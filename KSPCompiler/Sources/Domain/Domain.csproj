@@ -11,4 +11,9 @@
       <ProjectReference Include="..\Commons\Commons.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Ast\Aggregate" />
+      <Folder Include="Ast\Value" />
+    </ItemGroup>
+
 </Project>

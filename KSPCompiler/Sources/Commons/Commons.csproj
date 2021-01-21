@@ -8,7 +8,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="UnitGenerator" Version="1.1.*" />
+      <PackageReference Include="RkHelper" Version="0.0.2" />
+      <PackageReference Include="ValueObjectGenerator" Version="0.0.1" />
       <PackageReference Include="VisitorGenerator" Version="1.0.1" />
     </ItemGroup>
 

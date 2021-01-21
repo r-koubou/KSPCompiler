@@ -1,0 +1,9 @@
+{
+    "root_namespace": "youapp.root.namespace",
+    "usecases": [
+        {
+            "usecase_name": "SaSa",
+            "namespace": "module.sasa"
+        }
+    ]
+}
