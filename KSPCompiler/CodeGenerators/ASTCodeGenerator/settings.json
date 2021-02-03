@@ -1,0 +1,8 @@
+{
+    "output_directory": "out/",
+    "directory_layout": {
+        "block": "Block",
+        "statement": "Statement",
+        "expression": "Expression"
+    }
+}

@@ -1,0 +1,50 @@
+[
+    {
+        "name": "KspPreprocessorDefine",
+        "description": "a KSP Preprocessor: SET_CONDITION"
+    },
+    {
+        "name": "KspPreprocessorUndefine",
+        "description": "a KSP Preprocessor: RESET_CONDITION"
+    },
+    {
+        "name": "KspPreprocessorIfdefine",
+        "description": "a KSP Preprocessor: USE_CODE_IF"
+    },
+    {
+        "name": "KspPreprocessorIfnotDefine",
+        "description": "a KSP Preprocessor: USE_CODE_IF_NOT"
+    },
+    {
+        "name": "IfStatement",
+        "description": "an if statement"
+    },
+    {
+        "name": "WhileStatement",
+        "description": "a while statement"
+    },
+    {
+        "name": "SelectStatement",
+        "description": "a select statement"
+    },
+    {
+        "name": "CallKspUserFunctionStatement",
+        "description": "a call statement"
+    },
+    {
+        "name": "VariableDeclaration",
+        "description": "a variable declaration"
+    },
+    {
+        "name": "VariableInitializer",
+        "description": "a variable initialization"
+    },
+    {
+        "name": "PrimitiveInititalizer",
+        "description": "a primitive variable initialization"
+    },
+    {
+        "name": "ArrayInitializer",
+        "description": "an array variable initialization"
+    }
+]

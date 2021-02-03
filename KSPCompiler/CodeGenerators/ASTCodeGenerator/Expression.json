@@ -1,0 +1,126 @@
+[
+    {
+        "name": "LogicalOrExpression",
+        "description": "a conditional operator: AND (||)"
+    },
+    {
+        "name": "LogicalAndExpression",
+        "description": "a conditional operator: AND (&&)"
+    },
+    {
+        "name": "StringConcatenateExpression",
+        "description": "a string concatenation operator (&)"
+    },
+    {
+        "name": "BitwiseOrExpression",
+        "description": "a bitwise OR operator"
+    },
+    {
+        "name": "BitwiseAndExpression",
+        "description": "a bitwise AND operator"
+    },
+    {
+        "name": "EqualExpression",
+        "description": "a comparison operator: equal"
+    },
+    {
+        "name": "NotEqualExpression",
+        "description": "a comparison operator: not equal (!=)"
+    },
+    {
+        "name": "LessThanExpression",
+        "description": "a comparison operator: less than (&lt;)"
+    },
+    {
+        "name": "GreaterThanExpression",
+        "description": "a comparison operator: greater than (>)"
+    },
+    {
+        "name": "LessEqualExpression",
+        "description": "a comparison operator: less equal (&lt;=)"
+    },
+    {
+        "name": "GreaterEqualExpression",
+        "description": "a comparison operator: greater equal (>=)"
+    },
+    {
+        "name": "AdditionExpression",
+        "description": "an addition operator (+)"
+    },
+    {
+        "name": "SubtractionExpression",
+        "description": "a subtraction operator (-)"
+    },
+    {
+        "name": "MultiplyingExpression",
+        "description": "a multiplying operator (*)"
+    },
+    {
+        "name": "DivisionExpression",
+        "description": "a division operator (/)"
+    },
+    {
+        "name": "ModuloExpression",
+        "description": "a modulo operator (%)"
+    },
+    {
+        "name": "UnaryMinusExpression",
+        "description": "an unary operator: negative"
+    },
+    {
+        "name": "UnaryNotExpression",
+        "description": "an unary operator: NOT"
+    },
+    {
+        "name": "IntLiteral",
+        "description": "an integer literal"
+    },
+    {
+        "name": "RealLiteral",
+        "description": "a floating-point literal"
+    },
+    {
+        "name": "StringLiteral",
+        "description": "a string literal"
+    },
+    {
+        "name": "ExpressionList",
+        "description": "a comma-separated list of expressions"
+    },
+    {
+        "name": "AssignmentExpression",
+        "description": "an assignment (:=)"
+    },
+    {
+        "name": "AdditionAssignmentExpression",
+        "description": "an assignment (+=)"
+    },
+    {
+        "name": "SubtractionAssignmentExpression",
+        "description": "an assignment (-=)"
+    },
+    {
+        "name": "MultiplyingAssignmentExpression",
+        "description": "an assignment (*=)"
+    },
+    {
+        "name": "DivisionAssignmentExpression",
+        "description": "an assignment (/=)"
+    },
+    {
+        "name": "AssignmentExpressionList",
+        "description": "a comma-separated list of expressions (including assignment expressions)"
+    },
+    {
+        "name": "SymbolExpression",
+        "description": "a symbolic reference"
+    },
+    {
+        "name": "ArrayElementExpression",
+        "description": "an array element reference expression ( Left: ASTSymbolExpression, Right: ASTExpressionSyntaxNode )"
+    },
+    {
+        "name": "CallExpression",
+        "description": "an invoking the KSP command"
+    }
+]
