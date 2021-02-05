@@ -33,16 +33,18 @@ def generate( setting, namespace, name, template_file, output_directory, prefix 
 
 def generate_all( setting, usecase ):
 
-    namespace = "{root}.{ns}".format(
+    namespace = lambda category: "{root}.{category}.{ns}".format(
         root = setting.root_namespace,
+        category = category,
         ns = usecase.namespace )
+
     output_root_directory = setting.output_root_directory
 
-    generate( setting, namespace, usecase.name, "template/UseCase.cs", os.path.join( output_root_directory, setting.directory_usecase ), "I", "UseCase"  )
-    generate( setting, namespace, usecase.name, "template/Request.cs", os.path.join( output_root_directory, setting.directory_inout ), "", "Request"  )
-    generate( setting, namespace, usecase.name, "template/Response.cs", os.path.join( output_root_directory, setting.directory_inout ), "", "Response"  )
-    generate( setting, namespace, usecase.name, "template/Interactor.cs", os.path.join( output_root_directory, setting.directory_interactor ), "", "Interactor"  )
-    generate( setting, namespace, usecase.name, "template/Presenter.cs", os.path.join( output_root_directory, setting.directory_presenter ), "I", "Presenter"  )
+    generate( setting, namespace("UseCases"),    usecase.name, "template/UseCase.cs", os.path.join( output_root_directory, setting.directory_usecase ), "I", "UseCase"  )
+    generate( setting, namespace("UseCases"),    usecase.name, "template/Request.cs", os.path.join( output_root_directory, setting.directory_inout ), "", "Request"  )
+    generate( setting, namespace("UseCases"),    usecase.name, "template/Response.cs", os.path.join( output_root_directory, setting.directory_inout ), "", "Response"  )
+    generate( setting, namespace("Interactors"), usecase.name, "template/Interactor.cs", os.path.join( output_root_directory, setting.directory_interactor ), "", "Interactor"  )
+    generate( setting, namespace("Presenters"),  usecase.name, "template/Presenter.cs", os.path.join( output_root_directory, setting.directory_presenter ), "I", "Presenter"  )
 
 
 def main( argv ):
