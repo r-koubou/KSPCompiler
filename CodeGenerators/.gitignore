@@ -1,0 +1,5 @@
+# My rules
+out/
+.[T|t]emp/
+*.org
+*.bak
