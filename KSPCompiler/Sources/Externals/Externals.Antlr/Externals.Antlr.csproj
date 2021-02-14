@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <LangVersion>9</LangVersion>
+        <TargetFramework>net5.0</TargetFramework>
+        <!-- Assembly -->
+        <Copyright>R-Koubou</Copyright>
+        <Company>R-Koubou</Company>
+        <Product>KSPCompiler.Externals.Antlr</Product>
+        <AssemblyName>KSPCompiler.Externals.Antlr</AssemblyName>
+        <RootNamespace>KSPCompiler.Externals.Antlr</RootNamespace>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\..\Commons\Commons.csproj" />
+      <ProjectReference Include="..\..\Gateways\Gateways.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Antlr\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Antlr\**" />
+    </ItemGroup>
+
+</Project>

@@ -9,7 +9,7 @@
 
     <ItemGroup>
         <PackageReference Include="RkHelper" Version="0.0.2" />
-        <PackageReference Include="ValueObjectGenerator" Version="1.0.1" />
+        <PackageReference Include="ValueObjectGenerator" Version="1.2.*" />
     </ItemGroup>
 
 </Project>
