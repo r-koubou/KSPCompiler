@@ -1,6 +1,4 @@
 [P|p]ublish/
 [B|b]uild/
 .[T|t]emp/
-.antlr/
 .org
-.cs.org
