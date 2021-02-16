@@ -1,6 +1,4 @@
-﻿using KSPCompiler.Domain.Ast.Node;
-
-namespace KSPCompiler.Domain.Ast
+﻿namespace KSPCompiler.Domain.Ast.Node
 {
     /// <summary>
     /// Define an Acceptor that accepts <see cref="IAstVisitor{T}"/>.

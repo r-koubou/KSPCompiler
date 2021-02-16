@@ -1,9 +1,8 @@
 using System.IO;
 
-using KSPCompiler.Domain.Ast.Node;
 using KSPCompiler.Domain.TextFile.Aggregate;
 
-namespace KSPCompiler.Domain.Ast
+namespace KSPCompiler.Domain.Ast.Node
 {
     /// <summary>
     /// Representation of AST node tree.
