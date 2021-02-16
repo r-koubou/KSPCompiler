@@ -25,7 +25,7 @@ wrapper {
 generateGrammarSource {
     def LANGUAGE    = 'CSharp'
     def DESTDIR     = 'out'
-    def NAMESPACE   = 'KSPCompiler.Externals.Antlr'
+    def NAMESPACE   = 'KSPCompiler.Externals.Antlr.Generated'
     outputDirectory = file(DESTDIR)
     arguments << '-Dlanguage=' + LANGUAGE
     arguments << '-o' << DESTDIR

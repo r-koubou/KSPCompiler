@@ -1,5 +1,5 @@
 namespace KSPCompiler.Gateways
 {
-    public interface IKspParser
+    public interface IKSPParser
     {}
 }
