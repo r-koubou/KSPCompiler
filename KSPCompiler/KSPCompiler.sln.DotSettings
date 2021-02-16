@@ -319,6 +319,7 @@
         &lt;/Entry&gt;
     &lt;/TypePattern&gt;
 &lt;/Patterns&gt;</s:String>
+	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/PredefinedNamingRules/=EnumMember/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb"&gt;&lt;ExtraRule Prefix="Ksp" Suffix="" Style="AaBb" /&gt;&lt;/Policy&gt;</s:String>
 	
 	
 	

@@ -2,6 +2,7 @@ import json
 
 class Setting:
     def __init__( self, json ):
+        self.root_namespace         = json[ "root_namespace" ]
         self.output_root_directory  = json[ "output_directory" ]
         self.directories            = json[ "directory_layout" ]
         self.directory_block        = self.directories[ "block" ]

@@ -20,6 +20,7 @@ def main( argv ):
         gen.generate_ast_all(
             setting,
             ast_block_list,
+            "Blocks",
             "template/Block.cs",
             os.path.join( setting.output_root_directory, setting.directory_block ) )
 
@@ -27,6 +28,7 @@ def main( argv ):
         gen.generate_ast_all(
             setting,
             ast_statement_list,
+            "Statements",
             "template/Statement.cs",
             os.path.join( setting.output_root_directory, setting.directory_statement ) )
 
@@ -34,6 +36,7 @@ def main( argv ):
         gen.generate_ast_all(
             setting,
             ast_expression_list,
+            "Expressions",
             "template/Expression.cs",
             os.path.join( setting.output_root_directory, setting.directory_expression ) )
 

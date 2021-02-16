@@ -1,4 +1,4 @@
-namespace Ast
+namespace __namespace__
 {
     public enum AstNodeId
     {

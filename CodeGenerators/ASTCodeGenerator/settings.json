@@ -1,8 +1,9 @@
 {
+    "root_namespace": "KSPCompiler.Domain.Ast.Node",
     "output_directory": "out/",
     "directory_layout": {
-        "block": "Block",
-        "statement": "Statement",
-        "expression": "Expression"
+        "block": "Blocks",
+        "statement": "Statements",
+        "expression": "Expressions"
     }
 }
