@@ -11,8 +11,4 @@
       <ProjectReference Include="..\Commons\Commons.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Ast\Node" />
-    </ItemGroup>
-
 </Project>
