@@ -67,16 +67,6 @@ namespace KSPCompiler.Domain.Ast.Node
         public virtual void DumpAll( StreamWriter writer, int indentDepth = 0 )
         {
             Dump( writer, indentDepth );
-#if false
-            if( ChildrenCount > 0 )
-            {
-                indentDepth++;
-            }
-            foreach( var n in Children )
-            {
-                n.DumpAll( writer, indentDepth );
-            }
-#endif
         }
 
         /// <summary>
@@ -100,7 +90,7 @@ namespace KSPCompiler.Domain.Ast.Node
             }
             return indent;
         }
-        #endregion MIASTNode methods
+        #endregion IASTNode methods
 
         #region ICloneable methods
         /// <summary>
