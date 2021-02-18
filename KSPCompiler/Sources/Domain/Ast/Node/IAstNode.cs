@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 
 using KSPCompiler.Domain.TextFile.Aggregate;
@@ -7,14 +8,14 @@ namespace KSPCompiler.Domain.Ast.Node
     /// <summary>
     /// Representation of AST node tree.
     /// </summary>
-    public interface IAstNode : System.ICloneable
+    public interface IAstNode : ICloneable
     {
         public static IAstNode None => NullNode.Instance;
 
         /// <summary>
         /// ID for identifying a node.
         /// </summary>
-        public AstNodeId Id { get; }
+        public virtual AstNodeId Id => AstNodeId.None;
 
         /// <summary>
         /// Token location information.
@@ -25,6 +26,11 @@ namespace KSPCompiler.Domain.Ast.Node
         /// Parent node. If not present, the value is null.
         /// </summary>
         public IAstNode Parent { get; set; }
+
+        /// <summary>
+        /// Returns whether the node is a constant expressive node or not.
+        /// </summary>
+        public bool IsConstant => false;
 
         /// <summary>
         /// Dumping information on this node for debugging purposes.
