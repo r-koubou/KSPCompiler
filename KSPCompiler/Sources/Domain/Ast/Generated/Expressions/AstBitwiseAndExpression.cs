@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Expressions
     /// <summary>
     /// AST node representing a bitwise AND operator
     /// </summary>
-    public class AstBitwiseAndExpression
+    public partial class AstBitwiseAndExpression
     {
     }
 }

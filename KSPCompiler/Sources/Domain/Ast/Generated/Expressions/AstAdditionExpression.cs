@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Expressions
     /// <summary>
     /// AST node representing an addition operator (+)
     /// </summary>
-    public class AstAdditionExpression
+    public partial class AstAdditionExpression
     {
     }
 }

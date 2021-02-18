@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Expressions
     /// <summary>
     /// AST node representing an array element reference expression ( Left: ASTSymbolExpression, Right: ASTExpressionSyntaxNode )
     /// </summary>
-    public class AstArrayElementExpression
+    public partial class AstArrayElementExpression
     {
     }
 }

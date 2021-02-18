@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Blocks
     /// <summary>
     /// AST node representing a callback definition
     /// </summary>
-    public class AstCallbackDeclaration
+    public partial class AstCallbackDeclaration
     {
     }
 }

@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Statements
     /// <summary>
     /// AST node representing an if statement
     /// </summary>
-    public class AstIfStatement
+    public partial class AstIfStatement
     {
     }
 }

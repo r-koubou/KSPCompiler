@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Statements
     /// <summary>
     /// AST node representing a call statement
     /// </summary>
-    public class AstCallKspUserFunctionStatement
+    public partial class AstCallKspUserFunctionStatement
     {
     }
 }

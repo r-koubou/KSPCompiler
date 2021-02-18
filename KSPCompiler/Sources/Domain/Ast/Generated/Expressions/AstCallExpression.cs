@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Expressions
     /// <summary>
     /// AST node representing an invoking the KSP command
     /// </summary>
-    public class AstCallExpression
+    public partial class AstCallExpression
     {
     }
 }

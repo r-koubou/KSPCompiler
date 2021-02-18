@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Blocks
     /// <summary>
     /// AST node representing an argument list
     /// </summary>
-    public class AstArgumentList
+    public partial class AstArgumentList
     {
     }
 }

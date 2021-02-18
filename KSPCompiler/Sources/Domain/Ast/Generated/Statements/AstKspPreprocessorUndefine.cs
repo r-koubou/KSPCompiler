@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Statements
     /// <summary>
     /// AST node representing a KSP Preprocessor: RESET_CONDITION
     /// </summary>
-    public class AstKspPreprocessorUndefine
+    public partial class AstKspPreprocessorUndefine
     {
     }
 }

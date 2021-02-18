@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Expressions
     /// <summary>
     /// AST node representing a comparison operator: greater than (>)
     /// </summary>
-    public class AstGreaterThanExpression
+    public partial class AstGreaterThanExpression
     {
     }
 }

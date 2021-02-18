@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Expressions
     /// <summary>
     /// AST node representing an assignment (-=)
     /// </summary>
-    public class AstSubtractionAssignmentExpression
+    public partial class AstSubtractionAssignmentExpression
     {
     }
 }

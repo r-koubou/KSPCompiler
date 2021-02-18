@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Blocks
     /// <summary>
     /// AST node representing a case block in the select statement
     /// </summary>
-    public class AstCaseBlock
+    public partial class AstCaseBlock
     {
     }
 }

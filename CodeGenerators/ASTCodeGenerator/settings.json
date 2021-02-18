@@ -1,5 +1,5 @@
 {
-    "root_namespace": "KSPCompiler.Domain.Ast.Node",
+    "root_namespace": "KSPCompiler.Domain.Ast",
     "output_directory": "out/",
     "directory_layout": {
         "block": "Blocks",

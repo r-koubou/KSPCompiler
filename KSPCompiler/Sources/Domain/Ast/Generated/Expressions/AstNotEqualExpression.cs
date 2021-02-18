@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Expressions
     /// <summary>
     /// AST node representing a comparison operator: not equal (!=)
     /// </summary>
-    public class AstNotEqualExpression
+    public partial class AstNotEqualExpression
     {
     }
 }

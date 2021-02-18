@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Statements
     /// <summary>
     /// AST node representing a KSP Preprocessor: USE_CODE_IF_NOT
     /// </summary>
-    public class AstKspPreprocessorIfnotDefine
+    public partial class AstKspPreprocessorIfnotDefine
     {
     }
 }

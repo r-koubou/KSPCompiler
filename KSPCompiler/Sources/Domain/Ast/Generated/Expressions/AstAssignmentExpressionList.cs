@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Expressions
     /// <summary>
     /// AST node representing a comma-separated list of expressions (including assignment expressions)
     /// </summary>
-    public class AstAssignmentExpressionList
+    public partial class AstAssignmentExpressionList
     {
     }
 }

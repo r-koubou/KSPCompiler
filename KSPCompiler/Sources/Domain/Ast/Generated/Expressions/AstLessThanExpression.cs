@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Expressions
     /// <summary>
     /// AST node representing a comparison operator: less than (&lt;)
     /// </summary>
-    public class AstLessThanExpression
+    public partial class AstLessThanExpression
     {
     }
 }

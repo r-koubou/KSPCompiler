@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Blocks
     /// <summary>
     /// AST node representing a root node
     /// </summary>
-    public class AstCompilationUnit
+    public partial class AstCompilationUnit
     {
     }
 }

@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Statements
     /// <summary>
     /// AST node representing a while statement
     /// </summary>
-    public class AstWhileStatement
+    public partial class AstWhileStatement
     {
     }
 }

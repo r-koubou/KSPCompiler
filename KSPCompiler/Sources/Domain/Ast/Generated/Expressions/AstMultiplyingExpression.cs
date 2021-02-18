@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Expressions
     /// <summary>
     /// AST node representing a multiplying operator (*)
     /// </summary>
-    public class AstMultiplyingExpression
+    public partial class AstMultiplyingExpression
     {
     }
 }

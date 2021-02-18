@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Expressions
     /// <summary>
     /// AST node representing an unary operator: negative
     /// </summary>
-    public class AstUnaryMinusExpression
+    public partial class AstUnaryMinusExpression
     {
     }
 }

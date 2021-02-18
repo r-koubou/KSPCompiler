@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Expressions
     /// <summary>
     /// AST node representing a modulo operator (%)
     /// </summary>
-    public class AstModuloExpression
+    public partial class AstModuloExpression
     {
     }
 }

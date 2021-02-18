@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Statements
     /// <summary>
     /// AST node representing a variable declaration
     /// </summary>
-    public class AstVariableDeclaration
+    public partial class AstVariableDeclaration
     {
     }
 }

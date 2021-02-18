@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Expressions
     /// <summary>
     /// AST node representing a division operator (/)
     /// </summary>
-    public class AstDivisionExpression
+    public partial class AstDivisionExpression
     {
     }
 }

@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Expressions
     /// <summary>
     /// AST node representing a symbolic reference
     /// </summary>
-    public class AstSymbolExpression
+    public partial class AstSymbolExpression
     {
     }
 }

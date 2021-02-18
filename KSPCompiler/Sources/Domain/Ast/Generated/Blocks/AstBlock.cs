@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Blocks
     /// <summary>
     /// AST node representing a callback, block in function
     /// </summary>
-    public class AstBlock
+    public partial class AstBlock
     {
     }
 }

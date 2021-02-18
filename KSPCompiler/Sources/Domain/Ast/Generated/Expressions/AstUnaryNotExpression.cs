@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Expressions
     /// <summary>
     /// AST node representing an unary operator: NOT
     /// </summary>
-    public class AstUnaryNotExpression
+    public partial class AstUnaryNotExpression
     {
     }
 }

@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Statements
     /// <summary>
     /// AST node representing a KSP Preprocessor: SET_CONDITION
     /// </summary>
-    public class AstKspPreprocessorDefine
+    public partial class AstKspPreprocessorDefine
     {
     }
 }

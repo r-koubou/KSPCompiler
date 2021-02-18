@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Statements
     /// <summary>
     /// AST node representing a select statement
     /// </summary>
-    public class AstSelectStatement
+    public partial class AstSelectStatement
     {
     }
 }

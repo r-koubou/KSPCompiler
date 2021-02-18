@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Expressions
     /// <summary>
     /// AST node representing a conditional operator: AND (&&)
     /// </summary>
-    public class AstLogicalAndExpression
+    public partial class AstLogicalAndExpression
     {
     }
 }

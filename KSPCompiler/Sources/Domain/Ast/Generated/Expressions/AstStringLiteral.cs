@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Expressions
     /// <summary>
     /// AST node representing a string literal
     /// </summary>
-    public class AstStringLiteral
+    public partial class AstStringLiteral
     {
     }
 }

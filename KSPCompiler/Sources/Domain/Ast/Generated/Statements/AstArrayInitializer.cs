@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Ast.Statements
     /// <summary>
     /// AST node representing an array variable initialization
     /// </summary>
-    public class AstArrayInitializer
+    public partial class AstArrayInitializer
     {
     }
 }
