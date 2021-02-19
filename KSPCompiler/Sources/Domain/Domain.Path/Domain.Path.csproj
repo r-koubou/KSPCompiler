@@ -6,15 +6,18 @@
         <!-- Assembly -->
         <Copyright>R-Koubou</Copyright>
         <Company>R-Koubou</Company>
-        <Product>KSPCompiler.Gateways.Parser</Product>
-        <AssemblyName>KSPCompiler.Gateways.Parser</AssemblyName>
-        <RootNamespace>KSPCompiler.Gateways.Parser</RootNamespace>
+        <Product>KSPCompiler.Domain.Path</Product>
+        <AssemblyName>KSPCompiler.Domain.Path</AssemblyName>
+        <RootNamespace>KSPCompiler.Domain.Path</RootNamespace>
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\..\Commons\Commons.csproj" />
-      <ProjectReference Include="..\..\Domain\Domain.Ast\Domain.Ast.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Value" />
     </ItemGroup>
 
 </Project>

@@ -27,6 +27,7 @@
     <ItemGroup>
         <PackageReference Include="Antlr4.Runtime.Standard" Version="4.9.1" />
         <ProjectReference Include="..\..\Commons\Commons.csproj" />
+        <ProjectReference Include="..\..\Domain\Domain.Path\Domain.Path.csproj" />
       <ProjectReference Include="..\..\Gateways\Gateways.Parser\Gateways.Parser.csproj" />
     </ItemGroup>
 

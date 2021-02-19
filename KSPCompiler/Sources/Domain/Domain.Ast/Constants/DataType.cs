@@ -1,9 +1,11 @@
-﻿namespace KSPCompiler.Domain.Ast.Constants
+﻿using System;
+
+namespace KSPCompiler.Domain.Ast.Constants
 {
     /// <summary>
     /// Representation of data type identifiers.
     /// </summary>
-    [System.Flags]
+    [Flags]
     public enum DataType
     {
         None                    = 0,

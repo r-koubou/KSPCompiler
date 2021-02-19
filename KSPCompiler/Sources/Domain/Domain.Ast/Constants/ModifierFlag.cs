@@ -1,9 +1,11 @@
-﻿namespace KSPCompiler.Domain.Ast.Constants
+﻿using System;
+
+namespace KSPCompiler.Domain.Ast.Constants
 {
     /// <summary>
     /// Symbol modifier definition.
     /// </summary>
-    [System.Flags]
+    [Flags]
     public enum ModifierFlag
     {
         None = 0,
