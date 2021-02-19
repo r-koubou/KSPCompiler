@@ -6,10 +6,10 @@
     [System.Flags]
     public enum ModifierFlag
     {
-        None            = 0,
-        Const           = 1 << 0,
-        Polyphonic      = 1 << 1,
-        UI              = 1 << 2,
+        None = 0,
+        Const = 1 << 0,
+        Polyphonic = 1 << 1,
+        UI = 1 << 2,
     }
 
     public static class ModifierFlagExtension

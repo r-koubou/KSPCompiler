@@ -9,14 +9,17 @@
         /// Uninitialized
         /// </summary>
         UnInitialized,
+
         /// <summary>
         /// In reference
         /// </summary>
         Loading,
+
         /// <summary>
         /// Referenced
         /// </summary>
         Loaded,
+
         /// <summary>
         /// Initialized
         /// </summary>
