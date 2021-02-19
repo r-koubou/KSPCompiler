@@ -1,4 +1,4 @@
-using KSPCompiler.Gateways;
+using KSPCompiler.Gateways.Parser;
 
 namespace KSPCompiler.Externals.Antlr
 {

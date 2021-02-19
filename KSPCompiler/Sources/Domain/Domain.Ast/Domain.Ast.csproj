@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <LangVersion>9</LangVersion>
+        <TargetFramework>net5.0</TargetFramework>
+        <!-- Assembly -->
+        <Copyright>R-Koubou</Copyright>
+        <Company>R-Koubou</Company>
+        <Product>KSPCompiler.Domain.Ast</Product>
+        <AssemblyName>KSPCompiler.Domain.Ast</AssemblyName>
+        <RootNamespace>KSPCompiler.Domain.Ast</RootNamespace>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\Commons\Commons.csproj" />
+        <ProjectReference Include="..\Domain.TextFile\Domain.TextFile.csproj" />
+    </ItemGroup>
+
+</Project>
