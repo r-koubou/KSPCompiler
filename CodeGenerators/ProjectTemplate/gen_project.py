@@ -34,6 +34,9 @@ def generate( project_type, project_name ):
 
     template_file = os.path.join(THIS_DIR, "Template.{type}.csproj".format(type=project_type) )
 
+    if not os.path.exists( template_file ):
+        return
+
     with open( template_file ) as f:
         template = f.read()
 
@@ -56,3 +59,4 @@ def generate( project_type, project_name ):
 
 if __name__ == '__main__':
     generate( sys.argv[ 1 ], sys.argv[ 2 ] )
+    generate( sys.argv[ 1 ] + ".Testing", sys.argv[ 2 ] + ".Testing" )
