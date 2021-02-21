@@ -2,9 +2,44 @@
 namespace KSPCompiler.Domain.Ast.Expressions
 {
     /// <summary>
-    /// AST node representing an unary operator: negative
+    /// Ast node representing an unary operator: negative
     /// </summary>
-    public partial class AstUnaryMinusExpression
+    public partial class AstUnaryMinusExpression : AstExpressionSyntaxNode
     {
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstUnaryMinusExpression(
+            IAstNode parent,
+            AstExpressionSyntaxNode left,
+            AstExpressionSyntaxNode right )
+            : base(
+                AstNodeId.UnaryMinusExpression,
+                parent,
+                left, right )
+        {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstUnaryMinusExpression(
+            AstExpressionSyntaxNode left,
+            AstExpressionSyntaxNode right )
+            : base(
+                AstNodeId.UnaryMinusExpression,
+                IAstNode.None,
+                left, right )
+        {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstUnaryMinusExpression()
+            : base(
+                AstNodeId.UnaryMinusExpression,
+                IAstNode.None,
+                AstExpressionSyntaxNode.None,
+                AstExpressionSyntaxNode.None )
+        {}
     }
 }

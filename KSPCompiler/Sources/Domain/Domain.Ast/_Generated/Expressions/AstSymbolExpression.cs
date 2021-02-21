@@ -2,9 +2,44 @@
 namespace KSPCompiler.Domain.Ast.Expressions
 {
     /// <summary>
-    /// AST node representing a symbolic reference
+    /// Ast node representing a symbolic reference
     /// </summary>
-    public partial class AstSymbolExpression
+    public partial class AstSymbolExpression : AstExpressionSyntaxNode
     {
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstSymbolExpression(
+            IAstNode parent,
+            AstExpressionSyntaxNode left,
+            AstExpressionSyntaxNode right )
+            : base(
+                AstNodeId.SymbolExpression,
+                parent,
+                left, right )
+        {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstSymbolExpression(
+            AstExpressionSyntaxNode left,
+            AstExpressionSyntaxNode right )
+            : base(
+                AstNodeId.SymbolExpression,
+                IAstNode.None,
+                left, right )
+        {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstSymbolExpression()
+            : base(
+                AstNodeId.SymbolExpression,
+                IAstNode.None,
+                AstExpressionSyntaxNode.None,
+                AstExpressionSyntaxNode.None )
+        {}
     }
 }

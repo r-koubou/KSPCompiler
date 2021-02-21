@@ -2,9 +2,44 @@
 namespace KSPCompiler.Domain.Ast.Expressions
 {
     /// <summary>
-    /// AST node representing an addition operator (+)
+    /// Ast node representing an addition operator (+)
     /// </summary>
-    public partial class AstAdditionExpression
+    public partial class AstAdditionExpression : AstExpressionSyntaxNode
     {
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstAdditionExpression(
+            IAstNode parent,
+            AstExpressionSyntaxNode left,
+            AstExpressionSyntaxNode right )
+            : base(
+                AstNodeId.AdditionExpression,
+                parent,
+                left, right )
+        {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstAdditionExpression(
+            AstExpressionSyntaxNode left,
+            AstExpressionSyntaxNode right )
+            : base(
+                AstNodeId.AdditionExpression,
+                IAstNode.None,
+                left, right )
+        {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstAdditionExpression()
+            : base(
+                AstNodeId.AdditionExpression,
+                IAstNode.None,
+                AstExpressionSyntaxNode.None,
+                AstExpressionSyntaxNode.None )
+        {}
     }
 }

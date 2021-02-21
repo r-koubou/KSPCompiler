@@ -2,9 +2,44 @@
 namespace KSPCompiler.Domain.Ast.Expressions
 {
     /// <summary>
-    /// AST node representing an invoking the KSP command
+    /// Ast node representing an invoking the KSP command
     /// </summary>
-    public partial class AstCallExpression
+    public partial class AstCallExpression : AstExpressionSyntaxNode
     {
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstCallExpression(
+            IAstNode parent,
+            AstExpressionSyntaxNode left,
+            AstExpressionSyntaxNode right )
+            : base(
+                AstNodeId.CallExpression,
+                parent,
+                left, right )
+        {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstCallExpression(
+            AstExpressionSyntaxNode left,
+            AstExpressionSyntaxNode right )
+            : base(
+                AstNodeId.CallExpression,
+                IAstNode.None,
+                left, right )
+        {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstCallExpression()
+            : base(
+                AstNodeId.CallExpression,
+                IAstNode.None,
+                AstExpressionSyntaxNode.None,
+                AstExpressionSyntaxNode.None )
+        {}
     }
 }

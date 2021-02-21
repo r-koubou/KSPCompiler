@@ -2,9 +2,44 @@
 namespace KSPCompiler.Domain.Ast.Expressions
 {
     /// <summary>
-    /// AST node representing a comparison operator: equal
+    /// Ast node representing a comparison operator: equal
     /// </summary>
-    public partial class AstEqualExpression
+    public partial class AstEqualExpression : AstExpressionSyntaxNode
     {
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstEqualExpression(
+            IAstNode parent,
+            AstExpressionSyntaxNode left,
+            AstExpressionSyntaxNode right )
+            : base(
+                AstNodeId.EqualExpression,
+                parent,
+                left, right )
+        {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstEqualExpression(
+            AstExpressionSyntaxNode left,
+            AstExpressionSyntaxNode right )
+            : base(
+                AstNodeId.EqualExpression,
+                IAstNode.None,
+                left, right )
+        {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstEqualExpression()
+            : base(
+                AstNodeId.EqualExpression,
+                IAstNode.None,
+                AstExpressionSyntaxNode.None,
+                AstExpressionSyntaxNode.None )
+        {}
     }
 }

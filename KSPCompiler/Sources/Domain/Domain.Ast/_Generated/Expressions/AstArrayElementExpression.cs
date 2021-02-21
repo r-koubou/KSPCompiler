@@ -2,9 +2,44 @@
 namespace KSPCompiler.Domain.Ast.Expressions
 {
     /// <summary>
-    /// AST node representing an array element reference expression ( Left: ASTSymbolExpression, Right: ASTExpressionSyntaxNode )
+    /// Ast node representing an array element reference expression ( Left: ASTSymbolExpression, Right: ASTExpressionSyntaxNode )
     /// </summary>
-    public partial class AstArrayElementExpression
+    public partial class AstArrayElementExpression : AstExpressionSyntaxNode
     {
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstArrayElementExpression(
+            IAstNode parent,
+            AstExpressionSyntaxNode left,
+            AstExpressionSyntaxNode right )
+            : base(
+                AstNodeId.ArrayElementExpression,
+                parent,
+                left, right )
+        {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstArrayElementExpression(
+            AstExpressionSyntaxNode left,
+            AstExpressionSyntaxNode right )
+            : base(
+                AstNodeId.ArrayElementExpression,
+                IAstNode.None,
+                left, right )
+        {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstArrayElementExpression()
+            : base(
+                AstNodeId.ArrayElementExpression,
+                IAstNode.None,
+                AstExpressionSyntaxNode.None,
+                AstExpressionSyntaxNode.None )
+        {}
     }
 }
