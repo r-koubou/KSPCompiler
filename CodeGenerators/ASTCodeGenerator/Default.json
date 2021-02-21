@@ -1,0 +1,9 @@
+[
+    {
+        "name": "None",
+        "base": [
+            "IAstNode"
+        ],
+        "description": "The Empty Ast Object"
+    }
+]

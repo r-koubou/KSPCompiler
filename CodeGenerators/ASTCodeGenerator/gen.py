@@ -11,14 +11,31 @@ def generate_ast( setting, ast, namespace_part, template_file, output_directory,
     with open( template_file, encoding="utf8" ) as f:
         template = f.read()
 
-    namespace = setting.root_namespace + "." + namespace_part
-    name      = prefix + ast.name + suffix
-    ast_id    = ast.name
-    desc      = ast.description
+    namespace = setting.root_namespace
+    if namespace_part:
+        namespace = namespace + "." + namespace_part
+
+    name   = prefix + ast.name + suffix
+    ast_id = ast.name
+    desc   = ast.description
+
+    using_code = ""
+    for u in ast.using_list:
+        using_code += "using {ns};\n".format( ns = u.strip() )
+
+    base_code = ""
+    last_index = len( ast.base_list ) - 1
+    for i, b in enumerate( ast.base_list ):
+        base_code += "{baseclass}{suffix}".format(
+            baseclass = b,
+            suffix = "," if i < last_index else ""
+        )
 
     code = template
+    code = code.replace( "__using__", using_code )
     code = code.replace( "__namespace__", namespace )
     code = code.replace( "__name__", name )
+    code = code.replace( "__base__", base_code )
     code = code.replace( "__ast_id__", ast_id )
     code = code.replace( "__desc__", desc )
 
@@ -36,10 +53,10 @@ def generate_ast_id( setting, ast_list, template_file, output_directory ):
     with open( template_file, encoding="utf8" ) as f:
         template = f.read()
 
-    namespace = setting.root_namespace
-    code = template
+    namespace   = setting.root_namespace
+    code        = template
+    enum_code   = ""
 
-    enum_code = "        None,\n"
     for x in ast_list:
         enum_code += "        " + x.name + ",\n"
 

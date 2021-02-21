@@ -13,8 +13,9 @@ class Setting:
 class AstSetting:
     def __init__( self, json_element ):
         self.name        = json_element[ "name" ]
-        self.description = json_element[ "description" ]
-
+        self.base_list   = json_element.get( "base", ["IAstNode"] )
+        self.using_list  = json_element.get( "using", [] )
+        self.description = json_element.get( "description", "" )
 
 def load_ast_settings( ast_setting_file ):
     with open( ast_setting_file, encoding = "utf-8" ) as f:
