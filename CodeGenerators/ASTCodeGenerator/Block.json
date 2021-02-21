@@ -1,30 +1,52 @@
 [
     {
         "name": "CompilationUnit",
+        "base":[
+            "AstNode"
+        ],
         "description": "a root node"
     },
     {
         "name": "CallbackDeclaration",
+        "base":[
+            "AstFunctionalSyntaxNode"
+        ],
         "description": "a callback definition"
     },
     {
         "name": "UserFunctionDeclaration",
+        "base":[
+            "AstNode"
+        ],
         "description": "an user Defined Functions (KSP)"
     },
     {
         "name": "Argument",
+        "base":[
+            "AstNode",
+            "INameable"
+        ],
         "description": "an argument"
     },
     {
         "name": "ArgumentList",
+        "base":[
+            "AstNode"
+        ],
         "description": "an argument list"
     },
     {
         "name": "Block",
+        "base":[
+            "AstNode"
+        ],
         "description": "a callback, block in function"
     },
     {
         "name": "CaseBlock",
+        "base":[
+            "AstNode"
+        ],
         "description": "a case block in the select statement"
     }
 ]

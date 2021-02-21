@@ -1,126 +1,219 @@
 [
     {
         "name": "LogicalOrExpression",
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
         "description": "a conditional operator: AND (||)"
     },
     {
         "name": "LogicalAndExpression",
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
         "description": "a conditional operator: AND (&&)"
     },
     {
         "name": "StringConcatenateExpression",
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
         "description": "a string concatenation operator (&)"
     },
     {
         "name": "BitwiseOrExpression",
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
         "description": "a bitwise OR operator"
     },
     {
         "name": "BitwiseAndExpression",
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
         "description": "a bitwise AND operator"
     },
     {
         "name": "EqualExpression",
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
         "description": "a comparison operator: equal"
     },
     {
         "name": "NotEqualExpression",
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
         "description": "a comparison operator: not equal (!=)"
     },
     {
         "name": "LessThanExpression",
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
         "description": "a comparison operator: less than (&lt;)"
     },
     {
         "name": "GreaterThanExpression",
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
         "description": "a comparison operator: greater than (>)"
     },
     {
         "name": "LessEqualExpression",
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
         "description": "a comparison operator: less equal (&lt;=)"
     },
     {
         "name": "GreaterEqualExpression",
-        "description": "a comparison operator: greater equal (>=)"
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
+       "description": "a comparison operator: greater equal (>=)"
     },
     {
         "name": "AdditionExpression",
-        "description": "an addition operator (+)"
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
+       "description": "an addition operator (+)"
     },
     {
         "name": "SubtractionExpression",
-        "description": "a subtraction operator (-)"
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
+       "description": "a subtraction operator (-)"
     },
     {
         "name": "MultiplyingExpression",
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
         "description": "a multiplying operator (*)"
     },
     {
         "name": "DivisionExpression",
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
         "description": "a division operator (/)"
     },
     {
         "name": "ModuloExpression",
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
         "description": "a modulo operator (%)"
     },
     {
         "name": "UnaryMinusExpression",
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
         "description": "an unary operator: negative"
     },
     {
         "name": "UnaryNotExpression",
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
         "description": "an unary operator: NOT"
     },
     {
         "name": "IntLiteral",
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
         "description": "an integer literal"
     },
     {
         "name": "RealLiteral",
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
         "description": "a floating-point literal"
     },
     {
         "name": "StringLiteral",
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
         "description": "a string literal"
     },
     {
         "name": "ExpressionList",
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
         "description": "a comma-separated list of expressions"
     },
     {
         "name": "AssignmentExpression",
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
         "description": "an assignment (:=)"
     },
     {
         "name": "AdditionAssignmentExpression",
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
         "description": "an assignment (+=)"
     },
     {
         "name": "SubtractionAssignmentExpression",
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
         "description": "an assignment (-=)"
     },
     {
         "name": "MultiplyingAssignmentExpression",
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
         "description": "an assignment (*=)"
     },
     {
         "name": "DivisionAssignmentExpression",
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
         "description": "an assignment (/=)"
     },
     {
         "name": "AssignmentExpressionList",
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
         "description": "a comma-separated list of expressions (including assignment expressions)"
     },
     {
         "name": "SymbolExpression",
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
         "description": "a symbolic reference"
     },
     {
         "name": "ArrayElementExpression",
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
         "description": "an array element reference expression ( Left: ASTSymbolExpression, Right: ASTExpressionSyntaxNode )"
     },
     {
         "name": "CallExpression",
+        "base":[
+            "AstExpressionSyntaxNode"
+        ],
         "description": "an invoking the KSP command"
     }
 ]

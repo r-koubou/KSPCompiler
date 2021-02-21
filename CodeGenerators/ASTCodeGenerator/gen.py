@@ -28,7 +28,7 @@ def generate_ast( setting, ast, namespace_part, template_file, output_directory,
     for i, b in enumerate( ast.base_list ):
         base_code += "{baseclass}{suffix}".format(
             baseclass = b,
-            suffix = "," if i < last_index else ""
+            suffix = ", " if i < last_index else ""
         )
 
     code = template
