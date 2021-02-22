@@ -8,7 +8,7 @@
         /// <summary>
         /// Statements, expressions
         /// </summary>
-        public AstBlock Block { get; }
+        public AstBlock Block { get; protected set; }
 
         /// <summary>
         /// Ctor

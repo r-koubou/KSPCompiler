@@ -8,7 +8,7 @@ namespace KSPCompiler.Domain.Ast.Blocks
         /// <summary>
         /// Argument node list
         /// </summary>
-        public AstArgumentList ArgumentList { get; private set; }
+        public AstArgumentList ArgumentList { get; }
 
         /// <summary>
         /// Whether one or more arguments are stored in the ArgumentList or not.
@@ -20,10 +20,13 @@ namespace KSPCompiler.Domain.Ast.Blocks
         /// </summary>
         public virtual int ArgumentCount => HasArgument ? ArgumentList.Arguments.Count : 0;
 
-        private partial void Initialize()
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstCallbackDeclaration( IAstNode parent )
+            : base( AstNodeId.CallbackDeclaration, parent )
         {
             ArgumentList = new AstArgumentList( this );
         }
-
     }
 }

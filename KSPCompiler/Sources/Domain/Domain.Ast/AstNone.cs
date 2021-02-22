@@ -1,19 +1,14 @@
-using System;
+using KSPCompiler.Domain.TextFile.Aggregate;
 
-namespace KSPCompiler.Domain.Ast.Blocks
+namespace KSPCompiler.Domain.Ast
 {
-    public partial class AstArgument
+    /// <summary>
+    /// The Empty Ast Object
+    /// </summary>
+    public partial class AstNone : AstNode
     {
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        public AstArgument( IAstNode parent )
-            : base( AstNodeId.Argument, parent )
+        public AstNone() : base( AstNodeId.None, IAstNode.None )
         {}
-
-        #region INameable
-        public string Name { get; set; } = string.Empty;
-        #endregion
 
         #region IAstNodeAcceptor
         ///
@@ -32,6 +27,5 @@ namespace KSPCompiler.Domain.Ast.Blocks
             // Do nothing
         }
         #endregion IAstNodeAcceptor
-
     }
 }

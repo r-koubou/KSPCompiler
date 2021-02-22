@@ -13,10 +13,22 @@ namespace KSPCompiler.Domain.Ast.Blocks
         public bool HasArgument => Arguments.Count > 0;
         public int ArgumentCount => Arguments.Count;
 
-        private partial void Initialize()
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstArgumentList( IAstNode parent )
+            : base( AstNodeId.ArgumentList, parent )
         {}
 
-        #region Part of IAstNodeAcceptor
+        #region IAstNodeAcceptor
+        ///
+        /// <inheritdoc/>
+        ///
+        public override T Accept<T>( IAstVisitor<T> visitor )
+        {
+            return visitor.Visit( this );
+        }
+
         ///
         /// <inheritdoc/>
         ///
