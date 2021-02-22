@@ -16,7 +16,7 @@
     {
         "name": "UserFunctionDeclaration",
         "base":[
-            "AstNode"
+            "AstFunctionalSyntaxNode"
         ],
         "description": "an user Defined Functions (KSP)"
     },

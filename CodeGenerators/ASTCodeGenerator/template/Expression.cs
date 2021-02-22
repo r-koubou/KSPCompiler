@@ -1,8 +1,10 @@
+__using__
 namespace __namespace__
 {
     /// <summary>
     /// Ast node representing __desc__
     /// </summary>
+    __attribute__
     public partial class __name__ : __base__
     {
         /// <summary>

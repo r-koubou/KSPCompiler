@@ -23,6 +23,10 @@ def generate_ast( setting, ast, namespace_part, template_file, output_directory,
     for u in ast.using_list:
         using_code += "using {ns};\n".format( ns = u.strip() )
 
+    attribute_code = ""
+    for a in ast.attribute_list:
+        attribute_code += "[{attr}]".format( attr = a.strip() )
+
     base_code = ""
     last_index = len( ast.base_list ) - 1
     for i, b in enumerate( ast.base_list ):
@@ -34,6 +38,7 @@ def generate_ast( setting, ast, namespace_part, template_file, output_directory,
     code = template
     code = code.replace( "__using__", using_code )
     code = code.replace( "__namespace__", namespace )
+    code = code.replace( "__attribute__", attribute_code )
     code = code.replace( "__name__", name )
     code = code.replace( "__base__", base_code )
     code = code.replace( "__ast_id__", ast_id )

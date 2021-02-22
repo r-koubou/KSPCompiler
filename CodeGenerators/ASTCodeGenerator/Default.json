@@ -2,7 +2,7 @@
     {
         "name": "None",
         "base": [
-            "IAstNode"
+            "AstNode"
         ],
         "description": "The Empty Ast Object"
     }

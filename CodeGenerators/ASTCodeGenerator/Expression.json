@@ -193,6 +193,12 @@
         "base":[
             "AstExpressionSyntaxNode"
         ],
+        "using":[
+            "KSPCompiler.Domain.Ast.Attributes"
+        ],
+        "attribute":[
+            "ExtendedSyntax"
+        ],
         "description": "a comma-separated list of expressions (including assignment expressions)"
     },
     {
