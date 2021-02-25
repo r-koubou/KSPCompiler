@@ -1,52 +1,70 @@
-[
-    {
-        "name": "CompilationUnit",
-        "base":[
-            "AstNode"
-        ],
-        "description": "a root node"
-    },
-    {
-        "name": "CallbackDeclaration",
-        "base":[
-            "AstFunctionalSyntaxNode"
-        ],
-        "description": "a callback definition"
-    },
-    {
-        "name": "UserFunctionDeclaration",
-        "base":[
-            "AstFunctionalSyntaxNode"
-        ],
-        "description": "an user Defined Functions (KSP)"
-    },
-    {
-        "name": "Argument",
-        "base":[
-            "AstNode",
-            "INameable"
-        ],
-        "description": "an argument"
-    },
-    {
-        "name": "ArgumentList",
-        "base":[
-            "AstNode"
-        ],
-        "description": "an argument list"
-    },
-    {
-        "name": "Block",
-        "base":[
-            "AstNode"
-        ],
-        "description": "a callback, block in function"
-    },
-    {
-        "name": "CaseBlock",
-        "base":[
-            "AstNode"
-        ],
-        "description": "a case block in the select statement"
-    }
-]
+{
+    "Namespace": "Blocks",
+    "ClassNamePrefix": "Ast",
+    "ClassNameSuffix": "",
+    "SourceFilePrefix": "Ast",
+    "SourceFileSuffix": ".cs",
+
+    "Classes": [
+        {
+            "Name": "CompilationUnit",
+            "Description": "a root node",
+            "BaseClasses":[
+                "AstNode"
+            ],
+            "Fields": [
+                {
+                    "Declaration": "public AstNodeList<AstNode> GlobalBlocks { get; }",
+                    "Description": [ "Global blocks for callback definitions, user-defined functions, etc." ]
+                }
+            ],
+            "HasConstructor": true,
+            "ConstructorStatements":[
+                "GlobalBlocks = new AstNodeList<AstNode>( this );"
+            ]
+        },
+        {
+            "Name": "CallbackDeclaration",
+            "BaseClasses":[
+                "AstFunctionalSyntaxNode"
+            ],
+            "Description": "a callback definition"
+        },
+        {
+            "Name": "UserFunctionDeclaration",
+            "BaseClasses":[
+                "AstFunctionalSyntaxNode"
+            ],
+            "Description": "an user Defined Functions (KSP)"
+        },
+        {
+            "Name": "Argument",
+            "BaseClasses":[
+                "AstNode",
+                "INameable"
+            ],
+            "Description": "an argument"
+        },
+        {
+            "Name": "ArgumentList",
+            "BaseClasses":[
+                "AstNode"
+            ],
+            "Description": "an argument list"
+        },
+        {
+            "Name": "Block",
+            "BaseClasses":[
+                "AstNode"
+            ],
+            "Description": "a callback, block in function"
+        },
+        {
+            "Name": "CaseBlock",
+            "BaseClasses":[
+                "AstNode"
+            ],
+            "Description": "a case block in the select statement"
+        }
+    ]
+}

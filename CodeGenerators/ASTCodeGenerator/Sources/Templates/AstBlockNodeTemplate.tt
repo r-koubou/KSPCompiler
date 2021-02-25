@@ -1,0 +1,33 @@
+<#@ template language="C#" linePragmas="false" #>
+<#
+    var info = Context.Info;
+    var nameSpace = info.GetFullNamespace( Context.Setting, info );
+    var astNodeClass = Context.AstNodeClass;
+    var astId = astNodeClass.Name;
+    var className = info.GetClassName( astNodeClass );
+    var attribute = TemplateUtil.ExpandAttribute( astNodeClass.Attributes );
+    var baseClass = TemplateUtil.ExpandListWithDelimiter( astNodeClass.BaseClasses, "," );
+    var field = TemplateUtil.ExpandTextWithField( astNodeClass.Fields );
+    var ctorStatement = TemplateUtil.ExpandTextWithStatements( astNodeClass.ConstructorStatements );
+#>
+// Genetated by CodeGenerators/ASTCodeGenerator
+<#= TemplateUtil.ExpandUsing( astNodeClass.Usings ) #>
+namespace <#= nameSpace #>
+{
+    /// <summary>
+    /// AST node representing <#= astNodeClass.Description #>
+    /// </summary>
+<#= attribute #>
+    public partial class <#= className #> : <#= baseClass #>
+    {
+<#= field #>
+
+<# if( astNodeClass.HasConstructor ) {#>
+        public <#= className #>( IAstNode parent )
+            : base( AstNodeId.<#= astId #>>, parent )
+        {
+<#= ctorStatement #>
+        }
+<# }#>
+    }
+}

@@ -1,0 +1,14 @@
+<#@ template language="C#" linePragmas="false" #>
+<#
+    var field = TemplateUtil.ExpandTextWithEnum( IdList );
+#>
+// Genetated by CodeGenerators/ASTCodeGenerator
+
+namespace <#= Namespace #>
+{
+    public enum AstNodeId
+    {
+        None,
+<#= field #>
+    }
+}

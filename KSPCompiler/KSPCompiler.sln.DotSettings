@@ -278,7 +278,7 @@
             &lt;/Entry.SortBy&gt;
         &lt;/Entry&gt;
 
-        &lt;Entry DisplayName="Properties, Indexers"&gt;
+        &lt;Entry DisplayName="Properties, Indexers" Priority="100"&gt;
             &lt;Entry.Match&gt;
                 &lt;Or&gt;
                     &lt;Kind Is="Property" /&gt;
@@ -405,7 +405,7 @@
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/PredefinedNamingRules/=PrivateStaticReadonly/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb"&gt;&lt;ExtraRule Prefix="Ni" Suffix="" Style="AaBb" /&gt;&lt;/Policy&gt;</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/PredefinedNamingRules/=Property/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb"&gt;&lt;ExtraRule Prefix="Ksp" Suffix="" Style="AaBb" /&gt;&lt;ExtraRule Prefix="Ast" Suffix="" Style="AaBb" /&gt;&lt;/Policy&gt;</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/PredefinedNamingRules/=StaticReadonly/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb"&gt;&lt;ExtraRule Prefix="Ni" Suffix="" Style="AaBb" /&gt;&lt;/Policy&gt;</s:String>
-	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/PredefinedNamingRules/=TypesAndNamespaces/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb"&gt;&lt;ExtraRule Prefix="AST" Suffix="" Style="AaBb" /&gt;&lt;ExtraRule Prefix="Ast" Suffix="" Style="AaBb" /&gt;&lt;ExtraRule Prefix="CST" Suffix="" Style="AaBb" /&gt;&lt;ExtraRule Prefix="Cst" Suffix="" Style="AaBb" /&gt;&lt;ExtraRule Prefix="KSP" Suffix="" Style="AaBb" /&gt;&lt;ExtraRule Prefix="Ksp" Suffix="" Style="AaBb" /&gt;&lt;/Policy&gt;</s:String>
+	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/PredefinedNamingRules/=TypesAndNamespaces/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb"&gt;&lt;ExtraRule Prefix="Ast" Suffix="" Style="AaBb" /&gt;&lt;ExtraRule Prefix="Cst" Suffix="" Style="AaBb" /&gt;&lt;ExtraRule Prefix="KSP" Suffix="" Style="AaBb" /&gt;&lt;ExtraRule Prefix="Ksp" Suffix="" Style="AaBb" /&gt;&lt;/Policy&gt;</s:String>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ECSharpKeepExistingMigration/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ECSharpPlaceEmbeddedOnSameLineMigration/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ECSharpUseContinuousIndentInsideBracesMigration/@EntryIndexedValue">True</s:Boolean>

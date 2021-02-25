@@ -1,0 +1,58 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <!-- Assembly -->
+        <OutputType>Exe</OutputType>
+        <LangVersion>9</LangVersion>
+        <TargetFramework>net5.0</TargetFramework>
+        <AssemblyName>KSPCompiler.Apps.ASTCodeGenerator</AssemblyName>
+        <RootNamespace>KSPCompiler.Apps.ASTCodeGenerator</RootNamespace>
+        <Company>R-Koubou</Company>
+        <Product>KSPCompiler.Apps.ASTCodeGenerator</Product>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Update="Sources\Templates\AstBlockNodeTemplate.cs">
+        <AutoGen>True</AutoGen>
+        <DesignTime>True</DesignTime>
+        <DependentUpon>AstBlockNodeTemplate.tt</DependentUpon>
+      </Compile>
+      <Compile Update="Sources\Templates\AstNodeIdTemplate.cs">
+        <AutoGen>True</AutoGen>
+        <DesignTime>True</DesignTime>
+        <DependentUpon>AstNodeIdTemplate.tt</DependentUpon>
+      </Compile>
+      <Compile Update="Sources\Templates\AstVisitorTemplate.cs">
+        <AutoGen>True</AutoGen>
+        <DesignTime>True</DesignTime>
+        <DependentUpon>AstVisitorTemplate.tt</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="Sources\Templates\AstBlockNodeTemplate.tt">
+        <Generator>TextTemplatingFilePreprocessor</Generator>
+        <LastGenOutput>AstBlockNodeTemplate.cs</LastGenOutput>
+      </None>
+      <None Update="Setting.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Block.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Sources\Templates\AstNodeIdTemplate.tt">
+        <Generator>TextTemplatingFilePreprocessor</Generator>
+        <LastGenOutput>AstNodeIdTemplate.cs</LastGenOutput>
+      </None>
+      <None Update="Sources\Templates\AstVisitorTemplate.tt">
+        <Generator>TextTemplatingFilePreprocessor</Generator>
+        <LastGenOutput>AstVisitorTemplate.cs</LastGenOutput>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="System.CodeDom" Version="5.0.0" />
+    </ItemGroup>
+
+</Project>

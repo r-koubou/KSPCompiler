@@ -1,9 +1,0 @@
-[
-    {
-        "name": "None",
-        "base": [
-            "AstNode"
-        ],
-        "description": "The Empty Ast Object"
-    }
-]

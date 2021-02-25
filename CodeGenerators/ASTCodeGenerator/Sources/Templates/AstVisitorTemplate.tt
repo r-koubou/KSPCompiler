@@ -1,0 +1,17 @@
+<#@ template language="C#" linePragmas="false" #>
+// Genetated by CodeGenerators/ASTCodeGenerator
+
+namespace <#= Namespace #>
+{
+    public interface IAstVisitor<out T>
+    {
+<# foreach( var name in AstClassNameList ) { #>
+        T Visit( <#= name #> node );
+<# } #>
+
+        T Visit( IAstNode node )
+        {
+            return Visit( (dynamic)node );
+        }
+    }
+}
