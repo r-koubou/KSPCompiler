@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace KSPCompiler.Apps.ASTCodeGenerator.JsonModels
 {
@@ -32,8 +33,11 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.JsonModels
             public string Name { get; set; } = string.Empty;
             public IList<string> BaseClasses { get; set; } = new List<string>();
             public IList<Field> Fields { get; set; } = new List<Field>();
-            public bool HasConstructor { get; set; } = false;
+            public bool HasConstructor { get; set; } = true;
             public IList<string> ConstructorStatements { get; set; } = new List<string>();
+            public bool HasAccept { get; set; } = true;
+            public bool HasAcceptChildren { get; set; } = true;
+            public IList<string> AcceptChildrenStatements { get; set; } = new List<string>();
 
             public class Field
             {

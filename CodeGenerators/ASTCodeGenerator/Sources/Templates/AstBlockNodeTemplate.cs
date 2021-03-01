@@ -9,6 +9,7 @@
 // ------------------------------------------------------------------------------
 namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
 {
+    using System.Linq;
     using System;
 
     /// <summary>
@@ -32,7 +33,13 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
     var attribute = TemplateUtil.ExpandAttribute( astNodeClass.Attributes );
     var baseClass = TemplateUtil.ExpandListWithDelimiter( astNodeClass.BaseClasses, "," );
     var field = TemplateUtil.ExpandTextWithField( astNodeClass.Fields );
+    var hasField = !string.IsNullOrEmpty( field );
     var ctorStatement = TemplateUtil.ExpandTextWithStatements( astNodeClass.ConstructorStatements );
+    var hasAnyAcceptor = astNodeClass.HasAccept || astNodeClass.HasAcceptChildren;
+    var hasAccept = astNodeClass.HasAccept;
+    var hasAcceptChildren = astNodeClass.HasAcceptChildren;
+    var acceptChildrenStatement = TemplateUtil.ExpandTextWithStatements( astNodeClass.AcceptChildrenStatements );
+    var nameable = astNodeClass.BaseClasses.Any( x => x == "INameable" );
 
 
             #line default
@@ -68,16 +75,26 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
             #line default
             #line hidden
             this.Write("\n    {\n");
+ if( hasField ) {
+
+            #line default
+            #line hidden
+            this.Write("        #region Fields\n\n");
             this.Write(this.ToStringHelper.ToStringWithCulture(field));
 
             #line default
             #line hidden
-            this.Write("\n\n");
+            this.Write("\n\n        #endregion Fields\n");
+ }
+
+            #line default
+            #line hidden
+            this.Write("\n");
  if( astNodeClass.HasConstructor ) {
 
             #line default
             #line hidden
-            this.Write("        public ");
+            this.Write("        /// <summary>\n        /// Ctor.\n        /// </summary>\n        public ");
             this.Write(this.ToStringHelper.ToStringWithCulture(className));
 
             #line default
@@ -97,7 +114,62 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
 
             #line default
             #line hidden
-            this.Write("    }\n}\n");
+            this.Write("\n");
+ if( nameable ) {
+
+            #line default
+            #line hidden
+            this.Write("        #region INameable\n        ///\n        /// <inheritdoc/>\n        ///\n        public string Name { get; set; } = \"\";\n        #endregion INameable\n");
+ }
+
+            #line default
+            #line hidden
+            this.Write("\n");
+ if( hasAnyAcceptor ) {
+
+            #line default
+            #line hidden
+            this.Write("        #region IAstNodeAcceptor\n");
+ }
+
+            #line default
+            #line hidden
+            this.Write("\n");
+ if( hasAccept ) {
+
+            #line default
+            #line hidden
+            this.Write("        ///\n        /// <inheritdoc/>\n        ///\n        public override T Accept<T>( IAstVisitor<T> visitor )\n        {\n            return visitor.Visit( this );\n        }\n");
+ }
+
+            #line default
+            #line hidden
+            this.Write("\n");
+ if( hasAcceptChildren ) {
+
+            #line default
+            #line hidden
+            this.Write("        ///\n        /// <inheritdoc/>\n        ///\n        public override void AcceptChildren<T>( IAstVisitor<T> visitor )\n        {\n");
+            this.Write(this.ToStringHelper.ToStringWithCulture(acceptChildrenStatement));
+
+            #line default
+            #line hidden
+            this.Write("\n        }\n");
+ }
+
+            #line default
+            #line hidden
+            this.Write("\n");
+ if( hasAnyAcceptor ) {
+
+            #line default
+            #line hidden
+            this.Write("        #endregion IAstNodeAcceptor\n");
+ }
+
+            #line default
+            #line hidden
+            this.Write("\n    }\n}\n");
             return this.GenerationEnvironment.ToString();
         }
     }

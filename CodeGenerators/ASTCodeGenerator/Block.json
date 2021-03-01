@@ -18,9 +18,14 @@
                     "Description": [ "Global blocks for callback definitions, user-defined functions, etc." ]
                 }
             ],
-            "HasConstructor": true,
-            "ConstructorStatements":[
+            "ConstructorStatements": [
                 "GlobalBlocks = new AstNodeList<AstNode>( this );"
+            ],
+            "AcceptChildrenStatements": [
+                "foreach( var n in GlobalBlocks )",
+                "{",
+                "    n.Accept( visitor );",
+                "}"
             ]
         },
         {
@@ -57,7 +62,20 @@
             "BaseClasses":[
                 "AstNode"
             ],
-            "Description": "a callback, block in function"
+            "Description": "a callback, block in function",
+            "Fields": [
+                {
+                    "Declaration": "public AstNodeList<AstNode> Statements { get; } = new();",
+                    "Description": [ "Statements" ]
+                }
+            ],
+            "AcceptChildrenStatements":
+            [
+                "foreach( var n in Statements )",
+                "{",
+                "    n.Accept( visitor );",
+                "}"
+            ]
         },
         {
             "Name": "CaseBlock",
