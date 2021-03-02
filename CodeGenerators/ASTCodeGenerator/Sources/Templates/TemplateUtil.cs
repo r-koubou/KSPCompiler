@@ -8,6 +8,8 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
 {
     public static class TemplateUtil
     {
+        private static readonly string LF = "\n";
+
         public const int MemberIndentCount = 2;
         public const int StatementIndentCount = 3;
 
@@ -27,13 +29,13 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
             foreach( var x in list )
             {
                 buffer.Append( $"{indent}{x}" )
-                      .Append( newLine ? "\n" : "" );
+                      .Append( newLine ? LF : "" );
             }
 
             return buffer.ToString();
         }
 
-        public static string ExpandTextWithField( IEnumerable<AstNodesInfo.Class.Field> fields )
+        public static string ExpandTextWithField( IList<AstNodesInfo.Class.Field> fields )
         {
             var buffer = new StringBuilder();
             var indent = "";
@@ -43,21 +45,31 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
                 indent += "    ";
             }
 
+            var index = 0;
             foreach( var f in fields )
             {
-
                 if( f.Description.Any() )
                 {
-                    buffer.Append( indent ).Append( "/// <summary>" ).Append( '\n' );
+                    buffer.Append( indent ).Append( "/// <summary>" ).Append( LF );
 
                     foreach( var d in f.Description )
                     {
-                        buffer.Append( indent ).Append( $"/// {d}" ).Append( '\n' );
+                        buffer.Append( indent ).Append( $"/// {d}" ).Append( LF );
                     }
 
-                    buffer.Append( indent ).Append( "/// </summary>" ).Append( '\n' );
+                    buffer.Append( indent ).Append( "/// </summary>" ).Append( LF );
                 }
-                buffer.Append( indent ).Append( f.Declaration );
+
+                buffer.Append( indent )
+                      .Append( f.Declaration )
+                      .Append( LF );
+
+                if( index < fields.Count - 1 )
+                {
+                    buffer.Append( LF );
+                }
+
+                index++;
             }
 
             return buffer.ToString();
@@ -74,7 +86,7 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
 
             foreach( var x in list )
             {
-                buffer.Append( $"using {x};\n" );
+                buffer.Append( $"using {x};{LF}" );
             }
 
             return buffer.ToString();
@@ -151,7 +163,7 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
 
                 if( newLine )
                 {
-                    buffer.Append( '\n' );
+                    buffer.Append( LF );
                 }
             }
 

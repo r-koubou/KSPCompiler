@@ -34,9 +34,11 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.JsonModels
             public IList<string> BaseClasses { get; set; } = new List<string>();
             public IList<Field> Fields { get; set; } = new List<Field>();
             public bool HasConstructor { get; set; } = true;
+            public string ConstructorSignature { get; set; } = string.Empty;
             public IList<string> ConstructorStatements { get; set; } = new List<string>();
-            public bool HasAccept { get; set; } = true;
-            public bool HasAcceptChildren { get; set; } = true;
+            public bool HasAccept { get; set; } = false;
+            public IList<string> AcceptStatements { get; set; } = new List<string>();
+            public bool HasAcceptChildren { get; set; } = false;
             public IList<string> AcceptChildrenStatements { get; set; } = new List<string>();
 
             public class Field
