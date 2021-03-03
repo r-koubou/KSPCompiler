@@ -10,6 +10,12 @@ namespace KSPCompiler.Domain.Ast
     /// </summary>
     public interface IAstNode : ICloneable
     {
+        public static bool IsNone( IAstNode? n ) =>
+            n == null ||
+            n == None ||
+            n is NullNode ||
+            n.Id == AstNodeId.None;
+
         public static IAstNode None => NullNode.Instance;
 
         /// <summary>
