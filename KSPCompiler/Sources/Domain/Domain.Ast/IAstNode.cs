@@ -12,11 +12,11 @@ namespace KSPCompiler.Domain.Ast
     {
         public static bool IsNone( IAstNode? n ) =>
             n == null ||
-            n == None ||
+            n == Null ||
             n is NullNode ||
             n.Id == AstNodeId.None;
 
-        public static IAstNode None => NullNode.Instance;
+        public static IAstNode Null => new NullNode();
 
         /// <summary>
         /// ID for identifying a node.
@@ -44,19 +44,17 @@ namespace KSPCompiler.Domain.Ast
         /// </summary>
         public void DumpAll( StreamWriter writer, int indentDepth = 0 )
         {}
-
-        #region Null Object
-        private sealed class NullNode : IAstNode
-        {
-            public static readonly IAstNode Instance = new NullNode();
-
-            private NullNode() {}
-            public object Clone() => new NullNode();
-            public AstNodeId Id => AstNodeId.None;
-            public Position Position { get; set; } = new ();
-            public IAstNode Parent { get; set; } = default!;
-        }
-        #endregion
-
     }
+
+    #region Null Object
+    public class NullNode : IAstNode
+    {
+        public NullNode() {}
+        public object Clone() => new NullNode();
+        public AstNodeId Id => AstNodeId.None;
+        public Position Position { get; set; } = new ();
+        public IAstNode Parent { get; set; } = default!;
+    }
+    #endregion
+
 }

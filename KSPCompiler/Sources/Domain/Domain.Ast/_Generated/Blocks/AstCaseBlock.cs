@@ -12,12 +12,12 @@ namespace KSPCompiler.Domain.Ast.Blocks
         /// <summary>
         /// Conditional expression for "case" (starting value)
         /// </summary>
-        public AstExpressionSyntaxNode ConditionFrom { get; set; } = AstExpressionSyntaxNode.None;
+        public AstExpressionSyntaxNode ConditionFrom { get; set; } = AstExpressionSyntaxNode.Null;
 
         /// <summary>
         /// Conditional expression for "case" (end value *optional)
         /// </summary>
-        public AstExpressionSyntaxNode ConditionTo { get; set; } = AstExpressionSyntaxNode.None;
+        public AstExpressionSyntaxNode ConditionTo { get; set; } = AstExpressionSyntaxNode.Null;
 
         /// <summary>
         /// Code block in this "case"
