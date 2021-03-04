@@ -1,0 +1,117 @@
+---
+Namespace: Blocks
+ClassNamePrefix: Ast
+ClassNameSuffix: ''
+SourceFilePrefix: Ast
+SourceFileSuffix: ".cs"
+Classes:
+#---------------------------------------------------------------------
+# CompilationUnit
+#---------------------------------------------------------------------
+- Name: CompilationUnit
+  Description: a root node
+  BaseClasses:
+  - AstNode
+  Fields:
+  - Declaration: public AstNodeList<AstNode> GlobalBlocks { get; }
+    Description: Global blocks for callback definitions, user-defined functions, etc.
+  HasConstructor: true
+  ConstructorStatements: |-
+    GlobalBlocks = new AstNodeList<AstNode>( this );
+  HasAccept: true
+  HasAcceptChildren: true
+  AcceptChildrenStatements: |-
+    foreach( var n in GlobalBlocks )
+    {
+        n.Accept( visitor );
+    }
+#---------------------------------------------------------------------
+# CallbackDeclaration
+#---------------------------------------------------------------------
+- Name: CallbackDeclaration
+  BaseClasses:
+  - AstFunctionalSyntaxNode
+  Description: a callback definition
+  Fields:
+  - Declaration: public AstArgumentList ArgumentList { get; }
+    Description: Argument node list
+  - Declaration: public virtual bool HasArgument => ArgumentList.HasArgument;
+    Description: Whether one or more arguments are stored in the ArgumentList or not.
+  - Declaration: 'public virtual int ArgumentCount => HasArgument ? ArgumentList.Arguments.Count : 0;'
+    Description: Number of arguments stored in ArgumentList.
+  HasConstructor: true
+  ConstructorStatements: |-
+    ArgumentList = new AstArgumentList( this );
+  HasAccept: false
+  HasAcceptChildren: false
+#---------------------------------------------------------------------
+# UserFunctionDeclaration
+#---------------------------------------------------------------------
+- Name: UserFunctionDeclaration
+  BaseClasses:
+  - AstFunctionalSyntaxNode
+  Description: an user Defined Functions (KSP)
+  HasConstructor: true
+  HasAccept: false
+  HasAcceptChildren: false
+- Name: Argument
+  BaseClasses:
+  - AstNode
+  - INameable
+  Description: an argument
+  HasConstructor: true
+  HasAccept: true
+  HasAcceptChildren: true
+- Name: ArgumentList
+  BaseClasses:
+  - AstNode
+  Description: an argument list
+  Fields:
+  - Declaration: public AstNodeList<AstArgument> Arguments { get; } = new();
+    Description: Argument node list
+  - Declaration: public bool HasArgument => Arguments.Count > 0;
+  - Declaration: public int ArgumentCount => Arguments.Count;
+  HasConstructor: true
+  HasAccept: true
+  HasAcceptChildren: true
+#---------------------------------------------------------------------
+# Block
+#---------------------------------------------------------------------
+- Name: Block
+  BaseClasses:
+  - AstNode
+  Description: a callback, block in function
+  Fields:
+  - Declaration: public AstNodeList<AstNode> Statements { get; } = new();
+    Description: Statements
+  HasConstructor: true
+  HasAccept: true
+  HasAcceptChildren: true
+  AcceptChildrenStatements: |-
+    foreach( var n in Statements )
+    {
+        n.Accept( visitor );
+    }
+#---------------------------------------------------------------------
+# CaseBlock
+#---------------------------------------------------------------------
+- Name: CaseBlock
+  Usings:
+  - KSPCompiler.Domain.Ast.Expressions
+  BaseClasses:
+  - AstNode
+  Description: a case block in the select statement
+  Fields:
+  - Declaration: public AstExpressionSyntaxNode ConditionFrom { get; set; } = AstExpressionSyntaxNode.None;
+    Description: Conditional expression for "case" (starting value)
+  - Declaration: public AstExpressionSyntaxNode ConditionTo { get; set; } = AstExpressionSyntaxNode.None;
+    Description: Conditional expression for "case" (end value *optional)
+  - Declaration: public AstBlock CodeBlock { get; }
+    Description: Code block in this "case"
+  HasConstructor: true
+  ConstructorStatements: |-
+    CodeBlock = new AstBlock( this );
+  HasAccept: true
+  HasAcceptChildren: true
+  AcceptChildrenStatements: |-
+    CodeBlock.AcceptChildren( visitor );

@@ -1,4 +1,4 @@
-namespace KSPCompiler.Apps.ASTCodeGenerator.JsonModels
+namespace KSPCompiler.Apps.ASTCodeGenerator.TemplateModels
 {
     public class Setting
     {

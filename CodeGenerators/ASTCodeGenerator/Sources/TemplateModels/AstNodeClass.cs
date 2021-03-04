@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
-namespace KSPCompiler.Apps.ASTCodeGenerator.JsonModels
+namespace KSPCompiler.Apps.ASTCodeGenerator.TemplateModels
 {
     public class AstNodesInfo
     {
@@ -14,10 +13,10 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.JsonModels
         public string SourceFilePrefix { get; set; } = "Ast";
         public string SourceFileSuffix { get; set; } = ".cs";
 
-        public string GetSourceFileName( AstNodesInfo.Class clazz )
+        public string GetSourceFileName( Class clazz )
             => $"{SourceFilePrefix}{clazz.Name}{SourceFileSuffix}";
 
-        public string GetClassName( AstNodesInfo.Class clazz )
+        public string GetClassName( Class clazz )
             => $"{ClassNamePrefix}{clazz.Name}{ClassNameSuffix}";
 
         public string GetFullNamespace( Setting setting, AstNodesInfo info )
@@ -35,16 +34,16 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.JsonModels
             public IList<Field> Fields { get; set; } = new List<Field>();
             public bool HasConstructor { get; set; } = true;
             public string ConstructorSignature { get; set; } = string.Empty;
-            public IList<string> ConstructorStatements { get; set; } = new List<string>();
+            public string ConstructorStatements { get; set; } = string.Empty;
             public bool HasAccept { get; set; } = false;
-            public IList<string> AcceptStatements { get; set; } = new List<string>();
+            public string AcceptStatements { get; set; } = string.Empty;
             public bool HasAcceptChildren { get; set; } = false;
-            public IList<string> AcceptChildrenStatements { get; set; } = new List<string>();
+            public string AcceptChildrenStatements { get; set; } = string.Empty;
 
             public class Field
             {
                 public string Declaration { get; set; } = string.Empty;
-                public IList<string> Description { get; set; } = new List<string>();
+                public string Description { get; set; } = string.Empty;
             }
         }
     }

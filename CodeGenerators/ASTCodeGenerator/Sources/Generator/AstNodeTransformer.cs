@@ -1,4 +1,4 @@
-using KSPCompiler.Apps.ASTCodeGenerator.JsonModels;
+using KSPCompiler.Apps.ASTCodeGenerator.TemplateModels;
 using KSPCompiler.Apps.ASTCodeGenerator.Templates;
 
 namespace KSPCompiler.Apps.ASTCodeGenerator.Generator

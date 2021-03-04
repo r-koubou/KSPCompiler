@@ -2,19 +2,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using KSPCompiler.Apps.ASTCodeGenerator.JsonModels;
+using KSPCompiler.Apps.ASTCodeGenerator.TemplateModels;
 
 namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
 {
     public static class TemplateUtil
     {
-        private static readonly string LF = "\n";
+        private const string LF = "\n";
 
         public const int MemberIndentCount = 2;
         public const int StatementIndentCount = 3;
 
         public static string ExpandText<T>(
-            IEnumerable<T> list,
+            IList<T> list,
             bool newLine,
             int indentCount = 0 )
         {
@@ -26,10 +26,14 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
                 indent += "    ";
             }
 
+            var count = list.Count;
+            var index = 0;
+
             foreach( var x in list )
             {
                 buffer.Append( $"{indent}{x}" )
-                      .Append( newLine ? LF : "" );
+                      .Append( newLine && index < count - 1 ? LF : "" );
+                index++;
             }
 
             return buffer.ToString();
@@ -48,15 +52,10 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
             var index = 0;
             foreach( var f in fields )
             {
-                if( f.Description.Any() )
+                if( !string.IsNullOrEmpty( f.Description ) )
                 {
                     buffer.Append( indent ).Append( "/// <summary>" ).Append( LF );
-
-                    foreach( var d in f.Description )
-                    {
-                        buffer.Append( indent ).Append( $"/// {d}" ).Append( LF );
-                    }
-
+                    buffer.Append( indent ).Append( $"/// {f.Description}" ).Append( LF );
                     buffer.Append( indent ).Append( "/// </summary>" ).Append( LF );
                 }
 
@@ -75,9 +74,17 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
             return buffer.ToString();
         }
 
-        public static string ExpandTextWithStatements( IEnumerable<string> statements )
+        public static string ExpandTextWithStatements( IList<string> statements )
         {
             return ExpandText( statements, true, StatementIndentCount );
+        }
+
+        public static string ExpandTextWithStatements( string statements )
+        {
+            var txt = statements.Trim();
+
+            return string.IsNullOrEmpty( txt ) ? string.Empty
+                : ExpandTextWithStatements( statements.Split( LF ) );
         }
 
         public static string ExpandUsing<T>( IEnumerable<T> list )

@@ -13,10 +13,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Compile Update="Sources\Templates\AstBlockNodeTemplate.cs">
+      <Compile Update="Sources\Templates\AstNodeTemplate.cs">
         <AutoGen>True</AutoGen>
         <DesignTime>True</DesignTime>
-        <DependentUpon>AstBlockNodeTemplate.tt</DependentUpon>
+        <DependentUpon>AstNodeTemplate.tt</DependentUpon>
       </Compile>
       <Compile Update="Sources\Templates\AstNodeIdTemplate.cs">
         <AutoGen>True</AutoGen>
@@ -32,15 +32,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="Sources\Templates\AstBlockNodeTemplate.tt">
+      <None Update="Sources\Templates\AstNodeTemplate.tt">
         <Generator>TextTemplatingFilePreprocessor</Generator>
-        <LastGenOutput>AstBlockNodeTemplate.cs</LastGenOutput>
-      </None>
-      <None Update="Setting.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="Block.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <LastGenOutput>AstNodeTemplate.cs</LastGenOutput>
       </None>
       <None Update="Sources\Templates\AstNodeIdTemplate.tt">
         <Generator>TextTemplatingFilePreprocessor</Generator>
@@ -50,10 +44,17 @@
         <Generator>TextTemplatingFilePreprocessor</Generator>
         <LastGenOutput>AstVisitorTemplate.cs</LastGenOutput>
       </None>
+      <None Update="Block.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Setting.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="System.CodeDom" Version="5.0.0" />
+      <PackageReference Include="YamlDotNet" Version="9.1.4" />
     </ItemGroup>
 
     <!--  Excludes  -->
