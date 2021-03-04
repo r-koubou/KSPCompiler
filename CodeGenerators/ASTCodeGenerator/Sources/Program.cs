@@ -16,7 +16,7 @@ namespace KSPCompiler.Apps.ASTCodeGenerator
         private static void GenerateAst( Setting setting )
         {
             var astInfoList = new List<AstNodesInfo>();
-            var blockNodes = GenerateAstNode( setting, "Block.json", new AstNodeGenerator( new AstBlockNodeTransformer() ) );
+            var blockNodes = GenerateAstNode( setting, "Block.json", new AstNodeGenerator( new AstNodeTransformer() ) );
 
             astInfoList.Add( blockNodes );
 

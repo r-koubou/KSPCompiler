@@ -1,10 +1,10 @@
 namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
 {
-    public partial class AstBlockNodeTemplate
+    public partial class AstNodeTemplate
     {
         public TemplateContext Context { get; }
 
-        public AstBlockNodeTemplate( TemplateContext context )
+        public AstNodeTemplate( TemplateContext context )
         {
             Context = context;
         }
