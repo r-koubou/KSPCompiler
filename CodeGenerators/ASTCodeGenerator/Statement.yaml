@@ -1,0 +1,25 @@
+---
+Namespace: Statements
+ClassNamePrefix: Ast
+ClassNameSuffix: ''
+SourceFilePrefix: Ast
+SourceFileSuffix: ".cs"
+Classes:
+#---------------------------------------------------------------------
+# VariableDeclaration
+#---------------------------------------------------------------------
+- Name: VariableDeclaration
+  Description: a variable declaration
+  BaseClasses:
+  - ASTStatementSyntaxNode
+  - INameable
+  Fields:
+  - Declaration: string Modifier { get; set; } = string.Empty;
+    Description: modifier
+  - Declaration: public ASTVariableInitializer? Initializer { get; set; }
+    Description: initialization statement
+  HasConstructor: true
+  HasAccept: false
+  HasAcceptChildren: true
+  AcceptChildrenStatements: |-
+    Initializer?.AcceptChildren( visitor );

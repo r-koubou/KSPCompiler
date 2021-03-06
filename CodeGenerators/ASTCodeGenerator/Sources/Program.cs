@@ -17,8 +17,10 @@ namespace KSPCompiler.Apps.ASTCodeGenerator
         {
             var astInfoList = new List<AstNodesInfo>();
             var blockNodes = GenerateAstNode( setting, "Block.yaml", new AstNodeGenerator( new AstNodeTransformer() ) );
+            var statementNodes = GenerateAstNode( setting, "Statement.yaml", new AstNodeGenerator( new AstNodeTransformer() ) );
 
             astInfoList.Add( blockNodes );
+            astInfoList.Add( statementNodes );
 
             new AstNodeIdGenerator( new AstNodeIdTextTransformer() )
                .Generate( setting, astInfoList );
