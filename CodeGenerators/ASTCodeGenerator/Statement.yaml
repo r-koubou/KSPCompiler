@@ -6,20 +6,112 @@ SourceFilePrefix: Ast
 SourceFileSuffix: ".cs"
 Classes:
 #---------------------------------------------------------------------
-# VariableDeclaration
+# VariableBody
 #---------------------------------------------------------------------
-- Name: VariableDeclaration
+- Name: VariableBody
   Description: a variable declaration
   BaseClasses:
-  - ASTStatementSyntaxNode
+  - AstStatementSyntaxNode
   - INameable
   Fields:
-  - Declaration: string Modifier { get; set; } = string.Empty;
+  - Body: public string Modifier { get; set; } = string.Empty;
     Description: modifier
-  - Declaration: public ASTVariableInitializer? Initializer { get; set; }
+  - Body: public AstVariableInitializer? Initializer { get; set; }
     Description: initialization statement
-  HasConstructor: true
   HasAccept: false
   HasAcceptChildren: true
   AcceptChildrenStatements: |-
     Initializer?.AcceptChildren( visitor );
+#---------------------------------------------------------------------
+# VariableInitializer
+#---------------------------------------------------------------------
+- Name: VariableInitializer
+  Description: a variable initialization
+  BaseClasses:
+  - AstNode
+  Fields:
+  - Body: public AstPrimitiveInitializer? PrimitiveInitializer { get; set; }
+    Description: primitive variable initialization
+  - Body: public AstArrayInitializer? ArrayInitializer { get; set; }
+    Description: array variable initialization
+  HasAccept: false
+  HasAcceptChildren: true
+  AcceptChildrenStatements: |-
+    PrimitiveInitializer?.AcceptChildren( visitor );
+    ArrayInitializer?.AcceptChildren( visitor );
+#---------------------------------------------------------------------
+# PrimitiveInititalizer
+#---------------------------------------------------------------------
+- Name: PrimitiveInititalizer
+  Description: a primitive variable initialization
+  BaseClasses:
+  - AstStatementSyntaxNode
+  Fields:
+  - Body: public AstExpressionSyntaxNode? Expression { get; }
+    Description: Assignment expression
+  - Body: public AstExpressionList? ExpressionList { get; }
+    Description: Assignment multiple expression (ui_type, constructor)
+  Constructors:
+    - Body: |-
+        public ##CLASSNAME##(
+            IAstNode parent,
+            AstExpressionSyntaxNode? expression = null,
+            AstExpressionList? expressionList = null )
+            : base( AstNodeId.##ASTID##, parent )
+        {
+            Expression     = expression;
+            ExpressionList = expressionList;
+        }
+  HasAccept: false
+  HasAcceptChildren: true
+  AcceptChildrenStatements: |-
+    throw new System.NotImplementedException();
+#---------------------------------------------------------------------
+# ArrayInitializer
+#---------------------------------------------------------------------
+- Name: ArrayInitializer
+  Description: an array variable initialization
+  BaseClasses:
+  - AstStatementSyntaxNode
+  Fields:
+  - Body: public AstExpressionSyntaxNode? Size { get; set; }
+    Description: Number of array elements
+  - Body: public AstExpressionList? Initializer { get; set; }
+    Description: Array element initialization
+  HasAccept: false
+  HasAcceptChildren: true
+  AcceptChildrenStatements: |-
+    throw new System.NotImplementedException();
+#---------------------------------------------------------------------
+# IfStatement
+#---------------------------------------------------------------------
+- Name: IfStatement
+  Description: an if statement
+  BaseClasses:
+  - AstConditionalStatement
+  Fields:
+  - Body: public AstBlock? ElseBlock { get; set; }
+    Description: The code block when if condition is not satisfied
+  Constructors:
+    - Body: |-
+        public ##CLASSNAME##() : this( null ) {}
+    - Body: |-
+        public ##CLASSNAME##( IAstNode parent )
+            : this( AstNodeId.##ASTID##, parent ) {}
+  HasAccept: false
+  HasAcceptChildren: false
+#---------------------------------------------------------------------
+# WhileStatement
+#---------------------------------------------------------------------
+- Name: WhileStatement
+  Description: a while statement
+  BaseClasses:
+  - AstConditionalStatement
+  Constructors:
+  - Body: |-
+        public ##CLASSNAME##() : this( null ) {}
+  - Body: |-
+        public ##CLASSNAME##( IAstNode parent )
+            : base( AstNodeId.##ASTID##, parent ) {}
+  HasAccept: false
+  HasAcceptChildren: false

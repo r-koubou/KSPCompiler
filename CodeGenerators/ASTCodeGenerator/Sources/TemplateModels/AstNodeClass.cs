@@ -32,9 +32,8 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.TemplateModels
             public string Name { get; set; } = string.Empty;
             public IList<string> BaseClasses { get; set; } = new List<string>();
             public IList<Field> Fields { get; set; } = new List<Field>();
-            public bool HasConstructor { get; set; } = true;
-            public string ConstructorSignature { get; set; } = string.Empty;
-            public string ConstructorStatements { get; set; } = string.Empty;
+            public IList<Constructor> Constructors { get; set; } = new List<Constructor>();
+            public IList<Method> Methods { get; set; } = new List<Method>();
             public bool HasAccept { get; set; } = false;
             public string AcceptStatements { get; set; } = string.Empty;
             public bool HasAcceptChildren { get; set; } = false;
@@ -42,8 +41,19 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.TemplateModels
 
             public class Field
             {
-                public string Declaration { get; set; } = string.Empty;
                 public string Description { get; set; } = string.Empty;
+                public string Body { get; set; } = string.Empty;
+            }
+
+            public class Method
+            {
+                public string Description { get; set; } = string.Empty;
+                public string Body { get; set; } = string.Empty;
+            }
+
+            public class Constructor
+            {
+                public string Body { get; set; } = string.Empty;
             }
         }
     }

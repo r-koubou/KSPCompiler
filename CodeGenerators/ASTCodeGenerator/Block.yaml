@@ -13,11 +13,15 @@ Classes:
   BaseClasses:
   - AstNode
   Fields:
-  - Declaration: public AstNodeList<AstNode> GlobalBlocks { get; }
+  - Body: public AstNodeList<AstNode> GlobalBlocks { get; }
     Description: Global blocks for callback definitions, user-defined functions, etc.
-  HasConstructor: true
-  ConstructorStatements: |-
-    GlobalBlocks = new AstNodeList<AstNode>( this );
+  Constructors:
+    - Body: |-
+        public ##CLASSNAME##( IAstNode parent )
+            : base( AstNodeId.##ASTID##, parent )
+        {
+            GlobalBlocks = new AstNodeList<AstNode>( this );
+        }
   HasAccept: true
   HasAcceptChildren: true
   AcceptChildrenStatements: |-
@@ -33,15 +37,19 @@ Classes:
   - AstFunctionalSyntaxNode
   Description: a callback definition
   Fields:
-  - Declaration: public AstArgumentList ArgumentList { get; }
+  - Body: public AstArgumentList ArgumentList { get; }
     Description: Argument node list
-  - Declaration: public virtual bool HasArgument => ArgumentList.HasArgument;
+  - Body: public virtual bool HasArgument => ArgumentList.HasArgument;
     Description: Whether one or more arguments are stored in the ArgumentList or not.
-  - Declaration: 'public virtual int ArgumentCount => HasArgument ? ArgumentList.Arguments.Count : 0;'
+  - Body: 'public virtual int ArgumentCount => HasArgument ? ArgumentList.Arguments.Count : 0;'
     Description: Number of arguments stored in ArgumentList.
-  HasConstructor: true
-  ConstructorStatements: |-
-    ArgumentList = new AstArgumentList( this );
+  Constructors:
+    - Body: |-
+        public ##CLASSNAME##( IAstNode parent )
+            : base( AstNodeId.##ASTID##, parent )
+        {
+            ArgumentList = new AstArgumentList( this );
+        }
   HasAccept: false
   HasAcceptChildren: false
 #---------------------------------------------------------------------
@@ -51,27 +59,30 @@ Classes:
   BaseClasses:
   - AstFunctionalSyntaxNode
   Description: an user Defined Functions (KSP)
-  HasConstructor: true
   HasAccept: false
   HasAcceptChildren: false
+#---------------------------------------------------------------------
+# Argument
+#---------------------------------------------------------------------
 - Name: Argument
   BaseClasses:
   - AstNode
   - INameable
   Description: an argument
-  HasConstructor: true
   HasAccept: true
   HasAcceptChildren: true
+#---------------------------------------------------------------------
+# ArgumentList
+#---------------------------------------------------------------------
 - Name: ArgumentList
   BaseClasses:
   - AstNode
   Description: an argument list
   Fields:
-  - Declaration: public AstNodeList<AstArgument> Arguments { get; } = new();
+  - Body: public AstNodeList<AstArgument> Arguments { get; } = new();
     Description: Argument node list
-  - Declaration: public bool HasArgument => Arguments.Count > 0;
-  - Declaration: public int ArgumentCount => Arguments.Count;
-  HasConstructor: true
+  - Body: public bool HasArgument => Arguments.Count > 0;
+  - Body: public int ArgumentCount => Arguments.Count;
   HasAccept: true
   HasAcceptChildren: true
 #---------------------------------------------------------------------
@@ -82,9 +93,8 @@ Classes:
   - AstNode
   Description: a callback, block in function
   Fields:
-  - Declaration: public AstNodeList<AstNode> Statements { get; } = new();
+  - Body: public AstNodeList<AstNode> Statements { get; } = new();
     Description: Statements
-  HasConstructor: true
   HasAccept: true
   HasAcceptChildren: true
   AcceptChildrenStatements: |-
@@ -102,15 +112,19 @@ Classes:
   - AstNode
   Description: a case block in the select statement
   Fields:
-  - Declaration: public AstExpressionSyntaxNode ConditionFrom { get; set; } = AstExpressionSyntaxNode.None;
+  - Body: public AstExpressionSyntaxNode ConditionFrom { get; set; } = AstExpressionSyntaxNode.None;
     Description: Conditional expression for "case" (starting value)
-  - Declaration: public AstExpressionSyntaxNode ConditionTo { get; set; } = AstExpressionSyntaxNode.None;
+  - Body: public AstExpressionSyntaxNode ConditionTo { get; set; } = AstExpressionSyntaxNode.None;
     Description: Conditional expression for "case" (end value *optional)
-  - Declaration: public AstBlock CodeBlock { get; }
+  - Body: public AstBlock CodeBlock { get; }
     Description: Code block in this "case"
-  HasConstructor: true
-  ConstructorStatements: |-
-    CodeBlock = new AstBlock( this );
+  Constructors:
+    - Body: |-
+        public ##CLASSNAME##( IAstNode parent )
+            : base( AstNodeId.##ASTID##, parent )
+        {
+            CodeBlock = new AstBlock( this );
+        }
   HasAccept: true
   HasAcceptChildren: true
   AcceptChildrenStatements: |-

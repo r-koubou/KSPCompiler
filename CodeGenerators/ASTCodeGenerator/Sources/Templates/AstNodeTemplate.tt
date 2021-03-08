@@ -8,10 +8,9 @@
     var className = info.GetClassName( astNodeClass );
     var attribute = TemplateUtil.ExpandAttribute( astNodeClass.Attributes );
     var baseClass = TemplateUtil.ExpandListWithDelimiter( astNodeClass.BaseClasses, "," );
-    var field = TemplateUtil.ExpandTextWithField( astNodeClass.Fields );
+    var field = TemplateUtil.ExpandTextWithField( info, astNodeClass, astNodeClass.Fields );
     var hasField = !string.IsNullOrEmpty( field );
-    var ctorSignature = astNodeClass.ConstructorSignature;
-    var ctorStatement = TemplateUtil.ExpandTextWithStatements( astNodeClass.ConstructorStatements );
+    var ctor = TemplateUtil.ExpandTextWithConstructor( info, astNodeClass, astNodeClass.Constructors );
     var hasAnyAcceptor = astNodeClass.HasAccept || astNodeClass.HasAcceptChildren;
     var hasAccept = astNodeClass.HasAccept;
     var acceptStatement = TemplateUtil.ExpandTextWithStatements( astNodeClass.AcceptStatements );
@@ -39,22 +38,18 @@ namespace <#= nameSpace #>
         #endregion Fields
 <# }#>
 
-<# if( astNodeClass.HasConstructor ) { #>
-        /// <summary>
-        /// Ctor.
-        /// </summary>
-<# if( !string.IsNullOrEmpty( ctorSignature ) ) { #>
-        <#= ctorSignature #>
+<# if( !string.IsNullOrEmpty( ctor ) ) { #>
+<#= ctor #>
 <# } else { #>
-        public <#= className #>( IAstNode parent )
-<# }#>
-            : base( AstNodeId.<#= astId #>, parent )
-        {
-<#= ctorStatement #>
-        }
-<# }#>
-
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public <#= className #>>( IAstNode parent )
+            : base( AstNodeId.<#= astId #>>, parent )
+        {}
+<# } #>
 <# if( nameable ) {#>
+
         #region INameable
         ///
         /// <inheritdoc/>

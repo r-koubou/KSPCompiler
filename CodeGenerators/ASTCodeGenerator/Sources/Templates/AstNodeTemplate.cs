@@ -32,10 +32,9 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
     var className = info.GetClassName( astNodeClass );
     var attribute = TemplateUtil.ExpandAttribute( astNodeClass.Attributes );
     var baseClass = TemplateUtil.ExpandListWithDelimiter( astNodeClass.BaseClasses, "," );
-    var field = TemplateUtil.ExpandTextWithField( astNodeClass.Fields );
+    var field = TemplateUtil.ExpandTextWithField( info, astNodeClass, astNodeClass.Fields );
     var hasField = !string.IsNullOrEmpty( field );
-    var ctorSignature = astNodeClass.ConstructorSignature;
-    var ctorStatement = TemplateUtil.ExpandTextWithStatements( astNodeClass.ConstructorStatements );
+    var ctor = TemplateUtil.ExpandTextWithConstructor( info, astNodeClass, astNodeClass.Constructors );
     var hasAnyAcceptor = astNodeClass.HasAccept || astNodeClass.HasAcceptChildren;
     var hasAccept = astNodeClass.HasAccept;
     var acceptStatement = TemplateUtil.ExpandTextWithStatements( astNodeClass.AcceptStatements );
@@ -117,17 +116,11 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
             #line default
             #line hidden
             this.Write("\n");
- if( astNodeClass.HasConstructor ) {
+ if( !string.IsNullOrEmpty( ctor ) ) {
 
             #line default
             #line hidden
-            this.Write("        /// <summary>\n        /// Ctor.\n        /// </summary>\n");
- if( !string.IsNullOrEmpty( ctorSignature ) ) {
-
-            #line default
-            #line hidden
-            this.Write("        ");
-            this.Write(this.ToStringHelper.ToStringWithCulture(ctorSignature));
+            this.Write(this.ToStringHelper.ToStringWithCulture(ctor));
 
             #line default
             #line hidden
@@ -136,37 +129,26 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
 
             #line default
             #line hidden
-            this.Write("        public ");
+            this.Write("        /// <summary>\n        /// Ctor\n        /// </summary>\n        public ");
             this.Write(this.ToStringHelper.ToStringWithCulture(className));
 
             #line default
             #line hidden
-            this.Write("( IAstNode parent )\n");
- }
-
-            #line default
-            #line hidden
-            this.Write("            : base( AstNodeId.");
+            this.Write(">( IAstNode parent )\n            : base( AstNodeId.");
             this.Write(this.ToStringHelper.ToStringWithCulture(astId));
 
             #line default
             #line hidden
-            this.Write(", parent )\n        {\n");
-            this.Write(this.ToStringHelper.ToStringWithCulture(ctorStatement));
-
-            #line default
-            #line hidden
-            this.Write("\n        }\n");
+            this.Write(">, parent )\n        {}\n");
  }
 
             #line default
             #line hidden
-            this.Write("\n");
  if( nameable ) {
 
             #line default
             #line hidden
-            this.Write("        #region INameable\n        ///\n        /// <inheritdoc/>\n        ///\n        public string Name { get; set; } = \"\";\n        #endregion INameable\n");
+            this.Write("\n        #region INameable\n        ///\n        /// <inheritdoc/>\n        ///\n        public string Name { get; set; } = \"\";\n        #endregion INameable\n");
  }
 
             #line default

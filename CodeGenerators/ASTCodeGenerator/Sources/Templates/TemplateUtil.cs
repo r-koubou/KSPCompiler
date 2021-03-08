@@ -8,10 +8,34 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
 {
     public static class TemplateUtil
     {
+        private const string REPLACE_CLASSNAME = "##CLASSNAME##";
+        private const string REPLACE_AST_ID = "##ASTID##";
+
         private const string LF = "\n";
 
         public const int MemberIndentCount = 2;
         public const int StatementIndentCount = 3;
+
+        public static string MakeIndentSpace( int count )
+        {
+            var indent = "";
+
+            for( var i = 0; i < count; i++ )
+            {
+                indent += "    ";
+            }
+
+            return indent;
+        }
+
+        public static string Replace( string text, AstNodesInfo info, AstNodesInfo.Class clazz )
+        {
+            var result = text;
+            result = result.Replace( REPLACE_CLASSNAME, info.GetClassName( clazz ) );
+            result = result.Replace( REPLACE_AST_ID,    clazz.Name );
+
+            return result;
+        }
 
         public static string ExpandText<T>(
             IList<T> list,
@@ -19,12 +43,7 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
             int indentCount = 0 )
         {
             var buffer = new StringBuilder();
-            var indent = "";
-
-            for( var i = 0; i < indentCount; i++ )
-            {
-                indent += "    ";
-            }
+            var indent = MakeIndentSpace( indentCount );
 
             var count = list.Count;
             var index = 0;
@@ -39,28 +58,29 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
             return buffer.ToString();
         }
 
-        public static string ExpandTextWithField( IList<AstNodesInfo.Class.Field> fields )
+        public static string ExpandTextWithField(
+            AstNodesInfo info,
+            AstNodesInfo.Class clazz,
+            IList<AstNodesInfo.Class.Field> fields )
         {
             var buffer = new StringBuilder();
-            var indent = "";
-
-            for( var i = 0; i < MemberIndentCount; i++ )
-            {
-                indent += "    ";
-            }
-
+            var indent = MakeIndentSpace( MemberIndentCount );
             var index = 0;
+
             foreach( var f in fields )
             {
                 if( !string.IsNullOrEmpty( f.Description ) )
                 {
+                    var desc = Replace( f.Body, info, clazz );
                     buffer.Append( indent ).Append( "/// <summary>" ).Append( LF );
-                    buffer.Append( indent ).Append( $"/// {f.Description}" ).Append( LF );
+                    buffer.Append( indent ).Append( $"/// {desc}" ).Append( LF );
                     buffer.Append( indent ).Append( "/// </summary>" ).Append( LF );
                 }
 
+                var indentedCode = f.Body.Trim().Replace( LF, $"{LF}{indent}" );
+
                 buffer.Append( indent )
-                      .Append( f.Declaration )
+                      .Append( Replace( indentedCode, info, clazz ) )
                       .Append( LF );
 
                 if( index < fields.Count - 1 )
@@ -72,6 +92,85 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
             }
 
             return buffer.ToString();
+        }
+
+        public static string ExpandTextWithMethod(
+            AstNodesInfo info,
+            AstNodesInfo.Class clazz,
+            IList<AstNodesInfo.Class.Method> methods )
+        {
+            var buffer = new StringBuilder();
+            var indent = MakeIndentSpace( MemberIndentCount );
+            var index = 0;
+
+            foreach( var m in methods )
+            {
+                if( !string.IsNullOrEmpty( m.Description ) )
+                {
+                    buffer.Append( indent ).Append( "/// <summary>" ).Append( LF );
+                    buffer.Append( indent ).Append( $"/// {m.Description}" ).Append( LF );
+                    buffer.Append( indent ).Append( "/// </summary>" ).Append( LF );
+                }
+
+                var indentedCode = m.Body.Trim().Replace( LF, $"{LF}{indent}" );
+                buffer.Append( indent ).Append( Replace( indentedCode, info, clazz ) )
+                      .Append( LF );
+
+                if( index < methods.Count - 1 )
+                {
+                    buffer.Append( LF );
+                }
+
+                index++;
+            }
+
+            return buffer.ToString();
+        }
+
+        public static string ExpandTextWithConstructor(
+            AstNodesInfo info,
+            AstNodesInfo.Class clazz,
+            IList<AstNodesInfo.Class.Constructor> constructors )
+        {
+            var buffer = new StringBuilder();
+            var indent = MakeIndentSpace( MemberIndentCount );
+            var index = 0;
+
+            foreach( var m in constructors )
+            {
+                ExpandTextWithMethodImpl( info, clazz, buffer, indent, "Ctor.", m.Body );
+
+                if( index < constructors.Count - 1 )
+                {
+                    buffer.Append( LF );
+                }
+
+                index++;
+            }
+
+            return buffer.ToString();
+        }
+
+        public static StringBuilder ExpandTextWithMethodImpl(
+            AstNodesInfo info,
+            AstNodesInfo.Class clazz,
+            StringBuilder buffer,
+            string indent,
+            string description,
+            string methodBody )
+        {
+            if( !string.IsNullOrEmpty( description ) )
+            {
+                buffer.Append( indent ).Append( "/// <summary>" ).Append( LF );
+                buffer.Append( indent ).Append( $"/// {description}" ).Append( LF );
+                buffer.Append( indent ).Append( "/// </summary>" ).Append( LF );
+            }
+
+            var indentedCode = methodBody.Trim().Replace( LF, $"{LF}{indent}" );
+            buffer.Append( indent ).Append( Replace( indentedCode, info, clazz ) )
+                  .Append( LF );
+
+            return buffer;
         }
 
         public static string ExpandTextWithStatements( IList<string> statements )
@@ -145,12 +244,7 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
             var buffer = new StringBuilder();
             var hasDelimiter = !string.IsNullOrEmpty( delimiter );
 
-            var indent = string.Empty;
-
-            for( int i = 0; i < indentCount; i++ )
-            {
-                indent += "    ";
-            }
+            var indent = MakeIndentSpace( indentCount );
 
             for( var i = 0; i < list.Count; i++ )
             {
