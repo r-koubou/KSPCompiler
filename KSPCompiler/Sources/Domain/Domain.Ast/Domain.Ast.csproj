@@ -17,4 +17,10 @@
         <ProjectReference Include="..\Domain.Text\Domain.Text.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Statements" />
+      <Folder Include="_Generated\Expressions" />
+      <Folder Include="_Generated\Statements" />
+    </ItemGroup>
+
 </Project>

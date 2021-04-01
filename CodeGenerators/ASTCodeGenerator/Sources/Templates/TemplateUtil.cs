@@ -9,7 +9,7 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
     public static class TemplateUtil
     {
         private const string REPLACE_CLASSNAME = "##CLASSNAME##";
-        private const string REPLACE_AST_ID = "##ASTID##";
+        private const string REPLACE_AST_ID = "##ID##";
 
         private const string LF = "\n";
 
