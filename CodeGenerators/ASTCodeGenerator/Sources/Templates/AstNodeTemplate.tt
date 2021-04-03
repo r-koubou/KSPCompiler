@@ -44,8 +44,8 @@ namespace <#= nameSpace #>
         /// <summary>
         /// Ctor
         /// </summary>
-        public <#= className #>>( IAstNode parent )
-            : base( AstNodeId.<#= astId #>>, parent )
+        public <#= className #>( IAstNode parent )
+            : base( AstNodeId.<#= astId #>, parent )
         {}
 <# } #>
 <# if( nameable ) {#>

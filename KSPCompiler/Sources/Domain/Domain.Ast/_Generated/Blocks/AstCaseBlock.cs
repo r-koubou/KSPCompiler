@@ -10,17 +10,17 @@ namespace KSPCompiler.Domain.Ast.Blocks
     {
         #region Fields
         /// <summary>
-        /// Conditional expression for "case" (starting value)
+        /// public AstExpressionSyntaxNode ConditionFrom { get; set; } = AstExpressionSyntaxNode.None;
         /// </summary>
-        public AstExpressionSyntaxNode ConditionFrom { get; set; } = AstExpressionSyntaxNode.Null;
+        public AstExpressionSyntaxNode ConditionFrom { get; set; } = AstExpressionSyntaxNode.None;
 
         /// <summary>
-        /// Conditional expression for "case" (end value *optional)
+        /// public AstExpressionSyntaxNode ConditionTo { get; set; } = AstExpressionSyntaxNode.None;
         /// </summary>
-        public AstExpressionSyntaxNode ConditionTo { get; set; } = AstExpressionSyntaxNode.Null;
+        public AstExpressionSyntaxNode ConditionTo { get; set; } = AstExpressionSyntaxNode.None;
 
         /// <summary>
-        /// Code block in this "case"
+        /// public AstBlock CodeBlock { get; }
         /// </summary>
         public AstBlock CodeBlock { get; }
 
@@ -33,7 +33,6 @@ namespace KSPCompiler.Domain.Ast.Blocks
             : base( AstNodeId.CaseBlock, parent )
         {
             CodeBlock = new AstBlock( this );
-
         }
 
 
@@ -53,7 +52,6 @@ namespace KSPCompiler.Domain.Ast.Blocks
         public override void AcceptChildren<T>( IAstVisitor<T> visitor )
         {
             CodeBlock.AcceptChildren( visitor );
-
         }
 
         #endregion IAstNodeAcceptor

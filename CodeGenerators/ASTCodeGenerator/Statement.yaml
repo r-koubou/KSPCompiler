@@ -8,7 +8,7 @@ Classes:
 #---------------------------------------------------------------------
 # VariableBody
 #---------------------------------------------------------------------
-- Name: VariableBody
+- Name: VariableDeclaration
   Description: a variable declaration
   BaseClasses:
   - AstStatementSyntaxNode
@@ -34,15 +34,17 @@ Classes:
     Description: primitive variable initialization
   - Body: public AstArrayInitializer? ArrayInitializer { get; set; }
     Description: array variable initialization
-  HasAccept: false
+  HasAccept: true
   HasAcceptChildren: true
   AcceptChildrenStatements: |-
     PrimitiveInitializer?.AcceptChildren( visitor );
     ArrayInitializer?.AcceptChildren( visitor );
 #---------------------------------------------------------------------
-# PrimitiveInititalizer
+# PrimitiveInitializer
 #---------------------------------------------------------------------
-- Name: PrimitiveInititalizer
+- Name: PrimitiveInitializer
+  Usings:
+  - KSPCompiler.Domain.Ast.Expressions
   Description: a primitive variable initialization
   BaseClasses:
   - AstStatementSyntaxNode
@@ -70,6 +72,8 @@ Classes:
 # ArrayInitializer
 #---------------------------------------------------------------------
 - Name: ArrayInitializer
+  Usings:
+  - KSPCompiler.Domain.Ast.Expressions
   Description: an array variable initialization
   BaseClasses:
   - AstStatementSyntaxNode
@@ -86,6 +90,8 @@ Classes:
 # IfStatement
 #---------------------------------------------------------------------
 - Name: IfStatement
+  Usings:
+  - KSPCompiler.Domain.Ast.Blocks
   Description: an if statement
   BaseClasses:
   - AstConditionalStatement
@@ -94,10 +100,10 @@ Classes:
     Description: The code block when if condition is not satisfied
   Constructors:
     - Body: |-
-        public ##CLASSNAME##() : this( null ) {}
+        public ##CLASSNAME##() : this( IAstNode.None ) {}
     - Body: |-
         public ##CLASSNAME##( IAstNode parent )
-            : this( AstNodeId.##ID##, parent ) {}
+            : base( AstNodeId.##ID##, parent ) {}
   HasAccept: false
   HasAcceptChildren: false
 #---------------------------------------------------------------------
@@ -119,6 +125,9 @@ Classes:
 # SelectStatement
 #---------------------------------------------------------------------
 - Name: SelectStatement
+  Usings:
+  - KSPCompiler.Domain.Ast.Blocks
+  - KSPCompiler.Domain.Ast.Expressions
   Description: a select statement
   BaseClasses:
   - AstConditionalStatement
@@ -157,6 +166,8 @@ Classes:
 # KspPreprocessorDefine
 #---------------------------------------------------------------------
 - Name: KspPreprocessorDefine
+  Usings:
+  - KSPCompiler.Domain.Ast.Expressions
   Description: a KSP Preprocessor - SET_CONDITION
   BaseClasses:
   - AstStatementSyntaxNode
@@ -178,6 +189,8 @@ Classes:
 # KspPreprocessorUndefine
 #---------------------------------------------------------------------
 - Name: KspPreprocessorUndefine
+  Usings:
+  - KSPCompiler.Domain.Ast.Expressions
   Description: a KSP Preprocessor - RESET_CONDITION
   BaseClasses:
   - AstStatementSyntaxNode
@@ -199,6 +212,8 @@ Classes:
 # KspPreprocessorIfdefine
 #---------------------------------------------------------------------
 - Name: KspPreprocessorIfdefine
+  Usings:
+  - KSPCompiler.Domain.Ast.Expressions
   Description: a KSP Preprocessor - USE_CODE_IF
   BaseClasses:
   - AstStatementSyntaxNode
@@ -222,13 +237,16 @@ Classes:
 # KspPreprocessorIfnotDefine
 #---------------------------------------------------------------------
 - Name: KspPreprocessorIfnotDefine
+  Usings:
+  - KSPCompiler.Domain.Ast.Blocks
+  - KSPCompiler.Domain.Ast.Expressions
   Description: a KSP Preprocessor - USE_CODE_IF_NOT
   BaseClasses:
   - AstStatementSyntaxNode
   Fields:
   - Body: public AstSymbolExpression Condition { get; }
     Description: Ifndef conditional symbol
-  - Body: public AstBlock Block? { get; set; }
+  - Body: public AstBlock? Block { get; set; }
     Description: Code block for ifndef is true
   Constructors:
     - Body: |-

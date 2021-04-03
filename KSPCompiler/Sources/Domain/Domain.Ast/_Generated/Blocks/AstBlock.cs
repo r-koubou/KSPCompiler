@@ -9,21 +9,18 @@ namespace KSPCompiler.Domain.Ast.Blocks
     {
         #region Fields
         /// <summary>
-        /// Statements
+        /// public AstNodeList<AstNode> Statements { get; } = new();
         /// </summary>
         public AstNodeList<AstNode> Statements { get; } = new();
 
         #endregion Fields
 
         /// <summary>
-        /// Ctor.
+        /// Ctor
         /// </summary>
         public AstBlock( IAstNode parent )
             : base( AstNodeId.Block, parent )
-        {
-
-        }
-
+        {}
 
         #region IAstNodeAcceptor
 
@@ -44,7 +41,6 @@ namespace KSPCompiler.Domain.Ast.Blocks
             {
                 n.Accept( visitor );
             }
-
         }
 
         #endregion IAstNodeAcceptor

@@ -26,7 +26,7 @@ namespace KSPCompiler.Domain.Ast
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstNodeList() : this( IAstNode.Null ) {}
+        public AstNodeList() : this( IAstNode.None ) {}
 
         /// <summary>
         /// Ctor
@@ -65,7 +65,7 @@ namespace KSPCompiler.Domain.Ast
         {
             if( Nodes.Remove( node ) )
             {
-                node.Parent = IAstNode.Null;
+                node.Parent = IAstNode.None;
             }
         }
 
@@ -73,7 +73,7 @@ namespace KSPCompiler.Domain.Ast
         {
             foreach( var n in Nodes )
             {
-                n.Parent = IAstNode.Null;
+                n.Parent = IAstNode.None;
             }
             Nodes.Clear();
         }
@@ -97,7 +97,7 @@ namespace KSPCompiler.Domain.Ast
                 list.RemoveAt( index );
                 list.Insert( index, value );
 
-                org.Parent   = IAstNode.Null;
+                org.Parent   = IAstNode.None;
                 value.Parent = this.Parent;
             }
         }

@@ -9,7 +9,7 @@ namespace KSPCompiler.Domain.Ast.Blocks
     {
         #region Fields
         /// <summary>
-        /// Global blocks for callback definitions, user-defined functions, etc.
+        /// public AstNodeList<AstNode> GlobalBlocks { get; }
         /// </summary>
         public AstNodeList<AstNode> GlobalBlocks { get; }
 
@@ -22,7 +22,6 @@ namespace KSPCompiler.Domain.Ast.Blocks
             : base( AstNodeId.CompilationUnit, parent )
         {
             GlobalBlocks = new AstNodeList<AstNode>( this );
-
         }
 
 
@@ -45,7 +44,6 @@ namespace KSPCompiler.Domain.Ast.Blocks
             {
                 n.Accept( visitor );
             }
-
         }
 
         #endregion IAstNodeAcceptor

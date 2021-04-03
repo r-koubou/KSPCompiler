@@ -9,13 +9,11 @@ namespace KSPCompiler.Domain.Ast.Blocks
     {
 
         /// <summary>
-        /// Ctor.
+        /// Ctor
         /// </summary>
         public AstArgument( IAstNode parent )
             : base( AstNodeId.Argument, parent )
-        {
-
-        }
+        {}
 
         #region INameable
         ///

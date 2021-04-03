@@ -134,12 +134,12 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
 
             #line default
             #line hidden
-            this.Write(">( IAstNode parent )\n            : base( AstNodeId.");
+            this.Write("( IAstNode parent )\n            : base( AstNodeId.");
             this.Write(this.ToStringHelper.ToStringWithCulture(astId));
 
             #line default
             #line hidden
-            this.Write(">, parent )\n        {}\n");
+            this.Write(", parent )\n        {}\n");
  }
 
             #line default

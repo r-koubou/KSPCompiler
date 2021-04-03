@@ -13,7 +13,7 @@
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstFunctionalSyntaxNode(
+        protected AstFunctionalSyntaxNode(
             AstNodeId id,
             IAstNode parent )
             : base( id, parent )

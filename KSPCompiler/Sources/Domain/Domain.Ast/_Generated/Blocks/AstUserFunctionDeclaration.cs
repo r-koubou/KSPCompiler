@@ -9,13 +9,10 @@ namespace KSPCompiler.Domain.Ast.Blocks
     {
 
         /// <summary>
-        /// Ctor.
+        /// Ctor
         /// </summary>
         public AstUserFunctionDeclaration( IAstNode parent )
             : base( AstNodeId.UserFunctionDeclaration, parent )
-        {
-
-        }
-
+        {}
     }
 }

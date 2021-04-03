@@ -9,7 +9,7 @@ namespace KSPCompiler.Domain.Ast.Expressions
     /// </summary>
     public abstract class AstExpressionSyntaxNode : AstNode
     {
-        public static readonly AstExpressionSyntaxNode Null = new NullNode();
+        public static readonly AstExpressionSyntaxNode None = new NoneNode();
 
         /// <summary>
         /// left operand
@@ -30,10 +30,10 @@ namespace KSPCompiler.Domain.Ast.Expressions
         /// Ctor
         /// </summary>
         public AstExpressionSyntaxNode()
-            : base( AstNodeId.None, IAstNode.Null )
+            : base( AstNodeId.None, IAstNode.None )
         {
-            Left  = Null;
-            Right = Null;
+            Left  = None;
+            Right = None;
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace KSPCompiler.Domain.Ast.Expressions
         #endregion AstNode
 
         #region Null Object
-        private class NullNode : AstExpressionSyntaxNode {}
+        private class NoneNode : AstExpressionSyntaxNode {}
         #endregion
 
     }

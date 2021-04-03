@@ -24,7 +24,7 @@ namespace KSPCompiler.Externals.Antlr.Cst
             var node = new TNode();
 
             node.Import( context );
-            node.Left = left.Accept( this ) as AstExpressionSyntaxNode ?? AstExpressionSyntaxNode.Null;
+            node.Left = left.Accept( this ) as AstExpressionSyntaxNode ?? AstExpressionSyntaxNode.None;
 
             return SetupUnaryOperatorNode( node );
         }

@@ -9,7 +9,7 @@ namespace KSPCompiler.Domain.Ast.Blocks
     {
         #region Fields
         /// <summary>
-        /// Argument node list
+        /// public AstNodeList<AstArgument> Arguments { get; } = new();
         /// </summary>
         public AstNodeList<AstArgument> Arguments { get; } = new();
 
@@ -20,14 +20,11 @@ namespace KSPCompiler.Domain.Ast.Blocks
         #endregion Fields
 
         /// <summary>
-        /// Ctor.
+        /// Ctor
         /// </summary>
         public AstArgumentList( IAstNode parent )
             : base( AstNodeId.ArgumentList, parent )
-        {
-
-        }
-
+        {}
 
         #region IAstNodeAcceptor
 

@@ -12,11 +12,11 @@ namespace KSPCompiler.Domain.Ast
     {
         public static bool IsNone( IAstNode? n ) =>
             n == null ||
-            n == Null ||
+            n == None ||
             n is NullNode ||
             n.Id == AstNodeId.None;
 
-        public static IAstNode Null => new NullNode();
+        public static IAstNode None => new NullNode();
 
         /// <summary>
         /// ID for identifying a node.
