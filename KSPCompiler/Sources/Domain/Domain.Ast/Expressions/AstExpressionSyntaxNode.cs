@@ -41,6 +41,15 @@ namespace KSPCompiler.Domain.Ast.Expressions
         /// </summary>
         public AstExpressionSyntaxNode(
             AstNodeId id,
+            IAstNode parent )
+            : this( id, parent, None, None )
+        {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstExpressionSyntaxNode(
+            AstNodeId id,
             IAstNode parent,
             AstExpressionSyntaxNode left,
             AstExpressionSyntaxNode right )

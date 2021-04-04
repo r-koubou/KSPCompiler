@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -41,6 +42,7 @@ namespace KSPCompiler.Apps.ASTCodeGenerator
         {
             if( !File.Exists( yamlFilePath ) )
             {
+                Console.Error.WriteLine( $"Warning: {yamlFilePath} not found. skipped..." );
                 return new AstNodesInfo();
             }
 

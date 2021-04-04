@@ -1,0 +1,7 @@
+---
+Namespace: Expressions
+ClassNamePrefix: Ast
+ClassNameSuffix: ''
+SourceFilePrefix: Ast
+SourceFileSuffix: ".cs"
+Classes: []

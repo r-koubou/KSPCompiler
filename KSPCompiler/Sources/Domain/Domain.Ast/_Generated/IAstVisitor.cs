@@ -27,6 +27,8 @@ namespace KSPCompiler.Domain.Ast
         T Visit( AstKspPreprocessorUndefine node );
         T Visit( AstKspPreprocessorIfdefine node );
         T Visit( AstKspPreprocessorIfnotDefine node );
+        T Visit( AstSymbolExpression node );
+        T Visit( AstExpressionList node );
 
         T Visit( IAstNode node )
         {

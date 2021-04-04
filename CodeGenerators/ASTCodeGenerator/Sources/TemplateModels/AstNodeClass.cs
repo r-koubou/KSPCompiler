@@ -26,6 +26,7 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.TemplateModels
 
         public class Class
         {
+            public bool Abstract { get; set; } = false;
             public string Description { get; set; } = string.Empty;
             public IList<string> Usings { get; set; } = new List<string>();
             public IList<string> Attributes { get; set; } = new List<string>();

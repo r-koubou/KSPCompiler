@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -71,7 +72,7 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
             {
                 if( !string.IsNullOrEmpty( f.Description ) )
                 {
-                    var desc = Replace( f.Body, info, clazz );
+                    var desc = Replace( f.Description, info, clazz );
                     buffer.Append( indent ).Append( "/// <summary>" ).Append( LF );
                     buffer.Append( indent ).Append( $"/// {desc}" ).Append( LF );
                     buffer.Append( indent ).Append( "/// </summary>" ).Append( LF );
@@ -214,9 +215,9 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
             return buffer.ToString();
         }
 
-        public static string ExpandTextWithEnum( IEnumerable<AstNodesInfo.Class> classes )
+        public static string ExpandTextWithEnum( IEnumerable<AstNodesInfo.Class> classes, Func<AstNodesInfo.Class, bool> skipCond )
         {
-            var ids = ( from x in classes select x.Name ).ToList();
+            var ids = ( from x in classes where !skipCond(x) select x.Name ).ToList();
 
             return ExpandListWithDelimiter<string>(
                 ids,
@@ -226,6 +227,11 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
                 true,
                 MemberIndentCount
             );
+        }
+
+        public static string ExpandTextWithEnum( IEnumerable<AstNodesInfo.Class> classes )
+        {
+            return ExpandTextWithEnum( classes, ( x ) => false );
         }
 
         public static string ExpandListWithDelimiter<T>(

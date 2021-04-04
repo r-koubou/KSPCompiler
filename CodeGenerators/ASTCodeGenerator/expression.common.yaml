@@ -15,6 +15,31 @@ Classes:
   - INameable
   HasAccept: false
   HasAcceptChildren: false
+#---------------------------------------------------------------------
+# ExpressionList
+#---------------------------------------------------------------------
+- Name: ExpressionList
+  Description: a comma-separated list of expressions
+  BaseClasses:
+  - AstExpressionSyntaxNode
+  Fields:
+  - Body: public AstNodeList<AstExpressionSyntaxNode> Expressions { get; }
+    Description: expression list
+  Constructors:
+    - Body: |-
+        public ##CLASSNAME##( IAstNode parent )
+            : base( AstNodeId.##ID##, parent )
+        {
+            Expressions = new AstNodeList<AstExpressionSyntaxNode>( this );
+        }
+  HasAccept: false
+  HasAcceptChildren: true
+  AcceptChildrenStatements: |-
+    foreach( var n in Expressions )
+    {
+        n.Accept( visitor );
+    }
+
 # #---------------------------------------------------------------------
 # # VariableInitializer
 # #---------------------------------------------------------------------

@@ -30,11 +30,10 @@ namespace KSPCompiler.Domain.Ast.Statements
 
         #region IAstNodeAcceptor
         /// <summary>
-        /// 何も行わない。適宜オーバーライド。
+        /// Do nothing. Override as appropriate.
         /// </summary>
         public override void AcceptChildren<T>( IAstVisitor<T> visitor )
-        {
-        }
+        {}
         #endregion
     }
 }

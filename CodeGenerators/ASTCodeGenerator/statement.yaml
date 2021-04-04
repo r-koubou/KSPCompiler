@@ -213,6 +213,7 @@ Classes:
 #---------------------------------------------------------------------
 - Name: KspPreprocessorIfdefine
   Usings:
+  - KSPCompiler.Domain.Ast.Blocks
   - KSPCompiler.Domain.Ast.Expressions
   Description: a KSP Preprocessor - USE_CODE_IF
   BaseClasses:

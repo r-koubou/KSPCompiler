@@ -23,7 +23,9 @@ namespace KSPCompiler.Domain.Ast
         KspPreprocessorDefine, 
         KspPreprocessorUndefine, 
         KspPreprocessorIfdefine, 
-        KspPreprocessorIfnotDefine
+        KspPreprocessorIfnotDefine, 
+        SymbolExpression, 
+        ExpressionList
 
     }
 }
