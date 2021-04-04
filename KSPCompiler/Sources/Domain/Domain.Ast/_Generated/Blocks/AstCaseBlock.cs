@@ -10,17 +10,17 @@ namespace KSPCompiler.Domain.Ast.Blocks
     {
         #region Fields
         /// <summary>
-        /// public AstExpressionSyntaxNode ConditionFrom { get; set; } = AstExpressionSyntaxNode.None;
+        /// Conditional expression for "case" (starting value)
         /// </summary>
         public AstExpressionSyntaxNode ConditionFrom { get; set; } = AstExpressionSyntaxNode.None;
 
         /// <summary>
-        /// public AstExpressionSyntaxNode ConditionTo { get; set; } = AstExpressionSyntaxNode.None;
+        /// Conditional expression for "case" (end value *optional)
         /// </summary>
         public AstExpressionSyntaxNode ConditionTo { get; set; } = AstExpressionSyntaxNode.None;
 
         /// <summary>
-        /// public AstBlock CodeBlock { get; }
+        /// Code block in this "case"
         /// </summary>
         public AstBlock CodeBlock { get; }
 

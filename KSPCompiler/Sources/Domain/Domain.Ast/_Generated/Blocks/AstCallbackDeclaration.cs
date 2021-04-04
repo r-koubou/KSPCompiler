@@ -9,17 +9,17 @@ namespace KSPCompiler.Domain.Ast.Blocks
     {
         #region Fields
         /// <summary>
-        /// public AstArgumentList ArgumentList { get; }
+        /// Argument node list
         /// </summary>
         public AstArgumentList ArgumentList { get; }
 
         /// <summary>
-        /// public virtual bool HasArgument => ArgumentList.HasArgument;
+        /// Whether one or more arguments are stored in the ArgumentList or not.
         /// </summary>
         public virtual bool HasArgument => ArgumentList.HasArgument;
 
         /// <summary>
-        /// public virtual int ArgumentCount => HasArgument ? ArgumentList.Arguments.Count : 0;
+        /// Number of arguments stored in ArgumentList.
         /// </summary>
         public virtual int ArgumentCount => HasArgument ? ArgumentList.Arguments.Count : 0;
 

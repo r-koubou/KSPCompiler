@@ -9,12 +9,12 @@ namespace KSPCompiler.Domain.Ast.Statements
     {
         #region Fields
         /// <summary>
-        /// public string Modifier { get; set; } = string.Empty;
+        /// modifier
         /// </summary>
         public string Modifier { get; set; } = string.Empty;
 
         /// <summary>
-        /// public AstVariableInitializer? Initializer { get; set; }
+        /// initialization statement
         /// </summary>
         public AstVariableInitializer? Initializer { get; set; }
 

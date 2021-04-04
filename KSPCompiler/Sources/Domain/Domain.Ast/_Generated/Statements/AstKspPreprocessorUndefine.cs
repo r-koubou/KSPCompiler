@@ -10,7 +10,7 @@ namespace KSPCompiler.Domain.Ast.Statements
     {
         #region Fields
         /// <summary>
-        /// public AstSymbolExpression Symbol { get; }
+        /// Preprocessor symbol
         /// </summary>
         public AstSymbolExpression Symbol { get; }
 

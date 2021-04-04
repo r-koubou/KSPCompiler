@@ -11,12 +11,12 @@ namespace KSPCompiler.Domain.Ast.Statements
     {
         #region Fields
         /// <summary>
-        /// public AstSymbolExpression Condition { get; }
+        /// Ifndef conditional symbol
         /// </summary>
         public AstSymbolExpression Condition { get; }
 
         /// <summary>
-        /// public AstBlock? Block { get; set; }
+        /// Code block for ifndef is true
         /// </summary>
         public AstBlock? Block { get; set; }
 

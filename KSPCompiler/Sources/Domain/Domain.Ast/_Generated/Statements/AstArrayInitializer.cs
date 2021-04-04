@@ -10,12 +10,12 @@ namespace KSPCompiler.Domain.Ast.Statements
     {
         #region Fields
         /// <summary>
-        /// public AstExpressionSyntaxNode? Size { get; set; }
+        /// Number of array elements
         /// </summary>
         public AstExpressionSyntaxNode? Size { get; set; }
 
         /// <summary>
-        /// public AstExpressionList? Initializer { get; set; }
+        /// Array element initialization
         /// </summary>
         public AstExpressionList? Initializer { get; set; }
 

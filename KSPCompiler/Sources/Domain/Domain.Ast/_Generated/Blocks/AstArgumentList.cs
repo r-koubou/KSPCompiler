@@ -9,7 +9,7 @@ namespace KSPCompiler.Domain.Ast.Blocks
     {
         #region Fields
         /// <summary>
-        /// public AstNodeList<AstArgument> Arguments { get; } = new();
+        /// Argument node list
         /// </summary>
         public AstNodeList<AstArgument> Arguments { get; } = new();
 

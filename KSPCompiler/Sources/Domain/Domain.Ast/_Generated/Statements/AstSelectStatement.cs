@@ -11,12 +11,12 @@ namespace KSPCompiler.Domain.Ast.Statements
     {
         #region Fields
         /// <summary>
-        /// public AstExpressionSyntaxNode? Condition { get; set; }
+        /// condition
         /// </summary>
         public AstExpressionSyntaxNode? Condition { get; set; }
 
         /// <summary>
-        /// public AstNodeList<AstCaseBlock> CaseBlocks { get; }
+        /// case list
         /// </summary>
         public AstNodeList<AstCaseBlock> CaseBlocks { get; }
 

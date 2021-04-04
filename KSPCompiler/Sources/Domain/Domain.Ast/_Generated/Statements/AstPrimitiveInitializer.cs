@@ -10,12 +10,12 @@ namespace KSPCompiler.Domain.Ast.Statements
     {
         #region Fields
         /// <summary>
-        /// public AstExpressionSyntaxNode? Expression { get; }
+        /// Assignment expression
         /// </summary>
         public AstExpressionSyntaxNode? Expression { get; }
 
         /// <summary>
-        /// public AstExpressionList? ExpressionList { get; }
+        /// Assignment multiple expression (ui_type, constructor)
         /// </summary>
         public AstExpressionList? ExpressionList { get; }
 

@@ -9,12 +9,12 @@ namespace KSPCompiler.Domain.Ast.Statements
     {
         #region Fields
         /// <summary>
-        /// public AstPrimitiveInitializer? PrimitiveInitializer { get; set; }
+        /// primitive variable initialization
         /// </summary>
         public AstPrimitiveInitializer? PrimitiveInitializer { get; set; }
 
         /// <summary>
-        /// public AstArrayInitializer? ArrayInitializer { get; set; }
+        /// array variable initialization
         /// </summary>
         public AstArrayInitializer? ArrayInitializer { get; set; }
 

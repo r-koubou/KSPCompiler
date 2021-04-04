@@ -9,7 +9,7 @@ namespace KSPCompiler.Domain.Ast.Blocks
     {
         #region Fields
         /// <summary>
-        /// public AstNodeList<AstNode> GlobalBlocks { get; }
+        /// Global blocks for callback definitions, user-defined functions, etc.
         /// </summary>
         public AstNodeList<AstNode> GlobalBlocks { get; }
 

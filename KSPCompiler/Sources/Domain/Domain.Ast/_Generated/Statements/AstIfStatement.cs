@@ -10,7 +10,7 @@ namespace KSPCompiler.Domain.Ast.Statements
     {
         #region Fields
         /// <summary>
-        /// public AstBlock? ElseBlock { get; set; }
+        /// The code block when if condition is not satisfied
         /// </summary>
         public AstBlock? ElseBlock { get; set; }
 
