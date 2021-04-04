@@ -1,0 +1,7 @@
+---
+OutputDirectory: out/
+RootNamespace: KSPCompiler.Domain.Ast
+AstDefinitionFiles:
+- Block.yaml
+- Statement.yaml
+- Expression.yaml

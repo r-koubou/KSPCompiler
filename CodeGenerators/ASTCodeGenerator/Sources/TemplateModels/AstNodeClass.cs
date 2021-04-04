@@ -19,10 +19,10 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.TemplateModels
         public string GetClassName( Class clazz )
             => $"{ClassNamePrefix}{clazz.Name}{ClassNameSuffix}";
 
-        public string GetFullNamespace( Setting setting, AstNodesInfo info )
-            => string.IsNullOrEmpty( info.Namespace )
+        public string GetFullNamespace( Setting setting )
+            => string.IsNullOrEmpty( Namespace )
                 ? setting.RootNamespace
-                : $"{setting.RootNamespace}.{info.Namespace}";
+                : $"{setting.RootNamespace}.{Namespace}";
 
         public class Class
         {

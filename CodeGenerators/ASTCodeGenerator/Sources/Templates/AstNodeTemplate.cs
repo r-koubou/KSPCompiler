@@ -26,7 +26,7 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
         {
 
     var info = Context.Info;
-    var nameSpace = info.GetFullNamespace( Context.Setting, info );
+    var nameSpace = info.GetFullNamespace( Context.Setting );
     var astNodeClass = Context.AstNodeClass;
     var astId = astNodeClass.Name;
     var className = info.GetClassName( astNodeClass );

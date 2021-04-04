@@ -1,0 +1,254 @@
+---
+Namespace: Expressions
+ClassNamePrefix: Ast
+ClassNameSuffix: ''
+SourceFilePrefix: Ast
+SourceFileSuffix: ".cs"
+Classes:
+#---------------------------------------------------------------------
+# SymbolExpression
+#---------------------------------------------------------------------
+- Name: SymbolExpression
+  Description: a symbolic reference
+  BaseClasses:
+  - AstExpressionSyntaxNode
+  - INameable
+  HasAccept: false
+  HasAcceptChildren: false
+# #---------------------------------------------------------------------
+# # VariableInitializer
+# #---------------------------------------------------------------------
+# - Name: VariableInitializer
+#   Description: a variable initialization
+#   BaseClasses:
+#   - AstNode
+#   Fields:
+#   - Body: public AstPrimitiveInitializer? PrimitiveInitializer { get; set; }
+#     Description: primitive variable initialization
+#   - Body: public AstArrayInitializer? ArrayInitializer { get; set; }
+#     Description: array variable initialization
+#   HasAccept: true
+#   HasAcceptChildren: true
+#   AcceptChildrenStatements: |-
+#     PrimitiveInitializer?.AcceptChildren( visitor );
+#     ArrayInitializer?.AcceptChildren( visitor );
+# #---------------------------------------------------------------------
+# # PrimitiveInitializer
+# #---------------------------------------------------------------------
+# - Name: PrimitiveInitializer
+#   Usings:
+#   - KSPCompiler.Domain.Ast.Expressions
+#   Description: a primitive variable initialization
+#   BaseClasses:
+#   - AstStatementSyntaxNode
+#   Fields:
+#   - Body: public AstExpressionSyntaxNode? Expression { get; }
+#     Description: Assignment expression
+#   - Body: public AstExpressionList? ExpressionList { get; }
+#     Description: Assignment multiple expression (ui_type, constructor)
+#   Constructors:
+#     - Body: |-
+#         public ##CLASSNAME##(
+#             IAstNode parent,
+#             AstExpressionSyntaxNode? expression = null,
+#             AstExpressionList? expressionList = null )
+#             : base( AstNodeId.##ID##, parent )
+#         {
+#             Expression     = expression;
+#             ExpressionList = expressionList;
+#         }
+#   HasAccept: false
+#   HasAcceptChildren: true
+#   AcceptChildrenStatements: |-
+#     throw new System.NotImplementedException();
+# #---------------------------------------------------------------------
+# # ArrayInitializer
+# #---------------------------------------------------------------------
+# - Name: ArrayInitializer
+#   Usings:
+#   - KSPCompiler.Domain.Ast.Expressions
+#   Description: an array variable initialization
+#   BaseClasses:
+#   - AstStatementSyntaxNode
+#   Fields:
+#   - Body: public AstExpressionSyntaxNode? Size { get; set; }
+#     Description: Number of array elements
+#   - Body: public AstExpressionList? Initializer { get; set; }
+#     Description: Array element initialization
+#   HasAccept: false
+#   HasAcceptChildren: true
+#   AcceptChildrenStatements: |-
+#     throw new System.NotImplementedException();
+# #---------------------------------------------------------------------
+# # IfStatement
+# #---------------------------------------------------------------------
+# - Name: IfStatement
+#   Usings:
+#   - KSPCompiler.Domain.Ast.Blocks
+#   Description: an if statement
+#   BaseClasses:
+#   - AstConditionalStatement
+#   Fields:
+#   - Body: public AstBlock? ElseBlock { get; set; }
+#     Description: The code block when if condition is not satisfied
+#   Constructors:
+#     - Body: |-
+#         public ##CLASSNAME##() : this( IAstNode.None ) {}
+#     - Body: |-
+#         public ##CLASSNAME##( IAstNode parent )
+#             : base( AstNodeId.##ID##, parent ) {}
+#   HasAccept: false
+#   HasAcceptChildren: false
+# #---------------------------------------------------------------------
+# # WhileStatement
+# #---------------------------------------------------------------------
+# - Name: WhileStatement
+#   Description: a while statement
+#   BaseClasses:
+#   - AstConditionalStatement
+#   Constructors:
+#   - Body: |-
+#       public ##CLASSNAME##() : this( null ) {}
+#   - Body: |-
+#       public ##CLASSNAME##( IAstNode parent )
+#           : base( AstNodeId.##ID##, parent ) {}
+#   HasAccept: false
+#   HasAcceptChildren: false
+# #---------------------------------------------------------------------
+# # SelectStatement
+# #---------------------------------------------------------------------
+# - Name: SelectStatement
+#   Usings:
+#   - KSPCompiler.Domain.Ast.Blocks
+#   - KSPCompiler.Domain.Ast.Expressions
+#   Description: a select statement
+#   BaseClasses:
+#   - AstConditionalStatement
+#   Fields:
+#     - Body: public AstExpressionSyntaxNode? Condition { get; set; }
+#       Description: condition
+#     - Body: public AstNodeList<AstCaseBlock> CaseBlocks { get; }
+#       Description: case list
+#   Constructors:
+#   - Body: |-
+#       public ##CLASSNAME##( IAstNode parent )
+#           : base( AstNodeId.##ID##, parent )
+#       {
+#           CaseBlocks = new AstNodeList<AstCaseBlock>( this );
+#       }
+#   HasAccept: false
+#   HasAcceptChildren: true
+#   AcceptChildrenStatements: |-
+#         foreach( var n in CaseBlocks )
+#         {
+#             n.Accept( visitor );
+#         }
+# #---------------------------------------------------------------------
+# # CallKspUserFunctionStatement
+# #---------------------------------------------------------------------
+# - Name: CallKspUserFunctionStatement
+#   Description: a call statement
+#   BaseClasses:
+#   - AstStatementSyntaxNode
+#   - INameable
+#   HasAccept: false
+#   HasAcceptChildren: true
+#   AcceptChildrenStatements: |-
+#       throw new System.NotImplementedException();
+# #---------------------------------------------------------------------
+# # KspPreprocessorDefine
+# #---------------------------------------------------------------------
+# - Name: KspPreprocessorDefine
+#   Usings:
+#   - KSPCompiler.Domain.Ast.Expressions
+#   Description: a KSP Preprocessor - SET_CONDITION
+#   BaseClasses:
+#   - AstStatementSyntaxNode
+#   Fields:
+#   - Body: public AstSymbolExpression Symbol { get; }
+#     Description: Preprocessor symbol
+#   Constructors:
+#     - Body: |-
+#         public ##CLASSNAME##( IAstNode parent )
+#             : base( AstNodeId.##ID##, parent )
+#         {
+#             Symbol = new AstSymbolExpression( this );
+#         }
+#   HasAccept: false
+#   HasAcceptChildren: true
+#   AcceptChildrenStatements: |-
+#     throw new System.NotImplementedException();
+# #---------------------------------------------------------------------
+# # KspPreprocessorUndefine
+# #---------------------------------------------------------------------
+# - Name: KspPreprocessorUndefine
+#   Usings:
+#   - KSPCompiler.Domain.Ast.Expressions
+#   Description: a KSP Preprocessor - RESET_CONDITION
+#   BaseClasses:
+#   - AstStatementSyntaxNode
+#   Fields:
+#   - Body: public AstSymbolExpression Symbol { get; }
+#     Description: Preprocessor symbol
+#   Constructors:
+#     - Body: |-
+#         public ##CLASSNAME##( IAstNode parent )
+#             : base( AstNodeId.##ID##, parent )
+#         {
+#             Symbol = new AstSymbolExpression( this );
+#         }
+#   HasAccept: false
+#   HasAcceptChildren: true
+#   AcceptChildrenStatements: |-
+#     throw new System.NotImplementedException();
+# #---------------------------------------------------------------------
+# # KspPreprocessorIfdefine
+# #---------------------------------------------------------------------
+# - Name: KspPreprocessorIfdefine
+#   Usings:
+#   - KSPCompiler.Domain.Ast.Expressions
+#   Description: a KSP Preprocessor - USE_CODE_IF
+#   BaseClasses:
+#   - AstStatementSyntaxNode
+#   Fields:
+#   - Body: public AstSymbolExpression Condition { get; }
+#     Description: Ifdef conditional symbol
+#   - Body: public AstBlock? Block { get; set; }
+#     Description: Code block for ifdef is true
+#   Constructors:
+#     - Body: |-
+#         public ##CLASSNAME##( IAstNode parent )
+#             : base( AstNodeId.##ID##, parent )
+#         {
+#             Condition = new AstSymbolExpression( this );
+#         }
+#   HasAccept: false
+#   HasAcceptChildren: true
+#   AcceptChildrenStatements: |-
+#     throw new System.NotImplementedException();
+# #---------------------------------------------------------------------
+# # KspPreprocessorIfnotDefine
+# #---------------------------------------------------------------------
+# - Name: KspPreprocessorIfnotDefine
+#   Usings:
+#   - KSPCompiler.Domain.Ast.Blocks
+#   - KSPCompiler.Domain.Ast.Expressions
+#   Description: a KSP Preprocessor - USE_CODE_IF_NOT
+#   BaseClasses:
+#   - AstStatementSyntaxNode
+#   Fields:
+#   - Body: public AstSymbolExpression Condition { get; }
+#     Description: Ifndef conditional symbol
+#   - Body: public AstBlock? Block { get; set; }
+#     Description: Code block for ifndef is true
+#   Constructors:
+#     - Body: |-
+#         public ##CLASSNAME##( IAstNode parent )
+#             : base( AstNodeId.##ID##, parent )
+#         {
+#             Condition = new AstSymbolExpression( this );
+#         }
+#   HasAccept: false
+#   HasAcceptChildren: true
+#   AcceptChildrenStatements: |-
+#     throw new System.NotImplementedException();

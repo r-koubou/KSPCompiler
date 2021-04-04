@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 
 using KSPCompiler.Apps.ASTCodeGenerator.Generator;
 using KSPCompiler.Apps.ASTCodeGenerator.TemplateModels;
@@ -9,18 +10,25 @@ namespace KSPCompiler.Apps.ASTCodeGenerator
     {
         public static void Main( string[] args )
         {
-            var setting = YamlFileSerializer.ReadYaml<Setting>( "Setting.yaml" );
+            var setting = YamlFileSerializer.ReadYaml<Setting>( "setting.yaml" );
             GenerateAst( setting );
         }
 
         private static void GenerateAst( Setting setting )
         {
             var astInfoList = new List<AstNodesInfo>();
-            var blockNodes = GenerateAstNode( setting, "Block.yaml", new AstNodeGenerator( new AstNodeTransformer() ) );
-            var statementNodes = GenerateAstNode( setting, "Statement.yaml", new AstNodeGenerator( new AstNodeTransformer() ) );
 
-            astInfoList.Add( blockNodes );
-            astInfoList.Add( statementNodes );
+            foreach( var definitionFile in setting.AstDefinitionFiles )
+            {
+                var astNodes = GenerateAstNode(
+                    setting,
+                    definitionFile,
+                    new AstNodeGenerator( new AstNodeTransformer() )
+                );
+
+                astInfoList.Add( astNodes );
+
+            }
 
             new AstNodeIdGenerator( new AstNodeIdTextTransformer() )
                .Generate( setting, astInfoList );
@@ -31,6 +39,11 @@ namespace KSPCompiler.Apps.ASTCodeGenerator
 
         private static AstNodesInfo GenerateAstNode( Setting setting, string yamlFilePath, IAstNodeGenerator generator )
         {
+            if( !File.Exists( yamlFilePath ) )
+            {
+                return new AstNodesInfo();
+            }
+
             var nodeInfo = YamlFileSerializer.ReadYaml<AstNodesInfo>( yamlFilePath );
             generator.Generate( setting, nodeInfo );
 
