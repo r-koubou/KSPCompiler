@@ -1,6 +1,7 @@
 ---
 OutputDirectory: out/
 RootNamespace: KSPCompiler.Domain.Ast
+AstDefinitionDir: Settings/
 AstDefinitionFiles:
 - block.yaml
 - statement.declaration.yaml

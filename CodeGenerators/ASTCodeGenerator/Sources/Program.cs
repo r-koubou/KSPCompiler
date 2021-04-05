@@ -11,7 +11,8 @@ namespace KSPCompiler.Apps.ASTCodeGenerator
     {
         public static void Main( string[] args )
         {
-            var setting = YamlFileSerializer.ReadYaml<Setting>( "setting.yaml" );
+            var settingFilePath = Path.Combine( "settings", "setting.yaml" );
+            var setting = YamlFileSerializer.ReadYaml<Setting>( settingFilePath );
             GenerateAst( setting );
         }
 
@@ -24,7 +25,7 @@ namespace KSPCompiler.Apps.ASTCodeGenerator
                 Console.WriteLine( $"-> {definitionFile}" );
                 var astNodes = GenerateAstNode(
                     setting,
-                    definitionFile,
+                    Path.Combine( setting.AstDefinitionDir, definitionFile ),
                     new AstNodeGenerator( new AstNodeTransformer() )
                 );
 
