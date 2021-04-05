@@ -1,0 +1,19 @@
+---
+Namespace: Statements
+ClassNamePrefix: Ast
+ClassNameSuffix: ''
+SourceFilePrefix: Ast
+SourceFileSuffix: ".cs"
+Classes:
+#---------------------------------------------------------------------
+# CallKspUserFunctionStatement
+#---------------------------------------------------------------------
+- Name: CallKspUserFunctionStatement
+  Description: a call statement
+  BaseClasses:
+  - AstStatementSyntaxNode
+  - INameable
+  HasAccept: false
+  HasAcceptChildren: true
+  AcceptChildrenStatements: |-
+      throw new System.NotImplementedException();

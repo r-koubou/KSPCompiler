@@ -1,0 +1,88 @@
+---
+Namespace: Statements
+ClassNamePrefix: Ast
+ClassNameSuffix: ''
+SourceFilePrefix: Ast
+SourceFileSuffix: ".cs"
+Classes:
+#---------------------------------------------------------------------
+# VariableBody
+#---------------------------------------------------------------------
+- Name: VariableDeclaration
+  Description: a variable declaration
+  BaseClasses:
+  - AstStatementSyntaxNode
+  - INameable
+  Fields:
+  - Body: public string Modifier { get; set; } = string.Empty;
+    Description: modifier
+  - Body: public AstVariableInitializer? Initializer { get; set; }
+    Description: initialization statement
+  HasAccept: false
+  HasAcceptChildren: true
+  AcceptChildrenStatements: |-
+    Initializer?.AcceptChildren( visitor );
+#---------------------------------------------------------------------
+# VariableInitializer
+#---------------------------------------------------------------------
+- Name: VariableInitializer
+  Description: a variable initialization
+  BaseClasses:
+  - AstNode
+  Fields:
+  - Body: public AstPrimitiveInitializer? PrimitiveInitializer { get; set; }
+    Description: primitive variable initialization
+  - Body: public AstArrayInitializer? ArrayInitializer { get; set; }
+    Description: array variable initialization
+  HasAccept: true
+  HasAcceptChildren: true
+  AcceptChildrenStatements: |-
+    PrimitiveInitializer?.AcceptChildren( visitor );
+    ArrayInitializer?.AcceptChildren( visitor );
+#---------------------------------------------------------------------
+# PrimitiveInitializer
+#---------------------------------------------------------------------
+- Name: PrimitiveInitializer
+  Usings:
+  - KSPCompiler.Domain.Ast.Expressions
+  Description: a primitive variable initialization
+  BaseClasses:
+  - AstStatementSyntaxNode
+  Fields:
+  - Body: public AstExpressionSyntaxNode? Expression { get; }
+    Description: Assignment expression
+  - Body: public AstExpressionList? ExpressionList { get; }
+    Description: Assignment multiple expression (ui_type, constructor)
+  Constructors:
+    - Body: |-
+        public ##CLASSNAME##(
+            IAstNode parent,
+            AstExpressionSyntaxNode? expression = null,
+            AstExpressionList? expressionList = null )
+            : base( AstNodeId.##ID##, parent )
+        {
+            Expression     = expression;
+            ExpressionList = expressionList;
+        }
+  HasAccept: false
+  HasAcceptChildren: true
+  AcceptChildrenStatements: |-
+    throw new System.NotImplementedException();
+#---------------------------------------------------------------------
+# ArrayInitializer
+#---------------------------------------------------------------------
+- Name: ArrayInitializer
+  Usings:
+  - KSPCompiler.Domain.Ast.Expressions
+  Description: an array variable initialization
+  BaseClasses:
+  - AstStatementSyntaxNode
+  Fields:
+  - Body: public AstExpressionSyntaxNode? Size { get; set; }
+    Description: Number of array elements
+  - Body: public AstExpressionList? Initializer { get; set; }
+    Description: Array element initialization
+  HasAccept: false
+  HasAcceptChildren: true
+  AcceptChildrenStatements: |-
+    throw new System.NotImplementedException();

@@ -3,7 +3,10 @@ OutputDirectory: out/
 RootNamespace: KSPCompiler.Domain.Ast
 AstDefinitionFiles:
 - block.yaml
-- statement.yaml
+- statement.declaration.yaml
+- statement.condition.yaml
+- statement.function.yaml
+- statement.ksppreprocessor.yaml
 - expression.common.yaml
 - expression.binary.yaml
 - expression.unary.yaml

@@ -21,6 +21,7 @@ namespace KSPCompiler.Apps.ASTCodeGenerator
 
             foreach( var definitionFile in setting.AstDefinitionFiles )
             {
+                Console.WriteLine( $"-> {definitionFile}" );
                 var astNodes = GenerateAstNode(
                     setting,
                     definitionFile,
