@@ -16,4 +16,4 @@ Classes:
   HasAccept: false
   HasAcceptChildren: true
   AcceptChildrenStatements: |-
-      throw new System.NotImplementedException();
+      // None

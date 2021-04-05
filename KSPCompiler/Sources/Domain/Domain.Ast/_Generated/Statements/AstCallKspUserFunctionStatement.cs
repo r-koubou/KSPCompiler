@@ -29,7 +29,7 @@ namespace KSPCompiler.Domain.Ast.Statements
         ///
         public override void AcceptChildren<T>( IAstVisitor<T> visitor )
         {
-            throw new System.NotImplementedException();
+            // None
         }
 
         #endregion IAstNodeAcceptor
