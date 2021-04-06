@@ -11,7 +11,7 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Generator
             return Path.Combine(
                 setting.OutputDirectory,
                 info.Namespace,
-                info.GetSourceFileName( ast )
+                info.GetAstSourceFileName( ast )
             );
         }
 

@@ -32,7 +32,7 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
         public static string Replace( string text, AstNodesInfo info, AstNodesInfo.Class clazz )
         {
             var result = text;
-            result = result.Replace( REPLACE_CLASSNAME, info.GetClassName( clazz ) );
+            result = result.Replace( REPLACE_CLASSNAME, info.GetAstClassName( clazz ) );
             result = result.Replace( REPLACE_AST_ID,    $"AstNodeId.{clazz.Name}" );
 
             return result;
@@ -152,6 +152,39 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
             return buffer.ToString();
         }
 
+        public static string ExpandTextWithEnum( IList<AstNodesInfo.Enum.Field> fields )
+        {
+            var buffer = new StringBuilder();
+            var indent = MakeIndentSpace( MemberIndentCount );
+            var index = 0;
+
+            foreach( var f in fields )
+            {
+                if( !string.IsNullOrEmpty( f.Description ) )
+                {
+                    var desc = f.Description;
+                    buffer.Append( indent ).Append( "/// <summary>" ).Append( LF );
+                    buffer.Append( indent ).Append( $"/// {desc}" ).Append( LF );
+                    buffer.Append( indent ).Append( "/// </summary>" ).Append( LF );
+                }
+
+                var indentedCode = f.Name;
+                if( !string.IsNullOrEmpty( f.Value ) )
+                {
+                    indentedCode += $" = {f.Value.Trim()}";
+                }
+
+                buffer.Append( indent )
+                      .Append( indentedCode )
+                      .Append( index < fields.Count - 1 ? "," : "" )
+                      .Append( LF );
+
+                index++;
+            }
+
+            return buffer.ToString();
+        }
+
         public static StringBuilder ExpandTextWithMethodImpl(
             AstNodesInfo info,
             AstNodesInfo.Class clazz,
@@ -215,7 +248,7 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
             return buffer.ToString();
         }
 
-        public static string ExpandTextWithEnum( IEnumerable<AstNodesInfo.Class> classes, Func<AstNodesInfo.Class, bool> skipCond )
+        public static string ExpandAstIdText( IEnumerable<AstNodesInfo.Class> classes, Func<AstNodesInfo.Class, bool> skipCond )
         {
             var ids = ( from x in classes where !skipCond(x) select x.Name ).ToList();
 
@@ -229,9 +262,9 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
             );
         }
 
-        public static string ExpandTextWithEnum( IEnumerable<AstNodesInfo.Class> classes )
+        public static string ExpandAstIdText( IEnumerable<AstNodesInfo.Class> classes )
         {
-            return ExpandTextWithEnum( classes, ( x ) => false );
+            return ExpandAstIdText( classes, ( x ) => false );
         }
 
         public static string ExpandListWithDelimiter<T>(

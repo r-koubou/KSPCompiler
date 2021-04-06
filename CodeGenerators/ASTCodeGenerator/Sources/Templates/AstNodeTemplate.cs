@@ -27,9 +27,9 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
 
     var info = Context.Info;
     var nameSpace = info.GetFullNamespace( Context.Setting );
-    var astNodeClass = Context.AstNodeClass;
+    var astNodeClass = Context.NodeClass;
     var astId = astNodeClass.Name;
-    var className = info.GetClassName( astNodeClass );
+    var className = info.GetAstClassName( astNodeClass );
     var attribute = TemplateUtil.ExpandAttribute( astNodeClass.Attributes );
     var baseClass = TemplateUtil.ExpandListWithDelimiter( astNodeClass.BaseClasses, "," );
     var field = TemplateUtil.ExpandTextWithField( info, astNodeClass, astNodeClass.Fields );
@@ -41,6 +41,11 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
     var hasAcceptChildren = astNodeClass.HasAcceptChildren;
     var acceptChildrenStatement = TemplateUtil.ExpandTextWithStatements( astNodeClass.AcceptChildrenStatements );
     var nameable = astNodeClass.BaseClasses.Any( x => x == "INameable" );
+
+    var innerClasses = astNodeClass.InnerClasses;
+    var hasInnerClass = innerClasses.Any();
+    var innerEnums = astNodeClass.InnerEnums;
+    var hasInnerEnums = innerEnums.Any();
 
 
             #line default
@@ -224,6 +229,42 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
             #line hidden
             this.Write("\n        #endregion IAstNodeAcceptor\n");
  }
+
+            #line default
+            #line hidden
+ if( hasInnerClass ) {
+
+            #line default
+            #line hidden
+            this.Write("        #region InnerClasses\n");
+ foreach( var c in innerClasses )
+           {
+               Write( new InnerClassTemplate( Context, c ).TransformText() );
+           }
+
+
+            #line default
+            #line hidden
+            this.Write("        #endregion InnerClasses\n");
+}
+
+            #line default
+            #line hidden
+ if( hasInnerEnums ) {
+
+            #line default
+            #line hidden
+            this.Write("        #region InnerEnums\n");
+ foreach( var e in innerEnums )
+           {
+               Write( new InnerEnumTemplate( Context, e ).TransformText() );
+           }
+
+
+            #line default
+            #line hidden
+            this.Write("        #endregion InnerEnums\n");
+}
 
             #line default
             #line hidden

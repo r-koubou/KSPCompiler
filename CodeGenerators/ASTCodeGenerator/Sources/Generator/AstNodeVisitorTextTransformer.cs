@@ -10,7 +10,7 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Generator
     {
         public string TransformText( Setting setting, IList<AstNodesInfo> infoList )
         {
-            var classNames = infoList.SelectMany( info => info.Classes.Select( info.GetClassName ) );
+            var classNames = infoList.SelectMany( info => info.Classes.Select( info.GetAstClassName ) );
             var template = new AstVisitorTemplate( setting.RootNamespace, classNames );
 
             return template.TransformText();

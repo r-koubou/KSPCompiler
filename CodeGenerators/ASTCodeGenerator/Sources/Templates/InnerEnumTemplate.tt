@@ -1,0 +1,29 @@
+<#@ template language="C#" linePragmas="false" #>
+<#
+    var nodeClass = Source;
+    var className = nodeClass.Name;
+    var attribute = TemplateUtil.ExpandAttribute( nodeClass.Attributes );
+    var field = TemplateUtil.ExpandTextWithEnum( nodeClass.Fields );
+    var hasField = !string.IsNullOrEmpty( field );
+
+    PushIndent( TemplateContext.Indent );
+#>
+
+<# if( !string.IsNullOrEmpty( nodeClass.Description ) ) { #>
+    /// <summary>
+    /// <#= nodeClass.Description #>
+    /// </summary>
+<# } #>
+<# if( !string.IsNullOrEmpty( attribute ) ) { #>
+    <#= attribute #>
+<# } #>
+    public enum <#= className #>
+    {
+<# if( hasField ) { #>
+<#= field #>
+<# }#>
+    }
+
+<#
+   PopIndent();
+#>

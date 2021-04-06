@@ -1,0 +1,53 @@
+<#@ template language="C#" linePragmas="false" #>
+<#@ import namespace="System.Linq" #>
+<#
+    var info = Context.Info;
+    var nodeClass = Source;
+    var className = info.GetClassName( nodeClass );
+    var attribute = TemplateUtil.ExpandAttribute( nodeClass.Attributes );
+    var baseClass = TemplateUtil.ExpandListWithDelimiter( nodeClass.BaseClasses, "," );
+    var hasBaseClass = !string.IsNullOrEmpty( baseClass );
+    var field = TemplateUtil.ExpandTextWithField( info, nodeClass, nodeClass.Fields );
+    var hasField = !string.IsNullOrEmpty( field );
+    var ctor = TemplateUtil.ExpandTextWithConstructor( info, nodeClass, nodeClass.Constructors );
+    var method = TemplateUtil.ExpandTextWithMethod( info, nodeClass, nodeClass.Methods );
+    var hasMethod = !string.IsNullOrEmpty( method );
+
+    PushIndent( TemplateContext.Indent );
+#>
+
+<# if( !string.IsNullOrEmpty( nodeClass.Description ) ) { #>
+    /// <summary>
+    /// <#= nodeClass.Description #>
+    /// </summary>
+<# } #>
+<# if( !string.IsNullOrEmpty( attribute ) ) { #>
+    <#= attribute #>
+    public class <#= className #><#= hasBaseClass ? $" : {baseClass}" : "" #>
+<# } else { #>
+    public class <#= className #><#= hasBaseClass ? $" : {baseClass}" : "" #>
+<# } #>
+    {
+<# if( hasField ) { #>
+        #region Fields
+<#= field #>
+        #endregion Fields
+<# }#>
+
+<# if( !string.IsNullOrEmpty( ctor ) ) { #>
+<#= ctor #>
+<# } else { #>
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public <#= className #>() {}
+<# } #>
+
+<# if( hasMethod ) { #>
+<#= method #>
+<# } #>
+    }
+
+<#
+   PopIndent();
+#>

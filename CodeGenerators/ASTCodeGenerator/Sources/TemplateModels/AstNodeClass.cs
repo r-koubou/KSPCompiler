@@ -6,6 +6,7 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.TemplateModels
     {
         public string Namespace { get; set; } = string.Empty;
         public IList<Class> Classes { get; set; } = new List<Class>();
+        public IList<Enum> Enums { get; set; } = new List<Enum>();
 
         public string ClassNamePrefix { get; set; } = "Ast";
         public string ClassNameSuffix { get; set; } = "";
@@ -13,11 +14,17 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.TemplateModels
         public string SourceFilePrefix { get; set; } = "Ast";
         public string SourceFileSuffix { get; set; } = ".cs";
 
-        public string GetSourceFileName( Class clazz )
+        public string GetAstSourceFileName( Class clazz )
             => $"{SourceFilePrefix}{clazz.Name}{SourceFileSuffix}";
 
-        public string GetClassName( Class clazz )
+        public string GetAstClassName( Class clazz )
             => $"{ClassNamePrefix}{clazz.Name}{ClassNameSuffix}";
+
+        public string GetSourceFileName( Class clazz )
+            => $"{clazz.Name}{SourceFileSuffix}";
+
+        public string GetClassName( Class clazz ) => clazz.Name;
+
 
         public string GetFullNamespace( Setting setting )
             => string.IsNullOrEmpty( Namespace )
@@ -26,6 +33,9 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.TemplateModels
 
         public class Class
         {
+            public IList<Class> InnerClasses { get; set; } = new List<Class>();
+            public IList<Enum> InnerEnums { get; set; } = new List<Enum>();
+
             public bool Abstract { get; set; } = false;
             public string Description { get; set; } = string.Empty;
             public IList<string> Usings { get; set; } = new List<string>();
@@ -55,6 +65,21 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.TemplateModels
             public class Constructor
             {
                 public string Body { get; set; } = string.Empty;
+            }
+        }
+
+        public class Enum
+        {
+            public string Name { get; set; } = string.Empty;
+            public string Description { get; set; } = string.Empty;
+            public IList<string> Attributes { get; set; } = new List<string>();
+            public IList<Field> Fields { get; set; } = new List<Field>();
+
+            public class Field
+            {
+                public string Description { get; set; } = string.Empty;
+                public string Name { get; set; } = string.Empty;
+                public string Value { get; set; } = string.Empty;
             }
         }
     }

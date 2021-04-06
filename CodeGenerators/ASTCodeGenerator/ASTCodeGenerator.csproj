@@ -29,6 +29,16 @@
         <DependentUpon>AstVisitorTemplate.tt</DependentUpon>
       </Compile>
       <Compile Remove="out\**" />
+      <Compile Update="Sources\Templates\InnerClassTemplate.cs">
+        <AutoGen>True</AutoGen>
+        <DesignTime>True</DesignTime>
+        <DependentUpon>InnerClassTemplate.tt</DependentUpon>
+      </Compile>
+      <Compile Update="Sources\Templates\InnerEnumTemplate.cs">
+        <AutoGen>True</AutoGen>
+        <DesignTime>True</DesignTime>
+        <DependentUpon>InnerEnumTemplate.tt</DependentUpon>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>
@@ -49,6 +59,14 @@
       </None>
       <None Update="Setting.yaml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Sources\Templates\InnerClassTemplate.tt">
+        <Generator>TextTemplatingFilePreprocessor</Generator>
+        <LastGenOutput>InnerClassTemplate.cs</LastGenOutput>
+      </None>
+      <None Update="Sources\Templates\InnerEnumTemplate.tt">
+        <Generator>TextTemplatingFilePreprocessor</Generator>
+        <LastGenOutput>InnerEnumTemplate.cs</LastGenOutput>
       </None>
     </ItemGroup>
 
