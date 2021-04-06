@@ -59,7 +59,7 @@ Classes:
             IAstNode parent,
             AstExpressionSyntaxNode? expression = null,
             AstExpressionList? expressionList = null )
-            : base( AstNodeId.##ID##, parent )
+            : base( ##ID##, parent )
         {
             Expression     = expression;
             ExpressionList = expressionList;

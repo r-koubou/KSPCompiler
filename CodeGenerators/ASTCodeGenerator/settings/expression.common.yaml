@@ -28,7 +28,7 @@ Classes:
   Constructors:
     - Body: |-
         public ##CLASSNAME##( IAstNode parent )
-            : base( AstNodeId.##ID##, parent )
+            : base( ##ID##, parent )
         {
             Expressions = new AstNodeList<AstExpressionSyntaxNode>( this );
         }
@@ -77,7 +77,7 @@ Classes:
 #             IAstNode parent,
 #             AstExpressionSyntaxNode? expression = null,
 #             AstExpressionList? expressionList = null )
-#             : base( AstNodeId.##ID##, parent )
+#             : base( ##ID##, parent )
 #         {
 #             Expression     = expression;
 #             ExpressionList = expressionList;
@@ -121,7 +121,7 @@ Classes:
 #         public ##CLASSNAME##() : this( IAstNode.None ) {}
 #     - Body: |-
 #         public ##CLASSNAME##( IAstNode parent )
-#             : base( AstNodeId.##ID##, parent ) {}
+#             : base( ##ID##, parent ) {}
 #   HasAccept: false
 #   HasAcceptChildren: false
 # #---------------------------------------------------------------------
@@ -136,7 +136,7 @@ Classes:
 #       public ##CLASSNAME##() : this( null ) {}
 #   - Body: |-
 #       public ##CLASSNAME##( IAstNode parent )
-#           : base( AstNodeId.##ID##, parent ) {}
+#           : base( ##ID##, parent ) {}
 #   HasAccept: false
 #   HasAcceptChildren: false
 # #---------------------------------------------------------------------
@@ -157,7 +157,7 @@ Classes:
 #   Constructors:
 #   - Body: |-
 #       public ##CLASSNAME##( IAstNode parent )
-#           : base( AstNodeId.##ID##, parent )
+#           : base( ##ID##, parent )
 #       {
 #           CaseBlocks = new AstNodeList<AstCaseBlock>( this );
 #       }
@@ -195,7 +195,7 @@ Classes:
 #   Constructors:
 #     - Body: |-
 #         public ##CLASSNAME##( IAstNode parent )
-#             : base( AstNodeId.##ID##, parent )
+#             : base( ##ID##, parent )
 #         {
 #             Symbol = new AstSymbolExpression( this );
 #         }
@@ -218,7 +218,7 @@ Classes:
 #   Constructors:
 #     - Body: |-
 #         public ##CLASSNAME##( IAstNode parent )
-#             : base( AstNodeId.##ID##, parent )
+#             : base( ##ID##, parent )
 #         {
 #             Symbol = new AstSymbolExpression( this );
 #         }
@@ -243,7 +243,7 @@ Classes:
 #   Constructors:
 #     - Body: |-
 #         public ##CLASSNAME##( IAstNode parent )
-#             : base( AstNodeId.##ID##, parent )
+#             : base( ##ID##, parent )
 #         {
 #             Condition = new AstSymbolExpression( this );
 #         }
@@ -269,7 +269,7 @@ Classes:
 #   Constructors:
 #     - Body: |-
 #         public ##CLASSNAME##( IAstNode parent )
-#             : base( AstNodeId.##ID##, parent )
+#             : base( ##ID##, parent )
 #         {
 #             Condition = new AstSymbolExpression( this );
 #         }

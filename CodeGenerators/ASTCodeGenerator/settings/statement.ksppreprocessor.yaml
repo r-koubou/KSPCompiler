@@ -20,7 +20,7 @@ Classes:
   Constructors:
     - Body: |-
         public ##CLASSNAME##( IAstNode parent )
-            : base( AstNodeId.##ID##, parent )
+            : base( ##ID##, parent )
         {
             Symbol = new AstSymbolExpression( this );
         }
@@ -43,7 +43,7 @@ Classes:
   Constructors:
     - Body: |-
         public ##CLASSNAME##( IAstNode parent )
-            : base( AstNodeId.##ID##, parent )
+            : base( ##ID##, parent )
         {
             Symbol = new AstSymbolExpression( this );
         }
@@ -69,7 +69,7 @@ Classes:
   Constructors:
     - Body: |-
         public ##CLASSNAME##( IAstNode parent )
-            : base( AstNodeId.##ID##, parent )
+            : base( ##ID##, parent )
         {
             Condition = new AstSymbolExpression( this );
         }
@@ -95,7 +95,7 @@ Classes:
   Constructors:
     - Body: |-
         public ##CLASSNAME##( IAstNode parent )
-            : base( AstNodeId.##ID##, parent )
+            : base( ##ID##, parent )
         {
             Condition = new AstSymbolExpression( this );
         }

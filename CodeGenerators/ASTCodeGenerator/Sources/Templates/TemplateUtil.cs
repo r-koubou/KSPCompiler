@@ -33,7 +33,7 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
         {
             var result = text;
             result = result.Replace( REPLACE_CLASSNAME, info.GetClassName( clazz ) );
-            result = result.Replace( REPLACE_AST_ID,    clazz.Name );
+            result = result.Replace( REPLACE_AST_ID,    $"AstNodeId.{clazz.Name}" );
 
             return result;
         }

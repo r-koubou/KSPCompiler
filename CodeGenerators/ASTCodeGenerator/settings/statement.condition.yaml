@@ -22,7 +22,7 @@ Classes:
         public ##CLASSNAME##() : this( IAstNode.None ) {}
     - Body: |-
         public ##CLASSNAME##( IAstNode parent )
-            : base( AstNodeId.##ID##, parent ) {}
+            : base( ##ID##, parent ) {}
   HasAccept: false
   HasAcceptChildren: false
 #---------------------------------------------------------------------
@@ -37,7 +37,7 @@ Classes:
       public ##CLASSNAME##() : this( null ) {}
   - Body: |-
       public ##CLASSNAME##( IAstNode parent )
-          : base( AstNodeId.##ID##, parent ) {}
+          : base( ##ID##, parent ) {}
   HasAccept: false
   HasAcceptChildren: false
 #---------------------------------------------------------------------
@@ -58,7 +58,7 @@ Classes:
   Constructors:
   - Body: |-
       public ##CLASSNAME##( IAstNode parent )
-          : base( AstNodeId.##ID##, parent )
+          : base( ##ID##, parent )
       {
           CaseBlocks = new AstNodeList<AstCaseBlock>( this );
       }
