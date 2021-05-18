@@ -43,18 +43,18 @@ Classes:
 - Name: AssignmentExpressionList
   Description: a comma-separated list of expressions (including assignment expressions)
   Attributes:
-  - NotSupportedStandardSyntax
+  - ExtendedSyntax
   BaseClasses:
   - AstNode
   Fields:
-  - Body: public AstNodeList<ASTAssignmentExpression> Expressions { get; }
+  - Body: public AstNodeList<AstAssignmentExpression> Expressions { get; }
     Description: expression list
   Constructors:
     - Body: |-
         public ##CLASSNAME##( IAstNode parent )
             : base( ##ID##, parent )
         {
-            Expressions = new AstNodeList<ASTAssignmentExpression>( this );
+            Expressions = new AstNodeList<AstAssignmentExpression>( this );
         }
   HasAccept: true
   HasAcceptChildren: true
