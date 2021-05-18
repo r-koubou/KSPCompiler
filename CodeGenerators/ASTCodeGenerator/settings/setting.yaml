@@ -9,6 +9,7 @@ AstDefinitionFiles:
 - statement.function.yaml
 - statement.ksppreprocessor.yaml
 - expression.common.yaml
+- expression.ext.yaml
 - expression.assign.yaml
 - expression.binary.yaml
 - expression.unary.yaml

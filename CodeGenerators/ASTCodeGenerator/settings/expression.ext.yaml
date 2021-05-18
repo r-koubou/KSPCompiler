@@ -6,37 +6,31 @@ SourceFilePrefix: Ast
 SourceFileSuffix: ".cs"
 Classes:
 #---------------------------------------------------------------------
-# AssignmentExpression
+# AssignmentExpressionList
 #---------------------------------------------------------------------
-- Name: AssignmentExpression
-  Description: an assignment (:=)
+- Name: AssignmentExpressionList
+  Description: a comma-separated list of expressions (including assignment expressions)
+  Attributes:
+  - ExtendedSyntax
   BaseClasses:
-  - AstExpressionSyntaxNode
+  - AstNode
   Fields:
-  - Body: public OperatorType Operator { get; set; } = OperatorType.Assign;
-    Description: Operator type for assigning
+  - Body: public AstNodeList<AstAssignmentExpression> Expressions { get; }
+    Description: expression list
   Constructors:
     - Body: |-
-        public ##CLASSNAME##(
-            IAstNode parent,
-            AstExpressionSyntaxNode left,
-            AstExpressionSyntaxNode right )
-            : base( ##ID##, parent, left, right )
-        {}
-
-        public ##CLASSNAME##(
-            AstExpressionSyntaxNode left,
-            AstExpressionSyntaxNode right )
-            : base( ##ID##, IAstNode.None, left, right )
-        {}
-
-  HasAccept: false
-  HasAcceptChildren: false
-  InnerEnums:
-    - Name: OperatorType
-      Fields:
-      - Name: Assign
-        Description: :=
+        public ##CLASSNAME##( IAstNode parent )
+            : base( ##ID##, parent )
+        {
+            Expressions = new AstNodeList<AstAssignmentExpression>( this );
+        }
+  HasAccept: true
+  HasAcceptChildren: true
+  AcceptChildrenStatements: |-
+    foreach( var n in Expressions )
+    {
+        n.Accept( visitor );
+    }
 
 # #---------------------------------------------------------------------
 # # VariableInitializer
