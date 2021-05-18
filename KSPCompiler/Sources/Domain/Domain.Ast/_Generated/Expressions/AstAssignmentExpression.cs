@@ -24,12 +24,13 @@ namespace KSPCompiler.Domain.Ast.Expressions
             AstExpressionSyntaxNode right )
             : base( AstNodeId.AssignmentExpression, parent, left, right )
         {}
-        
+
         public AstAssignmentExpression(
             AstExpressionSyntaxNode left,
             AstExpressionSyntaxNode right )
             : base( AstNodeId.AssignmentExpression, IAstNode.None, left, right )
         {}
+
 
         #region InnerEnums
     

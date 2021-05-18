@@ -26,9 +26,9 @@ namespace KSPCompiler.Domain.Ast
         KspPreprocessorIfnotDefine, 
         SymbolExpression, 
         ExpressionList, 
-        AssignmentExpression, 
         AssignmentExpressionList, 
-        AstExpressionList
+        AssignmentExpression, 
+        StringConcatenateExpression
 
     }
 }

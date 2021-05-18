@@ -6,31 +6,13 @@ SourceFilePrefix: Ast
 SourceFileSuffix: ".cs"
 Classes:
 #---------------------------------------------------------------------
-# AstExpressionList
+# StringConcatenateExpression
 #---------------------------------------------------------------------
-- Name: AstExpressionList
-  Description: a comma-separated list of expressions.
+- Name: StringConcatenateExpression
+  Description: a string concatenation operator (&).
   BaseClasses:
   - AstExpressionSyntaxNode
-  Fields:
-  - Body: public AstNodeList<AstExpressionSyntaxNode> Expressions { get; }
-    Description: Expression list
   Constructors:
-    - Body: |-
-        public ##CLASSNAME##() : base( ##ID##, IAstNode.None )
-        {
-            Expressions = new AstNodeList<AstExpressionSyntaxNode>( this );
-        }
-
-        public ##CLASSNAME##( IAstNode parent ) : base( ##ID##, parent )
-        {
-            Expressions = new AstNodeList<AstExpressionSyntaxNode>( this );
-        }
-
+    - Body: "##EXPR_LR_CTOR##"
   HasAccept: false
-  HasAcceptChildren: true
-  AcceptChildrenStatements: |-
-    foreach( var n in Expressions )
-    {
-        n.Accept( visitor );
-    }
+  HasAcceptChildren: false
