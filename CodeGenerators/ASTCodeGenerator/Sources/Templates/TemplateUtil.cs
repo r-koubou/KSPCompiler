@@ -11,6 +11,23 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
     {
         private const string REPLACE_CLASSNAME = "##CLASSNAME##";
         private const string REPLACE_AST_ID = "##ID##";
+        private const string REPLACE_EXPRESSION_LR_AST_CTOR = "##EXPR_LR_CTOR##";
+
+        #region Template Codes
+        private const string ExpressionLrNodeCtor = @"public ##CLASSNAME##(
+            IAstNode parent,
+            AstExpressionSyntaxNode left,
+            AstExpressionSyntaxNode right )
+            : base( ##ID##, parent, left, right )
+        {}
+
+        public ##CLASSNAME##(
+            AstExpressionSyntaxNode left,
+            AstExpressionSyntaxNode right )
+            : base( ##ID##, IAstNode.None, left, right )
+        {}
+";
+        #endregion
 
         private const string LF = "\n";
 
@@ -32,6 +49,7 @@ namespace KSPCompiler.Apps.ASTCodeGenerator.Templates
         public static string Replace( string text, AstNodesInfo info, AstNodesInfo.Class clazz )
         {
             var result = text;
+            result = result.Replace( REPLACE_EXPRESSION_LR_AST_CTOR, ExpressionLrNodeCtor );
             result = result.Replace( REPLACE_CLASSNAME, info.GetAstClassName( clazz ) );
             result = result.Replace( REPLACE_AST_ID,    $"AstNodeId.{clazz.Name}" );
 
