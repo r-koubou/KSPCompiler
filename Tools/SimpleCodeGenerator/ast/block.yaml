@@ -1,0 +1,42 @@
+variables:
+  - TEMPLATE: ast.block
+
+namespace: KSPCompiler.Domain.Ast.Blocks
+suffix: ".cs"
+output_dir: out/Blocks
+
+classes:
+  - name: CompilationUnit
+    description: a root node
+    templates:
+      - name: ${TEMPLATE}
+
+  - name: CallbackDeclaration
+    description: a callback definition
+    templates:
+      - name: ${TEMPLATE}
+
+  - name: UserFunctionDeclaration
+    description: an user Defined Functions (KSP)
+    templates:
+      - name: ${TEMPLATE}
+
+  - name: Argument
+    description: an argument
+    templates:
+      - name: ${TEMPLATE}
+
+  - name: ArgumentList
+    description: an argument list
+    templates:
+      - name: ${TEMPLATE}
+
+  - name: Block
+    description: a callback, block in function
+    templates:
+      - name: ${TEMPLATE}
+
+  - name: CaseBlock
+    description: a case block in the select statement
+    templates:
+      - name: ${TEMPLATE}

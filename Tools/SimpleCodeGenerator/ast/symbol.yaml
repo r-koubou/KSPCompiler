@@ -1,0 +1,11 @@
+variables:
+  - TEMPLATE: ast.symbol
+
+namespace: KSPCompiler.Domain.Ast.Symbols
+suffix: ".cs"
+output_dir: out/Symbols
+
+classes:
+  - name: Dummy
+    templates:
+    - name: ${TEMPLATE}

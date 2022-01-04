@@ -1,0 +1,19 @@
+variables:
+  - PREFIX: Ast
+
+templates:
+  - name: ast.block
+    path: "ast/block.cs"
+    prefix: ${PREFIX}
+
+  - name: ast.expression
+    path: "ast/expression.cs"
+    prefix: ${PREFIX}
+
+  - name: ast.statement
+    path: "ast/statement.cs"
+    prefix: ${PREFIX}
+
+  - name: ast.symbol
+    path: "ast/symbol.cs"
+    prefix: ${PREFIX}
