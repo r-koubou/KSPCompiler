@@ -198,6 +198,7 @@ classes:
     description: "a symbolic reference"
     templates:
       - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
 
   - name: ArrayElement
     description: "an array element reference expression ( Left: AstSymbolExpression, Right: AstExpressionSyntaxNode )"

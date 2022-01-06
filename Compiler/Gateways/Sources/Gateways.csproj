@@ -11,4 +11,8 @@
         <RootNamespace>KSPCompiler.Gateways</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\Domain\Sources\Domain.csproj" />
+    </ItemGroup>
+
 </Project>

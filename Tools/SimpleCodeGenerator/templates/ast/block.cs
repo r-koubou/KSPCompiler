@@ -1,3 +1,5 @@
+#nullable disable
+
 namespace ${namespace}
 {
     /// <summary>
@@ -12,5 +14,16 @@ namespace ${namespace}
             : base( AstNodeId.${name}, parent )
         {
         }
+
+        #region IAstNodeAcceptor
+
+        ///
+        /// <inheritdoc/>
+        ///
+        public override T Accept<T>( IAstVisitor<T> visitor )
+            => visitor.Visit( this );
+
+
+        #endregion IAstNodeAcceptor
     }
 }

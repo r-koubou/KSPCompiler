@@ -121,7 +121,8 @@ def process_output( code_text, config_data, class_info, template_meta ):
 
     output_path = os.path.join( output_dir, output_filename )
 
-    print_indent( output_path, 2 )
+    print_indent( file_name, 2 )
+    print_indent( output_path, 3 )
 
     os.makedirs( output_dir, exist_ok = True )
 

@@ -68,7 +68,7 @@ classes:
     templates:
       - name: ${TEMPLATE}
 
-  - name: PrimitiveInititalizer
+  - name: PrimitiveInitializer
     description: "a primitive variable initialization"
     templates:
       - name: ${TEMPLATE}

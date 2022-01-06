@@ -1,3 +1,5 @@
+#nullable disable
+
 namespace ${namespace}
 {
     /// <summary>
@@ -14,13 +16,21 @@ namespace ${namespace}
         }
 
         #region IAstNodeAcceptor
+
         ///
         /// <inheritdoc/>
         ///
-        public override void AcceptChildren<T>( KSPCompiler.Domain.Ast.IAstVisitor<T> visitor )
+        public override T Accept<T>( IAstVisitor<T> visitor )
+            => visitor.Visit( this );
+
+        ///
+        /// <inheritdoc/>
+        ///
+        public override void AcceptChildren<T>( IAstVisitor<T> visitor )
         {
             throw new System.NotImplementedException();
         }
+
         #endregion IAstNodeAcceptor
     }
 }
