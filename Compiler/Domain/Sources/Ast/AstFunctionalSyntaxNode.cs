@@ -12,7 +12,7 @@ namespace KSPCompiler.Domain.Ast
         /// <summary>
         /// Statements, expressions
         /// </summary>
-        public AstBlock Block { get; protected set; }
+        public AstBlock Block { get; set; }
 
         /// <summary>
         /// Ctor
@@ -30,7 +30,7 @@ namespace KSPCompiler.Domain.Ast
         /// <inheritdoc/>
         ///
         public string Name { get; set; } = string.Empty;
-        #endregion IAstNameable
+        #endregion INameable
 
         #region IAstNodeAcceptor
         ///

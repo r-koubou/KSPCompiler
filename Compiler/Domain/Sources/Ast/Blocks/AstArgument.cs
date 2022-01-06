@@ -5,8 +5,17 @@ namespace KSPCompiler.Domain.Ast.Blocks
     /// <summary>
     /// AST node representing an argument
     /// </summary>
-    public class AstArgument : AstFunctionalSyntaxNode
+    public class AstArgument : AstNode, INameable
     {
+        #region INameable
+
+        ///
+        /// <inheritdoc/>
+        ///
+        public string Name { get; set; } = "";
+
+        #endregion INameable
+
         /// <summary>
         /// Ctor
         /// </summary>
@@ -23,6 +32,10 @@ namespace KSPCompiler.Domain.Ast.Blocks
         public override T Accept<T>( IAstVisitor<T> visitor )
             => visitor.Visit( this );
 
+        public override void AcceptChildren<T>( IAstVisitor<T> visitor )
+        {
+            // Do nothing
+        }
 
         #endregion IAstNodeAcceptor
     }
