@@ -1,0 +1,18 @@
+variables:
+  - TEMPLATE_NAME: usecases
+
+namespace: KSPCompiler.UseCases
+suffix: ".cs"
+output_dir: out/usecases
+
+classes:
+  - name: SyntaxAnalysis
+    description: Syntax analysis
+    templates:
+      - name: ${TEMPLATE_NAME}
+
+  - name: SemanticAnalysis
+    description: Semantic analysis
+    templates:
+      - name: ${TEMPLATE_NAME}
+      - name: ast.block

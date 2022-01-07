@@ -16,4 +16,8 @@
         <PackageReference Include="ValueObjectGenerator" Version="1.2.*" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Path" />
+    </ItemGroup>
+
 </Project>

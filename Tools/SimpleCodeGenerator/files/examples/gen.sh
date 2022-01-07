@@ -6,4 +6,4 @@ for x in *.yaml ;do
     args="${args} ${x}"
 done
 
-../simple_codegen.sh $args
+../../simple_codegen.sh $args
