@@ -1,5 +1,8 @@
 #nullable disable
 
+using KSPCompiler.Domain.Ast.Blocks;
+using KSPCompiler.Domain.Ast.Expressions;
+
 namespace KSPCompiler.Domain.Ast.Statements
 {
     /// <summary>
@@ -8,11 +11,22 @@ namespace KSPCompiler.Domain.Ast.Statements
     public class AstKspPreprocessorIfdefine : AstStatementSyntaxNode
     {
         /// <summary>
+        /// The ifdef conditional symbol.
+        /// </summary>
+        public AstSymbolExpression Condition { get; }
+
+        /// <summary>
+        /// The code block for ifdef is true.
+        /// </summary>
+        public AstBlock Block { get; set; }
+
+        /// <summary>
         /// Ctor
         /// </summary>
         public AstKspPreprocessorIfdefine( IAstNode parent = null )
             : base( AstNodeId.KspPreprocessorIfdefine, parent )
         {
+            Condition = new AstSymbolExpression( this );
         }
 
         #region IAstNodeAcceptor

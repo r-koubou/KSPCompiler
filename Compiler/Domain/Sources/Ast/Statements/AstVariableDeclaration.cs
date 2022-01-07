@@ -5,8 +5,27 @@ namespace KSPCompiler.Domain.Ast.Statements
     /// <summary>
     /// AST node representing a variable declaration
     /// </summary>
-    public class AstVariableDeclaration : AstStatementSyntaxNode
+    public class AstVariableDeclaration : AstStatementSyntaxNode, INameable
     {
+        /// <summary>
+        /// modifier
+        /// </summary>
+        public string Modifier { get; set; } = "";
+
+        #region INamable
+
+        /// <summary>
+        /// variable name
+        /// </summary>
+        public string Name { get; set; } = "";
+
+        #endregion
+
+        /// <summary>
+        /// initialization statement
+        /// </summary>
+        public AstVariableInitializer Initializer { get; set; }
+
         /// <summary>
         /// Ctor
         /// </summary>
@@ -28,7 +47,7 @@ namespace KSPCompiler.Domain.Ast.Statements
         ///
         public override void AcceptChildren<T>( IAstVisitor<T> visitor )
         {
-            throw new System.NotImplementedException();
+            Initializer?.AcceptChildren( visitor );
         }
 
         #endregion IAstNodeAcceptor

@@ -5,8 +5,17 @@ namespace KSPCompiler.Domain.Ast.Statements
     /// <summary>
     /// AST node representing a call statement
     /// </summary>
-    public class AstCallKspUserFunctionStatement : AstStatementSyntaxNode
+    public class AstCallKspUserFunctionStatement : AstStatementSyntaxNode, INameable
     {
+        #region INamable
+
+        /// <summary>
+        /// An user function name
+        /// </summary>
+        public string Name { get; set; }
+
+        #endregion INamable
+
         /// <summary>
         /// Ctor
         /// </summary>

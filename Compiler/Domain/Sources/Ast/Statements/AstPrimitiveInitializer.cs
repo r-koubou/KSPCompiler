@@ -1,18 +1,33 @@
 #nullable disable
 
+using System;
+using KSPCompiler.Domain.Ast.Expressions;
+
 namespace KSPCompiler.Domain.Ast.Statements
 {
     /// <summary>
-    /// AST node representing a primitive variable initialization
+    /// Ast node representing a primitive variable initialization
     /// </summary>
     public class AstPrimitiveInitializer : AstStatementSyntaxNode
     {
         /// <summary>
-        /// Ctor
+        /// Assignment expression
         /// </summary>
-        public AstPrimitiveInitializer( IAstNode parent = null )
+        public AstExpressionSyntaxNode Expression { get; }
+
+        /// <summary>
+        /// Assignment multiple expression (ui_type, constructor)
+        /// </summary>
+        public AstExpressionList ExpressionList { get; }
+
+        public AstPrimitiveInitializer(
+            IAstNode parent = null,
+            AstExpressionSyntaxNode expression = null,
+            AstExpressionList expressionList = null )
             : base( AstNodeId.PrimitiveInitializer, parent )
         {
+            Expression     = expression;
+            ExpressionList = expressionList;
         }
 
         #region IAstNodeAcceptor
@@ -28,7 +43,7 @@ namespace KSPCompiler.Domain.Ast.Statements
         ///
         public override void AcceptChildren<T>( IAstVisitor<T> visitor )
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         #endregion IAstNodeAcceptor

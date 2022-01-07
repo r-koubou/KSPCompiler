@@ -1,5 +1,7 @@
 #nullable disable
 
+using KSPCompiler.Domain.Ast.Expressions;
+
 namespace KSPCompiler.Domain.Ast.Statements
 {
     /// <summary>
@@ -7,6 +9,16 @@ namespace KSPCompiler.Domain.Ast.Statements
     /// </summary>
     public class AstArrayInitializer : AstStatementSyntaxNode
     {
+        /// <summary>
+        /// Number of array elements
+        /// </summary>
+        public AstExpressionSyntaxNode Size { get; set; }
+
+        /// <summary>
+        /// Array element initialization
+        /// </summary>
+        public AstExpressionList Initializer { get; set; }
+
         /// <summary>
         /// Ctor
         /// </summary>

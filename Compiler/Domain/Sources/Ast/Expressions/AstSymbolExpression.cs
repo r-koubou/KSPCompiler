@@ -5,29 +5,22 @@ namespace KSPCompiler.Domain.Ast.Expressions
     /// <summary>
     /// AST node representing a symbolic reference
     /// </summary>
-    public class AstSymbolExpression : AstExpressionSyntaxNode
+    public class AstSymbolExpression : AstExpressionSyntaxNode, INameable
     {
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        public AstSymbolExpression( IAstNode parent, AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
-            : base( AstNodeId.Symbol, parent, left, right )
-        {
-        }
+        #region INameable
+
+        ///
+        /// <inheritdoc/>
+        ///
+        public string Name { get; set; } = "";
+
+        #endregion INameable
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstSymbolExpression( AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
-            : base( AstNodeId.Symbol, null, left, right )
-        {
-        }
-
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        public AstSymbolExpression()
-            : base( AstNodeId.Symbol, null, null, null )
+        public AstSymbolExpression( IAstNode parent = null )
+            : base( AstNodeId.Symbol, parent, null, null )
         {
         }
 

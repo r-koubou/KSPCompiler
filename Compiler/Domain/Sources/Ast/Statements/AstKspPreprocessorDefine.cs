@@ -1,5 +1,7 @@
 #nullable disable
 
+using KSPCompiler.Domain.Ast.Expressions;
+
 namespace KSPCompiler.Domain.Ast.Statements
 {
     /// <summary>
@@ -8,11 +10,17 @@ namespace KSPCompiler.Domain.Ast.Statements
     public class AstKspPreprocessorDefine : AstStatementSyntaxNode
     {
         /// <summary>
+        /// preprocessor symbol
+        /// </summary>
+        public AstSymbolExpression Symbol { get; }
+
+        /// <summary>
         /// Ctor
         /// </summary>
         public AstKspPreprocessorDefine( IAstNode parent = null )
             : base( AstNodeId.KspPreprocessorDefine, parent )
         {
+            Symbol = new AstSymbolExpression( this );
         }
 
         #region IAstNodeAcceptor

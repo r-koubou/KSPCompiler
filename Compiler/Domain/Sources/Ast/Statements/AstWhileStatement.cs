@@ -5,8 +5,15 @@ namespace KSPCompiler.Domain.Ast.Statements
     /// <summary>
     /// AST node representing an while statement
     /// </summary>
-    public class AstWhileStatement : AstStatementSyntaxNode
+    public class AstWhileStatement : AstConditionalStatement
     {
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstWhileStatement()
+            : this( null )
+        {}
+
         /// <summary>
         /// Ctor
         /// </summary>
@@ -22,14 +29,6 @@ namespace KSPCompiler.Domain.Ast.Statements
         ///
         public override T Accept<T>( IAstVisitor<T> visitor )
             => visitor.Visit( this );
-
-        ///
-        /// <inheritdoc/>
-        ///
-        public override void AcceptChildren<T>( IAstVisitor<T> visitor )
-        {
-            throw new System.NotImplementedException();
-        }
 
         #endregion IAstNodeAcceptor
     }
