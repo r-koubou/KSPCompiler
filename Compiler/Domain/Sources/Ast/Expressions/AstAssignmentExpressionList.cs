@@ -3,22 +3,22 @@
 namespace KSPCompiler.Domain.Ast.Expressions
 {
     /// <summary>
-    /// AST node representing a comma-separated list of expressions
+    /// AST node representing a comma-separated list of expressions (including assignment expressions).
     /// </summary>
-    public class AstExpressionList : AstExpressionSyntaxNode
+    public class AstAssignmentExpressionList : AstNode
     {
         /// <summary>
         /// expression list
         /// </summary>
-        public AstNodeList<AstExpressionSyntaxNode> Expressions { get; }
+        public AstNodeList<AstAssignmentExpression> Expressions { get; }
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstExpressionList( IAstNode parent = null )
-            : base( AstNodeId.ExpressionList, parent )
+        public AstAssignmentExpressionList( IAstNode parent = null )
+            : base( AstNodeId.AssignmentExpressionList, parent )
         {
-            Expressions = new AstNodeList<AstExpressionSyntaxNode>( this );
+            Expressions = new AstNodeList<AstAssignmentExpression>( this );
         }
 
         #region IAstNodeAcceptor

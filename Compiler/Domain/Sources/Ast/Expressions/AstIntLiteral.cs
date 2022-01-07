@@ -5,30 +5,30 @@ namespace KSPCompiler.Domain.Ast.Expressions
     /// <summary>
     /// AST node representing an integer literal
     /// </summary>
-    public class AstIntLiteral : AstExpressionSyntaxNode
+    public class AstIntLiteral : AstExpressionSyntaxNode, IVariable<int>
     {
+        #region IAstVariable<T>
+
         /// <summary>
-        /// Ctor
+        /// literal value
         /// </summary>
-        public AstIntLiteral( IAstNode parent, AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
-            : base( AstNodeId.IntLiteral, parent, left, right )
-        {
-        }
+        public int Value { get; set; }
+
+        #endregion IAstVariable<T>
+
+        ///
+        /// <inheritdoc/>
+        ///
+        public override bool IsConstant => true;
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstIntLiteral( AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
-            : base( AstNodeId.IntLiteral, null, left, right )
+        public AstIntLiteral( int value = 0, IAstNode parent = null )
+            : base( AstNodeId.RealLiteral, parent )
         {
-        }
-
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        public AstIntLiteral()
-            : base( AstNodeId.IntLiteral, null, null, null )
-        {
+            Value = value;
+            Type  = DataType.Int;
         }
 
         #region IAstNodeAcceptor

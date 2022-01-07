@@ -1,5 +1,7 @@
 #nullable disable
 
+using System;
+
 using KSPCompiler.Domain.Ast.Expressions;
 
 namespace KSPCompiler.Domain.Ast.Statements
@@ -36,7 +38,7 @@ namespace KSPCompiler.Domain.Ast.Statements
         ///
         public override void AcceptChildren<T>( IAstVisitor<T> visitor )
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         #endregion IAstNodeAcceptor

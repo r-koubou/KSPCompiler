@@ -19,7 +19,7 @@ namespace KSPCompiler.Domain.Ast
         public T Visit( AstLogicalAndExpression node );
         public T Visit( AstStringConcatenateExpression node );
         public T Visit( AstBitwiseOrExpression node );
-        public T Visit( AstBitwiseOrAndExpression node );
+        public T Visit( AstBitwiseAndExpression node );
         public T Visit( AstEqualExpression node );
         public T Visit( AstNotEqualExpression node );
         public T Visit( AstLessThanExpression node );
@@ -37,14 +37,15 @@ namespace KSPCompiler.Domain.Ast
         public T Visit( AstRealLiteral node );
         public T Visit( AstStringLiteral node );
         public T Visit( AstExpressionList node );
-        public T Visit( AstAssignment node );
+        public T Visit( AstAssignmentExpression node );
+        public T Visit( AstAssignmentExpressionList node );
         public T Visit( AstAdditionAssignment node );
         public T Visit( AstSubtractionAssignment node );
         public T Visit( AstMultiplyingAssignment node );
         public T Visit( AstDivisionAssignment node );
         public T Visit( AstSymbolExpression node );
-        public T Visit( AstArrayElement node );
-        public T Visit( AstCall node );
+        public T Visit( AstArrayElementExpression node );
+        public T Visit( AstCallExpression node );
         public T Visit( AstKspPreprocessorDefine node );
         public T Visit( AstKspPreprocessorUndefine node );
         public T Visit( AstKspPreprocessorIfdefine node );

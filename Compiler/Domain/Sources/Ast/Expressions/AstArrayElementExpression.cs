@@ -5,29 +5,29 @@ namespace KSPCompiler.Domain.Ast.Expressions
     /// <summary>
     /// AST node representing an array element reference expression ( Left: AstSymbolExpression, Right: AstExpressionSyntaxNode )
     /// </summary>
-    public class AstArrayElement : AstExpressionSyntaxNode
+    public class AstArrayElementExpression : AstExpressionSyntaxNode
     {
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstArrayElement( IAstNode parent, AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
-            : base( AstNodeId.ArrayElement, parent, left, right )
+        public AstArrayElementExpression( IAstNode parent, AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
+            : base( AstNodeId.ArrayElementExpression, parent, left, right )
         {
         }
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstArrayElement( AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
-            : base( AstNodeId.ArrayElement, null, left, right )
+        public AstArrayElementExpression( AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
+            : base( AstNodeId.ArrayElementExpression, null, left, right )
         {
         }
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstArrayElement()
-            : base( AstNodeId.ArrayElement, null, null, null )
+        public AstArrayElementExpression()
+            : base( AstNodeId.ArrayElementExpression, null, null, null )
         {
         }
 

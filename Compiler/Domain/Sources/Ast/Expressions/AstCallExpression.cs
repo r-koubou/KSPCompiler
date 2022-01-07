@@ -3,31 +3,31 @@
 namespace KSPCompiler.Domain.Ast.Expressions
 {
     /// <summary>
-    /// AST node representing an assignment (:=)
+    /// AST node representing an invoking the KSP command
     /// </summary>
-    public class AstAssignment : AstExpressionSyntaxNode
+    public class AstCallExpression : AstExpressionSyntaxNode
     {
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstAssignment( IAstNode parent, AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
-            : base( AstNodeId.Assignment, parent, left, right )
+        public AstCallExpression( IAstNode parent, AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
+            : base( AstNodeId.CallExpression, parent, left, right )
         {
         }
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstAssignment( AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
-            : base( AstNodeId.Assignment, null, left, right )
+        public AstCallExpression( AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
+            : base( AstNodeId.CallExpression, null, left, right )
         {
         }
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstAssignment()
-            : base( AstNodeId.Assignment, null, null, null )
+        public AstCallExpression()
+            : base( AstNodeId.CallExpression, null, null, null )
         {
         }
 

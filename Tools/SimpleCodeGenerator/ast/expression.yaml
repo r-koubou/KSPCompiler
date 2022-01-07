@@ -40,7 +40,7 @@ classes:
       - name: ${TEMPLATE}
         suffix: ${NAME_SUFFIX}
 
-  - name: BitwiseOrAnd
+  - name: BitwiseAnd
     description: "a bitwise AND operator"
     templates:
       - name: ${TEMPLATE}
@@ -167,6 +167,12 @@ classes:
     description: "an assignment (:=)"
     templates:
       - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
+
+  - name: AssignmentExpressionList
+    description: "a comma-separated list of expressions (including assignment expressions)."
+    templates:
+      - name: ${TEMPLATE}
 
   #--------------------------------------------
   # 代入演算子 (KSP非標準)
@@ -204,9 +210,11 @@ classes:
     description: "an array element reference expression ( Left: AstSymbolExpression, Right: AstExpressionSyntaxNode )"
     templates:
       - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
 
   - name: Call
     description: "an invoking the KSP command"
     templates:
       - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
 

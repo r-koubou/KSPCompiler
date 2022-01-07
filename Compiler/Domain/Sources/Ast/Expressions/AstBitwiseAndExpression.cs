@@ -5,12 +5,12 @@ namespace KSPCompiler.Domain.Ast.Expressions
     /// <summary>
     /// AST node representing a bitwise AND operator
     /// </summary>
-    public class AstBitwiseOrAndExpression : AstExpressionSyntaxNode
+    public class AstBitwiseAndExpression : AstExpressionSyntaxNode
     {
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstBitwiseOrAndExpression( IAstNode parent, AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
+        public AstBitwiseAndExpression( IAstNode parent, AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
             : base( AstNodeId.BitwiseOrAnd, parent, left, right )
         {
         }
@@ -18,7 +18,7 @@ namespace KSPCompiler.Domain.Ast.Expressions
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstBitwiseOrAndExpression( AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
+        public AstBitwiseAndExpression( AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
             : base( AstNodeId.BitwiseOrAnd, null, left, right )
         {
         }
@@ -26,7 +26,7 @@ namespace KSPCompiler.Domain.Ast.Expressions
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstBitwiseOrAndExpression()
+        public AstBitwiseAndExpression()
             : base( AstNodeId.BitwiseOrAnd, null, null, null )
         {
         }
