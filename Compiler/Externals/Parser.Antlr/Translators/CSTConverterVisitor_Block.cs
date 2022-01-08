@@ -12,7 +12,7 @@ using KSPCompiler.Externals.Parser.Antlr.Translators.Extensions;
 namespace KSPCompiler.Externals.Parser.Antlr.Translators
 {
     // Implementation of root, callback and user-defined function node generation
-    internal partial class CSTConverterVisitor
+    public partial class CSTConverterVisitor
     {
         public override AstNode VisitCompilationUnit( KSPParser.CompilationUnitContext context )
         {

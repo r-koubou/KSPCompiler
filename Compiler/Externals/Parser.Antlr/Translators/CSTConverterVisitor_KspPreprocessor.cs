@@ -10,7 +10,7 @@ using KSPCompiler.Externals.Parser.Antlr.Translators.Extensions;
 namespace KSPCompiler.Externals.Parser.Antlr.Translators
 {
     // implementation of the statement node
-    internal partial class CSTConverterVisitor
+    public partial class CSTConverterVisitor
     {
         public override AstNode VisitKspPreprocessorDefine( KSPParser.KspPreprocessorDefineContext context )
         {

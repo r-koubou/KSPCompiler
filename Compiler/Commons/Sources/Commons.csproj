@@ -12,7 +12,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="RkHelper" Version="0.0.2" />
+        <PackageReference Include="RkHelper" Version="0.0.8" />
         <PackageReference Include="ValueObjectGenerator" Version="1.2.*" />
     </ItemGroup>
 

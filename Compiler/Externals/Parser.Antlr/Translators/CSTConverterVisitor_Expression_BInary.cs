@@ -10,7 +10,7 @@ using KSPCompiler.Domain.Ast.Expressions;
 namespace KSPCompiler.Externals.Parser.Antlr.Translators
 {
     // implementation of binary operator node generation
-    internal partial class CSTConverterVisitor
+    public partial class CSTConverterVisitor
     {
         private AstNode VisitBinaryExpressionNodeImpl<TNode>(
             ParserRuleContext context,

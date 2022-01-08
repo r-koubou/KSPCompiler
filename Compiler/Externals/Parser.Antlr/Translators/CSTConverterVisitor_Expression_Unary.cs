@@ -11,7 +11,7 @@ using KSPCompiler.Externals.Parser.Antlr.Translators.Extensions;
 namespace KSPCompiler.Externals.Parser.Antlr.Translators
 {
     // implementation of the unary operator node
-    internal partial class CSTConverterVisitor
+    public partial class CSTConverterVisitor
     {
         private TNode SetupUnaryOperatorNode<TNode>( TNode dest )
             where TNode : AstExpressionSyntaxNode

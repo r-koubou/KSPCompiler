@@ -6,7 +6,7 @@ using KSPCompiler.Commons.Text;
 
 namespace KSPCompiler.Externals.Parser.Antlr.Translators
 {
-    internal partial class CSTConverterVisitor
+    public partial class CSTConverterVisitor
     {
         #region TokenPosition
         private static Position ToPosition( ParserRuleContext context )
@@ -26,8 +26,8 @@ namespace KSPCompiler.Externals.Parser.Antlr.Translators
             {
                 BeginLine   = token.Line,
                 BeginColumn = token.Column,
-                EndLine     = -1,
-                EndColumn   = -1
+                EndLine     = LineNumber.Unknown,
+                EndColumn   = Column.Unknown
             };
         }
         #endregion TokenPosition

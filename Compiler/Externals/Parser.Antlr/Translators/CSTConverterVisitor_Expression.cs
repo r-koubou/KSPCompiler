@@ -12,7 +12,7 @@ using KSPCompiler.Externals.Parser.Antlr.Translators.Extensions;
 namespace KSPCompiler.Externals.Parser.Antlr.Translators
 {
     // Expression node generation implementation
-    internal partial class CSTConverterVisitor
+    public partial class CSTConverterVisitor
     {
         private TNode SetupExpressionNode<TNode>( TNode dest )
             where TNode : AstExpressionSyntaxNode
