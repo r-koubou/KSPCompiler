@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using System.IO;
+﻿using System.IO;
 
 namespace KSPCompiler.Domain.Ast
 {
@@ -12,12 +10,12 @@ namespace KSPCompiler.Domain.Ast
         /// <summary>
         /// left operand
         /// </summary>
-        public AstExpressionSyntaxNode Left { get; set; }
+        public AstExpressionSyntaxNode? Left { get; set; }
 
         /// <summary>
         /// right operand
         /// </summary>
-        public AstExpressionSyntaxNode Right { get; set; }
+        public AstExpressionSyntaxNode? Right { get; set; }
 
         /// <summary>
         /// The data type representing this node
@@ -39,18 +37,9 @@ namespace KSPCompiler.Domain.Ast
         /// </summary>
         public AstExpressionSyntaxNode(
             AstNodeId id,
-            IAstNode parent )
-            : this( id, parent, null, null )
-        {}
-
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        public AstExpressionSyntaxNode(
-            AstNodeId id,
-            IAstNode parent,
-            AstExpressionSyntaxNode left,
-            AstExpressionSyntaxNode right )
+            IAstNode? parent,
+            AstExpressionSyntaxNode? left = null,
+            AstExpressionSyntaxNode? right = null )
             : base( id, parent )
         {
             Left  = left;
@@ -68,8 +57,8 @@ namespace KSPCompiler.Domain.Ast
         ///
         public override void AcceptChildren<T>( IAstVisitor<T> visitor )
         {
-            Left.AcceptChildren( visitor );
-            Right.AcceptChildren( visitor );
+            Left?.AcceptChildren( visitor );
+            Right?.AcceptChildren( visitor );
         }
         #endregion IAstNodeAcceptor
 
@@ -79,8 +68,8 @@ namespace KSPCompiler.Domain.Ast
         ///
         public override void DumpAll( StreamWriter writer, int indentDepth = 0 )
         {
-            Left.Dump( writer, indentDepth );
-            Right.Dump( writer, indentDepth );
+            Left?.Dump( writer, indentDepth );
+            Right?.Dump( writer, indentDepth );
         }
         #endregion AstNode
     }

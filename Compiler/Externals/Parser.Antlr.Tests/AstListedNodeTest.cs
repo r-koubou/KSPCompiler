@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using System.Linq;
+﻿using System.Linq;
 
 using KSPCompiler.Domain.Ast;
 using KSPCompiler.Domain.Ast.Expressions;

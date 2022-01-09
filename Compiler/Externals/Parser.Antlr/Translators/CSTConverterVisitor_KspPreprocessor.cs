@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 using KSPCompiler.Domain.Ast;
 using KSPCompiler.Domain.Ast.Blocks;

@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace KSPCompiler.Domain.Ast
+﻿namespace KSPCompiler.Domain.Ast
 {
     /// <summary>
     /// AST node representing a base node representing of a statement.
@@ -12,7 +10,7 @@ namespace KSPCompiler.Domain.Ast
         /// </summary>
         protected AstStatementSyntaxNode(
             AstNodeId id,
-            IAstNode parent )
+            IAstNode? parent )
             : base( id, parent )
         {}
     }

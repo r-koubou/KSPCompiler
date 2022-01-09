@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace KSPCompiler.Domain.Ast
+﻿namespace KSPCompiler.Domain.Ast
 {
     /// <summary>
     /// Define an Acceptor that accepts <see cref="IAstVisitor{T}"/>.

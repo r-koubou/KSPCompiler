@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using System;
+﻿using System;
 
 using Antlr4.Runtime;
 
@@ -14,9 +12,9 @@ namespace KSPCompiler.Externals.Parser.Antlr.Translators
     {
         private AstNode VisitBinaryExpressionNodeImpl<TNode>(
             ParserRuleContext context,
-            ParserRuleContext nested,
-            ParserRuleContext left,
-            ParserRuleContext right )
+            ParserRuleContext? nested,
+            ParserRuleContext? left,
+            ParserRuleContext? right )
             where TNode : AstExpressionSyntaxNode, new()
         {
             if( nested != null )

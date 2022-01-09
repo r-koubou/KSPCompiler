@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using KSPCompiler.Domain.Ast.Blocks;
+﻿using KSPCompiler.Domain.Ast.Blocks;
 
 namespace KSPCompiler.Domain.Ast
 {

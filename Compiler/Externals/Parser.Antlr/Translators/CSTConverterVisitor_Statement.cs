@@ -1,6 +1,4 @@
-﻿#nullable enable
-
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 using Antlr4.Runtime;
 
@@ -23,6 +21,9 @@ namespace KSPCompiler.Externals.Parser.Antlr.Translators
             var conditionNode = condition.Accept( this ) as AstExpressionSyntaxNode;
             var blockNode = block.Accept( this ) as AstBlock;
 
+            Debug.Assert( conditionNode != null );
+            Debug.Assert( blockNode != null );
+
             node.Condition = conditionNode;
             node.CodeBlock = blockNode;
 
@@ -43,7 +44,7 @@ namespace KSPCompiler.Externals.Parser.Antlr.Translators
             }
 
             node.ElseBlock = elseBlock;
-            node.ElseBlock.Import( context.elseBlock );
+            node.ElseBlock.Import( context.elseBlock! );
 
             return node;
         }
@@ -57,7 +58,9 @@ namespace KSPCompiler.Externals.Parser.Antlr.Translators
             #region Condition
             node.Import( context );
             node.Condition = condition.Accept( this ) as AstExpressionSyntaxNode;
-            node.Condition.Import( condition );
+            Debug.Assert( node.Condition != null );
+
+            node.Condition?.Import( condition );
             #endregion
 
             #region CaseBlock

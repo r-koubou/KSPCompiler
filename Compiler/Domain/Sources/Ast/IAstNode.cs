@@ -1,5 +1,3 @@
-#nullable disable
-
 using System;
 using System.IO;
 
@@ -12,7 +10,7 @@ namespace KSPCompiler.Domain.Ast
     /// </summary>
     public interface IAstNode : ICloneable
     {
-        public static bool IsNone( IAstNode n ) =>
+        public static bool IsNone( IAstNode? n ) =>
             n == null ||
             n.Id == AstNodeId.None;
 
@@ -29,7 +27,7 @@ namespace KSPCompiler.Domain.Ast
         /// <summary>
         /// Parent node. If not present, the value is null.
         /// </summary>
-        public IAstNode Parent { get; set; }
+        public IAstNode? Parent { get; set; }
 
         /// <summary>
         /// Dumping information on this node for debugging purposes.

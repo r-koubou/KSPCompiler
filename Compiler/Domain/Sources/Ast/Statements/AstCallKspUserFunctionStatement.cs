@@ -1,7 +1,5 @@
 using System;
 
-#nullable disable
-
 namespace KSPCompiler.Domain.Ast.Statements
 {
     /// <summary>
@@ -14,14 +12,14 @@ namespace KSPCompiler.Domain.Ast.Statements
         /// <summary>
         /// An user function name
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         #endregion INamable
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstCallKspUserFunctionStatement( IAstNode parent = null )
+        public AstCallKspUserFunctionStatement( IAstNode? parent = null )
             : base( AstNodeId.CallKspUserFunctionStatement, parent )
         {
         }

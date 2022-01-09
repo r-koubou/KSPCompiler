@@ -1,5 +1,3 @@
-#nullable disable
-
 namespace KSPCompiler.Domain.Ast.Statements
 {
     /// <summary>
@@ -24,12 +22,12 @@ namespace KSPCompiler.Domain.Ast.Statements
         /// <summary>
         /// initialization statement
         /// </summary>
-        public AstVariableInitializer Initializer { get; set; }
+        public AstVariableInitializer? Initializer { get; set; }
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstVariableDeclaration( IAstNode parent = null )
+        public AstVariableDeclaration( IAstNode? parent = null )
             : base( AstNodeId.VariableDeclaration, parent )
         {
         }

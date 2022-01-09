@@ -1,5 +1,3 @@
-#nullable disable
-
 using KSPCompiler.Domain.Ast.Blocks;
 
 namespace KSPCompiler.Domain.Ast.Statements
@@ -12,7 +10,7 @@ namespace KSPCompiler.Domain.Ast.Statements
         /// <summary>
         /// condition
         /// </summary>
-        public AstExpressionSyntaxNode Condition { get; set; }
+        public AstExpressionSyntaxNode? Condition { get; set; }
 
         /// <summary>
         /// case list
@@ -22,7 +20,7 @@ namespace KSPCompiler.Domain.Ast.Statements
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstSelectStatement( IAstNode parent = null )
+        public AstSelectStatement( IAstNode? parent = null )
             : base( AstNodeId.SelectStatement, parent )
         {
             CaseBlocks = new AstNodeList<AstCaseBlock>( this );

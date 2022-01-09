@@ -1,5 +1,3 @@
-#nullable disable
-
 using System;
 
 using KSPCompiler.Domain.Ast.Expressions;
@@ -14,17 +12,17 @@ namespace KSPCompiler.Domain.Ast.Statements
         /// <summary>
         /// Number of array elements
         /// </summary>
-        public AstExpressionSyntaxNode Size { get; set; }
+        public AstExpressionSyntaxNode? Size { get; set; }
 
         /// <summary>
         /// Array element initialization
         /// </summary>
-        public AstExpressionList Initializer { get; set; }
+        public AstExpressionList? Initializer { get; set; }
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstArrayInitializer( IAstNode parent = null )
+        public AstArrayInitializer( IAstNode? parent = null )
             : base( AstNodeId.ArrayInitializer, parent )
         {
         }

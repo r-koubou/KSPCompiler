@@ -1,5 +1,3 @@
-#nullable disable
-
 namespace KSPCompiler.Domain.Ast.Expressions
 {
     /// <summary>
@@ -15,7 +13,7 @@ namespace KSPCompiler.Domain.Ast.Expressions
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstExpressionList( IAstNode parent = null )
+        public AstExpressionList( IAstNode? parent = null )
             : base( AstNodeId.ExpressionList, parent )
         {
             Expressions = new AstNodeList<AstExpressionSyntaxNode>( this );

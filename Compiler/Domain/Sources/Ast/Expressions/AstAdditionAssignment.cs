@@ -1,5 +1,3 @@
-#nullable disable
-
 namespace KSPCompiler.Domain.Ast.Expressions
 {
     /// <summary>
@@ -7,7 +5,7 @@ namespace KSPCompiler.Domain.Ast.Expressions
     /// </summary>
     public class AstAdditionAssignment : AstExpressionSyntaxNode
     {
-        /// <summary>
+        /// <summary>q
         /// Ctor
         /// </summary>
         public AstAdditionAssignment( IAstNode parent, AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
@@ -27,7 +25,7 @@ namespace KSPCompiler.Domain.Ast.Expressions
         /// Ctor
         /// </summary>
         public AstAdditionAssignment()
-            : base( AstNodeId.AdditionAssignment, null, null, null )
+            : base( AstNodeId.AdditionAssignment, null )
         {
         }
 

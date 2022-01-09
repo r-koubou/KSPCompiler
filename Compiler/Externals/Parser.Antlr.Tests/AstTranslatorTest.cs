@@ -1,5 +1,3 @@
-#nullable disable
-
 using Antlr4.Runtime;
 
 using KSPCompiler.Domain.Ast.Blocks;
@@ -41,7 +39,7 @@ public class AstTranslatorTest
 
         var ast = cst.Accept( new CSTConverterVisitor() ) as AstCompilationUnit;
 
-        return ast;
+        return ast!;
     }
 
     [Test]

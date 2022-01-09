@@ -1,5 +1,3 @@
-#nullable disable
-
 namespace KSPCompiler.Domain.Ast.Blocks
 {
     /// <summary>
@@ -21,7 +19,7 @@ namespace KSPCompiler.Domain.Ast.Blocks
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstArgumentList( IAstNode parent = null )
+        public AstArgumentList( IAstNode? parent = null )
             : base( AstNodeId.ArgumentList, parent )
         {
             Arguments = new AstNodeList<AstArgument>( this );

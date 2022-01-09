@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 
 using Antlr4.Runtime.Tree;
@@ -33,7 +31,7 @@ namespace KSPCompiler.Externals.Parser.Antlr.Translators
             node.Import( context );
             node.Name         = context.name.Text;
             node.Position     = ToPosition( context );
-            node.Block        = context.block().Accept( this ) as AstBlock;
+            node.Block        = context.block().Accept( this ) as AstBlock ?? null!;
 
             Debug.Assert( node.Block != null );
 
@@ -41,7 +39,7 @@ namespace KSPCompiler.Externals.Parser.Antlr.Translators
 
             if( context.arguments != null )
             {
-                node.ArgumentList = context.arguments.Accept( this ) as AstArgumentList;
+                node.ArgumentList = context.arguments.Accept( this ) as AstArgumentList ?? null!;
 
                 Debug.Assert( node.ArgumentList != null );
 
@@ -58,7 +56,7 @@ namespace KSPCompiler.Externals.Parser.Antlr.Translators
             node.Import( context );
             node.Name         = context.name.Text;
             node.Position     = ToPosition( context );
-            node.Block        = context.block().Accept( this ) as AstBlock;
+            node.Block        = context.block().Accept( this ) as AstBlock ?? null!;
 
             Debug.Assert( node.Block != null );
 
@@ -129,7 +127,7 @@ namespace KSPCompiler.Externals.Parser.Antlr.Translators
             var codeBlock = context.block();
 
             node.Import( context );
-            node.ConditionFrom = condFrom.Accept( this ) as AstExpressionSyntaxNode;
+            node.ConditionFrom = condFrom?.Accept( this ) as AstExpressionSyntaxNode;
             node.ConditionTo   = condTo?.Accept( this ) as AstExpressionSyntaxNode;
             node.CodeBlock     = codeBlock?.Accept( this ) as AstBlock;
 

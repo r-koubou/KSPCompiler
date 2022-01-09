@@ -1,5 +1,3 @@
-#nullable disable
-
 using System;
 
 using KSPCompiler.Domain.Ast.Blocks;
@@ -20,12 +18,12 @@ namespace KSPCompiler.Domain.Ast.Statements
         /// <summary>
         /// The code block for ifndef is true.
         /// </summary>
-        public AstBlock Block { get; set; }
+        public AstBlock? Block { get; set; }
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstKspPreprocessorIfnotDefine( IAstNode parent = null )
+        public AstKspPreprocessorIfnotDefine( IAstNode? parent = null )
             : base( AstNodeId.KspPreprocessorIfnotDefine, parent )
         {
             Condition = new AstSymbolExpression( this );

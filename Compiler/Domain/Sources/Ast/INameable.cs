@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace KSPCompiler.Domain.Ast
+﻿namespace KSPCompiler.Domain.Ast
 {
     /// <summary>
     /// Declaration of Individually Named Nodes.

@@ -1,5 +1,3 @@
-#nullable disable
-
 namespace ${namespace}
 {
     /// <summary>
@@ -10,7 +8,7 @@ namespace ${namespace}
         /// <summary>
         /// Ctor
         /// </summary>
-        public ${classname}( IAstNode parent = null )
+        public ${classname}( IAstNode? parent = null )
             : base( AstNodeId.${name}, parent )
         {
         }

@@ -1,5 +1,3 @@
-#nullable disable
-
 using System;
 
 using KSPCompiler.Domain.Ast.Expressions;
@@ -14,17 +12,17 @@ namespace KSPCompiler.Domain.Ast.Statements
         /// <summary>
         /// Assignment expression
         /// </summary>
-        public AstExpressionSyntaxNode Expression { get; }
+        public AstExpressionSyntaxNode? Expression { get; }
 
         /// <summary>
         /// Assignment multiple expression (ui_type, constructor)
         /// </summary>
-        public AstExpressionList ExpressionList { get; }
+        public AstExpressionList? ExpressionList { get; }
 
         public AstPrimitiveInitializer(
-            IAstNode parent = null,
-            AstExpressionSyntaxNode expression = null,
-            AstExpressionList expressionList = null )
+            IAstNode? parent = null,
+            AstExpressionSyntaxNode? expression = null,
+            AstExpressionList? expressionList = null )
             : base( AstNodeId.PrimitiveInitializer, parent )
         {
             Expression     = expression;

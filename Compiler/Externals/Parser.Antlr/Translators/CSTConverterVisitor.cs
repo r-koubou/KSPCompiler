@@ -16,17 +16,24 @@ namespace KSPCompiler.Externals.Parser.Antlr.Translators
     public partial class CSTConverterVisitor : KSPParserBaseVisitor<AstNode>
     {
         private void SetupChildNode(
-            IAstNode parent,
-            IAstNode child,
-            ParserRuleContext childContext )
+            IAstNode? parent,
+            IAstNode? child,
+            ParserRuleContext? childContext )
         {
             if( IAstNode.IsNone( child ) )
             {
                 return;
             }
 
-            child.Import( childContext );
-            child.Parent = parent;
+            if( childContext != null )
+            {
+                child?.Import( childContext );
+            }
+
+            if( child != null )
+            {
+                child.Parent = parent!;
+            }
         }
 
         /// <summary>

@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using KSPCompiler.Domain.Ast.Blocks;
+﻿using KSPCompiler.Domain.Ast.Blocks;
 
 namespace KSPCompiler.Domain.Ast
 {
@@ -19,7 +17,7 @@ namespace KSPCompiler.Domain.Ast
         /// </summary>
         protected AstFunctionalSyntaxNode(
             AstNodeId id,
-            IAstNode parent )
+            IAstNode? parent )
             : base( id, parent )
         {
             Block = new AstBlock( this );

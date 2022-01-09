@@ -1,5 +1,3 @@
-#nullable disable
-
 using System.Collections;
 using System.Collections.Generic;
 
@@ -13,7 +11,7 @@ namespace KSPCompiler.Domain.Ast
         /// <summary>
         /// Source node.
         /// </summary>
-        public IAstNode Parent { get; }
+        public IAstNode? Parent { get; }
 
         /// <summary>
         /// Child nodes
@@ -33,7 +31,7 @@ namespace KSPCompiler.Domain.Ast
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstNodeList( IAstNode parent )
+        public AstNodeList( IAstNode? parent )
         {
             Parent = parent;
         }

@@ -1,5 +1,3 @@
-#nullable disable
-
 namespace KSPCompiler.Domain.Ast.Expressions
 {
     /// <summary>
@@ -27,7 +25,7 @@ namespace KSPCompiler.Domain.Ast.Expressions
         /// Ctor
         /// </summary>
         public AstMultiplyingAssignment()
-            : base( AstNodeId.MultiplyingAssignment, null, null, null )
+            : base( AstNodeId.MultiplyingAssignment, null )
         {
         }
 

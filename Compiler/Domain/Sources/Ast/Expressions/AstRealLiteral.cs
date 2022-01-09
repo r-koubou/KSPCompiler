@@ -1,5 +1,3 @@
-#nullable disable
-
 namespace KSPCompiler.Domain.Ast.Expressions
 {
     /// <summary>
@@ -24,7 +22,7 @@ namespace KSPCompiler.Domain.Ast.Expressions
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstRealLiteral( double value = 0, IAstNode parent = null )
+        public AstRealLiteral( double value = 0, IAstNode? parent = null )
             : base( AstNodeId.IntLiteral, parent )
         {
             Value = value;

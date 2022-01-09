@@ -1,5 +1,3 @@
-#nullable disable
-
 namespace KSPCompiler.Domain.Ast.Statements
 {
     /// <summary>
@@ -17,7 +15,7 @@ namespace KSPCompiler.Domain.Ast.Statements
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstWhileStatement( IAstNode parent = null )
+        public AstWhileStatement( IAstNode? parent = null )
             : base( AstNodeId.WhileStatement, parent )
         {
         }

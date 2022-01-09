@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using KSPCompiler.Domain.Ast.Blocks;
+﻿using KSPCompiler.Domain.Ast.Blocks;
 
 namespace KSPCompiler.Domain.Ast
 {
@@ -12,19 +10,19 @@ namespace KSPCompiler.Domain.Ast
         /// <summary>
         /// Condition
         /// </summary>
-        public AstExpressionSyntaxNode Condition { get; set; }
+        public AstExpressionSyntaxNode? Condition { get; set; }
 
         /// <summary>
         /// A code block when the conditional expression is true.
         /// </summary>
-        public AstBlock CodeBlock { get; set; }
+        public AstBlock? CodeBlock { get; set; }
 
         /// <summary>
         /// Ctor
         /// </summary>
         protected AstConditionalStatement(
             AstNodeId id,
-            IAstNode parent )
+            IAstNode? parent )
             : base( id, parent )
         {
         }

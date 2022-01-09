@@ -1,5 +1,3 @@
-#nullable disable
-
 namespace ${namespace}
 {
     /// <summary>
@@ -10,7 +8,7 @@ namespace ${namespace}
         /// <summary>
         /// Ctor
         /// </summary>
-        public ${classname}( IAstNode parent, AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
+        public ${classname}( IAstNode? parent, AstExpressionSyntaxNode? left, AstExpressionSyntaxNode? right )
             : base( AstNodeId.${name}, parent, left, right )
         {
         }
@@ -18,7 +16,7 @@ namespace ${namespace}
         /// <summary>
         /// Ctor
         /// </summary>
-        public ${classname}( AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
+        public ${classname}( AstExpressionSyntaxNode? left, AstExpressionSyntaxNode? right )
             : base( AstNodeId.${name}, null, left, right )
         {
         }
@@ -27,7 +25,7 @@ namespace ${namespace}
         /// Ctor
         /// </summary>
         public ${classname}()
-            : base( AstNodeId.${name}, null, null, null )
+            : base( AstNodeId.${name}, null )
         {
         }
 

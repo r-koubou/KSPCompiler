@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using System;
+﻿using System;
 using System.Globalization;
 
 using Antlr4.Runtime;
@@ -32,15 +30,23 @@ namespace KSPCompiler.Externals.Parser.Antlr.Translators
 
         private TNode VisitExpressionNodeImpl<TNode>(
             ParserRuleContext context,
-            ParserRuleContext left,
-            ParserRuleContext right )
+            ParserRuleContext? left,
+            ParserRuleContext? right )
             where TNode : AstExpressionSyntaxNode, new()
         {
             var node = new TNode();
 
             node.Import( context );
-            node.Left  = left?.Accept( this ) as AstExpressionSyntaxNode;
-            node.Right = right?.Accept( this ) as AstExpressionSyntaxNode;
+
+            if( left != null )
+            {
+                node.Left = (AstExpressionSyntaxNode)left.Accept( this );
+            }
+
+            if( right != null )
+            {
+                node.Right = (AstExpressionSyntaxNode)right.Accept( this );
+            }
 
             return SetupExpressionNode( node );
         }
@@ -158,9 +164,6 @@ namespace KSPCompiler.Externals.Parser.Antlr.Translators
             else if( callExpression != null )
             {
                 var node = VisitExpressionNodeImpl<AstCallExpression>( context, callExpression, callArguments );
-
-                // when given no arguments
-                node.Right ??= new AstExpressionList( node );
                 node.Import( context );
 
                 return node;
@@ -204,14 +207,14 @@ namespace KSPCompiler.Externals.Parser.Antlr.Translators
             {
                 VisitExpressionListRecursive( expressionList, dest );
                 dest.Expressions.Add(
-                   expression.Accept( this ) as AstExpressionSyntaxNode
+                   (AstExpressionSyntaxNode)expression.Accept( this )
                 );
             }
             // expression
             else
             {
                 dest.Expressions.Add(
-                   expression.Accept( this ) as AstExpressionSyntaxNode
+                   (AstExpressionSyntaxNode)expression.Accept( this )
                 );
             }
         }
@@ -264,7 +267,7 @@ namespace KSPCompiler.Externals.Parser.Antlr.Translators
             {
                 VisitAssignmentExpressionListRecursive( assignmentList, dest );
                 dest.Expressions.Add(
-                    expression.Accept( this ) as AstAssignmentExpression
+                    (AstAssignmentExpression)expression.Accept( this )
                 );
             }
             //
@@ -273,7 +276,7 @@ namespace KSPCompiler.Externals.Parser.Antlr.Translators
             else
             {
                 dest.Expressions.Add(
-                    expression.Accept( this ) as AstAssignmentExpression
+                    (AstAssignmentExpression)expression.Accept( this )
                 );
             }
         }

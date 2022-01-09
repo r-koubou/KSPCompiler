@@ -1,5 +1,3 @@
-#nullable disable
-
 using System;
 
 using KSPCompiler.Domain.Ast.Expressions;
@@ -19,7 +17,7 @@ namespace KSPCompiler.Domain.Ast.Statements
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstKspPreprocessorUndefine( IAstNode parent = null )
+        public AstKspPreprocessorUndefine( IAstNode? parent = null )
             : base( AstNodeId.KspPreprocessorUndefine, parent )
         {
             Symbol = new AstSymbolExpression( this );

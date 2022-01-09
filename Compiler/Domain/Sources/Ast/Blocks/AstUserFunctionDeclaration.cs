@@ -1,5 +1,3 @@
-#nullable disable
-
 namespace KSPCompiler.Domain.Ast.Blocks
 {
     /// <summary>
@@ -10,7 +8,7 @@ namespace KSPCompiler.Domain.Ast.Blocks
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstUserFunctionDeclaration( IAstNode parent = null )
+        public AstUserFunctionDeclaration( IAstNode? parent = null )
             : base( AstNodeId.UserFunctionDeclaration, parent )
         {
         }

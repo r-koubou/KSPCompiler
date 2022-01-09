@@ -1,5 +1,3 @@
-#nullable disable
-
 using KSPCompiler.Domain.Ast.Blocks;
 using KSPCompiler.Domain.Ast.Expressions;
 using KSPCompiler.Domain.Ast.Statements;

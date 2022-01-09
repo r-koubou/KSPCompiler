@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿using System.Diagnostics;
 
 using KSPCompiler.Domain.Ast;
 using KSPCompiler.Domain.Ast.Expressions;
@@ -14,9 +14,20 @@ namespace KSPCompiler.Externals.Parser.Antlr.Translators
         {
             var node = new AstVariableDeclaration();
             node.Import( context );
-            node.Name        = context.name.Text;
-            node.Modifier    = context.modifier?.Text;
-            node.Initializer = context.variableInitializer()?.Accept( this ) as AstVariableInitializer;
+            node.Name     = context.name.Text;
+            node.Modifier = string.Empty;
+
+            if( context.modifier?.Text != null )
+            {
+                node.Modifier = context.modifier.Text;
+            }
+
+            var initializer = context.variableInitializer()?.Accept( this );
+
+            if( initializer != null )
+            {
+                node.Initializer = (AstVariableInitializer)initializer;
+            }
 
             return node;
         }
@@ -50,17 +61,19 @@ namespace KSPCompiler.Externals.Parser.Antlr.Translators
             var expression = context.expression();
             var expressionList = context.expressionList();
 
-            AstExpressionSyntaxNode expressionNode = null;
-            AstExpressionList expressionListNode = null;
+            AstExpressionSyntaxNode? expressionNode = null;
+            AstExpressionList? expressionListNode = null;
 
             // 初期化式：単一の式か複数の式かは型によってどちらか一方
             if( expression != null )
             {
                 expressionNode = expression.Accept( this ) as AstExpressionSyntaxNode;
+                Debug.Assert( expressionNode != null );
             }
             else if( expressionList != null )
             {
                 expressionListNode = expressionList.Accept( this ) as AstExpressionList;
+                Debug.Assert( expressionList != null );
             }
 
             return new AstPrimitiveInitializer( null, expressionNode, expressionListNode );
@@ -68,16 +81,18 @@ namespace KSPCompiler.Externals.Parser.Antlr.Translators
 
         public override AstNode VisitArrayInitializer( KSPParser.ArrayInitializerContext context )
         {
-            AstArrayInitializer node = new AstArrayInitializer();
+            var node = new AstArrayInitializer();
 
             var arraySizeExpression = context.expression();
             var expressionList = context.expressionList();
 
             node.Size = arraySizeExpression.Accept( this ) as AstExpressionSyntaxNode;
+            Debug.Assert( node.Size != null );
 
             if( expressionList != null )
             {
                 node.Initializer = expressionList.Accept( this ) as AstExpressionList;
+                Debug.Assert( node.Initializer != null );
             }
 
             return node;

@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-using System;
+﻿using System;
 
 using Antlr4.Runtime;
 
@@ -16,7 +14,11 @@ namespace KSPCompiler.Externals.Parser.Antlr.Translators
         private TNode SetupUnaryOperatorNode<TNode>( TNode dest )
             where TNode : AstExpressionSyntaxNode
         {
-            dest.Left.Parent = dest;
+            if( dest.Left != null )
+            {
+                dest.Left.Parent = dest;
+            }
+
             return dest;
         }
 
@@ -28,7 +30,7 @@ namespace KSPCompiler.Externals.Parser.Antlr.Translators
             var node = new TNode();
 
             node.Import( context );
-            node.Left = left.Accept( this ) as AstExpressionSyntaxNode;
+            node.Left = (AstExpressionSyntaxNode)left.Accept( this );
 
             return SetupUnaryOperatorNode( node );
         }

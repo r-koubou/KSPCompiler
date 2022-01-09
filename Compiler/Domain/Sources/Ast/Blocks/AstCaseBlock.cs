@@ -1,5 +1,3 @@
-#nullable disable
-
 namespace KSPCompiler.Domain.Ast.Blocks
 {
     /// <summary>
@@ -10,22 +8,22 @@ namespace KSPCompiler.Domain.Ast.Blocks
         /// <summary>
         /// Conditional expression (starting value)
         /// </summary>
-        public AstExpressionSyntaxNode ConditionFrom { get; set; }
+        public AstExpressionSyntaxNode? ConditionFrom { get; set; }
 
         /// <summary>
         /// Conditional expression (end value *optional)
         /// </summary>
-        public AstExpressionSyntaxNode ConditionTo { get; set; }
+        public AstExpressionSyntaxNode? ConditionTo { get; set; }
 
         /// <summary>
         /// Code block to be executed when the case condition is matched
         /// </summary>
-        public  AstBlock CodeBlock { get; set; }
+        public  AstBlock? CodeBlock { get; set; }
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstCaseBlock( IAstNode parent = null )
+        public AstCaseBlock( IAstNode? parent = null )
             : base( AstNodeId.CaseBlock, parent )
         {
         }

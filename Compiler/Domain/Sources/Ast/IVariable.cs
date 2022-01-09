@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace KSPCompiler.Domain.Ast
+﻿namespace KSPCompiler.Domain.Ast
 {
     /// <summary>
     /// Declarations of value-representable nodes.

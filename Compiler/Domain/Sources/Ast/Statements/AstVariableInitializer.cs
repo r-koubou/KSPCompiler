@@ -1,5 +1,3 @@
-#nullable disable
-
 namespace KSPCompiler.Domain.Ast.Statements
 {
     /// <summary>
@@ -10,17 +8,17 @@ namespace KSPCompiler.Domain.Ast.Statements
         /// <summary>
         /// primitive variable initialization
         /// </summary>
-        public AstPrimitiveInitializer PrimitiveInitializer { get; set; }
+        public AstPrimitiveInitializer? PrimitiveInitializer { get; set; }
 
         /// <summary>
         /// array variable initialization
         /// </summary>
-        public AstArrayInitializer ArrayInitializer { get; set; }
+        public AstArrayInitializer? ArrayInitializer { get; set; }
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstVariableInitializer( IAstNode parent = null )
+        public AstVariableInitializer( IAstNode? parent = null )
             : base( AstNodeId.VariableInitializer, parent )
         {
         }
