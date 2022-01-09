@@ -31,12 +31,12 @@ public class AstTranslatorTest
 
         if( lexerErrorListener.HasError )
         {
-            throw new MockLexerException( lexerErrorListener.Messages );
+            throw new MockLexerException();
         }
 
         if( parserErrorListener.HasError )
         {
-            throw new MockParserException( parserErrorListener.Messages );
+            throw new MockParserException();
         }
 
         var ast = cst.Accept( new CSTConverterVisitor() ) as AstCompilationUnit;

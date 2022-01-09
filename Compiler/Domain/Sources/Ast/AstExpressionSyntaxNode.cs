@@ -28,7 +28,7 @@ namespace KSPCompiler.Domain.Ast
         /// Ctor
         /// </summary>
         public AstExpressionSyntaxNode()
-            : base( AstNodeId.None, IAstNode.None )
+            : base( AstNodeId.None, null )
         {
             Left  = null;
             Right = null;

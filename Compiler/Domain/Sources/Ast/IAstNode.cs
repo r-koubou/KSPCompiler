@@ -14,11 +14,7 @@ namespace KSPCompiler.Domain.Ast
     {
         public static bool IsNone( IAstNode n ) =>
             n == null ||
-            n == None ||
-            n is NullNode ||
             n.Id == AstNodeId.None;
-
-        public static IAstNode None => new NullNode();
 
         /// <summary>
         /// ID for identifying a node.
@@ -47,15 +43,4 @@ namespace KSPCompiler.Domain.Ast
         public void DumpAll( StreamWriter writer, int indentDepth = 0 )
         {}
     }
-
-    #region Null Object
-    public class NullNode : IAstNode
-    {
-        public object Clone() => new NullNode();
-        public AstNodeId Id => AstNodeId.None;
-        public Position Position { get; set; } = new ();
-        public IAstNode Parent { get; set; } = default!;
-    }
-    #endregion
-
 }

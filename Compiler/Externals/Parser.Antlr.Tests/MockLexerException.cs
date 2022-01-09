@@ -1,13 +1,7 @@
-using System.Collections.Generic;
+using System;
 
 namespace KSPCompiler.Parser.Antlr.Tests;
 
-public class MockLexerException : System.Exception
+public class MockLexerException : Exception
 {
-    private IReadOnlyCollection<string> Messages { get; }
-
-    public MockLexerException( IReadOnlyCollection<string> messages )
-    {
-        Messages = messages;
-    }
 }
