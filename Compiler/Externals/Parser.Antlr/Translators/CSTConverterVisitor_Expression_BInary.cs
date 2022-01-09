@@ -1,11 +1,11 @@
-﻿using System;
+﻿#nullable disable
+
+using System;
 
 using Antlr4.Runtime;
 
 using KSPCompiler.Domain.Ast;
 using KSPCompiler.Domain.Ast.Expressions;
-
-#nullable disable
 
 namespace KSPCompiler.Externals.Parser.Antlr.Translators
 {

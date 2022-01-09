@@ -1,11 +1,11 @@
-﻿using System.Diagnostics;
+﻿#nullable disable
+
+using System.Diagnostics;
 
 using KSPCompiler.Domain.Ast;
 using KSPCompiler.Domain.Ast.Blocks;
 using KSPCompiler.Domain.Ast.Statements;
 using KSPCompiler.Externals.Parser.Antlr.Translators.Extensions;
-
-#nullable disable
 
 namespace KSPCompiler.Externals.Parser.Antlr.Translators
 {

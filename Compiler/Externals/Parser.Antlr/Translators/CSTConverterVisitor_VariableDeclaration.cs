@@ -1,9 +1,9 @@
-﻿using KSPCompiler.Domain.Ast;
+﻿#nullable disable
+
+using KSPCompiler.Domain.Ast;
 using KSPCompiler.Domain.Ast.Expressions;
 using KSPCompiler.Domain.Ast.Statements;
 using KSPCompiler.Externals.Parser.Antlr.Translators.Extensions;
-
-#nullable disable
 
 namespace KSPCompiler.Externals.Parser.Antlr.Translators
 {
