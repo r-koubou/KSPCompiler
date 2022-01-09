@@ -16,21 +16,52 @@ public class AstTranslatorTest
     // ReSharper disable once UnusedMethodReturnValue.Local
     private static AstCompilationUnit TranslateImpl( string script )
     {
-        var lexerErrorListener = new MockLexerErrorListener();
-        var parserErrorListener = new MockParserErrorListener();
         var antlrStream = new AntlrInputStream( script );
         var lexer = new KSPLexer( antlrStream );
         var tokenStream = new CommonTokenStream( lexer );
         var parser = new KSPParser( tokenStream );
 
+        var lexerErrorListener = new MockLexerErrorListener();
+        var parserErrorListener = new MockParserErrorListener();
+
         lexer.AddErrorListener( lexerErrorListener );
         parser.AddErrorListener( parserErrorListener );
 
         var cst = parser.compilationUnit();
-        Assert.IsFalse( lexerErrorListener.HasError );
-        Assert.IsFalse( parserErrorListener.HasError );
 
-        return cst.Accept( new CSTConverterVisitor() ) as AstCompilationUnit;
+        if( lexerErrorListener.HasError )
+        {
+            throw new MockLexerException( lexerErrorListener.Messages );
+        }
+
+        if( parserErrorListener.HasError )
+        {
+            throw new MockParserException( parserErrorListener.Messages );
+        }
+
+        var ast = cst.Accept( new CSTConverterVisitor() ) as AstCompilationUnit;
+
+        return ast;
+    }
+
+    [Test]
+    public void LexerErrorTest()
+    {
+        const string script = @"
+@@ @ @ - - - - on hoge( $arg1, $arg2,
+end on
+";
+        Assert.Throws<MockLexerException>( () => TranslateImpl( script ) );
+    }
+
+    [Test]
+    public void ParserErrorTest()
+    {
+        const string script = @"
+on hoge( $arg1, $arg2,
+end on
+";
+        Assert.Throws<MockParserException>( () => TranslateImpl( script ) );
     }
 
     [Test]
