@@ -1,8 +1,8 @@
-using Antlr4.Runtime;
+using System.Text;
 
 using KSPCompiler.Domain.Ast.Blocks;
+using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Externals.Parser.Antlr;
-using KSPCompiler.Externals.Parser.Antlr.Translators;
 
 using NUnit.Framework;
 
@@ -14,32 +14,8 @@ public class AstTranslatorTest
     // ReSharper disable once UnusedMethodReturnValue.Local
     private static AstCompilationUnit TranslateImpl( string script )
     {
-        var antlrStream = new AntlrInputStream( script );
-        var lexer = new KSPLexer( antlrStream );
-        var tokenStream = new CommonTokenStream( lexer );
-        var parser = new KSPParser( tokenStream );
-
-        var lexerErrorListener = new MockLexerErrorListener();
-        var parserErrorListener = new MockParserErrorListener();
-
-        lexer.AddErrorListener( lexerErrorListener );
-        parser.AddErrorListener( parserErrorListener );
-
-        var cst = parser.compilationUnit();
-
-        if( lexerErrorListener.HasError )
-        {
-            throw new MockLexerException();
-        }
-
-        if( parserErrorListener.HasError )
-        {
-            throw new MockParserException();
-        }
-
-        var ast = cst.Accept( new CSTConverterVisitor() ) as AstCompilationUnit;
-
-        return ast!;
+        var p = new KspStringScriptParser( script, ICompilerMessageManger.CreateDefault(), Encoding.UTF8 );
+        return p.Parse();
     }
 
     [Test]
@@ -49,7 +25,7 @@ public class AstTranslatorTest
 @@ @ @ - - - - on hoge( $arg1, $arg2,
 end on
 ";
-        Assert.Throws<MockLexerException>( () => TranslateImpl( script ) );
+        Assert.Throws<KspParserException>( () => TranslateImpl( script ) );
     }
 
     [Test]
@@ -59,7 +35,7 @@ end on
 on hoge( $arg1, $arg2,
 end on
 ";
-        Assert.Throws<MockParserException>( () => TranslateImpl( script ) );
+        Assert.Throws<KspParserException>( () => TranslateImpl( script ) );
     }
 
     [Test]

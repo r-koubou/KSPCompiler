@@ -8,7 +8,7 @@ namespace KSPCompiler.Domain.Ast.Statements
         /// <summary>
         /// modifier
         /// </summary>
-        public string Modifier { get; set; } = "";
+        public string Modifier { get; set; } = string.Empty;
 
         #region INamable
 

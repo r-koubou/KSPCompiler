@@ -40,8 +40,8 @@ namespace KSPCompiler.Externals.Parser.Antlr.Translators.Extensions
             {
                 BeginLine   = token.Line,
                 BeginColumn = token.Column,
-                EndLine     = -1,
-                EndColumn   = -1
+                EndLine     = LineNumber.Unknown,
+                EndColumn   = Column.Unknown
             };
         }
 
