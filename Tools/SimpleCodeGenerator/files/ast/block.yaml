@@ -1,7 +1,7 @@
 variables:
   - TEMPLATE: ast.block
 
-namespace: KSPCompiler.Domain.Ast.Blocks
+namespace: KSPCompiler.Domain.Ast.Node.Blocks
 suffix: ".cs"
 output_dir: out/Blocks
 

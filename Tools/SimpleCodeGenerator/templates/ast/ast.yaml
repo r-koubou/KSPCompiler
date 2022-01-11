@@ -13,7 +13,3 @@ templates:
   - name: ast.statement
     path: "ast/statement.cs"
     prefix: ${PREFIX}
-
-  - name: ast.symbol
-    path: "ast/symbol.cs"
-    prefix: ${PREFIX}

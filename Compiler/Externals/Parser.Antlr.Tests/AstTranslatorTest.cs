@@ -1,6 +1,6 @@
 using System.Text;
 
-using KSPCompiler.Domain.Ast.Blocks;
+using KSPCompiler.Domain.Ast.Node.Blocks;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Externals.Parser.Antlr;
 

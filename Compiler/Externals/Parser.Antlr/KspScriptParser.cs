@@ -3,7 +3,7 @@ using System.IO;
 
 using Antlr4.Runtime;
 
-using KSPCompiler.Domain.Ast.Blocks;
+using KSPCompiler.Domain.Ast.Node.Blocks;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Externals.Parser.Antlr.Translators;
 using KSPCompiler.Gateways.Parsers;

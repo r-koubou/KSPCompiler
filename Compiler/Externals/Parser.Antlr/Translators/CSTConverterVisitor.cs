@@ -3,7 +3,7 @@
 using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
 
-using KSPCompiler.Domain.Ast;
+using KSPCompiler.Domain.Ast.Node;
 using KSPCompiler.Externals.Parser.Antlr.Translators.Extensions;
 
 // ReSharper disable UnusedMember.Local

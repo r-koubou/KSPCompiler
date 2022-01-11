@@ -2,9 +2,9 @@
 
 using Antlr4.Runtime;
 
-using KSPCompiler.Domain.Ast;
-using KSPCompiler.Domain.Ast.Blocks;
-using KSPCompiler.Domain.Ast.Statements;
+using KSPCompiler.Domain.Ast.Node;
+using KSPCompiler.Domain.Ast.Node.Blocks;
+using KSPCompiler.Domain.Ast.Node.Statements;
 using KSPCompiler.Externals.Parser.Antlr.Translators.Extensions;
 
 namespace KSPCompiler.Externals.Parser.Antlr.Translators

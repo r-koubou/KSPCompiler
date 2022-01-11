@@ -2,7 +2,7 @@
 using Antlr4.Runtime.Tree;
 
 using KSPCompiler.Commons.Text;
-using KSPCompiler.Domain.Ast;
+using KSPCompiler.Domain.Ast.Node;
 
 namespace KSPCompiler.Externals.Parser.Antlr.Translators.Extensions
 {

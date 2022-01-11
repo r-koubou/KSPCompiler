@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 
-using KSPCompiler.Domain.Ast;
-using KSPCompiler.Domain.Ast.Expressions;
+using KSPCompiler.Domain.Ast.Node;
+using KSPCompiler.Domain.Ast.Node.Expressions;
 
 using NUnit.Framework;
 

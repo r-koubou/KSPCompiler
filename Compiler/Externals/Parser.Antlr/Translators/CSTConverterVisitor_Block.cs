@@ -3,8 +3,8 @@ using System.Diagnostics;
 
 using Antlr4.Runtime.Tree;
 
-using KSPCompiler.Domain.Ast;
-using KSPCompiler.Domain.Ast.Blocks;
+using KSPCompiler.Domain.Ast.Node;
+using KSPCompiler.Domain.Ast.Node.Blocks;
 using KSPCompiler.Externals.Parser.Antlr.Translators.Extensions;
 
 namespace KSPCompiler.Externals.Parser.Antlr.Translators
