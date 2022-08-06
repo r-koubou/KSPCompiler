@@ -11,6 +11,12 @@ classes:
     templates:
       - name: ${TEMPLATE_NAME}
 
+  - name: CorrectSymbol
+    description: Correct symbols from AST
+    templates:
+      - name: ${TEMPLATE_NAME}
+      - name: ast.block
+
   - name: SemanticAnalysis
     description: Semantic analysis
     templates:
