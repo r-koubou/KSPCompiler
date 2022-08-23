@@ -1,9 +1,0 @@
-{
-    "output_directory": "out/",
-    "directory_layout": {
-        "usecase": "UseCases",
-        "inout": "UseCases",
-        "interactor": "Interactors",
-        "presenter": "Presenters"
-    }
-}

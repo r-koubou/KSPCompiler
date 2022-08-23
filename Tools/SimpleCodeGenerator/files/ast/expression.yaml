@@ -1,0 +1,220 @@
+variables:
+  - TEMPLATE: ast.expression
+  - NAME_SUFFIX: Expression
+
+namespace: KSPCompiler.Domain.Ast.Node.Expressions
+suffix: ".cs"
+output_dir: out/Expressions
+
+classes:
+  #--------------------------------------------
+  # 論理 OR, AND
+  #--------------------------------------------
+  - name: LogicalOr
+    description: "a conditional operator: AND (||)"
+    templates:
+      - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
+
+  - name: LogicalAnd
+    description: "a conditional operator: AND (&&)"
+    templates:
+      - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
+
+  #--------------------------------------------
+  # KSP文字列連結
+  #--------------------------------------------
+  - name: StringConcatenate
+    description: "a string concatenation operator (&)"
+    templates:
+      - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
+
+  #--------------------------------------------
+  # ビット演算子 OR AND
+  #--------------------------------------------
+  - name: BitwiseOr
+    description: "a bitwise OR operator"
+    templates:
+      - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
+
+  - name: BitwiseAnd
+    description: "a bitwise AND operator"
+    templates:
+      - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
+
+  #--------------------------------------------
+  # 比較演算子
+  #--------------------------------------------
+  - name: Equal
+    description: "a comparison operator: equal"
+    templates:
+      - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
+
+  - name: NotEqual
+    description: "a comparison operator: not equal"
+    templates:
+      - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
+
+  - name: LessThan
+    description: "a comparison operator: less than (&lt;)"
+    templates:
+      - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
+
+  - name: GreaterThan
+    description: "a comparison operator: greater than (&gt;)"
+    templates:
+      - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
+
+  - name: LessEqual
+    description: "a comparison operator: less equal (&lt;=)"
+    templates:
+      - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
+
+  - name: GreaterEqual
+    description: "a comparison operator: greater equal (&gt;=)"
+    templates:
+      - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
+
+  #--------------------------------------------
+  # 2項演算子
+  #--------------------------------------------
+  - name: Addition
+    description: "an addition operator (+)"
+    templates:
+      - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
+
+  - name: Subtraction
+    description: "a subtraction operator (-)"
+    templates:
+      - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
+
+  - name: Multiplying
+    description: "a multiplying operator (*)"
+    templates:
+      - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
+
+  - name: Division
+    description: "a division operator (/)"
+    templates:
+      - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
+
+  - name: Modulo
+    description: "a modulo operator (%)"
+    templates:
+      - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
+
+  #--------------------------------------------
+  # 単項演算子
+  #--------------------------------------------
+  - name: UnaryMinus
+    description: "an unary operator: negative"
+    templates:
+      - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
+
+  - name: UnaryNot
+    description: "an unary operator: NOT"
+    templates:
+      - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
+
+  #--------------------------------------------
+  # リテラル
+  #--------------------------------------------
+  - name: IntLiteral
+    description: "an integer literal"
+    templates:
+      - name: ${TEMPLATE}
+
+  - name: RealLiteral
+    description: "a floating-point literal"
+    templates:
+      - name: ${TEMPLATE}
+
+  - name: StringLiteral
+    description: "a string literal"
+    templates:
+      - name: ${TEMPLATE}
+
+  #--------------------------------------------
+  # 式リスト
+  #--------------------------------------------
+  - name: ExpressionList
+    description: "a comma-separated list of expressions"
+    templates:
+      - name: ${TEMPLATE}
+
+
+  #--------------------------------------------
+  # 代入演算子
+  #--------------------------------------------
+  - name: Assignment
+    description: "an assignment (:=)"
+    templates:
+      - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
+
+  - name: AssignmentExpressionList
+    description: "a comma-separated list of expressions (including assignment expressions)."
+    templates:
+      - name: ${TEMPLATE}
+
+  #--------------------------------------------
+  # 代入演算子 (KSP非標準)
+  #--------------------------------------------
+  - name: AdditionAssignment
+    description: "an assignment (+=)"
+    templates:
+      - name: ${TEMPLATE}
+
+  - name: SubtractionAssignment
+    description: "an assignment (-=)"
+    templates:
+      - name: ${TEMPLATE}
+
+  - name: MultiplyingAssignment
+    description: "an assignment (*=)"
+    templates:
+      - name: ${TEMPLATE}
+
+  - name: DivisionAssignment
+    description: "an assignment (/=)"
+    templates:
+      - name: ${TEMPLATE}
+
+  #--------------------------------------------
+  # シンボル参照
+  #--------------------------------------------
+  - name: Symbol
+    description: "a symbolic reference"
+    templates:
+      - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
+
+  - name: ArrayElement
+    description: "an array element reference expression ( Left: AstSymbolExpression, Right: AstExpressionSyntaxNode )"
+    templates:
+      - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
+
+  - name: Call
+    description: "an invoking the KSP command"
+    templates:
+      - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
+

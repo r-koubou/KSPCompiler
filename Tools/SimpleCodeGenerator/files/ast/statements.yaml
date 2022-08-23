@@ -1,0 +1,80 @@
+variables:
+  - TEMPLATE: ast.statement
+
+namespace: KSPCompiler.Domain.Ast.Node.Statements
+suffix: ".cs"
+output_dir: out/Statements
+
+classes:
+  #--------------------------------------------
+  # KSPプリプロセッサ
+  #--------------------------------------------
+  - name: KspPreprocessorDefine
+    description: "a KSP Preprocessor: SET_CONDITION"
+    templates:
+      - name: ${TEMPLATE}
+
+  - name: KspPreprocessorUndefine
+    description: "a KSP Preprocessor: RESET_CONDITION"
+    templates:
+      - name: ${TEMPLATE}
+
+  - name: KspPreprocessorIfdefine
+    description: "a KSP Preprocessor: USE_CODE_IF"
+    templates:
+      - name: ${TEMPLATE}
+
+  - name: KspPreprocessorIfnotDefine
+    description: "a KSP Preprocessor: USE_CODE_IF_NOT"
+    templates:
+      - name: ${TEMPLATE}
+
+  #--------------------------------------------
+  # if, while, select ステートメント
+  #--------------------------------------------
+  - name: IfStatement
+    description: "an if statement"
+    templates:
+      - name: ${TEMPLATE}
+
+  - name: WhileStatement
+    description: "an while statement"
+    templates:
+      - name: ${TEMPLATE}
+
+  - name: SelectStatement
+    description: "an select statement"
+    templates:
+      - name: ${TEMPLATE}
+
+  #--------------------------------------------
+  # KSPコマンドコール
+  #--------------------------------------------
+  - name: CallKspUserFunctionStatement
+    description: "a call statement"
+    templates:
+      - name: ${TEMPLATE}
+
+  #--------------------------------------------
+  # 変数宣言
+  #--------------------------------------------
+  - name: VariableDeclaration
+    description: "a variable declaration"
+    templates:
+      - name: ${TEMPLATE}
+
+  - name: VariableInitializer
+    description: "a variable initialization"
+    templates:
+      - name: ${TEMPLATE}
+
+  - name: PrimitiveInitializer
+    description: "a primitive variable initialization"
+    templates:
+      - name: ${TEMPLATE}
+
+  - name: ArrayInitializer
+    description: "an array variable initialization"
+    templates:
+      - name: ${TEMPLATE}
+

@@ -1,0 +1,34 @@
+plugins {
+    // The ANTLR plugin
+    // See: https://docs.gradle.org/current/userguide/antlr_plugin.html
+    // Ja : http://gradle.monochromeroad.com/docs/userguide/antlr_plugin.html
+    id "antlr"
+}
+
+repositories {
+    // Use jcenter for resolving dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/org.antlr/antlr4
+    antlr group: 'org.antlr', name: 'antlr4', version: '4.9.3'
+}
+
+wrapper {
+    gradleVersion = '6.7'
+}
+
+// ANTLR
+generateGrammarSource {
+    def LANGUAGE    = 'CSharp'
+    def DESTDIR     = 'out'
+    def NAMESPACE   = 'KSPCompiler.Externals.Parser.Antlr'
+    outputDirectory = file(DESTDIR)
+    arguments << '-Dlanguage=' + LANGUAGE
+    arguments << '-o' << DESTDIR
+    arguments << '-package' << NAMESPACE
+    arguments << '-visitor'
+}
