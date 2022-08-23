@@ -25,7 +25,7 @@ namespace KSPCompiler.Domain.Ast.Node.Expressions
         /// Ctor
         /// </summary>
         public AstRealLiteral( double value = 0, IAstNode? parent = null )
-            : base( AstNodeId.IntLiteral, parent )
+            : base( AstNodeId.RealLiteral, parent )
         {
             Value = value;
             Type  = DataType.Real;
