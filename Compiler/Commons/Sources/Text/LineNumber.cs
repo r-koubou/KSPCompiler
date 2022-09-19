@@ -1,23 +1,24 @@
+using System;
+
+using KSPCompiler.Commons.Values;
+
 using RkHelper.Number;
 
 using ValueObjectGenerator;
 
 namespace KSPCompiler.Commons.Text
 {
-    [ValueObject( typeof(int), Option = ValueOption.Implicit)]
-    public partial class LineNumber
+    public record LineNumber( int Value ) : IntValue( Value )
     {
-        public static readonly LineNumber Unknown = new LineNumber();
+        public static readonly LineNumber Unknown = new( 0 );
 
-        private LineNumber()
-        {
-            Value = -1;
-        }
+        public override int MinValue => 0;
+        public override int MaxValue => int.MaxValue;
 
-        private static partial int Validate( int value )
-        {
-            NumberHelper.ValidateRange( value, 0, int.MaxValue );
-            return value;
-        }
+        protected override string ToStringImpl()
+            => ReferenceEquals( Unknown, this ) ? "Unknown" : Value.ToString();
+
+        public static implicit operator LineNumber( int value )
+            => new( value );
     }
 }
