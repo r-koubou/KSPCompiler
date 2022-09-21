@@ -1,22 +1,22 @@
 namespace KSPCompiler.Commons.Text
 {
-    public struct Position
+    public class Position
     {
         /// <summary>
         /// Starting line number.
         /// </summary>
-        public LineNumber BeginLine;
+        public LineNumber BeginLine = 0;
         /// <summary>
-        /// End Line Number. It's -1 if it's unknown.
+        /// End Line number.
         /// </summary>
-        public LineNumber EndLine;
+        public LineNumber EndLine = LineNumber.Unknown;
         /// <summary>
         /// Start column number.
         /// </summary>
-        public Column BeginColumn;
+        public Column BeginColumn = 0;
         /// <summary>
-        /// End Column Number. It's -1 if it's unknown.
+        /// End Column number.
         /// </summary>
-        public Column EndColumn;
+        public Column EndColumn = Column.Unknown;
     }
 }

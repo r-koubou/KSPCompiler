@@ -1,23 +1,18 @@
-using RkHelper.Number;
-
-using ValueObjectGenerator;
+using KSPCompiler.Commons.Values;
 
 namespace KSPCompiler.Commons.Text
 {
-    [ValueObject( typeof(int), Option = ValueOption.Implicit)]
-    public partial class Column
+    public record Column( int Value ) : NumberValue<int>( Value )
     {
-        public static readonly Column Unknown = new Column();
+        public static readonly Column Unknown = -1;
 
-        private Column()
-        {
-            Value = -1;
-        }
+        protected override string ToStringImpl()
+            => ReferenceEquals( Unknown, this ) ? "Unknown" : Value.ToString();
 
-        private static partial int Validate( int value )
-        {
-            NumberHelper.ValidateRange( value, 0, int.MaxValue );
-            return value;
-        }
+        public static implicit operator Column( int value )
+            => new( value );
+
+        public static explicit operator int( Column value )
+            => value.Value;
     }
 }
