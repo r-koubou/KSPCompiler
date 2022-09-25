@@ -2,7 +2,7 @@ using KSPCompiler.Commons.Values;
 
 namespace KSPCompiler.Commons.Text
 {
-    public record Column( int Value ) : NumberValue<int>( Value )
+    public sealed record Column( int Value ) : NumberValue<int>( Value )
     {
         public static readonly Column Unknown = -1;
 

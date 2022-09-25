@@ -2,7 +2,7 @@ using KSPCompiler.Commons.Values;
 
 namespace KSPCompiler.Commons.Text
 {
-    public record LineNumber( int Value ) : NumberValue<int>( Value )
+    public sealed record LineNumber( int Value ) : NumberValue<int>( Value )
     {
         public static readonly LineNumber Unknown = -1;
 

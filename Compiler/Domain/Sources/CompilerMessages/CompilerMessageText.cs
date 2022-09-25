@@ -1,12 +1,9 @@
-using RkHelper.Text;
-
-using ValueObjectGenerator;
+using KSPCompiler.Commons.Values;
 
 namespace KSPCompiler.Domain.CompilerMessages;
 
-[ValueObject(typeof(string), Option = ValueOption.Implicit)]
-public partial class CompilerMessageText
+public sealed record CompilerMessageText( string Value ) : StringValue( Value )
 {
-    private static partial string Validate( string value )
-        => StringHelper.IsEmpty( value ) ? string.Empty : value;
+    public static implicit operator CompilerMessageText( string value )
+        => new( value );
 }

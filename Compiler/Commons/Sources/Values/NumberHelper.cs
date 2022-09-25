@@ -9,12 +9,12 @@ namespace KSPCompiler.Commons.Values
         {
             if( value.Value.CompareTo( min ) < 0 )
             {
-                throw new ArgumentOutOfRangeException( $"{nameof( value )}({value}) < {nameof( min )}({min})" );
+                throw new ValueOutOfRangeException( value, $"{nameof( value )}({value}) < {nameof( min )}({min})" );
             }
 
             if( value.Value.CompareTo( max ) > 0 )
             {
-                throw new ArgumentOutOfRangeException( $"{nameof( value )}({value}) > {nameof( max )}({max})" );
+                throw new ValueOutOfRangeException( value, $"{nameof( value )}({value}) > {nameof( max )}({max})" );
             }
         }
 

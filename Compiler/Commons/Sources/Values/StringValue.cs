@@ -13,24 +13,6 @@ namespace KSPCompiler.Commons.Values
 
         private static readonly Dictionary<Type, StringValue> CachedEmpty = new();
 
-        public static T GetEmpty<T>() where T : StringValue, new()
-        {
-            var type = typeof( T );
-            if( CachedEmpty.ContainsKey( type ) )
-            {
-                return (T)CachedEmpty[ type ];
-            }
-
-            var newEmpty = new T
-            {
-                Value = string.Empty
-            };
-
-            CachedEmpty[ type ] = newEmpty;
-
-            return newEmpty;
-        }
-
         public static bool IsNullOrEmpty( StringValue? value )
             => value is null || string.IsNullOrEmpty( value.Value );
 
@@ -49,5 +31,8 @@ namespace KSPCompiler.Commons.Values
 
         public sealed override string ToString()
             => Value;
+
+        public static implicit operator string( StringValue value )
+            => value.Value;
     }
 }
