@@ -2,19 +2,19 @@ using System;
 
 namespace KSPCompiler.Commons.Values
 {
-    public class EmptyStringException : Exception
+    public class EmptyStringValueException : Exception
     {
-        public EmptyStringException() {}
+        public EmptyStringValueException() {}
 
-        public EmptyStringException( string message ) : base( message ) {}
+        public EmptyStringValueException( string message ) : base( message ) {}
 
-        public EmptyStringException( string name, string message ) : base( $"{name} - {message}" ) {}
+        public EmptyStringValueException( string name, string message ) : base( $"{name} - {message}" ) {}
 
         public static void ThrowIf( StringValue value )
         {
             if( StringValue.IsNullOrEmpty( value ) )
             {
-                throw new EmptyStringException();
+                throw new EmptyStringValueException();
             }
         }
 
@@ -22,7 +22,7 @@ namespace KSPCompiler.Commons.Values
         {
             if( StringValue.IsNullOrEmptyWithTrim( value ) )
             {
-                throw new EmptyStringException();
+                throw new EmptyStringValueException();
             }
         }
     }
