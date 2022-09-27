@@ -1,20 +1,12 @@
-using RkHelper.Text;
+using KSPCompiler.Commons.ValueObjects;
 
-using ValueObjectGenerator;
+namespace KSPCompiler.Commons.Text;
 
-namespace KSPCompiler.Commons.Text
+public sealed record PlainText( string Value ) : StringValueObject( Value )
 {
-    [ValueObject( typeof( string ), Option = ValueOption.Implicit )]
-    public partial class PlainText : IText
-    {
-        public static readonly IText Empty = new PlainText();
+    public override bool AllowEmpty
+        => true;
 
-        private PlainText()
-        {
-            Value = string.Empty;
-        }
-
-        private static partial string Validate( string value )
-            => StringHelper.IsEmpty( value ) ? string.Empty : value;
-    }
+    public static implicit operator PlainText( string value )
+        => new( value );
 }
