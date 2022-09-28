@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Commons", "Commons", "{C97B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons", "Commons\Sources\Commons.csproj", "{6D23E551-44EA-43DA-8A69-F1D56EDFF413}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Sources\Domain.csproj", "{DC135E43-6ACC-4708-983B-03BB9FBFC64C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{DC135E43-6ACC-4708-983B-03BB9FBFC64C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateways", "Gateways\Sources\Gateways.csproj", "{F8949CED-23A2-44B8-A279-1655A80EA517}"
 EndProject

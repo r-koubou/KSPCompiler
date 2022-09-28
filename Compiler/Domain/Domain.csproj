@@ -12,7 +12,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Commons\Sources\Commons.csproj" />
+      <ProjectReference Include="..\Commons\Sources\Commons.csproj" />
     </ItemGroup>
 
 </Project>
