@@ -1,19 +1,15 @@
-using RkHelper.Text;
-
-using ValueObjectGenerator;
+using KSPCompiler.Commons.ValueObjects;
 
 namespace KSPCompiler.Domain.Ast.Symbols;
 
-[ValueObject( typeof(string), Option = ValueOption.Implicit )]
-public partial class SymbolName
+public record SymbolName( string Value ) : StringValueObject( Value )
 {
-    public static readonly SymbolName Empty = new SymbolName();
+    // ReSharper disable once MemberCanBePrivate.Global
+    public static readonly SymbolName Empty = new SymbolName( string.Empty );
 
-    private SymbolName()
-    {
-        Value = string.Empty;
-    }
+    public override bool AllowEmpty
+        => ReferenceEquals( Empty, this );
 
-    private static partial string Validate( string value )
-        => StringHelper.IsEmpty( value ) ? string.Empty : value;
+    public static implicit operator SymbolName( string value )
+        => new( value );
 }
