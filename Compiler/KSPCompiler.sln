@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04 Frameworks and Drivers",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Commons", "Commons", "{C97B7126-8892-4A70-A0AC-16DAA646E6CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons", "Commons\Sources\Commons.csproj", "{6D23E551-44EA-43DA-8A69-F1D56EDFF413}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons", "Commons\Commons.csproj", "{6D23E551-44EA-43DA-8A69-F1D56EDFF413}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{DC135E43-6ACC-4708-983B-03BB9FBFC64C}"
 EndProject
