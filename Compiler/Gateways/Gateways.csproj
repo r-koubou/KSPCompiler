@@ -6,13 +6,13 @@
         <Nullable>enable</Nullable>
         <Copyright>R-Koubou</Copyright>
         <Company>R-Koubou</Company>
-        <Product>KSPCompiler.Domain</Product>
-        <AssemblyName>KSPCompiler.Domain</AssemblyName>
-        <RootNamespace>KSPCompiler.Domain</RootNamespace>
+        <Product>KSPCompiler.Gateways</Product>
+        <AssemblyName>KSPCompiler.Gateways</AssemblyName>
+        <RootNamespace>KSPCompiler.Gateways</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Commons\Sources\Commons.csproj" />
+      <ProjectReference Include="..\Domain\Domain.csproj" />
     </ItemGroup>
 
 </Project>

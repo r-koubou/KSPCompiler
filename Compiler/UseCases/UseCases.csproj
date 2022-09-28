@@ -12,8 +12,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Commons\Sources\Commons.csproj" />
-      <ProjectReference Include="..\Domain\Sources\Domain.csproj" />
+      <ProjectReference Include="..\Commons\Commons.csproj" />
+      <ProjectReference Include="..\Domain\Domain.csproj" />
     </ItemGroup>
 
 </Project>
