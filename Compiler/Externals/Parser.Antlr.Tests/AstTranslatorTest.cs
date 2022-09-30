@@ -14,8 +14,8 @@ public class AstTranslatorTest
     // ReSharper disable once UnusedMethodReturnValue.Local
     private static AstCompilationUnit TranslateImpl( string script )
     {
-        var p = new KspStringScriptParser( script, ICompilerMessageManger.CreateDefault(), Encoding.UTF8 );
-        return p.Parse();
+        var p = new KspStringSyntaxAnalyser( script, ICompilerMessageManger.CreateDefault(), Encoding.UTF8 );
+        return p.Analyse();
     }
 
     [Test]

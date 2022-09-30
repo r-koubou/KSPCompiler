@@ -3,21 +3,21 @@ using System.IO;
 
 using Antlr4.Runtime;
 
+using KSPCompiler.Domain;
 using KSPCompiler.Domain.Ast.Node.Blocks;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Externals.Parser.Antlr.Translators;
-using KSPCompiler.Gateways.Parsers;
 
 namespace KSPCompiler.Externals.Parser.Antlr;
 
-public abstract class KspScriptParser : IKspScriptParser
+public abstract class KspSyntaxAnalyser : ISyntaxAnalyser
 {
     protected Stream Stream { get; }
     public bool LeaveOpen { get; }
 
     public ICompilerMessageManger MessageManger { get; }
 
-    protected KspScriptParser( Stream stream, ICompilerMessageManger messageManger, bool leaveOpen = false )
+    protected KspSyntaxAnalyser( Stream stream, ICompilerMessageManger messageManger, bool leaveOpen = false )
     {
         Stream        = stream;
         MessageManger = messageManger;
@@ -42,7 +42,7 @@ public abstract class KspScriptParser : IKspScriptParser
         }
     }
 
-    public AstCompilationUnit Parse()
+    public AstCompilationUnit Analyse()
     {
         var antlrStream = new AntlrInputStream( Stream );
         var lexer = new KSPLexer( antlrStream );
