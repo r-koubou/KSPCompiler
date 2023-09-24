@@ -1,3 +1,5 @@
+using System;
+
 namespace KSPCompiler.Domain.Ast.Node.Expressions
 {
     /// <summary>
@@ -11,6 +13,7 @@ namespace KSPCompiler.Domain.Ast.Node.Expressions
         public AstAdditionAssignment( IAstNode parent, AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
             : base( AstNodeId.AdditionAssignment, parent, left, right )
         {
+            throw new NotImplementedException( "`+=` is not KSP Syntax (Tt will be extended syntax in the future)" );
         }
 
         /// <summary>
