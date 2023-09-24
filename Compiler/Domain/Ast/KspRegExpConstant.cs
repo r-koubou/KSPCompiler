@@ -16,7 +16,7 @@ namespace KSPCompiler.Domain.Ast
         /// <summary>
         /// Variable name: Regular expression of the symbol with data type symbol.
         /// </summary>
-        public static readonly Regex TypePrefix = new Regex( "^[\\$|\\%|\\@|\\!\\?|\\~]", RegexOptions.Compiled );
+        public static readonly Regex TypePrefix = new Regex( @"^[\$|\%|\@|\!\?|\~]", RegexOptions.Compiled );
 
         /// <summary>
         /// Regular expressions of symbols such as preprocessor symbols without data type symbols.

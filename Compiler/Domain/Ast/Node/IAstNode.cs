@@ -8,7 +8,7 @@ namespace KSPCompiler.Domain.Ast.Node
     /// <summary>
     /// Representation of AST node tree.
     /// </summary>
-    public interface IAstNode : ICloneable
+    public interface IAstNode
     {
         public static bool IsNone( IAstNode? n ) =>
             n == null ||
