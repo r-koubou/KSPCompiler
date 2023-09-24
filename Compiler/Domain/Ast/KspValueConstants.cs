@@ -1,4 +1,6 @@
-﻿namespace KSPCompiler.Domain.Ast
+﻿using System.Linq;
+
+namespace KSPCompiler.Domain.Ast
 {
     /// <summary>
     /// Definition of a constant values.
@@ -14,7 +16,7 @@
         /// <summary>
         /// The prefix of a variable name that NI disallows to be used.
         /// </summary>
-        public static readonly string[] NiReservedPrefix =
+        private static readonly string[] NiReservedPrefix =
         {
             // From KSP Reference Manual:
             // Please do not create variables with the prefixes below, as these prefixes are used for
@@ -24,5 +26,13 @@
             "$EVENT_PAR_",
             "$ENGINE_PAR_",
         };
+
+        /// <summary>
+        /// Check if the variable name contains the prefix that NI disallows to be used.
+        /// </summary>
+        public static bool ContainsNiReservedPrefix(string name)
+        {
+            return NiReservedPrefix.Any( name.StartsWith );
+        }
     }
 }
