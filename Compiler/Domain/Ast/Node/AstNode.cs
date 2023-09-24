@@ -8,7 +8,7 @@ namespace KSPCompiler.Domain.Ast.Node
     /// <summary>
     /// Default implementation of <see cref="IAstNode"/>
     /// </summary>
-    public abstract class AstNode : IAstNode, IAstNodeAcceptor
+    public abstract class AstNode : IAstNode, IAstNodeAcceptor, ICloneable
     {
         #region IAstNode
         ///
