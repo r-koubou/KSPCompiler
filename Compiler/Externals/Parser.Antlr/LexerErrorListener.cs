@@ -20,8 +20,7 @@ internal class LexerErrorListener : IAntlrErrorListener<int>
     {
         HasError = true;
 
-        var factory = ICompilerMessageFactory.Default;
-        var compilerMessage = factory.Create(
+        var compilerMessage = MessageManger.MessageFactory.Create(
             CompilerMessageLevel.Error,
             msg,
             line,

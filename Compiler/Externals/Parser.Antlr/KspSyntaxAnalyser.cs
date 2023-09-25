@@ -45,9 +45,9 @@ public abstract class KspSyntaxAnalyser : ISyntaxAnalyser
     public AstCompilationUnit Analyse()
     {
         var antlrStream = new AntlrInputStream( Stream );
-        var lexer = new KSPLexer( antlrStream );
+        var lexer = new KSPLexer( antlrStream, TextWriter.Null, TextWriter.Null );
         var tokenStream = new CommonTokenStream( lexer );
-        var parser = new KSPParser( tokenStream );
+        var parser = new KSPParser( tokenStream, TextWriter.Null, TextWriter.Null );
 
         var lexerErrorListener = new LexerErrorListener( MessageManger );
         var parserErrorListener = new ParserErrorListener( MessageManger );
@@ -59,6 +59,7 @@ public abstract class KspSyntaxAnalyser : ISyntaxAnalyser
 
         if( lexerErrorListener.HasError || parserErrorListener.HasError )
         {
+            MessageManger.WriteTo( System.Console.Error );
             throw new KspParserException( $"Syntax Invalid : {cst.exception}" );
         }
 
