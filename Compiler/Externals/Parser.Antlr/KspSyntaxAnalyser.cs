@@ -59,6 +59,7 @@ public abstract class KspSyntaxAnalyser : ISyntaxAnalyser
 
         if( lexerErrorListener.HasError || parserErrorListener.HasError )
         {
+            MessageManger.WriteTo( System.Console.Error );
             throw new KspParserException( $"Syntax Invalid : {cst.exception}" );
         }
 
