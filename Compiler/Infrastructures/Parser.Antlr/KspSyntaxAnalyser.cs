@@ -6,9 +6,10 @@ using Antlr4.Runtime;
 using KSPCompiler.Domain;
 using KSPCompiler.Domain.Ast.Node.Blocks;
 using KSPCompiler.Domain.CompilerMessages;
-using KSPCompiler.Externals.Parser.Antlr.Translators;
+using KSPCompiler.Externals.Parser.Antlr;
+using KSPCompiler.Infrastructures.Parser.Antlr.Translators;
 
-namespace KSPCompiler.Externals.Parser.Antlr;
+namespace KSPCompiler.Infrastructures.Parser.Antlr;
 
 public abstract class KspSyntaxAnalyser : ISyntaxAnalyser
 {

@@ -4,11 +4,12 @@ using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
 
 using KSPCompiler.Domain.Ast.Node;
-using KSPCompiler.Externals.Parser.Antlr.Translators.Extensions;
+using KSPCompiler.Externals.Parser.Antlr;
+using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
 
 // ReSharper disable UnusedMember.Local
 
-namespace KSPCompiler.Externals.Parser.Antlr.Translators
+namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 {
     /// <summary>
     /// Implementation of AST generation process based on CST.

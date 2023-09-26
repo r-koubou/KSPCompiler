@@ -5,9 +5,10 @@ using Antlr4.Runtime;
 
 using KSPCompiler.Domain.Ast.Node;
 using KSPCompiler.Domain.Ast.Node.Expressions;
-using KSPCompiler.Externals.Parser.Antlr.Translators.Extensions;
+using KSPCompiler.Externals.Parser.Antlr;
+using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
 
-namespace KSPCompiler.Externals.Parser.Antlr.Translators
+namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 {
     // Expression node generation implementation
     public partial class CSTConverterVisitor

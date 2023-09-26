@@ -3,7 +3,7 @@ using System.Text;
 
 using KSPCompiler.Domain.CompilerMessages;
 
-namespace KSPCompiler.Externals.Parser.Antlr;
+namespace KSPCompiler.Infrastructures.Parser.Antlr;
 
 public class KspStringSyntaxAnalyser : KspSyntaxAnalyser
 {
