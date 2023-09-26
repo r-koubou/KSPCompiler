@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using System.IO;
 
@@ -6,7 +7,6 @@ using Antlr4.Runtime;
 using KSPCompiler.Domain;
 using KSPCompiler.Domain.Ast.Node.Blocks;
 using KSPCompiler.Domain.CompilerMessages;
-using KSPCompiler.Externals.Parser.Antlr;
 using KSPCompiler.Infrastructures.Parser.Antlr.Translators;
 
 namespace KSPCompiler.Infrastructures.Parser.Antlr;
@@ -60,7 +60,7 @@ public abstract class KspSyntaxAnalyser : ISyntaxAnalyser
 
         if( lexerErrorListener.HasError || parserErrorListener.HasError )
         {
-            MessageManger.WriteTo( System.Console.Error );
+            MessageManger.WriteTo( Console.Error );
             throw new KspParserException( $"Syntax Invalid : {cst.exception}" );
         }
 

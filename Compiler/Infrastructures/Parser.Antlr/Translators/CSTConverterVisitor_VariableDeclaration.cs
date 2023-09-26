@@ -3,7 +3,6 @@
 using KSPCompiler.Domain.Ast.Node;
 using KSPCompiler.Domain.Ast.Node.Expressions;
 using KSPCompiler.Domain.Ast.Node.Statements;
-using KSPCompiler.Externals.Parser.Antlr;
 using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
 
 namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
