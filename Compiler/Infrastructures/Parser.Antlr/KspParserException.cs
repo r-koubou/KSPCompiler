@@ -1,6 +1,6 @@
 using System;
 
-namespace KSPCompiler.Externals.Parser.Antlr;
+namespace KSPCompiler.Infrastructures.Parser.Antlr;
 
 public class KspParserException : Exception
 {

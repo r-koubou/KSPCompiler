@@ -18,14 +18,14 @@ dependencies {
 }
 
 wrapper {
-    gradleVersion = '6.7'
+    gradleVersion = '7.6.2'
 }
 
 // ANTLR
 generateGrammarSource {
     def LANGUAGE    = 'CSharp'
     def DESTDIR     = 'out'
-    def NAMESPACE   = 'KSPCompiler.Externals.Parser.Antlr'
+    def NAMESPACE   = 'KSPCompiler.Infrastructures.Parser.Antlr'
     outputDirectory = file(DESTDIR)
     arguments << '-Dlanguage=' + LANGUAGE
     arguments << '-o' << DESTDIR

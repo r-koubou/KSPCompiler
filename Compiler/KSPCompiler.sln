@@ -4,15 +4,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons", "Commons\Commons.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{DC135E43-6ACC-4708-983B-03BB9FBFC64C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateways", "Gateways\Gateways.csproj", "{F8949CED-23A2-44B8-A279-1655A80EA517}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UseCases", "UseCases\UseCases.csproj", "{7908F721-B88B-4D26-BAE1-F2614AD267F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser.Antlr", "Externals\Parser.Antlr\Parser.Antlr.csproj", "{BC12E3DD-7AB6-4E76-9FF0-573D3E94D1AA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser.Antlr", "Infrastructures\Parser.Antlr\Parser.Antlr.csproj", "{BC12E3DD-7AB6-4E76-9FF0-573D3E94D1AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser.Antlr.Tests", "Externals\Parser.Antlr.Tests\Parser.Antlr.Tests.csproj", "{02C3250C-F545-4090-8448-5B5CEC6B05FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser.Antlr.Tests", "Infrastructures\Parser.Antlr.Tests\Parser.Antlr.Tests.csproj", "{02C3250C-F545-4090-8448-5B5CEC6B05FA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Externals", "Externals", "{D8212F71-4678-4B7F-8EC9-F692C48B5093}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructures", "Infrastructures", "{D8212F71-4678-4B7F-8EC9-F692C48B5093}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,10 +26,6 @@ Global
 		{DC135E43-6ACC-4708-983B-03BB9FBFC64C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC135E43-6ACC-4708-983B-03BB9FBFC64C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC135E43-6ACC-4708-983B-03BB9FBFC64C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F8949CED-23A2-44B8-A279-1655A80EA517}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F8949CED-23A2-44B8-A279-1655A80EA517}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F8949CED-23A2-44B8-A279-1655A80EA517}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F8949CED-23A2-44B8-A279-1655A80EA517}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7908F721-B88B-4D26-BAE1-F2614AD267F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7908F721-B88B-4D26-BAE1-F2614AD267F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7908F721-B88B-4D26-BAE1-F2614AD267F6}.Release|Any CPU.ActiveCfg = Release|Any CPU

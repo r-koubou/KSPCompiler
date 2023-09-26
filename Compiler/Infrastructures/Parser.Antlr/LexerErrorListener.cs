@@ -4,20 +4,19 @@ using Antlr4.Runtime;
 
 using KSPCompiler.Domain.CompilerMessages;
 
-namespace KSPCompiler.Externals.Parser.Antlr;
+namespace KSPCompiler.Infrastructures.Parser.Antlr;
 
-internal class ParserErrorListener : IAntlrErrorListener<IToken>
+internal class LexerErrorListener : IAntlrErrorListener<int>
 {
     private ICompilerMessageManger MessageManger { get; }
-
     public bool HasError { get; private set; }
 
-    public ParserErrorListener( ICompilerMessageManger messageManger )
+    public LexerErrorListener( ICompilerMessageManger messageManger )
     {
         MessageManger = messageManger;
     }
 
-    public void SyntaxError( TextWriter output, IRecognizer recognizer, IToken offendingSymbol, int line, int charPositionInLine, string msg, RecognitionException e )
+    public void SyntaxError( TextWriter output, IRecognizer recognizer, int offendingSymbol, int line, int charPositionInLine, string msg, RecognitionException e )
     {
         HasError = true;
 

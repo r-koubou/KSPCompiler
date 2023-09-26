@@ -5,7 +5,7 @@ using Antlr4.Runtime;
 using KSPCompiler.Domain.Ast.Node;
 using KSPCompiler.Domain.Ast.Node.Expressions;
 
-namespace KSPCompiler.Externals.Parser.Antlr.Translators
+namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 {
     // implementation of binary operator node generation
     public partial class CSTConverterVisitor

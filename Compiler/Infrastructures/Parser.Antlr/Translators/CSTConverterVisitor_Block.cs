@@ -5,9 +5,9 @@ using Antlr4.Runtime.Tree;
 
 using KSPCompiler.Domain.Ast.Node;
 using KSPCompiler.Domain.Ast.Node.Blocks;
-using KSPCompiler.Externals.Parser.Antlr.Translators.Extensions;
+using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
 
-namespace KSPCompiler.Externals.Parser.Antlr.Translators
+namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 {
     // Implementation of root, callback and user-defined function node generation
     public partial class CSTConverterVisitor

@@ -5,9 +5,9 @@ using Antlr4.Runtime;
 using KSPCompiler.Domain.Ast.Node;
 using KSPCompiler.Domain.Ast.Node.Blocks;
 using KSPCompiler.Domain.Ast.Node.Statements;
-using KSPCompiler.Externals.Parser.Antlr.Translators.Extensions;
+using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
 
-namespace KSPCompiler.Externals.Parser.Antlr.Translators
+namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 {
     // implementation of the statement node
     public partial class CSTConverterVisitor

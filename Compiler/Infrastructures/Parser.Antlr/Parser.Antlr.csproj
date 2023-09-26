@@ -6,16 +6,15 @@
         <Nullable>enable</Nullable>
         <Copyright>R-Koubou</Copyright>
         <Company>R-Koubou</Company>
-        <Product>KSPCompiler.Externals.Parser.Antlr</Product>
-        <AssemblyName>KSPCompiler.Externals.Parser.Antlr</AssemblyName>
-        <RootNamespace>KSPCompiler.Externals.Parser.Antlr</RootNamespace>
+        <Product>KSPCompiler.Infrastructures.Parser.Antlr</Product>
+        <AssemblyName>KSPCompiler.Infrastructures.Parser.Antlr</AssemblyName>
+        <RootNamespace>KSPCompiler.Infrastructures.Parser.Antlr</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Antlr4.Runtime.Standard" Version="4.9.3" />
         <ProjectReference Include="..\..\Commons\Commons.csproj" />
         <ProjectReference Include="..\..\Domain\Domain.csproj" />
-        <ProjectReference Include="..\..\Gateways\Gateways.csproj" />
     </ItemGroup>
 
 </Project>

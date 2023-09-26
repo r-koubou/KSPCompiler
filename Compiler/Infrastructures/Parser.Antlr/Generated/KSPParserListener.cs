@@ -19,7 +19,7 @@
 // Ambiguous reference in cref attribute
 #pragma warning disable 419
 
-namespace KSPCompiler.Externals.Parser.Antlr {
+namespace KSPCompiler.Infrastructures.Parser.Antlr {
 using Antlr4.Runtime.Misc;
 using IParseTreeListener = Antlr4.Runtime.Tree.IParseTreeListener;
 using IToken = Antlr4.Runtime.IToken;
@@ -412,4 +412,4 @@ public interface IKSPParserListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitUnaryExpression([NotNull] KSPParser.UnaryExpressionContext context);
 }
-} // namespace KSPCompiler.Externals.Parser.Antlr
+} // namespace KSPCompiler.Infrastructures.Parser.Antlr

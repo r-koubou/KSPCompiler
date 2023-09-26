@@ -4,7 +4,7 @@ using KSPCompiler.Commons.Text;
 
 // ReSharper disable UnusedMember.Local
 
-namespace KSPCompiler.Externals.Parser.Antlr.Translators
+namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 {
     public partial class CSTConverterVisitor
     {

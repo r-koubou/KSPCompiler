@@ -4,9 +4,9 @@ using Antlr4.Runtime;
 
 using KSPCompiler.Domain.Ast.Node;
 using KSPCompiler.Domain.Ast.Node.Expressions;
-using KSPCompiler.Externals.Parser.Antlr.Translators.Extensions;
+using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
 
-namespace KSPCompiler.Externals.Parser.Antlr.Translators
+namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 {
     // implementation of the unary operator node
     public partial class CSTConverterVisitor

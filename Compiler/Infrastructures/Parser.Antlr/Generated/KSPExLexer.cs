@@ -19,7 +19,7 @@
 // Ambiguous reference in cref attribute
 #pragma warning disable 419
 
-namespace KSPCompiler.Externals.Parser.Antlr {
+namespace KSPCompiler.Infrastructures.Parser.Antlr {
 using System;
 using System.IO;
 using System.Text;
@@ -514,4 +514,4 @@ public partial class KSPExLexer : Lexer {
 
 
 }
-} // namespace KSPCompiler.Externals.Parser.Antlr
+} // namespace KSPCompiler.Infrastructures.Parser.Antlr
