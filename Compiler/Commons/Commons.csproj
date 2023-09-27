@@ -19,4 +19,8 @@
       <Folder Include="Path" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Resources\Resources.csproj" />
+    </ItemGroup>
+
 </Project>
