@@ -7,34 +7,31 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace KSPCompiler.Domain.CompilerMessages {
-    using System;
-    
-    
+namespace KSPCompiler.Resources {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class CompilerMessageResources {
-        
+
         private static System.Resources.ResourceManager resourceMan;
-        
+
         private static System.Globalization.CultureInfo resourceCulture;
-        
+
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal CompilerMessageResources() {
         }
-        
+
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         public static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("KSPCompiler.Domain.CompilerMessages.CompilerMessageResources", typeof(CompilerMessageResources).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("KSPCompiler.Domain.Resources.CompilerMessageResources", typeof(CompilerMessageResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-        
+
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         public static System.Globalization.CultureInfo Culture {
             get {
@@ -44,13 +41,13 @@ namespace KSPCompiler.Domain.CompilerMessages {
                 resourceCulture = value;
             }
         }
-        
+
         public static string syntax_error {
             get {
                 return ResourceManager.GetString("syntax.error", resourceCulture);
             }
         }
-        
+
         public static string synax_error_detail {
             get {
                 return ResourceManager.GetString("synax.error.detail", resourceCulture);

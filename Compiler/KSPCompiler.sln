@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser.Antlr.Tests", "Infra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructures", "Infrastructures", "{D8212F71-4678-4B7F-8EC9-F692C48B5093}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resources", "Resources\Resources.csproj", "{31A40E73-CA3F-4983-87FC-D5BA22D654E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{02C3250C-F545-4090-8448-5B5CEC6B05FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02C3250C-F545-4090-8448-5B5CEC6B05FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02C3250C-F545-4090-8448-5B5CEC6B05FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31A40E73-CA3F-4983-87FC-D5BA22D654E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31A40E73-CA3F-4983-87FC-D5BA22D654E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31A40E73-CA3F-4983-87FC-D5BA22D654E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31A40E73-CA3F-4983-87FC-D5BA22D654E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BC12E3DD-7AB6-4E76-9FF0-573D3E94D1AA} = {D8212F71-4678-4B7F-8EC9-F692C48B5093}

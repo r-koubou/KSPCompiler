@@ -15,19 +15,4 @@
       <ProjectReference Include="..\Commons\Commons.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <EmbeddedResource Update="CompilerMessages\CompilerMessageResources.resx">
-        <Generator>PublicResXFileCodeGenerator</Generator>
-        <LastGenOutput>CompilerMessageResources.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Update="CompilerMessages\CompilerMessageResources.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>CompilerMessageResources.resx</DependentUpon>
-      </Compile>
-    </ItemGroup>
-
 </Project>
