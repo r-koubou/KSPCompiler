@@ -11,18 +11,31 @@ internal class LexerErrorListener : IAntlrErrorListener<int>
     private ICompilerMessageManger MessageManger { get; }
     public bool HasError { get; private set; }
 
-    public LexerErrorListener( ICompilerMessageManger messageManger )
+    private bool EnableDetailMessage { get; }
+
+    public LexerErrorListener( ICompilerMessageManger messageManger, bool enableDetailMessage = true)
     {
-        MessageManger = messageManger;
+        MessageManger       = messageManger;
+        EnableDetailMessage = enableDetailMessage;
     }
 
     public void SyntaxError( TextWriter output, IRecognizer recognizer, int offendingSymbol, int line, int charPositionInLine, string msg, RecognitionException e )
     {
         HasError = true;
 
+        var message = "Syntax error";
+
+        if( EnableDetailMessage )
+        {
+            if( !string.IsNullOrEmpty( msg ) )
+            {
+                message = $"Syntax error: {msg}";
+            }
+        }
+
         var compilerMessage = MessageManger.MessageFactory.Create(
             CompilerMessageLevel.Error,
-            msg,
+            message,
             line,
             charPositionInLine
         );
