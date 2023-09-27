@@ -25,7 +25,7 @@ public class AstTranslatorTest
 @@ @ @ - - - - on hoge( $arg1, $arg2,
 end on
 ";
-        Assert.Throws<KspParserException>( () => TranslateImpl( script ) );
+        Assert.Throws<KspParseException>( () => TranslateImpl( script ) );
     }
 
     [Test]
@@ -35,7 +35,7 @@ end on
 on hoge( $arg1, $arg2,
 end on
 ";
-        Assert.Throws<KspParserException>( () => TranslateImpl( script ) );
+        Assert.Throws<KspParseException>( () => TranslateImpl( script ) );
     }
 
     [Test]
