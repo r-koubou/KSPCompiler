@@ -1,5 +1,6 @@
 using System.Text;
 
+using KSPCompiler.Domain;
 using KSPCompiler.Domain.Ast.Node.Blocks;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Infrastructures.Parser.Antlr;
@@ -25,7 +26,7 @@ public class AstTranslatorTest
 @@ @ @ - - - - on hoge( $arg1, $arg2,
 end on
 ";
-        Assert.Throws<KspParseException>( () => TranslateImpl( script ) );
+        Assert.Throws<KspScriptParseException>( () => TranslateImpl( script ) );
     }
 
     [Test]
@@ -35,7 +36,7 @@ end on
 on hoge( $arg1, $arg2,
 end on
 ";
-        Assert.Throws<KspParseException>( () => TranslateImpl( script ) );
+        Assert.Throws<KspScriptParseException>( () => TranslateImpl( script ) );
     }
 
     [Test]
