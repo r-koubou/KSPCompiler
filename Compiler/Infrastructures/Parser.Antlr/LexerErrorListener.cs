@@ -3,6 +3,7 @@ using System.IO;
 using Antlr4.Runtime;
 
 using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Resources;
 
 namespace KSPCompiler.Infrastructures.Parser.Antlr;
 
@@ -23,14 +24,11 @@ internal class LexerErrorListener : IAntlrErrorListener<int>
     {
         HasError = true;
 
-        var message = "Syntax error";
+        var message = CompilerMessageResources.syntax_error;
 
-        if( EnableDetailMessage )
+        if( EnableDetailMessage && !string.IsNullOrEmpty( msg ) )
         {
-            if( !string.IsNullOrEmpty( msg ) )
-            {
-                message = $"Syntax error: {msg}";
-            }
+            message = string.Format( CompilerMessageResources.synax_error_detail, msg );
         }
 
         var compilerMessage = MessageManger.MessageFactory.Create(
