@@ -2,7 +2,7 @@ using System;
 
 using KSPCompiler.Domain.Ast.Node.Blocks;
 
-namespace KSPCompiler.Domain
+namespace KSPCompiler.Gateways
 {
     public interface ISyntaxAnalyser : IDisposable
     {

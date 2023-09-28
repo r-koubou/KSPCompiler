@@ -6,6 +6,7 @@ using Antlr4.Runtime;
 using KSPCompiler.Domain;
 using KSPCompiler.Domain.Ast.Node.Blocks;
 using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Gateways;
 using KSPCompiler.Infrastructures.Parser.Antlr.Translators;
 
 namespace KSPCompiler.Infrastructures.Parser.Antlr;
