@@ -1,4 +1,4 @@
-﻿namespace KSPCompiler.Domain.Ast.Symbols
+﻿namespace KSPCompiler.Domain.Symbols
 {
     /// <summary>
     /// Function, callback identification value.

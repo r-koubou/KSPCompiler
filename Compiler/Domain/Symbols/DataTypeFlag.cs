@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KSPCompiler.Domain.Ast.Symbols
+namespace KSPCompiler.Domain.Symbols
 {
     /// <summary>
     /// Representation of attributes associated with data types.

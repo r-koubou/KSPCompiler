@@ -1,4 +1,4 @@
-namespace KSPCompiler.Domain.Ast.Symbols.Extensions;
+namespace KSPCompiler.Domain.Symbols.Extensions;
 
 public static class ModifierFlagExtension
 {
