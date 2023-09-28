@@ -1,4 +1,3 @@
-using System;
 using System.Diagnostics;
 using System.IO;
 
@@ -15,14 +14,16 @@ public abstract class KspSyntaxAnalyser : ISyntaxAnalyser
 {
     protected Stream Stream { get; }
     public bool LeaveOpen { get; }
-
     public ICompilerMessageManger MessageManger { get; }
 
-    protected KspSyntaxAnalyser( Stream stream, ICompilerMessageManger messageManger, bool leaveOpen = false )
+    private readonly TextWriter errorMessageWriter;
+
+    protected KspSyntaxAnalyser( Stream stream, ICompilerMessageManger messageManger, bool leaveOpen = false, TextWriter? errorMessageWriter = null )
     {
-        Stream        = stream;
-        MessageManger = messageManger;
-        LeaveOpen     = leaveOpen;
+        Stream                  = stream;
+        MessageManger           = messageManger;
+        LeaveOpen               = leaveOpen;
+        this.errorMessageWriter = errorMessageWriter ?? TextWriter.Null;
     }
 
     public void Dispose()
@@ -60,7 +61,7 @@ public abstract class KspSyntaxAnalyser : ISyntaxAnalyser
 
         if( lexerErrorListener.HasError || parserErrorListener.HasError )
         {
-            MessageManger.WriteTo( Console.Error );
+            MessageManger.WriteTo( errorMessageWriter );
             throw new KspScriptParseException( $"Syntax Invalid : {cst.exception}" );
         }
 
