@@ -1,6 +1,6 @@
 using System;
 
-namespace KSPCompiler.Domain;
+namespace KSPCompiler.Gateways;
 
 public interface ISymbolAnalyser : IDisposable
 {
