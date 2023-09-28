@@ -1,0 +1,6 @@
+on hoge( $arg1, $arg2, $arg3 )
+    $i := 0 + 1 + 2 + 91234h
+    declare $i[100] (1,2,3,4)
+    declare $j := 100
+    declare ui_table $z(1,2,3)
+end on
