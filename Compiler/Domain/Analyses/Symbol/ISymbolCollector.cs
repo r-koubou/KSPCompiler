@@ -5,5 +5,7 @@ namespace KSPCompiler.Domain.Analyses.Symbol;
 
 public interface ISymbolCollector
 {
-    SymbolTable Collect( AstCompilationUnit root );
+    SymbolTable<VariableSymbol> VariableTable { get; }
+    SymbolTable<FunctionSymbol> FunctionTable { get; }
+    void Collect( AstCompilationUnit root );
 }

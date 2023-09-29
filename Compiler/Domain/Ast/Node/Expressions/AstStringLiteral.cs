@@ -28,7 +28,7 @@ namespace KSPCompiler.Domain.Ast.Node.Expressions
             : base( AstNodeId.StringLiteral, parent )
         {
             Value = value;
-            Type  = DataType.String;
+            TypeFlag  = DataTypeFlag.String;
         }
 
         #region IAstNodeAcceptor

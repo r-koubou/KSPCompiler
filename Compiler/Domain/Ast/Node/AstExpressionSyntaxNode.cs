@@ -22,7 +22,7 @@ namespace KSPCompiler.Domain.Ast.Node
         /// <summary>
         /// The data type representing this node
         /// </summary>
-        public DataType Type { get; set; } = DataType.Void;
+        public DataTypeFlag TypeFlag { get; set; } = DataTypeFlag.Void;
 
         /// <summary>
         /// Ctor
