@@ -22,7 +22,4 @@ public class ValueOutOfRangeException : Exception
             throw new ValueOutOfRangeException( value, $"{nameof( value )}({value}) > {nameof( max )}({max})" );
         }
     }
-
-    public static void ThrowIf<T>( IValueObject<T> value, IRangeValue<T> range ) where T : IComparable<T>
-        => ThrowIf( value, range.MinValue, range.MaxValue );
 }
