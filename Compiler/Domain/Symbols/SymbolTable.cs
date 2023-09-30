@@ -1,16 +1,15 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
 namespace KSPCompiler.Domain.Symbols;
 
-public abstract class SymbolTable<TSymbol> : ICloneable where TSymbol : SymbolBase
+public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol : SymbolBase
 {
     /// <summary>
     /// Parent node to be used when local scope, such as nesting, is allowed.
     /// </summary>
-    protected SymbolTable<TSymbol>? Parent { get; set; }
+    public SymbolTable<TSymbol>? Parent { get; set; }
 
     /// <summary>
     /// Unique index value assigned to the symbol
@@ -41,7 +40,7 @@ public abstract class SymbolTable<TSymbol> : ICloneable where TSymbol : SymbolBa
     /// Searches whether the specified symbol name is registered in the table
     /// </summary>
     /// <returns>Valid instance, null if not found</returns>
-    public bool TrySearchByName( SymbolName name, out TSymbol result, bool enableSearchParent = true )
+    public virtual bool TrySearchByName( SymbolName name, out TSymbol result, bool enableSearchParent = true )
     {
         if( table.TryGetValue( name, out result ) )
         {
@@ -68,7 +67,7 @@ public abstract class SymbolTable<TSymbol> : ICloneable where TSymbol : SymbolBa
         return false;
     }
 
-    public bool TrySearchByIndex( UniqueSymbolIndex index, out TSymbol result, bool enableSearchParent = true )
+    public virtual bool TrySearchByIndex( UniqueSymbolIndex index, out TSymbol result, bool enableSearchParent = true )
     {
         // table.Values.Any( x => x?.TableIndex == index );
 
@@ -106,7 +105,7 @@ public abstract class SymbolTable<TSymbol> : ICloneable where TSymbol : SymbolBa
         return false;
     }
 
-    public bool TrySearchIndexByName( SymbolName name, out UniqueSymbolIndex result, bool enableSearchParent = true )
+    public virtual bool TrySearchIndexByName( SymbolName name, out UniqueSymbolIndex result, bool enableSearchParent = true )
     {
         if( table.TryGetValue( name, out var symbol ) )
         {
@@ -138,16 +137,16 @@ public abstract class SymbolTable<TSymbol> : ICloneable where TSymbol : SymbolBa
     #endregion ~Search
 
     #region Adding
-    public abstract bool Add( TSymbol symbol );
+    public abstract bool Add( SymbolName name, TSymbol symbol );
     #endregion ~Adding
 
     #region Convert
-    public List<TSymbol> ToList()
+    public virtual List<TSymbol> ToList()
         => table.Values.ToList();
     #endregion ~Convert
 
     #region Debugging
-    public void DumpSymbol(TextWriter writer)
+    public virtual void Dump(TextWriter writer)
     {
         foreach( var x in table.Values )
         {
