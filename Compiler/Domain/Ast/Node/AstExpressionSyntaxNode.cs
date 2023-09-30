@@ -1,6 +1,7 @@
 ﻿using System.IO;
 
 using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Domain.Symbols.MetaData;
 
 namespace KSPCompiler.Domain.Ast.Node
 {
@@ -22,7 +23,7 @@ namespace KSPCompiler.Domain.Ast.Node
         /// <summary>
         /// The data type representing this node
         /// </summary>
-        public DataTypeFlag TypeFlag { get; set; } = DataTypeFlag.Void;
+        public DataTypeFlag TypeFlag { get; set; } = DataTypeFlag.TypeVoid;
 
         /// <summary>
         /// Ctor

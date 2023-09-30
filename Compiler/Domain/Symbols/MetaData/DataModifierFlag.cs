@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace KSPCompiler.Domain.Symbols
+namespace KSPCompiler.Domain.Symbols.MetaData
 {
     /// <summary>
     /// Symbol modifier definition.
     /// </summary>
     [Flags]
-    public enum ModifierFlag
+    public enum DataModifierFlag
     {
         None = 0,
         Const = 1 << 0,
