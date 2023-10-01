@@ -1,21 +1,21 @@
 namespace KSPCompiler.Domain.Symbols;
 
-public class FunctionSymbolTable : SymbolTable<FunctionSymbol>
+public class UserFunctionSymbolTable : SymbolTable<UserFunctionSymbol>
 {
     #region ctor
     // ReSharper disable MemberCanBePrivate.Global
-    public FunctionSymbolTable()
+    public UserFunctionSymbolTable()
         : base( null, UniqueSymbolIndex.Zero ) {}
 
-    public FunctionSymbolTable( SymbolTable<FunctionSymbol>? parent )
+    public UserFunctionSymbolTable( SymbolTable<UserFunctionSymbol>? parent )
         : base( parent ) {}
 
-    public FunctionSymbolTable( SymbolTable<FunctionSymbol>? parent, UniqueSymbolIndex startUniqueIndex )
+    public UserFunctionSymbolTable( SymbolTable<UserFunctionSymbol>? parent, UniqueSymbolIndex startUniqueIndex )
         : base( parent, startUniqueIndex ) {}
     // ReSharper restore MemberCanBePrivate.Global
     #endregion
 
-    public override bool Add( SymbolName name, FunctionSymbol symbol )
+    public override bool Add( SymbolName name, UserFunctionSymbol symbol )
         => throw new System.NotImplementedException();
 
     public override object Clone()
