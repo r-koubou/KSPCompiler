@@ -16,8 +16,14 @@ public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol
     /// </summary>
     protected readonly UniqueSymbolIndexGenerator uniqueIndexGenerator;
 
+    ///
+    ///  <inheritdoc />
+    ///
+    public IReadOnlyDictionary<SymbolName, TSymbol> Table
+        => table;
+
     /// <summary>
-    /// Table
+    /// Table body
     /// </summary>
     protected readonly Dictionary<SymbolName, TSymbol> table = new( 512 );
 
@@ -138,15 +144,31 @@ public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol
 
     #region Adding
     public abstract bool Add( SymbolName name, TSymbol symbol );
-    public abstract void Merge( ISymbolTable<TSymbol> other );
+
+    ///
+    /// <inheritdoc />
+    ///
+    public virtual void Merge( ISymbolTable<TSymbol> other )
+    {
+        foreach( var key in other.Table.Keys )
+        {
+            table.TryAdd( key, other.Table[ key ] );
+        }
+    }
     #endregion ~Adding
 
     #region Convert
+    ///
+    /// <inheritdoc />
+    ///
     public virtual List<TSymbol> ToList()
         => table.Values.ToList();
     #endregion ~Convert
 
     #region Debugging
+    ///
+    /// <inheritdoc />
+    ///
     public virtual void Dump(TextWriter writer)
     {
         foreach( var x in table.Values )

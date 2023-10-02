@@ -19,9 +19,4 @@ public class UserFunctionSymbolTable : SymbolTable<UserFunctionSymbol>
     {
         throw new System.NotImplementedException();
     }
-
-    public override void Merge( ISymbolTable<UserFunctionSymbol> other )
-    {
-        throw new System.NotImplementedException();
-    }
 }

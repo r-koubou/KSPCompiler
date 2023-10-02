@@ -6,9 +6,4 @@ public class UITypeSymbolTable : SymbolTable<UITypeSymbol>
     {
         throw new System.NotImplementedException();
     }
-
-    public override void Merge( ISymbolTable<UITypeSymbol> other )
-    {
-        throw new System.NotImplementedException();
-    }
 }

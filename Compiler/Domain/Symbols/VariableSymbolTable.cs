@@ -19,9 +19,4 @@ public class VariableSymbolTable : SymbolTable<VariableSymbol>
     {
         throw new System.NotImplementedException();
     }
-
-    public override void Merge( ISymbolTable<VariableSymbol> other )
-    {
-        throw new System.NotImplementedException();
-    }
 }

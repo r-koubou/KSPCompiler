@@ -7,6 +7,11 @@ namespace KSPCompiler.Domain.Symbols;
 public interface ISymbolTable<TSymbol> where TSymbol : SymbolBase
 {
     /// <summary>
+    /// Symbol table (read-only)
+    /// </summary>
+    IReadOnlyDictionary<SymbolName, TSymbol> Table { get; }
+
+    /// <summary>
     /// Parent node to be used when local scope, such as nesting, is allowed.
     /// </summary>
     SymbolTable<TSymbol>? Parent { get; set; }
@@ -37,7 +42,10 @@ public interface ISymbolTable<TSymbol> where TSymbol : SymbolBase
     /// Merge with other symbol table
     /// </summary>
     /// <remarks>
-    /// Merge into this table from other table directly.
+    /// <list type="bullet">
+    ///   <item>If the same symbol (key) exists in `other`, it will be ignored</item>
+    ///   <item>Merge into this table from other table directly</item>
+    /// </list>
     /// </remarks>
     void Merge( ISymbolTable<TSymbol> other );
 
