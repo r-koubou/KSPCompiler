@@ -24,9 +24,4 @@ public class VariableSymbolTable : SymbolTable<VariableSymbol>
     {
         throw new System.NotImplementedException();
     }
-
-    public override object Clone()
-    {
-        throw new System.NotImplementedException();
-    }
 }

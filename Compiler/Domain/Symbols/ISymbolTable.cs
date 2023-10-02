@@ -4,7 +4,7 @@ using System.IO;
 
 namespace KSPCompiler.Domain.Symbols;
 
-public interface ISymbolTable<TSymbol> : ICloneable where TSymbol : SymbolBase
+public interface ISymbolTable<TSymbol> where TSymbol : SymbolBase
 {
     /// <summary>
     /// Parent node to be used when local scope, such as nesting, is allowed.

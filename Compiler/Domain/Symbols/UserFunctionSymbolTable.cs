@@ -24,9 +24,4 @@ public class UserFunctionSymbolTable : SymbolTable<UserFunctionSymbol>
     {
         throw new System.NotImplementedException();
     }
-
-    public override object Clone()
-    {
-        throw new System.NotImplementedException();
-    }
 }

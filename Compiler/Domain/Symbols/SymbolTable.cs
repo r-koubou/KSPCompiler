@@ -155,8 +155,4 @@ public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol
         }
     }
     #endregion ~Debugging
-
-    #region ICloneable
-    public abstract object Clone();
-    #endregion ~IClonable
 }
