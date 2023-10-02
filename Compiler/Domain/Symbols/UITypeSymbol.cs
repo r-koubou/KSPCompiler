@@ -6,4 +6,6 @@ public sealed class UITypeSymbol : SymbolBase
 {
     public override SymbolType Type
         => SymbolType.UI;
+
+    // TODO Implementation
 }

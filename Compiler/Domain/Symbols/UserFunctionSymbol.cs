@@ -6,4 +6,6 @@ public sealed class UserFunctionSymbol : SymbolBase
 {
     public override SymbolType Type
         => SymbolType.UserFunction;
+
+    // TODO Implementation
 }

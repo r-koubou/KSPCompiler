@@ -40,4 +40,6 @@ public sealed class VariableSymbol : SymbolBase
     #region ctor
     public VariableSymbol() {}
     #endregion
+
+    // TODO Implementation
 }
