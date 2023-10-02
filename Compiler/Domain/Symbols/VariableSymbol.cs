@@ -17,7 +17,9 @@ public sealed class VariableSymbol : SymbolBase
     /// <summary>
     /// UI type when variable type is UI
     /// </summary>
-    //public UIType? UIType {get; set; } = null;
+    /// <seealso cref="DataTypeModifierFlag"/>
+    /// <seealso cref="DataTypeModifierFlag.UI"/>
+    public UITypeSymbol? UIType {get; set; } = null;
 
     /// <summary>
     /// Index number when stored in constant pool

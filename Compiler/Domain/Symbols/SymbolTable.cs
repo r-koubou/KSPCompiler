@@ -138,6 +138,7 @@ public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol
 
     #region Adding
     public abstract bool Add( SymbolName name, TSymbol symbol );
+    public abstract void Merge( ISymbolTable<TSymbol> other );
     #endregion ~Adding
 
     #region Convert

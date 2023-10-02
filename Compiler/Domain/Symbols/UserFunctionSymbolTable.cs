@@ -16,8 +16,17 @@ public class UserFunctionSymbolTable : SymbolTable<UserFunctionSymbol>
     #endregion
 
     public override bool Add( SymbolName name, UserFunctionSymbol symbol )
-        => throw new System.NotImplementedException();
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void Merge( ISymbolTable<UserFunctionSymbol> other )
+    {
+        throw new System.NotImplementedException();
+    }
 
     public override object Clone()
-        => throw new System.NotImplementedException();
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -9,6 +9,9 @@ namespace KSPCompiler.Domain.Symbols.MetaData;
 public enum DataTypeFlag : uint
 {
     None                        = 0,
+    All                         = 0xffffffff,
+
+    #region Type
     TypeInt                     = 1 << 0,
     TypeString                  = 1 << 1,
     TypeReal                    = 1 << 2,
@@ -19,7 +22,15 @@ public enum DataTypeFlag : uint
     TypeNumerical               = TypeInt | TypeReal,
     TypeNonVariable             = TypeKspPreprocessorSymbol | TypePgsId,
     MultipleType                = 0x00ffffff & ~TypeNonVariable,
+    #endregion
 
+    #region Attribute
     AttributeArray              = 0x01000000,
-    All                         = 0xffffffff,
+    #endregion
+
+    #region Alias
+    TypeIntArray                = TypeInt    | AttributeArray,
+    TypeStringArray             = TypeString | AttributeArray,
+    TypeRealArray               = TypeReal   | AttributeArray,
+    #endregion
 }

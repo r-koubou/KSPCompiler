@@ -34,6 +34,14 @@ public interface ISymbolTable<TSymbol> : ICloneable where TSymbol : SymbolBase
     bool Add( SymbolName name, TSymbol symbol );
 
     /// <summary>
+    /// Merge with other symbol table
+    /// </summary>
+    /// <remarks>
+    /// Merge into this table from other table directly.
+    /// </remarks>
+    void Merge( ISymbolTable<TSymbol> other );
+
+    /// <summary>
     /// Convert to list
     /// </summary>
     List<TSymbol> ToList();

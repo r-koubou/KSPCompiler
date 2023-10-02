@@ -6,6 +6,7 @@ using KSPCompiler.Domain.Ast.Node.Blocks;
 using KSPCompiler.Domain.Ast.Node.Statements;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Resources;
 
@@ -16,16 +17,19 @@ public class VariableSymbolCollector : AstVisitorAdaptor<Unit>, ISymbolCollector
     private ISymbolFactory<AstVariableDeclaration, VariableSymbol> VariableSymbolFactory { get; }
     private readonly ICompilerMessageManger compilerMessageManager;
 
+    private ISymbolTable<UITypeSymbol> UITypeSymbolTable { get; }
     public ISymbolTable<VariableSymbol> SymbolTable { get; } = new VariableSymbolTable();
 
     public bool HasError { get; private set; }
 
     public VariableSymbolCollector(
         ICompilerMessageManger compilerMessageManager,
-        ISymbolFactory<AstVariableDeclaration, VariableSymbol> variableSymbolFactory )
+        ISymbolFactory<AstVariableDeclaration, VariableSymbol> variableSymbolFactory,
+        ISymbolTable<UITypeSymbol> uiTypeSymbolTable )
     {
         this.compilerMessageManager = compilerMessageManager;
         VariableSymbolFactory       = variableSymbolFactory;
+        UITypeSymbolTable           = uiTypeSymbolTable;
     }
 
     public ISymbolTable<VariableSymbol> Collect( AstCompilationUnit root )
@@ -71,7 +75,7 @@ public class VariableSymbolCollector : AstVisitorAdaptor<Unit>, ISymbolCollector
         if( SymbolTable.TrySearchByName( node.Name, out var symbol ) )
         {
             // ビルトイン変数との重複
-            if( symbol.IsReserved )
+            if( symbol.Reserved )
             {
                 var text = string.Format( CompilerMessageResources.symbol_error_declare_variable_reserved, node.Name);
                 var message = compilerMessageManager.MessageFactory.Error( text );
@@ -92,9 +96,17 @@ public class VariableSymbolCollector : AstVisitorAdaptor<Unit>, ISymbolCollector
 
         var newSymbol = VariableSymbolFactory.Create( node );
 
-        #error TODO UI変数チェック / 外部定義とのマージ
-        if( newSymbol.DataModifier.IsUI() )
+        if( newSymbol.DataTypeModifier.IsUI() )
         {
+            #region UI変数チェック / 外部定義とのマージ
+            //
+            #endregion ~UI変数チェック / 外部定義とのマージ
+        }
+        else
+        {
+            #region プリミティブ型
+            newSymbol.DataType = DataTypeUtility.FromVariableName( node.Name );
+            #endregion
         }
 
         //テーブルに登録

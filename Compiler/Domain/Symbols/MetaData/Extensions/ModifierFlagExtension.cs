@@ -5,23 +5,21 @@ namespace KSPCompiler.Domain.Symbols.MetaData.Extensions;
 [SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" )]
 public static class ModifierFlagExtension
 {
-    public static bool IsConstant( this DataModifierFlag flag )
-        => flag.HasFlag( DataModifierFlag.Const );
+    public static bool IsConstant( this DataTypeModifierFlag flag )
+        => flag.HasFlag( DataTypeModifierFlag.Const );
 
-    public static bool AreConstant( this DataModifierFlag a, DataModifierFlag b )
+    public static bool AreConstant( this DataTypeModifierFlag a, DataTypeModifierFlag b )
         => a.IsConstant() && b.IsConstant();
 
-    public static bool IsPolyphonic( this DataModifierFlag flag )
-        => flag.HasFlag( DataModifierFlag.Polyphonic );
+    public static bool IsPolyphonic( this DataTypeModifierFlag flag )
+        => flag.HasFlag( DataTypeModifierFlag.Polyphonic );
 
-    public static bool ArePolyphonic( this DataModifierFlag a, DataModifierFlag b )
+    public static bool ArePolyphonic( this DataTypeModifierFlag a, DataTypeModifierFlag b )
         => a.IsPolyphonic() && b.IsPolyphonic();
 
-    // ReSharper disable once InconsistentNaming
-    public static bool IsUI( this DataModifierFlag flag )
-        => flag.HasFlag( DataModifierFlag.UI );
+    public static bool IsUI( this DataTypeModifierFlag flag )
+        => flag.HasFlag( DataTypeModifierFlag.UI );
 
-    // ReSharper disable once InconsistentNaming
-    public static bool AreUI( this DataModifierFlag a, DataModifierFlag b )
+    public static bool AreUI( this DataTypeModifierFlag a, DataTypeModifierFlag b )
         => a.IsUI() && b.IsUI();
 }
