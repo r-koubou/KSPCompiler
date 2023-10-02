@@ -7,6 +7,7 @@ public enum SymbolType
     Command,
     UserFunction,
     Variable,
+    UI,
     Literal,
     Expression,
     PreprocessorSymbol,
