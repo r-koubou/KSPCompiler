@@ -30,6 +30,11 @@ namespace KSPCompiler.Domain.Ast.Node
         public IAstNode? Parent { get; set; }
 
         /// <summary>
+        /// Retrieves the parent node with the specified TNode.
+        /// </summary>
+        bool TryGetParent<TNode>( out TNode? result ) where TNode : IAstNode;
+
+        /// <summary>
         /// Dumping information on this node for debugging purposes.
         /// </summary>
         public void Dump( StreamWriter writer, int indentDepth = 0 )

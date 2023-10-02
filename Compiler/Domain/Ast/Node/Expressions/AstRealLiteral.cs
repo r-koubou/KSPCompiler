@@ -1,4 +1,5 @@
-using KSPCompiler.Domain.Ast.Symbols;
+using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Domain.Symbols.MetaData;
 
 namespace KSPCompiler.Domain.Ast.Node.Expressions
 {
@@ -28,7 +29,7 @@ namespace KSPCompiler.Domain.Ast.Node.Expressions
             : base( AstNodeId.RealLiteral, parent )
         {
             Value = value;
-            Type  = DataType.Real;
+            TypeFlag  = DataTypeFlag.TypeReal;
         }
 
         #region IAstNodeAcceptor

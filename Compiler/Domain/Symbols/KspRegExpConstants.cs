@@ -1,11 +1,11 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace KSPCompiler.Domain.Ast
+namespace KSPCompiler.Domain.Symbols
 {
     /// <summary>
     /// Definitions of regular expressions used in AST analysis in general.
     /// </summary>
-    public static class KspRegExpConstant
+    public static class KspRegExpConstants
     {
         /// <summary>
         /// A regular expression that determines whether or not the first character of a variable name contains a numeric character.

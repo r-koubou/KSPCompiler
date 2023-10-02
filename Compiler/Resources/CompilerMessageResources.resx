@@ -19,9 +19,24 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="syntax.error" xml:space="preserve">
-        <value>Synrax error</value>
+        <value>Syntax error</value>
     </data>
     <data name="synax.error.detail" xml:space="preserve">
         <value>Syntax error: {0}</value>
+    </data>
+    <data name="symbol.error.declare.variable.outside" xml:space="preserve">
+        <value>Variable {0} declaration outside of callback scope</value>
+    </data>
+    <data name="symbol.error.declare.variable.reserved" xml:space="preserve">
+        <value>Variable name {0} is reserved</value>
+    </data>
+    <data name="symbol.error.declare.variable.ni_reserved" xml:space="preserve">
+        <value>Variable name {0} contains NI reserved prefix</value>
+    </data>
+    <data name="symbol.error.declare.variable.already" xml:space="preserve">
+        <value>Variable name {0} has already declared</value>
+    </data>
+    <data name="symbol.waring.declare.oninit" xml:space="preserve">
+        <value>Variable {0} declaration outside of `on init` callback scope</value>
     </data>
 </root>

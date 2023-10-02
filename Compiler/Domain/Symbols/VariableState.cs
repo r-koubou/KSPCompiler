@@ -1,4 +1,4 @@
-﻿namespace KSPCompiler.Domain.Ast.Symbols
+﻿namespace KSPCompiler.Domain.Symbols
 {
     /// <summary>
     /// Represents the state of a variable.

@@ -10,12 +10,14 @@ public class CompilerMessage
     public CompilerMessageLevel Level { get; }
     public CompilerMessageText Text { get; }
     public Position Position { get; }
+    public Exception? Exception { get; }
 
-    public CompilerMessage( CompilerMessageLevel level, CompilerMessageText text, Position position )
+    public CompilerMessage( CompilerMessageLevel level, CompilerMessageText text, Position position, Exception? exception = null )
     {
-        DateTime = DateTime.Now;
-        Level    = level;
-        Text     = text;
-        Position = position;
+        DateTime  = DateTime.Now;
+        Level     = level;
+        Text      = text;
+        Position  = position;
+        Exception = exception;
     }
 }
