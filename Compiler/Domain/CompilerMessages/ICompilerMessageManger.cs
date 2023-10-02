@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace KSPCompiler.Domain.CompilerMessages;
 
@@ -17,6 +18,10 @@ public interface ICompilerMessageManger
 
     public static ICompilerMessageManger CreateDefault()
         => new DefaultMangerImpl();
+
+    public int Count();
+    public int Count( CompilerMessageLevel level );
+    public bool IsEmpty();
 
     #region Default
     private class DefaultMangerImpl : ICompilerMessageManger
@@ -67,6 +72,15 @@ public interface ICompilerMessageManger
                 writer.WriteLine( MessageFormatter.Format( x ) );
             }
         }
+
+        public int Count()
+            => _messages.Count;
+
+        public int Count( CompilerMessageLevel level )
+            => _messages.Count( x => x.Level == level );
+
+        public bool IsEmpty()
+            => _messages.Count == 0;
     }
     #endregion
 }

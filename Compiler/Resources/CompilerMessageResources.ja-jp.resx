@@ -17,4 +17,19 @@
     <data name="syntax.error" xml:space="preserve">
         <value>文法エラー</value>
     </data>
+    <data name="symbol.error.declare.variable.outside" xml:space="preserve">
+        <value>変数 {0} はコールバック外で宣言できません</value>
+    </data>
+    <data name="symbol.error.declare.variable.reserved" xml:space="preserve">
+        <value>変数名 {0} は予約されています</value>
+    </data>
+    <data name="symbol.error.declare.variable.ni_reserved" xml:space="preserve">
+        <value>変数名 {0} は NI で予約されている接頭文字を含んでいます</value>
+    </data>
+    <data name="symbol.error.declare.variable.already" xml:space="preserve">
+        <value>変数名 {0} は既に宣言されています</value>
+    </data>
+    <data name="symbol.waring.declare.oninit" xml:space="preserve">
+        <value>変数 {0} は `on init` コールバック以外の場所で宣言されています</value>
+    </data>
 </root>

@@ -49,6 +49,29 @@ namespace KSPCompiler.Domain.Ast.Node
         #endregion IAstNodeAcceptor
 
         #region IAstNode
+
+        ///
+        /// <inheritdoc/>
+        ///
+        public bool TryGetParent<TNode>( out TNode? result ) where TNode : IAstNode
+        {
+            result = default;
+
+            var parent = Parent;
+            do
+            {
+                if( Parent is not TNode targetNode )
+                {
+                    continue;
+                }
+
+                result = targetNode;
+                break;
+            }while( ( parent = parent?.Parent ) != null );
+
+            return result != null;
+        }
+
         ///
         /// <inheritdoc/>
         ///

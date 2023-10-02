@@ -56,5 +56,35 @@ namespace KSPCompiler.Resources {
                 return ResourceManager.GetString("synax.error.detail", resourceCulture);
             }
         }
+        
+        public static string symbol_error_declare_variable_outside {
+            get {
+                return ResourceManager.GetString("symbol.error.declare.variable.outside", resourceCulture);
+            }
+        }
+        
+        public static string symbol_error_declare_variable_reserved {
+            get {
+                return ResourceManager.GetString("symbol.error.declare.variable.reserved", resourceCulture);
+            }
+        }
+        
+        public static string symbol_error_declare_variable_ni_reserved {
+            get {
+                return ResourceManager.GetString("symbol.error.declare.variable.ni_reserved", resourceCulture);
+            }
+        }
+        
+        public static string symbol_error_declare_variable_already {
+            get {
+                return ResourceManager.GetString("symbol.error.declare.variable.already", resourceCulture);
+            }
+        }
+        
+        public static string symbol_waring_declare_oninit {
+            get {
+                return ResourceManager.GetString("symbol.waring.declare.oninit", resourceCulture);
+            }
+        }
     }
 }
