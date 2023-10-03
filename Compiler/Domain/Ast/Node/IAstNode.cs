@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 
 using KSPCompiler.Commons.Text;
@@ -17,7 +16,7 @@ namespace KSPCompiler.Domain.Ast.Node
         /// <summary>
         /// ID for identifying a node.
         /// </summary>
-        public virtual AstNodeId Id => AstNodeId.None;
+        public AstNodeId Id => AstNodeId.None;
 
         /// <summary>
         /// Token location information.

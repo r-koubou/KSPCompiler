@@ -1,3 +1,5 @@
+using System;
+
 namespace KSPCompiler.Domain.Symbols;
 
 public class UserFunctionSymbolTable : SymbolTable<UserFunctionSymbol>
@@ -17,6 +19,6 @@ public class UserFunctionSymbolTable : SymbolTable<UserFunctionSymbol>
 
     public override bool Add( SymbolName name, UserFunctionSymbol symbol )
     {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
 }

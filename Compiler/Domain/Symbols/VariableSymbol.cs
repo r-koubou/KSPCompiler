@@ -37,9 +37,6 @@ public sealed class VariableSymbol : SymbolBase
     public bool ConstantValueWithSingleOperator { get; set; } = false;
     #endregion ~ Properties
 
-    #region ctor
-    public VariableSymbol() {}
-    #endregion
 
     // TODO Implementation
 }
