@@ -1,5 +1,6 @@
 namespace KSPCompiler.Commons.Text
 {
+    // ReSharper disable InconsistentNaming
     public struct Position
     {
         /// <summary>
@@ -22,4 +23,5 @@ namespace KSPCompiler.Commons.Text
         /// </summary>
         public Column EndColumn;
     }
+    // ReSharper restore InconsistentNaming
 }

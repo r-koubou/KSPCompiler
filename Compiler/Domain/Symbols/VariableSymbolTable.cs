@@ -1,3 +1,5 @@
+using System;
+
 namespace KSPCompiler.Domain.Symbols;
 
 public class VariableSymbolTable : SymbolTable<VariableSymbol>
@@ -17,6 +19,6 @@ public class VariableSymbolTable : SymbolTable<VariableSymbol>
 
     public override bool Add( SymbolName name, VariableSymbol symbol )
     {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
 }

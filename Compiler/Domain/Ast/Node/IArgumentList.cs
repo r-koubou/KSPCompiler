@@ -15,11 +15,11 @@ namespace KSPCompiler.Domain.Ast.Node
         /// <summary>
         /// Whether one or more arguments are stored in the ArgumentList or not.
         /// </summary>
-        public virtual bool HasArgument => ArgumentList is { HasArgument: true };
+        public bool HasArgument => ArgumentList is { HasArgument: true };
 
         /// <summary>
         /// Number of arguments stored in ArgumentList, 0 for null.
         /// </summary>
-        public virtual int ArgumentCount => HasArgument ? ArgumentList.Arguments.Count : 0;
+        public int ArgumentCount => HasArgument ? ArgumentList.Arguments.Count : 0;
     }
 }

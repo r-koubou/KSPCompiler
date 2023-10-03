@@ -1,6 +1,5 @@
 ﻿using System.IO;
 
-using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 
 namespace KSPCompiler.Domain.Ast.Node

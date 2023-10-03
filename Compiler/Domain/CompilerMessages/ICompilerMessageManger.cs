@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,10 +25,10 @@ public interface ICompilerMessageManger
     #region Default
     private class DefaultMangerImpl : ICompilerMessageManger
     {
-        private readonly List<CompilerMessage> _messages = new(256);
+        private readonly List<CompilerMessage> messages = new(256);
 
         public IReadOnlyCollection<CompilerMessage> Messages
-            => new List<CompilerMessage>( _messages );
+            => new List<CompilerMessage>( messages );
 
         public ICompilerMessageFactory MessageFactory
             => ICompilerMessageFactory.Default;
@@ -41,7 +40,7 @@ public interface ICompilerMessageManger
 
         public void Append( CompilerMessage message )
         {
-            _messages.Add( message );
+            messages.Add( message );
 
             foreach( var x in Handlers )
             {
@@ -74,13 +73,13 @@ public interface ICompilerMessageManger
         }
 
         public int Count()
-            => _messages.Count;
+            => messages.Count;
 
         public int Count( CompilerMessageLevel level )
-            => _messages.Count( x => x.Level == level );
+            => messages.Count( x => x.Level == level );
 
         public bool IsEmpty()
-            => _messages.Count == 0;
+            => messages.Count == 0;
     }
     #endregion
 }

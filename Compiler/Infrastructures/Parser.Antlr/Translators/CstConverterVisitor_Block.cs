@@ -10,7 +10,7 @@ using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
 namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 {
     // Implementation of root, callback and user-defined function node generation
-    public partial class CSTConverterVisitor
+    public partial class CstConverterVisitor
     {
         public override AstNode VisitCompilationUnit( KSPParser.CompilationUnitContext context )
         {

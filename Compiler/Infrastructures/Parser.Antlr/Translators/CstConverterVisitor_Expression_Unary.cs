@@ -9,7 +9,7 @@ using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
 namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 {
     // implementation of the unary operator node
-    public partial class CSTConverterVisitor
+    public partial class CstConverterVisitor
     {
         private TNode SetupUnaryOperatorNode<TNode>( TNode dest )
             where TNode : AstExpressionSyntaxNode
