@@ -1,27 +1,27 @@
 namespace KSPCompiler.Commons.Text
 {
-    // ReSharper disable UnusedAutoPropertyAccessor.Global
+    // ReSharper disable InconsistentNaming
     public struct Position
     {
         /// <summary>
         /// Starting line number.
         /// </summary>
-        public LineNumber BeginLine { get; init; }
+        public LineNumber BeginLine;
 
         /// <summary>
         /// End Line Number. It's -1 if it's unknown.
         /// </summary>
-        public LineNumber EndLine { get; init; }
+        public LineNumber EndLine;
 
         /// <summary>
         /// Start column number.
         /// </summary>
-        public Column BeginColumn { get; init; }
+        public Column BeginColumn;
 
         /// <summary>
         /// End Column Number. It's -1 if it's unknown.
         /// </summary>
-        public Column EndColumn { get; init; }
+        public Column EndColumn;
     }
-    // ReSharper restore UnusedAutoPropertyAccessor.Global
+    // ReSharper restore InconsistentNaming
 }
