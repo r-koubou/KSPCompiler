@@ -66,7 +66,7 @@ public abstract class KspSyntaxAnalyser : ISyntaxAnalyser
             throw new KspScriptParseException( $"Syntax Invalid : {cst.exception}" );
         }
 
-        var ast = cst.Accept( new CSTConverterVisitor() ) as AstCompilationUnit;
+        var ast = cst.Accept( new CstConverterVisitor() ) as AstCompilationUnit;
         Debug.Assert( ast != null );
 
         return ast;

@@ -8,7 +8,7 @@ using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
 namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 {
     // implementation of the variable declaration node
-    public partial class CSTConverterVisitor
+    public partial class CstConverterVisitor
     {
         public override AstNode VisitVariableDeclaration( KSPParser.VariableDeclarationContext context )
         {

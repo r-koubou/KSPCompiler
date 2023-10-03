@@ -13,14 +13,14 @@ namespace KSPCompiler.Parser.Antlr.Tests;
 [TestFixture]
 public class AstTranslatorTest
 {
-    private static readonly string testDataDirectory = Path.Combine( "TestData", "AstTranslatorTest" );
+    private static readonly string TestDataDirectory = Path.Combine( "TestData", "AstTranslatorTest" );
 
     // ReSharper disable once UnusedMethodReturnValue.Local
     private static AstCompilationUnit TranslateImpl( string scriptFilePath )
     {
         var path = Path.Combine(
             TestContext.CurrentContext.TestDirectory,
-            testDataDirectory,
+            TestDataDirectory,
             scriptFilePath
         );
 

@@ -13,7 +13,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
     /// <summary>
     /// Implementation of AST generation process based on CST.
     /// </summary>
-    public partial class CSTConverterVisitor : KSPParserBaseVisitor<AstNode>
+    public partial class CstConverterVisitor : KSPParserBaseVisitor<AstNode>
     {
         private void SetupChildNode(
             IAstNode? parent,

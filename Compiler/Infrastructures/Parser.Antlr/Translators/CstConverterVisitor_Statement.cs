@@ -10,7 +10,7 @@ using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
 namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 {
     // implementation of the statement node
-    public partial class CSTConverterVisitor
+    public partial class CstConverterVisitor
     {
         private TNode VisitControlStatementImpl<TNode>(
             ParserRuleContext condition,
