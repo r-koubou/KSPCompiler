@@ -2,6 +2,7 @@ using System;
 
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Model.Variables;
 
 namespace KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Translators;
@@ -20,6 +21,9 @@ public class FromYamlTranslator : IDataTranslator<RootObject, ISymbolTable<Varia
                 ArraySize = 0,
                 Reserved = x.Reserved
             };
+
+            symbol.DataType         = DataTypeUtility.FromVariableName( symbol.Name.Value );
+            symbol.DataTypeModifier = DataTypeModifierFlag.None;
 
             if( !result.Add( symbol.Name, symbol ) )
             {
