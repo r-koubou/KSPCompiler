@@ -1,0 +1,11 @@
+version: 1
+symbols:
+  - name: hoge
+    type: command
+    reserved: true
+    return: int
+    args:
+      - hoge
+      - age
+      - huga
+    description: hoge

@@ -121,7 +121,7 @@ public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol
 
         if( !enableSearchParent )
         {
-            result = UniqueSymbolIndex.Null;
+            result = UniqueSymbolIndex.Zero;
             return false;
         }
 
@@ -137,7 +137,7 @@ public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol
             p = p.Parent;
         }
 
-        result = UniqueSymbolIndex.Null;
+        result = UniqueSymbolIndex.Zero;
         return false;
     }
     #endregion ~Search

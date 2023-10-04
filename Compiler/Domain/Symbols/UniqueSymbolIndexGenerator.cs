@@ -6,10 +6,7 @@ public class UniqueSymbolIndexGenerator
 {
     private uint nextIndex;
 
-    public UniqueSymbolIndexGenerator()
-    {
-        nextIndex = UniqueSymbolIndex.MinValue;
-    }
+    public UniqueSymbolIndexGenerator() : this( UniqueSymbolIndex.Zero ) {}
 
     public UniqueSymbolIndexGenerator(UniqueSymbolIndex startIndex)
     {
@@ -18,7 +15,7 @@ public class UniqueSymbolIndexGenerator
 
     public UniqueSymbolIndex Next()
     {
-        if( nextIndex == UniqueSymbolIndex.Null.Value )
+        if( nextIndex == uint.MaxValue )
         {
             throw new InvalidOperationException( "SymbolUniqueIndex overflow" );
         }

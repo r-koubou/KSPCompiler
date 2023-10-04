@@ -24,6 +24,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04 Framework & Drivers", "0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateways", "Gateways\Gateways.csproj", "{7057EEA5-D1E2-471E-92D0-2E6C5C2BE72D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalSymbolRepository.Yaml", "Infrastructures\ExternalSymbolRepository.Yaml\ExternalSymbolRepository.Yaml.csproj", "{2BF41409-DA79-415C-BB28-9B3A51FA3031}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalSymbolRepository.Yaml.Tests", "Infrastructures\ExternalSymbolRepository.Yaml.Tests\ExternalSymbolRepository.Yaml.Tests.csproj", "{96D5F140-22C5-44C7-A135-99B3F4D3A153}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +62,14 @@ Global
 		{7057EEA5-D1E2-471E-92D0-2E6C5C2BE72D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7057EEA5-D1E2-471E-92D0-2E6C5C2BE72D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7057EEA5-D1E2-471E-92D0-2E6C5C2BE72D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BF41409-DA79-415C-BB28-9B3A51FA3031}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BF41409-DA79-415C-BB28-9B3A51FA3031}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BF41409-DA79-415C-BB28-9B3A51FA3031}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BF41409-DA79-415C-BB28-9B3A51FA3031}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96D5F140-22C5-44C7-A135-99B3F4D3A153}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96D5F140-22C5-44C7-A135-99B3F4D3A153}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96D5F140-22C5-44C7-A135-99B3F4D3A153}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96D5F140-22C5-44C7-A135-99B3F4D3A153}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BC12E3DD-7AB6-4E76-9FF0-573D3E94D1AA} = {D8212F71-4678-4B7F-8EC9-F692C48B5093}
@@ -66,5 +78,7 @@ Global
 		{7908F721-B88B-4D26-BAE1-F2614AD267F6} = {162ECAB2-81F2-4577-9529-2A1AA395B80A}
 		{D8212F71-4678-4B7F-8EC9-F692C48B5093} = {CC9F575A-C074-4678-8DB4-488A9D6BF472}
 		{7057EEA5-D1E2-471E-92D0-2E6C5C2BE72D} = {27226E22-2F17-483D-A9B6-47889EC51C1C}
+		{2BF41409-DA79-415C-BB28-9B3A51FA3031} = {D8212F71-4678-4B7F-8EC9-F692C48B5093}
+		{96D5F140-22C5-44C7-A135-99B3F4D3A153} = {D8212F71-4678-4B7F-8EC9-F692C48B5093}
 	EndGlobalSection
 EndGlobal
