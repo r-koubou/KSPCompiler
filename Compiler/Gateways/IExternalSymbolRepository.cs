@@ -2,8 +2,8 @@ using KSPCompiler.Domain.Symbols;
 
 namespace KSPCompiler.Gateways;
 
-public interface IExternalSymbolRepository<TLoadSymbol, in TStore> where TLoadSymbol : SymbolBase
+public interface IExternalSymbolRepository<TSymbol> where TSymbol : SymbolBase
 {
-    ISymbolTable<TLoadSymbol> LoadSymbolTable();
-    void StoreSymbolTable( TStore store );
+    ISymbolTable<TSymbol> LoadSymbolTable();
+    void StoreSymbolTable( ISymbolTable<TSymbol> store );
 }

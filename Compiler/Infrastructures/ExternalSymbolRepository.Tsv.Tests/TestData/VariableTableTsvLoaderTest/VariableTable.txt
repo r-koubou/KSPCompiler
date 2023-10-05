@@ -1,0 +1,2 @@
+// type, name, reserved, description
+variable	$hoge	true	hoge

@@ -12,7 +12,7 @@ using YamlDotNet.Serialization.NamingConventions;
 
 namespace KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
 
-public class YamlExternalVariableSymbolRepository : IExternalSymbolRepository<VariableSymbol, RootObject>
+public class YamlExternalVariableSymbolRepository : IExternalSymbolRepository<VariableSymbol>
 {
     private readonly FilePath yamlFilePath;
 
@@ -32,7 +32,7 @@ public class YamlExternalVariableSymbolRepository : IExternalSymbolRepository<Va
         return new FromYamlTranslator().Translate( rootObject );
     }
 
-    public void StoreSymbolTable( RootObject store )
+    public void StoreSymbolTable( ISymbolTable<VariableSymbol> store )
     {
         var serializer = new SerializerBuilder()
                           .WithNamingConvention( CamelCaseNamingConvention.Instance )

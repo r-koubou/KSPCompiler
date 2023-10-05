@@ -1,25 +1,33 @@
 using System;
+using System.Collections.Generic;
 
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Model;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Translators;
+namespace KSPCompiler.ExternalSymbolRepository.Tsv.Variables.Translators;
 
-public class FromYamlTranslator : IDataTranslator<RootObject, ISymbolTable<VariableSymbol>>
+public class FromTsvTranslator : IDataTranslator<IReadOnlyCollection<string>, ISymbolTable<VariableSymbol>>
 {
-    public ISymbolTable<VariableSymbol> Translate( RootObject source )
+    public ISymbolTable<VariableSymbol> Translate( IReadOnlyCollection<string> source )
     {
         var result = new VariableSymbolTable();
 
-        foreach( var x in source.Symbols )
+        foreach( var x in source )
         {
+            var line = x.Trim();
+            if( line.StartsWith( "//" ) )
+            {
+                continue;
+            }
+
+            var values = line.Split( '\t' );
+
             var symbol = new VariableSymbol
             {
-                Name = x.Name,
+                Name      = values[ 1 ],
                 ArraySize = 0,
-                Reserved = x.Reserved
+                Reserved  =  values[ 2 ] == "true"
             };
 
             symbol.DataType         = DataTypeUtility.FromVariableName( symbol.Name.Value );
