@@ -35,7 +35,7 @@ public interface ISymbolTable<TSymbol> where TSymbol : SymbolBase
     /// Add a symbol to the table
     /// </summary>
     /// <returns>true if added, false if already exists</returns>
-    bool Add( SymbolName name, TSymbol symbol );
+    bool Add( TSymbol symbol );
 
     /// <summary>
     /// Merge with other symbol table

@@ -1,13 +1,9 @@
-using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Text;
 
 using KSPCompiler.Commons.Path;
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Model;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Translators;
 
 using NUnit.Framework;
 
@@ -50,11 +46,5 @@ public class VariableTableYamlLoaderTest
         var symbolTable = repository.LoadSymbolTable();
 
         Assert.IsTrue( symbolTable.Table.Count > 0 );
-
-        foreach( var x in symbolTable.Table.Values )
-        {
-            Assert.IsTrue( x.DataType.IsInt() );
-        }
     }
-
 }

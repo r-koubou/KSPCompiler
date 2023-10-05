@@ -25,7 +25,7 @@ public class FromYamlTranslator : IDataTranslator<RootObject, ISymbolTable<Varia
             symbol.DataType         = DataTypeUtility.FromVariableName( symbol.Name.Value );
             symbol.DataTypeModifier = DataTypeModifierFlag.None;
 
-            if( !result.Add( symbol.Name, symbol ) )
+            if( !result.Add( symbol ) )
             {
                 throw new InvalidOperationException( $"Duplicate symbol name: {symbol.Name}" );
             }

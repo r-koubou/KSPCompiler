@@ -1,4 +1,5 @@
-using System;
+using KSPCompiler.Domain.Symbols.MetaData;
+using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 
 namespace KSPCompiler.Domain.Symbols;
 
@@ -17,8 +18,26 @@ public class VariableSymbolTable : SymbolTable<VariableSymbol>
     // ReSharper restore MemberCanBePrivate.Global
     #endregion
 
-    public override bool Add( SymbolName name, VariableSymbol symbol )
+    public override bool Add( VariableSymbol symbol )
     {
-        throw new NotImplementedException();
+        if( table.ContainsKey( symbol.Name ) )
+        {
+            // Already added
+            return false;
+        }
+
+        if( symbol.DataTypeModifier.IsConstant() )
+        {
+            symbol.TableIndex = UniqueSymbolIndex.Null;
+        }
+        else
+        {
+            symbol.TableIndex = uniqueIndexGenerator.Next();
+        }
+
+        symbol.DataType = DataTypeUtility.FromVariableName( symbol.Name.Value );
+        table.Add( symbol.Name, symbol );
+
+        return true;
     }
 }

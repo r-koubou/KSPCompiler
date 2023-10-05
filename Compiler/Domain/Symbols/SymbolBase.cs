@@ -36,5 +36,5 @@ public abstract class SymbolBase
     /// <summary>
     /// Index number when stored in <see cref="ISymbolTable{TSymbol}"/>
     /// </summary>
-    public UniqueSymbolIndex TableIndex { get; set; } = UniqueSymbolIndex.Zero;
+    public UniqueSymbolIndex TableIndex { get; set; } = UniqueSymbolIndex.Null;
 }
