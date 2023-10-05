@@ -1,7 +1,11 @@
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Text;
 
+using KSPCompiler.Commons.Path;
 using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Domain.Symbols.MetaData.Extensions;
+using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Model;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Translators;
 
@@ -42,20 +46,15 @@ public class VariableTableYamlLoaderTest
     public void TranslateSymbolTable()
     {
         var path = Path.Combine( TestDataDirectory, "VariableTable.yaml" );
-        var yaml = File.ReadAllText( path, Encoding.UTF8 );
-        var deserializer = new DeserializerBuilder()
-                          .WithNamingConvention( CamelCaseNamingConvention.Instance )
-                          .Build();
-        var definition = deserializer.Deserialize<RootObject>(yaml);
+        var repository = new YamlExternalVariableSymbolRepository( new FilePath( path ) );
+        var symbolTable = repository.LoadSymbolTable();
 
-        ISymbolTable<VariableSymbol>? symbolTable = null;
-        Assert.DoesNotThrow( () =>
+        Assert.IsTrue( symbolTable.Table.Count > 0 );
+
+        foreach( var x in symbolTable.Table.Values )
         {
-            symbolTable = new FromYamlTranslator().Translate( definition );
-        });
-
-        Assert.IsTrue( symbolTable?.Table.Count > 0 );
-
+            Assert.IsTrue( x.DataType.IsInt() );
+        }
     }
 
 }

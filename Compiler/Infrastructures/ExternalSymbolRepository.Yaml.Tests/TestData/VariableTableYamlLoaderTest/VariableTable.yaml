@@ -1,11 +1,6 @@
 version: 1
 symbols:
-  - name: hoge
-    type: command
+  - name: $hoge
+    type: variable
     reserved: true
-    return: int
-    args:
-      - hoge
-      - age
-      - huga
     description: hoge
