@@ -2,7 +2,7 @@ using System.IO;
 using System.Text;
 
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Model.Variables;
+using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Model;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Translators;
 
 using NUnit.Framework;
@@ -35,8 +35,6 @@ public class VariableTableYamlLoaderTest
         Assert.IsTrue( !string.IsNullOrEmpty( definition.Symbols[ 0 ].Name ) );
         Assert.IsTrue( !string.IsNullOrEmpty( definition.Symbols[ 0 ].Type ) );
         Assert.IsTrue( definition.Symbols[ 0 ].Reserved );
-        Assert.IsTrue( !string.IsNullOrEmpty( definition.Symbols[ 0 ].Return ) );
-        Assert.IsTrue( definition.Symbols[ 0 ].Args.Count > 0 );
         Assert.IsTrue( !string.IsNullOrEmpty( definition.Symbols[ 0 ].Description ) );
     }
 

@@ -3,7 +3,7 @@ using System;
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Model.Variables;
+using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Model;
 
 namespace KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Translators;
 

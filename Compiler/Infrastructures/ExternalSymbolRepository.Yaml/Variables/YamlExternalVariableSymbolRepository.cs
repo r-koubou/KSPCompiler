@@ -3,7 +3,7 @@ using System.Text;
 
 using KSPCompiler.Commons.Path;
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Model.Variables;
+using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Model;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Translators;
 using KSPCompiler.Gateways;
 
@@ -12,11 +12,11 @@ using YamlDotNet.Serialization.NamingConventions;
 
 namespace KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
 
-public class ExternalVariableSymbolRepository : IExternalSymbolRepository<VariableSymbol>
+public class YamlExternalVariableSymbolRepository : IExternalSymbolRepository<VariableSymbol, RootObject>
 {
     private readonly FilePath yamlFilePath;
 
-    public ExternalVariableSymbolRepository( FilePath yamlFilePath )
+    public YamlExternalVariableSymbolRepository( FilePath yamlFilePath )
     {
         this.yamlFilePath = yamlFilePath;
     }
@@ -32,8 +32,12 @@ public class ExternalVariableSymbolRepository : IExternalSymbolRepository<Variab
         return new FromYamlTranslator().Translate( rootObject );
     }
 
-    public bool StoreSymbolTable( ISymbolTable<VariableSymbol> symbolTable )
+    public void StoreSymbolTable( RootObject store )
     {
-        return true;
+        var serializer = new SerializerBuilder()
+                          .WithNamingConvention( CamelCaseNamingConvention.Instance )
+                          .Build();
+        var yaml = serializer.Serialize( store );
+        File.WriteAllText( yamlFilePath.Path, yaml, Encoding.UTF8 );
     }
 }
