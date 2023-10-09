@@ -8,13 +8,13 @@ using KSPCompiler.UseCases.Symbols;
 
 using NUnit.Framework;
 
-namespace KSPCompiler.ExternalSymbolConvert.Tests;
+namespace KSPCompiler.ExternalSymbolControllers.Tests;
 
 [TestFixture]
 public class ExternalSymbolConvertControllerTest
 {
-    private static readonly string TestDataDirectory = Path.Combine( "TestData", "ExternalSymbolConvertControllerTest" );
-    private static readonly string OutputDirectory  = Path.Combine( ".Temp", "ExternalSymbolConvertControllerTest" );
+    private static readonly string TestDataDirectory = Path.Combine( "TestData", "ExternalSymbolControllersTest" );
+    private static readonly string OutputDirectory  = Path.Combine( ".Temp", "ExternalSymbolControllersTest" );
 
     [Test]
     public void TsvToYamlConvertTest()
