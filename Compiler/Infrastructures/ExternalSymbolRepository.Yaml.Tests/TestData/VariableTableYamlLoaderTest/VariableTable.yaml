@@ -1,6 +1,5 @@
 version: 1
 symbols:
-  - type: variable
-    name: $hoge
+  - name: $hoge
     reserved: true
     description: hoge

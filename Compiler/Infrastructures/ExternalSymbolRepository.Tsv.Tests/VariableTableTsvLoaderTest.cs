@@ -16,7 +16,7 @@ public class VariableTableTsvLoaderTest
     public void TranslateSymbolTable()
     {
         var path = Path.Combine( TestDataDirectory, "VariableTable.txt" );
-        var repository = new TsvExternalVariableSymbolRepository( new FilePath( path ) );
+        var repository = new TsvVariableSymbolRepository( new FilePath( path ) );
         var symbolTable = repository.LoadSymbolTable();
 
         Assert.IsTrue( symbolTable.Table.Count == 1 );

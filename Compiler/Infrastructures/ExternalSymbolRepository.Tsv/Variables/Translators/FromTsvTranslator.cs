@@ -12,7 +12,6 @@ public class FromTsvTranslator : IDataTranslator<IReadOnlyCollection<string>, IS
 {
     private enum Column
     {
-        Category,
         Name,
         Reserved,
         Description
@@ -35,12 +34,13 @@ public class FromTsvTranslator : IDataTranslator<IReadOnlyCollection<string>, IS
 
             var symbol = new VariableSymbol
             {
-                Name      = values[ (int)Column.Name ],
-                ArraySize = 0,
-                Reserved  =  values[ (int)Column.Reserved ] == "true"
+                Name        = values[ (int)Column.Name ],
+                ArraySize   = 0,
+                Reserved    = values[ (int)Column.Reserved ] == "true",
+                Description = values[ (int)Column.Description ]
             };
 
-            symbol.DataType         = DataTypeUtility.FromVariableName( symbol.Name.Value );
+            symbol.DataType         = DataTypeUtility.FromVariableName( symbol.Name );
             symbol.DataTypeModifier = DataTypeModifierFlag.Const;
 
             if( !result.Add( symbol ) )

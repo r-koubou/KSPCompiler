@@ -12,4 +12,7 @@ public record SymbolName( string Value ) : StringValueObject( Value )
 
     public static implicit operator SymbolName( string value )
         => new( value );
+
+    public static implicit operator string( SymbolName value )
+        => value.Value;
 }

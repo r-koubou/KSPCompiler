@@ -19,10 +19,11 @@ public class FromYamlTranslator : IDataTranslator<RootObject, ISymbolTable<Varia
             {
                 Name = x.Name,
                 ArraySize = 0,
-                Reserved = x.Reserved
+                Reserved = x.Reserved,
+                Description = x.Description
             };
 
-            symbol.DataType         = DataTypeUtility.FromVariableName( symbol.Name.Value );
+            symbol.DataType         = DataTypeUtility.FromVariableName( symbol.Name );
             symbol.DataTypeModifier = DataTypeModifierFlag.Const;
 
             if( !result.Add( symbol ) )

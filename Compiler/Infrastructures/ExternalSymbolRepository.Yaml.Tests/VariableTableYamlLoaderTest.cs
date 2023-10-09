@@ -33,7 +33,6 @@ public class VariableTableYamlLoaderTest
         Assert.IsTrue( definition.Symbols.Count > 0 );
 
         Assert.IsTrue( !string.IsNullOrEmpty( definition.Symbols[ 0 ].Name ) );
-        Assert.IsTrue( !string.IsNullOrEmpty( definition.Symbols[ 0 ].Type ) );
         Assert.IsTrue( definition.Symbols[ 0 ].Reserved );
         Assert.IsTrue( !string.IsNullOrEmpty( definition.Symbols[ 0 ].Description ) );
     }
@@ -42,7 +41,7 @@ public class VariableTableYamlLoaderTest
     public void TranslateSymbolTable()
     {
         var path = Path.Combine( TestDataDirectory, "VariableTable.yaml" );
-        var repository = new YamlExternalVariableSymbolRepository( new FilePath( path ) );
+        var repository = new YamlVariableSymbolRepository( new FilePath( path ) );
         var symbolTable = repository.LoadSymbolTable();
 
         Assert.IsTrue( symbolTable.Table.Count > 0 );

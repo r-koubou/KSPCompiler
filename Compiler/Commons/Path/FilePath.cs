@@ -22,14 +22,39 @@ namespace KSPCompiler.Commons.Path
             }
         }
 
+        public void CreateDirectory()
+        {
+            var dir = System.IO.Path.GetDirectoryName( Path );
+
+            if( dir == null )
+            {
+                return;
+            }
+
+            if( Directory.Exists( dir ) )
+            {
+                return;
+            }
+
+            Directory.CreateDirectory( dir );
+        }
+
         public Stream OpenStream( FileMode mode, FileAccess access )
-            => File.Open( Path, mode, access );
+        {
+            CreateDirectory();
+            return File.Open( Path, mode, access );
+        }
 
         public Stream OpenReadStream()
-            => File.OpenRead( Path );
+        {
+            return File.OpenRead( Path );
+        }
 
         public Stream OpenWriteStream()
-            => File.OpenWrite( Path );
+        {
+            CreateDirectory();
+            return File.OpenWrite( Path );
+        }
 
         public override string ToString() => Path;
     }
