@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
@@ -9,25 +10,34 @@ namespace KSPCompiler.ExternalSymbolRepository.Tsv.Variables.Translators;
 
 public class FromTsvTranslator : IDataTranslator<IReadOnlyCollection<string>, ISymbolTable<VariableSymbol>>
 {
+    private enum Column
+    {
+        Category,
+        Name,
+        Reserved,
+        Description
+    }
+
+    private static readonly Regex LineComment = new( @"^#.*" );
+
     public ISymbolTable<VariableSymbol> Translate( IReadOnlyCollection<string> source )
     {
         var result = new VariableSymbolTable();
 
         foreach( var x in source )
         {
-            var line = x.Trim();
-            if( line.StartsWith( "//" ) )
+            if( LineComment.IsMatch( x ) )
             {
                 continue;
             }
 
-            var values = line.Split( '\t' );
+            var values = x.Split( '\t' );
 
             var symbol = new VariableSymbol
             {
-                Name      = values[ 1 ],
+                Name      = values[ (int)Column.Name ],
                 ArraySize = 0,
-                Reserved  =  values[ 2 ] == "true"
+                Reserved  =  values[ (int)Column.Reserved ] == "true"
             };
 
             symbol.DataType         = DataTypeUtility.FromVariableName( symbol.Name.Value );

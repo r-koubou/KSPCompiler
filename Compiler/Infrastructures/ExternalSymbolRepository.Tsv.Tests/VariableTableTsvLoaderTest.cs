@@ -1,5 +1,4 @@
 using System.IO;
-using System.Text;
 
 using KSPCompiler.Commons.Path;
 using KSPCompiler.ExternalSymbolRepository.Tsv.Variables;
@@ -20,6 +19,6 @@ public class VariableTableTsvLoaderTest
         var repository = new TsvExternalVariableSymbolRepository( new FilePath( path ) );
         var symbolTable = repository.LoadSymbolTable();
 
-        Assert.IsTrue( symbolTable.Table.Count > 0 );
+        Assert.IsTrue( symbolTable.Table.Count == 1 );
     }
 }
