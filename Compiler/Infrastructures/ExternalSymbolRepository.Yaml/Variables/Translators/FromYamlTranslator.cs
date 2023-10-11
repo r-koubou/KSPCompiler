@@ -7,7 +7,7 @@ using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Model;
 
 namespace KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Translators;
 
-public class FromYamlTranslator : IDataTranslator<RootObject, ISymbolTable<VariableSymbol>>
+internal class FromYamlTranslator : IDataTranslator<RootObject, ISymbolTable<VariableSymbol>>
 {
     public ISymbolTable<VariableSymbol> Translate( RootObject source )
     {

@@ -22,6 +22,11 @@ public class YamlVariableSymbolRepository : IVariableSymbolRepository
 
     public ISymbolTable<VariableSymbol> LoadSymbolTable()
     {
+        if( !yamlFilePath.Exists )
+        {
+            return new VariableSymbolTable();
+        }
+
         var yaml = File.ReadAllText( yamlFilePath.Path, Encoding.UTF8 );
         var deserializer = new DeserializerBuilder()
                           .WithNamingConvention( CamelCaseNamingConvention.Instance )

@@ -3,6 +3,8 @@ using System.IO;
 
 namespace KSPCompiler.Domain.Symbols;
 
+// ReSharper disable UnusedMemberInSuper.Global
+// ReSharper disable UnusedMember.Global
 public interface ISymbolTable<TSymbol> where TSymbol : SymbolBase
 {
     /// <summary>
@@ -42,11 +44,11 @@ public interface ISymbolTable<TSymbol> where TSymbol : SymbolBase
     /// </summary>
     /// <remarks>
     /// <list type="bullet">
-    ///   <item>If the same symbol (key) exists in `other`, it will be ignored</item>
+    ///   <item>If the same symbol (key) exists in `other`, it will be overwritten when parameter `overwrite` is true. </item>
     ///   <item>Merge into this table from other table directly</item>
     /// </list>
     /// </remarks>
-    void Merge( ISymbolTable<TSymbol> other );
+    void Merge( ISymbolTable<TSymbol> other, bool overwrite = true );
 
     /// <summary>
     /// Convert to list

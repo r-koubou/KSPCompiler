@@ -4,7 +4,7 @@ using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Model;
 
 namespace KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Translators;
 
-public class ToYamlTranslator : IDataTranslator<ISymbolTable<VariableSymbol>, RootObject>
+internal class ToYamlTranslator : IDataTranslator<ISymbolTable<VariableSymbol>, RootObject>
 {
     private const int Version = 1;
 

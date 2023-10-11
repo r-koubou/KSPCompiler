@@ -57,5 +57,7 @@ namespace KSPCompiler.Commons.Path
         }
 
         public override string ToString() => Path;
+
+        public static implicit operator FilePath( string path ) => new( path );
     }
 }

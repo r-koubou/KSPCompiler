@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -148,11 +149,21 @@ public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol
     ///
     /// <inheritdoc />
     ///
-    public virtual void Merge( ISymbolTable<TSymbol> other )
+    public virtual void Merge( ISymbolTable<TSymbol> other, bool overwrite = true )
     {
         foreach( var key in other.Table.Keys )
         {
-            table.TryAdd( key, other.Table[ key ] );
+            if( table.ContainsKey( key ) && overwrite )
+            {
+                table[ key ] = other.Table[ key ];
+            }
+            else
+            {
+                if( !table.TryAdd( key, other.Table[ key ] ) )
+                {
+                    throw new InvalidOperationException( $"{nameof(Merge)} : Failed to add symbol to table." );
+                }
+            }
         }
     }
     #endregion ~Adding

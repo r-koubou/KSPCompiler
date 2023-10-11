@@ -8,7 +8,7 @@ using KSPCompiler.Domain.Symbols.MetaData;
 
 namespace KSPCompiler.ExternalSymbolRepository.Tsv.Variables.Translators;
 
-public class FromTsvTranslator : IDataTranslator<IReadOnlyCollection<string>, ISymbolTable<VariableSymbol>>
+internal class FromTsvTranslator : IDataTranslator<IReadOnlyCollection<string>, ISymbolTable<VariableSymbol>>
 {
     private enum Column
     {
