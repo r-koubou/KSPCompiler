@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <LangVersion>10</LangVersion>
+        <TargetFramework>net7.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <Copyright>R-Koubou</Copyright>
+        <Company>R-Koubou</Company>
+        <Product>KSPCompiler.Apps.VariableSymbolDataManager</Product>
+        <Version>0.0.1</Version>
+        <AssemblyName>KSPCompiler.Apps.VariableSymbolDataManager</AssemblyName>
+        <RootNamespace>KSPCompiler.Apps.VariableSymbolDataManager</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="ConsoleAppFramework" Version="4.2.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Infrastructures\ExternalSymbolRepository.Tsv\ExternalSymbolRepository.Tsv.csproj" />
+      <ProjectReference Include="..\..\Infrastructures\ExternalSymbolRepository.Yaml\ExternalSymbolRepository.Yaml.csproj" />
+      <ProjectReference Include="..\..\Interactor\Interactor.csproj" />
+    </ItemGroup>
+
+</Project>
