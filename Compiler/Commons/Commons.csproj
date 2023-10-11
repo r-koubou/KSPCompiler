@@ -12,10 +12,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="RkHelper" Version="0.0.8" />
-    </ItemGroup>
-
-    <ItemGroup>
       <Folder Include="Path" />
     </ItemGroup>
 
