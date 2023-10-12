@@ -10,7 +10,7 @@ public class VariableSymbolTable : SymbolTable<VariableSymbol>
     public VariableSymbolTable()
         : base( null, UniqueSymbolIndex.Zero ) {}
 
-    public VariableSymbolTable( SymbolTable<VariableSymbol>? parent )
+    public VariableSymbolTable( ISymbolTable<VariableSymbol>? parent )
         : base( parent ) {}
 
     public VariableSymbolTable( SymbolTable<VariableSymbol>? parent, UniqueSymbolIndex startUniqueIndex )

@@ -18,9 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Infrastructures\ExternalSymbolRepository.Tsv\ExternalSymbolRepository.Tsv.csproj" />
-      <ProjectReference Include="..\..\Infrastructures\ExternalSymbolRepository.Yaml\ExternalSymbolRepository.Yaml.csproj" />
-      <ProjectReference Include="..\..\Interactor\Interactor.csproj" />
+      <ProjectReference Include="..\..\Controllers\ExternalSymbolControllers\ExternalSymbolControllers.csproj" />
     </ItemGroup>
 
 </Project>

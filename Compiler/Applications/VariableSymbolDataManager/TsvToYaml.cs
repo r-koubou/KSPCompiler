@@ -8,7 +8,7 @@ public class TsvToYaml : ConsoleAppBase
 {
     public void t2y( [Option("t")] string tsvPath, [Option("y")] string yamlPath )
     {
-        var interactor = new ExternalSymbolConvertInteractor();
+        var interactor = new ExternalVariableSymbolConvertInteractor();
         using var tsvRepository = new TsvVariableSymbolRepository( tsvPath );
         using var yamlRepository = new YamlVariableSymbolRepository( yamlPath );
         interactor.Convert( tsvRepository, yamlRepository );

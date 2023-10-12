@@ -7,10 +7,16 @@ namespace KSPCompiler.Domain.Symbols;
 
 public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol : SymbolBase
 {
-    /// <summary>
-    /// Parent node to be used when local scope, such as nesting, is allowed.
-    /// </summary>
-    public SymbolTable<TSymbol>? Parent { get; set; }
+    ///
+    /// <inheritdoc />
+    ///
+    public ISymbolTable<TSymbol>? Parent { get; set; }
+
+    ///
+    /// <inheritdoc />
+    ///
+    public int Count
+        => table.Count;
 
     /// <summary>
     /// Unique index value assigned to the symbol
@@ -32,9 +38,9 @@ public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol
     // ReSharper disable MemberCanBePrivate.Global
     protected SymbolTable() : this( null, UniqueSymbolIndex.Zero ) {}
 
-    protected SymbolTable( SymbolTable<TSymbol>? parent ) : this( parent, UniqueSymbolIndex.Zero ) {}
+    protected SymbolTable( ISymbolTable<TSymbol>? parent ) : this( parent, UniqueSymbolIndex.Zero ) {}
 
-    protected SymbolTable( SymbolTable<TSymbol>? parent, UniqueSymbolIndex startUniqueIndex )
+    protected SymbolTable( ISymbolTable<TSymbol>? parent, UniqueSymbolIndex startUniqueIndex )
     {
         Parent               = parent;
         uniqueIndexGenerator = new UniqueSymbolIndexGenerator( startUniqueIndex );
@@ -149,7 +155,7 @@ public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol
     ///
     /// <inheritdoc />
     ///
-    public virtual void Merge( ISymbolTable<TSymbol> other, bool overwrite = true )
+    public virtual ISymbolTable<TSymbol> Merge( ISymbolTable<TSymbol> other, bool overwrite = true )
     {
         foreach( var key in other.Table.Keys )
         {
@@ -165,6 +171,8 @@ public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol
                 }
             }
         }
+
+        return this;
     }
     #endregion ~Adding
 

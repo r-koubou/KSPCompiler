@@ -15,21 +15,20 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Gateways\Gateways.csproj" />
-      <ProjectReference Include="..\..\Infrastructures\ExternalSymbolRepository.Tsv\ExternalSymbolRepository.Tsv.csproj" />
-      <ProjectReference Include="..\..\Infrastructures\ExternalSymbolRepository.Yaml\ExternalSymbolRepository.Yaml.csproj" />
-      <ProjectReference Include="..\..\Interactor\Interactor.csproj" />
-      <ProjectReference Include="..\..\UseCases\UseCases.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
       <Folder Include="TestData\" />
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="TestData\ExternalSymbolControllersTest\Tsv\VariableTable.tsv">
+      <None Update="TestData\ExternalSymbolControllersTest\VariableTable.tsv">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="TestData\ExternalSymbolControllersTest\VariableTable.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ExternalSymbolControllers\ExternalSymbolControllers.csproj" />
     </ItemGroup>
 
 </Project>

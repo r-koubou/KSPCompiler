@@ -1,14 +1,16 @@
 using KSPCompiler.Commons.Path;
-using KSPCompiler.ExternalSymbolRepository.Tsv.Variables;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
+using KSPCompiler.ExternalSymbolControllers;
+using KSPCompiler.Interactor.Symbols;
 
 var app = ConsoleApp.Create( args );
 app.AddCommand( "tsv2yaml", TsvToYaml );
+app.AddCommand( "yaml2tsv", YamlToTsv );
 
 app.Run();
 
 return;
 
+#region Command Implementation
 static void TsvToYaml(
     [Option( 0, "tsv file")] string input,
     [Option( 1, "yaml file")] string output )
@@ -16,20 +18,22 @@ static void TsvToYaml(
     var inputPath = new FilePath( input );
     var outputPath = new FilePath( output );
 
-    using var tsvRepository = new TsvVariableSymbolRepository( inputPath );
-    using var yamlRepository = new YamlVariableSymbolRepository( outputPath );
+    var interactor = new ExternalVariableSymbolConvertInteractor();
+    var controller = new VariableSymbolTableFileConvertController( interactor );
 
-    if( outputPath.Exists )
-    {
-        var sourceTable = tsvRepository.LoadSymbolTable();
-        var targetTable = yamlRepository.LoadSymbolTable();
-
-        targetTable.Merge( sourceTable );
-        yamlRepository.StoreSymbolTable( targetTable );
-    }
-    else
-    {
-        var sourceTable = tsvRepository.LoadSymbolTable();
-        yamlRepository.StoreSymbolTable( sourceTable );
-    }
+    controller.TsvToYamlConvert( inputPath, outputPath );
 }
+
+static void YamlToTsv(
+    [Option( 0, "yaml file")] string input,
+    [Option( 1, "tsv file")] string output )
+{
+    var inputPath = new FilePath( input );
+    var outputPath = new FilePath( output );
+
+    var interactor = new ExternalVariableSymbolConvertInteractor();
+    var controller = new VariableSymbolTableFileConvertController( interactor );
+
+    controller.YamlToTsvConvert( inputPath, outputPath );
+}
+#endregion

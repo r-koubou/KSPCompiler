@@ -1,9 +1,11 @@
 // ReSharper disable UnusedMember.Global
 // ReSharper disable UnusedType.Global
 
+using System;
+
 namespace KSPCompiler.Commons.ValueObjects;
 
-public class EmptyStringValueException : System.Exception
+public class EmptyStringValueException : Exception
 {
     public EmptyStringValueException() {}
 

@@ -1,10 +1,7 @@
 using System.IO;
 
 using KSPCompiler.Commons.Path;
-using KSPCompiler.ExternalSymbolRepository.Tsv.Variables;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
 using KSPCompiler.Interactor.Symbols;
-using KSPCompiler.UseCases.Symbols;
 
 using NUnit.Framework;
 
@@ -19,31 +16,24 @@ public class ExternalSymbolConvertControllerTest
     [Test]
     public void TsvToYamlConvertTest()
     {
-        var source = new FilePath( Path.Combine( TestDataDirectory, "Tsv", "VariableTable.tsv" ) );
-        var destination = new FilePath( Path.Combine( OutputDirectory, "Yaml", "Variables.yaml" ) );
+        var source = new FilePath( Path.Combine( TestDataDirectory, "VariableTable.tsv" ) );
+        var destination = new FilePath( Path.Combine( OutputDirectory, "Variables.yaml" ) );
 
-        var controller = new TsvSymbolTableToYamlSymbolTableFileConvertController( new ExternalSymbolConvertInteractor() );
+        var controller = new VariableSymbolTableFileConvertController( new ExternalVariableSymbolConvertInteractor() );
 
-        controller.Convert( source, destination );
+        controller.TsvToYamlConvert( source, destination );
         Assert.That( File.Exists( destination.Path ), Is.True );
     }
-}
 
-
-public class TsvSymbolTableToYamlSymbolTableFileConvertController
-{
-    private readonly IExternalSymbolConvertUseCase useCase;
-
-    public TsvSymbolTableToYamlSymbolTableFileConvertController( IExternalSymbolConvertUseCase useCase )
+    [Test]
+    public void YamlToTsvConvertTest()
     {
-        this.useCase = useCase;
-    }
+        var source = new FilePath( Path.Combine( TestDataDirectory, "Variables.yaml" ) );
+        var destination = new FilePath( Path.Combine( OutputDirectory, "VariableTable.tsv" ) );
 
-    public void Convert(FilePath source, FilePath destination)
-    {
-        using var sourceRepository = new TsvVariableSymbolRepository( source );
-        using var destRepository = new YamlVariableSymbolRepository( destination );
+        var controller = new VariableSymbolTableFileConvertController( new ExternalVariableSymbolConvertInteractor() );
 
-        useCase.Convert( sourceRepository, destRepository );
+        controller.TsvToYamlConvert( source, destination );
+        Assert.That( File.Exists( destination.Path ), Is.True );
     }
 }

@@ -32,6 +32,9 @@ internal class FromTsvTranslator : IDataTranslator<IReadOnlyCollection<string>, 
 
             var values = x.Split( '\t' );
 
+            // Remove " from the beginning and end of the string.
+            RemoveQuoteCharacter( values );
+
             var symbol = new VariableSymbol
             {
                 Name        = values[ (int)Column.Name ],
@@ -50,5 +53,18 @@ internal class FromTsvTranslator : IDataTranslator<IReadOnlyCollection<string>, 
         }
 
         return result;
+    }
+
+    private static void RemoveQuoteCharacter( string[] values )
+    {
+        for( var i = 0; i < values.Length; i++ )
+        {
+            var v = values[ i ];
+
+            if( v.StartsWith( "\"" ) && v.EndsWith( "\"" ) )
+            {
+                values[ i ] = v[ 1..^1 ];
+            }
+        }
     }
 }

@@ -13,9 +13,14 @@ public interface ISymbolTable<TSymbol> where TSymbol : SymbolBase
     IReadOnlyDictionary<SymbolName, TSymbol> Table { get; }
 
     /// <summary>
+    /// Size of symbol table
+    /// </summary>
+    int Count { get; }
+
+    /// <summary>
     /// Parent node to be used when local scope, such as nesting, is allowed.
     /// </summary>
-    SymbolTable<TSymbol>? Parent { get; set; }
+    ISymbolTable<TSymbol>? Parent { get; set; }
 
     /// <summary>
     /// Searches whether the specified symbol name is registered in the table
@@ -48,7 +53,10 @@ public interface ISymbolTable<TSymbol> where TSymbol : SymbolBase
     ///   <item>Merge into this table from other table directly</item>
     /// </list>
     /// </remarks>
-    void Merge( ISymbolTable<TSymbol> other, bool overwrite = true );
+    /// <returns>
+    /// this instance
+    /// </returns>
+    ISymbolTable<TSymbol> Merge( ISymbolTable<TSymbol> other, bool overwrite = true );
 
     /// <summary>
     /// Convert to list
