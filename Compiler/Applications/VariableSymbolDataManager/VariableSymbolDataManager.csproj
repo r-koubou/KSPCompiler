@@ -10,7 +10,7 @@
         <Product>KSPCompiler.Apps.VariableSymbolDataManager</Product>
         <Version>0.0.1</Version>
         <AssemblyName>KSPCompiler.Apps.VariableSymbolDataManager</AssemblyName>
-        <RootNamespace>KSPCompiler.Apps.VariableSymbolDataManager</RootNamespace>
+        <RootNamespace>KSPCompiler.Applications.VariableSymbolDataManager</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

@@ -2,7 +2,7 @@ using KSPCompiler.ExternalSymbolRepository.Tsv.Variables;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
 using KSPCompiler.Interactor.Symbols;
 
-namespace KSPCompiler.Apps.VariableSymbolDataManager;
+namespace KSPCompiler.Applications.VariableSymbolDataManager;
 
 public class TsvToYaml : ConsoleAppBase
 {
