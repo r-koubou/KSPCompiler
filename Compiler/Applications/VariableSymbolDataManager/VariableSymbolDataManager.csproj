@@ -2,14 +2,14 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
+        <TargetFrameworks>net7.0;net6.0</TargetFrameworks>
         <LangVersion>10</LangVersion>
-        <TargetFramework>net7.0</TargetFramework>
         <Nullable>enable</Nullable>
         <Copyright>R-Koubou</Copyright>
         <Company>R-Koubou</Company>
         <Product>KSPCompiler.Apps.VariableSymbolDataManager</Product>
         <Version>0.0.1</Version>
-        <AssemblyName>KSPCompiler.Apps.VariableSymbolDataManager</AssemblyName>
+        <AssemblyName>vsdm</AssemblyName>　<!-- `V`ariable `S`ymbol `D`ata `M`anager -->
         <RootNamespace>KSPCompiler.Applications.VariableSymbolDataManager</RootNamespace>
     </PropertyGroup>
 
