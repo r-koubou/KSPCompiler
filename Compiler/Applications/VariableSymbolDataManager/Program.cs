@@ -30,7 +30,7 @@ static void ConvertVariableImp( IVariableSymbolRepository source, IVariableSymbo
 {
     // Load
     var loadInteractor = new VariableSymbolLoadInteractor( source );
-    var loadController = new ExternalVariableSymbolTableLoadController( loadInteractor );
+    var loadController = new VariableSymbolTableLoadController( loadInteractor );
 
     var loadResult = loadController.Load();
 
@@ -41,7 +41,7 @@ static void ConvertVariableImp( IVariableSymbolRepository source, IVariableSymbo
 
     // Store
     var storeInteractor = new VariableSymbolStoreInteractor( destination );
-    var storeController = new ExternalVariableSymbolTableStoreController( storeInteractor );
+    var storeController = new VariableSymbolTableStoreController( storeInteractor );
 
     storeController.Store( loadResult.Table );
 }

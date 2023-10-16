@@ -3,11 +3,11 @@ using KSPCompiler.UseCases.Symbols;
 
 namespace KSPCompiler.ExternalSymbolControllers;
 
-public class ExternalVariableSymbolTableStoreController
+public class VariableSymbolTableStoreController
 {
     private readonly IVariableSymbolStoreUseCase useCase;
 
-    public ExternalVariableSymbolTableStoreController( IVariableSymbolStoreUseCase useCase )
+    public VariableSymbolTableStoreController( IVariableSymbolStoreUseCase useCase )
     {
         this.useCase = useCase;
     }

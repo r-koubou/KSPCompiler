@@ -23,7 +23,7 @@ public class ExternalVariableSymbolControllerTest
         // Load
         var sourceRepository = new TsvVariableSymbolRepository( source );
         var loadInteractor = new VariableSymbolLoadInteractor( sourceRepository );
-        var loadController = new ExternalVariableSymbolTableLoadController( loadInteractor );
+        var loadController = new VariableSymbolTableLoadController( loadInteractor );
 
         var loadResult = loadController.Load();
         Assert.True( loadResult.Reeult );
@@ -33,7 +33,7 @@ public class ExternalVariableSymbolControllerTest
         // Store
         var destinationRepository = new YamlVariableSymbolRepository( destination );
         var storeInteractor = new VariableSymbolStoreInteractor( destinationRepository );
-        var storeController = new ExternalVariableSymbolTableStoreController( storeInteractor );
+        var storeController = new VariableSymbolTableStoreController( storeInteractor );
 
         storeController.Store( loadResult.Table );
         Assert.That( File.Exists( destination ), Is.True );
@@ -48,7 +48,7 @@ public class ExternalVariableSymbolControllerTest
         // Load
         var sourceRepository = new YamlVariableSymbolRepository( source );
         var loadInteractor = new VariableSymbolLoadInteractor( sourceRepository );
-        var loadController = new ExternalVariableSymbolTableLoadController( loadInteractor );
+        var loadController = new VariableSymbolTableLoadController( loadInteractor );
 
         var loadResult = loadController.Load();
         Assert.True( loadResult.Reeult );
@@ -58,7 +58,7 @@ public class ExternalVariableSymbolControllerTest
         // Store
         var destinationRepository = new TsvVariableSymbolRepository( destination );
         var storeInteractor = new VariableSymbolStoreInteractor( destinationRepository );
-        var storeController = new ExternalVariableSymbolTableStoreController( storeInteractor );
+        var storeController = new VariableSymbolTableStoreController( storeInteractor );
 
         storeController.Store( loadResult.Table );
         Assert.That( File.Exists( destination ), Is.True );

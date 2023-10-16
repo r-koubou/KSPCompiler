@@ -5,11 +5,11 @@ using KSPCompiler.UseCases.Symbols;
 
 namespace KSPCompiler.ExternalSymbolControllers;
 
-public class ExternalVariableSymbolTableLoadController
+public class VariableSymbolTableLoadController
 {
     private readonly IVariableSymbolLoadUseCase useCase;
 
-    public ExternalVariableSymbolTableLoadController( IVariableSymbolLoadUseCase useCase )
+    public VariableSymbolTableLoadController( IVariableSymbolLoadUseCase useCase )
     {
         this.useCase = useCase;
     }
