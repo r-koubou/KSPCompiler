@@ -26,7 +26,8 @@ public class TsvVariableSymbolRepository : IVariableSymbolRepository
 
     public void StoreSymbolTable( ISymbolTable<VariableSymbol> store )
     {
-        throw new NotSupportedException();
+        var lines = new ToTsvTranslator().Translate( store );
+        File.WriteAllLines( tsvFilePath.Path, lines, Encoding.UTF8 );
     }
 
     public void Dispose() {}
