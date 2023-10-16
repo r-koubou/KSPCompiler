@@ -35,5 +35,3 @@ public interface ISymbolRepository<TSymbol> : IDisposable where TSymbol : Symbol
         }
     }
 }
-
-public interface IVariableSymbolRepository : ISymbolRepository<VariableSymbol> {}
