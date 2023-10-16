@@ -1,4 +1,3 @@
-using KSPCompiler.Commons.Path;
 using KSPCompiler.ExternalSymbolControllers;
 using KSPCompiler.ExternalSymbolRepository.Tsv.Variables;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
