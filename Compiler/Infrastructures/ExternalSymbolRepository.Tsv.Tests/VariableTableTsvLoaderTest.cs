@@ -18,7 +18,7 @@ public class VariableTableTsvLoaderTest
     {
         var path = Path.Combine( TestDataDirectory, "VariableTable.txt" );
         var repository = new TsvVariableSymbolRepository( new FilePath( path ) );
-        var symbolTable = repository.LoadSymbolTable();
+        var symbolTable = repository.Load();
 
         Assert.IsTrue( symbolTable.Table.Count == 1 );
     }
@@ -30,6 +30,6 @@ public class VariableTableTsvLoaderTest
         var repository = new TsvVariableSymbolRepository( new FilePath( path ) );
         var symbolTable = MockSymbolTableUtility.CreateDummy();
 
-        repository.StoreSymbolTable( symbolTable );
+        repository.Store( symbolTable );
     }
 }

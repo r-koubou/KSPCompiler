@@ -10,12 +10,12 @@ public interface ISymbolRepository<TSymbol> : IDisposable where TSymbol : Symbol
     /// <returns>
     /// A symbol table when success, otherwise throw exception.
     /// </returns>
-    ISymbolTable<TSymbol> LoadSymbolTable();
+    ISymbolTable<TSymbol> Load();
 
     /// <summary>
     /// Save symbol table to repository.
     /// </summary>
-    void StoreSymbolTable( ISymbolTable<TSymbol> store );
+    void Store( ISymbolTable<TSymbol> store );
 
     /// <summary>
     /// Load symbol table from repository with try-catch scope.
@@ -23,11 +23,11 @@ public interface ISymbolRepository<TSymbol> : IDisposable where TSymbol : Symbol
     /// <returns>
     /// A symbol table when success, otherwise return `defaultSymbolTable` behavior.
     /// </returns>
-    ISymbolTable<TSymbol> TryLoadSymbolTable<TSymbolTable>( Func<TSymbolTable> defaultSymbolTable ) where TSymbolTable : ISymbolTable<TSymbol>
+    ISymbolTable<TSymbol> TryLoad<TSymbolTable>( Func<TSymbolTable> defaultSymbolTable ) where TSymbolTable : ISymbolTable<TSymbol>
     {
         try
         {
-            return LoadSymbolTable();
+            return Load();
         }
         catch( Exception e )
         {

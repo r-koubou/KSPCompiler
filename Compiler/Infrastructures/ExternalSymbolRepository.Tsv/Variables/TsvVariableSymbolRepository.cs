@@ -17,14 +17,14 @@ public class TsvVariableSymbolRepository : IVariableSymbolRepository
         this.tsvFilePath = tsvFilePath;
     }
 
-    public ISymbolTable<VariableSymbol> LoadSymbolTable()
+    public ISymbolTable<VariableSymbol> Load()
     {
         var tsv = File.ReadAllLines( tsvFilePath.Path, Encoding.UTF8 );
 
         return new FromTsvTranslator().Translate( tsv );
     }
 
-    public void StoreSymbolTable( ISymbolTable<VariableSymbol> store )
+    public void Store( ISymbolTable<VariableSymbol> store )
     {
         var lines = new ToTsvTranslator().Translate( store );
         File.WriteAllLines( tsvFilePath.Path, lines, Encoding.UTF8 );

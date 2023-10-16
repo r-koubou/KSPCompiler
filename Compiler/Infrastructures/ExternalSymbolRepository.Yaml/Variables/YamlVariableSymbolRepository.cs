@@ -20,7 +20,7 @@ public class YamlVariableSymbolRepository : IVariableSymbolRepository
         this.yamlFilePath = yamlFilePath;
     }
 
-    public ISymbolTable<VariableSymbol> LoadSymbolTable()
+    public ISymbolTable<VariableSymbol> Load()
     {
         var yaml = File.ReadAllText( yamlFilePath.Path, Encoding.UTF8 );
         var deserializer = new DeserializerBuilder()
@@ -31,7 +31,7 @@ public class YamlVariableSymbolRepository : IVariableSymbolRepository
         return new FromYamlTranslator().Translate( rootObject );
     }
 
-    public void StoreSymbolTable( ISymbolTable<VariableSymbol> store )
+    public void Store( ISymbolTable<VariableSymbol> store )
     {
         var serializer = new SerializerBuilder()
                           .WithNamingConvention( CamelCaseNamingConvention.Instance )

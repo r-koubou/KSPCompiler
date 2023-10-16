@@ -7,10 +7,10 @@ public class ExternalVariableSymbolConvertInteractor : IExternalVariableSymbolCo
 {
     public void Convert( ISymbolRepository<VariableSymbol> source, ISymbolRepository<VariableSymbol> target )
     {
-        var sourceTable = source.TryLoadSymbolTable( () => new VariableSymbolTable() );
-        var targetTable = target.TryLoadSymbolTable( () => new VariableSymbolTable() );
+        var sourceTable = source.TryLoad( () => new VariableSymbolTable() );
+        var targetTable = target.TryLoad( () => new VariableSymbolTable() );
 
         targetTable.Merge( sourceTable );
-        target.StoreSymbolTable( targetTable );
+        target.Store( targetTable );
     }
 }

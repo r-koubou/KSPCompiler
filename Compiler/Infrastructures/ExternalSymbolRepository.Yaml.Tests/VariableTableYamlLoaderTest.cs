@@ -45,7 +45,7 @@ public class VariableTableYamlLoaderTest
 
         ISymbolRepository<VariableSymbol> repository = new YamlVariableSymbolRepository( new FilePath( path ) );
         var defaultTable = new VariableSymbolTable();
-        var result = repository.TryLoadSymbolTable( () => defaultTable );
+        var result = repository.TryLoad( () => defaultTable );
 
         Assert.AreSame( result, defaultTable );
     }
@@ -55,7 +55,7 @@ public class VariableTableYamlLoaderTest
     {
         var path = Path.Combine( TestDataDirectory, "VariableTable.yaml" );
         ISymbolRepository<VariableSymbol> repository = new YamlVariableSymbolRepository( new FilePath( path ) );
-        var symbolTable = repository.LoadSymbolTable();
+        var symbolTable = repository.Load();
 
         Assert.IsTrue( symbolTable.Table.Count > 0 );
     }

@@ -18,6 +18,6 @@ public class NewDatabaseCreateInteractor : INewDatabaseCreateUseCase
 
         table.Add( example );
 
-        repository.StoreSymbolTable( table );
+        repository.Store( table );
     }
 }
