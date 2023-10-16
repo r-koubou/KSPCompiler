@@ -16,24 +16,24 @@ public class ExternalSymbolConvertControllerTest
     [Test]
     public void TsvToYamlConvertTest()
     {
-        var source = new FilePath( Path.Combine( TestDataDirectory, "VariableTable.tsv" ) );
-        var destination = new FilePath( Path.Combine( OutputDirectory, "Variables.yaml" ) );
+        var source = Path.Combine( TestDataDirectory,    "VariableTable.tsv" );
+        var destination = Path.Combine( OutputDirectory, "Variables.yaml" );
 
         var controller = new VariableSymbolTableFileConvertController( new ExternalVariableSymbolConvertInteractor() );
 
         controller.TsvToYamlConvert( source, destination );
-        Assert.That( File.Exists( destination.Path ), Is.True );
+        Assert.That( File.Exists( destination ), Is.True );
     }
 
     [Test]
     public void YamlToTsvConvertTest()
     {
-        var source = new FilePath( Path.Combine( TestDataDirectory, "Variables.yaml" ) );
-        var destination = new FilePath( Path.Combine( OutputDirectory, "VariableTable.tsv" ) );
+        var source = Path.Combine( TestDataDirectory,    "Variables.yaml" );
+        var destination = Path.Combine( OutputDirectory, "VariableTable.tsv" );
 
         var controller = new VariableSymbolTableFileConvertController( new ExternalVariableSymbolConvertInteractor() );
 
         controller.TsvToYamlConvert( source, destination );
-        Assert.That( File.Exists( destination.Path ), Is.True );
+        Assert.That( File.Exists( destination ), Is.True );
     }
 }

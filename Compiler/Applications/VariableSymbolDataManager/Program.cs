@@ -26,25 +26,19 @@ static void TsvToYaml(
     [Option( 0, "tsv file")] string input,
     [Option( 1, "yaml file")] string output )
 {
-    var inputPath = new FilePath( input );
-    var outputPath = new FilePath( output );
-
     var interactor = new ExternalVariableSymbolConvertInteractor();
     var controller = new VariableSymbolTableFileConvertController( interactor );
 
-    controller.TsvToYamlConvert( inputPath, outputPath );
+    controller.TsvToYamlConvert( input, output );
 }
 
 static void YamlToTsv(
     [Option( 0, "yaml file")] string input,
     [Option( 1, "tsv file")] string output )
 {
-    var inputPath = new FilePath( input );
-    var outputPath = new FilePath( output );
-
     var interactor = new ExternalVariableSymbolConvertInteractor();
     var controller = new VariableSymbolTableFileConvertController( interactor );
 
-    controller.YamlToTsvConvert( inputPath, outputPath );
+    controller.YamlToTsvConvert( input, output );
 }
 #endregion

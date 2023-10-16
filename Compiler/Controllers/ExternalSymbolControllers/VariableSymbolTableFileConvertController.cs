@@ -14,7 +14,7 @@ public class VariableSymbolTableFileConvertController
         this.useCase = useCase;
     }
 
-    public void TsvToYamlConvert(FilePath source, FilePath destination)
+    public void TsvToYamlConvert(string source, string destination)
     {
         using var sourceRepository = new TsvVariableSymbolRepository( source );
         using var destRepository = new YamlVariableSymbolRepository( destination );
@@ -22,7 +22,7 @@ public class VariableSymbolTableFileConvertController
         useCase.Convert( sourceRepository, destRepository );
     }
 
-    public void YamlToTsvConvert(FilePath source, FilePath destination)
+    public void YamlToTsvConvert(string source, string destination)
     {
         using var sourceRepository = new YamlVariableSymbolRepository( source );
         using var destRepository = new TsvVariableSymbolRepository( destination );
