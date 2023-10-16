@@ -1,3 +1,6 @@
+using System;
+
+using KSPCompiler.Domain.Symbols;
 using KSPCompiler.ExternalSymbolControllers;
 using KSPCompiler.ExternalSymbolRepository.Tsv.Variables;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
@@ -23,41 +26,43 @@ static void NewDb(
     controller.Create( outputDirectory, databaseName );
 }
 
+static void ConvertVariableImp( IVariableSymbolRepository source, IVariableSymbolRepository destination )
+{
+    // Load
+    var loadInteractor = new VariableSymbolLoadInteractor( source );
+    var loadController = new ExternalVariableSymbolTableLoadController( loadInteractor );
+
+    var loadResult = loadController.Load();
+
+    if( !loadResult.Reeult )
+    {
+        throw new InvalidOperationException("Load failed", loadResult.Error);
+    }
+
+    // Store
+    var storeInteractor = new VariableSymbolStoreInteractor( destination );
+    var storeController = new ExternalVariableSymbolTableStoreController( storeInteractor );
+
+    storeController.Store( loadResult.Table );
+}
+
 static void TsvToYaml(
     [Option( 0, "tsv file")] string input,
     [Option( 1, "yaml file")] string output )
 {
-    // Load
     var sourceRepository = new TsvVariableSymbolRepository( input );
-    var loadInteractor = new VariableSymbolLoadInteractor( sourceRepository );
-    var loadController = new ExternalVariableSymbolTableLoadController( loadInteractor );
-
-    var table = loadController.Load();
-
-    // Store
     var destinationRepository = new YamlVariableSymbolRepository( output );
-    var storeInteractor = new VariableSymbolStoreInteractor( destinationRepository );
-    var storeController = new ExternalVariableSymbolTableStoreController( storeInteractor );
 
-    storeController.Store( table );
+    ConvertVariableImp( sourceRepository, destinationRepository );
 }
 
 static void YamlToTsv(
     [Option( 0, "yaml file")] string input,
     [Option( 1, "tsv file")] string output )
 {
-    // Load
     var sourceRepository = new YamlVariableSymbolRepository( input );
-    var loadInteractor = new VariableSymbolLoadInteractor( sourceRepository );
-    var loadController = new ExternalVariableSymbolTableLoadController( loadInteractor );
-
-    var table = loadController.Load();
-
-    // Store
     var destinationRepository = new TsvVariableSymbolRepository( output );
-    var storeInteractor = new VariableSymbolStoreInteractor( destinationRepository );
-    var storeController = new ExternalVariableSymbolTableStoreController( storeInteractor );
 
-    storeController.Store( table );
+    ConvertVariableImp( sourceRepository, destinationRepository );
 }
 #endregion

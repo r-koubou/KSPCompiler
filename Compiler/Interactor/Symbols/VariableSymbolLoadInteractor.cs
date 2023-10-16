@@ -12,8 +12,10 @@ public class VariableSymbolLoadInteractor : IVariableSymbolLoadUseCase
         this.repository = repository;
     }
 
-    public ISymbolTable<VariableSymbol> Execute()
+    public VariableSymbolLoadOutputData Execute()
     {
-        return repository.Load();
+        var (result, table, error) = repository.TryLoad( () => new VariableSymbolTable() );
+
+        return new VariableSymbolLoadOutputData( result, table, error );
     }
 }

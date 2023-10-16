@@ -1,3 +1,5 @@
+using System;
+
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.UseCases.Symbols;
 
@@ -12,8 +14,10 @@ public class ExternalVariableSymbolTableLoadController
         this.useCase = useCase;
     }
 
-    public ISymbolTable<VariableSymbol> Load()
+    public (bool Reeult, ISymbolTable<VariableSymbol> Table, Exception? Error) Load()
     {
-        return useCase.Execute();
+        var result = useCase.Execute();
+
+        return ( result.Result, result.Table, result.Error );
     }
 }

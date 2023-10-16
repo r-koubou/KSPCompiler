@@ -23,19 +23,17 @@ public interface ISymbolRepository<TSymbol> : IDisposable where TSymbol : Symbol
     /// <returns>
     /// A symbol table when success, otherwise return `defaultSymbolTable` behavior.
     /// </returns>
-    ISymbolTable<TSymbol> TryLoad<TSymbolTable>( Func<TSymbolTable> defaultSymbolTable ) where TSymbolTable : ISymbolTable<TSymbol>
+    (bool reeult, ISymbolTable<TSymbol> table, Exception? error ) TryLoad<TSymbolTable>( Func<TSymbolTable> defaultSymbolTable ) where TSymbolTable : ISymbolTable<TSymbol>
     {
         try
         {
-            return Load();
+            return ( true, Load(), null );
         }
         catch( Exception e )
         {
-            return defaultSymbolTable();
+            return ( false, defaultSymbolTable.Invoke(), e );
         }
     }
 }
 
 public interface IVariableSymbolRepository : ISymbolRepository<VariableSymbol> {}
-
-public interface ICommandSymbolRepository : ISymbolRepository<CommandSymbol> {}

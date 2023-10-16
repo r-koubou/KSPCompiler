@@ -25,14 +25,17 @@ public class ExternalVariableSymbolControllerTest
         var loadInteractor = new VariableSymbolLoadInteractor( sourceRepository );
         var loadController = new ExternalVariableSymbolTableLoadController( loadInteractor );
 
-        var table = loadController.Load();
+        var loadResult = loadController.Load();
+        Assert.True( loadResult.Reeult );
+        Assert.True( loadResult.Table.Count > 0 );
+        Assert.Null( loadResult.Error );
 
         // Store
         var destinationRepository = new YamlVariableSymbolRepository( destination );
         var storeInteractor = new VariableSymbolStoreInteractor( destinationRepository );
         var storeController = new ExternalVariableSymbolTableStoreController( storeInteractor );
 
-        storeController.Store( table );
+        storeController.Store( loadResult.Table );
         Assert.That( File.Exists( destination ), Is.True );
     }
 
@@ -47,14 +50,17 @@ public class ExternalVariableSymbolControllerTest
         var loadInteractor = new VariableSymbolLoadInteractor( sourceRepository );
         var loadController = new ExternalVariableSymbolTableLoadController( loadInteractor );
 
-        var table = loadController.Load();
+        var loadResult = loadController.Load();
+        Assert.True( loadResult.Reeult );
+        Assert.True( loadResult.Table.Count > 0 );
+        Assert.Null( loadResult.Error );
 
         // Store
         var destinationRepository = new TsvVariableSymbolRepository( destination );
         var storeInteractor = new VariableSymbolStoreInteractor( destinationRepository );
         var storeController = new ExternalVariableSymbolTableStoreController( storeInteractor );
 
-        storeController.Store( table );
+        storeController.Store( loadResult.Table );
         Assert.That( File.Exists( destination ), Is.True );
     }
 }

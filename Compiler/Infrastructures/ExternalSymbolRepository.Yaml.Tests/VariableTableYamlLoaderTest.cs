@@ -43,7 +43,7 @@ public class VariableTableYamlLoaderTest
     {
         var path = Path.Combine( TestDataDirectory, "invalid.yaml" );
 
-        ISymbolRepository<VariableSymbol> repository = new YamlVariableSymbolRepository( new FilePath( path ) );
+        IVariableSymbolRepository repository = new YamlVariableSymbolRepository( new FilePath( path ) );
         var defaultTable = new VariableSymbolTable();
         var result = repository.TryLoad( () => defaultTable );
 
@@ -54,7 +54,7 @@ public class VariableTableYamlLoaderTest
     public void TranslateLoadedSymbolTable()
     {
         var path = Path.Combine( TestDataDirectory, "VariableTable.yaml" );
-        ISymbolRepository<VariableSymbol> repository = new YamlVariableSymbolRepository( new FilePath( path ) );
+        IVariableSymbolRepository repository = new YamlVariableSymbolRepository( new FilePath( path ) );
         var symbolTable = repository.Load();
 
         Assert.IsTrue( symbolTable.Table.Count > 0 );
