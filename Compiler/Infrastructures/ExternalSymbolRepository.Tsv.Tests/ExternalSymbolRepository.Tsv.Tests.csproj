@@ -15,6 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Domain.Tests\Domain.Tests.csproj" />
       <ProjectReference Include="..\ExternalSymbolRepository.Tsv\ExternalSymbolRepository.Tsv.csproj" />
     </ItemGroup>
 

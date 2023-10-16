@@ -3,7 +3,7 @@
     <PropertyGroup>
         <LangVersion>10</LangVersion>
         <TargetFramework>net6.0</TargetFramework>
-        <RootNamespace>KSPCompiler.ExternalSymbolRepository.Yaml.Tests</RootNamespace>
+        <RootNamespace>KSPCompiler.Domain.Tests</RootNamespace>
         <Nullable>enable</Nullable>
         <IsPackable>false</IsPackable>
     </PropertyGroup>
@@ -15,14 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Domain.Tests\Domain.Tests.csproj" />
-        <ProjectReference Include="..\ExternalSymbolRepository.Yaml\ExternalSymbolRepository.Yaml.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Update="TestData\VariableTableYamlLoaderTest\VariableTable.yaml">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
+      <ProjectReference Include="..\Domain\Domain.csproj" />
     </ItemGroup>
 
 </Project>
