@@ -2,7 +2,6 @@ using System;
 
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.ExternalSymbolControllers;
-using KSPCompiler.ExternalSymbolRepository.Tsv.Variables;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
 using KSPCompiler.Interactor.Symbols;

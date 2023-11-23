@@ -2,10 +2,10 @@ using System.IO;
 using System.Threading.Tasks;
 
 using KSPCompiler.Commons.Path;
-using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Tests;
 using KSPCompiler.ExternalSymbolRepository.Tsv.Variables;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
+using KSPCompiler.UseCases.Symbols.Commons;
 
 using NUnit.Framework;
 
@@ -16,20 +16,24 @@ public class VariableTableTsvLoaderTest
 {
     private static readonly string TestDataDirectory = Path.Combine( "TestData", "VariableTableTsvLoaderTest" );
 
-    private static IVariableSymbolRepository CreateLocalRepository( string path )
+    private static IExternalVariableSymbolImporter CreateLocalImporter( string path )
     {
         var reader = new LocalTextContentReader( new FilePath( path ) );
-        var writer = new LocalTextContentWriter( new FilePath( path ) );
+        return new TsvVariableSymbolImporter( reader );
+    }
 
-        return new TsvVariableSymbolRepository( reader, writer );
+    private static IExternalVariableSymbolExporter CreateLocalExporter( string path )
+    {
+        var writer = new LocalTextContentWriter( new FilePath( path ) );
+        return new TsvVariableSymbolExporter( writer );
     }
 
     [Test]
     public void TranslateSymbolTable()
     {
         var path = Path.Combine( TestDataDirectory, "VariableTable.txt" );
-        var repository = CreateLocalRepository( path );
-        var symbolTable = repository.Load();
+        var repository = CreateLocalImporter( path );
+        var symbolTable = repository.Import();
 
         Assert.IsTrue( symbolTable.Table.Count == 1 );
     }
@@ -38,10 +42,10 @@ public class VariableTableTsvLoaderTest
     public async Task TranslateSymbolTableAsync()
     {
         var path = Path.Combine( TestDataDirectory, "VariableTable.txt" );
-        var repository = CreateLocalRepository( path );
+        var repository = CreateLocalImporter( path );
 
         await Task.Run( async () => {
-            var symbolTable = await repository.LoadAsync();
+            var symbolTable = await repository.ImportAsync();
             Assert.IsTrue( symbolTable.Table.Count == 1 );
         });
     }
@@ -50,19 +54,19 @@ public class VariableTableTsvLoaderTest
     public void StoreTest()
     {
         var path = Path.Combine( TestDataDirectory, "VariableTable.tsv" );
-        var repository = CreateLocalRepository( path );
+        var repository = CreateLocalExporter( path );
         var symbolTable = MockSymbolTableUtility.CreateDummy();
 
-        repository.Store( symbolTable );
+        repository.ExportAsync( symbolTable );
     }
 
     [Test]
     public async Task StoreAsyncTest()
     {
         var path = Path.Combine( TestDataDirectory, "VariableTable.tsv" );
-        var repository = CreateLocalRepository( path );
+        var repository = CreateLocalExporter( path );
         var symbolTable = MockSymbolTableUtility.CreateDummy();
 
-        await repository.StoreAsync( symbolTable );
+        await repository.ExportAsync( symbolTable );
     }
 }
