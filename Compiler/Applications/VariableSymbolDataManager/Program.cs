@@ -4,6 +4,7 @@ using KSPCompiler.Domain.Symbols;
 using KSPCompiler.ExternalSymbolControllers;
 using KSPCompiler.ExternalSymbolRepository.Tsv.Variables;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
+using KSPCompiler.Infrastructures.Commons.LocalStorages;
 using KSPCompiler.Interactor.Symbols;
 
 var app = ConsoleApp.Create( args );
@@ -50,7 +51,7 @@ static void TsvToYaml(
     [Option( 0, "tsv file")] string input,
     [Option( 1, "yaml file")] string output )
 {
-    var sourceRepository = new TsvVariableSymbolRepository( input );
+    var sourceRepository = new TsvVariableSymbolRepository( new LocalTextContentReader( input ) );
     var destinationRepository = new YamlVariableSymbolRepository( output );
 
     ConvertVariableImp( sourceRepository, destinationRepository );
@@ -61,7 +62,7 @@ static void YamlToTsv(
     [Option( 1, "tsv file")] string output )
 {
     var sourceRepository = new YamlVariableSymbolRepository( input );
-    var destinationRepository = new TsvVariableSymbolRepository( output );
+    var destinationRepository = new TsvVariableSymbolRepository( new LocalTextContentWriter( output ) );
 
     ConvertVariableImp( sourceRepository, destinationRepository );
 }

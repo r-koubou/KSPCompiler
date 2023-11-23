@@ -1,5 +1,7 @@
 using System.IO;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 using KSPCompiler.Commons.Path;
 using KSPCompiler.Domain.Symbols;
@@ -20,9 +22,9 @@ public class YamlVariableSymbolRepository : IVariableSymbolRepository
         this.yamlFilePath = yamlFilePath;
     }
 
-    public ISymbolTable<VariableSymbol> Load()
+    public async Task<ISymbolTable<VariableSymbol>> LoadAsync( CancellationToken cancellationToken = default )
     {
-        var yaml = File.ReadAllText( yamlFilePath.Path, Encoding.UTF8 );
+        var yaml = await File.ReadAllTextAsync( yamlFilePath.Path, Encoding.UTF8, cancellationToken );
         var deserializer = new DeserializerBuilder()
                           .WithNamingConvention( CamelCaseNamingConvention.Instance )
                           .Build();
@@ -31,7 +33,7 @@ public class YamlVariableSymbolRepository : IVariableSymbolRepository
         return new FromYamlTranslator().Translate( rootObject );
     }
 
-    public void Store( ISymbolTable<VariableSymbol> store )
+    public async Task StoreAsync( ISymbolTable<VariableSymbol> store, CancellationToken cancellationToken = default )
     {
         var serializer = new SerializerBuilder()
                           .WithNamingConvention( CamelCaseNamingConvention.Instance )
@@ -40,7 +42,7 @@ public class YamlVariableSymbolRepository : IVariableSymbolRepository
         var yaml = serializer.Serialize( root );
 
         yamlFilePath.CreateDirectory();
-        File.WriteAllText( yamlFilePath.Path, yaml, Encoding.UTF8 );
+        await File.WriteAllTextAsync( yamlFilePath.Path, yaml, Encoding.UTF8, cancellationToken );
     }
 
     public void Dispose() {}

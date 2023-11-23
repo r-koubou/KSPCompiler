@@ -1,7 +1,8 @@
-using System.IO;
-using System.Text;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
-using KSPCompiler.Commons.Path;
+using KSPCompiler.Commons.Contents;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.ExternalSymbolRepository.Tsv.Variables.Translators;
 
@@ -9,24 +10,38 @@ namespace KSPCompiler.ExternalSymbolRepository.Tsv.Variables;
 
 public class TsvVariableSymbolRepository : IVariableSymbolRepository
 {
-    private readonly FilePath tsvFilePath;
+    private readonly ITextContentReader? contentReader;
+    private readonly ITextContentWriter? contentWriter;
 
-    public TsvVariableSymbolRepository( FilePath tsvFilePath )
+    public TsvVariableSymbolRepository( ITextContentWriter? writer ) : this( null, writer) {}
+
+    public TsvVariableSymbolRepository( ITextContentReader? reader, ITextContentWriter? writer = null )
     {
-        this.tsvFilePath = tsvFilePath;
+        contentReader = reader;
+        contentWriter = writer;
     }
 
-    public ISymbolTable<VariableSymbol> Load()
+    public async Task<ISymbolTable<VariableSymbol>> LoadAsync( CancellationToken cancellationToken = default )
     {
-        var tsv = File.ReadAllLines( tsvFilePath.Path, Encoding.UTF8 );
+        if( contentReader == null )
+        {
+            throw new InvalidOperationException( "Content reader is not set." );
+        }
+
+        var tsv = await contentReader.ReadContentAsync( cancellationToken );
 
         return new FromTsvTranslator().Translate( tsv );
     }
 
-    public void Store( ISymbolTable<VariableSymbol> store )
+    public async Task StoreAsync( ISymbolTable<VariableSymbol> store, CancellationToken cancellationToken = default )
     {
+        if( contentWriter == null )
+        {
+            throw new InvalidOperationException( "Content writer is not set." );
+        }
+
         var lines = new ToTsvTranslator().Translate( store );
-        File.WriteAllLines( tsvFilePath.Path, lines, Encoding.UTF8 );
+        await contentWriter.WriteContentAsync( lines, cancellationToken );
     }
 
     public void Dispose() {}

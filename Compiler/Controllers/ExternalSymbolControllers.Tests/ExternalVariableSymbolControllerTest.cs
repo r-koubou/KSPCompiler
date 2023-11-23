@@ -2,6 +2,7 @@ using System.IO;
 
 using KSPCompiler.ExternalSymbolRepository.Tsv.Variables;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
+using KSPCompiler.Infrastructures.Commons.LocalStorages;
 using KSPCompiler.Interactor.Symbols;
 
 using NUnit.Framework;
@@ -21,7 +22,7 @@ public class ExternalVariableSymbolControllerTest
         var destination = Path.Combine( OutputDirectory, "VariableTable-converted.yaml" );
 
         // Load
-        var sourceRepository = new TsvVariableSymbolRepository( source );
+        var sourceRepository = new TsvVariableSymbolRepository( new LocalTextContentReader( source ) );
         var loadInteractor = new VariableSymbolLoadInteractor( sourceRepository );
         var loadController = new VariableSymbolTableLoadController( loadInteractor );
 
@@ -56,7 +57,7 @@ public class ExternalVariableSymbolControllerTest
         Assert.Null( loadResult.Error );
 
         // Store
-        var destinationRepository = new TsvVariableSymbolRepository( destination );
+        var destinationRepository = new TsvVariableSymbolRepository( new LocalTextContentWriter( destination ) );
         var storeInteractor = new VariableSymbolStoreInteractor( destinationRepository );
         var storeController = new VariableSymbolTableStoreController( storeInteractor );
 

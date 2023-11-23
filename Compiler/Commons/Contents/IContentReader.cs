@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 
 namespace KSPCompiler.Commons.Contents;
 
-public interface IContentReader
+public interface IContentReader<T>
 {
-    byte[] ReadContent()
+    T ReadContent()
         => ReadContentAsync().GetAwaiter().GetResult();
 
-    Task<byte[]> ReadContentAsync( CancellationToken cancellationToken = default );
+    Task<T> ReadContentAsync( CancellationToken cancellationToken = default );
 }

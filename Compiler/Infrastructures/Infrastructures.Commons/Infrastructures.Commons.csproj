@@ -6,15 +6,14 @@
         <Nullable>enable</Nullable>
         <Copyright>R-Koubou</Copyright>
         <Company>R-Koubou</Company>
-        <Product>KSPCompiler.ExternalSymbolRepository.Tsv</Product>
-        <AssemblyName>KSPCompiler.ExternalSymbolRepository.Tsv</AssemblyName>
-        <RootNamespace>KSPCompiler.ExternalSymbolRepository.Tsv</RootNamespace>
+        <Product>KSPCompiler.Infrastructures.Commons</Product>
+        <AssemblyName>KSPCompiler.Infrastructures.Commons</AssemblyName>
+        <RootNamespace>KSPCompiler.Infrastructures.Commons</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\..\Commons\Commons.csproj" />
       <ProjectReference Include="..\..\Domain\Domain.csproj" />
-      <ProjectReference Include="..\Infrastructures.Commons\Infrastructures.Commons.csproj" />
     </ItemGroup>
 
 </Project>
