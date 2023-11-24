@@ -1,24 +1,22 @@
 using System;
 
+using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
 
 namespace KSPCompiler.UseCases.Symbols;
 
-public sealed class VariableSymbolLoadOutputData
+public sealed class VariableSymbolLoadOutputData : IOutputPort<ISymbolTable<VariableSymbol>>
 {
     public bool Result { get; }
-    public ISymbolTable<VariableSymbol> Table { get; }
+    public ISymbolTable<VariableSymbol> OutputData { get; }
     public Exception? Error { get; }
 
     public VariableSymbolLoadOutputData( bool result, ISymbolTable<VariableSymbol> table, Exception? error = null )
     {
-        Result = result;
-        Table  = table;
-        Error  = error;
+        Result     = result;
+        OutputData = table;
+        Error      = error;
     }
 }
 
-public interface IVariableSymbolLoadUseCase
-{
-    VariableSymbolLoadOutputData Execute();
-}
+public interface IVariableSymbolLoadUseCase : IUseCase<Unit, VariableSymbolLoadOutputData> {}

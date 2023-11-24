@@ -1,5 +1,6 @@
 using System.IO;
 
+using KSPCompiler.ExternalSymbolRepository.Tsv.Variables;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
 using KSPCompiler.Interactor.Symbols;
@@ -21,8 +22,8 @@ public class ExternalVariableSymbolControllerTest
         var destination = Path.Combine( OutputDirectory, "VariableTable-converted.yaml" );
 
         // Load
-        var sourceRepository = new TsvVariableSymbolRepository( new LocalTextContentReader( source ) );
-        var loadInteractor = new VariableSymbolLoadInteractor( sourceRepository );
+        var importer = new TsvVariableSymbolImporter( new LocalTextContentReader( source ) );
+        var loadInteractor = new VariableSymbolLoadInteractor( importer );
         var loadController = new VariableSymbolTableLoadController( loadInteractor );
 
         var loadResult = loadController.Load();
@@ -31,8 +32,8 @@ public class ExternalVariableSymbolControllerTest
         Assert.Null( loadResult.Error );
 
         // Store
-        var destinationRepository = new YamlVariableSymbolRepository( destination );
-        var storeInteractor = new VariableSymbolStoreInteractor( destinationRepository );
+        var exporter = new YamlVariableSymbolRepository( destination );
+        var storeInteractor = new VariableSymbolStoreInteractor( exporter );
         var storeController = new VariableSymbolTableStoreController( storeInteractor );
 
         storeController.Store( loadResult.Table );
@@ -56,7 +57,7 @@ public class ExternalVariableSymbolControllerTest
         Assert.Null( loadResult.Error );
 
         // Store
-        var destinationRepository = new TsvVariableSymbolRepository( new LocalTextContentWriter( destination ) );
+        var destinationRepository = new TsvVariableSymbolExporter( new LocalTextContentWriter( destination ) );
         var storeInteractor = new VariableSymbolStoreInteractor( destinationRepository );
         var storeController = new VariableSymbolTableStoreController( storeInteractor );
 

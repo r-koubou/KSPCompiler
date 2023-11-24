@@ -1,21 +1,33 @@
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+
+using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.UseCases.Symbols;
+using KSPCompiler.UseCases.Symbols.Commons;
 
 namespace KSPCompiler.Interactor.Symbols;
 
 public class VariableSymbolLoadInteractor : IVariableSymbolLoadUseCase
 {
-    private readonly IVariableSymbolRepository repository;
+    private readonly IExternalVariableSymbolImporter importer;
 
-    public VariableSymbolLoadInteractor( IVariableSymbolRepository repository )
+    public VariableSymbolLoadInteractor( IExternalVariableSymbolImporter importer )
     {
-        this.repository = repository;
+        this.importer = importer;
     }
 
-    public VariableSymbolLoadOutputData Execute()
+    public async Task<VariableSymbolLoadOutputData> ExecuteAsync( Unit input, CancellationToken cancellationToken = default )
     {
-        var (result, table, error) = repository.TryLoad( () => new VariableSymbolTable() );
-
-        return new VariableSymbolLoadOutputData( result, table, error );
+        try
+        {
+            var resultData = await importer.ImportAsync( cancellationToken );
+            return new VariableSymbolLoadOutputData( true, resultData );
+        }
+        catch( Exception e )
+        {
+            return new VariableSymbolLoadOutputData( false, new VariableSymbolTable(), e );
+        }
     }
 }

@@ -13,7 +13,7 @@ public interface IExternalSymbolImporter<TSymbol> where TSymbol : SymbolBase
     /// <returns>
     /// A symbol table when success, otherwise throw exception.
     /// </returns>
-    public ISymbolTable<TSymbol> Import()
+    ISymbolTable<TSymbol> Import()
         => ImportAsync().GetAwaiter().GetResult();
 
     /// <summary>

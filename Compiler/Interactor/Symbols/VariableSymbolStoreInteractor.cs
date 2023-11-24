@@ -1,19 +1,25 @@
+using System.Threading;
+using System.Threading.Tasks;
+
+using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.UseCases.Symbols;
+using KSPCompiler.UseCases.Symbols.Commons;
 
 namespace KSPCompiler.Interactor.Symbols;
 
 public class VariableSymbolStoreInteractor : IVariableSymbolStoreUseCase
 {
-    private readonly IVariableSymbolRepository repository;
+    private readonly IExternalVariableSymbolExporter exporter;
 
-    public VariableSymbolStoreInteractor( IVariableSymbolRepository repository )
+    public VariableSymbolStoreInteractor( IExternalVariableSymbolExporter exporter )
     {
-        this.repository = repository;
+        this.exporter = exporter;
     }
 
-    public void Execute( ISymbolTable<VariableSymbol> table )
+    public async Task<Unit> ExecuteAsync( ISymbolTable<VariableSymbol> table, CancellationToken cancellationToken = default )
     {
-        repository.Store( table );
+        await exporter.ExportAsync( table, cancellationToken );
+        return Unit.Default;
     }
 }
