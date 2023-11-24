@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,6 +18,6 @@ public sealed class LocalTextContentReader : ITextContentReader
         FilePath = filePath;
     }
 
-    public async Task<IReadOnlyCollection<string>> ReadContentAsync( CancellationToken cancellationToken = default )
-        => await File.ReadAllLinesAsync( FilePath.Path, cancellationToken );
+    public async Task<string> ReadContentAsync( CancellationToken cancellationToken = default )
+        => await File.ReadAllTextAsync( FilePath.Path, cancellationToken );
 }

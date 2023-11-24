@@ -1,7 +1,6 @@
-using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
-using KSPCompiler.Commons.Path;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
 using KSPCompiler.UseCases.Symbols;
 
 namespace KSPCompiler.ExternalSymbolControllers;
@@ -15,11 +14,11 @@ public class VariableSymbolTableFileCreateController
         this.useCase = useCase;
     }
 
-    public void Create( DirectoryPath outputDirectory, string databaseName )
-    {
-        var path = Path.Combine( outputDirectory.Path, databaseName + ".db.yaml" );
-        using var repository = new YamlVariableSymbolRepository( path );
+    public void Create()
+        => CreateAsync().GetAwaiter().GetResult();
 
-        useCase.Create( repository );
+    public async Task CreateAsync( CancellationToken cancellationToken = default)
+    {
+        await useCase.ExecuteAsync( cancellationToken );
     }
 }

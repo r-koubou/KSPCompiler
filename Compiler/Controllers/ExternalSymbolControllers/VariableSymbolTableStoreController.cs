@@ -1,3 +1,6 @@
+using System.Threading;
+using System.Threading.Tasks;
+
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.UseCases.Symbols;
 
@@ -13,7 +16,10 @@ public class VariableSymbolTableStoreController
     }
 
     public void Store( ISymbolTable<VariableSymbol> table )
+        => StoreAsync( table ).GetAwaiter().GetResult();
+
+    public async Task StoreAsync( ISymbolTable<VariableSymbol> table, CancellationToken cancellationToken = default )
     {
-        useCase.Execute( table );
+        await useCase.ExecuteAsync( table, cancellationToken );
     }
 }

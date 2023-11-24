@@ -1,10 +1,10 @@
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 
-using KSPCompiler.Commons.Path;
-using KSPCompiler.Domain.Symbols;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Model;
+using KSPCompiler.Infrastructures.Commons.LocalStorages;
 
 using NUnit.Framework;
 
@@ -39,23 +39,11 @@ public class VariableTableYamlLoaderTest
     }
 
     [Test]
-    public void TryLoadTest()
-    {
-        var path = Path.Combine( TestDataDirectory, "invalid.yaml" );
-
-        IVariableSymbolRepository repository = new YamlVariableSymbolRepository( new FilePath( path ) );
-        var defaultTable = new VariableSymbolTable();
-        var result = repository.TryLoad( () => defaultTable );
-
-        Assert.AreSame( result, defaultTable );
-    }
-
-    [Test]
-    public void TranslateLoadedSymbolTable()
+    public async Task TranslateLoadedSymbolTableAsyncTest()
     {
         var path = Path.Combine( TestDataDirectory, "VariableTable.yaml" );
-        IVariableSymbolRepository repository = new YamlVariableSymbolRepository( new FilePath( path ) );
-        var symbolTable = repository.Load();
+        var importer = new YamlVariableSymbolImporter( new LocalTextContentReader( path ) );
+        var symbolTable = await importer.ImportAsync();
 
         Assert.IsTrue( symbolTable.Table.Count > 0 );
     }

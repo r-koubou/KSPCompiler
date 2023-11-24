@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,6 +18,6 @@ public sealed class LocalTextContentWriter : ITextContentWriter
         FilePath = filePath;
     }
 
-    public async Task WriteContentAsync( IReadOnlyCollection<string> content, CancellationToken cancellationToken = default )
-        => await File.WriteAllLinesAsync( FilePath.Path, content, cancellationToken );
+    public async Task WriteContentAsync( string content, CancellationToken cancellationToken = default )
+        => await File.WriteAllTextAsync( FilePath.Path, content, cancellationToken );
 }

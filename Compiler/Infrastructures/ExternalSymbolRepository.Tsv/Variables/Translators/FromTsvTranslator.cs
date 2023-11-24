@@ -1,14 +1,14 @@
 using System;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
+using KSPCompiler.Infrastructures.Commons.Extensions;
 
 namespace KSPCompiler.ExternalSymbolRepository.Tsv.Variables.Translators;
 
-internal class FromTsvTranslator : IDataTranslator<IReadOnlyCollection<string>, ISymbolTable<VariableSymbol>>
+internal class FromTsvTranslator : IDataTranslator<string, ISymbolTable<VariableSymbol>>
 {
     private enum Column
     {
@@ -19,11 +19,11 @@ internal class FromTsvTranslator : IDataTranslator<IReadOnlyCollection<string>, 
 
     private static readonly Regex LineComment = new( @"^#.*" );
 
-    public ISymbolTable<VariableSymbol> Translate( IReadOnlyCollection<string> source )
+    public ISymbolTable<VariableSymbol> Translate( string source )
     {
         var result = new VariableSymbolTable();
 
-        foreach( var x in source )
+        foreach( var x in source.SplitNewLine() )
         {
             if( LineComment.IsMatch( x ) )
             {

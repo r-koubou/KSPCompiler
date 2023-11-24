@@ -1,21 +1,22 @@
-using System.Collections.Generic;
+using System.Text;
 
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
 
 namespace KSPCompiler.ExternalSymbolRepository.Tsv.Variables.Translators;
 
-internal class ToTsvTranslator : IDataTranslator<ISymbolTable<VariableSymbol>, IReadOnlyCollection<string>>
+internal class ToTsvTranslator : IDataTranslator<ISymbolTable<VariableSymbol>, string>
 {
-    public IReadOnlyCollection<string> Translate( ISymbolTable<VariableSymbol> source )
+    public string Translate( ISymbolTable<VariableSymbol> source )
     {
-        var result = new List<string>();
+        var result = new StringBuilder();
 
         foreach( var (_, v) in source.Table )
         {
-            result.Add( $"{v.Name}\t{v.Reserved.ToString().ToLower()}\t${v.Description}" );
+            result.Append( $"{v.Name}\t{v.Reserved.ToString().ToLower()}\t${v.Description}" )
+                  .Append( '\n' );
         }
 
-        return result;
+        return result.ToString();
     }
 }

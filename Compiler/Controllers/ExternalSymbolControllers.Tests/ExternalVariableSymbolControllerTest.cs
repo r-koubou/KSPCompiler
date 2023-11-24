@@ -32,7 +32,7 @@ public class ExternalVariableSymbolControllerTest
         Assert.Null( loadResult.Error );
 
         // Store
-        var exporter = new YamlVariableSymbolRepository( destination );
+        var exporter = new YamlVariableSymbolExporter( new LocalTextContentWriter( destination ) );
         var storeInteractor = new VariableSymbolStoreInteractor( exporter );
         var storeController = new VariableSymbolTableStoreController( storeInteractor );
 
@@ -47,7 +47,7 @@ public class ExternalVariableSymbolControllerTest
         var destination = Path.Combine( OutputDirectory, "VariableTable-converted.tsv" );
 
         // Load
-        var sourceRepository = new YamlVariableSymbolRepository( source );
+        var sourceRepository = new YamlVariableSymbolImporter( new LocalTextContentReader( source ) );
         var loadInteractor = new VariableSymbolLoadInteractor( sourceRepository );
         var loadController = new VariableSymbolTableLoadController( loadInteractor );
 

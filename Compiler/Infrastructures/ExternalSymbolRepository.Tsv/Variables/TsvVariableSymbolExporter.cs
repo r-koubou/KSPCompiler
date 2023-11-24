@@ -19,8 +19,8 @@ public class TsvVariableSymbolExporter : IExternalVariableSymbolExporter
 
     public async Task ExportAsync( ISymbolTable<VariableSymbol> store, CancellationToken cancellationToken = default )
     {
-        var lines = new ToTsvTranslator().Translate( store );
-        await contentWriter.WriteContentAsync( lines, cancellationToken );
+        var tsv = new ToTsvTranslator().Translate( store );
+        await contentWriter.WriteContentAsync( tsv, cancellationToken );
     }
 
     public void Dispose() {}
