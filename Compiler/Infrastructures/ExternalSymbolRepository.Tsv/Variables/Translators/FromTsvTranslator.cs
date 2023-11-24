@@ -25,6 +25,11 @@ internal class FromTsvTranslator : IDataTranslator<string, ISymbolTable<Variable
 
         foreach( var x in source.SplitNewLine() )
         {
+            if( string.IsNullOrWhiteSpace( x ) )
+            {
+                continue;
+            }
+
             if( LineComment.IsMatch( x ) )
             {
                 continue;

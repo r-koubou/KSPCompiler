@@ -27,8 +27,8 @@ public class ExternalVariableSymbolControllerTest
         var loadController = new VariableSymbolTableLoadController( loadInteractor );
 
         var loadResult = loadController.Load();
-        Assert.True( loadResult.Reeult );
-        Assert.True( loadResult.Table.Count > 0 );
+        Assert.True( loadResult.Result );
+        Assert.True( loadResult.OutputData.Count > 0 );
         Assert.Null( loadResult.Error );
 
         // Store
@@ -36,7 +36,7 @@ public class ExternalVariableSymbolControllerTest
         var storeInteractor = new VariableSymbolStoreInteractor( exporter );
         var storeController = new VariableSymbolTableStoreController( storeInteractor );
 
-        storeController.Store( loadResult.Table );
+        storeController.Store( loadResult.OutputData );
         Assert.That( File.Exists( destination ), Is.True );
     }
 
@@ -52,8 +52,8 @@ public class ExternalVariableSymbolControllerTest
         var loadController = new VariableSymbolTableLoadController( loadInteractor );
 
         var loadResult = loadController.Load();
-        Assert.True( loadResult.Reeult );
-        Assert.True( loadResult.Table.Count > 0 );
+        Assert.True( loadResult.Result );
+        Assert.True( loadResult.OutputData.Count > 0 );
         Assert.Null( loadResult.Error );
 
         // Store
@@ -61,7 +61,7 @@ public class ExternalVariableSymbolControllerTest
         var storeInteractor = new VariableSymbolStoreInteractor( destinationRepository );
         var storeController = new VariableSymbolTableStoreController( storeInteractor );
 
-        storeController.Store( loadResult.Table );
+        storeController.Store( loadResult.OutputData );
         Assert.That( File.Exists( destination ), Is.True );
     }
 }

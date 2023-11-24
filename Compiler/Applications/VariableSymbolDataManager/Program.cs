@@ -38,7 +38,7 @@ static void ConvertVariableImp( IExternalVariableSymbolImporter source, IExterna
 
     var loadResult = loadController.Load();
 
-    if( !loadResult.Reeult )
+    if( !loadResult.Result )
     {
         throw new InvalidOperationException("Load failed", loadResult.Error);
     }
@@ -47,7 +47,7 @@ static void ConvertVariableImp( IExternalVariableSymbolImporter source, IExterna
     var storeInteractor = new VariableSymbolStoreInteractor( destination );
     var storeController = new VariableSymbolTableStoreController( storeInteractor );
 
-    storeController.Store( loadResult.Table );
+    storeController.Store( loadResult.OutputData );
 }
 
 static void TsvToYaml(

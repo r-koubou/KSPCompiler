@@ -1,9 +1,7 @@
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
 using KSPCompiler.Commons;
-using KSPCompiler.Domain.Symbols;
 using KSPCompiler.UseCases.Symbols;
 
 namespace KSPCompiler.ExternalSymbolControllers;
@@ -17,13 +15,11 @@ public class VariableSymbolTableLoadController
         this.useCase = useCase;
     }
 
-    public(bool Reeult, ISymbolTable<VariableSymbol> Table, Exception? Error) Load()
+    public VariableSymbolLoadOutputData Load()
         => LoadAsync().GetAwaiter().GetResult();
 
-    public async Task<(bool Reeult, ISymbolTable<VariableSymbol> Table, Exception? Error)> LoadAsync( CancellationToken cancellationToken = default )
+    public async Task<VariableSymbolLoadOutputData> LoadAsync( CancellationToken cancellationToken = default )
     {
-        var result = await useCase.ExecuteAsync(Unit.Default, cancellationToken );
-
-        return ( result.Result, result.OutputData, result.Error );
+        return await useCase.ExecuteAsync(Unit.Default, cancellationToken );
     }
 }
