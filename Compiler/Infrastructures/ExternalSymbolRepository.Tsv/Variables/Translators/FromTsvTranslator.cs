@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
+using KSPCompiler.ExternalSymbol.Commons;
 using KSPCompiler.Infrastructures.Commons.Extensions;
 
 namespace KSPCompiler.ExternalSymbolRepository.Tsv.Variables.Translators;
@@ -53,7 +54,7 @@ internal class FromTsvTranslator : IDataTranslator<string, ISymbolTable<Variable
 
             if( !result.Add( symbol ) )
             {
-                throw new InvalidOperationException( $"Duplicate symbol name: {symbol.Name}" );
+                throw new DuplicatedSymbolException( symbol.Name );
             }
         }
 

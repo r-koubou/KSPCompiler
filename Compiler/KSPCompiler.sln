@@ -52,6 +52,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Tests", "Domain.Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructures.Commons", "Infrastructures\Infrastructures.Commons\Infrastructures.Commons.csproj", "{431D0EB5-D3BC-4AA5-BAAD-0C5EE54595E0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalSymbol.Commons", "Infrastructures\ExternalSymbol.Commons\ExternalSymbol.Commons.csproj", "{5AD08EF5-AAE5-4E18-8518-DA1519DA94A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -126,6 +128,10 @@ Global
 		{431D0EB5-D3BC-4AA5-BAAD-0C5EE54595E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{431D0EB5-D3BC-4AA5-BAAD-0C5EE54595E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{431D0EB5-D3BC-4AA5-BAAD-0C5EE54595E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AD08EF5-AAE5-4E18-8518-DA1519DA94A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AD08EF5-AAE5-4E18-8518-DA1519DA94A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AD08EF5-AAE5-4E18-8518-DA1519DA94A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AD08EF5-AAE5-4E18-8518-DA1519DA94A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BC12E3DD-7AB6-4E76-9FF0-573D3E94D1AA} = {D8212F71-4678-4B7F-8EC9-F692C48B5093}
@@ -148,5 +154,6 @@ Global
 		{B13D91F7-1129-4D11-985B-3A5C0F544D4B} = {46FE5486-25B2-4937-9138-3F4F29871C15}
 		{0AB47CCA-A8B2-4247-AF05-C6D78D458B47} = {D9F235EC-F610-4F08-B031-5B8528EA70E4}
 		{431D0EB5-D3BC-4AA5-BAAD-0C5EE54595E0} = {D8212F71-4678-4B7F-8EC9-F692C48B5093}
+		{5AD08EF5-AAE5-4E18-8518-DA1519DA94A4} = {D8212F71-4678-4B7F-8EC9-F692C48B5093}
 	EndGlobalSection
 EndGlobal

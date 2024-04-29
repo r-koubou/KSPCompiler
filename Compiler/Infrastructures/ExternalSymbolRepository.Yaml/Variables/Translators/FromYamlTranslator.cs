@@ -3,6 +3,7 @@ using System;
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
+using KSPCompiler.ExternalSymbol.Commons;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Model;
 
 namespace KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Translators;
@@ -28,7 +29,7 @@ internal class FromYamlTranslator : IDataTranslator<RootObject, ISymbolTable<Var
 
             if( !result.Add( symbol ) )
             {
-                throw new InvalidOperationException( $"Duplicate symbol name: {symbol.Name}" );
+                throw new DuplicatedSymbolException( symbol.Name );
             }
         }
 

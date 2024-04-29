@@ -1,7 +1,9 @@
+using System;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
+using KSPCompiler.ExternalSymbol.Commons;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Model;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
@@ -31,6 +33,7 @@ public class VariableTableYamlLoaderTest
         Assert.NotNull( definition );
 
         Assert.IsTrue( definition.Version != RootObject.UnknownVersion );
+        Assert.DoesNotThrow( definition.ValidateSupportedVersion );
         Assert.IsTrue( definition.Symbols.Count > 0 );
 
         Assert.IsTrue( !string.IsNullOrEmpty( definition.Symbols[ 0 ].Name ) );
@@ -46,5 +49,14 @@ public class VariableTableYamlLoaderTest
         var symbolTable = await importer.ImportAsync();
 
         Assert.IsTrue( symbolTable.Table.Count > 0 );
+    }
+
+    [Test]
+    public void CannotImportDuplicateSymbolTest()
+    {
+        var path = Path.Combine( TestDataDirectory, "DuplicateVariableTable.yaml" );
+        var importer = new YamlVariableSymbolImporter( new LocalTextContentReader( path ) );
+
+        Assert.ThrowsAsync<DuplicatedSymbolException>( async () => await importer.ImportAsync() );
     }
 }

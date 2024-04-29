@@ -26,6 +26,9 @@
       <None Update="TestData\VariableTableTsvLoaderTest\VariableTable.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="TestData\VariableTableTsvLoaderTest\DuplicateVariableTable.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

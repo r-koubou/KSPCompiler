@@ -23,6 +23,9 @@
       <None Update="TestData\VariableTableYamlLoaderTest\VariableTable.yaml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="TestData\VariableTableYamlLoaderTest\DuplicateVariableTable.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 
 using KSPCompiler.Commons.Path;
 using KSPCompiler.Domain.Tests;
+using KSPCompiler.ExternalSymbol.Commons;
 using KSPCompiler.ExternalSymbolRepository.Tsv.Variables;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
 using KSPCompiler.UseCases.Symbols.Commons;
@@ -48,6 +49,15 @@ public class VariableTableTsvLoaderTest
             var symbolTable = await importer.ImportAsync();
             Assert.IsTrue( symbolTable.Table.Count == 1 );
         });
+    }
+
+    [Test]
+    public void CannotImportDuplicateSymbolTest()
+    {
+        var path = Path.Combine( TestDataDirectory, "DuplicateVariableTable.txt" );
+        var importer = CreateLocalImporter( path );
+
+        Assert.ThrowsAsync<DuplicatedSymbolException>( async () => await importer.ImportAsync() );
     }
 
     [Test]

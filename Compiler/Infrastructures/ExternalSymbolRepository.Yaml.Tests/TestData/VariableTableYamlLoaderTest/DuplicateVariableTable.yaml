@@ -1,0 +1,8 @@
+version: 1
+symbols:
+  - name: $hoge
+    reserved: true
+    description: hoge
+  - name: $hoge
+    reserved: true
+    description: hoge
