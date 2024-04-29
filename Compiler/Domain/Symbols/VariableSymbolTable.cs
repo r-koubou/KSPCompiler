@@ -35,7 +35,7 @@ public class VariableSymbolTable : SymbolTable<VariableSymbol>
             symbol.TableIndex = uniqueIndexGenerator.Next();
         }
 
-        symbol.DataType = DataTypeUtility.FromVariableName( symbol.Name );
+        symbol.DataType = DataTypeUtility.Guess( symbol.Name );
         table.Add( symbol.Name, symbol );
 
         return true;

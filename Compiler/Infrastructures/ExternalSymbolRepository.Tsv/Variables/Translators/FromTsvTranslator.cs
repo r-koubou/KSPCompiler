@@ -44,11 +44,11 @@ internal class FromTsvTranslator : IDataTranslator<string, ISymbolTable<Variable
             {
                 Name        = values[ (int)Column.Name ],
                 ArraySize   = 0,
-                Reserved    = values[ (int)Column.Reserved ] == "true",
+                Reserved    = values[ (int)Column.Reserved ].ToLower() == "true",
                 Description = values[ (int)Column.Description ]
             };
 
-            symbol.DataType         = DataTypeUtility.FromVariableName( symbol.Name );
+            symbol.DataType         = DataTypeUtility.Guess( symbol.Name );
             symbol.DataTypeModifier = DataTypeModifierFlag.Const;
 
             if( !result.Add( symbol ) )

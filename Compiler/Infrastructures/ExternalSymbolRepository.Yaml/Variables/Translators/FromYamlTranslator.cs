@@ -23,7 +23,7 @@ internal class FromYamlTranslator : IDataTranslator<RootObject, ISymbolTable<Var
                 Description = x.Description
             };
 
-            symbol.DataType         = DataTypeUtility.FromVariableName( symbol.Name );
+            symbol.DataType         = DataTypeUtility.Guess( symbol.Name );
             symbol.DataTypeModifier = DataTypeModifierFlag.Const;
 
             if( !result.Add( symbol ) )
