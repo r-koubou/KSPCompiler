@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Symbols.MetaData;
 
 public static class DataTypeUtility
 {
-    public static DataTypeFlag FromVariableName( string variableName )
+    public static DataTypeFlag Guess( string variableName )
     {
         if( string.IsNullOrEmpty( variableName ) )
         {

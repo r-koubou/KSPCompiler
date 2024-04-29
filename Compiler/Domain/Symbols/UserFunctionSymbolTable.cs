@@ -17,7 +17,7 @@ public class UserFunctionSymbolTable : SymbolTable<UserFunctionSymbol>
     // ReSharper restore MemberCanBePrivate.Global
     #endregion
 
-    public override bool Add( SymbolName name, UserFunctionSymbol symbol )
+    public override bool Add( UserFunctionSymbol symbol )
     {
         throw new NotImplementedException();
     }

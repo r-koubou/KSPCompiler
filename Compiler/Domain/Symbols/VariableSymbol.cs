@@ -24,7 +24,7 @@ public sealed class VariableSymbol : SymbolBase
     /// <summary>
     /// Index number when stored in constant pool
     /// </summary>
-    public ConstantPoolIndex ConstantIndex { get; set; } = ConstantPoolIndex.Null;
+    public UniqueSymbolIndex ConstantTableIndex { get; set; } = UniqueSymbolIndex.Zero;
 
     /// <summary>
     /// Whether the variable is available within `on init` (for built-in variables read from external definition files)

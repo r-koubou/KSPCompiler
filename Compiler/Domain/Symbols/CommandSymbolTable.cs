@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Symbols;
 
 public class CommandSymbolTable : SymbolTable<CommandSymbol>
 {
-    public override bool Add( SymbolName name, CommandSymbol symbol )
+    public override bool Add( CommandSymbol symbol )
     {
         throw new NotImplementedException();
     }

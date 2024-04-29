@@ -1,0 +1,3 @@
+# name, reserved, description
+$hoge	true	hoge
+$hoge	true	hoge

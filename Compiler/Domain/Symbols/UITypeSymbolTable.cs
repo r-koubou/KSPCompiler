@@ -4,7 +4,7 @@ namespace KSPCompiler.Domain.Symbols;
 
 public class UITypeSymbolTable : SymbolTable<UITypeSymbol>
 {
-    public override bool Add( SymbolName name, UITypeSymbol symbol )
+    public override bool Add( UITypeSymbol symbol )
     {
         throw new NotImplementedException();
     }

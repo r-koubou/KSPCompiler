@@ -4,21 +4,23 @@ namespace KSPCompiler.Domain.Symbols;
 
 public class UniqueSymbolIndexGenerator
 {
-    private uint nextIndex;
+    private int nextIndex;
 
-    public UniqueSymbolIndexGenerator()
-    {
-        nextIndex = UniqueSymbolIndex.MinValue;
-    }
+    public UniqueSymbolIndexGenerator() : this( UniqueSymbolIndex.Zero ) {}
 
     public UniqueSymbolIndexGenerator(UniqueSymbolIndex startIndex)
     {
+        if( startIndex == UniqueSymbolIndex.Null )
+        {
+            throw new ArgumentException( $"startIndex cannot be {UniqueSymbolIndex.Null}" );
+        }
+
         nextIndex = startIndex.Value;
     }
 
     public UniqueSymbolIndex Next()
     {
-        if( nextIndex == UniqueSymbolIndex.Null.Value )
+        if( nextIndex == int.MaxValue )
         {
             throw new InvalidOperationException( "SymbolUniqueIndex overflow" );
         }

@@ -37,4 +37,12 @@ public abstract class SymbolBase
     /// Index number when stored in <see cref="ISymbolTable{TSymbol}"/>
     /// </summary>
     public UniqueSymbolIndex TableIndex { get; set; } = UniqueSymbolIndex.Null;
+
+    /// <summary>
+    /// Symbol's specified description.
+    /// </summary>
+    /// <remarks>
+    /// Empty characters are also acceptable since they correspond to document comments.
+    /// </remarks>
+    public SymbolDescription Description { get; set; } = SymbolDescription.Empty;
 }

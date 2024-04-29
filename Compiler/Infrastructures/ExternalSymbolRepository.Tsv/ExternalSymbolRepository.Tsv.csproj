@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <LangVersion>10</LangVersion>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <Nullable>enable</Nullable>
+        <Copyright>R-Koubou</Copyright>
+        <Company>R-Koubou</Company>
+        <Product>KSPCompiler.ExternalSymbolRepository.Tsv</Product>
+        <AssemblyName>KSPCompiler.ExternalSymbolRepository.Tsv</AssemblyName>
+        <RootNamespace>KSPCompiler.ExternalSymbolRepository.Tsv</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Commons\Commons.csproj" />
+      <ProjectReference Include="..\..\Domain\Domain.csproj" />
+      <ProjectReference Include="..\ExternalSymbol.Commons\ExternalSymbol.Commons.csproj" />
+      <ProjectReference Include="..\Infrastructures.Commons\Infrastructures.Commons.csproj" />
+    </ItemGroup>
+
+</Project>

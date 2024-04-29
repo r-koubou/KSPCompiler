@@ -3,6 +3,8 @@ using System.IO;
 
 namespace KSPCompiler.Domain.Symbols;
 
+// ReSharper disable UnusedMemberInSuper.Global
+// ReSharper disable UnusedMember.Global
 public interface ISymbolTable<TSymbol> where TSymbol : SymbolBase
 {
     /// <summary>
@@ -11,9 +13,14 @@ public interface ISymbolTable<TSymbol> where TSymbol : SymbolBase
     IReadOnlyDictionary<SymbolName, TSymbol> Table { get; }
 
     /// <summary>
+    /// Size of symbol table
+    /// </summary>
+    int Count { get; }
+
+    /// <summary>
     /// Parent node to be used when local scope, such as nesting, is allowed.
     /// </summary>
-    SymbolTable<TSymbol>? Parent { get; set; }
+    ISymbolTable<TSymbol>? Parent { get; set; }
 
     /// <summary>
     /// Searches whether the specified symbol name is registered in the table
@@ -35,18 +42,21 @@ public interface ISymbolTable<TSymbol> where TSymbol : SymbolBase
     /// Add a symbol to the table
     /// </summary>
     /// <returns>true if added, false if already exists</returns>
-    bool Add( SymbolName name, TSymbol symbol );
+    bool Add( TSymbol symbol );
 
     /// <summary>
     /// Merge with other symbol table
     /// </summary>
     /// <remarks>
     /// <list type="bullet">
-    ///   <item>If the same symbol (key) exists in `other`, it will be ignored</item>
+    ///   <item>If the same symbol (key) exists in `other`, it will be overwritten when parameter `overwrite` is true. </item>
     ///   <item>Merge into this table from other table directly</item>
     /// </list>
     /// </remarks>
-    void Merge( ISymbolTable<TSymbol> other );
+    /// <returns>
+    /// this instance
+    /// </returns>
+    ISymbolTable<TSymbol> Merge( ISymbolTable<TSymbol> other, bool overwrite = true );
 
     /// <summary>
     /// Convert to list
