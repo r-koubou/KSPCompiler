@@ -1,9 +1,9 @@
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Model.v1;
+using KSPCompiler.ExternalSymbolRepository.Yaml.Commands.v1.Model;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Translators.v1;
+namespace KSPCompiler.ExternalSymbolRepository.Yaml.Commands.v1.Translators;
 
 internal class ToYamlTranslator : IDataTranslator<ISymbolTable<CommandSymbol>, RootObject>
 {

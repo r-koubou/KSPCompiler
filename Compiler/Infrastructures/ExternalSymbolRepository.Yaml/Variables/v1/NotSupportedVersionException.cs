@@ -1,8 +1,8 @@
 using System;
 
-using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Model;
+using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.v1.Model;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
+namespace KSPCompiler.ExternalSymbolRepository.Yaml.Variables.v1;
 
 public class NotSupportedVersionException : Exception
 {

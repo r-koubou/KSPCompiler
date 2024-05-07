@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 using YamlDotNet.Serialization;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Model.v1;
+namespace KSPCompiler.ExternalSymbolRepository.Yaml.Commands.v1.Model;
 
 // ReSharper disable once ClassNeverInstantiated.Global
 // ReSharper disable CollectionNeverUpdated.Global

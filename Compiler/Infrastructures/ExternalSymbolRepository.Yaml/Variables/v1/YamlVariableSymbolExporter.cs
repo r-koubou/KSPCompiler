@@ -3,13 +3,13 @@ using System.Threading.Tasks;
 
 using KSPCompiler.Commons.Contents;
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Translators;
+using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.v1.Translators;
 using KSPCompiler.UseCases.Symbols.Commons;
 
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
+namespace KSPCompiler.ExternalSymbolRepository.Yaml.Variables.v1;
 
 public class YamlVariableSymbolExporter : IExternalVariableSymbolExporter
 {
