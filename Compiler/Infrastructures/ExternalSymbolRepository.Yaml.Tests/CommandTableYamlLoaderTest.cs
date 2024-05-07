@@ -3,8 +3,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using KSPCompiler.ExternalSymbol.Commons;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Model;
+using KSPCompiler.ExternalSymbolRepository.Yaml.Commands;
+using KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Model.v1;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
 
 using NUnit.Framework;
@@ -15,14 +15,14 @@ using YamlDotNet.Serialization.NamingConventions;
 namespace KSPCompiler.ExternalSymbolRepository.Yaml.Tests;
 
 [TestFixture]
-public class VariableTableYamlLoaderTest
+public class CommandTableYamlLoaderTest
 {
-    private static readonly string TestDataDirectory = Path.Combine( "TestData", "VariableTableYamlLoaderTest" );
+    private static readonly string TestDataDirectory = Path.Combine( "TestData", "CommandTableYamlLoaderTest" );
 
     [Test]
     public void LoadYamlTest()
     {
-        var path = Path.Combine( TestDataDirectory, "VariableTable.yaml" );
+        var path = Path.Combine( TestDataDirectory, "CommandTable.yaml" );
         var yaml = File.ReadAllText( path, Encoding.UTF8 );
         var deserializer = new DeserializerBuilder()
                           .WithNamingConvention( LowerCaseNamingConvention.Instance )
@@ -31,8 +31,7 @@ public class VariableTableYamlLoaderTest
 
         Assert.NotNull( definition );
 
-        Assert.IsTrue( definition.Version != RootObject.UnknownVersion );
-        Assert.DoesNotThrow( definition.ValidateSupportedVersion );
+        Assert.IsTrue( definition.Version == RootObject.CurrentVersion );
         Assert.IsTrue( definition.Symbols.Count > 0 );
 
         Assert.IsTrue( !string.IsNullOrEmpty( definition.Symbols[ 0 ].Name ) );
@@ -43,8 +42,8 @@ public class VariableTableYamlLoaderTest
     [Test]
     public async Task TranslateLoadedSymbolTableAsyncTest()
     {
-        var path = Path.Combine( TestDataDirectory, "VariableTable.yaml" );
-        var importer = new YamlVariableSymbolImporter( new LocalTextContentReader( path ) );
+        var path = Path.Combine( TestDataDirectory, "CommandTable.yaml" );
+        var importer = new YamlCommandSymbolImporter( new LocalTextContentReader( path ) );
         var symbolTable = await importer.ImportAsync();
 
         Assert.IsTrue( symbolTable.Table.Count > 0 );
@@ -53,8 +52,8 @@ public class VariableTableYamlLoaderTest
     [Test]
     public void CannotImportDuplicateSymbolTest()
     {
-        var path = Path.Combine( TestDataDirectory, "DuplicateVariableTable.yaml" );
-        var importer = new YamlVariableSymbolImporter( new LocalTextContentReader( path ) );
+        var path = Path.Combine( TestDataDirectory, "DuplicateCommandTable.yaml" );
+        var importer = new YamlCommandSymbolImporter( new LocalTextContentReader( path ) );
 
         Assert.ThrowsAsync<DuplicatedSymbolException>( async () => await importer.ImportAsync() );
     }

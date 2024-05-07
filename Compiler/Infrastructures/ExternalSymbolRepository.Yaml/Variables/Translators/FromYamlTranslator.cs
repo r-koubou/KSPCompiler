@@ -1,5 +1,3 @@
-using System;
-
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
