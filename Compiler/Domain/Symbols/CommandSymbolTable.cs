@@ -6,6 +6,15 @@ public class CommandSymbolTable : SymbolTable<CommandSymbol>
 {
     public override bool Add( CommandSymbol symbol )
     {
-        throw new NotImplementedException();
+        if( table.ContainsKey( symbol.Name ) )
+        {
+            // Already added
+            return false;
+        }
+
+        symbol.TableIndex = uniqueIndexGenerator.Next();
+        table.Add( symbol.Name, symbol );
+
+        return true;
     }
 }

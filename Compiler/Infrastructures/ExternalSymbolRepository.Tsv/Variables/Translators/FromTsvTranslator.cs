@@ -1,4 +1,3 @@
-using System;
 using System.Text.RegularExpressions;
 
 using KSPCompiler.Commons;
@@ -6,6 +5,8 @@ using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.ExternalSymbol.Commons;
 using KSPCompiler.Infrastructures.Commons.Extensions;
+
+using DataTypeUtility = KSPCompiler.Domain.Symbols.MetaData.DataTypeUtility;
 
 namespace KSPCompiler.ExternalSymbolRepository.Tsv.Variables.Translators;
 

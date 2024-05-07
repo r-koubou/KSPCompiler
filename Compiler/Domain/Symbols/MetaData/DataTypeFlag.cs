@@ -32,5 +32,6 @@ public enum DataTypeFlag : uint
     TypeIntArray                = TypeInt    | AttributeArray,
     TypeStringArray             = TypeString | AttributeArray,
     TypeRealArray               = TypeReal   | AttributeArray,
+    TypeBoolArray               = TypeBool   | AttributeArray,
     #endregion
 }
