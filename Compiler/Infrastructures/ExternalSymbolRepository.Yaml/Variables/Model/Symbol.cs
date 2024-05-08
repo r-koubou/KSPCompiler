@@ -1,4 +1,4 @@
-namespace KSPCompiler.ExternalSymbolRepository.Yaml.Variables.v1.Model;
+namespace KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Model;
 
 // ReSharper disable once ClassNeverInstantiated.Global
 // ReSharper disable CollectionNeverUpdated.Global

@@ -1,8 +1,8 @@
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.v1.Model;
+using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Model;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml.Variables.v1.Translators;
+namespace KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Translators;
 
 internal class ToYamlTranslator : IDataTranslator<ISymbolTable<VariableSymbol>, RootObject>
 {

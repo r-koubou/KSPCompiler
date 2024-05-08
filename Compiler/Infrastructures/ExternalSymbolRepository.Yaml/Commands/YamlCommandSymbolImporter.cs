@@ -3,14 +3,14 @@ using System.Threading.Tasks;
 
 using KSPCompiler.Commons.Contents;
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Commands.v1.Model;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Commands.v1.Translators;
+using KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Model;
+using KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Translators;
 using KSPCompiler.UseCases.Symbols.Commons;
 
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml.Commands.v1;
+namespace KSPCompiler.ExternalSymbolRepository.Yaml.Commands;
 
 public class YamlCommandSymbolImporter : IExternalCommandSymbolImporter
 {

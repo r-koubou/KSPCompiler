@@ -4,8 +4,7 @@ using System.Threading.Tasks;
 
 using KSPCompiler.ExternalSymbol.Commons;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Commands;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Commands.v1;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Commands.v1.Model;
+using KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Model;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
 
 using NUnit.Framework;

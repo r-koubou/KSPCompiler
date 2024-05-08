@@ -3,14 +3,14 @@ using System.Threading.Tasks;
 
 using KSPCompiler.Commons.Contents;
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.v1.Model;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.v1.Translators;
+using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Model;
+using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Translators;
 using KSPCompiler.UseCases.Symbols.Commons;
 
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml.Variables.v1;
+namespace KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
 
 public class YamlVariableSymbolImporter : IExternalVariableSymbolImporter
 {

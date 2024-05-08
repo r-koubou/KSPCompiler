@@ -3,24 +3,24 @@ using System.Threading.Tasks;
 
 using KSPCompiler.Commons.Contents;
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.v1.Translators;
+using KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Translators;
 using KSPCompiler.UseCases.Symbols.Commons;
 
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml.Variables.v1;
+namespace KSPCompiler.ExternalSymbolRepository.Yaml.Commands;
 
-public class YamlVariableSymbolExporter : IExternalVariableSymbolExporter
+public class YamlCommandSymbolExporter : IExternalCommandSymbolExporter
 {
     private readonly ITextContentWriter contentWriter;
 
-    public YamlVariableSymbolExporter( ITextContentWriter writer )
+    public YamlCommandSymbolExporter( ITextContentWriter writer )
     {
         contentWriter = writer;
     }
 
-    public async Task ExportAsync( ISymbolTable<VariableSymbol> store, CancellationToken cancellationToken = default )
+    public async Task ExportAsync( ISymbolTable<CommandSymbol> store, CancellationToken cancellationToken = default )
     {
         var serializer = new SerializerBuilder()
                         .WithNamingConvention( CamelCaseNamingConvention.Instance )
