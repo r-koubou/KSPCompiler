@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 using KSPCompiler.ExternalSymbol.Commons;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Commands;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Model;
+using KSPCompiler.ExternalSymbolRepository.Yaml.Commons;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
 
 using NUnit.Framework;
 
 using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.NamingConventions;
 
 namespace KSPCompiler.ExternalSymbolRepository.Yaml.Tests;
 
@@ -24,9 +24,7 @@ public class CommandTableYamlLoaderTest
     {
         var path = Path.Combine( TestDataDirectory, "CommandTable.yaml" );
         var yaml = File.ReadAllText( path, Encoding.UTF8 );
-        var deserializer = new DeserializerBuilder()
-                          .WithNamingConvention( LowerCaseNamingConvention.Instance )
-                          .Build();
+        var deserializer = DeserializerBuilderFactory.Create().Build();
         var definition = deserializer.Deserialize<RootObject>( yaml );
 
         Assert.NotNull( definition );

@@ -4,10 +4,8 @@ using System.Threading.Tasks;
 using KSPCompiler.Commons.Contents;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Translators;
+using KSPCompiler.ExternalSymbolRepository.Yaml.Commons;
 using KSPCompiler.UseCases.Symbols.Commons;
-
-using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.NamingConventions;
 
 namespace KSPCompiler.ExternalSymbolRepository.Yaml.Commands;
 
@@ -22,9 +20,7 @@ public class YamlCommandSymbolExporter : IExternalCommandSymbolExporter
 
     public async Task ExportAsync( ISymbolTable<CommandSymbol> store, CancellationToken cancellationToken = default )
     {
-        var serializer = new SerializerBuilder()
-                        .WithNamingConvention( CamelCaseNamingConvention.Instance )
-                        .Build();
+        var serializer = SerializerBuilderFactory.Create().Build();
         var root = new ToYamlTranslator().Translate( store );
         var yaml = serializer.Serialize( root );
 

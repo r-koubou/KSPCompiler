@@ -1,8 +1,8 @@
-version: 1
-symbols:
-  - name: message
-    reserved: true
-    returntype: V
-    description: display text in the status line of KONTAKT
-    arguments:
-      - name: "*message"
+Version: 1
+Symbols:
+  - Name: message
+    Reserved: true
+    ReturnType: V
+    Description: display text in the status line of KONTAKT
+    Arguments:
+      - Name: "*message"

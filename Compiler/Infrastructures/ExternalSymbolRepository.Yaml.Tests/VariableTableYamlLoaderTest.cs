@@ -3,6 +3,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using KSPCompiler.ExternalSymbol.Commons;
+using KSPCompiler.ExternalSymbolRepository.Yaml.Commons;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Model;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
@@ -24,9 +25,7 @@ public class VariableTableYamlLoaderTest
     {
         var path = Path.Combine( TestDataDirectory, "VariableTable.yaml" );
         var yaml = File.ReadAllText( path, Encoding.UTF8 );
-        var deserializer = new DeserializerBuilder()
-                          .WithNamingConvention( LowerCaseNamingConvention.Instance )
-                          .Build();
+        var deserializer = DeserializerBuilderFactory.Create().Build();
         var definition = deserializer.Deserialize<RootObject>( yaml );
 
         Assert.NotNull( definition );
