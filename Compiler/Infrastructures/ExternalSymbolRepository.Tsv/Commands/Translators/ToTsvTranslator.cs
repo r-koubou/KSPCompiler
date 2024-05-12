@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Text;
 
 using KSPCompiler.Commons;
@@ -6,13 +7,13 @@ using KSPCompiler.Domain.Symbols.MetaData;
 
 namespace KSPCompiler.ExternalSymbolRepository.Tsv.Commands.Translators;
 
-internal class ToTsvTranslator : IDataTranslator<ISymbolTable<CommandSymbol>, string>
+internal class ToTsvTranslator : IDataTranslator<IEnumerable<CommandSymbol>, string>
 {
-    public string Translate( ISymbolTable<CommandSymbol> source )
+    public string Translate( IEnumerable<CommandSymbol> source )
     {
         var result = new StringBuilder();
 
-        foreach( var (_, v) in source.Table )
+        foreach( var v in source )
         {
             result.Append( v.Name ).Append( "\t" )
                   .Append( v.Reserved.ToString().ToLower() ).Append( "\t" )

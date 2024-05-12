@@ -1,15 +1,15 @@
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.ExternalSymbol.Commons;
 using KSPCompiler.Infrastructures.Commons.Extensions;
 
 using DataTypeUtility = KSPCompiler.Domain.Symbols.MetaData.DataTypeUtility;
 
 namespace KSPCompiler.ExternalSymbolRepository.Tsv.Commands.Translators;
 
-internal class FromTsvTranslator : IDataTranslator<string, ISymbolTable<CommandSymbol>>
+internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<CommandSymbol>>
 {
     private enum Column
     {
@@ -23,9 +23,9 @@ internal class FromTsvTranslator : IDataTranslator<string, ISymbolTable<CommandS
 
     private static readonly Regex LineComment = new( @"^#.*" );
 
-    public ISymbolTable<CommandSymbol> Translate( string source )
+    public IReadOnlyCollection<CommandSymbol> Translate( string source )
     {
-        var result = new CommandSymbolTable();
+        var result = new List<CommandSymbol>();
 
         foreach( var x in source.SplitNewLine() )
         {
@@ -57,11 +57,7 @@ internal class FromTsvTranslator : IDataTranslator<string, ISymbolTable<CommandS
                 ParseArguments( values, ref command );
             }
 
-            if( !result.Add( command ) )
-            {
-                throw new DuplicatedSymbolException( command.Name );
-            }
-
+            result.Add( command );
         }
 
         return result;

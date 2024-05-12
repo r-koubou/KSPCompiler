@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,11 +16,11 @@ public class VariableSymbolTableStoreController
         this.useCase = useCase;
     }
 
-    public void Store( ISymbolTable<VariableSymbol> table )
-        => StoreAsync( table ).GetAwaiter().GetResult();
+    public void Store( IEnumerable<VariableSymbol> symbols )
+        => StoreAsync( symbols ).GetAwaiter().GetResult();
 
-    public async Task StoreAsync( ISymbolTable<VariableSymbol> table, CancellationToken cancellationToken = default )
+    public async Task StoreAsync( IEnumerable<VariableSymbol> symbols, CancellationToken cancellationToken = default )
     {
-        await useCase.ExecuteAsync( table, cancellationToken );
+        await useCase.ExecuteAsync( symbols, cancellationToken );
     }
 }

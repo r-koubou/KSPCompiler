@@ -1,4 +1,5 @@
 using System.IO;
+using System.Linq;
 
 using KSPCompiler.ExternalSymbolRepository.Tsv.Variables;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
@@ -28,7 +29,7 @@ public class ExternalVariableSymbolControllerTest
 
         var loadResult = loadController.Load();
         Assert.True( loadResult.Result );
-        Assert.True( loadResult.OutputData.Count > 0 );
+        Assert.True( loadResult.OutputData.Any() );
         Assert.Null( loadResult.Error );
 
         // Store
@@ -53,7 +54,7 @@ public class ExternalVariableSymbolControllerTest
 
         var loadResult = loadController.Load();
         Assert.True( loadResult.Result );
-        Assert.True( loadResult.OutputData.Count > 0 );
+        Assert.True( loadResult.OutputData.Any() );
         Assert.Null( loadResult.Error );
 
         // Store

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -6,11 +7,10 @@ using KSPCompiler.Domain.Symbols;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Model;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Translators;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Commons;
-using KSPCompiler.UseCases.Symbols.Commons;
 
 namespace KSPCompiler.ExternalSymbolRepository.Yaml.Commands;
 
-public class YamlCommandSymbolImporter : IExternalCommandSymbolImporter
+public class YamlCommandSymbolImporter : ISymbolImporter<CommandSymbol>
 {
     private readonly ITextContentReader contentReader;
 
@@ -19,7 +19,7 @@ public class YamlCommandSymbolImporter : IExternalCommandSymbolImporter
         contentReader = reader;
     }
 
-    public async Task<ISymbolTable<CommandSymbol>> ImportAsync( CancellationToken cancellationToken = default )
+    public async Task<IReadOnlyCollection<CommandSymbol>> ImportAsync( CancellationToken cancellationToken = default )
     {
         var yaml = await contentReader.ReadContentAsync( cancellationToken );
         var deserializer = DeserializerBuilderFactory.Create().Build();

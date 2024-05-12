@@ -1,14 +1,14 @@
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
 using KSPCompiler.Commons.Contents;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.ExternalSymbolRepository.Tsv.Commands.Translators;
-using KSPCompiler.UseCases.Symbols.Commons;
 
 namespace KSPCompiler.ExternalSymbolRepository.Tsv.Commands;
 
-public class TsvCommandSymbolExporter : IExternalCommandSymbolExporter
+public class TsvCommandSymbolExporter : ISymbolExporter<CommandSymbol>
 {
     private readonly ITextContentWriter contentWriter;
 
@@ -17,9 +17,9 @@ public class TsvCommandSymbolExporter : IExternalCommandSymbolExporter
         contentWriter = writer;
     }
 
-    public async Task ExportAsync( ISymbolTable<CommandSymbol> store, CancellationToken cancellationToken = default )
+    public async Task ExportAsync( IEnumerable<CommandSymbol> symbols, CancellationToken cancellationToken = default )
     {
-        var tsv = new ToTsvTranslator().Translate( store );
+        var tsv = new ToTsvTranslator().Translate( symbols );
         await contentWriter.WriteContentAsync( tsv, cancellationToken );
     }
 
