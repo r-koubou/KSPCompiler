@@ -7,19 +7,19 @@ using KSPCompiler.UseCases.Symbols;
 
 namespace KSPCompiler.ExternalSymbolControllers;
 
-public class VariableSymbolTableStoreController
+public class SymbolStoreController<TSymbol> where TSymbol : SymbolBase
 {
-    private readonly IVariableSymbolStoreUseCase useCase;
+    private readonly ISymbolStoreUseCase<TSymbol> useCase;
 
-    public VariableSymbolTableStoreController( IVariableSymbolStoreUseCase useCase )
+    public SymbolStoreController( ISymbolStoreUseCase<TSymbol> useCase )
     {
         this.useCase = useCase;
     }
 
-    public void Store( IEnumerable<VariableSymbol> symbols )
+    public void Store( IEnumerable<TSymbol> symbols )
         => StoreAsync( symbols ).GetAwaiter().GetResult();
 
-    public async Task StoreAsync( IEnumerable<VariableSymbol> symbols, CancellationToken cancellationToken = default )
+    public async Task StoreAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default )
     {
         await useCase.ExecuteAsync( symbols, cancellationToken );
     }
