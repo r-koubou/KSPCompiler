@@ -1,6 +1,7 @@
 using System.IO;
 using System.Linq;
 
+using KSPCompiler.Domain.Symbols;
 using KSPCompiler.ExternalSymbolRepository.Tsv.Variables;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
@@ -11,7 +12,7 @@ using NUnit.Framework;
 namespace KSPCompiler.ExternalSymbolControllers.Tests;
 
 [TestFixture]
-public class ExternalVariableSymbolControllerTest
+public class ExternalSymbolControllerTest
 {
     private static readonly string TestDataDirectory = Path.Combine( "TestData", "ExternalSymbolControllersTest" );
     private static readonly string OutputDirectory  = Path.Combine( ".Temp", "ExternalSymbolControllersTest" );
@@ -24,8 +25,8 @@ public class ExternalVariableSymbolControllerTest
 
         // Load
         var importer = new TsvVariableSymbolImporter( new LocalTextContentReader( source ) );
-        var loadInteractor = new VariableSymbolLoadInteractor( importer );
-        var loadController = new VariableSymbolTableLoadController( loadInteractor );
+        var loadInteractor = new SymbolLoadInteractor<VariableSymbol>( importer );
+        var loadController = new SymbolLoadController<VariableSymbol>( loadInteractor );
 
         var loadResult = loadController.Load();
         Assert.True( loadResult.Result );
@@ -34,8 +35,8 @@ public class ExternalVariableSymbolControllerTest
 
         // Store
         var exporter = new YamlVariableSymbolExporter( new LocalTextContentWriter( destination ) );
-        var storeInteractor = new VariableSymbolStoreInteractor( exporter );
-        var storeController = new VariableSymbolTableStoreController( storeInteractor );
+        var storeInteractor = new SymbolStoreInteractor<VariableSymbol>( exporter );
+        var storeController = new SymbolStoreController<VariableSymbol>( storeInteractor );
 
         storeController.Store( loadResult.OutputData );
         Assert.That( File.Exists( destination ), Is.True );
@@ -49,8 +50,8 @@ public class ExternalVariableSymbolControllerTest
 
         // Load
         var sourceRepository = new YamlVariableSymbolImporter( new LocalTextContentReader( source ) );
-        var loadInteractor = new VariableSymbolLoadInteractor( sourceRepository );
-        var loadController = new VariableSymbolTableLoadController( loadInteractor );
+        var loadInteractor = new SymbolLoadInteractor<VariableSymbol>( sourceRepository );
+        var loadController = new SymbolLoadController<VariableSymbol>( loadInteractor );
 
         var loadResult = loadController.Load();
         Assert.True( loadResult.Result );
@@ -59,8 +60,8 @@ public class ExternalVariableSymbolControllerTest
 
         // Store
         var destinationRepository = new TsvVariableSymbolExporter( new LocalTextContentWriter( destination ) );
-        var storeInteractor = new VariableSymbolStoreInteractor( destinationRepository );
-        var storeController = new VariableSymbolTableStoreController( storeInteractor );
+        var storeInteractor = new SymbolStoreInteractor<VariableSymbol>( destinationRepository );
+        var storeController = new SymbolStoreController<VariableSymbol>( storeInteractor );
 
         storeController.Store( loadResult.OutputData );
         Assert.That( File.Exists( destination ), Is.True );

@@ -30,11 +30,11 @@ static void NewDb(
     controller.Create();
 }
 
-static void ConvertVariableImp( ISymbolImporter<VariableSymbol> source, ISymbolExporter<VariableSymbol> destination )
+static void ConvertVariableImp<TSymbol>( ISymbolImporter<TSymbol> source, ISymbolExporter<TSymbol> destination ) where TSymbol : SymbolBase
 {
     // Load
-    var loadInteractor = new VariableSymbolLoadInteractor( source );
-    var loadController = new VariableSymbolTableLoadController( loadInteractor );
+    var loadInteractor = new SymbolLoadInteractor<TSymbol>( source );
+    var loadController = new SymbolLoadController<TSymbol>( loadInteractor );
 
     var loadResult = loadController.Load();
 
@@ -44,8 +44,8 @@ static void ConvertVariableImp( ISymbolImporter<VariableSymbol> source, ISymbolE
     }
 
     // Store
-    var storeInteractor = new VariableSymbolStoreInteractor( destination );
-    var storeController = new VariableSymbolTableStoreController( storeInteractor );
+    var storeInteractor = new SymbolStoreInteractor<TSymbol>( destination );
+    var storeController = new SymbolStoreController<TSymbol>( storeInteractor );
 
     storeController.Store( loadResult.OutputData );
 }

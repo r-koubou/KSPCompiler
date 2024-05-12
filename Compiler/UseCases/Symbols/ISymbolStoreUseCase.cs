@@ -5,5 +5,5 @@ using KSPCompiler.Domain.Symbols;
 
 namespace KSPCompiler.UseCases.Symbols;
 
-public interface IVariableSymbolStoreUseCase : IUseCase<IEnumerable<VariableSymbol>, Unit>
+public interface ISymbolStoreUseCase<in TSymbol> : IUseCase<IEnumerable<TSymbol>, Unit> where TSymbol : SymbolBase
 {}

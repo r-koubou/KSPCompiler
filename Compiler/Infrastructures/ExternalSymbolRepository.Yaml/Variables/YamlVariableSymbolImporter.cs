@@ -23,7 +23,7 @@ public class YamlVariableSymbolImporter : ISymbolImporter<VariableSymbol>
     {
         var yaml = await contentReader.ReadContentAsync( cancellationToken );
         var deserializer = DeserializerBuilderFactory.Create().Build();
-        var rootObject = deserializer.Deserialize<RootObject>(yaml);
+        var rootObject = deserializer.Deserialize<RootObject>( yaml );
 
         return new FromYamlTranslator().Translate( rootObject );
     }
