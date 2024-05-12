@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using KSPCompiler.Commons.Path;
 using KSPCompiler.Domain.Tests;
 using KSPCompiler.ExternalSymbol.Commons;
-using KSPCompiler.ExternalSymbolRepository.Tsv.Variables;
+using KSPCompiler.ExternalSymbolRepository.Tsv.Commands;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
 using KSPCompiler.UseCases.Symbols.Commons;
 
@@ -13,26 +13,26 @@ using NUnit.Framework;
 namespace KSPCompiler.ExternalSymbolRepository.Tsv.Tests;
 
 [TestFixture]
-public class VariableTableTsvLoaderTest
+public class CommandTableTsvLoaderTest
 {
-    private static readonly string TestDataDirectory = Path.Combine( "TestData", "VariableTableTsvLoaderTest" );
+    private static readonly string TestDataDirectory = Path.Combine( "TestData", "CommandTableTsvLoaderTest" );
 
-    private static IExternalVariableSymbolImporter CreateLocalImporter( string path )
+    private static IExternalCommandSymbolImporter CreateLocalImporter( string path )
     {
         var reader = new LocalTextContentReader( new FilePath( path ) );
-        return new TsvVariableSymbolImporter( reader );
+        return new TsvCommandSymbolImporter( reader );
     }
 
-    private static IExternalVariableSymbolExporter CreateLocalExporter( string path )
+    private static IExternalCommandSymbolExporter CreateLocalExporter( string path )
     {
         var writer = new LocalTextContentWriter( new FilePath( path ) );
-        return new TsvVariableSymbolExporter( writer );
+        return new TsvCommandSymbolExporter( writer );
     }
 
     [Test]
     public void TranslateSymbolTable()
     {
-        var path = Path.Combine( TestDataDirectory, "VariableTable.txt" );
+        var path = Path.Combine( TestDataDirectory, "CommandTable.txt" );
         var importer = CreateLocalImporter( path );
         var symbolTable = importer.Import();
 
@@ -42,7 +42,7 @@ public class VariableTableTsvLoaderTest
     [Test]
     public async Task TranslateSymbolTableAsync()
     {
-        var path = Path.Combine( TestDataDirectory, "VariableTable.txt" );
+        var path = Path.Combine( TestDataDirectory, "CommandTable.txt" );
         var importer = CreateLocalImporter( path );
 
         await Task.Run( async () => {
@@ -54,7 +54,7 @@ public class VariableTableTsvLoaderTest
     [Test]
     public void CannotImportDuplicateSymbolTest()
     {
-        var path = Path.Combine( TestDataDirectory, "DuplicateVariableTable.txt" );
+        var path = Path.Combine( TestDataDirectory, "DuplicateCommandTable.txt" );
         var importer = CreateLocalImporter( path );
 
         Assert.ThrowsAsync<DuplicatedSymbolException>( async () => await importer.ImportAsync() );
@@ -63,9 +63,9 @@ public class VariableTableTsvLoaderTest
     [Test]
     public void StoreTest()
     {
-        var path = Path.Combine( TestDataDirectory, "VariableTable.tsv" );
+        var path = Path.Combine( TestDataDirectory, "CommandTable.tsv" );
         var exporter = CreateLocalExporter( path );
-        var symbolTable = MockSymbolTableUtility.CreateDummyVariableSymbolTable();
+        var symbolTable = MockSymbolTableUtility.CreateDummyCommandSymbolTable();
 
         exporter.ExportAsync( symbolTable );
     }
@@ -73,9 +73,9 @@ public class VariableTableTsvLoaderTest
     [Test]
     public async Task StoreAsyncTest()
     {
-        var path = Path.Combine( TestDataDirectory, "VariableTable.tsv" );
+        var path = Path.Combine( TestDataDirectory, "CommandTable.tsv" );
         var exporter = CreateLocalExporter( path );
-        var symbolTable = MockSymbolTableUtility.CreateDummyVariableSymbolTable();
+        var symbolTable = MockSymbolTableUtility.CreateDummyCommandSymbolTable();
 
         await exporter.ExportAsync( symbolTable );
     }

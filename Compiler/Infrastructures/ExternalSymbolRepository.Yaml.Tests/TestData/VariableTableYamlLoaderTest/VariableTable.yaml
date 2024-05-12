@@ -1,5 +1,5 @@
-version: 1
-symbols:
-  - name: $hoge
-    reserved: true
-    description: hoge
+Version: 1
+Symbols:
+  - Name: $hoge
+    Reserved: true
+    Description: hoge

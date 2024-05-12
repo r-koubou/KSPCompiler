@@ -1,19 +1,26 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace KSPCompiler.Domain.Symbols.MetaData;
 
 public static class DataTypeUtility
 {
-    public static DataTypeFlag Guess( string variableName )
+    /// <summary>
+    /// Convert to data type from symbol name.
+    /// </summary>
+    /// <exception cref="ArgumentException">Unknown type</exception>
+    public static DataTypeFlag Guess( SymbolName symbolName )
     {
-        if( string.IsNullOrEmpty( variableName ) )
+        if( string.IsNullOrEmpty( symbolName ) )
         {
             return DataTypeFlag.None;
         }
 
-        var typePrefix = variableName[ 0 ];
+        var typePrefix = symbolName.Value[ 0 ];
 
-        if( KspRegExpConstants.NonTypePrefix.IsMatch( variableName ) )
+        if( KspRegExpConstants.NonTypePrefix.IsMatch( symbolName ) )
         {
             return DataTypeFlag.TypeKspPreprocessorSymbol | DataTypeFlag.TypePgsId;
         }
@@ -32,12 +39,114 @@ public static class DataTypeUtility
             //--------------------------------------------------------------------------
             // For internal processing
             //--------------------------------------------------------------------------
-            'B' => DataTypeFlag.TypeBool,
-            'V' => DataTypeFlag.TypeVoid,
-            'P' => DataTypeFlag.TypeKspPreprocessorSymbol,
-            'K' => DataTypeFlag.TypePgsId,
             '*' => DataTypeFlag.MultipleType,
-            _   => throw new ArgumentException( $"unknown ksp type : {typePrefix} ({nameof(variableName)}={variableName})" )
+            _   => throw new ArgumentException( $"unknown ksp type : {typePrefix} ({nameof(symbolName)}={symbolName})" )
         };
+    }
+
+    /// <summary>
+    /// Convert to data type from string with separated '||' if multiple types.
+    /// </summary>
+    /// <exception cref="ArgumentException">Unknown type</exception>
+    public static DataTypeFlag Guess( string typeString, string separator = "||" )
+    {
+        var result = DataTypeFlag.None;
+
+        typeString.Split( separator );
+
+        foreach( var type in typeString.Split( separator ) )
+        {
+            result |= type switch
+            {
+                //--------------------------------------------------------------------------
+                // KSP Standard syntax
+                //--------------------------------------------------------------------------
+                "$" => DataTypeFlag.TypeInt,
+                "%" => DataTypeFlag.TypeIntArray,
+                "~" => DataTypeFlag.TypeReal,
+                "?" => DataTypeFlag.TypeRealArray,
+                "@" => DataTypeFlag.TypeString,
+                "!" => DataTypeFlag.TypeStringArray,
+                //--------------------------------------------------------------------------
+                // For internal processing
+                //--------------------------------------------------------------------------
+                "I" => DataTypeFlag.TypeInt,
+                "S" => DataTypeFlag.TypeString,
+                "R" => DataTypeFlag.TypeReal,
+                "B" => DataTypeFlag.TypeBool,
+                "I[]" => DataTypeFlag.TypeIntArray,
+                "S[]" => DataTypeFlag.TypeStringArray,
+                "R[]" => DataTypeFlag.TypeRealArray,
+                "V" => DataTypeFlag.TypeVoid,
+                "P" => DataTypeFlag.TypeKspPreprocessorSymbol,
+                "K" => DataTypeFlag.TypePgsId,
+                "*" => DataTypeFlag.MultipleType,
+                _   => throw new ArgumentException( $"unknown type : {type}" )
+            };
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    /// Convert to this compiler formated string from data type with separated '||' if multiple types.
+    /// </summary>
+    /// <exception cref="ArgumentException">Unknown type</exception>
+    public static string ToString( DataTypeFlag typeFlag, string separator = "||" )
+    {
+        var resultTexts = new List<string>();
+
+        if( typeFlag == DataTypeFlag.MultipleType )
+        {
+            return "*";
+        }
+
+        ToStringImpl( typeFlag, DataTypeFlag.TypeVoid,                  "V", resultTexts );
+        ToStringImpl( typeFlag, DataTypeFlag.TypeInt,                   "I", resultTexts );
+        ToStringImpl( typeFlag, DataTypeFlag.TypeString,                "S", resultTexts );
+        ToStringImpl( typeFlag, DataTypeFlag.TypeReal,                  "R", resultTexts );
+        ToStringImpl( typeFlag, DataTypeFlag.TypeBool,                  "B", resultTexts );
+        ToStringImpl( typeFlag, DataTypeFlag.TypeKspPreprocessorSymbol, "P", resultTexts );
+        ToStringImpl( typeFlag, DataTypeFlag.TypePgsId,                 "K", resultTexts );
+
+        if(resultTexts.Count == 0)
+        {
+            throw new ArgumentException( $"unknown type : {typeFlag}" );
+        }
+
+        var result = new StringBuilder();
+
+        foreach( var (value, index) in resultTexts.Select( (value, index) => (value, index) ))
+        {
+            result.Append( value );
+
+            if( index < resultTexts.Count - 1 )
+            {
+                result.Append( separator );
+            }
+        }
+
+        return result.ToString();
+    }
+
+    private static void ToStringImpl( DataTypeFlag typeFlag, DataTypeFlag expectedType, string typeText, ICollection<string> outputTextTo )
+    {
+        string result;
+
+        if( ( typeFlag & expectedType ) != 0 )
+        {
+            result = typeText;
+        }
+        else
+        {
+            return;
+        }
+
+        if( ( typeFlag & DataTypeFlag.AttributeArray ) != 0 )
+        {
+            result += "[]";
+        }
+
+        outputTextTo.Add( result );
     }
 }
