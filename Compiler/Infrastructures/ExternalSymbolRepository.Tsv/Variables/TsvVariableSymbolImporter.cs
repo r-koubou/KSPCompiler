@@ -1,14 +1,14 @@
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
 using KSPCompiler.Commons.Contents;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.ExternalSymbolRepository.Tsv.Variables.Translators;
-using KSPCompiler.UseCases.Symbols.Commons;
 
 namespace KSPCompiler.ExternalSymbolRepository.Tsv.Variables;
 
-public class TsvVariableSymbolImporter : IExternalVariableSymbolImporter
+public class TsvVariableSymbolImporter : ISymbolImporter<VariableSymbol>
 {
     private readonly ITextContentReader contentReader;
 
@@ -17,7 +17,7 @@ public class TsvVariableSymbolImporter : IExternalVariableSymbolImporter
         contentReader = reader;
     }
 
-    public async Task<ISymbolTable<VariableSymbol>> ImportAsync( CancellationToken cancellationToken = default )
+    public async Task<IReadOnlyCollection<VariableSymbol>> ImportAsync( CancellationToken cancellationToken = default )
     {
         var tsv = await contentReader.ReadContentAsync( cancellationToken );
 

@@ -1,16 +1,16 @@
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
-using KSPCompiler.ExternalSymbol.Commons;
 using KSPCompiler.Infrastructures.Commons.Extensions;
 
 using DataTypeUtility = KSPCompiler.Domain.Symbols.MetaData.DataTypeUtility;
 
 namespace KSPCompiler.ExternalSymbolRepository.Tsv.Variables.Translators;
 
-internal class FromTsvTranslator : IDataTranslator<string, ISymbolTable<VariableSymbol>>
+internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<VariableSymbol>>
 {
     private enum Column
     {
@@ -21,9 +21,9 @@ internal class FromTsvTranslator : IDataTranslator<string, ISymbolTable<Variable
 
     private static readonly Regex LineComment = new( @"^#.*" );
 
-    public ISymbolTable<VariableSymbol> Translate( string source )
+    public IReadOnlyCollection<VariableSymbol> Translate( string source )
     {
-        var result = new VariableSymbolTable();
+        var result = new List<VariableSymbol>();
 
         foreach( var x in source.SplitNewLine() )
         {
@@ -53,10 +53,7 @@ internal class FromTsvTranslator : IDataTranslator<string, ISymbolTable<Variable
             symbol.DataType         = DataTypeUtility.Guess( symbol.Name );
             symbol.DataTypeModifier = DataTypeModifierFlag.Const;
 
-            if( !result.Add( symbol ) )
-            {
-                throw new DuplicatedSymbolException( symbol.Name );
-            }
+            result.Add( symbol );
         }
 
         return result;

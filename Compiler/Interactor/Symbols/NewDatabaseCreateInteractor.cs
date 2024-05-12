@@ -1,33 +1,33 @@
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.UseCases.Symbols;
-using KSPCompiler.UseCases.Symbols.Commons;
 
 namespace KSPCompiler.Interactor.Symbols;
 
 public class NewDatabaseCreateInteractor : INewDatabaseCreateUseCase
 {
-    private IExternalVariableSymbolExporter Exporter { get; }
+    private ISymbolExporter<VariableSymbol> Exporter { get; }
 
-    public NewDatabaseCreateInteractor( IExternalVariableSymbolExporter exporter )
+    public NewDatabaseCreateInteractor( ISymbolExporter<VariableSymbol> exporter )
     {
         Exporter = exporter;
     }
 
     public async Task ExecuteAsync( CancellationToken cancellationToken = default )
     {
-        var table = new VariableSymbolTable();
-        var example = new VariableSymbol
+        var list = new List<VariableSymbol>
         {
-            Name        = "$example1",
-            Description = "example1 symbol",
-            Reserved    = true,
+            new()
+            {
+                Name        = "$example1",
+                Description = "example1 symbol",
+                Reserved    = true,
+            }
         };
 
-
-        table.Add( example );
-        await Exporter.ExportAsync( table, cancellationToken );
+        await Exporter.ExportAsync( list, cancellationToken );
     }
 }

@@ -2,11 +2,10 @@ using System.IO;
 using System.Threading.Tasks;
 
 using KSPCompiler.Commons.Path;
+using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Tests;
-using KSPCompiler.ExternalSymbol.Commons;
 using KSPCompiler.ExternalSymbolRepository.Tsv.Variables;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
-using KSPCompiler.UseCases.Symbols.Commons;
 
 using NUnit.Framework;
 
@@ -17,13 +16,13 @@ public class VariableTableTsvLoaderTest
 {
     private static readonly string TestDataDirectory = Path.Combine( "TestData", "VariableTableTsvLoaderTest" );
 
-    private static IExternalVariableSymbolImporter CreateLocalImporter( string path )
+    private static ISymbolImporter<VariableSymbol> CreateLocalImporter( string path )
     {
         var reader = new LocalTextContentReader( new FilePath( path ) );
         return new TsvVariableSymbolImporter( reader );
     }
 
-    private static IExternalVariableSymbolExporter CreateLocalExporter( string path )
+    private static ISymbolExporter<VariableSymbol> CreateLocalExporter( string path )
     {
         var writer = new LocalTextContentWriter( new FilePath( path ) );
         return new TsvVariableSymbolExporter( writer );
@@ -34,9 +33,9 @@ public class VariableTableTsvLoaderTest
     {
         var path = Path.Combine( TestDataDirectory, "VariableTable.txt" );
         var importer = CreateLocalImporter( path );
-        var symbolTable = importer.Import();
+        var symbols = importer.Import();
 
-        Assert.IsTrue( symbolTable.Table.Count == 1 );
+        Assert.IsTrue( symbols.Count == 1 );
     }
 
     [Test]
@@ -46,18 +45,9 @@ public class VariableTableTsvLoaderTest
         var importer = CreateLocalImporter( path );
 
         await Task.Run( async () => {
-            var symbolTable = await importer.ImportAsync();
-            Assert.IsTrue( symbolTable.Table.Count == 1 );
+            var symbols = await importer.ImportAsync();
+            Assert.IsTrue( symbols.Count == 1 );
         });
-    }
-
-    [Test]
-    public void CannotImportDuplicateSymbolTest()
-    {
-        var path = Path.Combine( TestDataDirectory, "DuplicateVariableTable.txt" );
-        var importer = CreateLocalImporter( path );
-
-        Assert.ThrowsAsync<DuplicatedSymbolException>( async () => await importer.ImportAsync() );
     }
 
     [Test]
@@ -65,7 +55,7 @@ public class VariableTableTsvLoaderTest
     {
         var path = Path.Combine( TestDataDirectory, "VariableTable.tsv" );
         var exporter = CreateLocalExporter( path );
-        var symbolTable = MockSymbolTableUtility.CreateDummyVariableSymbolTable();
+        var symbolTable = MockSymbolTableUtility.CreateDummyVariableSymbols();
 
         exporter.ExportAsync( symbolTable );
     }
@@ -75,7 +65,7 @@ public class VariableTableTsvLoaderTest
     {
         var path = Path.Combine( TestDataDirectory, "VariableTable.tsv" );
         var exporter = CreateLocalExporter( path );
-        var symbolTable = MockSymbolTableUtility.CreateDummyVariableSymbolTable();
+        var symbolTable = MockSymbolTableUtility.CreateDummyVariableSymbols();
 
         await exporter.ExportAsync( symbolTable );
     }

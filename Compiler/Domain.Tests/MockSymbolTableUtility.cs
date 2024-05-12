@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 
@@ -5,9 +7,9 @@ namespace KSPCompiler.Domain.Tests;
 
 public static class MockSymbolTableUtility
 {
-    public static VariableSymbolTable CreateDummyVariableSymbolTable()
+    public static List<VariableSymbol> CreateDummyVariableSymbols()
     {
-        var table = new VariableSymbolTable();
+        var list = new List<VariableSymbol>();
         var example = new VariableSymbol
         {
             Name = "$example1",
@@ -15,14 +17,14 @@ public static class MockSymbolTableUtility
             Reserved = true,
         };
 
-        table.Add( example );
+        list.Add( example );
 
-        return table;
+        return list;
     }
 
-    public static CommandSymbolTable CreateDummyCommandSymbolTable()
+    public static List<CommandSymbol> CreateDummyCommandSymbols()
     {
-        var table = new CommandSymbolTable();
+        var list = new List<CommandSymbol>();
         var example = new CommandSymbol()
         {
             Name        = "message",
@@ -39,8 +41,8 @@ public static class MockSymbolTableUtility
             Reserved = false,
         });
 
-        table.Add( example );
+        list.Add( example );
 
-        return table;
+        return list;
     }
 }

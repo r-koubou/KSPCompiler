@@ -1,12 +1,12 @@
 using System;
 using System.IO;
 
+using KSPCompiler.Domain.Symbols;
 using KSPCompiler.ExternalSymbolControllers;
 using KSPCompiler.ExternalSymbolRepository.Tsv.Variables;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
 using KSPCompiler.Interactor.Symbols;
-using KSPCompiler.UseCases.Symbols.Commons;
 
 var app = ConsoleApp.Create( args );
 app.AddCommand( "newdb",    NewDb );
@@ -30,7 +30,7 @@ static void NewDb(
     controller.Create();
 }
 
-static void ConvertVariableImp( IExternalVariableSymbolImporter source, IExternalVariableSymbolExporter destination )
+static void ConvertVariableImp( ISymbolImporter<VariableSymbol> source, ISymbolExporter<VariableSymbol> destination )
 {
     // Load
     var loadInteractor = new VariableSymbolLoadInteractor( source );

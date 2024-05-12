@@ -2,15 +2,12 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-using KSPCompiler.ExternalSymbol.Commons;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Commands;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Model;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Commons;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
 
 using NUnit.Framework;
-
-using YamlDotNet.Serialization;
 
 namespace KSPCompiler.ExternalSymbolRepository.Yaml.Tests;
 
@@ -42,17 +39,8 @@ public class CommandTableYamlLoaderTest
     {
         var path = Path.Combine( TestDataDirectory, "CommandTable.yaml" );
         var importer = new YamlCommandSymbolImporter( new LocalTextContentReader( path ) );
-        var symbolTable = await importer.ImportAsync();
+        var symbols = await importer.ImportAsync();
 
-        Assert.IsTrue( symbolTable.Table.Count > 0 );
-    }
-
-    [Test]
-    public void CannotImportDuplicateSymbolTest()
-    {
-        var path = Path.Combine( TestDataDirectory, "DuplicateCommandTable.yaml" );
-        var importer = new YamlCommandSymbolImporter( new LocalTextContentReader( path ) );
-
-        Assert.ThrowsAsync<DuplicatedSymbolException>( async () => await importer.ImportAsync() );
+        Assert.IsTrue( symbols.Count > 0 );
     }
 }

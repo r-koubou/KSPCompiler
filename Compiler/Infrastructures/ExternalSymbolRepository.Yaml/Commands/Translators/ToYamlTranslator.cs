@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
@@ -5,13 +7,13 @@ using KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Model;
 
 namespace KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Translators;
 
-internal class ToYamlTranslator : IDataTranslator<ISymbolTable<CommandSymbol>, RootObject>
+internal class ToYamlTranslator : IDataTranslator<IEnumerable<CommandSymbol>, RootObject>
 {
-    public RootObject Translate( ISymbolTable<CommandSymbol> source )
+    public RootObject Translate( IEnumerable<CommandSymbol> source )
     {
         var result = new RootObject();
 
-        foreach( var x in source.Table.Values )
+        foreach( var x in source )
         {
             var symbol = new Symbol
             {

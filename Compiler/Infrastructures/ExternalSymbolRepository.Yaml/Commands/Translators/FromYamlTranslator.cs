@@ -1,16 +1,17 @@
+using System.Collections.Generic;
+
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
-using KSPCompiler.ExternalSymbol.Commons;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Model;
 
 namespace KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Translators;
 
-internal class FromYamlTranslator : IDataTranslator<RootObject, ISymbolTable<CommandSymbol>>
+internal class FromYamlTranslator : IDataTranslator<RootObject, IReadOnlyCollection<CommandSymbol>>
 {
-    public ISymbolTable<CommandSymbol> Translate( RootObject source )
+    public IReadOnlyCollection<CommandSymbol> Translate( RootObject source )
     {
-        var result = new CommandSymbolTable();
+        var result = new List<CommandSymbol>();
 
         foreach( var x in source.Symbols )
         {
@@ -35,10 +36,7 @@ internal class FromYamlTranslator : IDataTranslator<RootObject, ISymbolTable<Com
                 command.AddArgument( argument );
             }
 
-            if( !result.Add( command ) )
-            {
-                throw new DuplicatedSymbolException( command.Name );
-            }
+            result.Add( command );
         }
 
         return result;

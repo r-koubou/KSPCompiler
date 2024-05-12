@@ -1,16 +1,17 @@
+using System.Collections.Generic;
+
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
-using KSPCompiler.ExternalSymbol.Commons;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Model;
 
 namespace KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Translators;
 
-internal class FromYamlTranslator : IDataTranslator<RootObject, ISymbolTable<VariableSymbol>>
+internal class FromYamlTranslator : IDataTranslator<RootObject, IReadOnlyCollection<VariableSymbol>>
 {
-    public ISymbolTable<VariableSymbol> Translate( RootObject source )
+    public IReadOnlyCollection<VariableSymbol> Translate( RootObject source )
     {
-        var result = new VariableSymbolTable();
+        var result = new List<VariableSymbol>();
 
         foreach( var x in source.Symbols )
         {
@@ -25,10 +26,7 @@ internal class FromYamlTranslator : IDataTranslator<RootObject, ISymbolTable<Var
             symbol.DataType         = DataTypeUtility.Guess( symbol.Name );
             symbol.DataTypeModifier = DataTypeModifierFlag.Const;
 
-            if( !result.Add( symbol ) )
-            {
-                throw new DuplicatedSymbolException( symbol.Name );
-            }
+            result.Add( symbol );
         }
 
         return result;
