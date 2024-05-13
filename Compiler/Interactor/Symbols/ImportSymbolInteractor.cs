@@ -9,11 +9,11 @@ using KSPCompiler.UseCases.Symbols;
 
 namespace KSPCompiler.Interactor.Symbols;
 
-public class SymbolLoadInteractor<TSymbol> : ISymbolLoadUseCase<TSymbol> where TSymbol : SymbolBase
+public class ImportSymbolInteractor<TSymbol> : IImportSymbolUseCase<TSymbol> where TSymbol : SymbolBase
 {
     private readonly ISymbolImporter<TSymbol> importer;
 
-    public SymbolLoadInteractor( ISymbolImporter<TSymbol> importer )
+    public ImportSymbolInteractor( ISymbolImporter<TSymbol> importer )
     {
         this.importer = importer;
     }

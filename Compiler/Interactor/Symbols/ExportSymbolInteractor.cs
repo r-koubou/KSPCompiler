@@ -8,11 +8,11 @@ using KSPCompiler.UseCases.Symbols;
 
 namespace KSPCompiler.Interactor.Symbols;
 
-public class SymbolStoreInteractor<TSymbol> : ISymbolStoreUseCase<TSymbol> where TSymbol : SymbolBase
+public class ExportSymbolInteractor<TSymbol> : IExportSymbolUseCase<TSymbol> where TSymbol : SymbolBase
 {
     private readonly ISymbolExporter<TSymbol> exporter;
 
-    public SymbolStoreInteractor( ISymbolExporter<TSymbol> exporter )
+    public ExportSymbolInteractor( ISymbolExporter<TSymbol> exporter )
     {
         this.exporter = exporter;
     }

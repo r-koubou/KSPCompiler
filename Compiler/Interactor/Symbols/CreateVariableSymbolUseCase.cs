@@ -7,11 +7,11 @@ using KSPCompiler.UseCases.Symbols;
 
 namespace KSPCompiler.Interactor.Symbols;
 
-public class NewDatabaseCreateInteractor : INewDatabaseCreateUseCase
+public class CreateVariableSymbolUseCase : ICreateVariableSymbolUseCase
 {
     private ISymbolExporter<VariableSymbol> Exporter { get; }
 
-    public NewDatabaseCreateInteractor( ISymbolExporter<VariableSymbol> exporter )
+    public CreateVariableSymbolUseCase( ISymbolExporter<VariableSymbol> exporter )
     {
         Exporter = exporter;
     }
