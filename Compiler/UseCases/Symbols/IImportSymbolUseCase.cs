@@ -20,4 +20,4 @@ public sealed class SymbolLoadOutputData<TSymbol> : IOutputPort<IEnumerable<TSym
     }
 }
 
-public interface ISymbolLoadUseCase<TSymbol> : IUseCase<Unit, SymbolLoadOutputData<TSymbol>> where TSymbol : SymbolBase {}
+public interface IImportSymbolUseCase<TSymbol> : IUseCase<Unit, SymbolLoadOutputData<TSymbol>> where TSymbol : SymbolBase {}

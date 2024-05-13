@@ -25,20 +25,20 @@ public class ExternalSymbolControllerTest
 
         // Load
         var importer = new TsvVariableSymbolImporter( new LocalTextContentReader( source ) );
-        var loadInteractor = new SymbolLoadInteractor<VariableSymbol>( importer );
-        var loadController = new SymbolLoadController<VariableSymbol>( loadInteractor );
+        var loadInteractor = new ImportSymbolInteractor<VariableSymbol>( importer );
+        var loadController = new ImportSymbolController<VariableSymbol>( loadInteractor );
 
-        var loadResult = loadController.Load();
+        var loadResult = loadController.Import();
         Assert.True( loadResult.Result );
         Assert.True( loadResult.OutputData.Any() );
         Assert.Null( loadResult.Error );
 
         // Store
         var exporter = new YamlVariableSymbolExporter( new LocalTextContentWriter( destination ) );
-        var storeInteractor = new SymbolStoreInteractor<VariableSymbol>( exporter );
-        var storeController = new SymbolStoreController<VariableSymbol>( storeInteractor );
+        var storeInteractor = new ExportSymbolInteractor<VariableSymbol>( exporter );
+        var storeController = new ExportSymbolController<VariableSymbol>( storeInteractor );
 
-        storeController.Store( loadResult.OutputData );
+        storeController.Export( loadResult.OutputData );
         Assert.That( File.Exists( destination ), Is.True );
     }
 
@@ -50,20 +50,20 @@ public class ExternalSymbolControllerTest
 
         // Load
         var sourceRepository = new YamlVariableSymbolImporter( new LocalTextContentReader( source ) );
-        var loadInteractor = new SymbolLoadInteractor<VariableSymbol>( sourceRepository );
-        var loadController = new SymbolLoadController<VariableSymbol>( loadInteractor );
+        var loadInteractor = new ImportSymbolInteractor<VariableSymbol>( sourceRepository );
+        var loadController = new ImportSymbolController<VariableSymbol>( loadInteractor );
 
-        var loadResult = loadController.Load();
+        var loadResult = loadController.Import();
         Assert.True( loadResult.Result );
         Assert.True( loadResult.OutputData.Any() );
         Assert.Null( loadResult.Error );
 
         // Store
         var destinationRepository = new TsvVariableSymbolExporter( new LocalTextContentWriter( destination ) );
-        var storeInteractor = new SymbolStoreInteractor<VariableSymbol>( destinationRepository );
-        var storeController = new SymbolStoreController<VariableSymbol>( storeInteractor );
+        var storeInteractor = new ExportSymbolInteractor<VariableSymbol>( destinationRepository );
+        var storeController = new ExportSymbolController<VariableSymbol>( storeInteractor );
 
-        storeController.Store( loadResult.OutputData );
+        storeController.Export( loadResult.OutputData );
         Assert.That( File.Exists( destination ), Is.True );
     }
 }
