@@ -2,7 +2,9 @@ using KSPCompiler.Commons;
 
 namespace KSPCompiler.UseCases;
 
-public interface IInputPort<out TInput>
+public interface IInputPort {}
+
+public interface IInputPort<out TInput> : IInputPort
 {
     public TInput InputData { get; }
 }
