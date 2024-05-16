@@ -1,9 +1,9 @@
-using System.Collections.Generic;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
+using KSPCompiler.UseCases;
 using KSPCompiler.UseCases.Symbols;
 
 namespace KSPCompiler.Interactor.Symbols;
@@ -17,9 +17,16 @@ public class ExportSymbolInteractor<TSymbol> : IExportSymbolUseCase<TSymbol> whe
         this.exporter = exporter;
     }
 
-    public async Task<Unit> ExecuteAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default )
+    public async Task<UnitOutputPort> ExecuteAsync( ExportSymbolInputData<TSymbol> parameter, CancellationToken cancellationToken = default )
     {
-        await exporter.ExportAsync( symbols, cancellationToken );
-        return Unit.Default;
+        try
+        {
+            await exporter.ExportAsync( parameter.InputData, cancellationToken );
+            return new UnitOutputPort( true );
+        }
+        catch( Exception e )
+        {
+            return new UnitOutputPort( false, e );
+        }
     }
 }

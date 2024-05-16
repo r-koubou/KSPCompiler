@@ -12,9 +12,11 @@ public interface IUseCase
 }
 
 public interface IUseCase<in TInputPort, TOutputPort>
+    where TInputPort : IInputPort
+    where TOutputPort : IOutputPort
 {
     TOutputPort Execute( TInputPort input )
         => ExecuteAsync( input ).GetAwaiter().GetResult();
 
-    Task<TOutputPort> ExecuteAsync( TInputPort input, CancellationToken cancellationToken = default );
+    Task<TOutputPort> ExecuteAsync( TInputPort parameter, CancellationToken cancellationToken = default );
 }
