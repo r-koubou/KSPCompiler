@@ -18,7 +18,7 @@ public class ImportSymbolInteractor<TSymbol> : IImportSymbolUseCase<TSymbol> whe
         this.importer = importer;
     }
 
-    public async Task<SymbolLoadOutputData<TSymbol>> ExecuteAsync( Unit input, CancellationToken cancellationToken = default )
+    public async Task<SymbolLoadOutputData<TSymbol>> ExecuteAsync( Unit _, CancellationToken cancellationToken = default )
     {
         try
         {

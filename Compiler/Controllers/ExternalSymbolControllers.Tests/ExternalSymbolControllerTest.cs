@@ -6,6 +6,7 @@ using KSPCompiler.ExternalSymbolRepository.Tsv.Variables;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
 using KSPCompiler.Interactor.Symbols;
+using KSPCompiler.UseCases.Symbols;
 
 using NUnit.Framework;
 
@@ -34,11 +35,12 @@ public class ExternalSymbolControllerTest
         Assert.Null( loadResult.Error );
 
         // Store
+        var exportInputPort = new ExportSymbolInputData<VariableSymbol>( loadResult.OutputData );
         var exporter = new YamlVariableSymbolExporter( new LocalTextContentWriter( destination ) );
         var storeInteractor = new ExportSymbolInteractor<VariableSymbol>( exporter );
         var storeController = new ExportSymbolController<VariableSymbol>( storeInteractor );
 
-        storeController.Export( loadResult.OutputData );
+        storeController.Export( exportInputPort );
         Assert.That( File.Exists( destination ), Is.True );
     }
 
@@ -58,12 +60,13 @@ public class ExternalSymbolControllerTest
         Assert.True( loadResult.OutputData.Any() );
         Assert.Null( loadResult.Error );
 
-        // Store
+        // Export
+        var exportParameter = new ExportSymbolInputData<VariableSymbol>( loadResult.OutputData );
         var destinationRepository = new TsvVariableSymbolExporter( new LocalTextContentWriter( destination ) );
-        var storeInteractor = new ExportSymbolInteractor<VariableSymbol>( destinationRepository );
-        var storeController = new ExportSymbolController<VariableSymbol>( storeInteractor );
+        var exportInteractor = new ExportSymbolInteractor<VariableSymbol>( destinationRepository );
+        var exportController = new ExportSymbolController<VariableSymbol>( exportInteractor );
 
-        storeController.Export( loadResult.OutputData );
+        exportController.Export( exportParameter );
         Assert.That( File.Exists( destination ), Is.True );
     }
 }

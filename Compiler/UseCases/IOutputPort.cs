@@ -21,9 +21,9 @@ public sealed class UnitOutputPort : IOutputPort<Unit>
     public Unit OutputData { get; } = Unit.Default;
     public Exception? Error { get; }
 
-    public UnitOutputPort( bool result, Exception? error )
+    public UnitOutputPort( bool result, Exception? error = null )
     {
-        Result     = result;
-        Error      = error;
+        Result = result;
+        Error  = error;
     }
 }

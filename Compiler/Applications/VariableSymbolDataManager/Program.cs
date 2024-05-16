@@ -7,6 +7,7 @@ using KSPCompiler.ExternalSymbolRepository.Tsv.Variables;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
 using KSPCompiler.Interactor.Symbols;
+using KSPCompiler.UseCases.Symbols;
 
 var app = ConsoleApp.Create( args );
 app.AddCommand( "newdb",    NewDb );
@@ -18,10 +19,10 @@ app.Run();
 return;
 
 #region Command Implementation
-
 static void NewDb(
-    [Option("d", "Output directory for database file")] string outputDirectory,
-    [Option("f", "New database name")] string databaseName)
+    [Option( "d", "Output directory for database file" )]
+    string outputDirectory,
+    [Option( "f", "New database name" )] string databaseName )
 {
     var path = Path.Combine( outputDirectory, databaseName + ".yaml" );
     var exporter = new YamlVariableSymbolExporter( new LocalTextContentWriter( path ) );
@@ -40,19 +41,20 @@ static void ConvertVariableImp<TSymbol>( ISymbolImporter<TSymbol> source, ISymbo
 
     if( !loadResult.Result )
     {
-        throw new InvalidOperationException("Load failed", loadResult.Error);
+        throw new InvalidOperationException( "Load failed", loadResult.Error );
     }
 
     // Store
+    var storeInputPort = new ExportSymbolInputData<TSymbol>( loadResult.OutputData );
     var storeInteractor = new ExportSymbolInteractor<TSymbol>( destination );
     var storeController = new ExportSymbolController<TSymbol>( storeInteractor );
 
-    storeController.Export( loadResult.OutputData );
+    storeController.Export( storeInputPort );
 }
 
 static void TsvToYaml(
-    [Option( 0, "tsv file")] string input,
-    [Option( 1, "yaml file")] string output )
+    [Option( 0, "tsv file" )] string input,
+    [Option( 1, "yaml file" )] string output )
 {
     var sourceRepository = new TsvVariableSymbolImporter( new LocalTextContentReader( input ) );
     var destinationRepository = new YamlVariableSymbolExporter( new LocalTextContentWriter( output ) );
@@ -61,13 +63,12 @@ static void TsvToYaml(
 }
 
 static void YamlToTsv(
-    [Option( 0, "yaml file")] string input,
-    [Option( 1, "tsv file")] string output )
+    [Option( 0, "yaml file" )] string input,
+    [Option( 1, "tsv file" )] string output )
 {
     var sourceRepository = new YamlVariableSymbolImporter( new LocalTextContentReader( input ) );
     var destinationRepository = new TsvVariableSymbolExporter( new LocalTextContentWriter( output ) );
 
     ConvertVariableImp( sourceRepository, destinationRepository );
 }
-
 #endregion

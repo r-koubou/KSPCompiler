@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,10 +15,10 @@ public class ExportSymbolController<TSymbol> where TSymbol : SymbolBase
         this.useCase = useCase;
     }
 
-    public void Export( IEnumerable<TSymbol> symbols )
+    public void Export( ExportSymbolInputData<TSymbol> symbols )
         => ExportAsync( symbols ).GetAwaiter().GetResult();
 
-    public async Task ExportAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default )
+    public async Task ExportAsync( ExportSymbolInputData<TSymbol> symbols, CancellationToken cancellationToken = default )
     {
         await useCase.ExecuteAsync( symbols, cancellationToken );
     }
