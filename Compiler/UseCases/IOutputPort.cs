@@ -10,13 +10,9 @@ public interface IOutputPort
     public Exception? Error { get; }
 }
 
-public interface IOutputPort<out TOutputData>
+public interface IOutputPort<out TOutputData> : IOutputPort
 {
-    public bool Result { get; }
     public TOutputData OutputData { get; }
-    public Exception? Error { get; }
-
-
 }
 
 public sealed class UnitOutputPort : IOutputPort<Unit>
