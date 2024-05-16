@@ -17,6 +17,8 @@ public interface IOutputPort<out TOutputData> : IOutputPort
 
 public sealed class UnitOutputPort : IOutputPort<Unit>
 {
+    public static readonly UnitOutputPort Default = new( true );
+
     public bool Result { get; }
     public Unit OutputData { get; } = Unit.Default;
     public Exception? Error { get; }

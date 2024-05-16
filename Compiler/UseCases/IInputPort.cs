@@ -11,5 +11,6 @@ public interface IInputPort<out TInput> : IInputPort
 
 public sealed class UnitInputPort : IInputPort<Unit>
 {
+    public static readonly UnitInputPort Default = new();
     public Unit InputData => Unit.Default;
 }

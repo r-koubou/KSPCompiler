@@ -50,18 +50,18 @@ public class ExternalSymbolControllerTest
         var source = Path.Combine( TestDataDirectory,    "VariableTable.yaml" );
         var destination = Path.Combine( OutputDirectory, "VariableTable-converted.tsv" );
 
-        // Load
+        // Import
         var sourceRepository = new YamlVariableSymbolImporter( new LocalTextContentReader( source ) );
-        var loadInteractor = new ImportSymbolInteractor<VariableSymbol>( sourceRepository );
-        var loadController = new ImportSymbolController<VariableSymbol>( loadInteractor );
+        var importInteractor = new ImportSymbolInteractor<VariableSymbol>( sourceRepository );
+        var importController = new ImportSymbolController<VariableSymbol>( importInteractor );
 
-        var loadResult = loadController.Import();
-        Assert.True( loadResult.Result );
-        Assert.True( loadResult.OutputData.Any() );
-        Assert.Null( loadResult.Error );
+        var importResult = importController.Import();
+        Assert.True( importResult.Result );
+        Assert.True( importResult.OutputData.Any() );
+        Assert.Null( importResult.Error );
 
         // Export
-        var exportParameter = new ExportSymbolInputData<VariableSymbol>( loadResult.OutputData );
+        var exportParameter = new ExportSymbolInputData<VariableSymbol>( importResult.OutputData );
         var destinationRepository = new TsvVariableSymbolExporter( new LocalTextContentWriter( destination ) );
         var exportInteractor = new ExportSymbolInteractor<VariableSymbol>( destinationRepository );
         var exportController = new ExportSymbolController<VariableSymbol>( exportInteractor );
