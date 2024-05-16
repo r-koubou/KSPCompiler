@@ -12,6 +12,8 @@ public interface IUseCase
 }
 
 public interface IUseCase<in TInputPort, TOutputPort>
+    where TInputPort : IInputPort
+    where TOutputPort : IOutputPort
 {
     TOutputPort Execute( TInputPort input )
         => ExecuteAsync( input ).GetAwaiter().GetResult();
