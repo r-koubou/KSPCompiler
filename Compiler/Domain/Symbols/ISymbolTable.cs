@@ -5,7 +5,7 @@ namespace KSPCompiler.Domain.Symbols;
 
 // ReSharper disable UnusedMemberInSuper.Global
 // ReSharper disable UnusedMember.Global
-public interface ISymbolTable<TSymbol> where TSymbol : SymbolBase
+public interface ISymbolTable<TSymbol> : IEnumerable<TSymbol> where TSymbol : SymbolBase
 {
     /// <summary>
     /// Symbol table (read-only)

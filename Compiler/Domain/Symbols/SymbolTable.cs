@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -183,6 +184,14 @@ public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol
     public virtual List<TSymbol> ToList()
         => table.Values.ToList();
     #endregion ~Convert
+
+    #region IEnumerator<T>
+    public virtual IEnumerator<TSymbol> GetEnumerator()
+        => table.Values.GetEnumerator();
+
+    IEnumerator IEnumerable.GetEnumerator()
+        => GetEnumerator();
+    #endregion
 
     #region Debugging
     ///
