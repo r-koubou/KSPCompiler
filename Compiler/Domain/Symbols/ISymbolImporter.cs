@@ -7,6 +7,11 @@ namespace KSPCompiler.Domain.Symbols;
 public interface ISymbolImporter<TSymbol> where TSymbol : SymbolBase
 {
     /// <summary>
+    /// Null Object. Always return empty symbol table.
+    /// </summary>
+    public static ISymbolImporter<TSymbol> Null { get; } = new NullImporter();
+
+    /// <summary>
     /// Import symbol table from repository.
     /// </summary>
     /// <returns>
@@ -19,4 +24,14 @@ public interface ISymbolImporter<TSymbol> where TSymbol : SymbolBase
     /// Import symbol table from repository asynchronously.
     /// </summary>
     Task<IReadOnlyCollection<TSymbol>> ImportAsync( CancellationToken cancellationToken = default );
+
+    private class NullImporter : ISymbolImporter<TSymbol>
+    {
+        public async Task<IReadOnlyCollection<TSymbol>> ImportAsync( CancellationToken cancellationToken = default )
+        {
+            await Task.CompletedTask;
+
+            return new List<TSymbol>();
+        }
+    }
 }
