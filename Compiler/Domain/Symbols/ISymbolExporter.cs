@@ -4,8 +4,13 @@ using System.Threading.Tasks;
 
 namespace KSPCompiler.Domain.Symbols;
 
-public interface ISymbolExporter<TSymbol> where TSymbol : SymbolBase
+public interface ISymbolExporter<in TSymbol> where TSymbol : SymbolBase
 {
+    /// <summary>
+    /// Null Object. Symbols export to nowhere.
+    /// </summary>
+    public static ISymbolExporter<TSymbol> Null { get; } = new NullExporter();
+
     /// <summary>
     /// Export symbol table to repository.
     /// </summary>
@@ -16,4 +21,10 @@ public interface ISymbolExporter<TSymbol> where TSymbol : SymbolBase
     /// Export symbol table to repository.
     /// </summary>
     Task ExportAsync( IEnumerable<TSymbol> store, CancellationToken cancellationToken = default );
+
+    private sealed class NullExporter : ISymbolExporter<TSymbol>
+    {
+        public async Task ExportAsync( IEnumerable<TSymbol> store, CancellationToken cancellationToken = default )
+            => await Task.CompletedTask;
+    }
 }
