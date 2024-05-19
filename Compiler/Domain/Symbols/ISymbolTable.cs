@@ -39,24 +39,24 @@ public interface ISymbolTable<TSymbol> : IEnumerable<TSymbol> where TSymbol : Sy
     bool TrySearchIndexByName( SymbolName name, out UniqueSymbolIndex result, bool enableSearchParent = true );
 
     /// <summary>
+    /// Callback when adding a symbol.
+    /// </summary>
+    /// <remarks>
+    /// Default is empty. Custom processing can be performed when adding a symbol if necessary.
+    /// </remarks>
+    void OnWillAdd( TSymbol symbol );
+
+    /// <summary>
     /// Add a symbol to the table
     /// </summary>
     /// <returns>true if added, false if already exists</returns>
-    bool Add( TSymbol symbol );
+    bool Add( TSymbol symbol, bool overwrite = false);
 
     /// <summary>
-    /// Merge with other symbol table
+    /// Adds elements from the specified collection to this table
     /// </summary>
-    /// <remarks>
-    /// <list type="bullet">
-    ///   <item>If the same symbol (key) exists in `other`, it will be overwritten when parameter `overwrite` is true. </item>
-    ///   <item>Merge into this table from other table directly</item>
-    /// </list>
-    /// </remarks>
-    /// <returns>
-    /// this instance
-    /// </returns>
-    ISymbolTable<TSymbol> Merge( ISymbolTable<TSymbol> other, bool overwrite = true );
+    /// <returns>true if added all, false If one or more already exist</returns>
+    bool AddRange( IEnumerable<TSymbol> symbols, bool overwrite = false );
 
     /// <summary>
     /// Convert to list

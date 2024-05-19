@@ -18,14 +18,8 @@ public class VariableSymbolTable : SymbolTable<VariableSymbol>
     // ReSharper restore MemberCanBePrivate.Global
     #endregion
 
-    public override bool Add( VariableSymbol symbol )
+    public override void OnWillAdd( VariableSymbol symbol )
     {
-        if( table.ContainsKey( symbol.Name ) )
-        {
-            // Already added
-            return false;
-        }
-
         if( symbol.DataTypeModifier.IsConstant() )
         {
             symbol.TableIndex = UniqueSymbolIndex.Null;
@@ -36,8 +30,5 @@ public class VariableSymbolTable : SymbolTable<VariableSymbol>
         }
 
         symbol.DataType = DataTypeUtility.Guess( symbol.Name );
-        table.Add( symbol.Name, symbol );
-
-        return true;
     }
 }

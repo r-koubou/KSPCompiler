@@ -151,29 +151,47 @@ public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol
     #endregion ~Search
 
     #region Adding
-    public abstract bool Add( TSymbol symbol );
 
     ///
     /// <inheritdoc />
     ///
-    public virtual ISymbolTable<TSymbol> Merge( ISymbolTable<TSymbol> other, bool overwrite = true )
+    public virtual void OnWillAdd( TSymbol symbol )
     {
-        foreach( var key in other.Table.Keys )
+        // Do nothing
+    }
+
+    ///
+    /// <inheritdoc />
+    ///
+    public bool Add( TSymbol symbol, bool overwrite = false )
+    {
+        var contains = table.ContainsKey( symbol.Name );
+
+        if( contains && !overwrite)
         {
-            if( table.ContainsKey( key ) && overwrite )
-            {
-                table[ key ] = other.Table[ key ];
-            }
-            else
-            {
-                if( !table.TryAdd( key, other.Table[ key ] ) )
-                {
-                    throw new InvalidOperationException( $"{nameof(Merge)} : Failed to add symbol to table." );
-                }
-            }
+            // Already added
+            return false;
         }
 
-        return this;
+        OnWillAdd( symbol );
+        symbol.TableIndex    = uniqueIndexGenerator.Next();
+        table[ symbol.Name ] = symbol;
+        return true;
+    }
+
+    ///
+    /// <inheritdoc />
+    ///
+    public bool AddRange( IEnumerable<TSymbol> symbols, bool overwrite = false )
+    {
+        var result = true;
+
+        foreach( var x in symbols )
+        {
+            result &= Add( x, overwrite );
+        }
+
+        return result;
     }
     #endregion ~Adding
 
