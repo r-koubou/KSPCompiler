@@ -55,8 +55,19 @@ public interface ISymbolTable<TSymbol> : IEnumerable<TSymbol> where TSymbol : Sy
     /// <summary>
     /// Adds elements from the specified collection to this table
     /// </summary>
-    /// <returns>true if added all, false If one or more already exist</returns>
-    bool AddRange( IEnumerable<TSymbol> symbols, bool overwrite = false );
+    /// <returns>Symbols for which the addition failed</returns>
+    IReadOnlyList<TSymbol> AddRange( IEnumerable<TSymbol> symbols, bool overwrite = false );
+
+    /// <summary>
+    /// Remove a symbol to the table
+    /// </summary>
+    /// <returns>true if added, false if already exists</returns>
+    bool Remove( TSymbol symbol );
+
+    /// <summary>
+    /// Remove all symbols from the table
+    /// </summary>
+    void Clear();
 
     /// <summary>
     /// Convert to list

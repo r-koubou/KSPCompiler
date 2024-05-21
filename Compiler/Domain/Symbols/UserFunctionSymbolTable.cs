@@ -14,6 +14,4 @@ public class UserFunctionSymbolTable : SymbolTable<UserFunctionSymbol>
         : base( parent, startUniqueIndex ) {}
     // ReSharper restore MemberCanBePrivate.Global
     #endregion
-
-    public override void OnWillAdd( UserFunctionSymbol symbol ) {}
 }

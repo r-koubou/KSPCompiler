@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -155,14 +154,6 @@ public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol
     ///
     /// <inheritdoc />
     ///
-    public virtual void OnWillAdd( TSymbol symbol )
-    {
-        // Do nothing
-    }
-
-    ///
-    /// <inheritdoc />
-    ///
     public bool Add( TSymbol symbol, bool overwrite = false )
     {
         var contains = table.ContainsKey( symbol.Name );
@@ -182,18 +173,40 @@ public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol
     ///
     /// <inheritdoc />
     ///
-    public bool AddRange( IEnumerable<TSymbol> symbols, bool overwrite = false )
+    public IReadOnlyList<TSymbol> AddRange( IEnumerable<TSymbol> symbols, bool overwrite = false )
     {
-        var result = true;
+        var result = new List<TSymbol>();
 
         foreach( var x in symbols )
         {
-            result &= Add( x, overwrite );
+            if( !Add( x, overwrite ) )
+            {
+                result.Add( x );
+            }
         }
 
         return result;
     }
     #endregion ~Adding
+
+    #region Removing
+    public bool Remove( TSymbol symbol )
+    {
+        if( !table.ContainsKey( symbol.Name ) )
+        {
+            return false;
+        }
+
+        OnWillRemove( symbol );
+        return table.Remove( symbol.Name );
+    }
+
+    public void Clear()
+    {
+        OnWillClear();
+        table.Clear();
+    }
+    #endregion
 
     #region Convert
     ///
@@ -203,12 +216,52 @@ public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol
         => table.Values.ToList();
     #endregion ~Convert
 
-    #region IEnumerator<T>
+    #region IEnumerable<T>
     public virtual IEnumerator<TSymbol> GetEnumerator()
         => table.Values.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator()
         => GetEnumerator();
+    #endregion
+
+    #region Callback
+
+    /// <summary>
+    /// Callback when adding a symbol.
+    /// </summary>
+    /// <remarks>
+    /// Default is empty. Custom processing can be performed when adding a symbol if necessary.
+    /// </remarks>
+    // ReSharper disable once VirtualMemberNeverOverridden.Global
+    protected virtual void OnWillAdd( TSymbol symbol )
+    {
+        // Do nothing
+    }
+
+    /// <summary>
+    /// Callback when removing a symbol.
+    /// </summary>
+    /// <remarks>
+    /// Default is empty. Custom processing can be performed when removing a symbol if necessary.
+    /// </remarks>
+    // ReSharper disable once VirtualMemberNeverOverridden.Global
+    protected virtual void OnWillRemove( TSymbol symbol )
+    {
+        // Do nothing
+    }
+
+    /// <summary>
+    /// Callback when all symbols are removing.
+    /// </summary>
+    /// <remarks>
+    /// Default is empty. Custom processing can be performed when removing all symbols if necessary.
+    /// </remarks>
+    // ReSharper disable once VirtualMemberNeverOverridden.Global
+    protected virtual void OnWillClear()
+    {
+        // Do nothing
+    }
+
     #endregion
 
     #region Debugging

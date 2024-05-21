@@ -18,7 +18,7 @@ public class VariableSymbolTable : SymbolTable<VariableSymbol>
     // ReSharper restore MemberCanBePrivate.Global
     #endregion
 
-    public override void OnWillAdd( VariableSymbol symbol )
+    protected override void OnWillAdd( VariableSymbol symbol )
     {
         if( symbol.DataTypeModifier.IsConstant() )
         {
