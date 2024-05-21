@@ -173,13 +173,16 @@ public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol
     ///
     /// <inheritdoc />
     ///
-    public bool AddRange( IEnumerable<TSymbol> symbols, bool overwrite = false )
+    public IReadOnlyList<TSymbol> AddRange( IEnumerable<TSymbol> symbols, bool overwrite = false )
     {
-        var result = true;
+        var result = new List<TSymbol>();
 
         foreach( var x in symbols )
         {
-            result &= Add( x, overwrite );
+            if( !Add( x, overwrite ) )
+            {
+                result.Add( x );
+            }
         }
 
         return result;
