@@ -1,4 +1,4 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -150,31 +150,63 @@ public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol
     #endregion ~Search
 
     #region Adding
-    public abstract bool Add( TSymbol symbol );
 
     ///
     /// <inheritdoc />
     ///
-    public virtual ISymbolTable<TSymbol> Merge( ISymbolTable<TSymbol> other, bool overwrite = true )
+    public bool Add( TSymbol symbol, bool overwrite = false )
     {
-        foreach( var key in other.Table.Keys )
+        var contains = table.ContainsKey( symbol.Name );
+
+        if( contains && !overwrite)
         {
-            if( table.ContainsKey( key ) && overwrite )
+            // Already added
+            return false;
+        }
+
+        OnWillAdd( symbol );
+        symbol.TableIndex    = uniqueIndexGenerator.Next();
+        table[ symbol.Name ] = symbol;
+        return true;
+    }
+
+    ///
+    /// <inheritdoc />
+    ///
+    public IReadOnlyList<TSymbol> AddRange( IEnumerable<TSymbol> symbols, bool overwrite = false )
+    {
+        var result = new List<TSymbol>();
+
+        foreach( var x in symbols )
+        {
+            if( !Add( x, overwrite ) )
             {
-                table[ key ] = other.Table[ key ];
-            }
-            else
-            {
-                if( !table.TryAdd( key, other.Table[ key ] ) )
-                {
-                    throw new InvalidOperationException( $"{nameof(Merge)} : Failed to add symbol to table." );
-                }
+                result.Add( x );
             }
         }
 
-        return this;
+        return result;
     }
     #endregion ~Adding
+
+    #region Removing
+    public bool Remove( TSymbol symbol )
+    {
+        if( !table.ContainsKey( symbol.Name ) )
+        {
+            return false;
+        }
+
+        OnWillRemove( symbol );
+        return table.Remove( symbol.Name );
+    }
+
+    public void Clear()
+    {
+        OnWillClear();
+        table.Clear();
+    }
+    #endregion
 
     #region Convert
     ///
@@ -183,6 +215,54 @@ public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol
     public virtual List<TSymbol> ToList()
         => table.Values.ToList();
     #endregion ~Convert
+
+    #region IEnumerable<T>
+    public virtual IEnumerator<TSymbol> GetEnumerator()
+        => table.Values.GetEnumerator();
+
+    IEnumerator IEnumerable.GetEnumerator()
+        => GetEnumerator();
+    #endregion
+
+    #region Callback
+
+    /// <summary>
+    /// Callback when adding a symbol.
+    /// </summary>
+    /// <remarks>
+    /// Default is empty. Custom processing can be performed when adding a symbol if necessary.
+    /// </remarks>
+    // ReSharper disable once VirtualMemberNeverOverridden.Global
+    protected virtual void OnWillAdd( TSymbol symbol )
+    {
+        // Do nothing
+    }
+
+    /// <summary>
+    /// Callback when removing a symbol.
+    /// </summary>
+    /// <remarks>
+    /// Default is empty. Custom processing can be performed when removing a symbol if necessary.
+    /// </remarks>
+    // ReSharper disable once VirtualMemberNeverOverridden.Global
+    protected virtual void OnWillRemove( TSymbol symbol )
+    {
+        // Do nothing
+    }
+
+    /// <summary>
+    /// Callback when all symbols are removing.
+    /// </summary>
+    /// <remarks>
+    /// Default is empty. Custom processing can be performed when removing all symbols if necessary.
+    /// </remarks>
+    // ReSharper disable once VirtualMemberNeverOverridden.Global
+    protected virtual void OnWillClear()
+    {
+        // Do nothing
+    }
+
+    #endregion
 
     #region Debugging
     ///

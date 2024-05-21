@@ -5,7 +5,7 @@ namespace KSPCompiler.Domain.Symbols;
 
 // ReSharper disable UnusedMemberInSuper.Global
 // ReSharper disable UnusedMember.Global
-public interface ISymbolTable<TSymbol> where TSymbol : SymbolBase
+public interface ISymbolTable<TSymbol> : IEnumerable<TSymbol> where TSymbol : SymbolBase
 {
     /// <summary>
     /// Symbol table (read-only)
@@ -42,21 +42,24 @@ public interface ISymbolTable<TSymbol> where TSymbol : SymbolBase
     /// Add a symbol to the table
     /// </summary>
     /// <returns>true if added, false if already exists</returns>
-    bool Add( TSymbol symbol );
+    bool Add( TSymbol symbol, bool overwrite = false);
 
     /// <summary>
-    /// Merge with other symbol table
+    /// Adds elements from the specified collection to this table
     /// </summary>
-    /// <remarks>
-    /// <list type="bullet">
-    ///   <item>If the same symbol (key) exists in `other`, it will be overwritten when parameter `overwrite` is true. </item>
-    ///   <item>Merge into this table from other table directly</item>
-    /// </list>
-    /// </remarks>
-    /// <returns>
-    /// this instance
-    /// </returns>
-    ISymbolTable<TSymbol> Merge( ISymbolTable<TSymbol> other, bool overwrite = true );
+    /// <returns>Symbols for which the addition failed</returns>
+    IReadOnlyList<TSymbol> AddRange( IEnumerable<TSymbol> symbols, bool overwrite = false );
+
+    /// <summary>
+    /// Remove a symbol to the table
+    /// </summary>
+    /// <returns>true if added, false if already exists</returns>
+    bool Remove( TSymbol symbol );
+
+    /// <summary>
+    /// Remove all symbols from the table
+    /// </summary>
+    void Clear();
 
     /// <summary>
     /// Convert to list
