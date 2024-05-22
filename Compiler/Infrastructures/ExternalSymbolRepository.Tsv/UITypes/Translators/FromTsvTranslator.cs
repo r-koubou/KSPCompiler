@@ -3,7 +3,6 @@ using System.Text.RegularExpressions;
 
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Infrastructures.Commons.Extensions;
 
 using DataTypeUtility = KSPCompiler.Domain.Symbols.MetaData.DataTypeUtility;
@@ -17,6 +16,7 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<U
         Name,
         VariableType,
         Description,
+        RequireInitializer,
         InitializerArguments,
     }
 
@@ -43,14 +43,13 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<U
             // Remove " from the beginning and end of the string.
             RemoveQuoteCharacter( values );
 
-            var uiType = new UITypeSymbol( values.Length > (int)Column.InitializerArguments )
+            var uiType = new UITypeSymbol( values[ (int)Column.RequireInitializer ].ToLower() == "true" )
             {
                 Name        = values[ (int)Column.Name ],
                 Reserved    = true,
-                Description = values[ (int)Column.Description ]
+                Description = values[ (int)Column.Description ],
+                DataType    = DataTypeUtility.Guess( values[ (int)Column.VariableType ] )
             };
-
-            uiType.DataType = DataTypeUtility.Guess( values[ (int)Column.VariableType ] );
 
             ParseInitializerArguments( values, ref uiType );
             result.Add( uiType );

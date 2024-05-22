@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 using KSPCompiler.Domain.Symbols.MetaData;
 
@@ -44,23 +43,23 @@ public sealed class UITypeSymbol : SymbolBase
     public override SymbolType Type
         => SymbolType.UI;
 
-    private readonly List<VariableSymbol> arguments = new ();
+    private readonly List<VariableSymbol> initializerArguments = new ();
 
     public IReadOnlyList<VariableSymbol> InitializerArguments
-        => arguments;
+        => initializerArguments;
 
     /// <summary>
     /// True if the UI type requires an initializer.
     /// </summary>
-    public bool InitializerRequired
-        => arguments.Any();
+    public bool InitializerRequired { get; }
 
     /// <summary>
     /// Ctor
     /// </summary>
     public UITypeSymbol( bool initializerRequired, IEnumerable<VariableSymbol> initializerArguments )
     {
-        arguments.AddRange( initializerArguments );
+        InitializerRequired = initializerRequired;
+        this.initializerArguments.AddRange( initializerArguments );
         DataTypeModifier = DataTypeModifierFlag.UI;
     }
 
@@ -71,11 +70,11 @@ public sealed class UITypeSymbol : SymbolBase
 
     public void AddInitializerArgument( VariableSymbol arg )
     {
-        if( arguments.Contains( arg ))
+        if( initializerArguments.Contains( arg ))
         {
             throw new InvalidOperationException( $"Initializer argument {arg.Name} already exists in {Name}" );
         }
-        arguments.Add( arg );
+        initializerArguments.Add( arg );
     }
 
     // TODO Implementation
