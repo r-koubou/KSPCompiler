@@ -33,9 +33,9 @@ public class UITypeTableTsvLoaderTest
     {
         var path = Path.Combine( TestDataDirectory, "UiTypeTable.txt" );
         var importer = CreateLocalImporter( path );
-        var symbolTable = importer.Import();
+        var symbols = importer.Import();
 
-        Assert.IsTrue( symbolTable.Count == 1 );
+        Assert.IsTrue( symbols.Count == 1 );
     }
 
     [Test]
@@ -45,8 +45,8 @@ public class UITypeTableTsvLoaderTest
         var importer = CreateLocalImporter( path );
 
         await Task.Run( async () => {
-            var symbolTable = await importer.ImportAsync();
-            Assert.IsTrue( symbolTable.Count == 1 );
+            var symbols = await importer.ImportAsync();
+            Assert.IsTrue( symbols.Count == 1 );
         });
     }
 
@@ -65,8 +65,8 @@ public class UITypeTableTsvLoaderTest
     {
         var path = Path.Combine( TestDataDirectory, "UiTypeTable.tsv" );
         var exporter = CreateLocalExporter( path );
-        var symbolTable = MockSymbolTableUtility.CreateDummyUITypeSymbols();
+        var symbols = MockSymbolTableUtility.CreateDummyUITypeSymbols();
 
-        await exporter.ExportAsync( symbolTable );
+        await exporter.ExportAsync( symbols );
     }
 }
