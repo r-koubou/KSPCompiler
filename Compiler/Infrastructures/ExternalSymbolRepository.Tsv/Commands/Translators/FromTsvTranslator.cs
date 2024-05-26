@@ -3,6 +3,7 @@ using System.Text.RegularExpressions;
 
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
+using KSPCompiler.ExternalSymbolRepository.Tsv.Commons;
 using KSPCompiler.Infrastructures.Commons.Extensions;
 
 using DataTypeUtility = KSPCompiler.Domain.Symbols.MetaData.DataTypeUtility;
@@ -17,8 +18,7 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<C
         Reserved,
         Description,
         ReturnType,
-        ArgumentBegin,
-        ArgumentDescription,
+        ArgumentBegin
     }
 
     private static readonly Regex LineComment = new( @"^#.*" );
@@ -41,20 +41,19 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<C
 
             var values = x.Split( '\t' );
 
-            // Remove " from the beginning and end of the string.
-            RemoveQuoteCharacter( values );
+            TsvUtility.RemoveQuoteCharacter( values );
 
             var command = new CommandSymbol
             {
                 Name        = values[ (int)Column.Name ],
-                Reserved    = values[ (int)Column.Reserved ].ToLower() == "true",
+                Reserved    = TsvUtility.ParseBoolean( values[ (int)Column.Reserved ] ),
                 Description = values[ (int)Column.Description ],
                 DataType    = DataTypeUtility.Guess( values[ (int)Column.ReturnType ] )
             };
 
             if( values.Length > (int)Column.ArgumentBegin )
             {
-                ParseArguments( values, ref command );
+                ParseArguments( values, command );
             }
 
             result.Add( command );
@@ -63,39 +62,23 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<C
         return result;
     }
 
-    private static void ParseArguments( string[] values, ref CommandSymbol command )
+    private static void ParseArguments( string[] values, CommandSymbol command )
     {
         /*
          * Argument1, Argument1Description, Argument2, Argument2Description, ...
          */
-        for( var i = (int)Column.ArgumentBegin; i < values.Length; i += 2 )
-        {
-            var name = values[ i + 0 ];
-            var description = values[ i + 1 ];
-
-            var argument = new VariableSymbol
+        TsvUtility.ParseColumnGroups( values, (int)Column.ArgumentBegin, 2, arg =>
             {
-                Name        = name,
-                Reserved    = false,
-                Description = description,
-            };
+                var argument = new VariableSymbol
+                {
+                    Name        = arg[ 0 ],
+                    Description = arg[ 1 ],
+                    Reserved    = false
+                };
 
-            argument.DataType = DataTypeUtility.Guess( argument.Name );
-
-            command.AddArgument( argument );
-        }
-    }
-
-    private static void RemoveQuoteCharacter( string[] values )
-    {
-        for( var i = 0; i < values.Length; i++ )
-        {
-            var v = values[ i ];
-
-            if( v.StartsWith( "\"" ) && v.EndsWith( "\"" ) )
-            {
-                values[ i ] = v[ 1..^1 ];
+                argument.DataType = DataTypeUtility.Guess( argument.Name );
+                command.AddArgument( argument );
             }
-        }
+        );
     }
 }

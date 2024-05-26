@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
+using KSPCompiler.ExternalSymbolRepository.Tsv.Commons;
 using KSPCompiler.Infrastructures.Commons.Extensions;
 
 using DataTypeUtility = KSPCompiler.Domain.Symbols.MetaData.DataTypeUtility;
@@ -25,50 +26,25 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<V
     {
         var result = new List<VariableSymbol>();
 
-        foreach( var x in source.SplitNewLine() )
-        {
-            if( string.IsNullOrWhiteSpace( x ) )
+        TsvUtility.ParseTsv( source.SplitNewLine(), LineComment, values =>
             {
-                continue;
+                TsvUtility.RemoveQuoteCharacter( values );
+
+                var symbol = new VariableSymbol
+                {
+                    Name        = values[ (int)Column.Name ],
+                    ArraySize   = 0,
+                    Reserved    = TsvUtility.ParseBoolean( values[ (int)Column.Reserved ] ),
+                    Description = values[ (int)Column.Description ]
+                };
+
+                symbol.DataType         = DataTypeUtility.Guess( symbol.Name );
+                symbol.DataTypeModifier = DataTypeModifierFlag.Const;
+
+                result.Add( symbol );
             }
-
-            if( LineComment.IsMatch( x ) )
-            {
-                continue;
-            }
-
-            var values = x.Split( '\t' );
-
-            // Remove " from the beginning and end of the string.
-            RemoveQuoteCharacter( values );
-
-            var symbol = new VariableSymbol
-            {
-                Name        = values[ (int)Column.Name ],
-                ArraySize   = 0,
-                Reserved    = values[ (int)Column.Reserved ].ToLower() == "true",
-                Description = values[ (int)Column.Description ]
-            };
-
-            symbol.DataType         = DataTypeUtility.Guess( symbol.Name );
-            symbol.DataTypeModifier = DataTypeModifierFlag.Const;
-
-            result.Add( symbol );
-        }
+        );
 
         return result;
-    }
-
-    private static void RemoveQuoteCharacter( string[] values )
-    {
-        for( var i = 0; i < values.Length; i++ )
-        {
-            var v = values[ i ];
-
-            if( v.StartsWith( "\"" ) && v.EndsWith( "\"" ) )
-            {
-                values[ i ] = v[ 1..^1 ];
-            }
-        }
     }
 }
