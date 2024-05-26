@@ -39,14 +39,6 @@ public interface ISymbolTable<TSymbol> : IEnumerable<TSymbol> where TSymbol : Sy
     bool TrySearchIndexByName( SymbolName name, out UniqueSymbolIndex result, bool enableSearchParent = true );
 
     /// <summary>
-    /// Callback when adding a symbol.
-    /// </summary>
-    /// <remarks>
-    /// Default is empty. Custom processing can be performed when adding a symbol if necessary.
-    /// </remarks>
-    void OnWillAdd( TSymbol symbol );
-
-    /// <summary>
     /// Add a symbol to the table
     /// </summary>
     /// <returns>true if added, false if already exists</returns>
