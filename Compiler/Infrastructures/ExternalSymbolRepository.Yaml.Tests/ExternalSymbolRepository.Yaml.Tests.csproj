@@ -32,6 +32,9 @@
       <None Update="TestData\CommandTableYamlLoaderTest\DuplicateCommandTable.yaml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="TestData\UITypeTableYamlLoaderTest\UITypeTable.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

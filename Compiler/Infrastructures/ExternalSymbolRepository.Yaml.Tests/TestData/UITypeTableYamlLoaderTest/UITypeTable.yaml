@@ -1,0 +1,10 @@
+Version: 1
+Symbols:
+  - Name: ui_button
+    Reserved: true
+    VariableType: I
+    Description: Button UI
+    RequireInitializer: true
+    InitializerArguments:
+      - Name: $width
+        Description: button width

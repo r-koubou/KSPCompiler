@@ -19,7 +19,7 @@ public sealed class VariableSymbol : SymbolBase
     /// </summary>
     /// <seealso cref="DataTypeModifierFlag"/>
     /// <seealso cref="DataTypeModifierFlag.UI"/>
-    public UITypeSymbol? UIType {get; set; } = null;
+    public UITypeSymbol UIType { get; set; } = UITypeSymbol.Null;
 
     /// <summary>
     /// Index number when stored in constant pool

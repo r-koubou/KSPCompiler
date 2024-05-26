@@ -45,4 +45,29 @@ public static class MockSymbolTableUtility
 
         return list;
     }
+
+    public static List<UITypeSymbol> CreateDummyUITypeSymbols()
+    {
+        var list = new List<UITypeSymbol>();
+        var example = new UITypeSymbol(false)
+        {
+            Name        = "ui_button",
+            Description = "Button",
+            Reserved    = true,
+            DataType    = DataTypeFlag.TypeInt
+        };
+
+        example.AddInitializerArgument( new VariableSymbol
+        {
+            Name        = "width",
+            DataType    = DataTypeFlag.TypeInt,
+            Description = "button width",
+            Reserved    = false,
+        });
+
+        list.Add( example );
+
+        return list;
+    }
+
 }
