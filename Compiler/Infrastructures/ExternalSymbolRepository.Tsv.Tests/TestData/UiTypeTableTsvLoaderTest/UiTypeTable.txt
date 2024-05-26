@@ -1,2 +1,2 @@
-# Name	Type	Description	Require Initializer	[Initializer Argument, Description, ...]
-ui_button	I	Button	false	$width	Button width
+# Name	Reserved	Type	Description	Require Initializer	[Initializer Argument, Description, ...]
+ui_button	true	I	Button	false	$width	Button width

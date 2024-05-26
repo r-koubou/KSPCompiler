@@ -14,6 +14,7 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<U
     private enum Column
     {
         Name,
+        Reserved,
         VariableType,
         Description,
         RequireInitializer,
@@ -46,7 +47,7 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<U
             var uiType = new UITypeSymbol( values[ (int)Column.RequireInitializer ].ToLower() == "true" )
             {
                 Name        = values[ (int)Column.Name ],
-                Reserved    = true,
+                Reserved    = values[ (int)Column.Reserved ].ToLower() == "true",
                 Description = values[ (int)Column.Description ],
                 DataType    = DataTypeUtility.Guess( values[ (int)Column.VariableType ] )
             };
