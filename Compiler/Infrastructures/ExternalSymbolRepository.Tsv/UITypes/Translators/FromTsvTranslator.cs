@@ -3,6 +3,7 @@ using System.Text.RegularExpressions;
 
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
+using KSPCompiler.ExternalSymbolRepository.Tsv.Commons;
 using KSPCompiler.Infrastructures.Commons.Extensions;
 
 using DataTypeUtility = KSPCompiler.Domain.Symbols.MetaData.DataTypeUtility;
@@ -18,7 +19,7 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<U
         VariableType,
         Description,
         RequireInitializer,
-        InitializerArguments,
+        InitializerArgumentBegin,
     }
 
     private static readonly Regex LineComment = new( @"^#.*" );
@@ -27,71 +28,43 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<U
     {
         var result = new List<UITypeSymbol>();
 
-        foreach( var x in source.SplitNewLine() )
-        {
-            if( string.IsNullOrWhiteSpace( x ) )
+        TsvUtility.ParseTsv( source.SplitNewLine(), LineComment, values =>
             {
-                continue;
+                TsvUtility.RemoveQuoteCharacter( values );
+
+                var uiType = new UITypeSymbol( TsvUtility.ParseBoolean( values[ (int)Column.RequireInitializer ] ) )
+                {
+                    Name        = values[ (int)Column.Name ],
+                    Reserved    = TsvUtility.ParseBoolean( values[ (int)Column.Reserved ] ),
+                    Description = values[ (int)Column.Description ],
+                    DataType    = DataTypeUtility.Guess( values[ (int)Column.VariableType ] )
+                };
+
+                ParseInitializerArguments( values, uiType );
+                result.Add( uiType );
             }
-
-            if( LineComment.IsMatch( x ) )
-            {
-                continue;
-            }
-
-            var values = x.Split( '\t' );
-
-            // Remove " from the beginning and end of the string.
-            RemoveQuoteCharacter( values );
-
-            var uiType = new UITypeSymbol( values[ (int)Column.RequireInitializer ].ToLower() == "true" )
-            {
-                Name        = values[ (int)Column.Name ],
-                Reserved    = values[ (int)Column.Reserved ].ToLower() == "true",
-                Description = values[ (int)Column.Description ],
-                DataType    = DataTypeUtility.Guess( values[ (int)Column.VariableType ] )
-            };
-
-            ParseInitializerArguments( values, ref uiType );
-            result.Add( uiType );
-        }
+        );
 
         return result;
     }
 
-    private static void ParseInitializerArguments( string[] values, ref UITypeSymbol uiType )
+    private static void ParseInitializerArguments( string[] values, UITypeSymbol uiType )
     {
         /*
          * Argument1, Argument1Description, Argument2, Argument2Description, ...
          */
-        for( var i = (int)Column.InitializerArguments; i < values.Length; i += 2 )
-        {
-            var name = values[ i + 0 ];
-            var description = values[ i + 1 ];
-
-            var argument = new VariableSymbol
+        TsvUtility.ParseColumnGroups( values, (int)Column.InitializerArgumentBegin, 2, arg =>
             {
-                Name        = name,
-                Reserved    = false,
-                Description = description,
-            };
+                var argument = new VariableSymbol
+                {
+                    Name        = arg[ 0 ],
+                    Description = arg[ 1 ],
+                    Reserved    = false
+                };
 
-            argument.DataType = DataTypeUtility.Guess( argument.Name );
-
-            uiType.AddInitializerArgument( argument );
-        }
-    }
-
-    private static void RemoveQuoteCharacter( string[] values )
-    {
-        for( var i = 0; i < values.Length; i++ )
-        {
-            var v = values[ i ];
-
-            if( v.StartsWith( "\"" ) && v.EndsWith( "\"" ) )
-            {
-                values[ i ] = v[ 1..^1 ];
+                argument.DataType = DataTypeUtility.Guess( argument.Name );
+                uiType.AddInitializerArgument( argument );
             }
-        }
+        );
     }
 }
