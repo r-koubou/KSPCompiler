@@ -29,6 +29,9 @@
       <None Update="TestData\CommandTableTsvLoaderTest\CommandTable.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="TestData\UiTypeTableTsvLoaderTest\UiTypeTable.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

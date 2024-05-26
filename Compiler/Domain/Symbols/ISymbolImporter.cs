@@ -9,7 +9,7 @@ public interface ISymbolImporter<TSymbol> where TSymbol : SymbolBase
     /// <summary>
     /// Null Object. Always return empty symbol table.
     /// </summary>
-    public static ISymbolImporter<TSymbol> Null { get; } = new NullImporter();
+    public static ISymbolImporter<TSymbol> Null { get; } = new NullSymbolImporter<TSymbol>();
 
     /// <summary>
     /// Import symbol table from repository.
@@ -24,14 +24,17 @@ public interface ISymbolImporter<TSymbol> where TSymbol : SymbolBase
     /// Import symbol table from repository asynchronously.
     /// </summary>
     Task<IReadOnlyCollection<TSymbol>> ImportAsync( CancellationToken cancellationToken = default );
+}
 
-    private class NullImporter : ISymbolImporter<TSymbol>
+/// <summary>
+/// Do nothing importer for Null Object.
+/// </summary>
+internal class NullSymbolImporter<TSymbol> : ISymbolImporter<TSymbol> where TSymbol : SymbolBase
+{
+    public async Task<IReadOnlyCollection<TSymbol>> ImportAsync( CancellationToken cancellationToken = default )
     {
-        public async Task<IReadOnlyCollection<TSymbol>> ImportAsync( CancellationToken cancellationToken = default )
-        {
-            await Task.CompletedTask;
+        await Task.CompletedTask;
 
-            return new List<TSymbol>();
-        }
+        return new List<TSymbol>();
     }
 }
