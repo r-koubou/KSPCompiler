@@ -25,7 +25,7 @@ internal class FromYamlTranslator : IDataTranslator<RootObject, IReadOnlyCollect
 
             foreach( var arg in x.InitializerArguments )
             {
-                var argument = new VariableSymbol
+                var argument = new UIInitializerArgument
                 {
                     Name        = arg.Name,
                     Reserved    = false,

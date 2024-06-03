@@ -57,7 +57,7 @@ public static class MockSymbolTableUtility
             DataType    = DataTypeFlag.TypeInt
         };
 
-        example.AddInitializerArgument( new VariableSymbol
+        example.AddInitializerArgument( new UIInitializerArgument
         {
             Name        = "width",
             DataType    = DataTypeFlag.TypeInt,
