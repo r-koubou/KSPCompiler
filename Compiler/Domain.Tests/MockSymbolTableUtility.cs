@@ -33,7 +33,7 @@ public static class MockSymbolTableUtility
             DataType    = DataTypeFlag.TypeVoid
         };
 
-        example.AddArgument( new CommandArgument
+        example.AddArgument( new CommandArgumentSymbol
         {
             Name = "text",
             DataType = DataTypeFlag.MultipleType,
@@ -57,7 +57,7 @@ public static class MockSymbolTableUtility
             DataType    = DataTypeFlag.TypeInt
         };
 
-        example.AddInitializerArgument( new UIInitializerArgument
+        example.AddInitializerArgument( new UIInitializerArgumentSymbol
         {
             Name        = "width",
             DataType    = DataTypeFlag.TypeInt,

@@ -43,9 +43,9 @@ public sealed class UITypeSymbol : SymbolBase
     public override SymbolType Type
         => SymbolType.UI;
 
-    private readonly List<UIInitializerArgument> initializerArguments = new ();
+    private readonly List<UIInitializerArgumentSymbol> initializerArguments = new ();
 
-    public IReadOnlyList<UIInitializerArgument> InitializerArguments
+    public IReadOnlyList<UIInitializerArgumentSymbol> InitializerArguments
         => initializerArguments;
 
     /// <summary>
@@ -56,7 +56,7 @@ public sealed class UITypeSymbol : SymbolBase
     /// <summary>
     /// Ctor
     /// </summary>
-    public UITypeSymbol( bool initializerRequired, IEnumerable<UIInitializerArgument> initializerArguments )
+    public UITypeSymbol( bool initializerRequired, IEnumerable<UIInitializerArgumentSymbol> initializerArguments )
     {
         InitializerRequired = initializerRequired;
         this.initializerArguments.AddRange( initializerArguments );
@@ -66,9 +66,9 @@ public sealed class UITypeSymbol : SymbolBase
     /// <summary>
     /// Ctor
     /// </summary>
-    public UITypeSymbol( bool initializerRequired ) : this( initializerRequired, new List<UIInitializerArgument>() ) {}
+    public UITypeSymbol( bool initializerRequired ) : this( initializerRequired, new List<UIInitializerArgumentSymbol>() ) {}
 
-    public void AddInitializerArgument( UIInitializerArgument arg )
+    public void AddInitializerArgument( UIInitializerArgumentSymbol arg )
     {
         if( initializerArguments.Contains( arg ))
         {

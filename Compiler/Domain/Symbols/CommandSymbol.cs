@@ -10,9 +10,9 @@ public sealed class CommandSymbol : SymbolBase
     public override SymbolType Type
         => SymbolType.Command;
 
-    private readonly List<CommandArgument> arguments = new ();
+    private readonly List<CommandArgumentSymbol> arguments = new ();
 
-    public IReadOnlyCollection<CommandArgument> Arguments
+    public IReadOnlyCollection<CommandArgumentSymbol> Arguments
         => arguments;
 
     public int ArgumentCount
@@ -20,12 +20,12 @@ public sealed class CommandSymbol : SymbolBase
 
     public CommandSymbol() {}
 
-    public CommandSymbol( IEnumerable<CommandArgument> args )
+    public CommandSymbol( IEnumerable<CommandArgumentSymbol> args )
     {
         arguments.AddRange( args );
     }
 
-    public void AddArgument( CommandArgument arg )
+    public void AddArgument( CommandArgumentSymbol arg )
     {
         if( arguments.Contains( arg ))
         {

@@ -69,7 +69,7 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<C
          */
         TsvUtility.ParseColumnGroups( values, (int)Column.ArgumentBegin, 2, arg =>
             {
-                var argument = new CommandArgument
+                var argument = new CommandArgumentSymbol
                 {
                     Name        = arg[ 0 ],
                     Description = arg[ 1 ],

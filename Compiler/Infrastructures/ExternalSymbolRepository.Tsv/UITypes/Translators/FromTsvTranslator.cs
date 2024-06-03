@@ -55,7 +55,7 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<U
          */
         TsvUtility.ParseColumnGroups( values, (int)Column.InitializerArgumentBegin, 2, arg =>
             {
-                var argument = new UIInitializerArgument
+                var argument = new UIInitializerArgumentSymbol
                 {
                     Name        = arg[ 0 ],
                     Description = arg[ 1 ],
