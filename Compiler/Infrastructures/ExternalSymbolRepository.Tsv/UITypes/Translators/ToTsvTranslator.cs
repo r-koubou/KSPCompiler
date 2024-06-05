@@ -18,8 +18,8 @@ internal class ToTsvTranslator : IDataTranslator<IEnumerable<UITypeSymbol>, stri
         {
             result.AppendTab( v.Name )
                   .AppendTab( v.Reserved.ToString().ToLower() )
-                  .AppendTab( v.Description )
-                  .Append( DataTypeUtility.ToString( v.DataType ) );
+                  .AppendTab( DataTypeUtility.ToString( v.DataType ) )
+                  .Append( v.Description );
 
             if( v.InitializerArguments.Count == 0 )
             {
@@ -32,7 +32,7 @@ internal class ToTsvTranslator : IDataTranslator<IEnumerable<UITypeSymbol>, stri
 
             foreach( var x in v.InitializerArguments )
             {
-                result.AppendTab( DataTypeUtility.ToString( x.DataType ), x.Name )
+                result.AppendTab( x.Name )
                       .AppendTab( x.Description );
             }
 

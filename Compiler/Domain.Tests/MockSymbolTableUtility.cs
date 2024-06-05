@@ -35,7 +35,7 @@ public static class MockSymbolTableUtility
 
         example.AddArgument( new CommandArgumentSymbol
         {
-            Name = "text",
+            Name = "*text",
             DataType = DataTypeFlag.MultipleType,
             Description = "message text",
             Reserved = false,
@@ -59,7 +59,7 @@ public static class MockSymbolTableUtility
 
         example.AddInitializerArgument( new UIInitializerArgumentSymbol
         {
-            Name        = "width",
+            Name        = "$width",
             DataType    = DataTypeFlag.TypeInt,
             Description = "button width",
             Reserved    = false,
