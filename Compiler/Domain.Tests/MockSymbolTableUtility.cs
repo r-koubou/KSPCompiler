@@ -73,12 +73,12 @@ public static class MockSymbolTableUtility
     public static List<CallbackSymbol> CreateDummyCallbackSymbols()
     {
         var list = new List<CallbackSymbol>();
-        var example = new CallbackSymbol(false)
+        var example = new CallbackSymbol( true )
         {
             Name        = "ui_control",
             Description = "UI event callback",
             Reserved    = true,
-            DataType    = DataTypeFlag.None
+            DataType    = DataTypeFlag.TypeInt
         };
 
         example.AddArgument( new CallbackArgumentSymbol( false )
