@@ -32,6 +32,9 @@
       <None Update="TestData\UiTypeTableTsvLoaderTest\UiTypeTable.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="TestData\CallbackTableTsvLoaderTest\CallbackTable.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
