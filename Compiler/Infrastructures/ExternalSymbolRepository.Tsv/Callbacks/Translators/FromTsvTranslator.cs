@@ -53,7 +53,7 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<C
     {
         /*
          * [0] Name
-         * [1] Required declare in on_init
+         * [1] Required declare in `on init`
          * [2] Description
          */
         TsvUtility.ParseColumnGroups( values, (int)Column.ArgumentBegin, 3, arg =>
