@@ -10,6 +10,11 @@ namespace KSPCompiler.ExternalSymbolRepository.Tsv.Commons;
 internal static class TsvUtility
 {
     /// <summary>
+    /// A regular expression that matches a line comment in a TSV file. Begins with a '#'.
+    /// </summary>
+    public static readonly Regex RegexDefaultLineComment = new( @"^#.*" );
+
+    /// <summary>
     /// Processes multi-line text line by line, splitting each line with a tab character and executing delegate parseBody.
     /// </summary>
     public static void ParseTsv( IEnumerable<string> lines, Regex? lineComment, Action<string[]> parseBody )
@@ -29,6 +34,15 @@ internal static class TsvUtility
             parseBody( x.Split( '\t' ) );
         }
     }
+
+    /// <summary>
+    /// Processes multi-line text line by line, splitting each line with a tab character and executing delegate parseBody.
+    /// </summary>
+    /// <remarks>
+    /// <see cref="RegexDefaultLineComment"/> will be used as the line comment regular expression.
+    /// </remarks>
+    public static void ParseTsv( IEnumerable<string> lines, Action<string[]> parseBody )
+        => ParseTsv( lines, RegexDefaultLineComment, parseBody );
 
     /// <summary>
     /// Remove " from the beginning and end of the string
