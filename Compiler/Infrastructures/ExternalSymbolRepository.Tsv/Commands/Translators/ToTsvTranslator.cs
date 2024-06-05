@@ -30,7 +30,7 @@ internal class ToTsvTranslator : IDataTranslator<IEnumerable<CommandSymbol>, str
             result.AppendTab();
             foreach( var x in v.Arguments )
             {
-                result.AppendTab( DataTypeUtility.ToString( x.DataType ), x.Name )
+                result.AppendTab( x.Name )
                       .AppendTab( x.Description );
             }
 
