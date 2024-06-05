@@ -18,8 +18,8 @@ internal class ToTsvTranslator : IDataTranslator<IEnumerable<CallbackSymbol>, st
         {
             result.AppendTab( v.Name )
                   .AppendTab( v.Reserved.ToString().ToLower() )
-                  .AppendTab( v.Description )
-                  .Append( v.AllowMultipleDeclarations.ToString().ToLower() );
+                  .Append( v.AllowMultipleDeclarations.ToString().ToLower() )
+                  .AppendTab( v.Description );
 
             if( v.Arguments.Count == 0 )
             {
@@ -32,7 +32,7 @@ internal class ToTsvTranslator : IDataTranslator<IEnumerable<CallbackSymbol>, st
 
             foreach( var x in v.Arguments )
             {
-                result.AppendTab( DataTypeUtility.ToString( x.DataType ), x.Name )
+                result.AppendTab( x.Name )
                       .AppendTab( x.RequiredDeclareOnInit.ToString().ToLower() )
                       .AppendTab( x.Description );
             }

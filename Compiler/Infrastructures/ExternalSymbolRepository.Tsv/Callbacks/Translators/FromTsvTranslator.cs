@@ -16,8 +16,8 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<C
     {
         Name,
         Reserved,
-        Description,
         AllowDuplicate,
+        Description,
         ArgumentBegin
     }
 
@@ -37,7 +37,11 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<C
                     DataType    = DataTypeFlag.None
                 };
 
-                ParseArguments( values, symbol );
+                if( values.Length > (int)Column.ArgumentBegin )
+                {
+                    ParseArguments( values, symbol );
+                }
+
                 result.Add( symbol );
             }
         );
@@ -52,9 +56,9 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<C
          * [1] Required declare in on_init
          * [2] Description
          */
-        TsvUtility.ParseColumnGroups( values, (int)Column.ArgumentBegin, 2, arg =>
+        TsvUtility.ParseColumnGroups( values, (int)Column.ArgumentBegin, 3, arg =>
             {
-                var argument = new CallbackArgumentSymbol( TsvUtility.ParseBoolean( arg[1] ))
+                var argument = new CallbackArgumentSymbol( TsvUtility.ParseBoolean( arg[ 1 ] ) )
                 {
                     Name        = arg[ 0 ],
                     Description = arg[ 2 ],

@@ -70,4 +70,27 @@ public static class MockSymbolTableUtility
         return list;
     }
 
+    public static List<CallbackSymbol> CreateDummyCallbackSymbols()
+    {
+        var list = new List<CallbackSymbol>();
+        var example = new CallbackSymbol(false)
+        {
+            Name        = "ui_control",
+            Description = "UI event callback",
+            Reserved    = true,
+            DataType    = DataTypeFlag.None
+        };
+
+        example.AddArgument( new CallbackArgumentSymbol( false )
+        {
+            Name        = "$button",
+            DataType    = DataTypeFlag.TypeInt,
+            Description = "button ui variable",
+            Reserved    = false,
+        });
+
+        list.Add( example );
+
+        return list;
+    }
 }
