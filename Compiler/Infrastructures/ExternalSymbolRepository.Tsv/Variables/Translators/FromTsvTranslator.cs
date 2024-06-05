@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
@@ -20,13 +19,11 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<V
         Description
     }
 
-    private static readonly Regex LineComment = new( @"^#.*" );
-
     public IReadOnlyCollection<VariableSymbol> Translate( string source )
     {
         var result = new List<VariableSymbol>();
 
-        TsvUtility.ParseTsv( source.SplitNewLine(), LineComment, values =>
+        TsvUtility.ParseTsv( source.SplitNewLine(), TsvUtility.RegexDefaultLineComment, values =>
             {
                 TsvUtility.RemoveQuoteCharacter( values );
 
