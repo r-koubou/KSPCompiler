@@ -15,6 +15,7 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<U
     {
         Name,
         Reserved,
+        VariableType,
         Description,
         RequireInitializer,
         InitializerArgumentBegin,
@@ -33,7 +34,7 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<U
                     Name        = values[ (int)Column.Name ],
                     Reserved    = TsvUtility.ParseBoolean( values[ (int)Column.Reserved ] ),
                     Description = values[ (int)Column.Description ],
-                    DataType    = DataTypeUtility.Guess( values[ (int)Column.Name ] )
+                    DataType    = DataTypeUtility.Guess( values[ (int)Column.VariableType ] )
                 };
 
                 ParseInitializerArguments( values, uiType );
