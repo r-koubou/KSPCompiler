@@ -21,43 +21,30 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<C
         ArgumentBegin
     }
 
-    private static readonly Regex LineComment = new( @"^#.*" );
-
     public IReadOnlyCollection<CommandSymbol> Translate( string source )
     {
         var result = new List<CommandSymbol>();
 
-        foreach( var x in source.SplitNewLine() )
-        {
-            if( string.IsNullOrWhiteSpace( x ) )
+        TsvUtility.ParseTsv( source.SplitNewLine(), TsvUtility.RegexDefaultLineComment, values =>
             {
-                continue;
+                TsvUtility.RemoveQuoteCharacter( values );
+
+                var command = new CommandSymbol
+                {
+                    Name        = values[ (int)Column.Name ],
+                    Reserved    = TsvUtility.ParseBoolean( values[ (int)Column.Reserved ] ),
+                    Description = values[ (int)Column.Description ],
+                    DataType    = DataTypeUtility.Guess( values[ (int)Column.ReturnType ] )
+                };
+
+                if( values.Length > (int)Column.ArgumentBegin )
+                {
+                    ParseArguments( values, command );
+                }
+
+                result.Add( command );
             }
-
-            if( LineComment.IsMatch( x ) )
-            {
-                continue;
-            }
-
-            var values = x.Split( '\t' );
-
-            TsvUtility.RemoveQuoteCharacter( values );
-
-            var command = new CommandSymbol
-            {
-                Name        = values[ (int)Column.Name ],
-                Reserved    = TsvUtility.ParseBoolean( values[ (int)Column.Reserved ] ),
-                Description = values[ (int)Column.Description ],
-                DataType    = DataTypeUtility.Guess( values[ (int)Column.ReturnType ] )
-            };
-
-            if( values.Length > (int)Column.ArgumentBegin )
-            {
-                ParseArguments( values, command );
-            }
-
-            result.Add( command );
-        }
+        );
 
         return result;
     }
