@@ -23,7 +23,8 @@ internal class ToTsvTranslator : IDataTranslator<IEnumerable<CallbackSymbol>, st
 
             if( v.Arguments.Count == 0 )
             {
-                result.AppendTab();
+                result.AppendNewLine();
+
                 continue;
             }
 
@@ -36,7 +37,7 @@ internal class ToTsvTranslator : IDataTranslator<IEnumerable<CallbackSymbol>, st
                       .AppendTab( x.Description );
             }
 
-            result.AppendTab();
+            result.AppendNewLine();
         }
 
         return result.ToString();
