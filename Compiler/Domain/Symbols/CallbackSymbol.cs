@@ -24,14 +24,14 @@ public sealed class CallbackSymbol : SymbolBase
     /// <remarks>
     /// Some callbacks allows duplicated callback definitions in script.
     /// </remarks>
-    public bool AllowMultipleDeclarations { get; }
+    public bool AllowMultipleDeclaration { get; }
 
-    public CallbackSymbol( bool allowMultipleDeclarations )
+    public CallbackSymbol( bool allowMultipleDeclaration )
     {
-        AllowMultipleDeclarations = allowMultipleDeclarations;
+        AllowMultipleDeclaration = allowMultipleDeclaration;
     }
 
-    public CallbackSymbol( bool allowMultipleDeclarations, IEnumerable<CallbackArgumentSymbol> args ) : this( allowMultipleDeclarations )
+    public CallbackSymbol( bool allowMultipleDeclaration, IEnumerable<CallbackArgumentSymbol> args ) : this( allowMultipleDeclaration )
     {
         arguments.AddRange( args );
     }
