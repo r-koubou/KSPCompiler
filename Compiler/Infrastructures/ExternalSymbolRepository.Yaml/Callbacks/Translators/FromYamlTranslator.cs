@@ -3,33 +3,33 @@ using System.Collections.Generic;
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Model;
+using KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks.Model;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Translators;
+namespace KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks.Translators;
 
-internal class FromYamlTranslator : IDataTranslator<RootObject, IReadOnlyCollection<CommandSymbol>>
+internal class FromYamlTranslator : IDataTranslator<RootObject, IReadOnlyCollection<CallbackSymbol>>
 {
-    public IReadOnlyCollection<CommandSymbol> Translate( RootObject source )
+    public IReadOnlyCollection<CallbackSymbol> Translate( RootObject source )
     {
-        var result = new List<CommandSymbol>();
+        var result = new List<CallbackSymbol>();
 
         foreach( var x in source.Symbols )
         {
-            var command = new CommandSymbol
+            var command = new CallbackSymbol( x.AllowMultipleDeclaration )
             {
                 Name        = x.Name,
                 Reserved    = x.Reserved,
-                DataType    = DataTypeUtility.Guess( x.ReturnType ),
-                Description = x.Description
+                Description = x.Description,
+                DataType    = DataTypeFlag.None
             };
 
             foreach( var arg in x.Arguments )
             {
-                var argument = new CommandArgumentSymbol
+                var argument = new CallbackArgumentSymbol( arg.RequiredDeclare )
                 {
                     Name        = arg.Name,
-                    Reserved    = false,
                     Description = arg.Description,
+                    Reserved    = false
                 };
 
                 argument.DataType = DataTypeUtility.Guess( argument.Name );

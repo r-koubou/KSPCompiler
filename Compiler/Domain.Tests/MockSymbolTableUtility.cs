@@ -33,9 +33,9 @@ public static class MockSymbolTableUtility
             DataType    = DataTypeFlag.TypeVoid
         };
 
-        example.AddArgument( new VariableSymbol
+        example.AddArgument( new CommandArgumentSymbol
         {
-            Name = "text",
+            Name = "*text",
             DataType = DataTypeFlag.MultipleType,
             Description = "message text",
             Reserved = false,
@@ -57,9 +57,9 @@ public static class MockSymbolTableUtility
             DataType    = DataTypeFlag.TypeInt
         };
 
-        example.AddInitializerArgument( new VariableSymbol
+        example.AddInitializerArgument( new UIInitializerArgumentSymbol
         {
-            Name        = "width",
+            Name        = "$width",
             DataType    = DataTypeFlag.TypeInt,
             Description = "button width",
             Reserved    = false,
@@ -70,4 +70,27 @@ public static class MockSymbolTableUtility
         return list;
     }
 
+    public static List<CallbackSymbol> CreateDummyCallbackSymbols()
+    {
+        var list = new List<CallbackSymbol>();
+        var example = new CallbackSymbol( true )
+        {
+            Name        = "ui_control",
+            Description = "UI event callback",
+            Reserved    = true,
+            DataType    = DataTypeFlag.TypeInt
+        };
+
+        example.AddArgument( new CallbackArgumentSymbol( false )
+        {
+            Name        = "$button",
+            DataType    = DataTypeFlag.TypeInt,
+            Description = "button ui variable",
+            Reserved    = false,
+        });
+
+        list.Add( example );
+
+        return list;
+    }
 }

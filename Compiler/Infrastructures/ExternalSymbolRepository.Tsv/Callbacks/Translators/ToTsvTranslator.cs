@@ -6,11 +6,11 @@ using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.ExternalSymbolRepository.Tsv.Extensions;
 
-namespace KSPCompiler.ExternalSymbolRepository.Tsv.Commands.Translators;
+namespace KSPCompiler.ExternalSymbolRepository.Tsv.Callbacks.Translators;
 
-internal class ToTsvTranslator : IDataTranslator<IEnumerable<CommandSymbol>, string>
+internal class ToTsvTranslator : IDataTranslator<IEnumerable<CallbackSymbol>, string>
 {
-    public string Translate( IEnumerable<CommandSymbol> source )
+    public string Translate( IEnumerable<CallbackSymbol> source )
     {
         var result = new StringBuilder();
 
@@ -18,19 +18,22 @@ internal class ToTsvTranslator : IDataTranslator<IEnumerable<CommandSymbol>, str
         {
             result.AppendTab( v.Name )
                   .AppendTab( v.Reserved.ToString().ToLower() )
-                  .AppendTab( v.Description )
-                  .Append( DataTypeUtility.ToString( v.DataType ) );
+                  .AppendTab( v.AllowMultipleDeclaration.ToString().ToLower() )
+                  .Append( v.Description );
 
             if( v.Arguments.Count == 0 )
             {
                 result.AppendNewLine();
+
                 continue;
             }
 
             result.AppendTab();
+
             foreach( var x in v.Arguments )
             {
                 result.AppendTab( x.Name )
+                      .AppendTab( x.RequiredDeclareOnInit.ToString().ToLower() )
                       .AppendTab( x.Description );
             }
 

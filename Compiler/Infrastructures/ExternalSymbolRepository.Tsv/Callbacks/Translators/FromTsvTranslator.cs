@@ -1,70 +1,72 @@
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.ExternalSymbolRepository.Tsv.Commons;
 using KSPCompiler.Infrastructures.Commons.Extensions;
 
 using DataTypeUtility = KSPCompiler.Domain.Symbols.MetaData.DataTypeUtility;
 
-namespace KSPCompiler.ExternalSymbolRepository.Tsv.Commands.Translators;
+namespace KSPCompiler.ExternalSymbolRepository.Tsv.Callbacks.Translators;
 
-internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<CommandSymbol>>
+internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<CallbackSymbol>>
 {
     private enum Column
     {
         Name,
         Reserved,
+        AllowDuplicate,
         Description,
-        ReturnType,
         ArgumentBegin
     }
 
-    public IReadOnlyCollection<CommandSymbol> Translate( string source )
+    public IReadOnlyCollection<CallbackSymbol> Translate( string source )
     {
-        var result = new List<CommandSymbol>();
+        var result = new List<CallbackSymbol>();
 
         TsvUtility.ParseTsv( source.SplitNewLine(), TsvUtility.RegexDefaultLineComment, values =>
             {
                 TsvUtility.RemoveQuoteCharacter( values );
 
-                var command = new CommandSymbol
+                var symbol = new CallbackSymbol( TsvUtility.ParseBoolean( values[ (int)Column.AllowDuplicate ] ) )
                 {
                     Name        = values[ (int)Column.Name ],
                     Reserved    = TsvUtility.ParseBoolean( values[ (int)Column.Reserved ] ),
                     Description = values[ (int)Column.Description ],
-                    DataType    = DataTypeUtility.Guess( values[ (int)Column.ReturnType ] )
+                    DataType    = DataTypeFlag.None
                 };
 
                 if( values.Length > (int)Column.ArgumentBegin )
                 {
-                    ParseArguments( values, command );
+                    ParseArguments( values, symbol );
                 }
 
-                result.Add( command );
+                result.Add( symbol );
             }
         );
 
         return result;
     }
 
-    private static void ParseArguments( string[] values, CommandSymbol command )
+    private static void ParseArguments( string[] values, CallbackSymbol symbol )
     {
         /*
-         * Argument1, Argument1Description, Argument2, Argument2Description, ...
+         * [0] Name
+         * [1] Required declare in `on init`
+         * [2] Description
          */
-        TsvUtility.ParseColumnGroups( values, (int)Column.ArgumentBegin, 2, arg =>
+        TsvUtility.ParseColumnGroups( values, (int)Column.ArgumentBegin, 3, arg =>
             {
-                var argument = new CommandArgumentSymbol
+                var argument = new CallbackArgumentSymbol( TsvUtility.ParseBoolean( arg[ 1 ] ) )
                 {
                     Name        = arg[ 0 ],
-                    Description = arg[ 1 ],
+                    Description = arg[ 2 ],
                     Reserved    = false
                 };
 
                 argument.DataType = DataTypeUtility.Guess( argument.Name );
-                command.AddArgument( argument );
+                symbol.AddArgument( argument );
             }
         );
     }
