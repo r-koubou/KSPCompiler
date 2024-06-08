@@ -56,6 +56,8 @@ CASE:                   'case';
 TO:                     'to';
 WHILE:                  'while';
 CALL:                   'call';
+// Control Statement
+CONTINUE:               'continue';
 
 //------------------------------------------------------------------------------
 // プリプロセッサ (KSP 標準)
