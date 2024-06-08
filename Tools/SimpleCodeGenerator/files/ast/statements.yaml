@@ -48,6 +48,14 @@ classes:
       - name: ${TEMPLATE}
 
   #--------------------------------------------
+  # 制御文
+  #--------------------------------------------
+  - name: ContinueStatement
+    description: "an continue statement"
+    templates:
+      - name: ${TEMPLATE}
+
+  #--------------------------------------------
   # KSPコマンドコール
   #--------------------------------------------
   - name: CallKspUserFunctionStatement

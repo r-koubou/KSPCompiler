@@ -265,6 +265,18 @@ public partial class KSPParserBaseListener : IKSPParserListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitWhileStatement([NotNull] KSPParser.WhileStatementContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="KSPParser.continueStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterContinueStatement([NotNull] KSPParser.ContinueStatementContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="KSPParser.continueStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitContinueStatement([NotNull] KSPParser.ContinueStatementContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="KSPParser.callKspUserFunction"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>

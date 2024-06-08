@@ -25,7 +25,8 @@ public class AstTranslatorTest
         );
 
         var p = new KspFileSyntaxAnalyser( path, ICompilerMessageManger.CreateDefault(), Encoding.UTF8 );
-        return p.Analyse();
+        var result = p.Analyse();
+        return result;
     }
 
     [Test]
