@@ -1,4 +1,6 @@
 #!/bin/bash
 
-python -m pip install pipenv
+# if pipenv not installed
+# brew install pipenv
+
 pipenv sync
