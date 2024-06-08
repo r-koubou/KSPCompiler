@@ -48,6 +48,7 @@ namespace KSPCompiler.Domain.Ast.Node
         public T Visit( AstWhileStatement node );
         public T Visit( AstSelectStatement node );
         public T Visit( AstCallKspUserFunctionStatement node );
+        public T Visit( AstContinueStatement node );
         public T Visit( AstVariableDeclaration node );
         public T Visit( AstVariableInitializer node );
         public T Visit( AstPrimitiveInitializer node );

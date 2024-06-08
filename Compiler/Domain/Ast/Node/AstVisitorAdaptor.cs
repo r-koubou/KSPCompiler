@@ -143,4 +143,7 @@ public abstract class AstVisitorAdaptor<T> : IAstVisitor<T>
 
     public virtual T Visit( AstArrayInitializer node )
         => node.Accept( this );
+
+    public T Visit( AstContinueStatement node )
+        => node.Accept( this );
 }

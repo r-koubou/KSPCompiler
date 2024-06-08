@@ -84,6 +84,14 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             return VisitControlStatementImpl<AstWhileStatement>( context.expression(), context.block() );
         }
 
+        public override AstNode VisitContinueStatement( KSPParser.ContinueStatementContext context )
+        {
+            var node = new AstContinueStatement();
+            node.Import( context );
+
+            return node;
+        }
+
         public override AstNode VisitCallKspUserFunction( KSPParser.CallKspUserFunctionContext context )
         {
             var node = new AstCallKspUserFunctionStatement();

@@ -53,5 +53,6 @@ namespace KSPCompiler.Domain.Ast.Node
         VariableInitializer,
         PrimitiveInitializer,
         ArrayInitializer,
+        ContinueStatement,
     }
 }

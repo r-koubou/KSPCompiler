@@ -10,6 +10,9 @@ on init
     end select
     while( x < 10 )
         x := x + 1
+        if( x = 5 )
+            continue
+        end if
     end while
     call userFunc
 end on

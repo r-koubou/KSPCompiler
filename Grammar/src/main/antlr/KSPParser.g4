@@ -136,6 +136,7 @@ statement
     | ifStatement
     | selectStatement
     | whileStatement
+    | continueStatement
     | callKspUserFunction
     | expressionStatement
 ;
@@ -255,6 +256,14 @@ whileStatement:
         RPARENT                             // )
         block                               // statement+
     END MULTI_LINE_DELIMITER* WHILE
+;
+
+//------------------------------------------------------------------------------
+// continue ステートメント
+//------------------------------------------------------------------------------
+
+continueStatement:
+    CONTINUE MULTI_LINE_DELIMITER*          // continue
 ;
 
 //------------------------------------------------------------------------------
