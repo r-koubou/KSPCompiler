@@ -7,14 +7,14 @@ using KSPCompiler.Resources;
 
 namespace KSPCompiler.Infrastructures.Parser.Antlr;
 
-internal class LexerErrorListener : IAntlrErrorListener<int>
+internal class AntlrLexerErrorListener : IAntlrErrorListener<int>
 {
     private ICompilerMessageManger MessageManger { get; }
     public bool HasError { get; private set; }
 
     private bool EnableDetailMessage { get; }
 
-    public LexerErrorListener( ICompilerMessageManger messageManger, bool enableDetailMessage = true)
+    public AntlrLexerErrorListener( ICompilerMessageManger messageManger, bool enableDetailMessage = true)
     {
         MessageManger       = messageManger;
         EnableDetailMessage = enableDetailMessage;
