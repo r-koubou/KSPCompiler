@@ -11,7 +11,7 @@ using KSPCompiler.Infrastructures.Parser.Antlr.Translators;
 
 namespace KSPCompiler.Infrastructures.Parser.Antlr;
 
-public abstract class KspSyntaxAnalyser : ISyntaxAnalyser
+public abstract class KspSyntaxAnalyzer : ISyntaxAnalyzer
 {
     protected Stream Stream { get; }
     public bool LeaveOpen { get; }
@@ -19,7 +19,7 @@ public abstract class KspSyntaxAnalyser : ISyntaxAnalyser
 
     private readonly TextWriter errorMessageWriter;
 
-    protected KspSyntaxAnalyser( Stream stream, ICompilerMessageManger messageManger, bool leaveOpen = false, TextWriter? errorMessageWriter = null )
+    protected KspSyntaxAnalyzer( Stream stream, ICompilerMessageManger messageManger, bool leaveOpen = false, TextWriter? errorMessageWriter = null )
     {
         Stream                  = stream;
         MessageManger           = messageManger;
