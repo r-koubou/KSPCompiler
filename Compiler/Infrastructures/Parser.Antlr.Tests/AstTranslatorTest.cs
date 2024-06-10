@@ -1,10 +1,7 @@
 using System.IO;
-using System.Text;
 
 using KSPCompiler.Domain;
-using KSPCompiler.Domain.Ast.Node.Blocks;
-using KSPCompiler.Domain.CompilerMessages;
-using KSPCompiler.Infrastructures.Parser.Antlr;
+using KSPCompiler.Parser.Antlr.Tests.Commons;
 
 using NUnit.Framework;
 
@@ -16,53 +13,41 @@ public class AstTranslatorTest
     private static readonly string TestDataDirectory = Path.Combine( "TestData", "AstTranslatorTest" );
 
     // ReSharper disable once UnusedMethodReturnValue.Local
-    private static AstCompilationUnit TranslateImpl( string scriptFilePath )
-    {
-        var path = Path.Combine(
-            TestContext.CurrentContext.TestDirectory,
-            TestDataDirectory,
-            scriptFilePath
-        );
-
-        var p = new AntlrKspFileSyntaxAnalyzer( path, ICompilerMessageManger.CreateDefault(), Encoding.UTF8 );
-        var result = p.Analyze();
-        return result;
-    }
 
     [Test]
     public void LexerErrorTest()
     {
-        Assert.Throws<KspScriptParseException>( () => TranslateImpl( "LexerErrorTest.txt" ) );
+        Assert.Throws<KspScriptParseException>( () => ParseTestUtility.Parse( TestDataDirectory, "LexerErrorTest.txt" ) );
     }
 
     [Test]
     public void ParserErrorTest()
     {
-        Assert.Throws<KspScriptParseException>( () => TranslateImpl( "ParserErrorTest.txt" ) );
+        Assert.Throws<KspScriptParseException>( () => ParseTestUtility.Parse( TestDataDirectory, "ParserErrorTest.txt" ) );
     }
 
     [Test]
     public void ExpressionTest()
     {
-        Assert.DoesNotThrow( () => TranslateImpl( "ExpressionTest.txt" ) );
+        Assert.DoesNotThrow( () => ParseTestUtility.Parse( TestDataDirectory, "ExpressionTest.txt" ) );
     }
 
     [Test]
     public void CallCommandTest()
     {
-        Assert.DoesNotThrow( () => TranslateImpl( "CallCommandTest.txt" ) );
+        Assert.DoesNotThrow( () => ParseTestUtility.Parse( TestDataDirectory, "CallCommandTest.txt" ) );
     }
 
     [Test]
     public void AssignTest()
     {
-        Assert.DoesNotThrow( () => TranslateImpl( "AssignTest.txt" ) );
+        Assert.DoesNotThrow( () => ParseTestUtility.Parse( TestDataDirectory, "AssignTest.txt" ) );
     }
 
     [Test]
     public void StatementTest()
     {
-        Assert.DoesNotThrow( () => TranslateImpl( "StatementTest.txt" ) );
+        Assert.DoesNotThrow( () => ParseTestUtility.Parse( TestDataDirectory, "StatementTest.txt" ) );
     }
 
 }
