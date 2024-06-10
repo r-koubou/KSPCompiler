@@ -19,8 +19,8 @@ public static class ParseTestUtility
             scriptFilePath
         );
 
-        var p = new AntlrKspFileSyntaxAnalyzer( path, ICompilerMessageManger.CreateDefault(), Encoding.UTF8 );
-        var result = p.Analyze();
-        return result;
+        var analyzer = new AntlrKspFileSyntaxAnalyzer( path, ICompilerMessageManger.CreateDefault(), Encoding.UTF8 );
+        var ast = analyzer.Analyze();
+        return ast;
     }
 }
