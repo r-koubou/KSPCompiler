@@ -7,7 +7,7 @@ using KSPCompiler.Resources;
 
 namespace KSPCompiler.Infrastructures.Parser.Antlr;
 
-internal class ParserErrorListener : IAntlrErrorListener<IToken>
+internal class AntlrParserErrorListener : IAntlrErrorListener<IToken>
 {
     private ICompilerMessageManger MessageManger { get; }
 
@@ -16,7 +16,7 @@ internal class ParserErrorListener : IAntlrErrorListener<IToken>
     private bool EnableDetailMessage { get; }
 
 
-    public ParserErrorListener( ICompilerMessageManger messageManger, bool enableDetailMessage = true )
+    public AntlrParserErrorListener( ICompilerMessageManger messageManger, bool enableDetailMessage = true )
     {
         MessageManger       = messageManger;
         EnableDetailMessage = enableDetailMessage;

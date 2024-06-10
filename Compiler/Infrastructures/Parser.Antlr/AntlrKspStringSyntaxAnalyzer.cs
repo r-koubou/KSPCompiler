@@ -5,9 +5,9 @@ using KSPCompiler.Domain.CompilerMessages;
 
 namespace KSPCompiler.Infrastructures.Parser.Antlr;
 
-public class KspStringSyntaxAnalyser : KspSyntaxAnalyser
+public class AntlrKspStringSyntaxAnalyzer : AntlrKspSyntaxAnalyzer
 {
-    public KspStringSyntaxAnalyser( string script, ICompilerMessageManger messageManger, Encoding encoding )
+    public AntlrKspStringSyntaxAnalyzer( string script, ICompilerMessageManger messageManger, Encoding encoding )
         : base( new MemoryStream( encoding.GetBytes( script ) ), messageManger )
     {}
 }

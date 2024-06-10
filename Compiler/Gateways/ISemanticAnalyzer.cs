@@ -2,7 +2,7 @@ using System;
 
 namespace KSPCompiler.Gateways;
 
-public interface ISemanticAnalyser : IDisposable
+public interface ISemanticAnalyzer : IDisposable
 {
     void Analyse();
     void IDisposable.Dispose() {}
