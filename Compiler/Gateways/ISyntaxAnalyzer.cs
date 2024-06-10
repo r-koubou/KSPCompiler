@@ -6,7 +6,7 @@ namespace KSPCompiler.Gateways
 {
     public interface ISyntaxAnalyzer : IDisposable
     {
-        public AstCompilationUnit Analyse();
+        public AstCompilationUnit Analyze();
         void IDisposable.Dispose() {}
     }
 }

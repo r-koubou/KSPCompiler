@@ -4,6 +4,6 @@ namespace KSPCompiler.Gateways;
 
 public interface ISemanticAnalyzer : IDisposable
 {
-    void Analyse();
+    void Analyze();
     void IDisposable.Dispose() {}
 }
