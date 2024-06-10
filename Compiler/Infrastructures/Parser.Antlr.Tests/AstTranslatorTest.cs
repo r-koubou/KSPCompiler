@@ -24,7 +24,7 @@ public class AstTranslatorTest
             scriptFilePath
         );
 
-        var p = new KspFileSyntaxAnalyser( path, ICompilerMessageManger.CreateDefault(), Encoding.UTF8 );
+        var p = new AntlrKspFileSyntaxAnalyzer( path, ICompilerMessageManger.CreateDefault(), Encoding.UTF8 );
         var result = p.Analyse();
         return result;
     }
