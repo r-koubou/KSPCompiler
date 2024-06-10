@@ -45,7 +45,7 @@ public abstract class AntlrKspSyntaxAnalyzer : ISyntaxAnalyzer
         }
     }
 
-    public AstCompilationUnit Analyse()
+    public AstCompilationUnit Analyze()
     {
         var antlrStream = new AntlrInputStream( Stream );
         var lexer = new KSPLexer( antlrStream, TextWriter.Null, TextWriter.Null );
