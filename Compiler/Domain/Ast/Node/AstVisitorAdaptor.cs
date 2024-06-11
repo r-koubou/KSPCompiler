@@ -4,146 +4,152 @@ using KSPCompiler.Domain.Ast.Node.Statements;
 
 namespace KSPCompiler.Domain.Ast.Node;
 
-public abstract class AstVisitorAdaptor<T> : IAstVisitor<T>
+public abstract class AstVisitorAdaptor : IAstVisitor<AstNode>
 {
-    public virtual T Visit( AstCompilationUnit node )
-        => node.Accept( this );
+    public virtual AstNode VisitChildren( AstNode node )
+    {
+        node.AcceptChildren( this );
+        return node;
+    }
 
-    public virtual T Visit( AstCallbackDeclaration node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstCompilationUnit node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstUserFunctionDeclaration node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstCallbackDeclaration node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstArgument node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstUserFunctionDeclaration node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstArgumentList node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstArgument node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstBlock node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstArgumentList node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstCaseBlock node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstBlock node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstLogicalOrExpression node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstCaseBlock node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstLogicalAndExpression node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstLogicalOrExpression node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstStringConcatenateExpression node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstLogicalAndExpression node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstBitwiseOrExpression node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstStringConcatenateExpression node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstBitwiseAndExpression node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstBitwiseOrExpression node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstEqualExpression node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstBitwiseAndExpression node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstNotEqualExpression node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstEqualExpression node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstLessThanExpression node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstNotEqualExpression node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstGreaterThanExpression node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstLessThanExpression node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstLessEqualExpression node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstGreaterThanExpression node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstGreaterEqualExpression node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstLessEqualExpression node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstAdditionExpression node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstGreaterEqualExpression node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstSubtractionExpression node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstAdditionExpression node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstMultiplyingExpression node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstSubtractionExpression node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstDivisionExpression node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstMultiplyingExpression node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstModuloExpression node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstDivisionExpression node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstUnaryMinusExpression node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstModuloExpression node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstUnaryNotExpression node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstUnaryMinusExpression node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstIntLiteral node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstUnaryNotExpression node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstRealLiteral node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstIntLiteral node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstStringLiteral node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstRealLiteral node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstExpressionList node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstStringLiteral node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstAssignmentExpression node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstExpressionList node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstAssignmentExpressionList node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstAssignmentExpression node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstSymbolExpression node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstAssignmentExpressionList node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstArrayElementExpression node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstSymbolExpression node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstCallExpression node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstArrayElementExpression node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstKspPreprocessorDefine node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstCallExpression node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstKspPreprocessorUndefine node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstKspPreprocessorDefine node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstKspPreprocessorIfdefine node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstKspPreprocessorUndefine node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstKspPreprocessorIfnotDefine node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstKspPreprocessorIfdefine node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstIfStatement node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstKspPreprocessorIfnotDefine node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstWhileStatement node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstIfStatement node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstSelectStatement node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstWhileStatement node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstCallKspUserFunctionStatement node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstSelectStatement node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstVariableDeclaration node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstCallKspUserFunctionStatement node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstVariableInitializer node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstVariableDeclaration node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstPrimitiveInitializer node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstVariableInitializer node )
+        => VisitChildren( node );
 
-    public virtual T Visit( AstArrayInitializer node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstPrimitiveInitializer node )
+        => VisitChildren( node );
 
-    public T Visit( AstContinueStatement node )
-        => node.Accept( this );
+    public virtual AstNode Visit( AstArrayInitializer node )
+        => VisitChildren( node );
+
+    public AstNode Visit( AstContinueStatement node )
+        => VisitChildren( node );
 }
