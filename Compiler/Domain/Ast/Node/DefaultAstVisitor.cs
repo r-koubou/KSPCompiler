@@ -4,7 +4,7 @@ using KSPCompiler.Domain.Ast.Node.Statements;
 
 namespace KSPCompiler.Domain.Ast.Node;
 
-public abstract class AstVisitorAdaptor : IAstVisitor<AstNode>
+public abstract class DefaultAstVisitor : IAstVisitor<AstNode>
 {
     public virtual AstNode VisitChildren( AstNode node )
     {
