@@ -1,5 +1,6 @@
 using System;
 
+using KSPCompiler.Domain;
 using KSPCompiler.Domain.Ast.Node.Blocks;
 
 namespace KSPCompiler.Gateways
@@ -12,7 +13,13 @@ namespace KSPCompiler.Gateways
     /// </remarks>
     public interface ISyntaxParser : IDisposable
     {
+        /// <summary>
+        /// Parses KSP scripts and generates abstract parse trees.
+        /// </summary>
+        /// <exception cref="KspCompilerException">If parsing fails</exception>
         public AstCompilationUnit Parse();
+
+        /// <inheritdoc cref="IDisposable.Dispose"/>
         void IDisposable.Dispose() {}
     }
 }
