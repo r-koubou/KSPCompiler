@@ -37,6 +37,9 @@
       <None Update="TestData\AstTranslatorTest\StatementTest.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="TestData\SymbolAnalyzeTest\VariableSymbolTest.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
