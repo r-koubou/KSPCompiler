@@ -37,7 +37,6 @@ callbackDeclaration:
         )?
     EOL
     block
-    EOL
     END MULTI_LINE_DELIMITER* ON
 ;
 
@@ -57,7 +56,6 @@ userFunctionDeclaration:
     FUNCTION MULTI_LINE_DELIMITER* name = IDENTIFIER
     EOL
     block
-    EOL
     END MULTI_LINE_DELIMITER* FUNCTION
 ;
 
