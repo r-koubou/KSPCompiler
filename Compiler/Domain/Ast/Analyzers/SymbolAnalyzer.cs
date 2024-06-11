@@ -5,7 +5,7 @@ using KSPCompiler.Domain.Symbols;
 
 namespace KSPCompiler.Domain.Ast.Analyzers;
 
-public class SymbolAnalyzer : AstVisitorAdaptor, ISymbolAnalyzer
+public class SymbolAnalyzer : DefaultAstVisitor, ISymbolAnalyzer
 {
     private ICompilerMessageManger CompilerMessageManger { get; }
 
@@ -37,15 +37,13 @@ public class SymbolAnalyzer : AstVisitorAdaptor, ISymbolAnalyzer
     private AstNode AnalyzeNonInitCallback( AstCallbackDeclaration node )
     {
         // TODO 解析、変数宣言を見つけたらエラー扱いにする
-        node.AcceptChildren( this );
-        return node;
+        return VisitChildren( node );
     }
 
     private AstNode AnalyzeInitCallback( AstCallbackDeclaration node )
     {
         // TODO 解析、変数宣言を見つけたら変数テーブルへ追加
-        node.AcceptChildren( this );
-        return node;
+        return VisitChildren( node );
     }
 
     #endregion
