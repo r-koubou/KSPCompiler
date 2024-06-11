@@ -1,34 +1,18 @@
 using System;
 
+using KSPCompiler.Domain.Ast.Analyzers;
 using KSPCompiler.Domain.Ast.Node.Blocks;
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Gateways;
 
 namespace KSPCompiler.Parser.Symbols;
 
 public class SymbolAnalyzer : ISymbolAnalyzer
 {
     #region Symbol Tables
-    private ISymbolTable<VariableSymbol>? variables;
-
-    public ISymbolTable<VariableSymbol> Variables
-    {
-        get
-        {
-            var result = new VariableSymbolTable();
-
-            if( variables != null )
-            {
-                result.AddRange( variables );
-            }
-
-            return result;
-        }
-    }
-
+    public ISymbolTable<VariableSymbol> Variables { get; } = new VariableSymbolTable();
     #endregion
 
-    public void Analyse( AstCompilationUnit node )
+    public void Analyze( AstCompilationUnit node )
     {
         throw new NotImplementedException();
     }
