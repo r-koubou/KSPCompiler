@@ -1,5 +1,8 @@
 using System;
 
+using KSPCompiler.Domain.Ast.Node.Blocks;
+using KSPCompiler.Domain.Symbols;
+
 namespace KSPCompiler.Domain.Ast.Analyzers;
 
 public interface ISymbolAnalyzer : IDisposable
@@ -8,13 +11,13 @@ public interface ISymbolAnalyzer : IDisposable
 
     ISymbolTable<VariableSymbol> Variables { get; }
 
-    void Analyse( AstCompilationUnit node );
+    void Analyze( AstCompilationUnit node );
     void IDisposable.Dispose() {}
 
     private sealed class NullSymbolAnalyzer : ISymbolAnalyzer
     {
         public ISymbolTable<VariableSymbol> Variables => new VariableSymbolTable();
 
-        public void Analyse( AstCompilationUnit node ) {}
+        public void Analyze( AstCompilationUnit node ) {}
     }
 }
