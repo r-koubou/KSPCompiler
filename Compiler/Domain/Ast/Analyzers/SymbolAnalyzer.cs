@@ -1,10 +1,9 @@
 using System;
 
-using KSPCompiler.Domain.Ast.Analyzers;
 using KSPCompiler.Domain.Ast.Node.Blocks;
 using KSPCompiler.Domain.Symbols;
 
-namespace KSPCompiler.Parser.Symbols;
+namespace KSPCompiler.Domain.Ast.Analyzers;
 
 public class SymbolAnalyzer : ISymbolAnalyzer
 {
