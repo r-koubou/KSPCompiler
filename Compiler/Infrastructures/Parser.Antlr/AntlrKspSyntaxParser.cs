@@ -11,7 +11,7 @@ using KSPCompiler.Infrastructures.Parser.Antlr.Translators;
 
 namespace KSPCompiler.Infrastructures.Parser.Antlr;
 
-public abstract class AntlrKspSyntaxAnalyzer : ISyntaxAnalyzer
+public abstract class AntlrKspSyntaxParser : ISyntaxParser
 {
     protected Stream Stream { get; }
     public bool LeaveOpen { get; }
@@ -19,7 +19,7 @@ public abstract class AntlrKspSyntaxAnalyzer : ISyntaxAnalyzer
 
     private readonly TextWriter errorMessageWriter;
 
-    protected AntlrKspSyntaxAnalyzer( Stream stream, ICompilerMessageManger messageManger, bool leaveOpen = false, TextWriter? errorMessageWriter = null )
+    protected AntlrKspSyntaxParser( Stream stream, ICompilerMessageManger messageManger, bool leaveOpen = false, TextWriter? errorMessageWriter = null )
     {
         Stream                  = stream;
         MessageManger           = messageManger;
@@ -45,7 +45,7 @@ public abstract class AntlrKspSyntaxAnalyzer : ISyntaxAnalyzer
         }
     }
 
-    public AstCompilationUnit Analyze()
+    public AstCompilationUnit Parse()
     {
         var antlrStream = new AntlrInputStream( Stream );
         var lexer = new KSPLexer( antlrStream, TextWriter.Null, TextWriter.Null );

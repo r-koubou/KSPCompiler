@@ -5,10 +5,10 @@ using KSPCompiler.Domain.CompilerMessages;
 
 namespace KSPCompiler.Infrastructures.Parser.Antlr;
 
-public class AntlrKspFileSyntaxAnalyzer : AntlrKspSyntaxAnalyzer
+public class AntlrKspFileSyntaxParser : AntlrKspSyntaxParser
 {
     // ReSharper disable once UnusedParameter.Local
-    public AntlrKspFileSyntaxAnalyzer( string path, ICompilerMessageManger messageManger, Encoding _ )
+    public AntlrKspFileSyntaxParser( string path, ICompilerMessageManger messageManger, Encoding _ )
         : base( File.OpenRead( path ), messageManger )
     {}
 }
