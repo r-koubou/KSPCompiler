@@ -7,12 +7,8 @@ namespace KSPCompiler.Domain.Ast.Node
     /// <summary>
     /// Representation of AST node tree.
     /// </summary>
-    public interface IAstNode
+    public interface IAstNode : IAstNodeAcceptor
     {
-        public static bool IsNone( IAstNode? n ) =>
-            n == null ||
-            n.Id == AstNodeId.None;
-
         /// <summary>
         /// ID for identifying a node.
         /// </summary>

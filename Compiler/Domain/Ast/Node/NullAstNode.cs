@@ -3,12 +3,12 @@
     /// <summary>
     /// Null Object of <see cref="AstNode"/>
     /// </summary>
-    public class NullAstNode : AstNode
+    public sealed class NullAstNode : AstNode
     {
         /// <summary>
         /// Ctor
         /// </summary>
-        public NullAstNode( IAstNode parent ) : base( AstNodeId.None, parent ) {}
+        public NullAstNode() : base( AstNodeId.None ) {}
 
         #region IAstNodeAcceptor
         ///

@@ -8,7 +8,7 @@ namespace KSPCompiler.Domain.Ast.Node
     /// <summary>
     /// Default implementation of <see cref="IAstNode"/>
     /// </summary>
-    public abstract class AstNode : IAstNode, IAstNodeAcceptor, ICloneable
+    public abstract class AstNode : IAstNode, ICloneable
     {
         #region IAstNode
         ///
@@ -26,6 +26,15 @@ namespace KSPCompiler.Domain.Ast.Node
         ///
         public IAstNode Parent { get; set; }
         #endregion IAstNode
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstNode( AstNodeId id )
+        {
+            Id     = id;
+            Parent = new NullAstNode();
+        }
 
         /// <summary>
         /// Ctor
