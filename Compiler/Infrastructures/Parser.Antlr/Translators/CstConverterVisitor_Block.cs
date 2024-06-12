@@ -127,13 +127,24 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             var codeBlock = context.block();
 
             node.Import( context );
-            node.ConditionFrom = condFrom?.Accept( this ) as AstExpressionSyntaxNode;
-            node.ConditionTo   = condTo?.Accept( this ) as AstExpressionSyntaxNode;
-            node.CodeBlock     = codeBlock?.Accept( this ) as AstBlock;
 
-            SetupChildNode( node, node.ConditionFrom, condFrom );
-            SetupChildNode( node, node.ConditionTo,   condTo );
-            SetupChildNode( node, node.CodeBlock,     codeBlock );
+            if( condFrom?.Accept( this ) is AstExpressionSyntaxNode condFromNode )
+            {
+                node.ConditionFrom = condFromNode;
+                SetupChildNode( node, node.ConditionFrom, condFrom );
+            }
+
+            if( condFrom?.Accept( this ) is AstExpressionSyntaxNode conditionToNode )
+            {
+                node.ConditionTo = conditionToNode;
+                SetupChildNode( node, node.ConditionTo, condTo );
+            }
+
+            if( condFrom?.Accept( this ) is AstBlock codeBlockNode )
+            {
+                node.CodeBlock = codeBlockNode;
+                SetupChildNode( node, node.CodeBlock, codeBlock );
+            }
 
             return node;
         }
