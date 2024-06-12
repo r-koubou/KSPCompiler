@@ -26,7 +26,7 @@ namespace KSPCompiler.Domain.Ast.Node
         /// <summary>
         /// Parent node. If not present, the value is null.
         /// </summary>
-        public IAstNode? Parent { get; set; }
+        public IAstNode Parent { get; set; }
 
         /// <summary>
         /// Retrieves the parent node with the specified TNode.

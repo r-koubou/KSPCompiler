@@ -12,6 +12,9 @@ public abstract class DefaultAstVisitor : IAstVisitor<AstNode>
         return node;
     }
 
+    public AstNode Visit( NullAstNode node )
+        => VisitChildren( node );
+
     public virtual AstNode Visit( AstCompilationUnit node )
         => VisitChildren( node );
 

@@ -24,13 +24,13 @@ namespace KSPCompiler.Domain.Ast.Node
         ///
         /// <inheritdoc/>
         ///
-        public IAstNode? Parent { get; set; }
+        public IAstNode Parent { get; set; }
         #endregion IAstNode
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstNode( AstNodeId id, IAstNode? parent )
+        public AstNode( AstNodeId id, IAstNode parent )
         {
             Id     = id;
             Parent = parent;
