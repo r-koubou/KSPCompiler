@@ -31,7 +31,7 @@ namespace KSPCompiler.Domain.Ast.Node
         /// Ctor
         /// </summary>
         /// <remarks>
-        /// Id is set to <see cref="AstNodeId.None"/> and Parent is set to <see cref="NullAstNode.Instance"/>.
+        /// Id will be set to <see cref="AstNodeId.None"/> and Parent will be set to <see cref="NullAstNode.Instance"/>.
         /// </remarks>
         public AstNode() : this( AstNodeId.None, NullAstNode.Instance ) {}
 
@@ -39,7 +39,7 @@ namespace KSPCompiler.Domain.Ast.Node
         /// Ctor
         /// </summary>
         /// <remarks>
-        /// Parent is set to <see cref="NullAstNode.Instance"/>.
+        /// Parent will be set to <see cref="NullAstNode.Instance"/>.
         /// </remarks>
         public AstNode( AstNodeId id )
         {
