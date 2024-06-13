@@ -10,7 +10,7 @@
         /// </summary>
         protected AstStatementSyntaxNode(
             AstNodeId id,
-            IAstNode? parent )
+            IAstNode parent )
             : base( id, parent )
         {}
     }
