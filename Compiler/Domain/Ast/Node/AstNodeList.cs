@@ -24,6 +24,11 @@ namespace KSPCompiler.Domain.Ast.Node
         public int Count => Nodes.Count;
 
         /// <summary>
+        /// true if there are no child nodes otherwise false.
+        /// </summary>
+        public bool Empty => Nodes.Count == 0;
+
+        /// <summary>
         /// Ctor
         /// </summary>
         public AstNodeList() : this( NullAstNode.Instance ) {}
