@@ -18,6 +18,9 @@ public abstract class DefaultAstVisitor : IAstVisitor<IAstNode>
     public IAstNode Visit( NullAstExpressionSyntaxNode node )
         => VisitChildren( node );
 
+    public IAstNode Visit( NullAstInitializer node )
+        => VisitChildren( node );
+
     public virtual IAstNode Visit( AstCompilationUnit node )
         => VisitChildren( node );
 
