@@ -13,7 +13,15 @@ namespace KSPCompiler.Domain.Ast.Node.Blocks
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstBlock( IAstNode? parent = null )
+        /// <remarks>
+        /// Parent will be set to <see cref="NullAstNode.Instance"/>.
+        /// </remarks>
+        public AstBlock() : this( NullAstNode.Instance ) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstBlock( IAstNode parent )
             : base( AstNodeId.Block, parent )
         {
             Statements = new AstNodeList<AstNode>( this );
