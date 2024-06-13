@@ -10,7 +10,7 @@ namespace KSPCompiler.Domain.Ast.Node
         /// <summary>
         /// Condition
         /// </summary>
-        public AstExpressionSyntaxNode? Condition { get; set; }
+        public AstExpressionSyntaxNode Condition { get; set; }
 
         /// <summary>
         /// A code block when the conditional expression is true.
@@ -25,6 +25,7 @@ namespace KSPCompiler.Domain.Ast.Node
             IAstNode parent )
             : base( id, parent )
         {
+            Condition = NullAstExpressionSyntaxNode.Instance;
             CodeBlock = new AstBlock( this );
         }
 
