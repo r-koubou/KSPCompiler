@@ -24,7 +24,19 @@ namespace KSPCompiler.Domain.Ast.Node.Expressions
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstIntLiteral( int value = 0, IAstNode? parent = null )
+        public AstIntLiteral()
+            : this( 0 ) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstIntLiteral( int value )
+            : this( value, NullAstNode.Instance ) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstIntLiteral( int value, IAstNode parent )
             : base( AstNodeId.IntLiteral, parent )
         {
             Value = value;

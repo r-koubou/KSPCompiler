@@ -13,11 +13,17 @@ namespace KSPCompiler.Domain.Ast.Node.Expressions
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstAssignmentExpressionList( IAstNode? parent = null )
+        public AstAssignmentExpressionList( IAstNode parent )
             : base( AstNodeId.AssignmentExpressionList, parent )
         {
             Expressions = new AstNodeList<AstAssignmentExpression>( this );
         }
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstAssignmentExpressionList()
+            : this( NullAstNode.Instance ) {}
 
         #region IAstNodeAcceptor
 

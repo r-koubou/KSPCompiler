@@ -12,12 +12,12 @@ namespace KSPCompiler.Domain.Ast.Node
         /// <summary>
         /// left operand
         /// </summary>
-        public AstExpressionSyntaxNode? Left { get; set; }
+        public AstExpressionSyntaxNode Left { get; set; }
 
         /// <summary>
         /// right operand
         /// </summary>
-        public AstExpressionSyntaxNode? Right { get; set; }
+        public AstExpressionSyntaxNode Right { get; set; }
 
         /// <summary>
         /// The data type representing this node
@@ -28,20 +28,37 @@ namespace KSPCompiler.Domain.Ast.Node
         /// Ctor
         /// </summary>
         public AstExpressionSyntaxNode()
-            : base( AstNodeId.None, null )
-        {
-            Left  = null;
-            Right = null;
-        }
+            : this( AstNodeId.None, NullAstNode.Instance, NullAstExpressionSyntaxNode.Instance, NullAstExpressionSyntaxNode.Instance ) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstExpressionSyntaxNode( AstNodeId id )
+            : this( id, NullAstNode.Instance, NullAstExpressionSyntaxNode.Instance, NullAstExpressionSyntaxNode.Instance ) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstExpressionSyntaxNode( AstNodeId id, IAstNode parent )
+            : this( id, parent, NullAstExpressionSyntaxNode.Instance, NullAstExpressionSyntaxNode.Instance ) {}
 
         /// <summary>
         /// Ctor
         /// </summary>
         public AstExpressionSyntaxNode(
             AstNodeId id,
-            IAstNode? parent,
-            AstExpressionSyntaxNode? left = null,
-            AstExpressionSyntaxNode? right = null )
+            AstExpressionSyntaxNode left,
+            AstExpressionSyntaxNode right )
+            : this( id, NullAstExpressionSyntaxNode.Instance, left, right ) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstExpressionSyntaxNode(
+            AstNodeId id,
+            IAstNode parent,
+            AstExpressionSyntaxNode left,
+            AstExpressionSyntaxNode right )
             : base( id, parent )
         {
             Left  = left;
@@ -59,8 +76,8 @@ namespace KSPCompiler.Domain.Ast.Node
         ///
         public override void AcceptChildren<T>( IAstVisitor<T> visitor )
         {
-            Left?.AcceptChildren( visitor );
-            Right?.AcceptChildren( visitor );
+            Left.AcceptChildren( visitor );
+            Right.AcceptChildren( visitor );
         }
         #endregion IAstNodeAcceptor
 
@@ -70,8 +87,8 @@ namespace KSPCompiler.Domain.Ast.Node
         ///
         public override void DumpAll( StreamWriter writer, int indentDepth = 0 )
         {
-            Left?.Dump( writer, indentDepth );
-            Right?.Dump( writer, indentDepth );
+            Left.Dump( writer, indentDepth );
+            Right.Dump( writer, indentDepth );
         }
         #endregion AstNode
     }

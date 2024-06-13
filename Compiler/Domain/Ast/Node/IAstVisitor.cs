@@ -7,6 +7,7 @@ namespace KSPCompiler.Domain.Ast.Node
     public interface IAstVisitor<out T>
     {
         public T Visit( NullAstNode node );
+        public T Visit( NullAstExpressionSyntaxNode node );
         public T Visit( AstCompilationUnit node );
         public T Visit( AstCallbackDeclaration node );
         public T Visit( AstUserFunctionDeclaration node );

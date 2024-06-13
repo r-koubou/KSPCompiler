@@ -17,7 +17,7 @@ namespace KSPCompiler.Domain.Ast.Node.Expressions
         /// Ctor
         /// </summary>
         public AstNotEqualExpression( AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
-            : base( AstNodeId.NotEqual, null, left, right )
+            : base( AstNodeId.NotEqual, left, right )
         {
         }
 
@@ -25,7 +25,7 @@ namespace KSPCompiler.Domain.Ast.Node.Expressions
         /// Ctor
         /// </summary>
         public AstNotEqualExpression()
-            : base( AstNodeId.NotEqual, null )
+            : base( AstNodeId.NotEqual )
         {
         }
 

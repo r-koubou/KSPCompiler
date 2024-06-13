@@ -17,7 +17,7 @@ namespace KSPCompiler.Domain.Ast.Node.Expressions
         /// Ctor
         /// </summary>
         public AstLogicalAndExpression( AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
-            : base( AstNodeId.LogicalAnd, null, left, right )
+            : base( AstNodeId.LogicalAnd, left, right )
         {
         }
 
@@ -25,7 +25,7 @@ namespace KSPCompiler.Domain.Ast.Node.Expressions
         /// Ctor
         /// </summary>
         public AstLogicalAndExpression()
-            : base( AstNodeId.LogicalAnd, null )
+            : base( AstNodeId.LogicalAnd )
         {
         }
 

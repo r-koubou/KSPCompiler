@@ -17,7 +17,7 @@ namespace KSPCompiler.Domain.Ast.Node.Expressions
         /// Ctor
         /// </summary>
         public AstArrayElementExpression( AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
-            : base( AstNodeId.ArrayElementExpression, null, left, right )
+            : base( AstNodeId.ArrayElementExpression, left, right )
         {
         }
 
@@ -25,7 +25,7 @@ namespace KSPCompiler.Domain.Ast.Node.Expressions
         /// Ctor
         /// </summary>
         public AstArrayElementExpression()
-            : base( AstNodeId.ArrayElementExpression, null )
+            : base( AstNodeId.ArrayElementExpression )
         {
         }
 

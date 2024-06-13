@@ -56,5 +56,8 @@ namespace KSPCompiler.Domain.Ast.Node
         /// </summary>
         public void AcceptChildren<T>( IAstVisitor<T> visitor ) {}
         #endregion IAstNodeAcceptor
+
+        public override string ToString()
+            => nameof(NullAstNode);
     }
 }

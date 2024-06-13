@@ -17,7 +17,7 @@ namespace KSPCompiler.Domain.Ast.Node.Expressions
         /// Ctor
         /// </summary>
         public AstGreaterEqualExpression( AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
-            : base( AstNodeId.GreaterEqual, null, left, right )
+            : base( AstNodeId.GreaterEqual, left, right )
         {
         }
 
@@ -25,7 +25,7 @@ namespace KSPCompiler.Domain.Ast.Node.Expressions
         /// Ctor
         /// </summary>
         public AstGreaterEqualExpression()
-            : base( AstNodeId.GreaterEqual, null )
+            : base( AstNodeId.GreaterEqual )
         {
         }
 
