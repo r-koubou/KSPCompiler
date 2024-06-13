@@ -15,16 +15,17 @@ namespace KSPCompiler.Domain.Ast.Node
         /// <summary>
         /// A code block when the conditional expression is true.
         /// </summary>
-        public AstBlock? CodeBlock { get; set; }
+        public AstBlock CodeBlock { get; set; }
 
         /// <summary>
         /// Ctor
         /// </summary>
         protected AstConditionalStatement(
             AstNodeId id,
-            IAstNode? parent )
+            IAstNode parent )
             : base( id, parent )
         {
+            CodeBlock = new AstBlock( this );
         }
 
         #region IAstNodeAcceptor
