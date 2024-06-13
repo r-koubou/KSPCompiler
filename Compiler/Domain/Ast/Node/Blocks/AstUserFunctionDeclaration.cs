@@ -8,7 +8,13 @@ namespace KSPCompiler.Domain.Ast.Node.Blocks
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstUserFunctionDeclaration( IAstNode? parent = null )
+        public AstUserFunctionDeclaration()
+            : this( NullAstNode.Instance ) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstUserFunctionDeclaration( IAstNode parent )
             : base( AstNodeId.UserFunctionDeclaration, parent )
         {
         }

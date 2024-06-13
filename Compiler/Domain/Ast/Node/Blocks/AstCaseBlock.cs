@@ -18,7 +18,7 @@ namespace KSPCompiler.Domain.Ast.Node.Blocks
         /// <summary>
         /// Code block to be executed when the case condition is matched
         /// </summary>
-        public  AstBlock? CodeBlock { get; set; }
+        public  AstBlock CodeBlock { get; set; }
 
         /// <summary>
         /// Ctor
@@ -34,6 +34,7 @@ namespace KSPCompiler.Domain.Ast.Node.Blocks
         public AstCaseBlock( IAstNode parent )
             : base( AstNodeId.CaseBlock, parent )
         {
+            CodeBlock = new AstBlock( this );
         }
 
         #region IAstNodeAcceptor
@@ -46,7 +47,7 @@ namespace KSPCompiler.Domain.Ast.Node.Blocks
 
         public override void AcceptChildren<T>( IAstVisitor<T> visitor )
         {
-            CodeBlock?.AcceptChildren( visitor );
+            CodeBlock.AcceptChildren( visitor );
         }
 
         #endregion IAstNodeAcceptor
