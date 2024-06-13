@@ -3,7 +3,7 @@ namespace KSPCompiler.Domain.Ast.Node.Statements
     /// <summary>
     /// AST node representing a variable initialization
     /// </summary>
-    public class AstVariableInitializer : AstNode
+    public class AstVariableInitializer : AstInitializer
     {
         /// <summary>
         /// primitive variable initialization

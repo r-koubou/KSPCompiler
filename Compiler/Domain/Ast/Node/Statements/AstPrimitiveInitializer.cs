@@ -7,7 +7,7 @@ namespace KSPCompiler.Domain.Ast.Node.Statements
     /// <summary>
     /// Ast node representing a primitive variable initialization
     /// </summary>
-    public class AstPrimitiveInitializer : AstStatementSyntaxNode
+    public class AstPrimitiveInitializer : AstInitializer
     {
         /// <summary>
         /// Assignment expression

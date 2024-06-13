@@ -7,7 +7,7 @@ namespace KSPCompiler.Domain.Ast.Node.Statements
     /// <summary>
     /// AST node representing an array variable initialization
     /// </summary>
-    public class AstArrayInitializer : AstStatementSyntaxNode
+    public class AstArrayInitializer : AstInitializer
     {
         /// <summary>
         /// Number of array elements
