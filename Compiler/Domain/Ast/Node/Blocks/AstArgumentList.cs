@@ -19,7 +19,16 @@ namespace KSPCompiler.Domain.Ast.Node.Blocks
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstArgumentList( IAstNode? parent = null )
+        /// <remarks>
+        /// Parent will be set to <see cref="NullAstNode.Instance"/>.
+        /// </remarks>
+        public AstArgumentList()
+            : this( NullAstNode.Instance ) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstArgumentList( IAstNode parent )
             : base( AstNodeId.ArgumentList, parent )
         {
             Arguments = new AstNodeList<AstArgument>( this );
