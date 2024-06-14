@@ -134,13 +134,13 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 SetupChildNode( node, node.ConditionFrom, condFrom );
             }
 
-            if( condFrom?.Accept( this ) is AstExpressionSyntaxNode conditionToNode )
+            if( condTo?.Accept( this ) is AstExpressionSyntaxNode conditionToNode )
             {
                 node.ConditionTo = conditionToNode;
                 SetupChildNode( node, node.ConditionTo, condTo );
             }
 
-            if( condFrom?.Accept( this ) is AstBlock codeBlockNode )
+            if( codeBlock?.Accept( this ) is AstBlock codeBlockNode )
             {
                 node.CodeBlock = codeBlockNode;
                 SetupChildNode( node, node.CodeBlock, codeBlock );
