@@ -13,9 +13,6 @@ namespace KSPCompiler.Domain.Ast.Node.Blocks
         /// <summary>
         /// Ctor
         /// </summary>
-        /// <remarks>
-        /// Parent will be set to <see cref="NullAstNode.Instance"/>.
-        /// </remarks>
         public AstBlock() : this( NullAstNode.Instance ) {}
 
         /// <summary>
