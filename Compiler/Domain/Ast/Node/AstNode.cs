@@ -14,17 +14,29 @@ namespace KSPCompiler.Domain.Ast.Node
         ///
         /// <inheritdoc/>
         ///
-        public AstNodeId Id { get; }
+        public virtual AstNodeId Id { get; }
+
+        private Position position;
 
         ///
         /// <inheritdoc/>
         ///
-        public Position Position { get; set; } = new Position();
+        public virtual Position Position
+        {
+            get => position;
+            set => position = value;
+        }
+
+        private IAstNode parent;
 
         ///
         /// <inheritdoc/>
         ///
-        public IAstNode Parent { get; set; }
+        public virtual IAstNode Parent
+        {
+            get => parent;
+            set => parent = value;
+        }
         #endregion IAstNode
 
         /// <summary>
@@ -38,7 +50,7 @@ namespace KSPCompiler.Domain.Ast.Node
         public AstNode( AstNodeId id )
         {
             Id     = id;
-            Parent = NullAstNode.Instance;
+            parent = NullAstNode.Instance;
         }
 
         /// <summary>
@@ -46,8 +58,8 @@ namespace KSPCompiler.Domain.Ast.Node
         /// </summary>
         public AstNode( AstNodeId id, IAstNode parent )
         {
-            Id     = id;
-            Parent = parent;
+            Id          = id;
+            this.parent = parent;
         }
 
         #region IAstNodeAcceptor
@@ -71,7 +83,7 @@ namespace KSPCompiler.Domain.Ast.Node
         {
             result = default;
 
-            var parent = Parent;
+            var parentNode = Parent;
             do
             {
                 if( Parent is not TNode targetNode )
@@ -81,7 +93,7 @@ namespace KSPCompiler.Domain.Ast.Node
 
                 result = targetNode;
                 break;
-            }while( ( parent = parent.Parent ) != null );
+            }while( ( parentNode = parentNode.Parent ) != null );
 
             return result != null;
         }

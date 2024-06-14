@@ -1,3 +1,5 @@
+using KSPCompiler.Commons.Text;
+
 namespace KSPCompiler.Domain.Ast.Node;
 
 /// <summary>
@@ -9,6 +11,48 @@ public sealed class NullAstExpressionSyntaxNode : AstExpressionSyntaxNode
     /// The Null Object instance.
     /// </summary>
     public static readonly NullAstExpressionSyntaxNode Instance = new();
+
+    /// <summary>
+    /// Always return <see cref="AstNodeId.None"/>.
+    /// </summary>
+    public override AstNodeId Id
+        => AstNodeId.None;
+
+    /// <summary>
+    /// Always return zero and the set is ignored.
+    /// </summary>
+    public override Position Position
+    {
+        get => new ();
+        set => _ = value;
+    }
+
+    /// <summary>
+    /// Always return this instance and the set is ignored.
+    /// </summary>
+    public override IAstNode Parent
+    {
+        get => this;
+        set => _ = value;
+    }
+
+    /// <summary>
+    /// Always return this instance and the set is ignored.
+    /// </summary>
+    public override AstExpressionSyntaxNode Left
+    {
+        get => this;
+        set => _ = value;
+    }
+
+    /// <summary>
+    /// Always return this instance and the set is ignored.
+    /// </summary>
+    public override AstExpressionSyntaxNode Right
+    {
+        get => this;
+        set => _ = value;
+    }
 
     private NullAstExpressionSyntaxNode()
     {}
@@ -27,5 +71,5 @@ public sealed class NullAstExpressionSyntaxNode : AstExpressionSyntaxNode
     #endregion IAstNodeAcceptor
 
     public override string ToString()
-        => nameof(NullAstExpressionSyntaxNode);
+        => nameof( NullAstExpressionSyntaxNode );
 }

@@ -9,20 +9,32 @@ namespace KSPCompiler.Domain.Ast.Node
     /// </summary>
     public abstract class AstExpressionSyntaxNode : AstNode
     {
+        private AstExpressionSyntaxNode left;
+
         /// <summary>
         /// left operand
         /// </summary>
-        public AstExpressionSyntaxNode Left { get; set; }
+        public virtual AstExpressionSyntaxNode Left
+        {
+            get => left;
+            set => left = value;
+        }
+
+        private AstExpressionSyntaxNode right;
 
         /// <summary>
         /// right operand
         /// </summary>
-        public AstExpressionSyntaxNode Right { get; set; }
+        public virtual AstExpressionSyntaxNode Right
+        {
+            get => right;
+            set => right = value;
+        }
 
         /// <summary>
         /// The data type representing this node
         /// </summary>
-        public DataTypeFlag TypeFlag { get; set; } = DataTypeFlag.TypeVoid;
+        public virtual DataTypeFlag TypeFlag { get; set; } = DataTypeFlag.TypeVoid;
 
         /// <summary>
         /// Ctor
@@ -61,8 +73,8 @@ namespace KSPCompiler.Domain.Ast.Node
             AstExpressionSyntaxNode right )
             : base( id, parent )
         {
-            Left  = left;
-            Right = right;
+            this.left  = left;
+            this.right = right;
         }
 
         /// <summary>

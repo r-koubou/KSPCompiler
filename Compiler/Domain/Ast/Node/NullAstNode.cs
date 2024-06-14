@@ -13,6 +13,12 @@ namespace KSPCompiler.Domain.Ast.Node
         public static readonly IAstNode Instance = new NullAstNode();
 
         /// <summary>
+        /// Always return <see cref="AstNodeId.None"/>.
+        /// </summary>
+        public AstNodeId Id
+            => AstNodeId.None;
+
+        /// <summary>
         /// Always return zero and the set is ignored.
         /// </summary>
         public Position Position
@@ -58,6 +64,6 @@ namespace KSPCompiler.Domain.Ast.Node
         #endregion IAstNodeAcceptor
 
         public override string ToString()
-            => nameof(NullAstNode);
+            => nameof( NullAstNode );
     }
 }
