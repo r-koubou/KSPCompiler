@@ -8,7 +8,13 @@ namespace ${namespace}
         /// <summary>
         /// Ctor
         /// </summary>
-        public ${classname}( IAstNode? parent, AstExpressionSyntaxNode? left, AstExpressionSyntaxNode? right )
+        public ${classname}()
+        : this( NullAstNode.Instance, AstExpressionSyntaxNode.Null, AstExpressionSyntaxNode.Null ) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public ${classname}( IAstNode parent, AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
             : base( AstNodeId.${name}, parent, left, right )
         {
         }
@@ -16,8 +22,8 @@ namespace ${namespace}
         /// <summary>
         /// Ctor
         /// </summary>
-        public ${classname}( AstExpressionSyntaxNode? left, AstExpressionSyntaxNode? right )
-            : base( AstNodeId.${name}, null, left, right )
+        public ${classname}( AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
+            : base( AstNodeId.${name}, NullAstNode.Instance, left, right )
         {
         }
 
@@ -25,7 +31,7 @@ namespace ${namespace}
         /// Ctor
         /// </summary>
         public ${classname}()
-            : base( AstNodeId.${name}, null )
+            : base( AstNodeId.${name}, NullAstNode.Instance )
         {
         }
 

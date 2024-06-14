@@ -8,7 +8,12 @@ namespace ${namespace}
         /// <summary>
         /// Ctor
         /// </summary>
-        public ${classname}( IAstNode? parent = null )
+        public ${classname}() : this( NullAstNode.Instance ) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public ${classname}( IAstNode parent )
             : base( AstNodeId.${name}, parent )
         {
         }
