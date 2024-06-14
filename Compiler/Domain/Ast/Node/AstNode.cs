@@ -87,7 +87,7 @@ namespace KSPCompiler.Domain.Ast.Node
 
                 result = targetNode;
                 break;
-            }while( ( parent = parent?.Parent ) != null );
+            }while( ( parent = parent.Parent ) != null );
 
             return result != null;
         }
