@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 
 using Antlr4.Runtime.Tree;
 
@@ -29,19 +28,17 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             var node = new AstCallbackDeclaration();
 
             node.Import( context );
-            node.Name         = context.name.Text;
-            node.Position     = ToPosition( context );
-            node.Block        = context.block().Accept( this ) as AstBlock ?? null!;
-
-            Debug.Assert( node.Block != null );
+            node.Name     = context.name.Text;
+            node.Position = ToPosition( context );
+            node.Block    = context.block().Accept( this ) as AstBlock
+                            ?? throw new MustBeNotNullException( nameof( node.Block ) );
 
             node.Block.Parent = node;
 
             if( context.arguments != null )
             {
-                node.ArgumentList = context.arguments.Accept( this ) as AstArgumentList ?? null!;
-
-                Debug.Assert( node.ArgumentList != null );
+                node.ArgumentList = context.arguments.Accept( this ) as AstArgumentList
+                                    ?? throw new MustBeNotNullException( nameof( node.ArgumentList ) );
 
                 node.ArgumentList.Parent = node;
             }
@@ -56,9 +53,8 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             node.Import( context );
             node.Name         = context.name.Text;
             node.Position     = ToPosition( context );
-            node.Block        = context.block().Accept( this ) as AstBlock ?? null!;
-
-            Debug.Assert( node.Block != null );
+            node.Block        = context.block().Accept( this ) as AstBlock
+                                ?? throw new MustBeNotNullException( nameof( node.Block ) );
 
             node.Block.Parent = node;
 
