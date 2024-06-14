@@ -40,21 +40,16 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
             node.Import( context );
 
-            if( primitiveInitializer != null )
+            if( primitiveInitializer?.Accept( this ) is AstPrimitiveInitializer astPrimitiveInitializer )
             {
-                if( primitiveInitializer.Accept( this ) is AstPrimitiveInitializer initializer )
-                {
-                    node.PrimitiveInitializer = initializer;
-                    SetupChildNode( node, initializer, primitiveInitializer );
-                }
+                node.PrimitiveInitializer = astPrimitiveInitializer;
+                SetupChildNode( node, astPrimitiveInitializer, primitiveInitializer );
             }
-            else
+
+            if( arrayInitializer?.Accept( this ) is AstArrayInitializer astArrayInitializer )
             {
-                if( arrayInitializer.Accept( this ) is AstArrayInitializer initializer )
-                {
-                    SetupChildNode( node, initializer, arrayInitializer );
-                    node.ArrayInitializer = initializer;
-                }
+                SetupChildNode( node, astArrayInitializer, arrayInitializer );
+                node.ArrayInitializer = astArrayInitializer;
             }
 
             return node;
