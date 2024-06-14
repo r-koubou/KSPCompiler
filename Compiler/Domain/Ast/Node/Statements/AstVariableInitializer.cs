@@ -8,19 +8,27 @@ namespace KSPCompiler.Domain.Ast.Node.Statements
         /// <summary>
         /// primitive variable initialization
         /// </summary>
-        public AstInitializer? PrimitiveInitializer { get; set; }
+        public AstInitializer PrimitiveInitializer { get; set; }
 
         /// <summary>
         /// array variable initialization
         /// </summary>
-        public AstInitializer? ArrayInitializer { get; set; }
+        public AstInitializer ArrayInitializer { get; set; }
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstVariableInitializer( IAstNode? parent = null )
+        public AstVariableInitializer()
+            : this( NullAstNode.Instance ) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstVariableInitializer( IAstNode parent )
             : base( AstNodeId.VariableInitializer, parent )
         {
+            PrimitiveInitializer = NullAstInitializer.Instance;
+            ArrayInitializer     = NullAstInitializer.Instance;
         }
 
         #region IAstNodeAcceptor
@@ -36,8 +44,8 @@ namespace KSPCompiler.Domain.Ast.Node.Statements
         ///
         public override void AcceptChildren<T>( IAstVisitor<T> visitor )
         {
-            PrimitiveInitializer?.AcceptChildren( visitor );
-            ArrayInitializer?.AcceptChildren( visitor );
+            PrimitiveInitializer.AcceptChildren( visitor );
+            ArrayInitializer.AcceptChildren( visitor );
         }
 
         #endregion IAstNodeAcceptor
