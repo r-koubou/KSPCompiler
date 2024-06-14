@@ -24,7 +24,7 @@ public class SymbolAnalyzer : DefaultAstVisitor, ISymbolAnalyzer
     }
 
     #region IAstVisitor
-    public override AstNode Visit( AstCallbackDeclaration node )
+    public override IAstNode Visit( AstCallbackDeclaration node )
     {
         return node.Name == "init"
             // init コールバックでのみ変数宣言が可能
@@ -34,13 +34,13 @@ public class SymbolAnalyzer : DefaultAstVisitor, ISymbolAnalyzer
             : AnalyzeNonInitCallback( node );
     }
 
-    private AstNode AnalyzeNonInitCallback( AstCallbackDeclaration node )
+    private IAstNode AnalyzeNonInitCallback( AstCallbackDeclaration node )
     {
         // TODO 解析、変数宣言を見つけたらエラー扱いにする
         return VisitChildren( node );
     }
 
-    private AstNode AnalyzeInitCallback( AstCallbackDeclaration node )
+    private IAstNode AnalyzeInitCallback( AstCallbackDeclaration node )
     {
         // TODO 解析、変数宣言を見つけたら変数テーブルへ追加
         return VisitChildren( node );
