@@ -18,15 +18,22 @@ namespace KSPCompiler.Domain.Ast.Node.Statements
         /// <summary>
         /// The code block for ifdef is true.
         /// </summary>
-        public AstBlock? Block { get; set; }
+        public AstBlock Block { get; set; }
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstKspPreprocessorIfdefine( IAstNode? parent = null )
+        public AstKspPreprocessorIfdefine()
+            : this( NullAstNode.Instance ) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstKspPreprocessorIfdefine( IAstNode parent )
             : base( AstNodeId.KspPreprocessorIfdefine, parent )
         {
             Condition = new AstSymbolExpression( this );
+            Block     = new AstBlock( this );
         }
 
         #region IAstNodeAcceptor

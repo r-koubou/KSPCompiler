@@ -17,7 +17,12 @@ namespace KSPCompiler.Domain.Ast.Node.Blocks
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstArgument( IAstNode? parent = null )
+        public AstArgument() {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstArgument( IAstNode parent )
             : base( AstNodeId.Argument, parent )
         {
         }

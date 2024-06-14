@@ -7,22 +7,29 @@ namespace KSPCompiler.Domain.Ast.Node.Statements
     /// <summary>
     /// Ast node representing a primitive variable initialization
     /// </summary>
-    public class AstPrimitiveInitializer : AstStatementSyntaxNode
+    public class AstPrimitiveInitializer : AstInitializer
     {
         /// <summary>
         /// Assignment expression
         /// </summary>
-        public AstExpressionSyntaxNode? Expression { get; }
+        public AstExpressionSyntaxNode Expression { get; }
 
         /// <summary>
         /// Assignment multiple expression (ui_type, constructor)
         /// </summary>
-        public AstExpressionList? ExpressionList { get; }
+        public AstExpressionList ExpressionList { get; }
+
+        public AstPrimitiveInitializer()
+            : base( AstNodeId.PrimitiveInitializer, NullAstNode.Instance )
+        {
+            Expression     = NullAstExpressionSyntaxNode.Instance;
+            ExpressionList = new AstExpressionList( this );
+        }
 
         public AstPrimitiveInitializer(
-            IAstNode? parent = null,
-            AstExpressionSyntaxNode? expression = null,
-            AstExpressionList? expressionList = null )
+            IAstNode parent,
+            AstExpressionSyntaxNode expression,
+            AstExpressionList expressionList )
             : base( AstNodeId.PrimitiveInitializer, parent )
         {
             Expression     = expression;

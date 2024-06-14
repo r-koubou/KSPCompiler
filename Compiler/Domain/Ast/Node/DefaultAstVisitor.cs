@@ -4,152 +4,161 @@ using KSPCompiler.Domain.Ast.Node.Statements;
 
 namespace KSPCompiler.Domain.Ast.Node;
 
-public abstract class DefaultAstVisitor : IAstVisitor<AstNode>
+public abstract class DefaultAstVisitor : IAstVisitor<IAstNode>
 {
-    public virtual AstNode VisitChildren( AstNode node )
+    public virtual IAstNode VisitChildren( IAstNode node )
     {
         node.AcceptChildren( this );
         return node;
     }
 
-    public virtual AstNode Visit( AstCompilationUnit node )
+    public virtual IAstNode Visit( NullAstNode node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstCallbackDeclaration node )
+    public IAstNode Visit( NullAstExpressionSyntaxNode node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstUserFunctionDeclaration node )
+    public IAstNode Visit( NullAstInitializer node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstArgument node )
+    public virtual IAstNode Visit( AstCompilationUnit node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstArgumentList node )
+    public virtual IAstNode Visit( AstCallbackDeclaration node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstBlock node )
+    public virtual IAstNode Visit( AstUserFunctionDeclaration node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstCaseBlock node )
+    public virtual IAstNode Visit( AstArgument node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstLogicalOrExpression node )
+    public virtual IAstNode Visit( AstArgumentList node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstLogicalAndExpression node )
+    public virtual IAstNode Visit( AstBlock node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstStringConcatenateExpression node )
+    public virtual IAstNode Visit( AstCaseBlock node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstBitwiseOrExpression node )
+    public virtual IAstNode Visit( AstLogicalOrExpression node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstBitwiseAndExpression node )
+    public virtual IAstNode Visit( AstLogicalAndExpression node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstEqualExpression node )
+    public virtual IAstNode Visit( AstStringConcatenateExpression node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstNotEqualExpression node )
+    public virtual IAstNode Visit( AstBitwiseOrExpression node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstLessThanExpression node )
+    public virtual IAstNode Visit( AstBitwiseAndExpression node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstGreaterThanExpression node )
+    public virtual IAstNode Visit( AstEqualExpression node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstLessEqualExpression node )
+    public virtual IAstNode Visit( AstNotEqualExpression node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstGreaterEqualExpression node )
+    public virtual IAstNode Visit( AstLessThanExpression node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstAdditionExpression node )
+    public virtual IAstNode Visit( AstGreaterThanExpression node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstSubtractionExpression node )
+    public virtual IAstNode Visit( AstLessEqualExpression node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstMultiplyingExpression node )
+    public virtual IAstNode Visit( AstGreaterEqualExpression node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstDivisionExpression node )
+    public virtual IAstNode Visit( AstAdditionExpression node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstModuloExpression node )
+    public virtual IAstNode Visit( AstSubtractionExpression node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstUnaryMinusExpression node )
+    public virtual IAstNode Visit( AstMultiplyingExpression node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstUnaryNotExpression node )
+    public virtual IAstNode Visit( AstDivisionExpression node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstIntLiteral node )
+    public virtual IAstNode Visit( AstModuloExpression node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstRealLiteral node )
+    public virtual IAstNode Visit( AstUnaryMinusExpression node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstStringLiteral node )
+    public virtual IAstNode Visit( AstUnaryNotExpression node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstExpressionList node )
+    public virtual IAstNode Visit( AstIntLiteral node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstAssignmentExpression node )
+    public virtual IAstNode Visit( AstRealLiteral node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstAssignmentExpressionList node )
+    public virtual IAstNode Visit( AstStringLiteral node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstSymbolExpression node )
+    public virtual IAstNode Visit( AstExpressionList node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstArrayElementExpression node )
+    public virtual IAstNode Visit( AstAssignmentExpression node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstCallExpression node )
+    public virtual IAstNode Visit( AstAssignmentExpressionList node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstKspPreprocessorDefine node )
+    public virtual IAstNode Visit( AstSymbolExpression node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstKspPreprocessorUndefine node )
+    public virtual IAstNode Visit( AstArrayElementExpression node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstKspPreprocessorIfdefine node )
+    public virtual IAstNode Visit( AstCallExpression node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstKspPreprocessorIfnotDefine node )
+    public virtual IAstNode Visit( AstKspPreprocessorDefine node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstIfStatement node )
+    public virtual IAstNode Visit( AstKspPreprocessorUndefine node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstWhileStatement node )
+    public virtual IAstNode Visit( AstKspPreprocessorIfdefine node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstSelectStatement node )
+    public virtual IAstNode Visit( AstKspPreprocessorIfnotDefine node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstCallKspUserFunctionStatement node )
+    public virtual IAstNode Visit( AstIfStatement node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstVariableDeclaration node )
+    public virtual IAstNode Visit( AstWhileStatement node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstVariableInitializer node )
+    public virtual IAstNode Visit( AstSelectStatement node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstPrimitiveInitializer node )
+    public virtual IAstNode Visit( AstCallKspUserFunctionStatement node )
         => VisitChildren( node );
 
-    public virtual AstNode Visit( AstArrayInitializer node )
+    public virtual IAstNode Visit( AstVariableDeclaration node )
         => VisitChildren( node );
 
-    public AstNode Visit( AstContinueStatement node )
+    public virtual IAstNode Visit( AstVariableInitializer node )
+        => VisitChildren( node );
+
+    public virtual IAstNode Visit( AstPrimitiveInitializer node )
+        => VisitChildren( node );
+
+    public virtual IAstNode Visit( AstArrayInitializer node )
+        => VisitChildren( node );
+
+    public virtual IAstNode Visit( AstContinueStatement node )
         => VisitChildren( node );
 }

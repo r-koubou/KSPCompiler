@@ -2,38 +2,65 @@
 using System.IO;
 
 using KSPCompiler.Commons.Text;
+using KSPCompiler.Domain.Ast.Node.Extensions;
 
 namespace KSPCompiler.Domain.Ast.Node
 {
     /// <summary>
     /// Default implementation of <see cref="IAstNode"/>
     /// </summary>
-    public abstract class AstNode : IAstNode, IAstNodeAcceptor, ICloneable
+    public abstract class AstNode : IAstNode, ICloneable
     {
         #region IAstNode
         ///
         /// <inheritdoc/>
         ///
-        public AstNodeId Id { get; }
+        public virtual AstNodeId Id { get; }
+
+        private Position position;
 
         ///
         /// <inheritdoc/>
         ///
-        public Position Position { get; set; } = new Position();
+        public virtual Position Position
+        {
+            get => position;
+            set => position = value;
+        }
+
+        private IAstNode parent;
 
         ///
         /// <inheritdoc/>
         ///
-        public IAstNode? Parent { get; set; }
+        public virtual IAstNode Parent
+        {
+            get => parent;
+            set => parent = value;
+        }
         #endregion IAstNode
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstNode( AstNodeId id, IAstNode? parent )
+        public AstNode() : this( AstNodeId.None, NullAstNode.Instance ) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstNode( AstNodeId id )
         {
             Id     = id;
-            Parent = parent;
+            parent = NullAstNode.Instance;
+        }
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstNode( AstNodeId id, IAstNode parent )
+        {
+            Id          = id;
+            this.parent = parent;
         }
 
         #region IAstNodeAcceptor
@@ -57,7 +84,7 @@ namespace KSPCompiler.Domain.Ast.Node
         {
             result = default;
 
-            var parent = Parent;
+            var parentNode = Parent;
             do
             {
                 if( Parent is not TNode targetNode )
@@ -67,7 +94,7 @@ namespace KSPCompiler.Domain.Ast.Node
 
                 result = targetNode;
                 break;
-            }while( ( parent = parent?.Parent ) != null );
+            }while( ( parentNode = parentNode.Parent ).IsNotNull() );
 
             return result != null;
         }
@@ -97,7 +124,7 @@ namespace KSPCompiler.Domain.Ast.Node
         /// </summary>
         public override string ToString()
         {
-            return nameof(AstNode);
+            return nameof( AstNode );
         }
 
         /// <summary>

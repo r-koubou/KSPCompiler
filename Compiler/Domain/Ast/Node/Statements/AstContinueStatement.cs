@@ -8,7 +8,13 @@ namespace KSPCompiler.Domain.Ast.Node.Statements
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstContinueStatement( IAstNode? parent = null )
+        public AstContinueStatement()
+            : this( NullAstNode.Instance ) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstContinueStatement( IAstNode parent )
             : base( AstNodeId.ContinueStatement, parent )
         {
         }

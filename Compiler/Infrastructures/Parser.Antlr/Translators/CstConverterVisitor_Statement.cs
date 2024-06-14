@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-using Antlr4.Runtime;
+﻿using Antlr4.Runtime;
 
 using KSPCompiler.Domain.Ast.Node;
 using KSPCompiler.Domain.Ast.Node.Blocks;
@@ -21,8 +19,8 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             var conditionNode = condition.Accept( this ) as AstExpressionSyntaxNode;
             var blockNode = block.Accept( this ) as AstBlock;
 
-            Debug.Assert( conditionNode != null );
-            Debug.Assert( blockNode != null );
+            _ = conditionNode ?? throw new MustBeNotNullException( nameof( conditionNode ) );
+            _ = blockNode ?? throw new MustBeNotNullException( nameof( blockNode ) );
 
             node.Condition = conditionNode;
             node.CodeBlock = blockNode;
@@ -57,8 +55,8 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
             #region Condition
             node.Import( context );
-            node.Condition = condition.Accept( this ) as AstExpressionSyntaxNode;
-            Debug.Assert( node.Condition != null );
+            node.Condition = condition.Accept( this ) as AstExpressionSyntaxNode
+                             ?? throw new MustBeNotNullException( nameof( node.Condition ) );
 
             node.Condition?.Import( condition );
             #endregion
@@ -68,7 +66,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             {
                 var caseBlock = c.Accept( this ) as AstCaseBlock;
 
-                Debug.Assert( caseBlock != null );
+                _ = caseBlock ?? throw new MustBeNotNullException( nameof( caseBlock ) );
 
                 caseBlock.Parent = node;
                 caseBlock.Import( c );

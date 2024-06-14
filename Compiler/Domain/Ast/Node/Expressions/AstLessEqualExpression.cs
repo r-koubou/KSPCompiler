@@ -17,7 +17,7 @@ namespace KSPCompiler.Domain.Ast.Node.Expressions
         /// Ctor
         /// </summary>
         public AstLessEqualExpression( AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
-            : base( AstNodeId.LessEqual, null, left, right )
+            : base( AstNodeId.LessEqual, left, right )
         {
         }
 
@@ -25,7 +25,7 @@ namespace KSPCompiler.Domain.Ast.Node.Expressions
         /// Ctor
         /// </summary>
         public AstLessEqualExpression()
-            : base( AstNodeId.LessEqual, null )
+            : base( AstNodeId.LessEqual )
         {
         }
 

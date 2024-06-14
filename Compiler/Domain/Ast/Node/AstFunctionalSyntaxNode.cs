@@ -17,7 +17,7 @@ namespace KSPCompiler.Domain.Ast.Node
         /// </summary>
         protected AstFunctionalSyntaxNode(
             AstNodeId id,
-            IAstNode? parent )
+            IAstNode parent )
             : base( id, parent )
         {
             Block = new AstBlock( this );

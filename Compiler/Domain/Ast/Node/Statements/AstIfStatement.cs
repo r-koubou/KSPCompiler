@@ -12,17 +12,16 @@ namespace KSPCompiler.Domain.Ast.Node.Statements
         /// </summary>
         public AstBlock ElseBlock { get; set; }
 
-        /// <summary>s
+        /// <summary>
         /// Ctor
         /// </summary>
         public AstIfStatement()
-            : this( null )
-        {}
+            : this( NullAstNode.Instance ) {}
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstIfStatement( IAstNode? parent = null )
+        public AstIfStatement( IAstNode parent )
             : base( AstNodeId.IfStatement, parent )
         {
             ElseBlock = new AstBlock( this );

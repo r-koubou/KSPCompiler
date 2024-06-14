@@ -11,7 +11,7 @@ namespace KSPCompiler.Domain.Ast.Node
         /// <summary>
         /// Source node.
         /// </summary>
-        public IAstNode? Parent { get; }
+        public IAstNode Parent { get; }
 
         /// <summary>
         /// Child nodes
@@ -24,14 +24,19 @@ namespace KSPCompiler.Domain.Ast.Node
         public int Count => Nodes.Count;
 
         /// <summary>
-        /// Ctor
+        /// true if there are no child nodes otherwise false.
         /// </summary>
-        public AstNodeList() : this( null ) {}
+        public bool Empty => Nodes.Count == 0;
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstNodeList( IAstNode? parent )
+        public AstNodeList() : this( NullAstNode.Instance ) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstNodeList( IAstNode parent )
         {
             Parent = parent;
         }
@@ -65,7 +70,7 @@ namespace KSPCompiler.Domain.Ast.Node
         {
             if( Nodes.Remove( node ) )
             {
-                node.Parent = null;
+                node.Parent = NullAstNode.Instance;
             }
         }
 
@@ -73,7 +78,7 @@ namespace KSPCompiler.Domain.Ast.Node
         {
             foreach( var n in Nodes )
             {
-                n.Parent = null;
+                n.Parent = NullAstNode.Instance;
             }
             Nodes.Clear();
         }
@@ -97,7 +102,7 @@ namespace KSPCompiler.Domain.Ast.Node
                 list.RemoveAt( index );
                 list.Insert( index, value );
 
-                org.Parent   = null;
+                org.Parent   = NullAstNode.Instance;
                 value.Parent = this.Parent;
             }
         }

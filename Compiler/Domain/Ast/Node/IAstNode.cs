@@ -7,12 +7,8 @@ namespace KSPCompiler.Domain.Ast.Node
     /// <summary>
     /// Representation of AST node tree.
     /// </summary>
-    public interface IAstNode
+    public interface IAstNode : IAstNodeAcceptor
     {
-        public static bool IsNone( IAstNode? n ) =>
-            n == null ||
-            n.Id == AstNodeId.None;
-
         /// <summary>
         /// ID for identifying a node.
         /// </summary>
@@ -26,7 +22,7 @@ namespace KSPCompiler.Domain.Ast.Node
         /// <summary>
         /// Parent node. If not present, the value is null.
         /// </summary>
-        public IAstNode? Parent { get; set; }
+        public IAstNode Parent { get; set; }
 
         /// <summary>
         /// Retrieves the parent node with the specified TNode.

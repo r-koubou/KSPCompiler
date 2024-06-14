@@ -9,13 +9,13 @@ namespace KSPCompiler.Domain.Ast.Node.Statements
         /// Ctor
         /// </summary>
         public AstWhileStatement()
-            : this( null )
+            : this( NullAstNode.Instance )
         {}
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstWhileStatement( IAstNode? parent = null )
+        public AstWhileStatement( IAstNode parent )
             : base( AstNodeId.WhileStatement, parent )
         {
         }

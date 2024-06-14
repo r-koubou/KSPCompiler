@@ -17,7 +17,7 @@ namespace KSPCompiler.Domain.Ast.Node.Expressions
         /// Ctor
         /// </summary>
         public AstStringConcatenateExpression( AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
-            : base( AstNodeId.StringConcatenate, null, left, right )
+            : base( AstNodeId.StringConcatenate,  left, right )
         {
         }
 
@@ -25,7 +25,7 @@ namespace KSPCompiler.Domain.Ast.Node.Expressions
         /// Ctor
         /// </summary>
         public AstStringConcatenateExpression()
-            : base( AstNodeId.StringConcatenate, null )
+            : base( AstNodeId.StringConcatenate )
         {
         }
 

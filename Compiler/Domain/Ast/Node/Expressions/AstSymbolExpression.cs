@@ -17,7 +17,13 @@ namespace KSPCompiler.Domain.Ast.Node.Expressions
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstSymbolExpression( IAstNode? parent = null )
+        public AstSymbolExpression()
+            : this( NullAstNode.Instance ) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstSymbolExpression( IAstNode parent )
             : base( AstNodeId.Symbol, parent )
         {
         }
