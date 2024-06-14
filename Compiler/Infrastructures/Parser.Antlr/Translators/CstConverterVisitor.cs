@@ -4,6 +4,7 @@ using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
 
 using KSPCompiler.Domain.Ast.Node;
+using KSPCompiler.Domain.Ast.Node.Extensions;
 using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
 
 // ReSharper disable UnusedMember.Local
@@ -20,6 +21,11 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             IAstNode child,
             ParserRuleContext? childContext )
         {
+            if( child.IsNull() || child.Id == AstNodeId.None )
+            {
+                return;
+            }
+
             if( childContext != null )
             {
                 child.Import( childContext );
