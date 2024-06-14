@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-using KSPCompiler.Domain.Ast.Node;
+﻿using KSPCompiler.Domain.Ast.Node;
 using KSPCompiler.Domain.Ast.Node.Expressions;
 using KSPCompiler.Domain.Ast.Node.Statements;
 using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
@@ -40,17 +38,16 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
             node.Import( context );
 
-            if( primitiveInitializer != null )
+            if( primitiveInitializer?.Accept( this ) is AstPrimitiveInitializer astPrimitiveInitializer )
             {
-                var initializer = primitiveInitializer.Accept( this ) as AstPrimitiveInitializer;
-                node.PrimitiveInitializer = initializer;
-                SetupChildNode( node, initializer, primitiveInitializer );
+                node.PrimitiveInitializer = astPrimitiveInitializer;
+                SetupChildNode( node, astPrimitiveInitializer, primitiveInitializer );
             }
-            else
+
+            if( arrayInitializer?.Accept( this ) is AstArrayInitializer astArrayInitializer )
             {
-                var initializer = arrayInitializer.Accept( this ) as AstArrayInitializer;
-                SetupChildNode( node, initializer, arrayInitializer );
-                node.ArrayInitializer = initializer;
+                SetupChildNode( node, astArrayInitializer, arrayInitializer );
+                node.ArrayInitializer = astArrayInitializer;
             }
 
             return node;
@@ -61,22 +58,22 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             var expression = context.expression();
             var expressionList = context.expressionList();
 
-            AstExpressionSyntaxNode? expressionNode = null;
-            AstExpressionList? expressionListNode = null;
+            AstExpressionSyntaxNode expressionNode = NullAstExpressionSyntaxNode.Instance;
+            AstExpressionList expressionListNode = new AstExpressionList();
 
             // 初期化式：単一の式か複数の式かは型によってどちらか一方
             if( expression != null )
             {
-                expressionNode = expression.Accept( this ) as AstExpressionSyntaxNode;
-                Debug.Assert( expressionNode != null );
+                expressionNode = expression.Accept( this ) as AstExpressionSyntaxNode
+                                 ?? throw new MustBeNotNullException( nameof( expressionNode ) );
             }
             else if( expressionList != null )
             {
-                expressionListNode = expressionList.Accept( this ) as AstExpressionList;
-                Debug.Assert( expressionList != null );
+                expressionListNode = expressionList.Accept( this ) as AstExpressionList
+                                     ?? throw new MustBeNotNullException( nameof( expressionListNode ) );
             }
 
-            return new AstPrimitiveInitializer( null, expressionNode, expressionListNode );
+            return new AstPrimitiveInitializer( NullAstNode.Instance, expressionNode, expressionListNode );
         }
 
         public override AstNode VisitArrayInitializer( KSPParser.ArrayInitializerContext context )
@@ -86,13 +83,13 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             var arraySizeExpression = context.expression();
             var expressionList = context.expressionList();
 
-            node.Size = arraySizeExpression.Accept( this ) as AstExpressionSyntaxNode;
-            Debug.Assert( node.Size != null );
+            node.Size = arraySizeExpression.Accept( this ) as AstExpressionSyntaxNode
+                        ?? throw new MustBeNotNullException( nameof( node.Size ) );
 
             if( expressionList != null )
             {
-                node.Initializer = expressionList.Accept( this ) as AstExpressionList;
-                Debug.Assert( node.Initializer != null );
+                node.Initializer = expressionList.Accept( this ) as AstExpressionList
+                                   ?? throw new MustBeNotNullException( nameof( node.Initializer ) );
             }
 
             return node;

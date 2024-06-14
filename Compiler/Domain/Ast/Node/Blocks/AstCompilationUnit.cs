@@ -13,8 +13,8 @@ namespace KSPCompiler.Domain.Ast.Node.Blocks
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstCompilationUnit( IAstNode? parent = null )
-            : base( AstNodeId.CompilationUnit, parent )
+        public AstCompilationUnit()
+            : base( AstNodeId.CompilationUnit, NullAstNode.Instance )
         {
             GlobalBlocks = new AstNodeList<AstNode>( this );
         }

@@ -8,7 +8,12 @@ namespace KSPCompiler.Domain.Ast.Node.Blocks
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstCallbackDeclaration( IAstNode? parent = null )
+        public AstCallbackDeclaration() : this( NullAstNode.Instance ) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstCallbackDeclaration( IAstNode parent )
             : base( AstNodeId.CallbackDeclaration, parent )
         {
             ArgumentList = new AstArgumentList( this );

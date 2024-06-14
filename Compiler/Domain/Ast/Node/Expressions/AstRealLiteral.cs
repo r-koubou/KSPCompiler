@@ -24,8 +24,20 @@ namespace KSPCompiler.Domain.Ast.Node.Expressions
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstRealLiteral( double value = 0, IAstNode? parent = null )
-            : base( AstNodeId.RealLiteral, parent )
+        public AstRealLiteral()
+            : this( 0.0 ) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstRealLiteral( double value )
+            : this( value, NullAstNode.Instance ) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstRealLiteral( double value, IAstNode parent )
+            : base( AstNodeId.RealLiteral )
         {
             Value = value;
             TypeFlag  = DataTypeFlag.TypeReal;

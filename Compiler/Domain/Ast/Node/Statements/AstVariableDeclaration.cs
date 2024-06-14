@@ -22,14 +22,21 @@ namespace KSPCompiler.Domain.Ast.Node.Statements
         /// <summary>
         /// initialization statement
         /// </summary>
-        public AstVariableInitializer? Initializer { get; set; }
+        public AstInitializer Initializer { get; set; }
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstVariableDeclaration( IAstNode? parent = null )
+        public AstVariableDeclaration()
+            : this( NullAstNode.Instance ) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstVariableDeclaration( IAstNode parent )
             : base( AstNodeId.VariableDeclaration, parent )
         {
+            Initializer = NullAstInitializer.Instance;
         }
 
         #region IAstNodeAcceptor
@@ -45,7 +52,7 @@ namespace KSPCompiler.Domain.Ast.Node.Statements
         ///
         public override void AcceptChildren<T>( IAstVisitor<T> visitor )
         {
-            Initializer?.AcceptChildren( visitor );
+            Initializer.AcceptChildren( visitor );
         }
 
         #endregion IAstNodeAcceptor

@@ -33,7 +33,7 @@ namespace KSPCompiler.Domain.Ast.Node.Expressions
         /// Ctor
         /// </summary>
         public AstAssignmentExpression( AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
-            : base( AstNodeId.AssignmentExpression, null, left, right )
+            : base( AstNodeId.AssignmentExpression, left, right )
         {
         }
 
@@ -41,7 +41,7 @@ namespace KSPCompiler.Domain.Ast.Node.Expressions
         /// Ctor
         /// </summary>
         public AstAssignmentExpression()
-            : base( AstNodeId.AssignmentExpression, null )
+            : base( AstNodeId.AssignmentExpression )
         {
         }
 

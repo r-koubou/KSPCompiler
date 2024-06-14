@@ -67,7 +67,7 @@ public abstract class AntlrKspSyntaxParser : ISyntaxParser
         }
 
         var ast = cst.Accept( new CstConverterVisitor() ) as AstCompilationUnit;
-        Debug.Assert( ast != null );
+        _ = ast ?? throw new MustBeNotNullException( nameof( ast ) );
 
         return ast;
     }

@@ -7,24 +7,32 @@ namespace KSPCompiler.Domain.Ast.Node.Statements
     /// <summary>
     /// AST node representing an array variable initialization
     /// </summary>
-    public class AstArrayInitializer : AstStatementSyntaxNode
+    public class AstArrayInitializer : AstInitializer
     {
         /// <summary>
         /// Number of array elements
         /// </summary>
-        public AstExpressionSyntaxNode? Size { get; set; }
+        public AstExpressionSyntaxNode Size { get; set; }
 
         /// <summary>
         /// Array element initialization
         /// </summary>
-        public AstExpressionList? Initializer { get; set; }
+        public AstExpressionList Initializer { get; set; }
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstArrayInitializer( IAstNode? parent = null )
+        public AstArrayInitializer()
+            : this( NullAstNode.Instance) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstArrayInitializer( IAstNode parent )
             : base( AstNodeId.ArrayInitializer, parent )
         {
+            Size        = NullAstExpressionSyntaxNode.Instance;
+            Initializer = new AstExpressionList( this );
         }
 
         #region IAstNodeAcceptor

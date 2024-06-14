@@ -3,14 +3,14 @@ using KSPCompiler.Domain.Ast.Node.Blocks;
 namespace KSPCompiler.Domain.Ast.Node.Statements
 {
     /// <summary>
-    /// AST node representing an select statement
+    /// AST node representing a select statement
     /// </summary>
     public class AstSelectStatement : AstStatementSyntaxNode
     {
         /// <summary>
         /// condition
         /// </summary>
-        public AstExpressionSyntaxNode? Condition { get; set; }
+        public AstExpressionSyntaxNode Condition { get; set; }
 
         /// <summary>
         /// case list
@@ -20,9 +20,16 @@ namespace KSPCompiler.Domain.Ast.Node.Statements
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstSelectStatement( IAstNode? parent = null )
+        public AstSelectStatement()
+            : this( NullAstNode.Instance ) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstSelectStatement( IAstNode parent )
             : base( AstNodeId.SelectStatement, parent )
         {
+            Condition  = NullAstExpressionSyntaxNode.Instance;
             CaseBlocks = new AstNodeList<AstCaseBlock>( this );
         }
 

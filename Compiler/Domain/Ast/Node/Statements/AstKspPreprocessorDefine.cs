@@ -17,7 +17,13 @@ namespace KSPCompiler.Domain.Ast.Node.Statements
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstKspPreprocessorDefine( IAstNode? parent = null )
+        public AstKspPreprocessorDefine()
+            : this( NullAstNode.Instance ) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstKspPreprocessorDefine( IAstNode parent )
             : base( AstNodeId.KspPreprocessorDefine, parent )
         {
             Symbol = new AstSymbolExpression( this );

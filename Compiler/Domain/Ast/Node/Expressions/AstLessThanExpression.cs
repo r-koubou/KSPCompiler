@@ -17,7 +17,7 @@ namespace KSPCompiler.Domain.Ast.Node.Expressions
         /// Ctor
         /// </summary>
         public AstLessThanExpression( AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
-            : base( AstNodeId.LessThan, null, left, right )
+            : base( AstNodeId.LessThan, left, right )
         {
         }
 
@@ -25,7 +25,7 @@ namespace KSPCompiler.Domain.Ast.Node.Expressions
         /// Ctor
         /// </summary>
         public AstLessThanExpression()
-            : base( AstNodeId.LessThan, null )
+            : base( AstNodeId.LessThan )
         {
         }
 

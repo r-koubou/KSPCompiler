@@ -17,7 +17,7 @@ namespace KSPCompiler.Domain.Ast.Node.Expressions
         /// Ctor
         /// </summary>
         public AstUnaryNotExpression( AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
-            : base( AstNodeId.UnaryNot, null, left, right )
+            : base( AstNodeId.UnaryNot, left, right )
         {
         }
 
@@ -25,7 +25,7 @@ namespace KSPCompiler.Domain.Ast.Node.Expressions
         /// Ctor
         /// </summary>
         public AstUnaryNotExpression()
-            : base( AstNodeId.UnaryNot, null )
+            : base( AstNodeId.UnaryNot )
         {
         }
 

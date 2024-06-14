@@ -19,7 +19,13 @@ namespace KSPCompiler.Domain.Ast.Node.Statements
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstCallKspUserFunctionStatement( IAstNode? parent = null )
+        public AstCallKspUserFunctionStatement()
+            : this( NullAstNode.Instance ) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstCallKspUserFunctionStatement( IAstNode parent )
             : base( AstNodeId.CallKspUserFunctionStatement, parent )
         {
         }

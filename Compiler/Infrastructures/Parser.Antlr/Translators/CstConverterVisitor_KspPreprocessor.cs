@@ -44,8 +44,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             if( block != null )
             {
                 var b = context.block().Accept( this ) as AstBlock;
-
-                Debug.Assert( b != null );
+                _ = b ?? throw new MustBeNotNullException( nameof( b ) );
 
                 b.Parent = node;
                 node.Block = b;
@@ -63,15 +62,16 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             node.Condition.Import( context.symbol );
             node.Condition.Name = context.symbol.Text;
 
-            if( block != null )
+            if( block == null )
             {
-                var b = context.block().Accept( this ) as AstBlock;
-
-                Debug.Assert( b != null );
-
-                b.Parent   = node;
-                node.Block = b;
+                return node;
             }
+
+            var b = context.block().Accept( this ) as AstBlock;
+            _ = b ?? throw new MustBeNotNullException( nameof( b ) );
+
+            b.Parent   = node;
+            node.Block = b;
 
             return node;
         }

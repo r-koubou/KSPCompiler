@@ -17,7 +17,7 @@ namespace KSPCompiler.Domain.Ast.Node.Expressions
         /// Ctor
         /// </summary>
         public AstBitwiseAndExpression( AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
-            : base( AstNodeId.BitwiseOrAnd, null, left, right )
+            : base( AstNodeId.BitwiseOrAnd, left, right )
         {
         }
 
@@ -25,7 +25,7 @@ namespace KSPCompiler.Domain.Ast.Node.Expressions
         /// Ctor
         /// </summary>
         public AstBitwiseAndExpression()
-            : base( AstNodeId.BitwiseOrAnd, null )
+            : base( AstNodeId.BitwiseOrAnd )
         {
         }
 

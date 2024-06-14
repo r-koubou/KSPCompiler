@@ -11,13 +11,29 @@ namespace KSPCompiler.Domain.Ast.Node.Expressions
         public AstNodeList<AstAssignmentExpression> Expressions { get; }
 
         /// <summary>
+        /// Alias for <see cref="Expressions"/>.<see cref="AstNodeList{TNode}.Count"/>
+        /// </summary>
+        public int Count => Expressions.Count;
+
+        /// <summary>
+        /// Alias for <see cref="Expressions"/>.<see cref="AstNodeList{TNode}.Empty"/>
+        /// </summary>
+        public bool Empty => Expressions.Empty;
+
+        /// <summary>
         /// Ctor
         /// </summary>
-        public AstAssignmentExpressionList( IAstNode? parent = null )
+        public AstAssignmentExpressionList( IAstNode parent )
             : base( AstNodeId.AssignmentExpressionList, parent )
         {
             Expressions = new AstNodeList<AstAssignmentExpression>( this );
         }
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstAssignmentExpressionList()
+            : this( NullAstNode.Instance ) {}
 
         #region IAstNodeAcceptor
 
