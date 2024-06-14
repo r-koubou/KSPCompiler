@@ -2,6 +2,7 @@
 using System.IO;
 
 using KSPCompiler.Commons.Text;
+using KSPCompiler.Domain.Ast.Node.Extensions;
 
 namespace KSPCompiler.Domain.Ast.Node
 {
@@ -93,7 +94,7 @@ namespace KSPCompiler.Domain.Ast.Node
 
                 result = targetNode;
                 break;
-            }while( ( parentNode = parentNode.Parent ) != null );
+            }while( ( parentNode = parentNode.Parent ).IsNotNull() );
 
             return result != null;
         }
@@ -123,7 +124,7 @@ namespace KSPCompiler.Domain.Ast.Node
         /// </summary>
         public override string ToString()
         {
-            return nameof(AstNode);
+            return nameof( AstNode );
         }
 
         /// <summary>
