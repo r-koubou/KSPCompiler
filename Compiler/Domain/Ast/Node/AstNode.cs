@@ -87,7 +87,7 @@ namespace KSPCompiler.Domain.Ast.Node
             var parentNode = Parent;
             do
             {
-                if( Parent is not TNode targetNode )
+                if( parentNode is not TNode targetNode )
                 {
                     continue;
                 }
