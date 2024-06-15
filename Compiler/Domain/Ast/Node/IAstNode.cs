@@ -27,6 +27,20 @@ namespace KSPCompiler.Domain.Ast.Node
         /// <summary>
         /// Retrieves the parent node with the specified TNode.
         /// </summary>
+        /// <remarks>
+        /// It traverses the upper nodes until it finds one and returns the first node that matches the TNode.
+        /// </remarks>
+        /// <exception cref="NotFoundParentAstNodeException">if the parent TNode is not found</exception>
+        TNode GetParent<TNode>() where TNode : IAstNode;
+
+        /// <summary>
+        /// Retrieves the parent node with the specified TNode.
+        /// </summary>
+        /// <remarks>
+        /// It traverses the upper nodes until it finds one and returns the first node that matches the TNode.
+        /// </remarks>
+        /// <returns>true if the parent TNode is found, otherwise false</returns>
+        /// <out>the parent node will be stored if found otherwise default</out>
         bool TryGetParent<TNode>( out TNode? result ) where TNode : IAstNode;
 
         /// <summary>
