@@ -50,9 +50,9 @@ namespace KSPCompiler.Domain.Ast.Node
         /// <summary>
         /// Always return false and the out parameter is default.
         /// </summary>
-        public bool TryGetParent<TNode>( out TNode? result ) where TNode : IAstNode
+        public bool TryGetParent<TNode>( out TNode result ) where TNode : IAstNode
         {
-            result = default;
+            result = default!;
             return false;
         }
 
