@@ -5,16 +5,16 @@ using KSPCompiler.Domain.Symbols;
 
 namespace KSPCompiler.Domain.Ast.Analyzers;
 
-public interface ISymbolAnalyzer : IDisposable
+public interface ISymbolCollector : IDisposable
 {
-    public static ISymbolAnalyzer Null { get; } = new NullSymbolAnalyzer();
+    public static ISymbolCollector Null { get; } = new NullSymbolCollector();
 
     ISymbolTable<VariableSymbol> Variables { get; }
 
     void Analyze( AstCompilationUnit node );
     void IDisposable.Dispose() {}
 
-    private sealed class NullSymbolAnalyzer : ISymbolAnalyzer
+    private sealed class NullSymbolCollector : ISymbolCollector
     {
         public ISymbolTable<VariableSymbol> Variables => new VariableSymbolTable();
 

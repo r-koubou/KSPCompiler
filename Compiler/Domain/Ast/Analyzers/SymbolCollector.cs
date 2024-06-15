@@ -5,7 +5,7 @@ using KSPCompiler.Domain.Symbols;
 
 namespace KSPCompiler.Domain.Ast.Analyzers;
 
-public class SymbolAnalyzer : DefaultAstVisitor, ISymbolAnalyzer
+public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
 {
     private ICompilerMessageManger CompilerMessageManger { get; }
 
@@ -13,7 +13,7 @@ public class SymbolAnalyzer : DefaultAstVisitor, ISymbolAnalyzer
     public ISymbolTable<VariableSymbol> Variables { get; } = new VariableSymbolTable();
     #endregion
 
-    public SymbolAnalyzer( ICompilerMessageManger compilerMessageManger )
+    public SymbolCollector( ICompilerMessageManger compilerMessageManger )
     {
         CompilerMessageManger = compilerMessageManger;
     }

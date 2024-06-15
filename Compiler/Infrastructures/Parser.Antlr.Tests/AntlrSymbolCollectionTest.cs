@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace KSPCompiler.Parser.Antlr.Tests;
 
 [TestFixture]
-public class AntlrSymbolAnalyzeTest
+public class AntlrSymbolCollectionTest
 {
     private static readonly string TestDataDirectory = Path.Combine( "TestData", "SymbolAnalyzeTest" );
 
@@ -17,7 +17,7 @@ public class AntlrSymbolAnalyzeTest
     public void VariableSymbolAnalyzeTest()
     {
         var ast = ParseTestUtility.Parse( TestDataDirectory, "VariableSymbolTest.txt" );
-        var symbolAnalyzer = new SymbolAnalyzer( ICompilerMessageManger.CreateDefault() );
+        var symbolAnalyzer = new SymbolCollector( ICompilerMessageManger.CreateDefault() );
 
         Assert.DoesNotThrow( () => { symbolAnalyzer.Analyze( ast ); } );
         Assert.IsTrue( symbolAnalyzer.Variables.Count == 3 );
