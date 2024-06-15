@@ -82,7 +82,7 @@ namespace KSPCompiler.Domain.Ast.Node
         ///
         public TNode GetParent<TNode>() where TNode : IAstNode
         {
-            if( !TryGetParent( out TNode? result ) )
+            if( !TryGetParent( out TNode result ) )
             {
                 throw new NotFoundParentAstNodeException( typeof( TNode ) );
             }
@@ -93,11 +93,12 @@ namespace KSPCompiler.Domain.Ast.Node
         ///
         /// <inheritdoc/>
         ///
-        public bool TryGetParent<TNode>( out TNode? result ) where TNode : IAstNode
+        public bool TryGetParent<TNode>( out TNode result ) where TNode : IAstNode
         {
-            result = default;
+            result = default!;
 
             var parentNode = Parent;
+
             do
             {
                 if( parentNode is not TNode targetNode )
@@ -106,10 +107,12 @@ namespace KSPCompiler.Domain.Ast.Node
                 }
 
                 result = targetNode;
-                break;
-            }while( ( parentNode = parentNode.Parent ).IsNotNull() );
 
-            return result != null;
+                return true;
+
+            } while( ( parentNode = parentNode.Parent ).IsNotNull() );
+
+            return false;
         }
 
         ///

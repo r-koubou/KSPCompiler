@@ -41,7 +41,7 @@ namespace KSPCompiler.Domain.Ast.Node
         /// </remarks>
         /// <returns>true if the parent TNode is found, otherwise false</returns>
         /// <out>the parent node will be stored if found otherwise default</out>
-        bool TryGetParent<TNode>( out TNode? result ) where TNode : IAstNode;
+        bool TryGetParent<TNode>( out TNode result ) where TNode : IAstNode;
 
         /// <summary>
         /// Dumping information on this node for debugging purposes.
