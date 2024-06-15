@@ -42,6 +42,12 @@ namespace KSPCompiler.Domain.Ast.Node
         private NullAstNode() {}
 
         /// <summary>
+        /// Always throw <see cref="NotFoundParentAstNodeException"/>.
+        /// </summary>
+        public TNode GetParent<TNode>() where TNode : IAstNode
+            => throw new NotFoundParentAstNodeException( typeof( TNode ) );
+
+        /// <summary>
         /// Always return false and the out parameter is default.
         /// </summary>
         public bool TryGetParent<TNode>( out TNode? result ) where TNode : IAstNode
