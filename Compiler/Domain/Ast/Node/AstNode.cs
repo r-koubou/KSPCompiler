@@ -80,6 +80,19 @@ namespace KSPCompiler.Domain.Ast.Node
         ///
         /// <inheritdoc/>
         ///
+        public TNode GetParent<TNode>() where TNode : IAstNode
+        {
+            if( !TryGetParent( out TNode? result ) )
+            {
+                throw new NotFoundParentAstNodeException( typeof( TNode ) );
+            }
+
+            return result!;
+        }
+
+        ///
+        /// <inheritdoc/>
+        ///
         public bool TryGetParent<TNode>( out TNode? result ) where TNode : IAstNode
         {
             result = default;
