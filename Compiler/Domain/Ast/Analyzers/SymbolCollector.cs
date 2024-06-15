@@ -1,5 +1,6 @@
 using KSPCompiler.Domain.Ast.Node;
 using KSPCompiler.Domain.Ast.Node.Blocks;
+using KSPCompiler.Domain.Ast.Node.Statements;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols;
 
@@ -7,6 +8,8 @@ namespace KSPCompiler.Domain.Ast.Analyzers;
 
 public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
 {
+    private const string InitCallbackName = "init";
+
     private ICompilerMessageManger CompilerMessageManger { get; }
 
     #region Symbol Tables
@@ -24,26 +27,10 @@ public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
     }
 
     #region IAstVisitor
-    public override IAstNode Visit( AstCallbackDeclaration node )
-    {
-        return node.Name == "init"
-            // init コールバックでのみ変数宣言が可能
-            ? AnalyzeInitCallback( node )
-            // init 以外のコールバックでは変数宣言はできない
-            // 変数宣言を見つけ次第エラー
-            : AnalyzeNonInitCallback( node );
-    }
 
-    private IAstNode AnalyzeNonInitCallback( AstCallbackDeclaration node )
+    public override IAstNode Visit( AstVariableDeclaration node )
     {
-        // TODO 解析、変数宣言を見つけたらエラー扱いにする
-        return VisitChildren( node );
-    }
-
-    private IAstNode AnalyzeInitCallback( AstCallbackDeclaration node )
-    {
-        // TODO 解析、変数宣言を見つけたら変数テーブルへ追加
-        return VisitChildren( node );
+        return node;
     }
 
     #endregion
