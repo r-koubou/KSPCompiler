@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,6 +10,12 @@ public interface ICompilerMessageManger
     public IReadOnlyCollection<CompilerMessage> Messages { get; }
     public ICompilerMessageFactory MessageFactory { get; }
     public ICompilerMessageFormatter MessageFormatter { get; }
+
+    /// <summary>
+    /// Alias for <see cref="MessageFactory"/>.<see cref="ICompilerMessageFactory.Create(CompilerMessageLevel,string,int,int,Exception)"/>
+    /// </summary>
+    public CompilerMessage CreateMessage( CompilerMessageLevel level, string message )
+        => MessageFactory.Create( level, message );
 
     public void Append( CompilerMessage message );
     public void AddHandler( ICompilerMessageHandler handler );
