@@ -1,5 +1,8 @@
 namespace KSPCompiler.Domain.CompilerMessages;
 
+/// <summary>
+/// Formatter for console output.
+/// </summary>
 public class ConsoleCompilerMessageFormatter : ICompilerMessageFormatter
 {
     public string Format( CompilerMessage message )
