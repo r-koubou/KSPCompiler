@@ -18,47 +18,10 @@ public interface ICompilerMessageFactory
     /// </summary>
     public static ICompilerMessageFactory Default => new DefaultImpl();
 
-    #region Complex
-
     /// <summary>
     /// Creates a new message using the specified information.
     /// </summary>
     public CompilerMessage Create( CompilerMessageLevel level, string message, int lineNo = -1, int column = -1, Exception? exception = null );
-    #endregion
-
-    #region Simple
-    /// <summary>
-    /// Creates a new message using the specified information.
-    /// </summary>
-    /// <remarks>
-    /// Simple method for creating <see cref="CompilerMessageLevel.Info"/> level messages.
-    /// </remarks>
-    public CompilerMessage Info( string message, int lineNo = -1, int column = -1 );
-
-    /// <summary>
-    /// Creates a new message using the specified information.
-    /// </summary>
-    /// <remarks>
-    /// Simple method for creating <see cref="CompilerMessageLevel.Warning"/> level messages.
-    /// </remarks>
-    public CompilerMessage Warning( string message, int lineNo = -1, int column = -1 );
-
-    /// <summary>
-    /// Creates a new message using the specified information.
-    /// </summary>
-    /// <remarks>
-    /// Simple method for creating <see cref="CompilerMessageLevel.Error"/> level messages.
-    /// </remarks>
-    public CompilerMessage Error( string message, int lineNo = -1, int column = -1, Exception? exception = null );
-
-    /// <summary>
-    /// Creates a new message using the specified information.
-    /// </summary>
-    /// <remarks>
-    /// Simple method for creating <see cref="CompilerMessageLevel.Fatal"/> level messages.
-    /// </remarks>
-    public CompilerMessage Fatal( string message, int lineNo = -1, int column = -1, Exception? exception = null );
-    #endregion
 
     private class DefaultImpl : ICompilerMessageFactory
     {
@@ -74,17 +37,5 @@ public interface ICompilerMessageFactory
 
             return new CompilerMessage( level, message, position );
         }
-
-        public CompilerMessage Info( string message, int lineNo = -1, int column = -1 )
-            => Create( CompilerMessageLevel.Info, message, lineNo, column );
-
-        public CompilerMessage Warning( string message, int lineNo = -1, int column = -1 )
-            => Create( CompilerMessageLevel.Warning, message, lineNo, column );
-
-        public CompilerMessage Error( string message, int lineNo = -1, int column = -1, Exception? exception = null )
-            => Create( CompilerMessageLevel.Error, message, lineNo, column, exception );
-
-        public CompilerMessage Fatal( string message, int lineNo = -1, int column = -1, Exception? exception = null )
-            => Create( CompilerMessageLevel.Fatal, message, lineNo, column, exception );
     }
 }

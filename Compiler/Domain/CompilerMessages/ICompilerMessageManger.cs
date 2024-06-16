@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -39,36 +38,6 @@ public interface ICompilerMessageManger
     /// Append a new message to the message list.
     /// </summary>
     public void Append( CompilerMessage message );
-
-    /// <summary>
-    /// Alias for <see cref="Append(CompilerMessage)"/>.
-    /// </summary>
-    public void Append( CompilerMessageLevel level, string message )
-        => Append( MessageFactory.Create( level, message ) );
-
-    /// <summary>
-    /// Alias for <see cref="Append(CompilerMessage)"/> with <see cref="CompilerMessageLevel.Info"/>.
-    /// </summary>
-    public void Info( string message )
-        => Append( MessageFactory.Create( CompilerMessageLevel.Info, message ) );
-
-    /// <summary>
-    /// Alias for <see cref="Append(CompilerMessage)"/> with <see cref="CompilerMessageLevel.Warning"/>.
-    /// </summary>
-    public void Warning( string message )
-        => Append( MessageFactory.Create( CompilerMessageLevel.Warning, message ) );
-
-    /// <summary>
-    /// Alias for <see cref="Append(CompilerMessage)"/> with <see cref="CompilerMessageLevel.Error"/>.
-    /// </summary>
-    public void Error( string message )
-        => Append( MessageFactory.Create( CompilerMessageLevel.Error, message ) );
-
-    /// <summary>
-    /// Alias for <see cref="Append(CompilerMessage)"/> with <see cref="CompilerMessageLevel.Fatal"/>.
-    /// </summary>
-    public void Fatal( string message )
-        => Append( MessageFactory.Create( CompilerMessageLevel.Fatal, message ) );
 
     /// <summary>
     /// Subscribe this manager to receive messages.
