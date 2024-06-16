@@ -17,7 +17,7 @@ public class AntlrSymbolCollectionTest
     public void VariableSymbolAnalyzeTest()
     {
         var ast = ParseTestUtility.Parse( TestDataDirectory, "VariableSymbolTest.txt" );
-        var symbolAnalyzer = new SymbolCollector( ICompilerMessageManger.CreateDefault() );
+        var symbolAnalyzer = new SymbolCollector( ICompilerMessageManger.Default );
 
         Assert.DoesNotThrow( () => { symbolAnalyzer.Analyze( ast ); } );
         Assert.IsTrue( symbolAnalyzer.Variables.Count == 3 );
