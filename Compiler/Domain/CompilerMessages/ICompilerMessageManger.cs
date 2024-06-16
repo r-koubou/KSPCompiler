@@ -5,28 +5,99 @@ using System.Linq;
 
 namespace KSPCompiler.Domain.CompilerMessages;
 
+/// <summary>
+/// Base interface for compiler message management during compilation.
+/// </summary>
+/// <remarks>
+/// In most cases, it is sufficient to use the default implementation obtained with the <see cref="Default"/> property,
+/// but if you need your own implementation, implement this interface.
+/// </remarks>
 public interface ICompilerMessageManger
 {
+    /// <summary>
+    /// Create a default implementation of <see cref="ICompilerMessageManger"/>.
+    /// </summary>
+    public static ICompilerMessageManger Default
+        => new DefaultMangerImpl();
+
+    /// <summary>
+    /// Stored compiler messages when <see cref="Append(CompilerMessage)"/> is called.
+    /// </summary>
     public IReadOnlyCollection<CompilerMessage> Messages { get; }
+
+    /// <summary>
+    /// Message factory for creating a new message.
+    /// </summary>
     public ICompilerMessageFactory MessageFactory { get; }
+
+    /// <summary>
+    /// Message formatter for formatting messages.
+    /// </summary>
     public ICompilerMessageFormatter MessageFormatter { get; }
 
     /// <summary>
-    /// Alias for <see cref="MessageFactory"/>.<see cref="ICompilerMessageFactory.Create(CompilerMessageLevel,string,int,int,Exception)"/>
+    /// Append a new message to the message list.
     /// </summary>
-    public CompilerMessage CreateMessage( CompilerMessageLevel level, string message )
-        => MessageFactory.Create( level, message );
-
     public void Append( CompilerMessage message );
+
+    /// <summary>
+    /// Alias for <see cref="Append(CompilerMessage)"/>.
+    /// </summary>
+    public void Append( CompilerMessageLevel level, string message )
+        => Append( MessageFactory.Create( level, message ) );
+
+    /// <summary>
+    /// Alias for <see cref="Append(CompilerMessage)"/> with <see cref="CompilerMessageLevel.Info"/>.
+    /// </summary>
+    public void Info( string message )
+        => Append( MessageFactory.Create( CompilerMessageLevel.Info, message ) );
+
+    /// <summary>
+    /// Alias for <see cref="Append(CompilerMessage)"/> with <see cref="CompilerMessageLevel.Warning"/>.
+    /// </summary>
+    public void Warning( string message )
+        => Append( MessageFactory.Create( CompilerMessageLevel.Warning, message ) );
+
+    /// <summary>
+    /// Alias for <see cref="Append(CompilerMessage)"/> with <see cref="CompilerMessageLevel.Error"/>.
+    /// </summary>
+    public void Error( string message )
+        => Append( MessageFactory.Create( CompilerMessageLevel.Error, message ) );
+
+    /// <summary>
+    /// Alias for <see cref="Append(CompilerMessage)"/> with <see cref="CompilerMessageLevel.Fatal"/>.
+    /// </summary>
+    public void Fatal( string message )
+        => Append( MessageFactory.Create( CompilerMessageLevel.Fatal, message ) );
+
+    /// <summary>
+    /// Subscribe this manager to receive messages.
+    /// </summary>
     public void AddHandler( ICompilerMessageHandler handler );
+
+    /// <summary>
+    /// Unsubscribe this manager from receiving messages.
+    /// </summary>
     public void RemoveHandler( ICompilerMessageHandler handler );
+
+    /// <summary>
+    /// Write all messages to the specified writer.
+    /// </summary>
     public void WriteTo( TextWriter writer );
 
-    public static ICompilerMessageManger CreateDefault()
-        => new DefaultMangerImpl();
-
+    /// <summary>
+    /// Get the number of all messages stored.
+    /// </summary>
     public int Count();
+
+    /// <summary>
+    /// Get the number of messages with the specified level.
+    /// </summary>
     public int Count( CompilerMessageLevel level );
+
+    /// <summary>
+    /// true if there are no messages stored.
+    /// </summary>
     public bool IsEmpty();
 
     #region Default
@@ -51,7 +122,7 @@ public interface ICompilerMessageManger
 
             foreach( var x in Handlers )
             {
-                x.Handle( message );
+                x.OnAppended( message );
             }
         }
 
