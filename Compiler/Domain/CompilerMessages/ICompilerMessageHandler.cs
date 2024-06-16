@@ -1,14 +1,24 @@
 namespace KSPCompiler.Domain.CompilerMessages;
 
+/// <summary>
+/// The event handler in <see cref="ICompilerMessageManger"/> processes the message.
+/// </summary>
 public interface ICompilerMessageHandler
 {
+    /// <summary>
+    /// Empty implementation. Does nothing.
+    /// </summary>
     public static readonly ICompilerMessageHandler Empty = new EmptyImpl();
 
-    public void Handle( CompilerMessage message );
+    /// <summary>
+    /// When a message is appended, this method is called.
+    /// </summary>
+    /// <seealso cref="ICompilerMessageManger.Append"/>
+    public void OnAppended( CompilerMessage message );
 
     private class EmptyImpl : ICompilerMessageHandler
     {
-        public void Handle( CompilerMessage message )
+        public void OnAppended( CompilerMessage message )
         {}
     }
 }
