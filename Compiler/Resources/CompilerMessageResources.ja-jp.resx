@@ -32,4 +32,7 @@
     <data name="symbol.waring.declare.oninit" xml:space="preserve">
         <value>変数 {0} は `on init` コールバック以外の場所で宣言されています</value>
     </data>
+    <data name="symbol.error.declare.variable.unkown" xml:space="preserve">
+        <value>不明なデータ型: {0}</value>
+    </data>
 </root>

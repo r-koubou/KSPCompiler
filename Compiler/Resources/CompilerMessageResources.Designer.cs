@@ -81,6 +81,12 @@ namespace KSPCompiler.Resources {
             }
         }
         
+        public static string symbol_error_declare_variable_unkown {
+            get {
+                return ResourceManager.GetString("symbol.error.declare.variable.unkown", resourceCulture);
+            }
+        }
+        
         public static string symbol_waring_declare_oninit {
             get {
                 return ResourceManager.GetString("symbol.waring.declare.oninit", resourceCulture);
