@@ -1,7 +1,7 @@
 ﻿namespace KSPCompiler.Domain.Symbols
 {
     /// <summary>
-    /// Represents the state of a variable.
+    /// Represents the state of a variable in semantic analysis.
     /// </summary>
     public enum VariableState
     {

@@ -9,6 +9,11 @@ public class VariableSymbol : SymbolBase
         => SymbolType.Variable;
 
     /// <summary>
+    /// The variable's state in semantic analysis.
+    /// </summary>
+    public virtual VariableState State { get; set; } = VariableState.UnInitialized;
+
+    /// <summary>
     /// Number of elements for array type
     /// </summary>
     public virtual int ArraySize { get; set; } = 0;
