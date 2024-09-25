@@ -12,6 +12,9 @@ using Resource = KSPCompiler.Resources.CompilerMessageResources;
 
 namespace KSPCompiler.Domain.Ast.Analyzers;
 
+#error TODO ビルトインなど予約済みのシンボルを事前にファイルからロードする（変数、コールバック、コマンド）
+// 外部で事前にロードした結果をコンストラクタで受け取る(ISymbolTable<T>で)
+
 public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
 {
     private ICompilerMessageManger CompilerMessageManger { get; }
@@ -19,6 +22,8 @@ public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
     #region Symbol Tables
     public ISymbolTable<VariableSymbol> Variables { get; } = new VariableSymbolTable();
     public ISymbolTable<UITypeSymbol> UITypes { get; } = new UITypeSymbolTable();
+    public ISymbolTable<CallbackSymbol> Callbacks { get; } = new CallbackSymbolTable();
+    public ISymbolTable<CallbackSymbol> ReservedCallbacks { get; } = new CallbackSymbolTable();
     #endregion
 
     public SymbolCollector( ICompilerMessageManger compilerMessageManger )
@@ -139,4 +144,34 @@ public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
     }
 
     #endregion ~Variable Collection
+
+    #region Callback Collection
+
+    public override IAstNode Visit( AstCallbackDeclaration node )
+    {
+        if( node.ArgumentList.HasArgument )
+        {
+            // コールバック引数リストあり
+            // 現状、コールバック引数は　on init で宣言した変数
+            foreach( var arg in node.ArgumentList.Arguments )
+            {
+                if( !Variables.TrySearchByName( arg.Name, out var variable ) )
+                {
+                    // on init で未定義
+                    CompilerMessageManger.Error( Resource.symbol_error_declare_variable_unkown, arg.Name );
+                }
+                else
+                {
+                    variable.State = VariableState.Loaded;
+                }
+            }
+        }
+
+        #error TODO 予約済みコールバックの検査
+
+        return node;
+    }
+
+    #endregion
+
 }
