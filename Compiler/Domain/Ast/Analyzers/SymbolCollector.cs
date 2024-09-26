@@ -88,6 +88,7 @@ public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
             if( !Variables.TrySearchByName( name, out variable ) )
             {
                 // 未定義：新規追加可能
+                variable = node.As();
                 return true;
             }
             // NI の予約変数との重複
