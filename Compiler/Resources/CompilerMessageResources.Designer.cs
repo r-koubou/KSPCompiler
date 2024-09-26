@@ -92,5 +92,17 @@ namespace KSPCompiler.Resources {
                 return ResourceManager.GetString("symbol.waring.declare.oninit", resourceCulture);
             }
         }
+        
+        public static string symbol_warning_declare_callback_unkown {
+            get {
+                return ResourceManager.GetString("symbol.warning.declare.callback.unkown", resourceCulture);
+            }
+        }
+        
+        public static string symbol_error_declare_callback_already {
+            get {
+                return ResourceManager.GetString("symbol.error.declare.callback.already", resourceCulture);
+            }
+        }
     }
 }

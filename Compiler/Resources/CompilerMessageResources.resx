@@ -42,4 +42,10 @@
     <data name="symbol.waring.declare.oninit" xml:space="preserve">
         <value>Variable {0} declaration outside of `on init` callback scope</value>
     </data>
+    <data name="symbol.warning.declare.callback.unkown" xml:space="preserve">
+        <value>Unknown callback: {0}</value>
+    </data>
+    <data name="symbol.error.declare.callback.already" xml:space="preserve">
+        <value>Callback {0} has already declared</value>
+    </data>
 </root>

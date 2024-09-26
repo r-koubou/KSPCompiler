@@ -35,4 +35,10 @@
     <data name="symbol.error.declare.variable.unkown" xml:space="preserve">
         <value>不明なデータ型: {0}</value>
     </data>
+    <data name="symbol.warning.declare.callback.unkown" xml:space="preserve">
+        <value>不明な コールバック: {0} </value>
+    </data>
+    <data name="symbol.error.declare.callback.already" xml:space="preserve">
+        <value>コールバック {0} は既に宣言されています</value>
+    </data>
 </root>
