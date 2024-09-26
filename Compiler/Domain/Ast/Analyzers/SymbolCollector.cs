@@ -44,6 +44,7 @@ public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
             return node;
         }
 
+        Variables.Add( variable );
         ValidateVariable( node, variable );
 
         return node;
@@ -105,14 +106,6 @@ public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
 
     private void ValidateVariable( AstVariableDeclaration node, VariableSymbol variable )
     {
-        variable.DataTypeModifier |= ( node.Modifier ) switch
-        {
-            "const"      => DataTypeModifierFlag.Const,
-            "polyphonic" => DataTypeModifierFlag.Polyphonic,
-            // キーワード以外の場合は暫定で UI として、以降で判定
-            _            => DataTypeModifierFlag.UI
-        };
-
         #region UI変数チェック
         // 非プリミティブ型 (UI)
         if( variable.DataTypeModifier.IsUI() )

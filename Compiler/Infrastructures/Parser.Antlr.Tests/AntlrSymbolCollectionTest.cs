@@ -16,10 +16,13 @@ public class AntlrSymbolCollectionTest
     [Test]
     public void VariableSymbolAnalyzeTest()
     {
+        var compilerMessageManger = ICompilerMessageManger.Default;
         var ast = ParseTestUtility.Parse( TestDataDirectory, "VariableSymbolTest.txt" );
-        var symbolAnalyzer = new SymbolCollector( ICompilerMessageManger.Default );
+        var symbolAnalyzer = new SymbolCollector( compilerMessageManger );
 
         Assert.DoesNotThrow( () => { symbolAnalyzer.Analyze( ast ); } );
-        Assert.IsTrue( symbolAnalyzer.Variables.Count == 3 );
+        compilerMessageManger.WriteTo( System.Console.Out );
+        Assert.IsTrue( symbolAnalyzer.Variables.Count == 1 );
+    }
     }
 }
