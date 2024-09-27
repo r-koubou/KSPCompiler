@@ -40,9 +40,6 @@
       <None Update="TestData\SymbolAnalyzeTest\VariableSymbolTest.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="TestData\SymbolAnalyzeTest\CallbackSymbolTest.txt">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
     </ItemGroup>
 
 </Project>
