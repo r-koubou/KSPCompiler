@@ -12,7 +12,7 @@ using Resource = KSPCompiler.Resources.CompilerMessageResources;
 
 namespace KSPCompiler.Domain.Ast.Analyzers;
 
-#error TODO ビルトインなど予約済みのシンボルを事前にファイルからロードする（変数、コールバック、コマンド）
+// TODO ビルトインなど予約済みのシンボルを事前にファイルからロードする（変数、コールバック、コマンド）
 // 外部で事前にロードした結果をコンストラクタで受け取る(ISymbolTable<T>で)
 
 public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
@@ -23,13 +23,37 @@ public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
     public ISymbolTable<VariableSymbol> Variables { get; } = new VariableSymbolTable();
     public ISymbolTable<UITypeSymbol> UITypes { get; } = new UITypeSymbolTable();
     public ISymbolTable<CallbackSymbol> Callbacks { get; } = new CallbackSymbolTable();
-    public ISymbolTable<CallbackSymbol> ReservedCallbacks { get; } = new CallbackSymbolTable();
+
+
+    public ISymbolTable<VariableSymbol> ReservedVariables { get; }
+    public ISymbolTable<UITypeSymbol> ReservedUITypes { get; }
+    public ISymbolTable<CallbackSymbol> ReservedCallbacks { get; }
+    public ISymbolTable<CommandSymbol> ReservedCommands { get; }
+
     #endregion
 
-    public SymbolCollector( ICompilerMessageManger compilerMessageManger )
+    public SymbolCollector(
+        ICompilerMessageManger compilerMessageManger,
+        ISymbolTable<VariableSymbol> reservedVariables,
+        ISymbolTable<UITypeSymbol> reservedUITypes,
+        ISymbolTable<CallbackSymbol> reservedCallbacks,
+        ISymbolTable<CommandSymbol> reservedCommands )
     {
         CompilerMessageManger = compilerMessageManger;
+        ReservedVariables = reservedVariables;
+        ReservedUITypes = reservedUITypes;
+        ReservedCallbacks = reservedCallbacks;
+        ReservedCommands = reservedCommands;
     }
+
+    public SymbolCollector( ICompilerMessageManger compilerMessageManger ) : this(
+        compilerMessageManger,
+        new VariableSymbolTable(),
+        new UITypeSymbolTable(),
+        new CallbackSymbolTable(),
+        new CommandSymbolTable()
+    )
+    {}
 
     public void Analyze( AstCompilationUnit node )
     {
@@ -143,6 +167,8 @@ public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
 
     public override IAstNode Visit( AstCallbackDeclaration node )
     {
+        node.AcceptChildren( this );
+
         if( node.ArgumentList.HasArgument )
         {
             // コールバック引数リストあり
@@ -156,12 +182,30 @@ public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
                 }
                 else
                 {
-                    variable.State = VariableState.Loaded;
+                    variable.Referenced = true;
                 }
             }
         }
 
-        #error TODO 予約済みコールバックの検査
+        CallbackSymbol thisCallback;
+
+        // NI予約済みコールバックの検査
+        if( !ReservedCallbacks.TrySearchByName( node.Name, out var reservedCallback ) )
+        {
+            CompilerMessageManger.Warning( Resource.symbol_warning_declare_callback_unkown, node.Name );
+
+            // 暫定のシンボル生成
+            thisCallback = node.As();
+        }
+        else
+        {
+            thisCallback = reservedCallback;
+        }
+
+        if( !Callbacks.Add( thisCallback ) )
+        {
+            CompilerMessageManger.Error( Resource.symbol_error_declare_callback_already, node.Name );
+        }
 
         return node;
     }

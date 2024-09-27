@@ -24,5 +24,16 @@ public class AntlrSymbolCollectionTest
         compilerMessageManger.WriteTo( System.Console.Out );
         Assert.IsTrue( symbolAnalyzer.Variables.Count == 1 );
     }
+
+    [Test]
+    public void CallbackSymbolAnalyzeTest()
+    {
+        var compilerMessageManger = ICompilerMessageManger.Default;
+        var ast = ParseTestUtility.Parse( TestDataDirectory, "CallbackSymbolTest.txt" );
+        var symbolAnalyzer = new SymbolCollector( compilerMessageManger );
+
+        Assert.DoesNotThrow( () => { symbolAnalyzer.Analyze( ast ); } );
+        Assert.IsTrue( symbolAnalyzer.Callbacks.Count == 1 );
+
     }
 }
