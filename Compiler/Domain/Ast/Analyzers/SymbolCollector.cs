@@ -162,4 +162,53 @@ public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
     }
 
     #endregion ~Variable Collection
+
+    #region Callback Collection
+
+    public override IAstNode Visit( AstCallbackDeclaration node )
+    {
+        node.AcceptChildren( this );
+
+        if( node.ArgumentList.HasArgument )
+        {
+            // コールバック引数リストあり
+            // 現状、コールバック引数は　on init で宣言した変数
+            foreach( var arg in node.ArgumentList.Arguments )
+            {
+                if( !Variables.TrySearchByName( arg.Name, out var variable ) )
+                {
+                    // on init で未定義
+                    CompilerMessageManger.Error( node, Resource.symbol_error_declare_variable_unkown, arg.Name );
+                }
+                else
+                {
+                    variable.Referenced = true;
+                }
+            }
+        }
+
+        CallbackSymbol thisCallback;
+
+        // NI予約済みコールバックの検査
+        if( !ReservedCallbacks.TrySearchByName( node.Name, out var reservedCallback ) )
+        {
+            CompilerMessageManger.Warning( node, Resource.symbol_warning_declare_callback_unkown, node.Name );
+
+            // 暫定のシンボル生成
+            thisCallback = node.As();
+        }
+        else
+        {
+            thisCallback = reservedCallback;
+        }
+
+        if( !Callbacks.Add( thisCallback ) )
+        {
+            CompilerMessageManger.Error( node, Resource.symbol_error_declare_callback_already, node.Name );
+        }
+
+        return node;
+    }
+
+    #endregion ~Callback Collection
 }
