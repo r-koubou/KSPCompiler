@@ -21,11 +21,19 @@ public interface ICompilerMessageFactory
     /// <summary>
     /// Creates a new message using the specified information.
     /// </summary>
-    public CompilerMessage Create( CompilerMessageLevel level, string message, int lineNo = -1, int column = -1, Exception? exception = null );
+    public CompilerMessage Create( CompilerMessageLevel level, Position position, string message, Exception? exception = null );
+
+    /// <summary>
+    /// Creates a new message using the specified information.
+    /// </summary>
+    public CompilerMessage Create( CompilerMessageLevel level, int lineNo, int column, string message, Exception? exception = null );
 
     private class DefaultImpl : ICompilerMessageFactory
     {
-        public CompilerMessage Create( CompilerMessageLevel level, string message, int lineNo = -1, int column = -1, Exception? exception = null )
+        public CompilerMessage Create( CompilerMessageLevel level, Position position, string message, Exception? exception = null )
+            => new CompilerMessage( level, message, position );
+
+        public CompilerMessage Create( CompilerMessageLevel level, int lineNo, int column, string message, Exception? exception = null )
         {
             var position = new Position
             {
@@ -35,7 +43,7 @@ public interface ICompilerMessageFactory
                 EndColumn   = column
             };
 
-            return new CompilerMessage( level, message, position );
+            return Create( level, position, message, exception );
         }
     }
 }

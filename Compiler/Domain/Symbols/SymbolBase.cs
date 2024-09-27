@@ -19,6 +19,11 @@ public abstract class SymbolBase
     public bool Reserved { get; set; } = false;
 
     /// <summary>
+    /// This symbol is referenced in the script.
+    /// </summary>
+    public bool Referenced { get; set; } = false;
+
+    /// <summary>
     /// A symbol's type
     /// </summary>
     public abstract SymbolType Type { get; }

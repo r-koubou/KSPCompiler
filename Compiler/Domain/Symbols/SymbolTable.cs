@@ -154,7 +154,7 @@ public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol
     ///
     /// <inheritdoc />
     ///
-    public bool Add( TSymbol symbol, bool overwrite = false )
+    public virtual bool Add( TSymbol symbol, bool overwrite = false )
     {
         var contains = table.ContainsKey( symbol.Name );
 
@@ -173,7 +173,7 @@ public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol
     ///
     /// <inheritdoc />
     ///
-    public IReadOnlyList<TSymbol> AddRange( IEnumerable<TSymbol> symbols, bool overwrite = false )
+    public virtual IReadOnlyList<TSymbol> AddRange( IEnumerable<TSymbol> symbols, bool overwrite = false )
     {
         var result = new List<TSymbol>();
 
@@ -190,7 +190,7 @@ public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol
     #endregion ~Adding
 
     #region Removing
-    public bool Remove( TSymbol symbol )
+    public virtual bool Remove( TSymbol symbol )
     {
         if( !table.ContainsKey( symbol.Name ) )
         {
@@ -201,7 +201,7 @@ public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol
         return table.Remove( symbol.Name );
     }
 
-    public void Clear()
+    public virtual void Clear()
     {
         OnWillClear();
         table.Clear();
