@@ -35,9 +35,9 @@ internal class AntlrParserErrorListener : IAntlrErrorListener<IToken>
 
         var compilerMessage = MessageManger.MessageFactory.Create(
             CompilerMessageLevel.Error,
-            message,
             line,
-            charPositionInLine
+            charPositionInLine,
+            message
         );
 
         MessageManger.Append( compilerMessage );

@@ -33,6 +33,7 @@ public class AntlrSymbolCollectionTest
         var symbolAnalyzer = new SymbolCollector( compilerMessageManger );
 
         Assert.DoesNotThrow( () => { symbolAnalyzer.Analyze( ast ); } );
+        compilerMessageManger.WriteTo( System.Console.Out );
         Assert.IsTrue( symbolAnalyzer.Callbacks.Count == 1 );
 
     }

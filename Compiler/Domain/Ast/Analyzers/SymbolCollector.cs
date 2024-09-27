@@ -1,8 +1,8 @@
+using KSPCompiler.Domain.Ast.Extensions;
 using KSPCompiler.Domain.Ast.Node;
 using KSPCompiler.Domain.Ast.Node.Blocks;
 using KSPCompiler.Domain.Ast.Node.Statements;
 using KSPCompiler.Domain.CompilerMessages;
-using KSPCompiler.Domain.CompilerMessages.Extensions;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.Extensions;
 using KSPCompiler.Domain.Symbols.MetaData;
@@ -84,7 +84,7 @@ public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
         //--------------------------------------------------------------------------
         if( KspValueConstants.ContainsNiReservedPrefix( node.Name ) )
         {
-            CompilerMessageManger.Error( Resource.symbol_error_declare_variable_ni_reserved, name );
+            CompilerMessageManger.Error( node, Resource.symbol_error_declare_variable_ni_reserved, name );
         }
         #endregion
 
@@ -93,13 +93,13 @@ public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
         //--------------------------------------------------------------------------
         if( !node.TryGetParent<AstCallbackDeclaration>( out var callback ) )
         {
-            CompilerMessageManger.Fatal( Resource.syntax_error );
+            CompilerMessageManger.Fatal( node, Resource.syntax_error );
         }
         else
         {
             if( callback.Name != "init" )
             {
-                CompilerMessageManger.Error( Resource.symbol_error_declare_variable_outside, name );
+                CompilerMessageManger.Error( node, Resource.symbol_error_declare_variable_outside, name );
                 return false;
             }
         }
@@ -118,12 +118,12 @@ public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
             // NI の予約変数との重複
             if( variable.Reserved )
             {
-                CompilerMessageManger.Error( Resource.symbol_error_declare_variable_reserved, name );
+                CompilerMessageManger.Error( node, Resource.symbol_error_declare_variable_reserved, name );
                 return false;
             }
 
             // ユーザー変数との重複
-            CompilerMessageManger.Error( Resource.symbol_error_declare_variable_already, name );
+            CompilerMessageManger.Error( node, Resource.symbol_error_declare_variable_already, name );
             return false;
         }
         #endregion
@@ -138,7 +138,7 @@ public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
             // 有効な UI 型かチェック
             if( !UITypes.TrySearchByName( node.Modifier, out var uiType ) )
             {
-                CompilerMessageManger.Warning( Resource.symbol_error_declare_variable_unkown, node.Modifier );
+                CompilerMessageManger.Warning( node, Resource.symbol_error_declare_variable_unkown, node.Modifier );
 
                 return;
             }
@@ -178,7 +178,7 @@ public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
                 if( !Variables.TrySearchByName( arg.Name, out var variable ) )
                 {
                     // on init で未定義
-                    CompilerMessageManger.Error( Resource.symbol_error_declare_variable_unkown, arg.Name );
+                    CompilerMessageManger.Error( node, Resource.symbol_error_declare_variable_unkown, arg.Name );
                 }
                 else
                 {
@@ -192,7 +192,7 @@ public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
         // NI予約済みコールバックの検査
         if( !ReservedCallbacks.TrySearchByName( node.Name, out var reservedCallback ) )
         {
-            CompilerMessageManger.Warning( Resource.symbol_warning_declare_callback_unkown, node.Name );
+            CompilerMessageManger.Warning( node, Resource.symbol_warning_declare_callback_unkown, node.Name );
 
             // 暫定のシンボル生成
             thisCallback = node.As();
@@ -204,7 +204,7 @@ public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
 
         if( !Callbacks.Add( thisCallback ) )
         {
-            CompilerMessageManger.Error( Resource.symbol_error_declare_callback_already, node.Name );
+            CompilerMessageManger.Error( node, Resource.symbol_error_declare_callback_already, node.Name );
         }
 
         return node;
