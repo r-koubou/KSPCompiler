@@ -62,17 +62,24 @@ public class CallbackSymbolRepository : ISymbolRepository<CallbackSymbol>
             item.UpdatedAt = DateTime.UtcNow;
             return await Collection.ReplaceOneAsync( existing.Id, item );
         }
-        else
-        {
-            return await Collection.InsertOneAsync( jsonObject.First() );
-        }
+
+        return await Collection.InsertOneAsync( jsonObject.First() );
     }
 
     ///
     /// <inheritdoc />
     ///
-    public Task<bool> StoreAsync( IEnumerable<CallbackSymbol> symbols, CancellationToken cancellationToken = default )
-        => throw new NotImplementedException();
+    public async Task<bool> StoreAsync( IEnumerable<CallbackSymbol> symbols, CancellationToken cancellationToken = default )
+    {
+        foreach( var x in symbols )
+        {
+            if( !await StoreAsync( x, cancellationToken ) )
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 
     ///
     /// <inheritdoc />
