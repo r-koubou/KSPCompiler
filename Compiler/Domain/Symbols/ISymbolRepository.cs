@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 
 namespace KSPCompiler.Domain.Symbols;
 
-[Obsolete( "Use IExternalSymbolImporter<TSymbol> and IExternalSymbolExporter<TSymbol> instead." )]
 public interface ISymbolRepository<TSymbol> : IDisposable where TSymbol : SymbolBase
 {
     /// <summary>
