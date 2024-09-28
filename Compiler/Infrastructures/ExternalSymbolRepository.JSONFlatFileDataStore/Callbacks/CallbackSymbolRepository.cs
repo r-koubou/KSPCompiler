@@ -78,20 +78,40 @@ public class CallbackSymbolRepository : ISymbolRepository<CallbackSymbol>
                 return false;
             }
         }
+
         return true;
     }
 
     ///
     /// <inheritdoc />
     ///
-    public Task<bool> DeleteAsync( CallbackSymbol symbol, CancellationToken cancellationToken = default )
-        => throw new NotImplementedException();
+    public async Task<bool> DeleteAsync( CallbackSymbol symbol, CancellationToken cancellationToken = default )
+    {
+        var existing = Collection.Find( x => x.Name == symbol.Name ).FirstOrDefault();
+
+        if( existing != default )
+        {
+            return await Collection.DeleteOneAsync( existing.Id );
+        }
+
+        return true;
+    }
 
     ///
     /// <inheritdoc />
     ///
-    public Task<bool> DeleteAsync( IEnumerable<CallbackSymbol> symbols, CancellationToken cancellationToken = default )
-        => throw new NotImplementedException();
+    public async Task<bool> DeleteAsync( IEnumerable<CallbackSymbol> symbols, CancellationToken cancellationToken = default )
+    {
+        foreach( var x in symbols )
+        {
+            if( !await DeleteAsync( x, cancellationToken ) )
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     ///
     /// <inheritdoc />

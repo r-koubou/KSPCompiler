@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 using JsonFlatFileDataStore;
@@ -22,29 +23,72 @@ public class CallbackTableLoaderTest
         Directory.CreateDirectory( TestDataDirectory );
     }
 
-    [Test]
-    public void StoreTest()
+    private static CallbackSymbol CreateDummySymbol(string name)
     {
-        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( new FilePath( Path.Combine( TestDataDirectory, "callbacks.json" ) ) );
-
-        var callBack = new CallbackSymbol( true )
+        var callback = new CallbackSymbol( true )
         {
-            Name = "init",
+            Name = name,
             Description = "Initialize callback",
         };
 
-        callBack.AddArgument( new CallbackArgumentSymbol( false )
+        callback.AddArgument( new CallbackArgumentSymbol( false )
         {
             Name = "$arg1",
             Description = "Argument 1",
         });
 
-        var result = repository.Store( callBack );
-        Assert.IsTrue( result );
+        return callback;
     }
 
     [Test]
-    public void UseJsonFlatFileDataStoreTest()
+    public void StoreTest()
+    {
+        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( new FilePath( Path.Combine( TestDataDirectory, "store.json" ) ) );
+
+        var callBack = CreateDummySymbol( "init" );
+        Assert.IsTrue( repository.Store( callBack ) );
+    }
+
+    [Test]
+    public void StoreListTest()
+    {
+        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( new FilePath( Path.Combine( TestDataDirectory, "store_with_list.json" ) ) );
+
+        var callBacks = new List<CallbackSymbol>()
+        {
+            CreateDummySymbol( "init" ),
+            CreateDummySymbol( "start" ),
+        };
+
+        Assert.IsTrue( repository.Store( callBacks ) );
+    }
+
+    [Test]
+    public void DeleteTest()
+    {
+        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( new FilePath( Path.Combine( TestDataDirectory, "delete.json" ) ) );
+        var callBack = CreateDummySymbol( "init" );
+
+        repository.Store( callBack );
+        Assert.IsTrue( repository.Delete( callBack ) );
+    }
+
+    [Test]
+    public void DeleteListTest()
+    {
+        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( new FilePath( Path.Combine( TestDataDirectory, "delete_with_list.json" ) ) );
+        var callBacks = new List<CallbackSymbol>()
+        {
+            CreateDummySymbol( "init" ),
+            CreateDummySymbol( "start" ),
+        };
+
+        repository.Store( callBacks );
+        Assert.IsTrue( repository.Delete( callBacks ) );
+    }
+
+    [Test]
+    public void UseJsonFlatFileDataStoreDemo()
     {
         var jsonFilePath = Path.Combine( TestDataDirectory, "demo.json" );
 
