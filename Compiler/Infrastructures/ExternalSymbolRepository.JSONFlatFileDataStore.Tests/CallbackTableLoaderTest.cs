@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 using JsonFlatFileDataStore;
 
@@ -85,6 +86,44 @@ public class CallbackTableLoaderTest
 
         repository.Store( callBacks );
         Assert.IsTrue( repository.Delete( callBacks ) );
+    }
+
+    [Test]
+    public void FindByNameTest()
+    {
+        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( new FilePath( Path.Combine( TestDataDirectory, "find_by_name.json" ) ) );
+        var callBacks = new List<CallbackSymbol>()
+        {
+            CreateDummySymbol( "init" ),
+            CreateDummySymbol( "start" ),
+        };
+
+        repository.Store( callBacks );
+
+        var found = repository.FindByName( "init" );
+        Assert.AreEqual( 1, found.Count() );
+
+        found = repository.FindByName( "init-" );
+        Assert.AreEqual( 0, found.Count() );
+    }
+
+    [Test]
+    public void FindTest()
+    {
+        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( new FilePath( Path.Combine( TestDataDirectory, "find.json" ) ) );
+        var callBacks = new List<CallbackSymbol>()
+        {
+            CreateDummySymbol( "init" ),
+            CreateDummySymbol( "start" ),
+        };
+
+        repository.Store( callBacks );
+
+        var found = repository.Find( x => x.Name == "init" );
+        Assert.AreEqual( 1, found.Count() );
+
+        found = repository.Find( x => x.Name == "init-" );
+        Assert.AreEqual( 0, found.Count() );
     }
 
     [Test]

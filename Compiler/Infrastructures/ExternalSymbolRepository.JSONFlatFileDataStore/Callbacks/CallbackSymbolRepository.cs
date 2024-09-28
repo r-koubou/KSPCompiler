@@ -116,6 +116,29 @@ public class CallbackSymbolRepository : ISymbolRepository<CallbackSymbol>
     ///
     /// <inheritdoc />
     ///
-    public Task<IEnumerable<CallbackSymbol>> FindAsync( Func<CallbackSymbol, bool> predicate, CancellationToken cancellationToken = default )
-        => throw new NotImplementedException();
+    public async Task<IEnumerable<CallbackSymbol>> FindByNameAsync( string name, CancellationToken cancellationToken = default )
+    {
+        var founds = Collection.Find( x => name == x.Name );
+        var result = new FromJsonTranslator().Translate( founds );
+
+        return result;
+    }
+
+    public async Task<IEnumerable<CallbackSymbol>> FindAsync( Func<CallbackSymbol, bool> predicate, CancellationToken cancellationToken = default )
+    {
+        var result = new List<CallbackSymbol>();
+        var all = Collection.AsQueryable();
+        var translator = new FromJsonTranslator();
+
+        foreach( var x in all )
+        {
+            var symbol = translator.Translate( new[] { x } ).First();
+            if( predicate( symbol ) )
+            {
+                result.Add( symbol );
+            }
+        }
+
+        return result;
+    }
 }

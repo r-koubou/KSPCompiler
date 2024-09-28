@@ -29,6 +29,11 @@ public interface ISymbolRepository<TSymbol> : IDisposable where TSymbol : Symbol
 
     public Task<bool> DeleteAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default );
 
+    public IEnumerable<TSymbol> FindByName( string name )
+        => FindByNameAsync( name ).GetAwaiter().GetResult();
+
+    public Task<IEnumerable<TSymbol>>  FindByNameAsync( string name, CancellationToken cancellationToken = default );
+
     public IEnumerable<TSymbol> Find( Func<TSymbol, bool> predicate )
         => FindAsync( predicate ).GetAwaiter().GetResult();
 
