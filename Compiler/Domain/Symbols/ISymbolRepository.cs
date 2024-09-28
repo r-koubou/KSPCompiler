@@ -12,22 +12,22 @@ public interface ISymbolRepository<TSymbol> : IDisposable where TSymbol : Symbol
     public bool Store( TSymbol symbol )
         => StoreAsync( symbol ).GetAwaiter().GetResult();
 
-    public Task<bool> StoreAsync( TSymbol symbol );
+    public Task<bool> StoreAsync( TSymbol symbol, CancellationToken cancellationToken = default );
 
     public bool Store( IEnumerable<TSymbol> symbols )
         => StoreAsync( symbols ).GetAwaiter().GetResult();
 
-    public Task<bool> StoreAsync( IEnumerable<TSymbol> symbols );
+    public Task<bool> StoreAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default );
 
     public bool Delete( TSymbol symbol )
         => DeleteAsync( symbol ).GetAwaiter().GetResult();
 
-    public Task<bool> DeleteAsync( TSymbol symbol );
+    public Task<bool> DeleteAsync( TSymbol symbol, CancellationToken cancellationToken = default );
 
     public bool Delete( IEnumerable<TSymbol> symbols )
         => DeleteAsync( symbols ).GetAwaiter().GetResult();
 
-    public Task<bool> DeleteAsync( IEnumerable<TSymbol> symbols );
+    public Task<bool> DeleteAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default );
 
     public IEnumerable<TSymbol> Find( Func<TSymbol, bool> predicate )
         => FindAsync( predicate ).GetAwaiter().GetResult();

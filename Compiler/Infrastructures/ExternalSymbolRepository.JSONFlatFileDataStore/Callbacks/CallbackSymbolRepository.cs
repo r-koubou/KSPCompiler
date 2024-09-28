@@ -21,6 +21,9 @@ public class CallbackSymbolRepository : ISymbolRepository<CallbackSymbol>
     private DataStore DataStore { get; }
     private IDocumentCollection<Symbol> Collection { get; }
 
+    public int Count
+        => Collection.Count;
+
     public CallbackSymbolRepository( FilePath repositoryPath )
     {
         RepositoryPath = repositoryPath;
@@ -48,7 +51,7 @@ public class CallbackSymbolRepository : ISymbolRepository<CallbackSymbol>
     ///
     /// <inheritdoc />
     ///
-    public async Task<bool> StoreAsync( CallbackSymbol symbol )
+    public async Task<bool> StoreAsync( CallbackSymbol symbol, CancellationToken cancellationToken = default )
     {
         var jsonObject = new ToJsonObjectTranslator().Translate( new[] { symbol } );
         var existing = Collection.Find( x => x.Name == symbol.Name ).FirstOrDefault();
@@ -68,19 +71,19 @@ public class CallbackSymbolRepository : ISymbolRepository<CallbackSymbol>
     ///
     /// <inheritdoc />
     ///
-    public Task<bool> StoreAsync( IEnumerable<CallbackSymbol> symbols )
+    public Task<bool> StoreAsync( IEnumerable<CallbackSymbol> symbols, CancellationToken cancellationToken = default )
         => throw new NotImplementedException();
 
     ///
     /// <inheritdoc />
     ///
-    public Task<bool> DeleteAsync( CallbackSymbol symbol )
+    public Task<bool> DeleteAsync( CallbackSymbol symbol, CancellationToken cancellationToken = default )
         => throw new NotImplementedException();
 
     ///
     /// <inheritdoc />
     ///
-    public Task<bool> DeleteAsync( IEnumerable<CallbackSymbol> symbols )
+    public Task<bool> DeleteAsync( IEnumerable<CallbackSymbol> symbols, CancellationToken cancellationToken = default )
         => throw new NotImplementedException();
 
     ///
