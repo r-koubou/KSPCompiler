@@ -12,7 +12,7 @@ public static class AstVariableDeclarationExtension
             Name             = self.Name,
             Reserved         = false,
             Description      = $"Created from {nameof( AstVariableDeclarationExtension )}.{nameof( As )}",
-            DataType         = DataTypeUtility.Guess( new SymbolName( self.Name ) ),
+            DataType         = DataTypeUtility.GuessFromSymbolName( new SymbolName( self.Name ) ),
             DataTypeModifier = DataTypeModifierFlag.None
         };
 

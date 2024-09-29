@@ -11,14 +11,14 @@ public static class DataTypeUtility
     /// Convert to data type from symbol name.
     /// </summary>
     /// <exception cref="ArgumentException">Unknown type</exception>
-    public static DataTypeFlag Guess( SymbolName symbolName )
+    public static DataTypeFlag GuessFromSymbolName( string symbolName )
     {
         if( string.IsNullOrEmpty( symbolName ) )
         {
             return DataTypeFlag.None;
         }
 
-        var typePrefix = symbolName.Value[ 0 ];
+        var typePrefix = symbolName[ 0 ];
 
         if( KspRegExpConstants.NonTypePrefix.IsMatch( symbolName ) )
         {
@@ -45,10 +45,17 @@ public static class DataTypeUtility
     }
 
     /// <summary>
+    /// Convert to data type from symbol name.
+    /// </summary>
+    /// <exception cref="ArgumentException">Unknown type</exception>
+    public static DataTypeFlag GuessFromSymbolName( SymbolName symbolName )
+        => GuessFromSymbolName( symbolName.Value );
+
+    /// <summary>
     /// Convert to data type from string with separated '||' if multiple types.
     /// </summary>
     /// <exception cref="ArgumentException">Unknown type</exception>
-    public static DataTypeFlag Guess( string typeString, string separator = "||" )
+    public static DataTypeFlag GuessFromTypeString( string typeString, string separator = "||" )
     {
         var result = DataTypeFlag.None;
 

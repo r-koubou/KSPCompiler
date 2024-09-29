@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <LangVersion>10</LangVersion>
+        <TargetFramework>net6.0</TargetFramework>
+        <RootNamespace>KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Tests</RootNamespace>
+        <Nullable>enable</Nullable>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="nunit" Version="3.13.2" />
+        <PackageReference Include="NUnit3TestAdapter" Version="4.2.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ExternalSymbolRepository.JSONFlatFileDataStore\ExternalSymbolRepository.JSONFlatFileDataStore.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="TestData\CallbackTableLoaderTest\" />
+    </ItemGroup>
+
+</Project>

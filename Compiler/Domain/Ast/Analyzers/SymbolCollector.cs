@@ -156,7 +156,7 @@ public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
         // プリミティブ型
         else
         {
-            variable.DataType = DataTypeUtility.Guess( variable.Name );
+            variable.DataType = DataTypeUtility.GuessFromSymbolName( variable.Name );
         }
         #endregion
     }

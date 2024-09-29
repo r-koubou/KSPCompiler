@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks.Model;
+using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Callbacks.Models;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks.Translators;
+namespace KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Callbacks.Translators;
 
-internal class FromYamlTranslator : IDataTranslator<RootObject, IReadOnlyCollection<CallbackSymbol>>
+internal class FromCallbackSymbolModelTranslator : IDataTranslator<IEnumerable<CallbackSymbolModel>, IReadOnlyCollection<CallbackSymbol>>
 {
-    public IReadOnlyCollection<CallbackSymbol> Translate( RootObject source )
+    public IReadOnlyCollection<CallbackSymbol> Translate( IEnumerable<CallbackSymbolModel> source )
     {
         var result = new List<CallbackSymbol>();
 
-        foreach( var x in source.Symbols )
+        foreach( var x in source )
         {
             var command = new CallbackSymbol( x.AllowMultipleDeclaration )
             {

@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Model;
+using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Commands.Models;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Translators;
+namespace KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Commands.Translators;
 
-internal class FromYamlTranslator : IDataTranslator<RootObject, IReadOnlyCollection<CommandSymbol>>
+internal class FromCommandSymbolModelTranslator : IDataTranslator<IEnumerable<CommandSymbolModel>, IReadOnlyCollection<CommandSymbol>>
 {
-    public IReadOnlyCollection<CommandSymbol> Translate( RootObject source )
+    public IReadOnlyCollection<CommandSymbol> Translate( IEnumerable<CommandSymbolModel> source )
     {
         var result = new List<CommandSymbol>();
 
-        foreach( var x in source.Symbols )
+        foreach( var x in source )
         {
             var command = new CommandSymbol
             {
