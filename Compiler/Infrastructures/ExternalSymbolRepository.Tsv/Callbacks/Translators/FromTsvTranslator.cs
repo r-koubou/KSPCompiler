@@ -65,7 +65,7 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<C
                     Reserved    = false
                 };
 
-                argument.DataType = DataTypeUtility.Guess( argument.Name );
+                argument.DataType = DataTypeUtility.GuessFromSymbolName( argument.Name );
                 symbol.AddArgument( argument );
             }
         );

@@ -29,6 +29,6 @@ public class VariableSymbolTable : SymbolTable<VariableSymbol>
             symbol.TableIndex = uniqueIndexGenerator.Next();
         }
 
-        symbol.DataType = DataTypeUtility.Guess( symbol.Name );
+        symbol.DataType = DataTypeUtility.GuessFromSymbolName( symbol.Name );
     }
 }

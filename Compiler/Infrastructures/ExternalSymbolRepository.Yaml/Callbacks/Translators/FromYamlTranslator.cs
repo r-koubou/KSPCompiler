@@ -32,7 +32,7 @@ internal class FromYamlTranslator : IDataTranslator<RootObject, IReadOnlyCollect
                     Reserved    = false
                 };
 
-                argument.DataType = DataTypeUtility.Guess( argument.Name );
+                argument.DataType = DataTypeUtility.GuessFromSymbolName( argument.Name );
                 command.AddArgument( argument );
             }
 

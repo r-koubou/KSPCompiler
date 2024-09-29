@@ -20,7 +20,7 @@ internal class FromYamlTranslator : IDataTranslator<RootObject, IReadOnlyCollect
                 Name        = x.Name,
                 Reserved    = x.Reserved,
                 Description = x.Description,
-                DataType    = DataTypeUtility.Guess( x.VariableType )
+                DataType    = DataTypeUtility.GuessFromTypeString( x.VariableType )
             };
 
             foreach( var arg in x.InitializerArguments )
@@ -32,7 +32,7 @@ internal class FromYamlTranslator : IDataTranslator<RootObject, IReadOnlyCollect
                     Description = arg.Description,
                 };
 
-                argument.DataType = DataTypeUtility.Guess( argument.Name );
+                argument.DataType = DataTypeUtility.GuessFromSymbolName( argument.Name );
                 uiType.AddInitializerArgument( argument );
             }
 
