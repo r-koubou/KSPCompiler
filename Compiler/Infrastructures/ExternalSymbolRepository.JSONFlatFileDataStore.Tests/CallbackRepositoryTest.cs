@@ -14,9 +14,9 @@ using NUnit.Framework;
 namespace KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Tests;
 
 [TestFixture]
-public class CallbackTableLoaderTest
+public class CallbackRepositoryTest
 {
-    private static readonly string TestDataDirectory = Path.Combine( "TestData", "CallbackTableLoaderTest" );
+    private static readonly string TestDataDirectory = Path.Combine( "TestData", "CallbackRepositoryTest" );
 
     [SetUp]
     public void Setup()
