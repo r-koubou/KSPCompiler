@@ -119,7 +119,7 @@ public class CallbackSymbolRepository : ISymbolRepository<CallbackSymbol>
     public async Task<IEnumerable<CallbackSymbol>> FindByNameAsync( string name, CancellationToken cancellationToken = default )
     {
         var founds = Collection.Find( x => name == x.Name );
-        var result = new FromJsonTranslator().Translate( founds );
+        var result = new FromJsonModelTranslator().Translate( founds );
 
         return result;
     }
@@ -128,7 +128,7 @@ public class CallbackSymbolRepository : ISymbolRepository<CallbackSymbol>
     {
         var result = new List<CallbackSymbol>();
         var all = Collection.AsQueryable();
-        var translator = new FromJsonTranslator();
+        var translator = new FromJsonModelTranslator();
 
         foreach( var x in all )
         {
@@ -140,5 +140,13 @@ public class CallbackSymbolRepository : ISymbolRepository<CallbackSymbol>
         }
 
         return result;
+    }
+
+    public async Task<IEnumerable<CallbackSymbol>> FindAllAsync( CancellationToken cancellationToken = default )
+    {
+        var all = Collection.AsQueryable();
+        var translator = new FromJsonModelTranslator();
+
+        return translator.Translate( all );
     }
 }

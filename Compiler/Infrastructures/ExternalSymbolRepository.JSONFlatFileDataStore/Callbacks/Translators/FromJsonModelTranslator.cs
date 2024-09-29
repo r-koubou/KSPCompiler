@@ -7,7 +7,7 @@ using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Callbacks.Model
 
 namespace KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Callbacks.Translators;
 
-internal class FromJsonTranslator : IDataTranslator<IEnumerable<Symbol>, IReadOnlyCollection<CallbackSymbol>>
+internal class FromJsonModelTranslator : IDataTranslator<IEnumerable<Symbol>, IReadOnlyCollection<CallbackSymbol>>
 {
     public IReadOnlyCollection<CallbackSymbol> Translate( IEnumerable<Symbol> source )
     {

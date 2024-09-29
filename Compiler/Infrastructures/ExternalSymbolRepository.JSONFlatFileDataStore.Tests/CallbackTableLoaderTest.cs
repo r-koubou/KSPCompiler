@@ -127,6 +127,22 @@ public class CallbackTableLoaderTest
     }
 
     [Test]
+    public void FindAllTest()
+    {
+        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( new FilePath( Path.Combine( TestDataDirectory, "find_all.json" ) ) );
+        var callBacks = new List<CallbackSymbol>()
+        {
+            CreateDummySymbol( "init" ),
+            CreateDummySymbol( "start" ),
+        };
+
+        repository.Store( callBacks );
+
+        var found = repository.FindAll();
+        Assert.AreEqual( 2, found.Count() );
+    }
+
+    [Test]
     public void UseJsonFlatFileDataStoreDemo()
     {
         var jsonFilePath = Path.Combine( TestDataDirectory, "demo.json" );
@@ -154,7 +170,6 @@ public class CallbackTableLoaderTest
         {
             Console.Out.WriteLine("items is null");
         }
-
     }
 
     private class DemoRecord

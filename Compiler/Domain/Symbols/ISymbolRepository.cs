@@ -38,4 +38,9 @@ public interface ISymbolRepository<TSymbol> : IDisposable where TSymbol : Symbol
         => FindAsync( predicate ).GetAwaiter().GetResult();
 
     public Task<IEnumerable<TSymbol>> FindAsync( Func<TSymbol, bool> predicate, CancellationToken cancellationToken = default );
+
+    public IEnumerable<TSymbol> FindAll()
+        => FindAllAsync().GetAwaiter().GetResult();
+
+    public Task<IEnumerable<TSymbol>> FindAllAsync( CancellationToken cancellationToken = default );
 }
