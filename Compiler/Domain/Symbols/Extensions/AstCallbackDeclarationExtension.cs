@@ -23,7 +23,7 @@ public static class AstCallbackDeclarationExtension
                 Reserved = false
             };
 
-            argument.DataType = DataTypeUtility.Guess( argument.Name );
+            argument.DataType = DataTypeUtility.GuessFromSymbolName( argument.Name );
             result.AddArgument( argument );
         }
 
