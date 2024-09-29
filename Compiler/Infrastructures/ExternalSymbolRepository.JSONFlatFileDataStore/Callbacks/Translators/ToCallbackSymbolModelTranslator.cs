@@ -16,19 +16,19 @@ internal class ToCallbackSymbolModelTranslator : IDataTranslator<IEnumerable<Cal
         {
             var symbol = new CallbackSymbolModel
             {
-                Name        = x.Name.Value,
-                Reserved    = x.Reserved,
-                AllowMultipleDeclaration  = x.AllowMultipleDeclaration,
-                Description = x.Description.Value
+                Name                     = x.Name.Value,
+                Reserved                 = x.Reserved,
+                AllowMultipleDeclaration = x.AllowMultipleDeclaration,
+                Description              = x.Description.Value
             };
 
             foreach( var arg in x.Arguments )
             {
                 var argument = new CallbackArgumentModel
                 {
-                    Name        = arg.Name,
+                    Name            = arg.Name,
                     RequiredDeclare = arg.RequiredDeclareOnInit,
-                    Description = arg.Description
+                    Description     = arg.Description
                 };
 
                 symbol.Arguments.Add( argument );
