@@ -10,7 +10,7 @@ public class CallbackSymbolRepository : SymbolRepository<CallbackSymbol, Callbac
 {
     private const string CurrentVersion = "20240929";
 
-    public CallbackSymbolRepository( FilePath repositoryPath ) : base( repositoryPath, new ToModelTranslator(), new FromModelTranslator() )
+    public CallbackSymbolRepository( FilePath repositoryPath ) : base( repositoryPath, new ToCallbackSymbolModelTranslator(), new FromCallbackSymbolModelTranslator() )
     {
         DataStore.ReplaceItem( "version", CurrentVersion, upsert: true );
     }
