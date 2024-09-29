@@ -2,7 +2,7 @@ using System;
 
 namespace KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Commons.Models;
 
-public interface IModelBase
+public interface ISymbolModel
 {
     string Id { get; set; }
     string Name { get; set; }

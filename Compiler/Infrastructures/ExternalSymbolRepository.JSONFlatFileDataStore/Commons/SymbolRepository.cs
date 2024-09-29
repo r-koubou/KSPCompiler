@@ -15,7 +15,7 @@ namespace KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Commons;
 
 public abstract class SymbolRepository<TSymbol, TModel> : ISymbolRepository<TSymbol>
     where TSymbol : SymbolBase
-    where TModel : class, IModelBase
+    where TModel : class, ISymbolModel
 {
     protected FilePath RepositoryPath { get; }
     protected DataStore DataStore { get; }

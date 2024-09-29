@@ -24,7 +24,7 @@ internal class ToModelTranslator : IDataTranslator<IEnumerable<CallbackSymbol>, 
 
             foreach( var arg in x.Arguments )
             {
-                var argument = new ArgumentModel
+                var argument = new CallbackArgumentModel
                 {
                     Name        = arg.Name,
                     RequiredDeclare = arg.RequiredDeclareOnInit,
