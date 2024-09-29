@@ -17,10 +17,11 @@ internal class FromUITypeModelTranslator : IDataTranslator<IEnumerable<UITypeSym
         {
             var uiType = new UITypeSymbol( x.RequireInitializer )
             {
-                Name        = x.Name,
-                Reserved    = x.Reserved,
-                Description = x.Description,
-                DataType    = DataTypeUtility.Guess( x.VariableType )
+                Name             = x.Name,
+                Reserved         = x.Reserved,
+                Description      = x.Description,
+                DataType         = DataTypeUtility.Guess( x.VariableType ),
+                DataTypeModifier = DataTypeModifierFlag.UI
             };
 
             foreach( var arg in x.InitializerArguments )
