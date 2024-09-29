@@ -1,9 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
-using JsonFlatFileDataStore;
 
 using KSPCompiler.Commons.Path;
 using KSPCompiler.Domain.Symbols;
@@ -141,43 +138,4 @@ public class CallbackRepositoryTest
         var found = repository.FindAll();
         Assert.AreEqual( 2, found.Count() );
     }
-
-    [Test]
-    public void UseJsonFlatFileDataStoreDemo()
-    {
-        var jsonFilePath = Path.Combine( TestDataDirectory, "demo.json" );
-
-        var record = new DemoRecord { id = Guid.NewGuid(), Name = "test" };
-        var records = new[] { record };
-
-        using var store = new DataStore( jsonFilePath );
-
-        store.InsertItem( "version", "20240928" );
-        store.InsertItem( "records", records );
-
-        var items = store.GetCollection<DemoRecord>( "records" );
-
-        if( items != null )
-        {
-            Console.Out.WriteLine($"items.Count: {items.Count}");
-
-            foreach( var x in items.AsQueryable() )
-            {
-                Console.Out.WriteLine(x.Name);
-            }
-        }
-        else
-        {
-            Console.Out.WriteLine("items is null");
-        }
-    }
-
-    private class DemoRecord
-    {
-        public Guid id { get; set; }
-        public string Name { get; set; } = "";
-        public DateTime Created { get; set; } = DateTime.Now;
-        public DateTime Updated { get; set; } = DateTime.Now;
-    }
-
 }
