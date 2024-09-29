@@ -34,7 +34,7 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<C
                     Name        = values[ (int)Column.Name ],
                     Reserved    = TsvUtility.ParseBoolean( values[ (int)Column.Reserved ] ),
                     Description = values[ (int)Column.Description ],
-                    DataType    = DataTypeUtility.Guess( values[ (int)Column.ReturnType ] )
+                    DataType    = DataTypeUtility.GuessFromTypeString( values[ (int)Column.ReturnType ] )
                 };
 
                 if( values.Length > (int)Column.ArgumentBegin )
@@ -63,7 +63,7 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<C
                     Reserved    = false
                 };
 
-                argument.DataType = DataTypeUtility.Guess( argument.Name );
+                argument.DataType = DataTypeUtility.GuessFromSymbolName( argument.Name );
                 command.AddArgument( argument );
             }
         );

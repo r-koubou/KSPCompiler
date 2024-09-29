@@ -20,7 +20,7 @@ internal class FromUITypeModelTranslator : IDataTranslator<IEnumerable<UITypeSym
                 Name             = x.Name,
                 Reserved         = x.Reserved,
                 Description      = x.Description,
-                DataType         = DataTypeUtility.Guess( x.VariableType ),
+                DataType         = DataTypeUtility.GuessFromTypeString( x.VariableType ),
                 DataTypeModifier = DataTypeModifierFlag.UI
             };
 
@@ -33,7 +33,7 @@ internal class FromUITypeModelTranslator : IDataTranslator<IEnumerable<UITypeSym
                     Description = arg.Description,
                 };
 
-                argument.DataType = DataTypeUtility.Guess( argument.Name );
+                argument.DataType = DataTypeUtility.GuessFromSymbolName( argument.Name );
                 uiType.AddInitializerArgument( argument );
             }
 

@@ -28,7 +28,7 @@ public class VariableRepositoryTest
         {
             Name = name,
             Description = "Dummy variable",
-            DataType = DataTypeUtility.Guess( new SymbolName( name ) )
+            DataType = DataTypeUtility.GuessFromSymbolName( new SymbolName( name ) )
         };
 
         return variable;
