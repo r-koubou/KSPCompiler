@@ -6,15 +6,15 @@ using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Callbacks.Model
 
 namespace KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Callbacks.Translators;
 
-internal class ToJsonObjectTranslator : IDataTranslator<IEnumerable<CallbackSymbol>, IEnumerable<Symbol>>
+internal class ToModelTranslator : IDataTranslator<IEnumerable<CallbackSymbol>, IEnumerable<CallbackSymbolModel>>
 {
-    public IEnumerable<Symbol> Translate( IEnumerable<CallbackSymbol> source )
+    public IEnumerable<CallbackSymbolModel> Translate( IEnumerable<CallbackSymbol> source )
     {
-        var result = new List<Symbol>();
+        var result = new List<CallbackSymbolModel>();
 
         foreach( var x in source )
         {
-            var symbol = new Symbol
+            var symbol = new CallbackSymbolModel
             {
                 Name        = x.Name.Value,
                 Reserved    = x.Reserved,
@@ -24,7 +24,7 @@ internal class ToJsonObjectTranslator : IDataTranslator<IEnumerable<CallbackSymb
 
             foreach( var arg in x.Arguments )
             {
-                var argument = new Argument
+                var argument = new ArgumentModel
                 {
                     Name        = arg.Name,
                     RequiredDeclare = arg.RequiredDeclareOnInit,

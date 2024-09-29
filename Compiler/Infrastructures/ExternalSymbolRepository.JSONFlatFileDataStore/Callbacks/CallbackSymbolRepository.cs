@@ -6,11 +6,11 @@ using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Commons;
 
 namespace KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Callbacks;
 
-public class CallbackSymbolRepository : SymbolRepository<CallbackSymbol, Symbol>
+public class CallbackSymbolRepository : SymbolRepository<CallbackSymbol, CallbackSymbolModel>
 {
     private const string CurrentVersion = "20240929";
 
-    public CallbackSymbolRepository( FilePath repositoryPath ) : base( repositoryPath, new ToJsonObjectTranslator(), new FromJsonModelTranslator() )
+    public CallbackSymbolRepository( FilePath repositoryPath ) : base( repositoryPath, new ToModelTranslator(), new FromModelTranslator() )
     {
         DataStore.ReplaceItem( "version", CurrentVersion, upsert: true );
     }
