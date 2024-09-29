@@ -5,7 +5,7 @@ using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Commons.Models;
 
 namespace KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Callbacks.Models;
 
-public class CallbackSymbolModel : ISymbolModel
+public sealed class CallbackSymbolModel : ISymbolModel
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

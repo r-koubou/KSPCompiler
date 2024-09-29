@@ -1,6 +1,6 @@
 namespace KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Callbacks.Models;
 
-public class CallbackArgumentModel
+public sealed class CallbackArgumentModel
 {
     public string Name { get; set; } = string.Empty;
     public bool RequiredDeclare { get; set; }
