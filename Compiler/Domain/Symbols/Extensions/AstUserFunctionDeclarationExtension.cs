@@ -1,0 +1,20 @@
+using KSPCompiler.Domain.Ast.Node.Blocks;
+using KSPCompiler.Domain.Symbols.MetaData;
+
+namespace KSPCompiler.Domain.Symbols.Extensions;
+
+public static class AstUserFunctionDeclarationExtension
+{
+    public static UserFunctionSymbol As( this AstUserFunctionDeclaration self )
+    {
+        var result = new UserFunctionSymbol
+        {
+            Name        = self.Name,
+            Reserved    = false,
+            Description = $"Created from {nameof(AstUserFunctionDeclarationExtension)}.{nameof(As)}",
+            DataType    = DataTypeFlag.None
+        };
+
+        return result;
+    }
+}

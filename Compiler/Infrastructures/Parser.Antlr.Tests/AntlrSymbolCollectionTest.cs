@@ -36,4 +36,18 @@ public class AntlrSymbolCollectionTest
         compilerMessageManger.WriteTo( System.Console.Out );
         Assert.IsTrue( symbolAnalyzer.Callbacks.Count == 1 );
     }
+
+    [Test]
+    public void UserFunctionSymbolAnalyzeTest()
+    {
+        var compilerMessageManger = ICompilerMessageManger.Default;
+        var ast = ParseTestUtility.Parse( TestDataDirectory, "UserFunctionSymbolTest.txt" );
+        var symbolAnalyzer = new SymbolCollector( compilerMessageManger );
+
+        Assert.DoesNotThrow( () => { symbolAnalyzer.Analyze( ast ); } );
+        compilerMessageManger.WriteTo( System.Console.Out );
+
+        Assert.IsTrue( compilerMessageManger.Count() == 0 );
+        Assert.IsTrue( symbolAnalyzer.UserFunctions.Count == 1 );
+    }
 }

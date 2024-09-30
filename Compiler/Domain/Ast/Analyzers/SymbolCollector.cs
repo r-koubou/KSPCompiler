@@ -23,6 +23,7 @@ public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
     public ISymbolTable<VariableSymbol> Variables { get; } = new VariableSymbolTable();
     public ISymbolTable<UITypeSymbol> UITypes { get; } = new UITypeSymbolTable();
     public ISymbolTable<CallbackSymbol> Callbacks { get; } = new CallbackSymbolTable();
+    public ISymbolTable<UserFunctionSymbol> UserFunctions { get; } = new UserFunctionSymbolTable();
 
 
     public ISymbolTable<VariableSymbol> ReservedVariables { get; }
@@ -163,6 +164,7 @@ public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
 
     #endregion ~Variable Collection
 
+
     #region Callback Collection
 
     public override IAstNode Visit( AstCallbackDeclaration node )
@@ -211,4 +213,22 @@ public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
     }
 
     #endregion ~Callback Collection
+
+    #region User function Collection
+
+    public override IAstNode Visit( AstUserFunctionDeclaration node )
+    {
+        node.AcceptChildren( this );
+
+        var thisUserFunction = node.As();
+
+        if( !UserFunctions.Add( thisUserFunction ) )
+        {
+            CompilerMessageManger.Error( node, Resource.symbol_error_declare_userfunction_already, node.Name );
+        }
+
+        return node;
+    }
+
+    #endregion ~User function Collection
 }
