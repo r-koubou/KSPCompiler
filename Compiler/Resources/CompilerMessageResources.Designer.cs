@@ -105,12 +105,6 @@ namespace KSPCompiler.Resources {
             }
         }
         
-        public static string symbol_error_declare_userfunction_invalid_prefix {
-            get {
-                return ResourceManager.GetString("symbol.error.declare.userfunction.invalid.prefix", resourceCulture);
-            }
-        }
-        
         public static string symbol_error_declare_userfunction_already {
             get {
                 return ResourceManager.GetString("symbol.error.declare.userfunction.already", resourceCulture);

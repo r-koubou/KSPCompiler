@@ -41,9 +41,6 @@
     <data name="symbol.error.declare.callback.already" xml:space="preserve">
         <value>コールバック {0} は既に宣言されています</value>
     </data>
-    <data name="symbol.error.declare.userfunction.invalid.prefix" xml:space="preserve">
-        <value>ユーザー関数名 `{0}` は使用不可能な接頭文字です</value>
-    </data>
     <data name="symbol.error.declare.userfunction.already" xml:space="preserve">
         <value>ユーザー関数 {0} は既に宣言されています</value>
     </data>

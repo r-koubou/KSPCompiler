@@ -48,9 +48,6 @@
     <data name="symbol.error.declare.callback.already" xml:space="preserve">
         <value>Callback {0} has already declared</value>
     </data>
-    <data name="symbol.error.declare.userfunction.invalid.prefix" xml:space="preserve">
-        <value>User function name `{0}` is an unusable prefix</value>
-    </data>
     <data name="symbol.error.declare.userfunction.already" xml:space="preserve">
         <value>User function {0} has already declared</value>
     </data>
