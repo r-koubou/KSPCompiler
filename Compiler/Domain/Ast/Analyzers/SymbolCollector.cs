@@ -22,14 +22,9 @@ public sealed class SymbolCollector : DefaultAstVisitor, ISymbolCollector
     #region Symbol Tables
     public ISymbolTable<VariableSymbol> Variables { get; } = new VariableSymbolTable();
     public ISymbolTable<UITypeSymbol> UITypes { get; } = new UITypeSymbolTable();
-    public ISymbolTable<CallbackSymbol> Callbacks { get; } = new CallbackSymbolTable();
+    public ISymbolTable<CallbackSymbol> UserCallbacks { get; } = new CallbackSymbolTable();
+    public ISymbolTable<CallbackSymbol> ReservedCallbacks { get; }
     public ISymbolTable<UserFunctionSymbol> UserFunctions { get; } = new UserFunctionSymbolTable();
-
-
-    private ISymbolTable<VariableSymbol> ReservedVariables { get; }
-    private ISymbolTable<UITypeSymbol> ReservedUITypes { get; }
-    private ISymbolTable<CallbackSymbol> ReservedCallbacks { get; }
-    private ISymbolTable<CommandSymbol> ReservedCommands { get; }
 
     #endregion
 
@@ -37,22 +32,19 @@ public sealed class SymbolCollector : DefaultAstVisitor, ISymbolCollector
         ICompilerMessageManger compilerMessageManger,
         ISymbolTable<VariableSymbol> reservedVariables,
         ISymbolTable<UITypeSymbol> reservedUITypes,
-        ISymbolTable<CallbackSymbol> reservedCallbacks,
-        ISymbolTable<CommandSymbol> reservedCommands )
+        ISymbolTable<CallbackSymbol> reservedCallbacks )
     {
         CompilerMessageManger = compilerMessageManger;
-        ReservedVariables     = reservedVariables;
-        ReservedUITypes       = reservedUITypes;
-        ReservedCallbacks     = reservedCallbacks;
-        ReservedCommands      = reservedCommands;
+        Variables.AddRange( reservedVariables );
+        UITypes.AddRange( reservedUITypes );
+        ReservedCallbacks = reservedCallbacks;
     }
 
     public SymbolCollector( ICompilerMessageManger compilerMessageManger ) : this(
         compilerMessageManger,
         new VariableSymbolTable(),
         new UITypeSymbolTable(),
-        new CallbackSymbolTable(),
-        new CommandSymbolTable()
+        new CallbackSymbolTable()
     )
     {}
 
@@ -80,10 +72,12 @@ public sealed class SymbolCollector : DefaultAstVisitor, ISymbolCollector
         var name = node.Name;
         variable = NullVariableSymbol.Instance;
 
+        var reservedPrefixValidator = new NonAstVariableNamePrefixReservedValidator();
+
         //--------------------------------------------------------------------------
         #region 予約済み（NIが禁止している）接頭語検査
         //--------------------------------------------------------------------------
-        if( KspValueConstants.ContainsNiReservedPrefix( node.Name ) )
+        if( !reservedPrefixValidator.Validate( node ) )
         {
             CompilerMessageManger.Error( node, Resource.symbol_error_declare_variable_ni_reserved, name );
         }
@@ -203,7 +197,7 @@ public sealed class SymbolCollector : DefaultAstVisitor, ISymbolCollector
             thisCallback = reservedCallback;
         }
 
-        if( !Callbacks.Add( thisCallback ) )
+        if( !UserCallbacks.Add( thisCallback ) )
         {
             CompilerMessageManger.Error( node, Resource.symbol_error_declare_callback_already, node.Name );
         }
