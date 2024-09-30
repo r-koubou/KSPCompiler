@@ -34,7 +34,7 @@ public class AntlrSymbolCollectionTest
 
         Assert.DoesNotThrow( () => { symbolAnalyzer.Analyze( ast ); } );
         compilerMessageManger.WriteTo( System.Console.Out );
-        Assert.IsTrue( symbolAnalyzer.Callbacks.Count == 1 );
+        Assert.IsTrue( symbolAnalyzer.UserCallbacks.Count == 1 );
     }
 
     [Test]
