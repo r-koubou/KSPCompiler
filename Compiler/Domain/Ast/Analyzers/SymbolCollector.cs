@@ -15,7 +15,7 @@ namespace KSPCompiler.Domain.Ast.Analyzers;
 // TODO ビルトインなど予約済みのシンボルを事前にファイルからロードする（変数、コールバック、コマンド）
 // 外部で事前にロードした結果をコンストラクタで受け取る(ISymbolTable<T>で)
 
-public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
+public sealed class SymbolCollector : DefaultAstVisitor, ISymbolCollector
 {
     private ICompilerMessageManger CompilerMessageManger { get; }
 
@@ -26,10 +26,10 @@ public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
     public ISymbolTable<UserFunctionSymbol> UserFunctions { get; } = new UserFunctionSymbolTable();
 
 
-    public ISymbolTable<VariableSymbol> ReservedVariables { get; }
-    public ISymbolTable<UITypeSymbol> ReservedUITypes { get; }
-    public ISymbolTable<CallbackSymbol> ReservedCallbacks { get; }
-    public ISymbolTable<CommandSymbol> ReservedCommands { get; }
+    private ISymbolTable<VariableSymbol> ReservedVariables { get; }
+    private ISymbolTable<UITypeSymbol> ReservedUITypes { get; }
+    private ISymbolTable<CallbackSymbol> ReservedCallbacks { get; }
+    private ISymbolTable<CommandSymbol> ReservedCommands { get; }
 
     #endregion
 
@@ -41,10 +41,10 @@ public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
         ISymbolTable<CommandSymbol> reservedCommands )
     {
         CompilerMessageManger = compilerMessageManger;
-        ReservedVariables = reservedVariables;
-        ReservedUITypes = reservedUITypes;
-        ReservedCallbacks = reservedCallbacks;
-        ReservedCommands = reservedCommands;
+        ReservedVariables     = reservedVariables;
+        ReservedUITypes       = reservedUITypes;
+        ReservedCallbacks     = reservedCallbacks;
+        ReservedCommands      = reservedCommands;
     }
 
     public SymbolCollector( ICompilerMessageManger compilerMessageManger ) : this(
