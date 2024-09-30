@@ -164,7 +164,6 @@ public sealed class SymbolCollector : DefaultAstVisitor, ISymbolCollector
 
     #endregion ~Variable Collection
 
-
     #region Callback Collection
 
     public override IAstNode Visit( AstCallbackDeclaration node )
