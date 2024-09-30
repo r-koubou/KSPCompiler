@@ -15,7 +15,7 @@ namespace KSPCompiler.Domain.Ast.Analyzers;
 // TODO ビルトインなど予約済みのシンボルを事前にファイルからロードする（変数、コールバック、コマンド）
 // 外部で事前にロードした結果をコンストラクタで受け取る(ISymbolTable<T>で)
 
-public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
+public sealed class SymbolCollector : DefaultAstVisitor, ISymbolCollector
 {
     private ICompilerMessageManger CompilerMessageManger { get; }
 
@@ -23,12 +23,13 @@ public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
     public ISymbolTable<VariableSymbol> Variables { get; } = new VariableSymbolTable();
     public ISymbolTable<UITypeSymbol> UITypes { get; } = new UITypeSymbolTable();
     public ISymbolTable<CallbackSymbol> Callbacks { get; } = new CallbackSymbolTable();
+    public ISymbolTable<UserFunctionSymbol> UserFunctions { get; } = new UserFunctionSymbolTable();
 
 
-    public ISymbolTable<VariableSymbol> ReservedVariables { get; }
-    public ISymbolTable<UITypeSymbol> ReservedUITypes { get; }
-    public ISymbolTable<CallbackSymbol> ReservedCallbacks { get; }
-    public ISymbolTable<CommandSymbol> ReservedCommands { get; }
+    private ISymbolTable<VariableSymbol> ReservedVariables { get; }
+    private ISymbolTable<UITypeSymbol> ReservedUITypes { get; }
+    private ISymbolTable<CallbackSymbol> ReservedCallbacks { get; }
+    private ISymbolTable<CommandSymbol> ReservedCommands { get; }
 
     #endregion
 
@@ -40,10 +41,10 @@ public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
         ISymbolTable<CommandSymbol> reservedCommands )
     {
         CompilerMessageManger = compilerMessageManger;
-        ReservedVariables = reservedVariables;
-        ReservedUITypes = reservedUITypes;
-        ReservedCallbacks = reservedCallbacks;
-        ReservedCommands = reservedCommands;
+        ReservedVariables     = reservedVariables;
+        ReservedUITypes       = reservedUITypes;
+        ReservedCallbacks     = reservedCallbacks;
+        ReservedCommands      = reservedCommands;
     }
 
     public SymbolCollector( ICompilerMessageManger compilerMessageManger ) : this(
@@ -211,4 +212,22 @@ public class SymbolCollector : DefaultAstVisitor, ISymbolCollector
     }
 
     #endregion ~Callback Collection
+
+    #region User function Collection
+
+    public override IAstNode Visit( AstUserFunctionDeclaration node )
+    {
+        node.AcceptChildren( this );
+
+        var thisUserFunction = node.As();
+
+        if( !UserFunctions.Add( thisUserFunction ) )
+        {
+            CompilerMessageManger.Error( node, Resource.symbol_error_declare_userfunction_already, node.Name );
+        }
+
+        return node;
+    }
+
+    #endregion ~User function Collection
 }

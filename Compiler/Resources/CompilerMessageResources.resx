@@ -48,4 +48,7 @@
     <data name="symbol.error.declare.callback.already" xml:space="preserve">
         <value>Callback {0} has already declared</value>
     </data>
+    <data name="symbol.error.declare.userfunction.already" xml:space="preserve">
+        <value>User function {0} has already declared</value>
+    </data>
 </root>

@@ -104,5 +104,11 @@ namespace KSPCompiler.Resources {
                 return ResourceManager.GetString("symbol.error.declare.callback.already", resourceCulture);
             }
         }
+        
+        public static string symbol_error_declare_userfunction_already {
+            get {
+                return ResourceManager.GetString("symbol.error.declare.userfunction.already", resourceCulture);
+            }
+        }
     }
 }

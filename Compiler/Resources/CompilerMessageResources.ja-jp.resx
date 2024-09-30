@@ -41,4 +41,7 @@
     <data name="symbol.error.declare.callback.already" xml:space="preserve">
         <value>コールバック {0} は既に宣言されています</value>
     </data>
+    <data name="symbol.error.declare.userfunction.already" xml:space="preserve">
+        <value>ユーザー関数 {0} は既に宣言されています</value>
+    </data>
 </root>
