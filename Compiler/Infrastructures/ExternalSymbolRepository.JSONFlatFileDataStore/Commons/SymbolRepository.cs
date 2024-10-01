@@ -117,7 +117,6 @@ public abstract class SymbolRepository<TSymbol, TModel> : ISymbolRepository<TSym
         var createdCount = 0;
         var updatedCount = 0;
         var failedCount = 0;
-        Exception? exception = null;
 
         foreach( var x in symbols )
         {
@@ -126,48 +125,92 @@ public abstract class SymbolRepository<TSymbol, TModel> : ISymbolRepository<TSym
             {
                 failedCount++;
             }
+            else
+            {
+                createdCount += result.CreatedCount;
+                updatedCount += result.UpdatedCount;
+            }
 
             if( result.Exception == null )
             {
                 continue;
             }
 
-            exception = result.Exception;
-            break;
+            return new StoreResult( true, createdCount, updatedCount, failedCount, result.Exception );
         }
 
-        return new StoreResult( true, createdCount, updatedCount, failedCount, exception );
+        return new StoreResult( true, createdCount, updatedCount, failedCount );
     }
 
     ///
     /// <inheritdoc />
     ///
-    public virtual async Task<bool> DeleteAsync( TSymbol symbol, CancellationToken cancellationToken = default )
+    public virtual async Task<DeleteResult> DeleteAsync( TSymbol symbol, CancellationToken cancellationToken = default )
     {
         var existing = Collection.Find( x => x.Name == symbol.Name ).FirstOrDefault();
 
-        if( existing != default )
+        var success = false;
+        var deletedCount = 0;
+        var failedCount = 0;
+        Exception? exception = null;
+
+        try
         {
-            return await Collection.DeleteOneAsync( existing.Id );
+            if( existing != default )
+            {
+                var result = await Collection.DeleteOneAsync( existing.Id );
+                if( result )
+                {
+                    deletedCount = 1;
+                    success = true;
+                }
+                else
+                {
+                    failedCount = 1;
+                }
+            }
+            else
+            {
+                return new DeleteResult( true, 0, 0 );
+            }
+        }
+        catch( Exception e )
+        {
+            exception = e;
         }
 
-        return true;
+        return new DeleteResult( success, deletedCount, failedCount, exception );
     }
 
     ///
     /// <inheritdoc />
     ///
-    public virtual async Task<bool> DeleteAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default )
+    public virtual async Task<DeleteResult> DeleteAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default )
     {
+        var deletedCount = 0;
+        var failedCount = 0;
+
         foreach( var x in symbols )
         {
-            if( !await DeleteAsync( x, cancellationToken ) )
+            var result = await DeleteAsync( x, cancellationToken );
+            if( !result.Success )
             {
-                return false;
+                failedCount++;
             }
+            else
+            {
+                deletedCount += result.DeletedCount;
+            }
+
+            if( result.Exception == null )
+            {
+                continue;
+            }
+
+            return new DeleteResult( true, deletedCount, failedCount, result.Exception );
         }
 
-        return true;
+        return new DeleteResult( true, deletedCount, failedCount );
     }
 
     ///

@@ -75,7 +75,10 @@ public class CallbackRepositoryTest
         var callBack = CreateDummySymbol( "init" );
 
         repository.Store( callBack );
-        Assert.IsTrue( repository.Delete( callBack ) );
+        var result = repository.Delete( callBack );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.DeletedCount == 1 );
     }
 
     [Test]
@@ -89,7 +92,10 @@ public class CallbackRepositoryTest
         };
 
         repository.Store( callBacks );
-        Assert.IsTrue( repository.Delete( callBacks ) );
+        var result = repository.Delete( callBacks );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.DeletedCount == 2 );
     }
 
     [Test]

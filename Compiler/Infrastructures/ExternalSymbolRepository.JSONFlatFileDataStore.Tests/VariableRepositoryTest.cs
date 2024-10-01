@@ -68,24 +68,30 @@ public class VariableRepositoryTest
     public void DeleteTest()
     {
         using ISymbolRepository<VariableSymbol> repository = new VariableSymbolRepository( new FilePath( Path.Combine( TestDataDirectory, "delete.json" ) ) );
-        var callBack = CreateDummySymbol( "$ENGINE_PAR_VOLUME" );
+        var variable = CreateDummySymbol( "$ENGINE_PAR_VOLUME" );
 
-        repository.Store( callBack );
-        Assert.IsTrue( repository.Delete( callBack ) );
+        repository.Store( variable );
+        var result = repository.Delete( variable );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.DeletedCount == 1 );
     }
 
     [Test]
     public void DeleteListTest()
     {
         using ISymbolRepository<VariableSymbol> repository = new VariableSymbolRepository( new FilePath( Path.Combine( TestDataDirectory, "delete_with_list.json" ) ) );
-        var commands = new List<VariableSymbol>()
+        var variables = new List<VariableSymbol>()
         {
             CreateDummySymbol( "$ENGINE_PAR_VOLUME" ),
             CreateDummySymbol( "$ENGINE_PAR_PAN" ),
         };
 
-        repository.Store( commands );
-        Assert.IsTrue( repository.Delete( commands ) );
+        repository.Store( variables );
+        var result = repository.Delete( variables );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.DeletedCount == 2 );
     }
 
     [Test]

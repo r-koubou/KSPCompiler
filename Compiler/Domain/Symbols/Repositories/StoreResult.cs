@@ -21,5 +21,5 @@ public sealed class StoreResult
     }
 
     public override string ToString()
-        => $"Success: {Success}, Created: {CreatedCount}, Updated: {UpdatedCount}, Failed: {FailedCount}";
+        => $"Success: {Success}, Created: {CreatedCount}, Updated: {UpdatedCount}, Failed: {FailedCount}, Exception: {Exception}";
 }

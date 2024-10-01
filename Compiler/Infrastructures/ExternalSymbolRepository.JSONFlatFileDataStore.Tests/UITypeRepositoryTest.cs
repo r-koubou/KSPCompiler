@@ -75,24 +75,30 @@ public class UITypeRepositoryTest
     public void DeleteTest()
     {
         using ISymbolRepository<UITypeSymbol> repository = new UITypeSymbolRepository( new FilePath( Path.Combine( TestDataDirectory, "delete.json" ) ) );
-        var callBack = CreateDummySymbol( "ui_button" );
+        var uiType = CreateDummySymbol( "ui_button" );
 
-        repository.Store( callBack );
-        Assert.IsTrue( repository.Delete( callBack ) );
+        repository.Store( uiType );
+        var result = repository.Delete( uiType );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.DeletedCount == 1 );
     }
 
     [Test]
     public void DeleteListTest()
     {
         using ISymbolRepository<UITypeSymbol> repository = new UITypeSymbolRepository( new FilePath( Path.Combine( TestDataDirectory, "delete_with_list.json" ) ) );
-        var commands = new List<UITypeSymbol>()
+        var uiTypes = new List<UITypeSymbol>()
         {
             CreateDummySymbol( "ui_button" ),
             CreateDummySymbol( "ui_label" ),
         };
 
-        repository.Store( commands );
-        Assert.IsTrue( repository.Delete( commands ) );
+        repository.Store( uiTypes );
+        var result = repository.Delete( uiTypes );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.DeletedCount == 2 );
     }
 
     [Test]

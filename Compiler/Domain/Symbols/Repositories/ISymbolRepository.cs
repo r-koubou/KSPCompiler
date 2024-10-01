@@ -19,15 +19,15 @@ public interface ISymbolRepository<TSymbol> : IDisposable where TSymbol : Symbol
 
     public Task<StoreResult> StoreAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default );
 
-    public bool Delete( TSymbol symbol )
+    public DeleteResult Delete( TSymbol symbol )
         => DeleteAsync( symbol ).GetAwaiter().GetResult();
 
-    public Task<bool> DeleteAsync( TSymbol symbol, CancellationToken cancellationToken = default );
+    public Task<DeleteResult> DeleteAsync( TSymbol symbol, CancellationToken cancellationToken = default );
 
-    public bool Delete( IEnumerable<TSymbol> symbols )
+    public DeleteResult Delete( IEnumerable<TSymbol> symbols )
         => DeleteAsync( symbols ).GetAwaiter().GetResult();
 
-    public Task<bool> DeleteAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default );
+    public Task<DeleteResult> DeleteAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default );
 
     public IEnumerable<TSymbol> FindByName( string name )
         => FindByNameAsync( name ).GetAwaiter().GetResult();

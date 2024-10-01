@@ -74,10 +74,13 @@ public class CommandRepositoryTest
     public void DeleteTest()
     {
         using ISymbolRepository<CommandSymbol> repository = new CommandSymbolRepository( new FilePath( Path.Combine( TestDataDirectory, "delete.json" ) ) );
-        var callBack = CreateDummySymbol( "inc" );
+        var command = CreateDummySymbol( "inc" );
 
-        repository.Store( callBack );
-        Assert.IsTrue( repository.Delete( callBack ) );
+        repository.Store( command );
+        var result = repository.Delete( command );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.DeletedCount == 1 );
     }
 
     [Test]
@@ -91,7 +94,10 @@ public class CommandRepositoryTest
         };
 
         repository.Store( commands );
-        Assert.IsTrue( repository.Delete( commands ) );
+        var result = repository.Delete( commands );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.DeletedCount == 2 );
     }
 
     [Test]
