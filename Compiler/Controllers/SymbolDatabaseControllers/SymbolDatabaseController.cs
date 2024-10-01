@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -5,6 +6,7 @@ using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.Repositories;
 using KSPCompiler.Interactor.Symbols;
 using KSPCompiler.UseCases;
+using KSPCompiler.UseCases.Symbols;
 
 namespace KSPCompiler.SymbolDatabaseControllers;
 
@@ -36,6 +38,23 @@ public class SymbolDatabaseController<TSymbol> where TSymbol : SymbolBase
             result.UpdatedCount,
             result.FailedCount,
             result.Exception
+        );
+    }
+
+    public async Task<ExportResult> ExportAsync( IEnumerable<TSymbol> symbols, ISymbolExporter<TSymbol> exporter, CancellationToken cancellationToken = default )
+    {
+        var useCase = new ExportSymbolInteractor<TSymbol>( exporter );
+        var inputPort = new ExportSymbolInputData<TSymbol>( symbols );
+        var outputPort = await useCase.ExecuteAsync( inputPort, cancellationToken );
+
+        if( !outputPort.Result )
+        {
+            return new ExportResult( false, outputPort.Error );
+        }
+
+        return new ExportResult(
+            outputPort.Result,
+            outputPort.Error
         );
     }
 }
