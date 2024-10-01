@@ -61,7 +61,7 @@ public abstract class SymbolRepository<TSymbol, TModel> : ISymbolRepository<TSym
     public virtual async Task<StoreResult> StoreAsync( TSymbol symbol, CancellationToken cancellationToken = default )
     {
 
-        var jsonObject = ToModelTranslator.Translate( new[] { symbol } );
+        var model = ToModelTranslator.Translate( new[] { symbol } ).First();
         var existing = Collection.Find( x => x.Name == symbol.Name ).FirstOrDefault();
 
         var success = false;
@@ -74,13 +74,12 @@ public abstract class SymbolRepository<TSymbol, TModel> : ISymbolRepository<TSym
         {
             if( existing != default )
             {
-                var item = jsonObject.First();
-                item.UpdatedAt = DateTime.UtcNow;
-                success        = await Collection.ReplaceOneAsync( existing.Id, item );
+                model.UpdatedAt = DateTime.UtcNow;
+                success        = await Collection.ReplaceOneAsync( existing.Id, model );
 
                 if( success )
                 {
-                    updatedCount++;
+                    updatedCount = 1;
                 }
                 else
                 {
@@ -89,11 +88,17 @@ public abstract class SymbolRepository<TSymbol, TModel> : ISymbolRepository<TSym
             }
             else
             {
-                success = await Collection.InsertOneAsync( jsonObject.First() );
+                int newId = Collection.GetNextIdValue();
+                if( newId < 0 )
+                {
+                    throw new InvalidOperationException( "Failed to get next id value. (overflow)" );
+                }
+
+                success = await Collection.InsertOneAsync( model );
 
                 if( success )
                 {
-                    createdCount++;
+                    createdCount = 1;
                 }
                 else
                 {

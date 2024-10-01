@@ -4,7 +4,7 @@ namespace KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Commons.Mod
 
 public interface ISymbolModel
 {
-    string Id { get; set; }
+    int Id { get; set; }
     string Name { get; set; }
     DateTime CreatedAt { get; set; }
     DateTime UpdatedAt { get; set; }
