@@ -4,6 +4,7 @@ using System.Linq;
 
 using KSPCompiler.Commons.Path;
 using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Domain.Symbols.Repositories;
 using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Callbacks;
 
 using NUnit.Framework;
@@ -44,7 +45,10 @@ public class CallbackRepositoryTest
         using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( new FilePath( Path.Combine( TestDataDirectory, "store.json" ) ) );
 
         var callBack = CreateDummySymbol( "init" );
-        Assert.IsTrue( repository.Store( callBack ) );
+        var result = repository.Store( callBack );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.Exception == null );
     }
 
     [Test]
@@ -58,7 +62,10 @@ public class CallbackRepositoryTest
             CreateDummySymbol( "start" ),
         };
 
-        Assert.IsTrue( repository.Store( callBacks ) );
+        var result = repository.Store( callBacks );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.Exception == null );
     }
 
     [Test]
@@ -68,7 +75,11 @@ public class CallbackRepositoryTest
         var callBack = CreateDummySymbol( "init" );
 
         repository.Store( callBack );
-        Assert.IsTrue( repository.Delete( callBack ) );
+        var result = repository.Delete( callBack );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.Exception == null );
+        Assert.IsTrue( result.DeletedCount == 1 );
     }
 
     [Test]
@@ -82,7 +93,11 @@ public class CallbackRepositoryTest
         };
 
         repository.Store( callBacks );
-        Assert.IsTrue( repository.Delete( callBacks ) );
+        var result = repository.Delete( callBacks );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.Exception == null );
+        Assert.IsTrue( result.DeletedCount == 2 );
     }
 
     [Test]

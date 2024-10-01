@@ -3,31 +3,31 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace KSPCompiler.Domain.Symbols;
+namespace KSPCompiler.Domain.Symbols.Repositories;
 
 public interface ISymbolRepository<TSymbol> : IDisposable where TSymbol : SymbolBase
 {
     public static readonly Func<TSymbol, bool> Any = x => true;
 
-    public bool Store( TSymbol symbol )
+    public StoreResult Store( TSymbol symbol )
         => StoreAsync( symbol ).GetAwaiter().GetResult();
 
-    public Task<bool> StoreAsync( TSymbol symbol, CancellationToken cancellationToken = default );
+    public Task<StoreResult> StoreAsync( TSymbol symbol, CancellationToken cancellationToken = default );
 
-    public bool Store( IEnumerable<TSymbol> symbols )
+    public StoreResult Store( IEnumerable<TSymbol> symbols )
         => StoreAsync( symbols ).GetAwaiter().GetResult();
 
-    public Task<bool> StoreAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default );
+    public Task<StoreResult> StoreAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default );
 
-    public bool Delete( TSymbol symbol )
+    public DeleteResult Delete( TSymbol symbol )
         => DeleteAsync( symbol ).GetAwaiter().GetResult();
 
-    public Task<bool> DeleteAsync( TSymbol symbol, CancellationToken cancellationToken = default );
+    public Task<DeleteResult> DeleteAsync( TSymbol symbol, CancellationToken cancellationToken = default );
 
-    public bool Delete( IEnumerable<TSymbol> symbols )
+    public DeleteResult Delete( IEnumerable<TSymbol> symbols )
         => DeleteAsync( symbols ).GetAwaiter().GetResult();
 
-    public Task<bool> DeleteAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default );
+    public Task<DeleteResult> DeleteAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default );
 
     public IEnumerable<TSymbol> FindByName( string name )
         => FindByNameAsync( name ).GetAwaiter().GetResult();

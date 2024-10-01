@@ -5,6 +5,7 @@ using System.Linq;
 using KSPCompiler.Commons.Path;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
+using KSPCompiler.Domain.Symbols.Repositories;
 using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Commands;
 
 using NUnit.Framework;
@@ -46,7 +47,10 @@ public class CommandRepositoryTest
         using ISymbolRepository<CommandSymbol> repository = new CommandSymbolRepository( new FilePath( Path.Combine( TestDataDirectory, "store.json" ) ) );
 
         var command = CreateDummySymbol( "inc" );
-        Assert.IsTrue( repository.Store( command ) );
+        var result = repository.Store( command );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.Exception == null );
     }
 
     [Test]
@@ -60,17 +64,24 @@ public class CommandRepositoryTest
             CreateDummySymbol( "dec" ),
         };
 
-        Assert.IsTrue( repository.Store( commands ) );
+        var result = repository.Store( commands );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.Exception == null );
     }
 
     [Test]
     public void DeleteTest()
     {
         using ISymbolRepository<CommandSymbol> repository = new CommandSymbolRepository( new FilePath( Path.Combine( TestDataDirectory, "delete.json" ) ) );
-        var callBack = CreateDummySymbol( "inc" );
+        var command = CreateDummySymbol( "inc" );
 
-        repository.Store( callBack );
-        Assert.IsTrue( repository.Delete( callBack ) );
+        repository.Store( command );
+        var result = repository.Delete( command );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.Exception == null );
+        Assert.IsTrue( result.DeletedCount == 1 );
     }
 
     [Test]
@@ -84,7 +95,11 @@ public class CommandRepositoryTest
         };
 
         repository.Store( commands );
-        Assert.IsTrue( repository.Delete( commands ) );
+        var result = repository.Delete( commands );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.Exception == null );
+        Assert.IsTrue( result.DeletedCount == 2 );
     }
 
     [Test]
