@@ -81,6 +81,7 @@ public class UITypeRepositoryTest
         var result = repository.Delete( uiType );
 
         Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.Exception == null );
         Assert.IsTrue( result.DeletedCount == 1 );
     }
 
@@ -98,6 +99,7 @@ public class UITypeRepositoryTest
         var result = repository.Delete( uiTypes );
 
         Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.Exception == null );
         Assert.IsTrue( result.DeletedCount == 2 );
     }
 

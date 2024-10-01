@@ -78,6 +78,7 @@ public class CallbackRepositoryTest
         var result = repository.Delete( callBack );
 
         Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.Exception == null );
         Assert.IsTrue( result.DeletedCount == 1 );
     }
 
@@ -95,6 +96,7 @@ public class CallbackRepositoryTest
         var result = repository.Delete( callBacks );
 
         Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.Exception == null );
         Assert.IsTrue( result.DeletedCount == 2 );
     }
 

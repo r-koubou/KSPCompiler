@@ -74,6 +74,7 @@ public class VariableRepositoryTest
         var result = repository.Delete( variable );
 
         Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.Exception == null );
         Assert.IsTrue( result.DeletedCount == 1 );
     }
 
@@ -91,6 +92,7 @@ public class VariableRepositoryTest
         var result = repository.Delete( variables );
 
         Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.Exception == null );
         Assert.IsTrue( result.DeletedCount == 2 );
     }
 

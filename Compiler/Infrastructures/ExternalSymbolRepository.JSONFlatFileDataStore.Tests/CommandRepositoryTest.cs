@@ -80,6 +80,7 @@ public class CommandRepositoryTest
         var result = repository.Delete( command );
 
         Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.Exception == null );
         Assert.IsTrue( result.DeletedCount == 1 );
     }
 
@@ -97,6 +98,7 @@ public class CommandRepositoryTest
         var result = repository.Delete( commands );
 
         Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.Exception == null );
         Assert.IsTrue( result.DeletedCount == 2 );
     }
 
