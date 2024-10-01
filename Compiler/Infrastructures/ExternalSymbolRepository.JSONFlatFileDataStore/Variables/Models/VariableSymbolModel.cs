@@ -6,7 +6,7 @@ namespace KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Variables.M
 
 public sealed class VariableSymbolModel : ISymbolModel
 {
-    public string Id { get; set; } = Guid.NewGuid().ToString();
+    public int Id { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
     public string Name { get; set; } = string.Empty;
