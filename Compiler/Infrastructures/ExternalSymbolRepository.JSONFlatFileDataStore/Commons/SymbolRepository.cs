@@ -58,35 +58,85 @@ public abstract class SymbolRepository<TSymbol, TModel> : ISymbolRepository<TSym
     ///
     /// <inheritdoc />
     ///
-    public virtual async Task<bool> StoreAsync( TSymbol symbol, CancellationToken cancellationToken = default )
+    public virtual async Task<StoreResult> StoreAsync( TSymbol symbol, CancellationToken cancellationToken = default )
     {
+
         var jsonObject = ToModelTranslator.Translate( new[] { symbol } );
         var existing = Collection.Find( x => x.Name == symbol.Name ).FirstOrDefault();
 
-        if( existing != default )
+        var success = false;
+        var createdCount = 0;
+        var updatedCount = 0;
+        var failedCount = 0;
+        Exception? exception = null;
+
+        try
         {
-            var item = jsonObject.First();
-            item.UpdatedAt = DateTime.UtcNow;
-            return await Collection.ReplaceOneAsync( existing.Id, item );
+            if( existing != default )
+            {
+                var item = jsonObject.First();
+                item.UpdatedAt = DateTime.UtcNow;
+                success        = await Collection.ReplaceOneAsync( existing.Id, item );
+
+                if( success )
+                {
+                    updatedCount++;
+                }
+                else
+                {
+                    failedCount = 1;
+                }
+            }
+            else
+            {
+                success = await Collection.InsertOneAsync( jsonObject.First() );
+
+                if( success )
+                {
+                    createdCount++;
+                }
+                else
+                {
+                    failedCount = 1;
+                }
+            }
+        }
+        catch( Exception e )
+        {
+            exception = e;
         }
 
-        return await Collection.InsertOneAsync( jsonObject.First() );
+        return new StoreResult( success, createdCount, updatedCount, failedCount, exception );
     }
 
     ///
     /// <inheritdoc />
     ///
-    public virtual async Task<bool> StoreAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default )
+    public virtual async Task<StoreResult> StoreAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default )
     {
+        var createdCount = 0;
+        var updatedCount = 0;
+        var failedCount = 0;
+        Exception? exception = null;
+
         foreach( var x in symbols )
         {
-            if( !await StoreAsync( x, cancellationToken ) )
+            var result = await StoreAsync( x, cancellationToken );
+            if( !result.Success )
             {
-                return false;
+                failedCount++;
             }
+
+            if( result.Exception == null )
+            {
+                continue;
+            }
+
+            exception = result.Exception;
+            break;
         }
 
-        return true;
+        return new StoreResult( true, createdCount, updatedCount, failedCount, exception );
     }
 
     ///

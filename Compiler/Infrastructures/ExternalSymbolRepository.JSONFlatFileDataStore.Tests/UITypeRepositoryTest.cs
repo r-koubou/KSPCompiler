@@ -47,8 +47,11 @@ public class UITypeRepositoryTest
     {
         using ISymbolRepository<UITypeSymbol> repository = new UITypeSymbolRepository( new FilePath( Path.Combine( TestDataDirectory, "store.json" ) ) );
 
-        var command = CreateDummySymbol( "ui_button" );
-        Assert.IsTrue( repository.Store( command ) );
+        var uiType = CreateDummySymbol( "ui_button" );
+        var result = repository.Store( uiType );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.Exception == null );
     }
 
     [Test]
@@ -56,13 +59,16 @@ public class UITypeRepositoryTest
     {
         using ISymbolRepository<UITypeSymbol> repository = new UITypeSymbolRepository( new FilePath( Path.Combine( TestDataDirectory, "store_with_list.json" ) ) );
 
-        var commands = new List<UITypeSymbol>()
+        var uiTypes = new List<UITypeSymbol>()
         {
             CreateDummySymbol( "ui_button" ),
             CreateDummySymbol( "ui_label" ),
         };
 
-        Assert.IsTrue( repository.Store( commands ) );
+        var result = repository.Store( uiTypes );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.Exception == null );
     }
 
     [Test]

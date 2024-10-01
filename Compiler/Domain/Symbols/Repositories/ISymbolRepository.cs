@@ -9,15 +9,15 @@ public interface ISymbolRepository<TSymbol> : IDisposable where TSymbol : Symbol
 {
     public static readonly Func<TSymbol, bool> Any = x => true;
 
-    public bool Store( TSymbol symbol )
+    public StoreResult Store( TSymbol symbol )
         => StoreAsync( symbol ).GetAwaiter().GetResult();
 
-    public Task<bool> StoreAsync( TSymbol symbol, CancellationToken cancellationToken = default );
+    public Task<StoreResult> StoreAsync( TSymbol symbol, CancellationToken cancellationToken = default );
 
-    public bool Store( IEnumerable<TSymbol> symbols )
+    public StoreResult Store( IEnumerable<TSymbol> symbols )
         => StoreAsync( symbols ).GetAwaiter().GetResult();
 
-    public Task<bool> StoreAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default );
+    public Task<StoreResult> StoreAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default );
 
     public bool Delete( TSymbol symbol )
         => DeleteAsync( symbol ).GetAwaiter().GetResult();

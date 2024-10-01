@@ -47,7 +47,10 @@ public class CommandRepositoryTest
         using ISymbolRepository<CommandSymbol> repository = new CommandSymbolRepository( new FilePath( Path.Combine( TestDataDirectory, "store.json" ) ) );
 
         var command = CreateDummySymbol( "inc" );
-        Assert.IsTrue( repository.Store( command ) );
+        var result = repository.Store( command );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.Exception == null );
     }
 
     [Test]
@@ -61,7 +64,10 @@ public class CommandRepositoryTest
             CreateDummySymbol( "dec" ),
         };
 
-        Assert.IsTrue( repository.Store( commands ) );
+        var result = repository.Store( commands );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.Exception == null );
     }
 
     [Test]

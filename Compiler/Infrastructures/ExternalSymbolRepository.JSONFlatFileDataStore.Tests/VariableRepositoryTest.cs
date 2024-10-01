@@ -5,6 +5,7 @@ using System.Linq;
 using KSPCompiler.Commons.Path;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
+using KSPCompiler.Domain.Symbols.Repositories;
 using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Variables;
 
 using NUnit.Framework;
@@ -39,8 +40,11 @@ public class VariableRepositoryTest
     {
         using ISymbolRepository<VariableSymbol> repository = new VariableSymbolRepository( new FilePath( Path.Combine( TestDataDirectory, "store.json" ) ) );
 
-        var command = CreateDummySymbol( "$ENGINE_PAR_VOLUME" );
-        Assert.IsTrue( repository.Store( command ) );
+        var variable = CreateDummySymbol( "$ENGINE_PAR_VOLUME" );
+        var result = repository.Store( variable );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.Exception == null );
     }
 
     [Test]
@@ -48,13 +52,16 @@ public class VariableRepositoryTest
     {
         using ISymbolRepository<VariableSymbol> repository = new VariableSymbolRepository( new FilePath( Path.Combine( TestDataDirectory, "store_with_list.json" ) ) );
 
-        var commands = new List<VariableSymbol>()
+        var variables = new List<VariableSymbol>()
         {
             CreateDummySymbol( "$ENGINE_PAR_VOLUME" ),
             CreateDummySymbol( "$ENGINE_PAR_PAN" ),
         };
 
-        Assert.IsTrue( repository.Store( commands ) );
+        var result = repository.Store( variables );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.Exception == null );
     }
 
     [Test]

@@ -4,6 +4,7 @@ using System.Linq;
 
 using KSPCompiler.Commons.Path;
 using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Domain.Symbols.Repositories;
 using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Callbacks;
 
 using NUnit.Framework;
@@ -44,7 +45,10 @@ public class CallbackRepositoryTest
         using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( new FilePath( Path.Combine( TestDataDirectory, "store.json" ) ) );
 
         var callBack = CreateDummySymbol( "init" );
-        Assert.IsTrue( repository.Store( callBack ) );
+        var result = repository.Store( callBack );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.Exception == null );
     }
 
     [Test]
@@ -58,7 +62,10 @@ public class CallbackRepositoryTest
             CreateDummySymbol( "start" ),
         };
 
-        Assert.IsTrue( repository.Store( callBacks ) );
+        var result = repository.Store( callBacks );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.Exception == null );
     }
 
     [Test]
