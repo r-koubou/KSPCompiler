@@ -58,6 +58,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalSymbolRepository.JS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalSymbolRepository.JSONFlatFileDataStore.Tests", "Infrastructures\ExternalSymbolRepository.JSONFlatFileDataStore.Tests\ExternalSymbolRepository.JSONFlatFileDataStore.Tests.csproj", "{20766698-171D-4D73-9A6E-C13B2FE27D5B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SymbolDatabaseControllers", "Controllers\SymbolDatabaseControllers\SymbolDatabaseControllers.csproj", "{92E14865-AA15-45D4-938C-EB207B01BC6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SymbolDatabaseControllers.Tests", "Controllers\SymbolDatabaseControllers.Tests\SymbolDatabaseControllers.Tests.csproj", "{61E72DEC-C5CF-41FA-80C4-9FC57B289740}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -144,6 +148,14 @@ Global
 		{20766698-171D-4D73-9A6E-C13B2FE27D5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20766698-171D-4D73-9A6E-C13B2FE27D5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20766698-171D-4D73-9A6E-C13B2FE27D5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92E14865-AA15-45D4-938C-EB207B01BC6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92E14865-AA15-45D4-938C-EB207B01BC6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92E14865-AA15-45D4-938C-EB207B01BC6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92E14865-AA15-45D4-938C-EB207B01BC6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61E72DEC-C5CF-41FA-80C4-9FC57B289740}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61E72DEC-C5CF-41FA-80C4-9FC57B289740}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61E72DEC-C5CF-41FA-80C4-9FC57B289740}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61E72DEC-C5CF-41FA-80C4-9FC57B289740}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BC12E3DD-7AB6-4E76-9FF0-573D3E94D1AA} = {D8212F71-4678-4B7F-8EC9-F692C48B5093}
@@ -169,5 +181,7 @@ Global
 		{5AD08EF5-AAE5-4E18-8518-DA1519DA94A4} = {D8212F71-4678-4B7F-8EC9-F692C48B5093}
 		{371416AE-4282-4E06-B36D-8BD4F47CF6A5} = {D8212F71-4678-4B7F-8EC9-F692C48B5093}
 		{20766698-171D-4D73-9A6E-C13B2FE27D5B} = {D8212F71-4678-4B7F-8EC9-F692C48B5093}
+		{92E14865-AA15-45D4-938C-EB207B01BC6F} = {46FE5486-25B2-4937-9138-3F4F29871C15}
+		{61E72DEC-C5CF-41FA-80C4-9FC57B289740} = {46FE5486-25B2-4937-9138-3F4F29871C15}
 	EndGlobalSection
 EndGlobal
