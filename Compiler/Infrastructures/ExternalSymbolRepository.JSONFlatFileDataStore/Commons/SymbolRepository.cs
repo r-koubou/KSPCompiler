@@ -79,7 +79,7 @@ public abstract class SymbolRepository<TSymbol, TModel> : ISymbolRepository<TSym
 
                 if( success )
                 {
-                    updatedCount++;
+                    updatedCount = 1;
                 }
                 else
                 {
@@ -98,7 +98,7 @@ public abstract class SymbolRepository<TSymbol, TModel> : ISymbolRepository<TSym
 
                 if( success )
                 {
-                    createdCount++;
+                    createdCount = 1;
                 }
                 else
                 {
