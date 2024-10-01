@@ -9,6 +9,7 @@ using JsonFlatFileDataStore;
 using KSPCompiler.Commons;
 using KSPCompiler.Commons.Path;
 using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Domain.Symbols.Repositories;
 using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Commons.Models;
 
 namespace KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Commons;
