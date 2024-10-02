@@ -21,23 +21,21 @@ public class SymbolDatabaseController<TSymbol> where TSymbol : SymbolBase
 
     public async Task<ImportResult> ImportAsync( ISymbolImporter<TSymbol> importer, CancellationToken cancellationToken = default )
     {
-        var useCase = new ImportSymbolInteractorOld<TSymbol>( importer );
-        var outputPort = await useCase.ExecuteAsync( UnitInputPort.Default, cancellationToken );
+        var useCase = new ImportSymbolToRepositoryInteractor<TSymbol>( Repository );
+        var inputPort = new ImportSymbolInputPort<TSymbol>( importer );
+        var outputPort = await useCase.ExecuteAsync( inputPort, cancellationToken );
 
         if( !outputPort.Result )
         {
             return new ImportResult( false, 0, 0, 0, outputPort.Error );
         }
 
-        var importedSymbols = outputPort.OutputData;
-        var result = await Repository.StoreAsync( importedSymbols, cancellationToken );
-
         return new ImportResult(
-            result.Success,
-            result.CreatedCount,
-            result.UpdatedCount,
-            result.FailedCount,
-            result.Exception
+            outputPort.Result,
+            outputPort.OutputData.CreatedCount,
+            outputPort.OutputData.UpdatedCount,
+            outputPort.OutputData.FailedCount,
+            outputPort.Error
         );
     }
 
