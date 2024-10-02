@@ -27,6 +27,9 @@
       <None Update="TestData\SymbolLocalDatabaseControllerTest\export\repository_variable.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="TestData\SymbolLocalDatabaseControllerTest\delete\repository_variable.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
     <ItemGroup>

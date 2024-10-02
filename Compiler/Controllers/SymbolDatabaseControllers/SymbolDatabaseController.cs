@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -56,6 +55,19 @@ public class SymbolDatabaseController<TSymbol> where TSymbol : SymbolBase
 
         return new ExportResult(
             outputPort.Result,
+            outputPort.Error
+        );
+    }
+
+    public async Task<DeleteResult> DeleteAsync( Func<TSymbol, bool> predicate, CancellationToken cancellationToken = default )
+    {
+        var useCase = new DeleteSymbolFromRepositoryInteractor<TSymbol>( Repository );
+        var inputPort = new DeleteSymbolInputData<TSymbol>( predicate );
+        var outputPort = await useCase.ExecuteAsync( inputPort, cancellationToken );
+
+        return new DeleteResult(
+            outputPort.Result,
+            outputPort.OutputData.DeletedCount,
             outputPort.Error
         );
     }

@@ -1,4 +1,5 @@
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 using KSPCompiler.Commons.Contents;
@@ -19,6 +20,7 @@ public class SymbolLocalDatabaseControllerTest
     private static readonly string TestDataDirectory = Path.Combine( "TestData",              "SymbolLocalDatabaseControllerTest" );
     private static readonly string ImportTestDataDirectory = Path.Combine( TestDataDirectory, "import" );
     private static readonly string ExportTestDataDirectory = Path.Combine( TestDataDirectory, "export" );
+    private static readonly string DeleteTestDataDirectory = Path.Combine( TestDataDirectory, "delete" );
 
     [SetUp]
     public void Setup()
@@ -56,5 +58,19 @@ public class SymbolLocalDatabaseControllerTest
         var result = await controller.ExportAsync( exporter, _ => true );
 
         Assert.IsTrue( result.Success );
+    }
+
+    [Test]
+    public async Task DeleteVariablesTest()
+    {
+        var repositoryPath = new FilePath( Path.Combine( DeleteTestDataDirectory, "repository_variable.json" ) );
+
+        using ISymbolRepository<VariableSymbol> repository = new VariableSymbolRepository( repositoryPath );
+        var controller = new SymbolDatabaseController<VariableSymbol>( repository );
+
+        var result = await controller.DeleteAsync( _ => true );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsFalse( (await repository.FindAllAsync()).Any() );
     }
 }
