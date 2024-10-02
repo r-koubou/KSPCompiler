@@ -24,6 +24,13 @@
       <None Update="TestData\SymbolLocalDatabaseControllerTest\import\variable.tsv">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="TestData\SymbolLocalDatabaseControllerTest\export\repository_variable.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="TestData\SymbolLocalDatabaseControllerTest\export\" />
     </ItemGroup>
 
 </Project>

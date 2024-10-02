@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -41,8 +42,9 @@ public class SymbolDatabaseController<TSymbol> where TSymbol : SymbolBase
         );
     }
 
-    public async Task<ExportResult> ExportAsync( IEnumerable<TSymbol> symbols, ISymbolExporter<TSymbol> exporter, CancellationToken cancellationToken = default )
+    public async Task<ExportResult> ExportAsync( ISymbolExporter<TSymbol> exporter, Func<TSymbol, bool> predicate, CancellationToken cancellationToken = default )
     {
+        var symbols = await Repository.FindAsync( predicate, cancellationToken );
         var useCase = new ExportSymbolInteractor<TSymbol>( exporter );
         var inputPort = new ExportSymbolInputData<TSymbol>( symbols );
         var outputPort = await useCase.ExecuteAsync( inputPort, cancellationToken );

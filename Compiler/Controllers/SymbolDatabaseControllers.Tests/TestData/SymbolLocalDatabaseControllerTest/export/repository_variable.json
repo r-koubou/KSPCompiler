@@ -1,0 +1,13 @@
+{
+  "version": "20240929",
+  "symbols": [
+    {
+      "id": 0,
+      "createdAt": "2024-10-01T15:21:14.541823Z",
+      "updatedAt": "2024-10-01T15:21:14.556676Z",
+      "name": "$hoge",
+      "reserved": true,
+      "description": "hoge description"
+    }
+  ]
+}
