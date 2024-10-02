@@ -7,9 +7,9 @@ namespace KSPCompiler.ExternalSymbolControllers;
 
 public class CreateVariableSymbolController
 {
-    private readonly ICreateVariableSymbolUseCase useCase;
+    private readonly ICreateVariableSymbolUseCaseOld useCase;
 
-    public CreateVariableSymbolController( ICreateVariableSymbolUseCase useCase )
+    public CreateVariableSymbolController( ICreateVariableSymbolUseCaseOld useCase )
     {
         this.useCase = useCase;
     }
