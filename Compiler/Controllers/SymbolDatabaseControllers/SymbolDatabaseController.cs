@@ -21,7 +21,7 @@ public class SymbolDatabaseController<TSymbol> where TSymbol : SymbolBase
 
     public async Task<ImportResult> ImportAsync( ISymbolImporter<TSymbol> importer, CancellationToken cancellationToken = default )
     {
-        var useCase = new ImportSymbolInteractor<TSymbol>( importer );
+        var useCase = new ImportSymbolInteractorOld<TSymbol>( importer );
         var outputPort = await useCase.ExecuteAsync( UnitInputPort.Default, cancellationToken );
 
         if( !outputPort.Result )

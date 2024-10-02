@@ -34,8 +34,8 @@ static void NewDb(
 static void ConvertVariableImp<TSymbol>( ISymbolImporter<TSymbol> source, ISymbolExporter<TSymbol> destination ) where TSymbol : SymbolBase
 {
     // Load
-    var loadInteractor = new ImportSymbolInteractor<TSymbol>( source );
-    var loadController = new ImportSymbolController<TSymbol>( loadInteractor );
+    var loadInteractor = new ImportSymbolInteractorOld<TSymbol>( source );
+    var loadController = new ImportSymbolControllerOld<TSymbol>( loadInteractor );
 
     var loadResult = loadController.Import();
 

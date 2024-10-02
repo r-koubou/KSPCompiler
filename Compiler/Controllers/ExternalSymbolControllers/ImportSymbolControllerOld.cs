@@ -7,19 +7,19 @@ using KSPCompiler.UseCases.Symbols;
 
 namespace KSPCompiler.ExternalSymbolControllers;
 
-public class ImportSymbolController<TSymbol> where TSymbol : SymbolBase
+public class ImportSymbolControllerOld<TSymbol> where TSymbol : SymbolBase
 {
-    private readonly IImportSymbolUseCase<TSymbol> useCase;
+    private readonly IImportSymbolUseCaseOld<TSymbol> useCase;
 
-    public ImportSymbolController( IImportSymbolUseCase<TSymbol> useCase )
+    public ImportSymbolControllerOld( IImportSymbolUseCaseOld<TSymbol> useCase )
     {
         this.useCase = useCase;
     }
 
-    public ImportSymbolOutputPort<TSymbol> Import()
+    public ImportSymbolOutputPortOld<TSymbol> Import()
         => ImportAsync().GetAwaiter().GetResult();
 
-    public async Task<ImportSymbolOutputPort<TSymbol>> ImportAsync( CancellationToken cancellationToken = default )
+    public async Task<ImportSymbolOutputPortOld<TSymbol>> ImportAsync( CancellationToken cancellationToken = default )
     {
         return await useCase.ExecuteAsync( UnitInputPort.Default, cancellationToken );
     }

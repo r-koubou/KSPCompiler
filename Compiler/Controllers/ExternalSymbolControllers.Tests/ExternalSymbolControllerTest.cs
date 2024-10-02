@@ -26,8 +26,8 @@ public class ExternalSymbolControllerTest
 
         // Load
         var importer = new TsvVariableSymbolImporter( new LocalTextContentReader( source ) );
-        var loadInteractor = new ImportSymbolInteractor<VariableSymbol>( importer );
-        var loadController = new ImportSymbolController<VariableSymbol>( loadInteractor );
+        var loadInteractor = new ImportSymbolInteractorOld<VariableSymbol>( importer );
+        var loadController = new ImportSymbolControllerOld<VariableSymbol>( loadInteractor );
 
         var loadResult = loadController.Import();
         Assert.True( loadResult.Result );
@@ -52,8 +52,8 @@ public class ExternalSymbolControllerTest
 
         // Import
         var sourceRepository = new YamlVariableSymbolImporter( new LocalTextContentReader( source ) );
-        var importInteractor = new ImportSymbolInteractor<VariableSymbol>( sourceRepository );
-        var importController = new ImportSymbolController<VariableSymbol>( importInteractor );
+        var importInteractor = new ImportSymbolInteractorOld<VariableSymbol>( sourceRepository );
+        var importController = new ImportSymbolControllerOld<VariableSymbol>( importInteractor );
 
         var importResult = importController.Import();
         Assert.True( importResult.Result );
