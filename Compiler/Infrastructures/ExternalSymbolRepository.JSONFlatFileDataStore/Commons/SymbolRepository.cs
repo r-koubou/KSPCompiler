@@ -229,7 +229,7 @@ public abstract class SymbolRepository<TSymbol, TModel> : ISymbolRepository<TSym
         return result;
     }
 
-    public virtual async Task<IEnumerable<TSymbol>> FindAsync( Func<TSymbol, bool> predicate, CancellationToken cancellationToken = default )
+    public virtual async Task<IEnumerable<TSymbol>> FindAsync( Predicate<TSymbol> predicate, CancellationToken cancellationToken = default )
     {
         var result = new List<TSymbol>();
         var all = Collection.AsQueryable();

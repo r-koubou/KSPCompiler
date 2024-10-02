@@ -26,16 +26,16 @@ static void NewDb(
 {
     var path = Path.Combine( outputDirectory, databaseName + ".yaml" );
     var exporter = new YamlVariableSymbolExporter( new LocalTextContentWriter( path ) );
-    var interactor = new CreateVariableSymbolUseCase( exporter );
-    var controller = new CreateVariableSymbolController( interactor );
+    var interactor = new CreateVariableSymbolUseCaseOld( exporter );
+    var controller = new CreateVariableSymbolControllerOld( interactor );
     controller.Create();
 }
 
 static void ConvertVariableImp<TSymbol>( ISymbolImporter<TSymbol> source, ISymbolExporter<TSymbol> destination ) where TSymbol : SymbolBase
 {
     // Load
-    var loadInteractor = new ImportSymbolInteractor<TSymbol>( source );
-    var loadController = new ImportSymbolController<TSymbol>( loadInteractor );
+    var loadInteractor = new ImportSymbolInteractorOld<TSymbol>( source );
+    var loadController = new ImportSymbolControllerOld<TSymbol>( loadInteractor );
 
     var loadResult = loadController.Import();
 
@@ -45,9 +45,9 @@ static void ConvertVariableImp<TSymbol>( ISymbolImporter<TSymbol> source, ISymbo
     }
 
     // Store
-    var storeInputPort = new ExportSymbolInputData<TSymbol>( loadResult.OutputData );
-    var storeInteractor = new ExportSymbolInteractor<TSymbol>( destination );
-    var storeController = new ExportSymbolController<TSymbol>( storeInteractor );
+    var storeInputPort = new ExportSymbolInputDataOld<TSymbol>( loadResult.OutputData );
+    var storeInteractor = new ExportSymbolInteractorOld<TSymbol>( destination );
+    var storeController = new ExportSymbolControllerOld<TSymbol>( storeInteractor );
 
     storeController.Export( storeInputPort );
 }

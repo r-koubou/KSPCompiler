@@ -9,25 +9,26 @@ using KSPCompiler.UseCases.Symbols;
 
 namespace KSPCompiler.Interactor.Symbols;
 
-public class ImportSymbolInteractor<TSymbol> : IImportSymbolUseCase<TSymbol> where TSymbol : SymbolBase
+[Obsolete]
+public class ImportSymbolInteractorOld<TSymbol> : IImportSymbolUseCaseOld<TSymbol> where TSymbol : SymbolBase
 {
     private readonly ISymbolImporter<TSymbol> importer;
 
-    public ImportSymbolInteractor( ISymbolImporter<TSymbol> importer )
+    public ImportSymbolInteractorOld( ISymbolImporter<TSymbol> importer )
     {
         this.importer = importer;
     }
 
-    public async Task<ImportSymbolOutputPort<TSymbol>> ExecuteAsync( UnitInputPort _, CancellationToken cancellationToken = default )
+    public async Task<ImportSymbolOutputPortOld<TSymbol>> ExecuteAsync( UnitInputPort _, CancellationToken cancellationToken = default )
     {
         try
         {
             var result = await importer.ImportAsync( cancellationToken );
-            return new ImportSymbolOutputPort<TSymbol>( true, result );
+            return new ImportSymbolOutputPortOld<TSymbol>( true, result );
         }
         catch( Exception e )
         {
-            return new ImportSymbolOutputPort<TSymbol>( false, new List<TSymbol>(), e );
+            return new ImportSymbolOutputPortOld<TSymbol>( false, new List<TSymbol>(), e );
         }
     }
 }

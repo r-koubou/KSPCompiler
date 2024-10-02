@@ -7,7 +7,7 @@ namespace KSPCompiler.Domain.Symbols.Repositories;
 
 public interface ISymbolRepository<TSymbol> : IDisposable where TSymbol : SymbolBase
 {
-    public static readonly Func<TSymbol, bool> Any = x => true;
+    public static readonly Predicate<TSymbol> Any = _ => true;
 
     public StoreResult Store( TSymbol symbol )
         => StoreAsync( symbol ).GetAwaiter().GetResult();
@@ -34,10 +34,10 @@ public interface ISymbolRepository<TSymbol> : IDisposable where TSymbol : Symbol
 
     public Task<IEnumerable<TSymbol>>  FindByNameAsync( string name, CancellationToken cancellationToken = default );
 
-    public IEnumerable<TSymbol> Find( Func<TSymbol, bool> predicate )
+    public IEnumerable<TSymbol> Find( Predicate<TSymbol> predicate )
         => FindAsync( predicate ).GetAwaiter().GetResult();
 
-    public Task<IEnumerable<TSymbol>> FindAsync( Func<TSymbol, bool> predicate, CancellationToken cancellationToken = default );
+    public Task<IEnumerable<TSymbol>> FindAsync( Predicate<TSymbol> predicate, CancellationToken cancellationToken = default );
 
     public IEnumerable<TSymbol> FindAll()
         => FindAllAsync().GetAwaiter().GetResult();

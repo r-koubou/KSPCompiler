@@ -8,16 +8,17 @@ using KSPCompiler.UseCases.Symbols;
 
 namespace KSPCompiler.Interactor.Symbols;
 
-public class ExportSymbolInteractor<TSymbol> : IExportSymbolUseCase<TSymbol> where TSymbol : SymbolBase
+[Obsolete]
+public class ExportSymbolInteractorOld<TSymbol> : IExportSymbolUseCaseOld<TSymbol> where TSymbol : SymbolBase
 {
     private readonly ISymbolExporter<TSymbol> exporter;
 
-    public ExportSymbolInteractor( ISymbolExporter<TSymbol> exporter )
+    public ExportSymbolInteractorOld( ISymbolExporter<TSymbol> exporter )
     {
         this.exporter = exporter;
     }
 
-    public async Task<UnitOutputPort> ExecuteAsync( ExportSymbolInputData<TSymbol> parameter, CancellationToken cancellationToken = default )
+    public async Task<UnitOutputPort> ExecuteAsync( ExportSymbolInputDataOld<TSymbol> parameter, CancellationToken cancellationToken = default )
     {
         try
         {

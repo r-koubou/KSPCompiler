@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <LangVersion>10</LangVersion>
+        <TargetFramework>net6.0</TargetFramework>
+        <RootNamespace>KSPCompiler.SymbolDatabaseControllers.Tests</RootNamespace>
+        <Nullable>enable</Nullable>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="nunit" Version="3.13.2" />
+        <PackageReference Include="NUnit3TestAdapter" Version="4.2.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Infrastructures\ExternalSymbolRepository.JSONFlatFileDataStore\ExternalSymbolRepository.JSONFlatFileDataStore.csproj" />
+      <ProjectReference Include="..\..\Infrastructures\ExternalSymbolRepository.Tsv\ExternalSymbolRepository.Tsv.csproj" />
+      <ProjectReference Include="..\SymbolDatabaseControllers\SymbolDatabaseControllers.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="TestData\SymbolLocalDatabaseControllerTest\import\variable.tsv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\SymbolLocalDatabaseControllerTest\export\repository_variable.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\SymbolLocalDatabaseControllerTest\delete\repository_variable.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="TestData\SymbolLocalDatabaseControllerTest\export\" />
+    </ItemGroup>
+
+</Project>

@@ -5,18 +5,42 @@ using KSPCompiler.Domain.Symbols;
 
 namespace KSPCompiler.UseCases.Symbols;
 
-public sealed class ImportSymbolOutputPort<TSymbol> : IOutputPort<IEnumerable<TSymbol>> where TSymbol : SymbolBase
+public sealed class ImportSymbolInputPort<TSymbol> : IInputPort<ISymbolImporter<TSymbol>> where TSymbol : SymbolBase
+{
+    public ISymbolImporter<TSymbol> InputData { get; }
+
+    public ImportSymbolInputPort( ISymbolImporter<TSymbol> inputData )
+    {
+        InputData = inputData;
+    }
+}
+
+public sealed class ImportSymbolOutputPort : IOutputPort<ImportSymbolOutputPortDetail>
 {
     public bool Result { get; }
-    public IEnumerable<TSymbol> OutputData { get; }
+    public ImportSymbolOutputPortDetail OutputData { get; }
     public Exception? Error { get; }
 
-    public ImportSymbolOutputPort( bool result, IEnumerable<TSymbol> table, Exception? error = null )
+    public ImportSymbolOutputPort( bool result, ImportSymbolOutputPortDetail outputData, Exception? error )
     {
         Result     = result;
-        OutputData = table;
+        OutputData = outputData;
         Error      = error;
     }
 }
 
-public interface IImportSymbolUseCase<TSymbol> : IUseCase<UnitInputPort, ImportSymbolOutputPort<TSymbol>> where TSymbol : SymbolBase {}
+public sealed class ImportSymbolOutputPortDetail
+{
+    public int CreatedCount { get; }
+    public int UpdatedCount { get; }
+    public int FailedCount  { get; }
+
+    public ImportSymbolOutputPortDetail( int createdCount, int updatedCount, int failedCount )
+    {
+        CreatedCount = createdCount;
+        UpdatedCount = updatedCount;
+        FailedCount  = failedCount;
+    }
+}
+
+public interface IImportSymbolUseCase<TSymbol> : IUseCase<ImportSymbolInputPort<TSymbol>, ImportSymbolOutputPort> where TSymbol : SymbolBase {}

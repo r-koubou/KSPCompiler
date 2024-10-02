@@ -26,8 +26,8 @@ public class ExternalSymbolControllerTest
 
         // Load
         var importer = new TsvVariableSymbolImporter( new LocalTextContentReader( source ) );
-        var loadInteractor = new ImportSymbolInteractor<VariableSymbol>( importer );
-        var loadController = new ImportSymbolController<VariableSymbol>( loadInteractor );
+        var loadInteractor = new ImportSymbolInteractorOld<VariableSymbol>( importer );
+        var loadController = new ImportSymbolControllerOld<VariableSymbol>( loadInteractor );
 
         var loadResult = loadController.Import();
         Assert.True( loadResult.Result );
@@ -35,10 +35,10 @@ public class ExternalSymbolControllerTest
         Assert.Null( loadResult.Error );
 
         // Store
-        var exportInputPort = new ExportSymbolInputData<VariableSymbol>( loadResult.OutputData );
+        var exportInputPort = new ExportSymbolInputDataOld<VariableSymbol>( loadResult.OutputData );
         var exporter = new YamlVariableSymbolExporter( new LocalTextContentWriter( destination ) );
-        var storeInteractor = new ExportSymbolInteractor<VariableSymbol>( exporter );
-        var storeController = new ExportSymbolController<VariableSymbol>( storeInteractor );
+        var storeInteractor = new ExportSymbolInteractorOld<VariableSymbol>( exporter );
+        var storeController = new ExportSymbolControllerOld<VariableSymbol>( storeInteractor );
 
         storeController.Export( exportInputPort );
         Assert.That( File.Exists( destination ), Is.True );
@@ -52,8 +52,8 @@ public class ExternalSymbolControllerTest
 
         // Import
         var sourceRepository = new YamlVariableSymbolImporter( new LocalTextContentReader( source ) );
-        var importInteractor = new ImportSymbolInteractor<VariableSymbol>( sourceRepository );
-        var importController = new ImportSymbolController<VariableSymbol>( importInteractor );
+        var importInteractor = new ImportSymbolInteractorOld<VariableSymbol>( sourceRepository );
+        var importController = new ImportSymbolControllerOld<VariableSymbol>( importInteractor );
 
         var importResult = importController.Import();
         Assert.True( importResult.Result );
@@ -61,10 +61,10 @@ public class ExternalSymbolControllerTest
         Assert.Null( importResult.Error );
 
         // Export
-        var exportParameter = new ExportSymbolInputData<VariableSymbol>( importResult.OutputData );
+        var exportParameter = new ExportSymbolInputDataOld<VariableSymbol>( importResult.OutputData );
         var destinationRepository = new TsvVariableSymbolExporter( new LocalTextContentWriter( destination ) );
-        var exportInteractor = new ExportSymbolInteractor<VariableSymbol>( destinationRepository );
-        var exportController = new ExportSymbolController<VariableSymbol>( exportInteractor );
+        var exportInteractor = new ExportSymbolInteractorOld<VariableSymbol>( destinationRepository );
+        var exportController = new ExportSymbolControllerOld<VariableSymbol>( exportInteractor );
 
         exportController.Export( exportParameter );
         Assert.That( File.Exists( destination ), Is.True );
