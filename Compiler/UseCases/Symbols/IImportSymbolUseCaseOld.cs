@@ -5,6 +5,7 @@ using KSPCompiler.Domain.Symbols;
 
 namespace KSPCompiler.UseCases.Symbols;
 
+[Obsolete]
 public sealed class ImportSymbolOutputPortOld<TSymbol> : IOutputPort<IEnumerable<TSymbol>> where TSymbol : SymbolBase
 {
     public bool Result { get; }
@@ -19,4 +20,5 @@ public sealed class ImportSymbolOutputPortOld<TSymbol> : IOutputPort<IEnumerable
     }
 }
 
+[Obsolete]
 public interface IImportSymbolUseCaseOld<TSymbol> : IUseCase<UnitInputPort, ImportSymbolOutputPortOld<TSymbol>> where TSymbol : SymbolBase {}

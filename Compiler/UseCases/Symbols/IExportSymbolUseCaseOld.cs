@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 
 using KSPCompiler.Domain.Symbols;
 
 namespace KSPCompiler.UseCases.Symbols;
 
+[Obsolete]
 public class ExportSymbolInputDataOld<TSymbol> : IInputPort<IEnumerable<TSymbol>> where TSymbol : SymbolBase
 {
     public IEnumerable<TSymbol> InputData { get; }
@@ -14,4 +16,5 @@ public class ExportSymbolInputDataOld<TSymbol> : IInputPort<IEnumerable<TSymbol>
     }
 }
 
+[Obsolete]
 public interface IExportSymbolUseCaseOld<TSymbol> : IUseCase<ExportSymbolInputDataOld<TSymbol>, UnitOutputPort> where TSymbol : SymbolBase {}

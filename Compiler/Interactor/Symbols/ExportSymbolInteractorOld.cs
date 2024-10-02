@@ -8,6 +8,7 @@ using KSPCompiler.UseCases.Symbols;
 
 namespace KSPCompiler.Interactor.Symbols;
 
+[Obsolete]
 public class ExportSymbolInteractorOld<TSymbol> : IExportSymbolUseCaseOld<TSymbol> where TSymbol : SymbolBase
 {
     private readonly ISymbolExporter<TSymbol> exporter;

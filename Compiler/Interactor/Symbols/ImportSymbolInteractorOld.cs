@@ -9,6 +9,7 @@ using KSPCompiler.UseCases.Symbols;
 
 namespace KSPCompiler.Interactor.Symbols;
 
+[Obsolete]
 public class ImportSymbolInteractorOld<TSymbol> : IImportSymbolUseCaseOld<TSymbol> where TSymbol : SymbolBase
 {
     private readonly ISymbolImporter<TSymbol> importer;
