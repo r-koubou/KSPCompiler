@@ -45,9 +45,9 @@ static void ConvertVariableImp<TSymbol>( ISymbolImporter<TSymbol> source, ISymbo
     }
 
     // Store
-    var storeInputPort = new ExportSymbolInputData<TSymbol>( loadResult.OutputData );
-    var storeInteractor = new ExportSymbolInteractor<TSymbol>( destination );
-    var storeController = new ExportSymbolController<TSymbol>( storeInteractor );
+    var storeInputPort = new ExportSymbolInputDataOld<TSymbol>( loadResult.OutputData );
+    var storeInteractor = new ExportSymbolInteractorOld<TSymbol>( destination );
+    var storeController = new ExportSymbolControllerOld<TSymbol>( storeInteractor );
 
     storeController.Export( storeInputPort );
 }

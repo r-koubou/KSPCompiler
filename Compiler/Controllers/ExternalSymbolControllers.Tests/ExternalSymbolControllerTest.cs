@@ -35,10 +35,10 @@ public class ExternalSymbolControllerTest
         Assert.Null( loadResult.Error );
 
         // Store
-        var exportInputPort = new ExportSymbolInputData<VariableSymbol>( loadResult.OutputData );
+        var exportInputPort = new ExportSymbolInputDataOld<VariableSymbol>( loadResult.OutputData );
         var exporter = new YamlVariableSymbolExporter( new LocalTextContentWriter( destination ) );
-        var storeInteractor = new ExportSymbolInteractor<VariableSymbol>( exporter );
-        var storeController = new ExportSymbolController<VariableSymbol>( storeInteractor );
+        var storeInteractor = new ExportSymbolInteractorOld<VariableSymbol>( exporter );
+        var storeController = new ExportSymbolControllerOld<VariableSymbol>( storeInteractor );
 
         storeController.Export( exportInputPort );
         Assert.That( File.Exists( destination ), Is.True );
@@ -61,10 +61,10 @@ public class ExternalSymbolControllerTest
         Assert.Null( importResult.Error );
 
         // Export
-        var exportParameter = new ExportSymbolInputData<VariableSymbol>( importResult.OutputData );
+        var exportParameter = new ExportSymbolInputDataOld<VariableSymbol>( importResult.OutputData );
         var destinationRepository = new TsvVariableSymbolExporter( new LocalTextContentWriter( destination ) );
-        var exportInteractor = new ExportSymbolInteractor<VariableSymbol>( destinationRepository );
-        var exportController = new ExportSymbolController<VariableSymbol>( exportInteractor );
+        var exportInteractor = new ExportSymbolInteractorOld<VariableSymbol>( destinationRepository );
+        var exportController = new ExportSymbolControllerOld<VariableSymbol>( exportInteractor );
 
         exportController.Export( exportParameter );
         Assert.That( File.Exists( destination ), Is.True );

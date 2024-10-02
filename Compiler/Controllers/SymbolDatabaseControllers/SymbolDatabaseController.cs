@@ -44,8 +44,8 @@ public class SymbolDatabaseController<TSymbol> where TSymbol : SymbolBase
     public async Task<ExportResult> ExportAsync( ISymbolExporter<TSymbol> exporter, Func<TSymbol, bool> predicate, CancellationToken cancellationToken = default )
     {
         var symbols = await Repository.FindAsync( predicate, cancellationToken );
-        var useCase = new ExportSymbolInteractor<TSymbol>( exporter );
-        var inputPort = new ExportSymbolInputData<TSymbol>( symbols );
+        var useCase = new ExportSymbolInteractorOld<TSymbol>( exporter );
+        var inputPort = new ExportSymbolInputDataOld<TSymbol>( symbols );
         var outputPort = await useCase.ExecuteAsync( inputPort, cancellationToken );
 
         if( !outputPort.Result )
