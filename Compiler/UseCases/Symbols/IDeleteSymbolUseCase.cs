@@ -4,11 +4,11 @@ using KSPCompiler.Domain.Symbols;
 
 namespace KSPCompiler.UseCases.Symbols;
 
-public sealed class DeleteSymbolInputData<TSymbol> : IInputPort<Func<TSymbol, bool>> where TSymbol : SymbolBase
+public sealed class DeleteSymbolInputData<TSymbol> : IInputPort<Predicate<TSymbol>> where TSymbol : SymbolBase
 {
-    public Func<TSymbol, bool> InputData { get; }
+    public Predicate<TSymbol> InputData { get; }
 
-    public DeleteSymbolInputData( Func<TSymbol, bool> inputData )
+    public DeleteSymbolInputData( Predicate<TSymbol> inputData )
     {
         InputData = inputData;
     }

@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.Repositories;
 using KSPCompiler.Interactor.Symbols;
-using KSPCompiler.UseCases;
 using KSPCompiler.UseCases.Symbols;
 
 namespace KSPCompiler.SymbolDatabaseControllers;
@@ -39,11 +38,16 @@ public class SymbolDatabaseController<TSymbol> where TSymbol : SymbolBase
         );
     }
 
-    public async Task<ExportResult> ExportAsync( ISymbolExporter<TSymbol> exporter, Func<TSymbol, bool> predicate, CancellationToken cancellationToken = default )
+    public async Task<ExportResult> ExportAsync( ISymbolExporter<TSymbol> exporter, Predicate<TSymbol> predicate, CancellationToken cancellationToken = default )
     {
-        var symbols = await Repository.FindAsync( predicate, cancellationToken );
-        var useCase = new ExportSymbolInteractorOld<TSymbol>( exporter );
-        var inputPort = new ExportSymbolInputDataOld<TSymbol>( symbols );
+        var useCase = new ExportSymbolFromRepositoryInteractor<TSymbol>( Repository );
+        var inputPort = new ExportSymbolInputData<TSymbol>(
+            new ExportSymbolInputDataDetail<TSymbol>(
+                exporter,
+                predicate
+            )
+        );
+
         var outputPort = await useCase.ExecuteAsync( inputPort, cancellationToken );
 
         if( !outputPort.Result )
@@ -57,7 +61,7 @@ public class SymbolDatabaseController<TSymbol> where TSymbol : SymbolBase
         );
     }
 
-    public async Task<DeleteResult> DeleteAsync( Func<TSymbol, bool> predicate, CancellationToken cancellationToken = default )
+    public async Task<DeleteResult> DeleteAsync( Predicate<TSymbol> predicate, CancellationToken cancellationToken = default )
     {
         var useCase = new DeleteSymbolFromRepositoryInteractor<TSymbol>( Repository );
         var inputPort = new DeleteSymbolInputData<TSymbol>( predicate );
