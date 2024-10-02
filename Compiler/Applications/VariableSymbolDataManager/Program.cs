@@ -27,7 +27,7 @@ static void NewDb(
     var path = Path.Combine( outputDirectory, databaseName + ".yaml" );
     var exporter = new YamlVariableSymbolExporter( new LocalTextContentWriter( path ) );
     var interactor = new CreateVariableSymbolUseCaseOld( exporter );
-    var controller = new CreateVariableSymbolController( interactor );
+    var controller = new CreateVariableSymbolControllerOld( interactor );
     controller.Create();
 }
 

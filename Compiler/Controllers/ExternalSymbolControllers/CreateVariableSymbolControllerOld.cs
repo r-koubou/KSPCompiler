@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -5,11 +6,12 @@ using KSPCompiler.UseCases.Symbols;
 
 namespace KSPCompiler.ExternalSymbolControllers;
 
-public class CreateVariableSymbolController
+[Obsolete]
+public class CreateVariableSymbolControllerOld
 {
     private readonly ICreateVariableSymbolUseCaseOld useCase;
 
-    public CreateVariableSymbolController( ICreateVariableSymbolUseCaseOld useCase )
+    public CreateVariableSymbolControllerOld( ICreateVariableSymbolUseCaseOld useCase )
     {
         this.useCase = useCase;
     }
