@@ -6,8 +6,10 @@ using KSPCompiler.Commons.Contents;
 using KSPCompiler.Commons.Path;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.Repositories;
+using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Callbacks;
 using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Commands;
 using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Variables;
+using KSPCompiler.ExternalSymbolRepository.Tsv.Callbacks;
 using KSPCompiler.ExternalSymbolRepository.Tsv.Commands;
 using KSPCompiler.ExternalSymbolRepository.Tsv.Variables;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
@@ -130,4 +132,53 @@ public class SymbolLocalDatabaseControllerTest
 
     #endregion
 
+    #region Callback
+
+    [Test]
+    public async Task ImportCallbacksTest()
+    {
+        var importPath = new FilePath( Path.Combine( ImportTestDataDirectory,     "callback.tsv" ) );
+        var repositoryPath = new FilePath( Path.Combine( ImportTestDataDirectory, "repository_callback.json" ) );
+
+        ITextContentReader reader = new LocalTextContentReader( importPath );
+        ISymbolImporter<CallbackSymbol> importer = new TsvCallbackSymbolImporter( reader );
+        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryPath );
+        var controller = new SymbolDatabaseController<CallbackSymbol>( repository );
+
+        var result = await controller.ImportAsync( importer );
+
+        Assert.IsTrue( result.Success );
+    }
+
+    [Test]
+    public async Task ExportCallbacksTest()
+    {
+        var exportPath = new FilePath( Path.Combine( ExportTestDataDirectory,     "callback.tsv" ) );
+        var repositoryPath = new FilePath( Path.Combine( ExportTestDataDirectory, "repository_callback.json" ) );
+
+        ITextContentWriter writer = new LocalTextContentWriter( exportPath );
+        ISymbolExporter<CallbackSymbol> exporter = new TsvCallbackSymbolExporter( writer );
+        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryPath );
+        var controller = new SymbolDatabaseController<CallbackSymbol>( repository );
+
+        var result = await controller.ExportAsync( exporter, _ => true );
+
+        Assert.IsTrue( result.Success );
+    }
+
+    [Test]
+    public async Task DeleteCallbacksTest()
+    {
+        var repositoryPath = new FilePath( Path.Combine( DeleteTestDataDirectory, "repository_callback.json" ) );
+
+        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryPath );
+        var controller = new SymbolDatabaseController<CallbackSymbol>( repository );
+
+        var result = await controller.DeleteAsync( _ => true );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsFalse( ( await repository.FindAllAsync() ).Any() );
+    }
+
+    #endregion
 }
