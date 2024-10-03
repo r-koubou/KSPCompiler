@@ -48,6 +48,15 @@
       <None Update="TestData\SymbolLocalDatabaseControllerTest\delete\repository_callback.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="TestData\SymbolLocalDatabaseControllerTest\import\ui_type.tsv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\SymbolLocalDatabaseControllerTest\export\repository_ui_type.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\SymbolLocalDatabaseControllerTest\delete\repository_ui_type.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
     <ItemGroup>
