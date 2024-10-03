@@ -6,7 +6,9 @@ using KSPCompiler.Commons.Contents;
 using KSPCompiler.Commons.Path;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.Repositories;
+using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Commands;
 using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Variables;
+using KSPCompiler.ExternalSymbolRepository.Tsv.Commands;
 using KSPCompiler.ExternalSymbolRepository.Tsv.Variables;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
 
@@ -27,6 +29,8 @@ public class SymbolLocalDatabaseControllerTest
     {
         Directory.CreateDirectory( TestDataDirectory );
     }
+
+    #region Variable
 
     [Test]
     public async Task ImportVariablesTest()
@@ -73,4 +77,57 @@ public class SymbolLocalDatabaseControllerTest
         Assert.IsTrue( result.Success );
         Assert.IsFalse( (await repository.FindAllAsync()).Any() );
     }
+
+    #endregion
+
+    #region Command
+
+    [Test]
+    public async Task ImportCommandsTest()
+    {
+        var importPath = new FilePath( Path.Combine( ImportTestDataDirectory,     "command.tsv" ) );
+        var repositoryPath = new FilePath( Path.Combine( ImportTestDataDirectory, "repository_command.json" ) );
+
+        ITextContentReader reader = new LocalTextContentReader( importPath );
+        ISymbolImporter<CommandSymbol> importer = new TsvCommandSymbolImporter( reader );
+        using ISymbolRepository<CommandSymbol> repository = new CommandSymbolRepository( repositoryPath );
+        var controller = new SymbolDatabaseController<CommandSymbol>( repository );
+
+        var result = await controller.ImportAsync( importer );
+
+        Assert.IsTrue( result.Success );
+    }
+
+    [Test]
+    public async Task ExportCommandsTest()
+    {
+        var exportPath = new FilePath( Path.Combine( ExportTestDataDirectory,     "command.tsv" ) );
+        var repositoryPath = new FilePath( Path.Combine( ExportTestDataDirectory, "repository_command.json" ) );
+
+        ITextContentWriter writer = new LocalTextContentWriter( exportPath );
+        ISymbolExporter<CommandSymbol> exporter = new TsvCommandSymbolExporter( writer );
+        using ISymbolRepository<CommandSymbol> repository = new CommandSymbolRepository( repositoryPath );
+        var controller = new SymbolDatabaseController<CommandSymbol>( repository );
+
+        var result = await controller.ExportAsync( exporter, _ => true );
+
+        Assert.IsTrue( result.Success );
+    }
+
+    [Test]
+    public async Task DeleteCommandsTest()
+    {
+        var repositoryPath = new FilePath( Path.Combine( DeleteTestDataDirectory, "repository_command.json" ) );
+
+        using ISymbolRepository<CommandSymbol> repository = new CommandSymbolRepository( repositoryPath );
+        var controller = new SymbolDatabaseController<CommandSymbol>( repository );
+
+        var result = await controller.DeleteAsync( _ => true );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsFalse( ( await repository.FindAllAsync() ).Any() );
+    }
+
+    #endregion
+
 }
