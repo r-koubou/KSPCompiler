@@ -8,9 +8,11 @@ using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.Repositories;
 using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Callbacks;
 using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Commands;
+using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.UITypes;
 using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Variables;
 using KSPCompiler.ExternalSymbolRepository.Tsv.Callbacks;
 using KSPCompiler.ExternalSymbolRepository.Tsv.Commands;
+using KSPCompiler.ExternalSymbolRepository.Tsv.UITypes;
 using KSPCompiler.ExternalSymbolRepository.Tsv.Variables;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
 
@@ -173,6 +175,56 @@ public class SymbolLocalDatabaseControllerTest
 
         using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryPath );
         var controller = new SymbolDatabaseController<CallbackSymbol>( repository );
+
+        var result = await controller.DeleteAsync( _ => true );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsFalse( ( await repository.FindAllAsync() ).Any() );
+    }
+
+    #endregion
+
+    #region UIType
+
+    [Test]
+    public async Task ImportUITypeTest()
+    {
+        var importPath = new FilePath( Path.Combine( ImportTestDataDirectory,     "ui_type.tsv" ) );
+        var repositoryPath = new FilePath( Path.Combine( ImportTestDataDirectory, "repository_ui_type.json" ) );
+
+        ITextContentReader reader = new LocalTextContentReader( importPath );
+        ISymbolImporter<UITypeSymbol> importer = new TsvUITypeSymbolImporter( reader );
+        using ISymbolRepository<UITypeSymbol> repository = new UITypeSymbolRepository( repositoryPath );
+        var controller = new SymbolDatabaseController<UITypeSymbol>( repository );
+
+        var result = await controller.ImportAsync( importer );
+
+        Assert.IsTrue( result.Success );
+    }
+
+    [Test]
+    public async Task ExportUITypeTest()
+    {
+        var exportPath = new FilePath( Path.Combine( ExportTestDataDirectory,     "ui_type.tsv" ) );
+        var repositoryPath = new FilePath( Path.Combine( ExportTestDataDirectory, "repository_ui_type.json" ) );
+
+        ITextContentWriter writer = new LocalTextContentWriter( exportPath );
+        ISymbolExporter<UITypeSymbol> exporter = new TsvUITypeSymbolExporter( writer );
+        using ISymbolRepository<UITypeSymbol> repository = new UITypeSymbolRepository( repositoryPath );
+        var controller = new SymbolDatabaseController<UITypeSymbol>( repository );
+
+        var result = await controller.ExportAsync( exporter, _ => true );
+
+        Assert.IsTrue( result.Success );
+    }
+
+    [Test]
+    public async Task DeleteUITypeTest()
+    {
+        var repositoryPath = new FilePath( Path.Combine( DeleteTestDataDirectory, "repository_ui_type.json" ) );
+
+        using ISymbolRepository<UITypeSymbol> repository = new UITypeSymbolRepository( repositoryPath );
+        var controller = new SymbolDatabaseController<UITypeSymbol>( repository );
 
         var result = await controller.DeleteAsync( _ => true );
 
