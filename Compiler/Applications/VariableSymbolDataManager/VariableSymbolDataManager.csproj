@@ -17,8 +17,4 @@
       <PackageReference Include="ConsoleAppFramework" Version="4.2.4" />
     </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\..\Controllers\ExternalSymbolControllers\ExternalSymbolControllers.csproj" />
-    </ItemGroup>
-
 </Project>
