@@ -28,13 +28,28 @@ public class ExportCommand
     /// <summary>
     /// Export variables to specified file.
     /// </summary>
-    /// <param name="service">A service to import variables.</param>
-    /// <param name="databaseFilePath">-d, A database file path to store.</param>
+    /// <param name="service">A service to export variables.</param>
+    /// <param name="databaseFilePath">-d, A database file path to search symbols.</param>
     /// <param name="exportFilePath">-e, Export file path.</param>
     /// <param name="exportPattern">-p, Export symbol name pattern. Wildcard is supported.</param>
     /// <param name="cancellationToken"></param>
     [Command( "export-variables" )]
     public async Task ExportVariablesAsync( [FromServices] IVariableSymbolDatabaseService service, string databaseFilePath, string exportFilePath, string exportPattern = "*", CancellationToken cancellationToken = default )
+    {
+        var result = await service.ExportSymbolsAsync( databaseFilePath, exportFilePath, exportPattern, cancellationToken );
+        HandleExportResult( result );
+    }
+
+    /// <summary>
+    /// Export commands to specified file.
+    /// </summary>
+    /// <param name="service">A service to export commands.</param>
+    /// <param name="databaseFilePath">-d, A database file path to search symbols.</param>
+    /// <param name="exportFilePath">-e, Export file path.</param>
+    /// <param name="exportPattern">-p, Export symbol name pattern. Wildcard is supported.</param>
+    /// <param name="cancellationToken"></param>
+    [Command( "export-commands" )]
+    public async Task ExportCommandsAsync( [FromServices] ICommandSymbolDatabaseService service, string databaseFilePath, string exportFilePath, string exportPattern = "*", CancellationToken cancellationToken = default )
     {
         var result = await service.ExportSymbolsAsync( databaseFilePath, exportFilePath, exportPattern, cancellationToken );
         HandleExportResult( result );
