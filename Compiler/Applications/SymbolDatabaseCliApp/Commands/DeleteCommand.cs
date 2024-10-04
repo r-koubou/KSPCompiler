@@ -67,4 +67,18 @@ public class DeleteCommand
         var result = await service.DeleteSymbolsAsync( databaseFilePath, deletePattern, cancellationToken );
         HandleDeleteResult( result );
     }
+
+    /// <summary>
+    /// Delete ui-types from specified database file.
+    /// </summary>
+    /// <param name="service">A service to delete ui-type symbols.</param>
+    /// <param name="databaseFilePath">-d, A database file path to store.</param>
+    /// <param name="deletePattern">-p, Delete symbol name pattern. Wildcard is supported.</param>
+    /// <param name="cancellationToken"></param>
+    [Command( "delete-ui-types" )]
+    public async Task DeleteUITypeAsync( [FromServices] IUITypeSymbolDatabaseService service, string databaseFilePath, string deletePattern = "*", CancellationToken cancellationToken = default )
+    {
+        var result = await service.DeleteSymbolsAsync( databaseFilePath, deletePattern, cancellationToken );
+        HandleDeleteResult( result );
+    }
 }

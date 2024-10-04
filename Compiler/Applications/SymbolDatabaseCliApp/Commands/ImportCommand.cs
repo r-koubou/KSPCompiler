@@ -67,4 +67,18 @@ public class ImportCommand
         var result = await service.ImportSymbolsAsync( databaseFilePath, importFilePath, cancellationToken );
         HandleImportResult( result );
     }
+
+    /// <summary>
+    /// Import ui-types to specified database file.
+    /// </summary>
+    /// <param name="service">A service to import ui-types.</param>
+    /// <param name="databaseFilePath">-d, A database file path to store.</param>
+    /// <param name="importFilePath">-i, A importing file path.</param>
+    /// <param name="cancellationToken"></param>
+    [Command( "import-ui-types" )]
+    public async Task ImportUITypeAsync( [FromServices] IUITypeSymbolDatabaseService service, string databaseFilePath, string importFilePath, CancellationToken cancellationToken = default )
+    {
+        var result = await service.ImportSymbolsAsync( databaseFilePath, importFilePath, cancellationToken );
+        HandleImportResult( result );
+    }
 }

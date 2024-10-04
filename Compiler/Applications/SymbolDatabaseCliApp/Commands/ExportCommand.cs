@@ -69,4 +69,19 @@ public class ExportCommand
         var result = await service.ExportSymbolsAsync( databaseFilePath, exportFilePath, exportPattern, cancellationToken );
         HandleExportResult( result );
     }
+
+    /// <summary>
+    /// Export ui-types to specified file.
+    /// </summary>
+    /// <param name="service">A service to export ui-types.</param>
+    /// <param name="databaseFilePath">-d, A database file path to search symbols.</param>
+    /// <param name="exportFilePath">-e, Export file path.</param>
+    /// <param name="exportPattern">-p, Export symbol name pattern. Wildcard is supported.</param>
+    /// <param name="cancellationToken"></param>
+    [Command( "export-ui-types" )]
+    public async Task ExportUITypeAsync( [FromServices] IUITypeSymbolDatabaseService service, string databaseFilePath, string exportFilePath, string exportPattern = "*", CancellationToken cancellationToken = default )
+    {
+        var result = await service.ExportSymbolsAsync( databaseFilePath, exportFilePath, exportPattern, cancellationToken );
+        HandleExportResult( result );
+    }
 }
