@@ -29,7 +29,7 @@ public class DeleteCommand
     /// <summary>
     /// Delete variables from specified database file.
     /// </summary>
-    /// <param name="service">A service to import variables.</param>
+    /// <param name="service">A service to delete variable symbols.</param>
     /// <param name="databaseFilePath">-d, A database file path to store.</param>
     /// <param name="deletePattern">-p, Delete symbol name pattern. Wildcard is supported.</param>
     /// <param name="cancellationToken"></param>
@@ -43,12 +43,26 @@ public class DeleteCommand
     /// <summary>
     /// Delete commands from specified database file.
     /// </summary>
-    /// <param name="service">A service to import commands.</param>
+    /// <param name="service">A service to delete command symbols.</param>
     /// <param name="databaseFilePath">-d, A database file path to store.</param>
     /// <param name="deletePattern">-p, Delete symbol name pattern. Wildcard is supported.</param>
     /// <param name="cancellationToken"></param>
     [Command( "delete-commands" )]
     public async Task DeleteCommandsAsync( [FromServices] ICommandSymbolDatabaseService service, string databaseFilePath, string deletePattern = "*", CancellationToken cancellationToken = default )
+    {
+        var result = await service.DeleteSymbolsAsync( databaseFilePath, deletePattern, cancellationToken );
+        HandleDeleteResult( result );
+    }
+
+    /// <summary>
+    /// Delete callbacks from specified database file.
+    /// </summary>
+    /// <param name="service">A service to delete callback symbols.</param>
+    /// <param name="databaseFilePath">-d, A database file path to store.</param>
+    /// <param name="deletePattern">-p, Delete symbol name pattern. Wildcard is supported.</param>
+    /// <param name="cancellationToken"></param>
+    [Command( "delete-callbacks" )]
+    public async Task DeleteCallbacksAsync( [FromServices] ICallbackSymbolDatabaseService service, string databaseFilePath, string deletePattern = "*", CancellationToken cancellationToken = default )
     {
         var result = await service.DeleteSymbolsAsync( databaseFilePath, deletePattern, cancellationToken );
         HandleDeleteResult( result );

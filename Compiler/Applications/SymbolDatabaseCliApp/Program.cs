@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 var serviceCollection = new ServiceCollection();
 serviceCollection.AddSingleton<IVariableSymbolDatabaseService, VariableSymbolDatabaseService>();
 serviceCollection.AddSingleton<ICommandSymbolDatabaseService, CommandSymbolDatabaseService>();
+serviceCollection.AddSingleton<ICallbackSymbolDatabaseService, CallbackSymbolDatabaseService>();
 
 await using var serviceProvider = serviceCollection.BuildServiceProvider();
 

@@ -54,4 +54,19 @@ public class ExportCommand
         var result = await service.ExportSymbolsAsync( databaseFilePath, exportFilePath, exportPattern, cancellationToken );
         HandleExportResult( result );
     }
+
+    /// <summary>
+    /// Export callbacks to specified file.
+    /// </summary>
+    /// <param name="service">A service to export callbacks.</param>
+    /// <param name="databaseFilePath">-d, A database file path to search symbols.</param>
+    /// <param name="exportFilePath">-e, Export file path.</param>
+    /// <param name="exportPattern">-p, Export symbol name pattern. Wildcard is supported.</param>
+    /// <param name="cancellationToken"></param>
+    [Command( "export-callbacks" )]
+    public async Task ExportCallbacksAsync( [FromServices] ICallbackSymbolDatabaseService service, string databaseFilePath, string exportFilePath, string exportPattern = "*", CancellationToken cancellationToken = default )
+    {
+        var result = await service.ExportSymbolsAsync( databaseFilePath, exportFilePath, exportPattern, cancellationToken );
+        HandleExportResult( result );
+    }
 }

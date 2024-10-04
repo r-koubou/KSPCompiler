@@ -22,7 +22,7 @@ public class ImportCommand
         else
         {
             Console.WriteLine( "Import failed." );
-            Console.WriteLine( result.Exception?.Message );
+            Console.WriteLine( result.Exception );
         }
     }
 
@@ -49,6 +49,20 @@ public class ImportCommand
     /// <param name="cancellationToken"></param>
     [Command( "import-commands" )]
     public async Task ImportCommandsAsync( [FromServices] ICommandSymbolDatabaseService service, string databaseFilePath, string importFilePath, CancellationToken cancellationToken = default )
+    {
+        var result = await service.ImportSymbolsAsync( databaseFilePath, importFilePath, cancellationToken );
+        HandleImportResult( result );
+    }
+
+    /// <summary>
+    /// Import callbacks to specified database file.
+    /// </summary>
+    /// <param name="service">A service to import callbacks.</param>
+    /// <param name="databaseFilePath">-d, A database file path to store.</param>
+    /// <param name="importFilePath">-i, A importing file path.</param>
+    /// <param name="cancellationToken"></param>
+    [Command( "import-callbacks" )]
+    public async Task ImportCallbacksAsync( [FromServices] ICallbackSymbolDatabaseService service, string databaseFilePath, string importFilePath, CancellationToken cancellationToken = default )
     {
         var result = await service.ImportSymbolsAsync( databaseFilePath, importFilePath, cancellationToken );
         HandleImportResult( result );
