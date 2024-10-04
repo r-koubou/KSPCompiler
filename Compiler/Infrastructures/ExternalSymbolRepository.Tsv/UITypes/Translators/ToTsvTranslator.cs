@@ -30,10 +30,22 @@ internal class ToTsvTranslator : IDataTranslator<IEnumerable<UITypeSymbol>, stri
 
             result.AppendTab();
 
+            var i = 0;
+
             foreach( var x in v.InitializerArguments )
             {
-                result.AppendTab( x.Name )
-                      .AppendTab( x.Description );
+                if( i == v.InitializerArguments.Count - 1 )
+                {
+                    result.AppendTab( x.Name )
+                          .Append( x.Description );
+                }
+                else
+                {
+                    result.AppendTab( x.Name )
+                          .AppendTab( x.Description );
+                }
+
+                i++;
             }
 
             result.AppendNewLine();
