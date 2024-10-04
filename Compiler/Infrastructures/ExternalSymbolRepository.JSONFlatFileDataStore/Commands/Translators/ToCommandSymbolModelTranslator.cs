@@ -7,9 +7,9 @@ using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Commands.Models
 
 namespace KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Commands.Translators;
 
-internal class ToCommandSymbolModelTranslator : IDataTranslator<IEnumerable<CommandSymbol>, IEnumerable<CommandSymbolModel>>
+internal class ToCommandSymbolModelTranslator : IDataTranslator<IEnumerable<CommandSymbol>, IReadOnlyCollection<CommandSymbolModel>>
 {
-    public IEnumerable<CommandSymbolModel> Translate( IEnumerable<CommandSymbol> source )
+    public IReadOnlyCollection<CommandSymbolModel> Translate( IEnumerable<CommandSymbol> source )
     {
         var result = new List<CommandSymbolModel>();
 

@@ -22,16 +22,16 @@ public abstract class SymbolRepository<TSymbol, TModel> : ISymbolRepository<TSym
     protected DataStore DataStore { get; }
     protected IDocumentCollection<TModel> Collection { get; }
 
-    protected IDataTranslator<IEnumerable<TSymbol>, IEnumerable<TModel>> ToModelTranslator { get; }
-    protected IDataTranslator<IEnumerable<TModel>, IEnumerable<TSymbol>> FromModelTranslator { get; }
+    protected IDataTranslator<IEnumerable<TSymbol>, IReadOnlyCollection<TModel>> ToModelTranslator { get; }
+    protected IDataTranslator<IEnumerable<TModel>, IReadOnlyCollection<TSymbol>> FromModelTranslator { get; }
 
     public int Count
         => Collection.Count;
 
     public SymbolRepository(
         FilePath repositoryPath,
-        IDataTranslator<IEnumerable<TSymbol>, IEnumerable<TModel>> toModelTranslator,
-        IDataTranslator<IEnumerable<TModel>, IEnumerable<TSymbol>> fromModelTranslator )
+        IDataTranslator<IEnumerable<TSymbol>, IReadOnlyCollection<TModel>> toModelTranslator,
+        IDataTranslator<IEnumerable<TModel>, IReadOnlyCollection<TSymbol>> fromModelTranslator )
     {
         RepositoryPath      = repositoryPath;
         DataStore           = new DataStore( RepositoryPath.Path );
@@ -221,15 +221,16 @@ public abstract class SymbolRepository<TSymbol, TModel> : ISymbolRepository<TSym
     ///
     /// <inheritdoc />
     ///
-    public virtual async Task<IEnumerable<TSymbol>> FindByNameAsync( string name, CancellationToken cancellationToken = default )
+    public virtual async Task<IReadOnlyCollection<TSymbol>> FindByNameAsync( string name, CancellationToken cancellationToken = default )
     {
         var founds = Collection.Find( x => name == x.Name );
         var result = FromModelTranslator.Translate( founds );
 
+        await Task.CompletedTask;
         return result;
     }
 
-    public virtual async Task<IEnumerable<TSymbol>> FindAsync( Predicate<TSymbol> predicate, CancellationToken cancellationToken = default )
+    public virtual async Task<IReadOnlyCollection<TSymbol>> FindAsync( Predicate<TSymbol> predicate, CancellationToken cancellationToken = default )
     {
         var result = new List<TSymbol>();
         var all = Collection.AsQueryable();
@@ -243,13 +244,15 @@ public abstract class SymbolRepository<TSymbol, TModel> : ISymbolRepository<TSym
             }
         }
 
+        await Task.CompletedTask;
         return result;
     }
 
-    public virtual async Task<IEnumerable<TSymbol>> FindAllAsync( CancellationToken cancellationToken = default )
+    public virtual async Task<IReadOnlyCollection<TSymbol>> FindAllAsync( CancellationToken cancellationToken = default )
     {
         var all = Collection.AsQueryable();
 
+        await Task.CompletedTask;
         return FromModelTranslator.Translate( all );
     }
 }
