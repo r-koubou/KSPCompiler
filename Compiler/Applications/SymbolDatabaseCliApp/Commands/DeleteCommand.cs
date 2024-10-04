@@ -39,4 +39,18 @@ public class DeleteCommand
         var result = await service.DeleteSymbolsAsync( databaseFilePath, deletePattern, cancellationToken );
         HandleDeleteResult( result );
     }
+
+    /// <summary>
+    /// Delete commands from specified database file.
+    /// </summary>
+    /// <param name="service">A service to import commands.</param>
+    /// <param name="databaseFilePath">-d, A database file path to store.</param>
+    /// <param name="deletePattern">-p, Delete symbol name pattern. Wildcard is supported.</param>
+    /// <param name="cancellationToken"></param>
+    [Command( "delete-commands" )]
+    public async Task DeleteCommandsAsync( [FromServices] ICommandSymbolDatabaseService service, string databaseFilePath, string deletePattern = "*", CancellationToken cancellationToken = default )
+    {
+        var result = await service.DeleteSymbolsAsync( databaseFilePath, deletePattern, cancellationToken );
+        HandleDeleteResult( result );
+    }
 }

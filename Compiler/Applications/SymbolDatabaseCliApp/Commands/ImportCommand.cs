@@ -39,4 +39,18 @@ public class ImportCommand
         var result = await service.ImportSymbolsAsync( databaseFilePath, importFilePath, cancellationToken );
         HandleImportResult( result );
     }
+
+    /// <summary>
+    /// Import commands to specified database file.
+    /// </summary>
+    /// <param name="service">A service to import commands.</param>
+    /// <param name="databaseFilePath">-d, A database file path to store.</param>
+    /// <param name="importFilePath">-i, A importing file path.</param>
+    /// <param name="cancellationToken"></param>
+    [Command( "import-commands" )]
+    public async Task ImportCommandsAsync( [FromServices] ICommandSymbolDatabaseService service, string databaseFilePath, string importFilePath, CancellationToken cancellationToken = default )
+    {
+        var result = await service.ImportSymbolsAsync( databaseFilePath, importFilePath, cancellationToken );
+        HandleImportResult( result );
+    }
 }
