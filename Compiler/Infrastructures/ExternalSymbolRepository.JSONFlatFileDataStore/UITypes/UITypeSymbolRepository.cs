@@ -8,10 +8,12 @@ namespace KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.UITypes;
 
 public class UITypeSymbolRepository : SymbolRepository<UITypeSymbol, UITypeSymbolModel>
 {
-    private const string CurrentVersion = "20240929";
+    private const string RepositoryIdentifier = "ui_type";
+    private const int CurrentVersion = 1;
 
     public UITypeSymbolRepository( FilePath repositoryPath ) : base( repositoryPath, new ToUITypeModelTranslator(), new FromUITypeModelTranslator() )
     {
-        DataStore.ReplaceItem( "version", CurrentVersion, upsert: true );
+        ValidateRepositoryIdentifier( RepositoryIdentifier );
+        ValidateRepositoryVersion( CurrentVersion );
     }
 }

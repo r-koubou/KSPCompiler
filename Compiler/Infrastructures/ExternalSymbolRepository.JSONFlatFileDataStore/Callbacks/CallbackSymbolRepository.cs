@@ -8,10 +8,12 @@ namespace KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Callbacks;
 
 public class CallbackSymbolRepository : SymbolRepository<CallbackSymbol, CallbackSymbolModel>
 {
-    private const string CurrentVersion = "20240929";
+    private const string RepositoryIdentifier = "callback";
+    private const int CurrentVersion = 1;
 
     public CallbackSymbolRepository( FilePath repositoryPath ) : base( repositoryPath, new ToCallbackSymbolModelTranslator(), new FromCallbackSymbolModelTranslator() )
     {
-        DataStore.ReplaceItem( "version", CurrentVersion, upsert: true );
+        ValidateRepositoryIdentifier( RepositoryIdentifier );
+        ValidateRepositoryVersion( CurrentVersion );
     }
 }

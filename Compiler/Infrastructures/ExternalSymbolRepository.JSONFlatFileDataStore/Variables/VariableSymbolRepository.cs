@@ -8,10 +8,12 @@ namespace KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Variables;
 
 public class VariableSymbolRepository : SymbolRepository<VariableSymbol, VariableSymbolModel>
 {
-    private const string CurrentVersion = "20240929";
+    private const string RepositoryIdentifier = "variable";
+    private const int CurrentVersion = 1;
 
     public VariableSymbolRepository( FilePath repositoryPath ) : base( repositoryPath, new ToVariableSymbolModelTranslator(), new FromVariableSymbolModelTranslator() )
     {
-        DataStore.ReplaceItem( "version", CurrentVersion, upsert: true );
+        ValidateRepositoryIdentifier( RepositoryIdentifier );
+        ValidateRepositoryVersion( CurrentVersion );
     }
 }
