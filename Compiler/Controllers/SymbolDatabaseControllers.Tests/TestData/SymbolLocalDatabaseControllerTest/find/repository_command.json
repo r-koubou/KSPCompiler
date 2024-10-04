@@ -1,5 +1,6 @@
 {
-  "version": "20240929",
+  "repository_identifier": "command",
+  "repository_format_version": 1,
   "symbols": [
     {
       "id": 0,

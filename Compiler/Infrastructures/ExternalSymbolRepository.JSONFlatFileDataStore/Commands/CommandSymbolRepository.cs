@@ -8,10 +8,12 @@ namespace KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Commands;
 
 public class CommandSymbolRepository : SymbolRepository<CommandSymbol, CommandSymbolModel>
 {
-    private const string CurrentVersion = "20240929";
+    private const string RepositoryIdentifier = "command";
+    private const int CurrentVersion = 1;
 
     public CommandSymbolRepository( FilePath repositoryPath ) : base( repositoryPath, new ToCommandSymbolModelTranslator(), new FromCommandSymbolModelTranslator() )
     {
-        DataStore.ReplaceItem( "version", CurrentVersion, upsert: true );
+        ValidateRepositoryIdentifier( RepositoryIdentifier );
+        ValidateRepositoryVersion( CurrentVersion );
     }
 }

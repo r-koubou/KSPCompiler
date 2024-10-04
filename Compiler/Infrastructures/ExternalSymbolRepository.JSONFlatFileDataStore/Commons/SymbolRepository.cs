@@ -18,6 +18,9 @@ public abstract class SymbolRepository<TSymbol, TModel> : ISymbolRepository<TSym
     where TSymbol : SymbolBase
     where TModel : class, ISymbolModel
 {
+    protected const string CommonKeyIdentifier = "repository_identifier";
+    protected const string CommonKeyFormatVersion = "repository_format_version";
+
     protected FilePath RepositoryPath { get; }
     protected DataStore DataStore { get; }
     protected IDocumentCollection<TModel> Collection { get; }
@@ -38,6 +41,53 @@ public abstract class SymbolRepository<TSymbol, TModel> : ISymbolRepository<TSym
         Collection          = DataStore.GetCollection<TModel>( "symbols" );
         ToModelTranslator   = toModelTranslator;
         FromModelTranslator = fromModelTranslator;
+    }
+
+    protected void ValidateRepositoryIdentifier( string repositoryIdentifier )
+    {
+        string? identifier = null;
+
+        try
+        {
+            identifier = DataStore.GetItem<string>( CommonKeyIdentifier );
+        }
+        catch
+        {
+            // シンボルデータが存在するが、リポジトリ識別子が存在しない
+            if( Collection.Count > 0 )
+            {
+                throw new InvalidJsonRepositoryTypeException( $"Invalid repository type. (missing key: `{CommonKeyIdentifier}`)" );
+            }
+        }
+
+        // リポジトリ識別子が一致しない（他の種類のシンボル管理ファイルの可能性、新規作成直後(identifier == null)は対象外）
+        if( identifier != null && identifier != repositoryIdentifier )
+        {
+            throw new InvalidJsonRepositoryTypeException( $"Invalid repository type. (expected: {repositoryIdentifier}, actual: {identifier})" );
+        }
+
+        DataStore.ReplaceItem( CommonKeyIdentifier, repositoryIdentifier, upsert: true );
+    }
+
+    protected void ValidateRepositoryVersion( int expectedRepositoryVersion )
+    {
+        int actualRepositoryVersion = -1;
+
+        try
+        {
+            actualRepositoryVersion = DataStore.GetItem<int>( CommonKeyFormatVersion );
+        }
+        catch
+        {
+            // ignore
+        }
+
+        if( actualRepositoryVersion != -1 && actualRepositoryVersion != expectedRepositoryVersion )
+        {
+            throw new InvalidJsonRepositoryVersionException( expectedRepositoryVersion, actualRepositoryVersion );
+        }
+
+        DataStore.ReplaceItem( CommonKeyFormatVersion, expectedRepositoryVersion, upsert: true );
     }
 
     ///
