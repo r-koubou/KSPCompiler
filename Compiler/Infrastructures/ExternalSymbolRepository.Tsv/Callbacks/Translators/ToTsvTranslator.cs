@@ -3,7 +3,6 @@ using System.Text;
 
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.ExternalSymbolRepository.Tsv.Extensions;
 
 namespace KSPCompiler.ExternalSymbolRepository.Tsv.Callbacks.Translators;
@@ -30,11 +29,24 @@ internal class ToTsvTranslator : IDataTranslator<IEnumerable<CallbackSymbol>, st
 
             result.AppendTab();
 
+            var i = 0;
+
             foreach( var x in v.Arguments )
             {
-                result.AppendTab( x.Name )
-                      .AppendTab( x.RequiredDeclareOnInit.ToString().ToLower() )
-                      .AppendTab( x.Description );
+                if( i == v.Arguments.Count - 1 )
+                {
+                    result.AppendTab( x.Name )
+                          .AppendTab( x.RequiredDeclareOnInit.ToString().ToLower() )
+                          .Append( x.Description );
+                }
+                else
+                {
+                    result.AppendTab( x.Name )
+                          .AppendTab( x.RequiredDeclareOnInit.ToString().ToLower() )
+                          .AppendTab( x.Description );
+                }
+
+                i++;
             }
 
             result.AppendNewLine();
