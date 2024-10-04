@@ -9,6 +9,7 @@ var serviceCollection = new ServiceCollection();
 serviceCollection.AddSingleton<IVariableSymbolDatabaseService, VariableSymbolDatabaseService>();
 serviceCollection.AddSingleton<ICommandSymbolDatabaseService, CommandSymbolDatabaseService>();
 serviceCollection.AddSingleton<ICallbackSymbolDatabaseService, CallbackSymbolDatabaseService>();
+serviceCollection.AddSingleton<IUITypeSymbolDatabaseService, UITypeSymbolDatabaseService>();
 
 await using var serviceProvider = serviceCollection.BuildServiceProvider();
 
