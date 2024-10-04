@@ -27,6 +27,7 @@ public class SymbolLocalDatabaseControllerTest
     private static readonly string ImportTestDataDirectory = Path.Combine( TestDataDirectory, "import" );
     private static readonly string ExportTestDataDirectory = Path.Combine( TestDataDirectory, "export" );
     private static readonly string DeleteTestDataDirectory = Path.Combine( TestDataDirectory, "delete" );
+    private static readonly string FindTestDataDirectory = Path.Combine( TestDataDirectory,   "find" );
 
     [SetUp]
     public void Setup()
@@ -82,6 +83,20 @@ public class SymbolLocalDatabaseControllerTest
         Assert.IsFalse( (await repository.FindAllAsync()).Any() );
     }
 
+    [Test]
+    public async Task FindVariablesTest()
+    {
+        var repositoryPath = new FilePath( Path.Combine( FindTestDataDirectory, "repository_variable.json" ) );
+
+        using ISymbolRepository<VariableSymbol> repository = new VariableSymbolRepository( repositoryPath );
+        var controller = new SymbolDatabaseController<VariableSymbol>( repository );
+
+        var result = await controller.FindAsync( _ => true );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.FoundSymbols.Any() );
+    }
+
     #endregion
 
     #region Command
@@ -130,6 +145,20 @@ public class SymbolLocalDatabaseControllerTest
 
         Assert.IsTrue( result.Success );
         Assert.IsFalse( ( await repository.FindAllAsync() ).Any() );
+    }
+
+    [Test]
+    public async Task FindCommandsTest()
+    {
+        var repositoryPath = new FilePath( Path.Combine( FindTestDataDirectory, "repository_command.json" ) );
+
+        using ISymbolRepository<CommandSymbol> repository = new CommandSymbolRepository( repositoryPath );
+        var controller = new SymbolDatabaseController<CommandSymbol>( repository );
+
+        var result = await controller.FindAsync( _ => true );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.FoundSymbols.Any() );
     }
 
     #endregion
@@ -182,6 +211,20 @@ public class SymbolLocalDatabaseControllerTest
         Assert.IsFalse( ( await repository.FindAllAsync() ).Any() );
     }
 
+    [Test]
+    public async Task FindCallbacksTest()
+    {
+        var repositoryPath = new FilePath( Path.Combine( FindTestDataDirectory, "repository_callback.json" ) );
+
+        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryPath );
+        var controller = new SymbolDatabaseController<CallbackSymbol>( repository );
+
+        var result = await controller.FindAsync( _ => true );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.FoundSymbols.Any() );
+    }
+
     #endregion
 
     #region UIType
@@ -230,6 +273,20 @@ public class SymbolLocalDatabaseControllerTest
 
         Assert.IsTrue( result.Success );
         Assert.IsFalse( ( await repository.FindAllAsync() ).Any() );
+    }
+
+    [Test]
+    public async Task FindUITypeTest()
+    {
+        var repositoryPath = new FilePath( Path.Combine( FindTestDataDirectory, "repository_ui_type.json" ) );
+
+        using ISymbolRepository<UITypeSymbol> repository = new UITypeSymbolRepository( repositoryPath );
+        var controller = new SymbolDatabaseController<UITypeSymbol>( repository );
+
+        var result = await controller.FindAsync( _ => true );
+
+        Assert.IsTrue( result.Success );
+        Assert.IsTrue( result.FoundSymbols.Any() );
     }
 
     #endregion

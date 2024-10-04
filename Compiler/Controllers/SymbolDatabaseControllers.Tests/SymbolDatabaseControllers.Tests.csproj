@@ -57,6 +57,18 @@
       <None Update="TestData\SymbolLocalDatabaseControllerTest\delete\repository_ui_type.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="TestData\SymbolLocalDatabaseControllerTest\find\repository_callback.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\SymbolLocalDatabaseControllerTest\find\repository_command.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\SymbolLocalDatabaseControllerTest\find\repository_ui_type.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\SymbolLocalDatabaseControllerTest\find\repository_variable.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
     <ItemGroup>

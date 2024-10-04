@@ -7,8 +7,6 @@ namespace KSPCompiler.Domain.Symbols.Repositories;
 
 public interface ISymbolRepository<TSymbol> : IDisposable where TSymbol : SymbolBase
 {
-    public static readonly Predicate<TSymbol> Any = _ => true;
-
     public StoreResult Store( TSymbol symbol )
         => StoreAsync( symbol ).GetAwaiter().GetResult();
 
@@ -29,18 +27,18 @@ public interface ISymbolRepository<TSymbol> : IDisposable where TSymbol : Symbol
 
     public Task<DeleteResult> DeleteAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default );
 
-    public IEnumerable<TSymbol> FindByName( string name )
+    public IReadOnlyCollection<TSymbol> FindByName( string name )
         => FindByNameAsync( name ).GetAwaiter().GetResult();
 
-    public Task<IEnumerable<TSymbol>>  FindByNameAsync( string name, CancellationToken cancellationToken = default );
+    public Task<IReadOnlyCollection<TSymbol>>  FindByNameAsync( string name, CancellationToken cancellationToken = default );
 
-    public IEnumerable<TSymbol> Find( Predicate<TSymbol> predicate )
+    public IReadOnlyCollection<TSymbol> Find( Predicate<TSymbol> predicate )
         => FindAsync( predicate ).GetAwaiter().GetResult();
 
-    public Task<IEnumerable<TSymbol>> FindAsync( Predicate<TSymbol> predicate, CancellationToken cancellationToken = default );
+    public Task<IReadOnlyCollection<TSymbol>> FindAsync( Predicate<TSymbol> predicate, CancellationToken cancellationToken = default );
 
-    public IEnumerable<TSymbol> FindAll()
+    public IReadOnlyCollection<TSymbol> FindAll()
         => FindAllAsync().GetAwaiter().GetResult();
 
-    public Task<IEnumerable<TSymbol>> FindAllAsync( CancellationToken cancellationToken = default );
+    public Task<IReadOnlyCollection<TSymbol>> FindAllAsync( CancellationToken cancellationToken = default );
 }

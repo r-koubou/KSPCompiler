@@ -73,4 +73,18 @@ public class SymbolDatabaseController<TSymbol> where TSymbol : SymbolBase
             outputPort.Error
         );
     }
+
+    public async Task<FindResult<TSymbol>> FindAsync( Predicate<TSymbol> predicate, CancellationToken cancellationToken = default )
+    {
+        var useCase = new FindSymbolFromRepositoryInteractor<TSymbol>( Repository );
+        var inputPort = new FindSymbolInputData<TSymbol>( predicate );
+        var outputPort = await useCase.ExecuteAsync( inputPort, cancellationToken );
+
+        return new FindResult<TSymbol>(
+            outputPort.Result,
+            outputPort.OutputData,
+            outputPort.Error
+        );
+    }
+
 }
