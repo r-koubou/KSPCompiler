@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace KSPCompiler.ExternalSymbolRepository.Tsv.Commons;
+namespace KSPCompiler.ExternalSymbol.Tsv.Commons;
 
 /// <summary>
 /// A utility class that provides common data-independent logic in the TSV parsing process.

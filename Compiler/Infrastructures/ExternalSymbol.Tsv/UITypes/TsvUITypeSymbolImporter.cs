@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 using KSPCompiler.Commons.Contents;
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.ExternalSymbolRepository.Tsv.UITypes.Translators;
+using KSPCompiler.ExternalSymbol.Tsv.UITypes.Translators;
 
-namespace KSPCompiler.ExternalSymbolRepository.Tsv.UITypes;
+namespace KSPCompiler.ExternalSymbol.Tsv.UITypes;
 
 public class TsvUITypeSymbolImporter : ISymbolImporter<UITypeSymbol>
 {

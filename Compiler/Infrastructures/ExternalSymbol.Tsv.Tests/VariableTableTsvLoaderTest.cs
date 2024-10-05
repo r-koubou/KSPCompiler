@@ -4,12 +4,12 @@ using System.Threading.Tasks;
 using KSPCompiler.Commons.Path;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Tests;
-using KSPCompiler.ExternalSymbolRepository.Tsv.Variables;
+using KSPCompiler.ExternalSymbol.Tsv.Variables;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
 
 using NUnit.Framework;
 
-namespace KSPCompiler.ExternalSymbolRepository.Tsv.Tests;
+namespace KSPCompiler.ExternalSymbol.Tsv.Tests;
 
 [TestFixture]
 public class VariableTableTsvLoaderTest

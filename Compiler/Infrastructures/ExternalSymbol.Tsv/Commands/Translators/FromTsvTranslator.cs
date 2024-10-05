@@ -1,14 +1,13 @@
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.ExternalSymbolRepository.Tsv.Commons;
+using KSPCompiler.ExternalSymbol.Tsv.Commons;
 using KSPCompiler.Infrastructures.Commons.Extensions;
 
 using DataTypeUtility = KSPCompiler.Domain.Symbols.MetaData.DataTypeUtility;
 
-namespace KSPCompiler.ExternalSymbolRepository.Tsv.Commands.Translators;
+namespace KSPCompiler.ExternalSymbol.Tsv.Commands.Translators;
 
 internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<CommandSymbol>>
 {

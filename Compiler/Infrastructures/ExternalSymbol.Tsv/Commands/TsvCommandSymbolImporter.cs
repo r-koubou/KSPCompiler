@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 using KSPCompiler.Commons.Contents;
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.ExternalSymbolRepository.Tsv.Commands.Translators;
+using KSPCompiler.ExternalSymbol.Tsv.Commands.Translators;
 
-namespace KSPCompiler.ExternalSymbolRepository.Tsv.Commands;
+namespace KSPCompiler.ExternalSymbol.Tsv.Commands;
 
 public class TsvCommandSymbolImporter : ISymbolImporter<CommandSymbol>
 {

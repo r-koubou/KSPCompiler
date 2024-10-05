@@ -3,7 +3,7 @@
     <PropertyGroup>
         <LangVersion>10</LangVersion>
         <TargetFramework>net6.0</TargetFramework>
-        <RootNamespace>KSPCompiler.ExternalSymbolRepository.Tsv.Tests</RootNamespace>
+        <RootNamespace>KSPCompiler.ExternalSymbol.Tsv.Tests</RootNamespace>
         <Nullable>enable</Nullable>
         <IsPackable>false</IsPackable>
     </PropertyGroup>

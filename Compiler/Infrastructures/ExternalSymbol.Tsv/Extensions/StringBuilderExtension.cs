@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace KSPCompiler.ExternalSymbolRepository.Tsv.Extensions;
+namespace KSPCompiler.ExternalSymbol.Tsv.Extensions;
 
 internal static class StringBuilderExtension
 {

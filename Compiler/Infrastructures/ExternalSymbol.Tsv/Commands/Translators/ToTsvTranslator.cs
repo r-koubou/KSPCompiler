@@ -4,9 +4,9 @@ using System.Text;
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
-using KSPCompiler.ExternalSymbolRepository.Tsv.Extensions;
+using KSPCompiler.ExternalSymbol.Tsv.Extensions;
 
-namespace KSPCompiler.ExternalSymbolRepository.Tsv.Commands.Translators;
+namespace KSPCompiler.ExternalSymbol.Tsv.Commands.Translators;
 
 internal class ToTsvTranslator : IDataTranslator<IEnumerable<CommandSymbol>, string>
 {

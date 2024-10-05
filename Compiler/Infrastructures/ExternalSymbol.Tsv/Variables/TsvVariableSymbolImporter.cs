@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 using KSPCompiler.Commons.Contents;
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.ExternalSymbolRepository.Tsv.Variables.Translators;
+using KSPCompiler.ExternalSymbol.Tsv.Variables.Translators;
 
-namespace KSPCompiler.ExternalSymbolRepository.Tsv.Variables;
+namespace KSPCompiler.ExternalSymbol.Tsv.Variables;
 
 public class TsvVariableSymbolImporter : ISymbolImporter<VariableSymbol>
 {

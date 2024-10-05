@@ -16,7 +16,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Infrastructures\ExternalSymbolRepository.JSONFlatFileDataStore\ExternalSymbolRepository.JSONFlatFileDataStore.csproj" />
-      <ProjectReference Include="..\..\Infrastructures\ExternalSymbolRepository.Tsv\ExternalSymbolRepository.Tsv.csproj" />
+      <ProjectReference Include="..\..\Infrastructures\ExternalSymbol.Tsv\ExternalSymbol.Tsv.csproj" />
       <ProjectReference Include="..\SymbolDatabaseControllers\SymbolDatabaseControllers.csproj" />
     </ItemGroup>
 

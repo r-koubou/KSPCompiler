@@ -7,8 +7,8 @@
         <Copyright>R-Koubou</Copyright>
         <Company>R-Koubou</Company>
         <Product>KSPCompiler.ExternalSymbolRepository.Tsv</Product>
-        <AssemblyName>KSPCompiler.ExternalSymbolRepository.Tsv</AssemblyName>
-        <RootNamespace>KSPCompiler.ExternalSymbolRepository.Tsv</RootNamespace>
+        <AssemblyName>KSPCompiler.ExternalSymbol.Tsv</AssemblyName>
+        <RootNamespace>KSPCompiler.ExternalSymbol.Tsv</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

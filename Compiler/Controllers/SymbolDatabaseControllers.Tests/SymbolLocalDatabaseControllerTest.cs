@@ -6,14 +6,14 @@ using KSPCompiler.Commons.Contents;
 using KSPCompiler.Commons.Path;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.Repositories;
+using KSPCompiler.ExternalSymbol.Tsv.Callbacks;
+using KSPCompiler.ExternalSymbol.Tsv.Commands;
+using KSPCompiler.ExternalSymbol.Tsv.UITypes;
+using KSPCompiler.ExternalSymbol.Tsv.Variables;
 using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Callbacks;
 using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Commands;
 using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.UITypes;
 using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Variables;
-using KSPCompiler.ExternalSymbolRepository.Tsv.Callbacks;
-using KSPCompiler.ExternalSymbolRepository.Tsv.Commands;
-using KSPCompiler.ExternalSymbolRepository.Tsv.UITypes;
-using KSPCompiler.ExternalSymbolRepository.Tsv.Variables;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
 
 using NUnit.Framework;

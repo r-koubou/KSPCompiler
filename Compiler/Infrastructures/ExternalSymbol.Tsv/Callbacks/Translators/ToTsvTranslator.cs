@@ -3,9 +3,9 @@ using System.Text;
 
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.ExternalSymbolRepository.Tsv.Extensions;
+using KSPCompiler.ExternalSymbol.Tsv.Extensions;
 
-namespace KSPCompiler.ExternalSymbolRepository.Tsv.Callbacks.Translators;
+namespace KSPCompiler.ExternalSymbol.Tsv.Callbacks.Translators;
 
 internal class ToTsvTranslator : IDataTranslator<IEnumerable<CallbackSymbol>, string>
 {

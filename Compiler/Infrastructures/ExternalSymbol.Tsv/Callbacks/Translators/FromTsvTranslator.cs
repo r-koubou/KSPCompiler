@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
-using KSPCompiler.ExternalSymbolRepository.Tsv.Commons;
+using KSPCompiler.ExternalSymbol.Tsv.Commons;
 using KSPCompiler.Infrastructures.Commons.Extensions;
 
 using DataTypeUtility = KSPCompiler.Domain.Symbols.MetaData.DataTypeUtility;
 
-namespace KSPCompiler.ExternalSymbolRepository.Tsv.Callbacks.Translators;
+namespace KSPCompiler.ExternalSymbol.Tsv.Callbacks.Translators;
 
 internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<CallbackSymbol>>
 {

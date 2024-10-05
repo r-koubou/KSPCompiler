@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 using KSPCompiler.Commons.Contents;
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.ExternalSymbolRepository.Tsv.Callbacks.Translators;
+using KSPCompiler.ExternalSymbol.Tsv.Callbacks.Translators;
 
-namespace KSPCompiler.ExternalSymbolRepository.Tsv.Callbacks;
+namespace KSPCompiler.ExternalSymbol.Tsv.Callbacks;
 
 public class TsvCallbackSymbolImporter : ISymbolImporter<CallbackSymbol>
 {
