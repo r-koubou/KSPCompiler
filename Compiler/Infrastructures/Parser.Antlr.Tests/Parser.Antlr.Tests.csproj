@@ -46,6 +46,9 @@
       <None Update="TestData\SymbolAnalyzeTest\UserFunctionSymbolTest.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="TestData\SemanticAnalyzeOperatorTest\add.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
