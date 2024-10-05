@@ -13,8 +13,8 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, ISemanticAnalyzer
         CompilerMessageManger = compilerMessageManger;
     }
 
-    public void Analyze( AstCompilationUnit node )
+    public void Analyze( AstCompilationUnit node, AbortTraverseToken abortTraverseToken)
     {
-        node.AcceptChildren( this );
+        node.AcceptChildren( this, abortTraverseToken );
     }
 }

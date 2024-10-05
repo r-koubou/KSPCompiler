@@ -44,4 +44,7 @@
     <data name="symbol.error.declare.userfunction.already" xml:space="preserve">
         <value>ユーザー関数 {0} は既に宣言されています</value>
     </data>
+    <data name="semantic.error.binaryoprator.compatible" xml:space="preserve">
+        <value>左辺と右辺のデータ型が異なっています ( {0}, {1} )</value>
+    </data>
 </root>

@@ -51,4 +51,7 @@
     <data name="symbol.error.declare.userfunction.already" xml:space="preserve">
         <value>User function {0} has already declared</value>
     </data>
+    <data name="semantic.error.binaryoprator.compatible" xml:space="preserve">
+        <value>Not compatible : left and right side expression ( {0}, {1} )</value>
+    </data>
 </root>
