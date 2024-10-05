@@ -19,6 +19,7 @@ public enum DataTypeFlag : uint
     TypeVoid                    = 1 << 4,
     TypeKspPreprocessorSymbol   = 1 << 5,
     TypePgsId                   = 1 << 6,
+    TypeMask                    = 0x7fffff,
     TypeNumerical               = TypeInt | TypeReal,
     TypeNonVariable             = TypeKspPreprocessorSymbol | TypePgsId,
     MultipleType                = 0x00ffffff & ~TypeNonVariable,
@@ -26,6 +27,7 @@ public enum DataTypeFlag : uint
 
     #region Attribute
     AttributeArray              = 0x01000000,
+    AttributeMask               = 0xff000000,
     #endregion
 
     #region Alias
