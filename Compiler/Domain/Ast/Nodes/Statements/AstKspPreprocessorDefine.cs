@@ -1,8 +1,8 @@
 using System;
 
-using KSPCompiler.Domain.Ast.Node.Expressions;
+using KSPCompiler.Domain.Ast.Nodes.Expressions;
 
-namespace KSPCompiler.Domain.Ast.Node.Statements
+namespace KSPCompiler.Domain.Ast.Nodes.Statements
 {
     /// <summary>
     /// AST node representing a KSP Preprocessor: SET_CONDITION

@@ -1,7 +1,7 @@
 using System;
 
 using KSPCompiler.Domain;
-using KSPCompiler.Domain.Ast.Node.Blocks;
+using KSPCompiler.Domain.Ast.Nodes.Blocks;
 
 namespace KSPCompiler.Gateways
 {

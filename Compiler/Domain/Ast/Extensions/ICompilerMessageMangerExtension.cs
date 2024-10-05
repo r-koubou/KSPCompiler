@@ -1,6 +1,6 @@
 using System;
 
-using KSPCompiler.Domain.Ast.Node;
+using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.CompilerMessages;
 
 namespace KSPCompiler.Domain.Ast.Extensions;

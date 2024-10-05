@@ -1,6 +1,6 @@
-using KSPCompiler.Domain.Ast.Node.Statements;
+using KSPCompiler.Domain.Ast.Nodes.Statements;
 
-namespace KSPCompiler.Domain.Ast.Node.Extensions;
+namespace KSPCompiler.Domain.Ast.Nodes.Extensions;
 
 public static class AstNodeExtension
 {

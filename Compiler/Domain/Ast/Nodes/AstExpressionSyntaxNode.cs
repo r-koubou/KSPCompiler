@@ -2,7 +2,7 @@
 
 using KSPCompiler.Domain.Symbols.MetaData;
 
-namespace KSPCompiler.Domain.Ast.Node
+namespace KSPCompiler.Domain.Ast.Nodes
 {
     /// <summary>
     /// The base node representing the expression.

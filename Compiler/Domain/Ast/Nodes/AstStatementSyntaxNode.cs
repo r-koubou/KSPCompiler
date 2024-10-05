@@ -1,4 +1,4 @@
-﻿namespace KSPCompiler.Domain.Ast.Node
+﻿namespace KSPCompiler.Domain.Ast.Nodes
 {
     /// <summary>
     /// AST node representing a base node representing of a statement.

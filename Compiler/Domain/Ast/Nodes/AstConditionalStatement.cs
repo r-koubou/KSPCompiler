@@ -1,6 +1,6 @@
-﻿using KSPCompiler.Domain.Ast.Node.Blocks;
+﻿using KSPCompiler.Domain.Ast.Nodes.Blocks;
 
-namespace KSPCompiler.Domain.Ast.Node
+namespace KSPCompiler.Domain.Ast.Nodes
 {
     /// <summary>
     /// AST node representing a base node of a conditional branching statement.

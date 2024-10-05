@@ -1,4 +1,4 @@
-﻿namespace KSPCompiler.Domain.Ast.Node
+﻿namespace KSPCompiler.Domain.Ast.Nodes
 {
     /// <summary>
     /// Declaration of Individually Named Nodes.

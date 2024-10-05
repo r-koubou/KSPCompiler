@@ -1,9 +1,9 @@
 using System;
 
-using KSPCompiler.Domain.Ast.Node.Blocks;
-using KSPCompiler.Domain.Ast.Node.Expressions;
+using KSPCompiler.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Domain.Ast.Nodes.Expressions;
 
-namespace KSPCompiler.Domain.Ast.Node.Statements
+namespace KSPCompiler.Domain.Ast.Nodes.Statements
 {
     /// <summary>
     /// Ast node representing a KSP Preprocessor: USE_CODE_IF_NOT

@@ -1,6 +1,6 @@
 using System;
 
-using KSPCompiler.Domain.Ast.Node.Blocks;
+using KSPCompiler.Domain.Ast.Nodes.Blocks;
 
 namespace KSPCompiler.Domain.Ast.Analyzers;
 

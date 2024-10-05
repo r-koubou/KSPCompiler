@@ -1,8 +1,8 @@
-using KSPCompiler.Domain.Ast.Node.Blocks;
-using KSPCompiler.Domain.Ast.Node.Expressions;
-using KSPCompiler.Domain.Ast.Node.Statements;
+using KSPCompiler.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Domain.Ast.Nodes.Statements;
 
-namespace KSPCompiler.Domain.Ast.Node;
+namespace KSPCompiler.Domain.Ast.Nodes;
 
 public abstract class DefaultAstVisitor : IAstVisitor<IAstNode>
 {

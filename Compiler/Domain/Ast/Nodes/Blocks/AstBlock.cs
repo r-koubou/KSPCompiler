@@ -1,4 +1,4 @@
-namespace KSPCompiler.Domain.Ast.Node.Blocks
+namespace KSPCompiler.Domain.Ast.Nodes.Blocks
 {
     /// <summary>
     /// AST node representing a callback, block in function

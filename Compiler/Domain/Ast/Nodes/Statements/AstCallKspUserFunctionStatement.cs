@@ -1,6 +1,6 @@
 using System;
 
-namespace KSPCompiler.Domain.Ast.Node.Statements
+namespace KSPCompiler.Domain.Ast.Nodes.Statements
 {
     /// <summary>
     /// AST node representing a call statement

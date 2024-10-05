@@ -1,6 +1,6 @@
 using KSPCompiler.Domain.Symbols.MetaData;
 
-namespace KSPCompiler.Domain.Ast.Node.Expressions
+namespace KSPCompiler.Domain.Ast.Nodes.Expressions
 {
     /// <summary>
     /// AST node representing a floating-point literal

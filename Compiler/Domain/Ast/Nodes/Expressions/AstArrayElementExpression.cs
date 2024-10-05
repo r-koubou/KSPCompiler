@@ -1,4 +1,4 @@
-namespace KSPCompiler.Domain.Ast.Node.Expressions
+namespace KSPCompiler.Domain.Ast.Nodes.Expressions
 {
     /// <summary>
     /// AST node representing an array element reference expression ( Left: AstSymbolExpression, Right: AstExpressionSyntaxNode )

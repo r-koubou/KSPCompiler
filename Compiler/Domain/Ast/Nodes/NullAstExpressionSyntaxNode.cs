@@ -1,6 +1,6 @@
 using KSPCompiler.Commons.Text;
 
-namespace KSPCompiler.Domain.Ast.Node;
+namespace KSPCompiler.Domain.Ast.Nodes;
 
 /// <summary>
 /// Null Object of <see cref="AstExpressionSyntaxNode"/>

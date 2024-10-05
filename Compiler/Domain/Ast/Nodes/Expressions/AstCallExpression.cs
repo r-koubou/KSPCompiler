@@ -1,4 +1,4 @@
-namespace KSPCompiler.Domain.Ast.Node.Expressions
+namespace KSPCompiler.Domain.Ast.Nodes.Expressions
 {
     /// <summary>
     /// AST node representing an invoking the KSP command

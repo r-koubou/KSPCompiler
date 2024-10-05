@@ -2,9 +2,9 @@
 using System.IO;
 
 using KSPCompiler.Commons.Text;
-using KSPCompiler.Domain.Ast.Node.Extensions;
+using KSPCompiler.Domain.Ast.Nodes.Extensions;
 
-namespace KSPCompiler.Domain.Ast.Node
+namespace KSPCompiler.Domain.Ast.Nodes
 {
     /// <summary>
     /// Default implementation of <see cref="IAstNode"/>

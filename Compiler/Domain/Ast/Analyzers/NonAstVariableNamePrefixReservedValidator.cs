@@ -1,7 +1,7 @@
 using System.Linq;
 
 using KSPCompiler.Commons;
-using KSPCompiler.Domain.Ast.Node.Statements;
+using KSPCompiler.Domain.Ast.Nodes.Statements;
 
 namespace KSPCompiler.Domain.Ast.Analyzers;
 

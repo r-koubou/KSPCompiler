@@ -1,6 +1,6 @@
 using KSPCompiler.Commons.Text;
 
-namespace KSPCompiler.Domain.Ast.Node.Statements;
+namespace KSPCompiler.Domain.Ast.Nodes.Statements;
 
 public sealed class NullAstInitializer : AstInitializer
 {
