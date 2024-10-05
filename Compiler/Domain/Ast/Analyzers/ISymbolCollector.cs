@@ -1,5 +1,6 @@
 using System;
 
+using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Symbols;
 
@@ -11,13 +12,13 @@ public interface ISymbolCollector : IDisposable
 
     ISymbolTable<VariableSymbol> Variables { get; }
 
-    void Analyze( AstCompilationUnit node );
+    void Analyze( AstCompilationUnit node, AbortTraverseToken abortTraverseToken );
     void IDisposable.Dispose() {}
 
     private sealed class NullSymbolCollector : ISymbolCollector
     {
         public ISymbolTable<VariableSymbol> Variables => new VariableSymbolTable();
 
-        public void Analyze( AstCompilationUnit node ) {}
+        public void Analyze( AstCompilationUnit node, AbortTraverseToken abortTraverseToken ) {}
     }
 }

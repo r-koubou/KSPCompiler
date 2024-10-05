@@ -3,7 +3,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
     /// <summary>
     /// AST node representing a floating-point literal
     /// </summary>
-    public class AstRealLiteral : AstStringExpression, IVariable<double>
+    public class AstRealLiteral : AstRealExpression, IVariable<double>
     {
         #region IAstVariable<T>
 
@@ -45,8 +45,8 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
         ///
         /// <inheritdoc/>
         ///
-        public override T Accept<T>( IAstVisitor<T> visitor )
-            => visitor.Visit( this );
+        public override T Accept<T>( IAstVisitor<T> visitor, AbortTraverseToken abortTraverseToken )
+            => visitor.Visit( this , abortTraverseToken );
 
         #endregion IAstNodeAcceptor
     }

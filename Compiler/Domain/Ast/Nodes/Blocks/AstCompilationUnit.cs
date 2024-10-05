@@ -24,17 +24,27 @@ namespace KSPCompiler.Domain.Ast.Nodes.Blocks
         ///
         /// <inheritdoc/>
         ///
-        public override T Accept<T>( IAstVisitor<T> visitor )
-            => visitor.Visit( this );
+        public override T Accept<T>( IAstVisitor<T> visitor, AbortTraverseToken abortTraverseToken )
+            => visitor.Visit( this , abortTraverseToken );
 
         ///
         /// <inheritdoc/>
         ///
-        public override void AcceptChildren<T>( IAstVisitor<T> visitor )
+        public override void AcceptChildren<T>( IAstVisitor<T> visitor, AbortTraverseToken abortTraverseToken )
         {
+            if( abortTraverseToken.Aborted )
+            {
+                return;
+            }
+
             foreach( var n in GlobalBlocks )
             {
-                n.Accept( visitor );
+                n.Accept( visitor, abortTraverseToken );
+
+                if( abortTraverseToken.Aborted )
+                {
+                    return;
+                }
             }
         }
 

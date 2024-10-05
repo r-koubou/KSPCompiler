@@ -48,13 +48,13 @@ public sealed class SymbolCollector : DefaultAstVisitor, ISymbolCollector
     )
     {}
 
-    public void Analyze( AstCompilationUnit node )
+    public void Analyze( AstCompilationUnit node, AbortTraverseToken abortTraverseToken )
     {
-        node.Accept( this );
+        node.Accept( this, abortTraverseToken );
     }
 
     #region Variable Collection
-    public override IAstNode Visit( AstVariableDeclaration node )
+    public override IAstNode Visit( AstVariableDeclaration node, AbortTraverseToken abortTraverseToken )
     {
         if( !ValidateVariableDeclaration( node, out var variable ) || variable.IsNull() )
         {
@@ -160,9 +160,14 @@ public sealed class SymbolCollector : DefaultAstVisitor, ISymbolCollector
 
     #region Callback Collection
 
-    public override IAstNode Visit( AstCallbackDeclaration node )
+    public override IAstNode Visit( AstCallbackDeclaration node, AbortTraverseToken abortTraverseToken )
     {
-        node.AcceptChildren( this );
+        node.AcceptChildren( this, abortTraverseToken );
+
+        if( abortTraverseToken.Aborted )
+        {
+            return node;
+        }
 
         if( node.ArgumentList.HasArgument )
         {
@@ -209,9 +214,14 @@ public sealed class SymbolCollector : DefaultAstVisitor, ISymbolCollector
 
     #region User function Collection
 
-    public override IAstNode Visit( AstUserFunctionDeclaration node )
+    public override IAstNode Visit( AstUserFunctionDeclaration node, AbortTraverseToken abortTraverseToken )
     {
-        node.AcceptChildren( this );
+        node.AcceptChildren( this, abortTraverseToken );
+
+        if( abortTraverseToken.Aborted )
+        {
+            return node;
+        }
 
         var thisUserFunction = node.As();
 

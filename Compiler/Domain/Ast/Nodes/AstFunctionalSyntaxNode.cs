@@ -34,9 +34,9 @@ namespace KSPCompiler.Domain.Ast.Nodes
         ///
         /// <inheritdoc/>
         ///
-        public override void AcceptChildren<T>( IAstVisitor<T> visitor )
+        public override void AcceptChildren<T>( IAstVisitor<T> visitor, AbortTraverseToken abortTraverseToken )
         {
-            Block.AcceptChildren( visitor );
+            Block.AcceptChildren( visitor, abortTraverseToken );
         }
         #endregion IAstNodeAcceptor
     }
