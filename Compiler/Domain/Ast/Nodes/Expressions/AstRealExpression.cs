@@ -12,6 +12,12 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
         /// <summary>
         /// Ctor
         /// </summary>
+        public AstRealExpression( AstNodeId id, IAstNode parent )
+            : base( id, parent, NullAstExpressionSyntaxNode.Instance, NullAstExpressionSyntaxNode.Instance ) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
         public AstRealExpression( IAstNode parent, AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
             : base( AstNodeId.RealExpression, parent, left, right )
         {

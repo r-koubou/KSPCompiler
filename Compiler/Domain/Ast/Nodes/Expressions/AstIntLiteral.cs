@@ -1,11 +1,9 @@
-using KSPCompiler.Domain.Symbols.MetaData;
-
 namespace KSPCompiler.Domain.Ast.Nodes.Expressions
 {
     /// <summary>
     /// AST node representing an integer literal
     /// </summary>
-    public class AstIntLiteral : AstExpressionSyntaxNode, IVariable<int>
+    public class AstIntLiteral : AstIntExpression, IVariable<int>
     {
         #region IAstVariable<T>
 
@@ -40,7 +38,6 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
             : base( AstNodeId.IntLiteral, parent )
         {
             Value = value;
-            TypeFlag  = DataTypeFlag.TypeInt;
         }
 
         #region IAstNodeAcceptor

@@ -1,11 +1,9 @@
-using KSPCompiler.Domain.Symbols.MetaData;
-
 namespace KSPCompiler.Domain.Ast.Nodes.Expressions
 {
     /// <summary>
     /// AST node representing a floating-point literal
     /// </summary>
-    public class AstRealLiteral : AstExpressionSyntaxNode, IVariable<double>
+    public class AstRealLiteral : AstStringExpression, IVariable<double>
     {
         #region IAstVariable<T>
 
@@ -37,10 +35,9 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
         /// Ctor
         /// </summary>
         public AstRealLiteral( double value, IAstNode parent )
-            : base( AstNodeId.RealLiteral )
+            : base( AstNodeId.RealLiteral, parent )
         {
             Value = value;
-            TypeFlag  = DataTypeFlag.TypeReal;
         }
 
         #region IAstNodeAcceptor
