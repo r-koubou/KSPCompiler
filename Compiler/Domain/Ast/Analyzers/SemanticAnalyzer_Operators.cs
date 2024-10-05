@@ -2,15 +2,28 @@ using System;
 
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 
 namespace KSPCompiler.Domain.Ast.Analyzers;
 
-public partial class SemanticAnalyzer : DefaultAstVisitor, ISemanticAnalyzer
+public partial class SemanticAnalyzer
 {
     #region Binary Operators (Mathematical)
 
     public override IAstNode Visit( AstAdditionExpression node )
-        => throw new NotImplementedException("operator +");
+    {
+        var left = (AstExpressionSyntaxNode)node.Left.Accept( this );
+        var right = (AstExpressionSyntaxNode)node.Right.Accept( this );
+        var leftType = left.TypeFlag;
+        var rightType = right.TypeFlag;
+
+        if( !leftType.IsNumerical() || !rightType.IsNumerical() )
+        {
+            return new AstIntLiteral();
+        }
+
+        throw new NotImplementedException( "operator +" );
+    }
 
     public override IAstNode Visit( AstSubtractionExpression node )
         => throw new NotImplementedException("operator -");
@@ -48,4 +61,11 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, ISemanticAnalyzer
         => throw new NotImplementedException("operator unary -");
 
     #endregion ~Unary Operators
+
+    public override IAstNode Visit( AstAssignmentExpression node )
+    {
+        var resultL = node.Left.Accept( this );
+        var resultR = node.Right.Accept( this );
+        return node;
+    }
 }
