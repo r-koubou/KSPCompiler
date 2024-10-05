@@ -1,7 +1,7 @@
 using System;
 
-using KSPCompiler.Domain.Ast.Node;
-using KSPCompiler.Domain.Ast.Node.Expressions;
+using KSPCompiler.Domain.Ast.Nodes;
+using KSPCompiler.Domain.Ast.Nodes.Expressions;
 
 namespace KSPCompiler.Domain.Ast.Analyzers;
 

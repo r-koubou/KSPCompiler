@@ -1,4 +1,4 @@
-using KSPCompiler.Domain.Ast.Node;
+using KSPCompiler.Domain.Ast.Nodes;
 
 namespace KSPCompiler.Domain.Symbols;
 

@@ -1,6 +1,6 @@
-﻿using KSPCompiler.Domain.Ast.Node;
-using KSPCompiler.Domain.Ast.Node.Expressions;
-using KSPCompiler.Domain.Ast.Node.Statements;
+﻿using KSPCompiler.Domain.Ast.Nodes;
+using KSPCompiler.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
 
 namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators

@@ -2,7 +2,7 @@ variables:
   - TEMPLATE: ast.expression
   - NAME_SUFFIX: Expression
 
-namespace: KSPCompiler.Domain.Ast.Node.Expressions
+namespace: KSPCompiler.Domain.Ast.Nodes.Expressions
 suffix: ".cs"
 output_dir: out/Expressions
 
