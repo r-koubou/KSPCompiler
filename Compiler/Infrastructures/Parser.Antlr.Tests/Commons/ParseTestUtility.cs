@@ -1,7 +1,7 @@
 using System.IO;
 using System.Text;
 
-using KSPCompiler.Domain.Ast.Node.Blocks;
+using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Infrastructures.Parser.Antlr;
 

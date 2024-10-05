@@ -2,8 +2,8 @@
 
 using Antlr4.Runtime;
 
-using KSPCompiler.Domain.Ast.Node;
-using KSPCompiler.Domain.Ast.Node.Expressions;
+using KSPCompiler.Domain.Ast.Nodes;
+using KSPCompiler.Domain.Ast.Nodes.Expressions;
 
 namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 {

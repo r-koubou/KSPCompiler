@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 
-using KSPCompiler.Domain.Ast.Node;
-using KSPCompiler.Domain.Ast.Node.Blocks;
-using KSPCompiler.Domain.Ast.Node.Statements;
+using KSPCompiler.Domain.Ast.Nodes;
+using KSPCompiler.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
 
 namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators

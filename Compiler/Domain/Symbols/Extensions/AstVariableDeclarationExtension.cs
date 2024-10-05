@@ -1,4 +1,4 @@
-using KSPCompiler.Domain.Ast.Node.Statements;
+using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Domain.Symbols.MetaData;
 
 namespace KSPCompiler.Domain.Symbols.Extensions;
