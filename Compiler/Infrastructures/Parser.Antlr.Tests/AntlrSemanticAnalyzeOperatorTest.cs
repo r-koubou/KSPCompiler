@@ -3,6 +3,7 @@ using System.IO;
 using KSPCompiler.Domain.Ast.Analyzers;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Parser.Antlr.Tests.Commons;
 
 using NUnit.Framework;
@@ -20,7 +21,7 @@ public class AntlrSemanticAnalyzeOperatorTest
         var compilerMessageManger = ICompilerMessageManger.Default;
         var ast = ParseTestUtility.Parse( TestDataDirectory, "add.txt" );
         var symbolAnalyzer = new SymbolCollector( compilerMessageManger );
-        var semanticAnalyzer = new SemanticAnalyzer( compilerMessageManger );
+        var semanticAnalyzer = new SemanticAnalyzer( compilerMessageManger, new VariableSymbolTable() );
         var abortTraverseToken = new AbortTraverseToken();
 
         Assert.DoesNotThrow( () => semanticAnalyzer.Analyze( ast, abortTraverseToken ) );
@@ -36,7 +37,7 @@ public class AntlrSemanticAnalyzeOperatorTest
         var compilerMessageManger = ICompilerMessageManger.Default;
         var ast = ParseTestUtility.Parse( TestDataDirectory, "add_incompatible.txt" );
         var symbolAnalyzer = new SymbolCollector( compilerMessageManger );
-        var semanticAnalyzer = new SemanticAnalyzer( compilerMessageManger );
+        var semanticAnalyzer = new SemanticAnalyzer( compilerMessageManger, new VariableSymbolTable() );
         var abortTraverseToken = new AbortTraverseToken();
 
         Assert.DoesNotThrow( () => semanticAnalyzer.Analyze( ast, abortTraverseToken ) );

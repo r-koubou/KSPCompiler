@@ -12,6 +12,7 @@ namespace KSPCompiler.Domain.Ast.Nodes
         CaseBlock,
         LogicalOr,
         LogicalAnd,
+        LogicalNot,
         StringConcatenate,
         BitwiseOr,
         BitwiseAnd,
