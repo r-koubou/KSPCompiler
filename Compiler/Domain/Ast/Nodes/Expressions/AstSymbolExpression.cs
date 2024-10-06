@@ -5,6 +5,11 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
     /// </summary>
     public class AstSymbolExpression : AstExpressionSyntaxNode, INameable
     {
+        /// <summary>
+        /// Represents whether the node is symbol(variable, commands, callback, etc.) and its reserved (built-in) by NI.
+        /// </summary>
+        public virtual bool Reserved { get; set; }
+
         #region INameable
 
         ///
@@ -24,9 +29,13 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
         /// Ctor
         /// </summary>
         public AstSymbolExpression( IAstNode parent )
-            : base( AstNodeId.Symbol, parent )
-        {
-        }
+            : base( AstNodeId.Symbol, parent ) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstSymbolExpression( AstNodeId id, IAstNode parent )
+            : base( id, parent ) {}
 
         #region IAstNodeAcceptor
 
