@@ -20,6 +20,11 @@ namespace KSPCompiler.Domain.Ast.Nodes.Blocks
         }
 
         #region IAstNodeAcceptor
+        ///
+        /// <inheritdoc />
+        ///
+        public override int ChildNodeCount
+            => GlobalBlocks.Count;
 
         ///
         /// <inheritdoc/>

@@ -44,6 +44,11 @@ namespace KSPCompiler.Domain.Ast.Nodes.Blocks
         }
 
         #region IAstNodeAcceptor
+        ///
+        /// <inheritdoc />
+        ///
+        public override int ChildNodeCount
+            => 3;
 
         ///
         /// <inheritdoc/>

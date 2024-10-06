@@ -30,6 +30,11 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
         }
 
         #region IAstNodeAcceptor
+        ///
+        /// <inheritdoc />
+        ///
+        public override int ChildNodeCount
+            => 1;
 
         ///
         /// <inheritdoc/>

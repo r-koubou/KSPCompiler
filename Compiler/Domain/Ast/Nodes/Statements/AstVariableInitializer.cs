@@ -32,6 +32,27 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         }
 
         #region IAstNodeAcceptor
+        ///
+        /// <inheritdoc />
+        ///
+        public override int ChildNodeCount
+        {
+            get
+            {
+                var result = 0;
+
+                if( PrimitiveInitializer != NullAstInitializer.Instance )
+                {
+                    result++;
+                }
+                if( ArrayInitializer != NullAstInitializer.Instance )
+                {
+                    result++;
+                }
+
+                return result;
+            }
+        }
 
         ///
         /// <inheritdoc/>

@@ -65,6 +65,11 @@ namespace KSPCompiler.Domain.Ast.Nodes
 
         #region IAstNodeAcceptor
         ///
+        /// <inheritdoc />
+        ///
+        public abstract int ChildNodeCount { get; }
+
+        ///
         /// <inheritdoc/>
         ///
         public abstract T Accept<T>( IAstVisitor<T> visitor, AbortTraverseToken abortTraverseToken );

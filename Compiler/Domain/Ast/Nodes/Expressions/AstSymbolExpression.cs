@@ -6,6 +6,14 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
     public class AstSymbolExpression : AstExpressionSyntaxNode, INameable
     {
         /// <summary>
+        /// Null Object of <see cref="AstSymbolExpression"/>
+        /// </summary>
+        /// <remarks>
+        /// If invalid by analyzing the code the result set to this.
+        /// </remarks>
+        public static readonly AstSymbolExpression Null = new AstSymbolExpression();
+
+        /// <summary>
         /// Represents whether the node is symbol(variable, commands, callback, etc.) and its reserved (built-in) by NI.
         /// </summary>
         public virtual bool Reserved { get; set; }
@@ -38,6 +46,11 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
             : base( id, parent ) {}
 
         #region IAstNodeAcceptor
+        ///
+        /// <inheritdoc/>
+        ///
+        public override int ChildNodeCount
+            => 0;
 
         ///
         /// <inheritdoc/>

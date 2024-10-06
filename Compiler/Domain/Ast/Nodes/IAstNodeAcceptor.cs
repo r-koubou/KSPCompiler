@@ -6,6 +6,11 @@
     public interface IAstNodeAcceptor
     {
         /// <summary>
+        /// Get the number of child nodes.
+        /// </summary>
+        public int ChildNodeCount { get; }
+
+        /// <summary>
         /// Acceptance process for visitors.
         /// </summary>
         public T Accept<T>( IAstVisitor<T> visitor, AbortTraverseToken abortTraverseToken );
