@@ -14,7 +14,7 @@ namespace KSPCompiler.Domain.Ast.Nodes
         LogicalAnd,
         StringConcatenate,
         BitwiseOr,
-        BitwiseOrAnd,
+        BitwiseAnd,
         Equal,
         NotEqual,
         LessThan,
