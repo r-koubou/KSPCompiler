@@ -92,8 +92,7 @@ public static class EvaluationUtility
             !left.TypeFlag.IsArray() && !right.TypeFlag.IsArray() &&
             left.IsConstant && right.IsConstant )
         {
-            // TODO 畳み込み
-            object? convoluted = 0;
+            object? convoluted = null;
 
             if( resultType.IsInt() )
             {
@@ -108,8 +107,15 @@ public static class EvaluationUtility
             }
             else if( resultType.IsReal() )
             {
+                #error TODO 畳み込み
                 //constValue = EvalBinaryOperatorReal( node.Operator, left, right );
-                result = new AstRealLiteral( (double)convoluted );
+
+                if( convoluted is not double value )
+                {
+                    throw new InvalidOperationException("Invalid constant value");
+                }
+
+                return new AstRealLiteral( value );
             }
         }
 
