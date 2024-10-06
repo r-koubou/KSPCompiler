@@ -34,6 +34,7 @@ namespace KSPCompiler.Domain.Ast.Nodes
         public T Visit( AstModuloExpression node, AbortTraverseToken abortTraverseToken );
         public T Visit( AstUnaryMinusExpression node, AbortTraverseToken abortTraverseToken );
         public T Visit( AstUnaryNotExpression node, AbortTraverseToken abortTraverseToken );
+        public T Visit( AstUnaryLogicalNotExpression node, AbortTraverseToken abortTraverseToken );
         public T Visit( AstIntLiteral node, AbortTraverseToken abortTraverseToken );
         public T Visit( AstRealLiteral node, AbortTraverseToken abortTraverseToken );
         public T Visit( AstStringLiteral node, AbortTraverseToken abortTraverseToken );

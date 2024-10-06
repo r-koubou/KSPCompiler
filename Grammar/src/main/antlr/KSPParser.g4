@@ -454,8 +454,9 @@ multiplicativeExpression
 //
 unaryExpression
     : nested = postfixExpression
-    | opr    = MINUS   unaryMinus = unaryExpression
-    | opr    = BIT_NOT unaryNot   = unaryExpression
+    | opr    = MINUS   unaryMinus  = unaryExpression
+    | opr    = BIT_NOT unaryNot    = unaryExpression
+    | opr    = BOOL_NOT logicalNot = unaryExpression
 ;
 
 //

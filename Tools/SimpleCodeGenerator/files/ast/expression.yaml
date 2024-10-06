@@ -133,6 +133,12 @@ classes:
       - name: ${TEMPLATE}
         suffix: ${NAME_SUFFIX}
 
+  - name: UnaryLogicalNot
+    description: "an unary operator: Logical NOT"
+    templates:
+      - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
+
   #--------------------------------------------
   # リテラル
   #--------------------------------------------

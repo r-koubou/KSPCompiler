@@ -16,9 +16,9 @@ public static class EvaluationUtility
     public static AstSymbolExpression EvalBinaryOperator<TNode>(
         AstExpressionSyntaxNode node,
         IAstVisitor<TNode> astVisitor,
+        ISymbolTable<VariableSymbol> variableTable,
         ICompilerMessageManger compilerMessageManger,
-        AbortTraverseToken abortTraverseToken,
-        ISymbolTable<VariableSymbol> variableTable )
+        AbortTraverseToken abortTraverseToken )
         where TNode : IAstNode
     {
         /*
@@ -97,7 +97,7 @@ public static class EvaluationUtility
 
             if( resultType.IsInt() )
             {
-                convoluted = EvalConstantIntValue( node, 0, variableTable );
+                convoluted = EvalConstantIntValue( node, 0, variableTable, compilerMessageManger );
 
                 if( convoluted is not int value )
                 {
@@ -125,7 +125,11 @@ public static class EvaluationUtility
     /// <param name="workingValueForRecursive">Working value for recursive evaluation. First call should be 0.</param>
     /// <param name="variableTable">Variable table</param>
     /// <returns>Evaluated value. If constant value is not found, returns null.</returns>
-    static public int? EvalConstantIntValue( AstExpressionSyntaxNode expr, int? workingValueForRecursive, ISymbolTable<VariableSymbol> variableTable )
+    static public int? EvalConstantIntValue(
+        AstExpressionSyntaxNode expr,
+        int? workingValueForRecursive,
+        ISymbolTable<VariableSymbol> variableTable,
+        ICompilerMessageManger compilerMessageManger )
     {
         //--------------------------------------------------------------------------
         // リテラル・変数
@@ -167,13 +171,13 @@ public static class EvaluationUtility
             var left = expr.Left;
             var right = expr.Right;
 
-            var numL = EvalConstantIntValue( left, workingValueForRecursive, variableTable );
+            var numL = EvalConstantIntValue( left, workingValueForRecursive, variableTable, compilerMessageManger );
             if( numL == null )
             {
                 return null;
             }
 
-            var numR = EvalConstantIntValue( right, numL, variableTable );
+            var numR = EvalConstantIntValue( right, numL, variableTable, compilerMessageManger );
             if( numR == null )
             {
                 return null;
@@ -196,7 +200,7 @@ public static class EvaluationUtility
         //--------------------------------------------------------------------------
         else if( expr.ChildNodeCount == 1 )
         {
-            var num = EvalConstantIntValue( expr.Left, workingValueForRecursive, variableTable );
+            var num = EvalConstantIntValue( expr.Left, workingValueForRecursive, variableTable, compilerMessageManger );
             if( num == null )
             {
                 return null;
@@ -204,9 +208,9 @@ public static class EvaluationUtility
 
             return expr.Id switch
             {
-                AstNodeId.UnaryMinus  => -num,
-                AstNodeId.UnaryNot    => ~num,
-                AstNodeId.LogicalNot  => num == 0 ? 0 : 1, // ここでは 0=false, else=true としている
+                AstNodeId.UnaryMinus      => -num,
+                AstNodeId.UnaryNot        => ~num,
+                AstNodeId.UnaryLogicalNot => num == 0 ? 0 : 1, // ここでは 0=false, else=true としている
                 _ => null
             };
         }
