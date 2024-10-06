@@ -37,9 +37,6 @@ namespace KSPCompiler.Domain.Ast.Nodes
         public T Visit( AstIntLiteral node, AbortTraverseToken abortTraverseToken );
         public T Visit( AstRealLiteral node, AbortTraverseToken abortTraverseToken );
         public T Visit( AstStringLiteral node, AbortTraverseToken abortTraverseToken );
-        public T Visit( AstIntExpression node, AbortTraverseToken abortTraverseToken );
-        public T Visit( AstRealExpression node, AbortTraverseToken abortTraverseToken );
-        public T Visit( AstStringExpression node, AbortTraverseToken abortTraverseToken );
         public T Visit( AstExpressionList node, AbortTraverseToken abortTraverseToken );
         public T Visit( AstAssignmentExpression node, AbortTraverseToken abortTraverseToken );
         public T Visit( AstAssignmentExpressionList node, AbortTraverseToken abortTraverseToken );

@@ -1,9 +1,11 @@
+using KSPCompiler.Domain.Symbols.MetaData;
+
 namespace KSPCompiler.Domain.Ast.Nodes.Expressions
 {
     /// <summary>
     /// AST node representing a floating-point literal
     /// </summary>
-    public class AstRealLiteral : AstRealExpression, IVariable<double>
+    public class AstRealLiteral : AstSymbolExpression, IVariable<double>
     {
         #region IAstVariable<T>
 
@@ -13,6 +15,9 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
         public double Value { get; set; }
 
         #endregion IAstVariable<T>
+
+        public override DataTypeFlag TypeFlag
+            => DataTypeFlag.TypeReal;
 
         ///
         /// <inheritdoc/>

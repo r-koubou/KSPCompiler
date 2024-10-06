@@ -152,24 +152,6 @@ classes:
       - name: ${TEMPLATE}
 
   #--------------------------------------------
-  # 式の結果値
-  #--------------------------------------------
-  - name: IntExpression
-    description: "an integer expression"
-    templates:
-      - name: ${TEMPLATE}
-
-  - name: RealExpression
-    description: "a floating-point expression"
-    templates:
-      - name: ${TEMPLATE}
-
-  - name: StringExpression
-    description: "a string expression"
-    templates:
-      - name: ${TEMPLATE}
-
-  #--------------------------------------------
   # 式リスト
   #--------------------------------------------
   - name: ExpressionList
