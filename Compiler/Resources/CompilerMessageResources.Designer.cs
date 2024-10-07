@@ -116,5 +116,11 @@ namespace KSPCompiler.Resources {
                 return ResourceManager.GetString("semantic.error.binaryoprator.compatible", resourceCulture);
             }
         }
+        
+        public static string semantic_error_variable_not_declared {
+            get {
+                return ResourceManager.GetString("semantic.error.variable.not.declared", resourceCulture);
+            }
+        }
     }
 }

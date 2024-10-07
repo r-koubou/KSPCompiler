@@ -54,4 +54,7 @@
     <data name="semantic.error.binaryoprator.compatible" xml:space="preserve">
         <value>Not compatible : left and right side expression ( {0}, {1} )</value>
     </data>
+    <data name="semantic.error.variable.not.declared" xml:space="preserve">
+        <value>Variable not declared: {0}</value>
+    </data>
 </root>

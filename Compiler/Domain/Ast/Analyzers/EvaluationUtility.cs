@@ -92,30 +92,27 @@ public static class EvaluationUtility
             !left.TypeFlag.IsArray() && !right.TypeFlag.IsArray() &&
             left.IsConstant && right.IsConstant )
         {
-            object? convoluted = null;
-
             if( resultType.IsInt() )
             {
-                convoluted = EvalConstantIntValue( node, 0, variableTable, compilerMessageManger );
+                var convoluted = EvalConstantIntValue( node, 0, variableTable, compilerMessageManger );
 
-                if( convoluted is not int value )
+                if( convoluted == null )
                 {
                     throw new InvalidOperationException("Invalid constant value");
                 }
 
-                return new AstIntLiteral( value );
+                return new AstIntLiteral( convoluted.Value );
             }
             else if( resultType.IsReal() )
             {
-                #error TODO 畳み込み
-                //constValue = EvalBinaryOperatorReal( node.Operator, left, right );
+                var convoluted = EvalConstantRealValue( node, 0.0, variableTable, compilerMessageManger );
 
-                if( convoluted is not double value )
+                if( convoluted == null )
                 {
                     throw new InvalidOperationException("Invalid constant value");
                 }
 
-                return new AstRealLiteral( value );
+                return new AstRealLiteral( convoluted.Value );
             }
         }
 
@@ -165,7 +162,13 @@ public static class EvaluationUtility
                 }
                 else
                 {
-                    // TODO variable not found error message
+                    compilerMessageManger.Error(
+                        expr,
+                        CompilerMessageResources.semantic_error_variable_not_declared,
+                        symbol.Name
+                    );
+
+                    return null;
                 }
             }
         }
@@ -217,6 +220,107 @@ public static class EvaluationUtility
                 AstNodeId.UnaryMinus      => -num,
                 AstNodeId.UnaryNot        => ~num,
                 AstNodeId.UnaryLogicalNot => num == 0 ? 0 : 1, // ここでは 0=false, else=true としている
+                _ => null
+            };
+        }
+        return null;
+    }
+
+        /// <summary>
+    /// Convloved evaluation of binary operator for real type.
+    /// </summary>
+    /// <param name="expr">Expression node</param>
+    /// <param name="workingValueForRecursive">Working value for recursive evaluation. First call should be `0.0`.</param>
+    /// <param name="variableTable">Variable table</param>
+    /// <returns>Evaluated value. If constant value is not found, returns null.</returns>
+    static public double? EvalConstantRealValue(
+        AstExpressionSyntaxNode expr,
+        double? workingValueForRecursive,
+        ISymbolTable<VariableSymbol> variableTable,
+        ICompilerMessageManger compilerMessageManger )
+    {
+        //--------------------------------------------------------------------------
+        // リテラル・変数
+        //--------------------------------------------------------------------------
+        if( expr.ChildNodeCount == 0 )
+        {
+            if( expr is AstRealLiteral realLiteral )
+            {
+                return realLiteral.Value;
+            }
+
+            if( expr is AstSymbolExpression symbol )
+            {
+                if( variableTable.TrySearchByName( symbol.Name, out var variable ) )
+                {
+                    if( !variable.DataType.IsInt() || !variable.DataTypeModifier.IsConstant() )
+                    {
+                        return null;
+                    }
+                    variable.Referenced = true;
+                    variable.State      = VariableState.Loaded;
+
+                    if( variable.Value is int value )
+                    {
+                        return value;
+                    }
+                }
+                else
+                {
+                    compilerMessageManger.Error(
+                        expr,
+                        CompilerMessageResources.semantic_error_variable_not_declared,
+                        symbol.Name
+                    );
+
+                    return null;
+                }
+            }
+        }
+        //--------------------------------------------------------------------------
+        // ２項演算子
+        //--------------------------------------------------------------------------
+        else if( expr.ChildNodeCount == 2 )
+        {
+            var left = expr.Left;
+            var right = expr.Right;
+
+            var numL = EvalConstantRealValue( left, workingValueForRecursive, variableTable, compilerMessageManger );
+            if( numL == null )
+            {
+                return null;
+            }
+
+            var numR = EvalConstantRealValue( right, numL, variableTable, compilerMessageManger );
+            if( numR == null )
+            {
+                return null;
+            }
+
+            return expr.Id switch
+            {
+                AstNodeId.Addition    => numL + numR,
+                AstNodeId.Subtraction => numL - numR,
+                AstNodeId.Multiplying => numL * numR,
+                AstNodeId.Division    => numL / numR,
+                AstNodeId.Modulo      => numL % numR,
+                _ => null
+            };
+        }
+        //--------------------------------------------------------------------------
+        // 単項演算子
+        //--------------------------------------------------------------------------
+        else if( expr.ChildNodeCount == 1 )
+        {
+            var num = EvalConstantRealValue( expr.Left, workingValueForRecursive, variableTable, compilerMessageManger );
+            if( num == null )
+            {
+                return null;
+            }
+
+            return expr.Id switch
+            {
+                AstNodeId.UnaryMinus      => -num,
                 _ => null
             };
         }

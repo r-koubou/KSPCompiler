@@ -47,4 +47,7 @@
     <data name="semantic.error.binaryoprator.compatible" xml:space="preserve">
         <value>左辺と右辺のデータ型が異なっています ( {0}, {1} )</value>
     </data>
+    <data name="semantic.error.variable.not.declared" xml:space="preserve">
+        <value>宣言されていない変数です: {0}</value>
+    </data>
 </root>
