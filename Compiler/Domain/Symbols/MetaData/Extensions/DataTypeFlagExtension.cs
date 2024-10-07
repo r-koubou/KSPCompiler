@@ -1,4 +1,3 @@
-using System;
 using System.Diagnostics.CodeAnalysis;
 
 namespace KSPCompiler.Domain.Symbols.MetaData.Extensions;
@@ -62,9 +61,15 @@ public static class DataTypeFlagExtension
     public static bool AreArray( this DataTypeFlag a, DataTypeFlag b )
         => a.IsArray() && b.IsArray();
 
+    public static DataTypeFlag TypeMasked( this DataTypeFlag flag )
+        => flag & DataTypeFlag.TypeMask;
+
+    public static DataTypeFlag MatchedType( this DataTypeFlag flag, DataTypeFlag other )
+        => flag.TypeMasked() & other.TypeMasked();
+
     public static string ToMessageString( this DataTypeFlag flag )
     {
-        var typeMasked = flag & DataTypeFlag.TypeMask;
+        var typeMasked = flag.TypeMasked();
 
         var result = typeMasked switch
         {
@@ -75,15 +80,41 @@ public static class DataTypeFlagExtension
             DataTypeFlag.TypeVoid => "void",
             DataTypeFlag.TypeKspPreprocessorSymbol => "KSP preprocessor symbol",
             DataTypeFlag.TypePgsId => "PGS ID",
-            _ => string.Empty
+            DataTypeFlag.None => "",
+            _ => "*"
         };
+
+        if( result == "*" )
+        {
+            var typeString = "";
+
+            if( flag.IsInt() )
+            {
+                typeString += "integer,";
+            }
+            if( flag.IsReal() )
+            {
+                typeString += "real,";
+            }
+            if( flag.IsString() )
+            {
+                typeString += "string,";
+            }
+            if( flag.IsBoolean() )
+            {
+                typeString += "boolean,";
+            }
+            if( flag.IsVoid() )
+            {
+                typeString += "void";
+            }
+            return $"multiple type ({typeString})";
+        }
 
         if( !string.IsNullOrEmpty( result ) || !flag.HasAttribute() )
         {
             return result;
         }
-
-        var attributeMasked = flag & DataTypeFlag.AttributeMask;
 
         if( flag.IsArray() )
         {
