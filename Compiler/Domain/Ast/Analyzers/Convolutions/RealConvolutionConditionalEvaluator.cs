@@ -11,33 +11,30 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions;
 public sealed class RealConvolutionConditionalEvaluator : IConvolutionConditionalEvaluator<double>
 {
     private IAstVisitor Visitor { get; }
-    private AbortTraverseToken AbortTraverseToken { get; }
     private IConvolutionEvaluator<double> ConvolutionEvaluator { get; }
 
     public RealConvolutionConditionalEvaluator(
         IAstVisitor visitor,
-        AbortTraverseToken abortTraverseToken,
         IConvolutionEvaluator<double> convolutionEvaluator )
     {
         Visitor              = visitor;
-        AbortTraverseToken   = abortTraverseToken;
         ConvolutionEvaluator = convolutionEvaluator;
     }
 
-    public bool? Evaluate( AstExpressionSyntaxNode expr )
+    public bool? Evaluate( AstExpressionSyntaxNode expr, AbortTraverseToken abortTraverseToken )
     {
         if( expr.ChildNodeCount != 2 )
         {
             throw new ArgumentException( $"Expected 2 child nodes, but got {expr.ChildNodeCount}. (node: {expr.GetType().Name})" );
         }
 
-        if( AbortTraverseToken.Aborted )
+        if( abortTraverseToken.Aborted )
         {
             return null;
         }
 
-        var exprLeft = expr.Accept( Visitor, AbortTraverseToken ) as AstExpressionSyntaxNode;
-        var exprRight = expr.Accept( Visitor, AbortTraverseToken ) as AstExpressionSyntaxNode;
+        var exprLeft = expr.Accept( Visitor,  abortTraverseToken ) as AstExpressionSyntaxNode;
+        var exprRight = expr.Accept( Visitor, abortTraverseToken ) as AstExpressionSyntaxNode;
 
         if( exprLeft == null || exprRight == null )
         {

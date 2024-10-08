@@ -14,12 +14,12 @@ public sealed class IntegerConvolutionEvaluator : IConvolutionEvaluator<int>
     private IConvolutionUnaryCalculator<int> UnaryCalculator { get; }
     private IConvolutionConditionalEvaluator<int> ConditionalEvaluator { get; }
 
-    public IntegerConvolutionEvaluator( IAstVisitor visitor, ISymbolTable<VariableSymbol> variableSymbols, ICompilerMessageManger compilerMessageManger, AbortTraverseToken abortTraverseToken )
+    public IntegerConvolutionEvaluator( IAstVisitor visitor, ISymbolTable<VariableSymbol> variableSymbols, ICompilerMessageManger compilerMessageManger )
     {
         OperandCalculator    = new IntegerConvolutionOperandCalculator( variableSymbols, compilerMessageManger );
         BinaryCalculator     = new IntegerConvolutionBinaryCalculator( this );
         UnaryCalculator      = new IntegerConvolutionUnaryCalculator( this );
-        ConditionalEvaluator = new IntegerConvolutionConditionalEvaluator( visitor, abortTraverseToken, this );
+        ConditionalEvaluator = new IntegerConvolutionConditionalEvaluator( visitor, this );
     }
 
     public int? Evaluate( AstExpressionSyntaxNode expr, int workingValueForRecursive )
