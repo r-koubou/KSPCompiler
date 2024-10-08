@@ -1,6 +1,7 @@
 using System.IO;
 
 using KSPCompiler.Domain.Ast.Analyzers;
+using KSPCompiler.Domain.Ast.Analyzers.Semantics;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols;

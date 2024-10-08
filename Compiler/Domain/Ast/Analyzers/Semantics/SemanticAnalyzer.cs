@@ -3,7 +3,7 @@ using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols;
 
-namespace KSPCompiler.Domain.Ast.Analyzers;
+namespace KSPCompiler.Domain.Ast.Analyzers.Semantics;
 
 public partial class SemanticAnalyzer : DefaultAstVisitor, ISemanticAnalyzer
 {

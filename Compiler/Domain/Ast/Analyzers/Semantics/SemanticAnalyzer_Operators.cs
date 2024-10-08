@@ -3,7 +3,7 @@ using System;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 
-namespace KSPCompiler.Domain.Ast.Analyzers;
+namespace KSPCompiler.Domain.Ast.Analyzers.Semantics;
 
 public partial class SemanticAnalyzer
 {
