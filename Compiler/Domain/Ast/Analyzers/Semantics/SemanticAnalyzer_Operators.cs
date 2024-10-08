@@ -13,36 +13,41 @@ public partial class SemanticAnalyzer
         => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
 
     public override IAstNode Visit( AstSubtractionExpression node, AbortTraverseToken abortTraverseToken )
-        => throw new NotImplementedException( "operator -" );
+        => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
 
     public override IAstNode Visit( AstMultiplyingExpression node, AbortTraverseToken abortTraverseToken )
-        => throw new NotImplementedException( "operator *" );
+        => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
 
     public override IAstNode Visit( AstDivisionExpression node, AbortTraverseToken abortTraverseToken )
-        => throw new NotImplementedException( "operator /" );
+        => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
 
     public override IAstNode Visit( AstModuloExpression node, AbortTraverseToken abortTraverseToken )
-        => throw new NotImplementedException( "operator mod" );
+        => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
 
     public override IAstNode Visit( AstStringConcatenateExpression node, AbortTraverseToken abortTraverseToken )
-        => throw new NotImplementedException( "operator &" );
+        => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
+
     #endregion ~Binary Operators
 
     #region Binary Operators (Bitwise)
     public override IAstNode Visit( AstBitwiseOrExpression node, AbortTraverseToken abortTraverseToken )
-        => throw new NotImplementedException( "operator bitwise or (.or.)" );
+        => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
 
     public override IAstNode Visit( AstBitwiseAndExpression node, AbortTraverseToken abortTraverseToken )
-        => throw new NotImplementedException( "operator bitwise and (.and.)" );
+        => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
 
-    public override IAstNode Visit( AstUnaryNotExpression node, AbortTraverseToken abortTraverseToken )
-        => throw new NotImplementedException( "operator bitwise not (.not.)" );
     #endregion
 
     #region Unary Operators
+
+    public override IAstNode Visit( AstUnaryNotExpression node, AbortTraverseToken abortTraverseToken )
+        => throw new NotImplementedException( "operator bitwise not (.not.)" );
+
     public override IAstNode Visit( AstUnaryMinusExpression node, AbortTraverseToken abortTraverseToken )
         => throw new NotImplementedException( "operator unary -" );
+
     #endregion ~Unary Operators
+
 
     public override IAstNode Visit( AstAssignmentExpression node, AbortTraverseToken abortTraverseToken )
     {

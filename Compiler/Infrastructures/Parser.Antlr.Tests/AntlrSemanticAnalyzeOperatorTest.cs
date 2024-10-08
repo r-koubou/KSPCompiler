@@ -17,10 +17,17 @@ public class AntlrSemanticAnalyzeOperatorTest
     private static readonly string TestDataDirectory = Path.Combine( "TestData", "SemanticAnalyzeOperatorTest" );
 
     [Test]
-    public void AddSameTypeTest()
+    [TestCase( "add.txt" )]
+    [TestCase( "sub.txt" )]
+    [TestCase( "mul.txt" )]
+    [TestCase( "div.txt" )]
+    [TestCase( "mod.txt" )]
+    [TestCase( "bit_or.txt" )]
+    [TestCase( "bit_and.txt" )]
+    public void AddSameTypeTest( string scriptPath )
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
-        var ast = ParseTestUtility.Parse( TestDataDirectory, "add.txt" );
+        var ast = ParseTestUtility.Parse( TestDataDirectory, scriptPath );
         var symbolAnalyzer = new SymbolCollector( compilerMessageManger );
         var semanticAnalyzer = new SemanticAnalyzer( compilerMessageManger, new VariableSymbolTable() );
         var abortTraverseToken = new AbortTraverseToken();

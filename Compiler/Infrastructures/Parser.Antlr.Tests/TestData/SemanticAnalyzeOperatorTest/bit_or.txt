@@ -1,0 +1,4 @@
+on init
+    declare $i
+    $i := 3 .or. 2
+end on
