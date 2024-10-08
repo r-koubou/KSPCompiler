@@ -18,9 +18,11 @@ namespace KSPCompiler.Domain.Ast.Nodes
         public T Visit( AstCaseBlock node, AbortTraverseToken abortTraverseToken );
         public T Visit( AstLogicalOrExpression node, AbortTraverseToken abortTraverseToken );
         public T Visit( AstLogicalAndExpression node, AbortTraverseToken abortTraverseToken );
+        public T Visit( AstLogicalXorExpression node, AbortTraverseToken abortTraverseToken );
         public T Visit( AstStringConcatenateExpression node, AbortTraverseToken abortTraverseToken );
         public T Visit( AstBitwiseOrExpression node, AbortTraverseToken abortTraverseToken );
         public T Visit( AstBitwiseAndExpression node, AbortTraverseToken abortTraverseToken );
+        public T Visit( AstBitwiseXorExpression node, AbortTraverseToken abortTraverseToken );
         public T Visit( AstEqualExpression node, AbortTraverseToken abortTraverseToken );
         public T Visit( AstNotEqualExpression node, AbortTraverseToken abortTraverseToken );
         public T Visit( AstLessThanExpression node, AbortTraverseToken abortTraverseToken );

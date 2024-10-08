@@ -54,6 +54,9 @@ public abstract class DefaultAstVisitor : IAstVisitor
     public virtual IAstNode Visit( AstLogicalAndExpression node, AbortTraverseToken abortTraverseToken )
         => VisitChildren( node, abortTraverseToken );
 
+    public IAstNode Visit( AstLogicalXorExpression node, AbortTraverseToken abortTraverseToken )
+        => VisitChildren( node, abortTraverseToken );
+
     public virtual IAstNode Visit( AstStringConcatenateExpression node, AbortTraverseToken abortTraverseToken )
         => VisitChildren( node, abortTraverseToken );
 
@@ -61,6 +64,9 @@ public abstract class DefaultAstVisitor : IAstVisitor
         => VisitChildren( node, abortTraverseToken );
 
     public virtual IAstNode Visit( AstBitwiseAndExpression node, AbortTraverseToken abortTraverseToken )
+        => VisitChildren( node, abortTraverseToken );
+
+    public virtual IAstNode Visit( AstBitwiseXorExpression node, AbortTraverseToken abortTraverseToken )
         => VisitChildren( node, abortTraverseToken );
 
     public virtual IAstNode Visit( AstEqualExpression node, AbortTraverseToken abortTraverseToken )
