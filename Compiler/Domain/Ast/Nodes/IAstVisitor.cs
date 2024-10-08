@@ -57,4 +57,9 @@ namespace KSPCompiler.Domain.Ast.Nodes
         public T Visit( AstPrimitiveInitializer node );
         public T Visit( AstArrayInitializer node );
     }
+
+    /// <summary>
+    /// Non-generic version of <see cref="IAstVisitor{T}"/>. <see cref="IAstNode" /> is used as the return type.
+    /// </summary>
+    public interface IAstVisitor : IAstVisitor<IAstNode> {}
 }
