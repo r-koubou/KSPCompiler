@@ -40,10 +40,17 @@ public class AntlrSemanticAnalyzeOperatorTest
     }
 
     [Test]
-    public void AddInCompatibleTypesAreFailedTest()
+    [TestCase( "add_incompatible.txt" )]
+    [TestCase( "sub_incompatible.txt" )]
+    [TestCase( "mul_incompatible.txt" )]
+    [TestCase( "div_incompatible.txt" )]
+    [TestCase( "mod_incompatible.txt" )]
+    [TestCase( "bit_or_incompatible.txt" )]
+    [TestCase( "bit_and_incompatible.txt" )]
+    public void AddInCompatibleTypesAreFailedTest( string scriptPath )
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
-        var ast = ParseTestUtility.Parse( TestDataDirectory, "add_incompatible.txt" );
+        var ast = ParseTestUtility.Parse( TestDataDirectory, scriptPath );
         var symbolAnalyzer = new SymbolCollector( compilerMessageManger );
         var semanticAnalyzer = new SemanticAnalyzer( compilerMessageManger, new VariableSymbolTable() );
         var abortTraverseToken = new AbortTraverseToken();

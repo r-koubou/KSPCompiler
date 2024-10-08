@@ -70,6 +70,24 @@
       <None Update="TestData\SemanticAnalyzeOperatorTest\bit_and.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="TestData\SemanticAnalyzeOperatorTest\sub_incompatible.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\SemanticAnalyzeOperatorTest\mul_incompatible.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\SemanticAnalyzeOperatorTest\div_incompatible.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\SemanticAnalyzeOperatorTest\mod_incompatible.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\SemanticAnalyzeOperatorTest\bit_or_incompatible.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\SemanticAnalyzeOperatorTest\bit_and_incompatible.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
