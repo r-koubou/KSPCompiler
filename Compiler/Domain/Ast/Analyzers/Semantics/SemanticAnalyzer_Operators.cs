@@ -10,7 +10,7 @@ public partial class SemanticAnalyzer
     #region Binary Operators (Mathematical)
 
     public override IAstNode Visit( AstAdditionExpression node, AbortTraverseToken abortTraverseToken )
-        => EvaluationUtility.EvalBinaryOperator( node, this, VariableSymbolTable, CompilerMessageManger, abortTraverseToken );
+        => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
 
     public override IAstNode Visit( AstSubtractionExpression node, AbortTraverseToken abortTraverseToken )
         => throw new NotImplementedException( "operator -" );
