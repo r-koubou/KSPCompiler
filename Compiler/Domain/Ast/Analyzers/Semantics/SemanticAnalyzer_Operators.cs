@@ -36,7 +36,11 @@ public partial class SemanticAnalyzer
     public override IAstNode Visit( AstBitwiseAndExpression node, AbortTraverseToken abortTraverseToken )
         => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
 
-    #endregion
+    public override IAstNode Visit( AstBitwiseXorExpression node, AbortTraverseToken abortTraverseToken )
+        => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
+
+
+    #endregion ~Binary Operators
 
     #region Unary Operators
 

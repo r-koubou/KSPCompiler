@@ -16,7 +16,6 @@ public class AntlrSemanticAnalyzeOperatorTest
 {
     private static readonly string TestDataDirectory = Path.Combine( "TestData", "SemanticAnalyzeOperatorTest" );
 
-    [Test]
     [TestCase( "add.txt" )]
     [TestCase( "sub.txt" )]
     [TestCase( "mul.txt" )]
@@ -24,6 +23,7 @@ public class AntlrSemanticAnalyzeOperatorTest
     [TestCase( "mod.txt" )]
     [TestCase( "bit_or.txt" )]
     [TestCase( "bit_and.txt" )]
+    [TestCase( "bit_xor.txt" )]
     public void AddSameTypeTest( string scriptPath )
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
@@ -39,7 +39,6 @@ public class AntlrSemanticAnalyzeOperatorTest
         Assert.IsFalse( compilerMessageManger.Count( CompilerMessageLevel.Error ) > 0 );
     }
 
-    [Test]
     [TestCase( "add_incompatible.txt" )]
     [TestCase( "sub_incompatible.txt" )]
     [TestCase( "mul_incompatible.txt" )]
@@ -47,6 +46,7 @@ public class AntlrSemanticAnalyzeOperatorTest
     [TestCase( "mod_incompatible.txt" )]
     [TestCase( "bit_or_incompatible.txt" )]
     [TestCase( "bit_and_incompatible.txt" )]
+    [TestCase( "bit_xor_incompatible.txt" )]
     public void AddInCompatibleTypesAreFailedTest( string scriptPath )
     {
         var compilerMessageManger = ICompilerMessageManger.Default;

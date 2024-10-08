@@ -44,6 +44,7 @@ public sealed class IntegerConvolutionBinaryCalculator : IConvolutionBinaryCalcu
             AstNodeId.Modulo      => leftValue % rightValue,
             AstNodeId.BitwiseOr   => leftValue | rightValue,
             AstNodeId.BitwiseAnd  => leftValue & rightValue,
+            AstNodeId.BitwiseXor  => leftValue ^ rightValue,
             _                     => null
         };
     }
