@@ -3484,7 +3484,7 @@ public partial class KSPParser : Parser {
 		[System.Diagnostics.DebuggerNonUserCode] public EqualityExpressionContext equalityExpression() {
 			return GetRuleContext<EqualityExpressionContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode BIT_OR() { return GetToken(KSPParser.BIT_OR, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode BIT_AND() { return GetToken(KSPParser.BIT_AND, 0); }
 		[System.Diagnostics.DebuggerNonUserCode] public BitwiseAndExpressionContext bitwiseAndExpression() {
 			return GetRuleContext<BitwiseAndExpressionContext>(0);
 		}
@@ -3548,7 +3548,7 @@ public partial class KSPParser : Parser {
 					State = 617;
 					if (!(Precpred(Context, 1))) throw new FailedPredicateException(this, "Precpred(Context, 1)");
 					State = 618;
-					Match(BIT_OR);
+					Match(BIT_AND);
 					State = 619;
 					_localctx.right = equalityExpression(0);
 					}
@@ -4833,7 +4833,7 @@ public partial class KSPParser : Parser {
 		'\x2', '\x267', '\x265', '\x3', '\x2', '\x2', '\x2', '\x268', '\x269', 
 		'\b', '#', '\x1', '\x2', '\x269', '\x26A', '\x5', '\x46', '$', '\x2', 
 		'\x26A', '\x270', '\x3', '\x2', '\x2', '\x2', '\x26B', '\x26C', '\f', 
-		'\x3', '\x2', '\x2', '\x26C', '\x26D', '\a', '*', '\x2', '\x2', '\x26D', 
+		'\x3', '\x2', '\x2', '\x26C', '\x26D', '\a', ')', '\x2', '\x2', '\x26D', 
 		'\x26F', '\x5', '\x46', '$', '\x2', '\x26E', '\x26B', '\x3', '\x2', '\x2', 
 		'\x2', '\x26F', '\x272', '\x3', '\x2', '\x2', '\x2', '\x270', '\x26E', 
 		'\x3', '\x2', '\x2', '\x2', '\x270', '\x271', '\x3', '\x2', '\x2', '\x2', 

@@ -395,7 +395,7 @@ logicalAndExpression
 ;
 
 //
-// 論理積, 論理和
+// 論理積
 //
 bitwiseOrExpression
     : nested = bitwiseAndExpression
@@ -403,11 +403,11 @@ bitwiseOrExpression
 ;
 
 //
-// 論理積, 論理和
+// 論理和
 //
 bitwiseAndExpression
     : nested = equalityExpression
-    | left   = bitwiseAndExpression BIT_OR right = equalityExpression
+    | left   = bitwiseAndExpression BIT_AND right = equalityExpression
 ;
 
 //
