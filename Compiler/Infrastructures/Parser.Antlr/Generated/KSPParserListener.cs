@@ -352,6 +352,16 @@ public interface IKSPParserListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitLogicalAndExpression([NotNull] KSPParser.LogicalAndExpressionContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="KSPParser.logicalXorExpression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterLogicalXorExpression([NotNull] KSPParser.LogicalXorExpressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="KSPParser.logicalXorExpression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitLogicalXorExpression([NotNull] KSPParser.LogicalXorExpressionContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="KSPParser.bitwiseOrExpression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -371,6 +381,16 @@ public interface IKSPParserListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitBitwiseAndExpression([NotNull] KSPParser.BitwiseAndExpressionContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="KSPParser.bitwiseXorExpression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterBitwiseXorExpression([NotNull] KSPParser.BitwiseXorExpressionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="KSPParser.bitwiseXorExpression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitBitwiseXorExpression([NotNull] KSPParser.BitwiseXorExpressionContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="KSPParser.equalityExpression"/>.
 	/// </summary>

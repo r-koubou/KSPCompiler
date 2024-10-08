@@ -390,8 +390,16 @@ logicalOrExpression
 // 条件式AND
 //
 logicalAndExpression
+    : nested = logicalXorExpression
+    | left   = logicalAndExpression BOOL_AND right = logicalXorExpression
+;
+
+//
+// 条件式XOR
+//
+logicalXorExpression
     : nested = bitwiseOrExpression
-    | left   = logicalAndExpression BOOL_AND right = bitwiseOrExpression
+    | left   = logicalXorExpression BOOL_XOR right = bitwiseOrExpression
 ;
 
 //
@@ -406,8 +414,16 @@ bitwiseOrExpression
 // 論理和
 //
 bitwiseAndExpression
+    : nested = bitwiseXorExpression
+    | left   = bitwiseAndExpression BIT_AND right = bitwiseXorExpression
+;
+
+//
+// 排他的論理和
+//
+bitwiseXorExpression
     : nested = equalityExpression
-    | left   = bitwiseAndExpression BIT_AND right = equalityExpression
+    | left   = bitwiseXorExpression BIT_XOR right = equalityExpression
 ;
 
 //
