@@ -11,12 +11,12 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions;
 /// <typeparam name="T">Configured conditional expression type (int/real etc.)</typeparam>
 public sealed class IntegerConvolutionConditionalEvaluator : IConvolutionConditionalEvaluator<int>
 {
-    private IAstVisitor<IAstNode> Visitor { get; }
+    private IAstVisitor Visitor { get; }
     private AbortTraverseToken AbortTraverseToken { get; }
     private IConvolutionEvaluator<int> ConvolutionEvaluator { get; }
 
     public IntegerConvolutionConditionalEvaluator(
-        IAstVisitor<IAstNode> visitor,
+        IAstVisitor visitor,
         AbortTraverseToken abortTraverseToken,
         IConvolutionEvaluator<int> convolutionEvaluator )
     {

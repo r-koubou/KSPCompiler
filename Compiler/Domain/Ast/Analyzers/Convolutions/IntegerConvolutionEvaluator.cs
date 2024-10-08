@@ -14,7 +14,7 @@ public sealed class IntegerConvolutionEvaluator : IConvolutionEvaluator<int>
     private IConvolutionUnaryCalculator<int> UnaryCalculator { get; }
     private IConvolutionConditionalEvaluator<int> ConditionalEvaluator { get; }
 
-    public IntegerConvolutionEvaluator( IAstVisitor<IAstNode> visitor, ISymbolTable<VariableSymbol> variableSymbols, ICompilerMessageManger compilerMessageManger, AbortTraverseToken abortTraverseToken )
+    public IntegerConvolutionEvaluator( IAstVisitor visitor, ISymbolTable<VariableSymbol> variableSymbols, ICompilerMessageManger compilerMessageManger, AbortTraverseToken abortTraverseToken )
     {
         OperandCalculator    = new IntegerConvolutionOperandCalculator( variableSymbols, compilerMessageManger );
         BinaryCalculator     = new IntegerConvolutionBinaryCalculator( this );

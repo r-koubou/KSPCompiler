@@ -10,12 +10,12 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions;
 /// </summary>
 public sealed class RealConvolutionConditionalEvaluator : IConvolutionConditionalEvaluator<double>
 {
-    private IAstVisitor<IAstNode> Visitor { get; }
+    private IAstVisitor Visitor { get; }
     private AbortTraverseToken AbortTraverseToken { get; }
     private IConvolutionEvaluator<double> ConvolutionEvaluator { get; }
 
     public RealConvolutionConditionalEvaluator(
-        IAstVisitor<IAstNode> visitor,
+        IAstVisitor visitor,
         AbortTraverseToken abortTraverseToken,
         IConvolutionEvaluator<double> convolutionEvaluator )
     {
