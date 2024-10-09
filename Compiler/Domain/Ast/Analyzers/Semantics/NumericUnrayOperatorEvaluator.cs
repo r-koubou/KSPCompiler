@@ -15,14 +15,14 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
 {
     private IAstVisitor AstVisitor { get; }
     private ICompilerMessageManger CompilerMessageManger { get; }
-    private IConvolutionEvaluator<int> IntegerConvolutionEvaluator { get; }
-    private IConvolutionEvaluator<double> RealConvolutionEvaluator { get; }
+    private IPrimitiveConvolutionEvaluator<int> IntegerConvolutionEvaluator { get; }
+    private IPrimitiveConvolutionEvaluator<double> RealConvolutionEvaluator { get; }
 
     public NumericUnaryOperatorEvaluator(
         IAstVisitor astVisitor,
         ICompilerMessageManger compilerMessageManger,
-        IConvolutionEvaluator<int> integerConvolutionEvaluator,
-        IConvolutionEvaluator<double> realConvolutionEvaluator )
+        IPrimitiveConvolutionEvaluator<int> integerConvolutionEvaluator,
+        IPrimitiveConvolutionEvaluator<double> realConvolutionEvaluator )
     {
         AstVisitor                  = astVisitor;
         CompilerMessageManger       = compilerMessageManger;
