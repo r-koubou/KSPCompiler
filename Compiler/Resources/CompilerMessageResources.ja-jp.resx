@@ -50,4 +50,7 @@
     <data name="semantic.error.variable.not.declared" xml:space="preserve">
         <value>宣言されていない変数です: {0}</value>
     </data>
+    <data name="semantic.error.unrayoprator.bitnot.compatible" xml:space="preserve">
+        <value>単項演算子  .not. は整数にのみ使用できます</value>
+    </data>
 </root>

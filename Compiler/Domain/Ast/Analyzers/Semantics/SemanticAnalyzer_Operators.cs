@@ -45,10 +45,12 @@ public partial class SemanticAnalyzer
     #region Unary Operators
 
     public override IAstNode Visit( AstUnaryNotExpression node, AbortTraverseToken abortTraverseToken )
-        => throw new NotImplementedException( "operator bitwise not (.not.)" );
+        // => throw new NotImplementedException();
+        => NumericUnaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
 
     public override IAstNode Visit( AstUnaryMinusExpression node, AbortTraverseToken abortTraverseToken )
-        => throw new NotImplementedException( "operator unary -" );
+        //=> throw new NotImplementedException();
+        => NumericUnaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
 
     #endregion ~Unary Operators
 
