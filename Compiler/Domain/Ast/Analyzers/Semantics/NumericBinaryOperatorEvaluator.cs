@@ -31,6 +31,15 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
 
     public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstExpressionSyntaxNode expr, AbortTraverseToken abortTraverseToken )
     {
+        /*
+               <operator>
+                   +
+                   |
+              +----+----+
+              |         |
+            Left      Right
+        */
+
         if( expr.Left.Accept( visitor, abortTraverseToken ) is not AstSymbolExpression evaluatedLeft )
         {
             throw new AstAnalyzeException( expr, "Failed to evaluate left side of binary operator" );
