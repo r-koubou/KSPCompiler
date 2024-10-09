@@ -16,10 +16,10 @@ public sealed class RealConvolutionEvaluator : IConvolutionEvaluator<double>
 
     public RealConvolutionEvaluator( IAstVisitor visitor, ISymbolTable<VariableSymbol> variableSymbols, ICompilerMessageManger compilerMessageManger )
     {
-        OperandCalculator    = new RealConvolutionOperandCalculator( variableSymbols, compilerMessageManger );
-        BinaryCalculator     = new RealConvolutionBinaryCalculator( this );
-        UnaryCalculator      = new RealConvolutionUnaryCalculator( this );
-        ConditionalEvaluator = new RealConvolutionConditionalEvaluator( visitor, this );
+        OperandCalculator    = new RealOperandConvolutionCalculator( variableSymbols, compilerMessageManger );
+        BinaryCalculator     = new RealBinaryOperatorConvolutionCalculator( this );
+        UnaryCalculator      = new RealUnaryOperatorConvolutionCalculator( this );
+        ConditionalEvaluator = new RealConditionalOperatorConvolutionEvaluator( visitor, this );
     }
 
     public double? Evaluate( AstExpressionSyntaxNode expr, double workingValueForRecursive )

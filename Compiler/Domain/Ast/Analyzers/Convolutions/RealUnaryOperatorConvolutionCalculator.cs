@@ -5,18 +5,18 @@ using KSPCompiler.Domain.Ast.Nodes;
 namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions;
 
 /// <summary>
-/// Calculator for convolution operations with unary operations
+/// Calculator for convolution operations with unary operators
 /// </summary>
-public sealed class IntegerConvolutionUnaryCalculator : IConvolutionUnaryCalculator<int>
+public sealed class RealUnaryOperatorConvolutionCalculator : IConvolutionUnaryCalculator<double>
 {
-    private IConvolutionEvaluator<int> EvaluatorForRecursive { get; }
+    private IConvolutionEvaluator<double> EvaluatorForRecursive { get; }
 
-    public IntegerConvolutionUnaryCalculator( IConvolutionEvaluator<int> evaluatorForRecursive )
+    public RealUnaryOperatorConvolutionCalculator( IConvolutionEvaluator<double> evaluatorForRecursive )
     {
         EvaluatorForRecursive = evaluatorForRecursive;
     }
 
-    public int? Calculate( AstExpressionSyntaxNode expr, int workingValueForRecursive )
+    public double? Calculate( AstExpressionSyntaxNode expr, double workingValueForRecursive )
     {
         if( expr.ChildNodeCount != 1 )
         {
@@ -34,8 +34,6 @@ public sealed class IntegerConvolutionUnaryCalculator : IConvolutionUnaryCalcula
         return expr.Id switch
         {
             AstNodeId.UnaryMinus     => -convolutedValue,
-            AstNodeId.UnaryNot        => ~convolutedValue,
-            AstNodeId.UnaryLogicalNot => convolutedValue != 0 ? 0 : 1, // C言語と同じ、0=false, 0以外が真をベースにしている
             _ => null
         };
     }

@@ -5,13 +5,13 @@ using KSPCompiler.Domain.Ast.Nodes;
 namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions;
 
 /// <summary>
-/// Calculator for convolution operations with binary operations
+/// Calculator for convolution operations with binary operators
 /// </summary>
-public sealed class RealConvolutionBinaryCalculator : IConvolutionBinaryCalculator<double>
+public sealed class RealBinaryOperatorConvolutionCalculator : IConvolutionBinaryCalculator<double>
 {
     private IConvolutionEvaluator<double> EvaluatorForRecursive { get; }
 
-    public RealConvolutionBinaryCalculator( IConvolutionEvaluator<double> evaluatorForRecursive )
+    public RealBinaryOperatorConvolutionCalculator( IConvolutionEvaluator<double> evaluatorForRecursive )
     {
         EvaluatorForRecursive = evaluatorForRecursive;
     }

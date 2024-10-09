@@ -16,10 +16,10 @@ public sealed class IntegerConvolutionEvaluator : IConvolutionEvaluator<int>
 
     public IntegerConvolutionEvaluator( IAstVisitor visitor, ISymbolTable<VariableSymbol> variableSymbols, ICompilerMessageManger compilerMessageManger )
     {
-        OperandCalculator    = new IntegerConvolutionOperandCalculator( variableSymbols, compilerMessageManger );
-        BinaryCalculator     = new IntegerConvolutionBinaryCalculator( this );
-        UnaryCalculator      = new IntegerConvolutionUnaryCalculator( this );
-        ConditionalEvaluator = new IntegerConvolutionConditionalEvaluator( visitor, this );
+        OperandCalculator    = new IntegerOperandConvolutionCalculator( variableSymbols, compilerMessageManger );
+        BinaryCalculator     = new IntegerBinaryOperatorConvolutionCalculator( this );
+        UnaryCalculator      = new IntegerUnaryOperatorConvolutionCalculator( this );
+        ConditionalEvaluator = new IntegerConditionalOperatorConvolutionEvaluator( visitor, this );
     }
 
     public int? Evaluate( AstExpressionSyntaxNode expr, int workingValueForRecursive )

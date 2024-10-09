@@ -6,14 +6,14 @@ using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions;
 
 /// <summary>
-/// Calculator for convolution operations with conditional operations
+/// Calculator for convolution operations with conditional operators
 /// </summary>
-public sealed class RealConvolutionConditionalEvaluator : IConvolutionConditionalEvaluator<double>
+public sealed class RealConditionalOperatorConvolutionEvaluator : IConvolutionConditionalEvaluator<double>
 {
     private IAstVisitor Visitor { get; }
     private IConvolutionEvaluator<double> ConvolutionEvaluator { get; }
 
-    public RealConvolutionConditionalEvaluator(
+    public RealConditionalOperatorConvolutionEvaluator(
         IAstVisitor visitor,
         IConvolutionEvaluator<double> convolutionEvaluator )
     {
