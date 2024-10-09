@@ -15,14 +15,14 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
 {
     protected IAstVisitor AstVisitor { get; }
     protected ICompilerMessageManger CompilerMessageManger { get; }
-    protected IConvolutionEvaluator<int> IntegerConvolutionEvaluator { get; }
-    protected IConvolutionEvaluator<double> RealConvolutionEvaluator { get; }
+    protected IPrimitiveConvolutionEvaluator<int> IntegerConvolutionEvaluator { get; }
+    protected IPrimitiveConvolutionEvaluator<double> RealConvolutionEvaluator { get; }
 
     public NumericBinaryOperatorEvaluator(
         IAstVisitor astVisitor,
         ICompilerMessageManger compilerMessageManger,
-        IConvolutionEvaluator<int> integerConvolutionEvaluator,
-        IConvolutionEvaluator<double> realConvolutionEvaluator )
+        IPrimitiveConvolutionEvaluator<int> integerConvolutionEvaluator,
+        IPrimitiveConvolutionEvaluator<double> realConvolutionEvaluator )
     {
         AstVisitor                  = astVisitor;
         CompilerMessageManger       = compilerMessageManger;

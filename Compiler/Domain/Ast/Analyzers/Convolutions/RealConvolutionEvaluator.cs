@@ -7,12 +7,12 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions;
 /// <summary>
 /// Interface for evaluating convolution expressions
 /// </summary>
-public sealed class RealConvolutionEvaluator : IConvolutionEvaluator<double>
+public sealed class RealConvolutionEvaluator : IPrimitiveConvolutionEvaluator<double>
 {
-    private IConvolutionOperandCalculator<double> OperandCalculator { get; }
-    private IConvolutionBinaryCalculator<double> BinaryCalculator { get; }
-    private IConvolutionUnaryCalculator<double> UnaryCalculator { get; }
-    private IConvolutionConditionalEvaluator<double> ConditionalEvaluator { get; }
+    private IPrimitiveConvolutionOperandCalculator<double> OperandCalculator { get; }
+    private IPrimitiveConvolutionBinaryCalculator<double> BinaryCalculator { get; }
+    private IPrimitiveConvolutionUnaryCalculator<double> UnaryCalculator { get; }
+    private IPrimitiveConvolutionConditionalEvaluator<double> ConditionalEvaluator { get; }
 
     public RealConvolutionEvaluator( IAstVisitor visitor, ISymbolTable<VariableSymbol> variableSymbols, ICompilerMessageManger compilerMessageManger )
     {
