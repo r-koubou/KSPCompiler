@@ -3,10 +3,10 @@ using KSPCompiler.Domain.Ast.Nodes;
 namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions;
 
 /// <summary>
-/// Calculator for convolution operations with conditional operations
+/// Calculator for convolution operations with conditional operations for struct (primitive) types
 /// </summary>
 /// <typeparam name="T">Configured conditional expression type (int/real etc.)</typeparam>
-public interface IConvolutionConditionalEvaluator<T> where T : struct
+public interface IPrimitiveConvolutionConditionalEvaluator<T> where T : struct
 {
     /// <summary>
     /// Calculate conditional expression
@@ -17,7 +17,7 @@ public interface IConvolutionConditionalEvaluator<T> where T : struct
     bool? Evaluate( AstExpressionSyntaxNode expr, AbortTraverseToken abortTraverseToken );
 }
 
-public sealed class NullConvolutionConditionalEvaluator<T> : IConvolutionCalculator<bool> where T : struct
+public sealed class NullConvolutionConditionalEvaluator<T> : IPrimitiveConvolutionCalculator<bool> where T : struct
 {
     public bool? Calculate( AstExpressionSyntaxNode expr, bool workingValueForRecursive )
         => null;

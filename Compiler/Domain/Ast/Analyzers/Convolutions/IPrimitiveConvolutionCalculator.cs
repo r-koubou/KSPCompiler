@@ -3,10 +3,10 @@ using KSPCompiler.Domain.Ast.Nodes;
 namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions;
 
 /// <summary>
-/// Base interface for convolution calculators
+/// Base interface for convolution calculators for struct (primitive) types
 /// </summary>
 /// <typeparam name="T">Calculator return type</typeparam>
-public interface IConvolutionCalculator<T> where T : struct
+public interface IPrimitiveConvolutionCalculator<T> where T : struct
 {
     /// <summary>
     /// Calculate the value of the expression

@@ -8,14 +8,14 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions;
 /// <summary>
 /// Calculator for convolution operations with conditional operators
 /// </summary>
-public sealed class RealConditionalOperatorConvolutionEvaluator : IConvolutionConditionalEvaluator<double>
+public sealed class RealConditionalOperatorConvolutionEvaluator : IPrimitiveConvolutionConditionalEvaluator<double>
 {
     private IAstVisitor Visitor { get; }
-    private IConvolutionEvaluator<double> ConvolutionEvaluator { get; }
+    private IPrimitiveConvolutionEvaluator<double> ConvolutionEvaluator { get; }
 
     public RealConditionalOperatorConvolutionEvaluator(
         IAstVisitor visitor,
-        IConvolutionEvaluator<double> convolutionEvaluator )
+        IPrimitiveConvolutionEvaluator<double> convolutionEvaluator )
     {
         Visitor              = visitor;
         ConvolutionEvaluator = convolutionEvaluator;

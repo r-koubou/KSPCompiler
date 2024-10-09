@@ -7,11 +7,11 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions;
 /// <summary>
 /// Calculator for convolution operations with binary operators
 /// </summary>
-public sealed class RealBinaryOperatorConvolutionCalculator : IConvolutionBinaryCalculator<double>
+public sealed class RealBinaryOperatorConvolutionCalculator : IPrimitiveConvolutionBinaryCalculator<double>
 {
-    private IConvolutionEvaluator<double> EvaluatorForRecursive { get; }
+    private IPrimitiveConvolutionEvaluator<double> EvaluatorForRecursive { get; }
 
-    public RealBinaryOperatorConvolutionCalculator( IConvolutionEvaluator<double> evaluatorForRecursive )
+    public RealBinaryOperatorConvolutionCalculator( IPrimitiveConvolutionEvaluator<double> evaluatorForRecursive )
     {
         EvaluatorForRecursive = evaluatorForRecursive;
     }

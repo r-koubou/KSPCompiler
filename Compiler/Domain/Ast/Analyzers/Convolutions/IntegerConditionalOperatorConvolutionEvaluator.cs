@@ -9,14 +9,14 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions;
 /// Calculator for convolution operations with conditional operators
 /// </summary>
 /// <typeparam name="T">Configured conditional expression type (int/real etc.)</typeparam>
-public sealed class IntegerConditionalOperatorConvolutionEvaluator : IConvolutionConditionalEvaluator<int>
+public sealed class IntegerConditionalOperatorConvolutionEvaluator : IPrimitiveConvolutionConditionalEvaluator<int>
 {
     private IAstVisitor Visitor { get; }
-    private IConvolutionEvaluator<int> ConvolutionEvaluator { get; }
+    private IPrimitiveConvolutionEvaluator<int> ConvolutionEvaluator { get; }
 
     public IntegerConditionalOperatorConvolutionEvaluator(
         IAstVisitor visitor,
-        IConvolutionEvaluator<int> convolutionEvaluator )
+        IPrimitiveConvolutionEvaluator<int> convolutionEvaluator )
     {
         Visitor              = visitor;
         ConvolutionEvaluator = convolutionEvaluator;

@@ -7,11 +7,11 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions;
 /// <summary>
 /// Calculator for convolution operations with unary operators
 /// </summary>
-public sealed class RealUnaryOperatorConvolutionCalculator : IConvolutionUnaryCalculator<double>
+public sealed class RealUnaryOperatorConvolutionCalculator : IPrimitiveConvolutionUnaryCalculator<double>
 {
-    private IConvolutionEvaluator<double> EvaluatorForRecursive { get; }
+    private IPrimitiveConvolutionEvaluator<double> EvaluatorForRecursive { get; }
 
-    public RealUnaryOperatorConvolutionCalculator( IConvolutionEvaluator<double> evaluatorForRecursive )
+    public RealUnaryOperatorConvolutionCalculator( IPrimitiveConvolutionEvaluator<double> evaluatorForRecursive )
     {
         EvaluatorForRecursive = evaluatorForRecursive;
     }
