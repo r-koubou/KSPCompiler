@@ -40,7 +40,7 @@ public partial class SemanticAnalyzer
         => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
 
 
-    #endregion ~Binary Operators
+    #endregion ~Binary Operators (Bitwise)
 
     #region Unary Operators
 
