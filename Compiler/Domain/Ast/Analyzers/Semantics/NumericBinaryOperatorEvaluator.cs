@@ -3,6 +3,7 @@ using KSPCompiler.Domain.Ast.Analyzers.Evaluators;
 using KSPCompiler.Domain.Ast.Extensions;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Domain.Ast.Nodes.Extensions;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
@@ -32,13 +33,18 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
     public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstExpressionSyntaxNode expr, AbortTraverseToken abortTraverseToken )
     {
         /*
-               <operator>
-                   +
-                   |
-              +----+----+
-              |         |
-            Left      Right
+                <<operator>> expr
+                       +
+                       |
+                  +----+----+
+                  |         |
+              expr.Left   expr.Right
         */
+
+        if( expr.ChildNodeCount != 2 || !expr.Id.IsBinaryOperator())
+        {
+            throw new AstAnalyzeException( expr, "Invalid binary operator" );
+        }
 
         if( expr.Left.Accept( visitor, abortTraverseToken ) is not AstSymbolExpression evaluatedLeft )
         {
