@@ -13,12 +13,12 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions;
 /// <summary>
 /// Calculator for convolution operations with KSP real (floating-point) operands
 /// </summary>
-public sealed class RealOperandConvolutionCalculator : IPrimitiveConvolutionOperandCalculator<double>
+public sealed class RealConstantConvolutionCalculator : IPrimitiveConstantConvolutionCalculator<double>
 {
     private ISymbolTable<VariableSymbol> VariableSymbols { get; }
     private ICompilerMessageManger CompilerMessageManger { get; }
 
-    public RealOperandConvolutionCalculator(
+    public RealConstantConvolutionCalculator(
         ISymbolTable<VariableSymbol> variableSymbols,
         ICompilerMessageManger compilerMessageManger )
     {
