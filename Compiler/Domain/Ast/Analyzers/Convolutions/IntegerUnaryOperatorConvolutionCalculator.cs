@@ -23,8 +23,7 @@ public sealed class IntegerUnaryOperatorConvolutionCalculator : IConvolutionUnar
             throw new ArgumentException( $"Expected 1 child node, but got {expr.ChildNodeCount}. (node: {expr.GetType().Name})" );
         }
 
-        var unary = expr.Left;
-        var convolutedValue = EvaluatorForRecursive.Evaluate( expr, workingValueForRecursive );
+        var convolutedValue = EvaluatorForRecursive.Evaluate( expr.Left, workingValueForRecursive );
 
         if( convolutedValue == null )
         {
@@ -35,7 +34,6 @@ public sealed class IntegerUnaryOperatorConvolutionCalculator : IConvolutionUnar
         {
             AstNodeId.UnaryMinus     => -convolutedValue,
             AstNodeId.UnaryNot        => ~convolutedValue,
-            AstNodeId.UnaryLogicalNot => convolutedValue != 0 ? 0 : 1, // C言語と同じ、0=false, 0以外が真をベースにしている
             _ => null
         };
     }

@@ -24,6 +24,8 @@ public class AntlrSemanticAnalyzeOperatorTest
     [TestCase( "bit_or.txt" )]
     [TestCase( "bit_and.txt" )]
     [TestCase( "bit_xor.txt" )]
+    [TestCase( "unary_minus.txt" )]
+    [TestCase( "unary_not.txt" )]
     public void AddSameTypeTest( string scriptPath )
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
@@ -47,6 +49,8 @@ public class AntlrSemanticAnalyzeOperatorTest
     [TestCase( "bit_or_incompatible.txt" )]
     [TestCase( "bit_and_incompatible.txt" )]
     [TestCase( "bit_xor_incompatible.txt" )]
+    [TestCase( "unary_minus_incompatible.txt" )]
+    [TestCase( "unary_not_incompatible.txt" )]
     public void AddInCompatibleTypesAreFailedTest( string scriptPath )
     {
         var compilerMessageManger = ICompilerMessageManger.Default;

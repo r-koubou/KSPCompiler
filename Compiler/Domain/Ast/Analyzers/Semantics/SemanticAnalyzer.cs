@@ -15,6 +15,7 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, ISemanticAnalyzer
     #region Eveluators
 
     private NumericBinaryOperatorEvaluator NumericBinaryOperatorEvaluator { get; }
+    private NumericUnaryOperatorEvaluator NumericUnaryOperatorEvaluator { get; }
     private IntegerConvolutionEvaluator IntegerConvolutionEvaluator { get; }
     private RealConvolutionEvaluator RealConvolutionEvaluator { get; }
 
@@ -24,12 +25,13 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, ISemanticAnalyzer
         ICompilerMessageManger compilerMessageManger,
         ISymbolTable<VariableSymbol> variableSymbolTable )
     {
-        CompilerMessageManger          = compilerMessageManger;
-        VariableSymbolTable            = variableSymbolTable;
+        CompilerMessageManger = compilerMessageManger;
+        VariableSymbolTable   = variableSymbolTable;
 
         IntegerConvolutionEvaluator    = new IntegerConvolutionEvaluator( this, VariableSymbolTable, CompilerMessageManger );
         RealConvolutionEvaluator       = new RealConvolutionEvaluator( this, VariableSymbolTable, CompilerMessageManger );
         NumericBinaryOperatorEvaluator = new NumericBinaryOperatorEvaluator( this, CompilerMessageManger, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
+        NumericUnaryOperatorEvaluator  = new NumericUnaryOperatorEvaluator( this, CompilerMessageManger, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
     }
 
     public void Analyze( AstCompilationUnit node, AbortTraverseToken abortTraverseToken)

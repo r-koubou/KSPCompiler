@@ -23,8 +23,7 @@ public sealed class RealUnaryOperatorConvolutionCalculator : IConvolutionUnaryCa
             throw new ArgumentException( $"Expected 1 child node, but got {expr.ChildNodeCount}. (node: {expr.GetType().Name})" );
         }
 
-        var unary = expr.Left;
-        var convolutedValue = EvaluatorForRecursive.Evaluate( expr, workingValueForRecursive );
+        var convolutedValue = EvaluatorForRecursive.Evaluate( expr.Left, workingValueForRecursive );
 
         if( convolutedValue == null )
         {

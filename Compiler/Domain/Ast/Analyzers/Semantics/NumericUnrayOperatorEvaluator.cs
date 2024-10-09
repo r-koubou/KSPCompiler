@@ -11,14 +11,14 @@ using KSPCompiler.Resources;
 
 namespace KSPCompiler.Domain.Ast.Analyzers.Semantics;
 
-public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
+public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
 {
-    protected IAstVisitor AstVisitor { get; }
-    protected ICompilerMessageManger CompilerMessageManger { get; }
-    protected IConvolutionEvaluator<int> IntegerConvolutionEvaluator { get; }
-    protected IConvolutionEvaluator<double> RealConvolutionEvaluator { get; }
+    private IAstVisitor AstVisitor { get; }
+    private ICompilerMessageManger CompilerMessageManger { get; }
+    private IConvolutionEvaluator<int> IntegerConvolutionEvaluator { get; }
+    private IConvolutionEvaluator<double> RealConvolutionEvaluator { get; }
 
-    public NumericBinaryOperatorEvaluator(
+    public NumericUnaryOperatorEvaluator(
         IAstVisitor astVisitor,
         ICompilerMessageManger compilerMessageManger,
         IConvolutionEvaluator<int> integerConvolutionEvaluator,
@@ -33,26 +33,20 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
     public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstExpressionSyntaxNode expr, AbortTraverseToken abortTraverseToken )
     {
         /*
-                <<operator>> expr
-                       +
-                       |
-                  +----+----+
-                  |         |
-              expr.Left   expr.Right
+              <<operator>> expr
+                   +
+                   |
+                expr.Left
         */
 
-        if( expr.ChildNodeCount != 2 || !expr.Id.IsBinaryOperator())
+        if( expr.ChildNodeCount != 1 || !expr.Id.IsUnaryOperator())
         {
-            throw new AstAnalyzeException( expr, "Invalid binary operator" );
+            throw new AstAnalyzeException( expr, "Invalid unary operator" );
         }
 
         if( expr.Left.Accept( visitor, abortTraverseToken ) is not AstSymbolExpression evaluatedLeft )
         {
-            throw new AstAnalyzeException( expr, "Failed to evaluate left side of binary operator" );
-        }
-        if( expr.Right.Accept( visitor, abortTraverseToken ) is not AstSymbolExpression evaluatedRight )
-        {
-            throw new AstAnalyzeException( expr, "Failed to evaluate right side of binary operator" );
+            throw new AstAnalyzeException( expr, "Failed to evaluate of unary operator" );
         }
 
         if( abortTraverseToken.Aborted )
@@ -60,23 +54,22 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
             return AstSymbolExpression.Null;
         }
 
-        var typeEvalResult = EvaluateDataType( evaluatedLeft, evaluatedRight, out var resultType );
+        var typeEvalResult = EvaluateDataType( expr, evaluatedLeft, out var resultType );
 
         if( !typeEvalResult )
         {
             CompilerMessageManger.Error(
                 expr,
-                CompilerMessageResources.semantic_error_binaryoprator_compatible,
-                evaluatedLeft.TypeFlag.ToMessageString(),
-                evaluatedRight.TypeFlag.ToMessageString()
+                CompilerMessageResources.semantic_error_unrayoprator_bitnot_compatible,
+                evaluatedLeft.TypeFlag.ToMessageString()
             );
 
             abortTraverseToken.Abort();
             return AstSymbolExpression.Null;
         }
 
-        // 左辺、右辺共にリテラル、定数なら畳み込み
-        if( TryConvolutionValue( expr, evaluatedLeft, evaluatedRight, resultType, out var convolutedValue ) )
+        // リテラル、定数なら畳み込み
+        if( TryConvolutionValue( expr, evaluatedLeft, resultType, out var convolutedValue ) )
         {
             return convolutedValue;
         }
@@ -87,13 +80,13 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
         };
     }
 
-    private bool TryConvolutionValue( AstExpressionSyntaxNode expr, AstSymbolExpression left, AstSymbolExpression right, DataTypeFlag resultType, out AstSymbolExpression convolutedValue )
+    private bool TryConvolutionValue( AstExpressionSyntaxNode expr, AstSymbolExpression left, DataTypeFlag resultType, out AstSymbolExpression convolutedValue )
     {
         convolutedValue = default!;
 
-        if( left.Reserved || right.Reserved ||
-            left.TypeFlag.IsArray() || right.TypeFlag.IsArray() ||
-            !left.IsConstant || !right.IsConstant )
+        if( left.Reserved ||
+            left.TypeFlag.IsArray() ||
+            !left.IsConstant )
         {
             return false;
         }
@@ -126,19 +119,20 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
         return false;
     }
 
-    private bool EvaluateDataType( AstSymbolExpression left, AstSymbolExpression right, out DataTypeFlag resultType )
+    private bool EvaluateDataType( AstExpressionSyntaxNode expr, AstSymbolExpression left, out DataTypeFlag resultType )
     {
         resultType = DataTypeFlag.None;
 
         // 個別に判定しているのは、KSP が real から int の暗黙の型変換を持っていないため
 
-        if( left.TypeFlag.IsInt() && right.TypeFlag.IsInt() )
+        if( left.TypeFlag.IsInt() )
         {
             resultType = DataTypeFlag.TypeInt;
             return true;
         }
 
-        if( left.TypeFlag.IsReal() && right.TypeFlag.IsReal() )
+        // real は unary minus のみで bitwise not は不可
+        if( left.TypeFlag.IsReal() && expr.Id == AstNodeId.UnaryMinus)
         {
             resultType = DataTypeFlag.TypeReal;
             return true;

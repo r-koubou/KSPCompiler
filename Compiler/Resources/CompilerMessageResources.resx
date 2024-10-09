@@ -57,4 +57,7 @@
     <data name="semantic.error.variable.not.declared" xml:space="preserve">
         <value>Variable not declared: {0}</value>
     </data>
+    <data name="semantic.error.unrayoprator.bitnot.compatible" xml:space="preserve">
+        <value>Unary operator .not. available integer types only</value>
+    </data>
 </root>

@@ -122,5 +122,11 @@ namespace KSPCompiler.Resources {
                 return ResourceManager.GetString("semantic.error.variable.not.declared", resourceCulture);
             }
         }
+        
+        public static string semantic_error_unrayoprator_bitnot_compatible {
+            get {
+                return ResourceManager.GetString("semantic.error.unrayoprator.bitnot.compatible", resourceCulture);
+            }
+        }
     }
 }

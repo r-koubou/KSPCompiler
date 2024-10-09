@@ -94,6 +94,18 @@
       <None Update="TestData\SemanticAnalyzeOperatorTest\bit_xor_incompatible.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="TestData\SemanticAnalyzeOperatorTest\unary_minus.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\SemanticAnalyzeOperatorTest\unary_minus_incompatible.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\SemanticAnalyzeOperatorTest\unary_not.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\SemanticAnalyzeOperatorTest\unary_not_incompatible.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
