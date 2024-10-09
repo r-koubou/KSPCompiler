@@ -1,14 +1,14 @@
-using KSPCompiler.Domain.Symbols.MetaData;
-
 namespace KSPCompiler.Domain.Ast.Nodes.Expressions
 {
     /// <summary>
-    /// AST node representing an integer literal
+    /// AST node representing the base class for all literal nodes
     /// </summary>
-    public class AstIntLiteral : AstLiteral<int>
+    public abstract class AstLiteral<TValue> : AstSymbolExpression
     {
-        public override DataTypeFlag TypeFlag
-            => DataTypeFlag.TypeInt;
+        /// <summary>
+        /// literal value
+        /// </summary>
+        public TValue Value { get; set; }
 
         ///
         /// <inheritdoc/>
@@ -18,20 +18,20 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstIntLiteral()
-            : this( 0 ) {}
+        protected AstLiteral( AstNodeId id, TValue value )
+            : this( id, NullAstNode.Instance, value )
+        {
+            Value = value;
+        }
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstIntLiteral( int value )
-            : this( value, NullAstNode.Instance ) {}
-
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        public AstIntLiteral( int value, IAstNode parent )
-            : base( AstNodeId.IntLiteral, parent, value ) {}
+        protected AstLiteral( AstNodeId id, IAstNode parent, TValue value )
+            : base( id, parent )
+        {
+            Value = value;
+        }
 
         #region IAstNodeAcceptor
         ///
