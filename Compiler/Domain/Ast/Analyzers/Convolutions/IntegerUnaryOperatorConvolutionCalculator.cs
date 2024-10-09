@@ -34,7 +34,6 @@ public sealed class IntegerUnaryOperatorConvolutionCalculator : IConvolutionUnar
         {
             AstNodeId.UnaryMinus     => -convolutedValue,
             AstNodeId.UnaryNot        => ~convolutedValue,
-            AstNodeId.UnaryLogicalNot => convolutedValue != 0 ? 0 : 1, // C言語と同じ、0=false, 0以外が真をベースにしている
             _ => null
         };
     }
