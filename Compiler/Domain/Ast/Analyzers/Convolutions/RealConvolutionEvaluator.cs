@@ -9,14 +9,14 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions;
 /// </summary>
 public sealed class RealConvolutionEvaluator : IPrimitiveConvolutionEvaluator<double>
 {
-    private IPrimitiveConvolutionOperandCalculator<double> OperandCalculator { get; }
+    private IPrimitiveConstantConvolutionCalculator<double> ConstantCalculator { get; }
     private IPrimitiveConvolutionBinaryCalculator<double> BinaryCalculator { get; }
     private IPrimitiveConvolutionUnaryCalculator<double> UnaryCalculator { get; }
     private IPrimitiveConvolutionConditionalEvaluator<double> ConditionalEvaluator { get; }
 
     public RealConvolutionEvaluator( IAstVisitor visitor, ISymbolTable<VariableSymbol> variableSymbols, ICompilerMessageManger compilerMessageManger )
     {
-        OperandCalculator    = new RealOperandConvolutionCalculator( variableSymbols, compilerMessageManger );
+        ConstantCalculator   = new RealConstantConvolutionCalculator( variableSymbols, compilerMessageManger );
         BinaryCalculator     = new RealBinaryOperatorConvolutionCalculator( this );
         UnaryCalculator      = new RealUnaryOperatorConvolutionCalculator( this );
         ConditionalEvaluator = new RealConditionalOperatorConvolutionEvaluator( visitor, this );
@@ -26,7 +26,7 @@ public sealed class RealConvolutionEvaluator : IPrimitiveConvolutionEvaluator<do
     {
         return expr.ChildNodeCount switch
         {
-            0 => OperandCalculator.Calculate( expr, workingValueForRecursive ),
+            0 => ConstantCalculator.Calculate( expr, workingValueForRecursive ),
             1 => UnaryCalculator.Calculate( expr, workingValueForRecursive ),
             2 => BinaryCalculator.Calculate( expr, workingValueForRecursive ),
             _ => null

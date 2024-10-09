@@ -5,17 +5,8 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
     /// <summary>
     /// AST node representing a string literal
     /// </summary>
-    public class AstStringLiteral : AstSymbolExpression, IVariable<string>
+    public class AstStringLiteral : AstLiteral<string>
     {
-        #region IAstVariable<T>
-
-        /// <summary>
-        /// literal value
-        /// </summary>
-        public string Value { get; set; }
-
-        #endregion IAstVariable<T>
-
         public override DataTypeFlag TypeFlag
             => DataTypeFlag.TypeString;
 
@@ -40,10 +31,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
         /// Ctor
         /// </summary>
         public AstStringLiteral( string value, IAstNode parent )
-            : base( AstNodeId.StringLiteral, parent )
-        {
-            Value = value;
-        }
+            : base( AstNodeId.StringLiteral, parent, value ) {}
 
         #region IAstNodeAcceptor
         ///
