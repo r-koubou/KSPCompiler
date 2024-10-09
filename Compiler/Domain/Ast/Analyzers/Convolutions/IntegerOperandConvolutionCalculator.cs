@@ -13,12 +13,12 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions;
 /// <summary>
 /// Calculator for convolution operations with integer operands
 /// </summary>
-public sealed class IntegerConvolutionOperandCalculator : IConvolutionOperandCalculator<int>
+public sealed class IntegerOperandConvolutionCalculator : IConvolutionOperandCalculator<int>
 {
     private ISymbolTable<VariableSymbol> VariableSymbols { get; }
     private ICompilerMessageManger CompilerMessageManger { get; }
 
-    public IntegerConvolutionOperandCalculator(
+    public IntegerOperandConvolutionCalculator(
         ISymbolTable<VariableSymbol> variableSymbols,
         ICompilerMessageManger compilerMessageManger )
     {

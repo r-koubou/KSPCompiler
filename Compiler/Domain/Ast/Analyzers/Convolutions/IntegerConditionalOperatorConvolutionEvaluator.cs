@@ -6,15 +6,15 @@ using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions;
 
 /// <summary>
-/// Calculator for convolution operations with conditional operations
+/// Calculator for convolution operations with conditional operators
 /// </summary>
 /// <typeparam name="T">Configured conditional expression type (int/real etc.)</typeparam>
-public sealed class IntegerConvolutionConditionalEvaluator : IConvolutionConditionalEvaluator<int>
+public sealed class IntegerConditionalOperatorConvolutionEvaluator : IConvolutionConditionalEvaluator<int>
 {
     private IAstVisitor Visitor { get; }
     private IConvolutionEvaluator<int> ConvolutionEvaluator { get; }
 
-    public IntegerConvolutionConditionalEvaluator(
+    public IntegerConditionalOperatorConvolutionEvaluator(
         IAstVisitor visitor,
         IConvolutionEvaluator<int> convolutionEvaluator )
     {
