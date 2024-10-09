@@ -50,4 +50,9 @@ public abstract class SymbolBase
     /// Empty characters are also acceptable since they correspond to document comments.
     /// </remarks>
     public SymbolDescription Description { get; set; } = SymbolDescription.Empty;
+
+    /// <summary>
+    /// If the symbol can represent a value, this property holds the value. (e.g. constant value). Otherwise, it is null.
+    /// </summary>
+    public object? Value { get; set; } = null;
 }

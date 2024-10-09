@@ -28,12 +28,34 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         }
 
         #region IAstNodeAcceptor
+        ///
+        /// <inheritdoc />
+        ///
+        public override int ChildNodeCount
+        {
+            get
+            {
+                var result = 1; // condition node is always present
+
+                if( CodeBlock != NullAstNode.Instance )
+                {
+                    result++;
+                }
+
+                if( ElseBlock != NullAstNode.Instance )
+                {
+                    result++;
+                }
+
+                return result;
+            }
+        }
 
         ///
         /// <inheritdoc/>
         ///
-        public override T Accept<T>( IAstVisitor<T> visitor )
-            => visitor.Visit( this );
+        public override T Accept<T>( IAstVisitor<T> visitor, AbortTraverseToken abortTraverseToken )
+            => visitor.Visit( this , abortTraverseToken );
 
         #endregion IAstNodeAcceptor
     }

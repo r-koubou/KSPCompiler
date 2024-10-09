@@ -33,10 +33,13 @@ public sealed class NullAstInitializer : AstInitializer
     private NullAstInitializer()
         : base( AstNodeId.None, NullAstNode.Instance ) {}
 
-    public override T Accept<T>( IAstVisitor<T> visitor )
-        => visitor.Visit( this );
+    public override int ChildNodeCount
+        => 0;
 
-    public override void AcceptChildren<T>( IAstVisitor<T> visitor ) {}
+    public override T Accept<T>( IAstVisitor<T> visitor, AbortTraverseToken abortTraverseToken )
+        => visitor.Visit( this , abortTraverseToken );
+
+    public override void AcceptChildren<T>( IAstVisitor<T> visitor, AbortTraverseToken abortTraverseToken ) {}
 
     public override string ToString()
         => nameof( NullAstInitializer );

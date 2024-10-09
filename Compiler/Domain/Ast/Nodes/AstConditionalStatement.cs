@@ -34,7 +34,7 @@ namespace KSPCompiler.Domain.Ast.Nodes
         /// <summary>
         /// Do nothing. Override as appropriate.
         /// </summary>
-        public override void AcceptChildren<T>( IAstVisitor<T> visitor )
+        public override void AcceptChildren<T>( IAstVisitor<T> visitor, AbortTraverseToken abortTraverseToken )
         {}
 
         #endregion

@@ -84,12 +84,23 @@ namespace KSPCompiler.Domain.Ast.Nodes
 
         #region IAstNodeAcceptor
         ///
+        /// <inheritdoc />
+        ///
+        public override int ChildNodeCount
+            => 2; // left, right (but unary operators class will override this to return 1)
+
+        ///
         /// <inheritdoc/>
         ///
-        public override void AcceptChildren<T>( IAstVisitor<T> visitor )
+        public override void AcceptChildren<T>( IAstVisitor<T> visitor, AbortTraverseToken abortTraverseToken )
         {
-            Left.AcceptChildren( visitor );
-            Right.AcceptChildren( visitor );
+            if( abortTraverseToken.Aborted )
+            {
+                return;
+            }
+
+            Left.AcceptChildren( visitor, abortTraverseToken );
+            Right.AcceptChildren( visitor, abortTraverseToken );
         }
         #endregion IAstNodeAcceptor
 

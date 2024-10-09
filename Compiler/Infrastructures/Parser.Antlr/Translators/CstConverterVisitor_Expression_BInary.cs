@@ -69,9 +69,29 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             );
         }
 
+        public override AstNode VisitLogicalXorExpression( KSPParser.LogicalXorExpressionContext context )
+        {
+            return VisitBinaryExpressionNodeImpl<AstLogicalXorExpression>(
+                context,
+                context.nested,
+                context.left,
+                context.right
+            );
+        }
+
         public override AstNode VisitBitwiseAndExpression( KSPParser.BitwiseAndExpressionContext context )
         {
             return VisitBinaryExpressionNodeImpl<AstBitwiseAndExpression>(
+                context,
+                context.nested,
+                context.left,
+                context.right
+            );
+        }
+
+        public override AstNode VisitBitwiseXorExpression( KSPParser.BitwiseXorExpressionContext context )
+        {
+            return VisitBinaryExpressionNodeImpl<AstBitwiseXorExpression>(
                 context,
                 context.nested,
                 context.left,

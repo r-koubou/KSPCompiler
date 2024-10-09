@@ -421,6 +421,18 @@ public partial class KSPParserBaseListener : IKSPParserListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitLogicalAndExpression([NotNull] KSPParser.LogicalAndExpressionContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="KSPParser.logicalXorExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterLogicalXorExpression([NotNull] KSPParser.LogicalXorExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="KSPParser.logicalXorExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitLogicalXorExpression([NotNull] KSPParser.LogicalXorExpressionContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="KSPParser.bitwiseOrExpression"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -444,6 +456,18 @@ public partial class KSPParserBaseListener : IKSPParserListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitBitwiseAndExpression([NotNull] KSPParser.BitwiseAndExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="KSPParser.bitwiseXorExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterBitwiseXorExpression([NotNull] KSPParser.BitwiseXorExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="KSPParser.bitwiseXorExpression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitBitwiseXorExpression([NotNull] KSPParser.BitwiseXorExpressionContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="KSPParser.equalityExpression"/>.
 	/// <para>The default implementation does nothing.</para>

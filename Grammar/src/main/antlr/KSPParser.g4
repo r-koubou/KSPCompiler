@@ -390,12 +390,20 @@ logicalOrExpression
 // 条件式AND
 //
 logicalAndExpression
-    : nested = bitwiseOrExpression
-    | left   = logicalAndExpression BOOL_AND right = bitwiseOrExpression
+    : nested = logicalXorExpression
+    | left   = logicalAndExpression BOOL_AND right = logicalXorExpression
 ;
 
 //
-// 論理積, 論理和
+// 条件式XOR
+//
+logicalXorExpression
+    : nested = bitwiseOrExpression
+    | left   = logicalXorExpression BOOL_XOR right = bitwiseOrExpression
+;
+
+//
+// 論理積
 //
 bitwiseOrExpression
     : nested = bitwiseAndExpression
@@ -403,11 +411,19 @@ bitwiseOrExpression
 ;
 
 //
-// 論理積, 論理和
+// 論理和
 //
 bitwiseAndExpression
+    : nested = bitwiseXorExpression
+    | left   = bitwiseAndExpression BIT_AND right = bitwiseXorExpression
+;
+
+//
+// 排他的論理和
+//
+bitwiseXorExpression
     : nested = equalityExpression
-    | left   = bitwiseAndExpression BIT_OR right = equalityExpression
+    | left   = bitwiseXorExpression BIT_XOR right = equalityExpression
 ;
 
 //
@@ -454,8 +470,9 @@ multiplicativeExpression
 //
 unaryExpression
     : nested = postfixExpression
-    | opr    = MINUS   unaryMinus = unaryExpression
-    | opr    = BIT_NOT unaryNot   = unaryExpression
+    | opr    = MINUS   unaryMinus  = unaryExpression
+    | opr    = BIT_NOT unaryNot    = unaryExpression
+    | opr    = BOOL_NOT logicalNot = unaryExpression
 ;
 
 //

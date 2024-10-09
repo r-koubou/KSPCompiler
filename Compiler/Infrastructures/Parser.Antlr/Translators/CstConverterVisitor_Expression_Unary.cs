@@ -48,6 +48,8 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                     VisitUnaryExpressionImpl<AstUnaryMinusExpression>( context, context.unaryMinus ),
                 KSPLexer.BIT_NOT =>
                     VisitUnaryExpressionImpl<AstUnaryNotExpression>( context, context.unaryNot ),
+                KSPLexer.BOOL_NOT =>
+                    VisitUnaryExpressionImpl<AstUnaryLogicalNotExpression>( context, context.logicalNot ),
                 _ =>
                     throw new ArgumentException( $"context.opr.Type is {context.opr.Text}" ),
             };

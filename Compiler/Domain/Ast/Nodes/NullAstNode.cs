@@ -58,15 +58,21 @@ namespace KSPCompiler.Domain.Ast.Nodes
 
         #region IAstNodeAcceptor
         ///
+        /// <inheritdoc />
+        ///
+        public int ChildNodeCount
+            => 0;
+
+        ///
         /// <inheritdoc/>
         ///
-        public T Accept<T>( IAstVisitor<T> visitor )
-            => visitor.Visit( this );
+        public T Accept<T>( IAstVisitor<T> visitor, AbortTraverseToken abortTraverseToken )
+            => visitor.Visit( this , abortTraverseToken );
 
         /// <summary>
         /// Do nothing.
         /// </summary>
-        public void AcceptChildren<T>( IAstVisitor<T> visitor ) {}
+        public void AcceptChildren<T>( IAstVisitor<T> visitor, AbortTraverseToken abortTraverseToken ) {}
         #endregion IAstNodeAcceptor
 
         public override string ToString()

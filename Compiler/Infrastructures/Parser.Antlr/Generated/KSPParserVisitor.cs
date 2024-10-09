@@ -225,6 +225,12 @@ public interface IKSPParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitLogicalAndExpression([NotNull] KSPParser.LogicalAndExpressionContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="KSPParser.logicalXorExpression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitLogicalXorExpression([NotNull] KSPParser.LogicalXorExpressionContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="KSPParser.bitwiseOrExpression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -236,6 +242,12 @@ public interface IKSPParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitBitwiseAndExpression([NotNull] KSPParser.BitwiseAndExpressionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="KSPParser.bitwiseXorExpression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitBitwiseXorExpression([NotNull] KSPParser.BitwiseXorExpressionContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="KSPParser.equalityExpression"/>.
 	/// </summary>

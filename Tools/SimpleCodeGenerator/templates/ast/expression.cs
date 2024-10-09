@@ -8,12 +8,6 @@ namespace ${namespace}
         /// <summary>
         /// Ctor
         /// </summary>
-        public ${classname}()
-        : this( NullAstNode.Instance, AstExpressionSyntaxNode.Null, AstExpressionSyntaxNode.Null ) {}
-
-        /// <summary>
-        /// Ctor
-        /// </summary>
         public ${classname}( IAstNode parent, AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
             : base( AstNodeId.${name}, parent, left, right )
         {
@@ -40,8 +34,8 @@ namespace ${namespace}
         ///
         /// <inheritdoc/>
         ///
-        public override T Accept<T>( IAstVisitor<T> visitor )
-            => visitor.Visit( this );
+        public override T Accept<T>( IAstVisitor<T> visitor, AbortTraverseToken abortTraverseToken )
+            => visitor.Visit( this, abortTraverseToken );
 
         #endregion IAstNodeAcceptor
     }

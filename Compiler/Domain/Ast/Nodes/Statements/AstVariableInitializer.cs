@@ -32,20 +32,47 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         }
 
         #region IAstNodeAcceptor
-
         ///
-        /// <inheritdoc/>
+        /// <inheritdoc />
         ///
-        public override T Accept<T>( IAstVisitor<T> visitor )
-            => visitor.Visit( this );
-
-        ///
-        /// <inheritdoc/>
-        ///
-        public override void AcceptChildren<T>( IAstVisitor<T> visitor )
+        public override int ChildNodeCount
         {
-            PrimitiveInitializer.AcceptChildren( visitor );
-            ArrayInitializer.AcceptChildren( visitor );
+            get
+            {
+                var result = 0;
+
+                if( PrimitiveInitializer != NullAstInitializer.Instance )
+                {
+                    result++;
+                }
+                if( ArrayInitializer != NullAstInitializer.Instance )
+                {
+                    result++;
+                }
+
+                return result;
+            }
+        }
+
+        ///
+        /// <inheritdoc/>
+        ///
+        public override T Accept<T>( IAstVisitor<T> visitor, AbortTraverseToken abortTraverseToken )
+            => visitor.Visit( this , abortTraverseToken );
+
+        ///
+        /// <inheritdoc/>
+        ///
+        public override void AcceptChildren<T>( IAstVisitor<T> visitor, AbortTraverseToken abortTraverseToken )
+        {
+            PrimitiveInitializer.AcceptChildren( visitor, abortTraverseToken );
+
+            if( abortTraverseToken.Aborted )
+            {
+                return;
+            }
+
+            ArrayInitializer.AcceptChildren( visitor, abortTraverseToken );
         }
 
         #endregion IAstNodeAcceptor

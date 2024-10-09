@@ -84,6 +84,7 @@ BOOL_NE:    '#';
 BOOL_NOT:   'not';
 BOOL_AND:   'and';
 BOOL_OR:    'or';
+BOOL_XOR:   'xor';
 // 算術演算
 ASSIGN:     ':=';
 PLUS:       '+';
@@ -94,6 +95,7 @@ MOD:        'mod';
 BIT_AND:    '.and.';
 BIT_OR:     '.or.';
 BIT_NOT:    '.not.';
+BIT_XOR:    '.xor.';
 // ビットシフトはコマンドなので演算子扱いしない
 // 文字列連結
 STRING_ADD: '&';

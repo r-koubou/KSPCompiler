@@ -44,16 +44,21 @@ namespace KSPCompiler.Domain.Ast.Nodes.Blocks
         }
 
         #region IAstNodeAcceptor
+        ///
+        /// <inheritdoc />
+        ///
+        public override int ChildNodeCount
+            => 3;
 
         ///
         /// <inheritdoc/>
         ///
-        public override T Accept<T>( IAstVisitor<T> visitor )
-            => visitor.Visit( this );
+        public override T Accept<T>( IAstVisitor<T> visitor, AbortTraverseToken abortTraverseToken )
+            => visitor.Visit( this , abortTraverseToken );
 
-        public override void AcceptChildren<T>( IAstVisitor<T> visitor )
+        public override void AcceptChildren<T>( IAstVisitor<T> visitor, AbortTraverseToken abortTraverseToken )
         {
-            CodeBlock.AcceptChildren( visitor );
+            CodeBlock.AcceptChildren( visitor, abortTraverseToken );
         }
 
         #endregion IAstNodeAcceptor

@@ -5,6 +5,19 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
     /// </summary>
     public class AstSymbolExpression : AstExpressionSyntaxNode, INameable
     {
+        /// <summary>
+        /// Null Object of <see cref="AstSymbolExpression"/>
+        /// </summary>
+        /// <remarks>
+        /// If invalid by analyzing the code the result set to this.
+        /// </remarks>
+        public static readonly AstSymbolExpression Null = new AstSymbolExpression();
+
+        /// <summary>
+        /// Represents whether the node is symbol(variable, commands, callback, etc.) and its reserved (built-in) by NI.
+        /// </summary>
+        public virtual bool Reserved { get; set; }
+
         #region INameable
 
         ///
@@ -24,17 +37,26 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
         /// Ctor
         /// </summary>
         public AstSymbolExpression( IAstNode parent )
-            : base( AstNodeId.Symbol, parent )
-        {
-        }
+            : base( AstNodeId.Symbol, parent ) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstSymbolExpression( AstNodeId id, IAstNode parent )
+            : base( id, parent ) {}
 
         #region IAstNodeAcceptor
+        ///
+        /// <inheritdoc/>
+        ///
+        public override int ChildNodeCount
+            => 0;
 
         ///
         /// <inheritdoc/>
         ///
-        public override T Accept<T>( IAstVisitor<T> visitor )
-            => visitor.Visit( this );
+        public override T Accept<T>( IAstVisitor<T> visitor, AbortTraverseToken abortTraverseToken )
+            => visitor.Visit( this , abortTraverseToken );
 
         #endregion IAstNodeAcceptor
     }

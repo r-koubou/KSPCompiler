@@ -5,7 +5,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
     /// <summary>
     /// AST node representing an integer literal
     /// </summary>
-    public class AstIntLiteral : AstExpressionSyntaxNode, IVariable<int>
+    public class AstIntLiteral : AstSymbolExpression, IVariable<int>
     {
         #region IAstVariable<T>
 
@@ -15,6 +15,9 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
         public int Value { get; set; }
 
         #endregion IAstVariable<T>
+
+        public override DataTypeFlag TypeFlag
+            => DataTypeFlag.TypeInt;
 
         ///
         /// <inheritdoc/>
@@ -40,16 +43,20 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
             : base( AstNodeId.IntLiteral, parent )
         {
             Value = value;
-            TypeFlag  = DataTypeFlag.TypeInt;
         }
 
         #region IAstNodeAcceptor
+        ///
+        /// <inheritdoc/>
+        ///
+        public override int ChildNodeCount
+            => 0;
 
         ///
         /// <inheritdoc/>
         ///
-        public override T Accept<T>( IAstVisitor<T> visitor )
-            => visitor.Visit( this );
+        public override T Accept<T>( IAstVisitor<T> visitor, AbortTraverseToken abortTraverseToken )
+            => visitor.Visit( this , abortTraverseToken );
 
         #endregion IAstNodeAcceptor
     }

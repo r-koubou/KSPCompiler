@@ -35,7 +35,7 @@ public static class DataTypeFlagExtension
         => a.IsVoid() && b.IsVoid();
 
     public static bool IsNumerical( this DataTypeFlag flag )
-        => flag.HasFlag( DataTypeFlag.TypeNumerical );
+        => ( flag & DataTypeFlag.TypeNumerical ) != 0;
 
     public static bool AreNumerical( this DataTypeFlag a, DataTypeFlag b )
         => a.IsNumerical() && b.IsNumerical();
@@ -52,9 +52,75 @@ public static class DataTypeFlagExtension
     public static bool AreNonVariableType( this DataTypeFlag a, DataTypeFlag b )
         => a.IsNonVariableType() && b.IsNonVariableType();
 
+    public static bool HasAttribute( this DataTypeFlag flag )
+        => ( flag & DataTypeFlag.AttributeMask ) != 0;
+
     public static bool IsArray( this DataTypeFlag flag )
         => flag.HasFlag( DataTypeFlag.AttributeArray );
 
     public static bool AreArray( this DataTypeFlag a, DataTypeFlag b )
         => a.IsArray() && b.IsArray();
+
+    public static DataTypeFlag TypeMasked( this DataTypeFlag flag )
+        => flag & DataTypeFlag.TypeMask;
+
+    public static DataTypeFlag MatchedType( this DataTypeFlag flag, DataTypeFlag other )
+        => flag.TypeMasked() & other.TypeMasked();
+
+    public static string ToMessageString( this DataTypeFlag flag )
+    {
+        var typeMasked = flag.TypeMasked();
+
+        var result = typeMasked switch
+        {
+            DataTypeFlag.TypeInt => "integer",
+            DataTypeFlag.TypeString => "string",
+            DataTypeFlag.TypeReal => "real",
+            DataTypeFlag.TypeBool => "boolean",
+            DataTypeFlag.TypeVoid => "void",
+            DataTypeFlag.TypeKspPreprocessorSymbol => "KSP preprocessor symbol",
+            DataTypeFlag.TypePgsId => "PGS ID",
+            DataTypeFlag.None => "",
+            _ => "*"
+        };
+
+        if( result == "*" )
+        {
+            var typeString = "";
+
+            if( flag.IsInt() )
+            {
+                typeString += "integer,";
+            }
+            if( flag.IsReal() )
+            {
+                typeString += "real,";
+            }
+            if( flag.IsString() )
+            {
+                typeString += "string,";
+            }
+            if( flag.IsBoolean() )
+            {
+                typeString += "boolean,";
+            }
+            if( flag.IsVoid() )
+            {
+                typeString += "void";
+            }
+            return $"multiple type ({typeString})";
+        }
+
+        if( !string.IsNullOrEmpty( result ) || !flag.HasAttribute() )
+        {
+            return result;
+        }
+
+        if( flag.IsArray() )
+        {
+            result += " array";
+        }
+
+        return result;
+    }
 }

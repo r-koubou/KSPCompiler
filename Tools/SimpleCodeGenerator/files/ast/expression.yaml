@@ -8,16 +8,22 @@ output_dir: out/Expressions
 
 classes:
   #--------------------------------------------
-  # 論理 OR, AND
+  # 論理 OR, AND, XOR
   #--------------------------------------------
   - name: LogicalOr
-    description: "a conditional operator: AND (||)"
+    description: "a conditional operator: AND (or)"
     templates:
       - name: ${TEMPLATE}
         suffix: ${NAME_SUFFIX}
 
   - name: LogicalAnd
-    description: "a conditional operator: AND (&&)"
+    description: "a conditional operator: AND (and)"
+    templates:
+      - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
+
+  - name: LogicalXor
+    description: "a conditional operator: XOR (xor)"
     templates:
       - name: ${TEMPLATE}
         suffix: ${NAME_SUFFIX}
@@ -32,16 +38,22 @@ classes:
         suffix: ${NAME_SUFFIX}
 
   #--------------------------------------------
-  # ビット演算子 OR AND
+  # ビット演算子 OR AND XOR
   #--------------------------------------------
   - name: BitwiseOr
-    description: "a bitwise OR operator"
+    description: "a bitwise OR operator (.or.)"
     templates:
       - name: ${TEMPLATE}
         suffix: ${NAME_SUFFIX}
 
   - name: BitwiseAnd
-    description: "a bitwise AND operator"
+    description: "a bitwise AND operator (.and.)"
+    templates:
+      - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
+
+  - name: BitwiseXor
+    description: "a bitwise XOR operator (.xor.)"
     templates:
       - name: ${TEMPLATE}
         suffix: ${NAME_SUFFIX}
@@ -129,6 +141,12 @@ classes:
 
   - name: UnaryNot
     description: "an unary operator: NOT"
+    templates:
+      - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
+
+  - name: UnaryLogicalNot
+    description: "an unary operator: Logical NOT"
     templates:
       - name: ${TEMPLATE}
         suffix: ${NAME_SUFFIX}

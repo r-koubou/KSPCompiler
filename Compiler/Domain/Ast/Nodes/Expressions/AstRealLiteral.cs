@@ -5,7 +5,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
     /// <summary>
     /// AST node representing a floating-point literal
     /// </summary>
-    public class AstRealLiteral : AstExpressionSyntaxNode, IVariable<double>
+    public class AstRealLiteral : AstSymbolExpression, IVariable<double>
     {
         #region IAstVariable<T>
 
@@ -15,6 +15,9 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
         public double Value { get; set; }
 
         #endregion IAstVariable<T>
+
+        public override DataTypeFlag TypeFlag
+            => DataTypeFlag.TypeReal;
 
         ///
         /// <inheritdoc/>
@@ -37,19 +40,23 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
         /// Ctor
         /// </summary>
         public AstRealLiteral( double value, IAstNode parent )
-            : base( AstNodeId.RealLiteral )
+            : base( AstNodeId.RealLiteral, parent )
         {
             Value = value;
-            TypeFlag  = DataTypeFlag.TypeReal;
         }
 
         #region IAstNodeAcceptor
+        ///
+        /// <inheritdoc/>
+        ///
+        public override int ChildNodeCount
+            => 0;
 
         ///
         /// <inheritdoc/>
         ///
-        public override T Accept<T>( IAstVisitor<T> visitor )
-            => visitor.Visit( this );
+        public override T Accept<T>( IAstVisitor<T> visitor, AbortTraverseToken abortTraverseToken )
+            => visitor.Visit( this , abortTraverseToken );
 
         #endregion IAstNodeAcceptor
     }
