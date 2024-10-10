@@ -94,9 +94,11 @@ namespace KSPCompiler.Domain.Ast.Nodes
         #region IAstNodeAcceptor
         ///
         /// <inheritdoc />
+        /// <remarks>
+        /// However, if it has more than two child nodes, such as unary operators, literals, or other subclasses, it must override this and return the appropriate value.</remarks>
         ///
-        public override int ChildNodeCount
-            => 2; // left, right (but unary operators class will override this to return 1)
+        // public override int ChildNodeCount
+        //     => 2;
 
         ///
         /// <inheritdoc/>

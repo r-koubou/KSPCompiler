@@ -58,6 +58,13 @@ public sealed class NullAstExpressionSyntaxNode : AstExpressionSyntaxNode
     {}
 
     #region IAstNodeAcceptor
+
+    ///
+    /// <inheritdoc />
+    ///
+    public override int ChildNodeCount
+        => 2;
+
     ///
     /// <inheritdoc/>
     ///
