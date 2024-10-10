@@ -8,17 +8,17 @@ namespace KSPCompiler.Domain.Ast.Nodes.Blocks
         /// <summary>
         /// Conditional expression (starting value)
         /// </summary>
-        public AstExpressionSyntaxNode ConditionFrom { get; set; }
+        public AstExpressionNode ConditionFrom { get; set; }
 
         /// <summary>
         /// Conditional expression (end value *optional)
         /// </summary>
-        public AstExpressionSyntaxNode ConditionTo { get; set; }
+        public AstExpressionNode ConditionTo { get; set; }
 
         /// <summary>
         /// Code block to be executed when the case condition is matched
         /// </summary>
-        public  AstBlock CodeBlock { get; set; }
+        public  AstBlockNode CodeBlock { get; set; }
 
         /// <summary>
         /// Ctor
@@ -30,12 +30,12 @@ namespace KSPCompiler.Domain.Ast.Nodes.Blocks
         /// Ctor
         /// </summary>
         public AstCaseBlock( IAstNode parent )
-            : this( parent, NullAstExpressionSyntaxNode.Instance, NullAstExpressionSyntaxNode.Instance, new AstBlock() ) {}
+            : this( parent, NullAstExpressionNode.Instance, NullAstExpressionNode.Instance, new AstBlockNode() ) {}
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstCaseBlock( IAstNode parent, AstExpressionSyntaxNode conditionFrom, AstExpressionSyntaxNode conditionTo, AstBlock codeBlock )
+        public AstCaseBlock( IAstNode parent, AstExpressionNode conditionFrom, AstExpressionNode conditionTo, AstBlockNode codeBlock )
             : base( AstNodeId.CaseBlock, parent )
         {
             ConditionFrom = conditionFrom;

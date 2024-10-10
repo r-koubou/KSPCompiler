@@ -8,7 +8,7 @@ namespace KSPCompiler.Domain.Ast.Analyzers;
 /// <summary>
 /// Validates that a variable name does not start with a reserved prefix.
 /// </summary>
-public class NonAstVariableNamePrefixReservedValidator : IDataValidator<AstVariableDeclaration>
+public class NonAstVariableNamePrefixReservedValidator : IDataValidator<AstVariableDeclarationNode>
 {
     /// <summary>
     /// The prefix of a variable name that NI disallows to be used.
@@ -24,6 +24,6 @@ public class NonAstVariableNamePrefixReservedValidator : IDataValidator<AstVaria
         "$ENGINE_PAR_",
     };
 
-    public bool Validate( AstVariableDeclaration data )
+    public bool Validate( AstVariableDeclarationNode data )
         => NiReservedPrefix.All( prefix => !data.Name.StartsWith( prefix ) );
 }

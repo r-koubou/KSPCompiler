@@ -26,19 +26,19 @@ public sealed class IntegerConstantConvolutionCalculator : IPrimitiveConstantCon
         CompilerMessageManger = compilerMessageManger;
     }
 
-    public int? Calculate( AstExpressionSyntaxNode expr, int workingValueForRecursive )
+    public int? Calculate( AstExpressionNode expr, int workingValueForRecursive )
     {
         if( expr.ChildNodeCount != 0 )
         {
             throw new ArgumentException( $"Expected 0 child nodes, but got {expr.ChildNodeCount}. (node: {expr.GetType().Name})" );
         }
 
-        if( expr is AstIntLiteral literal )
+        if( expr is AstIntLiteralNodeNode literal )
         {
             return literal.Value;
         }
 
-        if( expr is not AstDefaultExpression symbol )
+        if( expr is not AstDefaultExpressionNode symbol )
         {
             return null;
         }

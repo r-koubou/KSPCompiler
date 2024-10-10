@@ -22,7 +22,7 @@ public sealed class IntegerConvolutionEvaluator : IPrimitiveConvolutionEvaluator
         ConditionalEvaluator = new IntegerConditionalOperatorConvolutionEvaluator( visitor, this );
     }
 
-    public int? Evaluate( AstExpressionSyntaxNode expr, int workingValueForRecursive )
+    public int? Evaluate( AstExpressionNode expr, int workingValueForRecursive )
     {
         return expr.ChildNodeCount switch
         {

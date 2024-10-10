@@ -12,7 +12,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
     public partial class CstConverterVisitor
     {
         private TNode SetupUnaryOperatorNode<TNode>( TNode dest )
-            where TNode : AstExpressionSyntaxNode
+            where TNode : AstExpressionNode
         {
             if( dest.Left != null )
             {
@@ -25,12 +25,12 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         private TNode VisitUnaryExpressionImpl<TNode>(
             ParserRuleContext context,
             ParserRuleContext left )
-            where TNode : AstExpressionSyntaxNode, new()
+            where TNode : AstExpressionNode, new()
         {
             var node = new TNode();
 
             node.Import( context );
-            node.Left = (AstExpressionSyntaxNode)left.Accept( this );
+            node.Left = (AstExpressionNode)left.Accept( this );
 
             return SetupUnaryOperatorNode( node );
         }
@@ -42,14 +42,14 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 return context.nested.Accept( this );
             }
 
-            AstExpressionSyntaxNode node = ( context.opr.Type ) switch
+            AstExpressionNode node = ( context.opr.Type ) switch
             {
                 KSPLexer.MINUS =>
-                    VisitUnaryExpressionImpl<AstUnaryMinusExpression>( context, context.unaryMinus ),
+                    VisitUnaryExpressionImpl<AstUnaryMinusExpressionNode>( context, context.unaryMinus ),
                 KSPLexer.BIT_NOT =>
-                    VisitUnaryExpressionImpl<AstUnaryNotExpression>( context, context.unaryNot ),
+                    VisitUnaryExpressionImpl<AstUnaryNotExpressionNode>( context, context.unaryNot ),
                 KSPLexer.BOOL_NOT =>
-                    VisitUnaryExpressionImpl<AstUnaryLogicalNotExpression>( context, context.logicalNot ),
+                    VisitUnaryExpressionImpl<AstUnaryLogicalNotExpressionNode>( context, context.logicalNot ),
                 _ =>
                     throw new ArgumentException( $"context.opr.Type is {context.opr.Text}" ),
             };

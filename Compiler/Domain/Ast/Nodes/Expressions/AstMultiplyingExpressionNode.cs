@@ -1,0 +1,48 @@
+namespace KSPCompiler.Domain.Ast.Nodes.Expressions
+{
+    /// <summary>
+    /// AST node representing a multiplying operator (*)
+    /// </summary>
+    public class AstMultiplyingExpressionNode : AstExpressionNode
+    {
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstMultiplyingExpressionNode( IAstNode parent, AstExpressionNode left, AstExpressionNode right )
+            : base( AstNodeId.Multiplying, parent, left, right )
+        {
+        }
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstMultiplyingExpressionNode( AstExpressionNode left, AstExpressionNode right )
+            : base( AstNodeId.Multiplying, left, right )
+        {
+        }
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstMultiplyingExpressionNode()
+            : base( AstNodeId.Multiplying )
+        {
+        }
+
+        #region IAstNodeAcceptor
+
+        ///
+        /// <inheritdoc />
+        ///
+        public override int ChildNodeCount
+            => 2;
+
+        ///
+        /// <inheritdoc/>
+        ///
+        public override T Accept<T>( IAstVisitor<T> visitor, AbortTraverseToken abortTraverseToken )
+            => visitor.Visit( this , abortTraverseToken );
+
+        #endregion IAstNodeAcceptor
+    }
+}

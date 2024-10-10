@@ -17,7 +17,7 @@ namespace KSPCompiler.Gateways
         /// Parses KSP scripts and generates abstract parse trees.
         /// </summary>
         /// <exception cref="KspCompilerException">If parsing fails</exception>
-        public AstCompilationUnit Parse();
+        public AstCompilationUnitNode Parse();
 
         /// <inheritdoc cref="IDisposable.Dispose"/>
         void IDisposable.Dispose() {}

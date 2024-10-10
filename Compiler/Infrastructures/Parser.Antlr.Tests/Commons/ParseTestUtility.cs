@@ -11,7 +11,7 @@ namespace KSPCompiler.Parser.Antlr.Tests.Commons;
 
 public static class ParseTestUtility
 {
-    public static AstCompilationUnit Parse( string scriptDirectoryPath, string scriptFilePath )
+    public static AstCompilationUnitNode Parse( string scriptDirectoryPath, string scriptFilePath )
     {
         var path = Path.Combine(
             TestContext.CurrentContext.TestDirectory,

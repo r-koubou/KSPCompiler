@@ -7,6 +7,6 @@ namespace KSPCompiler.Domain.Ast.Analyzers;
 
 public interface ISemanticAnalyzer : IDisposable
 {
-    void Analyze( AstCompilationUnit node, AbortTraverseToken abortTraverseToken );
+    void Analyze( AstCompilationUnitNode node, AbortTraverseToken abortTraverseToken );
     void IDisposable.Dispose() {}
 }

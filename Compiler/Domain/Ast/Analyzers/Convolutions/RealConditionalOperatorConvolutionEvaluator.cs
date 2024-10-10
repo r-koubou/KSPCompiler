@@ -21,7 +21,7 @@ public sealed class RealConditionalOperatorConvolutionEvaluator : IPrimitiveConv
         ConvolutionEvaluator = convolutionEvaluator;
     }
 
-    public bool? Evaluate( AstExpressionSyntaxNode expr, AbortTraverseToken abortTraverseToken )
+    public bool? Evaluate( AstExpressionNode expr, AbortTraverseToken abortTraverseToken )
     {
         if( expr.ChildNodeCount != 2 )
         {
@@ -33,8 +33,8 @@ public sealed class RealConditionalOperatorConvolutionEvaluator : IPrimitiveConv
             return null;
         }
 
-        var exprLeft = expr.Accept( Visitor,  abortTraverseToken ) as AstExpressionSyntaxNode;
-        var exprRight = expr.Accept( Visitor, abortTraverseToken ) as AstExpressionSyntaxNode;
+        var exprLeft = expr.Accept( Visitor,  abortTraverseToken ) as AstExpressionNode;
+        var exprRight = expr.Accept( Visitor, abortTraverseToken ) as AstExpressionNode;
 
         if( exprLeft == null || exprRight == null )
         {

@@ -5,7 +5,7 @@ namespace KSPCompiler.Domain.Symbols.Extensions;
 
 public static class AstCallbackDeclarationExtension
 {
-    public static CallbackSymbol As( this AstCallbackDeclaration self, bool requiredDeclareOnInit = false )
+    public static CallbackSymbol As( this AstCallbackDeclarationNode self, bool requiredDeclareOnInit = false )
     {
         var result = new CallbackSymbol( false )
         {

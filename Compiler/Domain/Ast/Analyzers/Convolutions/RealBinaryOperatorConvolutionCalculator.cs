@@ -16,7 +16,7 @@ public sealed class RealBinaryOperatorConvolutionCalculator : IPrimitiveConvolut
         EvaluatorForRecursive = evaluatorForRecursive;
     }
 
-    public double? Calculate( AstExpressionSyntaxNode expr, double workingValueForRecursive )
+    public double? Calculate( AstExpressionNode expr, double workingValueForRecursive )
     {
         if( expr.ChildNodeCount != 2 )
         {
