@@ -34,6 +34,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
             : base( AstNodeId.IntLiteral, parent, value ) {}
 
         #region IAstNodeAcceptor
+
         ///
         /// <inheritdoc/>
         ///

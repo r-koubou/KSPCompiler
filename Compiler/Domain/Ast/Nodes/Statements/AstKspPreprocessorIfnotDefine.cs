@@ -13,7 +13,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         /// <summary>
         /// The ifndef conditional symbol.
         /// </summary>
-        public AstSymbolExpression Condition { get; }
+        public AstDefaultExpression Condition { get; }
 
         /// <summary>
         /// The code block for ifndef is true.
@@ -32,7 +32,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         public AstKspPreprocessorIfnotDefine( IAstNode parent )
             : base( AstNodeId.KspPreprocessorIfnotDefine, parent )
         {
-            Condition = new AstSymbolExpression( this );
+            Condition = new AstDefaultExpression( this );
             Block     = new AstBlock( this );
         }
 

@@ -32,6 +32,12 @@ namespace ${namespace}
         #region IAstNodeAcceptor
 
         ///
+        /// <inheritdoc />
+        ///
+        public override int ChildNodeCount
+            => 2;
+
+        ///
         /// <inheritdoc/>
         ///
         public override T Accept<T>( IAstVisitor<T> visitor, AbortTraverseToken abortTraverseToken )
