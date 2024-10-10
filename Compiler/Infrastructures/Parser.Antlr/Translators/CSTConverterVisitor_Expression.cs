@@ -125,7 +125,13 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             // string value
             else if( stringLiteral != null )
             {
-                var node = new AstStringLiteralNode( stringLiteral.GetText() );
+                var value = stringLiteral.GetText();
+
+                // スクリプト上の最初と末尾のダブルクォートを取り除いてC#の文字列として扱う
+                // パーサから得る ksp上の文字列リテラル: "\"abc\"" を C#上では string 型 "abc" にしたい
+                value = value[ 1..^1 ];
+
+                var node = new AstStringLiteralNode( value );
                 node.Import( context );
                 return node;
             }
