@@ -41,7 +41,7 @@ public sealed class StringConcatenateOperatorEvaluator : IStringConcatenateOpera
         //--------------------------------------------------------------------------
         // 初期値代入式では使用できない
         //--------------------------------------------------------------------------
-        if( !expr.HasParent<AstVariableInitializerNode>() )
+        if( expr.HasParent<AstVariableInitializerNode>() )
         {
             CompilerMessageManger.Error(
                 expr,
