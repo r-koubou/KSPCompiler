@@ -13,7 +13,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
     public partial class CstConverterVisitor
     {
         private TNode SetupExpressionNode<TNode>( TNode dest )
-            where TNode : AstExpressionSyntaxNode
+            where TNode : AstExpressionNode
         {
             if( dest.Left != null )
             {
@@ -32,7 +32,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             ParserRuleContext context,
             ParserRuleContext? left,
             ParserRuleContext? right )
-            where TNode : AstExpressionSyntaxNode, new()
+            where TNode : AstExpressionNode, new()
         {
             var node = new TNode();
 
@@ -40,12 +40,12 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
             if( left != null )
             {
-                node.Left = (AstExpressionSyntaxNode)left.Accept( this );
+                node.Left = (AstExpressionNode)left.Accept( this );
             }
 
             if( right != null )
             {
-                node.Right = (AstExpressionSyntaxNode)right.Accept( this );
+                node.Right = (AstExpressionNode)right.Accept( this );
             }
 
             return SetupExpressionNode( node );
@@ -83,7 +83,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             #region Identifier
             if( identifier != null )
             {
-                var node = new AstDefaultExpression( AstNodeId.Symbol);
+                var node = new AstDefaultExpressionNode( AstNodeId.Symbol);
                 node.Import( context );
                 node.Name = identifier.GetText();
                 return node;
@@ -111,21 +111,21 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                     // decimal
                     v = int.Parse( digits );
                 }
-                var node = new AstIntLiteral( v );
+                var node = new AstIntLiteralNodeNode( v );
                 node.Import( context );
                 return node;
             }
             // real value
             else if( realLiteral != null )
             {
-                var node = new AstRealLiteral( double.Parse( realLiteral.GetText() ) );
+                var node = new AstRealLiteralNode( double.Parse( realLiteral.GetText() ) );
                 node.Import( context );
                 return node;
             }
             // string value
             else if( stringLiteral != null )
             {
-                var node = new AstStringLiteral( stringLiteral.GetText() );
+                var node = new AstStringLiteralNode( stringLiteral.GetText() );
                 node.Import( context );
                 return node;
             }
@@ -163,7 +163,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             #region Call
             else if( callExpression != null )
             {
-                var node = VisitExpressionNodeImpl<AstCallExpression>( context, callExpression, callArguments );
+                var node = VisitExpressionNodeImpl<AstCallCommandExpressionNode>( context, callExpression, callArguments );
                 node.Import( context );
 
                 return node;
@@ -176,7 +176,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             #region Array index
             else if( arrayExpression != null )
             {
-                return VisitExpressionNodeImpl<AstArrayElementExpression>( context, arrayExpression, arrayIndexExpression );
+                return VisitExpressionNodeImpl<AstArrayElementExpressionNode>( context, arrayExpression, arrayIndexExpression );
             }
             #endregion
 
@@ -185,7 +185,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         public override AstNode VisitExpressionList(KSPParser.ExpressionListContext context)
         {
-            var node = new AstExpressionList();
+            var node = new AstExpressionListNode();
             node.Import( context );
 
             VisitExpressionListRecursive( context, node );
@@ -194,7 +194,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         private void VisitExpressionListRecursive(
             KSPParser.ExpressionListContext context,
-            AstExpressionList dest
+            AstExpressionListNode dest
         )
         {
             var expressionList = context.expressionList();
@@ -207,14 +207,14 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             {
                 VisitExpressionListRecursive( expressionList, dest );
                 dest.Expressions.Add(
-                   (AstExpressionSyntaxNode)expression.Accept( this )
+                   (AstExpressionNode)expression.Accept( this )
                 );
             }
             // expression
             else
             {
                 dest.Expressions.Add(
-                   (AstExpressionSyntaxNode)expression.Accept( this )
+                   (AstExpressionNode)expression.Accept( this )
                 );
             }
         }
@@ -222,18 +222,18 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         public override AstNode VisitAssignmentExpression( KSPParser.AssignmentExpressionContext context )
         {
             var operatorToken = context.assignmentOperator().opr.Type;
-            AstAssignmentExpression.OperatorType operatorType;
+            AstAssignmentExpressionNode.OperatorType operatorType;
 
             switch( operatorToken )
             {
                 case KSPParser.ASSIGN:
-                    operatorType = AstAssignmentExpression.OperatorType.Assign;
+                    operatorType = AstAssignmentExpressionNode.OperatorType.Assign;
                     break;
                 default:
                     throw new NotSupportedException( $"Token ID: {operatorToken} is not supported" );
             }
 
-            var node = VisitExpressionNodeImpl<AstAssignmentExpression>(
+            var node = VisitExpressionNodeImpl<AstAssignmentExpressionNode>(
                 context,
                 context.postfixExpression(),
                 context.expression()
@@ -245,7 +245,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         public override AstNode VisitAssignmentExpressionList(KSPParser.AssignmentExpressionListContext context)
         {
-            var node = new AstAssignmentExpressionList();
+            var node = new AstAssignmentExpressionListNode();
             node.Import( context );
 
             VisitAssignmentExpressionListRecursive( context, node );
@@ -254,7 +254,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         private void VisitAssignmentExpressionListRecursive(
             KSPParser.AssignmentExpressionListContext context,
-            AstAssignmentExpressionList dest
+            AstAssignmentExpressionListNode dest
         )
         {
             var assignmentList = context.assignmentExpressionList();
@@ -267,7 +267,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             {
                 VisitAssignmentExpressionListRecursive( assignmentList, dest );
                 dest.Expressions.Add(
-                    (AstAssignmentExpression)expression.Accept( this )
+                    (AstAssignmentExpressionNode)expression.Accept( this )
                 );
             }
             //
@@ -276,7 +276,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             else
             {
                 dest.Expressions.Add(
-                    (AstAssignmentExpression)expression.Accept( this )
+                    (AstAssignmentExpressionNode)expression.Accept( this )
                 );
             }
         }

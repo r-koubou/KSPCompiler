@@ -5,7 +5,7 @@ namespace KSPCompiler.Domain.Symbols.Extensions;
 
 public static class AstVariableDeclarationExtension
 {
-    public static VariableSymbol As( this AstVariableDeclaration self )
+    public static VariableSymbol As( this AstVariableDeclarationNode self )
     {
         var result = new VariableSymbol
         {

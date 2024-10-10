@@ -10,7 +10,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
     {
         public override AstNode VisitVariableDeclaration( KSPParser.VariableDeclarationContext context )
         {
-            var node = new AstVariableDeclaration();
+            var node = new AstVariableDeclarationNode();
             node.Import( context );
             node.Name     = context.name.Text;
             node.Modifier = string.Empty;
@@ -24,7 +24,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
             if( initializer != null )
             {
-                node.Initializer = (AstVariableInitializer)initializer;
+                node.Initializer = (AstVariableInitializerNode)initializer;
             }
 
             return node;
@@ -32,19 +32,19 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         public override AstNode VisitVariableInitializer( KSPParser.VariableInitializerContext context )
         {
-            var node = new AstVariableInitializer();
+            var node = new AstVariableInitializerNode();
             var primitiveInitializer = context.primitiveInitializer();
             var arrayInitializer = context.arrayInitializer();
 
             node.Import( context );
 
-            if( primitiveInitializer?.Accept( this ) is AstPrimitiveInitializer astPrimitiveInitializer )
+            if( primitiveInitializer?.Accept( this ) is AstPrimitiveInitializerNode astPrimitiveInitializer )
             {
                 node.PrimitiveInitializer = astPrimitiveInitializer;
                 SetupChildNode( node, astPrimitiveInitializer, primitiveInitializer );
             }
 
-            if( arrayInitializer?.Accept( this ) is AstArrayInitializer astArrayInitializer )
+            if( arrayInitializer?.Accept( this ) is AstArrayInitializerNode astArrayInitializer )
             {
                 SetupChildNode( node, astArrayInitializer, arrayInitializer );
                 node.ArrayInitializer = astArrayInitializer;
@@ -58,37 +58,37 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             var expression = context.expression();
             var expressionList = context.expressionList();
 
-            AstExpressionSyntaxNode expressionNode = NullAstExpressionSyntaxNode.Instance;
-            AstExpressionList expressionListNode = new AstExpressionList();
+            AstExpressionNode expressionNode = NullAstExpressionNode.Instance;
+            AstExpressionListNode expressionListNode = new AstExpressionListNode();
 
             // 初期化式：単一の式か複数の式かは型によってどちらか一方
             if( expression != null )
             {
-                expressionNode = expression.Accept( this ) as AstExpressionSyntaxNode
+                expressionNode = expression.Accept( this ) as AstExpressionNode
                                  ?? throw new MustBeNotNullException( nameof( expressionNode ) );
             }
             else if( expressionList != null )
             {
-                expressionListNode = expressionList.Accept( this ) as AstExpressionList
+                expressionListNode = expressionList.Accept( this ) as AstExpressionListNode
                                      ?? throw new MustBeNotNullException( nameof( expressionListNode ) );
             }
 
-            return new AstPrimitiveInitializer( NullAstNode.Instance, expressionNode, expressionListNode );
+            return new AstPrimitiveInitializerNode( NullAstNode.Instance, expressionNode, expressionListNode );
         }
 
         public override AstNode VisitArrayInitializer( KSPParser.ArrayInitializerContext context )
         {
-            var node = new AstArrayInitializer();
+            var node = new AstArrayInitializerNode();
 
             var arraySizeExpression = context.expression();
             var expressionList = context.expressionList();
 
-            node.Size = arraySizeExpression.Accept( this ) as AstExpressionSyntaxNode
+            node.Size = arraySizeExpression.Accept( this ) as AstExpressionNode
                         ?? throw new MustBeNotNullException( nameof( node.Size ) );
 
             if( expressionList != null )
             {
-                node.Initializer = expressionList.Accept( this ) as AstExpressionList
+                node.Initializer = expressionList.Accept( this ) as AstExpressionListNode
                                    ?? throw new MustBeNotNullException( nameof( node.Initializer ) );
             }
 

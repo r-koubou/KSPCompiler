@@ -15,7 +15,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             ParserRuleContext? nested,
             ParserRuleContext? left,
             ParserRuleContext? right )
-            where TNode : AstExpressionSyntaxNode, new()
+            where TNode : AstExpressionNode, new()
         {
             if( nested != null )
             {
@@ -31,7 +31,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         public override AstNode VisitStringConcatenateExpression( KSPParser.StringConcatenateExpressionContext context )
         {
-            return VisitBinaryExpressionNodeImpl<AstStringConcatenateExpression>(
+            return VisitBinaryExpressionNodeImpl<AstStringConcatenateExpressionNode>(
                 context,
                 context.nested,
                 context.left,
@@ -41,7 +41,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         public override AstNode VisitLogicalOrExpression( KSPParser.LogicalOrExpressionContext context )
         {
-            return VisitBinaryExpressionNodeImpl<AstLogicalOrExpression>(
+            return VisitBinaryExpressionNodeImpl<AstLogicalOrExpressionNode>(
                 context,
                 context.nested,
                 context.left,
@@ -51,7 +51,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         public override AstNode VisitLogicalAndExpression( KSPParser.LogicalAndExpressionContext context )
         {
-            return VisitBinaryExpressionNodeImpl<AstLogicalAndExpression>(
+            return VisitBinaryExpressionNodeImpl<AstLogicalAndExpressionNode>(
                 context,
                 context.nested,
                 context.left,
@@ -61,7 +61,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         public override AstNode VisitBitwiseOrExpression( KSPParser.BitwiseOrExpressionContext context )
         {
-            return VisitBinaryExpressionNodeImpl<AstBitwiseOrExpression>(
+            return VisitBinaryExpressionNodeImpl<AstBitwiseOrExpressionNode>(
                 context,
                 context.nested,
                 context.left,
@@ -71,7 +71,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         public override AstNode VisitLogicalXorExpression( KSPParser.LogicalXorExpressionContext context )
         {
-            return VisitBinaryExpressionNodeImpl<AstLogicalXorExpression>(
+            return VisitBinaryExpressionNodeImpl<AstLogicalXorExpressionNode>(
                 context,
                 context.nested,
                 context.left,
@@ -81,7 +81,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         public override AstNode VisitBitwiseAndExpression( KSPParser.BitwiseAndExpressionContext context )
         {
-            return VisitBinaryExpressionNodeImpl<AstBitwiseAndExpression>(
+            return VisitBinaryExpressionNodeImpl<AstBitwiseAndExpressionNode>(
                 context,
                 context.nested,
                 context.left,
@@ -91,7 +91,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         public override AstNode VisitBitwiseXorExpression( KSPParser.BitwiseXorExpressionContext context )
         {
-            return VisitBinaryExpressionNodeImpl<AstBitwiseXorExpression>(
+            return VisitBinaryExpressionNodeImpl<AstBitwiseXorExpressionNode>(
                 context,
                 context.nested,
                 context.left,
@@ -106,12 +106,12 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 return context.nested.Accept( this );
             }
 
-            AstExpressionSyntaxNode node = context.opr.Type switch
+            AstExpressionNode node = context.opr.Type switch
             {
                 KSPLexer.BOOL_EQ =>
-                    VisitExpressionNodeImpl<AstEqualExpression>( context, context.left, context.right ),
+                    VisitExpressionNodeImpl<AstEqualExpressionNode>( context, context.left, context.right ),
                 KSPLexer.BOOL_NE =>
-                    VisitExpressionNodeImpl<AstNotEqualExpression>( context, context.left, context.right ),
+                    VisitExpressionNodeImpl<AstNotEqualExpressionNode>( context, context.left, context.right ),
                 _ =>
                     throw new ArgumentException( $"context.opr.Type is {context.opr.Text}" ),
             };
@@ -125,16 +125,16 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 return context.nested.Accept( this );
             }
 
-            AstExpressionSyntaxNode node = context.opr.Type switch
+            AstExpressionNode node = context.opr.Type switch
             {
                 KSPLexer.BOOL_GT =>
-                    VisitExpressionNodeImpl<AstGreaterThanExpression>( context, context.left, context.right ),
+                    VisitExpressionNodeImpl<AstGreaterThanExpressionNode>( context, context.left, context.right ),
                 KSPLexer.BOOL_LT =>
-                    VisitExpressionNodeImpl<AstLessThanExpression>( context, context.left, context.right ),
+                    VisitExpressionNodeImpl<AstLessThanExpressionNode>( context, context.left, context.right ),
                 KSPLexer.BOOL_GE =>
-                    VisitExpressionNodeImpl<AstGreaterEqualExpression>( context, context.left, context.right ),
+                    VisitExpressionNodeImpl<AstGreaterEqualExpressionNode>( context, context.left, context.right ),
                 KSPLexer.BOOL_LE =>
-                    VisitExpressionNodeImpl<AstLessEqualExpression>( context, context.left, context.right ),
+                    VisitExpressionNodeImpl<AstLessEqualExpressionNode>( context, context.left, context.right ),
                 _ =>
                     throw new ArgumentException( $"context.opr.Type is {context.opr.Text}" ),
             };
@@ -148,12 +148,12 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 return context.nested.Accept( this );
             }
 
-            AstExpressionSyntaxNode node = context.opr.Type switch
+            AstExpressionNode node = context.opr.Type switch
             {
                 KSPLexer.PLUS =>
-                    VisitExpressionNodeImpl<AstAdditionExpression>( context, context.left, context.right ),
+                    VisitExpressionNodeImpl<AstAdditionExpressionNode>( context, context.left, context.right ),
                 KSPLexer.MINUS =>
-                    VisitExpressionNodeImpl<AstSubtractionExpression>( context, context.left, context.right ),
+                    VisitExpressionNodeImpl<AstSubtractionExpressionNode>( context, context.left, context.right ),
                 _ =>
                     throw new ArgumentException( $"context.opr.Type is {context.opr.Text}" ),
             };
@@ -167,14 +167,14 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 return context.nested.Accept( this );
             }
 
-            AstExpressionSyntaxNode node = context.opr.Type switch
+            AstExpressionNode node = context.opr.Type switch
             {
                 KSPLexer.MUL =>
-                    VisitExpressionNodeImpl<AstMultiplyingExpression>( context, context.left, context.right ),
+                    VisitExpressionNodeImpl<AstMultiplyingExpressionNode>( context, context.left, context.right ),
                 KSPLexer.DIV =>
-                    VisitExpressionNodeImpl<AstDivisionExpression>( context, context.left, context.right ),
+                    VisitExpressionNodeImpl<AstDivisionExpressionNode>( context, context.left, context.right ),
                 KSPLexer.MOD =>
-                    VisitExpressionNodeImpl<AstModuloExpression>( context, context.left, context.right ),
+                    VisitExpressionNodeImpl<AstModuloExpressionNode>( context, context.left, context.right ),
                 _ =>
                     throw new ArgumentException( $"context.opr.Type is {context.opr.Text}" ),
             };

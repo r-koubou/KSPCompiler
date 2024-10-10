@@ -34,7 +34,7 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, ISemanticAnalyzer
         NumericUnaryOperatorEvaluator  = new NumericUnaryOperatorEvaluator( this, CompilerMessageManger, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
     }
 
-    public void Analyze( AstCompilationUnit node, AbortTraverseToken abortTraverseToken)
+    public void Analyze( AstCompilationUnitNode node, AbortTraverseToken abortTraverseToken)
     {
         node.AcceptChildren( this, abortTraverseToken );
     }

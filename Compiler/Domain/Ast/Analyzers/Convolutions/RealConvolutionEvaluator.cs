@@ -22,7 +22,7 @@ public sealed class RealConvolutionEvaluator : IPrimitiveConvolutionEvaluator<do
         ConditionalEvaluator = new RealConditionalOperatorConvolutionEvaluator( visitor, this );
     }
 
-    public double? Evaluate( AstExpressionSyntaxNode expr, double workingValueForRecursive )
+    public double? Evaluate( AstExpressionNode expr, double workingValueForRecursive )
     {
         return expr.ChildNodeCount switch
         {

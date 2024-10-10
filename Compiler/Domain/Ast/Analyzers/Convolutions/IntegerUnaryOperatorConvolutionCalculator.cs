@@ -16,7 +16,7 @@ public sealed class IntegerUnaryOperatorConvolutionCalculator : IPrimitiveConvol
         EvaluatorForRecursive = evaluatorForRecursive;
     }
 
-    public int? Calculate( AstExpressionSyntaxNode expr, int workingValueForRecursive )
+    public int? Calculate( AstExpressionNode expr, int workingValueForRecursive )
     {
         if( expr.ChildNodeCount != 1 )
         {

@@ -10,13 +10,13 @@ public static class AstNodeExtension
     /// <param name="node">A node instance</param>
     /// <returns>true if the node is Null Object otherwise false.</returns>
     /// <seealso cref="NullAstNode"/>
-    /// <seealso cref="NullAstExpressionSyntaxNode"/>
-    /// <seealso cref="NullAstExpressionSyntaxNode"/>
+    /// <seealso cref="NullAstExpressionNode"/>
+    /// <seealso cref="NullAstExpressionNode"/>
     public static bool IsNull( this IAstNode? node )
         => node is null
             or NullAstNode
-            or NullAstExpressionSyntaxNode
-            or NullAstInitializer;
+            or NullAstExpressionNode
+            or NullAstInitializerNode;
 
     /// <summary>
     /// Check if the node is not Null Object
@@ -24,8 +24,8 @@ public static class AstNodeExtension
     /// <param name="node">A node instance</param>
     /// <returns>true if the node is Null Object otherwise false.</returns>
     /// <seealso cref="NullAstNode"/>
-    /// <seealso cref="NullAstExpressionSyntaxNode"/>
-    /// <seealso cref="NullAstExpressionSyntaxNode"/>
+    /// <seealso cref="NullAstExpressionNode"/>
+    /// <seealso cref="NullAstExpressionNode"/>
     public static bool IsNotNull( this IAstNode? node )
         => !node.IsNull();
 }

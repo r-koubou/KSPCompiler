@@ -13,7 +13,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
     {
         public override AstNode VisitCompilationUnit( KSPParser.CompilationUnitContext context )
         {
-            var node = new AstCompilationUnit();
+            var node = new AstCompilationUnitNode();
             var list = new List<IParseTree>();
 
             node.Import( context );
@@ -25,19 +25,19 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         public override AstNode VisitCallbackDeclaration( KSPParser.CallbackDeclarationContext context )
         {
-            var node = new AstCallbackDeclaration();
+            var node = new AstCallbackDeclarationNode();
 
             node.Import( context );
             node.Name     = context.name.Text;
             node.Position = ToPosition( context );
-            node.Block    = context.block().Accept( this ) as AstBlock
+            node.Block    = context.block().Accept( this ) as AstBlockNode
                             ?? throw new MustBeNotNullException( nameof( node.Block ) );
 
             node.Block.Parent = node;
 
             if( context.arguments != null )
             {
-                node.ArgumentList = context.arguments.Accept( this ) as AstArgumentList
+                node.ArgumentList = context.arguments.Accept( this ) as AstArgumentListNode
                                     ?? throw new MustBeNotNullException( nameof( node.ArgumentList ) );
 
                 node.ArgumentList.Parent = node;
@@ -48,12 +48,12 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         public override AstNode VisitUserFunctionDeclaration( KSPParser.UserFunctionDeclarationContext context )
         {
-            var node = new AstUserFunctionDeclaration();
+            var node = new AstUserFunctionDeclarationNode();
 
             node.Import( context );
             node.Name         = context.name.Text;
             node.Position     = ToPosition( context );
-            node.Block        = context.block().Accept( this ) as AstBlock
+            node.Block        = context.block().Accept( this ) as AstBlockNode
                                 ?? throw new MustBeNotNullException( nameof( node.Block ) );
 
             node.Block.Parent = node;
@@ -63,7 +63,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         public override AstNode VisitArgumentDefinitionList( KSPParser.ArgumentDefinitionListContext context )
         {
-            var node = new AstArgumentList();
+            var node = new AstArgumentListNode();
 
             node.Import( context );
             VisitArgumentDefinitionListRecursive( context, node );
@@ -73,12 +73,12 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         private void VisitArgumentDefinitionListRecursive(
             KSPParser.ArgumentDefinitionListContext context,
-            AstArgumentList destNode )
+            AstArgumentListNode destNode )
         {
             var argumentList = context.argumentDefinitionList();
             var identifier = context.IDENTIFIER();
 
-            var arg = new AstArgument();
+            var arg = new AstArgumentNode();
 
             arg.Import( identifier );
             arg.Name = identifier.GetText();
@@ -104,7 +104,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         public override AstNode VisitBlock( KSPParser.BlockContext context )
         {
-            var node = new AstBlock();
+            var node = new AstBlockNode();
 
             node.Import( context );
 
@@ -124,19 +124,19 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
             node.Import( context );
 
-            if( condFrom?.Accept( this ) is AstExpressionSyntaxNode condFromNode )
+            if( condFrom?.Accept( this ) is AstExpressionNode condFromNode )
             {
                 node.ConditionFrom = condFromNode;
                 SetupChildNode( node, node.ConditionFrom, condFrom );
             }
 
-            if( condTo?.Accept( this ) is AstExpressionSyntaxNode conditionToNode )
+            if( condTo?.Accept( this ) is AstExpressionNode conditionToNode )
             {
                 node.ConditionTo = conditionToNode;
                 SetupChildNode( node, node.ConditionTo, condTo );
             }
 
-            if( codeBlock?.Accept( this ) is AstBlock codeBlockNode )
+            if( codeBlock?.Accept( this ) is AstBlockNode codeBlockNode )
             {
                 node.CodeBlock = codeBlockNode;
                 SetupChildNode( node, node.CodeBlock, codeBlock );

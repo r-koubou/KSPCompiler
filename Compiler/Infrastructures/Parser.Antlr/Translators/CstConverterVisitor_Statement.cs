@@ -13,11 +13,11 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         private TNode VisitControlStatementImpl<TNode>(
             ParserRuleContext condition,
             ParserRuleContext block )
-            where TNode : AstConditionalStatement, new()
+            where TNode : AstConditionalStatementNode, new()
         {
             var node = new TNode();
-            var conditionNode = condition.Accept( this ) as AstExpressionSyntaxNode;
-            var blockNode = block.Accept( this ) as AstBlock;
+            var conditionNode = condition.Accept( this ) as AstExpressionNode;
+            var blockNode = block.Accept( this ) as AstBlockNode;
 
             _ = conditionNode ?? throw new MustBeNotNullException( nameof( conditionNode ) );
             _ = blockNode ?? throw new MustBeNotNullException( nameof( blockNode ) );
@@ -33,8 +33,8 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         public override AstNode VisitIfStatement( KSPParser.IfStatementContext context )
         {
-            var node = VisitControlStatementImpl<AstIfStatement>( context.expression(), context.ifBlock );
-            var elseBlock = context.elseBlock?.Accept( this ) as AstBlock;
+            var node = VisitControlStatementImpl<AstIfStatementNode>( context.expression(), context.ifBlock );
+            var elseBlock = context.elseBlock?.Accept( this ) as AstBlockNode;
 
             if( elseBlock == null )
             {
@@ -51,11 +51,11 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         {
             var caseList = context.caseBlock();
             var condition = context.expression();
-            var node = new AstSelectStatement();
+            var node = new AstSelectStatementNode();
 
             #region Condition
             node.Import( context );
-            node.Condition = condition.Accept( this ) as AstExpressionSyntaxNode
+            node.Condition = condition.Accept( this ) as AstExpressionNode
                              ?? throw new MustBeNotNullException( nameof( node.Condition ) );
 
             node.Condition?.Import( condition );
@@ -79,12 +79,12 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         public override AstNode VisitWhileStatement( KSPParser.WhileStatementContext context )
         {
-            return VisitControlStatementImpl<AstWhileStatement>( context.expression(), context.block() );
+            return VisitControlStatementImpl<AstWhileStatementNode>( context.expression(), context.block() );
         }
 
         public override AstNode VisitContinueStatement( KSPParser.ContinueStatementContext context )
         {
-            var node = new AstContinueStatement();
+            var node = new AstContinueStatementNode();
             node.Import( context );
 
             return node;
@@ -92,7 +92,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         public override AstNode VisitCallKspUserFunction( KSPParser.CallKspUserFunctionContext context )
         {
-            var node = new AstCallKspUserFunctionStatement();
+            var node = new AstCallKspUserFunctionStatementNode();
             node.Import( context );
             node.Name = context.name.Text;
 

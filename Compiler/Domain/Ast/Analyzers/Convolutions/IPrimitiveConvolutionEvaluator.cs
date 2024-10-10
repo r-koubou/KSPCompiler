@@ -13,5 +13,5 @@ public interface IPrimitiveConvolutionEvaluator<T> where T : struct
     /// <param name="expr">Expression node</param>
     /// <param name="workingValueForRecursive">Working value for recursive evaluation. First call should be default value of T</param>
     /// <returns>Evaluated value. If constant value is not found, returns null.</returns>
-    T? Evaluate( AstExpressionSyntaxNode expr, T workingValueForRecursive );
+    T? Evaluate( AstExpressionNode expr, T workingValueForRecursive );
 }

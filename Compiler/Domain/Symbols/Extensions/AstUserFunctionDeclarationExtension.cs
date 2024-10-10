@@ -5,7 +5,7 @@ namespace KSPCompiler.Domain.Symbols.Extensions;
 
 public static class AstUserFunctionDeclarationExtension
 {
-    public static UserFunctionSymbol As( this AstUserFunctionDeclaration self )
+    public static UserFunctionSymbol As( this AstUserFunctionDeclarationNode self )
     {
         var result = new UserFunctionSymbol
         {

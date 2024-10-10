@@ -9,34 +9,34 @@ public partial class SemanticAnalyzer
 {
     #region Binary Operators (Mathematical)
 
-    public override IAstNode Visit( AstAdditionExpression node, AbortTraverseToken abortTraverseToken )
+    public override IAstNode Visit( AstAdditionExpressionNode node, AbortTraverseToken abortTraverseToken )
         => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
 
-    public override IAstNode Visit( AstSubtractionExpression node, AbortTraverseToken abortTraverseToken )
+    public override IAstNode Visit( AstSubtractionExpressionNode node, AbortTraverseToken abortTraverseToken )
         => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
 
-    public override IAstNode Visit( AstMultiplyingExpression node, AbortTraverseToken abortTraverseToken )
+    public override IAstNode Visit( AstMultiplyingExpressionNode node, AbortTraverseToken abortTraverseToken )
         => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
 
-    public override IAstNode Visit( AstDivisionExpression node, AbortTraverseToken abortTraverseToken )
+    public override IAstNode Visit( AstDivisionExpressionNode node, AbortTraverseToken abortTraverseToken )
         => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
 
-    public override IAstNode Visit( AstModuloExpression node, AbortTraverseToken abortTraverseToken )
+    public override IAstNode Visit( AstModuloExpressionNode node, AbortTraverseToken abortTraverseToken )
         => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
 
-    public override IAstNode Visit( AstStringConcatenateExpression node, AbortTraverseToken abortTraverseToken )
+    public override IAstNode Visit( AstStringConcatenateExpressionNode node, AbortTraverseToken abortTraverseToken )
         => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
 
     #endregion ~Binary Operators
 
     #region Binary Operators (Bitwise)
-    public override IAstNode Visit( AstBitwiseOrExpression node, AbortTraverseToken abortTraverseToken )
+    public override IAstNode Visit( AstBitwiseOrExpressionNode node, AbortTraverseToken abortTraverseToken )
         => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
 
-    public override IAstNode Visit( AstBitwiseAndExpression node, AbortTraverseToken abortTraverseToken )
+    public override IAstNode Visit( AstBitwiseAndExpressionNode node, AbortTraverseToken abortTraverseToken )
         => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
 
-    public override IAstNode Visit( AstBitwiseXorExpression node, AbortTraverseToken abortTraverseToken )
+    public override IAstNode Visit( AstBitwiseXorExpressionNode node, AbortTraverseToken abortTraverseToken )
         => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
 
 
@@ -44,18 +44,18 @@ public partial class SemanticAnalyzer
 
     #region Unary Operators
 
-    public override IAstNode Visit( AstUnaryNotExpression node, AbortTraverseToken abortTraverseToken )
+    public override IAstNode Visit( AstUnaryNotExpressionNode node, AbortTraverseToken abortTraverseToken )
         // => throw new NotImplementedException();
         => NumericUnaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
 
-    public override IAstNode Visit( AstUnaryMinusExpression node, AbortTraverseToken abortTraverseToken )
+    public override IAstNode Visit( AstUnaryMinusExpressionNode node, AbortTraverseToken abortTraverseToken )
         //=> throw new NotImplementedException();
         => NumericUnaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
 
     #endregion ~Unary Operators
 
 
-    public override IAstNode Visit( AstAssignmentExpression node, AbortTraverseToken abortTraverseToken )
+    public override IAstNode Visit( AstAssignmentExpressionNode node, AbortTraverseToken abortTraverseToken )
     {
         var resultL = node.Left.Accept( this, abortTraverseToken );
         var resultR = node.Right.Accept( this, abortTraverseToken );

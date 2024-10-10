@@ -26,19 +26,19 @@ public sealed class RealConstantConvolutionCalculator : IPrimitiveConstantConvol
         CompilerMessageManger = compilerMessageManger;
     }
 
-    public double? Calculate( AstExpressionSyntaxNode expr, double _ )
+    public double? Calculate( AstExpressionNode expr, double _ )
     {
         if( expr.ChildNodeCount != 0 )
         {
             throw new ArgumentException( $"Expected 0 child nodes, but got {expr.ChildNodeCount}. (node: {expr.GetType().Name})" );
         }
 
-        if( expr is AstRealLiteral literal )
+        if( expr is AstRealLiteralNode literal )
         {
             return literal.Value;
         }
 
-        if( expr is not AstDefaultExpression symbol )
+        if( expr is not AstDefaultExpressionNode symbol )
         {
             return null;
         }

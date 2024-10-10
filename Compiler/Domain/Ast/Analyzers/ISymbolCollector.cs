@@ -12,13 +12,13 @@ public interface ISymbolCollector : IDisposable
 
     ISymbolTable<VariableSymbol> Variables { get; }
 
-    void Analyze( AstCompilationUnit node, AbortTraverseToken abortTraverseToken );
+    void Analyze( AstCompilationUnitNode node, AbortTraverseToken abortTraverseToken );
     void IDisposable.Dispose() {}
 
     private sealed class NullSymbolCollector : ISymbolCollector
     {
         public ISymbolTable<VariableSymbol> Variables => new VariableSymbolTable();
 
-        public void Analyze( AstCompilationUnit node, AbortTraverseToken abortTraverseToken ) {}
+        public void Analyze( AstCompilationUnitNode node, AbortTraverseToken abortTraverseToken ) {}
     }
 }

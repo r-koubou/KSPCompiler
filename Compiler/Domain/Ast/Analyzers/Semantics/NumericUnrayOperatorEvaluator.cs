@@ -30,7 +30,7 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
         RealConvolutionEvaluator    = realConvolutionEvaluator;
     }
 
-    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstExpressionSyntaxNode expr, AbortTraverseToken abortTraverseToken )
+    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstExpressionNode expr, AbortTraverseToken abortTraverseToken )
     {
         /*
               <<operator>> expr
@@ -44,14 +44,14 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
             throw new AstAnalyzeException( expr, "Invalid unary operator" );
         }
 
-        if( expr.Left.Accept( visitor, abortTraverseToken ) is not AstDefaultExpression evaluatedLeft )
+        if( expr.Left.Accept( visitor, abortTraverseToken ) is not AstDefaultExpressionNode evaluatedLeft )
         {
             throw new AstAnalyzeException( expr, "Failed to evaluate of unary operator" );
         }
 
         if( abortTraverseToken.Aborted )
         {
-            return AstDefaultExpression.Null;
+            return AstDefaultExpressionNode.Null;
         }
 
         var typeEvalResult = EvaluateDataType( expr, evaluatedLeft, out var resultType );
@@ -65,7 +65,7 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
             );
 
             abortTraverseToken.Abort();
-            return AstDefaultExpression.Null;
+            return AstDefaultExpressionNode.Null;
         }
 
         // リテラル、定数なら畳み込み
@@ -74,13 +74,13 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
             return convolutedValue;
         }
 
-        return new AstDefaultExpression( expr )
+        return new AstDefaultExpressionNode( expr )
         {
             TypeFlag = resultType
         };
     }
 
-    private bool TryConvolutionValue( AstExpressionSyntaxNode expr, AstDefaultExpression left, DataTypeFlag resultType, out AstDefaultExpression convolutedValue )
+    private bool TryConvolutionValue( AstExpressionNode expr, AstDefaultExpressionNode left, DataTypeFlag resultType, out AstDefaultExpressionNode convolutedValue )
     {
         convolutedValue = default!;
 
@@ -100,7 +100,7 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
                 return false;
             }
 
-            convolutedValue = new AstIntLiteral( convolutedInt.Value );
+            convolutedValue = new AstIntLiteralNodeNode( convolutedInt.Value );
             return true;
         }
         else if( resultType.IsReal() )
@@ -112,14 +112,14 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
                 return false;
             }
 
-            convolutedValue = new AstRealLiteral( convolutedReal.Value );
+            convolutedValue = new AstRealLiteralNode( convolutedReal.Value );
             return true;
         }
 
         return false;
     }
 
-    private bool EvaluateDataType( AstExpressionSyntaxNode expr, AstDefaultExpression left, out DataTypeFlag resultType )
+    private bool EvaluateDataType( AstExpressionNode expr, AstDefaultExpressionNode left, out DataTypeFlag resultType )
     {
         resultType = DataTypeFlag.None;
 
