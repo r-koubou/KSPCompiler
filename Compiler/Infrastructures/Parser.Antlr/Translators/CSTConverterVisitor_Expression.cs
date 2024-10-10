@@ -5,6 +5,7 @@ using Antlr4.Runtime;
 
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Domain.Ast.Nodes.Extensions;
 using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
 
 namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
@@ -15,12 +16,12 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         private TNode SetupExpressionNode<TNode>( TNode dest )
             where TNode : AstExpressionNode
         {
-            if( dest.Left != null )
+            if( dest.Left.IsNotNull() )
             {
                 dest.Left.Parent = dest;
             }
 
-            if( dest.Right != null )
+            if( dest.Right.IsNotNull() )
             {
                 dest.Right.Parent = dest;
             }
