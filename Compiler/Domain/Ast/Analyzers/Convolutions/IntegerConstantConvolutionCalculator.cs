@@ -33,7 +33,7 @@ public sealed class IntegerConstantConvolutionCalculator : IPrimitiveConstantCon
             throw new ArgumentException( $"Expected 0 child nodes, but got {expr.ChildNodeCount}. (node: {expr.GetType().Name})" );
         }
 
-        if( expr is AstIntLiteralNodeNode literal )
+        if( expr is AstIntLiteralNode literal )
         {
             return literal.Value;
         }

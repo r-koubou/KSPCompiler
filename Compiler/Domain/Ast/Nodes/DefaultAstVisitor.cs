@@ -111,7 +111,7 @@ public abstract class DefaultAstVisitor : IAstVisitor
     public virtual IAstNode Visit( AstUnaryLogicalNotExpressionNode node, AbortTraverseToken abortTraverseToken )
         => VisitChildren( node, abortTraverseToken );
 
-    public virtual IAstNode Visit( AstIntLiteralNodeNode node, AbortTraverseToken abortTraverseToken )
+    public virtual IAstNode Visit( AstIntLiteralNode node, AbortTraverseToken abortTraverseToken )
         => VisitChildren( node, abortTraverseToken );
 
     public virtual IAstNode Visit( AstRealLiteralNode node, AbortTraverseToken abortTraverseToken )

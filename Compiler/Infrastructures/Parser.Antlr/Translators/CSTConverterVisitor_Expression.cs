@@ -111,7 +111,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                     // decimal
                     v = int.Parse( digits );
                 }
-                var node = new AstIntLiteralNodeNode( v );
+                var node = new AstIntLiteralNode( v );
                 node.Import( context );
                 return node;
             }

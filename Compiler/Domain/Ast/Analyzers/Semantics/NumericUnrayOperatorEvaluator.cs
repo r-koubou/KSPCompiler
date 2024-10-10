@@ -100,7 +100,7 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
                 return false;
             }
 
-            convolutedValue = new AstIntLiteralNodeNode( convolutedInt.Value );
+            convolutedValue = new AstIntLiteralNode( convolutedInt.Value );
             return true;
         }
         else if( resultType.IsReal() )
