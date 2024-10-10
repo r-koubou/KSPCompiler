@@ -3,12 +3,12 @@ namespace ${namespace}
     /// <summary>
     /// AST node representing ${description}
     /// </summary>
-    public class ${classname} : AstExpressionSyntaxNode
+    public class ${classname}Node : AstExpressionNode
     {
         /// <summary>
         /// Ctor
         /// </summary>
-        public ${classname}( IAstNode parent, AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
+        public ${classname}Node( IAstNode parent, AstExpressionNode left, AstExpressionNode right )
             : base( AstNodeId.${name}, parent, left, right )
         {
         }
@@ -16,7 +16,7 @@ namespace ${namespace}
         /// <summary>
         /// Ctor
         /// </summary>
-        public ${classname}( AstExpressionSyntaxNode left, AstExpressionSyntaxNode right )
+        public ${classname}Node( AstExpressionNode left, AstExpressionNode right )
             : base( AstNodeId.${name}, NullAstNode.Instance, left, right )
         {
         }

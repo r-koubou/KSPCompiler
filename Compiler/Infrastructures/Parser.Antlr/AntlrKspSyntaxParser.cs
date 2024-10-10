@@ -45,7 +45,7 @@ public abstract class AntlrKspSyntaxParser : ISyntaxParser
         }
     }
 
-    public AstCompilationUnit Parse()
+    public AstCompilationUnitNode Parse()
     {
         var antlrStream = new AntlrInputStream( Stream );
         var lexer = new KSPLexer( antlrStream, TextWriter.Null, TextWriter.Null );
@@ -66,7 +66,7 @@ public abstract class AntlrKspSyntaxParser : ISyntaxParser
             throw new KspScriptParseException( $"Syntax Invalid : {cst.exception}" );
         }
 
-        var ast = cst.Accept( new CstConverterVisitor() ) as AstCompilationUnit;
+        var ast = cst.Accept( new CstConverterVisitor() ) as AstCompilationUnitNode;
         _ = ast ?? throw new MustBeNotNullException( nameof( ast ) );
 
         return ast;

@@ -30,7 +30,7 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
         RealConvolutionEvaluator    = realConvolutionEvaluator;
     }
 
-    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstExpressionSyntaxNode expr, AbortTraverseToken abortTraverseToken )
+    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstExpressionNode expr, AbortTraverseToken abortTraverseToken )
     {
         /*
                 <<operator>> expr
@@ -46,18 +46,18 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
             throw new AstAnalyzeException( expr, "Invalid binary operator" );
         }
 
-        if( expr.Left.Accept( visitor, abortTraverseToken ) is not AstDefaultExpression evaluatedLeft )
+        if( expr.Left.Accept( visitor, abortTraverseToken ) is not AstDefaultExpressionNode evaluatedLeft )
         {
             throw new AstAnalyzeException( expr, "Failed to evaluate left side of binary operator" );
         }
-        if( expr.Right.Accept( visitor, abortTraverseToken ) is not AstDefaultExpression evaluatedRight )
+        if( expr.Right.Accept( visitor, abortTraverseToken ) is not AstDefaultExpressionNode evaluatedRight )
         {
             throw new AstAnalyzeException( expr, "Failed to evaluate right side of binary operator" );
         }
 
         if( abortTraverseToken.Aborted )
         {
-            return AstDefaultExpression.Null;
+            return AstDefaultExpressionNode.Null;
         }
 
         var typeEvalResult = EvaluateDataType( evaluatedLeft, evaluatedRight, out var resultType );
@@ -72,7 +72,7 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
             );
 
             abortTraverseToken.Abort();
-            return AstDefaultExpression.Null;
+            return AstDefaultExpressionNode.Null;
         }
 
         // 左辺、右辺共にリテラル、定数なら畳み込み
@@ -81,13 +81,13 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
             return convolutedValue;
         }
 
-        return new AstDefaultExpression( expr )
+        return new AstDefaultExpressionNode( expr )
         {
             TypeFlag = resultType
         };
     }
 
-    private bool TryConvolutionValue( AstExpressionSyntaxNode expr, AstDefaultExpression left, AstDefaultExpression right, DataTypeFlag resultType, out AstDefaultExpression convolutedValue )
+    private bool TryConvolutionValue( AstExpressionNode expr, AstDefaultExpressionNode left, AstDefaultExpressionNode right, DataTypeFlag resultType, out AstDefaultExpressionNode convolutedValue )
     {
         convolutedValue = default!;
 
@@ -107,7 +107,7 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
                 return false;
             }
 
-            convolutedValue = new AstIntLiteral( convolutedInt.Value );
+            convolutedValue = new AstIntLiteralNodeNode( convolutedInt.Value );
             return true;
         }
         else if( resultType.IsReal() )
@@ -119,14 +119,14 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
                 return false;
             }
 
-            convolutedValue = new AstRealLiteral( convolutedReal.Value );
+            convolutedValue = new AstRealLiteralNode( convolutedReal.Value );
             return true;
         }
 
         return false;
     }
 
-    private bool EvaluateDataType( AstDefaultExpression left, AstDefaultExpression right, out DataTypeFlag resultType )
+    private bool EvaluateDataType( AstDefaultExpressionNode left, AstDefaultExpressionNode right, out DataTypeFlag resultType )
     {
         resultType = DataTypeFlag.None;
 

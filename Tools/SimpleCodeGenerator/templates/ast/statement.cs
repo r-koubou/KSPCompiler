@@ -3,17 +3,17 @@ namespace ${namespace}
     /// <summary>
     /// AST node representing ${description}
     /// </summary>
-    public class ${classname} : AstStatementSyntaxNode
+    public class ${classname}Node : AstStatementNode
     {
         /// <summary>
         /// Ctor
         /// </summary>
-        public ${classname}() : this( NullAstNode.Instance ) {}
+        public ${classname}Node() : this( NullAstNode.Instance ) {}
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public ${classname}( IAstNode parent )
+        public ${classname}Node( IAstNode parent )
             : base( AstNodeId.${name}, parent )
         {
         }

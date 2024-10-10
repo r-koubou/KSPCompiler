@@ -12,7 +12,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
     {
         public override AstNode VisitKspPreprocessorDefine( KSPParser.KspPreprocessorDefineContext context )
         {
-            var node = new AstKspPreprocessorDefine();
+            var node = new AstKspPreprocessorDefineNode();
 
             node.Import( context );
             node.Symbol.Import( context.symbol );
@@ -23,7 +23,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         public override AstNode VisitKspPreprocessorUndefine( KSPParser.KspPreprocessorUndefineContext context )
         {
-            var node = new AstKspPreprocessorUndefine();
+            var node = new AstKspPreprocessorUndefineNode();
 
             node.Import( context );
             node.Symbol.Import( context.symbol );
@@ -34,7 +34,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         public override AstNode VisitKspPreprocessorIfdefine( KSPParser.KspPreprocessorIfdefineContext context )
         {
-            var node = new AstKspPreprocessorIfdefine();
+            var node = new AstKspPreprocessorIfdefineNode();
             var block = context.block();
 
             node.Import( context );
@@ -43,7 +43,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
             if( block != null )
             {
-                var b = context.block().Accept( this ) as AstBlock;
+                var b = context.block().Accept( this ) as AstBlockNode;
                 _ = b ?? throw new MustBeNotNullException( nameof( b ) );
 
                 b.Parent = node;
@@ -55,7 +55,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         public override AstNode VisitKspPreprocessorIfnotDefine( KSPParser.KspPreprocessorIfnotDefineContext context )
         {
-            var node = new AstKspPreprocessorIfnotDefine();
+            var node = new AstKspPreprocessorIfnotDefineNode();
             var block = context.block();
 
             node.Import( context );
@@ -67,7 +67,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 return node;
             }
 
-            var b = context.block().Accept( this ) as AstBlock;
+            var b = context.block().Accept( this ) as AstBlockNode;
             _ = b ?? throw new MustBeNotNullException( nameof( b ) );
 
             b.Parent   = node;

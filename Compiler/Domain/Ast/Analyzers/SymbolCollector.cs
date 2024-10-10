@@ -48,13 +48,13 @@ public sealed class SymbolCollector : DefaultAstVisitor, ISymbolCollector
     )
     {}
 
-    public void Analyze( AstCompilationUnit node, AbortTraverseToken abortTraverseToken )
+    public void Analyze( AstCompilationUnitNode node, AbortTraverseToken abortTraverseToken )
     {
         node.Accept( this, abortTraverseToken );
     }
 
     #region Variable Collection
-    public override IAstNode Visit( AstVariableDeclaration node, AbortTraverseToken abortTraverseToken )
+    public override IAstNode Visit( AstVariableDeclarationNode node, AbortTraverseToken abortTraverseToken )
     {
         if( !ValidateVariableDeclaration( node, out var variable ) || variable.IsNull() )
         {
@@ -67,7 +67,7 @@ public sealed class SymbolCollector : DefaultAstVisitor, ISymbolCollector
         return node;
     }
 
-    private bool ValidateVariableDeclaration( AstVariableDeclaration node, out VariableSymbol variable )
+    private bool ValidateVariableDeclaration( AstVariableDeclarationNode node, out VariableSymbol variable )
     {
         var name = node.Name;
         variable = NullVariableSymbol.Instance;
@@ -86,7 +86,7 @@ public sealed class SymbolCollector : DefaultAstVisitor, ISymbolCollector
         //--------------------------------------------------------------------------
         #region on init 外での変数宣言はエラー
         //--------------------------------------------------------------------------
-        if( !node.TryGetParent<AstCallbackDeclaration>( out var callback ) )
+        if( !node.TryGetParent<AstCallbackDeclarationNode>( out var callback ) )
         {
             CompilerMessageManger.Fatal( node, Resource.syntax_error );
         }
@@ -124,7 +124,7 @@ public sealed class SymbolCollector : DefaultAstVisitor, ISymbolCollector
         #endregion
     }
 
-    private void ValidateVariable( AstVariableDeclaration node, VariableSymbol variable )
+    private void ValidateVariable( AstVariableDeclarationNode node, VariableSymbol variable )
     {
         #region UI変数チェック
         // 非プリミティブ型 (UI)
@@ -160,7 +160,7 @@ public sealed class SymbolCollector : DefaultAstVisitor, ISymbolCollector
 
     #region Callback Collection
 
-    public override IAstNode Visit( AstCallbackDeclaration node, AbortTraverseToken abortTraverseToken )
+    public override IAstNode Visit( AstCallbackDeclarationNode node, AbortTraverseToken abortTraverseToken )
     {
         node.AcceptChildren( this, abortTraverseToken );
 
@@ -214,7 +214,7 @@ public sealed class SymbolCollector : DefaultAstVisitor, ISymbolCollector
 
     #region User function Collection
 
-    public override IAstNode Visit( AstUserFunctionDeclaration node, AbortTraverseToken abortTraverseToken )
+    public override IAstNode Visit( AstUserFunctionDeclarationNode node, AbortTraverseToken abortTraverseToken )
     {
         node.AcceptChildren( this, abortTraverseToken );
 

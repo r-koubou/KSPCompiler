@@ -46,7 +46,7 @@ namespace KSPCompiler.Domain.Ast.Nodes
         DivisionAssignment,
         Symbol,
         ArrayElementExpression,
-        CallExpression,
+        CallCommandExpression,
         KspPreprocessorDefine,
         KspPreprocessorUndefine,
         KspPreprocessorIfdefine,

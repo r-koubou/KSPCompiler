@@ -10,7 +10,7 @@ namespace KSPCompiler.Domain.Ast.Nodes
         /// <summary>
         /// 引数
         /// </summary>
-        public AstArgumentList ArgumentList { get; }
+        public AstArgumentListNode ArgumentList { get; }
 
         /// <summary>
         /// Whether one or more arguments are stored in the ArgumentList or not.

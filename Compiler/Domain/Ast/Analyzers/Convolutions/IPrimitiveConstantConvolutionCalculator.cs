@@ -10,6 +10,6 @@ public interface IPrimitiveConstantConvolutionCalculator<T> : IPrimitiveConvolut
 
 public sealed class NullConstantConvolutionCalculator<T> : IPrimitiveConvolutionCalculator<T> where T : struct
 {
-    public T? Calculate( AstExpressionSyntaxNode expr, T workingValueForRecursive )
+    public T? Calculate( AstExpressionNode expr, T workingValueForRecursive )
         => null;
 }
