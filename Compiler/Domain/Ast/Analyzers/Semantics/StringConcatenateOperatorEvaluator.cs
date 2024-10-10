@@ -87,13 +87,35 @@ public sealed class StringConcatenateOperatorEvaluator : IStringConcatenateOpera
             return NullAstExpressionNode.Instance;
         }
 
-        // 畳み込み
-
-        //evaluatedLeft.IsConstant
+        // 左辺、右辺共にリテラル、定数なら畳み込み
+        if( TryConvolutionValue( expr, evaluatedLeft, evaluatedRight, out var convolutedValue ) )
+        {
+            return convolutedValue;
+        }
 
         return new AstDefaultExpressionNode( expr )
         {
             TypeFlag = DataTypeFlag.TypeString
         };
+    }
+
+    private bool TryConvolutionValue( AstExpressionNode expr, AstExpressionNode left, AstExpressionNode right, out AstExpressionNode convolutedNode )
+    {
+        convolutedNode = default!;
+
+        if( left.TypeFlag.IsArray() || right.TypeFlag.IsArray() ||
+            !left.IsConstant || !right.IsConstant )
+        {
+            return false;
+        }
+
+        var convolutedValie = StringConvolutionEvaluator.Evaluate( expr, "" );
+        if( convolutedValie == null )
+        {
+            return false;
+        }
+
+        convolutedNode = new AstStringLiteralNode( convolutedValie );
+        return true;
     }
 }
