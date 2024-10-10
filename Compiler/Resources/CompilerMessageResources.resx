@@ -60,4 +60,10 @@
     <data name="semantic.error.unrayoprator.bitnot.compatible" xml:space="preserve">
         <value>Unary operator .not. available integer types only</value>
     </data>
+    <data name="semantic.error.variable.invalid.string.initializer" xml:space="preserve">
+        <value>String type is not support initializer</value>
+    </data>
+    <data name="semantic.error.string.operator.conditional" xml:space="preserve">
+        <value>Conditional expressions cannot be concatenated with string operators</value>
+    </data>
 </root>

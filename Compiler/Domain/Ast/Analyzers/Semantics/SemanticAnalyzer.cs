@@ -14,10 +14,21 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, ISemanticAnalyzer
 
     #region Eveluators
 
-    private NumericBinaryOperatorEvaluator NumericBinaryOperatorEvaluator { get; }
-    private NumericUnaryOperatorEvaluator NumericUnaryOperatorEvaluator { get; }
+    #region Convolution Evaluators
+
     private IntegerConvolutionEvaluator IntegerConvolutionEvaluator { get; }
     private RealConvolutionEvaluator RealConvolutionEvaluator { get; }
+    private StringConvolutionEvaluator StringConvolutionEvaluator { get; }
+
+    #endregion
+
+    #region Operator Evaluators
+
+    private NumericBinaryOperatorEvaluator NumericBinaryOperatorEvaluator { get; }
+    private NumericUnaryOperatorEvaluator NumericUnaryOperatorEvaluator { get; }
+    private StringConcatenateOperatorEvaluator StringConcatenateOperatorEvaluator { get; }
+
+    #endregion
 
     #endregion ~Eveluators
 
@@ -28,10 +39,13 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, ISemanticAnalyzer
         CompilerMessageManger = compilerMessageManger;
         VariableSymbolTable   = variableSymbolTable;
 
-        IntegerConvolutionEvaluator    = new IntegerConvolutionEvaluator( this, VariableSymbolTable, CompilerMessageManger );
-        RealConvolutionEvaluator       = new RealConvolutionEvaluator( this, VariableSymbolTable, CompilerMessageManger );
-        NumericBinaryOperatorEvaluator = new NumericBinaryOperatorEvaluator( this, CompilerMessageManger, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
-        NumericUnaryOperatorEvaluator  = new NumericUnaryOperatorEvaluator( this, CompilerMessageManger, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
+        IntegerConvolutionEvaluator        = new IntegerConvolutionEvaluator( this, VariableSymbolTable, CompilerMessageManger );
+        RealConvolutionEvaluator           = new RealConvolutionEvaluator( this, VariableSymbolTable, CompilerMessageManger );
+        StringConvolutionEvaluator         = new StringConvolutionEvaluator( this, VariableSymbolTable, CompilerMessageManger );
+
+        NumericBinaryOperatorEvaluator     = new NumericBinaryOperatorEvaluator( this, CompilerMessageManger, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
+        NumericUnaryOperatorEvaluator      = new NumericUnaryOperatorEvaluator( this, CompilerMessageManger, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
+        StringConcatenateOperatorEvaluator = new StringConcatenateOperatorEvaluator( this, CompilerMessageManger, StringConvolutionEvaluator );
     }
 
     public void Analyze( AstCompilationUnitNode node, AbortTraverseToken abortTraverseToken)

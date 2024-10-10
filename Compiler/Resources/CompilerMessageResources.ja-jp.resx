@@ -53,4 +53,10 @@
     <data name="semantic.error.unrayoprator.bitnot.compatible" xml:space="preserve">
         <value>単項演算子  .not. は整数にのみ使用できます</value>
     </data>
+    <data name="semantic.error.variable.invalid.string.initializer" xml:space="preserve">
+        <value>String型には初期値代入を行うことはできません</value>
+    </data>
+    <data name="semantic.error.string.operator.conditional" xml:space="preserve">
+        <value>条件式は文字列演算子と連結できません</value>
+    </data>
 </root>

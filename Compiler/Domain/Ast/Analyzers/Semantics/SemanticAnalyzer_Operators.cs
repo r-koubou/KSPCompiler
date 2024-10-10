@@ -24,9 +24,6 @@ public partial class SemanticAnalyzer
     public override IAstNode Visit( AstModuloExpressionNode node, AbortTraverseToken abortTraverseToken )
         => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
 
-    public override IAstNode Visit( AstStringConcatenateExpressionNode node, AbortTraverseToken abortTraverseToken )
-        => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
-
     #endregion ~Binary Operators
 
     #region Binary Operators (Bitwise)
@@ -41,6 +38,13 @@ public partial class SemanticAnalyzer
 
 
     #endregion ~Binary Operators (Bitwise)
+
+    #region String concatenation operator
+
+    public override IAstNode Visit( AstStringConcatenateExpressionNode node, AbortTraverseToken abortTraverseToken )
+        => StringConcatenateOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
+
+    #endregion
 
     #region Unary Operators
 
