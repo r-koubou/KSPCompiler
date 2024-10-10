@@ -46,18 +46,18 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
             throw new AstAnalyzeException( expr, "Invalid binary operator" );
         }
 
-        if( expr.Left.Accept( visitor, abortTraverseToken ) is not AstSymbolExpression evaluatedLeft )
+        if( expr.Left.Accept( visitor, abortTraverseToken ) is not AstDefaultExpression evaluatedLeft )
         {
             throw new AstAnalyzeException( expr, "Failed to evaluate left side of binary operator" );
         }
-        if( expr.Right.Accept( visitor, abortTraverseToken ) is not AstSymbolExpression evaluatedRight )
+        if( expr.Right.Accept( visitor, abortTraverseToken ) is not AstDefaultExpression evaluatedRight )
         {
             throw new AstAnalyzeException( expr, "Failed to evaluate right side of binary operator" );
         }
 
         if( abortTraverseToken.Aborted )
         {
-            return AstSymbolExpression.Null;
+            return AstDefaultExpression.Null;
         }
 
         var typeEvalResult = EvaluateDataType( evaluatedLeft, evaluatedRight, out var resultType );
@@ -72,7 +72,7 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
             );
 
             abortTraverseToken.Abort();
-            return AstSymbolExpression.Null;
+            return AstDefaultExpression.Null;
         }
 
         // 左辺、右辺共にリテラル、定数なら畳み込み
@@ -81,13 +81,13 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
             return convolutedValue;
         }
 
-        return new AstSymbolExpression( expr )
+        return new AstDefaultExpression( expr )
         {
             TypeFlag = resultType
         };
     }
 
-    private bool TryConvolutionValue( AstExpressionSyntaxNode expr, AstSymbolExpression left, AstSymbolExpression right, DataTypeFlag resultType, out AstSymbolExpression convolutedValue )
+    private bool TryConvolutionValue( AstExpressionSyntaxNode expr, AstDefaultExpression left, AstDefaultExpression right, DataTypeFlag resultType, out AstDefaultExpression convolutedValue )
     {
         convolutedValue = default!;
 
@@ -126,7 +126,7 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
         return false;
     }
 
-    private bool EvaluateDataType( AstSymbolExpression left, AstSymbolExpression right, out DataTypeFlag resultType )
+    private bool EvaluateDataType( AstDefaultExpression left, AstDefaultExpression right, out DataTypeFlag resultType )
     {
         resultType = DataTypeFlag.None;
 

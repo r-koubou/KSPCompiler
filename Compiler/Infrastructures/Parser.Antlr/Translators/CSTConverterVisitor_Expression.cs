@@ -83,7 +83,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             #region Identifier
             if( identifier != null )
             {
-                var node = new AstSymbolExpression();
+                var node = new AstDefaultExpression( AstNodeId.Symbol);
                 node.Import( context );
                 node.Name = identifier.GetText();
                 return node;

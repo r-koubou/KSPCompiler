@@ -1,7 +1,7 @@
 namespace KSPCompiler.Domain.Ast.Nodes.Expressions
 {
     /// <summary>
-    /// AST node representing an array element reference expression ( Left: AstSymbolExpression, Right: AstExpressionSyntaxNode )
+    /// AST node representing an array element reference expression ( Left: AstDefaultExpression, Right: AstExpressionSyntaxNode )
     /// </summary>
     public class AstArrayElementExpression : AstExpressionSyntaxNode
     {
@@ -30,6 +30,12 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
         }
 
         #region IAstNodeAcceptor
+
+        ///
+        /// <inheritdoc />
+        ///
+        public override int ChildNodeCount
+            => 1;
 
         ///
         /// <inheritdoc/>

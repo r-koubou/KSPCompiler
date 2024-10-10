@@ -12,7 +12,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         /// <summary>
         /// AST node representing a preprocessor symbol.
         /// </summary>
-        public AstSymbolExpression Symbol { get; }
+        public AstDefaultExpression Symbol { get; }
 
         /// <summary>
         /// Ctor
@@ -26,7 +26,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         public AstKspPreprocessorUndefine( IAstNode parent )
             : base( AstNodeId.KspPreprocessorUndefine, parent )
         {
-            Symbol = new AstSymbolExpression( this );
+            Symbol = new AstDefaultExpression( this );
         }
 
         #region IAstNodeAcceptor

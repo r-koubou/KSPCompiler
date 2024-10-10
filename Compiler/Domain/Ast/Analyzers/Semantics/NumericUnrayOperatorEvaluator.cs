@@ -44,14 +44,14 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
             throw new AstAnalyzeException( expr, "Invalid unary operator" );
         }
 
-        if( expr.Left.Accept( visitor, abortTraverseToken ) is not AstSymbolExpression evaluatedLeft )
+        if( expr.Left.Accept( visitor, abortTraverseToken ) is not AstDefaultExpression evaluatedLeft )
         {
             throw new AstAnalyzeException( expr, "Failed to evaluate of unary operator" );
         }
 
         if( abortTraverseToken.Aborted )
         {
-            return AstSymbolExpression.Null;
+            return AstDefaultExpression.Null;
         }
 
         var typeEvalResult = EvaluateDataType( expr, evaluatedLeft, out var resultType );
@@ -65,7 +65,7 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
             );
 
             abortTraverseToken.Abort();
-            return AstSymbolExpression.Null;
+            return AstDefaultExpression.Null;
         }
 
         // リテラル、定数なら畳み込み
@@ -74,13 +74,13 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
             return convolutedValue;
         }
 
-        return new AstSymbolExpression( expr )
+        return new AstDefaultExpression( expr )
         {
             TypeFlag = resultType
         };
     }
 
-    private bool TryConvolutionValue( AstExpressionSyntaxNode expr, AstSymbolExpression left, DataTypeFlag resultType, out AstSymbolExpression convolutedValue )
+    private bool TryConvolutionValue( AstExpressionSyntaxNode expr, AstDefaultExpression left, DataTypeFlag resultType, out AstDefaultExpression convolutedValue )
     {
         convolutedValue = default!;
 
@@ -119,7 +119,7 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
         return false;
     }
 
-    private bool EvaluateDataType( AstExpressionSyntaxNode expr, AstSymbolExpression left, out DataTypeFlag resultType )
+    private bool EvaluateDataType( AstExpressionSyntaxNode expr, AstDefaultExpression left, out DataTypeFlag resultType )
     {
         resultType = DataTypeFlag.None;
 
