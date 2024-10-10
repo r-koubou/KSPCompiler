@@ -1,7 +1,7 @@
 namespace KSPCompiler.Domain.Ast.Nodes.Expressions
 {
     /// <summary>
-    /// AST node representing an array element reference expression ( Left: AstSymbolExpression, Right: AstExpressionSyntaxNode )
+    /// AST node representing an array element reference expression ( Left: AstDefaultExpression, Right: AstExpressionSyntaxNode )
     /// </summary>
     public class AstArrayElementExpression : AstExpressionSyntaxNode
     {

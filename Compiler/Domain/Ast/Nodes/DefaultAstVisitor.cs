@@ -129,7 +129,7 @@ public abstract class DefaultAstVisitor : IAstVisitor
     public virtual IAstNode Visit( AstAssignmentExpressionList node, AbortTraverseToken abortTraverseToken )
         => VisitChildren( node, abortTraverseToken );
 
-    public virtual IAstNode Visit( AstSymbolExpression node, AbortTraverseToken abortTraverseToken )
+    public virtual IAstNode Visit( AstDefaultExpression node, AbortTraverseToken abortTraverseToken )
         => VisitChildren( node, abortTraverseToken );
 
     public virtual IAstNode Visit( AstArrayElementExpression node, AbortTraverseToken abortTraverseToken )

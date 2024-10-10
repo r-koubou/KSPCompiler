@@ -3,7 +3,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
     /// <summary>
     /// AST node representing the base class for all literal nodes
     /// </summary>
-    public abstract class AstLiteral<TValue> : AstSymbolExpression
+    public abstract class AstLiteral<TValue> : AstDefaultExpression
     {
         /// <summary>
         /// literal value

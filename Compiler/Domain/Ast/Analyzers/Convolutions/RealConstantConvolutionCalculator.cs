@@ -38,7 +38,7 @@ public sealed class RealConstantConvolutionCalculator : IPrimitiveConstantConvol
             return literal.Value;
         }
 
-        if( expr is not AstSymbolExpression symbol )
+        if( expr is not AstDefaultExpression symbol )
         {
             return null;
         }

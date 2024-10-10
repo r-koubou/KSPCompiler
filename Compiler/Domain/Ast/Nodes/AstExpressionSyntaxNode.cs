@@ -7,8 +7,17 @@ namespace KSPCompiler.Domain.Ast.Nodes
     /// <summary>
     /// The base node representing the expression.
     /// </summary>
-    public abstract class AstExpressionSyntaxNode : AstNode
+    public abstract class AstExpressionSyntaxNode : AstNode, INameable
     {
+        #region INameable
+
+        ///
+        /// <inheritdoc/>
+        ///
+        public string Name { get; set; }  = string.Empty;
+
+        #endregion INameable
+
         private AstExpressionSyntaxNode left;
 
         /// <summary>
