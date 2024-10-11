@@ -1,4 +1,8 @@
-using KSPCompiler.Domain.Ast.Analyzers.Convolutions;
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators;
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Integers;
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Reals;
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Strings;
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Operators;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.CompilerMessages;
@@ -16,17 +20,17 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, ISemanticAnalyzer
 
     #region Convolution Evaluators
 
-    private IntegerConvolutionEvaluator IntegerConvolutionEvaluator { get; }
-    private RealConvolutionEvaluator RealConvolutionEvaluator { get; }
-    private StringConvolutionEvaluator StringConvolutionEvaluator { get; }
+    private IIntegerConvolutionEvaluator IntegerConvolutionEvaluator { get; }
+    private IRealConvolutionEvaluator RealConvolutionEvaluator { get; }
+    private IStringConvolutionEvaluator StringConvolutionEvaluator { get; }
 
     #endregion
 
     #region Operator Evaluators
 
-    private NumericBinaryOperatorEvaluator NumericBinaryOperatorEvaluator { get; }
-    private NumericUnaryOperatorEvaluator NumericUnaryOperatorEvaluator { get; }
-    private StringConcatenateOperatorEvaluator StringConcatenateOperatorEvaluator { get; }
+    private IBinaryOperatorEvaluator NumericBinaryOperatorEvaluator { get; }
+    private IUnaryOperatorEvaluator NumericUnaryOperatorEvaluator { get; }
+    private IStringConcatenateOperatorEvaluator StringConcatenateOperatorEvaluator { get; }
 
     #endregion
 

@@ -1,5 +1,6 @@
-using KSPCompiler.Domain.Ast.Analyzers.Convolutions;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators;
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Strings;
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Operators;
 using KSPCompiler.Domain.Ast.Extensions;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
@@ -15,12 +16,12 @@ public sealed class StringConcatenateOperatorEvaluator : IStringConcatenateOpera
 {
     private IAstVisitor AstVisitor { get; }
     private ICompilerMessageManger CompilerMessageManger { get; }
-    private IObjectConvolutionEvaluator<string> StringConvolutionEvaluator { get; }
+    private IStringConvolutionEvaluator StringConvolutionEvaluator { get; }
 
     public StringConcatenateOperatorEvaluator(
         IAstVisitor astVisitor,
         ICompilerMessageManger compilerMessageManger,
-        IObjectConvolutionEvaluator<string> stringConvolutionEvaluator )
+        IStringConvolutionEvaluator stringConvolutionEvaluator )
     {
         AstVisitor                 = astVisitor;
         CompilerMessageManger      = compilerMessageManger;
