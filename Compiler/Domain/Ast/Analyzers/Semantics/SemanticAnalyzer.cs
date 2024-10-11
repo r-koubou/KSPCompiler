@@ -19,7 +19,7 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, ISemanticAnalyzer
 
     #region Convolution Evaluators
 
-    private IntegerConvolutionEvaluator IntegerConvolutionEvaluator { get; }
+    private IIntegerConvolutionEvaluator IntegerConvolutionEvaluator { get; }
     private RealConvolutionEvaluator RealConvolutionEvaluator { get; }
     private StringConvolutionEvaluator StringConvolutionEvaluator { get; }
 

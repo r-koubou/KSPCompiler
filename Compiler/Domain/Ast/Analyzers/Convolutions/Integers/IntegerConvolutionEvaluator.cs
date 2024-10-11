@@ -9,10 +9,10 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions.Integers;
 /// </summary>
 public sealed class IntegerConvolutionEvaluator : IIntegerConvolutionEvaluator
 {
-    private IPrimitiveConstantConvolutionCalculator<int> ConstantCalculator { get; }
-    private IPrimitiveConvolutionBinaryCalculator<int> BinaryCalculator { get; }
-    private IPrimitiveConvolutionUnaryCalculator<int> UnaryCalculator { get; }
-    private IPrimitiveConvolutionConditionalEvaluator<int> ConditionalEvaluator { get; }
+    private IIntegerConstantConvolutionCalculator ConstantCalculator { get; }
+    private IIntegerBinaryOperatorConvolutionCalculator BinaryCalculator { get; }
+    private IIntegerUnaryOperatorConvolutionCalculator UnaryCalculator { get; }
+    private IntegerConditionalOperatorConvolutionEvaluator ConditionalEvaluator { get; }
 
     public IntegerConvolutionEvaluator( IAstVisitor visitor, ISymbolTable<VariableSymbol> variableSymbols, ICompilerMessageManger compilerMessageManger )
     {

@@ -11,11 +11,11 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions.Integers;
 public sealed class IntegerConditionalOperatorConvolutionEvaluator : IIntegerConditionalOperatorConvolutionEvaluator
 {
     private IAstVisitor Visitor { get; }
-    private IPrimitiveConvolutionEvaluator<int> ConvolutionEvaluator { get; }
+    private IIntegerConvolutionEvaluator ConvolutionEvaluator { get; }
 
     public IntegerConditionalOperatorConvolutionEvaluator(
         IAstVisitor visitor,
-        IPrimitiveConvolutionEvaluator<int> convolutionEvaluator )
+        IIntegerConvolutionEvaluator convolutionEvaluator )
     {
         Visitor              = visitor;
         ConvolutionEvaluator = convolutionEvaluator;
