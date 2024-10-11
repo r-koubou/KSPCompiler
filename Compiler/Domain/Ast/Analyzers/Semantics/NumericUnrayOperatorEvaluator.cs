@@ -1,6 +1,6 @@
-using KSPCompiler.Domain.Ast.Analyzers.Convolutions.Integers;
-using KSPCompiler.Domain.Ast.Analyzers.Convolutions.Reals;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators;
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Integers;
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Reals;
 using KSPCompiler.Domain.Ast.Extensions;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
