@@ -5,9 +5,9 @@ using KSPCompiler.Domain.Ast.Nodes;
 namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions.Strings;
 
 /// <summary>
-/// Calculator for convolution operations with string concatenation operator
+/// Calculator for convolution operations with string concatenation operator (string)
 /// </summary>
-public sealed class StringConcatenateOperatorConvolutionCalculator : IObjectConvolutionCalculator<string>
+public sealed class StringConcatenateOperatorConvolutionCalculator : IStringConcatenateOperatorConvolutionCalculator
 {
     private IObjectConvolutionEvaluator<string> EvaluatorForRecursive { get; }
 

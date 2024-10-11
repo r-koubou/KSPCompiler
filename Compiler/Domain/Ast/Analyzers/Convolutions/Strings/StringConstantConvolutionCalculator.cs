@@ -13,9 +13,9 @@ using KSPCompiler.Resources;
 namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions.Strings;
 
 /// <summary>
-/// Calculator for convolution operations with KSP real (floating-point) operands
+/// Calculator for convolution operations with string constants
 /// </summary>
-public sealed class StringConstantConvolutionCalculator : IObjectConvolutionCalculator<string>
+public sealed class StringConstantConvolutionCalculator : IStringConstantConvolutionCalculator
 {
     private ISymbolTable<VariableSymbol> VariableSymbols { get; }
     private ICompilerMessageManger CompilerMessageManger { get; }
