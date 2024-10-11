@@ -43,7 +43,7 @@ namespace KSPCompiler.Domain.Ast.Nodes
         /// <summary>
         /// The data type representing this node
         /// </summary>
-        public virtual DataTypeFlag TypeFlag { get; set; } = DataTypeFlag.TypeVoid;
+        public virtual DataTypeFlag TypeFlag { get; set; } = DataTypeFlag.None;
 
         /// <summary>
         /// Ctor
