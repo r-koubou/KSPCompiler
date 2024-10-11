@@ -9,9 +9,9 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions.Reals;
 /// </summary>
 public sealed class RealBinaryOperatorConvolutionCalculator : IRealBinaryOperatorConvolutionCalculator
 {
-    private IPrimitiveConvolutionEvaluator<double> EvaluatorForRecursive { get; }
+    private IRealConvolutionEvaluator EvaluatorForRecursive { get; }
 
-    public RealBinaryOperatorConvolutionCalculator( IPrimitiveConvolutionEvaluator<double> evaluatorForRecursive )
+    public RealBinaryOperatorConvolutionCalculator( IRealConvolutionEvaluator evaluatorForRecursive )
     {
         EvaluatorForRecursive = evaluatorForRecursive;
     }

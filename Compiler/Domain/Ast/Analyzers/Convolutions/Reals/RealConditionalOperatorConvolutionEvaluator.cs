@@ -11,11 +11,11 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions.Reals;
 public sealed class RealConditionalOperatorConvolutionEvaluator : IRealConditionalOperatorConvolutionEvaluator
 {
     private IAstVisitor Visitor { get; }
-    private IPrimitiveConvolutionEvaluator<double> ConvolutionEvaluator { get; }
+    private IRealConvolutionEvaluator ConvolutionEvaluator { get; }
 
     public RealConditionalOperatorConvolutionEvaluator(
         IAstVisitor visitor,
-        IPrimitiveConvolutionEvaluator<double> convolutionEvaluator )
+        IRealConvolutionEvaluator convolutionEvaluator )
     {
         Visitor              = visitor;
         ConvolutionEvaluator = convolutionEvaluator;

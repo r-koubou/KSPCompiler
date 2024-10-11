@@ -9,10 +9,10 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions.Reals;
 /// </summary>
 public sealed class RealConvolutionEvaluator : IRealConvolutionEvaluator
 {
-    private IPrimitiveConstantConvolutionCalculator<double> ConstantCalculator { get; }
-    private IPrimitiveConvolutionBinaryCalculator<double> BinaryCalculator { get; }
-    private IPrimitiveConvolutionUnaryCalculator<double> UnaryCalculator { get; }
-    private IPrimitiveConvolutionConditionalEvaluator<double> ConditionalEvaluator { get; }
+    private IRealConstantConvolutionCalculator ConstantCalculator { get; }
+    private IRealBinaryOperatorConvolutionCalculator BinaryCalculator { get; }
+    private IRealUnaryOperatorConvolutionCalculator UnaryCalculator { get; }
+    private IRealConditionalOperatorConvolutionEvaluator ConditionalEvaluator { get; }
 
     public RealConvolutionEvaluator( IAstVisitor visitor, ISymbolTable<VariableSymbol> variableSymbols, ICompilerMessageManger compilerMessageManger )
     {
