@@ -7,7 +7,7 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions;
 /// <summary>
 /// Evaluating string convolution expressions
 /// </summary>
-public sealed class StringConvolutionEvaluator : IObjectConvolutionEvaluator<string>
+public sealed class StringConvolutionEvaluator : IStringConvolutionEvaluator
 {
     private IObjectConvolutionCalculator<string> ConstantCalculator { get; }
     private IObjectConvolutionCalculator<string> ConcatenateCalculator { get; }
