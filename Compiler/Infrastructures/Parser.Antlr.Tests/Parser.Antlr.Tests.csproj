@@ -112,6 +112,9 @@
       <None Update="TestData\SemanticAnalyzeOperatorTest\string_concat_incompatible.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="TestData\SemanticAnalyzeVariableTest\initializer_int.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
