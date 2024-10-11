@@ -1,5 +1,7 @@
-using KSPCompiler.Domain.Ast.Analyzers.Convolutions;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators;
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Integers;
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Reals;
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Operators;
 using KSPCompiler.Domain.Ast.Extensions;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
@@ -15,14 +17,14 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
 {
     private IAstVisitor AstVisitor { get; }
     private ICompilerMessageManger CompilerMessageManger { get; }
-    private IPrimitiveConvolutionEvaluator<int> IntegerConvolutionEvaluator { get; }
-    private IPrimitiveConvolutionEvaluator<double> RealConvolutionEvaluator { get; }
+    private IIntegerConvolutionEvaluator IntegerConvolutionEvaluator { get; }
+    private IRealConvolutionEvaluator RealConvolutionEvaluator { get; }
 
     public NumericUnaryOperatorEvaluator(
         IAstVisitor astVisitor,
         ICompilerMessageManger compilerMessageManger,
-        IPrimitiveConvolutionEvaluator<int> integerConvolutionEvaluator,
-        IPrimitiveConvolutionEvaluator<double> realConvolutionEvaluator )
+        IIntegerConvolutionEvaluator integerConvolutionEvaluator,
+        IRealConvolutionEvaluator realConvolutionEvaluator )
     {
         AstVisitor                  = astVisitor;
         CompilerMessageManger       = compilerMessageManger;

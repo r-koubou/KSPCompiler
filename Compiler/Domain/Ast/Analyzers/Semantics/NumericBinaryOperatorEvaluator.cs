@@ -1,5 +1,7 @@
-using KSPCompiler.Domain.Ast.Analyzers.Convolutions;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators;
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Integers;
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Reals;
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Operators;
 using KSPCompiler.Domain.Ast.Extensions;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
@@ -15,14 +17,14 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
 {
     protected IAstVisitor AstVisitor { get; }
     protected ICompilerMessageManger CompilerMessageManger { get; }
-    protected IPrimitiveConvolutionEvaluator<int> IntegerConvolutionEvaluator { get; }
-    protected IPrimitiveConvolutionEvaluator<double> RealConvolutionEvaluator { get; }
+    protected IIntegerConvolutionEvaluator IntegerConvolutionEvaluator { get; }
+    protected IRealConvolutionEvaluator RealConvolutionEvaluator { get; }
 
     public NumericBinaryOperatorEvaluator(
         IAstVisitor astVisitor,
         ICompilerMessageManger compilerMessageManger,
-        IPrimitiveConvolutionEvaluator<int> integerConvolutionEvaluator,
-        IPrimitiveConvolutionEvaluator<double> realConvolutionEvaluator )
+        IIntegerConvolutionEvaluator integerConvolutionEvaluator,
+        IRealConvolutionEvaluator realConvolutionEvaluator )
     {
         AstVisitor                  = astVisitor;
         CompilerMessageManger       = compilerMessageManger;
