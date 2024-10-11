@@ -6,5 +6,3 @@ public interface IOperatorEvaluator<TEvalResult>
 {
     public TEvalResult Evaluate( IAstVisitor<TEvalResult> visitor, AstExpressionNode expr, AbortTraverseToken abortTraverseToken );
 }
-
-public interface IOperatorEvaluator : IOperatorEvaluator<IAstNode> {}

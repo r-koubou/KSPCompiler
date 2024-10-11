@@ -5,6 +5,8 @@ using Antlr4.Runtime;
 
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Domain.Ast.Nodes.Extensions;
+using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
 
 namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
@@ -15,12 +17,12 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         private TNode SetupExpressionNode<TNode>( TNode dest )
             where TNode : AstExpressionNode
         {
-            if( dest.Left != null )
+            if( dest.Left.IsNotNull() )
             {
                 dest.Left.Parent = dest;
             }
 
-            if( dest.Right != null )
+            if( dest.Right.IsNotNull() )
             {
                 dest.Right.Parent = dest;
             }
@@ -86,6 +88,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 var node = new AstDefaultExpressionNode( AstNodeId.Symbol);
                 node.Import( context );
                 node.Name = identifier.GetText();
+                node.TypeFlag = DataTypeUtility.GuessFromSymbolName( node.Name );
                 return node;
             }
             #endregion
@@ -111,7 +114,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                     // decimal
                     v = int.Parse( digits );
                 }
-                var node = new AstIntLiteralNodeNode( v );
+                var node = new AstIntLiteralNode( v );
                 node.Import( context );
                 return node;
             }
@@ -125,7 +128,13 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             // string value
             else if( stringLiteral != null )
             {
-                var node = new AstStringLiteralNode( stringLiteral.GetText() );
+                var value = stringLiteral.GetText();
+
+                // スクリプト上の最初と末尾のダブルクォートを取り除いてC#の文字列として扱う
+                // パーサから得る ksp上の文字列リテラル: "\"abc\"" を C#上では string 型 "abc" にしたい
+                value = value[ 1..^1 ];
+
+                var node = new AstStringLiteralNode( value );
                 node.Import( context );
                 return node;
             }

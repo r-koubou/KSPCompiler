@@ -42,7 +42,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
         /// Ctor
         /// </summary>
         public AstDefaultExpressionNode( IAstNode parent )
-            : base( AstNodeId.None, parent ) {}
+            : base( parent.Id, parent ) {}
 
         /// <summary>
         /// Ctor

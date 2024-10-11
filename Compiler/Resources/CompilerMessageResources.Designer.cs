@@ -128,5 +128,17 @@ namespace KSPCompiler.Resources {
                 return ResourceManager.GetString("semantic.error.unrayoprator.bitnot.compatible", resourceCulture);
             }
         }
+        
+        public static string semantic_error_variable_invalid_string_initializer {
+            get {
+                return ResourceManager.GetString("semantic.error.variable.invalid.string.initializer", resourceCulture);
+            }
+        }
+        
+        public static string semantic_error_string_operator_conditional {
+            get {
+                return ResourceManager.GetString("semantic.error.string.operator.conditional", resourceCulture);
+            }
+        }
     }
 }

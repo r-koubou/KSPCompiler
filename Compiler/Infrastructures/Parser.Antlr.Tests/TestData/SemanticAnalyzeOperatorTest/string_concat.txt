@@ -1,0 +1,4 @@
+on init
+    declare @i
+    @i := "abc" & 123 & 1.234
+end on

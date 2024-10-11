@@ -44,6 +44,12 @@ namespace KSPCompiler.Domain.Ast.Nodes
         bool TryGetParent<TNode>( out TNode result ) where TNode : IAstNode;
 
         /// <summary>
+        /// Checks whether a parent node with the specified TNode exists.
+        /// </summary>
+        /// <returns>true if the parent TNode is found, otherwise false</returns>
+        bool HasParent<TNode>() where TNode : IAstNode;
+
+        /// <summary>
         /// Dumping information on this node for debugging purposes.
         /// </summary>
         public void Dump( StreamWriter writer, int indentDepth = 0 )

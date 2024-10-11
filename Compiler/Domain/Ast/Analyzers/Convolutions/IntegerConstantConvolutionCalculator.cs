@@ -5,6 +5,7 @@ using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Domain.Symbols.Extensions;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Resources;
 
@@ -33,7 +34,7 @@ public sealed class IntegerConstantConvolutionCalculator : IPrimitiveConstantCon
             throw new ArgumentException( $"Expected 0 child nodes, but got {expr.ChildNodeCount}. (node: {expr.GetType().Name})" );
         }
 
-        if( expr is AstIntLiteralNodeNode literal )
+        if( expr is AstIntLiteralNode literal )
         {
             return literal.Value;
         }
@@ -53,11 +54,12 @@ public sealed class IntegerConstantConvolutionCalculator : IPrimitiveConstantCon
             variable.Referenced = true;
             variable.State      = VariableState.Loaded;
 
-            if( variable.Value is int value )
+            if( variable.TryGetConstantValue<int>( out var value ) )
             {
                 return value;
             }
 
+            // 予約変数（組み込み変数）は定数値を持たない
             return null;
         }
 

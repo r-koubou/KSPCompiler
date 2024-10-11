@@ -123,6 +123,12 @@ namespace KSPCompiler.Domain.Ast.Nodes
         ///
         /// <inheritdoc/>
         ///
+        public bool HasParent<TNode>() where TNode : IAstNode
+            => TryGetParent( out TNode _ );
+
+        ///
+        /// <inheritdoc/>
+        ///
         public virtual void Dump( StreamWriter writer, int indentDepth = 0 )
         {
             if( indentDepth > 0 )

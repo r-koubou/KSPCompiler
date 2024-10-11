@@ -56,6 +56,12 @@ namespace KSPCompiler.Domain.Ast.Nodes
             return false;
         }
 
+        /// <summary>
+        /// Always return false.
+        /// </summary>
+        public bool HasParent<TNode>() where TNode : IAstNode
+            => false;
+
         #region IAstNodeAcceptor
         ///
         /// <inheritdoc />
