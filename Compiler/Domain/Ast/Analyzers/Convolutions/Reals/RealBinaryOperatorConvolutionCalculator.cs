@@ -2,21 +2,21 @@ using System;
 
 using KSPCompiler.Domain.Ast.Nodes;
 
-namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions;
+namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions.Reals;
 
 /// <summary>
 /// Calculator for convolution operations with binary operators
 /// </summary>
-public sealed class IntegerBinaryOperatorConvolutionCalculator : IPrimitiveConvolutionBinaryCalculator<int>
+public sealed class RealBinaryOperatorConvolutionCalculator : IPrimitiveConvolutionBinaryCalculator<double>
 {
-    private IPrimitiveConvolutionEvaluator<int> EvaluatorForRecursive { get; }
+    private IPrimitiveConvolutionEvaluator<double> EvaluatorForRecursive { get; }
 
-    public IntegerBinaryOperatorConvolutionCalculator( IPrimitiveConvolutionEvaluator<int> evaluatorForRecursive )
+    public RealBinaryOperatorConvolutionCalculator( IPrimitiveConvolutionEvaluator<double> evaluatorForRecursive )
     {
         EvaluatorForRecursive = evaluatorForRecursive;
     }
 
-    public int? Calculate( AstExpressionNode expr, int workingValueForRecursive )
+    public double? Calculate( AstExpressionNode expr, double workingValueForRecursive )
     {
         if( expr.ChildNodeCount != 2 )
         {
@@ -42,9 +42,6 @@ public sealed class IntegerBinaryOperatorConvolutionCalculator : IPrimitiveConvo
             AstNodeId.Multiplying => leftValue * rightValue,
             AstNodeId.Division    => leftValue / rightValue,
             AstNodeId.Modulo      => leftValue % rightValue,
-            AstNodeId.BitwiseOr   => leftValue | rightValue,
-            AstNodeId.BitwiseAnd  => leftValue & rightValue,
-            AstNodeId.BitwiseXor  => leftValue ^ rightValue,
             _                     => null
         };
     }

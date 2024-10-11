@@ -9,17 +9,17 @@ using KSPCompiler.Domain.Symbols.Extensions;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Resources;
 
-namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions;
+namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions.Integers;
 
 /// <summary>
-/// Calculator for convolution operations with KSP real (floating-point) operands
+/// Calculator for convolution operations with integer operands
 /// </summary>
-public sealed class RealConstantConvolutionCalculator : IPrimitiveConstantConvolutionCalculator<double>
+public sealed class IntegerConstantConvolutionCalculator : IPrimitiveConstantConvolutionCalculator<int>
 {
     private ISymbolTable<VariableSymbol> VariableSymbols { get; }
     private ICompilerMessageManger CompilerMessageManger { get; }
 
-    public RealConstantConvolutionCalculator(
+    public IntegerConstantConvolutionCalculator(
         ISymbolTable<VariableSymbol> variableSymbols,
         ICompilerMessageManger compilerMessageManger )
     {
@@ -27,14 +27,14 @@ public sealed class RealConstantConvolutionCalculator : IPrimitiveConstantConvol
         CompilerMessageManger = compilerMessageManger;
     }
 
-    public double? Calculate( AstExpressionNode expr, double _ )
+    public int? Calculate( AstExpressionNode expr, int workingValueForRecursive )
     {
         if( expr.ChildNodeCount != 0 )
         {
             throw new ArgumentException( $"Expected 0 child nodes, but got {expr.ChildNodeCount}. (node: {expr.GetType().Name})" );
         }
 
-        if( expr is AstRealLiteralNode literal )
+        if( expr is AstIntLiteralNode literal )
         {
             return literal.Value;
         }
@@ -46,7 +46,7 @@ public sealed class RealConstantConvolutionCalculator : IPrimitiveConstantConvol
 
         if( VariableSymbols.TrySearchByName( symbol.Name, out var variable ) )
         {
-            if( variable.DataType.IsReal() || !variable.DataTypeModifier.IsConstant() )
+            if( variable.DataType.IsInt() || !variable.DataTypeModifier.IsConstant() )
             {
                 return null;
             }
@@ -54,7 +54,7 @@ public sealed class RealConstantConvolutionCalculator : IPrimitiveConstantConvol
             variable.Referenced = true;
             variable.State      = VariableState.Loaded;
 
-            if( variable.TryGetConstantValue<double>( out var value ) )
+            if( variable.TryGetConstantValue<int>( out var value ) )
             {
                 return value;
             }

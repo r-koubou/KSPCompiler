@@ -2,7 +2,7 @@ using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols;
 
-namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions;
+namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions.Strings;
 
 /// <summary>
 /// Evaluating string convolution expressions

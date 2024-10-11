@@ -2,21 +2,21 @@ using System;
 
 using KSPCompiler.Domain.Ast.Nodes;
 
-namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions;
+namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions.Integers;
 
 /// <summary>
 /// Calculator for convolution operations with unary operators
 /// </summary>
-public sealed class RealUnaryOperatorConvolutionCalculator : IPrimitiveConvolutionUnaryCalculator<double>
+public sealed class IntegerUnaryOperatorConvolutionCalculator : IPrimitiveConvolutionUnaryCalculator<int>
 {
-    private IPrimitiveConvolutionEvaluator<double> EvaluatorForRecursive { get; }
+    private IPrimitiveConvolutionEvaluator<int> EvaluatorForRecursive { get; }
 
-    public RealUnaryOperatorConvolutionCalculator( IPrimitiveConvolutionEvaluator<double> evaluatorForRecursive )
+    public IntegerUnaryOperatorConvolutionCalculator( IPrimitiveConvolutionEvaluator<int> evaluatorForRecursive )
     {
         EvaluatorForRecursive = evaluatorForRecursive;
     }
 
-    public double? Calculate( AstExpressionNode expr, double workingValueForRecursive )
+    public int? Calculate( AstExpressionNode expr, int workingValueForRecursive )
     {
         if( expr.ChildNodeCount != 1 )
         {
@@ -33,6 +33,7 @@ public sealed class RealUnaryOperatorConvolutionCalculator : IPrimitiveConvoluti
         return expr.Id switch
         {
             AstNodeId.UnaryMinus     => -convolutedValue,
+            AstNodeId.UnaryNot        => ~convolutedValue,
             _ => null
         };
     }

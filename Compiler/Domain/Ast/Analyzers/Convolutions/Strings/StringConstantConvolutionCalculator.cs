@@ -10,7 +10,7 @@ using KSPCompiler.Domain.Symbols.Extensions;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Resources;
 
-namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions;
+namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions.Strings;
 
 /// <summary>
 /// Calculator for convolution operations with KSP real (floating-point) operands

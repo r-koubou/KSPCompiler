@@ -1,4 +1,7 @@
 using KSPCompiler.Domain.Ast.Analyzers.Convolutions;
+using KSPCompiler.Domain.Ast.Analyzers.Convolutions.Integers;
+using KSPCompiler.Domain.Ast.Analyzers.Convolutions.Reals;
+using KSPCompiler.Domain.Ast.Analyzers.Convolutions.Strings;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.CompilerMessages;

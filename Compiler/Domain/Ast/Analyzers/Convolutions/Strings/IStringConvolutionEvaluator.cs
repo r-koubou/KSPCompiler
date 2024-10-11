@@ -1,4 +1,4 @@
-namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions;
+namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions.Strings;
 
 /// <summary>
 /// Interface for evaluating convolution expressions for string.

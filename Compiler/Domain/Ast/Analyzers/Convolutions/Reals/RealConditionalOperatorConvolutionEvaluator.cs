@@ -3,20 +3,19 @@ using System;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 
-namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions;
+namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions.Reals;
 
 /// <summary>
 /// Calculator for convolution operations with conditional operators
 /// </summary>
-/// <typeparam name="T">Configured conditional expression type (int/real etc.)</typeparam>
-public sealed class IntegerConditionalOperatorConvolutionEvaluator : IPrimitiveConvolutionConditionalEvaluator<int>
+public sealed class RealConditionalOperatorConvolutionEvaluator : IPrimitiveConvolutionConditionalEvaluator<double>
 {
     private IAstVisitor Visitor { get; }
-    private IPrimitiveConvolutionEvaluator<int> ConvolutionEvaluator { get; }
+    private IPrimitiveConvolutionEvaluator<double> ConvolutionEvaluator { get; }
 
-    public IntegerConditionalOperatorConvolutionEvaluator(
+    public RealConditionalOperatorConvolutionEvaluator(
         IAstVisitor visitor,
-        IPrimitiveConvolutionEvaluator<int> convolutionEvaluator )
+        IPrimitiveConvolutionEvaluator<double> convolutionEvaluator )
     {
         Visitor              = visitor;
         ConvolutionEvaluator = convolutionEvaluator;
@@ -34,7 +33,7 @@ public sealed class IntegerConditionalOperatorConvolutionEvaluator : IPrimitiveC
             return null;
         }
 
-        var exprLeft = expr.Accept( Visitor, abortTraverseToken ) as AstExpressionNode;
+        var exprLeft = expr.Accept( Visitor,  abortTraverseToken ) as AstExpressionNode;
         var exprRight = expr.Accept( Visitor, abortTraverseToken ) as AstExpressionNode;
 
         if( exprLeft == null || exprRight == null )
@@ -42,7 +41,7 @@ public sealed class IntegerConditionalOperatorConvolutionEvaluator : IPrimitiveC
             return null;
         }
 
-        if( !exprLeft.TypeFlag.IsInt() || !exprRight.TypeFlag.IsInt() ||
+        if( !exprLeft.TypeFlag.IsReal() || !exprRight.TypeFlag.IsReal() ||
             !exprLeft.IsConstant || !exprRight.IsConstant )
         {
             return null;
@@ -58,8 +57,8 @@ public sealed class IntegerConditionalOperatorConvolutionEvaluator : IPrimitiveC
 
         return expr.Id switch
         {
-            AstNodeId.Equal        => convolutedLeft == convolutedRight,
-            AstNodeId.NotEqual     => convolutedLeft != convolutedRight,
+            AstNodeId.Equal        => convolutedLeft.Equals( convolutedRight ),
+            AstNodeId.NotEqual     => !convolutedLeft.Equals( convolutedRight ),
             AstNodeId.GreaterThan  => convolutedLeft > convolutedRight,
             AstNodeId.GreaterEqual => convolutedLeft >= convolutedRight,
             AstNodeId.LessThan     => convolutedLeft < convolutedRight,
