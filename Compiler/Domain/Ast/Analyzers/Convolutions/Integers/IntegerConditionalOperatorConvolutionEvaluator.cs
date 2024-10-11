@@ -6,10 +6,9 @@ using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions.Integers;
 
 /// <summary>
-/// Calculator for convolution operations with conditional operators
+/// Calculator for convolution operations with conditional operators (integer)
 /// </summary>
-/// <typeparam name="T">Configured conditional expression type (int/real etc.)</typeparam>
-public sealed class IntegerConditionalOperatorConvolutionEvaluator : IPrimitiveConvolutionConditionalEvaluator<int>
+public sealed class IntegerConditionalOperatorConvolutionEvaluator : IIntegerConditionalOperatorConvolutionEvaluator
 {
     private IAstVisitor Visitor { get; }
     private IPrimitiveConvolutionEvaluator<int> ConvolutionEvaluator { get; }

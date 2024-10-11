@@ -12,9 +12,9 @@ using KSPCompiler.Resources;
 namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions.Integers;
 
 /// <summary>
-/// Calculator for convolution operations with integer operands
+/// Calculator for convolution operations with integer constants
 /// </summary>
-public sealed class IntegerConstantConvolutionCalculator : IPrimitiveConstantConvolutionCalculator<int>
+public sealed class IntegerConstantConvolutionCalculator : IIntegerConstantConvolutionCalculator
 {
     private ISymbolTable<VariableSymbol> VariableSymbols { get; }
     private ICompilerMessageManger CompilerMessageManger { get; }
