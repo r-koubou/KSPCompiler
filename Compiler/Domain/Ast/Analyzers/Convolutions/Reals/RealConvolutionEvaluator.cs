@@ -7,7 +7,7 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions.Reals;
 /// <summary>
 /// Interface for evaluating convolution expressions
 /// </summary>
-public sealed class RealConvolutionEvaluator : IRealIntegerConvolutionEvaluator
+public sealed class RealConvolutionEvaluator : IRealConvolutionEvaluator
 {
     private IPrimitiveConstantConvolutionCalculator<double> ConstantCalculator { get; }
     private IPrimitiveConvolutionBinaryCalculator<double> BinaryCalculator { get; }
