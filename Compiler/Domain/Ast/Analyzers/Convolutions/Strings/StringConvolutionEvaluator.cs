@@ -9,8 +9,8 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions.Strings;
 /// </summary>
 public sealed class StringConvolutionEvaluator : IStringConvolutionEvaluator
 {
-    private IObjectConvolutionCalculator<string> ConstantCalculator { get; }
-    private IObjectConvolutionCalculator<string> ConcatenateCalculator { get; }
+    private IStringConstantConvolutionCalculator ConstantCalculator { get; }
+    private IStringConcatenateOperatorConvolutionCalculator ConcatenateCalculator { get; }
 
     public StringConvolutionEvaluator( IAstVisitor visitor, ISymbolTable<VariableSymbol> variableSymbols, ICompilerMessageManger compilerMessageManger )
     {

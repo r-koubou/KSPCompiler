@@ -9,9 +9,9 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Convolutions.Strings;
 /// </summary>
 public sealed class StringConcatenateOperatorConvolutionCalculator : IStringConcatenateOperatorConvolutionCalculator
 {
-    private IObjectConvolutionEvaluator<string> EvaluatorForRecursive { get; }
+    private IStringConvolutionEvaluator EvaluatorForRecursive { get; }
 
-    public StringConcatenateOperatorConvolutionCalculator( IObjectConvolutionEvaluator<string> evaluatorForRecursive )
+    public StringConcatenateOperatorConvolutionCalculator( IStringConvolutionEvaluator evaluatorForRecursive )
     {
         EvaluatorForRecursive = evaluatorForRecursive;
     }
