@@ -37,7 +37,7 @@ public class AntlrSemanticAnalyzeOperatorTest
         symbolAnalyzer.Analyze( ast, abortTraverseToken );
         Assert.IsFalse( abortTraverseToken.Aborted );
 
-        var semanticAnalyzer = new SemanticAnalyzer( compilerMessageManger, new VariableSymbolTable() );
+        var semanticAnalyzer = new SemanticAnalyzer( compilerMessageManger, symbolAnalyzer.Variables );
 
         Assert.DoesNotThrow( () => semanticAnalyzer.Analyze( ast, abortTraverseToken ) );
         compilerMessageManger.WriteTo( System.Console.Out );
@@ -68,7 +68,7 @@ public class AntlrSemanticAnalyzeOperatorTest
         symbolAnalyzer.Analyze( ast, abortTraverseToken );
         Assert.IsFalse( abortTraverseToken.Aborted );
 
-        var semanticAnalyzer = new SemanticAnalyzer( compilerMessageManger, new VariableSymbolTable() );
+        var semanticAnalyzer = new SemanticAnalyzer( compilerMessageManger, symbolAnalyzer.Variables );
 
         Assert.DoesNotThrow( () => semanticAnalyzer.Analyze( ast, abortTraverseToken ) );
         compilerMessageManger.WriteTo( System.Console.Out );
