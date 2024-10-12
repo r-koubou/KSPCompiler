@@ -1,4 +1,3 @@
-using KSPCompiler.Domain.Ast.Analyzers.Evaluators;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Integers;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Reals;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Operators;
@@ -48,18 +47,18 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
             throw new AstAnalyzeException( expr, "Invalid binary operator" );
         }
 
-        if( expr.Left.Accept( visitor, abortTraverseToken ) is not AstDefaultExpressionNode evaluatedLeft )
+        if( expr.Left.Accept( visitor, abortTraverseToken ) is not AstExpressionNode evaluatedLeft )
         {
             throw new AstAnalyzeException( expr, "Failed to evaluate left side of binary operator" );
         }
-        if( expr.Right.Accept( visitor, abortTraverseToken ) is not AstDefaultExpressionNode evaluatedRight )
+        if( expr.Right.Accept( visitor, abortTraverseToken ) is not AstExpressionNode evaluatedRight )
         {
             throw new AstAnalyzeException( expr, "Failed to evaluate right side of binary operator" );
         }
 
         if( abortTraverseToken.Aborted )
         {
-            return AstDefaultExpressionNode.Null;
+            return NullAstExpressionNode.Instance;
         }
 
         var typeEvalResult = EvaluateDataType( evaluatedLeft, evaluatedRight, out var resultType );
@@ -74,7 +73,7 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
             );
 
             abortTraverseToken.Abort();
-            return AstDefaultExpressionNode.Null;
+            return NullAstExpressionNode.Instance;
         }
 
         // 左辺、右辺共にリテラル、定数なら畳み込み
@@ -89,7 +88,7 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
         };
     }
 
-    private bool TryConvolutionValue( AstExpressionNode expr, AstDefaultExpressionNode left, AstDefaultExpressionNode right, DataTypeFlag resultType, out AstDefaultExpressionNode convolutedValue )
+    private bool TryConvolutionValue( AstExpressionNode expr, AstExpressionNode left, AstExpressionNode right, DataTypeFlag resultType, out AstExpressionNode convolutedValue )
     {
         convolutedValue = default!;
 
@@ -128,7 +127,7 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
         return false;
     }
 
-    private bool EvaluateDataType( AstDefaultExpressionNode left, AstDefaultExpressionNode right, out DataTypeFlag resultType )
+    private bool EvaluateDataType( AstExpressionNode left, AstExpressionNode right, out DataTypeFlag resultType )
     {
         resultType = DataTypeFlag.None;
 

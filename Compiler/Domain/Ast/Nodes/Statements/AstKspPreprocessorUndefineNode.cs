@@ -12,7 +12,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         /// <summary>
         /// AST node representing a preprocessor symbol.
         /// </summary>
-        public AstDefaultExpressionNode Symbol { get; }
+        public AstExpressionNode Symbol { get; }
 
         /// <summary>
         /// Ctor

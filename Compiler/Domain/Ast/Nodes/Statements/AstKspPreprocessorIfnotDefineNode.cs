@@ -13,7 +13,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         /// <summary>
         /// The ifndef conditional symbol.
         /// </summary>
-        public AstDefaultExpressionNode Condition { get; }
+        public AstExpressionNode Condition { get; }
 
         /// <summary>
         /// The code block for ifndef is true.
