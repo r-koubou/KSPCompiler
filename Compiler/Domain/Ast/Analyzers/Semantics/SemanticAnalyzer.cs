@@ -1,8 +1,8 @@
-using KSPCompiler.Domain.Ast.Analyzers.Evaluators;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Integers;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Reals;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Strings;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Operators;
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Symbols;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.CompilerMessages;
@@ -35,6 +35,12 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, ISemanticAnalyzer
 
     #endregion
 
+    #region Symbol Evaluators
+
+    private ISymbolEvaluator SymbolEvaluator { get; }
+
+    #endregion
+
     #endregion ~Eveluators
 
     public SemanticAnalyzer(
@@ -52,6 +58,8 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, ISemanticAnalyzer
         NumericUnaryOperatorEvaluator      = new NumericUnaryOperatorEvaluator( this, CompilerMessageManger, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
         StringConcatenateOperatorEvaluator = new StringConcatenateOperatorEvaluator( this, CompilerMessageManger, StringConvolutionEvaluator );
         AssignOperatorEvaluator            = new AssignOperatorEvaluator( this, CompilerMessageManger, VariableSymbolTable );
+
+        SymbolEvaluator                    = new SymbolEvaluator( this, CompilerMessageManger, VariableSymbolTable );
     }
 
     public void Analyze( AstCompilationUnitNode node, AbortTraverseToken abortTraverseToken)
