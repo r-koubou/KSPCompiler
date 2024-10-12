@@ -59,4 +59,10 @@
     <data name="semantic.error.string.operator.conditional" xml:space="preserve">
         <value>条件式は文字列演算子と連結できません</value>
     </data>
+    <data name="semantic.error.assign.to.constant" xml:space="preserve">
+        <value>値の代入ができません ({0} は定数型です)</value>
+    </data>
+    <data name="semantic.error.assign.type.compatible" xml:space="preserve">
+        <value>":=" : データ型が一致しません ({0} := {1})</value>
+    </data>
 </root>

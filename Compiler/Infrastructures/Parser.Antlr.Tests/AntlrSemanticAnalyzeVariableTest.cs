@@ -19,11 +19,15 @@ public class AntlrSemanticAnalyzeVariableTest
     [TestCase( "assign_int.txt" )]
     public void AssignTest( string scriptPath )
     {
+        var abortTraverseToken = new AbortTraverseToken();
         var compilerMessageManger = ICompilerMessageManger.Default;
         var ast = ParseTestUtility.Parse( TestDataDirectory, scriptPath );
         var symbolAnalyzer = new SymbolCollector( compilerMessageManger );
+        symbolAnalyzer.Analyze( ast, abortTraverseToken );
+
+        Assert.IsFalse( abortTraverseToken.Aborted );
+
         var semanticAnalyzer = new SemanticAnalyzer( compilerMessageManger, symbolAnalyzer.Variables );
-        var abortTraverseToken = new AbortTraverseToken();
 
         Assert.DoesNotThrow( () => semanticAnalyzer.Analyze( ast, abortTraverseToken ) );
         compilerMessageManger.WriteTo( Console.Out );
@@ -35,11 +39,15 @@ public class AntlrSemanticAnalyzeVariableTest
     [TestCase( "assign_int_incompatible.txt" )]
     public void AssignIncompatibleTest( string scriptPath )
     {
+        var abortTraverseToken = new AbortTraverseToken();
         var compilerMessageManger = ICompilerMessageManger.Default;
         var ast = ParseTestUtility.Parse( TestDataDirectory, scriptPath );
         var symbolAnalyzer = new SymbolCollector( compilerMessageManger );
+        symbolAnalyzer.Analyze( ast, abortTraverseToken );
+
+        Assert.IsFalse( abortTraverseToken.Aborted );
+
         var semanticAnalyzer = new SemanticAnalyzer( compilerMessageManger, symbolAnalyzer.Variables );
-        var abortTraverseToken = new AbortTraverseToken();
 
         Assert.DoesNotThrow( () => semanticAnalyzer.Analyze( ast, abortTraverseToken ) );
         compilerMessageManger.WriteTo( Console.Out );
