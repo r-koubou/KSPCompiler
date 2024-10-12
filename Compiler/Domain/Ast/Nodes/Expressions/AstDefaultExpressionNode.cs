@@ -13,14 +13,6 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
     public class AstDefaultExpressionNode : AstExpressionNode
     {
         /// <summary>
-        /// Null Object of <see cref="AstDefaultExpressionNode"/>
-        /// </summary>
-        /// <remarks>
-        /// If invalid by analyzing the code the result set to this.
-        /// </remarks>
-        public static readonly AstDefaultExpressionNode Null = new ();
-
-        /// <summary>
         /// Represents whether the node is symbol(variable, commands, callback, etc.) and its reserved (built-in) by NI.
         /// </summary>
         [Obsolete("Should be gotten from the symbol table. This property will be removed in the future.")]

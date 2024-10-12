@@ -39,7 +39,7 @@ public sealed class RealConstantConvolutionCalculator : IRealConstantConvolution
             return literal.Value;
         }
 
-        if( expr is not AstDefaultExpressionNode symbol )
+        if( expr is not AstExpressionNode symbol )
         {
             return null;
         }
