@@ -13,12 +13,6 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
     public class AstDefaultExpressionNode : AstExpressionNode
     {
         /// <summary>
-        /// Represents whether the node is symbol(variable, commands, callback, etc.) and its reserved (built-in) by NI.
-        /// </summary>
-        [Obsolete("Should be gotten from the symbol table. This property will be removed in the future.")]
-        public virtual bool Reserved { get; set; }
-
-        /// <summary>
         /// Ctor
         /// </summary>
         private AstDefaultExpressionNode()
