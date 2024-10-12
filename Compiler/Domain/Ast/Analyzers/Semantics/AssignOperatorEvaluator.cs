@@ -1,7 +1,6 @@
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Operators;
 using KSPCompiler.Domain.Ast.Extensions;
 using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
@@ -50,7 +49,7 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
 
         if( abortTraverseToken.Aborted )
         {
-            return AstDefaultExpressionNode.Null;
+            return NullAstExpressionNode.Instance;
         }
 
         // 変数の確認
