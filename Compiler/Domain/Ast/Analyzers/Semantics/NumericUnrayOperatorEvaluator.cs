@@ -87,7 +87,7 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
 
         if( left.Reserved ||
             left.TypeFlag.IsArray() ||
-            !left.IsConstant )
+            !left.Constant )
         {
             return false;
         }

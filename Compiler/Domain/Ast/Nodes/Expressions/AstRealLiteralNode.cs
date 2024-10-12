@@ -13,7 +13,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
         ///
         /// <inheritdoc/>
         ///
-        public override bool IsConstant => true;
+        public override bool Constant => true;
 
         /// <summary>
         /// Ctor

@@ -94,7 +94,7 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
 
         if( left.Reserved || right.Reserved ||
             left.TypeFlag.IsArray() || right.TypeFlag.IsArray() ||
-            !left.IsConstant || !right.IsConstant )
+            !left.Constant || !right.Constant )
         {
             return false;
         }

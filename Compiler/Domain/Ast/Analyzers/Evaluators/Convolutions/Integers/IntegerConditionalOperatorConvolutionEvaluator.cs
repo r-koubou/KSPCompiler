@@ -42,7 +42,7 @@ public sealed class IntegerConditionalOperatorConvolutionEvaluator : IIntegerCon
         }
 
         if( !exprLeft.TypeFlag.IsInt() || !exprRight.TypeFlag.IsInt() ||
-            !exprLeft.IsConstant || !exprRight.IsConstant )
+            !exprLeft.Constant || !exprRight.Constant )
         {
             return null;
         }

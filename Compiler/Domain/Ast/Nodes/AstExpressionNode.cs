@@ -96,16 +96,9 @@ namespace KSPCompiler.Domain.Ast.Nodes
         /// <summary>
         /// Returns whether the node is a constant expressive node or not.
         /// </summary>
-        public virtual bool IsConstant => false;
+        public virtual bool Constant { get; set; } = false;
 
         #region IAstNodeAcceptor
-        ///
-        /// <inheritdoc />
-        /// <remarks>
-        /// However, if it has more than two child nodes, such as unary operators, literals, or other subclasses, it must override this and return the appropriate value.</remarks>
-        ///
-        // public override int ChildNodeCount
-        //     => 2;
 
         ///
         /// <inheritdoc/>

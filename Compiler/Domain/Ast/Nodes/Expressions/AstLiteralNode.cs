@@ -13,7 +13,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
         ///
         /// <inheritdoc/>
         ///
-        public override bool IsConstant => true;
+        public override bool Constant => true;
 
         /// <summary>
         /// Ctor
@@ -21,7 +21,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
         protected AstLiteralNode( AstNodeId id, TValue value )
             : this( id, NullAstNode.Instance, value )
         {
-            Value = value;
+            Value    = value;
         }
 
         /// <summary>
