@@ -140,5 +140,17 @@ namespace KSPCompiler.Resources {
                 return ResourceManager.GetString("semantic.error.string.operator.conditional", resourceCulture);
             }
         }
+        
+        public static string semantic_error_assign_to_constant {
+            get {
+                return ResourceManager.GetString("semantic.error.assign.to.constant", resourceCulture);
+            }
+        }
+        
+        public static string semantic_error_assign_type_compatible {
+            get {
+                return ResourceManager.GetString("semantic.error.assign.type.compatible", resourceCulture);
+            }
+        }
     }
 }

@@ -60,10 +60,5 @@ public partial class SemanticAnalyzer
 
 
     public override IAstNode Visit( AstAssignmentExpressionNode node, AbortTraverseToken abortTraverseToken )
-    {
-        var resultL = node.Left.Accept( this, abortTraverseToken );
-        var resultR = node.Right.Accept( this, abortTraverseToken );
-
-        return node;
-    }
+        => AssignOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
 }

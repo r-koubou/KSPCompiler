@@ -1,0 +1,4 @@
+on init
+    declare $x
+    $x := 1
+end on

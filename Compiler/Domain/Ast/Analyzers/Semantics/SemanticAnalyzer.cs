@@ -31,6 +31,7 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, ISemanticAnalyzer
     private IBinaryOperatorEvaluator NumericBinaryOperatorEvaluator { get; }
     private IUnaryOperatorEvaluator NumericUnaryOperatorEvaluator { get; }
     private IStringConcatenateOperatorEvaluator StringConcatenateOperatorEvaluator { get; }
+    private IAssignOperatorEvaluator AssignOperatorEvaluator { get; }
 
     #endregion
 
@@ -50,6 +51,7 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, ISemanticAnalyzer
         NumericBinaryOperatorEvaluator     = new NumericBinaryOperatorEvaluator( this, CompilerMessageManger, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
         NumericUnaryOperatorEvaluator      = new NumericUnaryOperatorEvaluator( this, CompilerMessageManger, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
         StringConcatenateOperatorEvaluator = new StringConcatenateOperatorEvaluator( this, CompilerMessageManger, StringConvolutionEvaluator );
+        AssignOperatorEvaluator            = new AssignOperatorEvaluator( this, CompilerMessageManger, VariableSymbolTable );
     }
 
     public void Analyze( AstCompilationUnitNode node, AbortTraverseToken abortTraverseToken)

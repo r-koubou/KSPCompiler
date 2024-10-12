@@ -66,4 +66,10 @@
     <data name="semantic.error.string.operator.conditional" xml:space="preserve">
         <value>Conditional expressions cannot be concatenated with string operators</value>
     </data>
+    <data name="semantic.error.assign.to.constant" xml:space="preserve">
+        <value>Cannot assign value ({0} is constant)</value>
+    </data>
+    <data name="semantic.error.assign.type.compatible" xml:space="preserve">
+        <value>":=" : not compatible type ({0} := {1})</value>
+    </data>
 </root>
