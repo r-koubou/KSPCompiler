@@ -29,11 +29,15 @@ public class AntlrSemanticAnalyzeOperatorTest
     [TestCase( "string_concat.txt" )]
     public void AddSameTypeTest( string scriptPath )
     {
+        var abortTraverseToken = new AbortTraverseToken();
         var compilerMessageManger = ICompilerMessageManger.Default;
         var ast = ParseTestUtility.Parse( TestDataDirectory, scriptPath );
         var symbolAnalyzer = new SymbolCollector( compilerMessageManger );
+
+        symbolAnalyzer.Analyze( ast, abortTraverseToken );
+        Assert.IsFalse( abortTraverseToken.Aborted );
+
         var semanticAnalyzer = new SemanticAnalyzer( compilerMessageManger, new VariableSymbolTable() );
-        var abortTraverseToken = new AbortTraverseToken();
 
         Assert.DoesNotThrow( () => semanticAnalyzer.Analyze( ast, abortTraverseToken ) );
         compilerMessageManger.WriteTo( System.Console.Out );
@@ -56,11 +60,15 @@ public class AntlrSemanticAnalyzeOperatorTest
     #warning string_concat_incompatible.txt: Bool式の演算子評価をまだ実装していないため必ず失敗するので実装が終わるまではコメントアウト
     public void AddInCompatibleTypesAreFailedTest( string scriptPath )
     {
+        var abortTraverseToken = new AbortTraverseToken();
         var compilerMessageManger = ICompilerMessageManger.Default;
         var ast = ParseTestUtility.Parse( TestDataDirectory, scriptPath );
         var symbolAnalyzer = new SymbolCollector( compilerMessageManger );
+
+        symbolAnalyzer.Analyze( ast, abortTraverseToken );
+        Assert.IsFalse( abortTraverseToken.Aborted );
+
         var semanticAnalyzer = new SemanticAnalyzer( compilerMessageManger, new VariableSymbolTable() );
-        var abortTraverseToken = new AbortTraverseToken();
 
         Assert.DoesNotThrow( () => semanticAnalyzer.Analyze( ast, abortTraverseToken ) );
         compilerMessageManger.WriteTo( System.Console.Out );
