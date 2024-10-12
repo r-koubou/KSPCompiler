@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 using KSPCompiler.Domain.Symbols.MetaData;
 
@@ -17,6 +18,12 @@ namespace KSPCompiler.Domain.Ast.Nodes
         public string Name { get; set; }  = string.Empty;
 
         #endregion INameable
+
+        /// <summary>
+        /// Represents whether the node is symbol(variable, commands, callback, etc.) and its reserved (built-in) by NI.
+        /// </summary>
+        [Obsolete("Should be gotten from the symbol table. This property will be removed in the future.")]
+        public virtual bool Reserved { get; set; }
 
         private AstExpressionNode left;
 

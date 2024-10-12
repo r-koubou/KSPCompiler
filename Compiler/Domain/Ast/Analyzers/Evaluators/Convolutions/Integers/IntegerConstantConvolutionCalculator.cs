@@ -39,12 +39,7 @@ public sealed class IntegerConstantConvolutionCalculator : IIntegerConstantConvo
             return literal.Value;
         }
 
-        if( expr is not AstDefaultExpressionNode symbol )
-        {
-            return null;
-        }
-
-        if( VariableSymbols.TrySearchByName( symbol.Name, out var variable ) )
+        if( VariableSymbols.TrySearchByName( expr.Name, out var variable ) )
         {
             if( variable.DataType.IsInt() || !variable.DataTypeModifier.IsConstant() )
             {
@@ -66,7 +61,7 @@ public sealed class IntegerConstantConvolutionCalculator : IIntegerConstantConvo
         CompilerMessageManger.Error(
             expr,
             CompilerMessageResources.semantic_error_variable_not_declared,
-            symbol.Name
+            expr.Name
         );
 
         return null;

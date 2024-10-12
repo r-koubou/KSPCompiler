@@ -1,4 +1,3 @@
-using KSPCompiler.Domain.Ast.Analyzers.Evaluators;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Integers;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Reals;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Operators;
@@ -46,14 +45,14 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
             throw new AstAnalyzeException( expr, "Invalid unary operator" );
         }
 
-        if( expr.Left.Accept( visitor, abortTraverseToken ) is not AstDefaultExpressionNode evaluatedLeft )
+        if( expr.Left.Accept( visitor, abortTraverseToken ) is not AstExpressionNode evaluatedLeft )
         {
             throw new AstAnalyzeException( expr, "Failed to evaluate of unary operator" );
         }
 
         if( abortTraverseToken.Aborted )
         {
-            return AstDefaultExpressionNode.Null;
+            return NullAstExpressionNode.Instance;
         }
 
         var typeEvalResult = EvaluateDataType( expr, evaluatedLeft, out var resultType );
@@ -67,7 +66,7 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
             );
 
             abortTraverseToken.Abort();
-            return AstDefaultExpressionNode.Null;
+            return NullAstExpressionNode.Instance;
         }
 
         // リテラル、定数なら畳み込み
@@ -82,7 +81,7 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
         };
     }
 
-    private bool TryConvolutionValue( AstExpressionNode expr, AstDefaultExpressionNode left, DataTypeFlag resultType, out AstDefaultExpressionNode convolutedValue )
+    private bool TryConvolutionValue( AstExpressionNode expr, AstExpressionNode left, DataTypeFlag resultType, out AstExpressionNode convolutedValue )
     {
         convolutedValue = default!;
 
@@ -121,7 +120,7 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
         return false;
     }
 
-    private bool EvaluateDataType( AstExpressionNode expr, AstDefaultExpressionNode left, out DataTypeFlag resultType )
+    private bool EvaluateDataType( AstExpressionNode expr, AstExpressionNode left, out DataTypeFlag resultType )
     {
         resultType = DataTypeFlag.None;
 
