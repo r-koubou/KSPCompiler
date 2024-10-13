@@ -1,4 +1,0 @@
-on init
-    declare $i
-    $i := .not. 1
-end on

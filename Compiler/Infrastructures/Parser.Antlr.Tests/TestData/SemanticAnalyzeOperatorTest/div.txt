@@ -1,4 +1,0 @@
-on init
-    declare $i
-    $i := 4 / 2
-end on

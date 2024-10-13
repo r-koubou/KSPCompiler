@@ -1,4 +1,0 @@
-on init
-    declare $i
-    $i := 3 .xor. 2
-end on
