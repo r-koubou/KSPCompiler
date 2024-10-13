@@ -8,6 +8,6 @@ public enum SymbolType
     UserFunction,
     Variable,
     UI,
-    PgsSymbol,
-    KspPreprocessorSymbol,
+    Pgs,
+    KspPreprocessor,
 }

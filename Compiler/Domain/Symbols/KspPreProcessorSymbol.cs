@@ -7,7 +7,7 @@ public class KspPreProcessorSymbol : SymbolBase
     #region Properties
 
     public override SymbolType Type
-        => SymbolType.KspPreprocessorSymbol;
+        => SymbolType.KspPreprocessor;
 
     #endregion ~ Properties
 

@@ -7,7 +7,7 @@ public class PgsSymbol : SymbolBase
     #region Properties
 
     public override SymbolType Type
-        => SymbolType.PgsSymbol;
+        => SymbolType.Pgs;
 
     #endregion ~ Properties
 
