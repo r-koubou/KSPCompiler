@@ -135,7 +135,7 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
         if( left.TypeFlag.IsReal() ) ;
         {
             // Real型は unary minus のみで bitwise not は不可
-            if( !expr.Id.IsUnaryOperator() )
+            if( !expr.Id.IsRealSupportedUnaryOperator() )
             {
                 return false;
             }
