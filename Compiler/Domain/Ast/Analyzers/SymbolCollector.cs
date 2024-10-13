@@ -20,19 +20,19 @@ public sealed class SymbolCollector : DefaultAstVisitor, ISymbolCollector
     private ICompilerMessageManger CompilerMessageManger { get; }
 
     #region Symbol Tables
-    public ISymbolTable<VariableSymbol> Variables { get; } = new VariableSymbolTable();
-    public ISymbolTable<UITypeSymbol> UITypes { get; } = new UITypeSymbolTable();
-    public ISymbolTable<CallbackSymbol> UserCallbacks { get; } = new CallbackSymbolTable();
-    public ISymbolTable<CallbackSymbol> ReservedCallbacks { get; }
-    public ISymbolTable<UserFunctionSymbol> UserFunctions { get; } = new UserFunctionSymbolTable();
+    public IVariableSymbolTable Variables { get; } = new VariableSymbolTable();
+    public IUITypeSymbolTable UITypes { get; } = new UITypeSymbolTable();
+    public ICallbackSymbolTable UserCallbacks { get; } = new CallbackSymbolTable();
+    public ICallbackSymbolTable ReservedCallbacks { get; }
+    public IUserFunctionSymbolSymbolTable UserFunctions { get; } = new UserFunctionSymbolTable();
 
     #endregion
 
     public SymbolCollector(
         ICompilerMessageManger compilerMessageManger,
-        ISymbolTable<VariableSymbol> reservedVariables,
-        ISymbolTable<UITypeSymbol> reservedUITypes,
-        ISymbolTable<CallbackSymbol> reservedCallbacks )
+        IVariableSymbolTable reservedVariables,
+        IUITypeSymbolTable reservedUITypes,
+        ICallbackSymbolTable reservedCallbacks )
     {
         CompilerMessageManger = compilerMessageManger;
         Variables.AddRange( reservedVariables );

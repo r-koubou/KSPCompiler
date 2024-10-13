@@ -1,6 +1,6 @@
 namespace KSPCompiler.Domain.Symbols;
 
-public class CallbackSymbolTable : SymbolTable<CallbackSymbol>
+public class CallbackSymbolTable : SymbolTable<CallbackSymbol>, ICallbackSymbolTable
 {
     public override bool Add( CallbackSymbol symbol, bool overwrite = false )
     {

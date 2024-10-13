@@ -1,3 +1,3 @@
 namespace KSPCompiler.Domain.Symbols;
 
-public class UITypeSymbolTable : SymbolTable<UITypeSymbol> {}
+public class UITypeSymbolTable : SymbolTable<UITypeSymbol>, IUITypeSymbolTable {}

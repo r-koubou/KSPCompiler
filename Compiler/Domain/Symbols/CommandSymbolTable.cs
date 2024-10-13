@@ -1,3 +1,3 @@
 namespace KSPCompiler.Domain.Symbols;
 
-public class CommandSymbolTable : SymbolTable<CommandSymbol> {}
+public class CommandSymbolTable : SymbolTable<CommandSymbol>, ICommandSymbolTable {}

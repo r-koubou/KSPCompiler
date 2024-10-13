@@ -10,14 +10,14 @@ public interface ISymbolCollector : IDisposable
 {
     public static ISymbolCollector Null { get; } = new NullSymbolCollector();
 
-    ISymbolTable<VariableSymbol> Variables { get; }
+    IVariableSymbolTable Variables { get; }
 
     void Analyze( AstCompilationUnitNode node, AbortTraverseToken abortTraverseToken );
     void IDisposable.Dispose() {}
 
     private sealed class NullSymbolCollector : ISymbolCollector
     {
-        public ISymbolTable<VariableSymbol> Variables => new VariableSymbolTable();
+        public IVariableSymbolTable Variables => new VariableSymbolTable();
 
         public void Analyze( AstCompilationUnitNode node, AbortTraverseToken abortTraverseToken ) {}
     }

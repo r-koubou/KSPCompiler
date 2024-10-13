@@ -16,11 +16,11 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Integers;
 /// </summary>
 public sealed class IntegerConstantConvolutionCalculator : IIntegerConstantConvolutionCalculator
 {
-    private ISymbolTable<VariableSymbol> VariableSymbols { get; }
+    private IVariableSymbolTable VariableSymbols { get; }
     private ICompilerMessageManger CompilerMessageManger { get; }
 
     public IntegerConstantConvolutionCalculator(
-        ISymbolTable<VariableSymbol> variableSymbols,
+        IVariableSymbolTable variableSymbols,
         ICompilerMessageManger compilerMessageManger )
     {
         VariableSymbols       = variableSymbols;
