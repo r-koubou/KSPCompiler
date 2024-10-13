@@ -3,17 +3,17 @@ using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 
 namespace KSPCompiler.Domain.Symbols;
 
-public class VariableSymbolTable : SymbolTable<VariableSymbol>
+public class VariableSymbolTable : SymbolTable<VariableSymbol>, IVariableSymbolTable
 {
     #region ctor
     // ReSharper disable MemberCanBePrivate.Global
     public VariableSymbolTable()
         : base( null, UniqueSymbolIndex.Zero ) {}
 
-    public VariableSymbolTable( ISymbolTable<VariableSymbol>? parent )
+    public VariableSymbolTable( IVariableSymbolTable? parent )
         : base( parent ) {}
 
-    public VariableSymbolTable( SymbolTable<VariableSymbol>? parent, UniqueSymbolIndex startUniqueIndex )
+    public VariableSymbolTable( IVariableSymbolTable? parent, UniqueSymbolIndex startUniqueIndex )
         : base( parent, startUniqueIndex ) {}
     // ReSharper restore MemberCanBePrivate.Global
     #endregion

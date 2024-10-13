@@ -16,11 +16,11 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Reals;
 /// </summary>
 public sealed class RealConstantConvolutionCalculator : IRealConstantConvolutionCalculator
 {
-    private ISymbolTable<VariableSymbol> VariableSymbols { get; }
+    private IVariableSymbolTable VariableSymbols { get; }
     private ICompilerMessageManger CompilerMessageManger { get; }
 
     public RealConstantConvolutionCalculator(
-        ISymbolTable<VariableSymbol> variableSymbols,
+        IVariableSymbolTable variableSymbols,
         ICompilerMessageManger compilerMessageManger )
     {
         VariableSymbols       = variableSymbols;

@@ -12,7 +12,7 @@ public sealed class StringConvolutionEvaluator : IStringConvolutionEvaluator
     private IStringConstantConvolutionCalculator ConstantCalculator { get; }
     private IStringConcatenateOperatorConvolutionCalculator ConcatenateCalculator { get; }
 
-    public StringConvolutionEvaluator( IAstVisitor visitor, ISymbolTable<VariableSymbol> variableSymbols, ICompilerMessageManger compilerMessageManger )
+    public StringConvolutionEvaluator( IAstVisitor visitor, IVariableSymbolTable variableSymbols, ICompilerMessageManger compilerMessageManger )
     {
         ConstantCalculator    = new StringConstantConvolutionCalculator( variableSymbols, compilerMessageManger );
         ConcatenateCalculator = new StringConcatenateOperatorConvolutionCalculator( this );
