@@ -13,12 +13,12 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
 {
     private IAstVisitor AstVisitor { get; }
     private ICompilerMessageManger CompilerMessageManger { get; }
-    private ISymbolTable<VariableSymbol> VariableSymbolTable { get; }
+    private IVariableSymbolTable VariableSymbolTable { get; }
 
     public AssignOperatorEvaluator(
         IAstVisitor astVisitor,
         ICompilerMessageManger compilerMessageManger,
-        ISymbolTable<VariableSymbol> variableSymbolTable )
+        IVariableSymbolTable variableSymbolTable )
     {
         AstVisitor            = astVisitor;
         CompilerMessageManger = compilerMessageManger;

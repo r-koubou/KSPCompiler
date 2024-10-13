@@ -45,4 +45,21 @@ public static class AstIdExtension
             AstNodeId.LogicalXor => true,
             _                    => false
         };
+
+    public static bool IsRealSupportedBinaryOperator( this AstNodeId id )
+        => id switch
+        {
+            AstNodeId.Addition    => true,
+            AstNodeId.Subtraction => true,
+            AstNodeId.Multiplying => true,
+            AstNodeId.Division    => true,
+            _                     => false
+        };
+
+    public static bool IsRealSupportedUnaryOperator( this AstNodeId id )
+        => id switch
+        {
+            AstNodeId.UnaryMinus => true,
+            _                    => false
+        };
 }

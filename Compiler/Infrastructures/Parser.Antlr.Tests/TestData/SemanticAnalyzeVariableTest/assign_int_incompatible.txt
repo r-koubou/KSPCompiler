@@ -1,4 +1,0 @@
-on init
-    declare $x
-    $x := "abc"
-end on

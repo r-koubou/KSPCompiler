@@ -14,7 +14,7 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, ISemanticAnalyzer
 {
     private ICompilerMessageManger CompilerMessageManger { get; }
 
-    private ISymbolTable<VariableSymbol> VariableSymbolTable { get; }
+    private IVariableSymbolTable VariableSymbolTable { get; }
 
     #region Eveluators
 
@@ -45,7 +45,7 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, ISemanticAnalyzer
 
     public SemanticAnalyzer(
         ICompilerMessageManger compilerMessageManger,
-        ISymbolTable<VariableSymbol> variableSymbolTable )
+        IVariableSymbolTable variableSymbolTable )
     {
         CompilerMessageManger = compilerMessageManger;
         VariableSymbolTable   = variableSymbolTable;

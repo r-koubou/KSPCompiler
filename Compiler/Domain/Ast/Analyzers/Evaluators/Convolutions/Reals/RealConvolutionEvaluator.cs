@@ -14,7 +14,7 @@ public sealed class RealConvolutionEvaluator : IRealConvolutionEvaluator
     private IRealUnaryOperatorConvolutionCalculator UnaryCalculator { get; }
     private IRealConditionalOperatorConvolutionEvaluator ConditionalEvaluator { get; }
 
-    public RealConvolutionEvaluator( IAstVisitor visitor, ISymbolTable<VariableSymbol> variableSymbols, ICompilerMessageManger compilerMessageManger )
+    public RealConvolutionEvaluator( IAstVisitor visitor, IVariableSymbolTable variableSymbols, ICompilerMessageManger compilerMessageManger )
     {
         ConstantCalculator   = new RealConstantConvolutionCalculator( variableSymbols, compilerMessageManger );
         BinaryCalculator     = new RealBinaryOperatorConvolutionCalculator( this );

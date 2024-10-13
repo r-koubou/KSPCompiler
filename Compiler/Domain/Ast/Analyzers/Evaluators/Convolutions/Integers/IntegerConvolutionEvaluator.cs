@@ -14,7 +14,7 @@ public sealed class IntegerConvolutionEvaluator : IIntegerConvolutionEvaluator
     private IIntegerUnaryOperatorConvolutionCalculator UnaryCalculator { get; }
     private IntegerConditionalOperatorConvolutionEvaluator ConditionalEvaluator { get; }
 
-    public IntegerConvolutionEvaluator( IAstVisitor visitor, ISymbolTable<VariableSymbol> variableSymbols, ICompilerMessageManger compilerMessageManger )
+    public IntegerConvolutionEvaluator( IAstVisitor visitor, IVariableSymbolTable variableSymbols, ICompilerMessageManger compilerMessageManger )
     {
         ConstantCalculator   = new IntegerConstantConvolutionCalculator( variableSymbols, compilerMessageManger );
         BinaryCalculator     = new IntegerBinaryOperatorConvolutionCalculator( this );

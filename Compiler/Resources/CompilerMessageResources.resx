@@ -72,4 +72,10 @@
     <data name="semantic.error.assign.type.compatible" xml:space="preserve">
         <value>":=" : not compatible type ({0} := {1})</value>
     </data>
+    <data name="semantic.error.binaryoprator.not.supported" xml:space="preserve">
+        <value>Contains types not supported by the binary operator {0}, {1}</value>
+    </data>
+    <data name="semantic.error.unaryoprator.not.supported" xml:space="preserve">
+        <value>Contains types not supported by unary operators {0}</value>
+    </data>
 </root>
