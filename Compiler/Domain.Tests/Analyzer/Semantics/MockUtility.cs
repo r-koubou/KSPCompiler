@@ -30,4 +30,28 @@ public static class MockUtility
             Right = right
         };
     }
+
+    public static  AstUnaryMinusExpressionNode CreateUnaryMinusOperatorNode( string variableName, DataTypeFlag type )
+    {
+        return new AstUnaryMinusExpressionNode
+        {
+            Left = new AstSymbolExpressionNode
+            {
+                Name     = variableName,
+                TypeFlag = type
+            },
+        };
+    }
+
+    public static  AstUnaryNotExpressionNode CreateUnaryNotOperatorNode( string variableName, DataTypeFlag type )
+    {
+        return new AstUnaryNotExpressionNode
+        {
+            Left = new AstSymbolExpressionNode
+            {
+                Name     = variableName,
+                TypeFlag = type
+            },
+        };
+    }
 }
