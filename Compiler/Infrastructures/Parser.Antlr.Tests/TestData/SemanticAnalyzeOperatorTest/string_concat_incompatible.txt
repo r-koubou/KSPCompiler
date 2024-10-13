@@ -1,4 +1,0 @@
-on init
-    declare @i
-    @i := "abc" & (2=1)
-end on

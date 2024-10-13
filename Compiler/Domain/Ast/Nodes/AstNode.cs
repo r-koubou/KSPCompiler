@@ -17,7 +17,7 @@ namespace KSPCompiler.Domain.Ast.Nodes
         ///
         public virtual AstNodeId Id { get; }
 
-        private Position position;
+        private Position position = Position.Zero;
 
         ///
         /// <inheritdoc/>

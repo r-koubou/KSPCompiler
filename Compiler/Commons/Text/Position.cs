@@ -3,6 +3,14 @@ namespace KSPCompiler.Commons.Text
     // ReSharper disable InconsistentNaming
     public struct Position
     {
+        public static Position Zero { get; } = new()
+        {
+            BeginLine   = 0,
+            EndLine     = 0,
+            BeginColumn = 0,
+            EndColumn   = 0
+        };
+
         /// <summary>
         /// Starting line number.
         /// </summary>

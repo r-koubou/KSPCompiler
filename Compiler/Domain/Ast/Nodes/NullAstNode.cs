@@ -23,7 +23,7 @@ namespace KSPCompiler.Domain.Ast.Nodes
         /// </summary>
         public Position Position
         {
-            get => new ();
+            get => Position.Zero;
             set => _ = value;
         }
 
