@@ -152,5 +152,17 @@ namespace KSPCompiler.Resources {
                 return ResourceManager.GetString("semantic.error.assign.type.compatible", resourceCulture);
             }
         }
+        
+        public static string semantic_error_binaryoprator_not_supported {
+            get {
+                return ResourceManager.GetString("semantic.error.binaryoprator.not.supported", resourceCulture);
+            }
+        }
+        
+        public static string semantic_error_unaryoprator_not_supported {
+            get {
+                return ResourceManager.GetString("semantic.error.unaryoprator.not.supported", resourceCulture);
+            }
+        }
     }
 }

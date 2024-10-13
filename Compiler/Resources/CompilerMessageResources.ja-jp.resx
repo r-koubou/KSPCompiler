@@ -65,4 +65,10 @@
     <data name="semantic.error.assign.type.compatible" xml:space="preserve">
         <value>":=" : データ型が一致しません ({0} := {1})</value>
     </data>
+    <data name="semantic.error.binaryoprator.not.supported" xml:space="preserve">
+        <value>2項演算子がサポートしていない型が含まれています {0}, {1}</value>
+    </data>
+    <data name="semantic.error.unaryoprator.not.supported" xml:space="preserve">
+        <value>単項演算子がサポートしていない型が含まれています {0}</value>
+    </data>
 </root>

@@ -61,18 +61,10 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
             return NullAstExpressionNode.Instance;
         }
 
-        var typeEvalResult = EvaluateDataType( evaluatedLeft, evaluatedRight, out var resultType );
+        var typeEvalResult = EvaluateDataType( expr, evaluatedLeft, evaluatedRight, abortTraverseToken, out var resultType );
 
         if( !typeEvalResult )
         {
-            CompilerMessageManger.Error(
-                expr,
-                CompilerMessageResources.semantic_error_binaryoprator_compatible,
-                evaluatedLeft.TypeFlag.ToMessageString(),
-                evaluatedRight.TypeFlag.ToMessageString()
-            );
-
-            abortTraverseToken.Abort();
             return NullAstExpressionNode.Instance;
         }
 
@@ -127,7 +119,12 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
         return false;
     }
 
-    private bool EvaluateDataType( AstExpressionNode left, AstExpressionNode right, out DataTypeFlag resultType )
+    private bool EvaluateDataType(
+        AstExpressionNode operatorNode,
+        AstExpressionNode left,
+        AstExpressionNode right,
+        AbortTraverseToken abortTraverseToken,
+        out DataTypeFlag resultType )
     {
         resultType = DataTypeFlag.None;
 
@@ -141,9 +138,32 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
 
         if( left.TypeFlag.IsReal() && right.TypeFlag.IsReal() )
         {
+            // Real型はビット演算はサポートしていない
+            if( !operatorNode.Id.IsRealSupportedBinaryOperator() )
+            {
+                CompilerMessageManger.Error(
+                    operatorNode,
+                    CompilerMessageResources.semantic_error_binaryoprator_not_supported,
+                    left.TypeFlag.ToMessageString(),
+                    right.TypeFlag.ToMessageString()
+                );
+
+                abortTraverseToken.Abort();
+                return false;
+            }
+
             resultType = DataTypeFlag.TypeReal;
             return true;
         }
+
+        CompilerMessageManger.Error(
+            operatorNode,
+            CompilerMessageResources.semantic_error_binaryoprator_compatible,
+            left.TypeFlag.ToMessageString(),
+            right.TypeFlag.ToMessageString()
+        );
+
+        abortTraverseToken.Abort();
 
         return false;
     }
