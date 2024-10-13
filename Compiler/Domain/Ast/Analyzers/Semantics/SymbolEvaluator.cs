@@ -16,9 +16,9 @@ public class SymbolEvaluator : ISymbolEvaluator
 
     public SymbolEvaluator( IAstVisitor<IAstNode> visitor, ICompilerMessageManger compilerMessageManger, ISymbolTable<VariableSymbol> variableSymbolTable )
     {
-        VariableSymbolTable   = variableSymbolTable;
         CompilerMessageManger = compilerMessageManger;
         Visitor               = visitor;
+        VariableSymbolTable   = variableSymbolTable;
     }
 
     public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstSymbolExpressionNode expr, AbortTraverseToken abortTraverseToken )
