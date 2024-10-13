@@ -88,7 +88,6 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 var node = new AstSymbolExpressionNode();
                 node.Import( context );
                 node.Name = identifier.GetText();
-                node.TypeFlag = DataTypeUtility.GuessFromSymbolName( node.Name );
                 return node;
             }
             #endregion
