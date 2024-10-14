@@ -12,7 +12,29 @@ public static class MockUtility
         var variable = new VariableSymbol
         {
             Name     = name,
+            DataType = DataTypeFlag.TypeInt
+        };
+
+        return variable;
+    }
+
+    public static VariableSymbol CreateRealVariable( string name )
+    {
+        var variable = new VariableSymbol
+        {
+            Name     = name,
             DataType = DataTypeFlag.TypeReal
+        };
+
+        return variable;
+    }
+
+    public static VariableSymbol CreateStringVariable( string name )
+    {
+        var variable = new VariableSymbol
+        {
+            Name     = name,
+            DataType = DataTypeFlag.TypeString
         };
 
         return variable;
@@ -54,4 +76,24 @@ public static class MockUtility
             },
         };
     }
+
+    public static  AstSymbolExpressionNode CreateSymbolNode( string variableName )
+    {
+        return new AstSymbolExpressionNode
+        {
+            Name = variableName
+        };
+    }
+
+    public static AggregateSymbolTable CreateAggregateSymbolTable()
+        => new (
+            new VariableSymbolTable(),
+            new UITypeSymbolTable(),
+            new CommandSymbolTable(),
+            new CallbackSymbolTable(),
+            new CallbackSymbolTable(),
+            new UserFunctionSymbolTable(),
+            new KspPreProcessorSymbolTable(),
+            new PgsSymbolTable()
+        );
 }

@@ -10,9 +10,9 @@ public class MockAstSymbolVisitor : DefaultAstVisitor
 
     public MockAstSymbolVisitor() {}
 
-    public void Inject( ISymbolEvaluator unaryOperatorEvaluator )
+    public void Inject( ISymbolEvaluator evaluator )
     {
-        SymbolEvaluator = unaryOperatorEvaluator;
+        SymbolEvaluator = evaluator;
     }
 
     public override IAstNode Visit( AstSymbolExpressionNode node, AbortTraverseToken abortTraverseToken )

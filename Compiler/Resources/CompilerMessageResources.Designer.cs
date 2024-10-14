@@ -164,5 +164,11 @@ namespace KSPCompiler.Resources {
                 return ResourceManager.GetString("semantic.error.unaryoprator.not.supported", resourceCulture);
             }
         }
+        
+        public static string semantic_error_variable_arrayoutofbounds {
+            get {
+                return ResourceManager.GetString("semantic.error.variable.arrayoutofbounds", resourceCulture);
+            }
+        }
     }
 }

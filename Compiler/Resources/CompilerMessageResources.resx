@@ -78,4 +78,7 @@
     <data name="semantic.error.unaryoprator.not.supported" xml:space="preserve">
         <value>Contains types not supported by unary operators {0}</value>
     </data>
+    <data name="semantic.error.variable.arrayoutofbounds" xml:space="preserve">
+        <value>Array Index Out of Bounds (Array size: {0}, Index: {1})</value>
+    </data>
 </root>

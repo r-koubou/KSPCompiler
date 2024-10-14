@@ -59,7 +59,7 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, ISemanticAnalyzer
         StringConcatenateOperatorEvaluator = new StringConcatenateOperatorEvaluator( this, CompilerMessageManger, StringConvolutionEvaluator );
         AssignOperatorEvaluator            = new AssignOperatorEvaluator( this, CompilerMessageManger, SymbolTable.Variables );
 
-        SymbolEvaluator                    = new SymbolEvaluator( this, CompilerMessageManger, SymbolTable );
+        SymbolEvaluator                    = new SymbolEvaluator( CompilerMessageManger, SymbolTable );
     }
 
     public void Analyze( AstCompilationUnitNode node, AbortTraverseToken abortTraverseToken)

@@ -6,6 +6,15 @@ namespace KSPCompiler.Domain.Tests.Analyzer.Semantics;
 
 internal class MockSymbolEvaluator : ISymbolEvaluator
 {
+    private AstExpressionNode EvalResult { get; }
+
+    public MockSymbolEvaluator() : this( NullAstExpressionNode.Instance ) {}
+
+    public MockSymbolEvaluator( AstExpressionNode evalResult )
+    {
+        EvalResult = evalResult;
+    }
+
     public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstSymbolExpressionNode expr, AbortTraverseToken abortTraverseToken )
-        => throw new System.NotImplementedException();
+        => EvalResult;
 }
