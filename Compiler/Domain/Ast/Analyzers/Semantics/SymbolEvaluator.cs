@@ -4,6 +4,7 @@ using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Resources;
 
@@ -65,6 +66,13 @@ public class SymbolEvaluator : ISymbolEvaluator
         result          = new AstSymbolExpressionNode();
         result.Name     = variable.Name;
         result.TypeFlag = variable.DataType;
+
+        // 配列インデックスを式に含んでいる場合、要素アクセスになるので評価結果から配列フラグを削除
+        if( node.Left.Id == AstNodeId.ArrayElementExpression )
+        {
+            result.TypeFlag &= ~DataTypeFlag.AttributeArray;
+        }
+
         return true;
     }
 
