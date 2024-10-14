@@ -110,8 +110,8 @@ namespace KSPCompiler.Domain.Ast.Nodes
                 return;
             }
 
-            Left.AcceptChildren( visitor, abortTraverseToken );
-            Right.AcceptChildren( visitor, abortTraverseToken );
+            _ = Left.Accept( visitor, abortTraverseToken );
+            _ = Right.Accept( visitor, abortTraverseToken );
         }
         #endregion IAstNodeAcceptor
 
