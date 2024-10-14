@@ -12,13 +12,16 @@ public class SymbolEvaluator : ISymbolEvaluator
 {
     private IAstVisitor<IAstNode> Visitor { get; }
     private ICompilerMessageManger CompilerMessageManger { get; }
-    private ISymbolTable<VariableSymbol> VariableSymbolTable { get; }
+    private AggregateSymbolTable SymbolTable { get; }
 
-    public SymbolEvaluator( IAstVisitor<IAstNode> visitor, ICompilerMessageManger compilerMessageManger, ISymbolTable<VariableSymbol> variableSymbolTable )
+    public SymbolEvaluator(
+        IAstVisitor<IAstNode> visitor,
+        ICompilerMessageManger compilerMessageManger,
+        AggregateSymbolTable symbolTable )
     {
         CompilerMessageManger = compilerMessageManger;
+        SymbolTable           = symbolTable;
         Visitor               = visitor;
-        VariableSymbolTable   = variableSymbolTable;
     }
 
     public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstSymbolExpressionNode expr, AbortTraverseToken abortTraverseToken )
