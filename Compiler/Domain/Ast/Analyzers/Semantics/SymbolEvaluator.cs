@@ -52,6 +52,11 @@ public class SymbolEvaluator : ISymbolEvaluator
             return true;
         }
 
+        // 子ノードの評価
+        // 含まれる可能性のあるノード
+        // - 配列インデックス: AstArrayElementExpressionNode
+        node.AcceptChildren( visitor, abortTraverseToken );
+
         if( abortTraverseToken.Aborted )
         {
             return false;
