@@ -67,7 +67,7 @@ public class SymbolEvaluator : ISymbolEvaluator
     {
         result = NullAstExpressionNode.Instance;
 
-        if( !variable.DataTypeModifier.IsConstant() )
+        if( variable.Reserved || !variable.DataTypeModifier.IsConstant() )
         {
             return false;
         }
