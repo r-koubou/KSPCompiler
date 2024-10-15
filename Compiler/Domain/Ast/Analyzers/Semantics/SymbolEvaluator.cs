@@ -35,7 +35,6 @@ public class SymbolEvaluator : ISymbolEvaluator
             CompilerMessageResources.semantic_error_variable_not_declared,
             expr.Name );
 
-        abortTraverseToken.Abort();
         return NullAstExpressionNode.Instance;
     }
 
@@ -57,11 +56,6 @@ public class SymbolEvaluator : ISymbolEvaluator
         // 含まれる可能性のあるノード
         // - 配列インデックス: AstArrayElementExpressionNode
         node.AcceptChildren( visitor, abortTraverseToken );
-
-        if( abortTraverseToken.Aborted )
-        {
-            return false;
-        }
 
         result          = new AstSymbolExpressionNode();
         result.Name     = variable.Name;
