@@ -30,6 +30,16 @@ public class SymbolEvaluator : ISymbolEvaluator
             return result;
         }
 
+        if( TryGetPreProcessorSymbol( expr, out result ) )
+        {
+            return result;
+        }
+
+        if( TryGetPgsSymbol( expr, out result ) )
+        {
+            return result;
+        }
+
         CompilerMessageManger.Error(
             expr,
             CompilerMessageResources.semantic_error_variable_not_declared,
@@ -98,12 +108,34 @@ public class SymbolEvaluator : ISymbolEvaluator
     private bool TryGetPreProcessorSymbol( AstSymbolExpressionNode node, out AstExpressionNode result )
     {
         result = NullAstExpressionNode.Instance;
-        return false;
+
+        if( !SymbolTable.PreProcessorSymbols.TrySearchByName( node.Name, out var symbol ) )
+        {
+            return false;
+        }
+
+        result = new AstSymbolExpressionNode( symbol.Name, node, NullAstExpressionNode.Instance )
+        {
+            TypeFlag = DataTypeFlag.TypeKspPreprocessorSymbol
+        };
+
+        return true;
     }
 
     private bool TryGetPgsSymbol( AstSymbolExpressionNode node, out AstExpressionNode result )
     {
         result = NullAstExpressionNode.Instance;
+
+        if( !SymbolTable.PgsSymbols.TrySearchByName( node.Name, out var symbol ) )
+        {
+            return false;
+        }
+
+        result = new AstSymbolExpressionNode( symbol.Name, node, NullAstExpressionNode.Instance )
+        {
+            TypeFlag = DataTypeFlag.TypePgsId
+        };
+
         return false;
     }
 }
