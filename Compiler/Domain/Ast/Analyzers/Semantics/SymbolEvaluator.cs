@@ -149,7 +149,7 @@ public class SymbolEvaluator : ISymbolEvaluator
         {
             CompilerMessageManger.Error(
                 node,
-                CompilerMessageResources.semantic_error_variable_arrayoutofbounds,
+                CompilerMessageResources.semantic_error_variable_array_outofbounds,
                 variable.ArraySize,
                 intLiteral.Value
             );

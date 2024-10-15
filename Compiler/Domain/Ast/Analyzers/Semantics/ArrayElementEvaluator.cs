@@ -40,11 +40,11 @@ public class ArrayElementEvaluator : IArrayElementEvaluator
             throw new AstAnalyzeException( expr, "Failed to evaluate left side of array element" );
         }
 
-        if( evaluated is AstStringLiteralNode or AstRealLiteralNode )
+        if( !evaluated.TypeFlag.IsInt() )
         {
             CompilerMessageManger.Error(
                 expr,
-                CompilerMessageResources.semantic_error_binaryoprator_compatible,
+                CompilerMessageResources.semantic_error_array_subscript_compatible,
                 evaluated.TypeFlag.ToMessageString()
             );
 

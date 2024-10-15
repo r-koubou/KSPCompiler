@@ -41,7 +41,7 @@ public class AstVariableSymbolEvaluationTest
     public void IntVariableSymbolTest( bool isConstant )
     {
         var abortTraverseToken = new AbortTraverseToken();
-        var variable = MockUtility.CreateIntVariable( "$x" );
+        var variable = MockUtility.CreateVariable( "$x", DataTypeFlag.TypeInt );
 
         if( isConstant )
         {

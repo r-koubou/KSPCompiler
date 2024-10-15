@@ -165,15 +165,21 @@ namespace KSPCompiler.Resources {
             }
         }
         
-        public static string semantic_error_variable_arrayoutofbounds {
+        public static string semantic_error_variable_array_outofbounds {
             get {
-                return ResourceManager.GetString("semantic.error.variable.arrayoutofbounds", resourceCulture);
+                return ResourceManager.GetString("semantic.error.variable.array.outofbounds", resourceCulture);
             }
         }
         
         public static string semantic_error_variable_uninitialized {
             get {
                 return ResourceManager.GetString("semantic.error.variable.uninitialized", resourceCulture);
+            }
+        }
+        
+        public static string semantic_error_array_subscript_compatible {
+            get {
+                return ResourceManager.GetString("semantic.error.array.subscript.compatible", resourceCulture);
             }
         }
     }

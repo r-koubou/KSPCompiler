@@ -1,44 +1,57 @@
+using System.ComponentModel.DataAnnotations;
+
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
+using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 
 namespace KSPCompiler.Domain.Tests.Analyzer.Semantics;
 
 public static class MockUtility
 {
-    public static VariableSymbol CreateIntVariable( string name )
+    public static VariableSymbol CreateBuiltInIntVariable( string name )
     {
         var variable = new VariableSymbol
         {
-            Name     = name,
-            DataType = DataTypeFlag.TypeInt
+            Name             = name,
+            DataType         = DataTypeFlag.TypeInt,
+            DataTypeModifier = DataTypeModifierFlag.Const,
+            Reserved         = true,
+            Value            = 0
         };
 
         return variable;
     }
+
+    public static AstSymbolExpressionNode CreateAstSymbolExpression( VariableSymbol variable )
+    {
+        return new AstSymbolExpressionNode( variable.Name, NullAstExpressionNode.Instance )
+        {
+            TypeFlag = variable.DataType,
+            Constant = variable.DataTypeModifier.IsConstant()
+        };
+    }
+
+    public static VariableSymbol CreateVariable( string name, DataTypeFlag type )
+    {
+        var variable = new VariableSymbol
+        {
+            Name     = name,
+            DataType = type
+        };
+
+        return variable;
+    }
+
+    public static VariableSymbol CreateIntVariable( string name )
+        => CreateVariable( name, DataTypeFlag.TypeInt );
 
     public static VariableSymbol CreateRealVariable( string name )
-    {
-        var variable = new VariableSymbol
-        {
-            Name     = name,
-            DataType = DataTypeFlag.TypeReal
-        };
-
-        return variable;
-    }
+        => CreateVariable( name, DataTypeFlag.TypeReal );
 
     public static VariableSymbol CreateStringVariable( string name )
-    {
-        var variable = new VariableSymbol
-        {
-            Name     = name,
-            DataType = DataTypeFlag.TypeString
-        };
-
-        return variable;
-    }
+        => CreateVariable( name, DataTypeFlag.TypeString );
 
     public static  T CreateBinaryOperatorNode<T>( string variableName, DataTypeFlag leftType, AstExpressionNode right ) where T : AstExpressionNode, new()
     {

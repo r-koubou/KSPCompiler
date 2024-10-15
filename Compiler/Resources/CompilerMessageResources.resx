@@ -78,10 +78,13 @@
     <data name="semantic.error.unaryoprator.not.supported" xml:space="preserve">
         <value>Contains types not supported by unary operators {0}</value>
     </data>
-    <data name="semantic.error.variable.arrayoutofbounds" xml:space="preserve">
+    <data name="semantic.error.variable.array.outofbounds" xml:space="preserve">
         <value>Array Index Out of Bounds (Array size: {0}, Index: {1})</value>
     </data>
     <data name="semantic.error.variable.uninitialized" xml:space="preserve">
         <value>{0} is required initializer</value>
+    </data>
+    <data name="semantic.error.array.subscript.compatible" xml:space="preserve">
+        <value>Subscript type is not an integer type ({0})</value>
     </data>
 </root>
