@@ -13,7 +13,7 @@ using NUnit.Framework;
 namespace KSPCompiler.Domain.Tests.Analyzer.Semantics;
 
 [TestFixture]
-public class AstSymbolEvaluationTest
+public class AstVariableSymbolEvaluationTest
 {
     private AstExpressionNode VariableSymbolTestBody( VariableSymbol variable, AbortTraverseToken abortTraverseToken )
     {
