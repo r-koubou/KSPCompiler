@@ -35,11 +35,6 @@ public class ArrayElementEvaluator : IArrayElementEvaluator
 
         */
 
-        if( expr.Parent is not AstSymbolExpressionNode symbolNode )
-        {
-            throw new AstAnalyzeException( expr, "Array element must be a child of a symbol" );
-        }
-
         if( expr.Left.Accept( visitor, abortTraverseToken ) is not AstExpressionNode evaluated )
         {
             throw new AstAnalyzeException( expr, "Failed to evaluate left side of array element" );
@@ -53,40 +48,9 @@ public class ArrayElementEvaluator : IArrayElementEvaluator
                 evaluated.TypeFlag.ToMessageString()
             );
 
-            abortTraverseToken.Abort();
             return NullAstExpressionNode.Instance;
         }
 
-        if( evaluated is not AstIntLiteralNode intLiteralNode )
-        {
-            return evaluated;
-        }
-
-        if( !VariableSymbolTable.TrySearchByName( symbolNode.Name, out var variable ) )
-        {
-            CompilerMessageManger.Error(
-                symbolNode,
-                CompilerMessageResources.semantic_error_variable_not_declared,
-                symbolNode.Name
-            );
-
-            abortTraverseToken.Abort();
-            return NullAstExpressionNode.Instance;
-        }
-
-        if( intLiteralNode.Value < 0 || intLiteralNode.Value >= variable.ArraySize )
-        {
-            CompilerMessageManger.Error(
-                expr,
-                CompilerMessageResources.semantic_error_variable_arrayoutofbounds,
-                variable.ArraySize,
-                intLiteralNode.Value
-            );
-
-            abortTraverseToken.Abort();
-            return NullAstExpressionNode.Instance;
-        }
-
-        return intLiteralNode;
+        return evaluated;
     }
 }

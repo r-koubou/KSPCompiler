@@ -170,5 +170,11 @@ namespace KSPCompiler.Resources {
                 return ResourceManager.GetString("semantic.error.variable.arrayoutofbounds", resourceCulture);
             }
         }
+        
+        public static string semantic_error_variable_uninitialized {
+            get {
+                return ResourceManager.GetString("semantic.error.variable.uninitialized", resourceCulture);
+            }
+        }
     }
 }

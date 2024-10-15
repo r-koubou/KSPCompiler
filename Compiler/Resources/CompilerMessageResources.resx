@@ -81,4 +81,7 @@
     <data name="semantic.error.variable.arrayoutofbounds" xml:space="preserve">
         <value>Array Index Out of Bounds (Array size: {0}, Index: {1})</value>
     </data>
+    <data name="semantic.error.variable.uninitialized" xml:space="preserve">
+        <value>{0} is required initializer</value>
+    </data>
 </root>

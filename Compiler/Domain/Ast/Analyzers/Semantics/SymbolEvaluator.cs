@@ -62,20 +62,14 @@ public class SymbolEvaluator : ISymbolEvaluator
             return true;
         }
 
-        // 子ノードの評価
-        // 含まれる可能性のあるノード
-        // - 配列インデックス: AstArrayElementExpressionNode
-        node.AcceptChildren( visitor, abortTraverseToken );
+        if( TryGetArrayVariableNode( visitor, node, variable, out result, abortTraverseToken ) )
+        {
+            return true;
+        }
 
         result          = new AstSymbolExpressionNode();
         result.Name     = variable.Name;
         result.TypeFlag = variable.DataType;
-
-        // 配列インデックスを式に含んでいる場合、要素アクセスになるので評価結果から配列フラグを削除
-        if( node.Left.Id == AstNodeId.ArrayElementExpression )
-        {
-            result.TypeFlag &= ~DataTypeFlag.AttributeArray;
-        }
 
         return true;
     }
@@ -103,6 +97,67 @@ public class SymbolEvaluator : ISymbolEvaluator
             default:
                 return false;
         }
+    }
+
+    private bool TryGetArrayVariableNode( IAstVisitor<IAstNode> visitor, AstExpressionNode node, VariableSymbol variable, out AstExpressionNode result, AbortTraverseToken abortTraverseToken )
+    {
+        result = NullAstExpressionNode.Instance;
+
+        if( !variable.DataType.IsArray() )
+        {
+            return false;
+        }
+
+        // 子ノードの評価
+        // 含まれる可能性のあるノード
+        // - 配列インデックス: AstArrayElementExpressionNode
+        if( node.Left.Id != AstNodeId.ArrayElementExpression )
+        {
+            return false;
+        }
+
+        // 配列要素数未確定の状況
+        if( variable.ArraySize < 0 )
+        {
+            CompilerMessageManger.Error(
+                node,
+                CompilerMessageResources.semantic_error_variable_uninitialized,
+                variable.Name
+            );
+            return false;
+        }
+
+        if( node.Left.Accept( visitor, abortTraverseToken ) is not AstExpressionNode indexExpr )
+        {
+            throw new AstAnalyzeException( node.Left, "Failed to evaluate array index" );
+        }
+
+        result          =  new AstSymbolExpressionNode();
+        result.Name     =  variable.Name;
+        result.TypeFlag =  variable.DataType;
+        // 配列インデックスを式に含んでいる場合、要素アクセスになるので評価結果から配列フラグを削除
+        result.TypeFlag &= ~DataTypeFlag.AttributeArray;
+
+        // 変数がビルトイン変数または要素アクセスがリテラルで確定していない場合は評価はここまで
+        if( variable.Reserved || indexExpr is not AstIntLiteralNode intLiteral )
+        {
+            return true;
+        }
+
+        // 配列要素の範囲チェック
+        if( intLiteral.Value < 0 || intLiteral.Value >= variable.ArraySize )
+        {
+            CompilerMessageManger.Error(
+                node,
+                CompilerMessageResources.semantic_error_variable_arrayoutofbounds,
+                variable.ArraySize,
+                intLiteral.Value
+            );
+
+            // 変数の型自体は解決しているので return false としない
+        }
+
+        return true;
     }
 
     private bool TryGetPreProcessorSymbol( AstSymbolExpressionNode node, out AstExpressionNode result )
