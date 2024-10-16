@@ -16,7 +16,7 @@ public class VariableSymbol : SymbolBase
     /// <summary>
     /// Number of elements for array type
     /// </summary>
-    public virtual int ArraySize { get; set; } = 0;
+    public virtual int ArraySize { get; set; } = -1;
 
     // TODO
     /// <summary>

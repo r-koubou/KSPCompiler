@@ -8,6 +8,12 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
         /// <summary>
         /// Ctor
         /// </summary>
+        public AstArrayElementExpressionNode( IAstNode parent )
+            : this( parent, NullAstExpressionNode.Instance, NullAstExpressionNode.Instance ) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
         public AstArrayElementExpressionNode( IAstNode parent, AstExpressionNode left, AstExpressionNode right )
             : base( AstNodeId.ArrayElementExpression, parent, left, right )
         {

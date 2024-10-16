@@ -1,8 +1,8 @@
-using KSPCompiler.Domain.Ast.Analyzers.Evaluators;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Integers;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Reals;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Strings;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Operators;
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Symbols;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.CompilerMessages;
@@ -14,7 +14,7 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, ISemanticAnalyzer
 {
     private ICompilerMessageManger CompilerMessageManger { get; }
 
-    private IVariableSymbolTable VariableSymbolTable { get; }
+    private AggregateSymbolTable SymbolTable { get; }
 
     #region Eveluators
 
@@ -35,23 +35,31 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, ISemanticAnalyzer
 
     #endregion
 
+    #region Symbol Evaluators
+
+    private ISymbolEvaluator SymbolEvaluator { get; }
+
+    #endregion
+
     #endregion ~Eveluators
 
     public SemanticAnalyzer(
         ICompilerMessageManger compilerMessageManger,
-        IVariableSymbolTable variableSymbolTable )
+        AggregateSymbolTable symbolTable )
     {
         CompilerMessageManger = compilerMessageManger;
-        VariableSymbolTable   = variableSymbolTable;
+        SymbolTable           = symbolTable;
 
-        IntegerConvolutionEvaluator        = new IntegerConvolutionEvaluator( this, VariableSymbolTable, CompilerMessageManger );
-        RealConvolutionEvaluator           = new RealConvolutionEvaluator( this, VariableSymbolTable, CompilerMessageManger );
-        StringConvolutionEvaluator         = new StringConvolutionEvaluator( this, VariableSymbolTable, CompilerMessageManger );
+        IntegerConvolutionEvaluator = new IntegerConvolutionEvaluator( this, SymbolTable.Variables, CompilerMessageManger );
+        RealConvolutionEvaluator    = new RealConvolutionEvaluator( this, SymbolTable.Variables, CompilerMessageManger );
+        StringConvolutionEvaluator  = new StringConvolutionEvaluator( this, SymbolTable.Variables, CompilerMessageManger );
 
         NumericBinaryOperatorEvaluator     = new NumericBinaryOperatorEvaluator( this, CompilerMessageManger, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
         NumericUnaryOperatorEvaluator      = new NumericUnaryOperatorEvaluator( this, CompilerMessageManger, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
         StringConcatenateOperatorEvaluator = new StringConcatenateOperatorEvaluator( this, CompilerMessageManger, StringConvolutionEvaluator );
-        AssignOperatorEvaluator            = new AssignOperatorEvaluator( this, CompilerMessageManger, VariableSymbolTable );
+        AssignOperatorEvaluator            = new AssignOperatorEvaluator( this, CompilerMessageManger, SymbolTable.Variables );
+
+        SymbolEvaluator                    = new SymbolEvaluator( CompilerMessageManger, SymbolTable );
     }
 
     public void Analyze( AstCompilationUnitNode node, AbortTraverseToken abortTraverseToken)

@@ -42,7 +42,7 @@ public sealed class RealConditionalOperatorConvolutionEvaluator : IRealCondition
         }
 
         if( !exprLeft.TypeFlag.IsReal() || !exprRight.TypeFlag.IsReal() ||
-            !exprLeft.IsConstant || !exprRight.IsConstant )
+            !exprLeft.Constant || !exprRight.Constant )
         {
             return null;
         }
