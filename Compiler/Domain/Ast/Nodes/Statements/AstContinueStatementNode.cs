@@ -1,3 +1,5 @@
+using System;
+
 namespace KSPCompiler.Domain.Ast.Nodes.Statements
 {
     /// <summary>
@@ -37,7 +39,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         ///
         public override void AcceptChildren<T>( IAstVisitor<T> visitor, AbortTraverseToken abortTraverseToken )
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         #endregion IAstNodeAcceptor

@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 
 using KSPCompiler.Domain.Ast.Analyzers;
@@ -23,7 +24,7 @@ public class AntlrSymbolCollectionTest
         var abortTraverseToken = new AbortTraverseToken();
 
         Assert.DoesNotThrow( () => { symbolAnalyzer.Analyze( ast, abortTraverseToken ); } );
-        compilerMessageManger.WriteTo( System.Console.Out );
+        compilerMessageManger.WriteTo( Console.Out );
         Assert.IsFalse( abortTraverseToken.Aborted );
         Assert.IsTrue( symbolAnalyzer.Variables.Count == 1 );
     }
@@ -37,7 +38,7 @@ public class AntlrSymbolCollectionTest
         var abortTraverseToken = new AbortTraverseToken();
 
         Assert.DoesNotThrow( () => { symbolAnalyzer.Analyze( ast, abortTraverseToken ); } );
-        compilerMessageManger.WriteTo( System.Console.Out );
+        compilerMessageManger.WriteTo( Console.Out );
         Assert.IsFalse( abortTraverseToken.Aborted );
         Assert.IsTrue( symbolAnalyzer.UserCallbacks.Count == 1 );
     }
@@ -51,7 +52,7 @@ public class AntlrSymbolCollectionTest
         var abortTraverseToken = new AbortTraverseToken();
 
         Assert.DoesNotThrow( () => { symbolAnalyzer.Analyze( ast, abortTraverseToken ); } );
-        compilerMessageManger.WriteTo( System.Console.Out );
+        compilerMessageManger.WriteTo( Console.Out );
         Assert.IsFalse( abortTraverseToken.Aborted );
         Assert.IsTrue( compilerMessageManger.Count() == 0 );
         Assert.IsTrue( symbolAnalyzer.UserFunctions.Count == 1 );

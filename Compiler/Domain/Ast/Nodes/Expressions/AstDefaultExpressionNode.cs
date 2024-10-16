@@ -1,5 +1,3 @@
-using System;
-
 namespace KSPCompiler.Domain.Ast.Nodes.Expressions
 {
     /// <summary>

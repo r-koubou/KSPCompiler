@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Symbols;

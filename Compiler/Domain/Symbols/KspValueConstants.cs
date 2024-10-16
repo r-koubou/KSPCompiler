@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace KSPCompiler.Domain.Symbols
+﻿namespace KSPCompiler.Domain.Symbols
 {
     /// <summary>
     /// Definition of a constant values.
