@@ -3,7 +3,6 @@ using System;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Integers;
 using KSPCompiler.Domain.Ast.Analyzers.Semantics;
 using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;

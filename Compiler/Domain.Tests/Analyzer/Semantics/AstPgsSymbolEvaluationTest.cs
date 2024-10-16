@@ -6,7 +6,6 @@ using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
-using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 
 using NUnit.Framework;
 

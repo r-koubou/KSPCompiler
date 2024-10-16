@@ -1,5 +1,3 @@
-using System;
-
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 

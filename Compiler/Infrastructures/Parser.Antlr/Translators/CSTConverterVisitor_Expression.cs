@@ -6,7 +6,6 @@ using Antlr4.Runtime;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Extensions;
-using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
 
 namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
