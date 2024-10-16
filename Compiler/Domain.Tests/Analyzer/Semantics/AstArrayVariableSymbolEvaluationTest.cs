@@ -18,8 +18,7 @@ public class AstArrayVariableSymbolEvaluationTest
     private AstExpressionNode ArrayVariableSymbolTestBody(
         AstSymbolExpressionNode expr,
         AggregateSymbolTable symbolTable,
-        ICompilerMessageManger compilerMessageManger,
-        AbortTraverseToken abortTraverseToken )
+        ICompilerMessageManger compilerMessageManger )
     {
         var visitor = new MockAstSymbolVisitor();
         var symbolEvaluator = new SymbolEvaluator( compilerMessageManger, symbolTable );
@@ -28,11 +27,9 @@ public class AstArrayVariableSymbolEvaluationTest
         var arrayElementEvaluator = new ArrayElementEvaluator( compilerMessageManger, symbolTable.Variables );
         visitor.Inject( arrayElementEvaluator );
 
-        var result = visitor.Visit( expr, abortTraverseToken );
+        var result = visitor.Visit( expr );
 
         compilerMessageManger.WriteTo( Console.Out );
-
-        Assert.IsFalse( abortTraverseToken.Aborted );
 
         return (AstExpressionNode)result;
     }
@@ -43,7 +40,6 @@ public class AstArrayVariableSymbolEvaluationTest
     public void IntArrayEvalTest( string variableName, DataTypeFlag type )
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
-        var abortTraverseToken = new AbortTraverseToken();
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
         var variable = MockUtility.CreateVariable( variableName, type );
         variable.ArraySize = 10;
@@ -53,9 +49,7 @@ public class AstArrayVariableSymbolEvaluationTest
         var result = ArrayVariableSymbolTestBody(
             symbolExpr,
             symbolTable,
-            compilerMessageManger,
-            abortTraverseToken
-        );
+            compilerMessageManger );
 
         Assert.IsTrue( result.TypeFlag == type );
         Assert.IsTrue( compilerMessageManger.Count( CompilerMessageLevel.Error ) == 0 );
@@ -65,7 +59,6 @@ public class AstArrayVariableSymbolEvaluationTest
     public void IntArrayElementTest()
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
-        var abortTraverseToken = new AbortTraverseToken();
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
         var variable = MockUtility.CreateVariable( "%x", DataTypeFlag.TypeIntArray );
         variable.ArraySize = 10;
@@ -81,9 +74,7 @@ public class AstArrayVariableSymbolEvaluationTest
         var result = ArrayVariableSymbolTestBody(
             symbolExpr,
             symbolTable,
-            compilerMessageManger,
-            abortTraverseToken
-        );
+            compilerMessageManger );
 
         Assert.IsTrue( result.TypeFlag.IsInt() );
         Assert.IsTrue( compilerMessageManger.Count( CompilerMessageLevel.Error ) == 0 );
@@ -93,7 +84,6 @@ public class AstArrayVariableSymbolEvaluationTest
     public void RealArrayElementTest()
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
-        var abortTraverseToken = new AbortTraverseToken();
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
         var variable = MockUtility.CreateVariable( "?x", DataTypeFlag.TypeRealArray );
         variable.ArraySize = 10;
@@ -109,9 +99,7 @@ public class AstArrayVariableSymbolEvaluationTest
         var result = ArrayVariableSymbolTestBody(
             symbolExpr,
             symbolTable,
-            compilerMessageManger,
-            abortTraverseToken
-        );
+            compilerMessageManger );
 
         Assert.IsTrue( result.TypeFlag.IsReal() );
         Assert.IsTrue( compilerMessageManger.Count( CompilerMessageLevel.Error ) == 0 );
@@ -121,7 +109,6 @@ public class AstArrayVariableSymbolEvaluationTest
     public void StringArrayElementTest()
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
-        var abortTraverseToken = new AbortTraverseToken();
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
         var variable = MockUtility.CreateVariable( "!x", DataTypeFlag.TypeStringArray );
         variable.ArraySize = 10;
@@ -137,9 +124,7 @@ public class AstArrayVariableSymbolEvaluationTest
         var result = ArrayVariableSymbolTestBody(
             symbolExpr,
             symbolTable,
-            compilerMessageManger,
-            abortTraverseToken
-        );
+            compilerMessageManger );
 
         Assert.IsTrue( result.TypeFlag.IsString() );
         Assert.IsTrue( compilerMessageManger.Count( CompilerMessageLevel.Error ) == 0 );
@@ -151,7 +136,6 @@ public class AstArrayVariableSymbolEvaluationTest
     public void ArrayOutOfBoundsTest(int arraySize, int arrayIndex )
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
-        var abortTraverseToken = new AbortTraverseToken();
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
         var variable = MockUtility.CreateVariable( "%x", DataTypeFlag.TypeIntArray );
         variable.ArraySize = arraySize;
@@ -168,9 +152,7 @@ public class AstArrayVariableSymbolEvaluationTest
         var result = ArrayVariableSymbolTestBody(
             symbolExpr,
             symbolTable,
-            compilerMessageManger,
-            abortTraverseToken
-        );
+            compilerMessageManger );
 
         // Evaluated as int
         Assert.IsTrue( result.TypeFlag.IsInt() );

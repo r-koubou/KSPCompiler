@@ -2,7 +2,6 @@ using System;
 using System.IO;
 
 using KSPCompiler.Domain.Ast.Analyzers;
-using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Parser.Antlr.Tests.Commons;
 
@@ -21,11 +20,9 @@ public class AntlrSymbolCollectionTest
         var compilerMessageManger = ICompilerMessageManger.Default;
         var ast = ParseTestUtility.Parse( TestDataDirectory, "VariableSymbolTest.txt" );
         var symbolAnalyzer = new SymbolCollector( compilerMessageManger );
-        var abortTraverseToken = new AbortTraverseToken();
 
-        Assert.DoesNotThrow( () => { symbolAnalyzer.Analyze( ast, abortTraverseToken ); } );
+        Assert.DoesNotThrow( () => { symbolAnalyzer.Analyze( ast ); } );
         compilerMessageManger.WriteTo( Console.Out );
-        Assert.IsFalse( abortTraverseToken.Aborted );
         Assert.IsTrue( symbolAnalyzer.Variables.Count == 1 );
     }
 
@@ -35,11 +32,9 @@ public class AntlrSymbolCollectionTest
         var compilerMessageManger = ICompilerMessageManger.Default;
         var ast = ParseTestUtility.Parse( TestDataDirectory, "CallbackSymbolTest.txt" );
         var symbolAnalyzer = new SymbolCollector( compilerMessageManger );
-        var abortTraverseToken = new AbortTraverseToken();
 
-        Assert.DoesNotThrow( () => { symbolAnalyzer.Analyze( ast, abortTraverseToken ); } );
+        Assert.DoesNotThrow( () => { symbolAnalyzer.Analyze( ast ); } );
         compilerMessageManger.WriteTo( Console.Out );
-        Assert.IsFalse( abortTraverseToken.Aborted );
         Assert.IsTrue( symbolAnalyzer.UserCallbacks.Count == 1 );
     }
 
@@ -49,11 +44,9 @@ public class AntlrSymbolCollectionTest
         var compilerMessageManger = ICompilerMessageManger.Default;
         var ast = ParseTestUtility.Parse( TestDataDirectory, "UserFunctionSymbolTest.txt" );
         var symbolAnalyzer = new SymbolCollector( compilerMessageManger );
-        var abortTraverseToken = new AbortTraverseToken();
 
-        Assert.DoesNotThrow( () => { symbolAnalyzer.Analyze( ast, abortTraverseToken ); } );
+        Assert.DoesNotThrow( () => { symbolAnalyzer.Analyze( ast ); } );
         compilerMessageManger.WriteTo( Console.Out );
-        Assert.IsFalse( abortTraverseToken.Aborted );
         Assert.IsTrue( compilerMessageManger.Count() == 0 );
         Assert.IsTrue( symbolAnalyzer.UserFunctions.Count == 1 );
     }

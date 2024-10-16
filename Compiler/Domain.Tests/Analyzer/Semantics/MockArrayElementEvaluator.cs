@@ -15,6 +15,6 @@ internal class MockArrayElementEvaluator : IArrayElementEvaluator
         EvalResult = evalResult;
     }
 
-    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstArrayElementExpressionNode expr, AbortTraverseToken abortTraverseToken )
+    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstArrayElementExpressionNode expr )
         => EvalResult;
 }

@@ -21,20 +21,15 @@ public sealed class RealConditionalOperatorConvolutionEvaluator : IRealCondition
         ConvolutionEvaluator = convolutionEvaluator;
     }
 
-    public bool? Evaluate( AstExpressionNode expr, AbortTraverseToken abortTraverseToken )
+    public bool? Evaluate( AstExpressionNode expr )
     {
         if( expr.ChildNodeCount != 2 )
         {
             throw new ArgumentException( $"Expected 2 child nodes, but got {expr.ChildNodeCount}. (node: {expr.GetType().Name})" );
         }
 
-        if( abortTraverseToken.Aborted )
-        {
-            return null;
-        }
-
-        var exprLeft = expr.Accept( Visitor,  abortTraverseToken ) as AstExpressionNode;
-        var exprRight = expr.Accept( Visitor, abortTraverseToken ) as AstExpressionNode;
+        var exprLeft = expr.Accept( Visitor ) as AstExpressionNode;
+        var exprRight = expr.Accept( Visitor ) as AstExpressionNode;
 
         if( exprLeft == null || exprRight == null )
         {

@@ -64,8 +64,8 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, ISemanticAnalyzer
         AssignOperatorEvaluator            = new AssignOperatorEvaluator( this, CompilerMessageManger, SymbolTable.Variables );
     }
 
-    public void Analyze( AstCompilationUnitNode node, AbortTraverseToken abortTraverseToken)
+    public void Analyze( AstCompilationUnitNode node )
     {
-        node.AcceptChildren( this, abortTraverseToken );
+        node.AcceptChildren( this );
     }
 }

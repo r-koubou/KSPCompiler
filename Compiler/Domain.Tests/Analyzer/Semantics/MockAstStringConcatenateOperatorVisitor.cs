@@ -13,6 +13,6 @@ public class MockAstStringConcatenateOperatorVisitor : DefaultAstVisitor
         StringConcatenateOperatorEvaluator = unaryOperatorEvaluator;
     }
 
-    public override IAstNode Visit( AstStringConcatenateExpressionNode node, AbortTraverseToken abortTraverseToken )
-        => StringConcatenateOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
+    public override IAstNode Visit( AstStringConcatenateExpressionNode node )
+        => StringConcatenateOperatorEvaluator.Evaluate( this, node );
 }

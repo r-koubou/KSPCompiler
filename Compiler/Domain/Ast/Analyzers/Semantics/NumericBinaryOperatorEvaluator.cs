@@ -31,7 +31,7 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
         RealConvolutionEvaluator    = realConvolutionEvaluator;
     }
 
-    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstExpressionNode expr, AbortTraverseToken abortTraverseToken )
+    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstExpressionNode expr )
     {
         /*
                 <<operator>> expr
@@ -47,21 +47,16 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
             throw new AstAnalyzeException( expr, "Invalid binary operator" );
         }
 
-        if( expr.Left.Accept( visitor, abortTraverseToken ) is not AstExpressionNode evaluatedLeft )
+        if( expr.Left.Accept( visitor ) is not AstExpressionNode evaluatedLeft )
         {
             throw new AstAnalyzeException( expr, "Failed to evaluate left side of binary operator" );
         }
-        if( expr.Right.Accept( visitor, abortTraverseToken ) is not AstExpressionNode evaluatedRight )
+        if( expr.Right.Accept( visitor ) is not AstExpressionNode evaluatedRight )
         {
             throw new AstAnalyzeException( expr, "Failed to evaluate right side of binary operator" );
         }
 
-        if( abortTraverseToken.Aborted )
-        {
-            return NullAstExpressionNode.Instance;
-        }
-
-        var typeEvalResult = EvaluateDataType( expr, evaluatedLeft, evaluatedRight, abortTraverseToken, out var resultType );
+        var typeEvalResult = EvaluateDataType( expr, evaluatedLeft, evaluatedRight, out var resultType );
 
         if( !typeEvalResult )
         {
@@ -123,7 +118,6 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
         AstExpressionNode operatorNode,
         AstExpressionNode left,
         AstExpressionNode right,
-        AbortTraverseToken abortTraverseToken,
         out DataTypeFlag resultType )
     {
         resultType = DataTypeFlag.None;
@@ -148,7 +142,6 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
                     right.TypeFlag.ToMessageString()
                 );
 
-                abortTraverseToken.Abort();
                 return false;
             }
 
@@ -162,8 +155,6 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
             left.TypeFlag.ToMessageString(),
             right.TypeFlag.ToMessageString()
         );
-
-        abortTraverseToken.Abort();
 
         return false;
     }

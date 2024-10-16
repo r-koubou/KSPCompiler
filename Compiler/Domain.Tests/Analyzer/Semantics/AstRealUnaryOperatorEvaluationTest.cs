@@ -2,7 +2,6 @@ using System;
 
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Reals;
 using KSPCompiler.Domain.Ast.Analyzers.Semantics;
-using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
@@ -19,7 +18,6 @@ public class AstRealUnaryOperatorEvaluationTest
     {
         const string variableName = "~x";
 
-        var abortTraverseToken = new AbortTraverseToken();
         var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockAstUnaryOperatorVisitor();
         var variableTable = new VariableSymbolTable();
@@ -42,11 +40,10 @@ public class AstRealUnaryOperatorEvaluationTest
 
         var operatorNode = MockUtility.CreateUnaryMinusOperatorNode( variableName, DataTypeFlag.TypeReal );
 
-        Assert.DoesNotThrow( () => visitor.Visit( operatorNode, abortTraverseToken ) );
+        Assert.DoesNotThrow( () => visitor.Visit( operatorNode ) );
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsFalse( abortTraverseToken.Aborted );
         Assert.IsFalse( compilerMessageManger.Count() > 0 );
     }
 
@@ -55,7 +52,6 @@ public class AstRealUnaryOperatorEvaluationTest
     {
         const string variableName = "~x";
 
-        var abortTraverseToken = new AbortTraverseToken();
         var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockAstUnaryOperatorVisitor();
         var variableTable = new VariableSymbolTable();
@@ -78,11 +74,10 @@ public class AstRealUnaryOperatorEvaluationTest
 
         var operatorNode = MockUtility.CreateUnaryNotOperatorNode( variableName, DataTypeFlag.TypeReal );
 
-        Assert.DoesNotThrow( () => visitor.Visit( operatorNode, abortTraverseToken ) );
+        Assert.DoesNotThrow( () => visitor.Visit( operatorNode ) );
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsTrue( abortTraverseToken.Aborted );
         Assert.IsTrue( compilerMessageManger.Count() > 0 );
     }
 

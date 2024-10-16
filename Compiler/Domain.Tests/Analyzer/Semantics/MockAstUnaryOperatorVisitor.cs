@@ -13,9 +13,9 @@ public class MockAstUnaryOperatorVisitor : DefaultAstVisitor
         NumericUnaryOperatorEvaluator = unaryOperatorEvaluator;
     }
 
-    public override IAstNode Visit( AstUnaryNotExpressionNode node, AbortTraverseToken abortTraverseToken )
-        => NumericUnaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
+    public override IAstNode Visit( AstUnaryNotExpressionNode node )
+        => NumericUnaryOperatorEvaluator.Evaluate( this, node );
 
-    public override IAstNode Visit( AstUnaryMinusExpressionNode node, AbortTraverseToken abortTraverseToken )
-        => NumericUnaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
+    public override IAstNode Visit( AstUnaryMinusExpressionNode node )
+        => NumericUnaryOperatorEvaluator.Evaluate( this, node );
 }

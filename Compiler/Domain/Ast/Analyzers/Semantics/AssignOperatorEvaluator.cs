@@ -25,7 +25,7 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
         VariableSymbolTable   = variableSymbolTable;
     }
 
-    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstExpressionNode expr, AbortTraverseToken abortTraverseToken )
+    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstExpressionNode expr )
     {
         /*
                      := expr
@@ -37,19 +37,14 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
               (variable)    (value)
         */
 
-        if( expr.Left.Accept( visitor, abortTraverseToken ) is not AstExpressionNode evaluatedLeft )
+        if( expr.Left.Accept( visitor ) is not AstExpressionNode evaluatedLeft )
         {
             throw new AstAnalyzeException( expr, "Failed to evaluate left side of binary operator" );
         }
 
-        if( expr.Right.Accept( visitor, abortTraverseToken ) is not AstExpressionNode evaluatedRight )
+        if( expr.Right.Accept( visitor ) is not AstExpressionNode evaluatedRight )
         {
             throw new AstAnalyzeException( expr, "Failed to evaluate right side of binary operator" );
-        }
-
-        if( abortTraverseToken.Aborted )
-        {
-            return NullAstExpressionNode.Instance;
         }
 
         // 変数の確認
@@ -60,8 +55,6 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
                 CompilerMessageResources.semantic_error_variable_not_declared,
                 evaluatedLeft.Name
             );
-
-            abortTraverseToken.Abort();
 
             return NullAstExpressionNode.Instance;
         }
@@ -74,8 +67,6 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
                 CompilerMessageResources.semantic_error_assign_to_constant,
                 expr.Name
             );
-
-            abortTraverseToken.Abort();
 
             return NullAstExpressionNode.Instance;
         }
@@ -108,8 +99,6 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
                     leftType.TypeMasked().ToMessageString(),
                     evaluatedRight.TypeFlag.TypeMasked().ToMessageString()
                 );
-
-                abortTraverseToken.Abort();
 
                 return NullAstExpressionNode.Instance;
             }

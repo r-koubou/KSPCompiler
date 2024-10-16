@@ -23,9 +23,9 @@ public class SymbolEvaluator : ISymbolEvaluator
         SymbolTable           = symbolTable;
     }
 
-    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstSymbolExpressionNode expr, AbortTraverseToken abortTraverseToken )
+    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstSymbolExpressionNode expr )
     {
-        if( TryGetVariableSymbol( visitor, expr, out var result, abortTraverseToken ) )
+        if( TryGetVariableSymbol( visitor, expr, out var result ) )
         {
             return result;
         }
@@ -48,7 +48,7 @@ public class SymbolEvaluator : ISymbolEvaluator
         return NullAstExpressionNode.Instance;
     }
 
-    private bool TryGetVariableSymbol( IAstVisitor<IAstNode> visitor, AstSymbolExpressionNode node, out AstExpressionNode result, AbortTraverseToken abortTraverseToken )
+    private bool TryGetVariableSymbol( IAstVisitor<IAstNode> visitor, AstSymbolExpressionNode node, out AstExpressionNode result )
     {
         result = NullAstExpressionNode.Instance;
 
@@ -62,7 +62,7 @@ public class SymbolEvaluator : ISymbolEvaluator
             return true;
         }
 
-        if( TryGetArrayVariableNode( visitor, node, variable, out result, abortTraverseToken ) )
+        if( TryGetArrayVariableNode( visitor, node, variable, out result ) )
         {
             return true;
         }
@@ -99,7 +99,7 @@ public class SymbolEvaluator : ISymbolEvaluator
         }
     }
 
-    private bool TryGetArrayVariableNode( IAstVisitor<IAstNode> visitor, AstExpressionNode node, VariableSymbol variable, out AstExpressionNode result, AbortTraverseToken abortTraverseToken )
+    private bool TryGetArrayVariableNode( IAstVisitor<IAstNode> visitor, AstExpressionNode node, VariableSymbol variable, out AstExpressionNode result )
     {
         result = NullAstExpressionNode.Instance;
 
@@ -127,7 +127,7 @@ public class SymbolEvaluator : ISymbolEvaluator
             return false;
         }
 
-        if( node.Left.Accept( visitor, abortTraverseToken ) is not AstExpressionNode indexExpr )
+        if( node.Left.Accept( visitor ) is not AstExpressionNode indexExpr )
         {
             throw new AstAnalyzeException( node.Left, "Failed to evaluate array index" );
         }

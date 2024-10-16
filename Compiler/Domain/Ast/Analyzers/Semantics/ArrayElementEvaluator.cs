@@ -20,7 +20,7 @@ public class ArrayElementEvaluator : IArrayElementEvaluator
         VariableSymbolTable   = variableSymbolTable;
     }
 
-    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstArrayElementExpressionNode expr, AbortTraverseToken abortTraverseToken )
+    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstArrayElementExpressionNode expr )
     {
         /*
                symbol
@@ -35,7 +35,7 @@ public class ArrayElementEvaluator : IArrayElementEvaluator
 
         */
 
-        if( expr.Left.Accept( visitor, abortTraverseToken ) is not AstExpressionNode evaluated )
+        if( expr.Left.Accept( visitor ) is not AstExpressionNode evaluated )
         {
             throw new AstAnalyzeException( expr, "Failed to evaluate left side of array element" );
         }

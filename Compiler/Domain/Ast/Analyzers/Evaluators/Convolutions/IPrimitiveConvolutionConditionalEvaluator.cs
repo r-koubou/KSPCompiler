@@ -12,9 +12,8 @@ public interface IPrimitiveConvolutionConditionalEvaluator<T> where T : struct
     /// Calculate conditional expression
     /// </summary>
     /// <param name="expr">Expression node</param>
-    /// <param name="abortTraverseToken">Token for aborting traversal</param>
     /// <returns>Evaluated value. If constant value is not found, returns null.</returns>
-    bool? Evaluate( AstExpressionNode expr, AbortTraverseToken abortTraverseToken );
+    bool? Evaluate( AstExpressionNode expr );
 }
 
 public sealed class NullConvolutionConditionalEvaluator<T> : IPrimitiveConvolutionCalculator<bool> where T : struct

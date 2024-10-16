@@ -2,7 +2,6 @@ using System;
 
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Integers;
 using KSPCompiler.Domain.Ast.Analyzers.Semantics;
-using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols;
@@ -23,7 +22,6 @@ public class AstIntBinaryOperatorEvaluationTest
     {
         const string variableName = "$x";
 
-        var abortTraverseToken = new AbortTraverseToken();
         var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockAstBinaryOperatorVisitor();
         var variableTable = new VariableSymbolTable();
@@ -46,11 +44,10 @@ public class AstIntBinaryOperatorEvaluationTest
 
         var operatorNode = MockUtility.CreateBinaryOperatorNode<AstAdditionExpressionNode>( variableName, DataTypeFlag.TypeInt, new AstIntLiteralNode( 1 ) );
 
-        Assert.DoesNotThrow( () => visitor.Visit( operatorNode, abortTraverseToken ) );
+        Assert.DoesNotThrow( () => visitor.Visit( operatorNode ) );
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsFalse( abortTraverseToken.Aborted );
         Assert.IsFalse( compilerMessageManger.Count() > 0 );
     }
 
@@ -59,7 +56,6 @@ public class AstIntBinaryOperatorEvaluationTest
     {
         const string variableName = "$x";
 
-        var abortTraverseToken = new AbortTraverseToken();
         var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockAstBinaryOperatorVisitor();
         var variableTable = new VariableSymbolTable();
@@ -82,11 +78,10 @@ public class AstIntBinaryOperatorEvaluationTest
 
         var operatorNode = MockUtility.CreateBinaryOperatorNode<AstSubtractionExpressionNode>( variableName, DataTypeFlag.TypeInt, new AstIntLiteralNode( 1 ) );
 
-        Assert.DoesNotThrow( () => visitor.Visit( operatorNode, abortTraverseToken ) );
+        Assert.DoesNotThrow( () => visitor.Visit( operatorNode ) );
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsFalse( abortTraverseToken.Aborted );
         Assert.IsFalse( compilerMessageManger.Count() > 0 );
     }
 
@@ -95,7 +90,6 @@ public class AstIntBinaryOperatorEvaluationTest
     {
         const string variableName = "$x";
 
-        var abortTraverseToken = new AbortTraverseToken();
         var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockAstBinaryOperatorVisitor();
         var variableTable = new VariableSymbolTable();
@@ -118,11 +112,10 @@ public class AstIntBinaryOperatorEvaluationTest
 
         var operatorNode = MockUtility.CreateBinaryOperatorNode<AstMultiplyingExpressionNode>( variableName, DataTypeFlag.TypeInt, new AstIntLiteralNode( 1 ) );
 
-        Assert.DoesNotThrow( () => visitor.Visit( operatorNode, abortTraverseToken ) );
+        Assert.DoesNotThrow( () => visitor.Visit( operatorNode ) );
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsFalse( abortTraverseToken.Aborted );
         Assert.IsFalse( compilerMessageManger.Count() > 0 );
     }
 
@@ -131,7 +124,6 @@ public class AstIntBinaryOperatorEvaluationTest
     {
         const string variableName = "$x";
 
-        var abortTraverseToken = new AbortTraverseToken();
         var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockAstBinaryOperatorVisitor();
         var variableTable = new VariableSymbolTable();
@@ -154,11 +146,10 @@ public class AstIntBinaryOperatorEvaluationTest
 
         var operatorNode = MockUtility.CreateBinaryOperatorNode<AstDivisionExpressionNode>( variableName, DataTypeFlag.TypeInt, new AstIntLiteralNode( 1 ) );
 
-        Assert.DoesNotThrow( () => visitor.Visit( operatorNode, abortTraverseToken ) );
+        Assert.DoesNotThrow( () => visitor.Visit( operatorNode ) );
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsFalse( abortTraverseToken.Aborted );
         Assert.IsFalse( compilerMessageManger.Count() > 0 );
     }
 
@@ -167,7 +158,6 @@ public class AstIntBinaryOperatorEvaluationTest
     {
         const string variableName = "$x";
 
-        var abortTraverseToken = new AbortTraverseToken();
         var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockAstBinaryOperatorVisitor();
         var variableTable = new VariableSymbolTable();
@@ -190,11 +180,10 @@ public class AstIntBinaryOperatorEvaluationTest
 
         var operatorNode = MockUtility.CreateBinaryOperatorNode<AstModuloExpressionNode>( variableName, DataTypeFlag.TypeInt, new AstIntLiteralNode( 1 ) );
 
-        Assert.DoesNotThrow( () => visitor.Visit( operatorNode, abortTraverseToken ) );
+        Assert.DoesNotThrow( () => visitor.Visit( operatorNode ) );
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsFalse( abortTraverseToken.Aborted );
         Assert.IsFalse( compilerMessageManger.Count() > 0 );
     }
 
@@ -205,7 +194,6 @@ public class AstIntBinaryOperatorEvaluationTest
     {
         const string variableName = "$x";
 
-        var abortTraverseToken = new AbortTraverseToken();
         var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockAstBinaryOperatorVisitor();
         var variableTable = new VariableSymbolTable();
@@ -228,11 +216,10 @@ public class AstIntBinaryOperatorEvaluationTest
 
         var operatorNode = MockUtility.CreateBinaryOperatorNode<AstBitwiseOrExpressionNode>( variableName, DataTypeFlag.TypeInt, new AstIntLiteralNode( 1 ) );
 
-        Assert.DoesNotThrow( () => visitor.Visit( operatorNode, abortTraverseToken ) );
+        Assert.DoesNotThrow( () => visitor.Visit( operatorNode ) );
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsFalse( abortTraverseToken.Aborted );
         Assert.IsFalse( compilerMessageManger.Count() > 0 );
     }
 
@@ -241,7 +228,6 @@ public class AstIntBinaryOperatorEvaluationTest
     {
         const string variableName = "$x";
 
-        var abortTraverseToken = new AbortTraverseToken();
         var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockAstBinaryOperatorVisitor();
         var variableTable = new VariableSymbolTable();
@@ -264,11 +250,10 @@ public class AstIntBinaryOperatorEvaluationTest
 
         var operatorNode = MockUtility.CreateBinaryOperatorNode<AstBitwiseAndExpressionNode>( variableName, DataTypeFlag.TypeInt, new AstIntLiteralNode( 1 ) );
 
-        Assert.DoesNotThrow( () => visitor.Visit( operatorNode, abortTraverseToken ) );
+        Assert.DoesNotThrow( () => visitor.Visit( operatorNode ) );
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsFalse( abortTraverseToken.Aborted );
         Assert.IsFalse( compilerMessageManger.Count() > 0 );
     }
 
@@ -277,7 +262,6 @@ public class AstIntBinaryOperatorEvaluationTest
     {
         const string variableName = "$x";
 
-        var abortTraverseToken = new AbortTraverseToken();
         var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockAstBinaryOperatorVisitor();
         var variableTable = new VariableSymbolTable();
@@ -300,11 +284,10 @@ public class AstIntBinaryOperatorEvaluationTest
 
         var operatorNode = MockUtility.CreateBinaryOperatorNode<AstBitwiseXorExpressionNode>( variableName, DataTypeFlag.TypeInt, new AstIntLiteralNode( 1 ) );
 
-        Assert.DoesNotThrow( () => visitor.Visit( operatorNode, abortTraverseToken ) );
+        Assert.DoesNotThrow( () => visitor.Visit( operatorNode ) );
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsFalse( abortTraverseToken.Aborted );
         Assert.IsFalse( compilerMessageManger.Count() > 0 );
     }
 }

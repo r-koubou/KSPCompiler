@@ -27,7 +27,7 @@ public sealed class StringConcatenateOperatorEvaluator : IStringConcatenateOpera
         StringConvolutionEvaluator = stringConvolutionEvaluator;
     }
 
-    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstExpressionNode expr, AbortTraverseToken abortTraverseToken )
+    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstExpressionNode expr )
     {
         /*
                <<operator &>> expr
@@ -48,7 +48,6 @@ public sealed class StringConcatenateOperatorEvaluator : IStringConcatenateOpera
                 CompilerMessageResources.semantic_error_variable_invalid_string_initializer
             );
 
-            abortTraverseToken.Abort();
             return NullAstExpressionNode.Instance;
         }
 
@@ -57,18 +56,13 @@ public sealed class StringConcatenateOperatorEvaluator : IStringConcatenateOpera
             throw new AstAnalyzeException( expr, "Invalid string concatenate operator '&'" );
         }
 
-        if( expr.Left.Accept( visitor, abortTraverseToken ) is not AstExpressionNode evaluatedLeft )
+        if( expr.Left.Accept( visitor ) is not AstExpressionNode evaluatedLeft )
         {
             throw new AstAnalyzeException( expr, "Failed to evaluate left side of concatenate operator '&'" );
         }
-        if( expr.Right.Accept( visitor, abortTraverseToken ) is not AstExpressionNode evaluatedRight )
+        if( expr.Right.Accept( visitor ) is not AstExpressionNode evaluatedRight )
         {
             throw new AstAnalyzeException( expr, "Failed to evaluate right side of concatenate operator '&'" );
-        }
-
-        if( abortTraverseToken.Aborted )
-        {
-            return NullAstExpressionNode.Instance;
         }
 
         //----------------------------------------------------------------------
@@ -83,7 +77,6 @@ public sealed class StringConcatenateOperatorEvaluator : IStringConcatenateOpera
                 CompilerMessageResources.semantic_error_string_operator_conditional
             );
 
-            abortTraverseToken.Abort();
             return NullAstExpressionNode.Instance;
         }
 

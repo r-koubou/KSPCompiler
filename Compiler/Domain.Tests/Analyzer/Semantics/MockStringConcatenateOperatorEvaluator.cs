@@ -7,6 +7,6 @@ namespace KSPCompiler.Domain.Tests.Analyzer.Semantics;
 
 public class MockStringConcatenateOperatorEvaluator : IStringConcatenateOperatorEvaluator
 {
-    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstExpressionNode expr, AbortTraverseToken abortTraverseToken )
+    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstExpressionNode expr )
         => throw new NotImplementedException();
 }
