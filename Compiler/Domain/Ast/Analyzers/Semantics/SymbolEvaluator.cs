@@ -191,6 +191,6 @@ public class SymbolEvaluator : ISymbolEvaluator
             TypeFlag = DataTypeFlag.TypePgsId
         };
 
-        return false;
+        return true;
     }
 }
