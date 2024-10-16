@@ -15,32 +15,32 @@ public class MockAstBinaryOperatorVisitor : DefaultAstVisitor
 
     #region Binary Operators (Mathematical)
 
-    public override IAstNode Visit( AstAdditionExpressionNode node, AbortTraverseToken abortTraverseToken )
-        => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
+    public override IAstNode Visit( AstAdditionExpressionNode node )
+        => NumericBinaryOperatorEvaluator.Evaluate( this, node );
 
-    public override IAstNode Visit( AstSubtractionExpressionNode node, AbortTraverseToken abortTraverseToken )
-        => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
+    public override IAstNode Visit( AstSubtractionExpressionNode node )
+        => NumericBinaryOperatorEvaluator.Evaluate( this, node );
 
-    public override IAstNode Visit( AstMultiplyingExpressionNode node, AbortTraverseToken abortTraverseToken )
-        => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
+    public override IAstNode Visit( AstMultiplyingExpressionNode node )
+        => NumericBinaryOperatorEvaluator.Evaluate( this, node );
 
-    public override IAstNode Visit( AstDivisionExpressionNode node, AbortTraverseToken abortTraverseToken )
-        => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
+    public override IAstNode Visit( AstDivisionExpressionNode node )
+        => NumericBinaryOperatorEvaluator.Evaluate( this, node );
 
-    public override IAstNode Visit( AstModuloExpressionNode node, AbortTraverseToken abortTraverseToken )
-        => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
+    public override IAstNode Visit( AstModuloExpressionNode node )
+        => NumericBinaryOperatorEvaluator.Evaluate( this, node );
 
     #endregion ~Binary Operators
 
     #region Binary Operators (Bitwise)
-    public override IAstNode Visit( AstBitwiseOrExpressionNode node, AbortTraverseToken abortTraverseToken )
-        => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
+    public override IAstNode Visit( AstBitwiseOrExpressionNode node )
+        => NumericBinaryOperatorEvaluator.Evaluate( this, node );
 
-    public override IAstNode Visit( AstBitwiseAndExpressionNode node, AbortTraverseToken abortTraverseToken )
-        => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
+    public override IAstNode Visit( AstBitwiseAndExpressionNode node )
+        => NumericBinaryOperatorEvaluator.Evaluate( this, node );
 
-    public override IAstNode Visit( AstBitwiseXorExpressionNode node, AbortTraverseToken abortTraverseToken )
-        => NumericBinaryOperatorEvaluator.Evaluate( this, node, abortTraverseToken );
+    public override IAstNode Visit( AstBitwiseXorExpressionNode node )
+        => NumericBinaryOperatorEvaluator.Evaluate( this, node );
 
     #endregion ~Binary Operators (Bitwise)
 }

@@ -31,7 +31,7 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
         RealConvolutionEvaluator    = realConvolutionEvaluator;
     }
 
-    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstExpressionNode expr, AbortTraverseToken abortTraverseToken )
+    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstExpressionNode expr )
     {
         /*
               <<operator>> expr
@@ -45,14 +45,9 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
             throw new AstAnalyzeException( expr, "Invalid unary operator" );
         }
 
-        if( expr.Left.Accept( visitor, abortTraverseToken ) is not AstExpressionNode evaluatedLeft )
+        if( expr.Left.Accept( visitor ) is not AstExpressionNode evaluatedLeft )
         {
             throw new AstAnalyzeException( expr, "Failed to evaluate of unary operator" );
-        }
-
-        if( abortTraverseToken.Aborted )
-        {
-            return NullAstExpressionNode.Instance;
         }
 
         var typeEvalResult = EvaluateDataType( expr, evaluatedLeft, out var resultType );
@@ -65,7 +60,6 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
                 evaluatedLeft.TypeFlag.ToMessageString()
             );
 
-            abortTraverseToken.Abort();
             return NullAstExpressionNode.Instance;
         }
 

@@ -15,6 +15,6 @@ internal class MockSymbolEvaluator : ISymbolEvaluator
         EvalResult = evalResult;
     }
 
-    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstSymbolExpressionNode expr, AbortTraverseToken abortTraverseToken )
+    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstSymbolExpressionNode expr )
         => EvalResult;
 }

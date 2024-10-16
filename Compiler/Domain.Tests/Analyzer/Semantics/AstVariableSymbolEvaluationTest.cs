@@ -15,7 +15,7 @@ namespace KSPCompiler.Domain.Tests.Analyzer.Semantics;
 [TestFixture]
 public class AstVariableSymbolEvaluationTest
 {
-    private AstExpressionNode VariableSymbolTestBody( VariableSymbol variable, AbortTraverseToken abortTraverseToken )
+    private AstExpressionNode VariableSymbolTestBody( VariableSymbol variable )
     {
         var visitor = new MockAstSymbolVisitor();
         var compilerMessageManger = ICompilerMessageManger.Default;
@@ -27,11 +27,9 @@ public class AstVariableSymbolEvaluationTest
         visitor.Inject( symbolEvaluator );
 
         var node = MockUtility.CreateSymbolNode( variable.Name );
-        var result = visitor.Visit( node, abortTraverseToken );
+        var result = visitor.Visit( node );
 
         compilerMessageManger.WriteTo( Console.Out );
-
-        Assert.IsFalse( abortTraverseToken.Aborted );
 
         return (AstExpressionNode)result;
     }
@@ -40,7 +38,6 @@ public class AstVariableSymbolEvaluationTest
     [TestCase( true )]
     public void IntVariableSymbolTest( bool isConstant )
     {
-        var abortTraverseToken = new AbortTraverseToken();
         var variable = MockUtility.CreateVariable( "$x", DataTypeFlag.TypeInt );
 
         if( isConstant )
@@ -49,9 +46,7 @@ public class AstVariableSymbolEvaluationTest
             variable.Value            =  1;
         }
 
-        var result = VariableSymbolTestBody( variable, abortTraverseToken );
-
-        Assert.IsFalse( abortTraverseToken.Aborted );
+        var result = VariableSymbolTestBody( variable );
 
         Assert.That(
             result,

@@ -21,9 +21,9 @@ public class MockAstSymbolVisitor : DefaultAstVisitor
         ArrayElementEvaluator = evaluator;
     }
 
-    public override IAstNode Visit( AstSymbolExpressionNode node, AbortTraverseToken abortTraverseToken )
-        => SymbolEvaluator.Evaluate( this, node, abortTraverseToken );
+    public override IAstNode Visit( AstSymbolExpressionNode node )
+        => SymbolEvaluator.Evaluate( this, node );
 
-    public override IAstNode Visit( AstArrayElementExpressionNode node, AbortTraverseToken abortTraverseToken )
-        => ArrayElementEvaluator.Evaluate( this, node, abortTraverseToken );
+    public override IAstNode Visit( AstArrayElementExpressionNode node )
+        => ArrayElementEvaluator.Evaluate( this, node );
 }

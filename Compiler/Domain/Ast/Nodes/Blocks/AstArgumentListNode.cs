@@ -41,13 +41,13 @@ namespace KSPCompiler.Domain.Ast.Nodes.Blocks
         ///
         /// <inheritdoc/>
         ///
-        public override T Accept<T>( IAstVisitor<T> visitor, AbortTraverseToken abortTraverseToken )
-            => visitor.Visit( this, abortTraverseToken );
+        public override T Accept<T>( IAstVisitor<T> visitor )
+            => visitor.Visit( this );
 
         ///
         /// <inheritdoc/>
         ///
-        public override void AcceptChildren<T>( IAstVisitor<T> visitor, AbortTraverseToken abortTraverseToken )
+        public override void AcceptChildren<T>( IAstVisitor<T> visitor )
         {
             // Do nothing
         }

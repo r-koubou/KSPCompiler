@@ -17,18 +17,15 @@ public class AstKspPreProcessorSymbolEvaluationTest
     private AstExpressionNode PreProcessorSymbolTestBody(
         AstSymbolExpressionNode expr,
         AggregateSymbolTable symbolTable,
-        ICompilerMessageManger compilerMessageManger,
-        AbortTraverseToken abortTraverseToken )
+        ICompilerMessageManger compilerMessageManger )
     {
         var visitor = new MockAstSymbolVisitor();
         var symbolEvaluator = new SymbolEvaluator( compilerMessageManger, symbolTable );
         visitor.Inject( symbolEvaluator );
 
-        var result = visitor.Visit( expr, abortTraverseToken );
+        var result = visitor.Visit( expr );
 
         compilerMessageManger.WriteTo( Console.Out );
-
-        Assert.IsFalse( abortTraverseToken.Aborted );
 
         return (AstExpressionNode)result;
     }
@@ -37,7 +34,6 @@ public class AstKspPreProcessorSymbolEvaluationTest
     public void PreProcessorEvalTest()
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
-        var abortTraverseToken = new AbortTraverseToken();
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
         var symbol = new KspPreProcessorSymbol{ Name = "TEST" };
         symbolTable.PreProcessorSymbols.Add( symbol );
@@ -46,9 +42,7 @@ public class AstKspPreProcessorSymbolEvaluationTest
         var result = PreProcessorSymbolTestBody(
             symbolExpr,
             symbolTable,
-            compilerMessageManger,
-            abortTraverseToken
-        );
+            compilerMessageManger );
 
         Assert.IsTrue( result.TypeFlag == DataTypeFlag.TypeKspPreprocessorSymbol );
         Assert.IsTrue( compilerMessageManger.Count( CompilerMessageLevel.Error ) == 0 );
