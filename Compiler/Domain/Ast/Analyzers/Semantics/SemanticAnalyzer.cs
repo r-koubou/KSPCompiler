@@ -38,6 +38,7 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, ISemanticAnalyzer
     #region Symbol Evaluators
 
     private ISymbolEvaluator SymbolEvaluator { get; }
+    private IArrayElementEvaluator ArrayElementEvaluator { get; }
 
     #endregion
 
@@ -60,6 +61,7 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, ISemanticAnalyzer
         AssignOperatorEvaluator            = new AssignOperatorEvaluator( this, CompilerMessageManger, SymbolTable.Variables );
 
         SymbolEvaluator                    = new SymbolEvaluator( CompilerMessageManger, SymbolTable );
+        AssignOperatorEvaluator            = new AssignOperatorEvaluator( this, CompilerMessageManger, SymbolTable.Variables );
     }
 
     public void Analyze( AstCompilationUnitNode node, AbortTraverseToken abortTraverseToken)
