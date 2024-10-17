@@ -40,12 +40,17 @@ public class SymbolEvaluator : ISymbolEvaluator
             return result;
         }
 
+        // シンボルが見つからなかったのでエラー計上後、代替の評価結果を返す
+
         CompilerMessageManger.Error(
             expr,
             CompilerMessageResources.semantic_error_variable_not_declared,
             expr.Name );
 
-        return NullAstExpressionNode.Instance;
+        result          = expr.Clone<AstSymbolExpressionNode>();
+        result.TypeFlag = DataTypeUtility.GuessFromSymbolName( expr.Name );
+
+        return result;
     }
 
     private bool TryGetVariableSymbol( IAstVisitor<IAstNode> visitor, AstSymbolExpressionNode expr, out AstExpressionNode result )
