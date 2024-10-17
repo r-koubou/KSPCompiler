@@ -9,6 +9,9 @@ public class KspPreProcessorSymbol : SymbolBase
     public override SymbolType Type
         => SymbolType.KspPreprocessor;
 
+    public override DataTypeFlag DataType
+        => DataTypeFlag.TypeKspPreprocessorSymbol;
+
     #endregion ~ Properties
 
     // TODO Implementation

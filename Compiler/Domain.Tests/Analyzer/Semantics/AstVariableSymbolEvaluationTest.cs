@@ -46,13 +46,15 @@ public class AstVariableSymbolEvaluationTest
             variable.Value            =  1;
         }
 
+        variable.State = VariableState.Initialized;
+
         var result = VariableSymbolTestBody( variable );
 
         Assert.That(
             result,
             isConstant
                 ? Is.InstanceOf<AstIntLiteralNode>()
-                : Is.InstanceOf<AstExpressionNode>()
+                : Is.InstanceOf<AstSymbolExpressionNode>()
         );
 
         Assert.IsTrue( result.TypeFlag.IsInt() );

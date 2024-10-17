@@ -15,6 +15,24 @@ public class SymbolEvaluator : ISymbolEvaluator
     private ICompilerMessageManger CompilerMessageManger { get; }
     private AggregateSymbolTable SymbolTable { get; }
 
+    private static AstExpressionNode CreateEvaluateNode( AstExpressionNode source, SymbolBase symbol )
+    {
+        var result = new AstSymbolExpressionNode( symbol.Name, source.Left )
+        {
+            Parent   = source.Parent,
+            TypeFlag = symbol.DataType
+        };
+
+        return result;
+    }
+
+    private static AstExpressionNode CreateEvaluateNode( AstExpressionNode source, DataTypeFlag type )
+        => new AstSymbolExpressionNode( source.Name, source.Left )
+        {
+            Parent   = source.Parent,
+            TypeFlag = type
+        };
+
     public SymbolEvaluator(
         ICompilerMessageManger compilerMessageManger,
         AggregateSymbolTable symbolTable )
@@ -47,8 +65,7 @@ public class SymbolEvaluator : ISymbolEvaluator
             CompilerMessageResources.semantic_error_variable_not_declared,
             expr.Name );
 
-        result          = expr.Clone<AstSymbolExpressionNode>();
-        result.TypeFlag = DataTypeUtility.GuessFromSymbolName( expr.Name );
+        result = CreateEvaluateNode( expr, DataTypeUtility.GuessFromSymbolName( expr.Name ) );
 
         return result;
     }
@@ -62,6 +79,21 @@ public class SymbolEvaluator : ISymbolEvaluator
             return false;
         }
 
+        // 変数は見つかったが、未初期化の場合はエラー
+        if( variable.State == VariableState.UnInitialized )
+        {
+            CompilerMessageManger.Error(
+                expr,
+                CompilerMessageResources.semantic_error_variable_uninitialized,
+                variable.Name
+            );
+
+            // 変数は見つかったが、エラー扱いとして代替の評価結果を返す
+            result = CreateEvaluateNode( expr, variable );
+            return true;
+        }
+
+        variable.State = VariableState.Loaded;
         if( TryGetAstLiteralNode( variable, out result ) )
         {
             return true;
@@ -72,9 +104,7 @@ public class SymbolEvaluator : ISymbolEvaluator
             return true;
         }
 
-        result          = expr.Clone<AstSymbolExpressionNode>();
-        result.Name     = variable.Name;
-        result.TypeFlag = variable.DataType;
+        result = CreateEvaluateNode( expr, variable );
 
         return true;
     }
@@ -120,9 +150,7 @@ public class SymbolEvaluator : ISymbolEvaluator
         // 添字の式を持っていない場合は配列型として返す
         if( expr.Left.Id != AstNodeId.ArrayElementExpression )
         {
-            result          = expr.Clone<AstSymbolExpressionNode>();
-            result.Name     = variable.Name;
-            result.TypeFlag = variable.DataType;
+            result = CreateEvaluateNode( expr, variable );
 
             return true;
         }
@@ -143,9 +171,7 @@ public class SymbolEvaluator : ISymbolEvaluator
             throw new AstAnalyzeException( expr.Left, "Failed to evaluate array index" );
         }
 
-        result          = expr.Clone<AstSymbolExpressionNode>();
-        result.Name     = variable.Name;
-        result.TypeFlag = variable.DataType;
+        result = CreateEvaluateNode( expr, variable );
         // 配列インデックスを式に含んでいる場合、要素アクセスになるので評価結果から配列フラグを削除
         result.TypeFlag &= ~DataTypeFlag.AttributeArray;
 
@@ -180,9 +206,7 @@ public class SymbolEvaluator : ISymbolEvaluator
             return false;
         }
 
-        result          = expr.Clone<AstSymbolExpressionNode>();
-        result.Name     = symbol.Name;
-        result.TypeFlag = DataTypeFlag.TypeKspPreprocessorSymbol;
+        result = CreateEvaluateNode( expr, symbol );
 
         return true;
     }
@@ -196,9 +220,7 @@ public class SymbolEvaluator : ISymbolEvaluator
             return false;
         }
 
-        result          = expr.Clone<AstSymbolExpressionNode>();
-        result.Name     = symbol.Name;
-        result.TypeFlag = DataTypeFlag.TypePgsId;
+        result = CreateEvaluateNode( expr, symbol );
 
         return true;
     }

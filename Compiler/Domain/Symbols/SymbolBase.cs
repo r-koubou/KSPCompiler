@@ -31,7 +31,7 @@ public abstract class SymbolBase
     /// <summary>
     /// A symbol's data type
     /// </summary>
-    public DataTypeFlag DataType { get; set; } = DataTypeFlag.None;
+    public virtual DataTypeFlag DataType { get; set; } = DataTypeFlag.None;
 
     /// <summary>
     /// A symbol's data modifier

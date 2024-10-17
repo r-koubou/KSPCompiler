@@ -9,6 +9,9 @@ public class PgsSymbol : SymbolBase
     public override SymbolType Type
         => SymbolType.Pgs;
 
+    public override DataTypeFlag DataType
+        => DataTypeFlag.TypePgsId;
+
     #endregion ~ Properties
 
     // TODO Implementation

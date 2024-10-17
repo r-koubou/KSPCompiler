@@ -43,6 +43,7 @@ public class AstArrayVariableSymbolEvaluationTest
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
         var variable = MockUtility.CreateVariable( variableName, type );
         variable.ArraySize = 10;
+        variable.State     = VariableState.Initialized;
         symbolTable.Variables.Add( variable );
 
         var symbolExpr = new AstSymbolExpressionNode( variable.Name, NullAstExpressionNode.Instance );
