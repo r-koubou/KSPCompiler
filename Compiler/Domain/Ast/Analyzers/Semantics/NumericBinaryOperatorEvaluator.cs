@@ -19,6 +19,16 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
     protected IIntegerConvolutionEvaluator IntegerConvolutionEvaluator { get; }
     protected IRealConvolutionEvaluator RealConvolutionEvaluator { get; }
 
+    private static AstExpressionNode CreateEvaluateNode( AstExpressionNode source, DataTypeFlag type )
+        => new AstDefaultExpressionNode( source.Id )
+        {
+            Parent   = source.Parent,
+            Name     = source.Name,
+            Left     = source.Left,
+            Right    = source.Right,
+            TypeFlag = type
+        };
+
     public NumericBinaryOperatorEvaluator(
         IAstVisitor astVisitor,
         ICompilerMessageManger compilerMessageManger,
@@ -60,7 +70,10 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
 
         if( !typeEvalResult )
         {
-            return NullAstExpressionNode.Instance;
+            return CreateEvaluateNode(
+                expr,
+                evaluatedLeft.TypeFlag | evaluatedRight.TypeFlag
+            );
         }
 
         // 左辺、右辺共にリテラル、定数なら畳み込み
@@ -69,10 +82,7 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
             return convolutedValue;
         }
 
-        return new AstDefaultExpressionNode( expr )
-        {
-            TypeFlag = resultType
-        };
+        return CreateEvaluateNode( expr, resultType );
     }
 
     private bool TryConvolutionValue( AstExpressionNode expr, AstExpressionNode left, AstExpressionNode right, DataTypeFlag resultType, out AstExpressionNode convolutedValue )

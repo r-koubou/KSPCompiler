@@ -17,6 +17,16 @@ public sealed class StringConcatenateOperatorEvaluator : IStringConcatenateOpera
     private ICompilerMessageManger CompilerMessageManger { get; }
     private IStringConvolutionEvaluator StringConvolutionEvaluator { get; }
 
+    private static AstExpressionNode CreateEvaluateNode( AstExpressionNode source, DataTypeFlag type )
+        => new AstDefaultExpressionNode( source.Id )
+        {
+            Parent   = source.Parent,
+            Name     = source.Name,
+            Left     = source.Left,
+            Right    = source.Right,
+            TypeFlag = type
+        };
+
     public StringConcatenateOperatorEvaluator(
         IAstVisitor astVisitor,
         ICompilerMessageManger compilerMessageManger,
@@ -48,7 +58,7 @@ public sealed class StringConcatenateOperatorEvaluator : IStringConcatenateOpera
                 CompilerMessageResources.semantic_error_variable_invalid_string_initializer
             );
 
-            return NullAstExpressionNode.Instance;
+            return CreateEvaluateNode( expr, DataTypeFlag.TypeString );
         }
 
         if( expr.ChildNodeCount != 2 || expr.Id != AstNodeId.StringConcatenate)
@@ -77,7 +87,7 @@ public sealed class StringConcatenateOperatorEvaluator : IStringConcatenateOpera
                 CompilerMessageResources.semantic_error_string_operator_conditional
             );
 
-            return NullAstExpressionNode.Instance;
+            return CreateEvaluateNode( expr, DataTypeFlag.TypeBool );
         }
 
         // 左辺、右辺共にリテラル、定数なら畳み込み
@@ -86,10 +96,7 @@ public sealed class StringConcatenateOperatorEvaluator : IStringConcatenateOpera
             return convolutedValue;
         }
 
-        return new AstDefaultExpressionNode( expr )
-        {
-            TypeFlag = DataTypeFlag.TypeString
-        };
+        return CreateEvaluateNode( expr, DataTypeFlag.TypeString );
     }
 
     private bool TryConvolutionValue( AstExpressionNode expr, AstExpressionNode left, AstExpressionNode right, out AstExpressionNode convolutedNode )

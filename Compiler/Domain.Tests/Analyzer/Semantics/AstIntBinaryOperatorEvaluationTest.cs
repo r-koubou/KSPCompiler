@@ -2,10 +2,12 @@ using System;
 
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Integers;
 using KSPCompiler.Domain.Ast.Analyzers.Semantics;
+using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
+using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 
 using NUnit.Framework;
 
@@ -43,12 +45,13 @@ public class AstIntBinaryOperatorEvaluationTest
         visitor.Inject( binaryOperatorEvaluator );
 
         var operatorNode = MockUtility.CreateBinaryOperatorNode<AstAdditionExpressionNode>( variableName, DataTypeFlag.TypeInt, new AstIntLiteralNode( 1 ) );
-
-        Assert.DoesNotThrow( () => visitor.Visit( operatorNode ) );
+        var result = visitor.Visit( operatorNode ) as AstExpressionNode;
 
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.IsFalse( compilerMessageManger.Count() > 0 );
+        Assert.IsNotNull( result );
+        Assert.IsTrue( result?.TypeFlag.IsInt() );
     }
 
     [Test]
@@ -77,12 +80,13 @@ public class AstIntBinaryOperatorEvaluationTest
         visitor.Inject( binaryOperatorEvaluator );
 
         var operatorNode = MockUtility.CreateBinaryOperatorNode<AstSubtractionExpressionNode>( variableName, DataTypeFlag.TypeInt, new AstIntLiteralNode( 1 ) );
-
-        Assert.DoesNotThrow( () => visitor.Visit( operatorNode ) );
+        var result = visitor.Visit( operatorNode ) as AstExpressionNode;
 
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.IsFalse( compilerMessageManger.Count() > 0 );
+        Assert.IsNotNull( result );
+        Assert.IsTrue( result?.TypeFlag.IsInt() );
     }
 
     [Test]
@@ -111,12 +115,13 @@ public class AstIntBinaryOperatorEvaluationTest
         visitor.Inject( binaryOperatorEvaluator );
 
         var operatorNode = MockUtility.CreateBinaryOperatorNode<AstMultiplyingExpressionNode>( variableName, DataTypeFlag.TypeInt, new AstIntLiteralNode( 1 ) );
-
-        Assert.DoesNotThrow( () => visitor.Visit( operatorNode ) );
+        var result = visitor.Visit( operatorNode ) as AstExpressionNode;
 
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.IsFalse( compilerMessageManger.Count() > 0 );
+        Assert.IsNotNull( result );
+        Assert.IsTrue( result?.TypeFlag.IsInt() );
     }
 
     [Test]
@@ -146,11 +151,13 @@ public class AstIntBinaryOperatorEvaluationTest
 
         var operatorNode = MockUtility.CreateBinaryOperatorNode<AstDivisionExpressionNode>( variableName, DataTypeFlag.TypeInt, new AstIntLiteralNode( 1 ) );
 
-        Assert.DoesNotThrow( () => visitor.Visit( operatorNode ) );
+        var result = visitor.Visit( operatorNode ) as AstExpressionNode;
 
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.IsFalse( compilerMessageManger.Count() > 0 );
+        Assert.IsNotNull( result );
+        Assert.IsTrue( result?.TypeFlag.IsInt() );
     }
 
     [Test]
@@ -180,11 +187,13 @@ public class AstIntBinaryOperatorEvaluationTest
 
         var operatorNode = MockUtility.CreateBinaryOperatorNode<AstModuloExpressionNode>( variableName, DataTypeFlag.TypeInt, new AstIntLiteralNode( 1 ) );
 
-        Assert.DoesNotThrow( () => visitor.Visit( operatorNode ) );
+        var result = visitor.Visit( operatorNode ) as AstExpressionNode;
 
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.IsFalse( compilerMessageManger.Count() > 0 );
+        Assert.IsNotNull( result );
+        Assert.IsTrue( result?.TypeFlag.IsInt() );
     }
 
     #endregion ~Mathmatical Operators
@@ -216,11 +225,13 @@ public class AstIntBinaryOperatorEvaluationTest
 
         var operatorNode = MockUtility.CreateBinaryOperatorNode<AstBitwiseOrExpressionNode>( variableName, DataTypeFlag.TypeInt, new AstIntLiteralNode( 1 ) );
 
-        Assert.DoesNotThrow( () => visitor.Visit( operatorNode ) );
+        var result = visitor.Visit( operatorNode ) as AstExpressionNode;
 
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.IsFalse( compilerMessageManger.Count() > 0 );
+        Assert.IsNotNull( result );
+        Assert.IsTrue( result?.TypeFlag.IsInt() );
     }
 
     [Test]
@@ -250,11 +261,13 @@ public class AstIntBinaryOperatorEvaluationTest
 
         var operatorNode = MockUtility.CreateBinaryOperatorNode<AstBitwiseAndExpressionNode>( variableName, DataTypeFlag.TypeInt, new AstIntLiteralNode( 1 ) );
 
-        Assert.DoesNotThrow( () => visitor.Visit( operatorNode ) );
+        var result = visitor.Visit( operatorNode ) as AstExpressionNode;
 
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.IsFalse( compilerMessageManger.Count() > 0 );
+        Assert.IsNotNull( result );
+        Assert.IsTrue( result?.TypeFlag.IsInt() );
     }
 
     [Test]
@@ -284,10 +297,12 @@ public class AstIntBinaryOperatorEvaluationTest
 
         var operatorNode = MockUtility.CreateBinaryOperatorNode<AstBitwiseXorExpressionNode>( variableName, DataTypeFlag.TypeInt, new AstIntLiteralNode( 1 ) );
 
-        Assert.DoesNotThrow( () => visitor.Visit( operatorNode ) );
+        var result = visitor.Visit( operatorNode ) as AstExpressionNode;
 
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.IsFalse( compilerMessageManger.Count() > 0 );
+        Assert.IsNotNull( result );
+        Assert.IsTrue( result?.TypeFlag.IsInt() );
     }
 }
