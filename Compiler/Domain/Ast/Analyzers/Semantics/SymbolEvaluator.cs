@@ -128,7 +128,7 @@ public class SymbolEvaluator : ISymbolEvaluator
         }
 
         // 配列要素数未確定の状況
-        if( variable.ArraySize < 0 )
+        if( variable.State == VariableState.UnInitialized )
         {
             CompilerMessageManger.Error(
                 expr,
