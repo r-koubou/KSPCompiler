@@ -48,11 +48,11 @@ public class SymbolEvaluator : ISymbolEvaluator
         return NullAstExpressionNode.Instance;
     }
 
-    private bool TryGetVariableSymbol( IAstVisitor<IAstNode> visitor, AstSymbolExpressionNode node, out AstExpressionNode result )
+    private bool TryGetVariableSymbol( IAstVisitor<IAstNode> visitor, AstSymbolExpressionNode expr, out AstExpressionNode result )
     {
         result = NullAstExpressionNode.Instance;
 
-        if( !SymbolTable.Variables.TrySearchByName( node.Name, out var variable ) )
+        if( !SymbolTable.Variables.TrySearchByName( expr.Name, out var variable ) )
         {
             return false;
         }
@@ -62,12 +62,12 @@ public class SymbolEvaluator : ISymbolEvaluator
             return true;
         }
 
-        if( TryGetArrayVariableNode( visitor, node, variable, out result ) )
+        if( TryGetArrayVariableNode( visitor, expr, variable, out result ) )
         {
             return true;
         }
 
-        result          = new AstSymbolExpressionNode();
+        result          = expr.Clone<AstSymbolExpressionNode>();
         result.Name     = variable.Name;
         result.TypeFlag = variable.DataType;
 
@@ -99,7 +99,7 @@ public class SymbolEvaluator : ISymbolEvaluator
         }
     }
 
-    private bool TryGetArrayVariableNode( IAstVisitor<IAstNode> visitor, AstExpressionNode node, VariableSymbol variable, out AstExpressionNode result )
+    private bool TryGetArrayVariableNode( IAstVisitor<IAstNode> visitor, AstExpressionNode expr, VariableSymbol variable, out AstExpressionNode result )
     {
         result = NullAstExpressionNode.Instance;
 
@@ -111,7 +111,7 @@ public class SymbolEvaluator : ISymbolEvaluator
         // 子ノードの評価
         // 含まれる可能性のあるノード
         // - 配列インデックス: AstArrayElementExpressionNode
-        if( node.Left.Id != AstNodeId.ArrayElementExpression )
+        if( expr.Left.Id != AstNodeId.ArrayElementExpression )
         {
             return false;
         }
@@ -120,21 +120,21 @@ public class SymbolEvaluator : ISymbolEvaluator
         if( variable.ArraySize < 0 )
         {
             CompilerMessageManger.Error(
-                node,
+                expr,
                 CompilerMessageResources.semantic_error_variable_uninitialized,
                 variable.Name
             );
             return false;
         }
 
-        if( node.Left.Accept( visitor ) is not AstExpressionNode indexExpr )
+        if( expr.Left.Accept( visitor ) is not AstExpressionNode indexExpr )
         {
-            throw new AstAnalyzeException( node.Left, "Failed to evaluate array index" );
+            throw new AstAnalyzeException( expr.Left, "Failed to evaluate array index" );
         }
 
-        result          =  new AstSymbolExpressionNode();
-        result.Name     =  variable.Name;
-        result.TypeFlag =  variable.DataType;
+        result          = expr.Clone<AstSymbolExpressionNode>();
+        result.Name     = variable.Name;
+        result.TypeFlag = variable.DataType;
         // 配列インデックスを式に含んでいる場合、要素アクセスになるので評価結果から配列フラグを削除
         result.TypeFlag &= ~DataTypeFlag.AttributeArray;
 
@@ -148,7 +148,7 @@ public class SymbolEvaluator : ISymbolEvaluator
         if( intLiteral.Value < 0 || intLiteral.Value >= variable.ArraySize )
         {
             CompilerMessageManger.Error(
-                node,
+                expr,
                 CompilerMessageResources.semantic_error_variable_array_outofbounds,
                 variable.ArraySize,
                 intLiteral.Value
@@ -160,36 +160,34 @@ public class SymbolEvaluator : ISymbolEvaluator
         return true;
     }
 
-    private bool TryGetPreProcessorSymbol( AstSymbolExpressionNode node, out AstExpressionNode result )
+    private bool TryGetPreProcessorSymbol( AstSymbolExpressionNode expr, out AstExpressionNode result )
     {
         result = NullAstExpressionNode.Instance;
 
-        if( !SymbolTable.PreProcessorSymbols.TrySearchByName( node.Name, out var symbol ) )
+        if( !SymbolTable.PreProcessorSymbols.TrySearchByName( expr.Name, out var symbol ) )
         {
             return false;
         }
 
-        result = new AstSymbolExpressionNode( symbol.Name, node, NullAstExpressionNode.Instance )
-        {
-            TypeFlag = DataTypeFlag.TypeKspPreprocessorSymbol
-        };
+        result          = expr.Clone<AstSymbolExpressionNode>();
+        result.Name     = symbol.Name;
+        result.TypeFlag = DataTypeFlag.TypeKspPreprocessorSymbol;
 
         return true;
     }
 
-    private bool TryGetPgsSymbol( AstSymbolExpressionNode node, out AstExpressionNode result )
+    private bool TryGetPgsSymbol( AstSymbolExpressionNode expr, out AstExpressionNode result )
     {
         result = NullAstExpressionNode.Instance;
 
-        if( !SymbolTable.PgsSymbols.TrySearchByName( node.Name, out var symbol ) )
+        if( !SymbolTable.PgsSymbols.TrySearchByName( expr.Name, out var symbol ) )
         {
             return false;
         }
 
-        result = new AstSymbolExpressionNode( symbol.Name, node, NullAstExpressionNode.Instance )
-        {
-            TypeFlag = DataTypeFlag.TypePgsId
-        };
+        result          = expr.Clone<AstSymbolExpressionNode>();
+        result.Name     = symbol.Name;
+        result.TypeFlag = DataTypeFlag.TypePgsId;
 
         return true;
     }
