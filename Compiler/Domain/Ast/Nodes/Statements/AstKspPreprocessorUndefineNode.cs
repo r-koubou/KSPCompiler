@@ -1,6 +1,7 @@
 using System;
 
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Domain.Symbols.MetaData;
 
 namespace KSPCompiler.Domain.Ast.Nodes.Statements
 {
@@ -26,7 +27,11 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         public AstKspPreprocessorUndefineNode( IAstNode parent )
             : base( AstNodeId.KspPreprocessorUndefine, parent )
         {
-            Symbol = new AstDefaultExpressionNode( this );
+            Symbol = new AstSymbolExpressionNode
+            {
+                Parent   = this,
+                TypeFlag = DataTypeFlag.TypeKspPreprocessorSymbol
+            };
         }
 
         #region IAstNodeAcceptor
