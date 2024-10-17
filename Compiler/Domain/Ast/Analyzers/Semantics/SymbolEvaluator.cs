@@ -81,6 +81,9 @@ public class SymbolEvaluator : ISymbolEvaluator
             return false;
         }
 
+        // 変数への評価が確定するので参照済みフラグを立てる
+        variable.Referenced = true;
+
         // 変数は見つかったが、未初期化の場合はエラー
         if( variable.State == VariableState.UnInitialized )
         {
