@@ -116,9 +116,15 @@ public class SymbolEvaluator : ISymbolEvaluator
         // 子ノードの評価
         // 含まれる可能性のあるノード
         // - 配列インデックス: AstArrayElementExpressionNode
+
+        // 添字の式を持っていない場合は配列型として返す
         if( expr.Left.Id != AstNodeId.ArrayElementExpression )
         {
-            return false;
+            result          = expr.Clone<AstSymbolExpressionNode>();
+            result.Name     = variable.Name;
+            result.TypeFlag = variable.DataType;
+
+            return true;
         }
 
         // 配列要素数未確定の状況
