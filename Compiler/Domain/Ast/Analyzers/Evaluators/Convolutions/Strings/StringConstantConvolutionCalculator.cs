@@ -81,7 +81,7 @@ public sealed class StringConstantConvolutionCalculator : IStringConstantConvolu
             return false;
         }
 
-        if( !variable.DataTypeModifier.IsConstant() )
+        if( !variable.DataType.IsString() || !variable.DataTypeModifier.IsConstant() )
         {
             result = null;
             return false;

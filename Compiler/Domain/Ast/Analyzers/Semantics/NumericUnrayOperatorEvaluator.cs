@@ -19,6 +19,16 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
     private IIntegerConvolutionEvaluator IntegerConvolutionEvaluator { get; }
     private IRealConvolutionEvaluator RealConvolutionEvaluator { get; }
 
+    private static AstExpressionNode CreateEvaluateNode( AstExpressionNode source, DataTypeFlag type )
+        => new AstDefaultExpressionNode( source.Id )
+        {
+            Parent   = source.Parent,
+            Name     = source.Name,
+            Left     = source.Left,
+            Right    = source.Right,
+            TypeFlag = type
+        };
+
     public NumericUnaryOperatorEvaluator(
         IAstVisitor astVisitor,
         ICompilerMessageManger compilerMessageManger,
@@ -60,7 +70,7 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
                 evaluatedLeft.TypeFlag.ToMessageString()
             );
 
-            return NullAstExpressionNode.Instance;
+            return CreateEvaluateNode( expr, evaluatedLeft.TypeFlag );
         }
 
         // リテラル、定数なら畳み込み
@@ -69,10 +79,7 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
             return convolutedValue;
         }
 
-        return new AstDefaultExpressionNode( expr )
-        {
-            TypeFlag = resultType
-        };
+        return CreateEvaluateNode( expr, resultType );
     }
 
     private bool TryConvolutionValue( AstExpressionNode expr, AstExpressionNode left, DataTypeFlag resultType, out AstExpressionNode convolutedValue )

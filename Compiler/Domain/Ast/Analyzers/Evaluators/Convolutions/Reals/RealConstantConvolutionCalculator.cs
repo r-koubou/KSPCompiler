@@ -46,7 +46,7 @@ public sealed class RealConstantConvolutionCalculator : IRealConstantConvolution
 
         if( VariableSymbols.TrySearchByName( symbol.Name, out var variable ) )
         {
-            if( variable.DataType.IsReal() || !variable.DataTypeModifier.IsConstant() )
+            if( !variable.DataType.IsReal() || !variable.DataTypeModifier.IsConstant() )
             {
                 return null;
             }

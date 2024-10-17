@@ -43,6 +43,7 @@ public class AstArrayVariableSymbolEvaluationTest
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
         var variable = MockUtility.CreateVariable( variableName, type );
         variable.ArraySize = 10;
+        variable.State     = VariableState.Initialized;
         symbolTable.Variables.Add( variable );
 
         var symbolExpr = new AstSymbolExpressionNode( variable.Name, NullAstExpressionNode.Instance );
@@ -62,6 +63,7 @@ public class AstArrayVariableSymbolEvaluationTest
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
         var variable = MockUtility.CreateVariable( "%x", DataTypeFlag.TypeIntArray );
         variable.ArraySize = 10;
+        variable.State     = VariableState.Initialized;
         symbolTable.Variables.Add( variable );
 
         var symbolExpr = new AstSymbolExpressionNode( variable.Name, NullAstExpressionNode.Instance );
@@ -87,6 +89,7 @@ public class AstArrayVariableSymbolEvaluationTest
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
         var variable = MockUtility.CreateVariable( "?x", DataTypeFlag.TypeRealArray );
         variable.ArraySize = 10;
+        variable.State     = VariableState.Initialized;
         symbolTable.Variables.Add( variable );
 
         var symbolExpr = new AstSymbolExpressionNode( variable.Name, NullAstExpressionNode.Instance );
@@ -112,6 +115,7 @@ public class AstArrayVariableSymbolEvaluationTest
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
         var variable = MockUtility.CreateVariable( "!x", DataTypeFlag.TypeStringArray );
         variable.ArraySize = 10;
+        variable.State     = VariableState.Initialized;
         symbolTable.Variables.Add( variable );
 
         var symbolExpr = new AstSymbolExpressionNode( variable.Name, NullAstExpressionNode.Instance );
