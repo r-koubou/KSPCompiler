@@ -20,17 +20,19 @@ public class SymbolEvaluator : ISymbolEvaluator
         var result = new AstSymbolExpressionNode( symbol.Name, source.Left )
         {
             Parent   = source.Parent,
-            TypeFlag = symbol.DataType
+            TypeFlag = symbol.DataType,
+            Constant = symbol.DataTypeModifier.IsConstant()
         };
 
         return result;
     }
 
-    private static AstExpressionNode CreateEvaluateNode( AstExpressionNode source, DataTypeFlag type )
+    private static AstExpressionNode CreateEvaluateNode( AstExpressionNode source, DataTypeFlag type, bool isConstant )
         => new AstSymbolExpressionNode( source.Name, source.Left )
         {
             Parent   = source.Parent,
-            TypeFlag = type
+            TypeFlag = type,
+            Constant = isConstant
         };
 
     public SymbolEvaluator(
@@ -65,7 +67,7 @@ public class SymbolEvaluator : ISymbolEvaluator
             CompilerMessageResources.semantic_error_variable_not_declared,
             expr.Name );
 
-        result = CreateEvaluateNode( expr, DataTypeUtility.GuessFromSymbolName( expr.Name ) );
+        result = CreateEvaluateNode( expr, DataTypeUtility.GuessFromSymbolName( expr.Name ), expr.Constant );
 
         return result;
     }
