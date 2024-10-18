@@ -88,6 +88,15 @@ public static class MockUtility
         };
     }
 
+    public static  AstSymbolExpressionNode CreateSymbolNode( string variableName, DataTypeFlag type )
+    {
+        return new AstSymbolExpressionNode
+        {
+            Name     = variableName,
+            TypeFlag = type
+        };
+    }
+
     public static  AstSymbolExpressionNode CreateSymbolNode( string variableName )
     {
         return new AstSymbolExpressionNode
