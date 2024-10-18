@@ -1,6 +1,5 @@
 using System;
 
-using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Operators;
 using KSPCompiler.Domain.Ast.Analyzers.Semantics;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
@@ -98,26 +97,5 @@ public class AstAssignmentEvaluationTest
         Assert.IsTrue( compilerMessageManger.Count( CompilerMessageLevel.Error ) > 0 );
         Assert.IsNotNull( result );
         Assert.AreEqual( DataTypeFlag.TypeIntArray, result?.TypeFlag );
-    }
-}
-
-public class MockAssignOperatorVisitor : DefaultAstVisitor
-{
-    private IAssignOperatorEvaluator AssignOperatorEvaluator { get; set; } = new MockAssignOperatorEvaluator();
-
-    public void Inject( IAssignOperatorEvaluator evaluator )
-    {
-        AssignOperatorEvaluator = evaluator;
-    }
-
-    public override IAstNode Visit( AstAssignmentExpressionNode node )
-        => AssignOperatorEvaluator.Evaluate( this, node );
-}
-
-public class MockAssignOperatorEvaluator : IAssignOperatorEvaluator
-{
-    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstExpressionNode expr )
-    {
-        throw new NotImplementedException();
     }
 }
