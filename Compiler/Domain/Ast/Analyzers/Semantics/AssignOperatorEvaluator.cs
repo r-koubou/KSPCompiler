@@ -70,15 +70,18 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
         // 代入先の変数に合わせる。暗黙の型変換が不可能な場合は、以降の型判定で失敗させる
         if( ( leftType & rightType ) != 0 )
         {
-            // 代入先が文字列型なら暗黙の型変換が可能
-            if( leftType.IsString() )
-            {
-                rightType = leftType.TypeMasked(); // Mask: 型以外の属性は含まない
-            }
+            rightType = leftType.TypeMasked(); // Mask: 型以外の属性は含まない
         }
 
-        // 型の不一致または条件式の代入は不可
-        if( leftType != rightType || evaluatedRight.TypeFlag.IsBoolean() )
+        if( leftType == rightType )
+        {
+            return CreateEvaluateNode( evaluatedLeft, evaluatedLeft.TypeFlag );
+        }
+
+        // 型の不一致
+        // 代入先が文字列型以外なら型の不一致 or 条件式は代入不可
+        // => ＊文字列型へ integer, real 値の代入は可能（文字列への型変換が発生）
+        if( !leftType.IsString() || evaluatedRight.TypeFlag.IsBoolean() )
         {
             CompilerMessageManger.Error(
                 expr,
@@ -86,8 +89,6 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
                 leftType.ToMessageString(),
                 rightType.ToMessageString()
             );
-
-            return CreateEvaluateNode( evaluatedLeft, evaluatedLeft.TypeFlag );
         }
 
         return CreateEvaluateNode( evaluatedLeft, evaluatedLeft.TypeFlag );
