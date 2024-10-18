@@ -56,10 +56,10 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
             CompilerMessageManger.Error(
                 expr,
                 CompilerMessageResources.semantic_error_assign_to_constant,
-                expr.Name
+                evaluatedLeft.Name
             );
 
-            return NullAstExpressionNode.Instance;
+            return CreateEvaluateNode( evaluatedLeft, evaluatedLeft.TypeFlag );
         }
 
         var leftType  = evaluatedLeft.TypeFlag;
