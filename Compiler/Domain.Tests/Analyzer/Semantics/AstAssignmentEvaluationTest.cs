@@ -98,4 +98,27 @@ public class AstAssignmentEvaluationTest
         Assert.IsNotNull( result );
         Assert.AreEqual( DataTypeFlag.TypeIntArray, result?.TypeFlag );
     }
+    [Test]
+    public void StringCanAssignmentWithImplicitTest()
+    {
+        /*
+         * @x := 1 // ok: implicit conversion
+         */
+
+        var compilerMessageManger = ICompilerMessageManger.Default;
+        var visitor = new MockAssignOperatorVisitor();
+        var assignEvaluator = new AssignOperatorEvaluator( compilerMessageManger );
+        var variable = MockUtility.CreateSymbolNode( "@x", DataTypeFlag.TypeString );
+        var value = new AstIntLiteralNode( 1 );
+        var expr = new AstAssignmentExpressionNode( variable, value );
+
+        visitor.Inject( assignEvaluator );
+        var result = visitor.Visit( expr ) as AstExpressionNode;
+
+        compilerMessageManger.WriteTo( Console.Out );
+
+        Assert.IsFalse( compilerMessageManger.Count( CompilerMessageLevel.Error ) > 0 );
+        Assert.IsNotNull( result );
+        Assert.AreEqual( DataTypeFlag.TypeString, result?.TypeFlag );
+    }
 }
