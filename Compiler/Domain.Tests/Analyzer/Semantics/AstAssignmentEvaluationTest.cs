@@ -62,7 +62,7 @@ public class AstAssignmentEvaluationTest
         var visitor = new MockAssignOperatorVisitor();
         var assignEvaluator = new AssignOperatorEvaluator( compilerMessageManger );
         var variable = MockUtility.CreateSymbolNode( "$x", DataTypeFlag.TypeInt );
-        var value = new AstRealLiteralNode( 1.0 );
+        var value = MockUtility.CreateSymbolNode( "",      DataTypeFlag.TypeReal | DataTypeFlag.TypeString ); //new AstRealLiteralNode( 1.0 );
         var expr = new AstAssignmentExpressionNode( variable, value );
 
         visitor.Inject( assignEvaluator );
@@ -76,10 +76,10 @@ public class AstAssignmentEvaluationTest
     }
 
     [Test]
-    public void DirectlyArrayAccessAssignmentTest()
+    public void ArrayToNoArrayIncompatibleAssignmentTest()
     {
         /*
-         * %x := 1 // error: cannot assign to an array without an index
+         * %x := 1 // error: cannot assign value to an array
          */
 
         var compilerMessageManger = ICompilerMessageManger.Default;
@@ -98,6 +98,31 @@ public class AstAssignmentEvaluationTest
         Assert.IsNotNull( result );
         Assert.AreEqual( DataTypeFlag.TypeIntArray, result?.TypeFlag );
     }
+
+    [Test]
+    public void NoArrayToArrayIncompatibleAssignmentTest()
+    {
+        /*
+         * $x := %y // error: cannot assign an array to a non-array
+         */
+
+        var compilerMessageManger = ICompilerMessageManger.Default;
+        var visitor = new MockAssignOperatorVisitor();
+        var assignEvaluator = new AssignOperatorEvaluator( compilerMessageManger );
+        var variable = MockUtility.CreateSymbolNode( "$x", DataTypeFlag.TypeInt );
+        var value = MockUtility.CreateSymbolNode( "%y",      DataTypeFlag.TypeIntArray );
+        var expr = new AstAssignmentExpressionNode( variable, value );
+
+        visitor.Inject( assignEvaluator );
+        var result = visitor.Visit( expr ) as AstExpressionNode;
+
+        compilerMessageManger.WriteTo( Console.Out );
+
+        Assert.IsTrue( compilerMessageManger.Count( CompilerMessageLevel.Error ) > 0 );
+        Assert.IsNotNull( result );
+        Assert.AreEqual( DataTypeFlag.TypeInt, result?.TypeFlag );
+    }
+
     [Test]
     public void StringCanAssignmentWithImplicitTest()
     {

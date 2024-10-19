@@ -70,18 +70,18 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
         // 代入先の変数に合わせる。暗黙の型変換が不可能な場合は、以降の型判定で失敗させる
         if( ( leftType & rightType ) != 0 )
         {
-            rightType = leftType.TypeMasked(); // Mask: 型以外の属性は含まない
+            // 型情報のマージ
+            rightType |= leftType.TypeMasked(); // Mask: 型以外の属性は含まない
         }
 
+        // 完全一致
         if( leftType == rightType )
         {
             return CreateEvaluateNode( evaluatedLeft, evaluatedLeft.TypeFlag );
         }
 
-        // 型の不一致
-        // 代入先が文字列型以外なら型の不一致 or 条件式は代入不可
-        // => ＊文字列型へ integer, real 値の代入は可能（文字列への型変換が発生）
-        if( !leftType.IsString() || evaluatedRight.TypeFlag.IsBoolean() )
+        // 個別に型チェック
+        if( !IsTypeMatched( leftType, rightType ) )
         {
             CompilerMessageManger.Error(
                 expr,
@@ -89,8 +89,40 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
                 leftType.ToMessageString(),
                 rightType.ToMessageString()
             );
+
+            // 上位のノードで評価を継続させるので代替のノードは生成しない
         }
 
         return CreateEvaluateNode( evaluatedLeft, evaluatedLeft.TypeFlag );
+    }
+
+    private static bool IsTypeMatched( DataTypeFlag leftType, DataTypeFlag rightType )
+    {
+        var result = true;
+
+        // 代入先：配列型
+        // 代入元：非配列型
+        if( leftType.IsArray() && !rightType.IsArray() )
+        {
+            result = false;
+        }
+        // 代入先：非配列型
+        // 代入元：配列型
+        else if( rightType.IsArray() && !leftType.IsArray() )
+        {
+            result = false;
+        }
+        // 型が一致するビットがない
+        else if( ( leftType.TypeMasked() & rightType.TypeMasked() ) == 0 )
+        {
+            // 文字列型へ integer, real 値の代入は可能（文字列への型変換が発生）
+            // -> 代入先が文字列型以外なら型の不一致 or 条件式は代入不可
+            if( !leftType.IsString() || rightType.IsBoolean() )
+            {
+                result = false;
+            }
+        }
+
+        return result;
     }
 }
