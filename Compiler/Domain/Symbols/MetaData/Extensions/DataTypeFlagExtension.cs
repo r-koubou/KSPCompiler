@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
 namespace KSPCompiler.Domain.Symbols.MetaData.Extensions;
@@ -67,58 +68,46 @@ public static class DataTypeFlagExtension
     public static DataTypeFlag MatchedType( this DataTypeFlag flag, DataTypeFlag other )
         => flag.TypeMasked() & other.TypeMasked();
 
+    private static readonly IReadOnlyDictionary<DataTypeFlag, string> MessageTextMap = new Dictionary<DataTypeFlag, string>
+    {
+        { DataTypeFlag.None, "unknown" },
+        { DataTypeFlag.TypeInt, "integer" },
+        { DataTypeFlag.TypeString, "string" },
+        { DataTypeFlag.TypeReal, "real" },
+        { DataTypeFlag.TypeBool, "boolean" },
+        { DataTypeFlag.TypeVoid, "void" },
+        { DataTypeFlag.TypeKspPreprocessorSymbol, "KSP preprocessor symbol" },
+        { DataTypeFlag.TypePgsId, "Pgs ID" }
+    };
+
     public static string ToMessageString( this DataTypeFlag flag )
     {
         var typeMasked = flag.TypeMasked();
+        var isArray = flag.IsArray();
 
-        var result = typeMasked switch
+        if( MessageTextMap.TryGetValue( flag, out var messageText ) )
         {
-            DataTypeFlag.TypeInt => "integer",
-            DataTypeFlag.TypeString => "string",
-            DataTypeFlag.TypeReal => "real",
-            DataTypeFlag.TypeBool => "boolean",
-            DataTypeFlag.TypeVoid => "void",
-            DataTypeFlag.TypeKspPreprocessorSymbol => "KSP preprocessor symbol",
-            DataTypeFlag.TypePgsId => "PGS ID",
-            DataTypeFlag.None => "",
-            _ => "*"
-        };
-
-        if( result == "*" )
-        {
-            var typeString = "";
-
-            if( flag.IsInt() )
-            {
-                typeString += "integer,";
-            }
-            if( flag.IsReal() )
-            {
-                typeString += "real,";
-            }
-            if( flag.IsString() )
-            {
-                typeString += "string,";
-            }
-            if( flag.IsBoolean() )
-            {
-                typeString += "boolean,";
-            }
-            if( flag.IsVoid() )
-            {
-                typeString += "void";
-            }
-            return $"multiple type ({typeString})";
+            return messageText;
         }
 
-        if( !string.IsNullOrEmpty( result ) || !flag.HasAttribute() )
-        {
-            return result;
-        }
+        var result = "";
+        var foundCount = 0;
 
-        if( flag.IsArray() )
+        foreach( var (k,v) in MessageTextMap )
         {
-            result += " array";
+            var type = typeMasked & k;
+            if( type == 0 )
+            {
+                continue;
+            }
+
+            if( foundCount > 0 )
+            {
+                result += " or ";
+            }
+
+            result += $"{v}{( isArray ? "[]" : string.Empty )}";
+            foundCount++;
         }
 
         return result;

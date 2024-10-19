@@ -58,10 +58,9 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, ISemanticAnalyzer
         NumericBinaryOperatorEvaluator     = new NumericBinaryOperatorEvaluator( this, CompilerMessageManger, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
         NumericUnaryOperatorEvaluator      = new NumericUnaryOperatorEvaluator( this, CompilerMessageManger, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
         StringConcatenateOperatorEvaluator = new StringConcatenateOperatorEvaluator( this, CompilerMessageManger, StringConvolutionEvaluator );
-        AssignOperatorEvaluator            = new AssignOperatorEvaluator( this, CompilerMessageManger, SymbolTable.Variables );
 
         SymbolEvaluator                    = new SymbolEvaluator( CompilerMessageManger, SymbolTable );
-        AssignOperatorEvaluator            = new AssignOperatorEvaluator( this, CompilerMessageManger, SymbolTable.Variables );
+        AssignOperatorEvaluator            = new AssignOperatorEvaluator( CompilerMessageManger );
     }
 
     public void Analyze( AstCompilationUnitNode node )

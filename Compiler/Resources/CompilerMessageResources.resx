@@ -67,10 +67,10 @@
         <value>Conditional expressions cannot be concatenated with string operators</value>
     </data>
     <data name="semantic.error.assign.to.constant" xml:space="preserve">
-        <value>Cannot assign value ({0} is constant)</value>
+        <value>Cannot assign value ({0} is constant or Built-In variable)</value>
     </data>
     <data name="semantic.error.assign.type.compatible" xml:space="preserve">
-        <value>":=" : not compatible type ({0} := {1})</value>
+        <value>":=" : not compatible type (assign to: {0}, assign from {1})</value>
     </data>
     <data name="semantic.error.binaryoprator.not.supported" xml:space="preserve">
         <value>Contains types not supported by the binary operator {0}, {1}</value>

@@ -60,10 +60,10 @@
         <value>条件式は文字列演算子と連結できません</value>
     </data>
     <data name="semantic.error.assign.to.constant" xml:space="preserve">
-        <value>値の代入ができません ({0} は定数型です)</value>
+        <value>値の代入ができません ({0} は定数またはビルトイン変数です)</value>
     </data>
     <data name="semantic.error.assign.type.compatible" xml:space="preserve">
-        <value>":=" : データ型が一致しません ({0} := {1})</value>
+        <value>":=" : データ型が一致しません (代入先: {0}, 代入元: {1})</value>
     </data>
     <data name="semantic.error.binaryoprator.not.supported" xml:space="preserve">
         <value>2項演算子がサポートしていない型が含まれています {0}, {1}</value>
