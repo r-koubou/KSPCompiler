@@ -36,7 +36,7 @@ public class AntlrSymbolCollectionTest
         var ast = ParseTestUtility.Parse( TestDataDirectory, "VariableSymbolTest.txt" );
         var symbolAnalyzer = new SymbolCollector( compilerMessageManger, symbolTable );
 
-        Assert.DoesNotThrow( () => { symbolAnalyzer.Analyze( ast ); } );
+        Assert.DoesNotThrow( () => { symbolAnalyzer.Traverse( ast ); } );
         compilerMessageManger.WriteTo( Console.Out );
         Assert.IsTrue( symbolTable.Variables.Count == 1 );
     }
@@ -49,7 +49,7 @@ public class AntlrSymbolCollectionTest
         var ast = ParseTestUtility.Parse( TestDataDirectory, "CallbackSymbolTest.txt" );
         var symbolAnalyzer = new SymbolCollector( compilerMessageManger, symbolTable );
 
-        Assert.DoesNotThrow( () => { symbolAnalyzer.Analyze( ast ); } );
+        Assert.DoesNotThrow( () => { symbolAnalyzer.Traverse( ast ); } );
         compilerMessageManger.WriteTo( Console.Out );
         Assert.IsTrue( symbolTable.UserCallbacks.Count == 1 );
     }
@@ -62,7 +62,7 @@ public class AntlrSymbolCollectionTest
         var ast = ParseTestUtility.Parse( TestDataDirectory, "UserFunctionSymbolTest.txt" );
         var symbolAnalyzer = new SymbolCollector( compilerMessageManger, symbolTable );
 
-        Assert.DoesNotThrow( () => { symbolAnalyzer.Analyze( ast ); } );
+        Assert.DoesNotThrow( () => { symbolAnalyzer.Traverse( ast ); } );
         compilerMessageManger.WriteTo( Console.Out );
         Assert.IsTrue( compilerMessageManger.Count() == 0 );
         Assert.IsTrue( symbolTable.UserFunctions.Count == 1 );

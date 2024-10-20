@@ -15,7 +15,7 @@ namespace KSPCompiler.Domain.Ast.Analyzers.SymbolCollections;
 // TODO ビルトインなど予約済みのシンボルを事前にファイルからロードする（変数、コールバック、コマンド）
 // 外部で事前にロードした結果をコンストラクタで受け取る(ISymbolTable<T>で)
 
-public sealed class SymbolCollector : DefaultAstVisitor, ISymbolCollector
+public sealed class SymbolCollector : DefaultAstVisitor, IAstTraversal
 {
     private ICompilerMessageManger CompilerMessageManger { get; }
     private AggregateSymbolTable SymbolTable { get; }
@@ -26,7 +26,7 @@ public sealed class SymbolCollector : DefaultAstVisitor, ISymbolCollector
         SymbolTable           = symbolTable;
     }
 
-    public void Analyze( AstCompilationUnitNode node )
+    public void Traverse( AstCompilationUnitNode node )
     {
         node.Accept( this );
     }
