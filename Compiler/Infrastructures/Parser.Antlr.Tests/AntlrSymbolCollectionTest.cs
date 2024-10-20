@@ -33,6 +33,14 @@ public class AntlrSymbolCollectionTest
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
         var symbolTable = CreateAggregateSymbolTable();
+        var init = new CallbackSymbol( false )
+        {
+            Name = "init",
+            Reserved = true
+        };
+
+        Assert.IsTrue( symbolTable.ReservedCallbacks.Add( init ) );
+
         var ast = ParseTestUtility.Parse( TestDataDirectory, "VariableSymbolTest.txt" );
         var symbolAnalyzer = new SymbolCollector( compilerMessageManger, symbolTable );
 
