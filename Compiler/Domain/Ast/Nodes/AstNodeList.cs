@@ -8,6 +8,8 @@ namespace KSPCompiler.Domain.Ast.Nodes
     /// </summary>
     public class AstNodeList<TNode> : IEnumerable<TNode> where TNode : class, IAstNode
     {
+        private readonly List<TNode> nodeList = new();
+
         /// <summary>
         /// Source node.
         /// </summary>
@@ -16,17 +18,17 @@ namespace KSPCompiler.Domain.Ast.Nodes
         /// <summary>
         /// Child nodes
         /// </summary>
-        public List<TNode> Nodes { get; } = new();
+        public IReadOnlyCollection<TNode> Nodes => new List<TNode>( nodeList );
 
         /// <summary>
         /// The number of child nodes. 0 if there are no child nodes.
         /// </summary>
-        public int Count => Nodes.Count;
+        public int Count => nodeList.Count;
 
         /// <summary>
         /// true if there are no child nodes otherwise false.
         /// </summary>
-        public bool Empty => Nodes.Count == 0;
+        public bool Empty => nodeList.Count == 0;
 
         /// <summary>
         /// Ctor
@@ -47,28 +49,28 @@ namespace KSPCompiler.Domain.Ast.Nodes
             foreach( var n in list )
             {
                 n.Parent = this.Parent;
-                Nodes.Add( n );
+                nodeList.Add( n );
             }
         }
 
         public void AddRange( AstNodeList<TNode> list )
-            => AddRange( list.Nodes );
+            => AddRange( list.nodeList );
 
         public void Add( TNode node )
         {
             node.Parent = this.Parent;
-            Nodes.Add( node );
+            nodeList.Add( node );
         }
 
         public void Insert( int index, TNode node )
         {
-            Nodes.Insert( index, node );
+            nodeList.Insert( index, node );
             node.Parent = this.Parent;
         }
 
         public void Remove( TNode node )
         {
-            if( Nodes.Remove( node ) )
+            if( nodeList.Remove( node ) )
             {
                 node.Parent = NullAstNode.Instance;
             }
@@ -80,27 +82,23 @@ namespace KSPCompiler.Domain.Ast.Nodes
             {
                 n.Parent = NullAstNode.Instance;
             }
-            Nodes.Clear();
+            nodeList.Clear();
         }
 
         public bool Contains( TNode node )
-            => Nodes.Contains( node );
+            => nodeList.Contains( node );
         #endregion List controller
 
         #region Operator
         public TNode this [ int index ]
         {
-            get
-            {
-                return this.Nodes[ index ];
-            }
+            get => nodeList[ index ];
             set
             {
-                var list = Nodes;
-                var org  = list[ index ];
+                var org  = nodeList[ index ];
 
-                list.RemoveAt( index );
-                list.Insert( index, value );
+                nodeList.RemoveAt( index );
+                nodeList.Insert( index, value );
 
                 org.Parent   = NullAstNode.Instance;
                 value.Parent = this.Parent;
