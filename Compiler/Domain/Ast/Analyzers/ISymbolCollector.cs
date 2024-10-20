@@ -9,8 +9,6 @@ public interface ISymbolCollector : IDisposable
 {
     public static ISymbolCollector Null { get; } = new NullSymbolCollector();
 
-    IVariableSymbolTable Variables { get; }
-
     void Analyze( AstCompilationUnitNode node );
     void IDisposable.Dispose() {}
 

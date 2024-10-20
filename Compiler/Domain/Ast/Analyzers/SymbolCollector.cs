@@ -18,35 +18,13 @@ namespace KSPCompiler.Domain.Ast.Analyzers;
 public sealed class SymbolCollector : DefaultAstVisitor, ISymbolCollector
 {
     private ICompilerMessageManger CompilerMessageManger { get; }
+    private AggregateSymbolTable SymbolTable { get; }
 
-    #region Symbol Tables
-    public IVariableSymbolTable Variables { get; } = new VariableSymbolTable();
-    public IUITypeSymbolTable UITypes { get; } = new UITypeSymbolTable();
-    public ICallbackSymbolTable UserCallbacks { get; } = new CallbackSymbolTable();
-    public ICallbackSymbolTable ReservedCallbacks { get; }
-    public IUserFunctionSymbolSymbolTable UserFunctions { get; } = new UserFunctionSymbolTable();
-
-    #endregion
-
-    public SymbolCollector(
-        ICompilerMessageManger compilerMessageManger,
-        IVariableSymbolTable reservedVariables,
-        IUITypeSymbolTable reservedUITypes,
-        ICallbackSymbolTable reservedCallbacks )
+    public SymbolCollector( ICompilerMessageManger compilerMessageManger, AggregateSymbolTable symbolTable )
     {
         CompilerMessageManger = compilerMessageManger;
-        Variables.AddRange( reservedVariables );
-        UITypes.AddRange( reservedUITypes );
-        ReservedCallbacks = reservedCallbacks;
+        SymbolTable           = symbolTable;
     }
-
-    public SymbolCollector( ICompilerMessageManger compilerMessageManger ) : this(
-        compilerMessageManger,
-        new VariableSymbolTable(),
-        new UITypeSymbolTable(),
-        new CallbackSymbolTable()
-    )
-    {}
 
     public void Analyze( AstCompilationUnitNode node )
     {
@@ -61,7 +39,7 @@ public sealed class SymbolCollector : DefaultAstVisitor, ISymbolCollector
             return node;
         }
 
-        Variables.Add( variable );
+        SymbolTable.Variables.Add( variable );
         ValidateVariable( node, variable );
 
         return node;
@@ -104,7 +82,7 @@ public sealed class SymbolCollector : DefaultAstVisitor, ISymbolCollector
         #region 定義済みの検査
         //--------------------------------------------------------------------------
         {
-            if( !Variables.TrySearchByName( name, out variable ) )
+            if( !SymbolTable.Variables.TrySearchByName( name, out variable ) )
             {
                 // 未定義：新規追加可能
                 variable = node.As();
@@ -131,7 +109,7 @@ public sealed class SymbolCollector : DefaultAstVisitor, ISymbolCollector
         if( variable.DataTypeModifier.IsUI() )
         {
             // 有効な UI 型かチェック
-            if( !UITypes.TrySearchByName( node.Modifier, out var uiType ) )
+            if( !SymbolTable.UITypes.TrySearchByName( node.Modifier, out var uiType ) )
             {
                 CompilerMessageManger.Warning( node, Resource.symbol_error_declare_variable_unkown, node.Modifier );
 
@@ -170,7 +148,7 @@ public sealed class SymbolCollector : DefaultAstVisitor, ISymbolCollector
             // 現状、コールバック引数は　on init で宣言した変数
             foreach( var arg in node.ArgumentList.Arguments )
             {
-                if( !Variables.TrySearchByName( arg.Name, out var variable ) )
+                if( !SymbolTable.Variables.TrySearchByName( arg.Name, out var variable ) )
                 {
                     // on init で未定義
                     CompilerMessageManger.Error( node, Resource.symbol_error_declare_variable_unkown, arg.Name );
@@ -185,7 +163,7 @@ public sealed class SymbolCollector : DefaultAstVisitor, ISymbolCollector
         CallbackSymbol thisCallback;
 
         // NI予約済みコールバックの検査
-        if( !ReservedCallbacks.TrySearchByName( node.Name, out var reservedCallback ) )
+        if( !SymbolTable.ReservedCallbacks.TrySearchByName( node.Name, out var reservedCallback ) )
         {
             CompilerMessageManger.Warning( node, Resource.symbol_warning_declare_callback_unkown, node.Name );
 
@@ -197,7 +175,7 @@ public sealed class SymbolCollector : DefaultAstVisitor, ISymbolCollector
             thisCallback = reservedCallback;
         }
 
-        if( !UserCallbacks.Add( thisCallback ) )
+        if( !SymbolTable.UserCallbacks.Add( thisCallback ) )
         {
             CompilerMessageManger.Error( node, Resource.symbol_error_declare_callback_already, node.Name );
         }
@@ -215,7 +193,7 @@ public sealed class SymbolCollector : DefaultAstVisitor, ISymbolCollector
 
         var thisUserFunction = node.As();
 
-        if( !UserFunctions.Add( thisUserFunction ) )
+        if( !SymbolTable.UserFunctions.Add( thisUserFunction ) )
         {
             CompilerMessageManger.Error( node, Resource.symbol_error_declare_userfunction_already, node.Name );
         }
