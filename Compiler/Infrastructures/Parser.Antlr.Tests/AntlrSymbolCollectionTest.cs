@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 
-using KSPCompiler.Domain.Ast.Analyzers;
 using KSPCompiler.Domain.Ast.Analyzers.SymbolCollections;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols;
