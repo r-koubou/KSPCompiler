@@ -10,7 +10,7 @@ using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 
 using Resource = KSPCompiler.Resources.CompilerMessageResources;
 
-namespace KSPCompiler.Domain.Ast.Analyzers;
+namespace KSPCompiler.Domain.Ast.Analyzers.SymbolCollections;
 
 // TODO ビルトインなど予約済みのシンボルを事前にファイルからロードする（変数、コールバック、コマンド）
 // 外部で事前にロードした結果をコンストラクタで受け取る(ISymbolTable<T>で)
