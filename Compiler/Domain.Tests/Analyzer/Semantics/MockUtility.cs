@@ -1,5 +1,9 @@
+using System.Collections.Generic;
+
 using KSPCompiler.Domain.Ast.Nodes;
+using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
@@ -50,6 +54,19 @@ public static class MockUtility
 
     public static VariableSymbol CreateStringVariable( string name )
         => CreateVariable( name, DataTypeFlag.TypeString );
+
+    public static AstVariableDeclarationNode CreateVariableDeclarationNode( string name )
+        => new()
+        {
+            Name = name,
+        };
+
+    public static AstVariableDeclarationNode CreateVariableDeclarationNode( string name, AstVariableInitializerNode initializer )
+        => new()
+        {
+            Name = name,
+            Initializer = initializer
+        };
 
     public static  T CreateBinaryOperatorNode<T>( string variableName, DataTypeFlag leftType, AstExpressionNode right ) where T : AstExpressionNode, new()
     {
@@ -116,4 +133,50 @@ public static class MockUtility
             new KspPreProcessorSymbolTable(),
             new PgsSymbolTable()
         );
+
+    public static CallbackSymbol CreateCallback( string name, bool allowMultipleDeclaration )
+        => new( allowMultipleDeclaration )
+        {
+            Name = name
+        };
+
+    public static CallbackSymbol CreateCallback( string name, bool allowMultipleDeclaration, params CallbackArgumentSymbol[] args )
+        => new( allowMultipleDeclaration, args )
+        {
+            Name = name
+        };
+
+    public static AstCallbackDeclarationNode CreateCallbackDeclarationNode( string name )
+    {
+        return new AstCallbackDeclarationNode
+        {
+            Name = name,
+        };
+    }
+
+    public static AstCallbackDeclarationNode CreateCallbackDeclarationNode( string name, params AstArgumentNode[] args )
+    {
+        var result = new AstCallbackDeclarationNode
+        {
+            Name = name
+        };
+
+        result.ArgumentList.Arguments.AddRange( args );
+
+        return result;
+    }
+
+    public static UserFunctionSymbol CreateUserFunction( string name )
+        => new()
+        {
+            Name = name,
+        };
+
+    public static AstUserFunctionDeclarationNode CreateUserFunctionDeclarationNode( string name )
+    {
+        return new AstUserFunctionDeclarationNode
+        {
+            Name = name,
+        };
+    }
 }

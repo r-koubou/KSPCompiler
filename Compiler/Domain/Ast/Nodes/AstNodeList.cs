@@ -44,7 +44,7 @@ namespace KSPCompiler.Domain.Ast.Nodes
         }
 
         #region List controller
-        public void AddRange( List<TNode> list )
+        public void AddRange( IList<TNode> list )
         {
             foreach( var n in list )
             {

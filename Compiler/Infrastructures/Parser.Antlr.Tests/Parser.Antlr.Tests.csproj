@@ -37,15 +37,6 @@
       <None Update="TestData\AstTranslatorTest\StatementTest.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="TestData\SymbolAnalyzeTest\VariableSymbolTest.txt">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="TestData\SymbolAnalyzeTest\CallbackSymbolTest.txt">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="TestData\SymbolAnalyzeTest\UserFunctionSymbolTest.txt">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
       <None Update="TestData\SemanticAnalyzeVariableTest\assign_int.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>

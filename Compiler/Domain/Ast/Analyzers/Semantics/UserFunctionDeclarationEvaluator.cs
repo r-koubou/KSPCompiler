@@ -7,7 +7,7 @@ using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.Extensions;
 using KSPCompiler.Resources;
 
-namespace KSPCompiler.Domain.Ast.Analyzers.SymbolCollections;
+namespace KSPCompiler.Domain.Ast.Analyzers.Semantics;
 
 public class UserFunctionDeclarationEvaluator : IUserFunctionDeclarationEvaluator
 {
@@ -15,8 +15,8 @@ public class UserFunctionDeclarationEvaluator : IUserFunctionDeclarationEvaluato
     private ISymbolTable<UserFunctionSymbol> SymbolTable { get; }
 
     public UserFunctionDeclarationEvaluator(
-        ISymbolTable<UserFunctionSymbol> symbolTable,
-        ICompilerMessageManger compilerMessageManger )
+        ICompilerMessageManger compilerMessageManger,
+        ISymbolTable<UserFunctionSymbol> symbolTable )
     {
         SymbolTable           = symbolTable;
         CompilerMessageManger = compilerMessageManger;

@@ -1,6 +1,7 @@
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Integers;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Reals;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Strings;
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Declarations;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Operators;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Symbols;
 using KSPCompiler.Domain.Ast.Nodes;
@@ -15,6 +16,14 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, IAstTraversal
     private ICompilerMessageManger CompilerMessageManger { get; }
 
     private AggregateSymbolTable SymbolTable { get; }
+
+    #region Declaration
+
+    private ICallbackDeclarationEvaluator CallbackDeclarationEvaluator { get; }
+    private IUserFunctionDeclarationEvaluator UserFunctionDeclarationEvaluator { get; }
+    private IVariableDeclarationEvaluator VariableDeclarationEvaluator { get; }
+
+    #endregion
 
     #region Eveluators
 
@@ -50,6 +59,10 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, IAstTraversal
     {
         CompilerMessageManger = compilerMessageManger;
         SymbolTable           = symbolTable;
+
+        CallbackDeclarationEvaluator     = new CallbackDeclarationEvaluator( CompilerMessageManger, SymbolTable.ReservedCallbacks, SymbolTable.UserCallbacks );
+        UserFunctionDeclarationEvaluator = new UserFunctionDeclarationEvaluator( CompilerMessageManger, SymbolTable.UserFunctions );
+        VariableDeclarationEvaluator     = new VariableDeclarationEvaluator( CompilerMessageManger, SymbolTable.Variables, SymbolTable.UITypes );
 
         IntegerConvolutionEvaluator = new IntegerConvolutionEvaluator( this, SymbolTable.Variables, CompilerMessageManger );
         RealConvolutionEvaluator    = new RealConvolutionEvaluator( this, SymbolTable.Variables, CompilerMessageManger );
