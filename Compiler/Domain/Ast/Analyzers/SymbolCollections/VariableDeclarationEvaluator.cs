@@ -63,9 +63,10 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
     {
         if( !node.TryGetParent<AstCallbackDeclarationNode>( out var callback ) )
         {
-            CompilerMessageManger.Fatal(
+            CompilerMessageManger.Error(
                 node,
-                CompilerMessageResources.syntax_error
+                CompilerMessageResources.symbol_error_declare_variable_outside,
+                node.Name
             );
 
             return false;

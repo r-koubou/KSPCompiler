@@ -55,6 +55,19 @@ public static class MockUtility
     public static VariableSymbol CreateStringVariable( string name )
         => CreateVariable( name, DataTypeFlag.TypeString );
 
+    public static AstVariableDeclarationNode CreateVariableDeclarationNode( string name )
+        => new()
+        {
+            Name = name,
+        };
+
+    public static AstVariableDeclarationNode CreateVariableDeclarationNode( string name, AstVariableInitializerNode initializer )
+        => new()
+        {
+            Name = name,
+            Initializer = initializer
+        };
+
     public static  T CreateBinaryOperatorNode<T>( string variableName, DataTypeFlag leftType, AstExpressionNode right ) where T : AstExpressionNode, new()
     {
         return new T
