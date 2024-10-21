@@ -19,7 +19,7 @@ public sealed class SymbolCollector : DefaultAstVisitor, IAstTraversal
     {
         VariableDeclarationEvaluator     = new VariableDeclarationEvaluator( compilerMessageManger, symbolTable.Variables, symbolTable.UITypes );
         CallbackDeclarationEvaluator     = new CallbackDeclarationEvaluator( compilerMessageManger, symbolTable.ReservedCallbacks, symbolTable.UserCallbacks );
-        UserFunctionDeclarationEvaluator = new UserFunctionDeclarationEvaluator( symbolTable.UserFunctions, compilerMessageManger );
+        UserFunctionDeclarationEvaluator = new UserFunctionDeclarationEvaluator( compilerMessageManger, symbolTable.UserFunctions );
     }
 
     public void Traverse( AstCompilationUnitNode node )

@@ -62,7 +62,7 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, IAstTraversal
         SymbolTable           = symbolTable;
 
         CallbackDeclarationEvaluator     = new CallbackDeclarationEvaluator( CompilerMessageManger, SymbolTable.ReservedCallbacks, SymbolTable.UserCallbacks );
-        UserFunctionDeclarationEvaluator = new UserFunctionDeclarationEvaluator( SymbolTable.UserFunctions, CompilerMessageManger );
+        UserFunctionDeclarationEvaluator = new UserFunctionDeclarationEvaluator( CompilerMessageManger, SymbolTable.UserFunctions );
         VariableDeclarationEvaluator     = new VariableDeclarationEvaluator( CompilerMessageManger, SymbolTable.Variables, SymbolTable.UITypes );
 
         IntegerConvolutionEvaluator = new IntegerConvolutionEvaluator( this, SymbolTable.Variables, CompilerMessageManger );

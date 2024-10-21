@@ -15,8 +15,8 @@ public class UserFunctionDeclarationEvaluator : IUserFunctionDeclarationEvaluato
     private ISymbolTable<UserFunctionSymbol> SymbolTable { get; }
 
     public UserFunctionDeclarationEvaluator(
-        ISymbolTable<UserFunctionSymbol> symbolTable,
-        ICompilerMessageManger compilerMessageManger )
+        ICompilerMessageManger compilerMessageManger,
+        ISymbolTable<UserFunctionSymbol> symbolTable )
     {
         SymbolTable           = symbolTable;
         CompilerMessageManger = compilerMessageManger;
