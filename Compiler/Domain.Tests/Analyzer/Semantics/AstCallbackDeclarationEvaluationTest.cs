@@ -1,6 +1,6 @@
 using System;
 
-using KSPCompiler.Domain.Ast.Analyzers.SymbolCollections;
+using KSPCompiler.Domain.Ast.Analyzers.Semantics;
 using KSPCompiler.Domain.CompilerMessages;
 
 using NUnit.Framework;

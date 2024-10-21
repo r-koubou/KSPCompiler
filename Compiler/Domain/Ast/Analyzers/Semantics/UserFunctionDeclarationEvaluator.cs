@@ -7,7 +7,7 @@ using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.Extensions;
 using KSPCompiler.Resources;
 
-namespace KSPCompiler.Domain.Ast.Analyzers.SymbolCollections;
+namespace KSPCompiler.Domain.Ast.Analyzers.Semantics;
 
 public class UserFunctionDeclarationEvaluator : IUserFunctionDeclarationEvaluator
 {

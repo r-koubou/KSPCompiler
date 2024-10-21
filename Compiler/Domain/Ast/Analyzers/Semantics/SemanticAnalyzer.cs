@@ -4,7 +4,6 @@ using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Strings;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Declarations;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Operators;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Symbols;
-using KSPCompiler.Domain.Ast.Analyzers.SymbolCollections;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.CompilerMessages;

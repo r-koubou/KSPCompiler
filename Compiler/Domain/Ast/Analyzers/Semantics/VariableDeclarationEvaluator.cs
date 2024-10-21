@@ -10,7 +10,7 @@ using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Resources;
 
-namespace KSPCompiler.Domain.Ast.Analyzers.SymbolCollections;
+namespace KSPCompiler.Domain.Ast.Analyzers.Semantics;
 
 public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 {
