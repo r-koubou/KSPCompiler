@@ -153,4 +153,17 @@ public static class MockUtility
         return result;
     }
 
+    public static UserFunctionSymbol CreateUserFunction( string name )
+        => new()
+        {
+            Name = name,
+        };
+
+    public static AstUserFunctionDeclarationNode CreateUserFunctionDeclarationNode( string name )
+    {
+        return new AstUserFunctionDeclarationNode
+        {
+            Name = name,
+        };
+    }
 }
