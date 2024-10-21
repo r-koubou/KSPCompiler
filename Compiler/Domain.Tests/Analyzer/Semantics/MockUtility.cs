@@ -1,5 +1,9 @@
+using System.Collections.Generic;
+
 using KSPCompiler.Domain.Ast.Nodes;
+using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
@@ -116,4 +120,37 @@ public static class MockUtility
             new KspPreProcessorSymbolTable(),
             new PgsSymbolTable()
         );
+
+    public static CallbackSymbol CreateCallback( string name, bool allowMultipleDeclaration )
+        => new( allowMultipleDeclaration )
+        {
+            Name = name
+        };
+
+    public static CallbackSymbol CreateCallback( string name, bool allowMultipleDeclaration, params CallbackArgumentSymbol[] args )
+        => new( allowMultipleDeclaration, args )
+        {
+            Name = name
+        };
+
+    public static AstCallbackDeclarationNode CreateCallbackDeclarationNode( string name )
+    {
+        return new AstCallbackDeclarationNode
+        {
+            Name = name,
+        };
+    }
+
+    public static AstCallbackDeclarationNode CreateCallbackDeclarationNode( string name, params AstArgumentNode[] args )
+    {
+        var result = new AstCallbackDeclarationNode
+        {
+            Name = name
+        };
+
+        result.ArgumentList.Arguments.AddRange( args );
+
+        return result;
+    }
+
 }
