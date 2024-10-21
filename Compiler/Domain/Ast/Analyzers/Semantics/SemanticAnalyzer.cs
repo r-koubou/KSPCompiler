@@ -10,7 +10,7 @@ using KSPCompiler.Domain.Symbols;
 
 namespace KSPCompiler.Domain.Ast.Analyzers.Semantics;
 
-public partial class SemanticAnalyzer : DefaultAstVisitor, ISemanticAnalyzer
+public partial class SemanticAnalyzer : DefaultAstVisitor, IAstTraversal
 {
     private ICompilerMessageManger CompilerMessageManger { get; }
 
@@ -63,7 +63,7 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, ISemanticAnalyzer
         AssignOperatorEvaluator            = new AssignOperatorEvaluator( CompilerMessageManger );
     }
 
-    public void Analyze( AstCompilationUnitNode node )
+    public void Traverse( AstCompilationUnitNode node )
     {
         node.AcceptChildren( this );
     }

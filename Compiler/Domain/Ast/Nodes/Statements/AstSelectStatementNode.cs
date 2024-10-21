@@ -51,6 +51,8 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         ///
         public override void AcceptChildren<T>( IAstVisitor<T> visitor )
         {
+            Condition.AcceptChildren( visitor );
+
             foreach( var n in CaseBlocks )
             {
                 n.Accept( visitor );
