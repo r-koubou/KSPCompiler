@@ -1,7 +1,10 @@
+using System;
+
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Declarations;
 using KSPCompiler.Domain.Ast.Extensions;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Domain.Ast.Nodes.Extensions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols;
@@ -28,7 +31,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         UITypeSymbols         = uiTypeSymbols;
     }
 
-    public IAstNode Evaluate( AstVariableDeclarationNode node )
+    public IAstNode Evaluate( IAstVisitor visitor, AstVariableDeclarationNode node )
     {
         // 予約済み（NIが禁止している）接頭語検査
         ValidateNiReservedPrefix( node );
@@ -45,8 +48,13 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             return node;
         }
 
-        //
+        // UI型の検査
         if( !ValidateUIType( node, variable ) )
+        {
+            return node;
+        }
+
+        if( !ValidateInitialValue( node, variable ) )
         {
             return node;
         }
@@ -166,5 +174,15 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         variable.UIType = uiType;
 
         return true;
+    }
+
+    private bool ValidateInitialValue( AstVariableDeclarationNode node, VariableSymbol variable )
+    {
+        if( node.Initializer.IsNull() )
+        {
+            return true;
+        }
+
+        throw new NotImplementedException();
     }
 }

@@ -25,7 +25,7 @@ public class CallbackDeclarationEvaluator : ICallbackDeclarationEvaluator
         UserCallbackSymbols     = userCallbackSymbols;
     }
 
-    public IAstNode Evaluate( AstCallbackDeclarationNode node )
+    public IAstNode Evaluate( IAstVisitor visitor, AstCallbackDeclarationNode node )
     {
 #if false
         if( node.ArgumentList.HasArgument )
