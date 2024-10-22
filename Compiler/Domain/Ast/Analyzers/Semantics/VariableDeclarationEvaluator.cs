@@ -54,7 +54,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             return node;
         }
 
-        if( !ValidateInitialValue( node, variable ) )
+        if( !ValidateInitialValue( visitor, node, variable ) )
         {
             return node;
         }
@@ -176,13 +176,23 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         return true;
     }
 
-    private bool ValidateInitialValue( AstVariableDeclarationNode node, VariableSymbol variable )
+    private bool ValidateInitialValue( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
     {
         if( node.Initializer.IsNull() )
         {
             return true;
         }
 
+        if( node.Initializer is AstVariableInitializerNode variableInitializerNode )
+        {
+            return ValidateVariableInitializer( visitor, variableInitializerNode, variable );
+        }
+
+        return true;
+    }
+
+    private bool ValidateVariableInitializer( IAstVisitor visitor, AstVariableInitializerNode variableInitializerNode, VariableSymbol variable )
+    {
         throw new NotImplementedException();
     }
 }
