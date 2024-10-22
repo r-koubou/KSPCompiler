@@ -20,8 +20,10 @@ public class AstUserFunctionDeclarationEvaluationTest
 
         var ast = MockUtility.CreateUserFunctionDeclarationNode( name );
         var evaluator = new UserFunctionDeclarationEvaluator( compilerMessageManger, symbols.UserFunctions );
+        var visitor = new MockDeclarationVisitor();
 
-        evaluator.Evaluate( ast );
+        visitor.Inject( evaluator );
+        evaluator.Evaluate( visitor, ast );
 
         compilerMessageManger.WriteTo( Console.Out );
 
@@ -39,10 +41,13 @@ public class AstUserFunctionDeclarationEvaluationTest
 
         var ast = MockUtility.CreateUserFunctionDeclarationNode( name );
         var evaluator = new UserFunctionDeclarationEvaluator( compilerMessageManger, symbols.UserFunctions );
+        var visitor = new MockDeclarationVisitor();
+
+        visitor.Inject( evaluator );
 
         for( var i = 0; i < 2; i++ )
         {
-            evaluator.Evaluate( ast );
+            evaluator.Evaluate( visitor, ast );
         }
 
         compilerMessageManger.WriteTo( Console.Out );

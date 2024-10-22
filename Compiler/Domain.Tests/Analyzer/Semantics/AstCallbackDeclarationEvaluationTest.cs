@@ -27,9 +27,11 @@ public class AstCallbackDeclarationEvaluationTest
         }
 
         var ast = MockUtility.CreateCallbackDeclarationNode( name );
+        var visitor = new MockDeclarationVisitor();
         var evaluator = new CallbackDeclarationEvaluator( compilerMessageManger, symbols.ReservedCallbacks, symbols.UserCallbacks );
 
-        evaluator.Evaluate( ast );
+        visitor.Inject( evaluator );
+        evaluator.Evaluate( visitor, ast );
 
         compilerMessageManger.WriteTo( Console.Out );
 
@@ -49,10 +51,13 @@ public class AstCallbackDeclarationEvaluationTest
 
         var ast = MockUtility.CreateCallbackDeclarationNode( name );
         var evaluator = new CallbackDeclarationEvaluator( compilerMessageManger, symbols.ReservedCallbacks, symbols.UserCallbacks );
+        var visitor = new MockDeclarationVisitor();
+
+        visitor.Inject( evaluator );
 
         for( var i = 0; i < 2; i++ )
         {
-            evaluator.Evaluate( ast );
+            evaluator.Evaluate( visitor, ast );
         }
 
         compilerMessageManger.WriteTo( Console.Out );

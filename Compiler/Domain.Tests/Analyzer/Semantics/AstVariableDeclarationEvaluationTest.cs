@@ -24,8 +24,10 @@ public class AstVariableDeclarationEvaluationTest
         ast.Parent = callbackAst;
 
         var evaluator = new VariableDeclarationEvaluator( compilerMessageManger, symbols.Variables, symbols.UITypes );
+        var visitor = new MockDeclarationVisitor();
 
-        evaluator.Evaluate( ast );
+        visitor.Inject( evaluator );
+        evaluator.Evaluate( visitor, ast );
 
         compilerMessageManger.WriteTo( Console.Out );
 
@@ -47,10 +49,13 @@ public class AstVariableDeclarationEvaluationTest
         ast.Parent = callbackAst;
 
         var evaluator = new VariableDeclarationEvaluator( compilerMessageManger, symbols.Variables, symbols.UITypes );
+        var visitor = new MockDeclarationVisitor();
+
+        visitor.Inject( evaluator );
 
         for( var i = 0; i < 2; i++ )
         {
-            evaluator.Evaluate( ast );
+            evaluator.Evaluate( visitor, ast );
         }
 
         compilerMessageManger.WriteTo( Console.Out );
