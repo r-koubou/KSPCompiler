@@ -1,5 +1,3 @@
-using System;
-
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Declarations;
 using KSPCompiler.Domain.Ast.Extensions;
 using KSPCompiler.Domain.Ast.Nodes;
@@ -178,21 +176,17 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
     private bool ValidateInitialValue( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
     {
+        // 初期化代入式がない場合はスキップ
         if( node.Initializer.IsNull() )
         {
             return true;
         }
 
-        if( node.Initializer is AstVariableInitializerNode variableInitializerNode )
-        {
-            return ValidateVariableInitializer( visitor, variableInitializerNode, variable );
-        }
-
-        return true;
+        return ValidateVariableInitializer( visitor, node, variable );
     }
 
-    private bool ValidateVariableInitializer( IAstVisitor visitor, AstVariableInitializerNode variableInitializerNode, VariableSymbol variable )
+    private bool ValidateVariableInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
     {
-        throw new NotImplementedException();
+        return true;
     }
 }
