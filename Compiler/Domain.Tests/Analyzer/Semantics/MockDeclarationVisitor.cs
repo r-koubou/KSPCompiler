@@ -1,5 +1,3 @@
-using System;
-
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Declarations;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
@@ -35,14 +33,5 @@ public class MockDeclarationVisitor : DefaultAstVisitor
         => UserFunctionDeclarationEvaluator.Evaluate( this, node );
 
     public override IAstNode Visit( AstVariableDeclarationNode node )
-        => throw new NotImplementedException();
-
-    public override IAstNode Visit( AstVariableInitializerNode node )
-        => throw new NotImplementedException();
-
-    public override IAstNode Visit( AstPrimitiveInitializerNode node )
-        => throw new NotImplementedException();
-
-    public override IAstNode Visit( AstArrayInitializerNode node )
-        => throw new NotImplementedException();
+        => VariableDeclarationEvaluator.Evaluate( this, node );
 }
