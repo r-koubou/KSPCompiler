@@ -16,7 +16,8 @@ public static class AstNodeExtension
         => node is null
             or NullAstNode
             or NullAstExpressionNode
-            or NullAstInitializerNode;
+            or NullAstPrimitiveInitializerNode
+            or NullAstArrayInitializerNode;
 
     /// <summary>
     /// Check if the node is not Null Object
