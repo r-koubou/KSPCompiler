@@ -1,5 +1,3 @@
-using System;
-
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 
 namespace KSPCompiler.Domain.Ast.Nodes.Statements
@@ -7,7 +5,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
     /// <summary>
     /// Ast node representing a primitive variable initialization
     /// </summary>
-    public class AstPrimitiveInitializerNode : AstInitializerNode
+    public class AstPrimitiveInitializerNode : AstStatementNode
     {
         /// <summary>
         /// Assignment expression

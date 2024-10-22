@@ -3,17 +3,19 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
     /// <summary>
     /// AST node representing a variable initialization
     /// </summary>
-    public class AstVariableInitializerNode : AstInitializerNode
+    public class AstVariableInitializerNode : AstStatementNode
     {
         /// <summary>
         /// primitive variable initialization
         /// </summary>
-        public AstInitializerNode PrimitiveInitializer { get; set; }
+        public AstPrimitiveInitializerNode PrimitiveInitializer { get; set; }
+            = NullAstPrimitiveInitializerNode.Instance;
 
         /// <summary>
         /// array variable initialization
         /// </summary>
-        public AstInitializerNode ArrayInitializer { get; set; }
+        public AstArrayInitializerNode ArrayInitializer { get; set; }
+            = NullAstArrayInitializerNode.Instance;
 
         /// <summary>
         /// Ctor
@@ -25,11 +27,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         /// Ctor
         /// </summary>
         public AstVariableInitializerNode( IAstNode parent )
-            : base( AstNodeId.VariableInitializer, parent )
-        {
-            PrimitiveInitializer = NullAstInitializerNode.Instance;
-            ArrayInitializer     = NullAstInitializerNode.Instance;
-        }
+            : base( AstNodeId.VariableInitializer, parent ) {}
 
         #region IAstNodeAcceptor
         ///
@@ -41,11 +39,11 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
             {
                 var result = 0;
 
-                if( PrimitiveInitializer != NullAstInitializerNode.Instance )
+                if( PrimitiveInitializer != NullAstPrimitiveInitializerNode.Instance )
                 {
                     result++;
                 }
-                if( ArrayInitializer != NullAstInitializerNode.Instance )
+                if( ArrayInitializer != NullAstArrayInitializerNode.Instance )
                 {
                     result++;
                 }
@@ -65,6 +63,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         ///
         public override void AcceptChildren<T>( IAstVisitor<T> visitor )
         {
+
             PrimitiveInitializer.AcceptChildren( visitor );
             ArrayInitializer.AcceptChildren( visitor );
         }
