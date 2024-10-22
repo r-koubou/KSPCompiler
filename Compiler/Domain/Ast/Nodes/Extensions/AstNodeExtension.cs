@@ -11,14 +11,14 @@ public static class AstNodeExtension
     /// <returns>true if the node is Null Object otherwise false.</returns>
     /// <seealso cref="NullAstNode"/>
     /// <seealso cref="NullAstExpressionNode"/>
-    /// <seealso cref="NullAstInitializerNode"/>
+    /// <seealso cref="NullAstVariableInitializerNode"/>
     /// <seealso cref="NullAstPrimitiveInitializerNode"/>
     /// <seealso cref="NullAstArrayInitializerNode"/>
     public static bool IsNull( this IAstNode? node )
         => node is null
             or NullAstNode
             or NullAstExpressionNode
-            or NullAstInitializerNode
+            or NullAstVariableInitializerNode
             or NullAstPrimitiveInitializerNode
             or NullAstArrayInitializerNode;
 

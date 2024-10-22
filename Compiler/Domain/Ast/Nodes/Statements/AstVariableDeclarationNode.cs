@@ -22,7 +22,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         /// <summary>
         /// initialization statement
         /// </summary>
-        public AstVariableInitializerNode Initializer { get; set; } = NullAstInitializerNode.Instance;
+        public AstVariableInitializerNode Initializer { get; set; } = NullAstVariableInitializerNode.Instance;
 
         /// <summary>
         /// Ctor
