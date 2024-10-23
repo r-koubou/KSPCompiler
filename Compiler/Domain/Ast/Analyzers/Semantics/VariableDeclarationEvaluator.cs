@@ -286,7 +286,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             return false;
         }
 
-        if( !ValidateArraySize( visitor, node, initializer ) )
+        if( !ValidateArraySize( visitor, node, initializer, variable ) )
         {
             return false;
         }
@@ -295,7 +295,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         return ValidateArrayElements( visitor, node, variable, initializer );
     }
 
-    private bool ValidateArraySize( IAstVisitor visitor, AstVariableDeclarationNode node, AstArrayInitializerNode initializer )
+    private bool ValidateArraySize( IAstVisitor visitor, AstVariableDeclarationNode node, AstArrayInitializerNode initializer, VariableSymbol variable )
     {
         // 配列サイズのチェック
         if( initializer.Size.Accept( visitor ) is not AstExpressionNode arraySizeExpr )
@@ -355,6 +355,9 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
             return false;
         }
+
+        // シンボル情報に配列サイズを反映
+        variable.ArraySize = arraySize.Value;
 
         return true;
 
