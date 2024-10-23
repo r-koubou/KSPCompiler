@@ -56,7 +56,7 @@ public class AstArrayVariableDeclarationEvaluationTest
     }
 
     [Test]
-    public void DeclareWithInvalidInitializerTest()
+    public void CannotDeclareWithInvalidInitializerTest()
     {
         const string name = "%variable";
 
@@ -101,7 +101,7 @@ public class AstArrayVariableDeclarationEvaluationTest
     }
 
     [Test]
-    public void DeclareWithOutOfBoundInitializerTest()
+    public void CannotDeclareWithOutOfBoundInitializerTest()
     {
         const string name = "%variable";
 
@@ -183,7 +183,7 @@ public class AstArrayVariableDeclarationEvaluationTest
     [TestCase( -1 )]
     [TestCase( KspLanguageLimitations.MaxArraySize + 1 )]
     [TestCase( KspLanguageLimitations.MaxArraySize )]
-    public void DeclareWithInvalidSizeTest( int arraySize )
+    public void CannotDeclareWithInvalidSizeTest( int arraySize )
     {
         const string name = "%variable";
 
