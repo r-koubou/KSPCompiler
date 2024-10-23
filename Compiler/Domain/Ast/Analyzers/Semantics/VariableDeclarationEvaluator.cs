@@ -115,6 +115,21 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
     private bool TryCreateNewSymbol( AstVariableDeclarationNode node, out VariableSymbol result )
     {
+        var variableType = DataTypeUtility.GuessFromSymbolName( node.Name );
+
+        // 配列型に const は付与できない
+        if( variableType.IsArray() && node.Modifier == "const" )
+        {
+            result = null!;
+            CompilerMessageManger.Error(
+                node,
+                CompilerMessageResources.semantic_error_declare_variable_cannot_const,
+                node.Name
+            );
+
+            return false;
+        }
+
         if( !VariableSymbols.TrySearchByName( node.Name, out result ) )
         {
             // 未定義：新規追加可能
@@ -208,6 +223,18 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
     {
         var initializer = node.Initializer.PrimitiveInitializer;
 
+        // プリミティブ型変数に対し、配列初期化式を用いている
+        if( node.Initializer.ArrayInitializer.IsNotNull() )
+        {
+            CompilerMessageManger.Error(
+                node,
+                CompilerMessageResources.semantic_error_declare_variable_invalid_initializer,
+                node.Name
+            );
+
+            return false;
+        }
+
         // 文字列型は宣言時に初期化代入はできない
         if( variable.DataType.IsString() )
         {
@@ -273,6 +300,18 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
     private bool ValidateArrayInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
     {
         var initializer = node.Initializer.ArrayInitializer;
+
+        // 配列型変数に対し、プリミティブ型初期化式を用いている
+        if( node.Initializer.PrimitiveInitializer.IsNotNull() )
+        {
+            CompilerMessageManger.Error(
+                node,
+                CompilerMessageResources.semantic_error_declare_variable_invalid_initializer,
+                node.Name
+            );
+
+            return false;
+        }
 
         // 配列要素サイズ・初期化代入式なし
         if( initializer.IsNull() )

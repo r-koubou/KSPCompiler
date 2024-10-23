@@ -230,5 +230,17 @@ namespace KSPCompiler.Resources {
                 return ResourceManager.GetString("semantic.error.declare.variable.arrayinitilizer.sizeover", resourceCulture);
             }
         }
+        
+        public static string semantic_error_declare_variable_cannot_const {
+            get {
+                return ResourceManager.GetString("semantic.error.declare.variable.cannot.const", resourceCulture);
+            }
+        }
+        
+        public static string semantic_error_declare_variable_invalid_initializer {
+            get {
+                return ResourceManager.GetString("semantic.error.declare.variable.invalid.initializer", resourceCulture);
+            }
+        }
     }
 }

@@ -104,4 +104,10 @@
     <data name="semantic.error.declare.variable.arrayinitilizer.sizeover" xml:space="preserve">
         <value>{0}: 配列初期化のリスト数が配列サイズを超えています</value>
     </data>
+    <data name="semantic.error.declare.variable.cannot.const" xml:space="preserve">
+        <value>{0}: const を指定することはできません</value>
+    </data>
+    <data name="semantic.error.declare.variable.invalid.initializer" xml:space="preserve">
+        <value>{0}: 初期化式が正しくありません</value>
+    </data>
 </root>

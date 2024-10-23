@@ -111,4 +111,10 @@
     <data name="semantic.error.declare.variable.arrayinitilizer.sizeover" xml:space="preserve">
         <value>{0}: The number of lists in the array initialization exceeds the array size</value>
     </data>
+    <data name="semantic.error.declare.variable.cannot.const" xml:space="preserve">
+        <value>{0}: const cannot be specified</value>
+    </data>
+    <data name="semantic.error.declare.variable.invalid.initializer" xml:space="preserve">
+        <value>{0}: Incorrect initialization expression</value>
+    </data>
 </root>

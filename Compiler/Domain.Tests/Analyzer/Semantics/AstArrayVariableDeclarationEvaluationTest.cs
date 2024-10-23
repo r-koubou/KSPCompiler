@@ -144,6 +144,34 @@ public class AstArrayVariableDeclarationEvaluationTest
     }
 
     [Test]
+    public void CannotDeclareWithConstTest()
+    {
+        const string name = "%variable";
+
+        var compilerMessageManger = ICompilerMessageManger.Default;
+        var symbols = MockUtility.CreateAggregateSymbolTable();
+
+        // Variable can declare in init callback only
+        var callbackAst = MockUtility.CreateCallbackDeclarationNode( "init" );
+
+        // declare const %variable <-- cannot declare const in array type
+        var declaration = MockUtility.CreateVariableDeclarationNode( name );
+        declaration.Parent   = callbackAst;
+        declaration.Modifier = "const";
+
+        var evaluator = new VariableDeclarationEvaluator( compilerMessageManger, symbols.Variables, symbols.UITypes );
+        var visitor = new MockDeclarationVisitor();
+
+        visitor.Inject( evaluator );
+        evaluator.Evaluate( visitor, declaration );
+
+        compilerMessageManger.WriteTo( Console.Out );
+
+        Assert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        Assert.AreEqual( 0, symbols.Variables.Count );
+    }
+
+    [Test]
     public void DeclareWithoutInitializerTest()
     {
         const string name = "%variable";
