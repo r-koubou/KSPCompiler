@@ -138,4 +138,43 @@ public class AstVariableDeclarationEvaluationTest
         Assert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
         Assert.AreEqual( 0, symbols.Variables.Count );
     }
+
+    [Test]
+    public void CannotDeclareWithArrayInitializerTest()
+    {
+        const string name = "$variable";
+
+        var compilerMessageManger = ICompilerMessageManger.Default;
+        var symbols = MockUtility.CreateAggregateSymbolTable();
+
+        // Variable can declare in init callback only
+        var callbackAst = MockUtility.CreateCallbackDeclarationNode( "init" );
+
+        // declare $variable
+        var declaration = MockUtility.CreateVariableDeclarationNode( name );
+        declaration.Parent = callbackAst;
+
+        // [10] := 1 <-- cannot declare array initializer
+        var arrayInitializer = new AstArrayInitializerNode( declaration );
+        arrayInitializer.Size = new AstIntLiteralNode( 10 );
+        arrayInitializer.Initializer.Expressions.Add(
+            new AstIntLiteralNode( 1 )
+        );
+
+        declaration.Initializer = new AstVariableInitializerNode( declaration )
+        {
+            ArrayInitializer = arrayInitializer
+        };
+
+        var evaluator = new VariableDeclarationEvaluator( compilerMessageManger, symbols.Variables, symbols.UITypes );
+        var visitor = new MockDeclarationVisitor();
+
+        visitor.Inject( evaluator );
+        evaluator.Evaluate( visitor, declaration );
+
+        compilerMessageManger.WriteTo( Console.Out );
+
+        Assert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        Assert.AreEqual( 0, symbols.Variables.Count );
+    }
 }
