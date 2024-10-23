@@ -255,8 +255,8 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         CompilerMessageManger.Error(
             node,
             CompilerMessageResources.semantic_error_assign_type_compatible,
-            node.Name,
-            variable.DataType
+            variable.DataType.ToMessageString(),
+            evaluated.TypeFlag.ToMessageString()
         );
 
         return false;

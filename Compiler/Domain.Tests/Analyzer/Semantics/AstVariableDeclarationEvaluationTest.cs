@@ -101,4 +101,41 @@ public class AstVariableDeclarationEvaluationTest
         Assert.AreEqual( 0, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
         Assert.AreEqual( 1, symbols.Variables.Count );
     }
+
+    [Test]
+    public void PrimitiveDeclarationWithIncompatibleTypeInitializerTest()
+    {
+        const string name = "$variable";
+
+        var compilerMessageManger = ICompilerMessageManger.Default;
+        var symbols = MockUtility.CreateAggregateSymbolTable();
+
+        // Variable can declare in init callback only
+        var callbackAst = MockUtility.CreateCallbackDeclarationNode( "init" );
+
+        // declare $variable
+        var declaration = MockUtility.CreateVariableDeclarationNode( name );
+        declaration.Parent = callbackAst;
+
+        // := 1
+        declaration.Initializer = new AstVariableInitializerNode( declaration )
+        {
+            PrimitiveInitializer = new AstPrimitiveInitializerNode(
+                declaration,
+                new AstStringLiteralNode("string"),
+                NullAstExpressionListNode.Instance
+            )
+        };
+
+        var evaluator = new VariableDeclarationEvaluator( compilerMessageManger, symbols.Variables, symbols.UITypes );
+        var visitor = new MockDeclarationVisitor();
+
+        visitor.Inject( evaluator );
+        evaluator.Evaluate( visitor, declaration );
+
+        compilerMessageManger.WriteTo( Console.Out );
+
+        Assert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        Assert.AreEqual( 0, symbols.Variables.Count );
+    }
 }
