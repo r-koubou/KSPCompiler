@@ -87,4 +87,13 @@
     <data name="semantic.error.array.subscript.compatible" xml:space="preserve">
         <value>Subscript type is not an integer type ({0})</value>
     </data>
+    <data name="semantic.error.declare.variable.required.initializer" xml:space="preserve">
+        <value>{0} is required initializer</value>
+    </data>
+    <data name="semantic.error.declare.variable.noconstant.initializer" xml:space="preserve">
+        <value>{0}: Constant value(s) expected for variable initializer(s)</value>
+    </data>
+    <data name="semantic.error.declare.variable.string.initializer" xml:space="preserve">
+        <value>{0}: String type is not support initializer</value>
+    </data>
 </root>

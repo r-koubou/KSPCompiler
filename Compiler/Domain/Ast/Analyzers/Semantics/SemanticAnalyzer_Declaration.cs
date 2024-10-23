@@ -7,11 +7,11 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Semantics;
 public partial class SemanticAnalyzer
 {
     public override IAstNode Visit( AstCallbackDeclarationNode node )
-        => CallbackDeclarationEvaluator.Evaluate( node );
+        => CallbackDeclarationEvaluator.Evaluate( this, node );
 
     public override IAstNode Visit( AstUserFunctionDeclarationNode node )
-        => UserFunctionDeclarationEvaluator.Evaluate( node );
+        => UserFunctionDeclarationEvaluator.Evaluate( this, node );
 
     public override IAstNode Visit( AstVariableDeclarationNode node )
-        => VariableDeclarationEvaluator.Evaluate( node );
+        => VariableDeclarationEvaluator.Evaluate( this, node );
 }

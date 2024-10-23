@@ -39,7 +39,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         ///
         public override void AcceptChildren<T>( IAstVisitor<T> visitor )
         {
-            throw new NotImplementedException();
+            // Do nothing
         }
 
         #endregion IAstNodeAcceptor

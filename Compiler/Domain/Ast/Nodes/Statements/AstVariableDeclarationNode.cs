@@ -22,7 +22,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         /// <summary>
         /// initialization statement
         /// </summary>
-        public AstInitializerNode Initializer { get; set; }
+        public AstVariableInitializerNode Initializer { get; set; } = NullAstVariableInitializerNode.Instance;
 
         /// <summary>
         /// Ctor
@@ -34,10 +34,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         /// Ctor
         /// </summary>
         public AstVariableDeclarationNode( IAstNode parent )
-            : base( AstNodeId.VariableDeclaration, parent )
-        {
-            Initializer = NullAstInitializerNode.Instance;
-        }
+            : base( AstNodeId.VariableDeclaration, parent ) {}
 
         #region IAstNodeAcceptor
         ///

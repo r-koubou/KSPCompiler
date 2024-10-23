@@ -22,7 +22,7 @@ public class UserFunctionDeclarationEvaluator : IUserFunctionDeclarationEvaluato
         CompilerMessageManger = compilerMessageManger;
     }
 
-    public IAstNode Evaluate( AstUserFunctionDeclarationNode node )
+    public IAstNode Evaluate( IAstVisitor visitor, AstUserFunctionDeclarationNode node )
     {
         var thisUserFunction = node.As();
 

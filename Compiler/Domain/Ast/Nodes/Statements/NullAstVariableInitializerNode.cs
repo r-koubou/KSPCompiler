@@ -2,15 +2,15 @@ using KSPCompiler.Commons.Text;
 
 namespace KSPCompiler.Domain.Ast.Nodes.Statements;
 
-public sealed class NullAstInitializerNode : AstInitializerNode
+public sealed class NullAstVariableInitializerNode : AstVariableInitializerNode
 {
-    public static readonly NullAstInitializerNode Instance = new NullAstInitializerNode();
+    public static readonly NullAstVariableInitializerNode Instance = new ();
 
     /// <summary>
-    /// Always return <see cref="AstNodeId.None"/>.
+    /// Always return <see cref="AstNodeId.VariableInitializer"/>.
     /// </summary>
     public override AstNodeId Id
-        => AstNodeId.None;
+        => AstNodeId.VariableInitializer;
 
     /// <summary>
     /// Always return zero and the set is ignored.
@@ -30,8 +30,8 @@ public sealed class NullAstInitializerNode : AstInitializerNode
         set => _ = value;
     }
 
-    private NullAstInitializerNode()
-        : base( AstNodeId.None, NullAstNode.Instance ) {}
+    private NullAstVariableInitializerNode()
+        : base( NullAstNode.Instance ) {}
 
     public override int ChildNodeCount
         => 0;
@@ -42,5 +42,5 @@ public sealed class NullAstInitializerNode : AstInitializerNode
     public override void AcceptChildren<T>( IAstVisitor<T> visitor ) {}
 
     public override string ToString()
-        => nameof( NullAstInitializerNode );
+        => nameof( NullAstVariableInitializerNode );
 }

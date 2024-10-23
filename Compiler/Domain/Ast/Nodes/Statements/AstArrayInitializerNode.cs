@@ -1,5 +1,3 @@
-using System;
-
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 
 namespace KSPCompiler.Domain.Ast.Nodes.Statements
@@ -7,7 +5,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
     /// <summary>
     /// AST node representing an array variable initialization
     /// </summary>
-    public class AstArrayInitializerNode : AstInitializerNode
+    public class AstArrayInitializerNode : AstStatementNode
     {
         /// <summary>
         /// Number of array elements
@@ -53,7 +51,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         ///
         public override void AcceptChildren<T>( IAstVisitor<T> visitor )
         {
-            throw new NotImplementedException();
+            // Do nothing
         }
 
         #endregion IAstNodeAcceptor

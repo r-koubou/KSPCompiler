@@ -182,5 +182,23 @@ namespace KSPCompiler.Resources {
                 return ResourceManager.GetString("semantic.error.array.subscript.compatible", resourceCulture);
             }
         }
+        
+        public static string semantic_error_declare_variable_required_initializer {
+            get {
+                return ResourceManager.GetString("semantic.error.declare.variable.required.initializer", resourceCulture);
+            }
+        }
+        
+        public static string semantic_error_declare_variable_noconstant_initializer {
+            get {
+                return ResourceManager.GetString("semantic.error.declare.variable.noconstant.initializer", resourceCulture);
+            }
+        }
+        
+        public static string semantic_error_declare_variable_string_initializer {
+            get {
+                return ResourceManager.GetString("semantic.error.declare.variable.string.initializer", resourceCulture);
+            }
+        }
     }
 }

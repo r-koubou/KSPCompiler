@@ -80,4 +80,13 @@
     <data name="semantic.error.array.subscript.compatible" xml:space="preserve">
         <value>添字の型が整数型ではありません  ({0})</value>
     </data>
+    <data name="semantic.error.declare.variable.required.initializer" xml:space="preserve">
+        <value>{0}: 初期化が必要です</value>
+    </data>
+    <data name="semantic.error.declare.variable.noconstant.initializer" xml:space="preserve">
+        <value>{0}: 初期化式には定数値以外は指定できません</value>
+    </data>
+    <data name="semantic.error.declare.variable.string.initializer" xml:space="preserve">
+        <value>{0}: 文字列型には初期値代入を行うことはできません</value>
+    </data>
 </root>

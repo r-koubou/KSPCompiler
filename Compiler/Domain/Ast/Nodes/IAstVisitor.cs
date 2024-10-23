@@ -8,7 +8,6 @@ namespace KSPCompiler.Domain.Ast.Nodes
     {
         public T Visit( NullAstNode node );
         public T Visit( NullAstExpressionNode node );
-        public T Visit( NullAstInitializerNode node );
         public T Visit( AstCompilationUnitNode node );
         public T Visit( AstCallbackDeclarationNode node );
         public T Visit( AstUserFunctionDeclarationNode node );
