@@ -333,13 +333,23 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             return false;
         }
 
-        // - 配列サイズが 0 以下
-        // - 初期化要素数が配列サイズより大きい
-        if( arraySize.Value <= 0 || arraySize.Value < initializer.Initializer.Expressions.Count )
+        // 配列サイズが 0 以下
+        if( arraySize.Value <= 0 )
         {
             CompilerMessageManger.Error(
                 node,
                 CompilerMessageResources.semantic_error_declare_variable_arraysize,
+                node.Name
+            );
+
+            return false;
+        }
+        // 初期化要素数が配列サイズより大きい
+        if( arraySize.Value < initializer.Initializer.Expressions.Count )
+        {
+            CompilerMessageManger.Error(
+                node,
+                CompilerMessageResources.semantic_error_declare_variable_arrayinitilizer_sizeover,
                 node.Name
             );
 

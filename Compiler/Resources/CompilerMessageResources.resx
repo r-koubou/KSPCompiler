@@ -108,4 +108,7 @@
     <data name="semantic.error.declare.variable.arrayinitilizer.noconstant" xml:space="preserve">
         <value>{0}: Array initializer - element[{1}] is not a constant value</value>
     </data>
+    <data name="semantic.error.declare.variable.arrayinitilizer.sizeover" xml:space="preserve">
+        <value>{0}: The number of lists in the array initialization exceeds the array size</value>
+    </data>
 </root>

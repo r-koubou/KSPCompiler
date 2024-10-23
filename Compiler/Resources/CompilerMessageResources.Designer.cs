@@ -224,5 +224,11 @@ namespace KSPCompiler.Resources {
                 return ResourceManager.GetString("semantic.error.declare.variable.arrayinitilizer.noconstant", resourceCulture);
             }
         }
+        
+        public static string semantic_error_declare_variable_arrayinitilizer_sizeover {
+            get {
+                return ResourceManager.GetString("semantic.error.declare.variable.arrayinitilizer.sizeover", resourceCulture);
+            }
+        }
     }
 }

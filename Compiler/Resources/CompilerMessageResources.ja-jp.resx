@@ -101,4 +101,7 @@
     <data name="semantic.error.declare.variable.arrayinitilizer.noconstant" xml:space="preserve">
         <value>{0}: 配列初期化 - 要素[{1}] は定数値ではありません</value>
     </data>
+    <data name="semantic.error.declare.variable.arrayinitilizer.sizeover" xml:space="preserve">
+        <value>{0}: 配列初期化のリスト数が配列サイズを超えています</value>
+    </data>
 </root>
