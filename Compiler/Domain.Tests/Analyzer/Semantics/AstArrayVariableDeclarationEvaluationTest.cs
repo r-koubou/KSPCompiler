@@ -172,6 +172,42 @@ public class AstArrayVariableDeclarationEvaluationTest
     }
 
     [Test]
+    public void CannotDeclareWithPrimitiveInitializer()
+    {
+        const string name = "%variable";
+
+        var compilerMessageManger = ICompilerMessageManger.Default;
+        var symbols = MockUtility.CreateAggregateSymbolTable();
+
+        // Variable can declare in init callback only
+        var callbackAst = MockUtility.CreateCallbackDeclarationNode( "init" );
+
+        // declare %variable := 0 <-- cannot declare with primitive initializer
+        var declaration = MockUtility.CreateVariableDeclarationNode( name );
+        declaration.Parent   = callbackAst;
+
+        var initializer = new AstVariableInitializerNode( declaration );
+        initializer.PrimitiveInitializer = new AstPrimitiveInitializerNode(
+            initializer,
+            new AstIntLiteralNode( 0 ),
+            NullAstExpressionListNode.Instance
+        );
+
+        declaration.Initializer = initializer;
+
+        var evaluator = new VariableDeclarationEvaluator( compilerMessageManger, symbols.Variables, symbols.UITypes );
+        var visitor = new MockDeclarationVisitor();
+
+        visitor.Inject( evaluator );
+        evaluator.Evaluate( visitor, declaration );
+
+        compilerMessageManger.WriteTo( Console.Out );
+
+        Assert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        Assert.AreEqual( 0, symbols.Variables.Count );
+    }
+
+    [Test]
     public void DeclareWithoutInitializerTest()
     {
         const string name = "%variable";
