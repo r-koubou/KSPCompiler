@@ -1,3 +1,5 @@
+using System;
+
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Declarations;
 using KSPCompiler.Domain.Ast.Extensions;
 using KSPCompiler.Domain.Ast.Nodes;
@@ -201,17 +203,64 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
     private bool ValidatePrimitiveInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
     {
-        if( node.Initializer.PrimitiveInitializer.IsNull() )
+        var initializer = node.Initializer.PrimitiveInitializer;
+
+        // 文字列型は宣言時に初期化代入はできない
+        if( variable.DataType.IsString() )
+        {
+            CompilerMessageManger.Error(
+                node,
+                CompilerMessageResources.semantic_error_declare_variable_string_initializer,
+                node.Name
+            );
+
+            return false;
+        }
+
+        // 初期化代入式が欠落している
+        if( initializer.IsNull() || initializer.Expression.IsNull() )
         {
             CompilerMessageManger.Error(
                 node,
                 CompilerMessageResources.semantic_error_declare_variable_required_initializer,
                 node.Name
             );
+
             return false;
         }
 
-        throw new System.NotImplementedException();
+        if( initializer.Expression.Accept( visitor ) is not AstExpressionNode evaluated )
+        {
+            throw new AstAnalyzeException( initializer, "Primitive initializer expression evaluation failed" );
+        }
+
+        // リテラル or 定数でないと初期化できない
+        if( !evaluated.Constant )
+        {
+            CompilerMessageManger.Error(
+                node,
+                CompilerMessageResources.semantic_error_declare_variable_noconstant_initializer,
+                node.Name
+            );
+
+            return false;
+        }
+
+        // 型の一致チェック
+        if( AssigningTypeUtility.IsTypeCompatible( variable.DataType, evaluated.TypeFlag ) )
+        {
+            return true;
+        }
+
+        CompilerMessageManger.Error(
+            node,
+            CompilerMessageResources.semantic_error_assign_type_compatible,
+            node.Name,
+            variable.DataType
+        );
+
+        return false;
+
     }
 
     private bool ValidateArrayInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
@@ -226,7 +275,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             return false;
         }
 
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
 
     private bool ValidateUIInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
@@ -241,6 +290,6 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             return false;
         }
 
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
 }
