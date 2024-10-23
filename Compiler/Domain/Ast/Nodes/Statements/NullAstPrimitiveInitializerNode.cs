@@ -29,4 +29,6 @@ public sealed class NullAstPrimitiveInitializerNode : AstPrimitiveInitializerNod
         get => this;
         set => _ = value;
     }
+
+    private NullAstPrimitiveInitializerNode() {}
 }

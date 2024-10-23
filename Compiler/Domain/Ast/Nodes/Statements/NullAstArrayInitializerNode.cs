@@ -29,4 +29,6 @@ public sealed class NullAstArrayInitializerNode : AstArrayInitializerNode
         get => this;
         set => _ = value;
     }
+
+    private NullAstArrayInitializerNode() {}
 }

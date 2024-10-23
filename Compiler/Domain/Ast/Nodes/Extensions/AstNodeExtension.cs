@@ -1,3 +1,4 @@
+using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
 
 namespace KSPCompiler.Domain.Ast.Nodes.Extensions;
@@ -11,6 +12,7 @@ public static class AstNodeExtension
     /// <returns>true if the node is Null Object otherwise false.</returns>
     /// <seealso cref="NullAstNode"/>
     /// <seealso cref="NullAstExpressionNode"/>
+    /// <seealso cref="NullAstExpressionListNode"/>
     /// <seealso cref="NullAstVariableInitializerNode"/>
     /// <seealso cref="NullAstPrimitiveInitializerNode"/>
     /// <seealso cref="NullAstArrayInitializerNode"/>
@@ -18,6 +20,7 @@ public static class AstNodeExtension
         => node is null
             or NullAstNode
             or NullAstExpressionNode
+            or NullAstExpressionListNode
             or NullAstVariableInitializerNode
             or NullAstPrimitiveInitializerNode
             or NullAstArrayInitializerNode;
