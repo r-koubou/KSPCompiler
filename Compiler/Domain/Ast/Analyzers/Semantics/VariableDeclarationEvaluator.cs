@@ -274,8 +274,8 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
     {
         var initializer = node.Initializer.ArrayInitializer;
 
-        // 初期化代入式が欠落している
-        if( initializer.IsNull() || initializer.Initializer.Empty )
+        // 配列要素サイズ・初期化代入式なし
+        if( initializer.IsNull() )
         {
             CompilerMessageManger.Error(
                 node,
@@ -355,6 +355,13 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         var result = true;
         var i = -1;
 
+        // 初期値代入なし
+        if( initializer.Initializer.IsNull() )
+        {
+            return true;
+        }
+
+        // 初期値リストの型チェック
         foreach( var expr in initializer.Initializer.Expressions )
         {
             i++;
