@@ -194,7 +194,18 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
     private bool ValidateInitialValue( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
     {
-        // 初期化代入式がない場合はスキップ
+        // constあり＋初期化代入式が無い場合
+        if( variable.DataTypeModifier.IsConstant() && node.Initializer.IsNull() )
+        {
+            CompilerMessageManger.Error(
+                node,
+                CompilerMessageResources.semantic_error_declare_variable_required_initializer,
+                node.Name
+            );
+            return false;
+        }
+
+        // constなし＋初期化代入式がない場合はスキップ
         if( node.Initializer.IsNull() )
         {
             return true;
