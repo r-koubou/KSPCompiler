@@ -87,4 +87,7 @@
     <data name="semantic.error.array.subscript.compatible" xml:space="preserve">
         <value>Subscript type is not an integer type ({0})</value>
     </data>
+    <data name="semantic.error.declare.variable.required.initializer" xml:space="preserve">
+        <value>{0} is required initializer</value>
+    </data>
 </root>

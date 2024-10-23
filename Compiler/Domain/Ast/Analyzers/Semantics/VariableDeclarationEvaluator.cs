@@ -187,6 +187,60 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
     private bool ValidateVariableInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
     {
-        return true;
+        if( variable.DataTypeModifier.IsUI() )
+        {
+            return ValidateUIInitializer( visitor, node, variable );
+        }
+        else if( variable.DataType.IsArray() )
+        {
+            return ValidateArrayInitializer( visitor, node, variable );
+        }
+
+        return ValidatePrimitiveInitializer( visitor, node, variable );
+    }
+
+    private bool ValidatePrimitiveInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
+    {
+        if( node.Initializer.PrimitiveInitializer.IsNull() )
+        {
+            CompilerMessageManger.Error(
+                node,
+                CompilerMessageResources.semantic_error_declare_variable_required_initializer,
+                node.Name
+            );
+            return false;
+        }
+
+        throw new System.NotImplementedException();
+    }
+
+    private bool ValidateArrayInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
+    {
+        if( node.Initializer.ArrayInitializer.IsNull() )
+        {
+            CompilerMessageManger.Error(
+                node,
+                CompilerMessageResources.semantic_error_declare_variable_required_initializer,
+                node.Name
+            );
+            return false;
+        }
+
+        throw new System.NotImplementedException();
+    }
+
+    private bool ValidateUIInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
+    {
+        if( node.Initializer.PrimitiveInitializer.IsNull() )
+        {
+            CompilerMessageManger.Error(
+                node,
+                CompilerMessageResources.semantic_error_declare_variable_required_initializer,
+                node.Name
+            );
+            return false;
+        }
+
+        throw new System.NotImplementedException();
     }
 }

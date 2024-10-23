@@ -80,4 +80,7 @@
     <data name="semantic.error.array.subscript.compatible" xml:space="preserve">
         <value>添字の型が整数型ではありません  ({0})</value>
     </data>
+    <data name="semantic.error.declare.variable.required.initializer" xml:space="preserve">
+        <value>{0}: 初期化が必要です</value>
+    </data>
 </root>
