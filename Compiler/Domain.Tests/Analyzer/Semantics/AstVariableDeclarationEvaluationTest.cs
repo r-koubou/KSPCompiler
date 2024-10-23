@@ -13,7 +13,7 @@ namespace KSPCompiler.Domain.Tests.Analyzer.Semantics;
 public class AstVariableDeclarationEvaluationTest
 {
     [Test]
-    public void DeclarationTest()
+    public void DeclareTest()
     {
         const string name = "$variable";
 
@@ -38,7 +38,7 @@ public class AstVariableDeclarationEvaluationTest
     }
 
     [Test]
-    public void CannotDeclarationMultipleTest()
+    public void CannotDeclareMultipleTest()
     {
         const string name = "$variable";
 
@@ -66,7 +66,7 @@ public class AstVariableDeclarationEvaluationTest
     }
 
     [Test]
-    public void PrimitiveDeclarationWithInitializerTest()
+    public void DeclareWithInitializerTest()
     {
         const string name = "$variable";
 
@@ -103,7 +103,7 @@ public class AstVariableDeclarationEvaluationTest
     }
 
     [Test]
-    public void PrimitiveDeclarationWithIncompatibleTypeInitializerTest()
+    public void CannotDeclareWithIncompatibleTypeInitializerTest()
     {
         const string name = "$variable";
 
