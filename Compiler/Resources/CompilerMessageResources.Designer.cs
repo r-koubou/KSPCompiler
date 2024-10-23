@@ -200,5 +200,29 @@ namespace KSPCompiler.Resources {
                 return ResourceManager.GetString("semantic.error.declare.variable.string.initializer", resourceCulture);
             }
         }
+        
+        public static string semantic_error_declare_variable_arraysize {
+            get {
+                return ResourceManager.GetString("semantic.error.declare.variable.arraysize", resourceCulture);
+            }
+        }
+        
+        public static string semantic_error_declare_variable_maxarraysize {
+            get {
+                return ResourceManager.GetString("semantic.error.declare.variable.maxarraysize", resourceCulture);
+            }
+        }
+        
+        public static string semantic_error_declare_variable_arrayinitilizer_incompatible {
+            get {
+                return ResourceManager.GetString("semantic.error.declare.variable.arrayinitilizer.incompatible", resourceCulture);
+            }
+        }
+        
+        public static string semantic_error_declare_variable_arrayinitilizer_noconstant {
+            get {
+                return ResourceManager.GetString("semantic.error.declare.variable.arrayinitilizer.noconstant", resourceCulture);
+            }
+        }
     }
 }

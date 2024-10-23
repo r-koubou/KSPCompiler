@@ -89,4 +89,16 @@
     <data name="semantic.error.declare.variable.string.initializer" xml:space="preserve">
         <value>{0}: 文字列型には初期値代入を行うことはできません</value>
     </data>
+    <data name="semantic.error.declare.variable.arraysize" xml:space="preserve">
+        <value>{0}: 配列要素サイズが不正です</value>
+    </data>
+    <data name="semantic.error.declare.variable.maxarraysize" xml:space="preserve">
+        <value>{0}: 配列要素サイズが上限の {1} を超えています</value>
+    </data>
+    <data name="semantic.error.declare.variable.arrayinitilizer.incompatible" xml:space="preserve">
+        <value>{0}: 配列初期化 - 要素[{1}] のデータ型が異なっています ({2})</value>
+    </data>
+    <data name="semantic.error.declare.variable.arrayinitilizer.noconstant" xml:space="preserve">
+        <value>{0}: 配列初期化 - 要素[{1}] は定数値ではありません</value>
+    </data>
 </root>
