@@ -18,6 +18,11 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         public AstExpressionListNode Initializer { get; set; }
 
         /// <summary>
+        /// UI type initialization when variable is a UI type
+        /// </summary>
+        public AstExpressionListNode UITypeInitializer { get; }
+
+        /// <summary>
         /// Ctor
         /// </summary>
         public AstArrayInitializerNode()
@@ -29,8 +34,9 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         public AstArrayInitializerNode( IAstNode parent )
             : base( AstNodeId.ArrayInitializer, parent )
         {
-            Size        = NullAstExpressionNode.Instance;
-            Initializer = new AstExpressionListNode( this );
+            Size              = NullAstExpressionNode.Instance;
+            Initializer       = new AstExpressionListNode( this );
+            UITypeInitializer = new AstExpressionListNode( this );
         }
 
         #region IAstNodeAcceptor
@@ -38,7 +44,10 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         /// <inheritdoc />
         ///
         public override int ChildNodeCount
-            => 2; // size, initializer
+            // array size
+            // array initializer
+            // ui type initializer
+            => 3;
 
         ///
         /// <inheritdoc/>
