@@ -59,7 +59,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             var uiInitializer = context.uiInitializer();
 
             AstExpressionNode expressionNode = NullAstExpressionNode.Instance;
-            AstExpressionListNode uiTypeInitializer = new AstExpressionListNode();
+            AstExpressionListNode uiInitializerNode = new AstExpressionListNode();
 
             // 初期化式：単一の式かUI初期化式かどちらか一方
             if( expression != null )
@@ -69,11 +69,11 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             }
             else if( uiInitializer != null )
             {
-                uiTypeInitializer = uiInitializer.Accept( this ) as AstExpressionListNode
-                                     ?? throw new MustBeNotNullException( nameof( uiTypeInitializer ) );
+                uiInitializerNode = uiInitializer.Accept( this ) as AstExpressionListNode
+                                     ?? throw new MustBeNotNullException( nameof( uiInitializerNode ) );
             }
 
-            return new AstPrimitiveInitializerNode( NullAstNode.Instance, expressionNode, uiTypeInitializer );
+            return new AstPrimitiveInitializerNode( NullAstNode.Instance, expressionNode, uiInitializerNode );
         }
 
         public override AstNode VisitArrayInitializer( KSPParser.ArrayInitializerContext context )

@@ -15,23 +15,23 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         /// <summary>
         /// UI type initialization when variable is a UI type
         /// </summary>
-        public AstExpressionListNode UITypeInitializer { get; }
+        public AstExpressionListNode UIInitializer { get; }
 
         public AstPrimitiveInitializerNode()
             : base( AstNodeId.PrimitiveInitializer, NullAstNode.Instance )
         {
             Expression    = NullAstExpressionNode.Instance;
-            UITypeInitializer = new AstExpressionListNode( this );
+            UIInitializer = new AstExpressionListNode( this );
         }
 
         public AstPrimitiveInitializerNode(
             IAstNode parent,
             AstExpressionNode expression,
-            AstExpressionListNode uiTypeInitializer )
+            AstExpressionListNode uiInitializer )
             : base( AstNodeId.PrimitiveInitializer, parent )
         {
-            Expression        = expression;
-            UITypeInitializer = uiTypeInitializer;
+            Expression    = expression;
+            UIInitializer = uiInitializer;
         }
 
         #region IAstNodeAcceptor
