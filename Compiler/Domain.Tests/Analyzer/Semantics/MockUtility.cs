@@ -59,6 +59,68 @@ public static class MockUtility
             Initializer = initializer
         };
 
+    public static UITypeSymbol CreateNoInitializerUI( string uiName, DataTypeFlag type )
+    {
+        return new UITypeSymbol( true )
+        {
+            Name             = uiName,
+            DataTypeModifier = DataTypeModifierFlag.UI,
+            Reserved         = true,
+            DataType         = type
+        };
+    }
+
+    public static UITypeSymbol CreateUILabel()
+    {
+        return new UITypeSymbol( true, new UIInitializerArgumentSymbol[]
+        {
+            new ()
+            {
+                Name     = "grid_width",
+                DataType = DataTypeFlag.TypeInt
+            },
+            new ()
+            {
+                Name     = "grid_height",
+                DataType = DataTypeFlag.TypeInt
+            }
+        })
+        {
+            Name             = "ui_label",
+            DataTypeModifier = DataTypeModifierFlag.UI,
+            Reserved         = true,
+            DataType         = DataTypeFlag.TypeInt
+        };
+    }
+
+    public static UITypeSymbol CreateUITable()
+    {
+        return new UITypeSymbol( true, new UIInitializerArgumentSymbol[]
+        {
+            new ()
+            {
+                Name     = "width",
+                DataType = DataTypeFlag.TypeInt
+            },
+            new ()
+            {
+                Name     = "height",
+                DataType = DataTypeFlag.TypeInt
+            },
+            new ()
+            {
+                Name     = "range",
+                DataType = DataTypeFlag.TypeInt
+            }
+        })
+        {
+            Name             = "ui_table",
+            DataTypeModifier = DataTypeModifierFlag.UI,
+            Reserved         = true,
+            DataType         = DataTypeFlag.TypeIntArray
+        };
+    }
+
     #endregion
 
     #region Expression
