@@ -145,6 +145,18 @@ public partial class KSPParserBaseListener : IKSPParserListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitArrayInitializer([NotNull] KSPParser.ArrayInitializerContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="KSPParser.uiInitializer"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterUiInitializer([NotNull] KSPParser.UiInitializerContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="KSPParser.uiInitializer"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitUiInitializer([NotNull] KSPParser.UiInitializerContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="KSPParser.statement"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>

@@ -95,13 +95,8 @@ variableInitializer
 //
 primitiveInitializer
     : MULTI_LINE_DELIMITER* ASSIGN expression
-    // UI変数の初期値指定
-    | MULTI_LINE_DELIMITER*
-        LPARENT
-            expressionList
-        RPARENT
+    | uiInitializer
 ;
-
 
 //
 // 配列変数初期値代入
@@ -121,6 +116,16 @@ arrayInitializer:
             expressionList
         RPARENT
     )?
+;
+
+//
+// UI変数の初期化パラメーター指定
+//
+uiInitializer:
+    MULTI_LINE_DELIMITER*
+    LPARENT
+        expressionList
+    RPARENT
 ;
 
 //------------------------------------------------------------------------------
