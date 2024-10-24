@@ -10,28 +10,28 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         /// <summary>
         /// Assignment expression
         /// </summary>
-        public AstExpressionNode Expression { get; }
+        public AstExpressionNode Expression { get; set; }
 
         /// <summary>
-        /// Assignment multiple expression (ui_type, constructor)
+        /// UI type initialization when variable is a UI type
         /// </summary>
-        public AstExpressionListNode ExpressionList { get; }
+        public AstExpressionListNode UITypeInitializer { get; }
 
         public AstPrimitiveInitializerNode()
             : base( AstNodeId.PrimitiveInitializer, NullAstNode.Instance )
         {
-            Expression     = NullAstExpressionNode.Instance;
-            ExpressionList = new AstExpressionListNode( this );
+            Expression    = NullAstExpressionNode.Instance;
+            UITypeInitializer = new AstExpressionListNode( this );
         }
 
         public AstPrimitiveInitializerNode(
             IAstNode parent,
             AstExpressionNode expression,
-            AstExpressionListNode expressionList )
+            AstExpressionListNode uiTypeInitializer )
             : base( AstNodeId.PrimitiveInitializer, parent )
         {
-            Expression     = expression;
-            ExpressionList = expressionList;
+            Expression        = expression;
+            UITypeInitializer = uiTypeInitializer;
         }
 
         #region IAstNodeAcceptor
