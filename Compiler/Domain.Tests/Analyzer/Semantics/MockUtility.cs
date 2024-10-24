@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
@@ -12,6 +10,8 @@ namespace KSPCompiler.Domain.Tests.Analyzer.Semantics;
 
 public static class MockUtility
 {
+    #region Varieble
+
     public static VariableSymbol CreateBuiltInIntVariable( string name )
     {
         var variable = new VariableSymbol
@@ -24,15 +24,6 @@ public static class MockUtility
         };
 
         return variable;
-    }
-
-    public static AstSymbolExpressionNode CreateAstSymbolExpression( VariableSymbol variable )
-    {
-        return new AstSymbolExpressionNode( variable.Name, NullAstExpressionNode.Instance )
-        {
-            TypeFlag = variable.DataType,
-            Constant = variable.DataTypeModifier.IsConstant()
-        };
     }
 
     public static VariableSymbol CreateVariable( string name, DataTypeFlag type )
@@ -64,9 +55,13 @@ public static class MockUtility
     public static AstVariableDeclarationNode CreateVariableDeclarationNode( string name, AstVariableInitializerNode initializer )
         => new()
         {
-            Name = name,
+            Name        = name,
             Initializer = initializer
         };
+
+    #endregion
+
+    #region Expression
 
     public static  T CreateBinaryOperatorNode<T>( string variableName, DataTypeFlag leftType, AstExpressionNode right ) where T : AstExpressionNode, new()
     {
@@ -114,6 +109,15 @@ public static class MockUtility
         };
     }
 
+    public static AstSymbolExpressionNode CreateAstSymbolExpression( VariableSymbol variable )
+    {
+        return new AstSymbolExpressionNode( variable.Name, NullAstExpressionNode.Instance )
+        {
+            TypeFlag = variable.DataType,
+            Constant = variable.DataTypeModifier.IsConstant()
+        };
+    }
+
     public static  AstSymbolExpressionNode CreateSymbolNode( string variableName )
     {
         return new AstSymbolExpressionNode
@@ -121,6 +125,8 @@ public static class MockUtility
             Name = variableName
         };
     }
+
+    #endregion
 
     public static AggregateSymbolTable CreateAggregateSymbolTable()
         => new (
@@ -133,6 +139,8 @@ public static class MockUtility
             new KspPreProcessorSymbolTable(),
             new PgsSymbolTable()
         );
+
+    #region Callback
 
     public static CallbackSymbol CreateCallback( string name, bool allowMultipleDeclaration )
         => new( allowMultipleDeclaration )
@@ -166,6 +174,10 @@ public static class MockUtility
         return result;
     }
 
+    #endregion
+
+    #region User Function
+
     public static UserFunctionSymbol CreateUserFunction( string name )
         => new()
         {
@@ -179,4 +191,6 @@ public static class MockUtility
             Name = name,
         };
     }
+
+    #endregion
 }
