@@ -483,17 +483,87 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
     private bool ValidateUIInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
     {
-        if( node.Initializer.PrimitiveInitializer.IsNull() )
+        if( variable.DataType.IsArray() )
+        {
+            if( !ValidateArrayBasedUIInitializer( visitor, node, node.Initializer.ArrayInitializer, variable ) )
+            {
+                return false;
+            }
+        }
+
+        return ValidatePrimitiveBasedUIInitializer( visitor, node, node.Initializer.PrimitiveInitializer, variable );
+    }
+
+    private bool ValidateArrayBasedUIInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, AstArrayInitializerNode initializer, VariableSymbol variable )
+    {
+        throw new NotImplementedException();
+    }
+
+    private bool ValidatePrimitiveBasedUIInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, AstPrimitiveInitializerNode initializer, VariableSymbol variable )
+    {
+        var expressions = initializer.UIInitializer;
+
+        // パラメータ数が一致しない
+        if( expressions.Count != variable.UIType.InitializerArguments.Count )
         {
             CompilerMessageManger.Error(
                 node,
-                CompilerMessageResources.semantic_error_declare_variable_required_initializer,
-                node.Name
+                CompilerMessageResources.semantic_error_declare_variable_uiinitializer_count_incompatible,
+                node.Name,
+                variable.UIType.InitializerArguments.Count,
+                expressions.Count
             );
+
             return false;
         }
 
-        throw new NotImplementedException();
+        return ValidateUIArguments( visitor, node, expressions, variable.UIType );
+    }
+
+    private bool ValidateUIArguments( IAstVisitor visitor, AstVariableDeclarationNode node, AstExpressionListNode expressionList, UITypeSymbol uiType )
+    {
+        for(var i = 0; i < expressionList.Count; i++)
+        {
+            var expr = expressionList.Expressions[ i ];
+
+            if( expr.Accept( visitor ) is not AstExpressionNode evaluated )
+            {
+                throw new AstAnalyzeException( node, "UI initializer expression evaluation failed" );
+            }
+
+            // リテラル or 定数でないと初期化できない
+            if( !evaluated.Constant )
+            {
+                CompilerMessageManger.Error(
+                    node,
+                    CompilerMessageResources.semantic_error_declare_variable_uiinitializer_nonconstant,
+                    node.Name,
+                    i + 1 // 1 origin
+                );
+
+                return false;
+            }
+
+            var requiredType = uiType.InitializerArguments[ i ].DataType;
+
+            // 型の一致チェック
+            if( AssigningTypeUtility.IsTypeCompatible( evaluated.TypeFlag, requiredType ) )
+            {
+                continue;
+            }
+
+            CompilerMessageManger.Error(
+                node,
+                CompilerMessageResources.semantic_error_declare_variable_uiinitializer_incompatible,
+                node.Name,
+                i + 1, // 1 origin
+                evaluated.TypeFlag.ToMessageString()
+            );
+
+            return false;
+        }
+
+        return true;
     }
 
     #endregion ~UI Initializer
