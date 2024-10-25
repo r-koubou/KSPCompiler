@@ -68,6 +68,8 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         return node;
     }
 
+    #region Primary validations
+
     private bool ValidateCallbackNode( AstVariableDeclarationNode node )
     {
         if( !node.TryGetParent<AstCallbackDeclarationNode>( out var callback ) )
@@ -192,6 +194,10 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         return true;
     }
 
+    #endregion ~Primary validations
+
+    #region Initializer root
+
     private bool ValidateInitialValue( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
     {
         // constあり＋初期化代入式が無い場合
@@ -228,7 +234,9 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         return ValidatePrimitiveInitializer( visitor, node, variable );
     }
 
-    #region Primitive
+    #endregion ~Initializer root
+
+    #region Primitive Initializer
 
     private bool ValidatePrimitiveInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
     {
@@ -304,9 +312,9 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
     }
 
-    #endregion
+    #endregion ~Primitive Initializer
 
-    #region Array
+    #region Array Initializer
 
     private bool ValidateArrayInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
     {
@@ -469,7 +477,9 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         return result;
     }
 
-    #endregion
+    #endregion ~Array Initializer
+
+    #region UI Initializer
 
     private bool ValidateUIInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
     {
@@ -485,4 +495,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
         throw new NotImplementedException();
     }
+
+    #endregion ~UI Initializer
+
 }
