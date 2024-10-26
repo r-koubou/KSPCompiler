@@ -61,6 +61,101 @@ public class AstUIVariableDeclarationEvaluationTest
     }
 
     [Test]
+    public void DeclareTableTest()
+    {
+        // declare ui_table %table[10] (2, 2, 10)
+
+        const string name = "%table";
+
+        var compilerMessageManger = ICompilerMessageManger.Default;
+        var symbols = MockUtility.CreateAggregateSymbolTable();
+
+        // Variable can declare in init callback only
+        var callbackAst = MockUtility.CreateCallbackDeclarationNode( "init" );
+
+        // define UI type : ksp ui_table
+        var uiLabelType = MockUtility.CreateUITable();
+        symbols.UITypes.Add( uiLabelType );
+
+        // declare %variable[10]
+        var declaration = MockUtility.CreateVariableDeclarationNode( name );
+        declaration.Parent   = callbackAst;
+        declaration.Modifier = uiLabelType.Name;
+
+        // [10] (2, 2, 10)
+        declaration.Initializer = new AstVariableInitializerNode( declaration )
+        {
+            ArrayInitializer = new AstArrayInitializerNode
+            {
+                Parent = declaration,
+                Size   = new AstIntLiteralNode( 10 )
+            },
+            PrimitiveInitializer = new AstPrimitiveInitializerNode
+            {
+                Parent = declaration
+            }
+        };
+        declaration.Initializer.PrimitiveInitializer.UIInitializer.Expressions.AddRange( new AstExpressionNode[]
+        {
+            new AstIntLiteralNode( 2 ),
+            new AstIntLiteralNode( 2 ),
+            new AstIntLiteralNode( 10 )
+        });
+
+        var evaluator = new VariableDeclarationEvaluator( compilerMessageManger, symbols.Variables, symbols.UITypes );
+        var visitor = new MockDeclarationVisitor();
+
+        visitor.Inject( evaluator );
+        evaluator.Evaluate( visitor, declaration );
+
+        compilerMessageManger.WriteTo( Console.Out );
+
+        Assert.AreEqual( 0, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        Assert.AreEqual( 1, symbols.Variables.Count );
+    }
+
+    [Test]
+    public void CannotDeclareNoParameterCountTest()
+    {
+        const string name = "$variable";
+
+        var compilerMessageManger = ICompilerMessageManger.Default;
+        var symbols = MockUtility.CreateAggregateSymbolTable();
+
+        // Variable can declare in init callback only
+        var callbackAst = MockUtility.CreateCallbackDeclarationNode( "init" );
+
+        // define UI type : ksp ui_label
+        var uiLabelType = MockUtility.CreateUILabel();
+        symbols.UITypes.Add( uiLabelType );
+
+        // declare $variable
+        var declaration = MockUtility.CreateVariableDeclarationNode( name );
+        declaration.Parent   = callbackAst;
+        declaration.Modifier = uiLabelType.Name;
+
+        // Non parameter <-- invalid parameter count (expected 2 parameters)
+        declaration.Initializer = new AstVariableInitializerNode( declaration )
+        {
+            PrimitiveInitializer = new AstPrimitiveInitializerNode
+            {
+                Parent = declaration
+            }
+        };
+
+        var evaluator = new VariableDeclarationEvaluator( compilerMessageManger, symbols.Variables, symbols.UITypes );
+        var visitor = new MockDeclarationVisitor();
+
+        visitor.Inject( evaluator );
+        evaluator.Evaluate( visitor, declaration );
+
+        compilerMessageManger.WriteTo( Console.Out );
+
+        Assert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        Assert.AreEqual( 0, symbols.Variables.Count );
+    }
+
+    [Test]
     public void CannotDeclareIncompatibleParameterCountTest()
     {
         const string name = "$variable";

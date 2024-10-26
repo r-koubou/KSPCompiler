@@ -496,7 +496,12 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
     private bool ValidateArrayBasedUIInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, AstArrayInitializerNode initializer, VariableSymbol variable )
     {
-        throw new NotImplementedException();
+        if( !ValidateArraySize( visitor, node, initializer, variable ) )
+        {
+            return false;
+        }
+
+        return ValidateUIArguments( visitor, node, initializer.Initializer, variable.UIType );
     }
 
     private bool ValidatePrimitiveBasedUIInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, AstPrimitiveInitializerNode initializer, VariableSymbol variable )
