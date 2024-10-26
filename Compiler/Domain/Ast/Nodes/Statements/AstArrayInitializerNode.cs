@@ -7,26 +7,15 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
     /// </summary>
     public class AstArrayInitializerNode : AstStatementNode
     {
-        private AstExpressionNode size;
-        private AstExpressionListNode initializer;
-
         /// <summary>
         /// Number of array elements
         /// </summary>
-        public virtual AstExpressionNode Size
-        {
-            get => size;
-            set => size = value ?? NullAstExpressionNode.Instance;
-        }
+        public virtual AstExpressionNode Size { get; set; } = NullAstExpressionNode.Instance;
 
         /// <summary>
         /// Array element initialization
         /// </summary>
-        public virtual AstExpressionListNode Initializer
-        {
-            get => initializer;
-            set => initializer = value ?? new AstExpressionListNode( this );
-        }
+        public virtual AstExpressionListNode Initializer { get; set; } = NullAstExpressionListNode.Instance;
 
         /// <summary>
         /// Ctor
@@ -38,11 +27,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         /// Ctor
         /// </summary>
         public AstArrayInitializerNode( IAstNode parent )
-            : base( AstNodeId.ArrayInitializer, parent )
-        {
-            size        = NullAstExpressionNode.Instance;
-            initializer = new AstExpressionListNode( this );
-        }
+            : base( AstNodeId.ArrayInitializer, parent ) {}
 
         #region IAstNodeAcceptor
         ///
