@@ -29,19 +29,13 @@ public sealed class NullAstArrayInitializerNode : AstArrayInitializerNode
     /// Always return zero and the set is ignored.
     /// </summary>
     public override Position Position
-    {
-        get => new();
-        set => _ = value;
-    }
+        => Position.Zero;
 
     /// <summary>
     /// Always return this instance and the set is ignored.
     /// </summary>
     public override IAstNode Parent
-    {
-        get => this;
-        set => _ = value;
-    }
+        => this;
 
     private NullAstArrayInitializerNode() {}
 }
