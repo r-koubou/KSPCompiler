@@ -8,13 +8,13 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         /// <summary>
         /// primitive variable initialization
         /// </summary>
-        public AstPrimitiveInitializerNode PrimitiveInitializer { get; set; }
+        public virtual AstPrimitiveInitializerNode PrimitiveInitializer { get; set; }
             = NullAstPrimitiveInitializerNode.Instance;
 
         /// <summary>
         /// array variable initialization
         /// </summary>
-        public AstArrayInitializerNode ArrayInitializer { get; set; }
+        public virtual AstArrayInitializerNode ArrayInitializer { get; set; }
             = NullAstArrayInitializerNode.Instance;
 
         /// <summary>

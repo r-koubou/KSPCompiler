@@ -16,19 +16,25 @@ public sealed class NullAstVariableInitializerNode : AstVariableInitializerNode
     /// Always return zero and the set is ignored.
     /// </summary>
     public override Position Position
-    {
-        get => new();
-        set => _ = value;
-    }
+        => Position.Zero;
 
     /// <summary>
     /// Always return this instance and the set is ignored.
     /// </summary>
     public override IAstNode Parent
-    {
-        get => this;
-        set => _ = value;
-    }
+        => this;
+
+    /// <summary>
+    /// Always return <see cref="NullAstPrimitiveInitializerNode.Instance"/>.
+    /// </summary>
+    public override AstPrimitiveInitializerNode PrimitiveInitializer
+        => NullAstPrimitiveInitializerNode.Instance;
+
+    /// <summary>
+    /// Always return <see cref="NullAstArrayInitializerNode.Instance"/>.
+    /// </summary>
+    public override AstArrayInitializerNode ArrayInitializer
+        => NullAstArrayInitializerNode.Instance;
 
     private NullAstVariableInitializerNode()
         : base( NullAstNode.Instance ) {}
