@@ -87,6 +87,12 @@ public interface IKSPParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitArrayInitializer([NotNull] KSPParser.ArrayInitializerContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="KSPParser.uiInitializer"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitUiInitializer([NotNull] KSPParser.UiInitializerContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="KSPParser.statement"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

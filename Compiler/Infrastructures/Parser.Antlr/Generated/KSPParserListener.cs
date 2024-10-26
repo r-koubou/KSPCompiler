@@ -122,6 +122,16 @@ public interface IKSPParserListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitArrayInitializer([NotNull] KSPParser.ArrayInitializerContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="KSPParser.uiInitializer"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterUiInitializer([NotNull] KSPParser.UiInitializerContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="KSPParser.uiInitializer"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitUiInitializer([NotNull] KSPParser.UiInitializerContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="KSPParser.statement"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

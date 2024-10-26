@@ -110,4 +110,13 @@
     <data name="semantic.error.declare.variable.invalid.initializer" xml:space="preserve">
         <value>{0}: 初期化式が正しくありません</value>
     </data>
+    <data name="semantic.error.declare.variable.uiinitializer.count.incompatible" xml:space="preserve">
+        <value>{0}: UI変数の初期化引数の数が一致しません (要求される引数の数: {1}, 引数の数: {2})</value>
+    </data>
+    <data name="semantic.error.declare.variable.uiinitializer.incompatible" xml:space="preserve">
+        <value>{0}: UI初期化 - {1} 番目のデータ型が異なっています ({2})</value>
+    </data>
+    <data name="semantic.error.declare.variable.uiinitializer.nonconstant" xml:space="preserve">
+        <value>{0}: UI初期化 - {1} 番目のデータ型は定数値以外は指定できません</value>
+    </data>
 </root>

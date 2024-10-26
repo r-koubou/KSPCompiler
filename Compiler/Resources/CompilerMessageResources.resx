@@ -117,4 +117,13 @@
     <data name="semantic.error.declare.variable.invalid.initializer" xml:space="preserve">
         <value>{0}: Incorrect initialization expression</value>
     </data>
+    <data name="semantic.error.declare.variable.uiinitializer.count.incompatible" xml:space="preserve">
+        <value>{0}: The number of initialization arguments for UI variables does not match (required: {1}, actual: {2})</value>
+    </data>
+    <data name="semantic.error.declare.variable.uiinitializer.incompatible" xml:space="preserve">
+        <value>{0}: UI initializer - parameter [{1}] is not compatible type ({2})</value>
+    </data>
+    <data name="semantic.error.declare.variable.uiinitializer.nonconstant" xml:space="preserve">
+        <value>{0}: UI initializer - parameter [{1}] can only be a constant value</value>
+    </data>
 </root>
