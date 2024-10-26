@@ -15,7 +15,7 @@ namespace KSPCompiler.Domain.Tests.Analyzer.Semantics;
 public class AstUIVariableDeclarationEvaluationTest
 {
     [Test]
-    public void DeclareLabelTest()
+    public void DeclarePrimitiveBaseTest()
     {
         const string name = "$variable";
 
@@ -61,7 +61,7 @@ public class AstUIVariableDeclarationEvaluationTest
     }
 
     [Test]
-    public void DeclareTableTest()
+    public void DeclareArrayBaseTest()
     {
         // declare ui_table %table[10] (2, 2, 10)
 
