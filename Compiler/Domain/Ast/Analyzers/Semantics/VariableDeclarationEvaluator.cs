@@ -1,6 +1,5 @@
-using System;
-
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Declarations;
+using KSPCompiler.Domain.Ast.Analyzers.Extensions;
 using KSPCompiler.Domain.Ast.Extensions;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
@@ -120,7 +119,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         var variableType = DataTypeUtility.GuessFromSymbolName( node.Name );
 
         // 配列型に const は付与できない
-        if( variableType.IsArray() && node.Modifier == "const" )
+        if( variableType.IsArray() && node.Modifier.HasConstant() )
         {
             result = null!;
             CompilerMessageManger.Error(
@@ -170,26 +169,29 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         }
 
         // 有効な UI 型かチェック
-        if( !UITypeSymbols.TrySearchByName( node.Modifier, out var uiType ) )
+        foreach( var modifier in node.Modifier.GetUIModifiers() )
         {
-            CompilerMessageManger.Warning(
-                node,
-                CompilerMessageResources.symbol_error_declare_variable_unkown,
-                node.Modifier
-            );
+            if( !UITypeSymbols.TrySearchByName( modifier, out var uiType ) )
+            {
+                CompilerMessageManger.Warning(
+                    node,
+                    CompilerMessageResources.symbol_error_declare_variable_unkown,
+                    node.Modifier
+                );
 
-            return false;
+                return false;
+            }
+
+            // そのUI型は後から変更不可能な仕様の場合
+            if( uiType.Modifier.IsConstant() )
+            {
+                variable.Modifier |= ModifierFlag.Const;
+            }
+
+            // UI型情報を参照
+            // 意味解析時に使用するため、用意されている変数に保持
+            variable.UIType = uiType;
         }
-
-        // そのUI型は後から変更不可能な仕様の場合
-        if( uiType.Modifier.IsConstant() )
-        {
-            variable.Modifier |= ModifierFlag.Const;
-        }
-
-        // UI型情報を参照
-        // 意味解析時に使用するため、用意されている変数に保持
-        variable.UIType = uiType;
 
         return true;
     }

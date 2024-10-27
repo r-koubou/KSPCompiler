@@ -32,7 +32,7 @@ public class AstUIVariableDeclarationEvaluationTest
         // declare $variable
         var declaration = MockUtility.CreateVariableDeclarationNode( name );
         declaration.Parent   = callbackAst;
-        declaration.Modifier = uiLabelType.Name;
+        declaration.Modifier = new AstModiferNode( declaration, uiLabelType.Name );
 
         // (1, 2)
         declaration.Initializer = new AstVariableInitializerNode( declaration )
@@ -80,7 +80,7 @@ public class AstUIVariableDeclarationEvaluationTest
         // declare %variable[10]
         var declaration = MockUtility.CreateVariableDeclarationNode( name );
         declaration.Parent   = callbackAst;
-        declaration.Modifier = uiLabelType.Name;
+        declaration.Modifier = new AstModiferNode( declaration, uiLabelType.Name );
 
         // [10] (2, 2, 10)
         declaration.Initializer = new AstVariableInitializerNode( declaration )
@@ -132,7 +132,7 @@ public class AstUIVariableDeclarationEvaluationTest
         // declare $variable
         var declaration = MockUtility.CreateVariableDeclarationNode( name );
         declaration.Parent   = callbackAst;
-        declaration.Modifier = uiLabelType.Name;
+        declaration.Modifier = new AstModiferNode( declaration, uiLabelType.Name );
 
         // Non parameter <-- invalid parameter count (expected 2 parameters)
         declaration.Initializer = new AstVariableInitializerNode( declaration )
@@ -173,7 +173,7 @@ public class AstUIVariableDeclarationEvaluationTest
         // declare $variable
         var declaration = MockUtility.CreateVariableDeclarationNode( name );
         declaration.Parent   = callbackAst;
-        declaration.Modifier = uiLabelType.Name;
+        declaration.Modifier = new AstModiferNode( declaration, uiLabelType.Name );
 
         // (1) <-- invalid parameter count (expected 2 parameters)
         declaration.Initializer = new AstVariableInitializerNode( declaration )
@@ -218,7 +218,7 @@ public class AstUIVariableDeclarationEvaluationTest
         // declare $variable
         var declaration = MockUtility.CreateVariableDeclarationNode( name );
         declaration.Parent   = callbackAst;
-        declaration.Modifier = uiLabelType.Name;
+        declaration.Modifier = new AstModiferNode( declaration, uiLabelType.Name );
 
         // (1, 2.0) <-- invalid parameter type (expected 2 integer parameters)
         declaration.Initializer = new AstVariableInitializerNode( declaration )
@@ -268,7 +268,7 @@ public class AstUIVariableDeclarationEvaluationTest
         // declare $variable
         var declaration = MockUtility.CreateVariableDeclarationNode( name );
         declaration.Parent   = callbackAst;
-        declaration.Modifier = uiLabelType.Name;
+        declaration.Modifier = new AstModiferNode( declaration, uiLabelType.Name );
 
         // (1, $arg) <-- $arg is not constant
         declaration.Initializer = new AstVariableInitializerNode( declaration )

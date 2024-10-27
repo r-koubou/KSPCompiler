@@ -16,9 +16,9 @@ public static class AstVariableDeclarationExtension
             Modifier = ModifierFlag.None
         };
 
-        if( !string.IsNullOrEmpty( self.Modifier ) )
+        foreach( var x in self.Modifier.Values )
         {
-            result.Modifier |= ( self.Modifier ) switch
+            result.Modifier |= x switch
             {
                 "const"      => ModifierFlag.Const,
                 "polyphonic" => ModifierFlag.Polyphonic,
