@@ -16,11 +16,11 @@ public static class MockUtility
     {
         var variable = new VariableSymbol
         {
-            Name             = name,
-            DataType         = DataTypeFlag.TypeInt,
+            Name     = name,
+            DataType = DataTypeFlag.TypeInt,
             Modifier = ModifierFlag.Const,
-            Reserved         = true,
-            Value            = 0
+            Reserved = true,
+            Value    = 0
         };
 
         return variable;
@@ -63,10 +63,10 @@ public static class MockUtility
     {
         return new UITypeSymbol( true )
         {
-            Name             = uiName,
+            Name     = uiName,
             Modifier = ModifierFlag.UI,
-            Reserved         = true,
-            DataType         = type
+            Reserved = true,
+            DataType = type
         };
     }
 
@@ -86,10 +86,10 @@ public static class MockUtility
             }
         })
         {
-            Name             = "ui_label",
+            Name     = "ui_label",
             Modifier = ModifierFlag.UI,
-            Reserved         = true,
-            DataType         = DataTypeFlag.TypeInt
+            Reserved = true,
+            DataType = DataTypeFlag.TypeInt
         };
     }
 
@@ -114,10 +114,10 @@ public static class MockUtility
             }
         })
         {
-            Name             = "ui_table",
+            Name     = "ui_table",
             Modifier = ModifierFlag.UI,
-            Reserved         = true,
-            DataType         = DataTypeFlag.TypeIntArray
+            Reserved = true,
+            DataType = DataTypeFlag.TypeIntArray
         };
     }
 
