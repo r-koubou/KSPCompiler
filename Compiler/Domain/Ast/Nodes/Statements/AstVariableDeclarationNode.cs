@@ -41,7 +41,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         /// <inheritdoc />
         ///
         public override int ChildNodeCount
-            => 1;
+            => 2;
 
         ///
         /// <inheritdoc/>
@@ -54,6 +54,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         ///
         public override void AcceptChildren<T>( IAstVisitor<T> visitor )
         {
+            Modifier.AcceptChildren( visitor );
             Initializer.AcceptChildren( visitor );
         }
 
