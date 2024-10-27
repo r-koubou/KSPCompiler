@@ -190,6 +190,78 @@ public static class MockUtility
 
     #endregion
 
+    #region Command
+
+    public static CommandSymbol CreateCommand( string name, DataTypeFlag returnType, params CommandArgumentSymbol[] args )
+        => new( args )
+        {
+            Name = name,
+            DataType = returnType
+        };
+
+    public static CommandSymbol CreatePlayNoteCommand()
+    {
+        var result = CreateCommand(
+            "play_note",
+            DataTypeFlag.TypeVoid,
+            new CommandArgumentSymbol
+            {
+                Name     = "note_number",
+                DataType = DataTypeFlag.TypeInt
+            },
+            new CommandArgumentSymbol
+            {
+                Name     = "velocity",
+                DataType = DataTypeFlag.TypeInt
+            },
+            new CommandArgumentSymbol
+            {
+                Name     = "sample_offset",
+                DataType = DataTypeFlag.TypeInt
+            },
+            new CommandArgumentSymbol
+            {
+                Name     = "duration",
+                DataType = DataTypeFlag.TypeInt
+            }
+        );
+
+        result.Reserved = true;
+
+        return result;
+    }
+
+    public static AstCallCommandExpressionNode CreateCommandExpressionNode( string name, params AstExpressionNode[] arguments )
+    {
+        var commandExpression = new AstCallCommandExpressionNode();
+
+        var commandSymbol = new AstSymbolExpressionNode
+        {
+            Parent = commandExpression,
+            Name = name
+        };
+
+        commandExpression.Left = commandSymbol;
+
+        var args = new AstExpressionListNode( commandExpression )
+        {
+            Parent = commandExpression
+        };
+
+        foreach( var arg in arguments )
+        {
+            args.Expressions.Add( arg );
+        }
+
+        commandExpression.Right = args;
+
+        return commandExpression;
+    }
+
+    #endregion
+
+    #region Symbol Table
+
     public static AggregateSymbolTable CreateAggregateSymbolTable()
         => new (
             new VariableSymbolTable(),
@@ -201,6 +273,8 @@ public static class MockUtility
             new KspPreProcessorSymbolTable(),
             new PgsSymbolTable()
         );
+
+    #endregion ~Symbol Table
 
     #region Callback
 
