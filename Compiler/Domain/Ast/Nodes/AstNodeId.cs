@@ -6,6 +6,7 @@ namespace KSPCompiler.Domain.Ast.Nodes
         CompilationUnit,
         CallbackDeclaration,
         UserFunctionDeclaration,
+        Modifier,
         Argument,
         ArgumentList,
         Block,

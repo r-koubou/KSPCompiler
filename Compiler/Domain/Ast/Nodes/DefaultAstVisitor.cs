@@ -28,6 +28,9 @@ public abstract class DefaultAstVisitor : IAstVisitor
     public virtual IAstNode Visit( AstUserFunctionDeclarationNode node )
         => VisitChildren( node );
 
+    public IAstNode Visit( AstModiferNode node )
+        => VisitChildren( node );
+
     public virtual IAstNode Visit( AstArgumentNode node )
         => VisitChildren( node );
 
