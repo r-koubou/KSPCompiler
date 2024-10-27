@@ -20,7 +20,7 @@ public class VariableSymbolTable : SymbolTable<VariableSymbol>, IVariableSymbolT
 
     protected override void OnWillAdd( VariableSymbol symbol )
     {
-        if( symbol.DataTypeModifier.IsConstant() )
+        if( symbol.Modifier.IsConstant() )
         {
             symbol.TableIndex = UniqueSymbolIndex.Null;
         }

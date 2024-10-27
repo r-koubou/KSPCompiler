@@ -18,7 +18,7 @@ public static class MockUtility
         {
             Name             = name,
             DataType         = DataTypeFlag.TypeInt,
-            DataTypeModifier = DataTypeModifierFlag.Const,
+            Modifier = ModifierFlag.Const,
             Reserved         = true,
             Value            = 0
         };
@@ -64,7 +64,7 @@ public static class MockUtility
         return new UITypeSymbol( true )
         {
             Name             = uiName,
-            DataTypeModifier = DataTypeModifierFlag.UI,
+            Modifier = ModifierFlag.UI,
             Reserved         = true,
             DataType         = type
         };
@@ -87,7 +87,7 @@ public static class MockUtility
         })
         {
             Name             = "ui_label",
-            DataTypeModifier = DataTypeModifierFlag.UI,
+            Modifier = ModifierFlag.UI,
             Reserved         = true,
             DataType         = DataTypeFlag.TypeInt
         };
@@ -115,7 +115,7 @@ public static class MockUtility
         })
         {
             Name             = "ui_table",
-            DataTypeModifier = DataTypeModifierFlag.UI,
+            Modifier = ModifierFlag.UI,
             Reserved         = true,
             DataType         = DataTypeFlag.TypeIntArray
         };
@@ -176,7 +176,7 @@ public static class MockUtility
         return new AstSymbolExpressionNode( variable.Name, NullAstExpressionNode.Instance )
         {
             TypeFlag = variable.DataType,
-            Constant = variable.DataTypeModifier.IsConstant()
+            Constant = variable.Modifier.IsConstant()
         };
     }
 

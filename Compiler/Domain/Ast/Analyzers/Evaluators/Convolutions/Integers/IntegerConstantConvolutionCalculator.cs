@@ -41,7 +41,7 @@ public sealed class IntegerConstantConvolutionCalculator : IIntegerConstantConvo
 
         if( VariableSymbols.TrySearchByName( expr.Name, out var variable ) )
         {
-            if( !variable.DataType.IsInt() || !variable.DataTypeModifier.IsConstant() )
+            if( !variable.DataType.IsInt() || !variable.Modifier.IsConstant() )
             {
                 return null;
             }

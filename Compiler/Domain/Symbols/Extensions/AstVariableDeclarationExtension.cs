@@ -13,17 +13,17 @@ public static class AstVariableDeclarationExtension
             Reserved         = false,
             Description      = $"Created from {nameof( AstVariableDeclarationExtension )}.{nameof( As )}",
             DataType         = DataTypeUtility.GuessFromSymbolName( new SymbolName( self.Name ) ),
-            DataTypeModifier = DataTypeModifierFlag.None
+            Modifier = ModifierFlag.None
         };
 
         if( !string.IsNullOrEmpty( self.Modifier ) )
         {
-            result.DataTypeModifier |= ( self.Modifier ) switch
+            result.Modifier |= ( self.Modifier ) switch
             {
-                "const"      => DataTypeModifierFlag.Const,
-                "polyphonic" => DataTypeModifierFlag.Polyphonic,
+                "const"      => ModifierFlag.Const,
+                "polyphonic" => ModifierFlag.Polyphonic,
                 // キーワード以外の文字列が含まれる場合は暫定で UI として、以降で判定
-                _ => DataTypeModifierFlag.UI
+                _ => ModifierFlag.UI
             };
         }
 

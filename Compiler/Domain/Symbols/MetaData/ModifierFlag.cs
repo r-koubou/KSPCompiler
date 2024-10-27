@@ -6,7 +6,7 @@ namespace KSPCompiler.Domain.Symbols.MetaData
     /// Symbol modifier definition.
     /// </summary>
     [Flags]
-    public enum DataTypeModifierFlag
+    public enum ModifierFlag
     {
         None = 0,
         Const = 1 << 0,

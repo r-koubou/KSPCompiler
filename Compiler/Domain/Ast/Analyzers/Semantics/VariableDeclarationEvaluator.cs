@@ -164,7 +164,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
     private bool ValidateUIType( AstVariableDeclarationNode node, VariableSymbol variable )
     {
-        if( !variable.DataTypeModifier.IsUI() )
+        if( !variable.Modifier.IsUI() )
         {
             return true;
         }
@@ -182,9 +182,9 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         }
 
         // そのUI型は後から変更不可能な仕様の場合
-        if( uiType.DataTypeModifier.IsConstant() )
+        if( uiType.Modifier.IsConstant() )
         {
-            variable.DataTypeModifier |= DataTypeModifierFlag.Const;
+            variable.Modifier |= ModifierFlag.Const;
         }
 
         // UI型情報を参照
@@ -201,7 +201,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
     private bool ValidateInitialValue( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
     {
         // constあり＋初期化代入式が無い場合
-        if( variable.DataTypeModifier.IsConstant() && node.Initializer.IsNull() )
+        if( variable.Modifier.IsConstant() && node.Initializer.IsNull() )
         {
             CompilerMessageManger.Error(
                 node,
@@ -222,7 +222,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
     private bool ValidateVariableInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
     {
-        if( variable.DataTypeModifier.IsUI() )
+        if( variable.Modifier.IsUI() )
         {
             return ValidateUIInitializer( visitor, node, variable );
         }

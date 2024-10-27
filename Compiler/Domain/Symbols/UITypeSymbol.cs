@@ -60,7 +60,7 @@ public sealed class UITypeSymbol : SymbolBase
     {
         InitializerRequired = initializerRequired;
         this.initializerArguments.AddRange( initializerArguments );
-        DataTypeModifier = DataTypeModifierFlag.UI;
+        Modifier = ModifierFlag.UI;
     }
 
     /// <summary>

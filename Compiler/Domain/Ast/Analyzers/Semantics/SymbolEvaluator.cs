@@ -21,7 +21,7 @@ public class SymbolEvaluator : ISymbolEvaluator
         {
             Parent   = source.Parent,
             TypeFlag = symbol.DataType,
-            Constant = symbol.DataTypeModifier.IsConstant()
+            Constant = symbol.Modifier.IsConstant()
         };
 
         return result;
@@ -118,7 +118,7 @@ public class SymbolEvaluator : ISymbolEvaluator
     {
         result = NullAstExpressionNode.Instance;
 
-        if( variable.Reserved || !variable.DataTypeModifier.IsConstant() )
+        if( variable.Reserved || !variable.Modifier.IsConstant() )
         {
             return false;
         }

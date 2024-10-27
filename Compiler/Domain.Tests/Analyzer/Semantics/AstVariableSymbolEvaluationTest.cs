@@ -42,7 +42,7 @@ public class AstVariableSymbolEvaluationTest
 
         if( isConstant )
         {
-            variable.DataTypeModifier |= DataTypeModifierFlag.Const;
+            variable.Modifier |= ModifierFlag.Const;
             variable.Value            =  1;
         }
 

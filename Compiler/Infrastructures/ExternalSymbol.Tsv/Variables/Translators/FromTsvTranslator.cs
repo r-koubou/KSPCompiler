@@ -36,7 +36,7 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<V
                 };
 
                 symbol.DataType         = DataTypeUtility.GuessFromSymbolName( symbol.Name );
-                symbol.DataTypeModifier = DataTypeModifierFlag.Const;
+                symbol.Modifier = ModifierFlag.Const;
 
                 result.Add( symbol );
             }

@@ -24,7 +24,7 @@ internal class FromVariableSymbolModelTranslator : IDataTranslator<IEnumerable<V
             };
 
             symbol.DataType         = DataTypeUtility.GuessFromSymbolName( symbol.Name );
-            symbol.DataTypeModifier = DataTypeModifierFlag.Const;
+            symbol.Modifier = ModifierFlag.Const;
 
             result.Add( symbol );
         }
