@@ -173,10 +173,10 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         {
             if( !UITypeSymbols.TrySearchByName( modifier, out var uiType ) )
             {
-                CompilerMessageManger.Warning(
+                CompilerMessageManger.Error(
                     node,
-                    CompilerMessageResources.symbol_error_declare_variable_unkown,
-                    node.Modifier
+                    CompilerMessageResources.semantic_error_declare_variable_unkown_ui,
+                    modifier
                 );
 
                 return false;
