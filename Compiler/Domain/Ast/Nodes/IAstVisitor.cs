@@ -11,6 +11,7 @@ namespace KSPCompiler.Domain.Ast.Nodes
         public T Visit( AstCompilationUnitNode node );
         public T Visit( AstCallbackDeclarationNode node );
         public T Visit( AstUserFunctionDeclarationNode node );
+        public T Visit( AstModiferNode node );
         public T Visit( AstArgumentNode node );
         public T Visit( AstArgumentListNode node );
         public T Visit( AstBlockNode node );

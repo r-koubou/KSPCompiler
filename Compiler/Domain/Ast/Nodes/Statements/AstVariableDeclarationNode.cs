@@ -8,7 +8,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         /// <summary>
         /// modifier
         /// </summary>
-        public string Modifier { get; set; } = string.Empty;
+        public AstModiferNode Modifier { get; set; } = NullAstModiferNode.Instance;
 
         #region INamable
 
@@ -41,7 +41,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         /// <inheritdoc />
         ///
         public override int ChildNodeCount
-            => 1;
+            => 2;
 
         ///
         /// <inheritdoc/>
@@ -54,6 +54,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         ///
         public override void AcceptChildren<T>( IAstVisitor<T> visitor )
         {
+            Modifier.AcceptChildren( visitor );
             Initializer.AcceptChildren( visitor );
         }
 

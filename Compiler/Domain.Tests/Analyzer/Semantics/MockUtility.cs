@@ -16,11 +16,11 @@ public static class MockUtility
     {
         var variable = new VariableSymbol
         {
-            Name             = name,
-            DataType         = DataTypeFlag.TypeInt,
-            DataTypeModifier = DataTypeModifierFlag.Const,
-            Reserved         = true,
-            Value            = 0
+            Name     = name,
+            DataType = DataTypeFlag.TypeInt,
+            Modifier = ModifierFlag.Const,
+            Reserved = true,
+            Value    = 0
         };
 
         return variable;
@@ -63,10 +63,10 @@ public static class MockUtility
     {
         return new UITypeSymbol( true )
         {
-            Name             = uiName,
-            DataTypeModifier = DataTypeModifierFlag.UI,
-            Reserved         = true,
-            DataType         = type
+            Name     = uiName,
+            Modifier = ModifierFlag.UI,
+            Reserved = true,
+            DataType = type
         };
     }
 
@@ -86,10 +86,10 @@ public static class MockUtility
             }
         })
         {
-            Name             = "ui_label",
-            DataTypeModifier = DataTypeModifierFlag.UI,
-            Reserved         = true,
-            DataType         = DataTypeFlag.TypeInt
+            Name     = "ui_label",
+            Modifier = ModifierFlag.UI,
+            Reserved = true,
+            DataType = DataTypeFlag.TypeInt
         };
     }
 
@@ -114,10 +114,10 @@ public static class MockUtility
             }
         })
         {
-            Name             = "ui_table",
-            DataTypeModifier = DataTypeModifierFlag.UI,
-            Reserved         = true,
-            DataType         = DataTypeFlag.TypeIntArray
+            Name     = "ui_table",
+            Modifier = ModifierFlag.UI,
+            Reserved = true,
+            DataType = DataTypeFlag.TypeIntArray
         };
     }
 
@@ -176,7 +176,7 @@ public static class MockUtility
         return new AstSymbolExpressionNode( variable.Name, NullAstExpressionNode.Instance )
         {
             TypeFlag = variable.DataType,
-            Constant = variable.DataTypeModifier.IsConstant()
+            Constant = variable.Modifier.IsConstant()
         };
     }
 

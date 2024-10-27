@@ -1,6 +1,7 @@
 using System;
 
 using KSPCompiler.Domain.Ast.Analyzers.Semantics;
+using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Domain.CompilerMessages;
@@ -157,7 +158,7 @@ public class AstArrayVariableDeclarationEvaluationTest
         // declare const %variable <-- cannot declare const in array type
         var declaration = MockUtility.CreateVariableDeclarationNode( name );
         declaration.Parent   = callbackAst;
-        declaration.Modifier = "const";
+        declaration.Modifier = new AstModiferNode( declaration, "const" );
 
         var evaluator = new VariableDeclarationEvaluator( compilerMessageManger, symbols.Variables, symbols.UITypes );
         var visitor = new MockDeclarationVisitor();

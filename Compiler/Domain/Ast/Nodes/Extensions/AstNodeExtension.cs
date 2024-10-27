@@ -11,6 +11,7 @@ public static class AstNodeExtension
     /// <param name="node">A node instance</param>
     /// <returns>true if the node is Null Object otherwise false.</returns>
     /// <seealso cref="NullAstNode"/>
+    /// <seealso cref="NullAstModiferNode"/>
     /// <seealso cref="NullAstExpressionNode"/>
     /// <seealso cref="NullAstExpressionListNode"/>
     /// <seealso cref="NullAstVariableInitializerNode"/>
@@ -19,6 +20,7 @@ public static class AstNodeExtension
     public static bool IsNull( this IAstNode? node )
         => node is null
             or NullAstNode
+            or NullAstModiferNode
             or NullAstExpressionNode
             or NullAstExpressionListNode
             or NullAstVariableInitializerNode

@@ -39,6 +39,12 @@ public interface IKSPParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitCompilationUnit([NotNull] KSPParser.CompilationUnitContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="KSPParser.declarationModifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDeclarationModifier([NotNull] KSPParser.DeclarationModifierContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="KSPParser.callbackDeclaration"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

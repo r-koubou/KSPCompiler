@@ -21,7 +21,7 @@ internal class FromUITypeModelTranslator : IDataTranslator<IEnumerable<UITypeSym
                 Reserved         = x.Reserved,
                 Description      = x.Description,
                 DataType         = DataTypeUtility.GuessFromTypeString( x.VariableType ),
-                DataTypeModifier = DataTypeModifierFlag.UI
+                Modifier = ModifierFlag.UI
             };
 
             foreach( var arg in x.InitializerArguments )

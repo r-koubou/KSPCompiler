@@ -34,9 +34,9 @@ public abstract class SymbolBase
     public virtual DataTypeFlag DataType { get; set; } = DataTypeFlag.None;
 
     /// <summary>
-    /// A symbol's data modifier
+    /// A symbol's modifier
     /// </summary>
-    public DataTypeModifierFlag DataTypeModifier { get; set; } = DataTypeModifierFlag.None;
+    public ModifierFlag Modifier { get; set; } = ModifierFlag.None;
 
     /// <summary>
     /// Index number when stored in <see cref="ISymbolTable{TSymbol}"/>

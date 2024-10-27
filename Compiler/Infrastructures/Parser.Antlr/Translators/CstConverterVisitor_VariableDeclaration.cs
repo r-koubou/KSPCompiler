@@ -1,4 +1,6 @@
-﻿using KSPCompiler.Domain.Ast.Nodes;
+﻿using System.Collections.Generic;
+
+using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
@@ -13,11 +15,10 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             var node = new AstVariableDeclarationNode();
             node.Import( context );
             node.Name     = context.name.Text;
-            node.Modifier = string.Empty;
 
-            if( context.modifier?.Text != null )
+            if( context.modifier?.Accept( this ) is AstModiferNode modifier )
             {
-                node.Modifier = context.modifier.Text;
+                node.Modifier = modifier;
             }
 
             var initializer = context.variableInitializer()?.Accept( this );
@@ -26,6 +27,21 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             {
                 node.Initializer = (AstVariableInitializerNode)initializer;
             }
+
+            return node;
+        }
+
+        public override AstNode VisitDeclarationModifier( KSPParser.DeclarationModifierContext context )
+        {
+            var modifiers = new List<string>();
+
+            foreach( var x in context.children )
+            {
+                modifiers.Add( x.GetText() );
+            }
+
+            var node = new AstModiferNode( modifiers );
+            node.Import( context );
 
             return node;
         }

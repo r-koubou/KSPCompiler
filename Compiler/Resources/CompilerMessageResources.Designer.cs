@@ -260,5 +260,11 @@ namespace KSPCompiler.Resources {
                 return ResourceManager.GetString("semantic.error.declare.variable.uiinitializer.nonconstant", resourceCulture);
             }
         }
+        
+        public static string semantic_error_declare_variable_unkown_ui {
+            get {
+                return ResourceManager.GetString("semantic.error.declare.variable.unkown.ui", resourceCulture);
+            }
+        }
     }
 }

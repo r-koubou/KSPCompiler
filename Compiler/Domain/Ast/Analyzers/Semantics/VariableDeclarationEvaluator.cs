@@ -1,6 +1,5 @@
-using System;
-
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Declarations;
+using KSPCompiler.Domain.Ast.Analyzers.Extensions;
 using KSPCompiler.Domain.Ast.Extensions;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
@@ -120,7 +119,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         var variableType = DataTypeUtility.GuessFromSymbolName( node.Name );
 
         // 配列型に const は付与できない
-        if( variableType.IsArray() && node.Modifier == "const" )
+        if( variableType.IsArray() && node.Modifier.HasConstant() )
         {
             result = null!;
             CompilerMessageManger.Error(
@@ -164,32 +163,35 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
     private bool ValidateUIType( AstVariableDeclarationNode node, VariableSymbol variable )
     {
-        if( !variable.DataTypeModifier.IsUI() )
+        if( !variable.Modifier.IsUI() )
         {
             return true;
         }
 
         // 有効な UI 型かチェック
-        if( !UITypeSymbols.TrySearchByName( node.Modifier, out var uiType ) )
+        foreach( var modifier in node.Modifier.GetUIModifiers() )
         {
-            CompilerMessageManger.Warning(
-                node,
-                CompilerMessageResources.symbol_error_declare_variable_unkown,
-                node.Modifier
-            );
+            if( !UITypeSymbols.TrySearchByName( modifier, out var uiType ) )
+            {
+                CompilerMessageManger.Error(
+                    node,
+                    CompilerMessageResources.semantic_error_declare_variable_unkown_ui,
+                    modifier
+                );
 
-            return false;
+                return false;
+            }
+
+            // そのUI型は後から変更不可能な仕様の場合
+            if( uiType.Modifier.IsConstant() )
+            {
+                variable.Modifier |= ModifierFlag.Const;
+            }
+
+            // UI型情報を参照
+            // 意味解析時に使用するため、用意されている変数に保持
+            variable.UIType = uiType;
         }
-
-        // そのUI型は後から変更不可能な仕様の場合
-        if( uiType.DataTypeModifier.IsConstant() )
-        {
-            variable.DataTypeModifier |= DataTypeModifierFlag.Const;
-        }
-
-        // UI型情報を参照
-        // 意味解析時に使用するため、用意されている変数に保持
-        variable.UIType = uiType;
 
         return true;
     }
@@ -201,7 +203,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
     private bool ValidateInitialValue( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
     {
         // constあり＋初期化代入式が無い場合
-        if( variable.DataTypeModifier.IsConstant() && node.Initializer.IsNull() )
+        if( variable.Modifier.IsConstant() && node.Initializer.IsNull() )
         {
             CompilerMessageManger.Error(
                 node,
@@ -222,7 +224,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
     private bool ValidateVariableInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
     {
-        if( variable.DataTypeModifier.IsUI() )
+        if( variable.Modifier.IsUI() )
         {
             return ValidateUIInitializer( visitor, node, variable );
         }

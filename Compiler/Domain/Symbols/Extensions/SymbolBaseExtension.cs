@@ -13,7 +13,7 @@ public static class SymbolBaseExtension
         var symbolValue = symbol.Value;
         result = default!;
 
-        if( !symbol.DataTypeModifier.IsConstant() )
+        if( !symbol.Modifier.IsConstant() )
         {
             return false;
         }

@@ -49,6 +49,18 @@ public partial class KSPParserBaseListener : IKSPParserListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitCompilationUnit([NotNull] KSPParser.CompilationUnitContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="KSPParser.declarationModifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterDeclarationModifier([NotNull] KSPParser.DeclarationModifierContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="KSPParser.declarationModifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitDeclarationModifier([NotNull] KSPParser.DeclarationModifierContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="KSPParser.callbackDeclaration"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
