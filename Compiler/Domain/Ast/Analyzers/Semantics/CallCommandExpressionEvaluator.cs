@@ -1,9 +1,12 @@
+using System.Linq;
+
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Commands;
 using KSPCompiler.Domain.Ast.Extensions;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Resources;
 
 namespace KSPCompiler.Domain.Ast.Analyzers.Semantics;
@@ -62,8 +65,54 @@ public class CallCommandExpressionEvaluator : ICallCommandExpressionEvaluator
         return true;
     }
 
-    private bool ValidateCommandArguments( IAstVisitor<IAstNode> visitor, AstCallCommandExpressionNode expr, object commandSymbol )
+    private bool ValidateCommandArguments( IAstVisitor<IAstNode> visitor, AstCallCommandExpressionNode expr, CommandSymbol commandSymbol )
     {
-        throw new System.NotImplementedException();
+        if( expr.Right is not AstExpressionListNode arguments )
+        {
+            throw new AstAnalyzeException( expr, "Failed to evaluate command arguments" );
+        }
+
+        var symbolArgs = commandSymbol.Arguments.ToList();
+        var callArgs   = arguments.Expressions.ToList();
+
+        if( symbolArgs.Count != callArgs.Count )
+        {
+            CompilerMessageManger.Error(
+                expr,
+                CompilerMessageResources.semantic_error_command_arg_count,
+                commandSymbol.Name
+            );
+
+            return false;
+        }
+
+        for( var i = 0; i < callArgs.Count; i++ )
+        {
+            var symbolArg = symbolArgs[ i ];
+            var callArg = callArgs[ i ];
+
+            if( callArg.Accept( visitor ) is not AstExpressionNode evaluatedArg )
+            {
+                throw new AstAnalyzeException( callArg, "Failed to evaluate command argument" );
+            }
+
+            if( AssigningTypeUtility.IsTypeCompatible( evaluatedArg.TypeFlag, symbolArg.DataType ) )
+            {
+                continue;
+            }
+
+            CompilerMessageManger.Error(
+                callArg,
+                CompilerMessageResources.semantic_error_command_arg_incompatible,
+                commandSymbol.Name,
+                i + 1, // 1-based index
+                symbolArg.DataType.ToMessageString(),
+                callArg.TypeFlag.ToMessageString()
+            );
+
+            return false;
+        }
+
+        return true;
     }
 }
