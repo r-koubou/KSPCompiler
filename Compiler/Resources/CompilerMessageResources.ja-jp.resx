@@ -122,4 +122,13 @@
     <data name="semantic.error.declare.variable.unkown.ui" xml:space="preserve">
         <value>不明な UI 名です: {0}</value>
     </data>
+    <data name="semantic.warning.command.unknown" xml:space="preserve">
+        <value>{0}: 未知の KSP コマンドです(ドキュメント化されていない場合もあります)</value>
+    </data>
+    <data name="semantic.error.command.arg.count" xml:space="preserve">
+        <value>{0}: コマンド引数の数が一致していません</value>
+    </data>
+    <data name="semantic.error.command.arg.incompatible" xml:space="preserve">
+        <value>{0}: コマンド引数 {1} 番目のデータ型が異なっています (期待される型: {2}, 実際の型: {3})</value>
+    </data>
 </root>

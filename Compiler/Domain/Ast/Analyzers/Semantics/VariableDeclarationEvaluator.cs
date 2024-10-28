@@ -298,7 +298,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         }
 
         // 型の一致チェック
-        if( AssigningTypeUtility.IsTypeCompatible( variable.DataType, evaluated.TypeFlag ) )
+        if( TypeCompatibility.IsAssigningTypeCompatible( variable.DataType, evaluated.TypeFlag ) )
         {
             return true;
         }
@@ -460,7 +460,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             }
 
             // 型の一致チェック
-            if( AssigningTypeUtility.IsTypeCompatible( variable.DataType.TypeMasked(), evaluated.TypeFlag ) )
+            if( TypeCompatibility.IsAssigningTypeCompatible( variable.DataType.TypeMasked(), evaluated.TypeFlag ) )
             {
                 continue;
             }
@@ -554,7 +554,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             var requiredType = uiType.InitializerArguments[ i ].DataType;
 
             // 型の一致チェック
-            if( AssigningTypeUtility.IsTypeCompatible( evaluated.TypeFlag, requiredType ) )
+            if( TypeCompatibility.IsAssigningTypeCompatible( evaluated.TypeFlag, requiredType ) )
             {
                 continue;
             }

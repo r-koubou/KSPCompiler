@@ -3,6 +3,10 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
     /// <summary>
     /// AST node representing an invoking the KSP command
     /// </summary>
+    /// <remarks>
+    /// Left: <see cref="AstSymbolExpressionNode"/> (Command name)<br/>
+    /// Right: <see cref="AstExpressionListNode"/> (Arguments)
+    /// </remarks>
     public class AstCallCommandExpressionNode : AstExpressionNode
     {
         /// <summary>

@@ -129,4 +129,13 @@
     <data name="semantic.error.declare.variable.unkown.ui" xml:space="preserve">
         <value>Unknown UI name: {0}</value>
     </data>
+    <data name="semantic.warning.command.unknown" xml:space="preserve">
+        <value>{0}: Unknown KSP command (may not be documented)</value>
+    </data>
+    <data name="semantic.error.command.arg.count" xml:space="preserve">
+        <value>{0}: Unmatched number of command arguments</value>
+    </data>
+    <data name="semantic.error.command.arg.incompatible" xml:space="preserve">
+        <value>{0}: Command arguments [{1}] is not compatible type (Expected: {2}, Actual: {3})</value>
+    </data>
 </root>
