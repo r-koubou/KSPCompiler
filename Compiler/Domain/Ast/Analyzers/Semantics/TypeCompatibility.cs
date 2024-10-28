@@ -3,7 +3,7 @@ using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 
 namespace KSPCompiler.Domain.Ast.Analyzers.Semantics;
 
-public static class TypeCompatibilityUtility
+public static class TypeCompatibility
 {
     /// <summary>
     /// Judge whether the type of the right side can be assigned to the left side. (=included implicit type conversion)

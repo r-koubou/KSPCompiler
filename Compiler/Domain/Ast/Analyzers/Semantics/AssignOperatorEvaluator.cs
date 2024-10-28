@@ -65,7 +65,7 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
         var leftType  = evaluatedLeft.TypeFlag;
         var rightType = evaluatedRight.TypeFlag;
 
-        if( !TypeCompatibilityUtility.IsAssigningTypeCompatible( leftType, rightType ) )
+        if( !TypeCompatibility.IsAssigningTypeCompatible( leftType, rightType ) )
         {
             CompilerMessageManger.Error(
                 expr,
