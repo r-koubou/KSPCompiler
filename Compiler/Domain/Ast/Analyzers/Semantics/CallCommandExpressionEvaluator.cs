@@ -96,7 +96,7 @@ public class CallCommandExpressionEvaluator : ICallCommandExpressionEvaluator
                 throw new AstAnalyzeException( callArg, "Failed to evaluate command argument" );
             }
 
-            if( AssigningTypeUtility.IsTypeCompatible( evaluatedArg.TypeFlag, symbolArg.DataType ) )
+            if( TypeCompatibilityUtility.IsTypeCompatible( evaluatedArg.TypeFlag, symbolArg.DataType ) )
             {
                 continue;
             }
