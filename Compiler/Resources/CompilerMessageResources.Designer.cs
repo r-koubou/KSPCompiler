@@ -266,5 +266,11 @@ namespace KSPCompiler.Resources {
                 return ResourceManager.GetString("semantic.error.declare.variable.unkown.ui", resourceCulture);
             }
         }
+        
+        public static string semantic_warning_command_unknown {
+            get {
+                return ResourceManager.GetString("semantic.warning.command.unknown", resourceCulture);
+            }
+        }
     }
 }

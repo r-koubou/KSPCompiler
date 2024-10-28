@@ -129,4 +129,7 @@
     <data name="semantic.error.declare.variable.unkown.ui" xml:space="preserve">
         <value>Unknown UI name: {0}</value>
     </data>
+    <data name="semantic.warning.command.unknown" xml:space="preserve">
+        <value>{0}: Unknown KSP command (may not be documented)</value>
+    </data>
 </root>

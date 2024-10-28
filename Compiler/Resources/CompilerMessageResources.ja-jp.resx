@@ -122,4 +122,7 @@
     <data name="semantic.error.declare.variable.unkown.ui" xml:space="preserve">
         <value>不明な UI 名です: {0}</value>
     </data>
+    <data name="semantic.warning.command.unknown" xml:space="preserve">
+        <value>{0}: 未知の KSP コマンドです(ドキュメント化されていない場合もあります)</value>
+    </data>
 </root>
