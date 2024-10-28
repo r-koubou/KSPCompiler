@@ -195,8 +195,9 @@ public static class MockUtility
     public static CommandSymbol CreateCommand( string name, DataTypeFlag returnType, params CommandArgumentSymbol[] args )
         => new( args )
         {
-            Name = name,
-            DataType = returnType
+            Name     = name,
+            DataType = returnType,
+            Reserved = true
         };
 
     public static CommandSymbol CreatePlayNoteCommand()
@@ -225,8 +226,6 @@ public static class MockUtility
                 DataType = DataTypeFlag.TypeInt
             }
         );
-
-        result.Reserved = true;
 
         return result;
     }
