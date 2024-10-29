@@ -52,7 +52,7 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
               expr.Left   expr.Right
         */
 
-        if( expr.ChildNodeCount != 2 || !expr.Id.IsBinaryOperator())
+        if( expr.ChildNodeCount != 2 || !expr.Id.IsNumericSupportedBinaryOperator())
         {
             throw new AstAnalyzeException( expr, "Invalid binary operator" );
         }

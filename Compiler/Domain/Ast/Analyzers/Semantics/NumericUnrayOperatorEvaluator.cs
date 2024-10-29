@@ -50,7 +50,7 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
                 expr.Left
         */
 
-        if( expr.ChildNodeCount != 1 || !expr.Id.IsUnaryOperator())
+        if( expr.ChildNodeCount != 1 || !expr.Id.IsNumericSupportedUnaryOperator())
         {
             throw new AstAnalyzeException( expr, "Invalid unary operator" );
         }
