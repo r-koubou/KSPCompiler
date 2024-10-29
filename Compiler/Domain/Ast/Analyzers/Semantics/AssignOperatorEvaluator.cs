@@ -14,14 +14,12 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
     private ICompilerMessageManger CompilerMessageManger { get; }
 
     private static AstExpressionNode CreateEvaluateNode( AstExpressionNode source, DataTypeFlag type )
-        => new AstDefaultExpressionNode( source.Id )
-        {
-            Parent   = source.Parent,
-            Name     = source.Name,
-            Left     = source.Left,
-            Right    = source.Right,
-            TypeFlag = type
-        };
+    {
+        var result = source.Clone<AstExpressionNode>();
+        result.TypeFlag = type;
+
+        return result;
+    }
 
     public AssignOperatorEvaluator( ICompilerMessageManger compilerMessageManger )
     {
