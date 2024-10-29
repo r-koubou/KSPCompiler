@@ -23,7 +23,6 @@ public class AstConditionalBinaryOperatorEvaluationTest
             compilerMessageManger
         );
 
-        // 1 = 1
         var operatorNode = new TOperatorNode
         {
             Left  = new AstIntLiteralNode( 1 ),
