@@ -5,6 +5,35 @@ public static class AstIdExtension
     public static bool IsBinaryOperator( this AstNodeId id )
         => id switch
         {
+            AstNodeId.Addition     => true,
+            AstNodeId.Subtraction  => true,
+            AstNodeId.Multiplying  => true,
+            AstNodeId.Division     => true,
+            AstNodeId.Modulo       => true,
+            AstNodeId.BitwiseAnd   => true,
+            AstNodeId.BitwiseOr    => true,
+            AstNodeId.BitwiseXor   => true,
+            AstNodeId.Equal        => true,
+            AstNodeId.NotEqual     => true,
+            AstNodeId.LessThan     => true,
+            AstNodeId.GreaterThan  => true,
+            AstNodeId.LessEqual    => true,
+            AstNodeId.GreaterEqual => true,
+            _                      => false
+        };
+
+    public static bool IsUnaryOperator( this AstNodeId id )
+        => id switch
+        {
+            AstNodeId.UnaryNot        => true,
+            AstNodeId.UnaryMinus      => true,
+            AstNodeId.UnaryLogicalNot => true,
+            _                         => false
+        };
+
+    public static bool IsNumericSupportedBinaryOperator( this AstNodeId id )
+        => id switch
+        {
             AstNodeId.Addition    => true,
             AstNodeId.Subtraction => true,
             AstNodeId.Multiplying => true,
@@ -16,7 +45,7 @@ public static class AstIdExtension
             _                     => false
         };
 
-    public static bool IsUnaryOperator( this AstNodeId id )
+    public static bool IsNumericSupportedUnaryOperator( this AstNodeId id )
         => id switch
         {
             AstNodeId.UnaryNot   => true,
@@ -24,26 +53,27 @@ public static class AstIdExtension
             _                    => false
         };
 
-    public static bool IsBooleanOperator( this AstNodeId id )
+
+    public static bool IsIntegerSupportedBinaryOperator( this AstNodeId id )
         => id switch
         {
-            AstNodeId.Equal           => true,
-            AstNodeId.NotEqual        => true,
-            AstNodeId.LessThan        => true,
-            AstNodeId.GreaterThan     => true,
-            AstNodeId.LessEqual       => true,
-            AstNodeId.GreaterEqual    => true,
-            AstNodeId.UnaryLogicalNot => true,
-            _                         => false
+            AstNodeId.Addition    => true,
+            AstNodeId.Subtraction => true,
+            AstNodeId.Multiplying => true,
+            AstNodeId.Division    => true,
+            AstNodeId.Modulo      => true,
+            AstNodeId.BitwiseAnd  => true,
+            AstNodeId.BitwiseOr   => true,
+            AstNodeId.BitwiseXor  => true,
+            _                     => false
         };
 
-    public static bool IsConditionalOperator( this AstNodeId id )
+    public static bool IsIntegerSupportedUnaryOperator( this AstNodeId id )
         => id switch
         {
-            AstNodeId.LogicalAnd => true,
-            AstNodeId.LogicalOr  => true,
-            AstNodeId.LogicalXor => true,
-            _                    => false
+            AstNodeId.UnaryNot    => true,
+            AstNodeId.UnaryMinus  => true,
+            _                     => false
         };
 
     public static bool IsRealSupportedBinaryOperator( this AstNodeId id )
@@ -62,4 +92,46 @@ public static class AstIdExtension
             AstNodeId.UnaryMinus => true,
             _                    => false
         };
+
+    public static bool IsBooleanOperator( this AstNodeId id )
+        => id switch
+        {
+            AstNodeId.Equal           => true,
+            AstNodeId.NotEqual        => true,
+            AstNodeId.LessThan        => true,
+            AstNodeId.GreaterThan     => true,
+            AstNodeId.LessEqual       => true,
+            AstNodeId.GreaterEqual    => true,
+            AstNodeId.UnaryLogicalNot => true,
+            _                         => false
+        };
+
+    public static bool IsBooleanSupportedBinaryOperator( this AstNodeId id )
+        => id switch
+        {
+            AstNodeId.Equal           => true,
+            AstNodeId.NotEqual        => true,
+            AstNodeId.LessThan        => true,
+            AstNodeId.GreaterThan     => true,
+            AstNodeId.LessEqual       => true,
+            AstNodeId.GreaterEqual    => true,
+            _                         => false
+        };
+
+    public static bool IsBooleanSupportedUnaryOperator( this AstNodeId id )
+        => id switch
+        {
+            AstNodeId.UnaryLogicalNot => true,
+            _                         => false
+        };
+
+    public static bool IsConditionalOperator( this AstNodeId id )
+        => id switch
+        {
+            AstNodeId.LogicalAnd => true,
+            AstNodeId.LogicalOr  => true,
+            AstNodeId.LogicalXor => true,
+            _                    => false
+        };
+
 }

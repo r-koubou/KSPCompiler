@@ -1,7 +1,7 @@
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Operators;
 using KSPCompiler.Domain.Ast.Extensions;
 using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Domain.Ast.Nodes.Extensions;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
@@ -9,19 +9,11 @@ using KSPCompiler.Resources;
 
 namespace KSPCompiler.Domain.Ast.Analyzers.Semantics;
 
-public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
+public class ConditionalBinaryOperatorEvaluator : IBinaryOperatorEvaluator
 {
     private ICompilerMessageManger CompilerMessageManger { get; }
 
-    private static AstExpressionNode CreateEvaluateNode( AstExpressionNode source, DataTypeFlag type )
-    {
-        var result = source.Clone<AstExpressionNode>();
-        result.TypeFlag = type;
-
-        return result;
-    }
-
-    public AssignOperatorEvaluator( ICompilerMessageManger compilerMessageManger )
+    public ConditionalBinaryOperatorEvaluator( ICompilerMessageManger compilerMessageManger )
     {
         CompilerMessageManger = compilerMessageManger;
     }
@@ -29,14 +21,18 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
     public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstExpressionNode expr )
     {
         /*
-                     := expr
+                    operator
                        +
                        |
                   +----+----+
                   |         |
               expr.Left   expr.Right
-              (variable)    (value)
         */
+
+        if( expr.ChildNodeCount != 2 || !expr.Id.IsBooleanSupportedBinaryOperator() )
+        {
+            throw new AstAnalyzeException( expr, "Invalid binary operator" );
+        }
 
         if( expr.Left.Accept( visitor ) is not AstExpressionNode evaluatedLeft )
         {
@@ -48,26 +44,14 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
             throw new AstAnalyzeException( expr, "Failed to evaluate right side of binary operator" );
         }
 
-        // 定数には代入できない
-        if( evaluatedLeft.Constant )
-        {
-            CompilerMessageManger.Error(
-                expr,
-                CompilerMessageResources.semantic_error_assign_to_constant,
-                evaluatedLeft.Name
-            );
-
-            return CreateEvaluateNode( evaluatedLeft, evaluatedLeft.TypeFlag );
-        }
-
-        var leftType  = evaluatedLeft.TypeFlag;
+        var leftType = evaluatedLeft.TypeFlag;
         var rightType = evaluatedRight.TypeFlag;
 
-        if( !TypeCompatibility.IsAssigningTypeCompatible( leftType, rightType ) )
+        if( leftType != rightType )
         {
             CompilerMessageManger.Error(
                 expr,
-                CompilerMessageResources.semantic_error_assign_type_compatible,
+                CompilerMessageResources.semantic_error_binaryoprator_compatible,
                 leftType.ToMessageString(),
                 rightType.ToMessageString()
             );
@@ -75,6 +59,9 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
             // 上位のノードで評価を継続させるので代替のノードは生成しない
         }
 
-        return CreateEvaluateNode( evaluatedLeft, evaluatedLeft.TypeFlag );
+        var result = expr.Clone<AstExpressionNode>();
+        result.TypeFlag = DataTypeFlag.TypeBool;
+
+        return result;
     }
 }

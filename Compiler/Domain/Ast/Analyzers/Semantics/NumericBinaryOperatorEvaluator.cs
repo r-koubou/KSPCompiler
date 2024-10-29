@@ -20,14 +20,12 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
     protected IRealConvolutionEvaluator RealConvolutionEvaluator { get; }
 
     private static AstExpressionNode CreateEvaluateNode( AstExpressionNode source, DataTypeFlag type )
-        => new AstDefaultExpressionNode( source.Id )
-        {
-            Parent   = source.Parent,
-            Name     = source.Name,
-            Left     = source.Left,
-            Right    = source.Right,
-            TypeFlag = type
-        };
+    {
+        var result = source.Clone<AstExpressionNode>();
+        result.TypeFlag = type;
+
+        return result;
+    }
 
     public NumericBinaryOperatorEvaluator(
         IAstVisitor astVisitor,
@@ -52,7 +50,7 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
               expr.Left   expr.Right
         */
 
-        if( expr.ChildNodeCount != 2 || !expr.Id.IsBinaryOperator())
+        if( expr.ChildNodeCount != 2 || !expr.Id.IsNumericSupportedBinaryOperator())
         {
             throw new AstAnalyzeException( expr, "Invalid binary operator" );
         }
