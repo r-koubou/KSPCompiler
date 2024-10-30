@@ -53,7 +53,7 @@ public class AstConditionalLogicalOperatorEvaluationTest
     {
         ConditionalLogicalOperatorTestBody(
             visit: visit,
-            expectedErrorCount: 0,
+            expectedErrorCount: expectedErrorCount,
             left: new AstEqualExpressionNode
             {
                 TypeFlag = DataTypeFlag.TypeBool,
@@ -74,7 +74,7 @@ public class AstConditionalLogicalOperatorEvaluationTest
     {
         ConditionalLogicalOperatorTestBody(
             visit: visit,
-            expectedErrorCount: 1,
+            expectedErrorCount: expectedErrorCount,
             // 1 = 1 <opr> 2 + 2 <-- `2 + 2` is not boolean
             left: new AstEqualExpressionNode
             {
@@ -118,21 +118,20 @@ public class AstConditionalLogicalOperatorEvaluationTest
     public void CannotLogicalAndConditionalOperatorWithIncompatibleTest()
         => CannotIncompatibleTypeConditionalLogicalOperatorTestBody<AstLogicalAndExpressionNode>(
             ( visitor, node ) => visitor.Visit( node ),
-            0
+            1
         );
 
     [Test]
     public void CannotLogicalOrConditionalOperatorWithIncompatibleTest()
         => CannotIncompatibleTypeConditionalLogicalOperatorTestBody<AstLogicalOrExpressionNode>(
             ( visitor, node ) => visitor.Visit( node ),
-            0
+            1
         );
 
     [Test]
     public void CannotLogicalXorConditionalOperatorWithIncompatibleTest()
         => CannotIncompatibleTypeConditionalLogicalOperatorTestBody<AstLogicalXorExpressionNode>(
             ( visitor, node ) => visitor.Visit( node ),
-            0
+            1
         );
 }
-
