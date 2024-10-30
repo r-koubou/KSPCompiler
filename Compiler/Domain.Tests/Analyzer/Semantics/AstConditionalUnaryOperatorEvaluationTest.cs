@@ -33,6 +33,7 @@ public class AstConditionalUnaryOperatorEvaluationTest
         {
             Left  = new AstEqualExpressionNode
             {
+                TypeFlag = DataTypeFlag.TypeBool,
                 Left     = new AstIntLiteralNode( 1 ),
                 Right    = new AstIntLiteralNode( 1 )
             }
@@ -128,7 +129,7 @@ public class ConditionalUnaryOperatorEvaluator : IUnaryOperatorEvaluator
             );
         }
 
-        return CreateEvaluateNode( expr, DataTypeFlag.TypeBool );
+        return CreateEvaluateNode( evaluatedLeft, evaluatedLeft.TypeFlag );
     }
 }
 

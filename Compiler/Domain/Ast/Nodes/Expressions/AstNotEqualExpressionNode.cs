@@ -1,5 +1,3 @@
-using KSPCompiler.Domain.Symbols.MetaData;
-
 namespace KSPCompiler.Domain.Ast.Nodes.Expressions
 {
     /// <summary>
@@ -7,9 +5,6 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
     /// </summary>
     public class AstNotEqualExpressionNode : AstExpressionNode
     {
-        public override DataTypeFlag TypeFlag
-            => DataTypeFlag.TypeBool;
-
         /// <summary>
         /// Ctor
         /// </summary>
