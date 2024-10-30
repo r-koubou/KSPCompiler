@@ -1,9 +1,14 @@
 using System;
 
+using KSPCompiler.Domain.Ast.Analyzers;
+using KSPCompiler.Domain.Ast.Extensions;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Domain.Ast.Nodes.Extensions;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols.MetaData;
+using KSPCompiler.Domain.Symbols.MetaData.Extensions;
+using KSPCompiler.Resources;
 
 using NUnit.Framework;
 
@@ -74,7 +79,7 @@ public class AstConditionalLogicalOperatorEvaluationTest
     {
         ConditionalLogicalOperatorTestBody(
             visit: visit,
-            expectedErrorCount: 0,
+            expectedErrorCount: 1,
             // 1 = 1 <opr> 2 + 2 <-- `2 + 2` is not boolean
             left: new AstEqualExpressionNode
             {
@@ -82,9 +87,9 @@ public class AstConditionalLogicalOperatorEvaluationTest
                 Left     = new AstIntLiteralNode( 1 ),
                 Right    = new AstIntLiteralNode( 1 )
             },
-            right: new AstEqualExpressionNode
+            right: new AstAdditionExpressionNode
             {
-                TypeFlag = DataTypeFlag.TypeBool,
+                TypeFlag = DataTypeFlag.TypeInt,
                 Left     = new AstIntLiteralNode( 2 ),
                 Right    = new AstIntLiteralNode( 2 )
             }
@@ -96,6 +101,41 @@ public class AstConditionalLogicalOperatorEvaluationTest
     [Test]
     public void LogicalAndConditionalOperatorTest()
         => ConditionalLogicalOperatorTestBody<AstLogicalAndExpressionNode>(
+            ( visitor, node ) => visitor.Visit( node ),
+            0
+        );
+
+    [Test]
+    public void LogicalOrConditionalOperatorTest()
+        => ConditionalLogicalOperatorTestBody<AstLogicalOrExpressionNode>(
+            ( visitor, node ) => visitor.Visit( node ),
+            0
+        );
+
+    [Test]
+    public void LogicalXorConditionalOperatorTest()
+        => ConditionalLogicalOperatorTestBody<AstLogicalXorExpressionNode>(
+            ( visitor, node ) => visitor.Visit( node ),
+            0
+        );
+
+    [Test]
+    public void CannotLogicalAndConditionalOperatorWithIncompatibleTest()
+        => CannotIncompatibleTypeConditionalLogicalOperatorTestBody<AstLogicalAndExpressionNode>(
+            ( visitor, node ) => visitor.Visit( node ),
+            0
+        );
+
+    [Test]
+    public void CannotLogicalOrConditionalOperatorWithIncompatibleTest()
+        => CannotIncompatibleTypeConditionalLogicalOperatorTestBody<AstLogicalOrExpressionNode>(
+            ( visitor, node ) => visitor.Visit( node ),
+            0
+        );
+
+    [Test]
+    public void CannotLogicalXorConditionalOperatorWithIncompatibleTest()
+        => CannotIncompatibleTypeConditionalLogicalOperatorTestBody<AstLogicalXorExpressionNode>(
             ( visitor, node ) => visitor.Visit( node ),
             0
         );
@@ -147,5 +187,49 @@ public class ConditionalLogicalOperatorEvaluator : IConditionalLogicalOperatorEv
     }
 
     public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstExpressionNode expr )
-        => throw new NotImplementedException();
+    {
+        /*
+                    operator
+                       +
+                       |
+                  +----+----+
+                  |         |
+              expr.Left   expr.Right
+        */
+
+        if( expr.ChildNodeCount != 2 || !expr.Id.IsConditionalLogicalOperator() )
+        {
+            throw new AstAnalyzeException( expr, "Invalid conditional logical operator" );
+        }
+
+        if( expr.Left.Accept( visitor ) is not AstExpressionNode evaluatedLeft )
+        {
+            throw new AstAnalyzeException( expr, "Failed to evaluate left side of conditional logical operator" );
+        }
+
+        if( expr.Right.Accept( visitor ) is not AstExpressionNode evaluatedRight )
+        {
+            throw new AstAnalyzeException( expr, "Failed to evaluate right side of conditional logical operator" );
+        }
+
+        var leftType = evaluatedLeft.TypeFlag;
+        var rightType = evaluatedRight.TypeFlag;
+
+        if( !leftType.IsBoolean() || !rightType.IsBoolean() )
+        {
+            CompilerMessageManger.Error(
+                expr,
+                CompilerMessageResources.semantic_error_logicaloprator_incompatible,
+                leftType.ToMessageString(),
+                rightType.ToMessageString()
+            );
+
+            // 上位のノードで評価を継続させるので代替のノードは生成しない
+        }
+
+        var result = expr.Clone<AstExpressionNode>();
+        result.TypeFlag = DataTypeFlag.TypeBool;
+
+        return result;
+    }
 }

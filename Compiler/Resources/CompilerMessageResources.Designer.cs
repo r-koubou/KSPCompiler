@@ -290,5 +290,11 @@ namespace KSPCompiler.Resources {
                 return ResourceManager.GetString("semantic.error.unrayoprator.logicalnot.incompatible", resourceCulture);
             }
         }
+        
+        public static string semantic_error_logicaloprator_incompatible {
+            get {
+                return ResourceManager.GetString("semantic.error.logicaloprator.incompatible", resourceCulture);
+            }
+        }
     }
 }
