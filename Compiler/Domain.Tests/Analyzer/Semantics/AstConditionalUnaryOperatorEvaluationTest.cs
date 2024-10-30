@@ -127,9 +127,11 @@ public class ConditionalUnaryOperatorEvaluator : IUnaryOperatorEvaluator
                 CompilerMessageResources.semantic_error_unrayoprator_logicalnot_incompatible,
                 evaluatedLeft.TypeFlag.ToMessageString()
             );
+
+            // 上位のノードで評価を継続させるので代替のノードは生成しない
         }
 
-        return CreateEvaluateNode( evaluatedLeft, evaluatedLeft.TypeFlag );
+        return CreateEvaluateNode( expr, DataTypeFlag.TypeBool );
     }
 }
 
