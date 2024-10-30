@@ -134,4 +134,7 @@
     <data name="semantic.error.unrayoprator.logicalnot.incompatible" xml:space="preserve">
         <value>単項演算子 not は boolean 式にのみ使用できます</value>
     </data>
+    <data name="semantic.error.logicaloprator.incompatible" xml:space="preserve">
+        <value>論理演算子がサポートしていない型が含まれています {0}, {1}</value>
+    </data>
 </root>

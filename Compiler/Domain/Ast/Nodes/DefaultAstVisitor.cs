@@ -49,7 +49,7 @@ public abstract class DefaultAstVisitor : IAstVisitor
     public virtual IAstNode Visit( AstLogicalAndExpressionNode node )
         => VisitChildren( node );
 
-    public IAstNode Visit( AstLogicalXorExpressionNode node )
+    public virtual IAstNode Visit( AstLogicalXorExpressionNode node )
         => VisitChildren( node );
 
     public virtual IAstNode Visit( AstStringConcatenateExpressionNode node )

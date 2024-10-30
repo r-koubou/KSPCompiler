@@ -125,7 +125,7 @@ public static class AstIdExtension
             _                         => false
         };
 
-    public static bool IsConditionalOperator( this AstNodeId id )
+    public static bool IsConditionalLogicalOperator( this AstNodeId id )
         => id switch
         {
             AstNodeId.LogicalAnd => true,

@@ -141,4 +141,7 @@
     <data name="semantic.error.unrayoprator.logicalnot.incompatible" xml:space="preserve">
         <value>Unary operator not available boolean expression only</value>
     </data>
+    <data name="semantic.error.logicaloprator.incompatible" xml:space="preserve">
+        <value>Contains types not supported by logical operators {0}, {1}</value>
+    </data>
 </root>
