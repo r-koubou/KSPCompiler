@@ -138,4 +138,7 @@
     <data name="semantic.error.command.arg.incompatible" xml:space="preserve">
         <value>{0}: Command arguments [{1}] is not compatible type (Expected: {2}, Actual: {3})</value>
     </data>
+    <data name="semantic.error.unrayoprator.logicalnot.incompatible" xml:space="preserve">
+        <value>Unary operator not available boolean expression only</value>
+    </data>
 </root>

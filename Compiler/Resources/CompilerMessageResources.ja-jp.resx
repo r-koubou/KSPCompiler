@@ -131,4 +131,7 @@
     <data name="semantic.error.command.arg.incompatible" xml:space="preserve">
         <value>{0}: コマンド引数 {1} 番目のデータ型が異なっています (期待される型: {2}, 実際の型: {3})</value>
     </data>
+    <data name="semantic.error.unrayoprator.logicalnot.incompatible" xml:space="preserve">
+        <value>単項演算子 not は boolean 式にのみ使用できます</value>
+    </data>
 </root>
