@@ -139,9 +139,11 @@ public interface IConditionalLogicalOperatorEvaluator : IConditionalLogicalOpera
 
 public class ConditionalLogicalOperatorEvaluator : IConditionalLogicalOperatorEvaluator
 {
+    private ICompilerMessageManger CompilerMessageManger { get; }
+
     public ConditionalLogicalOperatorEvaluator( ICompilerMessageManger compilerMessageManger )
     {
-        throw new NotImplementedException();
+        CompilerMessageManger = compilerMessageManger;
     }
 
     public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstExpressionNode expr )
