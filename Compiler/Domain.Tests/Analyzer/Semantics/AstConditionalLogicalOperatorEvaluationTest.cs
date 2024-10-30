@@ -12,7 +12,7 @@ namespace KSPCompiler.Domain.Tests.Analyzer.Semantics;
 [TestFixture]
 public class AstConditionalLogicalOperatorEvaluationTest
 {
-    #region Test code implementation of each conditional logical operator
+    #region Common code implementation of each conditional logical operator
 
     private static void ConditionalLogicalOperatorTestBody<TOperatorNode>(
         Func<IAstVisitor, TOperatorNode, IAstNode> visit,
@@ -91,7 +91,7 @@ public class AstConditionalLogicalOperatorEvaluationTest
         );
     }
 
-    #endregion ~Test code implementation of each conditional logical operator
+    #endregion ~Common code implementation of each conditional logical operator
 
     [Test]
     public void LogicalAndConditionalOperatorTest()
