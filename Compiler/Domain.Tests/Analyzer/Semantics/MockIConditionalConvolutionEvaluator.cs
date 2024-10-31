@@ -1,4 +1,3 @@
-using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Conditions;
 using KSPCompiler.Domain.Ast.Nodes;
 
@@ -6,11 +5,15 @@ namespace KSPCompiler.Domain.Tests.Analyzer.Semantics;
 
 public class MockIConditionalConvolutionEvaluator : IConditionalConvolutionEvaluator
 {
-    private IConditionalConvolutionCalculator Calculator { get; set; } = new MockConditionalConvolutionCalculator();
+    private bool? Result { get; }
 
-    public void Inject( IConditionalConvolutionCalculator calculator )
-        => Calculator = calculator;
+    public MockIConditionalConvolutionEvaluator() : this( true ) {}
+
+    public MockIConditionalConvolutionEvaluator( bool? result )
+    {
+        Result = result;
+    }
 
     public bool? Evaluate( AstExpressionNode expr, bool workingValueForRecursive )
-        => Calculator.Calculate( expr );
+        => Result;
 }
