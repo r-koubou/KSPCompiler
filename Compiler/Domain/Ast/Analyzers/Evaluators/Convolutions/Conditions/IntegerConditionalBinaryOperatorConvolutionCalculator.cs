@@ -1,28 +1,28 @@
 using System;
 
-using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Reals;
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Integers;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 
-namespace KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Booleans;
+namespace KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Conditions;
 
 /// <summary>
-/// Calculator for convolution operations with conditional operators
+/// Calculator for convolution operations with conditional operators (integer)
 /// </summary>
-public sealed class RealConditionalOperatorConvolutionEvaluator : IRealConditionalOperatorConvolutionEvaluator
+public sealed class IntegerConditionalBinaryOperatorConvolutionCalculator : IIntegerConditionalBinaryOperatorConvolutionCalculator
 {
     private IAstVisitor Visitor { get; }
-    private IRealConvolutionEvaluator ConvolutionEvaluator { get; }
+    private IIntegerConvolutionEvaluator ConvolutionEvaluator { get; }
 
-    public RealConditionalOperatorConvolutionEvaluator(
+    public IntegerConditionalBinaryOperatorConvolutionCalculator(
         IAstVisitor visitor,
-        IRealConvolutionEvaluator convolutionEvaluator )
+        IIntegerConvolutionEvaluator convolutionEvaluator )
     {
         Visitor              = visitor;
         ConvolutionEvaluator = convolutionEvaluator;
     }
 
-    public bool? Evaluate( AstExpressionNode expr )
+    public bool? Calculate( AstExpressionNode expr )
     {
         if( expr.ChildNodeCount != 2 )
         {
@@ -37,7 +37,7 @@ public sealed class RealConditionalOperatorConvolutionEvaluator : IRealCondition
             return null;
         }
 
-        if( !exprLeft.TypeFlag.IsReal() || !exprRight.TypeFlag.IsReal() ||
+        if( !exprLeft.TypeFlag.IsInt() || !exprRight.TypeFlag.IsInt() ||
             !exprLeft.Constant || !exprRight.Constant )
         {
             return null;
@@ -53,8 +53,8 @@ public sealed class RealConditionalOperatorConvolutionEvaluator : IRealCondition
 
         return expr.Id switch
         {
-            AstNodeId.Equal        => convolutedLeft.Equals( convolutedRight ),
-            AstNodeId.NotEqual     => !convolutedLeft.Equals( convolutedRight ),
+            AstNodeId.Equal        => convolutedLeft == convolutedRight,
+            AstNodeId.NotEqual     => convolutedLeft != convolutedRight,
             AstNodeId.GreaterThan  => convolutedLeft > convolutedRight,
             AstNodeId.GreaterEqual => convolutedLeft >= convolutedRight,
             AstNodeId.LessThan     => convolutedLeft < convolutedRight,

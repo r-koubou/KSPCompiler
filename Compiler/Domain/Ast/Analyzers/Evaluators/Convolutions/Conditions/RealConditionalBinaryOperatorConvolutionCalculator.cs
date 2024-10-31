@@ -1,28 +1,28 @@
 using System;
 
-using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Integers;
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Reals;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 
-namespace KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Booleans;
+namespace KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Conditions;
 
 /// <summary>
-/// Calculator for convolution operations with conditional operators (integer)
+/// Calculator for convolution operations with conditional operators
 /// </summary>
-public sealed class IntegerConditionalOperatorConvolutionEvaluator : IIntegerConditionalOperatorConvolutionEvaluator
+public sealed class RealConditionalBinaryOperatorConvolutionCalculator : IRealConditionalBinaryOperatorConvolutionCalculator
 {
     private IAstVisitor Visitor { get; }
-    private IIntegerConvolutionEvaluator ConvolutionEvaluator { get; }
+    private IRealConvolutionEvaluator ConvolutionEvaluator { get; }
 
-    public IntegerConditionalOperatorConvolutionEvaluator(
+    public RealConditionalBinaryOperatorConvolutionCalculator(
         IAstVisitor visitor,
-        IIntegerConvolutionEvaluator convolutionEvaluator )
+        IRealConvolutionEvaluator convolutionEvaluator )
     {
         Visitor              = visitor;
         ConvolutionEvaluator = convolutionEvaluator;
     }
 
-    public bool? Evaluate( AstExpressionNode expr )
+    public bool? Calculate( AstExpressionNode expr )
     {
         if( expr.ChildNodeCount != 2 )
         {
@@ -37,7 +37,7 @@ public sealed class IntegerConditionalOperatorConvolutionEvaluator : IIntegerCon
             return null;
         }
 
-        if( !exprLeft.TypeFlag.IsInt() || !exprRight.TypeFlag.IsInt() ||
+        if( !exprLeft.TypeFlag.IsReal() || !exprRight.TypeFlag.IsReal() ||
             !exprLeft.Constant || !exprRight.Constant )
         {
             return null;
@@ -53,8 +53,8 @@ public sealed class IntegerConditionalOperatorConvolutionEvaluator : IIntegerCon
 
         return expr.Id switch
         {
-            AstNodeId.Equal        => convolutedLeft == convolutedRight,
-            AstNodeId.NotEqual     => convolutedLeft != convolutedRight,
+            AstNodeId.Equal        => convolutedLeft.Equals( convolutedRight ),
+            AstNodeId.NotEqual     => !convolutedLeft.Equals( convolutedRight ),
             AstNodeId.GreaterThan  => convolutedLeft > convolutedRight,
             AstNodeId.GreaterEqual => convolutedLeft >= convolutedRight,
             AstNodeId.LessThan     => convolutedLeft < convolutedRight,
