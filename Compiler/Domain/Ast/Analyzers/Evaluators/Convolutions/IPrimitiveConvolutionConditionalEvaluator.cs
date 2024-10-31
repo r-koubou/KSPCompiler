@@ -6,7 +6,7 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions;
 /// Calculator for convolution operations with conditional operations for struct (primitive) types
 /// </summary>
 /// <typeparam name="T">Configured conditional expression type (int/real etc.)</typeparam>
-public interface IPrimitiveConvolutionConditionalEvaluator<T> where T : struct
+public interface IPrimitiveConvolutionConditionalEvaluator
 {
     /// <summary>
     /// Calculate conditional expression
@@ -14,10 +14,4 @@ public interface IPrimitiveConvolutionConditionalEvaluator<T> where T : struct
     /// <param name="expr">Expression node</param>
     /// <returns>Evaluated value. If constant value is not found, returns null.</returns>
     bool? Evaluate( AstExpressionNode expr );
-}
-
-public sealed class NullConvolutionConditionalEvaluator<T> : IPrimitiveConvolutionCalculator<bool> where T : struct
-{
-    public bool? Calculate( AstExpressionNode expr, bool workingValueForRecursive )
-        => null;
 }
