@@ -115,6 +115,9 @@ public abstract class DefaultAstVisitor : IAstVisitor
     public virtual IAstNode Visit( AstStringLiteralNode node )
         => VisitChildren( node );
 
+    public virtual IAstNode Visit( AstBooleanLiteralNode node )
+        => VisitChildren( node );
+
     public virtual IAstNode Visit( AstExpressionListNode node )
         => VisitChildren( node );
 

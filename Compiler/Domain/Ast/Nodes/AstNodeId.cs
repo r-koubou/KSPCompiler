@@ -35,6 +35,7 @@ namespace KSPCompiler.Domain.Ast.Nodes
         IntLiteral,
         RealLiteral,
         StringLiteral,
+        BooleanLiteral,
         IntExpression,
         RealExpression,
         StringExpression,
