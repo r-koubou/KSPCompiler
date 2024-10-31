@@ -1,13 +1,8 @@
-using System;
-
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Booleans;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Conditions;
-using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Integers;
-using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Reals;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Extensions;
-using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 
@@ -21,23 +16,9 @@ public class AstBooleanConvolutionEvaluatorTest
     public void BooleanConvolutionEvaluatorWithIntegerTest<TNode>( int left, int right, bool expected )
         where TNode : AstExpressionNode, new()
     {
-        var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockDefaultAstVisitor();
-        var symbols = MockUtility.CreateAggregateSymbolTable();
+        var booleanConvolutionEvaluator = MockUtility.CreateBooleanConvolutionEvaluator( visitor );
 
-        var integerConvolutionEvaluator = new IntegerConvolutionEvaluator( visitor, symbols.Variables, compilerMessageManger );
-        var integerConditionalBinaryOperatorConvolutionCalculator = new IntegerConditionalBinaryOperatorConvolutionCalculator( visitor, integerConvolutionEvaluator );
-
-        var realConvolutionEvaluator = new RealConvolutionEvaluator( visitor, symbols.Variables, compilerMessageManger );
-        var realConditionalBinaryOperatorConvolutionCalculator = new RealConditionalBinaryOperatorConvolutionCalculator( visitor, realConvolutionEvaluator );
-
-        var booleanConvolutionEvaluator = new BooleanConvolutionEvaluator(
-            visitor,
-            integerConditionalBinaryOperatorConvolutionCalculator,
-            realConditionalBinaryOperatorConvolutionCalculator
-        );
-
-        // 1 == 1
         var ast = new TNode
         {
             TypeFlag = DataTypeFlag.TypeBool,
@@ -90,14 +71,133 @@ public class AstBooleanConvolutionEvaluatorTest
     public void BooleanConvolutionEvaluatorWithIntegerGreaterEqualTest( int left, int right, bool expected )
         // left >= right
         => BooleanConvolutionEvaluatorWithIntegerTest<AstGreaterEqualExpressionNode>( left, right, expected );
+
+    [TestCase( true )]
+    [TestCase( false )]
+    public void BooleanConvolutionEvaluatorWithIntegerUnaryLogicalNotTest( bool value )
+    {
+        var visitor = new MockDefaultAstVisitor();
+        var booleanConvolutionEvaluator = MockUtility.CreateBooleanConvolutionEvaluator( visitor );
+
+        var ast = new AstUnaryLogicalNotExpressionNode
+        {
+            TypeFlag = DataTypeFlag.TypeBool,
+            Left     = new AstBooleanLiteralNode( value )
+        };
+
+        var result = booleanConvolutionEvaluator.Evaluate( ast, false );
+
+        Assert.IsNotNull( result );
+        Assert.AreEqual( !value, result );
+    }
+
+    [TestCase( 1, 1, 1, 1, true )]
+    [TestCase( 1, 1, 2, 1, false )]
+    public void LogicalAndConditionalOperatorTest(int left1, int right1, int left2, int right2, bool expected )
+    {
+        var visitor = new MockDefaultAstVisitor();
+        var booleanConvolutionEvaluator = MockUtility.CreateBooleanConvolutionEvaluator( visitor );
+
+        var ast = new AstLogicalAndExpressionNode
+        {
+            TypeFlag = DataTypeFlag.TypeBool,
+            Left = new AstEqualExpressionNode
+            {
+                TypeFlag = DataTypeFlag.TypeBool,
+                Left     = new AstIntLiteralNode( left1 ),
+                Right    = new AstIntLiteralNode( right1 ),
+                Constant = true
+            },
+            Right = new AstEqualExpressionNode
+            {
+                TypeFlag = DataTypeFlag.TypeBool,
+                Left     = new AstIntLiteralNode( left2 ),
+                Right    = new AstIntLiteralNode( right2 ),
+                Constant = true
+            }
+        };
+
+        var result = booleanConvolutionEvaluator.Evaluate( ast, false );
+
+        Assert.IsNotNull( result );
+        Assert.AreEqual( expected, result );
+    }
+
+    [TestCase( 1, 1, 1, 1, true )]
+    [TestCase( 2, 1, 2, 1, false )]
+    public void LogicalOrConditionalOperatorTest(int left1, int right1, int left2, int right2, bool expected )
+    {
+        var visitor = new MockDefaultAstVisitor();
+        var booleanConvolutionEvaluator = MockUtility.CreateBooleanConvolutionEvaluator( visitor );
+
+        var ast = new AstLogicalOrExpressionNode
+        {
+            TypeFlag = DataTypeFlag.TypeBool,
+            Left = new AstEqualExpressionNode
+            {
+                TypeFlag = DataTypeFlag.TypeBool,
+                Left     = new AstIntLiteralNode( left1 ),
+                Right    = new AstIntLiteralNode( right1 ),
+                Constant = true
+            },
+            Right = new AstEqualExpressionNode
+            {
+                TypeFlag = DataTypeFlag.TypeBool,
+                Left     = new AstIntLiteralNode( left2 ),
+                Right    = new AstIntLiteralNode( right2 ),
+                Constant = true
+            }
+        };
+
+        var result = booleanConvolutionEvaluator.Evaluate( ast, false );
+
+        Assert.IsNotNull( result );
+        Assert.AreEqual( expected, result );
+    }
+
+    [TestCase( 1, 1, 1, 1, false )]
+    [TestCase( 1, 2, 1, 2, false )]
+    [TestCase( 1, 1, 1, 2, true )]
+    [TestCase( 1, 2, 1, 1, true )]
+    public void LogicalXorConditionalOperatorTest( int left1, int right1, int left2, int right2, bool expected )
+    {
+        var visitor = new MockDefaultAstVisitor();
+        var booleanConvolutionEvaluator = MockUtility.CreateBooleanConvolutionEvaluator( visitor );
+
+        var ast = new AstLogicalXorExpressionNode
+        {
+            TypeFlag = DataTypeFlag.TypeBool,
+            Left = new AstEqualExpressionNode
+            {
+                TypeFlag = DataTypeFlag.TypeBool,
+                Left     = new AstIntLiteralNode( left1 ),
+                Right    = new AstIntLiteralNode( right1 ),
+                Constant = true
+            },
+            Right = new AstEqualExpressionNode
+            {
+                TypeFlag = DataTypeFlag.TypeBool,
+                Left     = new AstIntLiteralNode( left2 ),
+                Right    = new AstIntLiteralNode( right2 ),
+                Constant = true
+            }
+        };
+
+        var result = booleanConvolutionEvaluator.Evaluate( ast, false );
+
+        Assert.IsNotNull( result );
+        Assert.AreEqual( expected, result );
+    }
 }
 
 public class BooleanConvolutionEvaluator : IBooleanConvolutionEvaluator
 {
     private IAstVisitor Visitor { get; }
+    private IBooleanConstantConvolutionCalculator ConstantConvolutionCalculator { get; }
     private IIntegerConditionalBinaryOperatorConvolutionCalculator IntegerBinaryOperatorCalculator { get; }
     private IRealConditionalBinaryOperatorConvolutionCalculator RealBinaryOperatorCalculator { get; }
-    private IBooleanConditionalUnaryOperatorConvolutionCalculator BooleanBinaryOperatorCalculator { get; }
+    private IConditionalLogicalOperatorConvolutionCalculator BooleanLogicalOperatorCalculator { get; }
+    private IBooleanConditionalUnaryOperatorConvolutionCalculator BooleanUnaryOperatorCalculator { get; }
 
     public BooleanConvolutionEvaluator(
         IAstVisitor visitor,
@@ -106,15 +206,42 @@ public class BooleanConvolutionEvaluator : IBooleanConvolutionEvaluator
     {
         Visitor = visitor;
 
-        IntegerBinaryOperatorCalculator = integerConvolutionEvaluator;
-        RealBinaryOperatorCalculator    = realConvolutionEvaluator;
-        BooleanBinaryOperatorCalculator = new BooleanConditionalUnaryOperatorConvolutionCalculator( this );
+        ConstantConvolutionCalculator    = new BooleanConstantConvolutionCalculator();
+        IntegerBinaryOperatorCalculator  = integerConvolutionEvaluator;
+        RealBinaryOperatorCalculator     = realConvolutionEvaluator;
+        BooleanLogicalOperatorCalculator = new ConditionalLogicalOperatorConvolutionCalculator( visitor, this );
+        BooleanUnaryOperatorCalculator   = new BooleanConditionalUnaryOperatorConvolutionCalculator( this );
     }
 
     public bool? Evaluate( AstExpressionNode expr, bool workingValueForRecursive )
     {
         var id = expr.Id;
 
+        if( expr.ChildNodeCount == 0 )
+        {
+            return ConstantConvolutionCalculator.Calculate( expr, workingValueForRecursive );
+        }
+
+        if( id.IsBooleanSupportedBinaryOperator() )
+        {
+            return CalculateBinaryOperator( expr );
+        }
+
+        if( id.IsBooleanSupportedUnaryOperator() )
+        {
+            return BooleanUnaryOperatorCalculator.Calculate( expr );
+        }
+
+        if( id.IsConditionalLogicalOperator() )
+        {
+            return BooleanLogicalOperatorCalculator.Calculate( expr );
+        }
+
+        return null;
+    }
+
+    private bool? CalculateBinaryOperator( AstExpressionNode expr )
+    {
         if( expr.Left.Accept( Visitor ) is not AstExpressionNode evaluatedLeft )
         {
             return null;
@@ -133,34 +260,19 @@ public class BooleanConvolutionEvaluator : IBooleanConvolutionEvaluator
             return null;
         }
 
-        if( id.IsBooleanSupportedBinaryOperator() )
-        {
-            return CalculateBinaryOperator( expr, leftType );
-        }
-
-        if( id.IsBooleanSupportedUnaryOperator() )
-        {
-            throw new NotImplementedException();
-        }
-
-        return null;
-    }
-
-    private bool? CalculateBinaryOperator( AstExpressionNode expr, DataTypeFlag type )
-    {
-        if( type.IsInt() )
+        if( leftType.IsInt() )
         {
             return IntegerBinaryOperatorCalculator.Calculate( expr );
         }
 
-        if( type.IsReal() )
+        if( leftType.IsReal() )
         {
             return RealBinaryOperatorCalculator.Calculate( expr );
         }
 
-        if( type.IsBoolean() )
+        if( leftType.IsBoolean() )
         {
-            return BooleanBinaryOperatorCalculator.Calculate( expr );
+            return BooleanLogicalOperatorCalculator.Calculate( expr );
         }
 
         return null;
