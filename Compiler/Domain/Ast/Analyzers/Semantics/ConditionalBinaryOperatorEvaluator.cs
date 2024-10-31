@@ -9,7 +9,7 @@ using KSPCompiler.Resources;
 
 namespace KSPCompiler.Domain.Ast.Analyzers.Semantics;
 
-public class ConditionalBinaryOperatorEvaluator : IBinaryOperatorEvaluator
+public class ConditionalBinaryOperatorEvaluator : IConditionalBinaryOperatorEvaluator
 {
     private ICompilerMessageManger CompilerMessageManger { get; }
 

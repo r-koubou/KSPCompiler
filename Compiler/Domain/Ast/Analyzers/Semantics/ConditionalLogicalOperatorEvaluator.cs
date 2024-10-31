@@ -1,4 +1,3 @@
-using KSPCompiler.Domain.Ast.Analyzers;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Operators;
 using KSPCompiler.Domain.Ast.Extensions;
 using KSPCompiler.Domain.Ast.Nodes;
@@ -8,7 +7,7 @@ using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Resources;
 
-namespace KSPCompiler.Domain.Tests.Analyzer.Semantics;
+namespace KSPCompiler.Domain.Ast.Analyzers.Semantics;
 
 public class ConditionalLogicalOperatorEvaluator : IConditionalLogicalOperatorEvaluator
 {

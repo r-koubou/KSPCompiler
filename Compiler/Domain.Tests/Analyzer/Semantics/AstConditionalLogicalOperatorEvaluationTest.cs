@@ -1,5 +1,6 @@
 using System;
 
+using KSPCompiler.Domain.Ast.Analyzers.Semantics;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.CompilerMessages;
