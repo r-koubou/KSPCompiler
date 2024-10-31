@@ -1,9 +1,10 @@
 using System;
 
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Booleans;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 
-namespace KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Booleans;
+namespace KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Conditions;
 
 public class ConditionalLogicalOperatorConvolutionCalculator : IConditionalLogicalOperatorConvolutionCalculator
 {
@@ -33,7 +34,7 @@ public class ConditionalLogicalOperatorConvolutionCalculator : IConditionalLogic
             return null;
         }
 
-        if( !exprLeft.TypeFlag.IsReal() || !exprRight.TypeFlag.IsReal() ||
+        if( !exprLeft.TypeFlag.IsBoolean() || !exprRight.TypeFlag.IsBoolean() ||
             !exprLeft.Constant || !exprRight.Constant )
         {
             return null;
