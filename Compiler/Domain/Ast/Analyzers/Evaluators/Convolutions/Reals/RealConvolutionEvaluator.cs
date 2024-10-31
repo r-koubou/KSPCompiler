@@ -12,14 +12,12 @@ public sealed class RealConvolutionEvaluator : IRealConvolutionEvaluator
     private IRealConstantConvolutionCalculator ConstantCalculator { get; }
     private IRealBinaryOperatorConvolutionCalculator BinaryCalculator { get; }
     private IRealUnaryOperatorConvolutionCalculator UnaryCalculator { get; }
-    private IRealConditionalOperatorConvolutionEvaluator ConditionalEvaluator { get; }
 
     public RealConvolutionEvaluator( IAstVisitor visitor, IVariableSymbolTable variableSymbols, ICompilerMessageManger compilerMessageManger )
     {
         ConstantCalculator   = new RealConstantConvolutionCalculator( variableSymbols, compilerMessageManger );
         BinaryCalculator     = new RealBinaryOperatorConvolutionCalculator( this );
         UnaryCalculator      = new RealUnaryOperatorConvolutionCalculator( this );
-        ConditionalEvaluator = new RealConditionalOperatorConvolutionEvaluator( visitor, this );
     }
 
     public double? Evaluate( AstExpressionNode expr, double workingValueForRecursive )

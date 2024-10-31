@@ -1,4 +1,4 @@
-namespace KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Reals;
+namespace KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Booleans;
 
 /// <summary>
 /// Calculator for convolution operations with conditional operators (real)
