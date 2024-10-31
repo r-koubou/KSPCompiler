@@ -10,7 +10,7 @@ using NUnit.Framework;
 namespace KSPCompiler.Domain.Tests.Analyzer.Semantics;
 
 [TestFixture]
-public class AstConditionalBinaryOperatorConvolutionCalculatorTest
+public class AstIntegerConditionalBinaryOperatorConvolutionCalculatorTest
 {
     private static void ConvolutionIntegerConditionalOperatorTestBody<TNode>( int value, bool expected )
         where TNode : AstExpressionNode, new()
