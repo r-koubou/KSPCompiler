@@ -26,7 +26,8 @@ public class AstConditionalLogicalOperatorEvaluationTest
         var visitor = new MockAstConditionalLogicalOperatorVisitor();
 
         var conditionalBinaryOperatorEvaluator = new ConditionalLogicalOperatorEvaluator(
-            compilerMessageManger
+            compilerMessageManger,
+            MockUtility.CreateBooleanConvolutionEvaluator( visitor )
         );
 
         // left <opr> right

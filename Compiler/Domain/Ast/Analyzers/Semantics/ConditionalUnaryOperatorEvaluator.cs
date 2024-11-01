@@ -1,6 +1,8 @@
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Booleans;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Operators;
 using KSPCompiler.Domain.Ast.Extensions;
 using KSPCompiler.Domain.Ast.Nodes;
+using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Extensions;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols.MetaData;
@@ -12,6 +14,7 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Semantics;
 public class ConditionalUnaryOperatorEvaluator : IUnaryOperatorEvaluator
 {
     private ICompilerMessageManger CompilerMessageManger { get; }
+    private IBooleanConvolutionEvaluator BooleanConvolutionEvaluator { get; }
 
     private static AstExpressionNode CreateEvaluateNode( AstExpressionNode source, DataTypeFlag type )
     {
@@ -21,8 +24,13 @@ public class ConditionalUnaryOperatorEvaluator : IUnaryOperatorEvaluator
         return result;
     }
 
-    public ConditionalUnaryOperatorEvaluator( ICompilerMessageManger compilerMessageManger )
-        => CompilerMessageManger = compilerMessageManger;
+    public ConditionalUnaryOperatorEvaluator(
+        ICompilerMessageManger compilerMessageManger,
+        IBooleanConvolutionEvaluator booleanConvolutionEvaluator )
+    {
+        CompilerMessageManger       = compilerMessageManger;
+        BooleanConvolutionEvaluator = booleanConvolutionEvaluator;
+    }
 
     public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstExpressionNode expr )
     {
@@ -56,6 +64,31 @@ public class ConditionalUnaryOperatorEvaluator : IUnaryOperatorEvaluator
             // 上位のノードで評価を継続させるので代替のノードは生成しない
         }
 
+        // リテラルに畳み込み可能なら畳み込む
+        if( TryConvolutionValue( expr, out var convolutedValue ) )
+        {
+            return convolutedValue;
+        }
+
         return CreateEvaluateNode( expr, DataTypeFlag.TypeBool );
+    }
+
+    private bool TryConvolutionValue( AstExpressionNode expr, out AstExpressionNode convolutedValue )
+    {
+        convolutedValue = NullAstExpressionNode.Instance;
+
+        var result = BooleanConvolutionEvaluator.Evaluate( expr, false );
+
+        if( result == null )
+        {
+            return false;
+        }
+
+        convolutedValue = new AstBooleanLiteralNode( result.Value )
+        {
+            Parent = expr
+        };
+
+        return true;
     }
 }
