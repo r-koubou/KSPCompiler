@@ -35,9 +35,10 @@ public class AstIntBinaryOperatorEvaluationTest
             compilerMessageManger
         );
         var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
-        var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator( compilerMessageManger,
-                                                                          integerConvolutionEvaluator,
-                                                                          realConvolutionEvaluator
+        var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
+            compilerMessageManger,
+            integerConvolutionEvaluator,
+            realConvolutionEvaluator
         );
 
         visitor.Inject( binaryOperatorEvaluator );
@@ -68,9 +69,10 @@ public class AstIntBinaryOperatorEvaluationTest
             compilerMessageManger
         );
         var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
-        var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator( compilerMessageManger,
-                                                                          integerConvolutionEvaluator,
-                                                                          realConvolutionEvaluator
+        var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
+            compilerMessageManger,
+            integerConvolutionEvaluator,
+            realConvolutionEvaluator
         );
 
         visitor.Inject( binaryOperatorEvaluator );
@@ -101,9 +103,10 @@ public class AstIntBinaryOperatorEvaluationTest
             compilerMessageManger
         );
         var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
-        var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator( compilerMessageManger,
-                                                                          integerConvolutionEvaluator,
-                                                                          realConvolutionEvaluator
+        var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
+            compilerMessageManger,
+            integerConvolutionEvaluator,
+            realConvolutionEvaluator
         );
 
         visitor.Inject( binaryOperatorEvaluator );
@@ -134,9 +137,10 @@ public class AstIntBinaryOperatorEvaluationTest
             compilerMessageManger
         );
         var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
-        var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator( compilerMessageManger,
-                                                                          integerConvolutionEvaluator,
-                                                                          realConvolutionEvaluator
+        var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
+            compilerMessageManger,
+            integerConvolutionEvaluator,
+            realConvolutionEvaluator
         );
 
         visitor.Inject( binaryOperatorEvaluator );
@@ -168,9 +172,10 @@ public class AstIntBinaryOperatorEvaluationTest
             compilerMessageManger
         );
         var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
-        var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator( compilerMessageManger,
-                                                                          integerConvolutionEvaluator,
-                                                                          realConvolutionEvaluator
+        var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
+            compilerMessageManger,
+            integerConvolutionEvaluator,
+            realConvolutionEvaluator
         );
 
         visitor.Inject( binaryOperatorEvaluator );
@@ -204,9 +209,10 @@ public class AstIntBinaryOperatorEvaluationTest
             compilerMessageManger
         );
         var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
-        var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator( compilerMessageManger,
-                                                                          integerConvolutionEvaluator,
-                                                                          realConvolutionEvaluator
+        var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
+            compilerMessageManger,
+            integerConvolutionEvaluator,
+            realConvolutionEvaluator
         );
 
         visitor.Inject( binaryOperatorEvaluator );
@@ -238,9 +244,10 @@ public class AstIntBinaryOperatorEvaluationTest
             compilerMessageManger
         );
         var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
-        var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator( compilerMessageManger,
-                                                                          integerConvolutionEvaluator,
-                                                                          realConvolutionEvaluator
+        var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
+            compilerMessageManger,
+            integerConvolutionEvaluator,
+            realConvolutionEvaluator
         );
 
         visitor.Inject( binaryOperatorEvaluator );
@@ -272,9 +279,10 @@ public class AstIntBinaryOperatorEvaluationTest
             compilerMessageManger
         );
         var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
-        var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator( compilerMessageManger,
-                                                                          integerConvolutionEvaluator,
-                                                                          realConvolutionEvaluator
+        var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
+            compilerMessageManger,
+            integerConvolutionEvaluator,
+            realConvolutionEvaluator
         );
 
         visitor.Inject( binaryOperatorEvaluator );
