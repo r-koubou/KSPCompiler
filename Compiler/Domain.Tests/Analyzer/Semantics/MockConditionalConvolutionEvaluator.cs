@@ -3,13 +3,13 @@ using KSPCompiler.Domain.Ast.Nodes;
 
 namespace KSPCompiler.Domain.Tests.Analyzer.Semantics;
 
-public class MockIConditionalConvolutionEvaluator : IConditionalConvolutionEvaluator
+public class MockConditionalConvolutionEvaluator : IConditionalConvolutionEvaluator
 {
     private bool? Result { get; }
 
-    public MockIConditionalConvolutionEvaluator() : this( true ) {}
+    public MockConditionalConvolutionEvaluator() : this( false ) {}
 
-    public MockIConditionalConvolutionEvaluator( bool? result )
+    public MockConditionalConvolutionEvaluator( bool? result )
     {
         Result = result;
     }
