@@ -1,15 +1,12 @@
 using System;
 
-using KSPCompiler.Domain.Ast.Analyzers;
-using KSPCompiler.Domain.Ast.Extensions;
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Conditionals;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols.MetaData;
-using KSPCompiler.Domain.Symbols.MetaData.Extensions;
-using KSPCompiler.Resources;
 
 using NUnit.Framework;
 
@@ -129,75 +126,4 @@ public class AstIfStatementTest
         IfStatementEvaluationTestBody( condition, 1 );
     }
 
-}
-
-#region Work mock classes
-
-public class MockIfStatementEvaluator : IIfStatementEvaluator
-{
-    public IAstNode Evaluate( IAstVisitor visitor, AstIfStatementNode statement )
-        => throw new NotImplementedException();
-}
-
-public class MockIfStatementVisitor : DefaultAstVisitor
-{
-    private IIfStatementEvaluator IfStatementEvaluator { get; set; } = new MockIfStatementEvaluator();
-
-    public void Inject( IIfStatementEvaluator evaluator )
-        => IfStatementEvaluator = evaluator;
-
-    public override IAstNode Visit( AstIfStatementNode node )
-        => IfStatementEvaluator.Evaluate( this, node );
-}
-
-#endregion
-
-public interface IConditionalStatementEvaluator<in TStatementNode> where TStatementNode : AstStatementNode
-{
-    IAstNode Evaluate( IAstVisitor visitor, TStatementNode statement );
-}
-
-public interface IIfStatementEvaluator : IConditionalStatementEvaluator<AstIfStatementNode> {}
-
-public class IfStatementEvaluator : IIfStatementEvaluator
-{
-    private ICompilerMessageManger CompilerMessageManger { get; }
-
-    public IfStatementEvaluator( ICompilerMessageManger compilerMessageManger )
-    {
-        CompilerMessageManger = compilerMessageManger;
-    }
-
-    public IAstNode Evaluate( IAstVisitor visitor, AstIfStatementNode statement )
-    {
-        // 条件式の評価
-        if( statement.Condition.Accept( visitor ) is not AstExpressionNode evaluatedCondition )
-        {
-            throw new AstAnalyzeException( statement, "Failed to evaluate condition" );
-        }
-
-        // if条件式が条件式以外の場合
-        if( !evaluatedCondition.TypeFlag.IsBoolean() )
-        {
-            CompilerMessageManger.Error(
-                statement,
-                CompilerMessageResources.semantic_error_if_condition_incompatible
-            );
-
-            return statement.Clone<AstIfStatementNode>();
-        }
-
-        // 真の場合のコードブロックの評価
-        statement.CodeBlock.AcceptChildren( visitor );
-
-        // else節がある場合のコードブロックの評価
-        statement.ElseBlock.AcceptChildren( visitor );
-
-        // Memo
-        // 畳み込みで条件式をリテラルでノードを置き換え可能だが
-        // 文法上は条件式リテラルが許されていないため、ここでは畳み込みは行わない
-        // 最適化やオブファスケーターの団で畳み込みを行う
-
-        return statement.Clone<AstIfStatementNode>();
-    }
 }
