@@ -1,7 +1,12 @@
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Booleans;
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Conditions;
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Integers;
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Reals;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
@@ -328,4 +333,26 @@ public static class MockUtility
     }
 
     #endregion
+
+    #region Convolutions
+
+    public static IBooleanConvolutionEvaluator CreateBooleanConvolutionEvaluator( IAstVisitor visitor )
+    {
+        var compilerMessageManger = ICompilerMessageManger.Default;
+        var symbols = MockUtility.CreateAggregateSymbolTable();
+
+        var integerConvolutionEvaluator = new IntegerConvolutionEvaluator( visitor, symbols.Variables, compilerMessageManger );
+        var integerConditionalBinaryOperatorConvolutionCalculator = new IntegerConditionalBinaryOperatorConvolutionCalculator( visitor, integerConvolutionEvaluator );
+
+        var realConvolutionEvaluator = new RealConvolutionEvaluator( visitor, symbols.Variables, compilerMessageManger );
+        var realConditionalBinaryOperatorConvolutionCalculator = new RealConditionalBinaryOperatorConvolutionCalculator( visitor, realConvolutionEvaluator );
+
+        return  new BooleanConvolutionEvaluator(
+            visitor,
+            integerConditionalBinaryOperatorConvolutionCalculator,
+            realConditionalBinaryOperatorConvolutionCalculator
+        );
+    }
+
+    #endregion ~Convolutions
 }

@@ -40,6 +40,7 @@ namespace KSPCompiler.Domain.Ast.Nodes
         public T Visit( AstIntLiteralNode node );
         public T Visit( AstRealLiteralNode node );
         public T Visit( AstStringLiteralNode node );
+        public T Visit( AstBooleanLiteralNode node );
         public T Visit( AstExpressionListNode node );
         public T Visit( AstAssignmentExpressionNode node );
         public T Visit( AstAssignmentExpressionListNode node );

@@ -169,6 +169,11 @@ classes:
     templates:
       - name: ${TEMPLATE}
 
+  - name: BooleanLiteral
+    description: "boolean literal"
+    templates:
+      - name: ${TEMPLATE}
+
   #--------------------------------------------
   # 式リスト
   #--------------------------------------------

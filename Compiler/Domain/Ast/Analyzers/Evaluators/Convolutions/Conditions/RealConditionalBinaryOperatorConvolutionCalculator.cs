@@ -1,19 +1,20 @@
 using System;
 
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Reals;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 
-namespace KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Reals;
+namespace KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Conditions;
 
 /// <summary>
 /// Calculator for convolution operations with conditional operators
 /// </summary>
-public sealed class RealConditionalOperatorConvolutionEvaluator : IRealConditionalOperatorConvolutionEvaluator
+public sealed class RealConditionalBinaryOperatorConvolutionCalculator : IRealConditionalBinaryOperatorConvolutionCalculator
 {
     private IAstVisitor Visitor { get; }
     private IRealConvolutionEvaluator ConvolutionEvaluator { get; }
 
-    public RealConditionalOperatorConvolutionEvaluator(
+    public RealConditionalBinaryOperatorConvolutionCalculator(
         IAstVisitor visitor,
         IRealConvolutionEvaluator convolutionEvaluator )
     {
@@ -21,15 +22,15 @@ public sealed class RealConditionalOperatorConvolutionEvaluator : IRealCondition
         ConvolutionEvaluator = convolutionEvaluator;
     }
 
-    public bool? Evaluate( AstExpressionNode expr )
+    public bool? Calculate( AstExpressionNode expr )
     {
         if( expr.ChildNodeCount != 2 )
         {
             throw new ArgumentException( $"Expected 2 child nodes, but got {expr.ChildNodeCount}. (node: {expr.GetType().Name})" );
         }
 
-        var exprLeft = expr.Accept( Visitor ) as AstExpressionNode;
-        var exprRight = expr.Accept( Visitor ) as AstExpressionNode;
+        var exprLeft = expr.Left.Accept( Visitor ) as AstExpressionNode;
+        var exprRight = expr.Right.Accept( Visitor ) as AstExpressionNode;
 
         if( exprLeft == null || exprRight == null )
         {
