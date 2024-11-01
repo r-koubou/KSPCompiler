@@ -12,7 +12,7 @@ namespace KSPCompiler.Domain.Tests.Analyzer.Semantics;
 [TestFixture]
 public class AstIntegerConditionalBinaryOperatorConvolutionCalculatorTest
 {
-    private static void ConvolutionIntegerConditionalOperatorTestBody<TNode>( int value, bool expected )
+    private static void ConvolutionConditionalOperatorTestBody<TNode>( int value, bool expected )
         where TNode : AstExpressionNode, new()
     {
         var visitor = new MockDefaultAstVisitor();
@@ -37,45 +37,45 @@ public class AstIntegerConditionalBinaryOperatorConvolutionCalculatorTest
     }
 
     [Test]
-    public void ConvolutionIntegerEqualTest()
+    public void ConvolutionEqualTest()
     {
         // 1 == 1  --> true
-        ConvolutionIntegerConditionalOperatorTestBody<AstEqualExpressionNode>( 1, true );
+        ConvolutionConditionalOperatorTestBody<AstEqualExpressionNode>( 1, true );
     }
 
     [Test]
-    public void ConvolutionIntegerNotEqualTest()
+    public void ConvolutionNotEqualTest()
     {
         // 1 != 1  --> false
-        ConvolutionIntegerConditionalOperatorTestBody<AstNotEqualExpressionNode>( 1, false );
+        ConvolutionConditionalOperatorTestBody<AstNotEqualExpressionNode>( 1, false );
     }
 
     [Test]
-    public void ConvolutionIntegerLessThanEqualTest()
+    public void ConvolutionLessThanEqualTest()
     {
         // 1 < 1  --> false
-        ConvolutionIntegerConditionalOperatorTestBody<AstLessThanExpressionNode>( 1, false );
+        ConvolutionConditionalOperatorTestBody<AstLessThanExpressionNode>( 1, false );
     }
 
     [Test]
-    public void ConvolutionIntegerGreaterThanEqualTest()
+    public void ConvolutionGreaterThanEqualTest()
     {
         // 1 > 1  --> false
-        ConvolutionIntegerConditionalOperatorTestBody<AstGreaterThanExpressionNode>( 1, false );
+        ConvolutionConditionalOperatorTestBody<AstGreaterThanExpressionNode>( 1, false );
     }
 
     [Test]
-    public void ConvolutionIntegerLessEqualEqualTest()
+    public void ConvolutionLessEqualEqualTest()
     {
         // 1 <= 1  --> true
-        ConvolutionIntegerConditionalOperatorTestBody<AstLessEqualExpressionNode>( 1, true );
+        ConvolutionConditionalOperatorTestBody<AstLessEqualExpressionNode>( 1, true );
     }
 
     [Test]
-    public void ConvolutionIntegerGreaterEqualEqualTest()
+    public void ConvolutionGreaterEqualEqualTest()
     {
         // 1 >= 1  --> true
-        ConvolutionIntegerConditionalOperatorTestBody<AstGreaterEqualExpressionNode>( 1, true );
+        ConvolutionConditionalOperatorTestBody<AstGreaterEqualExpressionNode>( 1, true );
     }
 
 }
