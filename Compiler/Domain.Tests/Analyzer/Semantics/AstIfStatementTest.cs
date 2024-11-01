@@ -48,9 +48,6 @@ public class AstIfStatementTest
         Assert.AreEqual( expectedErrorCount, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
     }
 
-    private static void IfStatementEvaluationTestBody( AstExpressionNode condition, AstBlockNode codeBlock, int expectedErrorCount )
-        => IfStatementEvaluationTestBody( condition, codeBlock, new AstBlockNode(), expectedErrorCount );
-
     private static void IfStatementEvaluationTestBody( AstExpressionNode condition, int expectedErrorCount )
         => IfStatementEvaluationTestBody( condition, new AstBlockNode(), new AstBlockNode(), expectedErrorCount );
 
