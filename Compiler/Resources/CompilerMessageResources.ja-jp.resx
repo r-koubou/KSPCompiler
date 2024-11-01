@@ -137,4 +137,7 @@
     <data name="semantic.error.logicaloprator.incompatible" xml:space="preserve">
         <value>論理演算子がサポートしていない型が含まれています {0}, {1}</value>
     </data>
+    <data name="semantic.error.if.condition.incompatible" xml:space="preserve">
+        <value>if: 条件式が含まれていません</value>
+    </data>
 </root>

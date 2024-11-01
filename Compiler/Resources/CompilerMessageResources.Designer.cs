@@ -296,5 +296,11 @@ namespace KSPCompiler.Resources {
                 return ResourceManager.GetString("semantic.error.logicaloprator.incompatible", resourceCulture);
             }
         }
+        
+        public static string semantic_error_if_condition_incompatible {
+            get {
+                return ResourceManager.GetString("semantic.error.if.condition.incompatible", resourceCulture);
+            }
+        }
     }
 }
