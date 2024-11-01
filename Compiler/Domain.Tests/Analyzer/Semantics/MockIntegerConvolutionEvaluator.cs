@@ -14,6 +14,6 @@ public class MockIntegerConvolutionEvaluator : IIntegerConvolutionEvaluator
         Result = result;
     }
 
-    public int? Evaluate( AstExpressionNode expr, int workingValueForRecursive )
+    public int? Evaluate( IAstVisitor visitor, AstExpressionNode expr, int workingValueForRecursive )
         => Result;
 }

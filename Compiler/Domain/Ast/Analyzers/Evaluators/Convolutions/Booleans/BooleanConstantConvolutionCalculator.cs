@@ -10,7 +10,7 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Booleans;
 /// </summary>
 public class BooleanConstantConvolutionCalculator : IBooleanConstantConvolutionCalculator
 {
-    public bool? Calculate( AstExpressionNode expr, bool workingValueForRecursive )
+    public bool? Calculate( IAstVisitor visitor, AstExpressionNode expr, bool workingValueForRecursive )
     {
         if( expr.ChildNodeCount != 0 )
         {

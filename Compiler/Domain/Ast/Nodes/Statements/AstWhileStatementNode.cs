@@ -30,7 +30,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         ///
         /// <inheritdoc/>
         ///
-        public override T Accept<T>( IAstVisitor<T> visitor )
+        public override IAstNode Accept( IAstVisitor visitor )
             => visitor.Visit( this );
 
         #endregion IAstNodeAcceptor

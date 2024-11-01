@@ -42,10 +42,10 @@ public sealed class NullAstVariableInitializerNode : AstVariableInitializerNode
     public override int ChildNodeCount
         => 0;
 
-    public override T Accept<T>( IAstVisitor<T> visitor )
+    public override IAstNode Accept( IAstVisitor visitor )
         => visitor.Visit( this );
 
-    public override void AcceptChildren<T>( IAstVisitor<T> visitor ) {}
+    public override void AcceptChildren( IAstVisitor visitor ) {}
 
     public override string ToString()
         => nameof( NullAstVariableInitializerNode );

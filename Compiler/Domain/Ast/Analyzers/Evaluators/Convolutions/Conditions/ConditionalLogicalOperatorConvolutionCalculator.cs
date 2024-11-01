@@ -8,7 +8,6 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Conditions;
 
 public class ConditionalLogicalOperatorConvolutionCalculator : IConditionalLogicalOperatorConvolutionCalculator
 {
-    private IAstVisitor Visitor { get; }
     private IBooleanConvolutionEvaluator ConvolutionEvaluator { get; }
 
     public ConditionalLogicalOperatorConvolutionCalculator(
@@ -16,18 +15,17 @@ public class ConditionalLogicalOperatorConvolutionCalculator : IConditionalLogic
         IBooleanConvolutionEvaluator convolutionEvaluator )
     {
         ConvolutionEvaluator = convolutionEvaluator;
-        Visitor              = visitor;
     }
 
-    public bool? Calculate( AstExpressionNode expr )
+    public bool? Calculate( IAstVisitor visitor, AstExpressionNode expr )
     {
         if( expr.ChildNodeCount != 2 )
         {
             throw new ArgumentException( $"Expected 2 child nodes, but got {expr.ChildNodeCount}. (node: {expr.GetType().Name})" );
         }
 
-        var exprLeft = expr.Left.Accept( Visitor ) as AstExpressionNode;
-        var exprRight = expr.Right.Accept( Visitor ) as AstExpressionNode;
+        var exprLeft = expr.Left.Accept( visitor ) as AstExpressionNode;
+        var exprRight = expr.Right.Accept( visitor ) as AstExpressionNode;
 
         if( exprLeft == null || exprRight == null )
         {
@@ -40,8 +38,8 @@ public class ConditionalLogicalOperatorConvolutionCalculator : IConditionalLogic
             return null;
         }
 
-        var convolutedLeft = ConvolutionEvaluator.Evaluate( exprLeft,   false );
-        var convolutedRight = ConvolutionEvaluator.Evaluate( exprRight, false );
+        var convolutedLeft = ConvolutionEvaluator.Evaluate( visitor, exprLeft,   false );
+        var convolutedRight = ConvolutionEvaluator.Evaluate( visitor, exprRight, false );
 
         if( convolutedLeft == null || convolutedRight == null )
         {

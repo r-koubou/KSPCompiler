@@ -43,7 +43,7 @@ public class SymbolEvaluator : ISymbolEvaluator
         SymbolTable           = symbolTable;
     }
 
-    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstSymbolExpressionNode expr )
+    public IAstNode Evaluate( IAstVisitor visitor, AstSymbolExpressionNode expr )
     {
         if( TryGetVariableSymbol( visitor, expr, out var result ) )
         {
@@ -72,7 +72,7 @@ public class SymbolEvaluator : ISymbolEvaluator
         return result;
     }
 
-    private bool TryGetVariableSymbol( IAstVisitor<IAstNode> visitor, AstSymbolExpressionNode expr, out AstExpressionNode result )
+    private bool TryGetVariableSymbol( IAstVisitor visitor, AstSymbolExpressionNode expr, out AstExpressionNode result )
     {
         result = NullAstExpressionNode.Instance;
 
@@ -139,7 +139,7 @@ public class SymbolEvaluator : ISymbolEvaluator
         }
     }
 
-    private bool TryGetArrayVariableNode( IAstVisitor<IAstNode> visitor, AstExpressionNode expr, VariableSymbol variable, out AstExpressionNode result )
+    private bool TryGetArrayVariableNode( IAstVisitor visitor, AstExpressionNode expr, VariableSymbol variable, out AstExpressionNode result )
     {
         result = NullAstExpressionNode.Instance;
 

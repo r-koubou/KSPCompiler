@@ -342,10 +342,10 @@ public static class MockUtility
         var symbols = MockUtility.CreateAggregateSymbolTable();
 
         var integerConvolutionEvaluator = new IntegerConvolutionEvaluator( visitor, symbols.Variables, compilerMessageManger );
-        var integerConditionalBinaryOperatorConvolutionCalculator = new IntegerConditionalBinaryOperatorConvolutionCalculator( visitor, integerConvolutionEvaluator );
+        var integerConditionalBinaryOperatorConvolutionCalculator = new IntegerConditionalBinaryOperatorConvolutionCalculator( integerConvolutionEvaluator );
 
         var realConvolutionEvaluator = new RealConvolutionEvaluator( visitor, symbols.Variables, compilerMessageManger );
-        var realConditionalBinaryOperatorConvolutionCalculator = new RealConditionalBinaryOperatorConvolutionCalculator( visitor, realConvolutionEvaluator );
+        var realConditionalBinaryOperatorConvolutionCalculator = new RealConditionalBinaryOperatorConvolutionCalculator( realConvolutionEvaluator );
 
         return  new BooleanConvolutionEvaluator(
             visitor,

@@ -29,11 +29,9 @@ public class AstRealUnaryOperatorEvaluationTest
             variableTable,
             compilerMessageManger
         );
-        var unaryOperatorEvaluator = new NumericUnaryOperatorEvaluator(
-            visitor,
-            compilerMessageManger,
-            integerConvolutionEvaluator,
-            realConvolutionEvaluator
+        var unaryOperatorEvaluator = new NumericUnaryOperatorEvaluator( compilerMessageManger,
+                                                                        integerConvolutionEvaluator,
+                                                                        realConvolutionEvaluator
         );
 
         visitor.Inject( unaryOperatorEvaluator );
@@ -63,11 +61,9 @@ public class AstRealUnaryOperatorEvaluationTest
             variableTable,
             compilerMessageManger
         );
-        var unaryOperatorEvaluator = new NumericUnaryOperatorEvaluator(
-            visitor,
-            compilerMessageManger,
-            integerConvolutionEvaluator,
-            realConvolutionEvaluator
+        var unaryOperatorEvaluator = new NumericUnaryOperatorEvaluator( compilerMessageManger,
+                                                                        integerConvolutionEvaluator,
+                                                                        realConvolutionEvaluator
         );
 
         visitor.Inject( unaryOperatorEvaluator );

@@ -18,9 +18,7 @@ public class AstIntegerConditionalBinaryOperatorConvolutionCalculatorTest
         var visitor = new MockDefaultAstVisitor();
         var integerConvolutionEvaluator = new MockIntegerConvolutionEvaluator( value ); // always return `value`
 
-        var calulator = new IntegerConditionalBinaryOperatorConvolutionCalculator(
-            visitor,
-            integerConvolutionEvaluator
+        var calulator = new IntegerConditionalBinaryOperatorConvolutionCalculator( integerConvolutionEvaluator
         );
 
         var ast = new TNode
@@ -30,7 +28,7 @@ public class AstIntegerConditionalBinaryOperatorConvolutionCalculatorTest
             Right    = new AstIntLiteralNode( value )
         };
 
-        var result = calulator.Calculate( ast );
+        var result = calulator.Calculate( visitor, ast );
 
         Assert.IsNotNull( result );
         Assert.AreEqual( expected, result );

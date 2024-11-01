@@ -14,6 +14,6 @@ public class MockBooleanConvolutionEvaluator : IBooleanConvolutionEvaluator
         Result = result;
     }
 
-    public bool? Evaluate( AstExpressionNode expr, bool workingValueForRecursive )
+    public bool? Evaluate( IAstVisitor visitor, AstExpressionNode expr, bool workingValueForRecursive )
         => Result;
 }

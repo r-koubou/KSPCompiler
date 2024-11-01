@@ -14,7 +14,6 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Semantics;
 
 public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
 {
-    protected IAstVisitor AstVisitor { get; }
     protected ICompilerMessageManger CompilerMessageManger { get; }
     protected IIntegerConvolutionEvaluator IntegerConvolutionEvaluator { get; }
     protected IRealConvolutionEvaluator RealConvolutionEvaluator { get; }
@@ -28,18 +27,16 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
     }
 
     public NumericBinaryOperatorEvaluator(
-        IAstVisitor astVisitor,
         ICompilerMessageManger compilerMessageManger,
         IIntegerConvolutionEvaluator integerConvolutionEvaluator,
         IRealConvolutionEvaluator realConvolutionEvaluator )
     {
-        AstVisitor                  = astVisitor;
         CompilerMessageManger       = compilerMessageManger;
         IntegerConvolutionEvaluator = integerConvolutionEvaluator;
         RealConvolutionEvaluator    = realConvolutionEvaluator;
     }
 
-    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstExpressionNode expr )
+    public IAstNode Evaluate( IAstVisitor visitor, AstExpressionNode expr )
     {
         /*
                 <<operator>> expr
@@ -75,7 +72,7 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
         }
 
         // 左辺、右辺共にリテラル、定数なら畳み込み
-        if( TryConvolutionValue( expr, evaluatedLeft, evaluatedRight, resultType, out var convolutedValue ) )
+        if( TryConvolutionValue( visitor, expr, evaluatedLeft, evaluatedRight, resultType, out var convolutedValue ) )
         {
             return convolutedValue;
         }
@@ -83,7 +80,7 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
         return CreateEvaluateNode( expr, resultType );
     }
 
-    private bool TryConvolutionValue( AstExpressionNode expr, AstExpressionNode left, AstExpressionNode right, DataTypeFlag resultType, out AstExpressionNode convolutedValue )
+    private bool TryConvolutionValue( IAstVisitor visitor, AstExpressionNode expr, AstExpressionNode left, AstExpressionNode right, DataTypeFlag resultType, out AstExpressionNode convolutedValue )
     {
         convolutedValue = default!;
 
@@ -96,7 +93,7 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
 
         if( resultType.IsInt() )
         {
-            var convolutedInt = IntegerConvolutionEvaluator.Evaluate( expr, 0 );
+            var convolutedInt = IntegerConvolutionEvaluator.Evaluate( visitor, expr, 0 );
 
             if( convolutedInt == null )
             {
@@ -108,7 +105,7 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
         }
         else if( resultType.IsReal() )
         {
-            var convolutedReal = RealConvolutionEvaluator.Evaluate( expr, 0 );
+            var convolutedReal = RealConvolutionEvaluator.Evaluate( visitor, expr, 0 );
 
             if( convolutedReal == null )
             {

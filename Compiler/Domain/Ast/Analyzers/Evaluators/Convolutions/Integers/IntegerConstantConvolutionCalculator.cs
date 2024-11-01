@@ -27,7 +27,7 @@ public sealed class IntegerConstantConvolutionCalculator : IIntegerConstantConvo
         CompilerMessageManger = compilerMessageManger;
     }
 
-    public int? Calculate( AstExpressionNode expr, int workingValueForRecursive )
+    public int? Calculate( IAstVisitor visitor, AstExpressionNode expr, int workingValueForRecursive )
     {
         if( expr.ChildNodeCount != 0 )
         {

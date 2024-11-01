@@ -14,6 +14,6 @@ public class MockStringConvolutionEvaluator : IStringConvolutionEvaluator
         Result = result;
     }
 
-    public string? Evaluate( AstExpressionNode expr, string workingValueForRecursive )
+    public string? Evaluate( IAstVisitor visitor, AstExpressionNode expr, string workingValueForRecursive )
         => Result;
 }

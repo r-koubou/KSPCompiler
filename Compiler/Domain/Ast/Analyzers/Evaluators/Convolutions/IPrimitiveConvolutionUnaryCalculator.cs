@@ -10,6 +10,6 @@ public interface IPrimitiveConvolutionUnaryCalculator<T> : IPrimitiveConvolution
 
 public sealed class  NullConvolutionUnaryCalculator<T> : IPrimitiveConvolutionCalculator<T> where T : struct
 {
-    public T? Calculate( AstExpressionNode expr, T workingValueForRecursive )
+    public T? Calculate( IAstVisitor visitor, AstExpressionNode expr, T workingValueForRecursive )
         => null;
 }

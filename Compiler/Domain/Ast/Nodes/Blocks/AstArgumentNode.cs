@@ -37,12 +37,12 @@ namespace KSPCompiler.Domain.Ast.Nodes.Blocks
         ///
         /// <inheritdoc/>
         ///
-        public override T Accept<T>( IAstVisitor<T> visitor )
+        public override IAstNode Accept( IAstVisitor visitor )
         {
             return visitor.Visit( this );
         }
 
-        public override void AcceptChildren<T>( IAstVisitor<T> visitor )
+        public override void AcceptChildren( IAstVisitor visitor )
         {
             // Do nothing
         }

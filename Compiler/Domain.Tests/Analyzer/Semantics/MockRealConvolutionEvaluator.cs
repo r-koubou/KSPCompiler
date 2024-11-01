@@ -14,6 +14,6 @@ public class MockRealConvolutionEvaluator : IRealConvolutionEvaluator
         Result = result;
     }
 
-    public double? Evaluate( AstExpressionNode expr, double workingValueForRecursive )
+    public double? Evaluate( IAstVisitor visitor, AstExpressionNode expr, double workingValueForRecursive )
         => Result;
 }

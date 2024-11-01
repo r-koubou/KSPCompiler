@@ -11,26 +11,23 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Conditions;
 /// </summary>
 public sealed class RealConditionalBinaryOperatorConvolutionCalculator : IRealConditionalBinaryOperatorConvolutionCalculator
 {
-    private IAstVisitor Visitor { get; }
     private IRealConvolutionEvaluator ConvolutionEvaluator { get; }
 
     public RealConditionalBinaryOperatorConvolutionCalculator(
-        IAstVisitor visitor,
         IRealConvolutionEvaluator convolutionEvaluator )
     {
-        Visitor              = visitor;
         ConvolutionEvaluator = convolutionEvaluator;
     }
 
-    public bool? Calculate( AstExpressionNode expr )
+    public bool? Calculate( IAstVisitor visitor, AstExpressionNode expr )
     {
         if( expr.ChildNodeCount != 2 )
         {
             throw new ArgumentException( $"Expected 2 child nodes, but got {expr.ChildNodeCount}. (node: {expr.GetType().Name})" );
         }
 
-        var exprLeft = expr.Left.Accept( Visitor ) as AstExpressionNode;
-        var exprRight = expr.Right.Accept( Visitor ) as AstExpressionNode;
+        var exprLeft = expr.Left.Accept( visitor ) as AstExpressionNode;
+        var exprRight = expr.Right.Accept( visitor ) as AstExpressionNode;
 
         if( exprLeft == null || exprRight == null )
         {
@@ -43,8 +40,8 @@ public sealed class RealConditionalBinaryOperatorConvolutionCalculator : IRealCo
             return null;
         }
 
-        var convolutedLeft = ConvolutionEvaluator.Evaluate( exprLeft,   0 );
-        var convolutedRight = ConvolutionEvaluator.Evaluate( exprRight, 0 );
+        var convolutedLeft = ConvolutionEvaluator.Evaluate( visitor, exprLeft,   0 );
+        var convolutedRight = ConvolutionEvaluator.Evaluate( visitor, exprRight, 0 );
 
         if( convolutedLeft == null || convolutedRight == null )
         {

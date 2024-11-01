@@ -20,13 +20,13 @@ public sealed class IntegerConvolutionEvaluator : IIntegerConvolutionEvaluator
         UnaryCalculator      = new IntegerUnaryOperatorConvolutionCalculator( this );
     }
 
-    public int? Evaluate( AstExpressionNode expr, int workingValueForRecursive )
+    public int? Evaluate( IAstVisitor visitor, AstExpressionNode expr, int workingValueForRecursive )
     {
         return expr.ChildNodeCount switch
         {
-            0 => ConstantCalculator.Calculate( expr, workingValueForRecursive ),
-            1 => UnaryCalculator.Calculate( expr, workingValueForRecursive ),
-            2 => BinaryCalculator.Calculate( expr, workingValueForRecursive ),
+            0 => ConstantCalculator.Calculate( visitor, expr, workingValueForRecursive ),
+            1 => UnaryCalculator.Calculate( visitor, expr, workingValueForRecursive ),
+            2 => BinaryCalculator.Calculate( visitor, expr, workingValueForRecursive ),
             _ => null
         };
     }

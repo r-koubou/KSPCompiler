@@ -20,7 +20,7 @@ public class ArrayElementEvaluator : IArrayElementEvaluator
         VariableSymbolTable   = variableSymbolTable;
     }
 
-    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstArrayElementExpressionNode expr )
+    public IAstNode Evaluate( IAstVisitor visitor, AstArrayElementExpressionNode expr )
     {
         /*
                symbol

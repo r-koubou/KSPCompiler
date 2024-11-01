@@ -13,11 +13,11 @@
         /// <summary>
         /// Acceptance process for visitors.
         /// </summary>
-        public T Accept<T>( IAstVisitor<T> visitor );
+        public IAstNode Accept( IAstVisitor visitor );
 
         /// <summary>
         /// Acceptance process of a visitor to a contained node such as a child node.
         /// </summary>
-        public void AcceptChildren<T>( IAstVisitor<T> visitor );
+        public void AcceptChildren( IAstVisitor visitor );
     }
 }

@@ -18,12 +18,12 @@ public sealed class StringConvolutionEvaluator : IStringConvolutionEvaluator
         ConcatenateCalculator = new StringConcatenateOperatorConvolutionCalculator( this );
     }
 
-    public string? Evaluate( AstExpressionNode expr, string workingValueForRecursive )
+    public string? Evaluate( IAstVisitor visitor, AstExpressionNode expr, string workingValueForRecursive )
     {
         return expr.ChildNodeCount switch
         {
-            0 => ConstantCalculator.Calculate( expr, workingValueForRecursive ),
-            2 => ConcatenateCalculator.Calculate( expr, workingValueForRecursive ),
+            0 => ConstantCalculator.Calculate( visitor, expr, workingValueForRecursive ),
+            2 => ConcatenateCalculator.Calculate( visitor, expr, workingValueForRecursive ),
             _ => null
         };
     }

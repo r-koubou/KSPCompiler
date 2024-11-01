@@ -27,7 +27,7 @@ public sealed class RealConstantConvolutionCalculator : IRealConstantConvolution
         CompilerMessageManger = compilerMessageManger;
     }
 
-    public double? Calculate( AstExpressionNode expr, double _ )
+    public double? Calculate( IAstVisitor visitor, AstExpressionNode expr, double _ )
     {
         if( expr.ChildNodeCount != 0 )
         {

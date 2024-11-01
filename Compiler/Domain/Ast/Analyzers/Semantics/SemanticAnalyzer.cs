@@ -68,9 +68,9 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, IAstTraversal
         RealConvolutionEvaluator    = new RealConvolutionEvaluator( this, SymbolTable.Variables, CompilerMessageManger );
         StringConvolutionEvaluator  = new StringConvolutionEvaluator( this, SymbolTable.Variables, CompilerMessageManger );
 
-        NumericBinaryOperatorEvaluator     = new NumericBinaryOperatorEvaluator( this, CompilerMessageManger, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
-        NumericUnaryOperatorEvaluator      = new NumericUnaryOperatorEvaluator( this, CompilerMessageManger, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
-        StringConcatenateOperatorEvaluator = new StringConcatenateOperatorEvaluator( this, CompilerMessageManger, StringConvolutionEvaluator );
+        NumericBinaryOperatorEvaluator     = new NumericBinaryOperatorEvaluator( CompilerMessageManger, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
+        NumericUnaryOperatorEvaluator      = new NumericUnaryOperatorEvaluator( CompilerMessageManger, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
+        StringConcatenateOperatorEvaluator = new StringConcatenateOperatorEvaluator( CompilerMessageManger, StringConvolutionEvaluator );
 
         SymbolEvaluator                    = new SymbolEvaluator( CompilerMessageManger, SymbolTable );
         AssignOperatorEvaluator            = new AssignOperatorEvaluator( CompilerMessageManger );
