@@ -20,7 +20,8 @@ public class AstConditionalUnaryOperatorEvaluationTest
         var visitor = new MockAstConditionalUnaryOperatorVisitor();
 
         var conditionalBinaryOperatorEvaluator = new ConditionalUnaryOperatorEvaluator(
-            compilerMessageManger
+            compilerMessageManger,
+            MockUtility.CreateBooleanConvolutionEvaluator( visitor )
         );
 
         // not 1 = 1
@@ -53,7 +54,8 @@ public class AstConditionalUnaryOperatorEvaluationTest
         var visitor = new MockAstConditionalUnaryOperatorVisitor();
 
         var conditionalBinaryOperatorEvaluator = new ConditionalUnaryOperatorEvaluator(
-            compilerMessageManger
+            compilerMessageManger,
+            MockUtility.CreateBooleanConvolutionEvaluator( visitor )
         );
 
         // not 1 + 1 <-- `1 + 1` is not conditional operator
