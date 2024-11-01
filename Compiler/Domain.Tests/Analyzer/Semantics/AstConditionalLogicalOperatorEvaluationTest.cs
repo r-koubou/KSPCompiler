@@ -1,6 +1,5 @@
 using System;
 
-using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Conditions;
 using KSPCompiler.Domain.Ast.Analyzers.Semantics;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
@@ -60,14 +59,12 @@ public class AstConditionalLogicalOperatorEvaluationTest
             left: new AstEqualExpressionNode
             {
                 TypeFlag = DataTypeFlag.TypeBool,
-                Constant = true,
                 Left     = new AstIntLiteralNode( 1 ),
                 Right    = new AstIntLiteralNode( 1 )
             },
             right: new AstEqualExpressionNode
             {
                 TypeFlag = DataTypeFlag.TypeBool,
-                Constant = true,
                 Left     = new AstIntLiteralNode( 2 ),
                 Right    = new AstIntLiteralNode( 2 )
             }
@@ -84,14 +81,12 @@ public class AstConditionalLogicalOperatorEvaluationTest
             left: new AstEqualExpressionNode
             {
                 TypeFlag = DataTypeFlag.TypeBool,
-                Constant = true,
                 Left     = new AstIntLiteralNode( 1 ),
                 Right    = new AstIntLiteralNode( 1 )
             },
             right: new AstAdditionExpressionNode
             {
                 TypeFlag = DataTypeFlag.TypeInt,
-                Constant = true,
                 Left     = new AstIntLiteralNode( 2 ),
                 Right    = new AstIntLiteralNode( 2 )
             }
