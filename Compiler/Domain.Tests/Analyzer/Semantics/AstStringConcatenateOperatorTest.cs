@@ -27,8 +27,9 @@ public class AstStringConcatenateOperatorTest
             variableTable,
             compilerMessageManger
         );
-        var unaryOperatorEvaluator = new StringConcatenateOperatorEvaluator( compilerMessageManger,
-                                                                             integerConvolutionEvaluator
+        var unaryOperatorEvaluator = new StringConcatenateOperatorEvaluator(
+            compilerMessageManger,
+            integerConvolutionEvaluator
         );
 
         visitor.Inject( unaryOperatorEvaluator );
@@ -64,8 +65,9 @@ public class AstStringConcatenateOperatorTest
             variableTable,
             compilerMessageManger
         );
-        var unaryOperatorEvaluator = new StringConcatenateOperatorEvaluator( compilerMessageManger,
-                                                                             integerConvolutionEvaluator
+        var unaryOperatorEvaluator = new StringConcatenateOperatorEvaluator(
+            compilerMessageManger,
+            integerConvolutionEvaluator
         );
 
         visitor.Inject( unaryOperatorEvaluator );

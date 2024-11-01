@@ -29,9 +29,10 @@ public class AstIntUnaryOperatorEvaluationTest
             compilerMessageManger
         );
         var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
-        var unaryOperatorEvaluator = new NumericUnaryOperatorEvaluator( compilerMessageManger,
-                                                                        integerConvolutionEvaluator,
-                                                                        realConvolutionEvaluator
+        var unaryOperatorEvaluator = new NumericUnaryOperatorEvaluator(
+            compilerMessageManger,
+            integerConvolutionEvaluator,
+            realConvolutionEvaluator
         );
 
         visitor.Inject( unaryOperatorEvaluator );
@@ -61,9 +62,10 @@ public class AstIntUnaryOperatorEvaluationTest
             compilerMessageManger
         );
         var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
-        var unaryOperatorEvaluator = new NumericUnaryOperatorEvaluator( compilerMessageManger,
-                                                                        integerConvolutionEvaluator,
-                                                                        realConvolutionEvaluator
+        var unaryOperatorEvaluator = new NumericUnaryOperatorEvaluator(
+            compilerMessageManger,
+            integerConvolutionEvaluator,
+            realConvolutionEvaluator
         );
 
         visitor.Inject( unaryOperatorEvaluator );

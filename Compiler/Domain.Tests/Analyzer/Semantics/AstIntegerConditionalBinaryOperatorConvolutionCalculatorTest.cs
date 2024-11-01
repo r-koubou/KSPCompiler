@@ -18,8 +18,7 @@ public class AstIntegerConditionalBinaryOperatorConvolutionCalculatorTest
         var visitor = new MockDefaultAstVisitor();
         var integerConvolutionEvaluator = new MockIntegerConvolutionEvaluator( value ); // always return `value`
 
-        var calulator = new IntegerConditionalBinaryOperatorConvolutionCalculator( integerConvolutionEvaluator
-        );
+        var calulator = new IntegerConditionalBinaryOperatorConvolutionCalculator( integerConvolutionEvaluator );
 
         var ast = new TNode
         {
