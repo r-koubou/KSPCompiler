@@ -1,7 +1,6 @@
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Operators;
 using KSPCompiler.Domain.Ast.Extensions;
 using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
@@ -26,7 +25,7 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
         CompilerMessageManger = compilerMessageManger;
     }
 
-    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstExpressionNode expr )
+    public IAstNode Evaluate( IAstVisitor visitor, AstExpressionNode expr )
     {
         /*
                      := expr

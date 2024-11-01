@@ -16,14 +16,14 @@ public sealed class RealUnaryOperatorConvolutionCalculator : IRealUnaryOperatorC
         EvaluatorForRecursive = evaluatorForRecursive;
     }
 
-    public double? Calculate( AstExpressionNode expr, double workingValueForRecursive )
+    public double? Calculate( IAstVisitor visitor, AstExpressionNode expr, double workingValueForRecursive )
     {
         if( expr.ChildNodeCount != 1 )
         {
             throw new ArgumentException( $"Expected 1 child node, but got {expr.ChildNodeCount}. (node: {expr.GetType().Name})" );
         }
 
-        var convolutedValue = EvaluatorForRecursive.Evaluate( expr.Left, workingValueForRecursive );
+        var convolutedValue = EvaluatorForRecursive.Evaluate( visitor, expr.Left, workingValueForRecursive );
 
         if( convolutedValue == null )
         {

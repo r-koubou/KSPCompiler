@@ -13,6 +13,7 @@ public class AstConditionalUnaryOperatorConvolutionCalculatorTest
     [TestCase( false )]
     public void ConvolutionIntegerConditionalOperatorTest( bool value )
     {
+        var visitor = new MockDefaultAstVisitor();
         var integerConvolutionEvaluator = new MockBooleanConvolutionEvaluator( value ); // always return `value`
 
         var calculator = new BooleanConditionalUnaryOperatorConvolutionCalculator(
@@ -25,7 +26,7 @@ public class AstConditionalUnaryOperatorConvolutionCalculatorTest
             Left     = new AstBooleanLiteralNode( value )
         };
 
-        var result = calculator.Calculate( ast );
+        var result = calculator.Calculate( visitor, ast );
 
         Assert.IsNotNull( result );
         Assert.AreEqual( !value, result );

@@ -2,7 +2,7 @@ using KSPCompiler.Domain.Ast.Nodes;
 
 namespace KSPCompiler.Domain.Ast.Analyzers.Evaluators.Operators;
 
-public interface IOperatorEvaluator<TEvalResult>
+public interface IOperatorEvaluator
 {
-    public TEvalResult Evaluate( IAstVisitor<TEvalResult> visitor, AstExpressionNode expr );
+    public IAstNode Evaluate( IAstVisitor visitor, AstExpressionNode expr );
 }

@@ -22,7 +22,7 @@ public class CallCommandExpressionEvaluator : ICallCommandExpressionEvaluator
         Commands              = commands;
     }
 
-    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstCallCommandExpressionNode expr )
+    public IAstNode Evaluate( IAstVisitor visitor, AstCallCommandExpressionNode expr )
     {
         if( !TryGetCommandSymbol( visitor, expr, out var commandSymbol ) )
         {
@@ -40,7 +40,7 @@ public class CallCommandExpressionEvaluator : ICallCommandExpressionEvaluator
         return result;
     }
 
-    private bool TryGetCommandSymbol( IAstVisitor<IAstNode> visitor, AstCallCommandExpressionNode expr, out CommandSymbol result )
+    private bool TryGetCommandSymbol( IAstVisitor visitor, AstCallCommandExpressionNode expr, out CommandSymbol result )
     {
         result = default!;
 
@@ -65,7 +65,7 @@ public class CallCommandExpressionEvaluator : ICallCommandExpressionEvaluator
         return true;
     }
 
-    private bool ValidateCommandArguments( IAstVisitor<IAstNode> visitor, AstCallCommandExpressionNode expr, CommandSymbol commandSymbol )
+    private bool ValidateCommandArguments( IAstVisitor visitor, AstCallCommandExpressionNode expr, CommandSymbol commandSymbol )
     {
         if( expr.Right is not AstExpressionListNode arguments )
         {

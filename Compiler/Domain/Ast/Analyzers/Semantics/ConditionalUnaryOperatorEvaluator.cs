@@ -32,7 +32,7 @@ public class ConditionalUnaryOperatorEvaluator : IUnaryOperatorEvaluator
         BooleanConvolutionEvaluator = booleanConvolutionEvaluator;
     }
 
-    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstExpressionNode expr )
+    public IAstNode Evaluate( IAstVisitor visitor, AstExpressionNode expr )
     {
         /*
           <<logical unary not operator>>
@@ -65,7 +65,7 @@ public class ConditionalUnaryOperatorEvaluator : IUnaryOperatorEvaluator
         }
 
         // リテラルに畳み込み可能なら畳み込む
-        if( TryConvolutionValue( expr, out var convolutedValue ) )
+        if( TryConvolutionValue( visitor, expr, out var convolutedValue ) )
         {
             return convolutedValue;
         }
@@ -73,11 +73,11 @@ public class ConditionalUnaryOperatorEvaluator : IUnaryOperatorEvaluator
         return CreateEvaluateNode( expr, DataTypeFlag.TypeBool );
     }
 
-    private bool TryConvolutionValue( AstExpressionNode expr, out AstExpressionNode convolutedValue )
+    private bool TryConvolutionValue( IAstVisitor visitor, AstExpressionNode expr, out AstExpressionNode convolutedValue )
     {
         convolutedValue = NullAstExpressionNode.Instance;
 
-        var result = BooleanConvolutionEvaluator.Evaluate( expr, false );
+        var result = BooleanConvolutionEvaluator.Evaluate( visitor, expr, false );
 
         if( result == null )
         {

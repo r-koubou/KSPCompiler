@@ -27,7 +27,6 @@ public class AstIntBinaryOperatorConvolutionTest
         );
         var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
         var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
-            visitor,
             compilerMessageManger,
             integerConvolutionEvaluator,
             realConvolutionEvaluator

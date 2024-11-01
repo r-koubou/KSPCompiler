@@ -14,7 +14,6 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Semantics;
 
 public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
 {
-    private IAstVisitor AstVisitor { get; }
     private ICompilerMessageManger CompilerMessageManger { get; }
     private IIntegerConvolutionEvaluator IntegerConvolutionEvaluator { get; }
     private IRealConvolutionEvaluator RealConvolutionEvaluator { get; }
@@ -28,18 +27,16 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
     }
 
     public NumericUnaryOperatorEvaluator(
-        IAstVisitor astVisitor,
         ICompilerMessageManger compilerMessageManger,
         IIntegerConvolutionEvaluator integerConvolutionEvaluator,
         IRealConvolutionEvaluator realConvolutionEvaluator )
     {
-        AstVisitor                  = astVisitor;
         CompilerMessageManger       = compilerMessageManger;
         IntegerConvolutionEvaluator = integerConvolutionEvaluator;
         RealConvolutionEvaluator    = realConvolutionEvaluator;
     }
 
-    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstExpressionNode expr )
+    public IAstNode Evaluate( IAstVisitor visitor, AstExpressionNode expr )
     {
         /*
               <<operator>> expr
@@ -72,7 +69,7 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
         }
 
         // リテラル、定数なら畳み込み
-        if( TryConvolutionValue( expr, evaluatedLeft, resultType, out var convolutedValue ) )
+        if( TryConvolutionValue( visitor, expr, evaluatedLeft, resultType, out var convolutedValue ) )
         {
             return convolutedValue;
         }
@@ -80,7 +77,7 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
         return CreateEvaluateNode( expr, resultType );
     }
 
-    private bool TryConvolutionValue( AstExpressionNode expr, AstExpressionNode left, DataTypeFlag resultType, out AstExpressionNode convolutedValue )
+    private bool TryConvolutionValue( IAstVisitor visitor, AstExpressionNode expr, AstExpressionNode left, DataTypeFlag resultType, out AstExpressionNode convolutedValue )
     {
         convolutedValue = default!;
 
@@ -93,7 +90,7 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
 
         if( resultType.IsInt() )
         {
-            var convolutedInt = IntegerConvolutionEvaluator.Evaluate( expr, 0 );
+            var convolutedInt = IntegerConvolutionEvaluator.Evaluate( visitor, expr, 0 );
 
             if( convolutedInt == null )
             {
@@ -105,7 +102,7 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
         }
         else if( resultType.IsReal() )
         {
-            var convolutedReal = RealConvolutionEvaluator.Evaluate( expr, 0 );
+            var convolutedReal = RealConvolutionEvaluator.Evaluate( visitor, expr, 0 );
 
             if( convolutedReal == null )
             {

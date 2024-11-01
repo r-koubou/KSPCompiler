@@ -16,14 +16,14 @@ public class BooleanConditionalUnaryOperatorConvolutionCalculator : IBooleanCond
         EvaluatorForRecursive = evaluatorForRecursive;
     }
 
-    public bool? Calculate( AstExpressionNode expr )
+    public bool? Calculate( IAstVisitor visitor, AstExpressionNode expr )
     {
         if( expr.ChildNodeCount != 1 )
         {
             throw new ArgumentException( $"Expected 1 child node, but got {expr.ChildNodeCount}. (node: {expr.GetType().Name})" );
         }
 
-        var convolutedValue = EvaluatorForRecursive.Evaluate( expr.Left, false );
+        var convolutedValue = EvaluatorForRecursive.Evaluate( visitor, expr.Left, false );
 
         if( convolutedValue == null )
         {

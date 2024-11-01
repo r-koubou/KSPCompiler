@@ -18,7 +18,7 @@ public class ConditionalBinaryOperatorEvaluator : IConditionalBinaryOperatorEval
         CompilerMessageManger = compilerMessageManger;
     }
 
-    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstExpressionNode expr )
+    public IAstNode Evaluate( IAstVisitor visitor, AstExpressionNode expr )
     {
         /*
                     operator

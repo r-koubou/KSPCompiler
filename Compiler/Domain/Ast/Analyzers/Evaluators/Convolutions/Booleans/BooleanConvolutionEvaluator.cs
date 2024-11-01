@@ -7,7 +7,6 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Booleans;
 
 public class BooleanConvolutionEvaluator : IBooleanConvolutionEvaluator
 {
-    private IAstVisitor Visitor { get; }
     private IBooleanConstantConvolutionCalculator ConstantConvolutionCalculator { get; }
     private IIntegerConditionalBinaryOperatorConvolutionCalculator IntegerBinaryOperatorCalculator { get; }
     private IRealConditionalBinaryOperatorConvolutionCalculator RealBinaryOperatorCalculator { get; }
@@ -19,8 +18,6 @@ public class BooleanConvolutionEvaluator : IBooleanConvolutionEvaluator
         IIntegerConditionalBinaryOperatorConvolutionCalculator integerConvolutionEvaluator,
         IRealConditionalBinaryOperatorConvolutionCalculator realConvolutionEvaluator )
     {
-        Visitor = visitor;
-
         ConstantConvolutionCalculator    = new BooleanConstantConvolutionCalculator();
         IntegerBinaryOperatorCalculator  = integerConvolutionEvaluator;
         RealBinaryOperatorCalculator     = realConvolutionEvaluator;
@@ -28,41 +25,41 @@ public class BooleanConvolutionEvaluator : IBooleanConvolutionEvaluator
         BooleanUnaryOperatorCalculator   = new BooleanConditionalUnaryOperatorConvolutionCalculator( this );
     }
 
-    public bool? Evaluate( AstExpressionNode expr, bool workingValueForRecursive )
+    public bool? Evaluate( IAstVisitor visitor, AstExpressionNode expr, bool workingValueForRecursive )
     {
         var id = expr.Id;
 
         if( expr.ChildNodeCount == 0 )
         {
-            return ConstantConvolutionCalculator.Calculate( expr, workingValueForRecursive );
+            return ConstantConvolutionCalculator.Calculate( visitor, expr, workingValueForRecursive );
         }
 
         if( id.IsBooleanSupportedBinaryOperator() )
         {
-            return CalculateBinaryOperator( expr );
+            return CalculateBinaryOperator( visitor, expr );
         }
 
         if( id.IsBooleanSupportedUnaryOperator() )
         {
-            return BooleanUnaryOperatorCalculator.Calculate( expr );
+            return BooleanUnaryOperatorCalculator.Calculate( visitor, expr );
         }
 
         if( id.IsConditionalLogicalOperator() )
         {
-            return BooleanLogicalOperatorCalculator.Calculate( expr );
+            return BooleanLogicalOperatorCalculator.Calculate( visitor, expr );
         }
 
         return null;
     }
 
-    private bool? CalculateBinaryOperator( AstExpressionNode expr )
+    private bool? CalculateBinaryOperator( IAstVisitor visitor, AstExpressionNode expr )
     {
-        if( expr.Left.Accept( Visitor ) is not AstExpressionNode evaluatedLeft )
+        if( expr.Left.Accept( visitor ) is not AstExpressionNode evaluatedLeft )
         {
             return null;
         }
 
-        if( expr.Right.Accept( Visitor ) is not AstExpressionNode evaluatedRight )
+        if( expr.Right.Accept( visitor ) is not AstExpressionNode evaluatedRight )
         {
             return null;
         }
@@ -77,17 +74,17 @@ public class BooleanConvolutionEvaluator : IBooleanConvolutionEvaluator
 
         if( leftType.IsInt() )
         {
-            return IntegerBinaryOperatorCalculator.Calculate( expr );
+            return IntegerBinaryOperatorCalculator.Calculate( visitor, expr );
         }
 
         if( leftType.IsReal() )
         {
-            return RealBinaryOperatorCalculator.Calculate( expr );
+            return RealBinaryOperatorCalculator.Calculate( visitor, expr );
         }
 
         if( leftType.IsBoolean() )
         {
-            return BooleanLogicalOperatorCalculator.Calculate( expr );
+            return BooleanLogicalOperatorCalculator.Calculate( visitor, expr );
         }
 
         return null;

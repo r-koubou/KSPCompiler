@@ -6,6 +6,6 @@ namespace KSPCompiler.Domain.Tests.Analyzer.Semantics;
 
 internal class MockCallCommandExpressionEvaluator : ICallCommandExpressionEvaluator
 {
-    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstCallCommandExpressionNode node )
+    public IAstNode Evaluate( IAstVisitor visitor, AstCallCommandExpressionNode node )
         => throw new System.NotImplementedException();
 }

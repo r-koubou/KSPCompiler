@@ -36,10 +36,10 @@ namespace KSPCompiler.Domain.Ast.Nodes
 
         #region IAstNodeAcceptor
 
-        public override T Accept<T>( IAstVisitor<T> visitor )
+        public override IAstNode Accept( IAstVisitor visitor )
             => visitor.Visit( this );
 
-        public override void AcceptChildren<T>( IAstVisitor<T> visitor ) {}
+        public override void AcceptChildren( IAstVisitor visitor ) {}
 
         #endregion
     }

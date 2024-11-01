@@ -28,7 +28,6 @@ public class AstStringConcatenateOperatorTest
             compilerMessageManger
         );
         var unaryOperatorEvaluator = new StringConcatenateOperatorEvaluator(
-            visitor,
             compilerMessageManger,
             integerConvolutionEvaluator
         );
@@ -67,7 +66,6 @@ public class AstStringConcatenateOperatorTest
             compilerMessageManger
         );
         var unaryOperatorEvaluator = new StringConcatenateOperatorEvaluator(
-            visitor,
             compilerMessageManger,
             integerConvolutionEvaluator
         );

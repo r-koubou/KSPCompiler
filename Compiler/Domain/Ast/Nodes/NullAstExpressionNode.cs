@@ -68,13 +68,13 @@ public sealed class NullAstExpressionNode : AstExpressionNode
     ///
     /// <inheritdoc/>
     ///
-    public override T Accept<T>( IAstVisitor<T> visitor )
+    public override IAstNode Accept( IAstVisitor visitor )
         => visitor.Visit( this );
 
     /// <summary>
     /// Do nothing.
     /// </summary>
-    public override void AcceptChildren<T>( IAstVisitor<T> visitor ) {}
+    public override void AcceptChildren( IAstVisitor visitor ) {}
     #endregion IAstNodeAcceptor
 
     public override string ToString()

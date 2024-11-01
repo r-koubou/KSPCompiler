@@ -16,14 +16,14 @@ public sealed class IntegerUnaryOperatorConvolutionCalculator : IIntegerUnaryOpe
         EvaluatorForRecursive = evaluatorForRecursive;
     }
 
-    public int? Calculate( AstExpressionNode expr, int workingValueForRecursive )
+    public int? Calculate( IAstVisitor visitor, AstExpressionNode expr, int workingValueForRecursive )
     {
         if( expr.ChildNodeCount != 1 )
         {
             throw new ArgumentException( $"Expected 1 child node, but got {expr.ChildNodeCount}. (node: {expr.GetType().Name})" );
         }
 
-        var convolutedValue = EvaluatorForRecursive.Evaluate( expr.Left, workingValueForRecursive );
+        var convolutedValue = EvaluatorForRecursive.Evaluate( visitor, expr.Left, workingValueForRecursive );
 
         if( convolutedValue == null )
         {

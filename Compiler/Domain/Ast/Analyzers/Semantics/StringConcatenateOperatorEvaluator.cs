@@ -13,7 +13,6 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Semantics;
 
 public sealed class StringConcatenateOperatorEvaluator : IStringConcatenateOperatorEvaluator
 {
-    private IAstVisitor AstVisitor { get; }
     private ICompilerMessageManger CompilerMessageManger { get; }
     private IStringConvolutionEvaluator StringConvolutionEvaluator { get; }
 
@@ -26,16 +25,14 @@ public sealed class StringConcatenateOperatorEvaluator : IStringConcatenateOpera
     }
 
     public StringConcatenateOperatorEvaluator(
-        IAstVisitor astVisitor,
         ICompilerMessageManger compilerMessageManger,
         IStringConvolutionEvaluator stringConvolutionEvaluator )
     {
-        AstVisitor                 = astVisitor;
         CompilerMessageManger      = compilerMessageManger;
         StringConvolutionEvaluator = stringConvolutionEvaluator;
     }
 
-    public IAstNode Evaluate( IAstVisitor<IAstNode> visitor, AstExpressionNode expr )
+    public IAstNode Evaluate( IAstVisitor visitor, AstExpressionNode expr )
     {
         /*
                <<operator &>> expr
@@ -89,7 +86,7 @@ public sealed class StringConcatenateOperatorEvaluator : IStringConcatenateOpera
         }
 
         // 左辺、右辺共にリテラル、定数なら畳み込み
-        if( TryConvolutionValue( expr, evaluatedLeft, evaluatedRight, out var convolutedValue ) )
+        if( TryConvolutionValue( visitor, expr, evaluatedLeft, evaluatedRight, out var convolutedValue ) )
         {
             return convolutedValue;
         }
@@ -97,7 +94,7 @@ public sealed class StringConcatenateOperatorEvaluator : IStringConcatenateOpera
         return CreateEvaluateNode( expr, DataTypeFlag.TypeString );
     }
 
-    private bool TryConvolutionValue( AstExpressionNode expr, AstExpressionNode left, AstExpressionNode right, out AstExpressionNode convolutedNode )
+    private bool TryConvolutionValue( IAstVisitor visitor, AstExpressionNode expr, AstExpressionNode left, AstExpressionNode right, out AstExpressionNode convolutedNode )
     {
         convolutedNode = default!;
 
@@ -107,7 +104,7 @@ public sealed class StringConcatenateOperatorEvaluator : IStringConcatenateOpera
             return false;
         }
 
-        var convolutedValie = StringConvolutionEvaluator.Evaluate( expr, "" );
+        var convolutedValie = StringConvolutionEvaluator.Evaluate( visitor, expr, "" );
         if( convolutedValie == null )
         {
             return false;

@@ -27,7 +27,7 @@ public sealed class StringConstantConvolutionCalculator : IStringConstantConvolu
         VariableSymbols       = variableSymbols;
         CompilerMessageManger = compilerMessageManger;
     }
-    public string? Calculate( AstExpressionNode expr, string _ )
+    public string? Calculate( IAstVisitor visitor, AstExpressionNode expr, string _ )
     {
         if( expr.ChildNodeCount != 0 )
         {

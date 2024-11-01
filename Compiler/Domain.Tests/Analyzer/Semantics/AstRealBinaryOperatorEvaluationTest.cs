@@ -35,7 +35,6 @@ public class AstRealBinaryOperatorEvaluationTest
             compilerMessageManger
         );
         var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
-            visitor,
             compilerMessageManger,
             integerConvolutionEvaluator,
             realConvolutionEvaluator
@@ -71,7 +70,6 @@ public class AstRealBinaryOperatorEvaluationTest
             compilerMessageManger
         );
         var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
-            visitor,
             compilerMessageManger,
             integerConvolutionEvaluator,
             realConvolutionEvaluator
@@ -107,7 +105,6 @@ public class AstRealBinaryOperatorEvaluationTest
             compilerMessageManger
         );
         var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
-            visitor,
             compilerMessageManger,
             integerConvolutionEvaluator,
             realConvolutionEvaluator
@@ -143,7 +140,6 @@ public class AstRealBinaryOperatorEvaluationTest
             compilerMessageManger
         );
         var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
-            visitor,
             compilerMessageManger,
             integerConvolutionEvaluator,
             realConvolutionEvaluator
@@ -183,7 +179,6 @@ public class AstRealBinaryOperatorEvaluationTest
             compilerMessageManger
         );
         var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
-            visitor,
             compilerMessageManger,
             integerConvolutionEvaluator,
             realConvolutionEvaluator
@@ -219,7 +214,6 @@ public class AstRealBinaryOperatorEvaluationTest
             compilerMessageManger
         );
         var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
-            visitor,
             compilerMessageManger,
             integerConvolutionEvaluator,
             realConvolutionEvaluator
@@ -255,7 +249,6 @@ public class AstRealBinaryOperatorEvaluationTest
             compilerMessageManger
         );
         var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
-            visitor,
             compilerMessageManger,
             integerConvolutionEvaluator,
             realConvolutionEvaluator
@@ -291,7 +284,6 @@ public class AstRealBinaryOperatorEvaluationTest
             compilerMessageManger
         );
         var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
-            visitor,
             compilerMessageManger,
             integerConvolutionEvaluator,
             realConvolutionEvaluator

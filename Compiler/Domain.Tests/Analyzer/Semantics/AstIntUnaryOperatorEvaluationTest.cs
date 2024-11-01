@@ -30,7 +30,6 @@ public class AstIntUnaryOperatorEvaluationTest
         );
         var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
         var unaryOperatorEvaluator = new NumericUnaryOperatorEvaluator(
-            visitor,
             compilerMessageManger,
             integerConvolutionEvaluator,
             realConvolutionEvaluator
@@ -64,7 +63,6 @@ public class AstIntUnaryOperatorEvaluationTest
         );
         var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
         var unaryOperatorEvaluator = new NumericUnaryOperatorEvaluator(
-            visitor,
             compilerMessageManger,
             integerConvolutionEvaluator,
             realConvolutionEvaluator

@@ -16,20 +16,20 @@ public sealed class StringConcatenateOperatorConvolutionCalculator : IStringConc
         EvaluatorForRecursive = evaluatorForRecursive;
     }
 
-    public string? Calculate( AstExpressionNode expr, string workingValueForRecursive )
+    public string? Calculate( IAstVisitor visitor, AstExpressionNode expr, string workingValueForRecursive )
     {
         if( expr.ChildNodeCount != 2 )
         {
             throw new ArgumentException( $"Expected 2 child nodes, but got {expr.ChildNodeCount}. (node: {expr.GetType().Name})" );
         }
 
-        var leftValue = EvaluatorForRecursive.Evaluate( expr.Left, workingValueForRecursive );
+        var leftValue = EvaluatorForRecursive.Evaluate( visitor, expr.Left, workingValueForRecursive );
         if( leftValue == null )
         {
             return null;
         }
 
-        var rightValue = EvaluatorForRecursive.Evaluate( expr.Right, workingValueForRecursive );
+        var rightValue = EvaluatorForRecursive.Evaluate( visitor, expr.Right, workingValueForRecursive );
         if( rightValue == null )
         {
             return null;

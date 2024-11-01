@@ -20,13 +20,13 @@ public sealed class RealConvolutionEvaluator : IRealConvolutionEvaluator
         UnaryCalculator      = new RealUnaryOperatorConvolutionCalculator( this );
     }
 
-    public double? Evaluate( AstExpressionNode expr, double workingValueForRecursive )
+    public double? Evaluate( IAstVisitor visitor, AstExpressionNode expr, double workingValueForRecursive )
     {
         return expr.ChildNodeCount switch
         {
-            0 => ConstantCalculator.Calculate( expr, workingValueForRecursive ),
-            1 => UnaryCalculator.Calculate( expr, workingValueForRecursive ),
-            2 => BinaryCalculator.Calculate( expr, workingValueForRecursive ),
+            0 => ConstantCalculator.Calculate( visitor, expr, workingValueForRecursive ),
+            1 => UnaryCalculator.Calculate( visitor, expr, workingValueForRecursive ),
+            2 => BinaryCalculator.Calculate( visitor, expr, workingValueForRecursive ),
             _ => null
         };
     }

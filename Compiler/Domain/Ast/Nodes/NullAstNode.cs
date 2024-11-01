@@ -72,13 +72,13 @@ namespace KSPCompiler.Domain.Ast.Nodes
         ///
         /// <inheritdoc/>
         ///
-        public T Accept<T>( IAstVisitor<T> visitor )
+        public IAstNode Accept( IAstVisitor visitor )
             => visitor.Visit( this );
 
         /// <summary>
         /// Do nothing.
         /// </summary>
-        public void AcceptChildren<T>( IAstVisitor<T> visitor ) {}
+        public void AcceptChildren( IAstVisitor visitor ) {}
         #endregion IAstNodeAcceptor
 
         public override string ToString()

@@ -72,12 +72,12 @@ namespace KSPCompiler.Domain.Ast.Nodes
         ///
         /// <inheritdoc/>
         ///
-        public abstract T Accept<T>( IAstVisitor<T> visitor );
+        public abstract IAstNode Accept( IAstVisitor visitor );
 
         ///
         /// <inheritdoc/>
         ///
-        public abstract void AcceptChildren<T>( IAstVisitor<T> visitor );
+        public abstract void AcceptChildren( IAstVisitor visitor );
         #endregion IAstNodeAcceptor
 
         #region IAstNode

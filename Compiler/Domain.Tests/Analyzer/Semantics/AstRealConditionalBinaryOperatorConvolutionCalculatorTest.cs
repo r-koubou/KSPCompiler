@@ -17,7 +17,6 @@ public class AstRealConditionalBinaryOperatorConvolutionCalculatorTest
         var realConvolutionEvaluator = new MockRealConvolutionEvaluator( value ); // always return `value`
 
         var calulator = new RealConditionalBinaryOperatorConvolutionCalculator(
-            visitor,
             realConvolutionEvaluator
         );
 
@@ -28,7 +27,7 @@ public class AstRealConditionalBinaryOperatorConvolutionCalculatorTest
             Right    = new AstRealLiteralNode( value )
         };
 
-        var result = calulator.Calculate( ast );
+        var result = calulator.Calculate( visitor, ast );
 
         Assert.IsNotNull( result );
         Assert.AreEqual( expected, result );

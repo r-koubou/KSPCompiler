@@ -16,20 +16,20 @@ public sealed class RealBinaryOperatorConvolutionCalculator : IRealBinaryOperato
         EvaluatorForRecursive = evaluatorForRecursive;
     }
 
-    public double? Calculate( AstExpressionNode expr, double workingValueForRecursive )
+    public double? Calculate( IAstVisitor visitor, AstExpressionNode expr, double workingValueForRecursive )
     {
         if( expr.ChildNodeCount != 2 )
         {
             throw new ArgumentException( $"Expected 2 child nodes, but got {expr.ChildNodeCount}. (node: {expr.GetType().Name})" );
         }
 
-        var leftValue = EvaluatorForRecursive.Evaluate( expr.Left, workingValueForRecursive );
+        var leftValue = EvaluatorForRecursive.Evaluate( visitor, expr.Left, workingValueForRecursive );
         if( leftValue == null )
         {
             return null;
         }
 
-        var rightValue = EvaluatorForRecursive.Evaluate( expr.Right, workingValueForRecursive );
+        var rightValue = EvaluatorForRecursive.Evaluate( visitor, expr.Right, workingValueForRecursive );
         if( rightValue == null )
         {
             return null;

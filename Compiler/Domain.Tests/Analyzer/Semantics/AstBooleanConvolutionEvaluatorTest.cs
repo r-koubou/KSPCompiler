@@ -22,7 +22,7 @@ public class AstBooleanConvolutionEvaluatorTest
             Right    = new AstIntLiteralNode( right )
         };
 
-        var result = booleanConvolutionEvaluator.Evaluate( ast, false );
+        var result = booleanConvolutionEvaluator.Evaluate( visitor, ast, false );
 
         Assert.IsNotNull( result );
         Assert.AreEqual( expected, result );
@@ -81,7 +81,7 @@ public class AstBooleanConvolutionEvaluatorTest
             Left     = new AstBooleanLiteralNode( value )
         };
 
-        var result = booleanConvolutionEvaluator.Evaluate( ast, false );
+        var result = booleanConvolutionEvaluator.Evaluate( visitor, ast, false );
 
         Assert.IsNotNull( result );
         Assert.AreEqual( !value, result );
@@ -113,7 +113,7 @@ public class AstBooleanConvolutionEvaluatorTest
             }
         };
 
-        var result = booleanConvolutionEvaluator.Evaluate( ast, false );
+        var result = booleanConvolutionEvaluator.Evaluate( visitor, ast, false );
 
         Assert.IsNotNull( result );
         Assert.AreEqual( expected, result );
@@ -145,7 +145,7 @@ public class AstBooleanConvolutionEvaluatorTest
             }
         };
 
-        var result = booleanConvolutionEvaluator.Evaluate( ast, false );
+        var result = booleanConvolutionEvaluator.Evaluate( visitor, ast, false );
 
         Assert.IsNotNull( result );
         Assert.AreEqual( expected, result );
@@ -179,7 +179,7 @@ public class AstBooleanConvolutionEvaluatorTest
             }
         };
 
-        var result = booleanConvolutionEvaluator.Evaluate( ast, false );
+        var result = booleanConvolutionEvaluator.Evaluate( visitor, ast, false );
 
         Assert.IsNotNull( result );
         Assert.AreEqual( expected, result );
