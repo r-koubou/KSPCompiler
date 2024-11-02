@@ -1,6 +1,4 @@
 using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.CompilerMessages;
-using KSPCompiler.Domain.Symbols;
 
 namespace KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Reals;
 
@@ -13,11 +11,11 @@ public sealed class RealConvolutionEvaluator : IRealConvolutionEvaluator
     private IRealBinaryOperatorConvolutionCalculator BinaryCalculator { get; }
     private IRealUnaryOperatorConvolutionCalculator UnaryCalculator { get; }
 
-    public RealConvolutionEvaluator( IAstVisitor visitor, IVariableSymbolTable variableSymbols, ICompilerMessageManger compilerMessageManger )
+    public RealConvolutionEvaluator()
     {
-        ConstantCalculator   = new RealConstantConvolutionCalculator( variableSymbols, compilerMessageManger );
-        BinaryCalculator     = new RealBinaryOperatorConvolutionCalculator( this );
-        UnaryCalculator      = new RealUnaryOperatorConvolutionCalculator( this );
+        ConstantCalculator = new RealConstantConvolutionCalculator();
+        BinaryCalculator   = new RealBinaryOperatorConvolutionCalculator( this );
+        UnaryCalculator    = new RealUnaryOperatorConvolutionCalculator( this );
     }
 
     public double? Evaluate( IAstVisitor visitor, AstExpressionNode expr, double workingValueForRecursive )

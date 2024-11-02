@@ -4,8 +4,6 @@ using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Strings;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.CompilerMessages;
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Domain.Symbols.MetaData;
 
 using NUnit.Framework;
 
@@ -18,14 +16,13 @@ public class AstStringConcatenateOperatorConvolutionCalculatorTest
     private static void ConvolutionTestBody(
         AstExpressionNode left,
         AstExpressionNode right,
-        IVariableSymbolTable symbolTable,
         string? expectedValue,
         int expectedErrorCount )
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockDefaultAstVisitor();
 
-        var evaluator = new StringConvolutionEvaluator( visitor, symbolTable, compilerMessageManger );
+        var evaluator = new StringConvolutionEvaluator();
 
         var operatorNode = new AstStringConcatenateExpressionNode
         {
@@ -39,21 +36,6 @@ public class AstStringConcatenateOperatorConvolutionCalculatorTest
 
         Assert.AreEqual( expectedErrorCount, compilerMessageManger.Count() );
         Assert.AreEqual( expectedValue,      result );
-    }
-
-    private static void ConvolutionTestBody(
-        AstExpressionNode left,
-        AstExpressionNode right,
-        string? expectedValue,
-        int expectedErrorCount )
-    {
-        ConvolutionTestBody(
-            left,
-            right,
-            MockUtility.CreateAggregateSymbolTable().Variables,
-            expectedValue,
-            expectedErrorCount
-        );
     }
 
     #endregion
@@ -132,30 +114,6 @@ public class AstStringConcatenateOperatorConvolutionCalculatorTest
             new AstRealLiteralNode( 1.23 ),
             new AstRealLiteralNode( 4.56 ),
             "1.234.56",
-            0
-        );
-    }
-
-    [Test]
-    public void VariableAndIntConvolutionTest()
-    {
-        // declare const $x : = 123
-        // "value: " & $x
-        // -> "value: 123"
-        var variable = MockUtility.CreateStringVariable( "$x" );
-        variable.Modifier = ModifierFlag.Const;
-        variable.Value    = 123;
-
-        var symbolTable = MockUtility.CreateAggregateSymbolTable().Variables;
-        symbolTable.Add( variable );
-
-        var variableNode = MockUtility.CreateAstSymbolExpression( variable );
-
-        ConvolutionTestBody(
-            new AstStringLiteralNode( "value: " ),
-            variableNode,
-            symbolTable,
-            "value: 123",
             0
         );
     }

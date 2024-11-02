@@ -1,6 +1,4 @@
 using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.CompilerMessages;
-using KSPCompiler.Domain.Symbols;
 
 namespace KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Integers;
 
@@ -13,11 +11,11 @@ public sealed class IntegerConvolutionEvaluator : IIntegerConvolutionEvaluator
     private IIntegerBinaryOperatorConvolutionCalculator BinaryCalculator { get; }
     private IIntegerUnaryOperatorConvolutionCalculator UnaryCalculator { get; }
 
-    public IntegerConvolutionEvaluator( IAstVisitor visitor, IVariableSymbolTable variableSymbols, ICompilerMessageManger compilerMessageManger )
+    public IntegerConvolutionEvaluator()
     {
-        ConstantCalculator   = new IntegerConstantConvolutionCalculator( variableSymbols, compilerMessageManger );
-        BinaryCalculator     = new IntegerBinaryOperatorConvolutionCalculator( this );
-        UnaryCalculator      = new IntegerUnaryOperatorConvolutionCalculator( this );
+        ConstantCalculator = new IntegerConstantConvolutionCalculator();
+        BinaryCalculator   = new IntegerBinaryOperatorConvolutionCalculator( this );
+        UnaryCalculator    = new IntegerUnaryOperatorConvolutionCalculator( this );
     }
 
     public int? Evaluate( IAstVisitor visitor, AstExpressionNode expr, int workingValueForRecursive )

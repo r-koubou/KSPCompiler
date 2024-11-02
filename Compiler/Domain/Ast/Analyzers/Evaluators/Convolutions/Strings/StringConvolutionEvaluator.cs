@@ -1,6 +1,4 @@
 using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.CompilerMessages;
-using KSPCompiler.Domain.Symbols;
 
 namespace KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Strings;
 
@@ -12,9 +10,9 @@ public sealed class StringConvolutionEvaluator : IStringConvolutionEvaluator
     private IStringConstantConvolutionCalculator ConstantCalculator { get; }
     private IStringConcatenateOperatorConvolutionCalculator ConcatenateCalculator { get; }
 
-    public StringConvolutionEvaluator( IAstVisitor visitor, IVariableSymbolTable variableSymbols, ICompilerMessageManger compilerMessageManger )
+    public StringConvolutionEvaluator()
     {
-        ConstantCalculator    = new StringConstantConvolutionCalculator( variableSymbols, compilerMessageManger );
+        ConstantCalculator    = new StringConstantConvolutionCalculator();
         ConcatenateCalculator = new StringConcatenateOperatorConvolutionCalculator( this );
     }
 
