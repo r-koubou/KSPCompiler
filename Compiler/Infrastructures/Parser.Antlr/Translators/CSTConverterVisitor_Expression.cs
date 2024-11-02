@@ -226,6 +226,30 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             }
         }
 
+        public override AstNode VisitAssignmentExpression( KSPParser.AssignmentExpressionContext context )
+        {
+            var operatorToken = context.assignmentOperator().opr.Type;
+            AstAssignmentExpressionNode.OperatorType operatorType;
+
+            switch( operatorToken )
+            {
+                case KSPParser.ASSIGN:
+                    operatorType = AstAssignmentExpressionNode.OperatorType.Assign;
+                    break;
+                default:
+                    throw new NotSupportedException( $"Token ID: {operatorToken} is not supported" );
+            }
+
+            var node = VisitExpressionNodeImpl<AstAssignmentExpressionNode>(
+                context,
+                context.postfixExpression(),
+                context.expression()
+            );
+            node.Operator = operatorType;
+
+            return node;
+        }
+
         public override AstNode VisitAssignmentExpressionList(KSPParser.AssignmentExpressionListContext context)
         {
             var node = new AstAssignmentExpressionListNode();
@@ -250,7 +274,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             {
                 VisitAssignmentExpressionListRecursive( assignmentList, dest );
                 dest.Expressions.Add(
-                    (AstAssignStatementNode)expression.Accept( this )
+                    (AstAssignmentExpressionNode)expression.Accept( this )
                 );
             }
             //
@@ -259,7 +283,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             else
             {
                 dest.Expressions.Add(
-                    (AstAssignStatementNode)expression.Accept( this )
+                    (AstAssignmentExpressionNode)expression.Accept( this )
                 );
             }
         }

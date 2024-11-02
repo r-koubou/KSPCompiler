@@ -18,13 +18,13 @@ public class AstAssignmentEvaluationTest
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockAssignOperatorVisitor();
-        var assignEvaluator = new AssignStatementEvaluator( compilerMessageManger );
+        var assignEvaluator = new AssignOperatorEvaluator( compilerMessageManger );
         var variable = MockUtility.CreateSymbolNode( "$x", DataTypeFlag.TypeInt );
         var value = new AstIntLiteralNode( 1 );
-        var statement = new AstAssignStatementNode( variable, value );
+        var expr = new AstAssignmentExpressionNode( variable, value );
 
         visitor.Inject( assignEvaluator );
-        var result = visitor.Visit( statement ) as AstExpressionNode;
+        var result = visitor.Visit( expr ) as AstExpressionNode;
 
         compilerMessageManger.WriteTo( Console.Out );
 
@@ -38,15 +38,15 @@ public class AstAssignmentEvaluationTest
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockAssignOperatorVisitor();
-        var assignEvaluator = new AssignStatementEvaluator( compilerMessageManger );
+        var assignEvaluator = new AssignOperatorEvaluator( compilerMessageManger );
         var variable = MockUtility.CreateSymbolNode( "$x", DataTypeFlag.TypeInt );
         variable.Constant = true;
 
         var value = new AstIntLiteralNode( 1 );
-        var statement = new AstAssignStatementNode( variable, value );
+        var expr = new AstAssignmentExpressionNode( variable, value );
 
         visitor.Inject( assignEvaluator );
-        var result = visitor.Visit( statement ) as AstExpressionNode;
+        var result = visitor.Visit( expr ) as AstExpressionNode;
 
         compilerMessageManger.WriteTo( Console.Out );
 
@@ -60,13 +60,13 @@ public class AstAssignmentEvaluationTest
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockAssignOperatorVisitor();
-        var assignEvaluator = new AssignStatementEvaluator( compilerMessageManger );
+        var assignEvaluator = new AssignOperatorEvaluator( compilerMessageManger );
         var variable = MockUtility.CreateSymbolNode( "$x", DataTypeFlag.TypeInt );
         var value = MockUtility.CreateSymbolNode( "",      DataTypeFlag.TypeReal | DataTypeFlag.TypeString ); //new AstRealLiteralNode( 1.0 );
-        var statement = new AstAssignStatementNode( variable, value );
+        var expr = new AstAssignmentExpressionNode( variable, value );
 
         visitor.Inject( assignEvaluator );
-        var result = visitor.Visit( statement ) as AstExpressionNode;
+        var result = visitor.Visit( expr ) as AstExpressionNode;
 
         compilerMessageManger.WriteTo( Console.Out );
 
@@ -84,13 +84,13 @@ public class AstAssignmentEvaluationTest
 
         var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockAssignOperatorVisitor();
-        var assignEvaluator = new AssignStatementEvaluator( compilerMessageManger );
+        var assignEvaluator = new AssignOperatorEvaluator( compilerMessageManger );
         var variable = MockUtility.CreateSymbolNode( "%x", DataTypeFlag.TypeIntArray );
         var value = new AstIntLiteralNode( 1 );
-        var statement = new AstAssignStatementNode( variable, value );
+        var expr = new AstAssignmentExpressionNode( variable, value );
 
         visitor.Inject( assignEvaluator );
-        var result = visitor.Visit( statement ) as AstExpressionNode;
+        var result = visitor.Visit( expr ) as AstExpressionNode;
 
         compilerMessageManger.WriteTo( Console.Out );
 
@@ -108,13 +108,13 @@ public class AstAssignmentEvaluationTest
 
         var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockAssignOperatorVisitor();
-        var assignEvaluator = new AssignStatementEvaluator( compilerMessageManger );
+        var assignEvaluator = new AssignOperatorEvaluator( compilerMessageManger );
         var variable = MockUtility.CreateSymbolNode( "$x", DataTypeFlag.TypeInt );
         var value = MockUtility.CreateSymbolNode( "%y",      DataTypeFlag.TypeIntArray );
-        var statement = new AstAssignStatementNode( variable, value );
+        var expr = new AstAssignmentExpressionNode( variable, value );
 
         visitor.Inject( assignEvaluator );
-        var result = visitor.Visit( statement ) as AstExpressionNode;
+        var result = visitor.Visit( expr ) as AstExpressionNode;
 
         compilerMessageManger.WriteTo( Console.Out );
 
@@ -132,13 +132,13 @@ public class AstAssignmentEvaluationTest
 
         var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockAssignOperatorVisitor();
-        var assignEvaluator = new AssignStatementEvaluator( compilerMessageManger );
+        var assignEvaluator = new AssignOperatorEvaluator( compilerMessageManger );
         var variable = MockUtility.CreateSymbolNode( "@x", DataTypeFlag.TypeString );
         var value = new AstIntLiteralNode( 1 );
-        var statement = new AstAssignStatementNode( variable, value );
+        var expr = new AstAssignmentExpressionNode( variable, value );
 
         visitor.Inject( assignEvaluator );
-        var result = visitor.Visit( statement ) as AstExpressionNode;
+        var result = visitor.Visit( expr ) as AstExpressionNode;
 
         compilerMessageManger.WriteTo( Console.Out );
 

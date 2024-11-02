@@ -121,7 +121,7 @@ public abstract class DefaultAstVisitor : IAstVisitor
     public virtual IAstNode Visit( AstExpressionListNode node )
         => VisitChildren( node );
 
-    public virtual IAstNode Visit( AstAssignStatementNode node )
+    public virtual IAstNode Visit( AstAssignmentExpressionNode node )
         => VisitChildren( node );
 
     public virtual IAstNode Visit( AstAssignmentExpressionListNode node )
