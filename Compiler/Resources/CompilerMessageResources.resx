@@ -147,4 +147,7 @@
     <data name="semantic.error.if.condition.incompatible" xml:space="preserve">
         <value>if: Conditional expression not included</value>
     </data>
+    <data name="semantic.error.continue.invalid" xml:space="preserve">
+        <value>continue: Only available within the loop</value>
+    </data>
 </root>

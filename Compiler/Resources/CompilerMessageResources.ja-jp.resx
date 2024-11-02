@@ -140,4 +140,7 @@
     <data name="semantic.error.if.condition.incompatible" xml:space="preserve">
         <value>if: 条件式が含まれていません</value>
     </data>
+    <data name="semantic.error.continue.invalid" xml:space="preserve">
+        <value>continue: ループ内でのみ使用可能です</value>
+    </data>
 </root>
