@@ -1,6 +1,7 @@
-using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Operators;
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Assigns;
 using KSPCompiler.Domain.Ast.Extensions;
 using KSPCompiler.Domain.Ast.Nodes;
+using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
@@ -8,7 +9,7 @@ using KSPCompiler.Resources;
 
 namespace KSPCompiler.Domain.Ast.Analyzers.Semantics;
 
-public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
+public sealed class AssignStatementEvaluator : IAssignStatementEvaluator
 {
     private ICompilerMessageManger CompilerMessageManger { get; }
 
@@ -20,15 +21,15 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
         return result;
     }
 
-    public AssignOperatorEvaluator( ICompilerMessageManger compilerMessageManger )
+    public AssignStatementEvaluator( ICompilerMessageManger compilerMessageManger )
     {
         CompilerMessageManger = compilerMessageManger;
     }
 
-    public IAstNode Evaluate( IAstVisitor visitor, AstExpressionNode expr )
+    public IAstNode Evaluate( IAstVisitor visitor, AstAssignStatementNode statement )
     {
         /*
-                     := expr
+                       :=
                        +
                        |
                   +----+----+
@@ -37,21 +38,21 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
               (variable)    (value)
         */
 
-        if( expr.Left.Accept( visitor ) is not AstExpressionNode evaluatedLeft )
+        if( statement.Left.Accept( visitor ) is not AstExpressionNode evaluatedLeft )
         {
-            throw new AstAnalyzeException( expr, "Failed to evaluate left side of binary operator" );
+            throw new AstAnalyzeException( statement, "Failed to evaluate left side of binary operator" );
         }
 
-        if( expr.Right.Accept( visitor ) is not AstExpressionNode evaluatedRight )
+        if( statement.Right.Accept( visitor ) is not AstExpressionNode evaluatedRight )
         {
-            throw new AstAnalyzeException( expr, "Failed to evaluate right side of binary operator" );
+            throw new AstAnalyzeException( statement, "Failed to evaluate right side of binary operator" );
         }
 
         // 定数には代入できない
         if( evaluatedLeft.Constant )
         {
             CompilerMessageManger.Error(
-                expr,
+                statement,
                 CompilerMessageResources.semantic_error_assign_to_constant,
                 evaluatedLeft.Name
             );
@@ -65,7 +66,7 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
         if( !TypeCompatibility.IsAssigningTypeCompatible( leftType, rightType ) )
         {
             CompilerMessageManger.Error(
-                expr,
+                statement,
                 CompilerMessageResources.semantic_error_assign_type_compatible,
                 leftType.ToMessageString(),
                 rightType.ToMessageString()

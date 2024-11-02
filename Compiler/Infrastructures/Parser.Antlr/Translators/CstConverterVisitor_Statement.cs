@@ -1,7 +1,10 @@
-﻿using Antlr4.Runtime;
+﻿using System;
+
+using Antlr4.Runtime;
 
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
 
@@ -27,6 +30,51 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
             SetupChildNode( node, conditionNode, condition );
             SetupChildNode( node, blockNode, block );
+
+            return node;
+        }
+
+        private AstAssignStatementNode VisitAssignStatementNodeImpl(
+            ParserRuleContext context,
+            ParserRuleContext? left,
+            ParserRuleContext? right )
+        {
+            var node = new AstAssignStatementNode();
+
+            node.Import( context );
+
+            if( left != null )
+            {
+                node.Left = (AstExpressionNode)left.Accept( this );
+                SetupChildNode( node, node.Left, left );
+            }
+
+            if( right != null )
+            {
+                node.Right = (AstExpressionNode)right.Accept( this );
+                SetupChildNode( node, node.Right, right );
+            }
+
+            return node;
+        }
+
+        public override AstNode VisitAssignmentExpression( KSPParser.AssignmentExpressionContext context )
+        {
+            var operatorToken = context.assignmentOperator().opr.Type;
+
+            AstAssignStatementNode.OperatorType operatorType = operatorToken switch
+            {
+                KSPParser.ASSIGN => AstAssignStatementNode.OperatorType.Assign,
+                _                => throw new NotSupportedException( $"Token ID: {operatorToken} is not supported" )
+            };
+
+            var node = VisitAssignStatementNodeImpl(
+                context,
+                context.postfixExpression(),
+                context.expression()
+            );
+
+            node.Operator = operatorType;
 
             return node;
         }

@@ -57,6 +57,6 @@ public partial class SemanticAnalyzer
     #endregion ~Unary Operators
 
 
-    public override IAstNode Visit( AstAssignmentExpressionNode node )
-        => AssignOperatorEvaluator.Evaluate( this, node );
+    public override IAstNode Visit( AstAssignStatementNode node )
+        => AssignStatementEvaluator.Evaluate( this, node );
 }

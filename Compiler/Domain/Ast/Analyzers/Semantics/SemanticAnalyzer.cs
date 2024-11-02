@@ -1,3 +1,4 @@
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Assigns;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Integers;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Reals;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Strings;
@@ -40,7 +41,7 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, IAstTraversal
     private IBinaryOperatorEvaluator NumericBinaryOperatorEvaluator { get; }
     private IUnaryOperatorEvaluator NumericUnaryOperatorEvaluator { get; }
     private IStringConcatenateOperatorEvaluator StringConcatenateOperatorEvaluator { get; }
-    private IAssignOperatorEvaluator AssignOperatorEvaluator { get; }
+    private IAssignStatementEvaluator AssignStatementEvaluator { get; }
 
     #endregion
 
@@ -73,7 +74,7 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, IAstTraversal
         StringConcatenateOperatorEvaluator = new StringConcatenateOperatorEvaluator( CompilerMessageManger, StringConvolutionEvaluator );
 
         SymbolEvaluator                    = new SymbolEvaluator( CompilerMessageManger, SymbolTable );
-        AssignOperatorEvaluator            = new AssignOperatorEvaluator( CompilerMessageManger );
+        AssignStatementEvaluator            = new AssignStatementEvaluator( CompilerMessageManger );
     }
 
     public void Traverse( AstCompilationUnitNode node )
