@@ -1,4 +1,4 @@
-using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Assigns;
+using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Operators;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 
@@ -6,13 +6,13 @@ namespace KSPCompiler.Domain.Tests.Analyzer.Semantics;
 
 public class MockAssignOperatorVisitor : DefaultAstVisitor
 {
-    private IAssignStatementEvaluator AssignStatementEvaluator { get; set; } = new MockAssignStatementEvaluator();
+    private IAssignOperatorEvaluator AssignOperatorEvaluator { get; set; } = new MockAssignOperatorEvaluator();
 
-    public void Inject( IAssignStatementEvaluator evaluator )
+    public void Inject( IAssignOperatorEvaluator evaluator )
     {
-        AssignStatementEvaluator = evaluator;
+        AssignOperatorEvaluator = evaluator;
     }
 
-    public override IAstNode Visit( AstAssignStatementNode node )
-        => AssignStatementEvaluator.Evaluate( this, node );
+    public override IAstNode Visit( AstAssignmentExpressionNode node )
+        => AssignOperatorEvaluator.Evaluate( this, node );
 }

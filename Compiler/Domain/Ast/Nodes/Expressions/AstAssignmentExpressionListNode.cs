@@ -3,15 +3,12 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
     /// <summary>
     /// AST node representing a comma-separated list of expressions (including assignment expressions).
     /// </summary>
-    /// <remarks>
-    /// KSP standard syntax DOES NOT SUPPORTED. THIS IS A CUSTOM EXTENSION FOR FUTURE USE.
-    /// </remarks>
     public class AstAssignmentExpressionListNode : AstNode
     {
         /// <summary>
         /// expression list
         /// </summary>
-        public AstNodeList<AstAssignStatementNode> Expressions { get; }
+        public AstNodeList<AstAssignmentExpressionNode> Expressions { get; }
 
         /// <summary>
         /// Alias for <see cref="Expressions"/>.<see cref="AstNodeList{TNode}.Count"/>
@@ -29,7 +26,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
         public AstAssignmentExpressionListNode( IAstNode parent )
             : base( AstNodeId.AssignmentExpressionList, parent )
         {
-            Expressions = new AstNodeList<AstAssignStatementNode>( this );
+            Expressions = new AstNodeList<AstAssignmentExpressionNode>( this );
         }
 
         /// <summary>

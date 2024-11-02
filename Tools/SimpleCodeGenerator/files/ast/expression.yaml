@@ -182,6 +182,44 @@ classes:
     templates:
       - name: ${TEMPLATE}
 
+
+  #--------------------------------------------
+  # 代入演算子
+  #--------------------------------------------
+  - name: Assignment
+    description: "an assignment (:=)"
+    templates:
+      - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
+
+  - name: AssignmentExpressionList
+    description: "a comma-separated list of expressions (including assignment expressions)."
+    templates:
+      - name: ${TEMPLATE}
+
+  #--------------------------------------------
+  # 代入演算子 (KSP非標準)
+  #--------------------------------------------
+  - name: AdditionAssignment
+    description: "an assignment (+=)"
+    templates:
+      - name: ${TEMPLATE}
+
+  - name: SubtractionAssignment
+    description: "an assignment (-=)"
+    templates:
+      - name: ${TEMPLATE}
+
+  - name: MultiplyingAssignment
+    description: "an assignment (*=)"
+    templates:
+      - name: ${TEMPLATE}
+
+  - name: DivisionAssignment
+    description: "an assignment (/=)"
+    templates:
+      - name: ${TEMPLATE}
+
   #--------------------------------------------
   # シンボル参照
   #--------------------------------------------

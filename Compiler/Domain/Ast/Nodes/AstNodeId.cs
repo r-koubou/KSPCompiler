@@ -40,7 +40,7 @@ namespace KSPCompiler.Domain.Ast.Nodes
         RealExpression,
         StringExpression,
         ExpressionList,
-        AssignStatement,
+        AssignmentExpression,
         AssignmentExpressionList,
         AdditionAssignment,
         SubtractionAssignment,
