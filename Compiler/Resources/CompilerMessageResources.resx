@@ -150,4 +150,19 @@
     <data name="semantic.error.continue.invalid" xml:space="preserve">
         <value>continue: Only available within the loop</value>
     </data>
+    <data name="semantic.error.select.condition.incompatible" xml:space="preserve">
+        <value>select: Condition must be an integer</value>
+    </data>
+    <data name="semantic.error.select.condition.notvariable" xml:space="preserve">
+        <value>select: Variables to be evaluated are not specified</value>
+    </data>
+    <data name="semantic.error.select.case.incompatible" xml:space="preserve">
+        <value>case: must be an integer and a constant</value>
+    </data>
+    <data name="semantic.warning.select.case.from.to.noeffect" xml:space="preserve">
+        <value>case: “from” value is the same as ‘to’ value (={0})</value>
+    </data>
+    <data name="semantic.error.select.case.from.grater" xml:space="preserve">
+        <value>case: “from” value is greater than ‘to’ value(={0})</value>
+    </data>
 </root>

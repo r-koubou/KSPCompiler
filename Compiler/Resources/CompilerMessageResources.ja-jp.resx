@@ -143,4 +143,19 @@
     <data name="semantic.error.continue.invalid" xml:space="preserve">
         <value>continue: ループ内でのみ使用可能です</value>
     </data>
+    <data name="semantic.error.select.condition.incompatible" xml:space="preserve">
+        <value>select: 条件は整数でなければなりません</value>
+    </data>
+    <data name="semantic.error.select.condition.notvariable" xml:space="preserve">
+        <value>select: 評価対象となる変数が指定されていません</value>
+    </data>
+    <data name="semantic.error.select.case.incompatible" xml:space="preserve">
+        <value>case: 整数かつ定数でなければなりません</value>
+    </data>
+    <data name="semantic.warning.select.case.from.to.noeffect" xml:space="preserve">
+        <value>case: "from" の値が "to" の値が同じです (={0})</value>
+    </data>
+    <data name="semantic.error.select.case.from.grater" xml:space="preserve">
+        <value>case: "from" の値が "to" の値より大きいです (={0})</value>
+    </data>
 </root>
