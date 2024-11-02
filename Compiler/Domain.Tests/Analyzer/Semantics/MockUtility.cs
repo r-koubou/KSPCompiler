@@ -341,7 +341,7 @@ public static class MockUtility
         var compilerMessageManger = ICompilerMessageManger.Default;
         var symbols = MockUtility.CreateAggregateSymbolTable();
 
-        var integerConvolutionEvaluator = new IntegerConvolutionEvaluator( visitor, symbols.Variables, compilerMessageManger );
+        var integerConvolutionEvaluator = new IntegerConvolutionEvaluator();
         var integerConditionalBinaryOperatorConvolutionCalculator = new IntegerConditionalBinaryOperatorConvolutionCalculator( integerConvolutionEvaluator );
 
         var realConvolutionEvaluator = new RealConvolutionEvaluator( visitor, symbols.Variables, compilerMessageManger );

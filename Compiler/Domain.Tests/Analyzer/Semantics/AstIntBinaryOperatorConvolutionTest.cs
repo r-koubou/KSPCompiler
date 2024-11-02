@@ -5,7 +5,6 @@ using KSPCompiler.Domain.Ast.Analyzers.Semantics;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.CompilerMessages;
-using KSPCompiler.Domain.Symbols;
 
 using NUnit.Framework;
 
@@ -18,13 +17,8 @@ public class AstIntBinaryOperatorConvolutionTest
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockAstBinaryOperatorVisitor();
-        var variableTable = new VariableSymbolTable();
 
-        var integerConvolutionEvaluator = new IntegerConvolutionEvaluator(
-            visitor,
-            variableTable,
-            compilerMessageManger
-        );
+        var integerConvolutionEvaluator = new IntegerConvolutionEvaluator();
         var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
         var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
             compilerMessageManger,

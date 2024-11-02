@@ -13,11 +13,11 @@ public sealed class IntegerConvolutionEvaluator : IIntegerConvolutionEvaluator
     private IIntegerBinaryOperatorConvolutionCalculator BinaryCalculator { get; }
     private IIntegerUnaryOperatorConvolutionCalculator UnaryCalculator { get; }
 
-    public IntegerConvolutionEvaluator( IAstVisitor visitor, IVariableSymbolTable variableSymbols, ICompilerMessageManger compilerMessageManger )
+    public IntegerConvolutionEvaluator()
     {
-        ConstantCalculator   = new IntegerConstantConvolutionCalculator( variableSymbols, compilerMessageManger );
-        BinaryCalculator     = new IntegerBinaryOperatorConvolutionCalculator( this );
-        UnaryCalculator      = new IntegerUnaryOperatorConvolutionCalculator( this );
+        ConstantCalculator = new IntegerConstantConvolutionCalculator();
+        BinaryCalculator   = new IntegerBinaryOperatorConvolutionCalculator( this );
+        UnaryCalculator    = new IntegerUnaryOperatorConvolutionCalculator( this );
     }
 
     public int? Evaluate( IAstVisitor visitor, AstExpressionNode expr, int workingValueForRecursive )

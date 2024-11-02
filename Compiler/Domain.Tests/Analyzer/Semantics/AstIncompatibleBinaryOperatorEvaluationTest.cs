@@ -5,7 +5,6 @@ using KSPCompiler.Domain.Ast.Analyzers.Semantics;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.CompilerMessages;
-using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 
@@ -24,15 +23,8 @@ public class AstIncompatibleBinaryOperatorEvaluationTest
 
         var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockAstBinaryOperatorVisitor();
-        var variableTable = new VariableSymbolTable();
-        var variable = MockUtility.CreateIntVariable( variableName );
-        variableTable.Add( variable );
 
-        var integerConvolutionEvaluator = new IntegerConvolutionEvaluator(
-            visitor,
-            variableTable,
-            compilerMessageManger
-        );
+        var integerConvolutionEvaluator = new IntegerConvolutionEvaluator();
         var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
         var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
             compilerMessageManger,
