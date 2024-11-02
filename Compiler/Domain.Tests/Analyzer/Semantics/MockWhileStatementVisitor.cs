@@ -1,4 +1,5 @@
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Conditionals;
+using KSPCompiler.Domain.Ast.Analyzers.Semantics;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
 
