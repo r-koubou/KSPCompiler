@@ -308,5 +308,35 @@ namespace KSPCompiler.Resources {
                 return ResourceManager.GetString("semantic.error.continue.invalid", resourceCulture);
             }
         }
+        
+        public static string semantic_error_select_condition_incompatible {
+            get {
+                return ResourceManager.GetString("semantic.error.select.condition.incompatible", resourceCulture);
+            }
+        }
+        
+        public static string semantic_error_select_condition_notvariable {
+            get {
+                return ResourceManager.GetString("semantic.error.select.condition.notvariable", resourceCulture);
+            }
+        }
+        
+        public static string semantic_error_select_case_incompatible {
+            get {
+                return ResourceManager.GetString("semantic.error.select.case.incompatible", resourceCulture);
+            }
+        }
+        
+        public static string semantic_warning_select_case_from_to_noeffect {
+            get {
+                return ResourceManager.GetString("semantic.warning.select.case.from.to.noeffect", resourceCulture);
+            }
+        }
+        
+        public static string semantic_error_select_case_from_grater {
+            get {
+                return ResourceManager.GetString("semantic.error.select.case.from.grater", resourceCulture);
+            }
+        }
     }
 }
