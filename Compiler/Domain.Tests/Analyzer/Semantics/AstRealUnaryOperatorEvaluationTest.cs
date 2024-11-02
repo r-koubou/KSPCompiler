@@ -3,7 +3,6 @@ using System;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Reals;
 using KSPCompiler.Domain.Ast.Analyzers.Semantics;
 using KSPCompiler.Domain.CompilerMessages;
-using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 
 using NUnit.Framework;
@@ -20,15 +19,9 @@ public class AstRealUnaryOperatorEvaluationTest
 
         var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockAstUnaryOperatorVisitor();
-        var variableTable = new VariableSymbolTable();
-        variableTable.Add( MockUtility.CreateIntVariable( variableName ) );
 
         var integerConvolutionEvaluator = new MockIntegerConvolutionEvaluator();
-        var realConvolutionEvaluator = new RealConvolutionEvaluator(
-            visitor,
-            variableTable,
-            compilerMessageManger
-        );
+        var realConvolutionEvaluator = new RealConvolutionEvaluator();
         var unaryOperatorEvaluator = new NumericUnaryOperatorEvaluator(
             compilerMessageManger,
             integerConvolutionEvaluator,
@@ -53,15 +46,9 @@ public class AstRealUnaryOperatorEvaluationTest
 
         var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockAstUnaryOperatorVisitor();
-        var variableTable = new VariableSymbolTable();
-        variableTable.Add( MockUtility.CreateIntVariable( variableName ) );
 
         var integerConvolutionEvaluator = new MockIntegerConvolutionEvaluator();
-        var realConvolutionEvaluator = new RealConvolutionEvaluator(
-            visitor,
-            variableTable,
-            compilerMessageManger
-        );
+        var realConvolutionEvaluator = new RealConvolutionEvaluator();
         var unaryOperatorEvaluator = new NumericUnaryOperatorEvaluator(
             compilerMessageManger,
             integerConvolutionEvaluator,

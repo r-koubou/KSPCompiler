@@ -1,6 +1,4 @@
 using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.CompilerMessages;
-using KSPCompiler.Domain.Symbols;
 
 namespace KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Integers;
 

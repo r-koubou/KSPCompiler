@@ -5,7 +5,6 @@ using KSPCompiler.Domain.Ast.Analyzers.Semantics;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.CompilerMessages;
-using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 
@@ -25,15 +24,9 @@ public class AstRealBinaryOperatorEvaluationTest
 
         var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockAstBinaryOperatorVisitor();
-        var variableTable = new VariableSymbolTable();
-        variableTable.Add( MockUtility.CreateIntVariable( variableName ) );
 
         var integerConvolutionEvaluator = new MockIntegerConvolutionEvaluator();
-        var realConvolutionEvaluator = new RealConvolutionEvaluator(
-            visitor,
-            variableTable,
-            compilerMessageManger
-        );
+        var realConvolutionEvaluator = new RealConvolutionEvaluator();
         var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
             compilerMessageManger,
             integerConvolutionEvaluator,
@@ -60,15 +53,9 @@ public class AstRealBinaryOperatorEvaluationTest
 
         var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockAstBinaryOperatorVisitor();
-        var variableTable = new VariableSymbolTable();
-        variableTable.Add( MockUtility.CreateIntVariable( variableName ) );
 
         var integerConvolutionEvaluator = new MockIntegerConvolutionEvaluator();
-        var realConvolutionEvaluator = new RealConvolutionEvaluator(
-            visitor,
-            variableTable,
-            compilerMessageManger
-        );
+        var realConvolutionEvaluator = new RealConvolutionEvaluator();
         var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
             compilerMessageManger,
             integerConvolutionEvaluator,
@@ -95,15 +82,9 @@ public class AstRealBinaryOperatorEvaluationTest
 
         var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockAstBinaryOperatorVisitor();
-        var variableTable = new VariableSymbolTable();
-        variableTable.Add( MockUtility.CreateIntVariable( variableName ) );
 
         var integerConvolutionEvaluator = new MockIntegerConvolutionEvaluator();
-        var realConvolutionEvaluator = new RealConvolutionEvaluator(
-            visitor,
-            variableTable,
-            compilerMessageManger
-        );
+        var realConvolutionEvaluator = new RealConvolutionEvaluator();
         var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
             compilerMessageManger,
             integerConvolutionEvaluator,
@@ -130,15 +111,9 @@ public class AstRealBinaryOperatorEvaluationTest
 
         var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockAstBinaryOperatorVisitor();
-        var variableTable = new VariableSymbolTable();
-        variableTable.Add( MockUtility.CreateIntVariable( variableName ) );
 
         var integerConvolutionEvaluator = new MockIntegerConvolutionEvaluator();
-        var realConvolutionEvaluator = new RealConvolutionEvaluator(
-            visitor,
-            variableTable,
-            compilerMessageManger
-        );
+        var realConvolutionEvaluator = new RealConvolutionEvaluator();
         var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
             compilerMessageManger,
             integerConvolutionEvaluator,
@@ -169,15 +144,9 @@ public class AstRealBinaryOperatorEvaluationTest
 
         var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockAstBinaryOperatorVisitor();
-        var variableTable = new VariableSymbolTable();
-        variableTable.Add( MockUtility.CreateIntVariable( variableName ) );
 
         var integerConvolutionEvaluator = new MockIntegerConvolutionEvaluator();
-        var realConvolutionEvaluator = new RealConvolutionEvaluator(
-            visitor,
-            variableTable,
-            compilerMessageManger
-        );
+        var realConvolutionEvaluator = new RealConvolutionEvaluator();
         var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
             compilerMessageManger,
             integerConvolutionEvaluator,
@@ -204,15 +173,9 @@ public class AstRealBinaryOperatorEvaluationTest
 
         var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockAstBinaryOperatorVisitor();
-        var variableTable = new VariableSymbolTable();
-        variableTable.Add( MockUtility.CreateIntVariable( variableName ) );
 
         var integerConvolutionEvaluator = new MockIntegerConvolutionEvaluator();
-        var realConvolutionEvaluator = new RealConvolutionEvaluator(
-            visitor,
-            variableTable,
-            compilerMessageManger
-        );
+        var realConvolutionEvaluator = new RealConvolutionEvaluator();
         var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
             compilerMessageManger,
             integerConvolutionEvaluator,
@@ -239,15 +202,9 @@ public class AstRealBinaryOperatorEvaluationTest
 
         var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockAstBinaryOperatorVisitor();
-        var variableTable = new VariableSymbolTable();
-        variableTable.Add( MockUtility.CreateIntVariable( variableName ) );
 
         var integerConvolutionEvaluator = new MockIntegerConvolutionEvaluator();
-        var realConvolutionEvaluator = new RealConvolutionEvaluator(
-            visitor,
-            variableTable,
-            compilerMessageManger
-        );
+        var realConvolutionEvaluator = new RealConvolutionEvaluator();
         var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
             compilerMessageManger,
             integerConvolutionEvaluator,
@@ -274,15 +231,9 @@ public class AstRealBinaryOperatorEvaluationTest
 
         var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockAstBinaryOperatorVisitor();
-        var variableTable = new VariableSymbolTable();
-        variableTable.Add( MockUtility.CreateIntVariable( variableName ) );
 
         var integerConvolutionEvaluator = new MockIntegerConvolutionEvaluator();
-        var realConvolutionEvaluator = new RealConvolutionEvaluator(
-            visitor,
-            variableTable,
-            compilerMessageManger
-        );
+        var realConvolutionEvaluator = new RealConvolutionEvaluator();
         var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
             compilerMessageManger,
             integerConvolutionEvaluator,

@@ -6,7 +6,6 @@ using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
-using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
@@ -338,13 +337,10 @@ public static class MockUtility
 
     public static IBooleanConvolutionEvaluator CreateBooleanConvolutionEvaluator( IAstVisitor visitor )
     {
-        var compilerMessageManger = ICompilerMessageManger.Default;
-        var symbols = MockUtility.CreateAggregateSymbolTable();
-
         var integerConvolutionEvaluator = new IntegerConvolutionEvaluator();
         var integerConditionalBinaryOperatorConvolutionCalculator = new IntegerConditionalBinaryOperatorConvolutionCalculator( integerConvolutionEvaluator );
 
-        var realConvolutionEvaluator = new RealConvolutionEvaluator( visitor, symbols.Variables, compilerMessageManger );
+        var realConvolutionEvaluator = new RealConvolutionEvaluator();
         var realConditionalBinaryOperatorConvolutionCalculator = new RealConditionalBinaryOperatorConvolutionCalculator( realConvolutionEvaluator );
 
         return  new BooleanConvolutionEvaluator(
