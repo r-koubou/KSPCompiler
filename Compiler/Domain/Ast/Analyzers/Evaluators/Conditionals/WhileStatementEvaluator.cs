@@ -1,6 +1,5 @@
 using KSPCompiler.Domain.Ast.Extensions;
 using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Ast.Nodes.Extensions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
@@ -19,11 +18,6 @@ public class WhileStatementEvaluator : IWhileStatementEvaluator
 
     public IAstNode Evaluate( IAstVisitor visitor, AstWhileStatementNode statement )
     {
-        if( statement.Condition.IsNull() )
-        {
-            throw new AstAnalyzeException( statement, "Condition is Null instance" );
-        }
-
         // 条件式の評価
         if( statement.Condition.Accept( visitor ) is not AstExpressionNode evaluatedCondition )
         {

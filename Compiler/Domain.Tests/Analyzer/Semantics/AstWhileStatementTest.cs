@@ -74,7 +74,7 @@ public class AstWhileStatementTest
         // end while
         var condition = NullAstExpressionNode.Instance;
 
-        Assert.Throws<AstAnalyzeException>( () => WhileStatementEvaluationTestBody( condition, 1 ) );
+        WhileStatementEvaluationTestBody( condition, 1 );
     }
 
     [Test]
