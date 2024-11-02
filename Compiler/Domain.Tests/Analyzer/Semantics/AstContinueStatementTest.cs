@@ -1,13 +1,10 @@
 using System;
 
-using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Conditionals;
-using KSPCompiler.Domain.Ast.Extensions;
-using KSPCompiler.Domain.Ast.Nodes;
+using KSPCompiler.Domain.Ast.Analyzers.Semantics;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols.MetaData;
-using KSPCompiler.Resources;
 
 using NUnit.Framework;
 
@@ -80,53 +77,5 @@ public class AstContinueStatementTest
         statement.CodeBlock.Statements.Add( continueStatement );
 
         ContinueStatementEvaluationTestBody( continueStatement, 1 );
-    }
-}
-
-#region Work mock classes
-
-public class MockContinueStatementEvaluator : IContinueStatementEvaluator
-{
-    public IAstNode Evaluate( IAstVisitor visitor, AstContinueStatementNode statement )
-        => throw new NotImplementedException();
-}
-
-public class MockContinueStatementVisitor : DefaultAstVisitor
-{
-    private IContinueStatementEvaluator Evaluator { get; set; } = new MockContinueStatementEvaluator();
-
-    public void Inject( IContinueStatementEvaluator evaluator )
-    {
-        Evaluator = evaluator;
-    }
-
-    public override IAstNode Visit( AstContinueStatementNode node )
-        => Evaluator.Evaluate( this, node );
-}
-
-#endregion
-
-public interface IContinueStatementEvaluator : IConditionalStatementEvaluator<AstContinueStatementNode> {}
-
-public class ContinueStatementEvaluator : IContinueStatementEvaluator
-{
-    private ICompilerMessageManger CompilerMessageManger { get; }
-
-    public ContinueStatementEvaluator( ICompilerMessageManger compilerMessageManger )
-    {
-        CompilerMessageManger = compilerMessageManger;
-    }
-
-    public IAstNode Evaluate( IAstVisitor visitor, AstContinueStatementNode statement )
-    {
-        if( !statement.HasParent<AstWhileStatementNode>() )
-        {
-            CompilerMessageManger.Error(
-                statement,
-                CompilerMessageResources.semantic_error_continue_invalid
-            );
-        }
-
-        return statement.Clone<AstContinueStatementNode>();
     }
 }
