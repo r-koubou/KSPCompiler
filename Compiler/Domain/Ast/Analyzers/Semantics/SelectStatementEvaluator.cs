@@ -92,7 +92,7 @@ public class SelectStatementEvaluator : ISelectStatementEvaluator
                 return;
             }
 
-            EvaluateCaseRange( statement, evaluatedCaseFrom, evaluatedCaseTo );
+            EvaluateCaseRange( evaluatedCaseFrom, evaluatedCaseTo );
         }
 
         // case 内のコードブロックの評価
@@ -100,7 +100,7 @@ public class SelectStatementEvaluator : ISelectStatementEvaluator
     }
 
     // from to の値が確定している場合の範囲が正しいかチェック
-    private void EvaluateCaseRange( AstSelectStatementNode statement, AstExpressionNode caseFrom, AstExpressionNode caseTo )
+    private void EvaluateCaseRange( AstExpressionNode caseFrom, AstExpressionNode caseTo )
     {
         if( caseFrom is not AstIntLiteralNode caseFromLiteral )
         {
@@ -116,7 +116,7 @@ public class SelectStatementEvaluator : ISelectStatementEvaluator
         if( caseFromLiteral.Value == caseToLiteral.Value )
         {
             CompilerMessageManger.Warning(
-                statement,
+                caseFrom,
                 CompilerMessageResources.semantic_warning_select_case_from_to_noeffect,
                 caseFromLiteral.Value
             );
@@ -128,7 +128,7 @@ public class SelectStatementEvaluator : ISelectStatementEvaluator
         if( caseFromLiteral.Value > caseToLiteral.Value )
         {
             CompilerMessageManger.Error(
-                statement,
+                caseFrom,
                 CompilerMessageResources.semantic_error_select_case_from_grater,
                 caseFromLiteral.Value
             );
