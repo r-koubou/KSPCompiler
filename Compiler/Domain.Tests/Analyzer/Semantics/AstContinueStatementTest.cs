@@ -1,11 +1,13 @@
 using System;
 
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Conditionals;
+using KSPCompiler.Domain.Ast.Extensions;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols.MetaData;
+using KSPCompiler.Resources;
 
 using NUnit.Framework;
 
@@ -117,6 +119,14 @@ public class ContinueStatementEvaluator : IContinueStatementEvaluator
 
     public IAstNode Evaluate( IAstVisitor visitor, AstContinueStatementNode statement )
     {
-        throw new NotImplementedException();
+        if( !statement.HasParent<AstWhileStatementNode>() )
+        {
+            CompilerMessageManger.Error(
+                statement,
+                CompilerMessageResources.semantic_error_continue_invalid
+            );
+        }
+
+        return statement.Clone<AstContinueStatementNode>();
     }
 }

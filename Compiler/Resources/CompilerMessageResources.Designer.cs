@@ -302,5 +302,11 @@ namespace KSPCompiler.Resources {
                 return ResourceManager.GetString("semantic.error.if.condition.incompatible", resourceCulture);
             }
         }
+        
+        public static string semantic_error_continue_invalid {
+            get {
+                return ResourceManager.GetString("semantic.error.continue.invalid", resourceCulture);
+            }
+        }
     }
 }
