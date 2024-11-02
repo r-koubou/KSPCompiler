@@ -11,8 +11,10 @@ using NUnit.Framework;
 namespace KSPCompiler.Domain.Tests.Analyzer.Semantics;
 
 [TestFixture]
-public class AstStringConcatenateOperatorTest
+public class AstStringConcatenateOperatorEvaluationTest
 {
+    #region Common test methods
+
     private static void ConcatenateOperatorTestBody( AstExpressionNode left, AstExpressionNode right, int expectedErrorCount )
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
@@ -37,6 +39,8 @@ public class AstStringConcatenateOperatorTest
 
         Assert.AreEqual( expectedErrorCount, compilerMessageManger.Count() );
     }
+
+    #endregion
 
     [Test]
     public void StringConcatenateTest()
