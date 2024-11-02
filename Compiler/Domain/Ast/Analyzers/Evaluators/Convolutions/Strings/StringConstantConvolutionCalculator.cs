@@ -44,12 +44,6 @@ public sealed class StringConstantConvolutionCalculator : IStringConstantConvolu
             return result;
         }
 
-        CompilerMessageManger.Error(
-            expr,
-            CompilerMessageResources.semantic_error_variable_not_declared,
-            expr.Name
-        );
-
         return null;
     }
 
@@ -81,7 +75,7 @@ public sealed class StringConstantConvolutionCalculator : IStringConstantConvolu
             return false;
         }
 
-        if( !variable.DataType.IsString() || !variable.Modifier.IsConstant() )
+        if( !variable.Modifier.IsConstant() )
         {
             result = null;
             return false;
