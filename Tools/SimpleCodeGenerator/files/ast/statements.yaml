@@ -86,3 +86,40 @@ classes:
     templates:
       - name: ${TEMPLATE}
 
+  #--------------------------------------------
+  # 代入
+  #--------------------------------------------
+  - name: AssignStatement
+    description: "an assignment (:=)"
+    templates:
+      - name: ${TEMPLATE}
+        suffix: ${NAME_SUFFIX}
+
+  # 代入リスト (KSP非標準)
+  - name: AssignmentExpressionList
+    description: "a comma-separated list of expressions (including assignment expressions)."
+    templates:
+      - name: ${TEMPLATE}
+
+  #--------------------------------------------
+  # 代入演算子 (KSP非標準)
+  #--------------------------------------------
+  - name: AdditionAssignStatement
+    description: "an assignment (+=)"
+    templates:
+      - name: ${TEMPLATE}
+
+  - name: SubtractionAssignStatement
+    description: "an assignment (-=)"
+    templates:
+      - name: ${TEMPLATE}
+
+  - name: MultiplyingAssignStatement
+    description: "an assignment (*=)"
+    templates:
+      - name: ${TEMPLATE}
+
+  - name: DivisionAssignStatement
+    description: "an assignment (/=)"
+    templates:
+      - name: ${TEMPLATE}
