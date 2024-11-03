@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace KSPCompiler.Domain.Tests.Analyzer.Semantics;
 
 [TestFixture]
-public class AstCallKspUserFunctionEvaluationTest
+public class AstCallUserFunctionEvaluationTest
 {
     [Test]
     public void CallFunctionTest()
@@ -17,17 +17,17 @@ public class AstCallKspUserFunctionEvaluationTest
         var symbols = MockUtility.CreateAggregateSymbolTable();
 
         // register function `my_function`
-        var function = MockUtility.CreateKspUserFunction( "my_function" );
+        var function = MockUtility.CreateUserFunction( "my_function" );
 
         // register the function
         symbols.UserFunctions.Add( function );
 
         // Create a call function statement node
         // call my_function
-        var callFunctionAst = MockUtility.CreateCallKspUserFunctionNode( function );
+        var callFunctionAst = MockUtility.CreateCallUserFunctionNode( function );
 
-        var evaluator = new CallKspUserFunctionStatementEvaluator( compilerMessageManger, symbols.UserFunctions );
-        var visitor = new MockCallKspUserFunctionStatementVisitor();
+        var evaluator = new CallUserFunctionEvaluator( compilerMessageManger, symbols.UserFunctions );
+        var visitor = new MockCallUserFunctionStatementVisitor();
 
         visitor.Inject( evaluator );
         evaluator.Evaluate( visitor, callFunctionAst );
@@ -44,14 +44,14 @@ public class AstCallKspUserFunctionEvaluationTest
         var symbols = MockUtility.CreateAggregateSymbolTable();
 
         // Don't register the function for make a error
-        // var function = MockUtility.CreateKspUserFunction( "my_function" );
+        // var function = MockUtility.CreateUserFunction( "my_function" );
         // symbols.UserFunctions.Add( function );
 
         // Creation of a non-existent call command expression node
-        var callFunctionAst = MockUtility.CreateCallKspUserFunctionNode( "my_function" );
+        var callFunctionAst = MockUtility.CreateCallUserFunctionNode( "my_function" );
 
-        var evaluator = new CallKspUserFunctionStatementEvaluator( compilerMessageManger, symbols.UserFunctions );
-        var visitor = new MockCallKspUserFunctionStatementVisitor();
+        var evaluator = new CallUserFunctionEvaluator( compilerMessageManger, symbols.UserFunctions );
+        var visitor = new MockCallUserFunctionStatementVisitor();
 
         visitor.Inject( evaluator );
         evaluator.Evaluate( visitor, callFunctionAst );

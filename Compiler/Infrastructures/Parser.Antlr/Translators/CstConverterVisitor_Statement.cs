@@ -90,9 +90,9 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             return node;
         }
 
-        public override AstNode VisitCallKspUserFunction( KSPParser.CallKspUserFunctionContext context )
+        public override AstNode VisitCallUserFunction( KSPParser.CallUserFunctionContext context )
         {
-            var node = new AstCallKspUserFunctionStatementNode();
+            var node = new AstCallUserFunctionStatementNode();
             node.Import( context );
             node.Name = context.name.Text;
 

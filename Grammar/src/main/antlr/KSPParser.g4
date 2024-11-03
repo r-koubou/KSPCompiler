@@ -143,7 +143,7 @@ statement
     | selectStatement
     | whileStatement
     | continueStatement
-    | callKspUserFunction
+    | callUserFunction
     | expressionStatement
 ;
 
@@ -276,7 +276,7 @@ continueStatement:
 // KSP ユーザー定義関数の呼び出し
 //------------------------------------------------------------------------------
 
-callKspUserFunction:
+callUserFunction:
     CALL MULTI_LINE_DELIMITER* name = IDENTIFIER
 ;
 

@@ -55,7 +55,7 @@ public partial class KSPParser : Parser {
 		RULE_kspPreprocessor = 12, RULE_kspPreprocessorDefine = 13, RULE_kspPreprocessorUndefine = 14, 
 		RULE_kspPreprocessorIfdefine = 15, RULE_kspPreprocessorIfnotDefine = 16, 
 		RULE_ifStatement = 17, RULE_selectStatement = 18, RULE_caseBlock = 19, 
-		RULE_whileStatement = 20, RULE_continueStatement = 21, RULE_callKspUserFunction = 22, 
+		RULE_whileStatement = 20, RULE_continueStatement = 21, RULE_callUserFunction = 22, 
 		RULE_expressionStatement = 23, RULE_primaryExpression = 24, RULE_postfixExpression = 25, 
 		RULE_assignmentExpression = 26, RULE_assignmentExpressionList = 27, RULE_assignmentOperator = 28, 
 		RULE_expression = 29, RULE_expressionList = 30, RULE_stringConcatenateExpression = 31, 
@@ -70,7 +70,7 @@ public partial class KSPParser : Parser {
 		"kspPreprocessor", "kspPreprocessorDefine", "kspPreprocessorUndefine", 
 		"kspPreprocessorIfdefine", "kspPreprocessorIfnotDefine", "ifStatement", 
 		"selectStatement", "caseBlock", "whileStatement", "continueStatement", 
-		"callKspUserFunction", "expressionStatement", "primaryExpression", "postfixExpression", 
+		"callUserFunction", "expressionStatement", "primaryExpression", "postfixExpression", 
 		"assignmentExpression", "assignmentExpressionList", "assignmentOperator", 
 		"expression", "expressionList", "stringConcatenateExpression", "logicalOrExpression", 
 		"logicalAndExpression", "logicalXorExpression", "bitwiseOrExpression", 
@@ -1230,8 +1230,8 @@ public partial class KSPParser : Parser {
 		[System.Diagnostics.DebuggerNonUserCode] public ContinueStatementContext continueStatement() {
 			return GetRuleContext<ContinueStatementContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public CallKspUserFunctionContext callKspUserFunction() {
-			return GetRuleContext<CallKspUserFunctionContext>(0);
+		[System.Diagnostics.DebuggerNonUserCode] public CallUserFunctionContext callUserFunction() {
+			return GetRuleContext<CallUserFunctionContext>(0);
 		}
 		[System.Diagnostics.DebuggerNonUserCode] public ExpressionStatementContext expressionStatement() {
 			return GetRuleContext<ExpressionStatementContext>(0);
@@ -1327,7 +1327,7 @@ public partial class KSPParser : Parser {
 				EnterOuterAlt(_localctx, 9);
 				{
 				State = 268;
-				callKspUserFunction();
+				callUserFunction();
 				}
 				break;
 			case 10:
@@ -2455,7 +2455,7 @@ public partial class KSPParser : Parser {
 		return _localctx;
 	}
 
-	public partial class CallKspUserFunctionContext : ParserRuleContext {
+	public partial class CallUserFunctionContext : ParserRuleContext {
 		public IToken name;
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode CALL() { return GetToken(KSPParser.CALL, 0); }
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode IDENTIFIER() { return GetToken(KSPParser.IDENTIFIER, 0); }
@@ -2463,33 +2463,33 @@ public partial class KSPParser : Parser {
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode MULTI_LINE_DELIMITER(int i) {
 			return GetToken(KSPParser.MULTI_LINE_DELIMITER, i);
 		}
-		public CallKspUserFunctionContext(ParserRuleContext parent, int invokingState)
+		public CallUserFunctionContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_callKspUserFunction; } }
+		public override int RuleIndex { get { return RULE_callUserFunction; } }
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IKSPParserListener typedListener = listener as IKSPParserListener;
-			if (typedListener != null) typedListener.EnterCallKspUserFunction(this);
+			if (typedListener != null) typedListener.EnterCallUserFunction(this);
 		}
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IKSPParserListener typedListener = listener as IKSPParserListener;
-			if (typedListener != null) typedListener.ExitCallKspUserFunction(this);
+			if (typedListener != null) typedListener.ExitCallUserFunction(this);
 		}
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IKSPParserVisitor<TResult> typedVisitor = visitor as IKSPParserVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitCallKspUserFunction(this);
+			if (typedVisitor != null) return typedVisitor.VisitCallUserFunction(this);
 			else return visitor.VisitChildren(this);
 		}
 	}
 
 	[RuleVersion(0)]
-	public CallKspUserFunctionContext callKspUserFunction() {
-		CallKspUserFunctionContext _localctx = new CallKspUserFunctionContext(Context, State);
-		EnterRule(_localctx, 44, RULE_callKspUserFunction);
+	public CallUserFunctionContext callUserFunction() {
+		CallUserFunctionContext _localctx = new CallUserFunctionContext(Context, State);
+		EnterRule(_localctx, 44, RULE_callUserFunction);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);

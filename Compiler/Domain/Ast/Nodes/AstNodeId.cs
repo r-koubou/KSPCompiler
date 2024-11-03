@@ -56,7 +56,7 @@ namespace KSPCompiler.Domain.Ast.Nodes
         IfStatement,
         WhileStatement,
         SelectStatement,
-        CallKspUserFunctionStatement,
+        CallUserFunctionStatement,
         VariableDeclaration,
         VariableInitializer,
         PrimitiveInitializer,

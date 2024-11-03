@@ -339,9 +339,9 @@ namespace KSPCompiler.Resources {
             }
         }
         
-        public static string semantic_error_userfunction_ksp_unknown {
+        public static string semantic_error_userfunction_unknown {
             get {
-                return ResourceManager.GetString("semantic.error.userfunction.ksp.unknown", resourceCulture);
+                return ResourceManager.GetString("semantic.error.userfunction.unknown", resourceCulture);
             }
         }
     }

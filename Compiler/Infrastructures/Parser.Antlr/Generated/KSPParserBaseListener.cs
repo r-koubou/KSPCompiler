@@ -301,17 +301,17 @@ public partial class KSPParserBaseListener : IKSPParserListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitContinueStatement([NotNull] KSPParser.ContinueStatementContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="KSPParser.callKspUserFunction"/>.
+	/// Enter a parse tree produced by <see cref="KSPParser.callUserFunction"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterCallKspUserFunction([NotNull] KSPParser.CallKspUserFunctionContext context) { }
+	public virtual void EnterCallUserFunction([NotNull] KSPParser.CallUserFunctionContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="KSPParser.callKspUserFunction"/>.
+	/// Exit a parse tree produced by <see cref="KSPParser.callUserFunction"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitCallKspUserFunction([NotNull] KSPParser.CallKspUserFunctionContext context) { }
+	public virtual void ExitCallUserFunction([NotNull] KSPParser.CallUserFunctionContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="KSPParser.expressionStatement"/>.
 	/// <para>The default implementation does nothing.</para>
