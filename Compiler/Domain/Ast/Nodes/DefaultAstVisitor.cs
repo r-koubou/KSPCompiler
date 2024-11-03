@@ -160,7 +160,7 @@ public abstract class DefaultAstVisitor : IAstVisitor
     public virtual IAstNode Visit( AstSelectStatementNode node )
         => VisitChildren( node );
 
-    public virtual IAstNode Visit( AstCallKspUserFunctionStatementNode node )
+    public virtual IAstNode Visit( AstCallUserFunctionStatementNode node )
         => VisitChildren( node );
 
     public virtual IAstNode Visit( AstVariableDeclarationNode node )

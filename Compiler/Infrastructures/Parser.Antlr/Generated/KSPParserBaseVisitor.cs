@@ -256,7 +256,7 @@ public partial class KSPParserBaseVisitor<Result> : AbstractParseTreeVisitor<Res
 	/// <return>The visitor result.</return>
 	public virtual Result VisitContinueStatement([NotNull] KSPParser.ContinueStatementContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="KSPParser.callKspUserFunction"/>.
+	/// Visit a parse tree produced by <see cref="KSPParser.callUserFunction"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -264,7 +264,7 @@ public partial class KSPParserBaseVisitor<Result> : AbstractParseTreeVisitor<Res
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitCallKspUserFunction([NotNull] KSPParser.CallKspUserFunctionContext context) { return VisitChildren(context); }
+	public virtual Result VisitCallUserFunction([NotNull] KSPParser.CallUserFunctionContext context) { return VisitChildren(context); }
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="KSPParser.expressionStatement"/>.
 	/// <para>

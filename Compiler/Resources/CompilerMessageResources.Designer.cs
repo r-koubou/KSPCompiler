@@ -338,5 +338,11 @@ namespace KSPCompiler.Resources {
                 return ResourceManager.GetString("semantic.error.select.case.from.grater", resourceCulture);
             }
         }
+        
+        public static string semantic_error_userfunction_unknown {
+            get {
+                return ResourceManager.GetString("semantic.error.userfunction.unknown", resourceCulture);
+            }
+        }
     }
 }

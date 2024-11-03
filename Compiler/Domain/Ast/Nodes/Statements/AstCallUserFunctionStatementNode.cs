@@ -5,7 +5,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
     /// <summary>
     /// AST node representing a call statement
     /// </summary>
-    public class AstCallKspUserFunctionStatementNode : AstStatementNode, INameable
+    public class AstCallUserFunctionStatementNode : AstStatementNode, INameable
     {
         #region INamable
 
@@ -19,14 +19,14 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstCallKspUserFunctionStatementNode()
+        public AstCallUserFunctionStatementNode()
             : this( NullAstNode.Instance ) {}
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstCallKspUserFunctionStatementNode( IAstNode parent )
-            : base( AstNodeId.CallKspUserFunctionStatement, parent )
+        public AstCallUserFunctionStatementNode( IAstNode parent )
+            : base( AstNodeId.CallUserFunctionStatement, parent )
         {
         }
 
