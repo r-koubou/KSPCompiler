@@ -15,7 +15,7 @@ namespace KSPCompiler.Domain.Tests.Analyzer.Semantics;
 [TestFixture]
 public class AstVariableSymbolEvaluationTest
 {
-    private AstExpressionNode VariableSymbolTestBody( VariableSymbol variable )
+    private static AstExpressionNode VariableSymbolTestBody( VariableSymbol variable )
     {
         var visitor = new MockAstSymbolVisitor();
         var compilerMessageManger = ICompilerMessageManger.Default;
@@ -109,5 +109,23 @@ public class AstVariableSymbolEvaluationTest
         Assert.AreEqual( true, result.Constant );
         Assert.IsNotNull( literal );
         Assert.AreEqual( value, literal?.Value );
+    }
+
+    [Test]
+    public void CannotEvaluateNonDeclaredVariableTest()
+    {
+        var visitor = new MockAstSymbolVisitor();
+        var compilerMessageManger = ICompilerMessageManger.Default;
+        var symbolTable = MockUtility.CreateAggregateSymbolTable(); // no variables registered
+
+        var symbolEvaluator = new SymbolEvaluator( compilerMessageManger, symbolTable );
+        visitor.Inject( symbolEvaluator );
+
+        var node = MockUtility.CreateSymbolNode( "$x" );
+        visitor.Visit( node );
+
+        compilerMessageManger.WriteTo( Console.Out );
+
+        Assert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
     }
 }
