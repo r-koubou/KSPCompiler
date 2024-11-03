@@ -343,8 +343,7 @@ public static class MockUtility
         var realConvolutionEvaluator = new RealConvolutionEvaluator();
         var realConditionalBinaryOperatorConvolutionCalculator = new RealConditionalBinaryOperatorConvolutionCalculator( realConvolutionEvaluator );
 
-        return  new BooleanConvolutionEvaluator(
-            visitor,
+        return new BooleanConvolutionEvaluator(
             integerConditionalBinaryOperatorConvolutionCalculator,
             realConditionalBinaryOperatorConvolutionCalculator
         );

@@ -11,7 +11,6 @@ public class ConditionalLogicalOperatorConvolutionCalculator : IConditionalLogic
     private IBooleanConvolutionEvaluator ConvolutionEvaluator { get; }
 
     public ConditionalLogicalOperatorConvolutionCalculator(
-        IAstVisitor visitor,
         IBooleanConvolutionEvaluator convolutionEvaluator )
     {
         ConvolutionEvaluator = convolutionEvaluator;

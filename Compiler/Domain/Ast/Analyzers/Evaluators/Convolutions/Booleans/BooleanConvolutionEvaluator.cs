@@ -14,14 +14,13 @@ public class BooleanConvolutionEvaluator : IBooleanConvolutionEvaluator
     private IBooleanConditionalUnaryOperatorConvolutionCalculator BooleanUnaryOperatorCalculator { get; }
 
     public BooleanConvolutionEvaluator(
-        IAstVisitor visitor,
         IIntegerConditionalBinaryOperatorConvolutionCalculator integerConvolutionEvaluator,
         IRealConditionalBinaryOperatorConvolutionCalculator realConvolutionEvaluator )
     {
         ConstantConvolutionCalculator    = new BooleanConstantConvolutionCalculator();
         IntegerBinaryOperatorCalculator  = integerConvolutionEvaluator;
         RealBinaryOperatorCalculator     = realConvolutionEvaluator;
-        BooleanLogicalOperatorCalculator = new ConditionalLogicalOperatorConvolutionCalculator( visitor, this );
+        BooleanLogicalOperatorCalculator = new ConditionalLogicalOperatorConvolutionCalculator( this );
         BooleanUnaryOperatorCalculator   = new BooleanConditionalUnaryOperatorConvolutionCalculator( this );
     }
 
