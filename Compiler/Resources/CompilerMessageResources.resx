@@ -165,4 +165,7 @@
     <data name="semantic.error.select.case.from.grater" xml:space="preserve">
         <value>case: “from” value is greater than ‘to’ value(={0})</value>
     </data>
+    <data name="semantic.error.userfunction.ksp.unknown" xml:space="preserve">
+        <value>{0}: Function not declared</value>
+    </data>
 </root>

@@ -158,4 +158,7 @@
     <data name="semantic.error.select.case.from.grater" xml:space="preserve">
         <value>case: "from" の値が "to" の値より大きいです (={0})</value>
     </data>
+    <data name="semantic.error.userfunction.ksp.unknown" xml:space="preserve">
+        <value>{0}: 宣言されていない関数です</value>
+    </data>
 </root>
