@@ -15,7 +15,7 @@ namespace KSPCompiler.Domain.Tests.Analyzer.Semantics;
 [TestFixture]
 public class AstVariableSymbolEvaluationTest
 {
-    private AstExpressionNode VariableSymbolTestBody( VariableSymbol variable )
+    private static AstExpressionNode VariableSymbolTestBody( VariableSymbol variable )
     {
         var visitor = new MockAstSymbolVisitor();
         var compilerMessageManger = ICompilerMessageManger.Default;
@@ -58,5 +58,74 @@ public class AstVariableSymbolEvaluationTest
         );
 
         Assert.IsTrue( result.TypeFlag.IsInt() );
+    }
+
+    [TestCase( 123)]
+    [TestCase( -123)]
+    public void EvaluateConvolutionIntVariableTest( int value )
+    {
+        var variable = MockUtility.CreateVariable( "$x", DataTypeFlag.TypeInt );
+        variable.Modifier |= ModifierFlag.Const;
+        variable.Value    =  value;
+        variable.State    = VariableState.Initialized;
+
+        var result = VariableSymbolTestBody( variable );
+        var literal = result as AstIntLiteralNode;
+
+        Assert.AreEqual( true, result.Constant );
+        Assert.IsNotNull( literal );
+        Assert.AreEqual( value, literal?.Value );
+    }
+
+    [TestCase( 1.23)]
+    [TestCase( -1.23)]
+    public void EvaluateConvolutionRealVariableTest( double value )
+    {
+        var variable = MockUtility.CreateRealVariable( "~x" );
+        variable.Modifier |= ModifierFlag.Const;
+        variable.Value    =  value;
+        variable.State    =  VariableState.Initialized;
+
+        var result = VariableSymbolTestBody( variable );
+        var literal = result as AstRealLiteralNode;
+
+        Assert.AreEqual( true, result.Constant );
+        Assert.IsNotNull( literal );
+        Assert.AreEqual( value, literal?.Value );
+    }
+
+    [TestCase( "abc")]
+    [TestCase( "ABC")]
+    public void EvaluateConvolutionStringVariableTest( string value )
+    {
+        var variable = MockUtility.CreateStringVariable( "@x" );
+        variable.Modifier |= ModifierFlag.Const;
+        variable.Value    =  value;
+        variable.State    =  VariableState.Initialized;
+
+        var result = VariableSymbolTestBody( variable );
+        var literal = result as AstStringLiteralNode;
+
+        Assert.AreEqual( true, result.Constant );
+        Assert.IsNotNull( literal );
+        Assert.AreEqual( value, literal?.Value );
+    }
+
+    [Test]
+    public void CannotEvaluateNonDeclaredVariableTest()
+    {
+        var visitor = new MockAstSymbolVisitor();
+        var compilerMessageManger = ICompilerMessageManger.Default;
+        var symbolTable = MockUtility.CreateAggregateSymbolTable(); // no variables registered
+
+        var symbolEvaluator = new SymbolEvaluator( compilerMessageManger, symbolTable );
+        visitor.Inject( symbolEvaluator );
+
+        var node = MockUtility.CreateSymbolNode( "$x" );
+        visitor.Visit( node );
+
+        compilerMessageManger.WriteTo( Console.Out );
+
+        Assert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
     }
 }
