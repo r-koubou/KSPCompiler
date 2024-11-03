@@ -32,9 +32,9 @@ public class AstIntBinaryOperatorConvolutionTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsFalse( compilerMessageManger.Count() > 0 );
+        Assert.AreEqual( 0, compilerMessageManger.Count() );
         Assert.IsNotNull( result );
-        Assert.IsTrue( result?.Value == expected );
+        Assert.AreEqual( expected, result?.Value );
     }
 
     [TestCase( 1, 1,  2 )]
