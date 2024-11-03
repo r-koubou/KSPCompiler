@@ -18,7 +18,7 @@ public class AstUserFunctionDeclarationEvaluationTest
         var compilerMessageManger = ICompilerMessageManger.Default;
         var symbols = MockUtility.CreateAggregateSymbolTable();
 
-        var ast = MockUtility.CreateUserFunctionDeclarationNode( name );
+        var ast = MockUtility.CreateKspUserFunctionDeclarationNode( name );
         var evaluator = new UserFunctionDeclarationEvaluator( compilerMessageManger, symbols.UserFunctions );
         var visitor = new MockDeclarationVisitor();
 
@@ -39,7 +39,7 @@ public class AstUserFunctionDeclarationEvaluationTest
         var compilerMessageManger = ICompilerMessageManger.Default;
         var symbols = MockUtility.CreateAggregateSymbolTable();
 
-        var ast = MockUtility.CreateUserFunctionDeclarationNode( name );
+        var ast = MockUtility.CreateKspUserFunctionDeclarationNode( name );
         var evaluator = new UserFunctionDeclarationEvaluator( compilerMessageManger, symbols.UserFunctions );
         var visitor = new MockDeclarationVisitor();
 

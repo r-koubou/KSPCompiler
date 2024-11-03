@@ -321,19 +321,35 @@ public static class MockUtility
 
     #endregion
 
-    #region User Function
+    #region Ksp User Function
 
-    public static UserFunctionSymbol CreateUserFunction( string name )
+    public static UserFunctionSymbol CreateKspUserFunction( string name )
         => new()
         {
-            Name = name,
+            Name = name
         };
 
-    public static AstUserFunctionDeclarationNode CreateUserFunctionDeclarationNode( string name )
+    public static AstUserFunctionDeclarationNode CreateKspUserFunctionDeclarationNode( string name )
     {
         return new AstUserFunctionDeclarationNode
         {
-            Name = name,
+            Name = name
+        };
+    }
+
+    public static AstCallKspUserFunctionStatementNode CreateCallKspUserFunctionNode( UserFunctionSymbol function )
+    {
+        return new AstCallKspUserFunctionStatementNode
+        {
+            Name = function.Name
+        };
+    }
+
+    public static AstCallKspUserFunctionStatementNode CreateCallKspUserFunctionNode( string name )
+    {
+        return new AstCallKspUserFunctionStatementNode
+        {
+            Name = name
         };
     }
 
