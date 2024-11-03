@@ -56,9 +56,9 @@ classes:
       - name: ${TEMPLATE}
 
   #--------------------------------------------
-  # KSPコマンドコール
+  # KSPユーザー定義関数
   #--------------------------------------------
-  - name: CallKspUserFunctionStatement
+  - name: CallUserFunctionStatement
     description: "a call statement"
     templates:
       - name: ${TEMPLATE}
