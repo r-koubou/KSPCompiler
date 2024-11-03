@@ -1,12 +1,5 @@
-using System;
-
-using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Integers;
-using KSPCompiler.Domain.Ast.Analyzers.Semantics;
-using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
-using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols.MetaData;
-using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 
 using NUnit.Framework;
 
@@ -15,237 +8,35 @@ namespace KSPCompiler.Domain.Tests.Analyzer.Semantics;
 [TestFixture]
 public class AstIntBinaryOperatorEvaluationTest
 {
-
-    #region Mathmatical Operators
-
     [Test]
     public void IntAddOperatorTest()
-    {
-        const string variableName = "$x";
-
-        var compilerMessageManger = ICompilerMessageManger.Default;
-        var visitor = new MockAstBinaryOperatorVisitor();
-
-        var integerConvolutionEvaluator = new IntegerConvolutionEvaluator();
-        var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
-        var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
-            compilerMessageManger,
-            integerConvolutionEvaluator,
-            realConvolutionEvaluator
-        );
-
-        visitor.Inject( binaryOperatorEvaluator );
-
-        var operatorNode = MockUtility.CreateBinaryOperatorNode<AstAdditionExpressionNode>( variableName, DataTypeFlag.TypeInt, new AstIntLiteralNode( 1 ) );
-        var result = visitor.Visit( operatorNode ) as AstExpressionNode;
-
-        compilerMessageManger.WriteTo( Console.Out );
-
-        Assert.IsFalse( compilerMessageManger.Count() > 0 );
-        Assert.IsNotNull( result );
-        Assert.IsTrue( result?.TypeFlag.IsInt() );
-    }
+        => MockUtility.OperatorTestBody<AstAdditionExpressionNode>( ( visitor, node ) => visitor.Visit( node ), 0, DataTypeFlag.TypeInt );
 
     [Test]
     public void IntSubOperatorTest()
-    {
-        const string variableName = "$x";
-
-        var compilerMessageManger = ICompilerMessageManger.Default;
-        var visitor = new MockAstBinaryOperatorVisitor();
-
-        var integerConvolutionEvaluator = new IntegerConvolutionEvaluator();
-        var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
-        var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
-            compilerMessageManger,
-            integerConvolutionEvaluator,
-            realConvolutionEvaluator
-        );
-
-        visitor.Inject( binaryOperatorEvaluator );
-
-        var operatorNode = MockUtility.CreateBinaryOperatorNode<AstSubtractionExpressionNode>( variableName, DataTypeFlag.TypeInt, new AstIntLiteralNode( 1 ) );
-        var result = visitor.Visit( operatorNode ) as AstExpressionNode;
-
-        compilerMessageManger.WriteTo( Console.Out );
-
-        Assert.IsFalse( compilerMessageManger.Count() > 0 );
-        Assert.IsNotNull( result );
-        Assert.IsTrue( result?.TypeFlag.IsInt() );
-    }
+        => MockUtility.OperatorTestBody<AstSubtractionExpressionNode>( ( visitor, node ) => visitor.Visit( node ), 0, DataTypeFlag.TypeInt );
 
     [Test]
     public void IntMulOperatorTest()
-    {
-        const string variableName = "$x";
-
-        var compilerMessageManger = ICompilerMessageManger.Default;
-        var visitor = new MockAstBinaryOperatorVisitor();
-
-        var integerConvolutionEvaluator = new IntegerConvolutionEvaluator();
-        var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
-        var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
-            compilerMessageManger,
-            integerConvolutionEvaluator,
-            realConvolutionEvaluator
-        );
-
-        visitor.Inject( binaryOperatorEvaluator );
-
-        var operatorNode = MockUtility.CreateBinaryOperatorNode<AstMultiplyingExpressionNode>( variableName, DataTypeFlag.TypeInt, new AstIntLiteralNode( 1 ) );
-        var result = visitor.Visit( operatorNode ) as AstExpressionNode;
-
-        compilerMessageManger.WriteTo( Console.Out );
-
-        Assert.IsFalse( compilerMessageManger.Count() > 0 );
-        Assert.IsNotNull( result );
-        Assert.IsTrue( result?.TypeFlag.IsInt() );
-    }
+        => MockUtility.OperatorTestBody<AstMultiplyingExpressionNode>( ( visitor, node ) => visitor.Visit( node ), 0, DataTypeFlag.TypeInt );
 
     [Test]
     public void IntDivOperatorTest()
-    {
-        const string variableName = "$x";
-
-        var compilerMessageManger = ICompilerMessageManger.Default;
-        var visitor = new MockAstBinaryOperatorVisitor();
-
-        var integerConvolutionEvaluator = new IntegerConvolutionEvaluator();
-        var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
-        var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
-            compilerMessageManger,
-            integerConvolutionEvaluator,
-            realConvolutionEvaluator
-        );
-
-        visitor.Inject( binaryOperatorEvaluator );
-
-        var operatorNode = MockUtility.CreateBinaryOperatorNode<AstDivisionExpressionNode>( variableName, DataTypeFlag.TypeInt, new AstIntLiteralNode( 1 ) );
-
-        var result = visitor.Visit( operatorNode ) as AstExpressionNode;
-
-        compilerMessageManger.WriteTo( Console.Out );
-
-        Assert.IsFalse( compilerMessageManger.Count() > 0 );
-        Assert.IsNotNull( result );
-        Assert.IsTrue( result?.TypeFlag.IsInt() );
-    }
+        => MockUtility.OperatorTestBody<AstDivisionExpressionNode>( ( visitor, node ) => visitor.Visit( node ), 0, DataTypeFlag.TypeInt );
 
     [Test]
     public void IntModOperatorTest()
-    {
-        const string variableName = "$x";
-
-        var compilerMessageManger = ICompilerMessageManger.Default;
-        var visitor = new MockAstBinaryOperatorVisitor();
-
-        var integerConvolutionEvaluator = new IntegerConvolutionEvaluator();
-        var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
-        var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
-            compilerMessageManger,
-            integerConvolutionEvaluator,
-            realConvolutionEvaluator
-        );
-
-        visitor.Inject( binaryOperatorEvaluator );
-
-        var operatorNode = MockUtility.CreateBinaryOperatorNode<AstModuloExpressionNode>( variableName, DataTypeFlag.TypeInt, new AstIntLiteralNode( 1 ) );
-
-        var result = visitor.Visit( operatorNode ) as AstExpressionNode;
-
-        compilerMessageManger.WriteTo( Console.Out );
-
-        Assert.IsFalse( compilerMessageManger.Count() > 0 );
-        Assert.IsNotNull( result );
-        Assert.IsTrue( result?.TypeFlag.IsInt() );
-    }
-
-    #endregion ~Mathmatical Operators
+        => MockUtility.OperatorTestBody<AstModuloExpressionNode>( ( visitor, node ) => visitor.Visit( node ), 0, DataTypeFlag.TypeInt );
 
     [Test]
     public void BitwiseOrOperatorTest()
-    {
-        const string variableName = "$x";
-
-        var compilerMessageManger = ICompilerMessageManger.Default;
-        var visitor = new MockAstBinaryOperatorVisitor();
-
-        var integerConvolutionEvaluator = new IntegerConvolutionEvaluator();
-        var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
-        var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
-            compilerMessageManger,
-            integerConvolutionEvaluator,
-            realConvolutionEvaluator
-        );
-
-        visitor.Inject( binaryOperatorEvaluator );
-
-        var operatorNode = MockUtility.CreateBinaryOperatorNode<AstBitwiseOrExpressionNode>( variableName, DataTypeFlag.TypeInt, new AstIntLiteralNode( 1 ) );
-
-        var result = visitor.Visit( operatorNode ) as AstExpressionNode;
-
-        compilerMessageManger.WriteTo( Console.Out );
-
-        Assert.IsFalse( compilerMessageManger.Count() > 0 );
-        Assert.IsNotNull( result );
-        Assert.IsTrue( result?.TypeFlag.IsInt() );
-    }
+        => MockUtility.OperatorTestBody<AstBitwiseOrExpressionNode>( ( visitor, node ) => visitor.Visit( node ), 0, DataTypeFlag.TypeInt );
 
     [Test]
     public void BitwiseAndOperatorTest()
-    {
-        const string variableName = "$x";
-
-        var compilerMessageManger = ICompilerMessageManger.Default;
-        var visitor = new MockAstBinaryOperatorVisitor();
-
-        var integerConvolutionEvaluator = new IntegerConvolutionEvaluator();
-        var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
-        var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
-            compilerMessageManger,
-            integerConvolutionEvaluator,
-            realConvolutionEvaluator
-        );
-
-        visitor.Inject( binaryOperatorEvaluator );
-
-        var operatorNode = MockUtility.CreateBinaryOperatorNode<AstBitwiseAndExpressionNode>( variableName, DataTypeFlag.TypeInt, new AstIntLiteralNode( 1 ) );
-
-        var result = visitor.Visit( operatorNode ) as AstExpressionNode;
-
-        compilerMessageManger.WriteTo( Console.Out );
-
-        Assert.IsFalse( compilerMessageManger.Count() > 0 );
-        Assert.IsNotNull( result );
-        Assert.IsTrue( result?.TypeFlag.IsInt() );
-    }
+        => MockUtility.OperatorTestBody<AstBitwiseAndExpressionNode>( ( visitor, node ) => visitor.Visit( node ), 0, DataTypeFlag.TypeInt );
 
     [Test]
     public void BitwiseXorOperatorTest()
-    {
-        const string variableName = "$x";
-
-        var compilerMessageManger = ICompilerMessageManger.Default;
-        var visitor = new MockAstBinaryOperatorVisitor();
-
-        var integerConvolutionEvaluator = new IntegerConvolutionEvaluator();
-        var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
-        var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
-            compilerMessageManger,
-            integerConvolutionEvaluator,
-            realConvolutionEvaluator
-        );
-
-        visitor.Inject( binaryOperatorEvaluator );
-
-        var operatorNode = MockUtility.CreateBinaryOperatorNode<AstBitwiseXorExpressionNode>( variableName, DataTypeFlag.TypeInt, new AstIntLiteralNode( 1 ) );
-
-        var result = visitor.Visit( operatorNode ) as AstExpressionNode;
-
-        compilerMessageManger.WriteTo( Console.Out );
-
-        Assert.IsFalse( compilerMessageManger.Count() > 0 );
-        Assert.IsNotNull( result );
-        Assert.IsTrue( result?.TypeFlag.IsInt() );
-    }
+        => MockUtility.OperatorTestBody<AstBitwiseXorExpressionNode>( ( visitor, node ) => visitor.Visit( node ), 0, DataTypeFlag.TypeInt );
 }

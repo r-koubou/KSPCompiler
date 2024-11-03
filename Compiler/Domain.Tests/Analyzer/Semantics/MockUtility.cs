@@ -1,14 +1,20 @@
+using System;
+
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Booleans;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Conditions;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Integers;
 using KSPCompiler.Domain.Ast.Analyzers.Evaluators.Convolutions.Reals;
+using KSPCompiler.Domain.Ast.Analyzers.Semantics;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
+
+using NUnit.Framework;
 
 namespace KSPCompiler.Domain.Tests.Analyzer.Semantics;
 
@@ -350,4 +356,47 @@ public static class MockUtility
     }
 
     #endregion ~Convolutions
+
+    #region Operators
+
+    public static void OperatorTestBody<TOperatorNode>( Func<IAstVisitor, TOperatorNode, IAstNode> visitImpl, int expectedErrorCount, DataTypeFlag expectedEvaluatedType )
+        where TOperatorNode : AstExpressionNode, new()
+    {
+        var compilerMessageManger = ICompilerMessageManger.Default;
+        var visitor = new MockAstBinaryOperatorVisitor();
+
+        var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
+            compilerMessageManger,
+            new MockIntegerConvolutionEvaluator(),
+            new RealConvolutionEvaluator()
+        );
+
+        visitor.Inject( binaryOperatorEvaluator );
+
+        var ast = new TOperatorNode();
+
+        switch( expectedEvaluatedType )
+        {
+            case DataTypeFlag.TypeInt:
+                ast.Left = new AstIntLiteralNode( 1 );
+                ast.Right = new AstIntLiteralNode( 2 );
+                break;
+            case DataTypeFlag.TypeReal:
+                ast.Left = new AstRealLiteralNode( 1 );
+                ast.Right = new AstRealLiteralNode( 2 );
+                break;
+            default:
+                throw new ArgumentException();
+        }
+
+        var result = visitImpl( visitor, ast ) as AstExpressionNode;
+
+        compilerMessageManger.WriteTo( Console.Out );
+
+        Assert.AreEqual( expectedErrorCount, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        Assert.IsNotNull( result );
+        Assert.AreEqual( expectedEvaluatedType, result?.TypeFlag );
+    }
+
+    #endregion |~Operators
 }
