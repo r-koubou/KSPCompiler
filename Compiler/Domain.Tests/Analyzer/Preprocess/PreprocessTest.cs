@@ -49,6 +49,7 @@ public class PreprocessTest
 
         analyzer.Traverse( ast );
 
+        Assert.AreEqual( 1, symbolTable.Count );
         Assert.AreEqual( expectedIgnored, ifdef.Ignore );
     }
 
@@ -90,6 +91,7 @@ public class PreprocessTest
 
         analyzer.Traverse( ast );
 
+        Assert.AreEqual( 1,               symbolTable.Count );
         Assert.AreEqual( expectedIgnored, ifdef.Ignore );
     }
 }
