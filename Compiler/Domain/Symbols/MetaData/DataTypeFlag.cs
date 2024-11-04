@@ -17,11 +17,11 @@ public enum DataTypeFlag : uint
     TypeReal                    = 1 << 2,
     TypeBool                    = 1 << 3,
     TypeVoid                    = 1 << 4,
-    TypeKspPreprocessorSymbol   = 1 << 5,
+    TypePreprocessorSymbol   = 1 << 5,
     TypePgsId                   = 1 << 6,
     TypeMask                    = 0x7fffff,
     TypeNumerical               = TypeInt | TypeReal,
-    TypeNonVariable             = TypeKspPreprocessorSymbol | TypePgsId,
+    TypeNonVariable             = TypePreprocessorSymbol | TypePgsId,
     MultipleType                = 0x00ffffff & ~TypeNonVariable,
     #endregion
 

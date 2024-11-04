@@ -105,35 +105,35 @@ public interface IKSPParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitStatement([NotNull] KSPParser.StatementContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="KSPParser.kspPreprocessor"/>.
+	/// Visit a parse tree produced by <see cref="KSPParser.preprocessor"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitKspPreprocessor([NotNull] KSPParser.KspPreprocessorContext context);
+	Result VisitPreprocessor([NotNull] KSPParser.PreprocessorContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="KSPParser.kspPreprocessorDefine"/>.
+	/// Visit a parse tree produced by <see cref="KSPParser.preprocessorDefine"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitKspPreprocessorDefine([NotNull] KSPParser.KspPreprocessorDefineContext context);
+	Result VisitPreprocessorDefine([NotNull] KSPParser.PreprocessorDefineContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="KSPParser.kspPreprocessorUndefine"/>.
+	/// Visit a parse tree produced by <see cref="KSPParser.preprocessorUndefine"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitKspPreprocessorUndefine([NotNull] KSPParser.KspPreprocessorUndefineContext context);
+	Result VisitPreprocessorUndefine([NotNull] KSPParser.PreprocessorUndefineContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="KSPParser.kspPreprocessorIfdefine"/>.
+	/// Visit a parse tree produced by <see cref="KSPParser.preprocessorIfdefine"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitKspPreprocessorIfdefine([NotNull] KSPParser.KspPreprocessorIfdefineContext context);
+	Result VisitPreprocessorIfdefine([NotNull] KSPParser.PreprocessorIfdefineContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="KSPParser.kspPreprocessorIfnotDefine"/>.
+	/// Visit a parse tree produced by <see cref="KSPParser.preprocessorIfnotDefine"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitKspPreprocessorIfnotDefine([NotNull] KSPParser.KspPreprocessorIfnotDefineContext context);
+	Result VisitPreprocessorIfnotDefine([NotNull] KSPParser.PreprocessorIfnotDefineContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="KSPParser.ifStatement"/>.
 	/// </summary>

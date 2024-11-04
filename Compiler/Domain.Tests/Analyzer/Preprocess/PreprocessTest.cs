@@ -33,16 +33,16 @@ public class PreprocessTest
 
         callBack.Name = "init";
         callBack.Block.Statements.Add(
-            new AstKspPreprocessorDefineNode( callBack, registerSymbolName )
+            new AstPreprocessorDefineNode( callBack, registerSymbolName )
         );
 
         var symbol = new AstSymbolExpressionNode
         {
             Name = evaluateSymbolName,
-            TypeFlag = DataTypeFlag.TypeKspPreprocessorSymbol
+            TypeFlag = DataTypeFlag.TypePreprocessorSymbol
         };
 
-        var ifdef = new AstKspPreprocessorIfdefineNode( callBack, symbol );
+        var ifdef = new AstPreprocessorIfdefineNode( callBack, symbol );
         callBack.Block.Statements.Add( ifdef);
 
         ast.GlobalBlocks.Add( callBack );
@@ -75,16 +75,16 @@ public class PreprocessTest
 
         callBack.Name = "init";
         callBack.Block.Statements.Add(
-            new AstKspPreprocessorDefineNode( callBack, registerSymbolName )
+            new AstPreprocessorDefineNode( callBack, registerSymbolName )
         );
 
         var symbol = new AstSymbolExpressionNode
         {
             Name     = evaluateSymbolName,
-            TypeFlag = DataTypeFlag.TypeKspPreprocessorSymbol
+            TypeFlag = DataTypeFlag.TypePreprocessorSymbol
         };
 
-        var ifdef = new AstKspPreprocessorIfnotDefineNode( callBack, symbol );
+        var ifdef = new AstPreprocessorIfnotDefineNode( callBack, symbol );
         callBack.Block.Statements.Add( ifdef);
 
         ast.GlobalBlocks.Add( callBack );
@@ -115,10 +115,10 @@ public class PreprocessTest
 
         callBack.Name = "init";
         callBack.Block.Statements.Add(
-            new AstKspPreprocessorDefineNode( callBack, symbolName )
+            new AstPreprocessorDefineNode( callBack, symbolName )
         );
 
-        var undef = new AstKspPreprocessorUndefineNode( callBack, symbolName );
+        var undef = new AstPreprocessorUndefineNode( callBack, symbolName );
         callBack.Block.Statements.Add( undef);
 
         ast.GlobalBlocks.Add( callBack );

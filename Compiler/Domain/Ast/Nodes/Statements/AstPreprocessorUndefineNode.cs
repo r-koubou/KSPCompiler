@@ -6,7 +6,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
     /// <summary>
     /// AST node representing a KSP Preprocessor: RESET_CONDITION
     /// </summary>
-    public class AstKspPreprocessorUndefineNode : AstStatementNode
+    public class AstPreprocessorUndefineNode : AstStatementNode
     {
         /// <summary>
         /// preprocessor symbol
@@ -16,25 +16,25 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstKspPreprocessorUndefineNode()
+        public AstPreprocessorUndefineNode()
             : this( NullAstNode.Instance, string.Empty ) {}
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstKspPreprocessorUndefineNode( string name )
+        public AstPreprocessorUndefineNode( string name )
             : this( NullAstNode.Instance, name ) {}
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstKspPreprocessorUndefineNode( IAstNode parent, string name )
-            : base( AstNodeId.KspPreprocessorDefine, parent )
+        public AstPreprocessorUndefineNode( IAstNode parent, string name )
+            : base( AstNodeId.PreprocessorDefine, parent )
         {
             Symbol = new AstSymbolExpressionNode
             {
                 Parent   = this,
-                TypeFlag = DataTypeFlag.TypeKspPreprocessorSymbol,
+                TypeFlag = DataTypeFlag.TypePreprocessorSymbol,
                 Name     = name
             };
         }

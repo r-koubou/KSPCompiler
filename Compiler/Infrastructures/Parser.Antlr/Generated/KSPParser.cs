@@ -52,30 +52,29 @@ public partial class KSPParser : Parser {
 		RULE_argumentDefinitionList = 3, RULE_userFunctionDeclaration = 4, RULE_block = 5, 
 		RULE_variableDeclaration = 6, RULE_variableInitializer = 7, RULE_primitiveInitializer = 8, 
 		RULE_arrayInitializer = 9, RULE_uiInitializer = 10, RULE_statement = 11, 
-		RULE_kspPreprocessor = 12, RULE_kspPreprocessorDefine = 13, RULE_kspPreprocessorUndefine = 14, 
-		RULE_kspPreprocessorIfdefine = 15, RULE_kspPreprocessorIfnotDefine = 16, 
-		RULE_ifStatement = 17, RULE_selectStatement = 18, RULE_caseBlock = 19, 
-		RULE_whileStatement = 20, RULE_continueStatement = 21, RULE_callUserFunction = 22, 
-		RULE_expressionStatement = 23, RULE_primaryExpression = 24, RULE_postfixExpression = 25, 
-		RULE_assignmentExpression = 26, RULE_assignmentExpressionList = 27, RULE_assignmentOperator = 28, 
-		RULE_expression = 29, RULE_expressionList = 30, RULE_stringConcatenateExpression = 31, 
-		RULE_logicalOrExpression = 32, RULE_logicalAndExpression = 33, RULE_logicalXorExpression = 34, 
-		RULE_bitwiseOrExpression = 35, RULE_bitwiseAndExpression = 36, RULE_bitwiseXorExpression = 37, 
-		RULE_equalityExpression = 38, RULE_relationalExpression = 39, RULE_additiveExpression = 40, 
-		RULE_multiplicativeExpression = 41, RULE_unaryExpression = 42;
+		RULE_preprocessor = 12, RULE_preprocessorDefine = 13, RULE_preprocessorUndefine = 14, 
+		RULE_preprocessorIfdefine = 15, RULE_preprocessorIfnotDefine = 16, RULE_ifStatement = 17, 
+		RULE_selectStatement = 18, RULE_caseBlock = 19, RULE_whileStatement = 20, 
+		RULE_continueStatement = 21, RULE_callUserFunction = 22, RULE_expressionStatement = 23, 
+		RULE_primaryExpression = 24, RULE_postfixExpression = 25, RULE_assignmentExpression = 26, 
+		RULE_assignmentExpressionList = 27, RULE_assignmentOperator = 28, RULE_expression = 29, 
+		RULE_expressionList = 30, RULE_stringConcatenateExpression = 31, RULE_logicalOrExpression = 32, 
+		RULE_logicalAndExpression = 33, RULE_logicalXorExpression = 34, RULE_bitwiseOrExpression = 35, 
+		RULE_bitwiseAndExpression = 36, RULE_bitwiseXorExpression = 37, RULE_equalityExpression = 38, 
+		RULE_relationalExpression = 39, RULE_additiveExpression = 40, RULE_multiplicativeExpression = 41, 
+		RULE_unaryExpression = 42;
 	public static readonly string[] ruleNames = {
 		"compilationUnit", "declarationModifier", "callbackDeclaration", "argumentDefinitionList", 
 		"userFunctionDeclaration", "block", "variableDeclaration", "variableInitializer", 
 		"primitiveInitializer", "arrayInitializer", "uiInitializer", "statement", 
-		"kspPreprocessor", "kspPreprocessorDefine", "kspPreprocessorUndefine", 
-		"kspPreprocessorIfdefine", "kspPreprocessorIfnotDefine", "ifStatement", 
-		"selectStatement", "caseBlock", "whileStatement", "continueStatement", 
-		"callUserFunction", "expressionStatement", "primaryExpression", "postfixExpression", 
-		"assignmentExpression", "assignmentExpressionList", "assignmentOperator", 
-		"expression", "expressionList", "stringConcatenateExpression", "logicalOrExpression", 
-		"logicalAndExpression", "logicalXorExpression", "bitwiseOrExpression", 
-		"bitwiseAndExpression", "bitwiseXorExpression", "equalityExpression", 
-		"relationalExpression", "additiveExpression", "multiplicativeExpression", 
+		"preprocessor", "preprocessorDefine", "preprocessorUndefine", "preprocessorIfdefine", 
+		"preprocessorIfnotDefine", "ifStatement", "selectStatement", "caseBlock", 
+		"whileStatement", "continueStatement", "callUserFunction", "expressionStatement", 
+		"primaryExpression", "postfixExpression", "assignmentExpression", "assignmentExpressionList", 
+		"assignmentOperator", "expression", "expressionList", "stringConcatenateExpression", 
+		"logicalOrExpression", "logicalAndExpression", "logicalXorExpression", 
+		"bitwiseOrExpression", "bitwiseAndExpression", "bitwiseXorExpression", 
+		"equalityExpression", "relationalExpression", "additiveExpression", "multiplicativeExpression", 
 		"unaryExpression"
 	};
 
@@ -1229,8 +1228,8 @@ public partial class KSPParser : Parser {
 		[System.Diagnostics.DebuggerNonUserCode] public VariableDeclarationContext variableDeclaration() {
 			return GetRuleContext<VariableDeclarationContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public KspPreprocessorContext kspPreprocessor() {
-			return GetRuleContext<KspPreprocessorContext>(0);
+		[System.Diagnostics.DebuggerNonUserCode] public PreprocessorContext preprocessor() {
+			return GetRuleContext<PreprocessorContext>(0);
 		}
 		[System.Diagnostics.DebuggerNonUserCode] public IfStatementContext ifStatement() {
 			return GetRuleContext<IfStatementContext>(0);
@@ -1306,7 +1305,7 @@ public partial class KSPParser : Parser {
 				EnterOuterAlt(_localctx, 4);
 				{
 				State = 267;
-				kspPreprocessor();
+				preprocessor();
 				}
 				break;
 			case 5:
@@ -1364,46 +1363,46 @@ public partial class KSPParser : Parser {
 		return _localctx;
 	}
 
-	public partial class KspPreprocessorContext : ParserRuleContext {
-		[System.Diagnostics.DebuggerNonUserCode] public KspPreprocessorDefineContext kspPreprocessorDefine() {
-			return GetRuleContext<KspPreprocessorDefineContext>(0);
+	public partial class PreprocessorContext : ParserRuleContext {
+		[System.Diagnostics.DebuggerNonUserCode] public PreprocessorDefineContext preprocessorDefine() {
+			return GetRuleContext<PreprocessorDefineContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public KspPreprocessorUndefineContext kspPreprocessorUndefine() {
-			return GetRuleContext<KspPreprocessorUndefineContext>(0);
+		[System.Diagnostics.DebuggerNonUserCode] public PreprocessorUndefineContext preprocessorUndefine() {
+			return GetRuleContext<PreprocessorUndefineContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public KspPreprocessorIfdefineContext kspPreprocessorIfdefine() {
-			return GetRuleContext<KspPreprocessorIfdefineContext>(0);
+		[System.Diagnostics.DebuggerNonUserCode] public PreprocessorIfdefineContext preprocessorIfdefine() {
+			return GetRuleContext<PreprocessorIfdefineContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public KspPreprocessorIfnotDefineContext kspPreprocessorIfnotDefine() {
-			return GetRuleContext<KspPreprocessorIfnotDefineContext>(0);
+		[System.Diagnostics.DebuggerNonUserCode] public PreprocessorIfnotDefineContext preprocessorIfnotDefine() {
+			return GetRuleContext<PreprocessorIfnotDefineContext>(0);
 		}
-		public KspPreprocessorContext(ParserRuleContext parent, int invokingState)
+		public PreprocessorContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_kspPreprocessor; } }
+		public override int RuleIndex { get { return RULE_preprocessor; } }
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IKSPParserListener typedListener = listener as IKSPParserListener;
-			if (typedListener != null) typedListener.EnterKspPreprocessor(this);
+			if (typedListener != null) typedListener.EnterPreprocessor(this);
 		}
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IKSPParserListener typedListener = listener as IKSPParserListener;
-			if (typedListener != null) typedListener.ExitKspPreprocessor(this);
+			if (typedListener != null) typedListener.ExitPreprocessor(this);
 		}
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IKSPParserVisitor<TResult> typedVisitor = visitor as IKSPParserVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitKspPreprocessor(this);
+			if (typedVisitor != null) return typedVisitor.VisitPreprocessor(this);
 			else return visitor.VisitChildren(this);
 		}
 	}
 
 	[RuleVersion(0)]
-	public KspPreprocessorContext kspPreprocessor() {
-		KspPreprocessorContext _localctx = new KspPreprocessorContext(Context, State);
-		EnterRule(_localctx, 24, RULE_kspPreprocessor);
+	public PreprocessorContext preprocessor() {
+		PreprocessorContext _localctx = new PreprocessorContext(Context, State);
+		EnterRule(_localctx, 24, RULE_preprocessor);
 		try {
 			State = 280;
 			ErrorHandler.Sync(this);
@@ -1412,28 +1411,28 @@ public partial class KSPParser : Parser {
 				EnterOuterAlt(_localctx, 1);
 				{
 				State = 276;
-				kspPreprocessorDefine();
+				preprocessorDefine();
 				}
 				break;
 			case PREPROCESSOR_RESET_COND:
 				EnterOuterAlt(_localctx, 2);
 				{
 				State = 277;
-				kspPreprocessorUndefine();
+				preprocessorUndefine();
 				}
 				break;
 			case PREPROCESSOR_CODE_IF:
 				EnterOuterAlt(_localctx, 3);
 				{
 				State = 278;
-				kspPreprocessorIfdefine();
+				preprocessorIfdefine();
 				}
 				break;
 			case PREPROCESSOR_CODE_IF_NOT:
 				EnterOuterAlt(_localctx, 4);
 				{
 				State = 279;
-				kspPreprocessorIfnotDefine();
+				preprocessorIfnotDefine();
 				}
 				break;
 			default:
@@ -1451,7 +1450,7 @@ public partial class KSPParser : Parser {
 		return _localctx;
 	}
 
-	public partial class KspPreprocessorDefineContext : ParserRuleContext {
+	public partial class PreprocessorDefineContext : ParserRuleContext {
 		public IToken symbol;
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode PREPROCESSOR_SET_COND() { return GetToken(KSPParser.PREPROCESSOR_SET_COND, 0); }
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode LPARENT() { return GetToken(KSPParser.LPARENT, 0); }
@@ -1461,33 +1460,33 @@ public partial class KSPParser : Parser {
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode MULTI_LINE_DELIMITER(int i) {
 			return GetToken(KSPParser.MULTI_LINE_DELIMITER, i);
 		}
-		public KspPreprocessorDefineContext(ParserRuleContext parent, int invokingState)
+		public PreprocessorDefineContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_kspPreprocessorDefine; } }
+		public override int RuleIndex { get { return RULE_preprocessorDefine; } }
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IKSPParserListener typedListener = listener as IKSPParserListener;
-			if (typedListener != null) typedListener.EnterKspPreprocessorDefine(this);
+			if (typedListener != null) typedListener.EnterPreprocessorDefine(this);
 		}
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IKSPParserListener typedListener = listener as IKSPParserListener;
-			if (typedListener != null) typedListener.ExitKspPreprocessorDefine(this);
+			if (typedListener != null) typedListener.ExitPreprocessorDefine(this);
 		}
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IKSPParserVisitor<TResult> typedVisitor = visitor as IKSPParserVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitKspPreprocessorDefine(this);
+			if (typedVisitor != null) return typedVisitor.VisitPreprocessorDefine(this);
 			else return visitor.VisitChildren(this);
 		}
 	}
 
 	[RuleVersion(0)]
-	public KspPreprocessorDefineContext kspPreprocessorDefine() {
-		KspPreprocessorDefineContext _localctx = new KspPreprocessorDefineContext(Context, State);
-		EnterRule(_localctx, 26, RULE_kspPreprocessorDefine);
+	public PreprocessorDefineContext preprocessorDefine() {
+		PreprocessorDefineContext _localctx = new PreprocessorDefineContext(Context, State);
+		EnterRule(_localctx, 26, RULE_preprocessorDefine);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
@@ -1555,7 +1554,7 @@ public partial class KSPParser : Parser {
 		return _localctx;
 	}
 
-	public partial class KspPreprocessorUndefineContext : ParserRuleContext {
+	public partial class PreprocessorUndefineContext : ParserRuleContext {
 		public IToken symbol;
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode PREPROCESSOR_RESET_COND() { return GetToken(KSPParser.PREPROCESSOR_RESET_COND, 0); }
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode LPARENT() { return GetToken(KSPParser.LPARENT, 0); }
@@ -1565,33 +1564,33 @@ public partial class KSPParser : Parser {
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode MULTI_LINE_DELIMITER(int i) {
 			return GetToken(KSPParser.MULTI_LINE_DELIMITER, i);
 		}
-		public KspPreprocessorUndefineContext(ParserRuleContext parent, int invokingState)
+		public PreprocessorUndefineContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_kspPreprocessorUndefine; } }
+		public override int RuleIndex { get { return RULE_preprocessorUndefine; } }
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IKSPParserListener typedListener = listener as IKSPParserListener;
-			if (typedListener != null) typedListener.EnterKspPreprocessorUndefine(this);
+			if (typedListener != null) typedListener.EnterPreprocessorUndefine(this);
 		}
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IKSPParserListener typedListener = listener as IKSPParserListener;
-			if (typedListener != null) typedListener.ExitKspPreprocessorUndefine(this);
+			if (typedListener != null) typedListener.ExitPreprocessorUndefine(this);
 		}
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IKSPParserVisitor<TResult> typedVisitor = visitor as IKSPParserVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitKspPreprocessorUndefine(this);
+			if (typedVisitor != null) return typedVisitor.VisitPreprocessorUndefine(this);
 			else return visitor.VisitChildren(this);
 		}
 	}
 
 	[RuleVersion(0)]
-	public KspPreprocessorUndefineContext kspPreprocessorUndefine() {
-		KspPreprocessorUndefineContext _localctx = new KspPreprocessorUndefineContext(Context, State);
-		EnterRule(_localctx, 28, RULE_kspPreprocessorUndefine);
+	public PreprocessorUndefineContext preprocessorUndefine() {
+		PreprocessorUndefineContext _localctx = new PreprocessorUndefineContext(Context, State);
+		EnterRule(_localctx, 28, RULE_preprocessorUndefine);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
@@ -1659,7 +1658,7 @@ public partial class KSPParser : Parser {
 		return _localctx;
 	}
 
-	public partial class KspPreprocessorIfdefineContext : ParserRuleContext {
+	public partial class PreprocessorIfdefineContext : ParserRuleContext {
 		public IToken symbol;
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode PREPROCESSOR_CODE_IF() { return GetToken(KSPParser.PREPROCESSOR_CODE_IF, 0); }
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode LPARENT() { return GetToken(KSPParser.LPARENT, 0); }
@@ -1673,33 +1672,33 @@ public partial class KSPParser : Parser {
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode MULTI_LINE_DELIMITER(int i) {
 			return GetToken(KSPParser.MULTI_LINE_DELIMITER, i);
 		}
-		public KspPreprocessorIfdefineContext(ParserRuleContext parent, int invokingState)
+		public PreprocessorIfdefineContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_kspPreprocessorIfdefine; } }
+		public override int RuleIndex { get { return RULE_preprocessorIfdefine; } }
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IKSPParserListener typedListener = listener as IKSPParserListener;
-			if (typedListener != null) typedListener.EnterKspPreprocessorIfdefine(this);
+			if (typedListener != null) typedListener.EnterPreprocessorIfdefine(this);
 		}
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IKSPParserListener typedListener = listener as IKSPParserListener;
-			if (typedListener != null) typedListener.ExitKspPreprocessorIfdefine(this);
+			if (typedListener != null) typedListener.ExitPreprocessorIfdefine(this);
 		}
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IKSPParserVisitor<TResult> typedVisitor = visitor as IKSPParserVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitKspPreprocessorIfdefine(this);
+			if (typedVisitor != null) return typedVisitor.VisitPreprocessorIfdefine(this);
 			else return visitor.VisitChildren(this);
 		}
 	}
 
 	[RuleVersion(0)]
-	public KspPreprocessorIfdefineContext kspPreprocessorIfdefine() {
-		KspPreprocessorIfdefineContext _localctx = new KspPreprocessorIfdefineContext(Context, State);
-		EnterRule(_localctx, 30, RULE_kspPreprocessorIfdefine);
+	public PreprocessorIfdefineContext preprocessorIfdefine() {
+		PreprocessorIfdefineContext _localctx = new PreprocessorIfdefineContext(Context, State);
+		EnterRule(_localctx, 30, RULE_preprocessorIfdefine);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
@@ -1771,7 +1770,7 @@ public partial class KSPParser : Parser {
 		return _localctx;
 	}
 
-	public partial class KspPreprocessorIfnotDefineContext : ParserRuleContext {
+	public partial class PreprocessorIfnotDefineContext : ParserRuleContext {
 		public IToken symbol;
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode PREPROCESSOR_CODE_IF_NOT() { return GetToken(KSPParser.PREPROCESSOR_CODE_IF_NOT, 0); }
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode LPARENT() { return GetToken(KSPParser.LPARENT, 0); }
@@ -1785,33 +1784,33 @@ public partial class KSPParser : Parser {
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode MULTI_LINE_DELIMITER(int i) {
 			return GetToken(KSPParser.MULTI_LINE_DELIMITER, i);
 		}
-		public KspPreprocessorIfnotDefineContext(ParserRuleContext parent, int invokingState)
+		public PreprocessorIfnotDefineContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
-		public override int RuleIndex { get { return RULE_kspPreprocessorIfnotDefine; } }
+		public override int RuleIndex { get { return RULE_preprocessorIfnotDefine; } }
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IKSPParserListener typedListener = listener as IKSPParserListener;
-			if (typedListener != null) typedListener.EnterKspPreprocessorIfnotDefine(this);
+			if (typedListener != null) typedListener.EnterPreprocessorIfnotDefine(this);
 		}
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IKSPParserListener typedListener = listener as IKSPParserListener;
-			if (typedListener != null) typedListener.ExitKspPreprocessorIfnotDefine(this);
+			if (typedListener != null) typedListener.ExitPreprocessorIfnotDefine(this);
 		}
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IKSPParserVisitor<TResult> typedVisitor = visitor as IKSPParserVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitKspPreprocessorIfnotDefine(this);
+			if (typedVisitor != null) return typedVisitor.VisitPreprocessorIfnotDefine(this);
 			else return visitor.VisitChildren(this);
 		}
 	}
 
 	[RuleVersion(0)]
-	public KspPreprocessorIfnotDefineContext kspPreprocessorIfnotDefine() {
-		KspPreprocessorIfnotDefineContext _localctx = new KspPreprocessorIfnotDefineContext(Context, State);
-		EnterRule(_localctx, 32, RULE_kspPreprocessorIfnotDefine);
+	public PreprocessorIfnotDefineContext preprocessorIfnotDefine() {
+		PreprocessorIfnotDefineContext _localctx = new PreprocessorIfnotDefineContext(Context, State);
+		EnterRule(_localctx, 32, RULE_preprocessorIfnotDefine);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);

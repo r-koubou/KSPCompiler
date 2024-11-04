@@ -12,7 +12,7 @@ using NUnit.Framework;
 namespace KSPCompiler.Domain.Tests.Analyzer.Semantics;
 
 [TestFixture]
-public class AstKspPreProcessorSymbolEvaluationTest
+public class AstPreProcessorSymbolEvaluationTest
 {
     private AstExpressionNode PreProcessorSymbolTestBody(
         AstSymbolExpressionNode expr,
@@ -35,7 +35,7 @@ public class AstKspPreProcessorSymbolEvaluationTest
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
-        var symbol = new KspPreProcessorSymbol{ Name = "TEST" };
+        var symbol = new PreProcessorSymbol{ Name = "TEST" };
         symbolTable.PreProcessorSymbols.Add( symbol );
 
         var symbolExpr = new AstSymbolExpressionNode( symbol.Name, NullAstExpressionNode.Instance );
@@ -44,7 +44,7 @@ public class AstKspPreProcessorSymbolEvaluationTest
             symbolTable,
             compilerMessageManger );
 
-        Assert.IsTrue( result.TypeFlag == DataTypeFlag.TypeKspPreprocessorSymbol );
+        Assert.IsTrue( result.TypeFlag == DataTypeFlag.TypePreprocessorSymbol );
         Assert.IsTrue( compilerMessageManger.Count( CompilerMessageLevel.Error ) == 0 );
     }
 }

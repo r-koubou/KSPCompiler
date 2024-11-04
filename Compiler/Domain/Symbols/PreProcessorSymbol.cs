@@ -2,15 +2,15 @@ using KSPCompiler.Domain.Symbols.MetaData;
 
 namespace KSPCompiler.Domain.Symbols;
 
-public class KspPreProcessorSymbol : SymbolBase
+public class PreProcessorSymbol : SymbolBase
 {
     #region Properties
 
     public override SymbolType Type
-        => SymbolType.KspPreprocessor;
+        => SymbolType.Preprocessor;
 
     public override DataTypeFlag DataType
-        => DataTypeFlag.TypeKspPreprocessorSymbol;
+        => DataTypeFlag.TypePreprocessorSymbol;
 
     #endregion ~ Properties
 

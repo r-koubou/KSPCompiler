@@ -8,9 +8,9 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
     // implementation of the statement node
     public partial class CstConverterVisitor
     {
-        public override AstNode VisitKspPreprocessorDefine( KSPParser.KspPreprocessorDefineContext context )
+        public override AstNode VisitPreprocessorDefine( KSPParser.PreprocessorDefineContext context )
         {
-            var node = new AstKspPreprocessorDefineNode();
+            var node = new AstPreprocessorDefineNode();
 
             node.Import( context );
             node.Symbol.Import( context.symbol );
@@ -19,9 +19,9 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             return node;
         }
 
-        public override AstNode VisitKspPreprocessorUndefine( KSPParser.KspPreprocessorUndefineContext context )
+        public override AstNode VisitPreprocessorUndefine( KSPParser.PreprocessorUndefineContext context )
         {
-            var node = new AstKspPreprocessorUndefineNode();
+            var node = new AstPreprocessorUndefineNode();
 
             node.Import( context );
             node.Symbol.Import( context.symbol );
@@ -30,9 +30,9 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             return node;
         }
 
-        public override AstNode VisitKspPreprocessorIfdefine( KSPParser.KspPreprocessorIfdefineContext context )
+        public override AstNode VisitPreprocessorIfdefine( KSPParser.PreprocessorIfdefineContext context )
         {
-            var node = new AstKspPreprocessorIfdefineNode();
+            var node = new AstPreprocessorIfdefineNode();
             var block = context.block();
 
             node.Import( context );
@@ -51,9 +51,9 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             return node;
         }
 
-        public override AstNode VisitKspPreprocessorIfnotDefine( KSPParser.KspPreprocessorIfnotDefineContext context )
+        public override AstNode VisitPreprocessorIfnotDefine( KSPParser.PreprocessorIfnotDefineContext context )
         {
-            var node = new AstKspPreprocessorIfnotDefineNode();
+            var node = new AstPreprocessorIfnotDefineNode();
             var block = context.block();
 
             node.Import( context );

@@ -9,5 +9,5 @@ public enum SymbolType
     Variable,
     UI,
     Pgs,
-    KspPreprocessor,
+    Preprocessor,
 }

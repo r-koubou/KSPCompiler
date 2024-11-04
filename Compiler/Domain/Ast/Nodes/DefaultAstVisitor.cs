@@ -139,16 +139,16 @@ public abstract class DefaultAstVisitor : IAstVisitor
     public virtual IAstNode Visit( AstCallCommandExpressionNode node )
         => VisitChildren( node );
 
-    public virtual IAstNode Visit( AstKspPreprocessorDefineNode node )
+    public virtual IAstNode Visit( AstPreprocessorDefineNode node )
         => VisitChildren( node );
 
-    public virtual IAstNode Visit( AstKspPreprocessorUndefineNode node )
+    public virtual IAstNode Visit( AstPreprocessorUndefineNode node )
         => VisitChildren( node );
 
-    public virtual IAstNode Visit( AstKspPreprocessorIfdefineNode node )
+    public virtual IAstNode Visit( AstPreprocessorIfdefineNode node )
         => VisitChildren( node );
 
-    public virtual IAstNode Visit( AstKspPreprocessorIfnotDefineNode node )
+    public virtual IAstNode Visit( AstPreprocessorIfnotDefineNode node )
         => VisitChildren( node );
 
     public virtual IAstNode Visit( AstIfStatementNode node )

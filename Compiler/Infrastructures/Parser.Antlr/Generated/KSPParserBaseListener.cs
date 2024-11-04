@@ -181,65 +181,65 @@ public partial class KSPParserBaseListener : IKSPParserListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitStatement([NotNull] KSPParser.StatementContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="KSPParser.kspPreprocessor"/>.
+	/// Enter a parse tree produced by <see cref="KSPParser.preprocessor"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterKspPreprocessor([NotNull] KSPParser.KspPreprocessorContext context) { }
+	public virtual void EnterPreprocessor([NotNull] KSPParser.PreprocessorContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="KSPParser.kspPreprocessor"/>.
+	/// Exit a parse tree produced by <see cref="KSPParser.preprocessor"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitKspPreprocessor([NotNull] KSPParser.KspPreprocessorContext context) { }
+	public virtual void ExitPreprocessor([NotNull] KSPParser.PreprocessorContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="KSPParser.kspPreprocessorDefine"/>.
+	/// Enter a parse tree produced by <see cref="KSPParser.preprocessorDefine"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterKspPreprocessorDefine([NotNull] KSPParser.KspPreprocessorDefineContext context) { }
+	public virtual void EnterPreprocessorDefine([NotNull] KSPParser.PreprocessorDefineContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="KSPParser.kspPreprocessorDefine"/>.
+	/// Exit a parse tree produced by <see cref="KSPParser.preprocessorDefine"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitKspPreprocessorDefine([NotNull] KSPParser.KspPreprocessorDefineContext context) { }
+	public virtual void ExitPreprocessorDefine([NotNull] KSPParser.PreprocessorDefineContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="KSPParser.kspPreprocessorUndefine"/>.
+	/// Enter a parse tree produced by <see cref="KSPParser.preprocessorUndefine"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterKspPreprocessorUndefine([NotNull] KSPParser.KspPreprocessorUndefineContext context) { }
+	public virtual void EnterPreprocessorUndefine([NotNull] KSPParser.PreprocessorUndefineContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="KSPParser.kspPreprocessorUndefine"/>.
+	/// Exit a parse tree produced by <see cref="KSPParser.preprocessorUndefine"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitKspPreprocessorUndefine([NotNull] KSPParser.KspPreprocessorUndefineContext context) { }
+	public virtual void ExitPreprocessorUndefine([NotNull] KSPParser.PreprocessorUndefineContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="KSPParser.kspPreprocessorIfdefine"/>.
+	/// Enter a parse tree produced by <see cref="KSPParser.preprocessorIfdefine"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterKspPreprocessorIfdefine([NotNull] KSPParser.KspPreprocessorIfdefineContext context) { }
+	public virtual void EnterPreprocessorIfdefine([NotNull] KSPParser.PreprocessorIfdefineContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="KSPParser.kspPreprocessorIfdefine"/>.
+	/// Exit a parse tree produced by <see cref="KSPParser.preprocessorIfdefine"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitKspPreprocessorIfdefine([NotNull] KSPParser.KspPreprocessorIfdefineContext context) { }
+	public virtual void ExitPreprocessorIfdefine([NotNull] KSPParser.PreprocessorIfdefineContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="KSPParser.kspPreprocessorIfnotDefine"/>.
+	/// Enter a parse tree produced by <see cref="KSPParser.preprocessorIfnotDefine"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterKspPreprocessorIfnotDefine([NotNull] KSPParser.KspPreprocessorIfnotDefineContext context) { }
+	public virtual void EnterPreprocessorIfnotDefine([NotNull] KSPParser.PreprocessorIfnotDefineContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="KSPParser.kspPreprocessorIfnotDefine"/>.
+	/// Exit a parse tree produced by <see cref="KSPParser.preprocessorIfnotDefine"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitKspPreprocessorIfnotDefine([NotNull] KSPParser.KspPreprocessorIfnotDefineContext context) { }
+	public virtual void ExitPreprocessorIfnotDefine([NotNull] KSPParser.PreprocessorIfnotDefineContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="KSPParser.ifStatement"/>.
 	/// <para>The default implementation does nothing.</para>
