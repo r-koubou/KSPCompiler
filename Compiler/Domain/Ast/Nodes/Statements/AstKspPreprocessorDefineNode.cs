@@ -1,5 +1,3 @@
-using System;
-
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Symbols.MetaData;
 
@@ -18,7 +16,6 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         /// <summary>
         /// Ctor
         /// </summary>
-        [Obsolete]
         public AstKspPreprocessorDefineNode()
             : this( NullAstNode.Instance, string.Empty ) {}
 
@@ -38,7 +35,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
             {
                 Parent   = this,
                 TypeFlag = DataTypeFlag.TypeKspPreprocessorSymbol,
-                Name = name
+                Name     = name
             };
         }
 
