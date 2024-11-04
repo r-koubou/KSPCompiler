@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 
-namespace KSPCompiler.Domain.Tests;
+namespace KSPCompiler.Domain.Tests.Analyzer;
 
 public static class MockSymbolTableUtility
 {

@@ -13,10 +13,11 @@ using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
+using KSPCompiler.Domain.Tests.Analyzer.Semantics;
 
 using NUnit.Framework;
 
-namespace KSPCompiler.Domain.Tests.Analyzer.Semantics;
+namespace KSPCompiler.Domain.Tests.Analyzer;
 
 public static class MockUtility
 {
