@@ -54,6 +54,47 @@ public class PreprocessTest
 
         Assert.AreEqual( expectedIgnored, ifdef.Ignore );
     }
+
+    [TestCase( "DEMO", "DEMO",  true )]
+    [TestCase( "DEMO", "DEMO2", false )]
+    public void IfNotDefinedTest( string registerSymbolName, string evaluateSymbolName, bool expectedIgnored )
+    {
+        var symbolTable = MockUtility.CreateAggregateSymbolTable().PreProcessorSymbols;
+        var analyzer = new PreprocessAnalyzer( symbolTable );
+
+        /*
+        on init
+            SET_CONDITION( registerSymbolName )
+            USE_CODE_IF_NOT( evaluateSymbolName )
+            :
+            : code block
+            :
+            END_USE_CODE
+        end on
+        */
+        var ast = new AstCompilationUnitNode();
+        var callBack = new AstCallbackDeclarationNode( ast );
+
+        callBack.Name = "init";
+        callBack.Block.Statements.Add(
+            new AstKspPreprocessorDefineNode( callBack, registerSymbolName )
+        );
+
+        var symbol = new AstSymbolExpressionNode
+        {
+            Name     = evaluateSymbolName,
+            TypeFlag = DataTypeFlag.TypeKspPreprocessorSymbol
+        };
+
+        var ifdef = new AstKspPreprocessorIfnotDefineNode( callBack, symbol );
+        callBack.Block.Statements.Add( ifdef);
+
+        ast.GlobalBlocks.Add( callBack );
+
+        analyzer.Traverse( ast );
+
+        Assert.AreEqual( expectedIgnored, ifdef.Ignore );
+    }
 }
 
 #region Woprk mock classes
@@ -62,7 +103,7 @@ public class PreprocessTest
 
 public class PreprocessAnalyzer : DefaultAstVisitor, IAstTraversal
 {
-    IKspPreProcessorSymbolTable SymbolTable { get; }
+    private IKspPreProcessorSymbolTable SymbolTable { get; }
 
     public PreprocessAnalyzer( IKspPreProcessorSymbolTable symbolTable )
     {
@@ -100,8 +141,6 @@ public class PreprocessAnalyzer : DefaultAstVisitor, IAstTraversal
 
     public override IAstNode Visit( AstKspPreprocessorIfdefineNode node )
     {
-        // Like `#ifdef SYMBOL` @ C preprocessor
-
         if( node.Condition is not AstSymbolExpressionNode symbolNode )
         {
             throw new AstAnalyzeException( node, $"Currently only {nameof( AstSymbolExpressionNode )} is supported." );
@@ -121,11 +160,19 @@ public class PreprocessAnalyzer : DefaultAstVisitor, IAstTraversal
 
     public override IAstNode Visit( AstKspPreprocessorIfnotDefineNode node )
     {
-        // Like `#ifndef SYMBOL` @ C preprocessor
+        if( node.Condition is not AstSymbolExpressionNode symbolNode )
+        {
+            throw new AstAnalyzeException( node, $"Currently only {nameof( AstSymbolExpressionNode )} is supported." );
+        }
+
+        if( !symbolNode.TypeFlag.IsPreprocessor() )
+        {
+            throw new AstAnalyzeException( node, $"Symbol is not a preprocessor symbol (={symbolNode.TypeFlag})" );
+        }
 
         // シンボルが「見つかれば」コードブロック自体を無視しても良いマークを行う
         // この時点でコードブロックのノードは維持する
-        node.Ignore = SymbolTable.TrySearchByName( node.Condition.Name, out _ );
+        node.Ignore = SymbolTable.TrySearchByName( symbolNode.Name, out _ );
 
         return node;
     }
