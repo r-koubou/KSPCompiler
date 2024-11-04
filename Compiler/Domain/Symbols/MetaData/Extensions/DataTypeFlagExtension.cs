@@ -29,6 +29,9 @@ public static class DataTypeFlagExtension
     public static bool AreBoolean( this DataTypeFlag a, DataTypeFlag b )
         => a.IsBoolean() && b.IsBoolean();
 
+    public static bool IsPreprocessor( this DataTypeFlag flag )
+        => flag.HasFlag( DataTypeFlag.TypeKspPreprocessorSymbol );
+
     public static bool IsVoid( this DataTypeFlag flag )
         => flag.HasFlag( DataTypeFlag.TypeVoid );
 

@@ -1,7 +1,4 @@
-using System;
-
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Domain.Ast.Nodes.Expressions;
 
 namespace KSPCompiler.Domain.Ast.Nodes.Statements
 {
@@ -11,9 +8,17 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
     public class AstKspPreprocessorIfdefineNode : AstStatementNode
     {
         /// <summary>
+        /// If true, the block can be ignored. (default: false)
+        /// </summary>
+        /// <remarks>
+        /// Value will be updated in preprocess phase.
+        /// </remarks>
+        public bool Ignore { get; set; }
+
+        /// <summary>
         /// The ifdef conditional symbol.
         /// </summary>
-        public AstExpressionNode Condition { get; }
+        public AstExpressionNode Condition { get; set; }
 
         /// <summary>
         /// The code block for ifdef is true.
@@ -24,15 +29,21 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         /// Ctor
         /// </summary>
         public AstKspPreprocessorIfdefineNode()
-            : this( NullAstNode.Instance ) {}
+            : this( NullAstNode.Instance, NullAstExpressionNode.Instance ) {}
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstKspPreprocessorIfdefineNode( IAstNode parent )
+        public AstKspPreprocessorIfdefineNode( AstExpressionNode condition )
+            : this( NullAstNode.Instance, condition ) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstKspPreprocessorIfdefineNode( IAstNode parent, AstExpressionNode condition )
             : base( AstNodeId.KspPreprocessorIfdefine, parent )
         {
-            Condition = new AstDefaultExpressionNode( this );
+            Condition = condition;
             Block     = new AstBlockNode( this );
         }
 
@@ -54,7 +65,12 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         ///
         public override void AcceptChildren( IAstVisitor visitor )
         {
-            throw new NotImplementedException();
+            Condition.Accept( visitor );
+
+            foreach( var statement in Block.Statements )
+            {
+                statement.Accept( visitor );
+            }
         }
 
         #endregion IAstNodeAcceptor

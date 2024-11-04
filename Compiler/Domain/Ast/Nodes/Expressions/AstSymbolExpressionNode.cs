@@ -44,6 +44,15 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
         /// <summary>
         /// Ctor
         /// </summary>
+        public AstSymbolExpressionNode( string name )
+            : this( name, NullAstExpressionNode.Instance )
+        {
+            Name = name;
+        }
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
         public AstSymbolExpressionNode()
             : base( AstNodeId.Symbol )
         {
