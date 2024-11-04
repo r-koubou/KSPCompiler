@@ -208,6 +208,13 @@ public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol
     }
     #endregion
 
+    #region Contains
+
+    public bool Contains( SymbolName name )
+        => table.ContainsKey( name );
+
+    #endregion ~Contains
+
     #region Convert
     ///
     /// <inheritdoc />
