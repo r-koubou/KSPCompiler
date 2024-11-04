@@ -8,7 +8,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
     // implementation of the statement node
     public partial class CstConverterVisitor
     {
-        public override AstNode VisitKspPreprocessorDefine( KSPParser.KspPreprocessorDefineContext context )
+        public override AstNode VisitPreprocessorDefine( KSPParser.PreprocessorDefineContext context )
         {
             var node = new AstPreprocessorDefineNode();
 
@@ -19,7 +19,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             return node;
         }
 
-        public override AstNode VisitKspPreprocessorUndefine( KSPParser.KspPreprocessorUndefineContext context )
+        public override AstNode VisitPreprocessorUndefine( KSPParser.PreprocessorUndefineContext context )
         {
             var node = new AstPreprocessorUndefineNode();
 
@@ -30,7 +30,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             return node;
         }
 
-        public override AstNode VisitKspPreprocessorIfdefine( KSPParser.KspPreprocessorIfdefineContext context )
+        public override AstNode VisitPreprocessorIfdefine( KSPParser.PreprocessorIfdefineContext context )
         {
             var node = new AstPreprocessorIfdefineNode();
             var block = context.block();
@@ -51,7 +51,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             return node;
         }
 
-        public override AstNode VisitKspPreprocessorIfnotDefine( KSPParser.KspPreprocessorIfnotDefineContext context )
+        public override AstNode VisitPreprocessorIfnotDefine( KSPParser.PreprocessorIfnotDefineContext context )
         {
             var node = new AstPreprocessorIfnotDefineNode();
             var block = context.block();

@@ -156,7 +156,7 @@ public partial class KSPParserBaseVisitor<Result> : AbstractParseTreeVisitor<Res
 	/// <return>The visitor result.</return>
 	public virtual Result VisitStatement([NotNull] KSPParser.StatementContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="KSPParser.kspPreprocessor"/>.
+	/// Visit a parse tree produced by <see cref="KSPParser.preprocessor"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -164,9 +164,9 @@ public partial class KSPParserBaseVisitor<Result> : AbstractParseTreeVisitor<Res
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitKspPreprocessor([NotNull] KSPParser.KspPreprocessorContext context) { return VisitChildren(context); }
+	public virtual Result VisitPreprocessor([NotNull] KSPParser.PreprocessorContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="KSPParser.kspPreprocessorDefine"/>.
+	/// Visit a parse tree produced by <see cref="KSPParser.preprocessorDefine"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -174,9 +174,9 @@ public partial class KSPParserBaseVisitor<Result> : AbstractParseTreeVisitor<Res
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitKspPreprocessorDefine([NotNull] KSPParser.KspPreprocessorDefineContext context) { return VisitChildren(context); }
+	public virtual Result VisitPreprocessorDefine([NotNull] KSPParser.PreprocessorDefineContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="KSPParser.kspPreprocessorUndefine"/>.
+	/// Visit a parse tree produced by <see cref="KSPParser.preprocessorUndefine"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -184,9 +184,9 @@ public partial class KSPParserBaseVisitor<Result> : AbstractParseTreeVisitor<Res
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitKspPreprocessorUndefine([NotNull] KSPParser.KspPreprocessorUndefineContext context) { return VisitChildren(context); }
+	public virtual Result VisitPreprocessorUndefine([NotNull] KSPParser.PreprocessorUndefineContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="KSPParser.kspPreprocessorIfdefine"/>.
+	/// Visit a parse tree produced by <see cref="KSPParser.preprocessorIfdefine"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -194,9 +194,9 @@ public partial class KSPParserBaseVisitor<Result> : AbstractParseTreeVisitor<Res
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitKspPreprocessorIfdefine([NotNull] KSPParser.KspPreprocessorIfdefineContext context) { return VisitChildren(context); }
+	public virtual Result VisitPreprocessorIfdefine([NotNull] KSPParser.PreprocessorIfdefineContext context) { return VisitChildren(context); }
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="KSPParser.kspPreprocessorIfnotDefine"/>.
+	/// Visit a parse tree produced by <see cref="KSPParser.preprocessorIfnotDefine"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -204,7 +204,7 @@ public partial class KSPParserBaseVisitor<Result> : AbstractParseTreeVisitor<Res
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitKspPreprocessorIfnotDefine([NotNull] KSPParser.KspPreprocessorIfnotDefineContext context) { return VisitChildren(context); }
+	public virtual Result VisitPreprocessorIfnotDefine([NotNull] KSPParser.PreprocessorIfnotDefineContext context) { return VisitChildren(context); }
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="KSPParser.ifStatement"/>.
 	/// <para>

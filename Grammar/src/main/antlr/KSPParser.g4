@@ -138,7 +138,7 @@ statement
     : MULTI_LINE_DELIMITER
     | EOL
     | variableDeclaration
-    | kspPreprocessor
+    | preprocessor
     | ifStatement
     | selectStatement
     | whileStatement
@@ -150,17 +150,17 @@ statement
 //------------------------------------------------------------------------------
 // KSPプリプロセッサ
 //------------------------------------------------------------------------------
-kspPreprocessor
-    : kspPreprocessorDefine
-    | kspPreprocessorUndefine
-    | kspPreprocessorIfdefine
-    | kspPreprocessorIfnotDefine
+preprocessor
+    : preprocessorDefine
+    | preprocessorUndefine
+    | preprocessorIfdefine
+    | preprocessorIfnotDefine
 ;
 
 //
 // define
 //
-kspPreprocessorDefine:
+preprocessorDefine:
     PREPROCESSOR_SET_COND MULTI_LINE_DELIMITER*             // SET_CONDITION
     LPARENT                                                 // (
     MULTI_LINE_DELIMITER*
@@ -172,7 +172,7 @@ kspPreprocessorDefine:
 //
 // undef
 //
-kspPreprocessorUndefine:
+preprocessorUndefine:
     PREPROCESSOR_RESET_COND MULTI_LINE_DELIMITER*         // RESET_CONDITION
     LPARENT                                               // (
     MULTI_LINE_DELIMITER*
@@ -184,7 +184,7 @@ kspPreprocessorUndefine:
 //
 // ifdef
 //
-kspPreprocessorIfdefine:
+preprocessorIfdefine:
     PREPROCESSOR_CODE_IF MULTI_LINE_DELIMITER*            // USE_CODE_IF
     LPARENT                                               // (
     MULTI_LINE_DELIMITER*
@@ -198,7 +198,7 @@ kspPreprocessorIfdefine:
 //
 // ifndef
 //
-kspPreprocessorIfnotDefine:
+preprocessorIfnotDefine:
     PREPROCESSOR_CODE_IF_NOT MULTI_LINE_DELIMITER*        // USE_CODE_IF_NOT
     LPARENT                                               // (
     MULTI_LINE_DELIMITER*
