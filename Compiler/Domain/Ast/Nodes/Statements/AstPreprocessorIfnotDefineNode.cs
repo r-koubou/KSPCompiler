@@ -41,7 +41,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         /// Ctor
         /// </summary>
         public AstPreprocessorIfnotDefineNode( IAstNode parent, AstExpressionNode condition )
-            : base( AstNodeId.PreprocessorIfdefine, parent )
+            : base( AstNodeId.PreprocessorIfnotDefine, parent )
         {
             Condition = condition;
             Block     = new AstBlockNode( this );
