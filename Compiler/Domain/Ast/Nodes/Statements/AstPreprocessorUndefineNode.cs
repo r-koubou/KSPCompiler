@@ -29,7 +29,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         /// Ctor
         /// </summary>
         public AstPreprocessorUndefineNode( IAstNode parent, string name )
-            : base( AstNodeId.PreprocessorDefine, parent )
+            : base( AstNodeId.PreprocessorUndefine, parent )
         {
             Symbol = new AstSymbolExpressionNode
             {
