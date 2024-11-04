@@ -8,7 +8,7 @@ public sealed class AggregateSymbolTable
     public ICallbackSymbolTable UserCallbacks { get; }
     public ICallbackSymbolTable ReservedCallbacks { get; }
     public IUserFunctionSymbolSymbolTable UserFunctions { get; }
-    public IKspPreProcessorSymbolTable PreProcessorSymbols { get; }
+    public IPreProcessorSymbolTable PreProcessorSymbols { get; }
     public IPgsSymbolTable PgsSymbols { get; }
 
     public AggregateSymbolTable(
@@ -18,7 +18,7 @@ public sealed class AggregateSymbolTable
         ICallbackSymbolTable userCallbacks,
         ICallbackSymbolTable reservedCallbacks,
         IUserFunctionSymbolSymbolTable userFunctions,
-        IKspPreProcessorSymbolTable preProcessorSymbols,
+        IPreProcessorSymbolTable preProcessorSymbols,
         IPgsSymbolTable pgsSymbols )
     {
         Variables           = variables;

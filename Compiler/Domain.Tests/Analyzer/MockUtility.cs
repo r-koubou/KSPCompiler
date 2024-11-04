@@ -280,7 +280,7 @@ public static class MockUtility
             new CallbackSymbolTable(),
             new CallbackSymbolTable(),
             new UserFunctionSymbolTable(),
-            new KspPreProcessorSymbolTable(),
+            new PreProcessorSymbolTable(),
             new PgsSymbolTable()
         );
 

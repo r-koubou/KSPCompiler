@@ -48,10 +48,10 @@ namespace KSPCompiler.Domain.Ast.Nodes
         public T Visit( AstSymbolExpressionNode node );
         public T Visit( AstArrayElementExpressionNode node );
         public T Visit( AstCallCommandExpressionNode node );
-        public T Visit( AstKspPreprocessorDefineNode node );
-        public T Visit( AstKspPreprocessorUndefineNode node );
-        public T Visit( AstKspPreprocessorIfdefineNode node );
-        public T Visit( AstKspPreprocessorIfnotDefineNode node );
+        public T Visit( AstPreprocessorDefineNode node );
+        public T Visit( AstPreprocessorUndefineNode node );
+        public T Visit( AstPreprocessorIfdefineNode node );
+        public T Visit( AstPreprocessorIfnotDefineNode node );
         public T Visit( AstIfStatementNode node );
         public T Visit( AstWhileStatementNode node );
         public T Visit( AstSelectStatementNode node );

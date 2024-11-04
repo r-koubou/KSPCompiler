@@ -22,7 +22,7 @@ public static class DataTypeUtility
 
         if( KspRegExpConstants.NonTypePrefix.IsMatch( symbolName ) )
         {
-            return DataTypeFlag.TypeKspPreprocessorSymbol | DataTypeFlag.TypePgsId;
+            return DataTypeFlag.TypePreprocessorSymbol | DataTypeFlag.TypePgsId;
         }
 
         return typePrefix switch
@@ -85,7 +85,7 @@ public static class DataTypeUtility
                 "S[]" => DataTypeFlag.TypeStringArray,
                 "R[]" => DataTypeFlag.TypeRealArray,
                 "V" => DataTypeFlag.TypeVoid,
-                "P" => DataTypeFlag.TypeKspPreprocessorSymbol,
+                "P" => DataTypeFlag.TypePreprocessorSymbol,
                 "K" => DataTypeFlag.TypePgsId,
                 "*" => DataTypeFlag.MultipleType,
                 _   => throw new ArgumentException( $"unknown type : {type}" )
@@ -113,7 +113,7 @@ public static class DataTypeUtility
         ToStringImpl( typeFlag, DataTypeFlag.TypeString,                "S", resultTexts );
         ToStringImpl( typeFlag, DataTypeFlag.TypeReal,                  "R", resultTexts );
         ToStringImpl( typeFlag, DataTypeFlag.TypeBool,                  "B", resultTexts );
-        ToStringImpl( typeFlag, DataTypeFlag.TypeKspPreprocessorSymbol, "P", resultTexts );
+        ToStringImpl( typeFlag, DataTypeFlag.TypePreprocessorSymbol, "P", resultTexts );
         ToStringImpl( typeFlag, DataTypeFlag.TypePgsId,                 "K", resultTexts );
 
         if(resultTexts.Count == 0)

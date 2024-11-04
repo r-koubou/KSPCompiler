@@ -3,9 +3,9 @@ using KSPCompiler.Domain.Ast.Nodes.Blocks;
 namespace KSPCompiler.Domain.Ast.Nodes.Statements
 {
     /// <summary>
-    /// AST node representing a KSP Preprocessor: USE_CODE_IF
+    /// Ast node representing a KSP Preprocessor: USE_CODE_IF_NOT
     /// </summary>
-    public class AstKspPreprocessorIfdefineNode : AstStatementNode
+    public class AstPreprocessorIfnotDefineNode : AstStatementNode
     {
         /// <summary>
         /// If true, the block can be ignored. (default: false)
@@ -16,32 +16,32 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         public bool Ignore { get; set; }
 
         /// <summary>
-        /// The ifdef conditional symbol.
+        /// The ifndef conditional symbol.
         /// </summary>
-        public AstExpressionNode Condition { get; set; }
+        public AstExpressionNode Condition { get; }
 
         /// <summary>
-        /// The code block for ifdef is true.
+        /// The code block for ifndef is true.
         /// </summary>
         public AstBlockNode Block { get; set; }
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstKspPreprocessorIfdefineNode()
+        public AstPreprocessorIfnotDefineNode()
             : this( NullAstNode.Instance, NullAstExpressionNode.Instance ) {}
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstKspPreprocessorIfdefineNode( AstExpressionNode condition )
+        public AstPreprocessorIfnotDefineNode( AstExpressionNode condition )
             : this( NullAstNode.Instance, condition ) {}
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstKspPreprocessorIfdefineNode( IAstNode parent, AstExpressionNode condition )
-            : base( AstNodeId.KspPreprocessorIfdefine, parent )
+        public AstPreprocessorIfnotDefineNode( IAstNode parent, AstExpressionNode condition )
+            : base( AstNodeId.PreprocessorIfdefine, parent )
         {
             Condition = condition;
             Block     = new AstBlockNode( this );

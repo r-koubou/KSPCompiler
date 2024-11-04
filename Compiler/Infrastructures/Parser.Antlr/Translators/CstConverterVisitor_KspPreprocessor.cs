@@ -10,7 +10,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
     {
         public override AstNode VisitKspPreprocessorDefine( KSPParser.KspPreprocessorDefineContext context )
         {
-            var node = new AstKspPreprocessorDefineNode();
+            var node = new AstPreprocessorDefineNode();
 
             node.Import( context );
             node.Symbol.Import( context.symbol );
@@ -21,7 +21,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         public override AstNode VisitKspPreprocessorUndefine( KSPParser.KspPreprocessorUndefineContext context )
         {
-            var node = new AstKspPreprocessorUndefineNode();
+            var node = new AstPreprocessorUndefineNode();
 
             node.Import( context );
             node.Symbol.Import( context.symbol );
@@ -32,7 +32,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         public override AstNode VisitKspPreprocessorIfdefine( KSPParser.KspPreprocessorIfdefineContext context )
         {
-            var node = new AstKspPreprocessorIfdefineNode();
+            var node = new AstPreprocessorIfdefineNode();
             var block = context.block();
 
             node.Import( context );
@@ -53,7 +53,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         public override AstNode VisitKspPreprocessorIfnotDefine( KSPParser.KspPreprocessorIfnotDefineContext context )
         {
-            var node = new AstKspPreprocessorIfnotDefineNode();
+            var node = new AstPreprocessorIfnotDefineNode();
             var block = context.block();
 
             node.Import( context );

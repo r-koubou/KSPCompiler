@@ -9,9 +9,9 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Preprocessing;
 
 public class PreprocessAnalyzer : DefaultAstVisitor, IAstTraversal
 {
-    private IKspPreProcessorSymbolTable SymbolTable { get; }
+    private IPreProcessorSymbolTable SymbolTable { get; }
 
-    public PreprocessAnalyzer( IKspPreProcessorSymbolTable symbolTable )
+    public PreprocessAnalyzer( IPreProcessorSymbolTable symbolTable )
     {
         SymbolTable = symbolTable;
     }
@@ -21,9 +21,9 @@ public class PreprocessAnalyzer : DefaultAstVisitor, IAstTraversal
         node.AcceptChildren( this );
     }
 
-    public override IAstNode Visit( AstKspPreprocessorDefineNode node )
+    public override IAstNode Visit( AstPreprocessorDefineNode node )
     {
-        var symbol = new KspPreProcessorSymbol
+        var symbol = new PreProcessorSymbol
         {
             Name = node.Symbol.Name
         };
@@ -33,9 +33,9 @@ public class PreprocessAnalyzer : DefaultAstVisitor, IAstTraversal
         return node;
     }
 
-    public override IAstNode Visit( AstKspPreprocessorUndefineNode node )
+    public override IAstNode Visit( AstPreprocessorUndefineNode node )
     {
-        var symbol = new KspPreProcessorSymbol
+        var symbol = new PreProcessorSymbol
         {
             Name = node.Symbol.Name
         };
@@ -45,7 +45,7 @@ public class PreprocessAnalyzer : DefaultAstVisitor, IAstTraversal
         return node;
     }
 
-    public override IAstNode Visit( AstKspPreprocessorIfdefineNode node )
+    public override IAstNode Visit( AstPreprocessorIfdefineNode node )
     {
         if( node.Condition is not AstSymbolExpressionNode symbolNode )
         {
@@ -64,7 +64,7 @@ public class PreprocessAnalyzer : DefaultAstVisitor, IAstTraversal
         return node;
     }
 
-    public override IAstNode Visit( AstKspPreprocessorIfnotDefineNode node )
+    public override IAstNode Visit( AstPreprocessorIfnotDefineNode node )
     {
         if( node.Condition is not AstSymbolExpressionNode symbolNode )
         {

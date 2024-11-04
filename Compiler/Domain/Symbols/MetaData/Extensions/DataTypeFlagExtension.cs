@@ -30,7 +30,7 @@ public static class DataTypeFlagExtension
         => a.IsBoolean() && b.IsBoolean();
 
     public static bool IsPreprocessor( this DataTypeFlag flag )
-        => flag.HasFlag( DataTypeFlag.TypeKspPreprocessorSymbol );
+        => flag.HasFlag( DataTypeFlag.TypePreprocessorSymbol );
 
     public static bool IsVoid( this DataTypeFlag flag )
         => flag.HasFlag( DataTypeFlag.TypeVoid );
@@ -79,7 +79,7 @@ public static class DataTypeFlagExtension
         { DataTypeFlag.TypeReal, "real" },
         { DataTypeFlag.TypeBool, "boolean" },
         { DataTypeFlag.TypeVoid, "void" },
-        { DataTypeFlag.TypeKspPreprocessorSymbol, "KSP preprocessor symbol" },
+        { DataTypeFlag.TypePreprocessorSymbol, "KSP preprocessor symbol" },
         { DataTypeFlag.TypePgsId, "Pgs ID" }
     };
 
