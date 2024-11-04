@@ -94,4 +94,38 @@ public class PreprocessTest
         Assert.AreEqual( 1,               symbolTable.Count );
         Assert.AreEqual( expectedIgnored, ifdef.Ignore );
     }
+
+    [Test]
+    public void UnDefinedTest()
+    {
+        var symbolTable = MockUtility.CreateAggregateSymbolTable().PreProcessorSymbols;
+        var analyzer = new PreprocessAnalyzer( symbolTable );
+
+        /*
+        on init
+            SET_CONDITION( DEMO )
+            RESET_CONDITION( DEMO )
+        end on
+        */
+
+        const string symbolName = "DEMO";
+
+        var ast = new AstCompilationUnitNode();
+        var callBack = new AstCallbackDeclarationNode( ast );
+
+        callBack.Name = "init";
+        callBack.Block.Statements.Add(
+            new AstKspPreprocessorDefineNode( callBack, symbolName )
+        );
+
+        var undef = new AstKspPreprocessorUndefineNode( callBack, symbolName );
+        callBack.Block.Statements.Add( undef);
+
+        ast.GlobalBlocks.Add( callBack );
+
+        analyzer.Traverse( ast );
+
+        Assert.AreEqual( 0, symbolTable.Count );
+    }
+
 }
