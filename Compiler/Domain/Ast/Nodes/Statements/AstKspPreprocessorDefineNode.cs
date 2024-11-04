@@ -1,5 +1,3 @@
-using System;
-
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Symbols.MetaData;
 
@@ -19,18 +17,25 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         /// Ctor
         /// </summary>
         public AstKspPreprocessorDefineNode()
-            : this( NullAstNode.Instance ) {}
+            : this( NullAstNode.Instance, string.Empty ) {}
 
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstKspPreprocessorDefineNode( IAstNode parent )
+        public AstKspPreprocessorDefineNode( string name )
+            : this( NullAstNode.Instance, name ) {}
+
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        public AstKspPreprocessorDefineNode( IAstNode parent, string name )
             : base( AstNodeId.KspPreprocessorDefine, parent )
         {
             Symbol = new AstSymbolExpressionNode
             {
                 Parent   = this,
-                TypeFlag = DataTypeFlag.TypeKspPreprocessorSymbol
+                TypeFlag = DataTypeFlag.TypeKspPreprocessorSymbol,
+                Name     = name
             };
         }
 
@@ -52,7 +57,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         ///
         public override void AcceptChildren( IAstVisitor visitor )
         {
-            // Do nothing
+            Symbol.Accept( visitor );
         }
 
         #endregion IAstNodeAcceptor

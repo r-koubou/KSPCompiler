@@ -67,6 +67,13 @@ public interface ISymbolTable<TSymbol> : IEnumerable<TSymbol> where TSymbol : Sy
     List<TSymbol> ToList();
 
     /// <summary>
+    /// Check contains the specified symbol name.
+    /// </summary>
+    /// <param name="name">A symbol name</param>
+    /// <returns>True if contains in the symbol table</returns>
+    bool Contains( SymbolName name );
+
+    /// <summary>
     /// Dump symbols to specified writer
     /// </summary>
     void Dump( TextWriter writer ) {}
