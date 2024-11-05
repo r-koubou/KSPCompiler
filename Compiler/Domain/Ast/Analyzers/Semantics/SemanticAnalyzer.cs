@@ -1,48 +1,74 @@
 using KSPCompiler.Domain.Ast.Analyzers.Context;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Domain.CompilerMessages;
-using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Domain.Ast.Nodes.Statements;
 
 namespace KSPCompiler.Domain.Ast.Analyzers.Semantics;
 
 public partial class SemanticAnalyzer : DefaultAstVisitor, IAstTraversal
 {
-    private ICompilerMessageManger CompilerMessageManger { get; }
-    private AggregateSymbolTable SymbolTable { get; }
-    private IAnalyzerContext Context { get; }
+    public IAnalyzerContext Context { get; }
 
-
-    public SemanticAnalyzer(
-        IAnalyzerContext context,
-        AggregateSymbolTable symbolTable,
-        ICompilerMessageManger compilerMessageManger )
+    public SemanticAnalyzer( IAnalyzerContext context )
     {
-        Context               = context;
-        SymbolTable           = symbolTable;
-        CompilerMessageManger = compilerMessageManger;
-
-/*
-        CallbackDeclarationEvaluator     = new CallbackDeclarationEvaluator( CompilerMessageManger, SymbolTable.ReservedCallbacks, SymbolTable.UserCallbacks );
-        UserFunctionDeclarationEvaluator = new UserFunctionDeclarationEvaluator( CompilerMessageManger, SymbolTable.UserFunctions );
-        VariableDeclarationEvaluator     = new VariableDeclarationEvaluator( CompilerMessageManger, SymbolTable.Variables, SymbolTable.UITypes );
-
-        IntegerConvolutionEvaluator = new IntegerConvolutionEvaluator();
-        RealConvolutionEvaluator    = new RealConvolutionEvaluator();
-        //StringConvolutionEvaluator  = new StringConvolutionEvaluator( this, SymbolTable.Variables, CompilerMessageManger );
-
-        NumericBinaryOperatorEvaluator     = new NumericBinaryOperatorEvaluator( CompilerMessageManger, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
-        NumericUnaryOperatorEvaluator      = new NumericUnaryOperatorEvaluator( CompilerMessageManger, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
-        StringConcatenateOperatorEvaluator = new StringConcatenateOperatorEvaluator( CompilerMessageManger, StringConvolutionEvaluator );
-
-        SymbolEvaluator                    = new SymbolEvaluator( CompilerMessageManger, SymbolTable );
-        AssignOperatorEvaluator            = new AssignOperatorEvaluator( CompilerMessageManger );
-*/
+        Context = context;
     }
-
 
     public void Traverse( AstCompilationUnitNode node )
     {
         node.AcceptChildren( this );
     }
+
+    #region Declarations
+
+    public override IAstNode Visit( AstCallbackDeclarationNode node )
+        => Context.DeclarationContext.Callback.Evaluate( this, node );
+
+    public override IAstNode Visit( AstUserFunctionDeclarationNode node )
+        => Context.DeclarationContext.UserFunction.Evaluate( this, node );
+
+    public override IAstNode Visit( AstVariableDeclarationNode node )
+        => Context.DeclarationContext.Variable.Evaluate( this, node );
+
+    #endregion ~Declarations
+
+
+
+    #region Statements
+
+    #region Preprocessor Symbol Statements
+
+    public override IAstNode Visit( AstPreprocessorIfdefineNode node )
+        => Context.StatementContext.Preprocess.Evaluate( this, node );
+
+    public override IAstNode Visit( AstPreprocessorIfnotDefineNode node )
+        => Context.StatementContext.Preprocess.Evaluate( this, node );
+
+    #endregion ~Preprocessor Symbol Statements
+
+    #region Call User Function Statements
+
+    public override IAstNode Visit( AstCallUserFunctionStatementNode node )
+        => Context.StatementContext.CallUserFunction.Evaluate( this, node );
+
+    #endregion ~Call User Function Statements
+
+    #region Control Statements
+
+    public override IAstNode Visit( AstIfStatementNode node )
+        => Context.StatementContext.If.Evaluate( this, node );
+
+    public override IAstNode Visit( AstWhileStatementNode node )
+        => Context.StatementContext.While.Evaluate( this, node );
+
+    public override IAstNode Visit( AstSelectStatementNode node )
+        => Context.StatementContext.Select.Evaluate( this, node );
+
+    public override IAstNode Visit( AstContinueStatementNode node )
+        => Context.StatementContext.Continue.Evaluate( this, node );
+
+    #endregion ~Control Statements
+
+    #endregion ~Statements
+
 }
