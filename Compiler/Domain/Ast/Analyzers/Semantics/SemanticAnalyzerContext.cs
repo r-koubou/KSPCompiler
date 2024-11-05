@@ -18,6 +18,9 @@ namespace KSPCompiler.Domain.Ast.Analyzers.Semantics;
 
 public sealed class SemanticAnalyzerContext : IAnalyzerContext
 {
+    public ICompilerMessageManger CompilerMessageManger { get; }
+    public AggregateSymbolTable SymbolTable { get; }
+
     public IDeclarationEvaluationContext DeclarationContext { get; }
     public IExpressionEvaluatorContext ExpressionContext { get; }
     public IStatementEvaluationContext StatementContext { get; }
@@ -26,9 +29,11 @@ public sealed class SemanticAnalyzerContext : IAnalyzerContext
         ICompilerMessageManger compilerMessageManger,
         AggregateSymbolTable aggregateSymbolTable )
     {
-        DeclarationContext = new DeclarationEvaluationContext( compilerMessageManger, aggregateSymbolTable );
-        ExpressionContext  = new ExpressionEvaluationContext( compilerMessageManger, aggregateSymbolTable );
-        StatementContext   = new StatementEvaluationContext( compilerMessageManger, aggregateSymbolTable );
+        CompilerMessageManger = compilerMessageManger;
+        SymbolTable           = aggregateSymbolTable;
+        DeclarationContext    = new DeclarationEvaluationContext( CompilerMessageManger, SymbolTable );
+        ExpressionContext     = new ExpressionEvaluationContext( CompilerMessageManger, SymbolTable );
+        StatementContext      = new StatementEvaluationContext( CompilerMessageManger, SymbolTable );
     }
 
     #region Declaration
@@ -55,21 +60,29 @@ public sealed class SemanticAnalyzerContext : IAnalyzerContext
 
     private class ExpressionEvaluationContext : IExpressionEvaluatorContext
     {
+        #region #region Expression Evaluators
+
         public IAssignOperatorEvaluator AssignOperator { get; }
-        public IConditionalBinaryOperatorEvaluator ConditionalBinaryOperator { get; }
-        public IConditionalLogicalOperatorEvaluator ConditionalLogicalOperator { get; }
-        public IUnaryOperatorEvaluator ConditionalUnaryOperator { get; }
         public IBinaryOperatorEvaluator NumericBinaryOperator { get; }
         public IUnaryOperatorEvaluator NumericUnaryOperator { get; }
         public IStringConcatenateOperatorEvaluator StringConcatenateOperator { get; }
+        public IConditionalBinaryOperatorEvaluator ConditionalBinaryOperator { get; }
+        public IConditionalLogicalOperatorEvaluator ConditionalLogicalOperator { get; }
+        public IUnaryOperatorEvaluator ConditionalUnaryOperator { get; }
         public ISymbolEvaluator Symbol { get; }
         public IArrayElementEvaluator ArrayElement { get; }
         public ICallCommandExpressionEvaluator CallCommand { get; }
+
+        #endregion ~Expression Evaluators
+
+        #region Convolution Evaluators
 
         public IIntegerConvolutionEvaluator IntegerConvolutionEvaluator { get; }
         public IRealConvolutionEvaluator RealConvolutionEvaluator { get; }
         public IStringConvolutionEvaluator StringConvolutionEvaluator { get; }
         public IBooleanConvolutionEvaluator BooleanConvolutionEvaluator { get; }
+
+        #endregion ~Convolution Evaluators
 
         public ExpressionEvaluationContext(
             ICompilerMessageManger compilerMessageManger,
@@ -106,10 +119,10 @@ public sealed class SemanticAnalyzerContext : IAnalyzerContext
     {
         public IPreprocessEvaluator Preprocess { get; }
         public ICallUserFunctionEvaluator CallUserFunction { get; }
-        public IContinueStatementEvaluator Continue { get; }
         public IIfStatementEvaluator If { get; }
         public ISelectStatementEvaluator Select { get; }
         public IWhileStatementEvaluator While { get; }
+        public IContinueStatementEvaluator Continue { get; }
 
         public StatementEvaluationContext(
             ICompilerMessageManger compilerMessageManger,
@@ -117,10 +130,10 @@ public sealed class SemanticAnalyzerContext : IAnalyzerContext
         {
             Preprocess       = new PreprocessEvaluator();
             CallUserFunction = new CallUserFunctionEvaluator( compilerMessageManger, aggregateSymbolTable.UserFunctions );
-            Continue         = new ContinueStatementEvaluator( compilerMessageManger );
             If               = new IfStatementEvaluator( compilerMessageManger );
             Select           = new SelectStatementEvaluator( compilerMessageManger );
             While            = new WhileStatementEvaluator( compilerMessageManger );
+            Continue         = new ContinueStatementEvaluator( compilerMessageManger );
         }
     }
 }
