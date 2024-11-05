@@ -22,12 +22,12 @@ public interface IExpressionEvaluatorContext
     #region Expression Evaluators
 
     IAssignOperatorEvaluator AssignOperator { get; }
-    IConditionalBinaryOperatorEvaluator ConditionalBinaryOperator { get; }
-    IConditionalLogicalOperatorEvaluator ConditionalLogicalOperator { get; }
-    IUnaryOperatorEvaluator ConditionalUnaryOperator { get; }
     IBinaryOperatorEvaluator NumericBinaryOperator { get; }
     IUnaryOperatorEvaluator NumericUnaryOperator { get; }
     IStringConcatenateOperatorEvaluator StringConcatenateOperator { get; }
+    IConditionalBinaryOperatorEvaluator ConditionalBinaryOperator { get; }
+    IConditionalLogicalOperatorEvaluator ConditionalLogicalOperator { get; }
+    IUnaryOperatorEvaluator ConditionalUnaryOperator { get; }
     ISymbolEvaluator Symbol { get; }
     IArrayElementEvaluator ArrayElement { get; }
     ICallCommandExpressionEvaluator CallCommand { get; }

@@ -8,8 +8,8 @@ public interface IStatementEvaluationContext
 {
     IPreprocessEvaluator Preprocess { get; }
     ICallUserFunctionEvaluator CallUserFunction { get; }
-    IContinueStatementEvaluator Continue { get; }
     IIfStatementEvaluator If { get; }
     ISelectStatementEvaluator Select { get; }
     IWhileStatementEvaluator While { get; }
+    IContinueStatementEvaluator Continue { get; }
 }
