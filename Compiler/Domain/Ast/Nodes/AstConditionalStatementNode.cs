@@ -36,7 +36,7 @@ namespace KSPCompiler.Domain.Ast.Nodes
         /// </summary>
         public override void AcceptChildren( IAstVisitor visitor )
         {
-            Condition.AcceptChildren( visitor );
+            Condition.Accept( visitor );
             CodeBlock.AcceptChildren( visitor );
         }
 

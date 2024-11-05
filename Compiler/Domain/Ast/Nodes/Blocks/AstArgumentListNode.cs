@@ -49,7 +49,10 @@ namespace KSPCompiler.Domain.Ast.Nodes.Blocks
         ///
         public override void AcceptChildren( IAstVisitor visitor )
         {
-            // Do nothing
+            foreach( var arg in Arguments )
+            {
+                arg.Accept( visitor );
+            }
         }
 
         #endregion IAstNodeAcceptor
