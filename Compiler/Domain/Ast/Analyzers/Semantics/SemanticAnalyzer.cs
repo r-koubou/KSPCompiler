@@ -1,4 +1,5 @@
 using KSPCompiler.Domain.Ast.Analyzers.Context;
+using KSPCompiler.Domain.Ast.Analyzers.Semantics.Extensions;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
@@ -17,7 +18,7 @@ public class SemanticAnalyzer : DefaultAstVisitor, IAstTraversal
 
     public void Traverse( AstCompilationUnitNode node )
     {
-        node.AcceptChildren( this );
+        node.AcceptChildrenPreferInitCallback( this );
     }
 
     #region Declarations
