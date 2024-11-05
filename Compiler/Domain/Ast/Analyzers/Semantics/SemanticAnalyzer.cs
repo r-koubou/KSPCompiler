@@ -80,11 +80,9 @@ public class SemanticAnalyzer : DefaultAstVisitor, IAstTraversal
     #region Unary Operators
 
     public override IAstNode Visit( AstUnaryNotExpressionNode node )
-        // => throw new NotImplementedException();
         => Context.ExpressionContext.NumericUnaryOperator.Evaluate( this, node );
 
     public override IAstNode Visit( AstUnaryMinusExpressionNode node )
-        //=> throw new NotImplementedException();
         => Context.ExpressionContext.NumericUnaryOperator.Evaluate( this, node );
 
     #endregion ~Unary Operators
