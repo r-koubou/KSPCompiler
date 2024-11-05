@@ -57,7 +57,7 @@
     <data name="semantic.error.variable.not.declared" xml:space="preserve">
         <value>Variable not declared: {0}</value>
     </data>
-    <data name="semantic.error.unrayoprator.bitnot.compatible" xml:space="preserve">
+    <data name="semantic.error.unaryoprator.bitnot.compatible" xml:space="preserve">
         <value>Unary operator .not. available integer types only</value>
     </data>
     <data name="semantic.error.variable.invalid.string.initializer" xml:space="preserve">
@@ -138,7 +138,7 @@
     <data name="semantic.error.command.arg.incompatible" xml:space="preserve">
         <value>{0}: Command arguments [{1}] is not compatible type (Expected: {2}, Actual: {3})</value>
     </data>
-    <data name="semantic.error.unrayoprator.logicalnot.incompatible" xml:space="preserve">
+    <data name="semantic.error.unaryoprator.logicalnot.incompatible" xml:space="preserve">
         <value>Unary operator not available boolean expression only</value>
     </data>
     <data name="semantic.error.logicaloprator.incompatible" xml:space="preserve">
