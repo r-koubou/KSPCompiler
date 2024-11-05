@@ -50,11 +50,6 @@ public class SymbolEvaluator : ISymbolEvaluator
             return result;
         }
 
-        if( TryGetPreProcessorSymbol( expr, out result ) )
-        {
-            return result;
-        }
-
         if( TryGetPgsSymbol( expr, out result ) )
         {
             return result;
@@ -202,28 +197,35 @@ public class SymbolEvaluator : ISymbolEvaluator
         return true;
     }
 
-    private bool TryGetPreProcessorSymbol( AstSymbolExpressionNode expr, out AstExpressionNode result )
-    {
-        result = NullAstExpressionNode.Instance;
-
-        if( !SymbolTable.PreProcessorSymbols.TrySearchByName( expr.Name, out var symbol ) )
-        {
-            return false;
-        }
-
-        result = CreateEvaluateNode( expr, symbol );
-
-        return true;
-    }
-
     private bool TryGetPgsSymbol( AstSymbolExpressionNode expr, out AstExpressionNode result )
     {
         result = NullAstExpressionNode.Instance;
 
-        if( !SymbolTable.PgsSymbols.TrySearchByName( expr.Name, out var symbol ) )
+        // PGS key は create, set, get の呼び出し順に関係なく参照可能なので
+        // シンボルテーブルを用いない
+        if( !DataTypeUtility.GuessFromSymbolName( expr.Name ).IsPgsId() )
         {
             return false;
         }
+
+        // 64 文字超の ID は使用できない仕様
+        // https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/advanced-concepts#pgs
+        if( expr.Name.Length > 64 )
+        {
+            CompilerMessageManger.Error(
+                expr,
+                CompilerMessageResources.semantic_error_pgs_name_maximam_length,
+                expr.Name[ ..16 ] + "..."
+            );
+
+            // 上位のノードで評価を継続させるので代替のノードは生成しない
+        }
+
+        var symbol = new PgsSymbol
+        {
+            Name = expr.Name,
+            DataType = DataTypeFlag.TypePgsId
+        };
 
         result = CreateEvaluateNode( expr, symbol );
 

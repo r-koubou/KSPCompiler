@@ -168,4 +168,7 @@
     <data name="semantic.error.userfunction.unknown" xml:space="preserve">
         <value>{0}: Function not declared</value>
     </data>
+    <data name="semantic.error.pgs.name.maximam.length" xml:space="preserve">
+        <value>PGS ID cannot exceed 64 characters (={0})</value>
+    </data>
 </root>

@@ -280,8 +280,7 @@ public static class MockUtility
             new CallbackSymbolTable(),
             new CallbackSymbolTable(),
             new UserFunctionSymbolTable(),
-            new PreProcessorSymbolTable(),
-            new PgsSymbolTable()
+            new PreProcessorSymbolTable()
         );
 
     #endregion ~Symbol Table

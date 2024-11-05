@@ -14,12 +14,14 @@ namespace KSPCompiler.Domain.Tests.Analyzer.Semantics;
 [TestFixture]
 public class AstPgsSymbolEvaluationTest
 {
-    private AstExpressionNode PreProcessorSymbolTestBody(
+    private void PgsSymbolTestBody(
         AstSymbolExpressionNode expr,
-        AggregateSymbolTable symbolTable,
-        ICompilerMessageManger compilerMessageManger )
+        int expectedErrorCount )
     {
+        var compilerMessageManger = ICompilerMessageManger.Default;
         var visitor = new MockAstSymbolVisitor();
+        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+
         var symbolEvaluator = new SymbolEvaluator( compilerMessageManger, symbolTable );
         visitor.Inject( symbolEvaluator );
 
@@ -27,24 +29,23 @@ public class AstPgsSymbolEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        return (AstExpressionNode)result;
+        Assert.IsTrue( result is AstExpressionNode );
+        Assert.IsTrue( ((AstExpressionNode)result).TypeFlag == DataTypeFlag.TypePgsId );
+        Assert.AreEqual( expectedErrorCount, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
     }
 
     [Test]
-    public void PreProcessorEvalTest()
+    public void PgsSymbolEvalTest()
     {
-        var compilerMessageManger = ICompilerMessageManger.Default;
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
-        var symbol = new PgsSymbol(){ Name = "TEST" };
-        symbolTable.PgsSymbols.Add( symbol );
+        var symbolExpr = new AstSymbolExpressionNode( "TEST", NullAstExpressionNode.Instance );
+        PgsSymbolTestBody( symbolExpr, 0 );
+    }
 
-        var symbolExpr = new AstSymbolExpressionNode( symbol.Name, NullAstExpressionNode.Instance );
-        var result = PreProcessorSymbolTestBody(
-            symbolExpr,
-            symbolTable,
-            compilerMessageManger );
-
-        Assert.IsTrue( result.TypeFlag == DataTypeFlag.TypePgsId );
-        Assert.IsTrue( compilerMessageManger.Count( CompilerMessageLevel.Error ) == 0 );
+    [Test]
+    public void CannotEvaluatePgsIdIsOver64Characters()
+    {
+        var over64Chars = new string( 'A', 65 );
+        var symbolExpr = new AstSymbolExpressionNode( over64Chars, NullAstExpressionNode.Instance );
+        PgsSymbolTestBody( symbolExpr, 1 );
     }
 }
