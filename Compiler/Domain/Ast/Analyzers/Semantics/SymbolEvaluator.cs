@@ -50,11 +50,6 @@ public class SymbolEvaluator : ISymbolEvaluator
             return result;
         }
 
-        if( TryGetPreProcessorSymbol( expr, out result ) )
-        {
-            return result;
-        }
-
         if( TryGetPgsSymbol( expr, out result ) )
         {
             return result;
@@ -198,20 +193,6 @@ public class SymbolEvaluator : ISymbolEvaluator
 
             // 変数の型自体は解決しているので return false としない
         }
-
-        return true;
-    }
-
-    private bool TryGetPreProcessorSymbol( AstSymbolExpressionNode expr, out AstExpressionNode result )
-    {
-        result = NullAstExpressionNode.Instance;
-
-        if( !SymbolTable.PreProcessorSymbols.TrySearchByName( expr.Name, out var symbol ) )
-        {
-            return false;
-        }
-
-        result = CreateEvaluateNode( expr, symbol );
 
         return true;
     }
