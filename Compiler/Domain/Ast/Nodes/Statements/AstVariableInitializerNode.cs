@@ -34,23 +34,8 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         /// <inheritdoc />
         ///
         public override int ChildNodeCount
-        {
-            get
-            {
-                var result = 0;
-
-                if( PrimitiveInitializer != NullAstPrimitiveInitializerNode.Instance )
-                {
-                    result++;
-                }
-                if( ArrayInitializer != NullAstArrayInitializerNode.Instance )
-                {
-                    result++;
-                }
-
-                return result;
-            }
-        }
+            => 1;
+            // PrimitiveInitializer or ArrayInitializer (exclusive)
 
         ///
         /// <inheritdoc/>

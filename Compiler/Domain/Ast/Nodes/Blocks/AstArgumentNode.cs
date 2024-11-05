@@ -32,7 +32,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Blocks
         /// <inheritdoc />
         ///
         public override int ChildNodeCount
-            => 1;
+            => 0;
 
         ///
         /// <inheritdoc/>

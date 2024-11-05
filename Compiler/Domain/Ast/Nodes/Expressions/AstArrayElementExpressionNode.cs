@@ -42,6 +42,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
         ///
         public override int ChildNodeCount
             => 1;
+            // Left: Array index
 
         ///
         /// <inheritdoc/>

@@ -66,11 +66,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         public override void AcceptChildren( IAstVisitor visitor )
         {
             Condition.Accept( visitor );
-
-            foreach( var statement in Block.Statements )
-            {
-                statement.Accept( visitor );
-            }
+            Block.AcceptChildren( visitor );
         }
 
         #endregion IAstNodeAcceptor

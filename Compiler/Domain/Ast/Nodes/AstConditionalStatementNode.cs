@@ -32,11 +32,11 @@ namespace KSPCompiler.Domain.Ast.Nodes
         #region IAstNodeAcceptor
 
         /// <summary>
-        /// Call Condition, CodeBlock's <see cref="AcceptChildren{T}"/>
+        /// Call Condition, CodeBlock's <see cref="AcceptChildren"/>
         /// </summary>
         public override void AcceptChildren( IAstVisitor visitor )
         {
-            Condition.AcceptChildren( visitor );
+            Condition.Accept( visitor );
             CodeBlock.AcceptChildren( visitor );
         }
 

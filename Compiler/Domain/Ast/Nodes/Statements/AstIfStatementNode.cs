@@ -32,30 +32,26 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         /// <inheritdoc />
         ///
         public override int ChildNodeCount
-        {
-            get
-            {
-                var result = 1; // condition node is always present
-
-                if( CodeBlock != NullAstNode.Instance )
-                {
-                    result++;
-                }
-
-                if( ElseBlock != NullAstNode.Instance )
-                {
-                    result++;
-                }
-
-                return result;
-            }
-        }
+            => 3;
+            // Condition
+            // CodeBlock
+            // ElseBlock
 
         ///
         /// <inheritdoc/>
         ///
         public override IAstNode Accept( IAstVisitor visitor )
             => visitor.Visit( this );
+
+        /// <summary>
+        /// Base class AcceptChildren + ElseBlock
+        /// </summary>
+        /// <param name="visitor">Visitor for traversing the AST</param>
+        public override void AcceptChildren( IAstVisitor visitor )
+        {
+            base.AcceptChildren( visitor );
+            ElseBlock.AcceptChildren( visitor );
+        }
 
         #endregion IAstNodeAcceptor
     }

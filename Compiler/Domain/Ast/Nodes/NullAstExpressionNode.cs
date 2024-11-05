@@ -63,7 +63,7 @@ public sealed class NullAstExpressionNode : AstExpressionNode
     /// <inheritdoc />
     ///
     public override int ChildNodeCount
-        => 2;
+        => 0;
 
     ///
     /// <inheritdoc/>
