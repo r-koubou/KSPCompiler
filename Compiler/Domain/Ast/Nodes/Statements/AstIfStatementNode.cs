@@ -33,6 +33,9 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         ///
         public override int ChildNodeCount
             => 3;
+            // Condition
+            // CodeBlock
+            // ElseBlock
 
         ///
         /// <inheritdoc/>

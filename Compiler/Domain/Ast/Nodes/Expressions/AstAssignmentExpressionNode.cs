@@ -52,6 +52,8 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
         ///
         public override int ChildNodeCount
             => 2;
+            // Left: Destination
+            // Right: Source
 
         ///
         /// <inheritdoc/>

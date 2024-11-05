@@ -39,7 +39,9 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
         /// <inheritdoc />
         ///
         public override int ChildNodeCount
-            => 0;
+            => 2;
+            // Left: Command name
+            // Right: Arguments
 
         ///
         /// <inheritdoc/>
