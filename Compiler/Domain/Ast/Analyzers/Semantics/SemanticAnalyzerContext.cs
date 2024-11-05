@@ -60,7 +60,7 @@ public sealed class SemanticAnalyzerContext : IAnalyzerContext
 
     private class ExpressionEvaluationContext : IExpressionEvaluatorContext
     {
-        #region #region Expression Evaluators
+        #region Expression Evaluators
 
         public IAssignOperatorEvaluator AssignOperator { get; }
         public IBinaryOperatorEvaluator NumericBinaryOperator { get; }
