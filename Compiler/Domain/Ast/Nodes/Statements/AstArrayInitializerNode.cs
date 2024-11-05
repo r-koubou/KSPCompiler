@@ -64,7 +64,8 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         ///
         public override void AcceptChildren( IAstVisitor visitor )
         {
-            // Do nothing
+            Size.Accept( visitor );
+            Initializer.AcceptChildren( visitor );
         }
 
         #endregion IAstNodeAcceptor

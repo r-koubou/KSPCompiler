@@ -58,6 +58,8 @@ namespace KSPCompiler.Domain.Ast.Nodes.Blocks
 
         public override void AcceptChildren( IAstVisitor visitor )
         {
+            ConditionFrom.Accept( visitor );
+            ConditionTo.Accept( visitor );
             CodeBlock.AcceptChildren( visitor );
         }
 

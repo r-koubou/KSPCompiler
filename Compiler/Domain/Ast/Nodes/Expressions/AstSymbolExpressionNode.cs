@@ -64,7 +64,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
         /// <inheritdoc />
         ///
         public override int ChildNodeCount
-            => Left.IsNotNull() ? 1 : 0;
+            => 1;
 
         ///
         /// <inheritdoc/>
