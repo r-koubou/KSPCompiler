@@ -14,7 +14,7 @@ namespace KSPCompiler.Domain.Tests.Analyzer.Semantics;
 [TestFixture]
 public class AstPgsSymbolEvaluationTest
 {
-    private AstExpressionNode PreProcessorSymbolTestBody(
+    private AstExpressionNode PgsSymbolTestBody(
         AstSymbolExpressionNode expr,
         AggregateSymbolTable symbolTable,
         ICompilerMessageManger compilerMessageManger )
@@ -31,15 +31,13 @@ public class AstPgsSymbolEvaluationTest
     }
 
     [Test]
-    public void PreProcessorEvalTest()
+    public void PgsSymbolEvalTest()
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
-        var symbol = new PgsSymbol(){ Name = "TEST" };
-        symbolTable.PgsSymbols.Add( symbol );
 
-        var symbolExpr = new AstSymbolExpressionNode( symbol.Name, NullAstExpressionNode.Instance );
-        var result = PreProcessorSymbolTestBody(
+        var symbolExpr = new AstSymbolExpressionNode( "TEST", NullAstExpressionNode.Instance );
+        var result = PgsSymbolTestBody(
             symbolExpr,
             symbolTable,
             compilerMessageManger );

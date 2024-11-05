@@ -9,7 +9,6 @@ public sealed class AggregateSymbolTable
     public ICallbackSymbolTable ReservedCallbacks { get; }
     public IUserFunctionSymbolSymbolTable UserFunctions { get; }
     public IPreProcessorSymbolTable PreProcessorSymbols { get; }
-    public IPgsSymbolTable PgsSymbols { get; }
 
     public AggregateSymbolTable(
         IVariableSymbolTable variables,
@@ -18,8 +17,7 @@ public sealed class AggregateSymbolTable
         ICallbackSymbolTable userCallbacks,
         ICallbackSymbolTable reservedCallbacks,
         IUserFunctionSymbolSymbolTable userFunctions,
-        IPreProcessorSymbolTable preProcessorSymbols,
-        IPgsSymbolTable pgsSymbols )
+        IPreProcessorSymbolTable preProcessorSymbols )
     {
         Variables           = variables;
         UITypes             = uiTypes;
@@ -28,6 +26,5 @@ public sealed class AggregateSymbolTable
         ReservedCallbacks   = reservedCallbacks;
         UserFunctions       = userFunctions;
         PreProcessorSymbols = preProcessorSymbols;
-        PgsSymbols          = pgsSymbols;
     }
 }
