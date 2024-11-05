@@ -57,7 +57,7 @@ public class ConditionalUnaryOperatorEvaluator : IUnaryOperatorEvaluator
         {
             CompilerMessageManger.Error(
                 expr,
-                CompilerMessageResources.semantic_error_unrayoprator_logicalnot_incompatible,
+                CompilerMessageResources.semantic_error_unaryoprator_logicalnot_incompatible,
                 evaluatedLeft.TypeFlag.ToMessageString()
             );
 

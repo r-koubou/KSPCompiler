@@ -123,9 +123,9 @@ namespace KSPCompiler.Resources {
             }
         }
         
-        public static string semantic_error_unrayoprator_bitnot_compatible {
+        public static string semantic_error_unaryoprator_bitnot_compatible {
             get {
-                return ResourceManager.GetString("semantic.error.unrayoprator.bitnot.compatible", resourceCulture);
+                return ResourceManager.GetString("semantic.error.unaryoprator.bitnot.compatible", resourceCulture);
             }
         }
         
@@ -285,9 +285,9 @@ namespace KSPCompiler.Resources {
             }
         }
         
-        public static string semantic_error_unrayoprator_logicalnot_incompatible {
+        public static string semantic_error_unaryoprator_logicalnot_incompatible {
             get {
-                return ResourceManager.GetString("semantic.error.unrayoprator.logicalnot.incompatible", resourceCulture);
+                return ResourceManager.GetString("semantic.error.unaryoprator.logicalnot.incompatible", resourceCulture);
             }
         }
         

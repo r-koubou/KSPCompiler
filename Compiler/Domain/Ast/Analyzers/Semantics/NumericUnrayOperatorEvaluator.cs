@@ -61,7 +61,7 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
         {
             CompilerMessageManger.Error(
                 expr,
-                CompilerMessageResources.semantic_error_unrayoprator_bitnot_compatible,
+                CompilerMessageResources.semantic_error_unaryoprator_bitnot_compatible,
                 evaluatedLeft.TypeFlag.ToMessageString()
             );
 
