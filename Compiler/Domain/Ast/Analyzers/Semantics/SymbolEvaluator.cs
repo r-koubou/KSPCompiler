@@ -208,6 +208,19 @@ public class SymbolEvaluator : ISymbolEvaluator
             return false;
         }
 
+        // 64 文字超の ID は使用できない仕様
+        // https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/advanced-concepts#pgs
+        if( expr.Name.Length > 64 )
+        {
+            CompilerMessageManger.Error(
+                expr,
+                CompilerMessageResources.semantic_error_pgs_name_maximam_length,
+                expr.Name[ ..16 ] + "..."
+            );
+
+            // 上位のノードで評価を継続させるので代替のノードは生成しない
+        }
+
         var symbol = new PgsSymbol
         {
             Name = expr.Name,

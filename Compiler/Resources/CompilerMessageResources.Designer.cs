@@ -344,5 +344,11 @@ namespace KSPCompiler.Resources {
                 return ResourceManager.GetString("semantic.error.userfunction.unknown", resourceCulture);
             }
         }
+        
+        public static string semantic_error_pgs_name_maximam_length {
+            get {
+                return ResourceManager.GetString("semantic.error.pgs.name.maximam.length", resourceCulture);
+            }
+        }
     }
 }
