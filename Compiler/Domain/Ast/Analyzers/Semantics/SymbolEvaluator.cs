@@ -220,10 +220,18 @@ public class SymbolEvaluator : ISymbolEvaluator
     {
         result = NullAstExpressionNode.Instance;
 
-        if( !SymbolTable.PgsSymbols.TrySearchByName( expr.Name, out var symbol ) )
+        // PGS key は create, set, get の呼び出し順に関係なく参照可能なので
+        // シンボルテーブルを用いない
+        if( !DataTypeUtility.GuessFromSymbolName( expr.Name ).IsPgsId() )
         {
             return false;
         }
+
+        var symbol = new PgsSymbol
+        {
+            Name = expr.Name,
+            DataType = DataTypeFlag.TypePgsId
+        };
 
         result = CreateEvaluateNode( expr, symbol );
 

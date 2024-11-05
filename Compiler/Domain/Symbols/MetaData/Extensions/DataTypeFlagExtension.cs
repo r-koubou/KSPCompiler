@@ -32,6 +32,9 @@ public static class DataTypeFlagExtension
     public static bool IsPreprocessor( this DataTypeFlag flag )
         => flag.HasFlag( DataTypeFlag.TypePreprocessorSymbol );
 
+    public static bool IsPgsId( this DataTypeFlag flag )
+        => flag.HasFlag( DataTypeFlag.TypePgsId );
+
     public static bool IsVoid( this DataTypeFlag flag )
         => flag.HasFlag( DataTypeFlag.TypeVoid );
 
