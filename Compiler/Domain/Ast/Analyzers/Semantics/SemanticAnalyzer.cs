@@ -6,9 +6,9 @@ using KSPCompiler.Domain.Ast.Nodes.Statements;
 
 namespace KSPCompiler.Domain.Ast.Analyzers.Semantics;
 
-public partial class SemanticAnalyzer : DefaultAstVisitor, IAstTraversal
+public class SemanticAnalyzer : DefaultAstVisitor, IAstTraversal
 {
-    public IAnalyzerContext Context { get; }
+    protected IAnalyzerContext Context { get; }
 
     public SemanticAnalyzer( IAnalyzerContext context )
     {
@@ -32,20 +32,6 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, IAstTraversal
         => Context.DeclarationContext.Variable.Evaluate( this, node );
 
     #endregion ~Declarations
-
-
-
-    #region Statements
-
-    #region Preprocessor Symbol Statements
-
-    public override IAstNode Visit( AstPreprocessorIfdefineNode node )
-        => Context.StatementContext.Preprocess.Evaluate( this, node );
-
-    public override IAstNode Visit( AstPreprocessorIfnotDefineNode node )
-        => Context.StatementContext.Preprocess.Evaluate( this, node );
-
-    #endregion ~Preprocessor Symbol Statements
 
     #region Expressions
 
@@ -158,6 +144,18 @@ public partial class SemanticAnalyzer : DefaultAstVisitor, IAstTraversal
     #endregion ~Operators
 
     #endregion ~Expressions
+
+    #region Statements
+
+    #region Preprocessor Symbol Statements
+
+    public override IAstNode Visit( AstPreprocessorIfdefineNode node )
+        => Context.StatementContext.Preprocess.Evaluate( this, node );
+
+    public override IAstNode Visit( AstPreprocessorIfnotDefineNode node )
+        => Context.StatementContext.Preprocess.Evaluate( this, node );
+
+    #endregion ~Preprocessor Symbol Statements
 
     #region Call User Function Statements
 
