@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.Repositories;
-using KSPCompiler.Interactor.Symbols;
+using KSPCompiler.Interactors.Symbols;
 using KSPCompiler.UseCases.Symbols;
 
 namespace KSPCompiler.SymbolDatabaseControllers;
