@@ -30,7 +30,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalSymbol.Tsv.Tests", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00 Commons", "00 Commons", "{E84879C6-F1EE-436D-BC48-1F2BE644B31B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interactor", "Interactor\Interactor.csproj", "{6C593F0D-A03B-4525-B216-3DD27437C6D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interactors", "Interactors\Interactors.csproj", "{6C593F0D-A03B-4525-B216-3DD27437C6D4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Controllers", "Controllers", "{46FE5486-25B2-4937-9138-3F4F29871C15}"
 EndProject
@@ -62,7 +62,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Parsers", "Parsers", "{CD12
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tsv", "Tsv", "{47152E7B-0F7F-4421-9AC4-648F3F51E033}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interactor.Tests", "Interactor.Tests\Interactor.Tests.csproj", "{1B9B713C-5ECE-46A6-9E92-669F348B7B2F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interactors.Tests", "Interactors.Tests\Interactors.Tests.csproj", "{1B9B713C-5ECE-46A6-9E92-669F348B7B2F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -13,7 +13,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\Gateways\Gateways.csproj" />
-        <ProjectReference Include="..\..\Interactor\Interactor.csproj" />
+        <ProjectReference Include="..\..\Interactors\Interactors.csproj" />
         <ProjectReference Include="..\..\UseCases\UseCases.csproj" />
     </ItemGroup>
 
