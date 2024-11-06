@@ -1,9 +1,9 @@
-using KSPCompiler.Domain.Ast.Extensions;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Interactor.Analysis.Commons.Evaluations;
+using KSPCompiler.Interactor.Analysis.Commons.Extensions;
 using KSPCompiler.Resources;
 using KSPCompiler.UseCases.Analysis.Evaluations.Operators;
 

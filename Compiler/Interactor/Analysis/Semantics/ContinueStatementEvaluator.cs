@@ -1,7 +1,7 @@
-using KSPCompiler.Domain.Ast.Extensions;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Interactor.Analysis.Commons.Extensions;
 using KSPCompiler.Resources;
 using KSPCompiler.UseCases.Analysis.Evaluations.Conditionals;
 

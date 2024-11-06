@@ -3,7 +3,7 @@ using System;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.CompilerMessages;
 
-namespace KSPCompiler.Domain.Ast.Extensions;
+namespace KSPCompiler.Interactor.Analysis.Commons.Extensions;
 
 /// <summary>
 /// Extension for <see cref="ICompilerMessageManger"/>
