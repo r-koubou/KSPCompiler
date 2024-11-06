@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <LangVersion>12</LangVersion>
+        <TargetFramework>net8.0</TargetFramework>
+        <RootNamespace>KSPCompiler.Interactor.Tests</RootNamespace>
+        <Nullable>enable</Nullable>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="nunit" Version="3.13.2" />
+        <PackageReference Include="NUnit3TestAdapter" Version="4.2.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Interactor\Interactor.csproj" />
+    </ItemGroup>
+
+</Project>

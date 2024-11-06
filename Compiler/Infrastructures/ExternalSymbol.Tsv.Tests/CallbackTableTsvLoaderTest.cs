@@ -3,8 +3,7 @@ using System.Threading.Tasks;
 
 using KSPCompiler.Commons.Path;
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Domain.Tests;
-using KSPCompiler.Domain.Tests.Analyzer;
+using KSPCompiler.ExternalSymbol.Commons;
 using KSPCompiler.ExternalSymbol.Tsv.Callbacks;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
 
