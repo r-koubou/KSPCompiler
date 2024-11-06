@@ -26,7 +26,7 @@ public class PreprocessInteractor : IPreprocessUseCase
             return Task.FromResult( CreateOutputData( false, e ) );
         }
 
-        return Task.FromResult( CreateOutputData( false, null ) );
+        return Task.FromResult( CreateOutputData( true, null ) );
 
         PreprocessOutputData CreateOutputData( bool result, Exception? error )
             => new( result, error, new PreprocessOutputDataDetail( messageManger, node, symbolTable ) );
