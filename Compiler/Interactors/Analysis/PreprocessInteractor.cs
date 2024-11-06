@@ -31,4 +31,7 @@ public class PreprocessInteractor : IPreprocessUseCase
         PreprocessOutputData CreateOutputData( bool result, Exception? error )
             => new( result, error, new PreprocessOutputDataDetail( messageManger, node, symbolTable ) );
     }
+
+    public PreprocessOutputData Execute( PreprocessInputData input )
+        => ExecuteAsync( input ).GetAwaiter().GetResult();
 }
