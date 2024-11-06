@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <LangVersion>12</LangVersion>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <Copyright>R-Koubou</Copyright>
+        <Company>R-Koubou</Company>
+        <Product>KSPCompiler.Apps.Cli</Product>
+        <AssemblyName>KSPCompiler.Applications.Cli</AssemblyName>
+        <RootNamespace>KSPCompiler.Applications.Cli</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Controllers\CompilerControllers\CompilerControllers.csproj" />
+      <ProjectReference Include="..\..\Infrastructures\Parser.Antlr\Parser.Antlr.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="example.ksp">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+</Project>
