@@ -10,7 +10,16 @@
         <Product>KSPCompiler.Apps.Cli</Product>
         <AssemblyName>KSPCompiler.Applications.Cli</AssemblyName>
         <RootNamespace>KSPCompiler.Applications.Cli</RootNamespace>
+        <Version>0.0.1</Version>
+        <AssemblyVersion>0.0.1</AssemblyVersion>
+        <FileVersion>0.0.1</FileVersion>
     </PropertyGroup>
+
+    <ItemGroup>
+        <None Update="example.ksp">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\..\Controllers\CompilerControllers\CompilerControllers.csproj" />
@@ -18,9 +27,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="example.ksp">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
+      <PackageReference Include="ConsoleAppFramework" Version="5.2.4">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
     </ItemGroup>
 
 </Project>

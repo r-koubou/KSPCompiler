@@ -9,7 +9,11 @@ using KSPCompiler.UseCases.Analysis;
 
 namespace KSPCompiler.Controllers.Compiler;
 
-public record CompilerOption( ISyntaxParser SyntaxParser);
+public record CompilerOption(
+    ISyntaxParser SyntaxParser,
+    AggregateSymbolTable symbolTable,
+    bool SyntaxCheckOnly,
+    bool EnableObfuscation );
 
 public sealed class CompilerController
 {
@@ -17,17 +21,14 @@ public sealed class CompilerController
     {
         try
         {
-            var symbolTable = new AggregateSymbolTable(
-                new VariableSymbolTable(),
-                new UITypeSymbolTable(),
-                new CommandSymbolTable(),
-                new CallbackSymbolTable(),
-                new CallbackSymbolTable(),
-                new UserFunctionSymbolTable(),
-                new PreProcessorSymbolTable()
-            );
+            var symbolTable = option.symbolTable;
 
             var ast = option.SyntaxParser.Parse();
+
+            if( option.SyntaxCheckOnly )
+            {
+                return;
+            }
 
             var preprocessOutput = ExecutePreprocess( compilerMessageManger, ast, symbolTable );
 
@@ -38,6 +39,14 @@ public sealed class CompilerController
             }
 
             var semanticAnalysisOutput = ExecuteSemanticAnalysis( compilerMessageManger, ast, symbolTable );
+
+            if( !option.EnableObfuscation )
+            {
+                return;
+            }
+
+            // TODO Obfuscation
+
         }
         catch( Exception e )
         {
