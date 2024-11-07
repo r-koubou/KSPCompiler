@@ -20,7 +20,8 @@ internal class FromVariableSymbolModelTranslator : IDataTranslator<IEnumerable<V
                 Name        = x.Name,
                 ArraySize   = 0,
                 Reserved    = x.Reserved,
-                Description = x.Description
+                Description = x.Description,
+                BuiltIntoVersion = x.BuiltIntoVersion
             };
 
             symbol.DataType         = DataTypeUtility.GuessFromSymbolName( symbol.Name );

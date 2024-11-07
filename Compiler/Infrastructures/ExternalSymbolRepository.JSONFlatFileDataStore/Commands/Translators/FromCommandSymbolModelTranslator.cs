@@ -17,10 +17,11 @@ internal class FromCommandSymbolModelTranslator : IDataTranslator<IEnumerable<Co
         {
             var command = new CommandSymbol
             {
-                Name        = x.Name,
-                Reserved    = x.Reserved,
-                DataType    = DataTypeUtility.GuessFromTypeString( x.ReturnType ),
-                Description = x.Description
+                Name             = x.Name,
+                Reserved         = x.Reserved,
+                DataType         = DataTypeUtility.GuessFromTypeString( x.ReturnType ),
+                Description      = x.Description,
+                BuiltIntoVersion = x.BuiltIntoVersion
             };
 
             foreach( var arg in x.Arguments )

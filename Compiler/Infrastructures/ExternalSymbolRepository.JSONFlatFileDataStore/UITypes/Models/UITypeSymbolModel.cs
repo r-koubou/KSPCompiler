@@ -14,6 +14,7 @@ public sealed class UITypeSymbolModel : ISymbolModel
     public bool Reserved { get; set; }
     public string VariableType { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
+    public string BuiltIntoVersion { get; set; } = string.Empty;
     public bool RequireInitializer { get; set; }
     public List<UITypeSymbolArgumentModel> InitializerArguments { get; set; } = new();
 }

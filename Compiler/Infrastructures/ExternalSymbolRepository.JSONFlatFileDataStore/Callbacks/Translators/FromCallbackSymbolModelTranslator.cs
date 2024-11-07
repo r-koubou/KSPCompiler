@@ -17,10 +17,11 @@ internal class FromCallbackSymbolModelTranslator : IDataTranslator<IEnumerable<C
         {
             var command = new CallbackSymbol( x.AllowMultipleDeclaration )
             {
-                Name        = x.Name,
-                Reserved    = x.Reserved,
-                Description = x.Description,
-                DataType    = DataTypeFlag.None
+                Name             = x.Name,
+                Reserved         = x.Reserved,
+                Description      = x.Description,
+                BuiltIntoVersion = x.BuiltIntoVersion,
+                DataType         = DataTypeFlag.None
             };
 
             foreach( var arg in x.Arguments )
