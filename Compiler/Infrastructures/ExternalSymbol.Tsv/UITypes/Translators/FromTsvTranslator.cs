@@ -17,6 +17,7 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<U
         Reserved,
         VariableType,
         Description,
+        BuiltIntoVersion,
         RequireInitializer,
         InitializerArgumentBegin,
     }
@@ -31,10 +32,11 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<U
 
                 var uiType = new UITypeSymbol( TsvUtility.ParseBoolean( values[ (int)Column.RequireInitializer ] ) )
                 {
-                    Name        = values[ (int)Column.Name ],
-                    Reserved    = TsvUtility.ParseBoolean( values[ (int)Column.Reserved ] ),
-                    Description = values[ (int)Column.Description ],
-                    DataType    = DataTypeUtility.GuessFromTypeString( values[ (int)Column.VariableType ] )
+                    Name             = values[ (int)Column.Name ],
+                    Reserved         = TsvUtility.ParseBoolean( values[ (int)Column.Reserved ] ),
+                    Description      = values[ (int)Column.Description ],
+                    BuiltIntoVersion = values[ (int)Column.BuiltIntoVersion ],
+                    DataType         = DataTypeUtility.GuessFromTypeString( values[ (int)Column.VariableType ] )
                 };
 
                 ParseInitializerArguments( values, uiType );

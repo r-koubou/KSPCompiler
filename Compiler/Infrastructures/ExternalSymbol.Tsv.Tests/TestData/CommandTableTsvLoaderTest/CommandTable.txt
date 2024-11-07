@@ -1,2 +1,2 @@
-# name, reserved, description, return type [, argument1, argument1 description ...]
-message	true	print message to console	V	*message	a message data
+# name, reserved, description, built-into-version, return type [, argument1, argument1 description ...]
+message	true	print message to console	N/A	V	*message	a message data

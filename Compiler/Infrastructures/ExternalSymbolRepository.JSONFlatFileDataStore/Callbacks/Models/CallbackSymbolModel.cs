@@ -14,5 +14,6 @@ public sealed class CallbackSymbolModel : ISymbolModel
     public bool Reserved { get; set; }
     public bool AllowMultipleDeclaration { get; set; }
     public string Description { get; set; } = string.Empty;
+    public string BuiltIntoVersion { get; set; } = string.Empty;
     public List<CallbackArgumentModel> Arguments { get; set; } = new();
 }

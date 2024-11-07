@@ -21,7 +21,8 @@ internal class ToUITypeModelTranslator : IDataTranslator<IEnumerable<UITypeSymbo
                 Reserved           = x.Reserved,
                 VariableType       = DataTypeUtility.ToString( x.DataType ),
                 RequireInitializer = x.InitializerRequired,
-                Description        = x.Description.Value
+                Description        = x.Description.Value,
+                BuiltIntoVersion   = x.BuiltIntoVersion
             };
 
             foreach( var arg in x.InitializerArguments )

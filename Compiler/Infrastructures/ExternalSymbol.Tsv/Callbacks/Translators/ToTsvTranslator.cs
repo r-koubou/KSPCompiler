@@ -18,6 +18,7 @@ internal class ToTsvTranslator : IDataTranslator<IEnumerable<CallbackSymbol>, st
             result.AppendTab( v.Name )
                   .AppendTab( v.Reserved.ToString().ToLower() )
                   .AppendTab( v.AllowMultipleDeclaration.ToString().ToLower() )
+                  .AppendTab( v.BuiltIntoVersion )
                   .Append( v.Description );
 
             if( v.Arguments.Count == 0 )

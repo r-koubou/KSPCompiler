@@ -17,10 +17,11 @@ internal class FromVariableSymbolModelTranslator : IDataTranslator<IEnumerable<V
         {
             var symbol = new VariableSymbol
             {
-                Name        = x.Name,
-                ArraySize   = 0,
-                Reserved    = x.Reserved,
-                Description = x.Description
+                Name             = x.Name,
+                ArraySize        = 0,
+                Reserved         = x.Reserved,
+                Description      = x.Description,
+                BuiltIntoVersion = x.BuiltIntoVersion
             };
 
             symbol.DataType         = DataTypeUtility.GuessFromSymbolName( symbol.Name );

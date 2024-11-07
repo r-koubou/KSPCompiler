@@ -23,7 +23,7 @@ public class VariableSymbol : SymbolBase
     /// UI type when variable type is UI
     /// </summary>
     /// <seealso cref="ModifierFlag"/>
-    /// <seealso crefModifierFlagModifierFlag.UI"/>
+    /// <seealso cref="ModifierFlag.UI"/>
     public virtual UITypeSymbol UIType { get; set; } = UITypeSymbol.Null;
 
     /// <summary>

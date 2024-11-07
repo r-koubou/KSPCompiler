@@ -20,6 +20,7 @@ internal class FromUITypeModelTranslator : IDataTranslator<IEnumerable<UITypeSym
                 Name             = x.Name,
                 Reserved         = x.Reserved,
                 Description      = x.Description,
+                BuiltIntoVersion = x.BuiltIntoVersion,
                 DataType         = DataTypeUtility.GuessFromTypeString( x.VariableType ),
                 Modifier = ModifierFlag.UI
             };

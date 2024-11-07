@@ -19,7 +19,8 @@ internal class ToCallbackSymbolModelTranslator : IDataTranslator<IEnumerable<Cal
                 Name                     = x.Name.Value,
                 Reserved                 = x.Reserved,
                 AllowMultipleDeclaration = x.AllowMultipleDeclaration,
-                Description              = x.Description.Value
+                Description              = x.Description.Value,
+                BuiltIntoVersion         = x.BuiltIntoVersion
             };
 
             foreach( var arg in x.Arguments )

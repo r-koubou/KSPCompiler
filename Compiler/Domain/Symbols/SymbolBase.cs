@@ -52,6 +52,14 @@ public abstract class SymbolBase
     public SymbolDescription Description { get; set; } = SymbolDescription.Empty;
 
     /// <summary>
+    /// A version built into KONTAKT.
+    /// </summary>
+    /// <remarks>
+    /// Empty if unknown.
+    /// </remarks>
+    public SymbolBuiltIntoVersion BuiltIntoVersion { get; set; } = SymbolBuiltIntoVersion.NotAvailable;
+
+    /// <summary>
     /// If the symbol can represent a value, this property holds the value. (e.g. constant value). Otherwise, it is null.
     /// </summary>
     public object? Value { get; set; } = null;

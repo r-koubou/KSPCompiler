@@ -19,6 +19,7 @@ internal class ToTsvTranslator : IDataTranslator<IEnumerable<CommandSymbol>, str
             result.AppendTab( v.Name )
                   .AppendTab( v.Reserved.ToString().ToLower() )
                   .AppendTab( v.Description )
+                  .AppendTab( v.BuiltIntoVersion )
                   .Append( DataTypeUtility.ToString( v.DataType ) );
 
             if( v.Arguments.Count == 0 )

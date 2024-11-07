@@ -1,4 +1,5 @@
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 using KSPCompiler.Commons.Path;
@@ -36,6 +37,10 @@ public class CallbackTableTsvLoaderTest
         var symbolTable = importer.Import();
 
         Assert.IsTrue( symbolTable.Count == 2 );
+
+        var list = symbolTable.ToList();
+        Assert.AreEqual( SymbolBuiltIntoVersion.NotAvailable, list[ 0 ].BuiltIntoVersion );
+        Assert.AreEqual( SymbolBuiltIntoVersion.NotAvailable, list[ 1 ].BuiltIntoVersion );
     }
 
     [Test]

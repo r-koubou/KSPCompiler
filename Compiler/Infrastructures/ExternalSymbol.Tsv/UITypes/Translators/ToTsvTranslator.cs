@@ -20,6 +20,7 @@ internal class ToTsvTranslator : IDataTranslator<IEnumerable<UITypeSymbol>, stri
                   .AppendTab( v.Reserved.ToString().ToLower() )
                   .AppendTab( DataTypeUtility.ToString( v.DataType ) )
                   .AppendTab( v.Description )
+                  .AppendTab( v.BuiltIntoVersion )
                   .Append( v.InitializerRequired.ToString().ToLower() );
 
             if( v.InitializerArguments.Count == 0 )
