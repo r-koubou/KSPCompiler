@@ -1,4 +1,5 @@
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 using KSPCompiler.Commons.Path;
@@ -36,6 +37,7 @@ public class CommandTableTsvLoaderTest
         var symbolTable = importer.Import();
 
         Assert.IsTrue( symbolTable.Count == 1 );
+        Assert.AreEqual( SymbolBuiltIntoVersion.NotAvailable, symbolTable.First().BuiltIntoVersion );
     }
 
     [Test]

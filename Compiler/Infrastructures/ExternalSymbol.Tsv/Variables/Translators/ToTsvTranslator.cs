@@ -17,7 +17,8 @@ internal class ToTsvTranslator : IDataTranslator<IEnumerable<VariableSymbol>, st
         {
             result.AppendTab( v.Name )
                   .AppendTab( v.Reserved.ToString().ToLower() )
-                  .AppendNewLine( v.Description );
+                  .AppendTab( v.Description )
+                  .AppendNewLine( v.BuiltIntoVersion );
         }
 
         return result.ToString();

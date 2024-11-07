@@ -16,6 +16,7 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<C
         Name,
         Reserved,
         Description,
+        BuiltIntoVersion,
         ReturnType,
         ArgumentBegin
     }
@@ -30,10 +31,11 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<C
 
                 var command = new CommandSymbol
                 {
-                    Name        = values[ (int)Column.Name ],
-                    Reserved    = TsvUtility.ParseBoolean( values[ (int)Column.Reserved ] ),
-                    Description = values[ (int)Column.Description ],
-                    DataType    = DataTypeUtility.GuessFromTypeString( values[ (int)Column.ReturnType ] )
+                    Name             = values[ (int)Column.Name ],
+                    Reserved         = TsvUtility.ParseBoolean( values[ (int)Column.Reserved ] ),
+                    Description      = values[ (int)Column.Description ],
+                    BuiltIntoVersion = values[ (int)Column.BuiltIntoVersion ],
+                    DataType         = DataTypeUtility.GuessFromTypeString( values[ (int)Column.ReturnType ] )
                 };
 
                 if( values.Length > (int)Column.ArgumentBegin )

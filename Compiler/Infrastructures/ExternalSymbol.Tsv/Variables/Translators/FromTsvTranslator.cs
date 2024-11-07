@@ -16,7 +16,8 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<V
     {
         Name,
         Reserved,
-        Description
+        Description,
+        BuiltIntoVersion
     }
 
     public IReadOnlyCollection<VariableSymbol> Translate( string source )
@@ -29,10 +30,11 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<V
 
                 var symbol = new VariableSymbol
                 {
-                    Name        = values[ (int)Column.Name ],
-                    ArraySize   = 0,
-                    Reserved    = TsvUtility.ParseBoolean( values[ (int)Column.Reserved ] ),
-                    Description = values[ (int)Column.Description ]
+                    Name             = values[ (int)Column.Name ],
+                    ArraySize        = 0,
+                    Reserved         = TsvUtility.ParseBoolean( values[ (int)Column.Reserved ] ),
+                    Description      = values[ (int)Column.Description ],
+                    BuiltIntoVersion = values[ (int)Column.BuiltIntoVersion ]
                 };
 
                 symbol.DataType         = DataTypeUtility.GuessFromSymbolName( symbol.Name );

@@ -18,6 +18,7 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<C
         Reserved,
         AllowDuplicate,
         Description,
+        BuiltIntoVersion,
         ArgumentBegin
     }
 
@@ -31,10 +32,11 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<C
 
                 var symbol = new CallbackSymbol( TsvUtility.ParseBoolean( values[ (int)Column.AllowDuplicate ] ) )
                 {
-                    Name        = values[ (int)Column.Name ],
-                    Reserved    = TsvUtility.ParseBoolean( values[ (int)Column.Reserved ] ),
-                    Description = values[ (int)Column.Description ],
-                    DataType    = DataTypeFlag.None
+                    Name             = values[ (int)Column.Name ],
+                    Reserved         = TsvUtility.ParseBoolean( values[ (int)Column.Reserved ] ),
+                    Description      = values[ (int)Column.Description ],
+                    BuiltIntoVersion = values[ (int)Column.BuiltIntoVersion ],
+                    DataType         = DataTypeFlag.None
                 };
 
                 if( values.Length > (int)Column.ArgumentBegin )
