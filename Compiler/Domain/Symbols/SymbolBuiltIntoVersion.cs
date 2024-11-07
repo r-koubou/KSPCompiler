@@ -4,10 +4,10 @@ namespace KSPCompiler.Domain.Symbols;
 
 public record SymbolBuiltIntoVersion( string Value ) : StringValueObject( Value )
 {
-    public static readonly SymbolBuiltIntoVersion Empty = new( string.Empty );
+    public static readonly SymbolBuiltIntoVersion NotAvailable = new( "N/A" );
 
     public override bool AllowEmpty
-        => true;
+        => false;
 
     public static implicit operator SymbolBuiltIntoVersion( string value )
         => new( value );
