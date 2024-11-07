@@ -16,6 +16,15 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Content Include="..\..\..\LICENSE">
+            <Link>LICENSE</Link>
+        </Content>
+        <Content Include="..\..\..\NOTICE.md">
+            <Link>NOTICE.md</Link>
+        </Content>
+        <None Update="README.md">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
         <None Update="example.ksp">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
