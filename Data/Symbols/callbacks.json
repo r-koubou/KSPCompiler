@@ -1,0 +1,188 @@
+{
+  "repository_identifier": "callback",
+  "repository_format_version": 1,
+  "symbols": [
+    {
+      "id": 0,
+      "createdAt": "2024-11-07T13:27:24.206725Z",
+      "updatedAt": "2024-11-07T13:27:24.206725Z",
+      "name": "async_complete",
+      "reserved": true,
+      "allowMultipleDeclaration": false,
+      "description": "Async complete callback, triggered after the execution of any command that is executed asynchronously, for example various loading or saving related commands.",
+      "builtIntoVersion": "N/A",
+      "arguments": []
+    },
+    {
+      "id": 1,
+      "createdAt": "2024-11-07T13:27:24.271152Z",
+      "updatedAt": "2024-11-07T13:27:24.271152Z",
+      "name": "controller",
+      "reserved": true,
+      "allowMultipleDeclaration": false,
+      "description": "MIDI controller callback, executed whenever a MIDI CC, Pitch Bend or Channel Pressure message is received.",
+      "builtIntoVersion": "N/A",
+      "arguments": []
+    },
+    {
+      "id": 2,
+      "createdAt": "2024-11-07T13:27:24.283739Z",
+      "updatedAt": "2024-11-07T13:27:24.283739Z",
+      "name": "init",
+      "reserved": true,
+      "allowMultipleDeclaration": false,
+      "description": "Initialization callback, executed when the script was successfully compiled without warnings or errors.",
+      "builtIntoVersion": "N/A",
+      "arguments": []
+    },
+    {
+      "id": 3,
+      "createdAt": "2024-11-07T13:27:24.289139Z",
+      "updatedAt": "2024-11-07T13:27:24.289139Z",
+      "name": "listener",
+      "reserved": true,
+      "allowMultipleDeclaration": false,
+      "description": "Listener callback, executed at definable time intervals or whenever a transport command is received.",
+      "builtIntoVersion": "N/A",
+      "arguments": []
+    },
+    {
+      "id": 4,
+      "createdAt": "2024-11-07T13:27:24.294899Z",
+      "updatedAt": "2024-11-07T13:27:24.294899Z",
+      "name": "note",
+      "reserved": true,
+      "allowMultipleDeclaration": false,
+      "description": "Note callback, executed whenever a MIDI Note On message is received.",
+      "builtIntoVersion": "N/A",
+      "arguments": []
+    },
+    {
+      "id": 5,
+      "createdAt": "2024-11-07T13:27:24.300118Z",
+      "updatedAt": "2024-11-07T13:27:24.300118Z",
+      "name": "note_controller",
+      "reserved": true,
+      "allowMultipleDeclaration": false,
+      "description": "MIDI 2.0 per-note controller callback, executed whenever a MIDI 2.0 Registered Per-Note Controller, MIDI 2.0 Assignable Per-Note Controller, or MIDI 2.0 Per-Note Pitch Bend message is received.",
+      "builtIntoVersion": "N/A",
+      "arguments": []
+    },
+    {
+      "id": 6,
+      "createdAt": "2024-11-07T13:27:24.305535Z",
+      "updatedAt": "2024-11-07T13:27:24.305535Z",
+      "name": "persistence_changed",
+      "reserved": true,
+      "allowMultipleDeclaration": false,
+      "description": "Executed after the on init callback, or whenever a snapshot has been loaded.",
+      "builtIntoVersion": "N/A",
+      "arguments": []
+    },
+    {
+      "id": 7,
+      "createdAt": "2024-11-07T13:27:24.311249Z",
+      "updatedAt": "2024-11-07T13:27:24.311249Z",
+      "name": "pgs_changed",
+      "reserved": true,
+      "allowMultipleDeclaration": false,
+      "description": "Executed whenever any pgs_set_key_val() command is executed in any script slot.",
+      "builtIntoVersion": "N/A",
+      "arguments": []
+    },
+    {
+      "id": 8,
+      "createdAt": "2024-11-07T13:27:24.32288Z",
+      "updatedAt": "2024-11-07T13:27:24.32288Z",
+      "name": "poly_at",
+      "reserved": true,
+      "allowMultipleDeclaration": false,
+      "description": "Polyphonic aftertouch callback, executed whenever a MIDI Polyphonic Aftertouch message is received.",
+      "builtIntoVersion": "N/A",
+      "arguments": []
+    },
+    {
+      "id": 9,
+      "createdAt": "2024-11-07T13:27:24.33382Z",
+      "updatedAt": "2024-11-07T13:27:24.33382Z",
+      "name": "release",
+      "reserved": true,
+      "allowMultipleDeclaration": false,
+      "description": "Release callback, executed whenever a MIDI Note Off message is received.",
+      "builtIntoVersion": "N/A",
+      "arguments": []
+    },
+    {
+      "id": 10,
+      "createdAt": "2024-11-07T13:27:24.33957Z",
+      "updatedAt": "2024-11-07T13:27:24.33957Z",
+      "name": "rpn",
+      "reserved": true,
+      "allowMultipleDeclaration": false,
+      "description": "RPN callbacks, executed whenever a MIDI RPN (registered/non-registered parameter number) message is received.",
+      "builtIntoVersion": "N/A",
+      "arguments": []
+    },
+    {
+      "id": 11,
+      "createdAt": "2024-11-07T13:27:24.345352Z",
+      "updatedAt": "2024-11-07T13:27:24.345352Z",
+      "name": "nrpn",
+      "reserved": true,
+      "allowMultipleDeclaration": false,
+      "description": "NRPN callbacks, executed whenever a MIDI NRPN (registered/non-registered parameter number) message is received.",
+      "builtIntoVersion": "N/A",
+      "arguments": []
+    },
+    {
+      "id": 12,
+      "createdAt": "2024-11-07T13:27:24.351175Z",
+      "updatedAt": "2024-11-07T13:27:24.351175Z",
+      "name": "ui_control",
+      "reserved": true,
+      "allowMultipleDeclaration": true,
+      "description": "UI callback, executed whenever the user interacts with a particular UI widget.",
+      "builtIntoVersion": "N/A",
+      "arguments": [
+        {
+          "name": "*ui_widget_name",
+          "requiredDeclare": true,
+          "description": "UI widget variable"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "createdAt": "2024-11-07T13:27:24.363068Z",
+      "updatedAt": "2024-11-07T13:27:24.363068Z",
+      "name": "ui_update",
+      "reserved": true,
+      "allowMultipleDeclaration": false,
+      "description": "UI update callback, executed with every GUI change in Kontakt.",
+      "builtIntoVersion": "N/A",
+      "arguments": []
+    },
+    {
+      "id": 14,
+      "createdAt": "2024-11-07T13:27:24.368876Z",
+      "updatedAt": "2024-11-07T13:27:24.368876Z",
+      "name": "ui_controls",
+      "reserved": true,
+      "allowMultipleDeclaration": false,
+      "description": "Global UI callback, executed whenever the user interacts with any particular UI widget.",
+      "builtIntoVersion": "N/A",
+      "arguments": []
+    },
+    {
+      "id": 15,
+      "createdAt": "2024-11-07T13:27:24.380321Z",
+      "updatedAt": "2024-11-07T13:27:24.380321Z",
+      "name": "midi_in",
+      "reserved": true,
+      "allowMultipleDeclaration": false,
+      "description": "MIDI callback, triggered by every incoming MIDI event.",
+      "builtIntoVersion": "N/A",
+      "arguments": []
+    }
+  ]
+}
