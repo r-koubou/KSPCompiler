@@ -16,9 +16,9 @@ internal class ToVariableSymbolModelTranslator : IDataTranslator<IEnumerable<Var
         {
             var symbol = new VariableSymbolModel
             {
-                Name        = x.Name.Value,
-                Reserved    = x.Reserved,
-                Description = x.Description.Value,
+                Name             = x.Name.Value,
+                Reserved         = x.Reserved,
+                Description      = x.Description.Value,
                 BuiltIntoVersion = x.BuiltIntoVersion
             };
 
