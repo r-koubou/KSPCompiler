@@ -32,4 +32,7 @@ public class SemanticAnalysisInteractor : ISemanticAnalysisUseCase
         SemanticAnalysisOutputData CreateOutputData( bool result, Exception? error )
             => new( result, error, new SemanticAnalysisOutputDataDetail( messageManger, node, symbolTable ) );
     }
+
+    public SemanticAnalysisOutputData Execute( SemanticAnalysisInputData input )
+        => ExecuteAsync( input ).GetAwaiter().GetResult();
 }

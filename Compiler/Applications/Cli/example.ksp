@@ -1,0 +1,9 @@
+
+
+    on init
+
+declare $i := 0
+
+$x := 0
+
+end on

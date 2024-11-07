@@ -1,5 +1,4 @@
 using System.IO;
-using System.Text;
 
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.CompilerMessages;
@@ -19,7 +18,7 @@ public static class ParseTestUtility
             scriptFilePath
         );
 
-        var parser = new AntlrKspFileSyntaxParser( path, ICompilerMessageManger.Default, Encoding.UTF8 );
+        var parser = new AntlrKspFileSyntaxParser( path, ICompilerMessageManger.Default );
         var ast = parser.Parse();
         return ast;
     }
