@@ -1,14 +1,11 @@
 using System;
 
-using ConsoleAppFramework;
-
 using KSPCompiler.Controllers.Compiler;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Infrastructures.Parser.Antlr;
 
-// Run the compiler program.
-ConsoleApp.Run( args, CompilerProgram.ExecuteCompiler );
+namespace KSPCompiler.Applications.Cli;
 
 /// <summary>
 /// Body of the compiler program.
