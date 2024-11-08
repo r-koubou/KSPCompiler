@@ -118,10 +118,16 @@ public class CallCommandExpressionEvaluator : ICallCommandExpressionEvaluator
 
                 foreach( var uiName in symbolArg.UITypeNames )
                 {
+                    // ワイルドカード指定の場合は合致とみなす
+                    if( uiName == UITypeSymbol.AnyUI.Name )
+                    {
+                        matchedUiType = true;
+                        break;
+                    }
+
                     if( UITypes.TrySearchByName( uiName, out _ ) )
                     {
                         matchedUiType = true;
-
                         break;
                     }
                 }
