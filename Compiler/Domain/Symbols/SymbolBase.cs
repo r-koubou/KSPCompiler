@@ -29,11 +29,6 @@ public abstract class SymbolBase
     public abstract SymbolType Type { get; }
 
     /// <summary>
-    /// A symbol's data type
-    /// </summary>
-    public virtual DataTypeFlag DataType { get; set; } = DataTypeFlag.None;
-
-    /// <summary>
     /// A symbol's modifier
     /// </summary>
     public ModifierFlag Modifier { get; set; } = ModifierFlag.None;

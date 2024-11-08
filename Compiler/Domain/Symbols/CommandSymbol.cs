@@ -5,7 +5,7 @@ using KSPCompiler.Domain.Symbols.MetaData;
 
 namespace KSPCompiler.Domain.Symbols;
 
-public sealed class CommandSymbol : SymbolBase
+public sealed class CommandSymbol : SymbolBase, ISymbolDataTypeProvider
 {
     public override SymbolType Type
         => SymbolType.Command;
@@ -14,6 +14,11 @@ public sealed class CommandSymbol : SymbolBase
 
     public IReadOnlyCollection<CommandArgumentSymbol> Arguments
         => arguments;
+
+    /// <summary>
+    /// Represents the return type of the command.
+    /// </summary>
+    public DataTypeFlag DataType { get; set; } = DataTypeFlag.None;
 
     public int ArgumentCount
         => Arguments.Count;

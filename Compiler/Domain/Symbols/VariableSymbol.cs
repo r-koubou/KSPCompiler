@@ -2,11 +2,16 @@ using KSPCompiler.Domain.Symbols.MetaData;
 
 namespace KSPCompiler.Domain.Symbols;
 
-public class VariableSymbol : SymbolBase
+public class VariableSymbol : SymbolBase, ISymbolDataTypeProvider
 {
     #region Properties
     public override SymbolType Type
         => SymbolType.Variable;
+
+    ///
+    /// <inheritdoc />
+    ///
+    public virtual DataTypeFlag DataType { get; set; } = DataTypeFlag.None;
 
     /// <summary>
     /// The variable's state in semantic analysis.
