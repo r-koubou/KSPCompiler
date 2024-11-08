@@ -54,12 +54,10 @@ public static class DataTypeUtility
     /// <summary>
     /// Convert to data type from string with separated '||' if multiple types.
     /// </summary>
-    /// <exception cref="ArgumentException">Unknown type</exception>
-    public static DataTypeFlag GuessFromTypeString( string typeString, string separator = "||" )
+    /// <returns>True if successful, otherwise false.</returns>
+    public static bool TryGuessFromTypeString( string typeString, out DataTypeFlag result, string separator = "||" )
     {
-        var result = DataTypeFlag.None;
-
-        typeString.Split( separator );
+        result = DataTypeFlag.None;
 
         foreach( var type in typeString.Split( separator ) )
         {
@@ -77,19 +75,33 @@ public static class DataTypeUtility
                 //--------------------------------------------------------------------------
                 // For internal processing
                 //--------------------------------------------------------------------------
-                "I" => DataTypeFlag.TypeInt,
-                "S" => DataTypeFlag.TypeString,
-                "R" => DataTypeFlag.TypeReal,
-                "B" => DataTypeFlag.TypeBool,
+                "I"   => DataTypeFlag.TypeInt,
+                "S"   => DataTypeFlag.TypeString,
+                "R"   => DataTypeFlag.TypeReal,
+                "B"   => DataTypeFlag.TypeBool,
                 "I[]" => DataTypeFlag.TypeIntArray,
                 "S[]" => DataTypeFlag.TypeStringArray,
                 "R[]" => DataTypeFlag.TypeRealArray,
-                "V" => DataTypeFlag.TypeVoid,
-                "P" => DataTypeFlag.TypePreprocessorSymbol,
-                "K" => DataTypeFlag.TypePgsId,
-                "*" => DataTypeFlag.MultipleType,
-                _   => throw new ArgumentException( $"unknown type : {type}" )
+                "V"   => DataTypeFlag.TypeVoid,
+                "P"   => DataTypeFlag.TypePreprocessorSymbol,
+                "K"   => DataTypeFlag.TypePgsId,
+                "*"   => DataTypeFlag.MultipleType,
+                _     => DataTypeFlag.None
             };
+        }
+
+        return result != DataTypeFlag.None;
+    }
+
+    /// <summary>
+    /// Convert to data type from string with separated '||' if multiple types.
+    /// </summary>
+    /// <exception cref="ArgumentException">Unknown type</exception>
+    public static DataTypeFlag GuessFromTypeString( string typeString, string separator = "||" )
+    {
+        if( !TryGuessFromTypeString( typeString, out var result, separator ) )
+        {
+            throw new ArgumentException( $"unknown type : {typeString}" );
         }
 
         return result;
