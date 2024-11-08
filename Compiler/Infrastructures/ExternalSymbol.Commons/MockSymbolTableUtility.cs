@@ -77,8 +77,7 @@ public static class MockSymbolTableUtility
         {
             Name        = "ui_control",
             Description = "UI event callback",
-            Reserved    = true,
-            DataType    = DataTypeFlag.TypeInt
+            Reserved    = true
         };
 
         example.AddArgument( new CallbackArgumentSymbol( false )

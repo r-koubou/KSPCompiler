@@ -35,8 +35,7 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<C
                     Name             = values[ (int)Column.Name ],
                     Reserved         = TsvUtility.ParseBoolean( values[ (int)Column.Reserved ] ),
                     Description      = values[ (int)Column.Description ],
-                    BuiltIntoVersion = values[ (int)Column.BuiltIntoVersion ],
-                    DataType         = DataTypeFlag.None
+                    BuiltIntoVersion = values[ (int)Column.BuiltIntoVersion ]
                 };
 
                 if( values.Length > (int)Column.ArgumentBegin )

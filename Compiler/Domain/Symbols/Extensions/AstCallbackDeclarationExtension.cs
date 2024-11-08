@@ -11,8 +11,7 @@ public static class AstCallbackDeclarationExtension
         {
             Name = self.Name,
             Reserved = false,
-            Description = $"Created from {nameof(AstCallbackDeclarationExtension)}.{nameof(As)}",
-            DataType = DataTypeFlag.None
+            Description = $"Created from {nameof(AstCallbackDeclarationExtension)}.{nameof(As)}"
         };
 
         foreach ( var arg in self.ArgumentList.Arguments )
