@@ -1,0 +1,255 @@
+abs	true	Absolute value	N/A	I||R||S	I||R	x	arg 1 description
+acos	true	arccosine function	N/A	R||S	R	x	arg 1 description
+add_menu_item	true	create a menu entry	N/A	V	ui_menu	variable	arg 1 description	S	text	arg 2 description	I	value	arg 3 description
+add_text_line	true	add a new text line in the specified label without erasing existing text	N/A	V	ui_label	variable	arg 1 description	S	text	arg 2 description
+allow_group	true	allows the specified group, i.e. makes it available for playback	N/A	V	I	group-index	arg 1 description
+array_equal	true	checks the values of two arrays, true if all values are equal, false if<br>  not	N/A	B	I[]	array-variable	arg 1 description	I[]	array-variable	arg 2 description
+asin	true	arcsine (inverse sine function)	N/A	R||S	R	x	arg 1 description
+atan	true	arctangent (inverse tangent function)	N/A	R||S	R	x	arg 1 description
+attach_level_meter	true	attach a level meter to a certain position within the instrument to read<br>  volume data	N/A	V	I	ui-ID	arg 1 description	I	group	arg 2 description	I	slot	arg 3 description	I	channel	arg 4 description	I	bus	arg 5 description
+attach_zone	true	connects the corresponding zone to the waveform so that it shows up<br>  within the display	N/A	V	ui_waveform	variable	arg 1 description	I	zone-id	arg 2 description	I	flags	arg 3 description
+by_marks	true	a user defined group of events (or event IDs)	N/A	I||S	I	bit-mask	arg 1 description
+by_track	true	can be used to group events by their track number	N/A	I||S	I	track	arg 1 description
+cbrt	true	Cube root function	N/A	R||S	R	x	arg 1 description
+cc_delivery_request	true	Undocumented	N/A	V	I	arg1	arg 1 description
+ceil	true	ceiling (round up) ceil(2.3) = 3.0	N/A	R||S	R	x	arg 1 description
+change_listener_par	true	changes the parameters of the on listener callback. Can be used in every<br>  callback.	N/A	V	I	signal-type	arg 1 description	I	parameter	arg 2 description
+change_note	true	change the note number of a specific note event	N/A	V	I	ID-number	arg 1 description	I	note-number	arg 2 description
+change_pan	true	change the pan position of a specific note event	N/A	V	I	ID-number	arg 1 description	I	panorama	arg 2 description	I	relative-bit	arg 3 description
+change_time_with_pitch	true	Undocumented	N/A	I||S	I	arg1	arg 1 description	I		arg 2 description
+change_tune	true	change the tuning of a specific note event in millicent	N/A	V	I	ID-number	arg 1 description	I	tune-amount	arg 2 description	I	relative-bit	arg 3 description
+change_velo	true	change the velocity of a specific note event	N/A	V	I	ID-number	arg 1 description	I	velocity	arg 2 description
+change_vol	true	change the volume of a specific note event in millidecibel	N/A	V	I	ID-number	arg 1 description	I	volume	arg 2 description	I	relative-bit	arg 3 description
+cos	true	cosine function	N/A	R||S	R	x	arg 1 description
+dec	true	decrement an expression by 1 (x - 1)	N/A	V	I	x	arg 1 description
+delete_event_mark	true	delete an event mark, i.e. ungroup the specified event from an event<br>  group	N/A	V	I	ID-number	arg 1 description	I	bit-mark	arg 2 description
+detect_drum_type	true	Assigns <drum-type-result> a $NI_DETECT_DRUM_TYPE tag describing<br>  the drum type of an audio sample.	N/A	R||S	I	zone-id	arg 1 description	I	drum-type-result	arg 2 description
+detect_instrument_type	true	Assigns <drum-type-result> a $NI_DETECT_INSTRUMENT_TYPE tag<br>  describing the in- strument type of an audio sample.	N/A	I||S	I	zone-id	arg 1 description	I	instrument-type-result	arg 2 description
+detect_key	true	Assigns <key-result> a $NI_DETECT_KEY tag describing the musical<br>  key of the audio sample. If detection fails, the function will return<br>  $NI_DETECT_KEY_INVALID.	N/A	I||S	I	zone-id	arg 1 description	I	key-result	arg 2 description
+detect_loudness	true	Returns a real value representing the loudness of an audio sample in dB.	N/A	R||S	I	zone-id	arg 1 description	R	loudness-result	arg 2 description
+detect_peak	true	Returns a real value representing peak level of an audio sample in dB.	N/A	I||S	I	zone-id	arg 1 description	R	peak-result	arg 2 description
+detect_pitch	true	Returns a real value representing the fundamental frequency of an audio<br>  sample, in semi- tones and cents	N/A	R||S	I	zone-id	arg 1 description	R	pitch-result	arg 2 description
+detect_rms	true	Returns a real value representing the RMS level of an audio sample in<br>  dB. 	N/A	R||S	I	zone-id	arg 1 description	R	rms-result	arg 2 description
+detect_sample_type	true	Assigns <sample-type-result> a $NI_DETECT_SAMPLE_TYPE tag<br>  describing the whether an audio sample is a drum or an instrument.	N/A	I||S	I	zone-id	arg 1 description	I	sample-type-result	arg 2 description
+detect_tempo	true	Returns a real value representing the detected tempo of the audio sample,<br>  in BPM. If detection fails, the function will return<br>  ~NI_DETECT_TEMPO_INVALID.	N/A	R||S	I	zone-id	arg 1 description	R	tempo-result	arg 2 description
+disable_logging	true	Quickly disabling emission of messages, warnings or watched<br>  variable<br>    events to both the Kontakt Status Bar<br>    $NI_LOG_MESSAGE, $NI_LOG_WARNING, $NI_LOG_WATCHING	N/A	V	I	type	arg 1 description
+disallow_group	true	disallows the specified group, i.e. makes it unavailable for playback	N/A	V	I	group-index	arg 1 description
+dont_use_machine_mode	true	play the specified event in sampler mode	N/A	V	I	ID-number	arg 1 description
+event_status	true	retrieve the status of a particular note event (or MIDI event in the<br>  multi script)	N/A	I||S	I	ID-number	arg 1 description
+exit	true	immediately stops a callback or exits a function	N/A	V		exit	arg 1 description
+exp	true	exponential function (returns the value of e^x)	N/A	R||S	R	x	arg 1 description
+fade_in	true	perform a fade-in for a specific note event	N/A	V	I	ID-number	arg 1 description	I	fade-time	arg 2 description
+fade_out	true	perform a fade-out for a specific note event	N/A	V	I	ID-number	arg 1 description	I	fade-time	arg 2 description	I	stop-voice	arg 3 description
+find_group	true	returns the group index for the specified group name	N/A	I||S	S	group-name	arg 1 description
+find_mod	true	returns the slot index of an internal modulator or external modulation<br>  slot	N/A	I||S	I	group-index	arg 1 description	S	mod-name	arg 2 description
+find_target	true	returns the slot index of a modulation slot of an internal modulator	N/A	I||S	I	group-index	arg 1 description	I	mod-index	arg 2 description	S	target-name	arg 3 description
+find_zone	true	returns the zone ID for the specified zone name. Only availabe in the<br>  init callback.	N/A	I||S	S	zone-name	arg 1 description
+floor	true	floor (round down) floor(2.8) = 2.0	N/A	R||S	R	x	arg 1 description
+fs_get_filename	true	return the filename of the last selected file in the UI file browser.	N/A	S	I	ui-ID	arg 1 description	I	return-parameter	arg 2 description
+fs_navigate	true	jump to the next/previous file in an ui file selector and trigger its<br>  callback.	N/A	V	I	ui-ID	arg 1 description	I	direction	arg 2 description
+get_control_par	true	retrieve various parameters of the specified gui control	N/A	I||S	I	ui-ID	arg 1 description	I	control-parameter	arg 2 description
+get_control_par_arr	true	Undocumented	N/A	I||S	I	arg1	arg 1 description	I	arg2	arg 2 description	I	arg3	arg 3 description
+get_control_par_real_arr	true	Undocumented	N/A	I||R||S	I	arg1	arg 1 description	I	arg2	arg 2 description	I	arg3	arg 3 description
+get_control_par_str	true	Undocumented	N/A	S	I	arg1	arg 1 description	I	arg2	arg 2 description
+get_control_par_str_arr	true	Undocumented	N/A	I||S	I	arg1	arg 1 description	I	arg2	arg 2 description	I	arg3	arg 3 description
+get_engine_par	true	returns the value of a specific engine parameter	N/A	I||S	I	parameter	arg 1 description	I	group	arg 2 description	I	slot	arg 3 description	I	generic	arg 4 description
+get_engine_par_disp	true	returns the displayed string of a specific engine parameter	N/A	S	I	parameter	arg 1 description	I	group	arg 2 description	I	slot	arg 3 description	I	generic	arg 4 description
+get_engine_par_disp_m	true	Undocumented	N/A	S	I	arg1	arg 1 description	I	arg2	arg 2 description	I	arg3	arg 3 description	I	arg4	arg 4 description
+get_engine_par_m	true	Undocumented	N/A	I||S	I	arg1	arg 1 description	I	arg2	arg 2 description	I	arg3	arg 3 description	I	arg4	arg 4 description
+get_event_ids	true	fills the specified array with all active event IDs.	N/A	V	I[]	array-name	arg 1 description
+get_event_mark	true	Check if the specified event belongs to a specific event group (returns 1<br>  if the bitmark is set, 0 otherwise)	N/A	I||S	I	ID-number	arg 1 description	I	bit-mark	arg 2 description
+get_event_par	true	return the value of a specific event parameter of the specified event	N/A	I||S	I	ID-number	arg 1 description	I	parameter	arg 2 description
+get_event_par_arr	true	special form of get_event_par(), used to retrieve the group allow state<br>  of the specified event	N/A	I||S	I	ID-number	arg 1 description	I	parameter	arg 2 description	I	group-index	arg 3 description
+get_folder	true	returns the path specified with the built-in path variable	N/A	S	I	path-variable	arg 1 description
+get_font_id	true	Enables use of custom dynamic fonts	N/A	I	I	id	arg 1 description
+get_group_idx	true	returns the group index for the specified group name	N/A	I||S	S	group-name	arg 1 description
+get_key_color	true	returns the color constant of the specified note number	N/A	I||S	I	note-nr	arg 1 description
+get_key_name	true	returns the name of the specified key	N/A	S	I	note-nr	arg 1 description
+get_key_triggerstate	true	returns the pressed state of the specified note number (i.e. key) on the<br>  KONTAKT keyboard, can be either 1 (key pressed) or 0 (key released)	N/A	I||S	I	note-nr	arg 1 description
+get_key_type	true	returns the key type constant of the specified key.	N/A	I||S	I	note-nr	arg 1 description
+get_keyrange_max_note	true	returns the highest note of the specified key range	N/A	I||S	I	note-nr	arg 1 description
+get_keyrange_min_note	true	returns the lowest note of the specified key range	N/A	I||S	I	note-nr	arg 1 description
+get_keyrange_name	true	returns the name of the specified key range	N/A	S	I	note-nr	arg 1 description
+get_loop_par	true	Returns the loop parameters of a zone	N/A	I||S	I	zone-id	arg 1 description	I	loop_index	arg 2 description	I	parameter	arg 3 description
+get_loop_sample	true	Returns paths, file names and extensions of samples	N/A	I||S	I	zone-id	arg 1 description	I	return-parameter	arg 2 description
+get_menu_item_str	true	returns the string value of the menu's entry.	N/A	S	I	menu-ID	arg 1 description	I	index	arg 2 description
+get_menu_item_value	true	returns the value of the menu's entry.	N/A	I||S	I	menu-ID	arg 1 description	I	index	arg 2 description
+get_menu_item_visibility	true	returns 1 if the menu entry is visible, otherwise 0.	N/A	I||S	I	menu-ID	arg 1 description	I	index	arg 2 description
+get_mod_idx	true	Returns the slot index of an internal modulator or external modulation<br>  slot	N/A	I||S	I	group-index	arg 1 description	S	mod-name	arg 2 description
+get_num_zones	true	Returns the total number of all zones that are present in the instrument<br>  (regular and user zones)	N/A	I||S
+get_purge_state	true	returns the purge state of the specified group. 0=purged, 1=not purged	N/A	I||S	I	group-index	arg 1 description
+get_sample_length	true	returns the length of the specified zone's sample in microseconds	N/A	I||S	I	zone-ID	arg 1 description
+get_sel_zones_idx	true	Fills the specified array with indices of all selected zones in KONTAKT's<br>  Mapping Editor.	N/A	V	I[]	array-name	arg 1 description
+get_target_idx	true	Returns the modulation target slot index of an internal modulator	N/A	I||S	I	group-index	arg 1 description	I	mod-index	arg 2 description	S	target-name	arg 3 description
+get_ui_id	true	retrieve the ID number of an ui control	N/A	I||S	ui_*	variable	arg 1 description
+get_ui_wf_property	true	returns the value of the waveform's different properties.	N/A	I||S	ui_waveform	variable	arg 1 description	I	property	arg 2 description	I	index	arg 3 description
+get_voice_limit	true	retunrs the voice limit for the Time Machine Pro mode of the source<br>  module	N/A	I||S	I	voice-type	arg 1 description
+get_zone_id	true	Returns the ID of the zone with the specified zone index	N/A	I||S	I	zone-index	arg 1 description
+get_zone_par	true	Returns the zone parameters	N/A	I||S	I	zone-id	arg 1 description	I	parameter	arg 2 description
+get_zone_status	true	Queries the status of the zone ID in<br>  question. Zone status has four possible states:<br>    - $NI_ZONE_STATUS_EMPTY - zone is a user zone and has no sample<br>  loaded<br>    - $NI_ZONE_STATUS_LOADED - zone is a user zone and has a sample<br>  loaded<br>    - $NI_ZONE_STATUS_PURGED - zone is purged from memory (valid for both<br>  regular and user<br>    zones)<br>    - $NI_ZONE_STATUS_IGNORED - zone is ignored by the user response in the<br>  Content Missing<br>    dialog (valid for both regular and user zones)	N/A	I||S	I	zone-id	arg 1 description
+group_name	true	returns the group name for the specified group	N/A	S	I	group-index	arg 1 description
+hide_part	true	hide specific parts of user interface controls	N/A	V	ui_*	variable	arg 1 description	I	hide-mask	arg 2 description
+ignore_controller	true	ignore a controller event in a controller callback	N/A	V		ignore_controller	arg 1 description
+ignore_event	true	ignore a note event in a note on or note off callback	N/A	V	I	ID-number	arg 1 description
+ignore_midi	true	Like ignore_event(), ignore_midi is a very "strong" command.<br>  Keep in mind that ignore_midi will ignore all incoming MIDI events. If you<br>  simply want to change the MIDI channel and/or any of the MIDI bytes, you can<br>  also use set_event_par().	N/A	V		ignore_midi	arg 1 description
+in_range	true	Boolean Operator: true if x is between y and z	N/A	B	I	x	arg 1 description	I	y	arg 2 description	I	z	arg 3 description
+inc	true	increment an expression by 1 (x + 1)	N/A	V	I	x	arg 1 description
+int	true	converts an integer value into a real number	N/A	I||S	R	real	arg 1 description
+int_to_real	true	converts an integer value into a real number	N/A	R||S	I	integer	arg 1 description
+is_zone_empty	true	Returns 1 if a zone is empty (has no sample), otherwise returns 0	N/A	I||S	I	zone-id	arg 1 description
+load_array	true	loads an array from an external file (.nka file)	N/A	I||S	I[]||S[]	array-variable	arg 1 description	I	mode	arg 2 description
+load_array_str	true	loads an array from an external file (.nka file) using the file's<br>  absolute path	N/A	I||S	I[]||S[]	array-variable	arg 1 description	S||I	path	arg 2 description
+load_ir_sample	true	loads an impulse response sample into KONTAKT's convolution effect	N/A	I||S	S	file-path	arg 1 description	I	slot	arg 2 description	I	generic	arg 3 description
+load_ir_sample_m	true	Undocumented	N/A	V	*	arg1	arg 1 description
+load_midi_file	true	Load MIDI file from path (*Non documented)	N/A	I||S	S	path	arg 1 description
+load_patch	true	Undocumented	N/A	V	S	arg1	arg 1 description	I	arg2	arg 2 description
+load_performance_view	true	Loads a performance view file (NCKP) that was created in the Creator<br>  Tools GUI Designer <filename>. The filename of the NCKP file, without<br>  extension, as a string (in quotation marks)	N/A	V	S	filename	arg 1 description
+log	true	logarithmic function	N/A	R||S	R	x	arg 1 description
+lsb	true	return the LSB portion (least significant byte) of a 14 bit value	N/A	I||S	I	value	arg 1 description
+make_instr_persistent	true	retain the value of a variable only with the instrument	N/A	V	*	variable	arg 1 description
+make_perfview	true	activates the performance view for the respective script	N/A	V		make_perfview	arg 1 description
+make_persistent	true	retain the value of a variable whith the instrument and snapshot	N/A	V	*	variable	arg 1 description
+message	true	display text in the status line of KONTAKT	N/A	V	S||I||R	variable/text	arg 1 description
+mf_copy_export_area	true	Copies the content of MIDI export area 0 to the specified index.	N/A	V	I	index	arg 1 description
+mf_get_buffer_size	true	returns the size of the MIDI event buffer	N/A	I||S	V
+mf_get_byte_one	true	Undocumented	N/A	I||S	V
+mf_get_byte_two	true	Undocumented	N/A	I||S	V
+mf_get_channel	true	Undocumented	N/A	I||S	V
+mf_get_command	true	Undocumented	N/A	I||S	V
+mf_get_event_par	true	returns the value of an event parameter	N/A	I||S	I	event-id	arg 1 description	I	parameter	arg 2 description
+mf_get_first	true	moves the position marker to the first event in the MIDI track	N/A	V	I	track-index	arg 1 description
+mf_get_id	true	returns the ID of the currently selected event (when using the navigation<br>  commands like mf_get_first(), and mf_get_next(), etc)	N/A	I||S	V
+mf_get_last	true	moves the position marker to the last event in the MIDI track	N/A	V	I	track-index	arg 1 description
+mf_get_last_filename	true	Returns the filename (not the full path!) of the last MIDI file that was<br>  inserted into KONTAKT, either via mf_insert_file(), or via drag and drop<br>  operation on ui_mouse_area.	N/A	S
+mf_get_mark	true	checks if an event is marked or not. Returns 1 if it is marked, or 0 if<br>  it is not.	N/A	I||S	I	event-id	arg 1 description	I	mark	arg 2 description
+mf_get_next	true	moves the position marker to the next event in the MIDI track	N/A	V	I	track-index	arg 1 description
+mf_get_next_at	true	moves the position marker to the next event in the MIDI track right after<br>  the defined position.	N/A	V	I	track-index	arg 1 description	I	pos	arg 2 description
+mf_get_note_length	true	Undocumented	N/A	I||S	V
+mf_get_num_tracks	true	returns the number of tracks in a MIDI object.	N/A	I||S	V
+mf_get_pos	true	Undocumented	N/A	I||S	V
+mf_get_prev	true	moves the position marker to the previous event in the MIDI track	N/A	V	I	track-index	arg 1 description
+mf_get_prev_at	true	moves the position marker to the first event before the defined position	N/A	V	I	track-index	arg 1 description	I	pos	arg 2 description
+mf_get_track_idx	true	Undocumented	N/A	I||S	V
+mf_insert_event	true	activates an inactive MIDI event in the MIDI object. However, because the<br>  command and position are defined in this command, it can be considered as an<br>  insertion.	N/A	I||S	I	track	arg 1 description	I	pos	arg 2 description	I	command	arg 3 description	I	byte1	arg 4 description	I	byte2	arg 5 description
+mf_insert_file	true	inserts a MIDI file into the MIDI object.	N/A	I||S	S	path	arg 1 description	I	track-offset	arg 2 description	I	position-offset	arg 3 description	I	mode	arg 4 description
+mf_remove_event	true	deactivates an event in the MIDI object, effectively removing it	N/A	V	I	event-id	arg 1 description
+mf_reset	true	resets the MIDI object, sets the event buffer to zero, and removes all<br>  events	N/A	V	V
+mf_set_buffer_size	true	defines a number of inactive MIDI events, that can be activated and<br>  edited	N/A	I||S	I	size	arg 1 description
+mf_set_byte_one	true	Non documented	N/A	V	I	value	arg 1 description
+mf_set_byte_two	true	Non documented	N/A	V	I	value	arg 1 description
+mf_set_channel	true	Undocumented	N/A	V	I
+mf_set_command	true	Non documented	N/A	V	I	value	arg 1 description
+mf_set_event_par	true	sets an event parameter	N/A	V	I	event-id	arg 1 description	I	parameter	arg 2 description	I	value	arg 3 description
+mf_set_export_area	true	defines the part of the MIDI object that will be exported when using a<br>  drag and drop area, or the save_midi_file() command.	N/A	I||S	S	name	arg 1 description	I	start-pos	arg 2 description	I	end-pos	arg 3 description	I	start-track	arg 4 description	I	end-track	arg 5 description
+mf_set_mark	true	marks an event, so that you may groups events together and process that<br>  group quickly	N/A	V	I	event-id	arg 1 description	I	mark	arg 2 description	I	status	arg 3 description
+mf_set_num_export_areas	true	Sets the number of export areas, with a maximum of 512.	N/A	V	I	num	arg 1 description
+mf_set_pos	true	Non documented	N/A	V	I	value	arg 1 description
+move_control	true	position ui elements in the standard KONTAKT grid	N/A	V	ui_*	variable	arg 1 description	I	x-position	arg 2 description	I	y-position	arg 3 description
+move_control_px	true	position ui elements in pixels	N/A	V	ui_*	variable	arg 1 description	I	x-position	arg 2 description	I	y-position	arg 3 description
+ms_to_ticks	true	converts a microseconds value into a tempo dependent ticks value	N/A	I||S	I	microseconds	arg 1 description
+msb	true	return the MSB portion (most significant byte) of a 14 bit value	N/A	I||S	I	value	arg 1 description
+note_off	true	send a note off message to a specific note	N/A	V	I	ID-number	arg 1 description
+num_elements	true	returns the number of elements in an array	N/A	I||S	I[]||R[]||S[]	array-variable	arg 1 description
+num_slices	true	Undocumented	N/A	I||S	I	arg1	arg 1 description
+num_slices_zone	true	returns the number of slices of the specified zone	N/A	I||S	I	zone-ID	arg 1 description
+output_channel_name	true	returns the channel name for the specified output	N/A	S	I	output-number	arg 1 description
+pgs_create_key	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	V	KEY	key-id	arg 1 description	I	size	arg 2 description
+pgs_create_str_key	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	V	KEY	key-id	arg 1 description
+pgs_get_key_val	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	I||S	KEY	key-id	arg 1 description	I	index	arg 2 description
+pgs_get_str_key_val	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	S	KEY
+pgs_key_exists	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	B	KEY	key-id	arg 1 description
+pgs_set_key_val	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	V	KEY	key-id	arg 1 description	I	index	arg 2 description	I	value	arg 3 description
+pgs_set_str_key_val	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	V	KEY	key-id	arg 1 description	S||I||R	<br>stringvalue	arg 2 description
+pgs_str_key_exists	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	B	KEY	key-id	arg 1 description
+play_note	true	generate a MIDI note, i.e. generate a note on message followed by a note<br>  off message	N/A	I||S	I	note-number	arg 1 description	I	velocity	arg 2 description	I	sample-offset	arg 3 description	I	duration	arg 4 description
+pow	true	power (returns the value of x^y)	N/A	R||S	R	x	arg 1 description	R	y	arg 2 description
+purge_group	true	purges (i.e. unloads from RAM) the samples of the specified group	N/A	V	I	group-index	arg 1 description	I	mode	arg 2 description
+random	true	generate a random integer in the range <min> to <max>	N/A	I||S	I	min	arg 1 description	I	max	arg 2 description
+read_persistent_var	true	instantly reloads the value of a variable that was saved via the<br>  make_persistent()command	N/A	V	*	variable	arg 1 description
+real	true	converts a real number into an integer	N/A	R||S	I	integer	arg 1 description
+real_to_int	true	converts a real number into an integer	N/A	I||S	R	real	arg 1 description
+redirect_midi	true	Undocumented	N/A	V	*	arg1	arg 1 description
+redirect_output	true	Routes the audio signal of the specified event to a specific output or<br>  bus	N/A	V	I	ID-number	arg 1 description	I	output-type	arg 2 description	I	index	arg 3 description
+remove_keyrange	true	assigns a text string to the specified range of keys	N/A	V	I	note-nr	arg 1 description
+reset_engine	true	Undocumented	N/A	V	V
+reset_ksp_timer	true	resets the KSP timer ($KSP_TIMER) to zero	N/A	V		reset_ksp_timer	arg 1 description
+reset_rls_trig_counter	true	dresets the release trigger counter (used by the release trigger system<br>  script)	N/A	V	I	note	arg 1 description
+round	true	round (round to nearest) round(2.3) = 2.0 round(2.8) = 3.0	N/A	R||S	R	x	arg 1 description
+save_array	true	saves an array to an external file (i.e. an .nka file)	N/A	I||S	I[]||S[]	array-variable	arg 1 description	I	mode	arg 2 description
+save_array_str	true	saves an array to an external file (i.e. an .nka file), using the<br>  specified absolute path	N/A	I||S	I[]||S[]	array-variable	arg 1 description	S||I	path	arg 2 description
+save_midi_file	true	saves a MIDI file with a range specified by the mf_set_export_area()<br>  command.	N/A	I||S	S	path	arg 1 description
+search	true	searches the specified array for the specified value and returns the<br>  index of its first position.	N/A	I||S	I[]	array-variable	arg 1 description	I	value	arg 2 description
+set_control_help	true	assigns a text string to be displayed when hovering the ui control. The<br>  text will appear in KONTAKT's info pane.	N/A	V	ui_*	variable	arg 1 description	S	text	arg 2 description
+set_control_par	true	change various parameters of the specified gui control	N/A	V	I	ui-ID	arg 1 description	I	control-parameter	arg 2 description	I	value	arg 3 description
+set_control_par_arr	true	change various parameters of an element within an array based gui control<br>  (for example: cursors in the XY pad)	N/A	V	I	ui-ID	arg 1 description	I	control-parameter	arg 2 description	I	value	arg 3 description	I	index	arg 4 description
+set_control_par_real_arr	true	change various parameters of an element within an array-based UI widget,<br>  e.g. ui_xy cursors.	N/A	V	I	ui-ID	arg 1 description	I	control-parameter	arg 2 description	R||I	value	arg 3 description	I	index	arg 4 description
+set_control_par_str	true	A variation of the command for usage with text strings. ( see:<br>  set_control_par() Remarks)	N/A	V	I	ui-ID	arg 1 description	I	CONTROL_PAR_xxx	arg 2 description	S||I	value	arg 3 description
+set_control_par_str_arr	true	A variation of the command for usage with text strings. ( see:<br>  set_control_par_arr() Remarks)	N/A	V	I	ui-ID	arg 1 description	I	control-parameter	arg 2 description	S||I	value	arg 3 description	I	index	arg 4 description
+set_controller	true	send a MIDI CC, pitchbend or channel pressure value	N/A	V	I	MIDICCnumber/$VCC_PITCH_BEND/$VCC_MONO	arg 1 description	I	value	arg 2 description
+set_engine_par	true	control automatable KONTAKT parameters and bypass buttons	N/A	I||S	I	parameter	arg 1 description	I	value	arg 2 description	I	group	arg 3 description	I	slot	arg 4 description	I	generic	arg 5 description
+set_engine_par_m	true	Undocumented	N/A	V	I	arg1	arg 1 description	I	arg2	arg 2 description	I	arg3	arg 3 description	I	arg4	arg 4 description	I	arg5	arg 5 description
+set_event_mark	true	Assign the specified event to a specific event group	N/A	V	I	ID-number	arg 1 description	I	bit-mark	arg 2 description
+set_event_par	true	assign a parameter to a specific event	N/A	V	I	ID-number	arg 1 description	I	parameter	arg 2 description	I	value	arg 3 description
+set_event_par_arr	true	special form of set_event_par(), used to set the group allow state of the<br>  specified event	N/A	V	I	ID-number	arg 1 description	I	parameter	arg 2 description	I	value	arg 3 description	I	group-index	arg 4 description
+set_key_color	true	sets the color of the specified key (i.e. MIDI note) on the KONTAKT<br>  keyboard. use $KEY_COLOR_****	N/A	V	I	note-nr	arg 1 description	I	key-color-constant	arg 2 description
+set_key_name	true	assigns a text string to the specified key	N/A	V	I	note-nr	arg 1 description	S	name	arg 2 description
+set_key_pressed	true	sets the trigger state of the specified key on KONTAKT's keyboard either<br>  to pressed/on (1) or released/off (0)	N/A	V	I	note-nr	arg 1 description	I	value	arg 2 description
+set_key_pressed_support	true	sets the pressed state support mode for KONTAKT'S keyboard. The available<br>  modes are:<br>    0: KONTAKT handles all pressed states, set_key_pressed() commands are<br>  ignored (default mode)<br>    1: KONTAKT's keyboard is only affected by set_key_pressed() commands	N/A	V	I	mode	arg 1 description
+set_key_type	true	assigns a key type to the specified key.<br>    The following key types are available:<br>    $NI_KEY_TYPE_DEFAULT (i.e. normal mapped notes that produce sound)<br>    $NI_KEY_TYPE_CONTROL (i.e. key switches or other notes that do not produce<br>  sound)<br>    $NI_KEY_TYPE_NONE (resets the key to its normal KONTAKT behaviour)	N/A	V	I	note-nr	arg 1 description	I	key-type-constant	arg 2 description
+set_keyrange	true	assigns a text string to the specified range of keys.	N/A	V	I	min-note	arg 1 description	I	max-note	arg 2 description	S	name	arg 3 description
+set_knob_defval	true	assign a default value to a knob to which the knob is reset when<br>  Cmd-clicking (mac) or Ctrl-clicking (PC) the knob.	N/A	V	ui_knob||ui_slider	variable	arg 1 description	I	value	arg 2 description
+set_knob_label	true	assign a text string to a knob	N/A	V	ui_knob	variable	arg 1 description	S	text	arg 2 description
+set_knob_unit	true	assign a unit mark to a knob.	N/A	V	ui_knob	variable	arg 1 description	I	knob-unit-constant	arg 2 description
+set_listener	true	Sets the signals on which the listener callback should react to. Can only<br>  be used in the init callback.	N/A	V	I	signal-type	arg 1 description	I	parameter	arg 2 description
+set_loop_par	true	Sets the loop parameters of a user zone	N/A	I||S	I	zone-id	arg 1 description	I	loop_index	arg 2 description	I	parameter	arg 3 description	I	value	arg 4 description
+set_map_editor_event_color	true	Assigns the specified color to events generated in the current script<br>  slot, visible in KONTAKT's Mapping Editor.	N/A	V	I	hex-value	arg 1 description
+set_menu_item_str	true	sets the value of a menu entry.	N/A	V	I	menu-id	arg 1 description	I	index	arg 2 description	S||I	string	arg 3 description
+set_menu_item_value	true	sets the value of a menu entry.	N/A	V	I	menu-id	arg 1 description	I	index	arg 2 description	I	value	arg 3 description
+set_menu_item_visibility	true	sets the visibility of a menu entry.	N/A	V	I	menu-id	arg 1 description	I	index	arg 2 description	I	visibility	arg 3 description
+set_midi	true	create any type of MIDI event. If you simply want to change the MIDI<br>  channel and/or any of the MIDI bytes, you can also use set_event_par().	N/A	V	I	channel	arg 1 description	I	command	arg 2 description	I	byte1	arg 3 description	I	byte2	arg 4 description
+set_note_controller	true	Sends a MIDI 2.0 Registered Per-Note Controller, MIDI 2.0 Assignable<br>  Per-Note Controller or MIDI 2.0 Per-Note Pitch Bend message.	N/A	V	I	controller	arg 1 description	I	note-number	arg 2 description	I	value	arg 3 description
+set_nrpn	true	send a nrpn message	N/A	V	I	address	arg 1 description	I	value	arg 2 description
+set_num_user_zones	true	Creates empty user zones	N/A	I||S	I	number_of_user_zones	arg 1 description
+set_poly_at	true	Sends a MIDI Polyphonic Aftertouch message.	N/A	V	I	note-number	arg 1 description	I	value	arg 2 description
+set_rpn	true	send a rpn message	N/A	V	I	address	arg 1 description	I	value	arg 2 description
+set_sample	true	Sets the user sample in a zone	N/A	I||S	I	zone-id	arg 1 description	S	sample-path	arg 2 description
+set_script_title	true	set the script title	N/A	V	S	text	arg 1 description
+set_skin_offset	true	offsets the chosen background picture file by the specified number of<br>  pixels	N/A	V	I	offset-in-pixel	arg 1 description
+set_snapshot_type	true	configures the KSP processor behavior of all five slots when a snapshot<br>  is recalled	N/A	V	I	type	arg 1 description
+set_table_steps_shown	true	changes the number of displayed columns in an ui table	N/A	V	ui_table	variable	arg 1 description	I	num-of-steps	arg 2 description
+set_text	true	when applied to a label: delete the text currently visible in the<br>  specified label and add new text.<br>    when applied to knobs, buttons, switches and value edits: set the display<br>  name of the ui element.	N/A	V	ui_button||ui_knob||ui_label||ui_switch||ui_value_edit	variable	arg 1 description	I||R||S	text	arg 2 description
+set_ui_color	true	set the main background color of the performance view	N/A	V	I	hex-values	arg 1 description	S	text	arg 2 description
+set_ui_height	true	set the height of a script performance view in grid units	N/A	V	I	height	arg 1 description
+set_ui_height_px	true	set the height of a script performance view in pixels	N/A	V	I	height	arg 1 description
+set_ui_wf_property	true	sets different properties for the waveform control	N/A	V	ui_waveform	variable	arg 1 description	I	property	arg 2 description	I	index	arg 3 description	I	value	arg 4 description
+set_ui_width_px	true	set the width of a script performance view in pixels	N/A	V	I	width	arg 1 description
+set_voice_limit	true	sets the voice limit for the Time Machine Pro mode of the source module	N/A	I||S	I	voice-type	arg 1 description	I	value	arg 2 description
+set_zone_par	true	Sets the user zone parameters	N/A	I||S	I	zone-id	arg 1 description	I	parameter	arg 2 description	I	value	arg 3 description
+sgn	true	Signum function (returns -1 if the number is negative, 0 if it's zero, 1<br>  if it's positive)	N/A	I||S	I	x	arg 1 description
+sh_left	true	shifts the bits in <expression> by the amount of <shift-bits><br>  to the left	N/A	I||S	I	expression	arg 1 description	I	shift-bits	arg 2 description
+sh_right	true	shifts the bits in <expression> by the amount of <shift-bits><br>  to the right	N/A	I||S	I	expression	arg 1 description	I	shift-bits	arg 2 description
+show_library_tab	true	Undocumented	N/A	V		show_library_tab	arg 1 description
+signbit	true	Sign bit (returns 1 if the number is negative, 0 otherwise)	N/A	I||S	I	x	arg 1 description
+sin	true	sine function	N/A	R||S	R	x	arg 1 description
+slice_idx_loop_end	true	Undocumented	N/A	I||S	I	arg1	arg 1 description	I	arg2	arg 2 description
+slice_idx_loop_start	true	Undocumented	N/A	I||S	I	arg1	arg 1 description	I	arg2	arg 2 description
+slice_length	true	Undocumented	N/A	I||S	I	arg1	arg 1 description	I	arg2	arg 2 description
+slice_loop_count	true	Undocumented	N/A	I||S	I	arg1	arg 1 description	I	arg2	arg 2 description
+slice_start	true	Undocumented	N/A	I||S	I	arg1	arg 1 description	I	arg2	arg 2 description
+sort	true	searches the specified array for the specified value and returns the<br>  index of its first position.	N/A	V	I[]||R[]	array-variable	arg 1 description	I	direction	arg 2 description
+sqrt	true	square root	N/A	R||S	R	x	arg 1 description
+stop_wait	true	stops wait commands in the specified callback	N/A	V	I	callback-ID	arg 1 description	I	parameter	arg 2 description
+tan	true	tangent function	N/A	R||S	R	x	arg 1 description
+ticks_to_ms	true	converts a tempo dependent ticks value into a microseconds value	N/A	I||S	I	ticks	arg 1 description
+unload_slot	true	Undocumented	N/A	V	I	arg1	arg 1 description
+wait	true	pauses the callback for the specified time in microseconds	N/A	V	I	wait-time	arg 1 description
+wait_async	true	waits until the async command identified by the <asyncID> is<br>  finished	N/A	V	I	asyncID	arg 1 description
+wait_ticks	true	pauses the callback for the specified time in ticks	N/A	V	I	wait-time	arg 1 description
+watch_array_idx	true	Variable watching through Creator Tools	N/A	V	I[]||S[]||R[]	arr	arg 1 description	I	idx	arg 2 description
+watch_var	true	Variable watching through Creator Tools	N/A	V	I||S||R	var	arg 1 description
+will_never_terminate	true	Tells the script engine that this event will never be finished (used by the release trigger system script).	N/A	V	I	event-id	arg 1 description
+zone_slice_idx_loop_end	true	returns the index number of the slice at the loop end	N/A	I||S	I	zone-ID	arg 1 description	I	loop-index	arg 2 description
+zone_slice_idx_loop_start	true	returns the index number of the slice at the loop start	N/A	I||S	I	zone-ID	arg 1 description	I	loop-index	arg 2 description
+zone_slice_length	true	returns the length in microseconds of the specified slice with respect to<br>  the current tempo	N/A	I||S	I	zone-ID	arg 1 description	I	slice-index	arg 2 description
+zone_slice_loop_count	true	returns the loop count of the specified loop	N/A	I||S	I	zone-ID	arg 1 description	I	loop-index	arg 2 description
+zone_slice_start	true	returns the absolute start point of the specified slice in microseconds,<br>  independent of the current tempo	N/A	I||S	I	zone-ID	arg 1 description	I	slice-index	arg 2 description

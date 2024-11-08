@@ -1,0 +1,17 @@
+# name	reserved	allow duplicate	description	built-into-version	[argument1	require declare in on_init	...]
+async_complete	true	false	Async complete callback, triggered after the execution of any command that is executed asynchronously, for example various loading or saving related commands.	N/A
+controller	true	false	MIDI controller callback, executed whenever a MIDI CC, Pitch Bend or Channel Pressure message is received.	N/A
+init	true	false	Initialization callback, executed when the script was successfully compiled without warnings or errors.	N/A
+listener	true	false	Listener callback, executed at definable time intervals or whenever a transport command is received.	N/A
+note	true	false	Note callback, executed whenever a MIDI Note On message is received.	N/A
+note_controller	true	false	MIDI 2.0 per-note controller callback, executed whenever a MIDI 2.0 Registered Per-Note Controller, MIDI 2.0 Assignable Per-Note Controller, or MIDI 2.0 Per-Note Pitch Bend message is received.	N/A
+persistence_changed	true	false	Executed after the on init callback, or whenever a snapshot has been loaded.	N/A
+pgs_changed	true	false	Executed whenever any pgs_set_key_val() command is executed in any script slot.	N/A
+poly_at	true	false	Polyphonic aftertouch callback, executed whenever a MIDI Polyphonic Aftertouch message is received.	N/A
+release	true	false	Release callback, executed whenever a MIDI Note Off message is received.	N/A
+rpn	true	false	RPN callbacks, executed whenever a MIDI RPN (registered/non-registered parameter number) message is received.	N/A
+nrpn	true	false	NRPN callbacks, executed whenever a MIDI NRPN (registered/non-registered parameter number) message is received.	N/A
+ui_control	true	true	UI callback, executed whenever the user interacts with a particular UI widget.	N/A	*ui_widget_name	true	UI widget variable
+ui_update	true	false	UI update callback, executed with every GUI change in Kontakt.	N/A
+ui_controls	true	false	Global UI callback, executed whenever the user interacts with any particular UI widget.	N/A
+midi_in	true	false	MIDI callback, triggered by every incoming MIDI event.	N/A
