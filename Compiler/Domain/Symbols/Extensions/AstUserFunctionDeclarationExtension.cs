@@ -11,8 +11,7 @@ public static class AstUserFunctionDeclarationExtension
         {
             Name        = self.Name,
             Reserved    = false,
-            Description = $"Created from {nameof(AstUserFunctionDeclarationExtension)}.{nameof(As)}",
-            DataType    = DataTypeFlag.None
+            Description = $"Created from {nameof(AstUserFunctionDeclarationExtension)}.{nameof(As)}"
         };
 
         return result;

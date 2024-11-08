@@ -2,15 +2,17 @@ using KSPCompiler.Domain.Symbols.MetaData;
 
 namespace KSPCompiler.Domain.Symbols;
 
-public class PgsSymbol : SymbolBase
+public sealed class PgsSymbol : SymbolBase, ISymbolDataTypeProvider
 {
     #region Properties
 
     public override SymbolType Type
         => SymbolType.Pgs;
 
-    public override DataTypeFlag DataType
-        => DataTypeFlag.TypePgsId;
+    ///
+    /// <inheritdoc />
+    ///
+    public DataTypeFlag DataType { get; set; } = DataTypeFlag.None;
 
     #endregion ~ Properties
 

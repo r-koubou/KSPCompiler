@@ -20,8 +20,7 @@ internal class FromCallbackSymbolModelTranslator : IDataTranslator<IEnumerable<C
                 Name             = x.Name,
                 Reserved         = x.Reserved,
                 Description      = x.Description,
-                BuiltIntoVersion = x.BuiltIntoVersion,
-                DataType         = DataTypeFlag.None
+                BuiltIntoVersion = x.BuiltIntoVersion
             };
 
             foreach( var arg in x.Arguments )
