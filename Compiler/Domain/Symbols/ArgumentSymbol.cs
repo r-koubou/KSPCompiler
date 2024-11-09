@@ -17,5 +17,5 @@ public abstract class ArgumentSymbol : VariableSymbol
     }
 
     protected ArgumentSymbol( IReadOnlyList<string> uiTypeNames )
-        : this( new string[] {}, new string[] {} ) {}
+        : this( uiTypeNames, new string[] {} ) {}
 }
