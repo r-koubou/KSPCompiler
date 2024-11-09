@@ -75,7 +75,7 @@
         <value>配列要素数の範囲外アクセスです (配列要素数: {0}, インデックス: {1})</value>
     </data>
     <data name="semantic.error.variable.uninitialized" xml:space="preserve">
-        <value>{0}: 初期化が必要です</value>
+        <value>{0}: 初期化されていない変数にアクセスしようとしています</value>
     </data>
     <data name="semantic.error.array.subscript.compatible" xml:space="preserve">
         <value>添字の型が整数型ではありません  ({0})</value>
