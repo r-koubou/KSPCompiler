@@ -61,15 +61,24 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<C
         TsvUtility.ParseColumnGroups( values, (int)Column.ArgumentBegin, 3, arg =>
             {
                 var uiTypeNames = new List<string>();
+                var otherTypeNames = new List<string>();
 
                 // プリミティブ型を表現する文字列が見つからなかった場合はUI型とみなしてリストに追加する
                 if( !DataTypeUtility.TryGuessFromTypeString( arg[ 0 ], out var typeFlag ) )
                 {
                     typeFlag = DataTypeFlag.None;
-                    uiTypeNames.AddRange( arg[ 0 ].Split( "||" ) );
+
+                    DataTypeUtility.GuessFromOtherTypeString(
+                        arg[ 0 ],
+                        out var resultUiTypes,
+                        out var resultOtherTypes
+                    );
+
+                    uiTypeNames.AddRange( resultUiTypes );
+                    otherTypeNames.AddRange( resultOtherTypes );
                 }
 
-                var argument = new CommandArgumentSymbol( uiTypeNames )
+                var argument = new CommandArgumentSymbol( uiTypeNames, otherTypeNames )
                 {
                     Name        = arg[ 1 ],
                     Description = arg[ 2 ],

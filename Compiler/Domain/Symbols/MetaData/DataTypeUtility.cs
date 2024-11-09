@@ -148,6 +148,24 @@ public static class DataTypeUtility
         return result.ToString();
     }
 
+    public static void GuessFromOtherTypeString( string typeString, out List<string> uiTypes, out List<string> otherTypes, string separator = "||" )
+    {
+        uiTypes    = new List<string>();
+        otherTypes = new List<string>();
+
+        foreach( var type in typeString.Split( separator ) )
+        {
+            if( type.StartsWith( "ui_" ) )
+            {
+                uiTypes.Add( type );
+            }
+            else
+            {
+                otherTypes.Add( type );
+            }
+        }
+    }
+
     private static void ToStringImpl( DataTypeFlag typeFlag, DataTypeFlag expectedType, string typeText, ICollection<string> outputTextTo )
     {
         string result;

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 using KSPCompiler.Commons;
@@ -30,27 +31,66 @@ internal class ToTsvTranslator : IDataTranslator<IEnumerable<CommandSymbol>, str
 
             result.AppendTab();
 
-            var i = 0;
-
-            foreach( var x in v.Arguments )
-            {
-                if( i == v.Arguments.Count - 1 )
-                {
-                    result.AppendTab( x.Name )
-                          .Append( x.Description );
-                }
-                else
-                {
-                    result.AppendTab( x.Name )
-                          .AppendTab( x.Description );
-                }
-
-                i++;
-            }
+            TranslateArgument( result, v );
 
             result.AppendNewLine();
         }
 
         return result.ToString();
+    }
+
+    private static void TranslateArgument( StringBuilder result, CommandSymbol v )
+    {
+        var i = 0;
+
+        foreach( var x in v.Arguments )
+        {
+            TranslateArgumentType( result, x );
+
+            if( i == v.Arguments.Count - 1 )
+            {
+                result.AppendTab( x.Name )
+                      .Append( x.Description );
+            }
+            else
+            {
+                result.AppendTab( x.Name )
+                      .AppendTab( x.Description );
+            }
+
+            i++;
+        }
+    }
+
+    private static void TranslateArgumentType( StringBuilder result, CommandArgumentSymbol x )
+    {
+        result.Append( DataTypeUtility.ToString( x.DataType ) );
+
+        if( x.UITypeNames.Any() )
+        {
+            result.Append( "||" );
+            TranslateArgumentType( result, x.UITypeNames );
+        }
+
+        if( x.OtherTypeNames.Any() )
+        {
+            result.Append( "||" );
+            TranslateArgumentType( result, x.OtherTypeNames );
+        }
+    }
+
+    private static void TranslateArgumentType( StringBuilder result, IReadOnlyList<string> types )
+    {
+        var count = types.Count;
+
+        for( var k = 0; k < count; k++ )
+        {
+            result.Append( types[ k ] );
+
+            if( k != count - 1 )
+            {
+                result.Append( "||" );
+            }
+        }
     }
 }
