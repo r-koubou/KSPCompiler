@@ -64,17 +64,30 @@ internal class ToTsvTranslator : IDataTranslator<IEnumerable<CommandSymbol>, str
 
     private static void TranslateArgumentType( StringBuilder result, CommandArgumentSymbol x )
     {
-        result.Append( DataTypeUtility.ToString( x.DataType ) );
+        var appendSeparator = false;
+
+        if( x.DataType != DataTypeFlag.None )
+        {
+            appendSeparator = true;
+            result.Append( DataTypeUtility.ToString( x.DataType ) );
+        }
 
         if( x.UITypeNames.Any() )
         {
-            result.Append( "||" );
+            if( appendSeparator )
+            {
+                result.Append( "||" );
+            }
+            appendSeparator = x.UITypeNames.Any();
             TranslateArgumentType( result, x.UITypeNames );
         }
 
         if( x.OtherTypeNames.Any() )
         {
-            result.Append( "||" );
+            if( appendSeparator )
+            {
+                result.Append( "||" );
+            }
             TranslateArgumentType( result, x.OtherTypeNames );
         }
 

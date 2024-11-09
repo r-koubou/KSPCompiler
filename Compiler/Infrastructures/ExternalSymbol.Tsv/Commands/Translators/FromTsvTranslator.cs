@@ -66,8 +66,6 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<C
                 // プリミティブ型を表現する文字列が見つからなかった場合はUI型とみなしてリストに追加する
                 if( !DataTypeUtility.TryGuessFromTypeString( arg[ 0 ], out var typeFlag ) )
                 {
-                    typeFlag = DataTypeFlag.None;
-
                     DataTypeUtility.GuessFromOtherTypeString(
                         arg[ 0 ],
                         out var resultUiTypes,

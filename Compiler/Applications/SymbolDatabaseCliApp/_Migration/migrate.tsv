@@ -109,35 +109,35 @@ lsb	true	return the LSB portion (least significant byte) of a 14 bit value	N/A	I
 make_instr_persistent	true	retain the value of a variable only with the instrument	N/A	V	*	variable	arg 1 description
 make_perfview	true	activates the performance view for the respective script	N/A	V		make_perfview	arg 1 description
 make_persistent	true	retain the value of a variable whith the instrument and snapshot	N/A	V	*	variable	arg 1 description
-message	true	display text in the status line of KONTAKT	N/A	V	S||I||R	variable/text	arg 1 description
+message	true	display text in the status line of KONTAKT	N/A	V	S||I||R	variable_or_text	arg 1 description
 mf_copy_export_area	true	Copies the content of MIDI export area 0 to the specified index.	N/A	V	I	index	arg 1 description
-mf_get_buffer_size	true	returns the size of the MIDI event buffer	N/A	I||S	V
-mf_get_byte_one	true	Undocumented	N/A	I||S	V
-mf_get_byte_two	true	Undocumented	N/A	I||S	V
-mf_get_channel	true	Undocumented	N/A	I||S	V
-mf_get_command	true	Undocumented	N/A	I||S	V
+mf_get_buffer_size	true	returns the size of the MIDI event buffer	N/A	I||S
+mf_get_byte_one	true	Undocumented	N/A	I||S
+mf_get_byte_two	true	Undocumented	N/A	I||S
+mf_get_channel	true	Undocumented	N/A	I||S
+mf_get_command	true	Undocumented	N/A	I||S
 mf_get_event_par	true	returns the value of an event parameter	N/A	I||S	I	event-id	arg 1 description	I	parameter	arg 2 description
 mf_get_first	true	moves the position marker to the first event in the MIDI track	N/A	V	I	track-index	arg 1 description
-mf_get_id	true	returns the ID of the currently selected event (when using the navigation<br>  commands like mf_get_first(), and mf_get_next(), etc)	N/A	I||S	V
+mf_get_id	true	returns the ID of the currently selected event (when using the navigation<br>  commands like mf_get_first(), and mf_get_next(), etc)	N/A	I||S
 mf_get_last	true	moves the position marker to the last event in the MIDI track	N/A	V	I	track-index	arg 1 description
 mf_get_last_filename	true	Returns the filename (not the full path!) of the last MIDI file that was<br>  inserted into KONTAKT, either via mf_insert_file(), or via drag and drop<br>  operation on ui_mouse_area.	N/A	S
 mf_get_mark	true	checks if an event is marked or not. Returns 1 if it is marked, or 0 if<br>  it is not.	N/A	I||S	I	event-id	arg 1 description	I	mark	arg 2 description
 mf_get_next	true	moves the position marker to the next event in the MIDI track	N/A	V	I	track-index	arg 1 description
 mf_get_next_at	true	moves the position marker to the next event in the MIDI track right after<br>  the defined position.	N/A	V	I	track-index	arg 1 description	I	pos	arg 2 description
-mf_get_note_length	true	Undocumented	N/A	I||S	V
-mf_get_num_tracks	true	returns the number of tracks in a MIDI object.	N/A	I||S	V
-mf_get_pos	true	Undocumented	N/A	I||S	V
+mf_get_note_length	true	Undocumented	N/A	I||S
+mf_get_num_tracks	true	returns the number of tracks in a MIDI object.	N/A	I||S
+mf_get_pos	true	Undocumented	N/A	I||S
 mf_get_prev	true	moves the position marker to the previous event in the MIDI track	N/A	V	I	track-index	arg 1 description
 mf_get_prev_at	true	moves the position marker to the first event before the defined position	N/A	V	I	track-index	arg 1 description	I	pos	arg 2 description
-mf_get_track_idx	true	Undocumented	N/A	I||S	V
+mf_get_track_idx	true	Undocumented	N/A	I||S
 mf_insert_event	true	activates an inactive MIDI event in the MIDI object. However, because the<br>  command and position are defined in this command, it can be considered as an<br>  insertion.	N/A	I||S	I	track	arg 1 description	I	pos	arg 2 description	I	command	arg 3 description	I	byte1	arg 4 description	I	byte2	arg 5 description
 mf_insert_file	true	inserts a MIDI file into the MIDI object.	N/A	I||S	S	path	arg 1 description	I	track-offset	arg 2 description	I	position-offset	arg 3 description	I	mode	arg 4 description
 mf_remove_event	true	deactivates an event in the MIDI object, effectively removing it	N/A	V	I	event-id	arg 1 description
-mf_reset	true	resets the MIDI object, sets the event buffer to zero, and removes all<br>  events	N/A	V	V
+mf_reset	true	resets the MIDI object, sets the event buffer to zero, and removes all<br>  events	N/A	V
 mf_set_buffer_size	true	defines a number of inactive MIDI events, that can be activated and<br>  edited	N/A	I||S	I	size	arg 1 description
 mf_set_byte_one	true	Non documented	N/A	V	I	value	arg 1 description
 mf_set_byte_two	true	Non documented	N/A	V	I	value	arg 1 description
-mf_set_channel	true	Undocumented	N/A	V	I
+mf_set_channel	true	Undocumented	N/A	V	I	value	arg 1 description
 mf_set_command	true	Non documented	N/A	V	I	value	arg 1 description
 mf_set_event_par	true	sets an event parameter	N/A	V	I	event-id	arg 1 description	I	parameter	arg 2 description	I	value	arg 3 description
 mf_set_export_area	true	defines the part of the MIDI object that will be exported when using a<br>  drag and drop area, or the save_midi_file() command.	N/A	I||S	S	name	arg 1 description	I	start-pos	arg 2 description	I	end-pos	arg 3 description	I	start-track	arg 4 description	I	end-track	arg 5 description
@@ -153,14 +153,14 @@ num_elements	true	returns the number of elements in an array	N/A	I||S	I[]||R[]||
 num_slices	true	Undocumented	N/A	I||S	I	arg1	arg 1 description
 num_slices_zone	true	returns the number of slices of the specified zone	N/A	I||S	I	zone-ID	arg 1 description
 output_channel_name	true	returns the channel name for the specified output	N/A	S	I	output-number	arg 1 description
-pgs_create_key	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	V	KEY	key-id	arg 1 description	I	size	arg 2 description
-pgs_create_str_key	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	V	KEY	key-id	arg 1 description
-pgs_get_key_val	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	I||S	KEY	key-id	arg 1 description	I	index	arg 2 description
-pgs_get_str_key_val	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	S	KEY
-pgs_key_exists	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	B	KEY	key-id	arg 1 description
-pgs_set_key_val	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	V	KEY	key-id	arg 1 description	I	index	arg 2 description	I	value	arg 3 description
-pgs_set_str_key_val	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	V	KEY	key-id	arg 1 description	S||I||R	<br>stringvalue	arg 2 description
-pgs_str_key_exists	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	B	KEY	key-id	arg 1 description
+pgs_create_key	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	V	P	key-id	arg 1 description	I	size	arg 2 description
+pgs_create_str_key	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	V	P	key-id	arg 1 description
+pgs_get_key_val	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	I||S	P	key-id	arg 1 description	I	index	arg 2 description
+pgs_get_str_key_val	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	S	P	key-id	arg 1 description
+pgs_key_exists	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	B	P	key-id	arg 1 description
+pgs_set_key_val	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	V	P	key-id	arg 1 description	I	index	arg 2 description	I	value	arg 3 description
+pgs_set_str_key_val	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	V	P	key-id	arg 1 description	S||I||R	<br>stringvalue	arg 2 description
+pgs_str_key_exists	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	B	P	key-id	arg 1 description
 play_note	true	generate a MIDI note, i.e. generate a note on message followed by a note<br>  off message	N/A	I||S	I	note-number	arg 1 description	I	velocity	arg 2 description	I	sample-offset	arg 3 description	I	duration	arg 4 description
 pow	true	power (returns the value of x^y)	N/A	R||S	R	x	arg 1 description	R	y	arg 2 description
 purge_group	true	purges (i.e. unloads from RAM) the samples of the specified group	N/A	V	I	group-index	arg 1 description	I	mode	arg 2 description
@@ -171,7 +171,7 @@ real_to_int	true	converts a real number into an integer	N/A	I||S	R	real	arg 1 de
 redirect_midi	true	Undocumented	N/A	V	*	arg1	arg 1 description
 redirect_output	true	Routes the audio signal of the specified event to a specific output or<br>  bus	N/A	V	I	ID-number	arg 1 description	I	output-type	arg 2 description	I	index	arg 3 description
 remove_keyrange	true	assigns a text string to the specified range of keys	N/A	V	I	note-nr	arg 1 description
-reset_engine	true	Undocumented	N/A	V	V
+reset_engine	true	Undocumented	N/A	V
 reset_ksp_timer	true	resets the KSP timer ($KSP_TIMER) to zero	N/A	V		reset_ksp_timer	arg 1 description
 reset_rls_trig_counter	true	dresets the release trigger counter (used by the release trigger system<br>  script)	N/A	V	I	note	arg 1 description
 round	true	round (round to nearest) round(2.3) = 2.0 round(2.8) = 3.0	N/A	R||S	R	x	arg 1 description

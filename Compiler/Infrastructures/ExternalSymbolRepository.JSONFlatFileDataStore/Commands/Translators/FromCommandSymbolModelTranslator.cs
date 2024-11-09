@@ -33,7 +33,7 @@ internal class FromCommandSymbolModelTranslator : IDataTranslator<IEnumerable<Co
                     Description = arg.Description,
                 };
 
-                argument.DataType = DataTypeUtility.GuessFromSymbolName( argument.Name );
+                argument.DataType = DataTypeUtility.GuessFromTypeString( arg.DataType );
                 command.AddArgument( argument );
             }
 
