@@ -77,6 +77,8 @@ internal class ToTsvTranslator : IDataTranslator<IEnumerable<CommandSymbol>, str
             result.Append( "||" );
             TranslateArgumentType( result, x.OtherTypeNames );
         }
+
+        result.AppendTab();
     }
 
     private static void TranslateArgumentType( StringBuilder result, IReadOnlyList<string> types )
