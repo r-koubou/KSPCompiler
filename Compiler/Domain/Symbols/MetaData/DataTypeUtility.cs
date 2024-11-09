@@ -93,6 +93,17 @@ public static class DataTypeUtility
         return result != DataTypeFlag.None;
     }
 
+    public static void GuessFromTypeString( string typeString, out DataTypeFlag dataTypeFlag, ref List<string> uiTypes, ref List<string> otherTypes, string separator = "||" )
+    {
+        if( !TryGuessFromTypeString( typeString, out dataTypeFlag ) )
+        {
+            dataTypeFlag = DataTypeFlag.None;
+        }
+
+        GuessFromOtherTypeString( typeString, ref uiTypes, ref otherTypes, separator );
+
+    }
+
     /// <summary>
     /// Convert to data type from string with separated '||' if multiple types.
     /// </summary>
@@ -107,25 +118,25 @@ public static class DataTypeUtility
         return result;
     }
 
-    public static void GuessFromOtherTypeString( string typeString, out List<string> uiTypes, out List<string> otherTypes, string separator = "||" )
+    public static void GuessFromOtherTypeString( string typeString, ref List<string> uiTypes, ref List<string> otherTypes, string separator = "||" )
     {
-        GuessFromUITypeString( typeString, out uiTypes, separator );
-        GuessFromOtherTypeString( typeString, out otherTypes, separator );
+        GuessFromUITypeString( typeString, ref uiTypes, separator );
+        GuessFromOtherTypeString( typeString, ref otherTypes, separator );
     }
 
-    public static void GuessFromOtherTypeString( string typeString, out List<string> otherTypes, string separator = "||" )
+    public static void GuessFromOtherTypeString( string typeString, ref List<string> otherTypes, string separator = "||" )
     {
-        GuessFromOtherTypeStringImpl( typeString, out otherTypes, x => !x.StartsWith( "ui_" ), separator );
+        GuessFromOtherTypeStringImpl( typeString, ref otherTypes, x => !x.StartsWith( "ui_" ), separator );
     }
 
-    public static void GuessFromUITypeString( string typeString, out List<string> uiTypes, string separator = "||" )
+    public static void GuessFromUITypeString( string typeString, ref List<string> uiTypes, string separator = "||" )
     {
-        GuessFromOtherTypeStringImpl( typeString, out uiTypes, x => x.StartsWith( "ui_" ), separator );
+        GuessFromOtherTypeStringImpl( typeString, ref uiTypes, x => x.StartsWith( "ui_" ), separator );
     }
 
-    private static void GuessFromOtherTypeStringImpl( string typeString, out List<string> result, Predicate<string> condition, string separator = "||" )
+    private static void GuessFromOtherTypeStringImpl( string typeString, ref List<string> result, Predicate<string> condition, string separator = "||" )
     {
-        result = new List<string>();
+        result.Clear();
 
         foreach( var type in typeString.Split( separator ) )
         {

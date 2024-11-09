@@ -2,7 +2,6 @@ using System.Collections.Generic;
 
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.ExternalSymbol.Tsv.Commons;
 using KSPCompiler.Infrastructures.Commons.Extensions;
 
@@ -63,18 +62,7 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<C
                 var uiTypeNames = new List<string>();
                 var otherTypeNames = new List<string>();
 
-                // プリミティブ型を表現する文字列が見つからなかった場合はUI型とみなしてリストに追加する
-                if( !DataTypeUtility.TryGuessFromTypeString( arg[ 0 ], out var typeFlag ) )
-                {
-                    DataTypeUtility.GuessFromOtherTypeString(
-                        arg[ 0 ],
-                        out var resultUiTypes,
-                        out var resultOtherTypes
-                    );
-
-                    uiTypeNames.AddRange( resultUiTypes );
-                    otherTypeNames.AddRange( resultOtherTypes );
-                }
+                DataTypeUtility.GuessFromTypeString( arg[ 0 ], out var typeFlag, ref uiTypeNames, ref otherTypeNames );
 
                 var argument = new CommandArgumentSymbol( uiTypeNames, otherTypeNames )
                 {
