@@ -25,7 +25,7 @@ public static class AstCompilationUnitNodeExtension
                 continue;
             }
 
-            if( callback.Name == "Init" )
+            if( callback.Name == "init" )
             {
                 initCallBackDeclare = callback;
             }
