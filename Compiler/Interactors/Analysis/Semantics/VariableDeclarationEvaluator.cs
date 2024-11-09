@@ -488,10 +488,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
     {
         if( variable.DataType.IsArray() )
         {
-            if( !ValidateArrayBasedUIInitializer( visitor, node, node.Initializer.ArrayInitializer, variable ) )
-            {
-                return false;
-            }
+            return ValidateArrayBasedUIInitializer( visitor, node, node.Initializer.ArrayInitializer, variable );
         }
 
         return ValidatePrimitiveBasedUIInitializer( visitor, node, node.Initializer.PrimitiveInitializer, variable );
@@ -530,7 +527,20 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
     private bool ValidateUIArguments( IAstVisitor visitor, AstVariableDeclarationNode node, AstExpressionListNode expressionList, UITypeSymbol uiType )
     {
-        for(var i = 0; i < expressionList.Count; i++)
+        if( expressionList.Count != uiType.InitializerArguments.Count )
+        {
+            CompilerMessageManger.Error(
+                node,
+                CompilerMessageResources.semantic_error_declare_variable_uiinitializer_count_incompatible,
+                node.Name,
+                uiType.InitializerArguments.Count,
+                expressionList.Count
+            );
+
+            return false;
+        }
+
+        for( var i = 0; i < expressionList.Count; i++ )
         {
             var expr = expressionList.Expressions[ i ];
 
@@ -555,7 +565,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             var requiredType = uiType.InitializerArguments[ i ].DataType;
 
             // 型の一致チェック
-            if( TypeCompatibility.IsAssigningTypeCompatible( evaluated.TypeFlag, requiredType ) )
+            if( TypeCompatibility.IsTypeCompatible( evaluated.TypeFlag, requiredType ) )
             {
                 continue;
             }
