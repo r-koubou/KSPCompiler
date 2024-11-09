@@ -92,8 +92,9 @@ internal static class TsvUtility
 
                 if( index >= row.Length )
                 {
-                    throw new IndexOutOfRangeException( $"Out of range (={index}). {nameof(row)}.Length = {row.Length}" );
+                    throw new IndexOutOfRangeException( $"{row[ 0 ]} : Out of range (={index}). {nameof( row )}.Length = {row.Length}" );
                 }
+
                 values.Add( row[ index ] );
             }
             parseBody( values );

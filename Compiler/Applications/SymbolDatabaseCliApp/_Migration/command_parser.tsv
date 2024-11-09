@@ -1,0 +1,255 @@
+abs	I||R||S	*	I||R
+acos	R||S	*	R
+add_menu_item	V	init	ui_menu	S	I
+add_text_line	V	*	ui_label	S
+allow_group	V	note||release	I
+array_equal	B	*	I[]	I[]
+asin	R||S	*	R
+atan	R||S	*	R
+attach_level_meter	V	*	I	I	I	I	I
+attach_zone	V	*	ui_waveform	I	I
+by_marks	I||S	*	I
+by_track	I||S	*	I
+cbrt	R||S	*	R
+cc_delivery_request	V	*	I
+ceil	R||S	*	R
+change_listener_par	V	*	I	I
+change_note	V	note	I	I
+change_pan	V	!init	I	I	I
+change_time_with_pitch	I||S	*	I	I
+change_tune	V	!init	I	I	I
+change_velo	V	note	I	I
+change_vol	V	!init	I	I	I
+cos	R||S	*	R
+dec	V	*	I
+delete_event_mark	V	*	I	I
+detect_drum_type	R||S	*	I	I
+detect_instrument_type	I||S	*	I	I
+detect_key	I||S	*	I	I
+detect_loudness	R||S	*	I	R
+detect_peak	I||S	*	I	R
+detect_pitch	R||S	*	I	R
+detect_rms	R||S	*	I	R
+detect_sample_type	I||S	*	I	I
+detect_tempo	R||S	*	I	R
+disable_logging	V	*	I
+disallow_group	V	note||release	I
+dont_use_machine_mode	V	*	I
+event_status	I||S	*	I
+exit	V	*
+exp	R||S	*	R
+fade_in	V	*	I	I
+fade_out	V	*	I	I	I
+find_group	I||S	*	S
+find_mod	I||S	*	I	S
+find_target	I||S	*	I	I	S
+find_zone	I||S	init	S
+floor	R||S	*	R
+fs_get_filename	S	ui_control	I	I
+fs_navigate	V	ui_control	I	I
+get_control_par	I||S	*	I	I
+get_control_par_arr	I||S	*	I	I	I
+get_control_par_real_arr	I||R||S	*	I	I	I
+get_control_par_str	S	*	I	I
+get_control_par_str_arr	I||S	*	I	I	I
+get_engine_par	I||S	*	I	I	I	I
+get_engine_par_disp	S	*	I	I	I	I
+get_engine_par_disp_m	S	*	I	I	I	I
+get_engine_par_m	I||S	*	I	I	I	I
+get_event_ids	V	!init	I[]
+get_event_mark	I||S	*	I	I
+get_event_par	I||S	*	I	I
+get_event_par_arr	I||S	*	I	I	I
+get_folder	S	*	I
+get_font_id	I	*	I
+get_group_idx	I||S	*	S
+get_key_color	I||S	*	I
+get_key_name	S	*	I
+get_key_triggerstate	I||S	*	I
+get_key_type	I||S	*	I
+get_keyrange_max_note	I||S	*	I
+get_keyrange_min_note	I||S	*	I
+get_keyrange_name	S	*	I
+get_loop_par	I||S	*	I	I	I
+get_loop_sample	I||S	*	I	I
+get_menu_item_str	S	*	I	I
+get_menu_item_value	I||S	*	I	I
+get_menu_item_visibility	I||S	*	I	I
+get_mod_idx	I||S	*	I	S
+get_num_zones	I||S	*
+get_purge_state	I||S	*	I
+get_sample_length	I||S	*	I
+get_sel_zones_idx	V	*	I[]
+get_target_idx	I||S	*	I	I	S
+get_ui_id	I||S	*	ui_*
+get_ui_wf_property	I||S	*	ui_waveform	I	I
+get_voice_limit	I||S	*	I
+get_zone_id	I||S	*	I
+get_zone_par	I||S	*	I	I
+get_zone_status	I||S	*	I
+group_name	S	*	I
+hide_part	V	*	ui_*	I
+ignore_controller	V	*
+ignore_event	V	note||release	I
+ignore_midi	V	*
+in_range	B	*	I	I	I
+inc	V	*	I
+int	I||S	*	R
+int_to_real	R||S	*	I
+is_zone_empty	I||S	*	I
+load_array	I||S	init||persistence_changed||pgs_changed||ui_control	I[]||S[]	I
+load_array_str	I||S	init||persistence_changed||pgs_changed||ui_control	I[]||S[]	S||I
+load_ir_sample	I||S	*	S	I	I
+load_ir_sample_m	V	*	*
+load_midi_file	I||S	*	S
+load_patch	V	*	S	I
+load_performance_view	V	*	S
+log	R||S	*	R
+lsb	I||S	*	I
+make_instr_persistent	V	*	*
+make_perfview	V	*
+make_persistent	V	*	*
+message	V	*	S||I||R
+mf_copy_export_area	V	*	I
+mf_get_buffer_size	I||S	*	V
+mf_get_byte_one	I||S	*	V
+mf_get_byte_two	I||S	*	V
+mf_get_channel	I||S	*	V
+mf_get_command	I||S	*	V
+mf_get_event_par	I||S	*	I	I
+mf_get_first	V	*	I
+mf_get_id	I||S	*	V
+mf_get_last	V	*	I
+mf_get_last_filename	S	*
+mf_get_mark	I||S	*	I	I
+mf_get_next	V	*	I
+mf_get_next_at	V	*	I	I
+mf_get_note_length	I||S	*	V
+mf_get_num_tracks	I||S	*	V
+mf_get_pos	I||S	*	V
+mf_get_prev	V	*	I
+mf_get_prev_at	V	*	I	I
+mf_get_track_idx	I||S	*	V
+mf_insert_event	I||S	*	I	I	I	I	I
+mf_insert_file	I||S	*	S	I	I	I
+mf_remove_event	V	*	I
+mf_reset	V	*	V
+mf_set_buffer_size	I||S	*	I
+mf_set_byte_one	V	*	I
+mf_set_byte_two	V	*	I
+mf_set_channel	V	*	I
+mf_set_command	V	*	I
+mf_set_event_par	V	*	I	I	I
+mf_set_export_area	I||S	*	S	I	I	I	I
+mf_set_mark	V	*	I	I	I
+mf_set_num_export_areas	V	*	I
+mf_set_pos	V	*	I
+move_control	V	*	ui_*	I	I
+move_control_px	V	*	ui_*	I	I
+ms_to_ticks	I||S	*	I
+msb	I||S	*	I
+note_off	V	!init	I
+num_elements	I||S	*	I[]||R[]||S[]
+num_slices	I||S	*	I
+num_slices_zone	I||S	*	I
+output_channel_name	S	*	I
+pgs_create_key	V	*	KEY	I
+pgs_create_str_key	V	*	KEY
+pgs_get_key_val	I||S	*	KEY	I
+pgs_get_str_key_val	S	*	KEY
+pgs_key_exists	B	*	KEY
+pgs_set_key_val	V	*	KEY	I	I
+pgs_set_str_key_val	V	*	KEY	S||I||R
+pgs_str_key_exists	B	*	KEY
+play_note	I||S	!init	I	I	I	I
+pow	R||S	*	R	R
+purge_group	V	ui_control||persistence_changed	I	I
+random	I||S	*	I	I
+read_persistent_var	V	*	*
+real	R||S	*	I
+real_to_int	I||S	*	R
+redirect_midi	V	*	*
+redirect_output	V	*	I	I	I
+remove_keyrange	V	*	I
+reset_engine	V	*	V
+reset_ksp_timer	V	*
+reset_rls_trig_counter	V	*	I
+round	R||S	*	R
+save_array	I||S	persistence_changed||pgs_changed||ui_control	I[]||S[]	I
+save_array_str	I||S	persistence_changed||pgs_changed||ui_control	I[]||S[]	S||I
+save_midi_file	I||S	*	S
+search	I||S	*	I[]	I
+set_control_help	V	init	ui_*	S
+set_control_par	V	*	I	I	I
+set_control_par_arr	V	*	I	I	I	I
+set_control_par_real_arr	V	*	I	I	R||I	I
+set_control_par_str	V	*	I	I	S||I
+set_control_par_str_arr	V	*	I	I	S||I	I
+set_controller	V	*	I	I
+set_engine_par	I||S	*	I	I	I	I	I
+set_engine_par_m	V	*	I	I	I	I	I
+set_event_mark	V	*	I	I
+set_event_par	V	*	I	I	I
+set_event_par_arr	V	*	I	I	I	I
+set_key_color	V	*	I	I
+set_key_name	V	*	I	S
+set_key_pressed	V	*	I	I
+set_key_pressed_support	V	*	I
+set_key_type	V	*	I	I
+set_keyrange	V	*	I	I	S
+set_knob_defval	V	*	ui_knob||ui_slider	I
+set_knob_label	V	*	ui_knob	S
+set_knob_unit	V	*	ui_knob	I
+set_listener	V	init	I	I
+set_loop_par	I||S	*	I	I	I	I
+set_map_editor_event_color	V	*	I
+set_menu_item_str	V	*	I	I	S||I
+set_menu_item_value	V	*	I	I	I
+set_menu_item_visibility	V	*	I	I	I
+set_midi	V	*	I	I	I	I
+set_note_controller	V	*	I	I	I
+set_nrpn	V	*	I	I
+set_num_user_zones	I||S	*	I
+set_poly_at	V	*	I	I
+set_rpn	V	*	I	I
+set_sample	I||S	*	I	S
+set_script_title	V	init	S
+set_skin_offset	V	*	I
+set_snapshot_type	V	*	I
+set_table_steps_shown	V	*	ui_table	I
+set_text	V	*	ui_button||ui_knob||ui_label||ui_switch||ui_value_edit	I||R||S
+set_ui_color	V	*	I	S
+set_ui_height	V	*	I
+set_ui_height_px	V	*	I
+set_ui_wf_property	V	*	ui_waveform	I	I	I
+set_ui_width_px	V	*	I
+set_voice_limit	I||S	*	I	I
+set_zone_par	I||S	*	I	I	I
+sgn	I||S	*	I
+sh_left	I||S	*	I	I
+sh_right	I||S	*	I	I
+show_library_tab	V	*
+signbit	I||S	*	I
+sin	R||S	*	R
+slice_idx_loop_end	I||S	*	I	I
+slice_idx_loop_start	I||S	*	I	I
+slice_length	I||S	*	I	I
+slice_loop_count	I||S	*	I	I
+slice_start	I||S	*	I	I
+sort	V	*	I[]||R[]	I
+sqrt	R||S	*	R
+stop_wait	V	!init	I	I
+tan	R||S	*	R
+ticks_to_ms	I||S	*	I
+unload_slot	V	*	I
+wait	V	!init	I
+wait_async	V	!init	I
+wait_ticks	V	!init	I
+watch_array_idx	V	*	I[]||S[]||R[]	I
+watch_var	V	*	I||S||R
+will_never_terminate	V	*	I
+zone_slice_idx_loop_end	I||S	*	I	I
+zone_slice_idx_loop_start	I||S	*	I	I
+zone_slice_length	I||S	*	I	I
+zone_slice_loop_count	I||S	*	I	I
+zone_slice_start	I||S	*	I	I

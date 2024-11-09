@@ -1,8 +1,14 @@
 using System;
+using System.IO;
+using System.Threading;
 
 using KSPCompiler.Controllers.Compiler;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols;
+using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Callbacks;
+using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Commands;
+using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.UITypes;
+using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Variables;
 using KSPCompiler.Infrastructures.Parser.Antlr;
 
 namespace KSPCompiler.Applications.Cli;
@@ -34,7 +40,8 @@ public static class CompilerProgram
             new PreProcessorSymbolTable()
         );
 
-        // TODO: 外部定義ファイルからビルトイン変数、コマンド、コールバック、UIタイプを構築
+        // 外部定義ファイルからビルトイン変数、コマンド、コールバック、UIタイプを構築
+        LoadSymbolTables( symbolTable );
 
         var parser = new AntlrKspFileSyntaxParser( input, messageManager );
 
@@ -51,5 +58,22 @@ public static class CompilerProgram
         messageManager.WriteTo( Console.Out );
 
         return messageManager.Count( CompilerMessageLevel.Error ) > 0 ? 1 : 0;
+    }
+
+    private static void LoadSymbolTables( AggregateSymbolTable symbolTable )
+    {
+        var basePath = Path.Combine( "Data", "Symbols" );
+
+        using var variables = new VariableSymbolRepository( Path.Combine( basePath, "variables.json" ) );
+        symbolTable.Variables.AddRange( variables.FindAllAsync( CancellationToken.None ).GetAwaiter().GetResult() );
+
+        using var uiTypes = new UITypeSymbolRepository( Path.Combine( basePath, "uitypes.json" ) );
+        symbolTable.UITypes.AddRange( uiTypes.FindAllAsync( CancellationToken.None ).GetAwaiter().GetResult() );
+
+        using var commands = new CommandSymbolRepository( Path.Combine( basePath, "commands.json" ) );
+        symbolTable.Commands.AddRange( commands.FindAllAsync( CancellationToken.None ).GetAwaiter().GetResult() );
+
+        using var callbacks = new CallbackSymbolRepository( Path.Combine( basePath, "callbacks.json" ) );
+        symbolTable.ReservedCallbacks.AddRange( callbacks.FindAllAsync( CancellationToken.None ).GetAwaiter().GetResult() );
     }
 }

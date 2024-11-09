@@ -26,14 +26,19 @@ internal class FromCommandSymbolModelTranslator : IDataTranslator<IEnumerable<Co
 
             foreach( var arg in x.Arguments )
             {
-                var argument = new CommandArgumentSymbol
+                var uiType = new List<string>();
+                var otherType = new List<string>();
+
+                DataTypeUtility.GuessFromTypeString( arg.DataType, out var dataType, ref uiType, ref otherType );
+
+                var argument = new CommandArgumentSymbol( uiType, otherType )
                 {
                     Name        = arg.Name,
+                    DataType    = dataType,
                     Reserved    = false,
                     Description = arg.Description,
                 };
 
-                argument.DataType = DataTypeUtility.GuessFromSymbolName( argument.Name );
                 command.AddArgument( argument );
             }
 

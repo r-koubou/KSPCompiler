@@ -25,7 +25,7 @@ public static class AstCompilationUnitNodeExtension
                 continue;
             }
 
-            if( callback.Name == "Init" )
+            if( callback.Name == "init" )
             {
                 initCallBackDeclare = callback;
             }
@@ -33,14 +33,16 @@ public static class AstCompilationUnitNodeExtension
 
         // init コールバックの宣言を先に処理（見つかれば）
         // 変数の宣言は init コールバックのでのみ可能なため
-        initCallBackDeclare?.Accept( visitor );
+        initCallBackDeclare?.Accept( visitor ); // 宣言の評価
+        initCallBackDeclare?.AcceptChildren( visitor ); // コールバック内のコード評価
 
         // それ以外のグローバルブロックを処理
         foreach( var block in self.GlobalBlocks )
         {
             if( block != initCallBackDeclare )
             {
-                block.Accept( visitor );
+                block.Accept( visitor ); // 宣言の評価
+                block.AcceptChildren( visitor ); // コールバック内のコード評価
             }
         }
     }

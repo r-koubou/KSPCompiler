@@ -1,9 +1,8 @@
+on init
+    declare $i := 0
+    $x := 0 {error: variable not declared}
+end on
 
-
-    on init
-
-declare $i := 0
-
-$x := 0
-
+on note
+    $d := 0 {error: variable not declared}
 end on
