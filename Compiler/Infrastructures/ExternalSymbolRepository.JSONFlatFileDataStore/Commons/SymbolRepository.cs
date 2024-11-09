@@ -124,8 +124,9 @@ public abstract class SymbolRepository<TSymbol, TModel> : ISymbolRepository<TSym
         {
             if( existing != default )
             {
+                model.Id        = existing.Id;
                 model.UpdatedAt = DateTime.UtcNow;
-                success        = await Collection.ReplaceOneAsync( existing.Id, model );
+                success         = await Collection.ReplaceOneAsync( existing.Id, model );
 
                 if( success )
                 {
