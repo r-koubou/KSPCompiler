@@ -2,6 +2,7 @@ using System.Collections.Generic;
 
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.ExternalSymbol.Tsv.Commons;
 using KSPCompiler.Infrastructures.Commons.Extensions;
 
@@ -53,18 +54,38 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<C
     private static void ParseArguments( string[] values, CommandSymbol command )
     {
         /*
-         * Argument1, Argument1Description, Argument2, Argument2Description, ...
+         * [0]; type
+         * [1]: name
+         * [2]: description
          */
-        TsvUtility.ParseColumnGroups( values, (int)Column.ArgumentBegin, 2, arg =>
+        TsvUtility.ParseColumnGroups( values, (int)Column.ArgumentBegin, 3, arg =>
             {
-                var argument = new CommandArgumentSymbol
+                var uiTypeNames = new List<string>();
+                var otherTypeNames = new List<string>();
+
+                // プリミティブ型を表現する文字列が見つからなかった場合はUI型とみなしてリストに追加する
+                if( !DataTypeUtility.TryGuessFromTypeString( arg[ 0 ], out var typeFlag ) )
                 {
-                    Name        = arg[ 0 ],
-                    Description = arg[ 1 ],
-                    Reserved    = false
+                    typeFlag = DataTypeFlag.None;
+
+                    DataTypeUtility.GuessFromOtherTypeString(
+                        arg[ 0 ],
+                        out var resultUiTypes,
+                        out var resultOtherTypes
+                    );
+
+                    uiTypeNames.AddRange( resultUiTypes );
+                    otherTypeNames.AddRange( resultOtherTypes );
+                }
+
+                var argument = new CommandArgumentSymbol( uiTypeNames, otherTypeNames )
+                {
+                    Name        = arg[ 1 ],
+                    Description = arg[ 2 ],
+                    Reserved    = false,
+                    DataType    = typeFlag
                 };
 
-                argument.DataType = DataTypeUtility.GuessFromSymbolName( argument.Name );
                 command.AddArgument( argument );
             }
         );

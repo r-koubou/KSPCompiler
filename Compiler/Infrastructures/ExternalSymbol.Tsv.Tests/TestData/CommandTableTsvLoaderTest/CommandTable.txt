@@ -1,2 +1,3 @@
-# name, reserved, description, built-into-version, return type [, argument1, argument1 description ...]
-message	true	print message to console	N/A	V	*message	a message data
+# name, reserved, description, built-into-version, return type [, argument1-type, argument1-name, argument1 description ...]
+message	true	print message to console	N/A	V	*	message	a message data
+message	true	print message to console	N/A	V	ui_*	message	a message data

@@ -16,12 +16,12 @@ public class SymbolEvaluator : ISymbolEvaluator
     private ICompilerMessageManger CompilerMessageManger { get; }
     private AggregateSymbolTable SymbolTable { get; }
 
-    private static AstExpressionNode CreateEvaluateNode( AstExpressionNode source, SymbolBase symbol )
+    private static AstExpressionNode CreateEvaluateNode( AstExpressionNode source, SymbolBase symbol, ISymbolDataTypeProvider symbolType )
     {
         var result = new AstSymbolExpressionNode( symbol.Name, source.Left )
         {
             Parent   = source.Parent,
-            TypeFlag = symbol.DataType,
+            TypeFlag = symbolType.DataType,
             Constant = symbol.Modifier.IsConstant()
         };
 
@@ -90,7 +90,7 @@ public class SymbolEvaluator : ISymbolEvaluator
             );
 
             // 変数は見つかったが、エラー扱いとして代替の評価結果を返す
-            result = CreateEvaluateNode( expr, variable );
+            result = CreateEvaluateNode( expr, variable, variable );
             return true;
         }
 
@@ -105,7 +105,7 @@ public class SymbolEvaluator : ISymbolEvaluator
             return true;
         }
 
-        result = CreateEvaluateNode( expr, variable );
+        result = CreateEvaluateNode( expr, variable, variable );
 
         return true;
     }
@@ -151,7 +151,7 @@ public class SymbolEvaluator : ISymbolEvaluator
         // 添字の式を持っていない場合は配列型として返す
         if( expr.Left.Id != AstNodeId.ArrayElementExpression )
         {
-            result = CreateEvaluateNode( expr, variable );
+            result = CreateEvaluateNode( expr, variable, variable );
 
             return true;
         }
@@ -172,7 +172,7 @@ public class SymbolEvaluator : ISymbolEvaluator
             throw new AstAnalyzeException( expr.Left, "Failed to evaluate array index" );
         }
 
-        result = CreateEvaluateNode( expr, variable );
+        result = CreateEvaluateNode( expr, variable, variable );
         // 配列インデックスを式に含んでいる場合、要素アクセスになるので評価結果から配列フラグを削除
         result.TypeFlag &= ~DataTypeFlag.AttributeArray;
 
@@ -228,7 +228,7 @@ public class SymbolEvaluator : ISymbolEvaluator
             DataType = DataTypeFlag.TypePgsId
         };
 
-        result = CreateEvaluateNode( expr, symbol );
+        result = CreateEvaluateNode( expr, symbol, symbol );
 
         return true;
     }

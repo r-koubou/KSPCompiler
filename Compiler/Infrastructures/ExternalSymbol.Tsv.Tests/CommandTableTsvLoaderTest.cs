@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 using KSPCompiler.Commons.Path;
 using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.ExternalSymbol.Commons;
 using KSPCompiler.ExternalSymbol.Tsv.Commands;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
@@ -36,8 +37,16 @@ public class CommandTableTsvLoaderTest
         var importer = CreateLocalImporter( path );
         var symbolTable = importer.Import();
 
-        Assert.IsTrue( symbolTable.Count == 1 );
-        Assert.AreEqual( SymbolBuiltIntoVersion.NotAvailable, symbolTable.First().BuiltIntoVersion );
+        Assert.IsTrue( symbolTable.Count == 2 );
+
+        var symbols = symbolTable.ToList();
+        Assert.AreEqual( SymbolBuiltIntoVersion.NotAvailable, symbols[ 0 ].BuiltIntoVersion );
+        Assert.AreEqual( DataTypeFlag.TypeVoid,               symbols[ 0 ].DataType );
+        Assert.AreEqual( DataTypeFlag.MultipleType,           symbols[ 0 ].Arguments.First().DataType );
+
+        Assert.AreEqual( SymbolBuiltIntoVersion.NotAvailable, symbols[ 1 ].BuiltIntoVersion );
+        Assert.AreEqual( DataTypeFlag.TypeVoid,               symbols[ 1 ].DataType );
+        Assert.AreEqual( new string[] { "ui_*" },             symbols[ 1 ].Arguments.First().UITypeNames );
     }
 
     [Test]
@@ -48,7 +57,7 @@ public class CommandTableTsvLoaderTest
 
         await Task.Run( async () => {
             var symbolTable = await importer.ImportAsync();
-            Assert.IsTrue( symbolTable.Count == 1 );
+            Assert.IsTrue( symbolTable.Count == 2 );
         });
     }
 

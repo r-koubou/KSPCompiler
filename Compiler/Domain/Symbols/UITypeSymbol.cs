@@ -5,7 +5,7 @@ using KSPCompiler.Domain.Symbols.MetaData;
 
 namespace KSPCompiler.Domain.Symbols;
 
-public sealed class UITypeSymbol : SymbolBase
+public sealed class UITypeSymbol : SymbolBase, ISymbolDataTypeProvider
 {
     /// <summary>
     /// Null Object
@@ -16,6 +16,11 @@ public sealed class UITypeSymbol : SymbolBase
     /// Represents any UI type.
     /// </summary>
     public static readonly UITypeSymbol AnyUI;
+
+    ///
+    /// <inheritdoc />
+    ///
+    public DataTypeFlag DataType { get; set; } = DataTypeFlag.None;
 
     /// <summary>
     /// Static constructor

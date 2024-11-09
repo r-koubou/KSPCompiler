@@ -33,9 +33,11 @@ public static class MockSymbolTableUtility
             DataType    = DataTypeFlag.TypeVoid
         };
 
-        example.AddArgument( new CommandArgumentSymbol
+        var ui = new string[] { "ui_*" };
+
+        example.AddArgument( new CommandArgumentSymbol( ui )
         {
-            Name = "*text",
+            Name = "text",
             DataType = DataTypeFlag.MultipleType,
             Description = "message text",
             Reserved = false,
@@ -77,8 +79,7 @@ public static class MockSymbolTableUtility
         {
             Name        = "ui_control",
             Description = "UI event callback",
-            Reserved    = true,
-            DataType    = DataTypeFlag.TypeInt
+            Reserved    = true
         };
 
         example.AddArgument( new CallbackArgumentSymbol( false )
