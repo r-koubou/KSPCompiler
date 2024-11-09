@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 
 using KSPCompiler.Domain.Ast.Nodes;
@@ -16,11 +17,13 @@ public class CallCommandExpressionEvaluator : ICallCommandExpressionEvaluator
 {
     private ICompilerMessageManger CompilerMessageManger { get; }
     private ICommandSymbolTable Commands { get; }
+    private IUITypeSymbolTable UITypes { get; }
 
-    public CallCommandExpressionEvaluator( ICompilerMessageManger compilerMessageManger, ICommandSymbolTable commands )
+    public CallCommandExpressionEvaluator( ICompilerMessageManger compilerMessageManger, ICommandSymbolTable commands, IUITypeSymbolTable uiTypeSymbolTable )
     {
         CompilerMessageManger = compilerMessageManger;
         Commands              = commands;
+        UITypes               = uiTypeSymbolTable;
     }
 
     public IAstNode Evaluate( IAstVisitor visitor, AstCallCommandExpressionNode expr )
@@ -87,6 +90,11 @@ public class CallCommandExpressionEvaluator : ICallCommandExpressionEvaluator
             return false;
         }
 
+        return ValidateCommandArgumentType( visitor, commandSymbol, callArgs, symbolArgs );
+    }
+
+    private bool ValidateCommandArgumentType( IAstVisitor visitor, CommandSymbol commandSymbol, IReadOnlyList<AstExpressionNode> callArgs, IReadOnlyList<CommandArgumentSymbol> symbolArgs )
+    {
         for( var i = 0; i < callArgs.Count; i++ )
         {
             var symbolArg = symbolArgs[ i ];
@@ -97,9 +105,37 @@ public class CallCommandExpressionEvaluator : ICallCommandExpressionEvaluator
                 throw new AstAnalyzeException( callArg, "Failed to evaluate command argument" );
             }
 
+            // プリミティブ型の型評価
             if( TypeCompatibility.IsTypeCompatible( evaluatedArg.TypeFlag, symbolArg.DataType ) )
             {
-                continue;
+                if( !symbolArg.UITypeNames.Any() )
+                {
+                    continue;
+                }
+
+                // UI情報を持つ場合
+                var matchedUiType = false;
+
+                foreach( var uiName in symbolArg.UITypeNames )
+                {
+                    // ワイルドカード指定の場合は合致とみなす
+                    if( uiName == UITypeSymbol.AnyUI.Name )
+                    {
+                        matchedUiType = true;
+                        break;
+                    }
+
+                    if( UITypes.TrySearchByName( uiName, out _ ) )
+                    {
+                        matchedUiType = true;
+                        break;
+                    }
+                }
+
+                if( matchedUiType )
+                {
+                    continue;
+                }
             }
 
             CompilerMessageManger.Error(

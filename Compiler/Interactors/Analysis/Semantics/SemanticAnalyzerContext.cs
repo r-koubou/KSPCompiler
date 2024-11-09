@@ -113,7 +113,7 @@ public sealed class SemanticAnalyzerContext : IAnalyzerContext
             StringConcatenateOperator  = new StringConcatenateOperatorEvaluator( compilerMessageManger, StringConvolutionEvaluator );
             Symbol                     = new SymbolEvaluator( compilerMessageManger, aggregateSymbolTable );
             ArrayElement               = new ArrayElementEvaluator( compilerMessageManger, aggregateSymbolTable.Variables );
-            CallCommand                = new CallCommandExpressionEvaluator( compilerMessageManger, aggregateSymbolTable.Commands );
+            CallCommand                = new CallCommandExpressionEvaluator( compilerMessageManger, aggregateSymbolTable.Commands, aggregateSymbolTable.UITypes );
         }
     }
 
