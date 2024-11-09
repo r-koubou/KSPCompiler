@@ -1,6 +1,4 @@
-
-
-    on init
+on init
 
 declare $i := 0
 
