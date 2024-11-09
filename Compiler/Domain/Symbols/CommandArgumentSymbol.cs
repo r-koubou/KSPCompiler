@@ -2,14 +2,13 @@ using System.Collections.Generic;
 
 namespace KSPCompiler.Domain.Symbols;
 
-public class CommandArgumentSymbol : VariableSymbol
+public sealed class CommandArgumentSymbol : ArgumentSymbol
 {
-    public IReadOnlyList<string> UITypeNames { get; }
+    public CommandArgumentSymbol() {}
 
-    public CommandArgumentSymbol() : this( new List<string>() ) {}
+    public CommandArgumentSymbol( IReadOnlyList<string> uiTypeNames, IReadOnlyList<string> otherTypeNames )
+        : base( uiTypeNames, otherTypeNames ) {}
 
     public CommandArgumentSymbol( IReadOnlyList<string> uiTypeNames )
-    {
-        UITypeNames = uiTypeNames;
-    }
+        : base( uiTypeNames ) {}
 }

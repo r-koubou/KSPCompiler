@@ -107,6 +107,41 @@ public static class DataTypeUtility
         return result;
     }
 
+    public static void GuessFromOtherTypeString( string typeString, out List<string> uiTypes, out List<string> otherTypes, string separator = "||" )
+    {
+        GuessFromUITypeString( typeString, out uiTypes, separator );
+        GuessFromOtherTypeString( typeString, out otherTypes, separator );
+    }
+
+    public static void GuessFromOtherTypeString( string typeString, out List<string> otherTypes, string separator = "||" )
+    {
+        GuessFromOtherTypeStringImpl( typeString, out otherTypes, x => !x.StartsWith( "ui_" ), separator );
+    }
+
+    public static void GuessFromUITypeString( string typeString, out List<string> uiTypes, string separator = "||" )
+    {
+        GuessFromOtherTypeStringImpl( typeString, out uiTypes, x => x.StartsWith( "ui_" ), separator );
+    }
+
+    private static void GuessFromOtherTypeStringImpl( string typeString, out List<string> result, Predicate<string> condition, string separator = "||" )
+    {
+        result = new List<string>();
+
+        foreach( var type in typeString.Split( separator ) )
+        {
+            // プリミティブ型はここでは対象外
+            if( TryGuessFromTypeString( type, out _, separator ) )
+            {
+                continue;
+            }
+
+            if( condition( type ) )
+            {
+                result.Add( type );
+            }
+        }
+    }
+
     /// <summary>
     /// Convert to this compiler formated string from data type with separated '||' if multiple types.
     /// </summary>
