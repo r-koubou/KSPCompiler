@@ -35,7 +35,7 @@ public static class MockSymbolTableUtility
 
         example.AddArgument( new CommandArgumentSymbol
         {
-            Name = "*text",
+            Name = "text",
             DataType = DataTypeFlag.MultipleType,
             Description = "message text",
             Reserved = false,

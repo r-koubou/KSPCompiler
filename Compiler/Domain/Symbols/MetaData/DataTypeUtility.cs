@@ -155,6 +155,12 @@ public static class DataTypeUtility
 
         foreach( var type in typeString.Split( separator ) )
         {
+            // プリミティブ型はここでは対象外
+            if( TryGuessFromTypeString( typeString, out _, separator ) )
+            {
+                continue;
+            }
+
             if( type.StartsWith( "ui_" ) )
             {
                 uiTypes.Add( type );

@@ -57,7 +57,7 @@ public class CommandTableTsvLoaderTest
 
         await Task.Run( async () => {
             var symbolTable = await importer.ImportAsync();
-            Assert.IsTrue( symbolTable.Count == 1 );
+            Assert.IsTrue( symbolTable.Count == 2 );
         });
     }
 
