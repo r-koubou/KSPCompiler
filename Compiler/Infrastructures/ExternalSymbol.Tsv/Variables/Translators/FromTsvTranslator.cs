@@ -34,8 +34,7 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<V
                     ArraySize        = 0,
                     Reserved         = TsvUtility.ParseBoolean( values[ (int)Column.Reserved ] ),
                     Description      = values[ (int)Column.Description ],
-                    BuiltIntoVersion = values[ (int)Column.BuiltIntoVersion ],
-                    State            = VariableState.Initialized // ビルトイン変数は即時使用可能
+                    BuiltIntoVersion = values[ (int)Column.BuiltIntoVersion ]
                 };
 
                 symbol.DataType         = DataTypeUtility.GuessFromSymbolName( symbol.Name );

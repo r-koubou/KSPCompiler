@@ -21,8 +21,7 @@ internal class FromVariableSymbolModelTranslator : IDataTranslator<IEnumerable<V
                 ArraySize        = 0,
                 Reserved         = x.Reserved,
                 Description      = x.Description,
-                BuiltIntoVersion = x.BuiltIntoVersion,
-                State            = VariableState.Initialized // ビルトイン変数は即時使用可能
+                BuiltIntoVersion = x.BuiltIntoVersion
             };
 
             symbol.DataType = DataTypeUtility.GuessFromSymbolName( symbol.Name );
