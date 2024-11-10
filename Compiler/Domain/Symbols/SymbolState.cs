@@ -1,7 +1,7 @@
 ﻿namespace KSPCompiler.Domain.Symbols
 {
     /// <summary>
-    /// Represents the state of a symbol in semantic analysis.
+    /// Represents the state of a symbol for evaluation in analysis.
     /// </summary>
     public enum SymbolState
     {
