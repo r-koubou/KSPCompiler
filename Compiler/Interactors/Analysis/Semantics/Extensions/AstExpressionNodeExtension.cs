@@ -9,7 +9,11 @@ namespace KSPCompiler.Interactors.Analysis.Semantics.Extensions;
 
 public static class AstExpressionNodeExtension
 {
-    public static bool EvaluateSymbolStateIsInitialized( this AstExpressionNode self, IAstNode parent, ICompilerMessageManger compilerMessageManger )
+    /// <summary>
+    /// Evaluate the symbol state is initialized or not if the expression is a <see cref="AstSymbolExpressionNode"/>.
+    /// </summary>
+    /// <returns>true if the symbol state is initialized or node is not a <see cref="AstSymbolExpressionNode"/>. Otherwise, false.</returns>
+    public static bool EvaluateSymbolState( this AstExpressionNode self, IAstNode parent, ICompilerMessageManger compilerMessageManger )
     {
         if( self is not AstSymbolExpressionNode symbolNode )
         {

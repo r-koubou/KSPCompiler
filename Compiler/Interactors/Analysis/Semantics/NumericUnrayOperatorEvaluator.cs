@@ -71,7 +71,7 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
         }
 
         // 評価対象が変数の場合、初期化されているかチェック
-        if( !evaluatedLeft.EvaluateSymbolStateIsInitialized( expr, CompilerMessageManger ) )
+        if( !evaluatedLeft.EvaluateSymbolState( expr, CompilerMessageManger ) )
         {
             return CreateEvaluateNode( expr, evaluatedLeft.TypeFlag );
         }

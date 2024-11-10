@@ -156,6 +156,6 @@ public class CallCommandExpressionEvaluator : ICallCommandExpressionEvaluator
 
     private bool ValidateCommandArgumentState( AstCallCommandExpressionNode expr, IReadOnlyList<AstExpressionNode> callArgs )
     {
-        return callArgs.All( arg => arg.EvaluateSymbolStateIsInitialized( expr, CompilerMessageManger ) );
+        return callArgs.All( arg => arg.EvaluateSymbolState( expr, CompilerMessageManger ) );
     }
 }
