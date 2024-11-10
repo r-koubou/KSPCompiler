@@ -6,6 +6,7 @@ using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations;
 using KSPCompiler.Interactors.Analysis.Commons.Extensions;
+using KSPCompiler.Interactors.Analysis.Semantics.Extensions;
 using KSPCompiler.Resources;
 using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Integers;
 using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Reals;
@@ -66,6 +67,12 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
                 evaluatedLeft.TypeFlag.ToMessageString()
             );
 
+            return CreateEvaluateNode( expr, evaluatedLeft.TypeFlag );
+        }
+
+        // 評価対象が変数の場合、初期化されているかチェック
+        if( !evaluatedLeft.EvaluateSymbolStateIsInitialized( expr, CompilerMessageManger ) )
+        {
             return CreateEvaluateNode( expr, evaluatedLeft.TypeFlag );
         }
 
