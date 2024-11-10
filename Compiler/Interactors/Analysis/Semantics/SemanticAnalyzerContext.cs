@@ -104,7 +104,7 @@ public sealed class SemanticAnalyzerContext : IAnalyzerContext
 
             #endregion ~Convolutions
 
-            AssignOperator             = new AssignOperatorEvaluator( compilerMessageManger );
+            AssignOperator             = new AssignOperatorEvaluator( compilerMessageManger, aggregateSymbolTable.Variables );
             ConditionalBinaryOperator  = new ConditionalBinaryOperatorEvaluator( compilerMessageManger );
             ConditionalLogicalOperator = new ConditionalLogicalOperatorEvaluator( compilerMessageManger, BooleanConvolutionEvaluator );
             ConditionalUnaryOperator   = new ConditionalUnaryOperatorEvaluator( compilerMessageManger, BooleanConvolutionEvaluator );

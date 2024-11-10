@@ -12,6 +12,7 @@ namespace KSPCompiler.Interactors.Analysis.Semantics;
 public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
 {
     private ICompilerMessageManger CompilerMessageManger { get; }
+    private IVariableSymbolTable Variables { get; }
 
     private static AstExpressionNode CreateEvaluateNode( AstExpressionNode source, DataTypeFlag type )
     {
@@ -21,9 +22,10 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
         return result;
     }
 
-    public AssignOperatorEvaluator( ICompilerMessageManger compilerMessageManger )
+    public AssignOperatorEvaluator( ICompilerMessageManger compilerMessageManger, IVariableSymbolTable variables )
     {
         CompilerMessageManger = compilerMessageManger;
+        Variables             = variables;
     }
 
     public IAstNode Evaluate( IAstVisitor visitor, AstExpressionNode expr )
