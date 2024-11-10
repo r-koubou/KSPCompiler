@@ -217,10 +217,24 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         // constなし＋初期化代入式がない場合はスキップ
         if( node.Initializer.IsNull() )
         {
+            // 例外として文字列型は宣言時に初期化代入はできないので宣言 = 初期化済み としてマーク
+            if( variable.DataType.IsString() )
+            {
+                variable.State = VariableState.Initialized;
+            }
+
             return true;
         }
 
-        return ValidateVariableInitializer( visitor, node, variable );
+        var result = ValidateVariableInitializer( visitor, node, variable );
+
+        // 成功していれば初期化済みとしてマーク
+        if( result )
+        {
+            variable.State = VariableState.Initialized;
+        }
+
+        return result;
     }
 
     private bool ValidateVariableInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
