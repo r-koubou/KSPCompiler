@@ -1,14 +1,19 @@
 ﻿namespace KSPCompiler.Domain.Symbols
 {
     /// <summary>
-    /// Represents the state of a variable in semantic analysis.
+    /// Represents the state of a symbol for evaluation in analysis.
     /// </summary>
-    public enum VariableState
+    public enum SymbolState
     {
         /// <summary>
         /// Uninitialized
         /// </summary>
         UnInitialized,
+
+        /// <summary>
+        /// Initialized
+        /// </summary>
+        Initialized,
 
         /// <summary>
         /// In reference
@@ -18,11 +23,6 @@
         /// <summary>
         /// Referenced
         /// </summary>
-        Loaded,
-
-        /// <summary>
-        /// Initialized
-        /// </summary>
-        Initialized,
+        Loaded
     }
 }

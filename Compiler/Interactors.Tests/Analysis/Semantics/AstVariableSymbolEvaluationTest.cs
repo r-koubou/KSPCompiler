@@ -46,7 +46,7 @@ public class AstVariableSymbolEvaluationTest
             variable.Value            =  1;
         }
 
-        variable.State = VariableState.Initialized;
+        variable.State = SymbolState.Initialized;
 
         var result = VariableSymbolTestBody( variable );
 
@@ -67,7 +67,7 @@ public class AstVariableSymbolEvaluationTest
         var variable = MockUtility.CreateVariable( "$x", DataTypeFlag.TypeInt );
         variable.Modifier |= ModifierFlag.Const;
         variable.Value    =  value;
-        variable.State    = VariableState.Initialized;
+        variable.State    = SymbolState.Initialized;
 
         var result = VariableSymbolTestBody( variable );
         var literal = result as AstIntLiteralNode;
@@ -84,7 +84,7 @@ public class AstVariableSymbolEvaluationTest
         var variable = MockUtility.CreateRealVariable( "~x" );
         variable.Modifier |= ModifierFlag.Const;
         variable.Value    =  value;
-        variable.State    =  VariableState.Initialized;
+        variable.State    =  SymbolState.Initialized;
 
         var result = VariableSymbolTestBody( variable );
         var literal = result as AstRealLiteralNode;
@@ -101,7 +101,7 @@ public class AstVariableSymbolEvaluationTest
         var variable = MockUtility.CreateStringVariable( "@x" );
         variable.Modifier |= ModifierFlag.Const;
         variable.Value    =  value;
-        variable.State    =  VariableState.Initialized;
+        variable.State    =  SymbolState.Initialized;
 
         var result = VariableSymbolTestBody( variable );
         var literal = result as AstStringLiteralNode;
