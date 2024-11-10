@@ -2,6 +2,7 @@ using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Interactors.Analysis.Commons.Evaluations;
 using KSPCompiler.Interactors.Analysis.Commons.Extensions;
 using KSPCompiler.Resources;
 
@@ -13,7 +14,7 @@ public static class AstExpressionNodeExtension
     /// Evaluate the symbol state is initialized or not if the expression is a <see cref="AstSymbolExpressionNode"/>.
     /// </summary>
     /// <returns>true if the symbol state is initialized or node is not a <see cref="AstSymbolExpressionNode"/>. Otherwise, false.</returns>
-    public static bool EvaluateSymbolState( this AstExpressionNode self, IAstNode parent, ICompilerMessageManger compilerMessageManger )
+    public static bool EvaluateSymbolState( this AstExpressionNode self, IAstNode parent, ICompilerMessageManger compilerMessageManger, IVariableSymbolTable variables )
     {
         if( self is not AstSymbolExpressionNode symbolNode )
         {
@@ -29,6 +30,11 @@ public static class AstExpressionNodeExtension
             );
 
             return false;
+        }
+
+        if( variables.TrySearchByName( symbolNode.Name, out var variable ) )
+        {
+            variable.State = SymbolState.Loaded;
         }
 
         return true;

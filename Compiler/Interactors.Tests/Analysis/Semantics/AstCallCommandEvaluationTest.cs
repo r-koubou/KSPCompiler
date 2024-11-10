@@ -35,7 +35,7 @@ public class AstCallCommandEvaluationTest
             new AstIntLiteralNode( 0 )
         );
 
-        var evaluator = new CallCommandExpressionEvaluator( compilerMessageManger, symbols.Commands, symbols.UITypes );
+        var evaluator = new CallCommandExpressionEvaluator( compilerMessageManger, symbols.Variables, symbols.Commands, symbols.UITypes );
         var visitor = new MockCallCommandExpressionVisitor();
 
         visitor.Inject( evaluator );
@@ -69,7 +69,7 @@ public class AstCallCommandEvaluationTest
             new AstIntLiteralNode( 0 )
         );
 
-        var evaluator = new CallCommandExpressionEvaluator( compilerMessageManger, symbols.Commands, symbols.UITypes );
+        var evaluator = new CallCommandExpressionEvaluator( compilerMessageManger, symbols.Variables, symbols.Commands, symbols.UITypes );
         var visitor = new MockCallCommandExpressionVisitor();
 
         visitor.Inject( evaluator );
@@ -104,7 +104,7 @@ public class AstCallCommandEvaluationTest
             new AstIntLiteralNode( 0 )
         );
 
-        var evaluator = new CallCommandExpressionEvaluator( compilerMessageManger, symbols.Commands, symbols.UITypes );
+        var evaluator = new CallCommandExpressionEvaluator( compilerMessageManger, symbols.Variables, symbols.Commands, symbols.UITypes );
         var visitor = new MockCallCommandExpressionVisitor();
 
         visitor.Inject( evaluator );
@@ -134,7 +134,7 @@ public class AstCallCommandEvaluationTest
             new AstIntLiteralNode( 0 )
         );
 
-        var evaluator = new CallCommandExpressionEvaluator( compilerMessageManger, symbols.Commands, symbols.UITypes );
+        var evaluator = new CallCommandExpressionEvaluator( compilerMessageManger, symbols.Variables, symbols.Commands, symbols.UITypes );
         var visitor = new MockCallCommandExpressionVisitor();
 
         visitor.Inject( evaluator );

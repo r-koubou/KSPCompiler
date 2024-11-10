@@ -17,12 +17,14 @@ namespace KSPCompiler.Interactors.Analysis.Semantics;
 public class CallCommandExpressionEvaluator : ICallCommandExpressionEvaluator
 {
     private ICompilerMessageManger CompilerMessageManger { get; }
+    private IVariableSymbolTable Variables { get; }
     private ICommandSymbolTable Commands { get; }
     private IUITypeSymbolTable UITypes { get; }
 
-    public CallCommandExpressionEvaluator( ICompilerMessageManger compilerMessageManger, ICommandSymbolTable commands, IUITypeSymbolTable uiTypeSymbolTable )
+    public CallCommandExpressionEvaluator( ICompilerMessageManger compilerMessageManger, IVariableSymbolTable variables, ICommandSymbolTable commands, IUITypeSymbolTable uiTypeSymbolTable )
     {
         CompilerMessageManger = compilerMessageManger;
+        Variables             = variables;
         Commands              = commands;
         UITypes               = uiTypeSymbolTable;
     }
@@ -156,6 +158,6 @@ public class CallCommandExpressionEvaluator : ICallCommandExpressionEvaluator
 
     private bool ValidateCommandArgumentState( AstCallCommandExpressionNode expr, IReadOnlyList<AstExpressionNode> callArgs )
     {
-        return callArgs.All( arg => arg.EvaluateSymbolState( expr, CompilerMessageManger ) );
+        return callArgs.All( arg => arg.EvaluateSymbolState( expr, CompilerMessageManger, Variables ) );
     }
 }

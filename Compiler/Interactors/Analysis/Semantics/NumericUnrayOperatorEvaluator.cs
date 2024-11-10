@@ -2,6 +2,7 @@ using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Extensions;
 using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations;
@@ -17,8 +18,10 @@ namespace KSPCompiler.Interactors.Analysis.Semantics;
 public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
 {
     private ICompilerMessageManger CompilerMessageManger { get; }
+    private IVariableSymbolTable Variables { get; }
     private IIntegerConvolutionEvaluator IntegerConvolutionEvaluator { get; }
     private IRealConvolutionEvaluator RealConvolutionEvaluator { get; }
+
 
     private static AstExpressionNode CreateEvaluateNode( AstExpressionNode source, DataTypeFlag type )
     {
@@ -30,10 +33,12 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
 
     public NumericUnaryOperatorEvaluator(
         ICompilerMessageManger compilerMessageManger,
+        IVariableSymbolTable variables,
         IIntegerConvolutionEvaluator integerConvolutionEvaluator,
         IRealConvolutionEvaluator realConvolutionEvaluator )
     {
         CompilerMessageManger       = compilerMessageManger;
+        Variables                   = variables;
         IntegerConvolutionEvaluator = integerConvolutionEvaluator;
         RealConvolutionEvaluator    = realConvolutionEvaluator;
     }
@@ -71,7 +76,7 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
         }
 
         // 評価対象が変数の場合、初期化されているかチェック
-        if( !evaluatedLeft.EvaluateSymbolState( expr, CompilerMessageManger ) )
+        if( !evaluatedLeft.EvaluateSymbolState( expr, CompilerMessageManger, Variables ) )
         {
             return CreateEvaluateNode( expr, evaluatedLeft.TypeFlag );
         }

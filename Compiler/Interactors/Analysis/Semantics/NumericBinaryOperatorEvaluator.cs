@@ -18,6 +18,7 @@ namespace KSPCompiler.Interactors.Analysis.Semantics;
 public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
 {
     protected ICompilerMessageManger CompilerMessageManger { get; }
+    protected IVariableSymbolTable Variables { get; }
     protected IIntegerConvolutionEvaluator IntegerConvolutionEvaluator { get; }
     protected IRealConvolutionEvaluator RealConvolutionEvaluator { get; }
 
@@ -31,10 +32,12 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
 
     public NumericBinaryOperatorEvaluator(
         ICompilerMessageManger compilerMessageManger,
+        IVariableSymbolTable variables,
         IIntegerConvolutionEvaluator integerConvolutionEvaluator,
         IRealConvolutionEvaluator realConvolutionEvaluator )
     {
         CompilerMessageManger       = compilerMessageManger;
+        Variables                   = variables;
         IntegerConvolutionEvaluator = integerConvolutionEvaluator;
         RealConvolutionEvaluator    = realConvolutionEvaluator;
     }
@@ -75,8 +78,8 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
         }
 
         // 評価対象が変数の場合、初期化されているかチェック
-        if( !evaluatedLeft.EvaluateSymbolState( expr, CompilerMessageManger ) ||
-            !evaluatedRight.EvaluateSymbolState( expr, CompilerMessageManger ) )
+        if( !evaluatedLeft.EvaluateSymbolState( expr, CompilerMessageManger, Variables ) ||
+            !evaluatedRight.EvaluateSymbolState( expr, CompilerMessageManger, Variables ) )
         {
             return CreateEvaluateNode(
                 expr,
