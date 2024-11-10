@@ -14,11 +14,6 @@ public class VariableSymbol : SymbolBase, ISymbolDataTypeProvider
     public virtual DataTypeFlag DataType { get; set; } = DataTypeFlag.None;
 
     /// <summary>
-    /// The variable's state in semantic analysis.
-    /// </summary>
-    public virtual VariableState State { get; set; } = VariableState.UnInitialized;
-
-    /// <summary>
     /// Number of elements for array type
     /// </summary>
     public virtual int ArraySize { get; set; } = -1;

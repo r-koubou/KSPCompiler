@@ -1,4 +1,4 @@
-using KSPCompiler.Domain.Ast.Nodes.Extensions;
+using KSPCompiler.Domain.Symbols;
 
 namespace KSPCompiler.Domain.Ast.Nodes.Expressions
 {
@@ -7,6 +7,14 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
     /// </summary>
     public class AstSymbolExpressionNode : AstExpressionNode
     {
+        /// <summary>
+        /// Represents a symbol state for evaluation in analysis.
+        /// </summary>
+        /// <remarks>
+        /// Typically, this property will be set in evaluation process as return evaluation result.
+        /// </remarks>
+        public SymbolState SymbolState { get; set; } = SymbolState.UnInitialized;
+
         /// <summary>
         /// Ctor
         /// </summary>

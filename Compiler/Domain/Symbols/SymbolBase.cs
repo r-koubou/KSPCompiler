@@ -24,6 +24,11 @@ public abstract class SymbolBase
     public bool Referenced { get; set; } = false;
 
     /// <summary>
+    /// A symbol's state for evaluation in analysis.
+    /// </summary>
+    public SymbolState State { get; set; } = SymbolState.UnInitialized;
+
+    /// <summary>
     /// A symbol's type
     /// </summary>
     public abstract SymbolType Type { get; }
