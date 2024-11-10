@@ -505,7 +505,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             return ValidateArrayBasedUIInitializer( visitor, node, node.Initializer.ArrayInitializer, variable );
         }
 
-        return ValidatePrimitiveBasedUIInitializer( visitor, node, node.Initializer.PrimitiveInitializer, variable );
+        return ValidatePrimitiveBasedUIInitializer( visitor, node, node.Initializer.PrimitiveInitializer.UIInitializer, variable );
     }
 
     private bool ValidateArrayBasedUIInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, AstArrayInitializerNode initializer, VariableSymbol variable )
@@ -518,25 +518,23 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         return ValidateUIArguments( visitor, node, initializer.Initializer, variable.UIType );
     }
 
-    private bool ValidatePrimitiveBasedUIInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, AstPrimitiveInitializerNode initializer, VariableSymbol variable )
+    private bool ValidatePrimitiveBasedUIInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, AstExpressionListNode initializer, VariableSymbol variable )
     {
-        var expressions = initializer.UIInitializer;
-
         // パラメータ数が一致しない
-        if( expressions.Count != variable.UIType.InitializerArguments.Count )
+        if( initializer.Count != variable.UIType.InitializerArguments.Count )
         {
             CompilerMessageManger.Error(
                 node,
                 CompilerMessageResources.semantic_error_declare_variable_uiinitializer_count_incompatible,
                 node.Name,
                 variable.UIType.InitializerArguments.Count,
-                expressions.Count
+                initializer.Count
             );
 
             return false;
         }
 
-        return ValidateUIArguments( visitor, node, expressions, variable.UIType );
+        return ValidateUIArguments( visitor, node, initializer, variable.UIType );
     }
 
     private bool ValidateUIArguments( IAstVisitor visitor, AstVariableDeclarationNode node, AstExpressionListNode expressionList, UITypeSymbol uiType )
