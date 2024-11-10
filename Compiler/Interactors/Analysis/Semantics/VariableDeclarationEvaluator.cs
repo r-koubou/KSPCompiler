@@ -220,7 +220,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             // 例外として文字列型は宣言時に初期化代入はできないので宣言 = 初期化済み としてマーク
             if( variable.DataType.IsString() )
             {
-                variable.State = VariableState.Initialized;
+                variable.State = SymbolState.Initialized;
             }
 
             return true;
@@ -231,7 +231,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         // 成功していれば初期化済みとしてマーク
         if( result )
         {
-            variable.State = VariableState.Initialized;
+            variable.State = SymbolState.Initialized;
         }
 
         return result;
