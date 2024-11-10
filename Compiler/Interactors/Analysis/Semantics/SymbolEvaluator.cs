@@ -81,7 +81,7 @@ public class SymbolEvaluator : ISymbolEvaluator
         variable.Referenced = true;
 
         // 変数は見つかったが、未初期化の場合はエラー
-        if( variable.State == VariableState.UnInitialized )
+        if( variable.State == SymbolState.UnInitialized )
         {
             CompilerMessageManger.Error(
                 expr,
@@ -94,7 +94,7 @@ public class SymbolEvaluator : ISymbolEvaluator
             return true;
         }
 
-        variable.State = VariableState.Loaded;
+        variable.State = SymbolState.Loaded;
         if( TryGetAstLiteralNode( variable, out result ) )
         {
             return true;
@@ -157,7 +157,7 @@ public class SymbolEvaluator : ISymbolEvaluator
         }
 
         // 配列要素数未確定の状況
-        if( variable.State == VariableState.UnInitialized )
+        if( variable.State == SymbolState.UnInitialized )
         {
             CompilerMessageManger.Error(
                 expr,

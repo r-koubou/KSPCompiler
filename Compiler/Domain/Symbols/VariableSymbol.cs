@@ -16,7 +16,7 @@ public class VariableSymbol : SymbolBase, ISymbolDataTypeProvider
     /// <summary>
     /// The variable's state in semantic analysis.
     /// </summary>
-    public virtual VariableState State { get; set; } = VariableState.UnInitialized;
+    public virtual SymbolState State { get; set; } = SymbolState.UnInitialized;
 
     /// <summary>
     /// Number of elements for array type
