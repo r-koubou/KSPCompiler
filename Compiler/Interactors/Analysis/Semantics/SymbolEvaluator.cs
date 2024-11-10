@@ -20,9 +20,10 @@ public class SymbolEvaluator : ISymbolEvaluator
     {
         var result = new AstSymbolExpressionNode( symbol.Name, source.Left )
         {
-            Parent   = source.Parent,
-            TypeFlag = symbolType.DataType,
-            Constant = symbol.Modifier.IsConstant()
+            Parent      = source.Parent,
+            TypeFlag    = symbolType.DataType,
+            Constant    = symbol.Modifier.IsConstant(),
+            SymbolState = symbol.State
         };
 
         return result;
