@@ -8,6 +8,7 @@ using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations;
 using KSPCompiler.Interactors.Analysis.Commons.Extensions;
+using KSPCompiler.Interactors.Analysis.Semantics.Extensions;
 using KSPCompiler.Resources;
 using KSPCompiler.UseCases.Analysis.Evaluations.Commands;
 
@@ -151,5 +152,10 @@ public class CallCommandExpressionEvaluator : ICallCommandExpressionEvaluator
         }
 
         return true;
+    }
+
+    private bool ValidateCommandArgumentState( AstCallCommandExpressionNode expr, IReadOnlyList<AstExpressionNode> callArgs )
+    {
+        return callArgs.All( arg => arg.EvaluateSymbolStateIsInitialized( expr, CompilerMessageManger ) );
     }
 }
