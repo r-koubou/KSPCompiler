@@ -21,10 +21,11 @@ internal class FromVariableSymbolModelTranslator : IDataTranslator<IEnumerable<V
                 ArraySize        = 0,
                 Reserved         = x.Reserved,
                 Description      = x.Description,
-                BuiltIntoVersion = x.BuiltIntoVersion
+                BuiltIntoVersion = x.BuiltIntoVersion,
+                State            = VariableState.Initialized // ビルトイン変数は即時使用可能
             };
 
-            symbol.DataType         = DataTypeUtility.GuessFromSymbolName( symbol.Name );
+            symbol.DataType = DataTypeUtility.GuessFromSymbolName( symbol.Name );
             symbol.Modifier = ModifierFlag.Const;
 
             result.Add( symbol );
