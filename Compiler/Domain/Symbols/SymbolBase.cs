@@ -24,7 +24,7 @@ public abstract class SymbolBase
     public bool Referenced { get; set; } = false;
 
     /// <summary>
-    /// A symbol's state in semantic analysis.
+    /// A symbol's state for evaluation in analysis.
     /// </summary>
     public SymbolState State { get; set; } = SymbolState.UnInitialized;
 
