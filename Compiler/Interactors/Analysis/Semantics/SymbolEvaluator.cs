@@ -81,21 +81,6 @@ public class SymbolEvaluator : ISymbolEvaluator
         // 変数への評価が確定するので参照済みフラグを立てる
         variable.Referenced = true;
 
-        // 変数は見つかったが、未初期化の場合はエラー
-        if( variable.State == SymbolState.UnInitialized )
-        {
-            CompilerMessageManger.Error(
-                expr,
-                CompilerMessageResources.semantic_error_variable_uninitialized,
-                variable.Name
-            );
-
-            // 変数は見つかったが、エラー扱いとして代替の評価結果を返す
-            result = CreateEvaluateNode( expr, variable, variable );
-            return true;
-        }
-
-        variable.State = SymbolState.Loaded;
         if( TryGetAstLiteralNode( variable, out result ) )
         {
             return true;
