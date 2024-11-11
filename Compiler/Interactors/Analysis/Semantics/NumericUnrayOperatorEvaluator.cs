@@ -94,8 +94,13 @@ public sealed class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
     {
         convolutedValue = default!;
 
-        if( left.Reserved ||
-            left.TypeFlag.IsArray() ||
+        // 変数シンボルで、ビルトイン変数であれば畳み込みしない
+        if( left is AstSymbolExpressionNode { BuiltIn: true } )
+        {
+            return false;
+        }
+
+        if( left.TypeFlag.IsArray() ||
             !left.Constant )
         {
             return false;

@@ -100,8 +100,17 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
     {
         convolutedValue = default!;
 
-        if( left.Reserved || right.Reserved ||
-            left.TypeFlag.IsArray() || right.TypeFlag.IsArray() ||
+        // 変数シンボルで、ビルトイン変数であれば畳み込みしない
+        if( left is AstSymbolExpressionNode { BuiltIn: true } )
+        {
+            return false;
+        }
+        if( right is AstSymbolExpressionNode { BuiltIn: true } )
+        {
+            return false;
+        }
+
+        if( left.TypeFlag.IsArray() || right.TypeFlag.IsArray() ||
             !left.Constant || !right.Constant )
         {
             return false;
