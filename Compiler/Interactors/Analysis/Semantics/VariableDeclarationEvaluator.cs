@@ -105,7 +105,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         {
             CompilerMessageManger.Error(
                 node,
-                CompilerMessageResources.symbol_error_declare_variable_ni_reserved,
+                CompilerMessageResources.symbol_error_declare_variable_ni_builtin,
                 node.Name
             );
 
@@ -145,7 +145,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         {
             CompilerMessageManger.Error(
                 node,
-                CompilerMessageResources.symbol_error_declare_variable_reserved,
+                CompilerMessageResources.symbol_error_declare_variable_builtin,
                 node.Name
             );
 
