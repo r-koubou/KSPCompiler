@@ -9,11 +9,11 @@ public static class AstVariableDeclarationExtension
     {
         var result = new VariableSymbol
         {
-            Name             = self.Name,
-            Reserved         = false,
-            Description      = $"Created from {nameof( AstVariableDeclarationExtension )}.{nameof( As )}",
-            DataType         = DataTypeUtility.GuessFromSymbolName( new SymbolName( self.Name ) ),
-            Modifier = ModifierFlag.None
+            Name        = self.Name,
+            BuiltIn     = false,
+            Description = $"Created from {nameof( AstVariableDeclarationExtension )}.{nameof( As )}",
+            DataType    = DataTypeUtility.GuessFromSymbolName( new SymbolName( self.Name ) ),
+            Modifier    = ModifierFlag.None
         };
 
         foreach( var x in self.Modifier.Values )

@@ -14,9 +14,9 @@ public abstract class SymbolBase
     public SymbolName Name { get; set; } = SymbolName.Empty;
 
     /// <summary>
-    /// Reserved symbol in external (e.g. KSP Built-in, Reserved name by NI etc.)
+    /// Built-In symbol in external.
     /// </summary>
-    public bool Reserved { get; set; } = false;
+    public bool BuiltIn { get; set; } = false;
 
     /// <summary>
     /// This symbol is referenced in the script.

@@ -18,7 +18,7 @@ internal class ToUITypeModelTranslator : IDataTranslator<IEnumerable<UITypeSymbo
             var symbol = new UITypeSymbolModel
             {
                 Name               = x.Name.Value,
-                Reserved           = x.Reserved,
+                BuiltIn            = x.BuiltIn,
                 VariableType       = DataTypeUtility.ToString( x.DataType ),
                 RequireInitializer = x.InitializerRequired,
                 Description        = x.Description.Value,

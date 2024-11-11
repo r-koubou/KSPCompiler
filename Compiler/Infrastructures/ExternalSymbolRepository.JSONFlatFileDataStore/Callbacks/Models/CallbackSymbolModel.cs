@@ -11,7 +11,7 @@ public sealed class CallbackSymbolModel : ISymbolModel
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
     public string Name { get; set; } = string.Empty;
-    public bool Reserved { get; set; }
+    public bool BuiltIn { get; set; }
     public bool AllowMultipleDeclaration { get; set; }
     public string Description { get; set; } = string.Empty;
     public string BuiltIntoVersion { get; set; } = string.Empty;

@@ -31,7 +31,7 @@ public static class MockUtility
             Name     = name,
             DataType = DataTypeFlag.TypeInt,
             Modifier = ModifierFlag.Const,
-            Reserved = true,
+            BuiltIn  = true,
             Value    = 0
         };
 
@@ -77,7 +77,7 @@ public static class MockUtility
         {
             Name     = uiName,
             Modifier = ModifierFlag.UI,
-            Reserved = true,
+            BuiltIn  = true,
             DataType = type
         };
     }
@@ -85,22 +85,23 @@ public static class MockUtility
     public static UITypeSymbol CreateUILabel()
     {
         return new UITypeSymbol( true, new UIInitializerArgumentSymbol[]
-        {
-            new ()
             {
-                Name     = "grid_width",
-                DataType = DataTypeFlag.TypeInt
-            },
-            new ()
-            {
-                Name     = "grid_height",
-                DataType = DataTypeFlag.TypeInt
+                new()
+                {
+                    Name     = "grid_width",
+                    DataType = DataTypeFlag.TypeInt
+                },
+                new()
+                {
+                    Name     = "grid_height",
+                    DataType = DataTypeFlag.TypeInt
+                }
             }
-        })
+        )
         {
             Name     = "ui_label",
             Modifier = ModifierFlag.UI,
-            Reserved = true,
+            BuiltIn  = true,
             DataType = DataTypeFlag.TypeInt
         };
     }
@@ -108,27 +109,28 @@ public static class MockUtility
     public static UITypeSymbol CreateUITable()
     {
         return new UITypeSymbol( true, new UIInitializerArgumentSymbol[]
-        {
-            new ()
             {
-                Name     = "width",
-                DataType = DataTypeFlag.TypeInt
-            },
-            new ()
-            {
-                Name     = "height",
-                DataType = DataTypeFlag.TypeInt
-            },
-            new ()
-            {
-                Name     = "range",
-                DataType = DataTypeFlag.TypeInt
+                new()
+                {
+                    Name     = "width",
+                    DataType = DataTypeFlag.TypeInt
+                },
+                new()
+                {
+                    Name     = "height",
+                    DataType = DataTypeFlag.TypeInt
+                },
+                new()
+                {
+                    Name     = "range",
+                    DataType = DataTypeFlag.TypeInt
+                }
             }
-        })
+        )
         {
             Name     = "ui_table",
             Modifier = ModifierFlag.UI,
-            Reserved = true,
+            BuiltIn  = true,
             DataType = DataTypeFlag.TypeIntArray
         };
     }
@@ -211,7 +213,7 @@ public static class MockUtility
         {
             Name     = name,
             DataType = returnType,
-            Reserved = true
+            BuiltIn  = true
         };
 
     public static CommandSymbol CreatePlayNoteCommand()

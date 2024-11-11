@@ -100,7 +100,7 @@ public class SymbolEvaluator : ISymbolEvaluator
     {
         result = NullAstExpressionNode.Instance;
 
-        if( variable.Reserved || !variable.Modifier.IsConstant() )
+        if( variable.BuiltIn || !variable.Modifier.IsConstant() )
         {
             return false;
         }
@@ -163,7 +163,7 @@ public class SymbolEvaluator : ISymbolEvaluator
         result.TypeFlag &= ~DataTypeFlag.AttributeArray;
 
         // 変数がビルトイン変数または要素アクセスがリテラルで確定していない場合は評価はここまで
-        if( variable.Reserved || indexExpr is not AstIntLiteralNode intLiteral )
+        if( variable.BuiltIn || indexExpr is not AstIntLiteralNode intLiteral )
         {
             return true;
         }

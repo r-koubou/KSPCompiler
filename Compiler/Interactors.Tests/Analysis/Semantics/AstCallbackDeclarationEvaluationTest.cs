@@ -17,18 +17,18 @@ public class AstCallbackDeclarationEvaluationTest
         var compilerMessageManger = ICompilerMessageManger.Default;
 
         var callback = MockUtility.CreateCallback( name, false );
-        callback.Reserved = reserved;
+        callback.BuiltIn = reserved;
 
         var symbols = MockUtility.CreateAggregateSymbolTable();
 
         if( reserved )
         {
-            symbols.ReservedCallbacks.Add( callback );
+            symbols.BuiltInCallbacks.Add( callback );
         }
 
         var ast = MockUtility.CreateCallbackDeclarationNode( name );
         var visitor = new MockDeclarationVisitor();
-        var evaluator = new CallbackDeclarationEvaluator( compilerMessageManger, symbols.ReservedCallbacks, symbols.UserCallbacks );
+        var evaluator = new CallbackDeclarationEvaluator( compilerMessageManger, symbols.BuiltInCallbacks, symbols.UserCallbacks );
 
         visitor.Inject( evaluator );
         evaluator.Evaluate( visitor, ast );
@@ -47,10 +47,10 @@ public class AstCallbackDeclarationEvaluationTest
 
         var callback = MockUtility.CreateCallback( name, allowMultiple );
         var symbols = MockUtility.CreateAggregateSymbolTable();
-        symbols.ReservedCallbacks.Add( callback );
+        symbols.BuiltInCallbacks.Add( callback );
 
         var ast = MockUtility.CreateCallbackDeclarationNode( name );
-        var evaluator = new CallbackDeclarationEvaluator( compilerMessageManger, symbols.ReservedCallbacks, symbols.UserCallbacks );
+        var evaluator = new CallbackDeclarationEvaluator( compilerMessageManger, symbols.BuiltInCallbacks, symbols.UserCallbacks );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );

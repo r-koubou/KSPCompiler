@@ -18,11 +18,11 @@ internal class FromUITypeModelTranslator : IDataTranslator<IEnumerable<UITypeSym
             var uiType = new UITypeSymbol( x.RequireInitializer )
             {
                 Name             = x.Name,
-                Reserved         = x.Reserved,
+                BuiltIn          = x.BuiltIn,
                 Description      = x.Description,
                 BuiltIntoVersion = x.BuiltIntoVersion,
                 DataType         = DataTypeUtility.GuessFromTypeString( x.VariableType ),
-                Modifier = ModifierFlag.UI
+                Modifier         = ModifierFlag.UI
             };
 
             foreach( var arg in x.InitializerArguments )
@@ -30,7 +30,7 @@ internal class FromUITypeModelTranslator : IDataTranslator<IEnumerable<UITypeSym
                 var argument = new UIInitializerArgumentSymbol
                 {
                     Name        = arg.Name,
-                    Reserved    = false,
+                    BuiltIn     = false,
                     Description = arg.Description,
                 };
 

@@ -29,16 +29,16 @@ public sealed class UITypeSymbol : SymbolBase, ISymbolDataTypeProvider
     {
         Null = new UITypeSymbol( false )
         {
-            Name             = "null",
-            DataType         = DataTypeFlag.None,
-            Reserved = true
+            Name     = "null",
+            DataType = DataTypeFlag.None,
+            BuiltIn  = true
         };
 
         AnyUI = new UITypeSymbol( false )
         {
-            Name             = "ui_*",
-            DataType         = DataTypeFlag.MultipleType,
-            Reserved = true
+            Name     = "ui_*",
+            DataType = DataTypeFlag.MultipleType,
+            BuiltIn  = true
         };
     }
 

@@ -10,8 +10,8 @@ public static class AstUserFunctionDeclarationExtension
         var result = new UserFunctionSymbol
         {
             Name        = self.Name,
-            Reserved    = false,
-            Description = $"Created from {nameof(AstUserFunctionDeclarationExtension)}.{nameof(As)}"
+            BuiltIn     = false,
+            Description = $"Created from {nameof( AstUserFunctionDeclarationExtension )}.{nameof( As )}"
         };
 
         return result;

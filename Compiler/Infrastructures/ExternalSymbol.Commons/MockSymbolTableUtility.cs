@@ -12,9 +12,9 @@ public static class MockSymbolTableUtility
         var list = new List<VariableSymbol>();
         var example = new VariableSymbol
         {
-            Name = "$example1",
+            Name        = "$example1",
             Description = "example1 symbol",
-            Reserved = true,
+            BuiltIn     = true,
         };
 
         list.Add( example );
@@ -29,19 +29,20 @@ public static class MockSymbolTableUtility
         {
             Name        = "message",
             Description = "display text in the status line of KONTAKT",
-            Reserved    = true,
+            BuiltIn    = true,
             DataType    = DataTypeFlag.TypeVoid
         };
 
         var ui = new string[] { "ui_*" };
 
         example.AddArgument( new CommandArgumentSymbol( ui )
-        {
-            Name = "text",
-            DataType = DataTypeFlag.MultipleType,
-            Description = "message text",
-            Reserved = false,
-        });
+            {
+                Name        = "text",
+                DataType    = DataTypeFlag.MultipleType,
+                Description = "message text",
+                BuiltIn     = false,
+            }
+        );
 
         list.Add( example );
 
@@ -55,17 +56,18 @@ public static class MockSymbolTableUtility
         {
             Name        = "ui_button",
             Description = "Button",
-            Reserved    = true,
+            BuiltIn    = true,
             DataType    = DataTypeFlag.TypeInt
         };
 
         example.AddInitializerArgument( new UIInitializerArgumentSymbol
-        {
-            Name        = "$width",
-            DataType    = DataTypeFlag.TypeInt,
-            Description = "button width",
-            Reserved    = false,
-        });
+            {
+                Name        = "$width",
+                DataType    = DataTypeFlag.TypeInt,
+                Description = "button width",
+                BuiltIn     = false,
+            }
+        );
 
         list.Add( example );
 
@@ -79,16 +81,17 @@ public static class MockSymbolTableUtility
         {
             Name        = "ui_control",
             Description = "UI event callback",
-            Reserved    = true
+            BuiltIn    = true
         };
 
         example.AddArgument( new CallbackArgumentSymbol( false )
-        {
-            Name        = "$button",
-            DataType    = DataTypeFlag.TypeInt,
-            Description = "button ui variable",
-            Reserved    = false,
-        });
+            {
+                Name        = "$button",
+                DataType    = DataTypeFlag.TypeInt,
+                Description = "button ui variable",
+                BuiltIn     = false,
+            }
+        );
 
         list.Add( example );
 

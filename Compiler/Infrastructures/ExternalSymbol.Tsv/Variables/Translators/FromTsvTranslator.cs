@@ -15,7 +15,7 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<V
     private enum Column
     {
         Name,
-        Reserved,
+        BuiltIn,
         Description,
         BuiltIntoVersion
     }
@@ -32,7 +32,7 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<V
                 {
                     Name             = values[ (int)Column.Name ],
                     ArraySize        = 0,
-                    Reserved         = TsvUtility.ParseBoolean( values[ (int)Column.Reserved ] ),
+                    BuiltIn          = TsvUtility.ParseBoolean( values[ (int)Column.BuiltIn ] ),
                     Description      = values[ (int)Column.Description ],
                     BuiltIntoVersion = values[ (int)Column.BuiltIntoVersion ]
                 };

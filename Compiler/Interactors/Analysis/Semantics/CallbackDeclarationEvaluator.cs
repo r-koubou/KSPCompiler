@@ -12,17 +12,17 @@ namespace KSPCompiler.Interactors.Analysis.Semantics;
 public class CallbackDeclarationEvaluator : ICallbackDeclarationEvaluator
 {
     private ICompilerMessageManger CompilerMessageManger { get; }
-    private ISymbolTable<CallbackSymbol> ReservedCallbackSymbols { get; }
+    private ISymbolTable<CallbackSymbol> BuiltInCallbackSymbols { get; }
     private ISymbolTable<CallbackSymbol> UserCallbackSymbols { get; }
 
     public CallbackDeclarationEvaluator(
         ICompilerMessageManger compilerMessageManger,
-        ISymbolTable<CallbackSymbol> reservedCallbackSymbols,
+        ISymbolTable<CallbackSymbol> builtInCallbackSymbols,
         ISymbolTable<CallbackSymbol> userCallbackSymbols )
     {
-        CompilerMessageManger   = compilerMessageManger;
-        ReservedCallbackSymbols = reservedCallbackSymbols;
-        UserCallbackSymbols     = userCallbackSymbols;
+        CompilerMessageManger  = compilerMessageManger;
+        BuiltInCallbackSymbols = builtInCallbackSymbols;
+        UserCallbackSymbols    = userCallbackSymbols;
     }
 
     public IAstNode Evaluate( IAstVisitor visitor, AstCallbackDeclarationNode node )
@@ -50,7 +50,7 @@ public class CallbackDeclarationEvaluator : ICallbackDeclarationEvaluator
         CallbackSymbol thisCallback;
 
         // NI予約済みコールバックの検査
-        if( !ReservedCallbackSymbols.TrySearchByName( node.Name, out var reservedCallback ) )
+        if( !BuiltInCallbackSymbols.TrySearchByName( node.Name, out var reservedCallback ) )
         {
             CompilerMessageManger.Warning(
                 node,
