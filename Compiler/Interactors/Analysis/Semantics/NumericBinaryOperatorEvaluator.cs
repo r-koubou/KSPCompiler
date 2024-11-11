@@ -2,10 +2,12 @@ using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Extensions;
 using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations;
 using KSPCompiler.Interactors.Analysis.Commons.Extensions;
+using KSPCompiler.Interactors.Analysis.Semantics.Extensions;
 using KSPCompiler.Resources;
 using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Integers;
 using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Reals;
@@ -16,6 +18,7 @@ namespace KSPCompiler.Interactors.Analysis.Semantics;
 public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
 {
     protected ICompilerMessageManger CompilerMessageManger { get; }
+    protected IVariableSymbolTable Variables { get; }
     protected IIntegerConvolutionEvaluator IntegerConvolutionEvaluator { get; }
     protected IRealConvolutionEvaluator RealConvolutionEvaluator { get; }
 
@@ -29,10 +32,12 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
 
     public NumericBinaryOperatorEvaluator(
         ICompilerMessageManger compilerMessageManger,
+        IVariableSymbolTable variables,
         IIntegerConvolutionEvaluator integerConvolutionEvaluator,
         IRealConvolutionEvaluator realConvolutionEvaluator )
     {
         CompilerMessageManger       = compilerMessageManger;
+        Variables                   = variables;
         IntegerConvolutionEvaluator = integerConvolutionEvaluator;
         RealConvolutionEvaluator    = realConvolutionEvaluator;
     }
@@ -65,6 +70,16 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
         var typeEvalResult = EvaluateDataType( expr, evaluatedLeft, evaluatedRight, out var resultType );
 
         if( !typeEvalResult )
+        {
+            return CreateEvaluateNode(
+                expr,
+                evaluatedLeft.TypeFlag | evaluatedRight.TypeFlag
+            );
+        }
+
+        // 評価対象が変数の場合、初期化されているかチェック
+        if( !evaluatedLeft.EvaluateSymbolState( expr, CompilerMessageManger, Variables ) ||
+            !evaluatedRight.EvaluateSymbolState( expr, CompilerMessageManger, Variables ) )
         {
             return CreateEvaluateNode(
                 expr,

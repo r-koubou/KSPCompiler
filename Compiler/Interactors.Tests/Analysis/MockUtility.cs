@@ -156,8 +156,9 @@ public static class MockUtility
         {
             Left = new AstSymbolExpressionNode
             {
-                Name     = variableName,
-                TypeFlag = type
+                Name        = variableName,
+                TypeFlag    = type,
+                SymbolState = SymbolState.Initialized
             },
         };
     }
@@ -168,8 +169,9 @@ public static class MockUtility
         {
             Left = new AstSymbolExpressionNode
             {
-                Name     = variableName,
-                TypeFlag = type
+                Name        = variableName,
+                TypeFlag    = type,
+                SymbolState = SymbolState.Initialized
             },
         };
     }
@@ -384,6 +386,7 @@ public static class MockUtility
 
         var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
             compilerMessageManger,
+            CreateAggregateSymbolTable().Variables,
             new MockIntegerConvolutionEvaluator(),
             new RealConvolutionEvaluator()
         );

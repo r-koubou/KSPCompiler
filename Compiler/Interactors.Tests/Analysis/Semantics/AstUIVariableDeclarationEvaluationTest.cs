@@ -95,7 +95,7 @@ public class AstUIVariableDeclarationEvaluationTest
                 Parent = declaration
             }
         };
-        declaration.Initializer.PrimitiveInitializer.UIInitializer.Expressions.AddRange( new AstExpressionNode[]
+        declaration.Initializer.ArrayInitializer.Initializer.Expressions.AddRange( new AstExpressionNode[]
         {
             new AstIntLiteralNode( 2 ),
             new AstIntLiteralNode( 2 ),

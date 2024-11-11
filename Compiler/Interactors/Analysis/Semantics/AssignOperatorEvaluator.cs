@@ -1,5 +1,7 @@
 using KSPCompiler.Domain.Ast.Nodes;
+using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations;
@@ -12,6 +14,7 @@ namespace KSPCompiler.Interactors.Analysis.Semantics;
 public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
 {
     private ICompilerMessageManger CompilerMessageManger { get; }
+    private IVariableSymbolTable Variables { get; }
 
     private static AstExpressionNode CreateEvaluateNode( AstExpressionNode source, DataTypeFlag type )
     {
@@ -21,9 +24,10 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
         return result;
     }
 
-    public AssignOperatorEvaluator( ICompilerMessageManger compilerMessageManger )
+    public AssignOperatorEvaluator( ICompilerMessageManger compilerMessageManger, IVariableSymbolTable variables )
     {
         CompilerMessageManger = compilerMessageManger;
+        Variables             = variables;
     }
 
     public IAstNode Evaluate( IAstVisitor visitor, AstExpressionNode expr )
@@ -73,6 +77,15 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
             );
 
             // 上位のノードで評価を継続させるので代替のノードは生成しない
+        }
+
+        // 代入先変数の状態を更新
+        if( evaluatedLeft is AstSymbolExpressionNode symbolNode )
+        {
+            if( Variables.TrySearchByName( symbolNode.Name, out var variable ) )
+            {
+                variable.State = SymbolState.Loaded;
+            }
         }
 
         return CreateEvaluateNode( evaluatedLeft, evaluatedLeft.TypeFlag );

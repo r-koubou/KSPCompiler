@@ -217,10 +217,24 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         // constなし＋初期化代入式がない場合はスキップ
         if( node.Initializer.IsNull() )
         {
+            // 例外として文字列型は宣言時に初期化代入はできないので宣言 = 初期化済み としてマーク
+            if( variable.DataType.IsString() )
+            {
+                variable.State = SymbolState.Initialized;
+            }
+
             return true;
         }
 
-        return ValidateVariableInitializer( visitor, node, variable );
+        var result = ValidateVariableInitializer( visitor, node, variable );
+
+        // 成功していれば初期化済みとしてマーク
+        if( result )
+        {
+            variable.State = SymbolState.Initialized;
+        }
+
+        return result;
     }
 
     private bool ValidateVariableInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
@@ -488,13 +502,10 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
     {
         if( variable.DataType.IsArray() )
         {
-            if( !ValidateArrayBasedUIInitializer( visitor, node, node.Initializer.ArrayInitializer, variable ) )
-            {
-                return false;
-            }
+            return ValidateArrayBasedUIInitializer( visitor, node, node.Initializer.ArrayInitializer, variable );
         }
 
-        return ValidatePrimitiveBasedUIInitializer( visitor, node, node.Initializer.PrimitiveInitializer, variable );
+        return ValidatePrimitiveBasedUIInitializer( visitor, node, node.Initializer.PrimitiveInitializer.UIInitializer, variable );
     }
 
     private bool ValidateArrayBasedUIInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, AstArrayInitializerNode initializer, VariableSymbol variable )
@@ -507,30 +518,41 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         return ValidateUIArguments( visitor, node, initializer.Initializer, variable.UIType );
     }
 
-    private bool ValidatePrimitiveBasedUIInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, AstPrimitiveInitializerNode initializer, VariableSymbol variable )
+    private bool ValidatePrimitiveBasedUIInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, AstExpressionListNode initializer, VariableSymbol variable )
     {
-        var expressions = initializer.UIInitializer;
-
         // パラメータ数が一致しない
-        if( expressions.Count != variable.UIType.InitializerArguments.Count )
+        if( initializer.Count != variable.UIType.InitializerArguments.Count )
         {
             CompilerMessageManger.Error(
                 node,
                 CompilerMessageResources.semantic_error_declare_variable_uiinitializer_count_incompatible,
                 node.Name,
                 variable.UIType.InitializerArguments.Count,
-                expressions.Count
+                initializer.Count
             );
 
             return false;
         }
 
-        return ValidateUIArguments( visitor, node, expressions, variable.UIType );
+        return ValidateUIArguments( visitor, node, initializer, variable.UIType );
     }
 
     private bool ValidateUIArguments( IAstVisitor visitor, AstVariableDeclarationNode node, AstExpressionListNode expressionList, UITypeSymbol uiType )
     {
-        for(var i = 0; i < expressionList.Count; i++)
+        if( expressionList.Count != uiType.InitializerArguments.Count )
+        {
+            CompilerMessageManger.Error(
+                node,
+                CompilerMessageResources.semantic_error_declare_variable_uiinitializer_count_incompatible,
+                node.Name,
+                uiType.InitializerArguments.Count,
+                expressionList.Count
+            );
+
+            return false;
+        }
+
+        for( var i = 0; i < expressionList.Count; i++ )
         {
             var expr = expressionList.Expressions[ i ];
 
@@ -555,7 +577,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             var requiredType = uiType.InitializerArguments[ i ].DataType;
 
             // 型の一致チェック
-            if( TypeCompatibility.IsAssigningTypeCompatible( evaluated.TypeFlag, requiredType ) )
+            if( TypeCompatibility.IsTypeCompatible( evaluated.TypeFlag, requiredType ) )
             {
                 continue;
             }

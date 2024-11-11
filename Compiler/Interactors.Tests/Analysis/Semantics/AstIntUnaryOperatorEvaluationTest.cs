@@ -24,6 +24,7 @@ public class AstIntUnaryOperatorEvaluationTest
         var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
         var unaryOperatorEvaluator = new NumericUnaryOperatorEvaluator(
             compilerMessageManger,
+            MockUtility.CreateAggregateSymbolTable().Variables,
             integerConvolutionEvaluator,
             realConvolutionEvaluator
         );
@@ -51,6 +52,7 @@ public class AstIntUnaryOperatorEvaluationTest
         var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
         var unaryOperatorEvaluator = new NumericUnaryOperatorEvaluator(
             compilerMessageManger,
+            MockUtility.CreateAggregateSymbolTable().Variables,
             integerConvolutionEvaluator,
             realConvolutionEvaluator
         );

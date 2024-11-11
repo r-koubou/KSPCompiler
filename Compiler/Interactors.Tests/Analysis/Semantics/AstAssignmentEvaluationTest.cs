@@ -3,6 +3,7 @@ using System;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Interactors.Analysis.Semantics;
 
@@ -17,8 +18,9 @@ public class AstAssignmentEvaluationTest
     public void IntAssignmentTest()
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var symbolTable = MockUtility.CreateAggregateSymbolTable();
         var visitor = new MockAssignOperatorVisitor();
-        var assignEvaluator = new AssignOperatorEvaluator( compilerMessageManger );
+        var assignEvaluator = new AssignOperatorEvaluator( compilerMessageManger, symbolTable.Variables );
         var variable = MockUtility.CreateSymbolNode( "$x", DataTypeFlag.TypeInt );
         var value = new AstIntLiteralNode( 1 );
         var expr = new AstAssignmentExpressionNode( variable, value );
@@ -37,8 +39,9 @@ public class AstAssignmentEvaluationTest
     public void CannotAssignToConstantTest()
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var symbolTable = MockUtility.CreateAggregateSymbolTable();
         var visitor = new MockAssignOperatorVisitor();
-        var assignEvaluator = new AssignOperatorEvaluator( compilerMessageManger );
+        var assignEvaluator = new AssignOperatorEvaluator( compilerMessageManger, symbolTable.Variables );
         var variable = MockUtility.CreateSymbolNode( "$x", DataTypeFlag.TypeInt );
         variable.Constant = true;
 
@@ -59,8 +62,9 @@ public class AstAssignmentEvaluationTest
     public void IncompatibleAssignmentTest()
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var symbolTable = MockUtility.CreateAggregateSymbolTable();
         var visitor = new MockAssignOperatorVisitor();
-        var assignEvaluator = new AssignOperatorEvaluator( compilerMessageManger );
+        var assignEvaluator = new AssignOperatorEvaluator( compilerMessageManger, symbolTable.Variables );
         var variable = MockUtility.CreateSymbolNode( "$x", DataTypeFlag.TypeInt );
         var value = MockUtility.CreateSymbolNode( "",      DataTypeFlag.TypeReal | DataTypeFlag.TypeString ); //new AstRealLiteralNode( 1.0 );
         var expr = new AstAssignmentExpressionNode( variable, value );
@@ -83,8 +87,9 @@ public class AstAssignmentEvaluationTest
          */
 
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var symbolTable = MockUtility.CreateAggregateSymbolTable();
         var visitor = new MockAssignOperatorVisitor();
-        var assignEvaluator = new AssignOperatorEvaluator( compilerMessageManger );
+        var assignEvaluator = new AssignOperatorEvaluator( compilerMessageManger, symbolTable.Variables );
         var variable = MockUtility.CreateSymbolNode( "%x", DataTypeFlag.TypeIntArray );
         var value = new AstIntLiteralNode( 1 );
         var expr = new AstAssignmentExpressionNode( variable, value );
@@ -107,8 +112,9 @@ public class AstAssignmentEvaluationTest
          */
 
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var symbolTable = MockUtility.CreateAggregateSymbolTable();
         var visitor = new MockAssignOperatorVisitor();
-        var assignEvaluator = new AssignOperatorEvaluator( compilerMessageManger );
+        var assignEvaluator = new AssignOperatorEvaluator( compilerMessageManger, symbolTable.Variables );
         var variable = MockUtility.CreateSymbolNode( "$x", DataTypeFlag.TypeInt );
         var value = MockUtility.CreateSymbolNode( "%y",      DataTypeFlag.TypeIntArray );
         var expr = new AstAssignmentExpressionNode( variable, value );
@@ -131,8 +137,9 @@ public class AstAssignmentEvaluationTest
          */
 
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var symbolTable = MockUtility.CreateAggregateSymbolTable();
         var visitor = new MockAssignOperatorVisitor();
-        var assignEvaluator = new AssignOperatorEvaluator( compilerMessageManger );
+        var assignEvaluator = new AssignOperatorEvaluator( compilerMessageManger, symbolTable.Variables );
         var variable = MockUtility.CreateSymbolNode( "@x", DataTypeFlag.TypeString );
         var value = new AstIntLiteralNode( 1 );
         var expr = new AstAssignmentExpressionNode( variable, value );

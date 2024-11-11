@@ -43,6 +43,9 @@ public static class CompilerProgram
         // 外部定義ファイルからビルトイン変数、コマンド、コールバック、UIタイプを構築
         LoadSymbolTables( symbolTable );
 
+        // 追加のシンボルセットアップ処理
+        SetupSymbolState( symbolTable );
+
         var parser = new AntlrKspFileSyntaxParser( input, messageManager );
 
         var compilerController = new CompilerController();
@@ -75,5 +78,14 @@ public static class CompilerProgram
 
         using var callbacks = new CallbackSymbolRepository( Path.Combine( basePath, "callbacks.json" ) );
         symbolTable.ReservedCallbacks.AddRange( callbacks.FindAllAsync( CancellationToken.None ).GetAwaiter().GetResult() );
+    }
+
+    private static void SetupSymbolState( AggregateSymbolTable symbolTable )
+    {
+        // ビルトイン変数は初期化済み扱い
+        foreach( var variable in symbolTable.Variables )
+        {
+            variable.State = SymbolState.Initialized;
+        }
     }
 }

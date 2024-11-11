@@ -104,16 +104,16 @@ public sealed class SemanticAnalyzerContext : IAnalyzerContext
 
             #endregion ~Convolutions
 
-            AssignOperator             = new AssignOperatorEvaluator( compilerMessageManger );
+            AssignOperator             = new AssignOperatorEvaluator( compilerMessageManger, aggregateSymbolTable.Variables );
             ConditionalBinaryOperator  = new ConditionalBinaryOperatorEvaluator( compilerMessageManger );
             ConditionalLogicalOperator = new ConditionalLogicalOperatorEvaluator( compilerMessageManger, BooleanConvolutionEvaluator );
             ConditionalUnaryOperator   = new ConditionalUnaryOperatorEvaluator( compilerMessageManger, BooleanConvolutionEvaluator );
-            NumericBinaryOperator      = new NumericBinaryOperatorEvaluator( compilerMessageManger, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
-            NumericUnaryOperator       = new NumericUnaryOperatorEvaluator( compilerMessageManger, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
+            NumericBinaryOperator      = new NumericBinaryOperatorEvaluator( compilerMessageManger, aggregateSymbolTable.Variables, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
+            NumericUnaryOperator       = new NumericUnaryOperatorEvaluator( compilerMessageManger, aggregateSymbolTable.Variables, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
             StringConcatenateOperator  = new StringConcatenateOperatorEvaluator( compilerMessageManger, StringConvolutionEvaluator );
             Symbol                     = new SymbolEvaluator( compilerMessageManger, aggregateSymbolTable );
             ArrayElement               = new ArrayElementEvaluator( compilerMessageManger, aggregateSymbolTable.Variables );
-            CallCommand                = new CallCommandExpressionEvaluator( compilerMessageManger, aggregateSymbolTable.Commands, aggregateSymbolTable.UITypes );
+            CallCommand                = new CallCommandExpressionEvaluator( compilerMessageManger, aggregateSymbolTable.Variables, aggregateSymbolTable.Commands, aggregateSymbolTable.UITypes );
         }
     }
 
