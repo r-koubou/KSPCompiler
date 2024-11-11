@@ -60,7 +60,7 @@
         <value>条件式は文字列演算子と連結できません</value>
     </data>
     <data name="semantic.error.assign.to.constant" xml:space="preserve">
-        <value>値の代入ができません ({0} は定数またはビルトイン変数です)</value>
+        <value>{0}: 定数の変数に値の代入はできません</value>
     </data>
     <data name="semantic.error.assign.type.compatible" xml:space="preserve">
         <value>":=" : データ型が一致しません (代入先: {0}, 代入元: {1})</value>
