@@ -64,6 +64,18 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
             return CreateEvaluateNode( evaluatedLeft, evaluatedLeft.TypeFlag );
         }
 
+        // ビルトイン変数には代入できない
+        if( evaluatedLeft is AstSymbolExpressionNode { BuiltIn: true } symbolLeft )
+        {
+            CompilerMessageManger.Error(
+                expr,
+                CompilerMessageResources.semantic_error_assign_to_builtin_variable,
+                symbolLeft.Name
+            );
+
+            return CreateEvaluateNode( evaluatedLeft, evaluatedLeft.TypeFlag );
+        }
+
         var leftType  = evaluatedLeft.TypeFlag;
         var rightType = evaluatedRight.TypeFlag;
 

@@ -67,7 +67,7 @@
         <value>Conditional expressions cannot be concatenated with string operators</value>
     </data>
     <data name="semantic.error.assign.to.constant" xml:space="preserve">
-        <value>Cannot assign value ({0} is constant or Built-In variable)</value>
+        <value>{0}: Cannot assign values to constant variable</value>
     </data>
     <data name="semantic.error.assign.type.compatible" xml:space="preserve">
         <value>":=" : not compatible type (assign to: {0}, assign from {1})</value>
@@ -170,5 +170,8 @@
     </data>
     <data name="semantic.error.pgs.name.maximam.length" xml:space="preserve">
         <value>PGS ID cannot exceed 64 characters (={0})</value>
+    </data>
+    <data name="semantic.error.assign.to.builtin.variable" xml:space="preserve">
+        <value>{0}: Cannot assign to built-in variable</value>
     </data>
 </root>

@@ -350,5 +350,11 @@ namespace KSPCompiler.Resources {
                 return ResourceManager.GetString("semantic.error.pgs.name.maximam.length", resourceCulture);
             }
         }
+        
+        public static string semantic_error_assign_to_builtin_variable {
+            get {
+                return ResourceManager.GetString("semantic.error.assign.to.builtin.variable", resourceCulture);
+            }
+        }
     }
 }
