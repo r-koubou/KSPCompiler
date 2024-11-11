@@ -8,6 +8,11 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
     public class AstSymbolExpressionNode : AstExpressionNode
     {
         /// <summary>
+        /// Represents whether the node is symbol(variable, commands, callback, etc.) and its built-in by NI.
+        /// </summary>
+        public virtual bool BuiltIn { get; set; }
+
+        /// <summary>
         /// Represents a symbol state for evaluation in analysis.
         /// </summary>
         /// <remarks>
