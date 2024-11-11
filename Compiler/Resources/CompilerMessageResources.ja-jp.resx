@@ -164,4 +164,7 @@
     <data name="semantic.error.pgs.name.maximam.length" xml:space="preserve">
         <value>PGS ID は 64文字を超えることはできません (={0})</value>
     </data>
+    <data name="semantic.error.assign.to.builtin.variable" xml:space="preserve">
+        <value>{0}: ビルトイン変数に代入できません</value>
+    </data>
 </root>

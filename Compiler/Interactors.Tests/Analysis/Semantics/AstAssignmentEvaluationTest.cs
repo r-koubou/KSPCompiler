@@ -3,7 +3,6 @@ using System;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.CompilerMessages;
-using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Interactors.Analysis.Semantics;
 
@@ -37,6 +36,29 @@ public class AstAssignmentEvaluationTest
 
     [Test]
     public void CannotAssignToConstantTest()
+    {
+        var compilerMessageManger = ICompilerMessageManger.Default;
+        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var visitor = new MockAssignOperatorVisitor();
+        var assignEvaluator = new AssignOperatorEvaluator( compilerMessageManger, symbolTable.Variables );
+        var variable = MockUtility.CreateSymbolNode( "$x", DataTypeFlag.TypeInt );
+        variable.BuiltIn = true;
+
+        var value = new AstIntLiteralNode( 1 );
+        var expr = new AstAssignmentExpressionNode( variable, value );
+
+        visitor.Inject( assignEvaluator );
+        var result = visitor.Visit( expr ) as AstExpressionNode;
+
+        compilerMessageManger.WriteTo( Console.Out );
+
+        Assert.IsTrue( compilerMessageManger.Count( CompilerMessageLevel.Error ) > 0 );
+        Assert.IsNotNull( result );
+        Assert.AreEqual( DataTypeFlag.TypeInt, result?.TypeFlag );
+    }
+
+    [Test]
+    public void CannotAssignToBuiltInVariableTest()
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
