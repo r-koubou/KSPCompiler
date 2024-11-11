@@ -42,7 +42,7 @@ public class AstAssignmentEvaluationTest
         var visitor = new MockAssignOperatorVisitor();
         var assignEvaluator = new AssignOperatorEvaluator( compilerMessageManger, symbolTable.Variables );
         var variable = MockUtility.CreateSymbolNode( "$x", DataTypeFlag.TypeInt );
-        variable.BuiltIn = true;
+        variable.Constant = true;
 
         var value = new AstIntLiteralNode( 1 );
         var expr = new AstAssignmentExpressionNode( variable, value );
@@ -65,7 +65,7 @@ public class AstAssignmentEvaluationTest
         var visitor = new MockAssignOperatorVisitor();
         var assignEvaluator = new AssignOperatorEvaluator( compilerMessageManger, symbolTable.Variables );
         var variable = MockUtility.CreateSymbolNode( "$x", DataTypeFlag.TypeInt );
-        variable.Constant = true;
+        variable.BuiltIn = true;
 
         var value = new AstIntLiteralNode( 1 );
         var expr = new AstAssignmentExpressionNode( variable, value );
