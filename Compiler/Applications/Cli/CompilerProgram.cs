@@ -77,7 +77,7 @@ public static class CompilerProgram
         symbolTable.Commands.AddRange( commands.FindAllAsync( CancellationToken.None ).GetAwaiter().GetResult() );
 
         using var callbacks = new CallbackSymbolRepository( Path.Combine( basePath, "callbacks.json" ) );
-        symbolTable.ReservedCallbacks.AddRange( callbacks.FindAllAsync( CancellationToken.None ).GetAwaiter().GetResult() );
+        symbolTable.BuiltInCallbacks.AddRange( callbacks.FindAllAsync( CancellationToken.None ).GetAwaiter().GetResult() );
     }
 
     private static void SetupSymbolState( AggregateSymbolTable symbolTable )

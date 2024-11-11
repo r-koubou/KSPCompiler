@@ -17,7 +17,7 @@ internal class ToCallbackSymbolModelTranslator : IDataTranslator<IEnumerable<Cal
             var symbol = new CallbackSymbolModel
             {
                 Name                     = x.Name.Value,
-                Reserved                 = x.Reserved,
+                BuiltIn                 = x.BuiltIn,
                 AllowMultipleDeclaration = x.AllowMultipleDeclaration,
                 Description              = x.Description.Value,
                 BuiltIntoVersion         = x.BuiltIntoVersion

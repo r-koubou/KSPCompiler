@@ -27,10 +27,10 @@
     <data name="symbol.error.declare.variable.outside" xml:space="preserve">
         <value>Variable {0} declaration outside of callback scope</value>
     </data>
-    <data name="symbol.error.declare.variable.reserved" xml:space="preserve">
+    <data name="symbol.error.declare.variable.builtin" xml:space="preserve">
         <value>Variable name {0} is reserved</value>
     </data>
-    <data name="symbol.error.declare.variable.ni_reserved" xml:space="preserve">
+    <data name="symbol.error.declare.variable.ni_builtin" xml:space="preserve">
         <value>Variable name {0} contains NI reserved prefix</value>
     </data>
     <data name="symbol.error.declare.variable.already" xml:space="preserve">

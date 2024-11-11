@@ -52,7 +52,7 @@ public sealed class SemanticAnalyzerContext : IAnalyzerContext
             ICompilerMessageManger compilerMessageManger,
             AggregateSymbolTable aggregateSymbolTable )
         {
-            Callback     = new CallbackDeclarationEvaluator( compilerMessageManger, aggregateSymbolTable.ReservedCallbacks, aggregateSymbolTable.UserCallbacks );
+            Callback     = new CallbackDeclarationEvaluator( compilerMessageManger, aggregateSymbolTable.BuiltInCallbacks, aggregateSymbolTable.UserCallbacks );
             UserFunction = new UserFunctionDeclarationEvaluator( compilerMessageManger, aggregateSymbolTable.UserFunctions );
             Variable     = new VariableDeclarationEvaluator( compilerMessageManger, aggregateSymbolTable.Variables, aggregateSymbolTable.UITypes );
         }

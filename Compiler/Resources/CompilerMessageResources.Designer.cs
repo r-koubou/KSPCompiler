@@ -63,15 +63,15 @@ namespace KSPCompiler.Resources {
             }
         }
         
-        public static string symbol_error_declare_variable_reserved {
+        public static string symbol_error_declare_variable_builtin {
             get {
-                return ResourceManager.GetString("symbol.error.declare.variable.reserved", resourceCulture);
+                return ResourceManager.GetString("symbol.error.declare.variable.builtin", resourceCulture);
             }
         }
         
-        public static string symbol_error_declare_variable_ni_reserved {
+        public static string symbol_error_declare_variable_ni_builtin {
             get {
-                return ResourceManager.GetString("symbol.error.declare.variable.ni_reserved", resourceCulture);
+                return ResourceManager.GetString("symbol.error.declare.variable.ni_builtin", resourceCulture);
             }
         }
         

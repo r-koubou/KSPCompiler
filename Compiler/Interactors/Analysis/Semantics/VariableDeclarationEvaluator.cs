@@ -35,7 +35,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
     public IAstNode Evaluate( IAstVisitor visitor, AstVariableDeclarationNode node )
     {
         // 予約済み（NIが禁止している）接頭語検査
-        ValidateNiReservedPrefix( node );
+        ValidateBuiltInPrefix( node );
 
         // on init 外での変数宣言はエラー
         if( !ValidateCallbackNode( node ) )
@@ -97,15 +97,15 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         return true;
     }
 
-    private bool ValidateNiReservedPrefix( AstVariableDeclarationNode node )
+    private bool ValidateBuiltInPrefix( AstVariableDeclarationNode node )
     {
-        var reservedPrefixValidator = new NonAstVariableNamePrefixReservedValidator();
+        var builtInPrefixValidator = new NonAstVariableNameBuiltInValidator();
 
-        if( !reservedPrefixValidator.Validate( node ) )
+        if( !builtInPrefixValidator.Validate( node ) )
         {
             CompilerMessageManger.Error(
                 node,
-                CompilerMessageResources.symbol_error_declare_variable_ni_reserved,
+                CompilerMessageResources.symbol_error_declare_variable_ni_builtin,
                 node.Name
             );
 
@@ -141,11 +141,11 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         }
 
         // NI の予約変数との重複
-        if( result.Reserved )
+        if( result.BuiltIn )
         {
             CompilerMessageManger.Error(
                 node,
-                CompilerMessageResources.symbol_error_declare_variable_reserved,
+                CompilerMessageResources.symbol_error_declare_variable_builtin,
                 node.Name
             );
 

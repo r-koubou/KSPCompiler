@@ -6,14 +6,14 @@ using KSPCompiler.Domain.Ast.Nodes.Statements;
 namespace KSPCompiler.Interactors.Analysis.Commons.Evaluations;
 
 /// <summary>
-/// Validates that a variable name does not start with a reserved prefix.
+/// Validates that a variable name does not start with a built-in prefix.
 /// </summary>
-public class NonAstVariableNamePrefixReservedValidator : IDataValidator<AstVariableDeclarationNode>
+public class NonAstVariableNameBuiltInValidator : IDataValidator<AstVariableDeclarationNode>
 {
     /// <summary>
     /// The prefix of a variable name that NI disallows to be used.
     /// </summary>
-    private static readonly string[] NiReservedPrefix =
+    private static readonly string[] BuiltInPrefixList =
     {
         // From KSP Reference Manual:
         // Please do not create variables with the prefixes below, as these prefixes are used for
@@ -25,5 +25,5 @@ public class NonAstVariableNamePrefixReservedValidator : IDataValidator<AstVaria
     };
 
     public bool Validate( AstVariableDeclarationNode data )
-        => NiReservedPrefix.All( prefix => !data.Name.StartsWith( prefix ) );
+        => BuiltInPrefixList.All( prefix => !data.Name.StartsWith( prefix ) );
 }

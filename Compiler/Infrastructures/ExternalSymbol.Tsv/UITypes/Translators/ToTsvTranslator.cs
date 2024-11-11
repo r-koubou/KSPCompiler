@@ -17,7 +17,7 @@ internal class ToTsvTranslator : IDataTranslator<IEnumerable<UITypeSymbol>, stri
         foreach( var v in source )
         {
             result.AppendTab( v.Name )
-                  .AppendTab( v.Reserved.ToString().ToLower() )
+                  .AppendTab( v.BuiltIn.ToString().ToLower() )
                   .AppendTab( DataTypeUtility.ToString( v.DataType ) )
                   .AppendTab( v.Description )
                   .AppendTab( v.BuiltIntoVersion )

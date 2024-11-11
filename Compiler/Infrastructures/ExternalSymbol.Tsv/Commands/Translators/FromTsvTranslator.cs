@@ -14,7 +14,7 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<C
     private enum Column
     {
         Name,
-        Reserved,
+        BuiltIn,
         Description,
         BuiltIntoVersion,
         ReturnType,
@@ -32,7 +32,7 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<C
                 var command = new CommandSymbol
                 {
                     Name             = values[ (int)Column.Name ],
-                    Reserved         = TsvUtility.ParseBoolean( values[ (int)Column.Reserved ] ),
+                    BuiltIn          = TsvUtility.ParseBoolean( values[ (int)Column.BuiltIn ] ),
                     Description      = values[ (int)Column.Description ],
                     BuiltIntoVersion = values[ (int)Column.BuiltIntoVersion ],
                     DataType         = DataTypeUtility.GuessFromTypeString( values[ (int)Column.ReturnType ] )
@@ -68,7 +68,7 @@ internal class FromTsvTranslator : IDataTranslator<string, IReadOnlyCollection<C
                 {
                     Name        = arg[ 1 ],
                     Description = arg[ 2 ],
-                    Reserved    = false,
+                    BuiltIn     = false,
                     DataType    = typeFlag
                 };
 

@@ -6,7 +6,7 @@ public sealed class AggregateSymbolTable
     public IUITypeSymbolTable UITypes { get; }
     public ICommandSymbolTable Commands { get; }
     public ICallbackSymbolTable UserCallbacks { get; }
-    public ICallbackSymbolTable ReservedCallbacks { get; }
+    public ICallbackSymbolTable BuiltInCallbacks { get; }
     public IUserFunctionSymbolSymbolTable UserFunctions { get; }
     public IPreProcessorSymbolTable PreProcessorSymbols { get; }
 
@@ -15,7 +15,7 @@ public sealed class AggregateSymbolTable
         IUITypeSymbolTable uiTypes,
         ICommandSymbolTable commands,
         ICallbackSymbolTable userCallbacks,
-        ICallbackSymbolTable reservedCallbacks,
+        ICallbackSymbolTable builtInCallbacks,
         IUserFunctionSymbolSymbolTable userFunctions,
         IPreProcessorSymbolTable preProcessorSymbols )
     {
@@ -23,7 +23,7 @@ public sealed class AggregateSymbolTable
         UITypes             = uiTypes;
         Commands            = commands;
         UserCallbacks       = userCallbacks;
-        ReservedCallbacks   = reservedCallbacks;
+        BuiltInCallbacks    = builtInCallbacks;
         UserFunctions       = userFunctions;
         PreProcessorSymbols = preProcessorSymbols;
     }

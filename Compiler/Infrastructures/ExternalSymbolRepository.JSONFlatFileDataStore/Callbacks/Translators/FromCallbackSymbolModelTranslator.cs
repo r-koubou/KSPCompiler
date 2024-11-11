@@ -18,7 +18,7 @@ internal class FromCallbackSymbolModelTranslator : IDataTranslator<IEnumerable<C
             var command = new CallbackSymbol( x.AllowMultipleDeclaration )
             {
                 Name             = x.Name,
-                Reserved         = x.Reserved,
+                BuiltIn          = x.BuiltIn,
                 Description      = x.Description,
                 BuiltIntoVersion = x.BuiltIntoVersion
             };
@@ -29,7 +29,7 @@ internal class FromCallbackSymbolModelTranslator : IDataTranslator<IEnumerable<C
                 {
                     Name        = arg.Name,
                     Description = arg.Description,
-                    Reserved    = false
+                    BuiltIn     = false
                 };
 
                 argument.DataType = DataTypeUtility.GuessFromSymbolName( argument.Name );

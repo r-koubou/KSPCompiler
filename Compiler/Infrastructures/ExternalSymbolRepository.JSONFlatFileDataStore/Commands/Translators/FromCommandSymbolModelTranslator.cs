@@ -18,7 +18,7 @@ internal class FromCommandSymbolModelTranslator : IDataTranslator<IEnumerable<Co
             var command = new CommandSymbol
             {
                 Name             = x.Name,
-                Reserved         = x.Reserved,
+                BuiltIn          = x.BuiltIn,
                 DataType         = DataTypeUtility.GuessFromTypeString( x.ReturnType ),
                 Description      = x.Description,
                 BuiltIntoVersion = x.BuiltIntoVersion
@@ -35,7 +35,7 @@ internal class FromCommandSymbolModelTranslator : IDataTranslator<IEnumerable<Co
                 {
                     Name        = arg.Name,
                     DataType    = dataType,
-                    Reserved    = false,
+                    BuiltIn     = false,
                     Description = arg.Description,
                 };
 

@@ -20,7 +20,7 @@ internal class ToCommandSymbolModelTranslator : IDataTranslator<IEnumerable<Comm
             var symbol = new CommandSymbolModel
             {
                 Name             = x.Name.Value,
-                Reserved         = x.Reserved,
+                BuiltIn          = x.BuiltIn,
                 ReturnType       = DataTypeUtility.ToString( x.DataType ),
                 Description      = x.Description.Value,
                 BuiltIntoVersion = x.BuiltIntoVersion

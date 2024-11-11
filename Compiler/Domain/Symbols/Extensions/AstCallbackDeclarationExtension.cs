@@ -9,9 +9,9 @@ public static class AstCallbackDeclarationExtension
     {
         var result = new CallbackSymbol( false )
         {
-            Name = self.Name,
-            Reserved = false,
-            Description = $"Created from {nameof(AstCallbackDeclarationExtension)}.{nameof(As)}"
+            Name        = self.Name,
+            BuiltIn     = false,
+            Description = $"Created from {nameof( AstCallbackDeclarationExtension )}.{nameof( As )}"
         };
 
         foreach ( var arg in self.ArgumentList.Arguments )
@@ -19,7 +19,7 @@ public static class AstCallbackDeclarationExtension
             var argument = new CallbackArgumentSymbol( false )
             {
                 Name = arg.Name,
-                Reserved = false
+                BuiltIn = false
             };
 
             argument.DataType = DataTypeUtility.GuessFromSymbolName( argument.Name );
