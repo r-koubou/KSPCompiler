@@ -6,7 +6,7 @@ using KSPCompiler.Domain.Ast.Nodes.Statements;
 namespace KSPCompiler.Interactors.Analysis.Commons.Evaluations;
 
 /// <summary>
-/// Validates that a variable name does not start with a reserved prefix.
+/// Validates that a variable name does not start with a built-in prefix.
 /// </summary>
 public class NonAstVariableNameBuiltInValidator : IDataValidator<AstVariableDeclarationNode>
 {

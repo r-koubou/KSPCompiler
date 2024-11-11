@@ -12,16 +12,16 @@ public class AstCallbackDeclarationEvaluationTest
 {
     [TestCase( "init", true )]
     [TestCase( "init", false )]
-    public void DeclarationTest( string name, bool reserved )
+    public void DeclarationTest( string name, bool builtIn )
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
 
         var callback = MockUtility.CreateCallback( name, false );
-        callback.BuiltIn = reserved;
+        callback.BuiltIn = builtIn;
 
         var symbols = MockUtility.CreateAggregateSymbolTable();
 
-        if( reserved )
+        if( builtIn )
         {
             symbols.BuiltInCallbacks.Add( callback );
         }

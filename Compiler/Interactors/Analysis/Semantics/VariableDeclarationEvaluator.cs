@@ -99,9 +99,9 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
     private bool ValidateBuiltInPrefix( AstVariableDeclarationNode node )
     {
-        var reservedPrefixValidator = new NonAstVariableNameBuiltInValidator();
+        var builtInPrefixValidator = new NonAstVariableNameBuiltInValidator();
 
-        if( !reservedPrefixValidator.Validate( node ) )
+        if( !builtInPrefixValidator.Validate( node ) )
         {
             CompilerMessageManger.Error(
                 node,

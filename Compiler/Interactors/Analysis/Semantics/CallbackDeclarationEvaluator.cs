@@ -50,7 +50,7 @@ public class CallbackDeclarationEvaluator : ICallbackDeclarationEvaluator
         CallbackSymbol thisCallback;
 
         // NI予約済みコールバックの検査
-        if( !BuiltInCallbackSymbols.TrySearchByName( node.Name, out var reservedCallback ) )
+        if( !BuiltInCallbackSymbols.TrySearchByName( node.Name, out var builtInCallback ) )
         {
             CompilerMessageManger.Warning(
                 node,
@@ -63,7 +63,7 @@ public class CallbackDeclarationEvaluator : ICallbackDeclarationEvaluator
         }
         else
         {
-            thisCallback = reservedCallback;
+            thisCallback = builtInCallback;
         }
 
         if( !UserCallbackSymbols.Add( thisCallback ) )
