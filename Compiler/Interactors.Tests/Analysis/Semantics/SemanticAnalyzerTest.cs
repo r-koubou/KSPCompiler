@@ -2,6 +2,7 @@ using System;
 
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Interactors.Analysis.Semantics;
 using KSPCompiler.UseCases.Analysis.Context;
@@ -114,5 +115,50 @@ public class SemanticAnalyzerTest
         Assert.AreEqual( 0,           context.CompilerMessageManger.Count() );
         Assert.AreEqual( true,        statement.Right is AstStringLiteralNode );
         Assert.AreEqual( "abc123def", ( statement.Right as AstStringLiteralNode )?.Value );
+    }
+
+    [Test]
+    public void CommandArgumentNodeWillBeReplacedStringLiteralNode()
+    {
+        // message( 1 + 2 + 3 )
+        // => message( 6 )  { replaced via convolution }
+
+        var context = CreateContext();
+        var semanticAnalyzer = new SemanticAnalyzer( context );
+        var command = MockUtility.CreateCommand(
+            "message",
+            DataTypeFlag.TypeVoid,
+            new CommandArgumentSymbol
+            {
+                DataType = DataTypeFlag.MultipleType
+            }
+        );
+
+        var variable = MockUtility.CreateSymbolNode( "@x", DataTypeFlag.TypeString );
+
+        context.SymbolTable.Commands.Add( command );
+
+        // message( 1 + 2 + 3 )
+        var expr = MockUtility.CreateCommandExpressionNode(
+            "message",
+            new AstAdditionExpressionNode(
+                new AstAdditionExpressionNode(
+                    new AstIntLiteralNode( 1 ),
+                    new AstIntLiteralNode( 2 )
+                ),
+                new AstIntLiteralNode( 3 )
+            )
+        );
+
+        context.ExpressionContext.CallCommand.Evaluate( semanticAnalyzer, expr );
+        context.CompilerMessageManger.WriteTo( Console.Out );
+
+        Assert.AreEqual( 0, context.CompilerMessageManger.Count() );
+
+        var args = expr.Right as AstExpressionListNode;
+
+        Assert.IsNotNull( args );
+        Assert.AreEqual( true, args?.Expressions[0] is AstIntLiteralNode );
+        Assert.AreEqual( 6,    ( args?.Expressions[ 0 ] as AstIntLiteralNode )?.Value );
     }
 }

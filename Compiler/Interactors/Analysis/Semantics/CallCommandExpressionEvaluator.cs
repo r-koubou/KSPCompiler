@@ -93,11 +93,13 @@ public class CallCommandExpressionEvaluator : ICallCommandExpressionEvaluator
             return false;
         }
 
-        return ValidateCommandArgumentType( visitor, commandSymbol, callArgs, symbolArgs );
+        return ValidateCommandArgumentType( visitor, expr, commandSymbol, callArgs, symbolArgs );
     }
 
-    private bool ValidateCommandArgumentType( IAstVisitor visitor, CommandSymbol commandSymbol, IReadOnlyList<AstExpressionNode> callArgs, IReadOnlyList<CommandArgumentSymbol> symbolArgs )
+    private bool ValidateCommandArgumentType( IAstVisitor visitor, AstCallCommandExpressionNode expr, CommandSymbol commandSymbol, IReadOnlyList<AstExpressionNode> callArgs, IReadOnlyList<CommandArgumentSymbol> symbolArgs )
     {
+        var evaluatedArgs = new List<AstExpressionNode>();
+
         for( var i = 0; i < callArgs.Count; i++ )
         {
             var symbolArg = symbolArgs[ i ];
@@ -107,6 +109,8 @@ public class CallCommandExpressionEvaluator : ICallCommandExpressionEvaluator
             {
                 throw new AstAnalyzeException( callArg, "Failed to evaluate command argument" );
             }
+
+            evaluatedArgs.Add( evaluatedArg );
 
             // プリミティブ型の型評価
             if( TypeCompatibility.IsTypeCompatible( evaluatedArg.TypeFlag, symbolArg.DataType ) )
@@ -153,7 +157,21 @@ public class CallCommandExpressionEvaluator : ICallCommandExpressionEvaluator
             return false;
         }
 
+        // 引数が畳み込みでリテラルになっていれば引数の式を置き換える
+        ReplaceConvolutedCommandArguments( expr, callArgs, evaluatedArgs );
+
         return true;
+    }
+
+    private static void ReplaceConvolutedCommandArguments( AstCallCommandExpressionNode expr, IReadOnlyList<AstExpressionNode> callArgs, IReadOnlyList<AstExpressionNode> evaluatedArgs )
+    {
+        for( var i = 0; i < callArgs.Count; i++ )
+        {
+            if( callArgs[ i ].IsLiteralNode() )
+            {
+                (expr.Right as AstExpressionListNode)?.Expressions.Put( i, evaluatedArgs[ i ] );
+            }
+        }
     }
 
     private bool ValidateCommandArgumentState( AstCallCommandExpressionNode expr, IReadOnlyList<AstExpressionNode> callArgs )
