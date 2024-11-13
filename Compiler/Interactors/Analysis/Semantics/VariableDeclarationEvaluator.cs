@@ -440,6 +440,9 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         // シンボル情報に配列サイズを反映
         variable.ArraySize = arraySize.Value;
 
+        // 配列サイズが畳み込みされた値を式から置き換える
+        initializer.Size = arraySize;
+
         return true;
 
     }
@@ -447,7 +450,6 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
     private bool ValidateArrayElements( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable, AstArrayInitializerNode initializer )
     {
         var result = true;
-        var i = -1;
 
         // 初期値代入なし
         if( initializer.Initializer.IsNull() )
@@ -456,9 +458,10 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         }
 
         // 初期値リストの型チェック
-        foreach( var expr in initializer.Initializer.Expressions )
+        //foreach( var expr in initializer.Initializer.Expressions )
+        for( var i = 0; i < initializer.Initializer.Expressions.Count; i++ )
         {
-            i++;
+            var expr = initializer.Initializer.Expressions[ i ];
 
             if( expr.Accept( visitor ) is not AstExpressionNode evaluated )
             {
@@ -481,20 +484,26 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             }
 
             // 型の一致チェック
-            if( TypeCompatibility.IsAssigningTypeCompatible( variable.DataType.TypeMasked(), evaluated.TypeFlag ) )
+            if( !TypeCompatibility.IsAssigningTypeCompatible( variable.DataType.TypeMasked(), evaluated.TypeFlag ) )
             {
+                result = false;
+
+                CompilerMessageManger.Error(
+                    node,
+                    CompilerMessageResources.semantic_error_declare_variable_arrayinitilizer_incompatible,
+                    variable.Name,
+                    i,
+                    evaluated.TypeFlag.ToMessageString()
+                );
+
                 continue;
             }
 
-            result = false;
-
-            CompilerMessageManger.Error(
-                node,
-                CompilerMessageResources.semantic_error_declare_variable_arrayinitilizer_incompatible,
-                variable.Name,
-                i,
-                evaluated.TypeFlag.ToMessageString()
-            );
+            // 値が畳み込みされた値（リテラル値）であれば、要素の式をその値に置き換える
+            if( evaluated.IsLiteralNode() )
+            {
+                initializer.Initializer.Expressions[ i ] = evaluated;
+            }
         }
 
         return result;
