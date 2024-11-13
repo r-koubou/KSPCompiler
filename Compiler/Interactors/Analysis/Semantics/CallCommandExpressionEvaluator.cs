@@ -165,12 +165,9 @@ public class CallCommandExpressionEvaluator : ICallCommandExpressionEvaluator
 
     private static void ReplaceConvolutedCommandArguments( AstCallCommandExpressionNode expr, IReadOnlyList<AstExpressionNode> evaluatedArgs )
     {
-        for( var i = 0; i < evaluatedArgs.Count; i++ )
+        if( expr.Right is AstExpressionListNode args )
         {
-            if( evaluatedArgs[ i ].IsLiteralNode() )
-            {
-                (expr.Right as AstExpressionListNode)?.Expressions.Put( i, evaluatedArgs[ i ] );
-            }
+            args.ReplaceConvolutedExpressions( evaluatedArgs, args );
         }
     }
 
