@@ -76,6 +76,12 @@ namespace KSPCompiler.Domain.Ast.Nodes
             }
         }
 
+        public void Put( int index, TNode node )
+        {
+            nodeList[ index ] = node;
+            node.Parent = this.Parent;
+        }
+
         public void Clear()
         {
             foreach( var n in Nodes )

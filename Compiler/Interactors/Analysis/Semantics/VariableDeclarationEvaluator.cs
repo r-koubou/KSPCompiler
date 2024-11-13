@@ -11,6 +11,7 @@ using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations;
 using KSPCompiler.Interactors.Analysis.Commons.Extensions;
+using KSPCompiler.Interactors.Analysis.Semantics.Extensions;
 using KSPCompiler.Resources;
 using KSPCompiler.UseCases.Analysis.Evaluations.Declarations;
 
@@ -313,20 +314,25 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         }
 
         // 型の一致チェック
-        if( TypeCompatibility.IsAssigningTypeCompatible( variable.DataType, evaluated.TypeFlag ) )
+        if( !TypeCompatibility.IsAssigningTypeCompatible( variable.DataType, evaluated.TypeFlag ) )
         {
-            return true;
+            CompilerMessageManger.Error(
+                node,
+                CompilerMessageResources.semantic_error_assign_type_compatible,
+                variable.DataType.ToMessageString(),
+                evaluated.TypeFlag.ToMessageString()
+            );
+
+            return false;
         }
 
-        CompilerMessageManger.Error(
-            node,
-            CompilerMessageResources.semantic_error_assign_type_compatible,
-            variable.DataType.ToMessageString(),
-            evaluated.TypeFlag.ToMessageString()
-        );
+        // 代入値が畳み込みされた値（リテラル値）であれば、右項をその値に置き換える
+        if( evaluated.IsLiteralNode() )
+        {
+            initializer.Expression = evaluated;
+        }
 
-        return false;
-
+        return true;
     }
 
     #endregion ~Primitive Initializer
@@ -434,6 +440,9 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         // シンボル情報に配列サイズを反映
         variable.ArraySize = arraySize.Value;
 
+        // 配列サイズが畳み込みされた値を式から置き換える
+        initializer.Size = arraySize;
+
         return true;
 
     }
@@ -441,7 +450,6 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
     private bool ValidateArrayElements( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable, AstArrayInitializerNode initializer )
     {
         var result = true;
-        var i = -1;
 
         // 初期値代入なし
         if( initializer.Initializer.IsNull() )
@@ -450,9 +458,10 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         }
 
         // 初期値リストの型チェック
-        foreach( var expr in initializer.Initializer.Expressions )
+        //foreach( var expr in initializer.Initializer.Expressions )
+        for( var i = 0; i < initializer.Initializer.Expressions.Count; i++ )
         {
-            i++;
+            var expr = initializer.Initializer.Expressions[ i ];
 
             if( expr.Accept( visitor ) is not AstExpressionNode evaluated )
             {
@@ -475,20 +484,26 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             }
 
             // 型の一致チェック
-            if( TypeCompatibility.IsAssigningTypeCompatible( variable.DataType.TypeMasked(), evaluated.TypeFlag ) )
+            if( !TypeCompatibility.IsAssigningTypeCompatible( variable.DataType.TypeMasked(), evaluated.TypeFlag ) )
             {
+                result = false;
+
+                CompilerMessageManger.Error(
+                    node,
+                    CompilerMessageResources.semantic_error_declare_variable_arrayinitilizer_incompatible,
+                    variable.Name,
+                    i,
+                    evaluated.TypeFlag.ToMessageString()
+                );
+
                 continue;
             }
 
-            result = false;
-
-            CompilerMessageManger.Error(
-                node,
-                CompilerMessageResources.semantic_error_declare_variable_arrayinitilizer_incompatible,
-                variable.Name,
-                i,
-                evaluated.TypeFlag.ToMessageString()
-            );
+            // 値が畳み込みされた値（リテラル値）であれば、要素の式をその値に置き換える
+            if( evaluated.IsLiteralNode() )
+            {
+                initializer.Initializer.Expressions[ i ] = evaluated;
+            }
         }
 
         return result;
@@ -577,20 +592,25 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             var requiredType = uiType.InitializerArguments[ i ].DataType;
 
             // 型の一致チェック
-            if( TypeCompatibility.IsTypeCompatible( evaluated.TypeFlag, requiredType ) )
+            if( !TypeCompatibility.IsTypeCompatible( evaluated.TypeFlag, requiredType ) )
             {
-                continue;
+
+                CompilerMessageManger.Error(
+                    node,
+                    CompilerMessageResources.semantic_error_declare_variable_uiinitializer_incompatible,
+                    node.Name,
+                    i + 1, // 1 origin
+                    evaluated.TypeFlag.ToMessageString()
+                );
+
+                return false;
             }
 
-            CompilerMessageManger.Error(
-                node,
-                CompilerMessageResources.semantic_error_declare_variable_uiinitializer_incompatible,
-                node.Name,
-                i + 1, // 1 origin
-                evaluated.TypeFlag.ToMessageString()
-            );
-
-            return false;
+            // 引数が畳み込みでリテラルになっていれば引数の式を置き換える
+            if( evaluated.IsLiteralNode() )
+            {
+                expressionList.Expressions[ i ] = evaluated;
+            }
         }
 
         return true;
