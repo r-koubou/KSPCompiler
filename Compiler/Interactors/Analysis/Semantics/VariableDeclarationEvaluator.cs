@@ -592,20 +592,25 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             var requiredType = uiType.InitializerArguments[ i ].DataType;
 
             // 型の一致チェック
-            if( TypeCompatibility.IsTypeCompatible( evaluated.TypeFlag, requiredType ) )
+            if( !TypeCompatibility.IsTypeCompatible( evaluated.TypeFlag, requiredType ) )
             {
-                continue;
+
+                CompilerMessageManger.Error(
+                    node,
+                    CompilerMessageResources.semantic_error_declare_variable_uiinitializer_incompatible,
+                    node.Name,
+                    i + 1, // 1 origin
+                    evaluated.TypeFlag.ToMessageString()
+                );
+
+                return false;
             }
 
-            CompilerMessageManger.Error(
-                node,
-                CompilerMessageResources.semantic_error_declare_variable_uiinitializer_incompatible,
-                node.Name,
-                i + 1, // 1 origin
-                evaluated.TypeFlag.ToMessageString()
-            );
-
-            return false;
+            // 引数が畳み込みでリテラルになっていれば引数の式を置き換える
+            if( evaluated.IsLiteralNode() )
+            {
+                expressionList.Expressions[ i ] = evaluated;
+            }
         }
 
         return true;
