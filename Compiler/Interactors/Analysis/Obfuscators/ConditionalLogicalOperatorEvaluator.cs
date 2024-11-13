@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 
 using KSPCompiler.Domain.Ast.Nodes;
@@ -21,7 +22,8 @@ public class ConditionalLogicalOperatorEvaluator : IConditionalLogicalOperatorEv
         {
             AstNodeId.LogicalOr  => OutputBuilder.AppendBinaryOperator( visitor, "or",  expr.Left, expr.Right ),
             AstNodeId.LogicalAnd => OutputBuilder.AppendBinaryOperator( visitor, "and", expr.Left, expr.Right ),
-            AstNodeId.LogicalXor => OutputBuilder.AppendBinaryOperator( visitor, "xor", expr.Left, expr.Right )
+            AstNodeId.LogicalXor => OutputBuilder.AppendBinaryOperator( visitor, "xor", expr.Left, expr.Right ),
+            _                    => throw new ArgumentException( $"Invalid logical operator: {expr.Id}" )
         };
 
         return expr;
