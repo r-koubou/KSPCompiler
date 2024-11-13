@@ -6,6 +6,7 @@ using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations;
 using KSPCompiler.Interactors.Analysis.Commons.Extensions;
+using KSPCompiler.Interactors.Analysis.Semantics.Extensions;
 using KSPCompiler.Resources;
 using KSPCompiler.UseCases.Analysis.Evaluations.Operators;
 
@@ -98,6 +99,12 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
             {
                 variable.State = SymbolState.Loaded;
             }
+        }
+
+        // 代入値が畳み込みされた値（リテラル値）であれば、右項をその値に置き換える
+        if( evaluatedRight.IsLiteralNode() )
+        {
+            expr.Right = evaluatedRight;
         }
 
         return CreateEvaluateNode( evaluatedLeft, evaluatedLeft.TypeFlag );
