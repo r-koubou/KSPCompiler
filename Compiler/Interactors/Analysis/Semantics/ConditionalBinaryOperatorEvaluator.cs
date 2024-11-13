@@ -5,6 +5,7 @@ using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations;
 using KSPCompiler.Interactors.Analysis.Commons.Extensions;
+using KSPCompiler.Interactors.Analysis.Semantics.Extensions;
 using KSPCompiler.Resources;
 using KSPCompiler.UseCases.Analysis.Evaluations.Operators;
 
@@ -57,7 +58,21 @@ public class ConditionalBinaryOperatorEvaluator : IConditionalBinaryOperatorEval
                 rightType.ToMessageString()
             );
 
-            // 上位のノードで評価を継続させるので代替のノードは生成しない
+            // 互換性がない場合は代替のノードを返す
+            var alt = expr.Clone<AstExpressionNode>();
+            alt.TypeFlag = DataTypeFlag.TypeBool;
+
+            return alt;
+        }
+
+        // 値が畳み込みされた値（リテラル値）であれば、式ノードをリテラルに置き換える
+        if( evaluatedLeft.IsLiteralNode() )
+        {
+            expr.Left = evaluatedLeft;
+        }
+        if( evaluatedRight.IsLiteralNode() )
+        {
+            expr.Right = evaluatedRight;
         }
 
         var result = expr.Clone<AstExpressionNode>();

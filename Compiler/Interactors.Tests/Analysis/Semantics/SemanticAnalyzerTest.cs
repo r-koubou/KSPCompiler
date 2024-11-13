@@ -213,4 +213,40 @@ public class SemanticAnalyzerTest
         Assert.AreEqual( true, statement.Initializer.PrimitiveInitializer.Expression is AstIntLiteralNode );
         Assert.AreEqual( 6,    ( statement.Initializer.PrimitiveInitializer.Expression as AstIntLiteralNode )?.Value );
     }
+
+    [Test]
+    public void ConditionalBinaryOperatorNodeWillBeReplacedIntLiteralNode()
+    {
+        // 1 + 2 + 3 = 1 + 2 + 3
+        // => 6 = 6  { replaced via convolution }
+
+        var context = CreateContext();
+        var semanticAnalyzer = new SemanticAnalyzer( context );
+
+        var expr = new AstEqualExpressionNode{
+            Left = new AstAdditionExpressionNode(
+                new AstAdditionExpressionNode(
+                    new AstIntLiteralNode( 1 ),
+                    new AstIntLiteralNode( 2 )
+                ),
+                new AstIntLiteralNode( 3 )
+            ),
+            Right = new AstAdditionExpressionNode(
+                new AstAdditionExpressionNode(
+                    new AstIntLiteralNode( 1 ),
+                    new AstIntLiteralNode( 2 )
+                ),
+                new AstIntLiteralNode( 3 )
+            )
+        };
+
+        context.ExpressionContext.ConditionalBinaryOperator.Evaluate( semanticAnalyzer, expr );
+        context.CompilerMessageManger.WriteTo( Console.Out );
+
+        Assert.AreEqual( 0,    context.CompilerMessageManger.Count() );
+        Assert.AreEqual( true, expr.Left is AstIntLiteralNode );
+        Assert.AreEqual( 6,    ( expr.Left as AstIntLiteralNode )?.Value );
+        Assert.AreEqual( true, expr.Right is AstIntLiteralNode );
+        Assert.AreEqual( 6,    ( expr.Right as AstIntLiteralNode )?.Value );
+    }
 }
