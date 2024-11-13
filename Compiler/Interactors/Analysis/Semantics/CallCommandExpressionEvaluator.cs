@@ -158,16 +158,16 @@ public class CallCommandExpressionEvaluator : ICallCommandExpressionEvaluator
         }
 
         // 引数が畳み込みでリテラルになっていれば引数の式を置き換える
-        ReplaceConvolutedCommandArguments( expr, callArgs, evaluatedArgs );
+        ReplaceConvolutedCommandArguments( expr, evaluatedArgs );
 
         return true;
     }
 
-    private static void ReplaceConvolutedCommandArguments( AstCallCommandExpressionNode expr, IReadOnlyList<AstExpressionNode> callArgs, IReadOnlyList<AstExpressionNode> evaluatedArgs )
+    private static void ReplaceConvolutedCommandArguments( AstCallCommandExpressionNode expr, IReadOnlyList<AstExpressionNode> evaluatedArgs )
     {
-        for( var i = 0; i < callArgs.Count; i++ )
+        for( var i = 0; i < evaluatedArgs.Count; i++ )
         {
-            if( callArgs[ i ].IsLiteralNode() )
+            if( evaluatedArgs[ i ].IsLiteralNode() )
             {
                 (expr.Right as AstExpressionListNode)?.Expressions.Put( i, evaluatedArgs[ i ] );
             }
