@@ -11,6 +11,7 @@ using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations;
 using KSPCompiler.Interactors.Analysis.Commons.Extensions;
+using KSPCompiler.Interactors.Analysis.Semantics.Extensions;
 using KSPCompiler.Resources;
 using KSPCompiler.UseCases.Analysis.Evaluations.Declarations;
 
@@ -313,20 +314,25 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         }
 
         // 型の一致チェック
-        if( TypeCompatibility.IsAssigningTypeCompatible( variable.DataType, evaluated.TypeFlag ) )
+        if( !TypeCompatibility.IsAssigningTypeCompatible( variable.DataType, evaluated.TypeFlag ) )
         {
-            return true;
+            CompilerMessageManger.Error(
+                node,
+                CompilerMessageResources.semantic_error_assign_type_compatible,
+                variable.DataType.ToMessageString(),
+                evaluated.TypeFlag.ToMessageString()
+            );
+
+            return false;
         }
 
-        CompilerMessageManger.Error(
-            node,
-            CompilerMessageResources.semantic_error_assign_type_compatible,
-            variable.DataType.ToMessageString(),
-            evaluated.TypeFlag.ToMessageString()
-        );
+        // 代入値が畳み込みされた値（リテラル値）であれば、右項をその値に置き換える
+        if( evaluated.IsLiteralNode() )
+        {
+            initializer.Expression = evaluated;
+        }
 
-        return false;
-
+        return true;
     }
 
     #endregion ~Primitive Initializer

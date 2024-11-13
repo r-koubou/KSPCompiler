@@ -1,6 +1,8 @@
 using System;
 
+using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
@@ -160,5 +162,55 @@ public class SemanticAnalyzerTest
         Assert.IsNotNull( args );
         Assert.AreEqual( true, args?.Expressions[0] is AstIntLiteralNode );
         Assert.AreEqual( 6,    ( args?.Expressions[ 0 ] as AstIntLiteralNode )?.Value );
+    }
+
+    [Test]
+    public void DeclarationWillBeReplacedIntLiteralNode()
+    {
+        // on init
+        //     declare $x := 1 + 2 + 3
+        //      => declare $x := 6  { replaced via convolution }
+        // end on
+
+
+        var context = CreateContext();
+        var semanticAnalyzer = new SemanticAnalyzer( context );
+
+        var init = new AstCallbackDeclarationNode
+        {
+            Name = "init"
+        };
+
+        var statement = new AstVariableDeclarationNode
+        {
+            Name = "$x",
+        };
+
+        var initializer = new AstAdditionExpressionNode(
+            statement,
+            new AstAdditionExpressionNode(
+                new AstIntLiteralNode( 1 ),
+                new AstIntLiteralNode( 2 )
+            ),
+            new AstIntLiteralNode( 3 )
+        );
+
+        statement.Initializer = new AstVariableInitializerNode
+        {
+            PrimitiveInitializer = new AstPrimitiveInitializerNode
+            {
+                Expression = initializer
+            }
+        };
+
+        statement.Parent = init;
+        init.Block.Statements.Add( statement );
+
+        context.DeclarationContext.Variable.Evaluate( semanticAnalyzer, statement );
+        context.CompilerMessageManger.WriteTo( Console.Out );
+
+        Assert.AreEqual( 0,    context.CompilerMessageManger.Count() );
+        Assert.AreEqual( true, statement.Initializer.PrimitiveInitializer.Expression is AstIntLiteralNode );
+        Assert.AreEqual( 6,    ( statement.Initializer.PrimitiveInitializer.Expression as AstIntLiteralNode )?.Value );
     }
 }
