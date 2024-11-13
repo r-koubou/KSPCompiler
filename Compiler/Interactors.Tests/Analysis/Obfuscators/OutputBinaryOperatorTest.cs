@@ -2,8 +2,8 @@ using System;
 using System.Text;
 
 using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Interactors.Analysis.Obfuscators.Extensions;
-using KSPCompiler.UseCases.Analysis.Evaluations.Operators;
+using KSPCompiler.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Interactors.Analysis.Obfuscators;
 
 using NUnit.Framework;
 
@@ -12,29 +12,49 @@ namespace KSPCompiler.Interactors.Tests.Analysis.Obfuscators;
 [TestFixture]
 public class OutputBinaryOperatorTest
 {
-}
-
-public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
-{
-    private StringBuilder OutputBuilder { get; }
-
-    public NumericBinaryOperatorEvaluator( StringBuilder outputBuilder )
+    private static void TestBody<TOprNode>( string expected, Action<IAstVisitor, TOprNode> visit ) where TOprNode : AstExpressionNode, new()
     {
-        OutputBuilder               = outputBuilder;
+        var output = new StringBuilder();
+        var evaluator = new NumericBinaryOperatorEvaluator( output );
+        var visitor = new MockBinaryOperatorVisitor();
+        var expr = new TOprNode();
+
+        visitor.Inject( evaluator );
+        visit( visitor, expr );
+
+        Assert.AreEqual( expected, output.ToString() );
     }
 
-    public IAstNode Evaluate( IAstVisitor visitor, AstExpressionNode expr )
-    {
-        _ = expr.Id switch
-        {
-            AstNodeId.Addition    => OutputBuilder.AppendBinaryOperator( visitor, "+", expr.Left, expr.Right ),
-            AstNodeId.Subtraction => OutputBuilder.AppendBinaryOperator( visitor, "-", expr.Left, expr.Right ),
-            AstNodeId.Multiplying => OutputBuilder.AppendBinaryOperator( visitor, "*", expr.Left, expr.Right ),
-            AstNodeId.Division    => OutputBuilder.AppendBinaryOperator( visitor, "/", expr.Left, expr.Right ),
-            AstNodeId.Modulo      => OutputBuilder.AppendBinaryOperator( visitor, "mod", expr.Left, expr.Right ),
-            _                     => throw new ArgumentException( $"Invalid binary operator: {expr.Id}" )
-        };
+    [Test]
+    public void AddTest()
+        => TestBody<AstAdditionExpressionNode>( " + ", ( visitor, expr ) => visitor.Visit( expr ) );
 
-        return expr;
-    }
+    [Test]
+    public void SubTest()
+        => TestBody<AstSubtractionExpressionNode>( " - ", ( visitor, expr ) => visitor.Visit( expr ) );
+
+    [Test]
+    public void MulTest()
+        => TestBody<AstMultiplyingExpressionNode>( " * ", ( visitor, expr ) => visitor.Visit( expr ) );
+
+    [Test]
+    public void DivTest()
+        => TestBody<AstDivisionExpressionNode>( " / ", ( visitor, expr ) => visitor.Visit( expr ) );
+
+    [Test]
+    public void ModTest()
+        => TestBody<AstModuloExpressionNode>( " mod ", ( visitor, expr ) => visitor.Visit( expr ) );
+
+
+    [Test]
+    public void BitwiseOrTest()
+        => TestBody<AstBitwiseOrExpressionNode>( " .or. ", ( visitor, expr ) => visitor.Visit( expr ) );
+
+    [Test]
+    public void BitwiseAndTest()
+        => TestBody<AstBitwiseAndExpressionNode>( " .and. ", ( visitor, expr ) => visitor.Visit( expr ) );
+
+    [Test]
+    public void BitwiseXorTest()
+        => TestBody<AstBitwiseXorExpressionNode>( " .xor. ", ( visitor, expr ) => visitor.Visit( expr ) );
 }
