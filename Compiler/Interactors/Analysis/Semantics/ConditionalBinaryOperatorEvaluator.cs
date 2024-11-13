@@ -49,6 +49,9 @@ public class ConditionalBinaryOperatorEvaluator : IConditionalBinaryOperatorEval
         var leftType = evaluatedLeft.TypeFlag;
         var rightType = evaluatedRight.TypeFlag;
 
+        var result = expr.Clone<AstExpressionNode>();
+        result.TypeFlag = DataTypeFlag.TypeBool;
+
         if( leftType != rightType )
         {
             CompilerMessageManger.Error(
@@ -58,11 +61,7 @@ public class ConditionalBinaryOperatorEvaluator : IConditionalBinaryOperatorEval
                 rightType.ToMessageString()
             );
 
-            // 互換性がない場合は代替のノードを返す
-            var alt = expr.Clone<AstExpressionNode>();
-            alt.TypeFlag = DataTypeFlag.TypeBool;
-
-            return alt;
+            return result;
         }
 
         // 値が畳み込みされた値（リテラル値）であれば、式ノードをリテラルに置き換える
@@ -74,9 +73,6 @@ public class ConditionalBinaryOperatorEvaluator : IConditionalBinaryOperatorEval
         {
             expr.Right = evaluatedRight;
         }
-
-        var result = expr.Clone<AstExpressionNode>();
-        result.TypeFlag = DataTypeFlag.TypeBool;
 
         return result;
     }
