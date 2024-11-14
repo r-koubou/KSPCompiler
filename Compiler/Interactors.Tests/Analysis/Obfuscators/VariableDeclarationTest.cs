@@ -7,6 +7,7 @@ using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Extensions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.UseCases.Analysis.Evaluations.Declarations;
 
@@ -110,6 +111,50 @@ public class VariableDeclarationTest
         Assert.AreEqual( expected, output.ToString() );
     }
 
+    [Test]
+    public void ArrayInitializerTest()
+    {
+        // declare %v0[3] := (1, 2, 3)
+
+        const string variableName = "%x";
+        const string obfuscatedName = "%v0";
+        const string expected = $"declare {obfuscatedName}[3] := (1, 2, 3)";
+
+        var output = new StringBuilder();
+        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+
+        var variable = MockUtility.CreateVariable( variableName, DataTypeFlag.TypeIntArray );
+
+        symbolTable.Variables.Add( variable );
+
+        var obfuscatedTable = new ObfuscatedVariableTable( symbolTable.Variables, "v" );
+
+        var initializer = new AstArrayInitializerNode
+        {
+            Size = new AstIntLiteralNode( 3 )
+        };
+        initializer.Initializer.Expressions.Add( new AstIntLiteralNode( 1 ) );
+        initializer.Initializer.Expressions.Add( new AstIntLiteralNode( 2 ) );
+        initializer.Initializer.Expressions.Add( new AstIntLiteralNode( 3 ) );
+
+        var node = new AstVariableDeclarationNode
+        {
+            Name = variableName,
+            Initializer = new AstVariableInitializerNode
+            {
+                ArrayInitializer = initializer
+            }
+        };
+
+        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.Variables, symbolTable.UITypes, obfuscatedTable );
+        var visitor = new MockVariableDeclarationVisitor( output );
+
+        visitor.Inject( evaluator );
+        visitor.Visit( node );
+
+        Assert.AreEqual( expected, output.ToString() );
+    }
+
 }
 
 public class MockVariableDeclarationVisitor : DefaultAstVisitor
@@ -199,7 +244,6 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         }
         else if( variable.DataType.IsArray() )
         {
-            throw new NotImplementedException();
             OutputArrayInitializer( visitor, node, variable );
             return;
         }
@@ -212,7 +256,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
     private void OutputPrimitiveInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
     {
         OutputBuilder.Append( " := " );
-        visitor.Visit( node.Initializer.PrimitiveInitializer );
+        node.Initializer.PrimitiveInitializer.Accept( visitor );
     }
 
     #endregion ~Primitive Initializer
@@ -221,13 +265,37 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
     #region Array Initializer
 
     private void OutputArrayInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
-    {}
+    {
+        OutputArraySize( visitor, node, node.Initializer.ArrayInitializer, variable );
+        OutputArrayElements( visitor, node, node.Initializer.ArrayInitializer, variable );
+    }
 
     private void OutputArraySize( IAstVisitor visitor, AstVariableDeclarationNode node, AstArrayInitializerNode initializer, VariableSymbol variable )
-    {}
+    {
+        OutputBuilder.Append( '[' );
+        initializer.Size.Accept( visitor );
+        OutputBuilder.Append( ']' );
+    }
 
-    private void OutputArrayElements( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable, AstArrayInitializerNode initializer )
-    {}
+    private void OutputArrayElements( IAstVisitor visitor, AstVariableDeclarationNode node, AstArrayInitializerNode initializer, VariableSymbol variable )
+    {
+        var expressions = initializer.Initializer.Expressions;
+
+        OutputBuilder.Append( " := " );
+        OutputBuilder.Append( '(' );
+
+        for( var i = 0; i < expressions.Count; i++ )
+        {
+            expressions[ i ].Accept( visitor );
+
+            if( i < expressions.Count - 1 )
+            {
+                OutputBuilder.Append( ", " );
+            }
+        }
+
+        OutputBuilder.Append( ')' );
+    }
 
     #endregion ~Array Initializer
 
