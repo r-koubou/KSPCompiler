@@ -384,16 +384,16 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         }
         else if( variable.DataType.IsArray() )
         {
-            OutputArrayInitializer( visitor, node, variable );
+            OutputArrayInitializer( visitor, node );
             return;
         }
 
-        OutputPrimitiveInitializer( visitor, node, variable );
+        OutputPrimitiveInitializer( visitor, node );
     }
 
     #region Primitive Initializer
 
-    private void OutputPrimitiveInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
+    private void OutputPrimitiveInitializer( IAstVisitor visitor, AstVariableDeclarationNode node )
     {
         OutputBuilder.Append( " := " );
         node.Initializer.PrimitiveInitializer.Accept( visitor );
@@ -404,20 +404,20 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
     #region Array Initializer
 
-    private void OutputArrayInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
+    private void OutputArrayInitializer( IAstVisitor visitor, AstVariableDeclarationNode node )
     {
-        OutputArraySize( visitor, node, node.Initializer.ArrayInitializer, variable );
-        OutputArrayElements( visitor, node, node.Initializer.ArrayInitializer, variable );
+        OutputArraySize( visitor, node.Initializer.ArrayInitializer );
+        OutputArrayElements( visitor, node.Initializer.ArrayInitializer );
     }
 
-    private void OutputArraySize( IAstVisitor visitor, AstVariableDeclarationNode node, AstArrayInitializerNode initializer, VariableSymbol variable )
+    private void OutputArraySize( IAstVisitor visitor, AstArrayInitializerNode initializer )
     {
         OutputBuilder.Append( '[' );
         initializer.Size.Accept( visitor );
         OutputBuilder.Append( ']' );
     }
 
-    private void OutputArrayElements( IAstVisitor visitor, AstVariableDeclarationNode node, AstArrayInitializerNode initializer, VariableSymbol variable )
+    private void OutputArrayElements( IAstVisitor visitor, AstArrayInitializerNode initializer )
     {
         OutputBuilder.Append( " := " );
         OutputBuilder.Append( '(' );
@@ -435,26 +435,26 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
     {
         if( variable.DataType.IsArray() )
         {
-            OutputArrayBasedUIInitializer( visitor, node, node.Initializer.ArrayInitializer, variable );
+            OutputArrayBasedUIInitializer( visitor, node );
         }
         else
         {
-            OutputPrimitiveBasedUIInitializer( visitor, node, node.Initializer.PrimitiveInitializer.UIInitializer, variable );
+            OutputPrimitiveBasedUIInitializer( visitor, node.Initializer.PrimitiveInitializer.UIInitializer );
         }
     }
 
-    private void OutputArrayBasedUIInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, AstArrayInitializerNode initializer, VariableSymbol variable )
+    private void OutputArrayBasedUIInitializer( IAstVisitor visitor, AstVariableDeclarationNode node )
     {
-        OutputArraySize( visitor, node, initializer, variable );
-        OutputUIArguments( visitor, node, node.Initializer.PrimitiveInitializer.UIInitializer, variable.UIType );
+        OutputArraySize( visitor, node.Initializer.ArrayInitializer );
+        OutputUIArguments( visitor, node.Initializer.PrimitiveInitializer.UIInitializer );
     }
 
-    private void OutputPrimitiveBasedUIInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, AstExpressionListNode initializer, VariableSymbol variable )
+    private void OutputPrimitiveBasedUIInitializer( IAstVisitor visitor, AstExpressionListNode initializer )
     {
-        OutputUIArguments( visitor, node, initializer, variable.UIType );
+        OutputUIArguments( visitor, initializer );
     }
 
-    private void OutputUIArguments( IAstVisitor visitor, AstVariableDeclarationNode node, AstExpressionListNode expressionList, UITypeSymbol uiType )
+    private void OutputUIArguments( IAstVisitor visitor, AstExpressionListNode expressionList )
     {
         OutputBuilder.Append( " := " );
         OutputBuilder.Append( '(' );
