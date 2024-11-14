@@ -17,11 +17,110 @@ namespace KSPCompiler.Interactors.Tests.Analysis.Obfuscators;
 [TestFixture]
 public class VariableDeclarationTest
 {
+    [Test]
+    public void Test()
+    {
+        const string variableName = "$x";
+        const string obfuscatedName = "$v0";
+
+        var output = new StringBuilder();
+        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+
+        symbolTable.Variables.Add( MockUtility.CreateIntVariable( variableName ) );
+
+        var obfuscatedTable = new ObfuscatedVariableTable( symbolTable.Variables, "v" );
+
+        var node = new AstVariableDeclarationNode
+        {
+            Name = variableName
+        };
+
+        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.Variables, symbolTable.UITypes, obfuscatedTable );
+        var visitor = new MockVariableDeclarationVisitor( output );
+
+        visitor.Inject( evaluator );
+        visitor.Visit( node );
+
+        Assert.AreEqual( $"declare {obfuscatedName}", output.ToString() );
+    }
+
+    [Test]
+    public void CannotObfuscateToBuiltInVariableTest()
+    {
+        const string variableName = "$ENGINE_PAR_TEST";
+
+        var output = new StringBuilder();
+        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+
+        var variable = MockUtility.CreateIntVariable( variableName );
+        variable.BuiltIn = true;
+
+        symbolTable.Variables.Add( variable );
+
+        var obfuscatedTable = new ObfuscatedVariableTable( symbolTable.Variables, "v" );
+
+        var node = new AstVariableDeclarationNode
+        {
+            Name = variableName
+        };
+
+        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.Variables, symbolTable.UITypes, obfuscatedTable );
+        var visitor = new MockVariableDeclarationVisitor( output );
+
+        visitor.Inject( evaluator );
+        visitor.Visit( node );
+
+        Assert.AreEqual( $"declare {variableName}", output.ToString() );
+    }
+
+    [Test]
+    public void PrimitiveInitializerTest()
+    {
+        // declare $v0 := 1
+
+        const string variableName = "$x";
+        const string obfuscatedName = "$v0";
+        const string expected = $"declare {obfuscatedName} := 1";
+
+        var output = new StringBuilder();
+        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+
+        symbolTable.Variables.Add( MockUtility.CreateIntVariable( variableName ) );
+
+        var obfuscatedTable = new ObfuscatedVariableTable( symbolTable.Variables, "v" );
+
+        var node = new AstVariableDeclarationNode
+        {
+            Name = variableName,
+            Initializer = new AstVariableInitializerNode
+            {
+                PrimitiveInitializer = new AstPrimitiveInitializerNode
+                {
+                    Expression = new AstIntLiteralNode( 1 )
+                }
+            }
+        };
+
+        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.Variables, symbolTable.UITypes, obfuscatedTable );
+        var visitor = new MockVariableDeclarationVisitor( output );
+
+        visitor.Inject( evaluator );
+        visitor.Visit( node );
+
+        Assert.AreEqual( expected, output.ToString() );
+    }
+
 }
 
 public class MockVariableDeclarationVisitor : DefaultAstVisitor
 {
+    private StringBuilder OutputBuilder { get; }
     private IVariableDeclarationEvaluator Evaluator { get; set; } = new MockVariableDeclarationEvaluator();
+
+    public MockVariableDeclarationVisitor( StringBuilder outputBuilder )
+    {
+        OutputBuilder = outputBuilder;
+    }
 
     public void Inject( IVariableDeclarationEvaluator evaluator )
     {
@@ -31,10 +130,16 @@ public class MockVariableDeclarationVisitor : DefaultAstVisitor
     public override IAstNode Visit( AstVariableDeclarationNode node )
         => Evaluator.Evaluate( this, node );
 
+    public override IAstNode Visit( AstIntLiteralNode node )
+    {
+        OutputBuilder.Append( node.Value );
+        return node;
+    }
+
     private class MockVariableDeclarationEvaluator : IVariableDeclarationEvaluator
     {
         public IAstNode Evaluate( IAstVisitor visitor, AstVariableDeclarationNode node )
-            => throw new System.NotImplementedException();
+            => throw new NotImplementedException();
     }
 }
 
@@ -99,14 +204,16 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             return;
         }
 
-        throw new NotImplementedException();
         OutputPrimitiveInitializer( visitor, node, variable );
     }
 
     #region Primitive Initializer
 
     private void OutputPrimitiveInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
-    {}
+    {
+        OutputBuilder.Append( " := " );
+        visitor.Visit( node.Initializer.PrimitiveInitializer );
+    }
 
     #endregion ~Primitive Initializer
 
@@ -166,7 +273,7 @@ public sealed class DefaultObfuscateFormatter : IObfuscateFormatter
         => $"{prefix}{index.Value}";
 }
 
-public class ObfuscatedSymbolTable<TSymbol> : IObfuscatedTable<TSymbol> where TSymbol : SymbolBase
+abstract public class ObfuscatedSymbolTable<TSymbol> : IObfuscatedTable<TSymbol> where TSymbol : SymbolBase
 {
     // <original name, obfuscated name>
     private Dictionary<string, string> ObfuscatedTable { get; } = new();
@@ -175,10 +282,10 @@ public class ObfuscatedSymbolTable<TSymbol> : IObfuscatedTable<TSymbol> where TS
 
     private IObfuscateFormatter Formatter { get; }
 
-    public ObfuscatedSymbolTable( ISymbolTable<TSymbol> source, string prefix )
+    protected ObfuscatedSymbolTable( ISymbolTable<TSymbol> source, string prefix )
         : this( source, prefix, new DefaultObfuscateFormatter() ) {}
 
-    public ObfuscatedSymbolTable( ISymbolTable<TSymbol> source, string prefix, IObfuscateFormatter formatter )
+    protected ObfuscatedSymbolTable( ISymbolTable<TSymbol> source, string prefix, IObfuscateFormatter formatter )
     {
         Prefix    = prefix;
         Formatter = formatter;
@@ -198,6 +305,11 @@ public class ObfuscatedSymbolTable<TSymbol> : IObfuscatedTable<TSymbol> where TS
     private void Obfuscate( string name, TSymbol symbol, UniqueSymbolIndexGenerator generator )
     {
         var typePrefix = string.Empty;
+
+        if( symbol.BuiltIn )
+        {
+            return;
+        }
 
         if( KspRegExpConstants.TypePrefix.IsMatch( name ) )
         {
@@ -222,5 +334,14 @@ public class ObfuscatedSymbolTable<TSymbol> : IObfuscatedTable<TSymbol> where TS
     }
 
     public string GetObfuscatedByName( string original )
-        => ObfuscatedTable[ original ];
+        => !TryGetObfuscatedByName( original, out var result ) ? original : result;
+}
+
+public class ObfuscatedVariableTable : ObfuscatedSymbolTable<VariableSymbol>, IObfuscatedVariableTable
+{
+    public ObfuscatedVariableTable( IVariableSymbolTable source, string prefix )
+        : base( source, prefix ) {}
+
+    public ObfuscatedVariableTable( IVariableSymbolTable source, string prefix, IObfuscateFormatter formatter )
+        : base( source, prefix, formatter ) {}
 }
