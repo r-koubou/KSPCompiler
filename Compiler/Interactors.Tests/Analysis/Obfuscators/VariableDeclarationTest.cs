@@ -9,6 +9,7 @@ using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
+using KSPCompiler.Interactors.Analysis.Obfuscators.Extensions;
 using KSPCompiler.UseCases.Analysis.Evaluations.Declarations;
 
 using NUnit.Framework;
@@ -155,6 +156,55 @@ public class VariableDeclarationTest
         Assert.AreEqual( expected, output.ToString() );
     }
 
+    [Test]
+    public void UIInitializerTest()
+    {
+        // declare ui_label $v0(1, 2)
+
+        const string variableName = "$x";
+        const string obfuscatedName = "$v0";
+        const string expected = $"declare ui_label {obfuscatedName} := (1, 2)";
+
+        var output = new StringBuilder();
+        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+
+        var ui = MockUtility.CreateUILabel();
+        symbolTable.UITypes.Add( ui );
+
+        var variable = MockUtility.CreateVariable( variableName, DataTypeFlag.TypeInt );
+        variable.Modifier = ModifierFlag.UI;
+        variable.UIType   = ui;
+
+        symbolTable.Variables.Add( variable );
+
+        var obfuscatedTable = new ObfuscatedVariableTable( symbolTable.Variables, "v" );
+
+        var uiInitializer = new AstExpressionListNode();
+        uiInitializer.Expressions.Add( new AstIntLiteralNode( 1 ) );
+        uiInitializer.Expressions.Add( new AstIntLiteralNode( 2 ) );
+
+        var node = new AstVariableDeclarationNode
+        {
+            Name = variableName,
+            Initializer = new AstVariableInitializerNode
+            {
+                PrimitiveInitializer = new AstPrimitiveInitializerNode(
+                    NullAstNode.Instance,
+                    NullAstExpressionNode.Instance,
+                    uiInitializer
+                )
+            }
+        };
+
+        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.Variables, symbolTable.UITypes, obfuscatedTable );
+        var visitor = new MockVariableDeclarationVisitor( output );
+
+        visitor.Inject( evaluator );
+        visitor.Visit( node );
+
+        Assert.AreEqual( expected, output.ToString() );
+    }
+
 }
 
 public class MockVariableDeclarationVisitor : DefaultAstVisitor
@@ -224,6 +274,11 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             OutputBuilder.Append( $" {modifier}" );
         }
 
+        if( variable.UIType != UITypeSymbol.Null )
+        {
+            OutputBuilder.Append( $" {variable.UIType.Name}" );
+        }
+
         OutputBuilder.Append( $" {name}" );
 
         if( node.Initializer.IsNotNull() )
@@ -238,7 +293,6 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
     {
         if( variable.Modifier.IsUI() )
         {
-            throw new NotImplementedException();
             OutputUIInitializer( visitor, node, variable );
             return;
         }
@@ -279,20 +333,10 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
     private void OutputArrayElements( IAstVisitor visitor, AstVariableDeclarationNode node, AstArrayInitializerNode initializer, VariableSymbol variable )
     {
-        var expressions = initializer.Initializer.Expressions;
-
         OutputBuilder.Append( " := " );
         OutputBuilder.Append( '(' );
 
-        for( var i = 0; i < expressions.Count; i++ )
-        {
-            expressions[ i ].Accept( visitor );
-
-            if( i < expressions.Count - 1 )
-            {
-                OutputBuilder.Append( ", " );
-            }
-        }
+        OutputBuilder.AppendExpressionList( visitor, initializer.Initializer );
 
         OutputBuilder.Append( ')' );
     }
@@ -302,21 +346,40 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
     #region UI Initializer
 
     private void OutputUIInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
-    {}
+    {
+        if( variable.DataType.IsArray() )
+        {
+            OutputArrayBasedUIInitializer( visitor, node, node.Initializer.ArrayInitializer, variable );
+        }
+        else
+        {
+            OutputPrimitiveBasedUIInitializer( visitor, node, node.Initializer.PrimitiveInitializer.UIInitializer, variable );
+        }
+    }
 
     private void OutputArrayBasedUIInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, AstArrayInitializerNode initializer, VariableSymbol variable )
-    {}
+    {
+        OutputArraySize( visitor, node, initializer, variable );
+        OutputUIArguments( visitor, node, initializer.Initializer, variable.UIType );
+    }
 
     private void OutputPrimitiveBasedUIInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, AstExpressionListNode initializer, VariableSymbol variable )
-    {}
+    {
+        OutputUIArguments( visitor, node, initializer, variable.UIType );
+    }
 
     private void OutputUIArguments( IAstVisitor visitor, AstVariableDeclarationNode node, AstExpressionListNode expressionList, UITypeSymbol uiType )
-    {}
+    {
+        OutputBuilder.Append( " := " );
+        OutputBuilder.Append( '(' );
+
+        OutputBuilder.AppendExpressionList( visitor, expressionList );
+
+        OutputBuilder.Append( ')' );
+    }
 
     #endregion ~UI Initializer
-
 }
-
 
 
 
