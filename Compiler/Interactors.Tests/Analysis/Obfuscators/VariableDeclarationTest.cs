@@ -46,6 +46,38 @@ public class VariableDeclarationTest
         Assert.AreEqual( $"declare {obfuscatedName}", output.ToString() );
     }
 
+    [TestCase( ModifierFlag.Const, "const" )]
+    [TestCase( ModifierFlag.Polyphonic, "polyphonic" )]
+    public void ModifierTest( ModifierFlag modifier, string modifierText )
+    {
+        const string variableName = "$x";
+        const string obfuscatedName = "$v0";
+
+        var output = new StringBuilder();
+        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+
+        var variable = MockUtility.CreateIntVariable( variableName );
+        variable.Modifier = modifier;
+
+        symbolTable.Variables.Add( variable );
+
+        var obfuscatedTable = new ObfuscatedVariableTable( symbolTable.Variables, "v" );
+
+        var node = new AstVariableDeclarationNode
+        {
+            Name     = variableName,
+            Modifier = new AstModiferNode( [modifierText] )
+        };
+
+        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.Variables, symbolTable.UITypes, obfuscatedTable );
+        var visitor = new MockVariableDeclarationVisitor( output );
+
+        visitor.Inject( evaluator );
+        visitor.Visit( node );
+
+        Assert.AreEqual( $"declare {modifierText} {obfuscatedName}", output.ToString() );
+    }
+
     [Test]
     public void CannotObfuscateToBuiltInVariableTest()
     {
