@@ -12,7 +12,7 @@ using KSPCompiler.UseCases.Analysis.Evaluations.Operators;
 
 namespace KSPCompiler.Interactors.Analysis.Semantics;
 
-public class ConditionalUnaryOperatorEvaluator : IUnaryOperatorEvaluator
+public class ConditionalUnaryOperatorEvaluator : IConditionalUnaryOperatorEvaluator
 {
     private ICompilerMessageManger CompilerMessageManger { get; }
     private IBooleanConvolutionEvaluator BooleanConvolutionEvaluator { get; }
