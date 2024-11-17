@@ -11,7 +11,7 @@ namespace KSPCompiler.Interactors.Tests.Analysis.Obfuscators;
 public class MockCallCommandEvaluatorVisitor : DefaultAstVisitor
 {
     private StringBuilder Output { get; }
-    private ICallCommandExpressionEvaluator Evaluator { get; set; } = new NullEvaluator();
+    private ICallCommandEvaluator Evaluator { get; set; } = new NullEvaluator();
     private IObfuscatedVariableTable ObfuscatedTable { get; }
 
     public MockCallCommandEvaluatorVisitor(
@@ -22,7 +22,7 @@ public class MockCallCommandEvaluatorVisitor : DefaultAstVisitor
         ObfuscatedTable = obfuscatedTable;
     }
 
-    public void Inject( ICallCommandExpressionEvaluator evaluator )
+    public void Inject( ICallCommandEvaluator evaluator )
     {
         Evaluator = evaluator;
     }
@@ -42,7 +42,7 @@ public class MockCallCommandEvaluatorVisitor : DefaultAstVisitor
     public override IAstNode Visit( AstCallCommandExpressionNode node )
         => Evaluator.Evaluate( this, node );
 
-    private class NullEvaluator : ICallCommandExpressionEvaluator
+    private class NullEvaluator : ICallCommandEvaluator
     {
         public IAstNode Evaluate( IAstVisitor visitor, AstCallCommandExpressionNode node )
             => throw new NotImplementedException();

@@ -8,7 +8,7 @@ using KSPCompiler.UseCases.Analysis.Evaluations.Commands;
 
 namespace KSPCompiler.Interactors.Analysis.Obfuscators;
 
-public class CallCommandEvaluator : ICallCommandExpressionEvaluator
+public class CallCommandEvaluator : ICallCommandEvaluator
 {
     private StringBuilder Output { get; }
     public CallCommandEvaluator( StringBuilder output )

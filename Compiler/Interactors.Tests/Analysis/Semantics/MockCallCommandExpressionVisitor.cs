@@ -6,13 +6,13 @@ namespace KSPCompiler.Interactors.Tests.Analysis.Semantics;
 
 public class MockCallCommandExpressionVisitor : DefaultAstVisitor
 {
-    private ICallCommandExpressionEvaluator CallCommandExpressionEvaluator { get; set; } = new MockCallCommandExpressionEvaluator();
+    private ICallCommandEvaluator CallCommandEvaluator { get; set; } = new MockICallCommandEvaluator();
 
-    public void Inject( ICallCommandExpressionEvaluator callCommandExpressionEvaluator )
+    public void Inject( ICallCommandEvaluator iCallCommandEvaluator )
     {
-        CallCommandExpressionEvaluator = callCommandExpressionEvaluator;
+        CallCommandEvaluator = iCallCommandEvaluator;
     }
 
     public override IAstNode Visit( AstCallCommandExpressionNode node )
-        => CallCommandExpressionEvaluator.Evaluate( this, node );
+        => CallCommandEvaluator.Evaluate( this, node );
 }
