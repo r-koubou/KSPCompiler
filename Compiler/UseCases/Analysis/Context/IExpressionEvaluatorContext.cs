@@ -30,7 +30,7 @@ public interface IExpressionEvaluatorContext
     IUnaryOperatorEvaluator ConditionalUnaryOperator { get; }
     ISymbolEvaluator Symbol { get; }
     IArrayElementEvaluator ArrayElement { get; }
-    ICallCommandExpressionEvaluator CallCommand { get; }
+    ICallCommandEvaluator CallCommand { get; }
 
     #endregion ~Expression Evaluators
 }

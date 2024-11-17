@@ -75,7 +75,7 @@ public sealed class SemanticAnalyzerContext : IAnalyzerContext
         public IUnaryOperatorEvaluator ConditionalUnaryOperator { get; }
         public ISymbolEvaluator Symbol { get; }
         public IArrayElementEvaluator ArrayElement { get; }
-        public ICallCommandExpressionEvaluator CallCommand { get; }
+        public ICallCommandEvaluator CallCommand { get; }
 
         #endregion ~Expression Evaluators
 
@@ -113,7 +113,7 @@ public sealed class SemanticAnalyzerContext : IAnalyzerContext
             StringConcatenateOperator  = new StringConcatenateOperatorEvaluator( compilerMessageManger, StringConvolutionEvaluator );
             Symbol                     = new SymbolEvaluator( compilerMessageManger, aggregateSymbolTable );
             ArrayElement               = new ArrayElementEvaluator( compilerMessageManger, aggregateSymbolTable.Variables );
-            CallCommand                = new CallCommandExpressionEvaluator( compilerMessageManger, aggregateSymbolTable.Variables, aggregateSymbolTable.Commands, aggregateSymbolTable.UITypes );
+            CallCommand                = new CallCommandEvaluator( compilerMessageManger, aggregateSymbolTable.Variables, aggregateSymbolTable.Commands, aggregateSymbolTable.UITypes );
         }
     }
 

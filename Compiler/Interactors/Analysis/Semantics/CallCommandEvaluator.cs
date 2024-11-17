@@ -14,14 +14,14 @@ using KSPCompiler.UseCases.Analysis.Evaluations.Commands;
 
 namespace KSPCompiler.Interactors.Analysis.Semantics;
 
-public class CallCommandExpressionEvaluator : ICallCommandExpressionEvaluator
+public class CallCommandEvaluator : ICallCommandEvaluator
 {
     private ICompilerMessageManger CompilerMessageManger { get; }
     private IVariableSymbolTable Variables { get; }
     private ICommandSymbolTable Commands { get; }
     private IUITypeSymbolTable UITypes { get; }
 
-    public CallCommandExpressionEvaluator( ICompilerMessageManger compilerMessageManger, IVariableSymbolTable variables, ICommandSymbolTable commands, IUITypeSymbolTable uiTypeSymbolTable )
+    public CallCommandEvaluator( ICompilerMessageManger compilerMessageManger, IVariableSymbolTable variables, ICommandSymbolTable commands, IUITypeSymbolTable uiTypeSymbolTable )
     {
         CompilerMessageManger = compilerMessageManger;
         Variables             = variables;

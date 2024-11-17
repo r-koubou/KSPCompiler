@@ -3,7 +3,7 @@ using KSPCompiler.Domain.Ast.Nodes.Expressions;
 
 namespace KSPCompiler.UseCases.Analysis.Evaluations.Commands;
 
-public interface ICallCommandExpressionEvaluator
+public interface ICallCommandEvaluator
 {
     public IAstNode Evaluate( IAstVisitor visitor, AstCallCommandExpressionNode node );
 }
