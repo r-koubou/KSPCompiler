@@ -178,11 +178,11 @@ public static class MockUtility
         };
     }
 
-    public static  AstSymbolExpressionNode CreateSymbolNode( string variableName, DataTypeFlag type )
+    public static  AstSymbolExpressionNode CreateSymbolNode( string symbolName, DataTypeFlag type )
     {
         return new AstSymbolExpressionNode
         {
-            Name     = variableName,
+            Name     = symbolName,
             TypeFlag = type
         };
     }
@@ -196,11 +196,11 @@ public static class MockUtility
         };
     }
 
-    public static  AstSymbolExpressionNode CreateSymbolNode( string variableName )
+    public static  AstSymbolExpressionNode CreateSymbolNode( string symbolName )
     {
         return new AstSymbolExpressionNode
         {
-            Name = variableName
+            Name = symbolName
         };
     }
 
@@ -215,6 +215,21 @@ public static class MockUtility
             DataType = returnType,
             BuiltIn  = true
         };
+
+    public static CommandSymbol CreateMessageCommand()
+    {
+        var result = CreateCommand(
+            "message",
+            DataTypeFlag.TypeVoid,
+            new CommandArgumentSymbol
+            {
+                Name     = "message",
+                DataType = DataTypeFlag.MultipleType
+            }
+        );
+
+        return result;
+    }
 
     public static CommandSymbol CreatePlayNoteCommand()
     {
