@@ -31,8 +31,10 @@ public class CommandSymbolEvaluatorTest
 
         symbolTable.Commands.Add( commandSymbol );
 
+        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.Variables, "v" );
+
         var expr = new AstSymbolExpressionNode( commandName );
-        var evaluator = new SymbolEvaluator( output, symbolTable );
+        var evaluator = new SymbolEvaluator( output, symbolTable, obfuscatedTable );
         var visitor = new MockSymbolEvaluatorVisitor();
 
         visitor.Inject( evaluator );
