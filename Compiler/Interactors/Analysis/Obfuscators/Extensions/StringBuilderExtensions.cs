@@ -9,7 +9,7 @@ public static class StringBuilderExtensions
 {
     public static StringBuilder NewLine( this StringBuilder self )
     {
-        return self.Append( '\n' );
+        return self.Append( ObfuscatorConstants.NewLine );
     }
 
     public static StringBuilder AppendUnaryOperator( this StringBuilder self, IAstVisitor visitor, string op, IAstNode left )
