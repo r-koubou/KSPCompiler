@@ -5,6 +5,7 @@ using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Interactors.Analysis.Obfuscators;
+using KSPCompiler.Interactors.Analysis.Obfuscators.Extensions;
 
 using NUnit.Framework;
 
@@ -37,7 +38,7 @@ public class VariableDeclarationTest
         visitor.Inject( evaluator );
         visitor.Visit( node );
 
-        Assert.AreEqual( $"declare {obfuscatedName}", output.ToString() );
+        Assert.AreEqual( $"declare {obfuscatedName}{ObfuscatorConstants.NewLine}", output.ToString() );
     }
 
     [TestCase( ModifierFlag.Const, "const" )]
@@ -69,7 +70,7 @@ public class VariableDeclarationTest
         visitor.Inject( evaluator );
         visitor.Visit( node );
 
-        Assert.AreEqual( $"declare {modifierText} {obfuscatedName}", output.ToString() );
+        Assert.AreEqual( $"declare {modifierText} {obfuscatedName}{ObfuscatorConstants.NewLine}", output.ToString() );
     }
 
     [Test]
@@ -98,7 +99,7 @@ public class VariableDeclarationTest
         visitor.Inject( evaluator );
         visitor.Visit( node );
 
-        Assert.AreEqual( $"declare {variableName}", output.ToString() );
+        Assert.AreEqual( $"declare {variableName}{ObfuscatorConstants.NewLine}", output.ToString() );
     }
 
     [Test]
@@ -108,7 +109,9 @@ public class VariableDeclarationTest
 
         const string variableName = "$x";
         const string obfuscatedName = "$v0";
-        const string expected = $"declare {obfuscatedName} := 1";
+        var expected = new StringBuilder()
+                      .Append( $"declare {obfuscatedName} := 1" )
+                      .NewLine().ToString();
 
         var output = new StringBuilder();
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
@@ -145,7 +148,9 @@ public class VariableDeclarationTest
 
         const string variableName = "%x";
         const string obfuscatedName = "%v0";
-        const string expected = $"declare {obfuscatedName}[3] := (1, 2, 3)";
+        var expected = new StringBuilder()
+                      .Append( $"declare {obfuscatedName}[3] := (1, 2, 3)" )
+                      .NewLine().ToString();
 
         var output = new StringBuilder();
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
@@ -189,7 +194,9 @@ public class VariableDeclarationTest
 
         const string variableName = "$x";
         const string obfuscatedName = "$v0";
-        const string expected = $"declare ui_label {obfuscatedName} := (1, 2)";
+        var expected = new StringBuilder()
+                      .Append( $"declare ui_label {obfuscatedName} := (1, 2)" )
+                      .NewLine().ToString();
 
         var output = new StringBuilder();
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
@@ -238,7 +245,9 @@ public class VariableDeclarationTest
 
         const string variableName = "%x";
         const string obfuscatedName = "%v0";
-        const string expected = $"declare ui_table {obfuscatedName}[2] := (1, 2)";
+        var expected = new StringBuilder()
+                      .Append( $"declare ui_table {obfuscatedName}[2] := (1, 2)" )
+                      .NewLine().ToString();
 
         var output = new StringBuilder();
         var symbolTable = MockUtility.CreateAggregateSymbolTable();

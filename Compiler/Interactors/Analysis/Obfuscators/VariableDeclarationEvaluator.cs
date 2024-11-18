@@ -15,18 +15,18 @@ namespace KSPCompiler.Interactors.Analysis.Obfuscators;
 
 public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 {
-    private StringBuilder OutputBuilder { get; }
+    private StringBuilder Output { get; }
     private IVariableSymbolTable Variables { get; }
     private ISymbolTable<UITypeSymbol> UITypeSymbols { get; }
     private IObfuscatedVariableTable ObfuscatedTable { get; }
 
     public VariableDeclarationEvaluator(
-        StringBuilder outputBuilder,
+        StringBuilder output,
         IVariableSymbolTable variables,
         ISymbolTable<UITypeSymbol> uiTypeSymbols,
         IObfuscatedVariableTable obfuscatedTable )
     {
-        OutputBuilder   = outputBuilder;
+        Output          = output;
         Variables       = variables;
         UITypeSymbols   = uiTypeSymbols;
         ObfuscatedTable = obfuscatedTable;
@@ -41,24 +41,26 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             throw new KeyNotFoundException( $"Variable not found: {node.Name} from variable symbol table" );
         }
 
-        OutputBuilder.Append( "declare" );
+        Output.Append( "declare" );
 
         foreach( var modifier in node.Modifier.Values )
         {
-            OutputBuilder.Append( $" {modifier}" );
+            Output.Append( $" {modifier}" );
         }
 
         if( variable.UIType != UITypeSymbol.Null )
         {
-            OutputBuilder.Append( $" {variable.UIType.Name}" );
+            Output.Append( $" {variable.UIType.Name}" );
         }
 
-        OutputBuilder.Append( $" {name}" );
+        Output.Append( $" {name}" );
 
         if( node.Initializer.IsNotNull() )
         {
             OutputInitializer( visitor, node, variable );
         }
+
+        Output.NewLine();
 
         return node;
     }
@@ -84,7 +86,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
     private void OutputPrimitiveInitializer( IAstVisitor visitor, AstVariableDeclarationNode node )
     {
-        OutputBuilder.Append( " := " );
+        Output.Append( " := " );
         node.Initializer.PrimitiveInitializer.Accept( visitor );
     }
 
@@ -101,19 +103,19 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
     private void OutputArraySize( IAstVisitor visitor, AstArrayInitializerNode initializer )
     {
-        OutputBuilder.Append( '[' );
+        Output.Append( '[' );
         initializer.Size.Accept( visitor );
-        OutputBuilder.Append( ']' );
+        Output.Append( ']' );
     }
 
     private void OutputArrayElements( IAstVisitor visitor, AstArrayInitializerNode initializer )
     {
-        OutputBuilder.Append( " := " );
-        OutputBuilder.Append( '(' );
+        Output.Append( " := " );
+        Output.Append( '(' );
 
-        OutputBuilder.AppendExpressionList( visitor, initializer.Initializer );
+        Output.AppendExpressionList( visitor, initializer.Initializer );
 
-        OutputBuilder.Append( ')' );
+        Output.Append( ')' );
     }
 
     #endregion ~Array Initializer
@@ -145,12 +147,12 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
     private void OutputUIArguments( IAstVisitor visitor, AstExpressionListNode expressionList )
     {
-        OutputBuilder.Append( " := " );
-        OutputBuilder.Append( '(' );
+        Output.Append( " := " );
+        Output.Append( '(' );
 
-        OutputBuilder.AppendExpressionList( visitor, expressionList );
+        Output.AppendExpressionList( visitor, expressionList );
 
-        OutputBuilder.Append( ')' );
+        Output.Append( ')' );
     }
 
     #endregion ~UI Initializer
