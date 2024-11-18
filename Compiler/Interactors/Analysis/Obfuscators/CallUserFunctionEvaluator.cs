@@ -2,6 +2,7 @@ using System.Text;
 
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Interactors.Analysis.Obfuscators.Extensions;
 using KSPCompiler.UseCases.Analysis.Evaluations.UserFunctions;
 using KSPCompiler.UseCases.Analysis.Obfuscators;
 
@@ -22,7 +23,7 @@ public class CallUserFunctionEvaluator : ICallUserFunctionEvaluator
     {
         var name = ObfuscatedTable.GetObfuscatedByName( statement.Name );
 
-        Output.Append( $"call {name}\n" );
+        Output.Append( $"call {name}" ).NewLine();
 
         return statement;
     }

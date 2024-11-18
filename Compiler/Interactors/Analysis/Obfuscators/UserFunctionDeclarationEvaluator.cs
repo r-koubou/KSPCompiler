@@ -2,6 +2,7 @@ using System.Text;
 
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Interactors.Analysis.Obfuscators.Extensions;
 using KSPCompiler.UseCases.Analysis.Evaluations.Declarations;
 using KSPCompiler.UseCases.Analysis.Obfuscators;
 
@@ -24,13 +25,11 @@ public class UserFunctionDeclarationEvaluator : IUserFunctionDeclarationEvaluato
     {
         var name = ObfuscatedTable.GetObfuscatedByName( node.Name );
 
-        Output.Append( $"function {name}" )
-              .Append( '\n' );
+        Output.Append( $"function {name}" ).NewLine();
 
         node.Block.AcceptChildren( visitor );
 
-        Output.Append( "end function" )
-              .Append( '\n' );
+        Output.Append( "end function" ).NewLine();
 
         return node;
     }

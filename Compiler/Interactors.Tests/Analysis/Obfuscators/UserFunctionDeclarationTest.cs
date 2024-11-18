@@ -2,6 +2,7 @@ using System.Text;
 
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Interactors.Analysis.Obfuscators;
+using KSPCompiler.Interactors.Analysis.Obfuscators.Extensions;
 
 using NUnit.Framework;
 
@@ -15,7 +16,11 @@ public class UserFunctionDeclarationTest
     {
         const string functionName = "x";
         const string obfuscatedName = "f0";
-        const string expected = $"function {obfuscatedName}\nend function\n";
+        var expected = new StringBuilder()
+                      .Append( $"function {obfuscatedName}" )
+                      .NewLine()
+                      .Append( "end function" )
+                      .NewLine().ToString();
 
         var output = new StringBuilder();
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
