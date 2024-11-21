@@ -15,9 +15,14 @@ public record CompilerOption(
     bool SyntaxCheckOnly,
     bool EnableObfuscation );
 
+public record CompilerResult(
+    bool Result,
+    Exception? Error,
+    string ObfuscatedScript );
+
 public sealed class CompilerController
 {
-    public void Execute( ICompilerMessageManger compilerMessageManger, CompilerOption option )
+    public CompilerResult Execute( ICompilerMessageManger compilerMessageManger, CompilerOption option )
     {
         try
         {
@@ -27,7 +32,7 @@ public sealed class CompilerController
 
             if( option.SyntaxCheckOnly )
             {
-                return;
+                return new CompilerResult( true, null, string.Empty );
             }
 
             var preprocessOutput = ExecutePreprocess( compilerMessageManger, ast, symbolTable );
@@ -35,28 +40,35 @@ public sealed class CompilerController
             if( !preprocessOutput.Result )
             {
                 Console.Error.WriteLine( preprocessOutput.Error );
-                return;
+                return new CompilerResult( false, null, string.Empty );
             }
 
             var semanticAnalysisOutput = ExecuteSemanticAnalysis( compilerMessageManger, ast, symbolTable );
 
             if( !option.EnableObfuscation )
             {
-                return;
+                return new CompilerResult( true, null, string.Empty );
             }
 
             // TODO Obfuscation
-            var obfuscationOOutput = ExecuteObfuscation(
+            var obfuscationOutput = ExecuteObfuscation(
                 compilerMessageManger,
                 semanticAnalysisOutput.OutputData.CompilationUnitNode,
                 semanticAnalysisOutput.OutputData.SymbolTable
             );
 
+            Console.WriteLine( obfuscationOutput.OutputData );
+
+            return new CompilerResult(
+                obfuscationOutput.Result,
+                obfuscationOutput.Error,
+                obfuscationOutput.OutputData
+            );
         }
         catch( Exception e )
         {
-            // ignored
             Console.Error.WriteLine( e );
+            return new CompilerResult( false, e, string.Empty );
         }
     }
 

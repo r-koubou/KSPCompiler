@@ -3,13 +3,5 @@ on init
     declare @i
     declare $j
     declare $k
-    message( $k )
-    $j := .not. $k
     $k := 1
-    @i := 234
-    $x := 0 {error: variable not declared}
-end on
-
-on note
-    $d := 0 {error: variable not declared}
 end on
