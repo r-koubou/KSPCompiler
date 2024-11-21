@@ -22,6 +22,12 @@ public class MockPreprocessEvaluatorVisitor : DefaultAstVisitor
     public void Inject( IPreprocessEvaluator evaluator )
         => Evaluator = evaluator;
 
+    public override IAstNode Visit( AstPreprocessorDefineNode node )
+        => Evaluator.Evaluate( this, node );
+
+    public override IAstNode Visit( AstPreprocessorUndefineNode node )
+        => Evaluator.Evaluate( this, node );
+
     public override IAstNode Visit( AstPreprocessorIfdefineNode node )
         => Evaluator.Evaluate( this, node );
 
@@ -46,11 +52,16 @@ public class MockPreprocessEvaluatorVisitor : DefaultAstVisitor
 
     private class MockPreprocessEvaluator : IPreprocessEvaluator
     {
+        public IAstNode Evaluate( IAstVisitor visitor, AstPreprocessorDefineNode node )
+            => throw new NotImplementedException();
+
+        public IAstNode Evaluate( IAstVisitor visitor, AstPreprocessorUndefineNode node )
+            => throw new NotImplementedException();
+
         public IAstNode Evaluate( IAstVisitor visitor, AstPreprocessorIfdefineNode node )
             => throw new NotImplementedException();
 
         public IAstNode Evaluate( IAstVisitor visitor, AstPreprocessorIfnotDefineNode node )
             => throw new NotImplementedException();
     }
-
 }

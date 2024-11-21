@@ -16,6 +16,30 @@ public class PreprocessEvaluator : IPreprocessEvaluator
         Output = output;
     }
 
+    public IAstNode Evaluate( IAstVisitor visitor, AstPreprocessorDefineNode node )
+    {
+        Output.Append( "SET_CONDITION(" );
+
+        node.Symbol.Accept( visitor );
+
+        Output.Append( ')' )
+              .NewLine();
+
+        return node;
+    }
+
+    public IAstNode Evaluate( IAstVisitor visitor, AstPreprocessorUndefineNode node )
+    {
+        Output.Append( "RESET_CONDITION(" );
+
+        node.Symbol.Accept( visitor );
+
+        Output.Append( ')' )
+              .NewLine();
+
+        return node;
+    }
+
     public IAstNode Evaluate( IAstVisitor visitor, AstPreprocessorIfdefineNode node )
     {
         // 暫定的にシュリンクせずにそのまま出力する
