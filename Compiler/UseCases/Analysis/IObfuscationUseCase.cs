@@ -12,14 +12,18 @@ public sealed class ObfuscationInputDataDetail
     public AstCompilationUnitNode CompilationUnitNode { get; }
     public AggregateSymbolTable SymbolTable { get; }
 
+    public int DefaultOutputBufferCapacity { get; }
+
     public ObfuscationInputDataDetail(
         ICompilerMessageManger messageManager,
         AstCompilationUnitNode compilationUnitNode,
-        AggregateSymbolTable symbolTable )
+        AggregateSymbolTable symbolTable,
+        int defaultOutputBufferCapacity = 16384 )
     {
-        MessageManager      = messageManager;
-        CompilationUnitNode = compilationUnitNode;
-        SymbolTable         = symbolTable;
+        MessageManager              = messageManager;
+        CompilationUnitNode         = compilationUnitNode;
+        SymbolTable                 = symbolTable;
+        DefaultOutputBufferCapacity = defaultOutputBufferCapacity;
     }
 }
 
@@ -47,4 +51,4 @@ public sealed class ObfuscationOutputData : IOutputPort<string>
     }
 }
 
-public interface IObfuscationUseCase : IUseCase<SemanticAnalysisInputData, SemanticAnalysisOutputData> {}
+public interface IObfuscationUseCase : IUseCase<ObfuscationInputData, ObfuscationOutputData> {}
