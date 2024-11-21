@@ -57,7 +57,6 @@ public sealed class CompilerController
                 return new CompilerResult( true, null, string.Empty );
             }
 
-            // TODO Obfuscation
             var obfuscationOutput = ExecuteObfuscation(
                 compilerMessageManger,
                 semanticAnalysisOutput.OutputData.CompilationUnitNode,
