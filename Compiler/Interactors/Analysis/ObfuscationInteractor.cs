@@ -19,7 +19,7 @@ public class ObfuscationInteractor : IObfuscationUseCase
         var symbolTable = parameter.InputData.SymbolTable;
 
         var context = new ObfuscatorContext( output, messageManger, symbolTable );
-        var obfuscator = new Obfuscator( context );
+        var obfuscator = new Obfuscator( context, output );
 
         try
         {

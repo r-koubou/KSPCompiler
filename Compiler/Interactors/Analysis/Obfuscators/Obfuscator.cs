@@ -1,3 +1,5 @@
+using System.Text;
+
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
@@ -9,11 +11,13 @@ namespace KSPCompiler.Interactors.Analysis.Obfuscators;
 
 public class Obfuscator : DefaultAstVisitor, IAstTraversal
 {
-    protected IAnalyzerContext Context { get; }
+    private IAnalyzerContext Context { get; }
+    private StringBuilder Output { get; }
 
-    public Obfuscator( IAnalyzerContext context )
+    public Obfuscator( IAnalyzerContext context, StringBuilder output )
     {
         Context = context;
+        Output  = output;
     }
 
     public void Traverse( AstCompilationUnitNode node )
@@ -141,6 +145,28 @@ public class Obfuscator : DefaultAstVisitor, IAstTraversal
     #endregion
 
     #endregion ~Operators
+
+    #region Literals
+
+    public override IAstNode Visit( AstIntLiteralNode node )
+    {
+        Output.Append( node.Value );
+        return node;
+    }
+
+    public override IAstNode Visit( AstRealLiteralNode node )
+    {
+        Output.Append( node.Value );
+        return node;
+    }
+
+    public override IAstNode Visit( AstStringLiteralNode node )
+    {
+        Output.Append( node.Value );
+        return node;
+    }
+
+    #endregion ~Literals
 
     #endregion ~Expressions
 
