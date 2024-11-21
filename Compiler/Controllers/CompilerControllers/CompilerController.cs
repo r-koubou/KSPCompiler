@@ -11,7 +11,7 @@ namespace KSPCompiler.Controllers.Compiler;
 
 public record CompilerOption(
     ISyntaxParser SyntaxParser,
-    AggregateSymbolTable symbolTable,
+    AggregateSymbolTable SymbolTable,
     bool SyntaxCheckOnly,
     bool EnableObfuscation );
 
@@ -21,7 +21,7 @@ public sealed class CompilerController
     {
         try
         {
-            var symbolTable = option.symbolTable;
+            var symbolTable = option.SymbolTable;
 
             var ast = option.SyntaxParser.Parse();
 

@@ -51,7 +51,7 @@ public static class CompilerProgram
         var compilerController = new CompilerController();
         var option = new CompilerOption(
             SyntaxParser: parser,
-            symbolTable: symbolTable,
+            SymbolTable: symbolTable,
             SyntaxCheckOnly: syntaxCheckOnly,
             EnableObfuscation: enableObfuscation
         );
