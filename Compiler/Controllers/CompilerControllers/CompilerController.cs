@@ -45,6 +45,13 @@ public sealed class CompilerController
 
             var semanticAnalysisOutput = ExecuteSemanticAnalysis( compilerMessageManger, ast, symbolTable );
 
+            if( !semanticAnalysisOutput.Result )
+            {
+                Console.Error.WriteLine( semanticAnalysisOutput.Error );
+                return new CompilerResult( false, null, string.Empty );
+            }
+
+
             if( !option.EnableObfuscation )
             {
                 return new CompilerResult( true, null, string.Empty );

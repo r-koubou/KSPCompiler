@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
+using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Interactors.Analysis.Semantics;
 using KSPCompiler.UseCases.Analysis;
 
@@ -27,7 +28,10 @@ public class SemanticAnalysisInteractor : ISemanticAnalysisUseCase
             return Task.FromResult( CreateOutputData( false, e ) );
         }
 
-        return Task.FromResult( CreateOutputData( true, null ) );
+        var noError = messageManger.Count( CompilerMessageLevel.Error ) == 0 &&
+                       messageManger.Count( CompilerMessageLevel.Fatal ) == 0;
+
+        return Task.FromResult( CreateOutputData( noError, null ) );
 
         SemanticAnalysisOutputData CreateOutputData( bool result, Exception? error )
             => new( result, error, new SemanticAnalysisOutputDataDetail( messageManger, node, symbolTable ) );
