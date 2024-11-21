@@ -22,6 +22,12 @@ public class MockPreprocessEvaluatorVisitor : DefaultAstVisitor
     public void Inject( IPreprocessEvaluator evaluator )
         => Evaluator = evaluator;
 
+    public override IAstNode Visit( AstPreprocessorDefineNode node )
+        => Evaluator.Evaluate( this, node );
+
+    public override IAstNode Visit( AstPreprocessorUndefineNode node )
+        => Evaluator.Evaluate( this, node );
+
     public override IAstNode Visit( AstPreprocessorIfdefineNode node )
         => Evaluator.Evaluate( this, node );
 

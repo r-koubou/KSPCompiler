@@ -13,6 +13,58 @@ namespace KSPCompiler.Interactors.Tests.Analysis.Obfuscators;
 public class PreprocessorTest
 {
     [Test]
+    public void DefineTest()
+    {
+        // SET_CONDITION(DEMO)
+
+        const string preprocessSymbolName = "DEMO";
+        var expected = new StringBuilder()
+                      .Append("SET_CONDITION(")
+                      .Append( preprocessSymbolName )
+                      .Append( ')' )
+                      .NewLine()
+                      .ToString();
+
+        var output = new StringBuilder();
+
+        var defineNode = new AstPreprocessorDefineNode( preprocessSymbolName );
+
+        var evaluator = new PreprocessEvaluator( output );
+        var visitor = new MockPreprocessEvaluatorVisitor( output );
+
+        visitor.Inject( evaluator );
+        visitor.Visit( defineNode );
+
+        Assert.AreEqual( expected, output.ToString() );
+    }
+
+    [Test]
+    public void UnDefineTest()
+    {
+        // RESET_CONDITION(DEMO)
+
+        const string preprocessSymbolName = "DEMO";
+        var expected = new StringBuilder()
+                      .Append("RESET_CONDITION(")
+                      .Append( preprocessSymbolName )
+                      .Append( ')' )
+                      .NewLine()
+                      .ToString();
+
+        var output = new StringBuilder();
+
+        var defineNode = new AstPreprocessorUndefineNode( preprocessSymbolName );
+
+        var evaluator = new PreprocessEvaluator( output );
+        var visitor = new MockPreprocessEvaluatorVisitor( output );
+
+        visitor.Inject( evaluator );
+        visitor.Visit( defineNode );
+
+        Assert.AreEqual( expected, output.ToString() );
+    }
+
+    [Test]
     public void IfDefTest()
     {
         // USE_CODE_IF(DEMO)
