@@ -46,6 +46,11 @@ public sealed class CompilerController
             }
 
             // TODO Obfuscation
+            var obfuscationOOutput = ExecuteObfuscation(
+                compilerMessageManger,
+                semanticAnalysisOutput.OutputData.CompilationUnitNode,
+                semanticAnalysisOutput.OutputData.SymbolTable
+            );
 
         }
         catch( Exception e )
@@ -102,6 +107,23 @@ public sealed class CompilerController
                     symbolTable
                 )
             );
+        }
+    }
+
+    private ObfuscationOutputData ExecuteObfuscation( ICompilerMessageManger compilerMessageManger, AstCompilationUnitNode ast, AggregateSymbolTable symbolTable )
+    {
+        var obfuscator = new ObfuscationInteractor();
+        var input = new ObfuscationInputData(
+            new ObfuscationInputDataDetail( compilerMessageManger, ast, symbolTable )
+        );
+
+        try
+        {
+            return obfuscator.Execute( input );
+        }
+        catch( Exception e )
+        {
+            return new ObfuscationOutputData( false, e, string.Empty );
         }
     }
 }
