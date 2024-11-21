@@ -11,23 +11,28 @@ namespace KSPCompiler.Controllers.Compiler;
 
 public record CompilerOption(
     ISyntaxParser SyntaxParser,
-    AggregateSymbolTable symbolTable,
+    AggregateSymbolTable SymbolTable,
     bool SyntaxCheckOnly,
     bool EnableObfuscation );
 
+public record CompilerResult(
+    bool Result,
+    Exception? Error,
+    string ObfuscatedScript );
+
 public sealed class CompilerController
 {
-    public void Execute( ICompilerMessageManger compilerMessageManger, CompilerOption option )
+    public CompilerResult Execute( ICompilerMessageManger compilerMessageManger, CompilerOption option )
     {
         try
         {
-            var symbolTable = option.symbolTable;
+            var symbolTable = option.SymbolTable;
 
             var ast = option.SyntaxParser.Parse();
 
             if( option.SyntaxCheckOnly )
             {
-                return;
+                return new CompilerResult( true, null, string.Empty );
             }
 
             var preprocessOutput = ExecutePreprocess( compilerMessageManger, ast, symbolTable );
@@ -35,23 +40,41 @@ public sealed class CompilerController
             if( !preprocessOutput.Result )
             {
                 Console.Error.WriteLine( preprocessOutput.Error );
-                return;
+                return new CompilerResult( false, null, string.Empty );
             }
 
             var semanticAnalysisOutput = ExecuteSemanticAnalysis( compilerMessageManger, ast, symbolTable );
 
-            if( !option.EnableObfuscation )
+            if( !semanticAnalysisOutput.Result )
             {
-                return;
+                Console.Error.WriteLine( semanticAnalysisOutput.Error );
+                return new CompilerResult( false, null, string.Empty );
             }
 
-            // TODO Obfuscation
 
+            if( !option.EnableObfuscation )
+            {
+                return new CompilerResult( true, null, string.Empty );
+            }
+
+            var obfuscationOutput = ExecuteObfuscation(
+                compilerMessageManger,
+                semanticAnalysisOutput.OutputData.CompilationUnitNode,
+                semanticAnalysisOutput.OutputData.SymbolTable
+            );
+
+            Console.WriteLine( obfuscationOutput.OutputData );
+
+            return new CompilerResult(
+                obfuscationOutput.Result,
+                obfuscationOutput.Error,
+                obfuscationOutput.OutputData
+            );
         }
         catch( Exception e )
         {
-            // ignored
             Console.Error.WriteLine( e );
+            return new CompilerResult( false, e, string.Empty );
         }
     }
 
@@ -102,6 +125,23 @@ public sealed class CompilerController
                     symbolTable
                 )
             );
+        }
+    }
+
+    private ObfuscationOutputData ExecuteObfuscation( ICompilerMessageManger compilerMessageManger, AstCompilationUnitNode ast, AggregateSymbolTable symbolTable )
+    {
+        var obfuscator = new ObfuscationInteractor();
+        var input = new ObfuscationInputData(
+            new ObfuscationInputDataDetail( compilerMessageManger, ast, symbolTable )
+        );
+
+        try
+        {
+            return obfuscator.Execute( input );
+        }
+        catch( Exception e )
+        {
+            return new ObfuscationOutputData( false, e, string.Empty );
         }
     }
 }
