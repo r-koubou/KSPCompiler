@@ -137,7 +137,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
     private void OutputArrayBasedUIInitializer( IAstVisitor visitor, AstVariableDeclarationNode node )
     {
         OutputArraySize( visitor, node.Initializer.ArrayInitializer );
-        OutputUIArguments( visitor, node.Initializer.PrimitiveInitializer.UIInitializer );
+        OutputUIArguments( visitor, node.Initializer.ArrayInitializer.Initializer );
     }
 
     private void OutputPrimitiveBasedUIInitializer( IAstVisitor visitor, AstExpressionListNode initializer )
