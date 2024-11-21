@@ -41,6 +41,12 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             throw new KeyNotFoundException( $"Variable not found: {node.Name} from variable symbol table" );
         }
 
+        // 未使用の変数はシュリンク
+        if( variable.State.IsNotUsed() )
+        {
+            return node;
+        }
+
         Output.Append( "declare" );
 
         foreach( var modifier in node.Modifier.Values )
