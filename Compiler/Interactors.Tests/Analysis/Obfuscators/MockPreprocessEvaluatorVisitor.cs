@@ -46,11 +46,16 @@ public class MockPreprocessEvaluatorVisitor : DefaultAstVisitor
 
     private class MockPreprocessEvaluator : IPreprocessEvaluator
     {
+        public IAstNode Evaluate( IAstVisitor visitor, AstPreprocessorDefineNode node )
+            => throw new NotImplementedException();
+
+        public IAstNode Evaluate( IAstVisitor visitor, AstPreprocessorUndefineNode node )
+            => throw new NotImplementedException();
+
         public IAstNode Evaluate( IAstVisitor visitor, AstPreprocessorIfdefineNode node )
             => throw new NotImplementedException();
 
         public IAstNode Evaluate( IAstVisitor visitor, AstPreprocessorIfnotDefineNode node )
             => throw new NotImplementedException();
     }
-
 }
