@@ -53,7 +53,7 @@ public class ArrayElementEvaluator : IArrayElementEvaluator
             CompilerMessageManger.Error(
                 expr,
                 CompilerMessageResources.semantic_error_array_subscript_compatible,
-                evaluatedLeft.TypeFlag.ToMessageString()
+                evaluatedRight.TypeFlag.ToMessageString()
             );
 
             return NullAstExpressionNode.Instance;
