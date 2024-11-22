@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 
 using KSPCompiler.Domain.Ast.Nodes;
@@ -33,7 +34,7 @@ public class MockAstStringConcatenateOperatorVisitor : DefaultAstVisitor
     private class MockStringConcatenateOperatorEvaluator : IStringConcatenateOperatorEvaluator
     {
         public IAstNode Evaluate( IAstVisitor visitor, AstExpressionNode expr )
-            => throw new System.NotImplementedException();
+            => throw new NotImplementedException();
     }
 
 }

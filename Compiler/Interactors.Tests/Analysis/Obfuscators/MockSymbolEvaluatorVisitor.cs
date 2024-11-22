@@ -1,3 +1,5 @@
+using System;
+
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.UseCases.Analysis.Evaluations.Symbols;
@@ -19,6 +21,6 @@ public class MockSymbolEvaluatorVisitor : DefaultAstVisitor
     private class MockSymbolEvaluator : ISymbolEvaluator
     {
         public IAstNode Evaluate( IAstVisitor visitor, AstSymbolExpressionNode expr )
-            => throw new System.NotImplementedException();
+            => throw new NotImplementedException();
     }
 }
