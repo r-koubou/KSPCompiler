@@ -25,6 +25,12 @@ public class MockArrayElementEvaluatorVisitor : DefaultAstVisitor
     public override IAstNode Visit( AstArrayElementExpressionNode expr )
         => Evaluator.Evaluate( this, expr );
 
+    public override IAstNode Visit( AstSymbolExpressionNode node )
+    {
+        Output.Append( node.Name );
+        return node;
+    }
+
     public override IAstNode Visit( AstIntLiteralNode node )
     {
         Output.Append( $"{node.Value}" );
