@@ -3,6 +3,7 @@ using System.Text;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Interactors.Analysis.Obfuscators;
 using KSPCompiler.Interactors.Analysis.Obfuscators.Extensions;
@@ -23,7 +24,10 @@ public class VariableDeclarationTest
         var output = new StringBuilder();
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
 
-        symbolTable.Variables.Add( MockUtility.CreateIntVariable( variableName ) );
+        var variable = MockUtility.CreateIntVariable( variableName );
+        variable.State = SymbolState.Loaded;
+
+        symbolTable.Variables.Add( variable );
 
         var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.Variables, "v" );
 
@@ -41,6 +45,37 @@ public class VariableDeclarationTest
         Assert.AreEqual( $"declare {obfuscatedName}{ObfuscatorConstants.NewLine}", output.ToString() );
     }
 
+    [Test]
+    public void ShrinkTest()
+    {
+        const string variableName = "$x";
+
+        var output = new StringBuilder();
+        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+
+        var variable = MockUtility.CreateIntVariable( variableName );
+
+        // 初期値代入のみで参照されない状況を作成
+        variable.State = SymbolState.Initialized;
+
+        symbolTable.Variables.Add( variable );
+
+        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.Variables, "v" );
+
+        var node = new AstVariableDeclarationNode
+        {
+            Name = variableName
+        };
+
+        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.Variables, symbolTable.UITypes, obfuscatedTable );
+        var visitor = new MockVariableDeclarationVisitor( output );
+
+        visitor.Inject( evaluator );
+        visitor.Visit( node );
+
+        Assert.AreEqual( "", output.ToString() );
+    }
+
     [TestCase( ModifierFlag.Const, "const" )]
     [TestCase( ModifierFlag.Polyphonic, "polyphonic" )]
     public void ModifierTest( ModifierFlag modifier, string modifierText )
@@ -53,6 +88,7 @@ public class VariableDeclarationTest
 
         var variable = MockUtility.CreateIntVariable( variableName );
         variable.Modifier = modifier;
+        variable.State    = SymbolState.Loaded;
 
         symbolTable.Variables.Add( variable );
 
@@ -74,35 +110,6 @@ public class VariableDeclarationTest
     }
 
     [Test]
-    public void CannotObfuscateToBuiltInVariableTest()
-    {
-        const string variableName = "$ENGINE_PAR_TEST";
-
-        var output = new StringBuilder();
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
-
-        var variable = MockUtility.CreateIntVariable( variableName );
-        variable.BuiltIn = true;
-
-        symbolTable.Variables.Add( variable );
-
-        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.Variables, "v" );
-
-        var node = new AstVariableDeclarationNode
-        {
-            Name = variableName
-        };
-
-        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.Variables, symbolTable.UITypes, obfuscatedTable );
-        var visitor = new MockVariableDeclarationVisitor( output );
-
-        visitor.Inject( evaluator );
-        visitor.Visit( node );
-
-        Assert.AreEqual( $"declare {variableName}{ObfuscatorConstants.NewLine}", output.ToString() );
-    }
-
-    [Test]
     public void PrimitiveInitializerTest()
     {
         // declare $v0 := 1
@@ -115,8 +122,10 @@ public class VariableDeclarationTest
 
         var output = new StringBuilder();
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var variable = MockUtility.CreateIntVariable( variableName );
 
-        symbolTable.Variables.Add( MockUtility.CreateIntVariable( variableName ) );
+        variable.State = SymbolState.Loaded;
+        symbolTable.Variables.Add( variable );
 
         var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.Variables, "v" );
 
@@ -156,6 +165,7 @@ public class VariableDeclarationTest
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
 
         var variable = MockUtility.CreateVariable( variableName, DataTypeFlag.TypeIntArray );
+        variable.State = SymbolState.Loaded;
 
         symbolTable.Variables.Add( variable );
 
@@ -207,6 +217,7 @@ public class VariableDeclarationTest
         var variable = MockUtility.CreateVariable( variableName, DataTypeFlag.TypeInt );
         variable.Modifier = ModifierFlag.UI;
         variable.UIType   = ui;
+        variable.State    = SymbolState.Loaded;
 
         symbolTable.Variables.Add( variable );
 
@@ -258,6 +269,7 @@ public class VariableDeclarationTest
         var variable = MockUtility.CreateVariable( variableName, DataTypeFlag.TypeIntArray );
         variable.Modifier = ModifierFlag.UI;
         variable.UIType   = ui;
+        variable.State    = SymbolState.Loaded;
 
         symbolTable.Variables.Add( variable );
 
