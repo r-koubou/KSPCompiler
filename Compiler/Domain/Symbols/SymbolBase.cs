@@ -19,11 +19,6 @@ public abstract class SymbolBase
     public bool BuiltIn { get; set; } = false;
 
     /// <summary>
-    /// This symbol is referenced in the script.
-    /// </summary>
-    public bool Referenced { get; set; } = false;
-
-    /// <summary>
     /// A symbol's state for evaluation in analysis.
     /// </summary>
     public SymbolState State { get; set; } = SymbolState.UnInitialized;

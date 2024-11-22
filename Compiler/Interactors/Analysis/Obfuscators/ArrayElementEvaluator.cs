@@ -3,7 +3,6 @@ using System.Text;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.UseCases.Analysis.Evaluations.Symbols;
-using KSPCompiler.UseCases.Analysis.Obfuscators;
 
 namespace KSPCompiler.Interactors.Analysis.Obfuscators;
 
