@@ -10,9 +10,6 @@ internal class MockArrayElementEvaluator : IArrayElementEvaluator
 {
     public MockArrayElementEvaluator() {}
 
-    [Obsolete]
-    public MockArrayElementEvaluator( AstExpressionNode evalResult ) {}
-
     public IAstNode Evaluate( IAstVisitor visitor, AstArrayElementExpressionNode expr )
         => throw new NotImplementedException();
 }
