@@ -4,7 +4,6 @@ using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
-using KSPCompiler.Interactors.Analysis.Commons.Evaluations;
 using KSPCompiler.Interactors.Analysis.Commons.Extensions;
 using KSPCompiler.Resources;
 using KSPCompiler.UseCases.Analysis.Evaluations.Symbols;
@@ -87,11 +86,6 @@ public class SymbolEvaluator : ISymbolEvaluator
             return true;
         }
 
-        if( TryGetArrayVariableNode( visitor, expr, variable, out result ) )
-        {
-            return true;
-        }
-
         result = CreateEvaluateNode( expr, variable, variable );
 
         return true;
@@ -120,69 +114,6 @@ public class SymbolEvaluator : ISymbolEvaluator
             default:
                 return false;
         }
-    }
-
-    private bool TryGetArrayVariableNode( IAstVisitor visitor, AstExpressionNode expr, VariableSymbol variable, out AstExpressionNode result )
-    {
-        result = NullAstExpressionNode.Instance;
-
-        if( !variable.DataType.IsArray() )
-        {
-            return false;
-        }
-
-        // 子ノードの評価
-        // 含まれる可能性のあるノード
-        // - 配列インデックス: AstArrayElementExpressionNode
-
-        // 添字の式を持っていない場合は配列型として返す
-        if( expr.Left.Id != AstNodeId.ArrayElementExpression )
-        {
-            result = CreateEvaluateNode( expr, variable, variable );
-
-            return true;
-        }
-
-        // 配列要素数未確定の状況
-        if( variable.State == SymbolState.UnInitialized )
-        {
-            CompilerMessageManger.Error(
-                expr,
-                CompilerMessageResources.semantic_error_variable_uninitialized,
-                variable.Name
-            );
-            return false;
-        }
-
-        if( expr.Left.Accept( visitor ) is not AstExpressionNode indexExpr )
-        {
-            throw new AstAnalyzeException( expr.Left, "Failed to evaluate array index" );
-        }
-
-        result = CreateEvaluateNode( expr, variable, variable );
-        // 配列インデックスを式に含んでいる場合、要素アクセスになるので評価結果から配列フラグを削除
-        result.TypeFlag &= ~DataTypeFlag.AttributeArray;
-
-        // 変数がビルトイン変数または要素アクセスがリテラルで確定していない場合は評価はここまで
-        if( variable.BuiltIn || indexExpr is not AstIntLiteralNode intLiteral )
-        {
-            return true;
-        }
-
-        // 配列要素の範囲チェック
-        if( intLiteral.Value < 0 || intLiteral.Value >= variable.ArraySize )
-        {
-            CompilerMessageManger.Error(
-                expr,
-                CompilerMessageResources.semantic_error_variable_array_outofbounds,
-                variable.ArraySize,
-                intLiteral.Value
-            );
-
-            // 変数の型自体は解決しているので return false としない
-        }
-
-        return true;
     }
 
     private bool TryGetPgsSymbol( AstSymbolExpressionNode expr, out AstExpressionNode result )
