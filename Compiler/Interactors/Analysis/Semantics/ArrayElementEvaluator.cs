@@ -59,6 +59,26 @@ public class ArrayElementEvaluator : IArrayElementEvaluator
             return NullAstExpressionNode.Instance;
         }
 
+        // 添字アクセスの評価
+        if( !EvaluateArrayIndex( expr, evaluatedLeft, evaluatedRight, variableSymbol ) )
+        {
+            return NullAstExpressionNode.Instance;
+        }
+
+        // 要素アクセス結果になるので評価結果から配列フラグを削除
+        evaluatedLeft.TypeFlag &= ~DataTypeFlag.AttributeArray;
+
+        return evaluatedLeft;
+    }
+
+    private bool EvaluateArrayIndex( AstArrayElementExpressionNode expr,  AstExpressionNode evaluatedLeft, AstExpressionNode evaluatedRight, VariableSymbol variableSymbol )
+    {
+        // ビルトイン変数は添字アクセスの評価は省略
+        if( variableSymbol.BuiltIn )
+        {
+            return true;
+        }
+
         if( evaluatedRight is AstIntLiteralNode intLiteral )
         {
             var arraySize = variableSymbol.ArraySize;
@@ -72,13 +92,10 @@ public class ArrayElementEvaluator : IArrayElementEvaluator
                     intLiteral.Value
                 );
 
-                return NullAstExpressionNode.Instance;
+                return false;
             }
         }
 
-        // 要素アクセス結果になるので評価結果から配列フラグを削除
-        evaluatedLeft.TypeFlag &= ~DataTypeFlag.AttributeArray;
-
-        return evaluatedLeft;
+        return true;
     }
 }
