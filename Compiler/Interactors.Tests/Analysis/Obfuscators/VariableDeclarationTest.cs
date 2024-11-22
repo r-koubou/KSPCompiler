@@ -45,6 +45,37 @@ public class VariableDeclarationTest
         Assert.AreEqual( $"declare {obfuscatedName}{ObfuscatorConstants.NewLine}", output.ToString() );
     }
 
+    [Test]
+    public void ShrinkTest()
+    {
+        const string variableName = "$x";
+
+        var output = new StringBuilder();
+        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+
+        var variable = MockUtility.CreateIntVariable( variableName );
+
+        // 初期値代入のみで参照されない状況を作成
+        variable.State = SymbolState.Initialized;
+
+        symbolTable.Variables.Add( variable );
+
+        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.Variables, "v" );
+
+        var node = new AstVariableDeclarationNode
+        {
+            Name = variableName
+        };
+
+        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.Variables, symbolTable.UITypes, obfuscatedTable );
+        var visitor = new MockVariableDeclarationVisitor( output );
+
+        visitor.Inject( evaluator );
+        visitor.Visit( node );
+
+        Assert.AreEqual( "", output.ToString() );
+    }
+
     [TestCase( ModifierFlag.Const, "const" )]
     [TestCase( ModifierFlag.Polyphonic, "polyphonic" )]
     public void ModifierTest( ModifierFlag modifier, string modifierText )
