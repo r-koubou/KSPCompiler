@@ -79,7 +79,7 @@ public class SymbolEvaluator : ISymbolEvaluator
         }
 
         // 変数への評価が確定するので参照済みフラグを立てる
-        variable.Referenced = true;
+        variable.State = SymbolState.Loaded;
 
         if( TryGetAstLiteralNode( variable, out result ) )
         {
