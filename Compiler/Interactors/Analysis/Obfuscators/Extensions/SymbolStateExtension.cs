@@ -5,6 +5,5 @@ namespace KSPCompiler.Interactors.Analysis.Obfuscators.Extensions;
 public static class SymbolStateExtension
 {
     public static bool IsNotUsed( this SymbolState self )
-        => self == SymbolState.UnInitialized ||
-           self != SymbolState.Loaded;
+        => self != SymbolState.Loaded;
 }

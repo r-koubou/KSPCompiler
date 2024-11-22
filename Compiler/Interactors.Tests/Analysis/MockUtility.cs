@@ -49,6 +49,17 @@ public static class MockUtility
         return variable;
     }
 
+    public static VariableSymbol CreateVariable( string name )
+    {
+        var variable = new VariableSymbol
+        {
+            Name     = name,
+            DataType = DataTypeUtility.GuessFromSymbolName( name )
+        };
+
+        return variable;
+    }
+
     public static VariableSymbol CreateIntVariable( string name )
         => CreateVariable( name, DataTypeFlag.TypeInt );
 
