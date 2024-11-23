@@ -30,8 +30,8 @@ public class AstRealConditionalBinaryOperatorConvolutionCalculatorTest
 
         var result = calulator.Calculate( visitor, ast );
 
-        ClassicAssert.IsNotNull( result );
-        ClassicAssert.AreEqual( expected, result );
+        Assert.That( result, Is.Not.Null );
+        Assert.That( result, Is.EqualTo( expected ) );
     }
 
     [Test]

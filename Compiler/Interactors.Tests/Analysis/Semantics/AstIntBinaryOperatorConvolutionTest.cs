@@ -34,9 +34,9 @@ public class AstIntBinaryOperatorConvolutionTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        ClassicAssert.AreEqual( 0, compilerMessageManger.Count() );
-        ClassicAssert.IsNotNull( result );
-        ClassicAssert.AreEqual( expected, result?.Value );
+        Assert.That( compilerMessageManger.Count(), Is.EqualTo( 0 ) );
+        Assert.That( result,                        Is.Not.Null );
+        Assert.That( result?.Value,                 Is.EqualTo( expected ) );
     }
 
     [TestCase( 1, 1,  2 )]

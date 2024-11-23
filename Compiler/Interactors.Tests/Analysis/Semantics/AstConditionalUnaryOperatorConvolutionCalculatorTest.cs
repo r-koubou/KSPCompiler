@@ -29,7 +29,7 @@ public class AstConditionalUnaryOperatorConvolutionCalculatorTest
 
         var result = calculator.Calculate( visitor, ast );
 
-        ClassicAssert.IsNotNull( result );
-        ClassicAssert.AreEqual( !value, result );
+        Assert.That( result, Is.Not.Null );
+        Assert.That( result, Is.EqualTo( !value ) );
     }
 }

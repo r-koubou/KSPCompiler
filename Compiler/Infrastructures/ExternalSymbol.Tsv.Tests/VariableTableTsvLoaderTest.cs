@@ -37,8 +37,8 @@ public class VariableTableTsvLoaderTest
         var importer = CreateLocalImporter( path );
         var symbols = importer.Import();
 
-        ClassicAssert.IsTrue( symbols.Count == 1 );
-        ClassicAssert.AreEqual( SymbolBuiltIntoVersion.NotAvailable, symbols.First().BuiltIntoVersion );
+        Assert.That( symbols.Count, Is.EqualTo( 1 ) );
+        Assert.That( symbols.First().BuiltIntoVersion, Is.EqualTo( SymbolBuiltIntoVersion.NotAvailable ) );
     }
 
     [Test]
@@ -49,7 +49,7 @@ public class VariableTableTsvLoaderTest
 
         await Task.Run( async () => {
             var symbols = await importer.ImportAsync();
-            ClassicAssert.IsTrue( symbols.Count == 1 );
+            Assert.That( symbols.Count, Is.EqualTo( 1 ) );
         });
     }
 

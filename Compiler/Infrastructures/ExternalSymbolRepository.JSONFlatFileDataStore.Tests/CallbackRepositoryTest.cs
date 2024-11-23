@@ -48,8 +48,8 @@ public class CallbackRepositoryTest
         var callBack = CreateDummySymbol( "init" );
         var result = repository.Store( callBack );
 
-        ClassicAssert.IsTrue( result.Success );
-        ClassicAssert.IsTrue( result.Exception == null );
+        Assert.That( result.Success, Is.True );
+        Assert.That( result.Exception, Is.Null );
     }
 
     [Test]
@@ -65,8 +65,8 @@ public class CallbackRepositoryTest
 
         var result = repository.Store( callBacks );
 
-        ClassicAssert.IsTrue( result.Success );
-        ClassicAssert.IsTrue( result.Exception == null );
+        Assert.That( result.Success, Is.True );
+        Assert.That( result.Exception, Is.Null );
     }
 
     [Test]
@@ -78,9 +78,9 @@ public class CallbackRepositoryTest
         repository.Store( callBack );
         var result = repository.Delete( callBack );
 
-        ClassicAssert.IsTrue( result.Success );
-        ClassicAssert.IsTrue( result.Exception == null );
-        ClassicAssert.IsTrue( result.DeletedCount == 1 );
+        Assert.That( result.Success, Is.True );
+        Assert.That( result.Exception, Is.Null );
+        Assert.That( result.DeletedCount, Is.EqualTo( 1 ) );
     }
 
     [Test]
@@ -96,9 +96,9 @@ public class CallbackRepositoryTest
         repository.Store( callBacks );
         var result = repository.Delete( callBacks );
 
-        ClassicAssert.IsTrue( result.Success );
-        ClassicAssert.IsTrue( result.Exception == null );
-        ClassicAssert.IsTrue( result.DeletedCount == 2 );
+        Assert.That( result.Success, Is.True );
+        Assert.That( result.Exception, Is.Null );
+        Assert.That( result.DeletedCount, Is.EqualTo( 2 ) );
     }
 
     [Test]
@@ -114,10 +114,10 @@ public class CallbackRepositoryTest
         repository.Store( callBacks );
 
         var found = repository.FindByName( "init" );
-        ClassicAssert.AreEqual( 1, found.Count() );
+        Assert.That( found.Count, Is.EqualTo( 1 ) );
 
         found = repository.FindByName( "init-" );
-        ClassicAssert.AreEqual( 0, found.Count() );
+        Assert.That( found.Count, Is.EqualTo( 0 ) );
     }
 
     [Test]
@@ -133,10 +133,10 @@ public class CallbackRepositoryTest
         repository.Store( callBacks );
 
         var found = repository.Find( x => x.Name == "init" );
-        ClassicAssert.AreEqual( 1, found.Count() );
+        Assert.That( found.Count, Is.EqualTo( 1 ) );
 
         found = repository.Find( x => x.Name == "init-" );
-        ClassicAssert.AreEqual( 0, found.Count() );
+        Assert.That( found.Count, Is.EqualTo( 0 ) );
     }
 
     [Test]
@@ -152,6 +152,6 @@ public class CallbackRepositoryTest
         repository.Store( callBacks );
 
         var found = repository.FindAll();
-        ClassicAssert.AreEqual( 2, found.Count() );
+        Assert.That( found.Count, Is.EqualTo( 2 ) );
     }
 }

@@ -442,9 +442,9 @@ public static class MockUtility
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        ClassicAssert.AreEqual( expectedErrorCount, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
-        ClassicAssert.IsNotNull( result );
-        ClassicAssert.AreEqual( expectedEvaluatedType, result?.TypeFlag );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( expectedErrorCount ) );
+        Assert.That( result, Is.Not.Null );
+        Assert.That( result?.TypeFlag, Is.EqualTo( expectedEvaluatedType ) );
     }
 
     #endregion |~Operators

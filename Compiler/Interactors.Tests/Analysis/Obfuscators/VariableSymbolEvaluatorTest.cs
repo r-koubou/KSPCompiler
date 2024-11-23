@@ -32,7 +32,7 @@ public class VariableSymbolEvaluatorTest
         visitor.Inject( evaluator );
         visitor.Visit( expr );
 
-        ClassicAssert.AreEqual( obfuscatedName, output.ToString() );
+        Assert.That( output.ToString(), Is.EqualTo( obfuscatedName ) );
     }
 
     [Test]
@@ -58,6 +58,6 @@ public class VariableSymbolEvaluatorTest
         visitor.Inject( evaluator );
         visitor.Visit( expr );
 
-        ClassicAssert.AreEqual( variableName, output.ToString() );
+        Assert.That( output.ToString(), Is.EqualTo( variableName ) );
     }
 }

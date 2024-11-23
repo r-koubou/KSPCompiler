@@ -53,7 +53,7 @@ public class CallCommandTest
         visitor.Inject( evaluator );
         visitor.Visit( node );
 
-        ClassicAssert.AreEqual( expected, output.ToString() );
+        Assert.That( output.ToString(), Is.EqualTo( expected ) );
     }
 
     [Test]
@@ -103,7 +103,7 @@ public class CallCommandTest
         visitor.Inject( evaluator );
         visitor.Visit( node );
 
-        ClassicAssert.AreEqual( expected, output.ToString() );
+        Assert.That( output.ToString(), Is.EqualTo( expected ) );
     }
 
 }

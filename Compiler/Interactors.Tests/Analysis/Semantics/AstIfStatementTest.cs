@@ -46,7 +46,7 @@ public class AstIfStatementTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        ClassicAssert.AreEqual( expectedErrorCount, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( expectedErrorCount ) );
     }
 
     private static void IfStatementEvaluationTestBody( AstExpressionNode condition, int expectedErrorCount )

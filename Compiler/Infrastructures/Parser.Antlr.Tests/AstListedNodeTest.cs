@@ -14,19 +14,23 @@ namespace KSPCompiler.Parser.Antlr.Tests
         public void ListTest()
         {
             var list = new AstNodeList<AstExpressionNode>();
-            ClassicAssert.DoesNotThrow( () => {
-                list.Add( new AstAdditionExpressionNode() );
-                list.Add( new AstSubtractionExpressionNode() );
-                list.Add( new AstMultiplyingExpressionNode() );
-            });
-            ClassicAssert.IsTrue( list.Nodes.Count == 3 );
+            Assert.That( () =>
+                {
+                    list.Add( new AstAdditionExpressionNode() );
+                    list.Add( new AstSubtractionExpressionNode() );
+                    list.Add( new AstMultiplyingExpressionNode() );
+                }, Throws.Nothing
+            );
+
+            Assert.That( list.Nodes.Count, Is.EqualTo( 3 ) );
 
             var count = list.Count();
-            ClassicAssert.IsTrue( count == list.Count );
+            Assert.That( count, Is.EqualTo( list.Count ) );
 
-            ClassicAssert.IsTrue( list[ 0 ] is AstAdditionExpressionNode );
-            ClassicAssert.IsTrue( list[ 1 ] is AstSubtractionExpressionNode );
-            ClassicAssert.IsTrue( list[ 2 ] is AstMultiplyingExpressionNode );
+            Assert.That( list[ 0 ], Is.InstanceOf<AstAdditionExpressionNode>() );
+            Assert.That( list[ 1 ], Is.InstanceOf<AstSubtractionExpressionNode>() );
+            Assert.That( list[ 2 ], Is.InstanceOf<AstMultiplyingExpressionNode>() );
+
         }
     }
 }

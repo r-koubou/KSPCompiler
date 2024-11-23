@@ -42,9 +42,9 @@ public class AstIncompatibleBinaryOperatorEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        ClassicAssert.IsTrue( compilerMessageManger.Count() > 0 );
-        ClassicAssert.IsNotNull( result );
-        ClassicAssert.IsTrue( result?.TypeFlag.IsInt() );
-        ClassicAssert.IsTrue( result?.TypeFlag.IsReal() );
+        Assert.That( compilerMessageManger.Count(), Is.GreaterThan( 0 ) );
+        Assert.That( result, Is.Not.Null );
+        Assert.That(result?.TypeFlag.IsInt(),  Is.True);
+        Assert.That(result?.TypeFlag.IsReal(), Is.True);
     }
 }

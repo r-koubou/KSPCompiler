@@ -23,7 +23,7 @@ public class ConditionalUnaryOperatorTest
         visitor.Inject( evaluator );
         visit( visitor, expr );
 
-        ClassicAssert.AreEqual( expected, output.ToString() );
+        Assert.That( output.ToString(), Is.EqualTo( expected ) );
     }
 
     [Test]

@@ -51,14 +51,15 @@ public class AstVariableSymbolEvaluationTest
 
         var result = VariableSymbolTestBody( variable );
 
-        ClassicAssert.That(
+        Assert.That(
             result,
             isConstant
                 ? Is.InstanceOf<AstIntLiteralNode>()
                 : Is.InstanceOf<AstSymbolExpressionNode>()
         );
 
-        ClassicAssert.IsTrue( result.TypeFlag.IsInt() );
+
+        Assert.That( result.TypeFlag.IsInt(), Is.True );
     }
 
     [TestCase( 123)]
@@ -73,9 +74,9 @@ public class AstVariableSymbolEvaluationTest
         var result = VariableSymbolTestBody( variable );
         var literal = result as AstIntLiteralNode;
 
-        ClassicAssert.AreEqual( true, result.Constant );
-        ClassicAssert.IsNotNull( literal );
-        ClassicAssert.AreEqual( value, literal?.Value );
+        Assert.That( result.Constant, Is.True );
+        Assert.That( literal, Is.Not.Null );
+        Assert.That( literal?.Value, Is.EqualTo( value ) );
     }
 
     [TestCase( 1.23)]
@@ -90,9 +91,9 @@ public class AstVariableSymbolEvaluationTest
         var result = VariableSymbolTestBody( variable );
         var literal = result as AstRealLiteralNode;
 
-        ClassicAssert.AreEqual( true, result.Constant );
-        ClassicAssert.IsNotNull( literal );
-        ClassicAssert.AreEqual( value, literal?.Value );
+        Assert.That( result.Constant, Is.True );
+        Assert.That( literal, Is.Not.Null );
+        Assert.That( literal?.Value, Is.EqualTo( value ) );
     }
 
     [TestCase( "abc")]
@@ -107,9 +108,9 @@ public class AstVariableSymbolEvaluationTest
         var result = VariableSymbolTestBody( variable );
         var literal = result as AstStringLiteralNode;
 
-        ClassicAssert.AreEqual( true, result.Constant );
-        ClassicAssert.IsNotNull( literal );
-        ClassicAssert.AreEqual( value, literal?.Value );
+        Assert.That( result.Constant, Is.True );
+        Assert.That( literal, Is.Not.Null );
+        Assert.That( literal?.Value, Is.EqualTo( value ) );
     }
 
     [Test]
@@ -127,6 +128,6 @@ public class AstVariableSymbolEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        ClassicAssert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
     }
 }

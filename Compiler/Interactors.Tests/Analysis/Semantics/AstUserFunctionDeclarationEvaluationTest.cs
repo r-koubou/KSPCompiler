@@ -28,8 +28,8 @@ public class AstUserFunctionDeclarationEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        ClassicAssert.AreEqual( 0, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
-        ClassicAssert.AreEqual( 1, symbols.UserFunctions.Count );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 0 ) );
+        Assert.That( symbols.UserFunctions.Count, Is.EqualTo( 1 ) );
     }
 
     [Test]
@@ -53,6 +53,6 @@ public class AstUserFunctionDeclarationEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        ClassicAssert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
     }
 }

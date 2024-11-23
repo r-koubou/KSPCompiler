@@ -36,6 +36,6 @@ public class ArrayElementEvaluatorTest
         visitor.Inject( evaluator );
         visitor.Visit( expr );
 
-        ClassicAssert.AreEqual( expected, output.ToString() );
+        Assert.That( output.ToString(), Is.EqualTo( expected ) );
     }
 }

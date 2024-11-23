@@ -41,6 +41,6 @@ public class CommandSymbolEvaluatorTest
         visitor.Inject( evaluator );
         visitor.Visit( expr );
 
-        ClassicAssert.AreEqual( commandName, output.ToString() );
+        Assert.That( output.ToString(), Is.EqualTo( commandName ) );
     }
 }

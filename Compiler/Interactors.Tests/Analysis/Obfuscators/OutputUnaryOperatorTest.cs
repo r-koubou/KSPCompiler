@@ -24,7 +24,7 @@ public class OutputUnaryOperatorTest
         visitor.Inject( evaluator );
         visit( visitor, expr );
 
-        ClassicAssert.AreEqual( expected, output.ToString() );
+        Assert.That( output.ToString(), Is.EqualTo( expected ) );
     }
 
     private static (IOperatorEvaluator, StringBuilder) CreateEvaluator()
