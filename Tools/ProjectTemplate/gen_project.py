@@ -4,7 +4,7 @@ import re
 
 AUTHOR                      = 'R-Koubou'
 PROJECT_NAME_PREFIX         = 'KSPCompiler.'
-TARGET_LANGVERSION          = '12'
+TARGET_LANGVERSION          = 'default'
 TARGET_FRAMEWORK            = 'netstandard2.1'
 REPO_URL                    = 'https://github.com/r-koubou/KSPCompiler'
 PROJECT_TYPE_MODULE         = 'module'

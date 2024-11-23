@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <LangVersion>10</LangVersion>
+        <LangVersion>default</LangVersion>
         <TargetFramework>net9.0</TargetFramework>
         <RootNamespace>KSPCompiler.Domain.Tests</RootNamespace>
         <Nullable>enable</Nullable>

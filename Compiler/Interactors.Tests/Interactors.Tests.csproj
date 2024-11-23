@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <LangVersion>12</LangVersion>
+        <LangVersion>default</LangVersion>
         <TargetFramework>net9.0</TargetFramework>
         <RootNamespace>KSPCompiler.Interactors.Tests</RootNamespace>
         <Nullable>enable</Nullable>
