@@ -1,2 +1,1 @@
-# name	reserved	description	return type	[argument1	argument1 description ...]
-message	true	print message to console	V	*message	a message data
+message	true	display text in the status line of KONTAKT	N/A	V	S||I||R	variable_or_text	arg 1 description

@@ -1,3 +1,3 @@
-# name	reserved	allow duplicate	description	[argument1	require declare in on_init	...]
-init	true	false	initialization point
-ui_control	true	true	ui event handling	$button	true	ui variable
+# name	reserved	allow duplicate	description	built-into-version	argument1	require declare in on_init	Description
+init	true	false	Initialization callback, executed when the script was successfully compiled without warnings or errors.	N/A
+ui_control	true	true	UI callback, executed whenever the user interacts with a particular UI widget.	N/A	*ui_widget_name	true	UI widget variable
