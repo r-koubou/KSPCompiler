@@ -4,7 +4,6 @@ using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Conditions;
 
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Semantics;
 

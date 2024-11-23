@@ -10,7 +10,6 @@ using KSPCompiler.Interactors.Analysis.Semantics;
 using KSPCompiler.UseCases.Analysis.Context;
 
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Semantics;
 

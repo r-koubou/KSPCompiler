@@ -5,7 +5,6 @@ using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Interactors.Analysis.Semantics;
 
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Semantics;
 

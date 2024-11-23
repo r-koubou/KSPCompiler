@@ -6,7 +6,6 @@ using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Interactors.Analysis.Obfuscators;
 
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Obfuscators;
 

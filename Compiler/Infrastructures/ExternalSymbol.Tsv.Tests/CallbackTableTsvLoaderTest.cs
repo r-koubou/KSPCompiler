@@ -9,7 +9,6 @@ using KSPCompiler.ExternalSymbol.Tsv.Callbacks;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
 
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.ExternalSymbol.Tsv.Tests;
 

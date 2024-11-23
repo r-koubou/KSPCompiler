@@ -4,7 +4,6 @@ using KSPCompiler.Domain;
 using KSPCompiler.Parser.Antlr.Tests.Commons;
 
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Parser.Antlr.Tests;
 

@@ -6,7 +6,6 @@ using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Integers
 using KSPCompiler.Interactors.Analysis.Semantics;
 
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Semantics;
 
