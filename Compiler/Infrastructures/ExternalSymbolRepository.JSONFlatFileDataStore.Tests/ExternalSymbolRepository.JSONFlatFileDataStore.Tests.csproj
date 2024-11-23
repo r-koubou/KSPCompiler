@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <LangVersion>10</LangVersion>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
         <RootNamespace>KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Tests</RootNamespace>
         <Nullable>enable</Nullable>
         <IsPackable>false</IsPackable>
