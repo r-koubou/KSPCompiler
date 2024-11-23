@@ -42,7 +42,8 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         }
 
         // 未使用の変数はシュリンク
-        if( variable.State.IsNotUsed() )
+        // （ただし、UI変数は宣言・初期化時点で有効・画面に配置される物もあるため、シュリンク対象外）
+        if( variable.UIType == UITypeSymbol.Null && variable.State.IsNotUsed() )
         {
             return node;
         }
