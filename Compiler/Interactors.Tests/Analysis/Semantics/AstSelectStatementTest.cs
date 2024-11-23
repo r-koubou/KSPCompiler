@@ -33,8 +33,8 @@ public class AstSelectStatementTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( expectedWarningCount, compilerMessageManger.Count( CompilerMessageLevel.Warning ) );
-        Assert.AreEqual( expectedErrorCount,   compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Warning ), Is.EqualTo( expectedWarningCount ) );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ),   Is.EqualTo( expectedErrorCount ) );
     }
 
     private static void AddCaseBlock( AstSelectStatementNode statement, AstExpressionNode caseFrom, AstStatementNode caseCode )

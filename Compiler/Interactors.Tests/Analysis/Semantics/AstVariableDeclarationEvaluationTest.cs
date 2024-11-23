@@ -34,8 +34,8 @@ public class AstVariableDeclarationEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 0, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
-        Assert.AreEqual( 1, symbols.Variables.Count );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 0 ) );
+        Assert.That( symbols.Variables.Count, Is.EqualTo( 1 ) );
     }
 
     [Test]
@@ -63,7 +63,7 @@ public class AstVariableDeclarationEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
     }
 
     [Test]
@@ -99,8 +99,8 @@ public class AstVariableDeclarationEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 0, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
-        Assert.AreEqual( 1, symbols.Variables.Count );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 0 ) );
+        Assert.That( symbols.Variables.Count, Is.EqualTo( 1 ) );
     }
 
     [Test]
@@ -136,8 +136,8 @@ public class AstVariableDeclarationEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
-        Assert.AreEqual( 0, symbols.Variables.Count );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
+        Assert.That( symbols.Variables.Count, Is.EqualTo( 0 ) );
     }
 
     [Test]
@@ -175,8 +175,8 @@ public class AstVariableDeclarationEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
-        Assert.AreEqual( 0, symbols.Variables.Count );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
+        Assert.That( symbols.Variables.Count, Is.EqualTo( 0 ) );
     }
 
     [Test]
@@ -203,8 +203,8 @@ public class AstVariableDeclarationEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
-        Assert.AreEqual( 0, symbols.Variables.Count );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
+        Assert.That( symbols.Variables.Count, Is.EqualTo( 0 ) );
     }
 
 }

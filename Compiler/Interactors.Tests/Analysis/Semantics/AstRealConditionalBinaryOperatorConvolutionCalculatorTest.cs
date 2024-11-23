@@ -29,8 +29,8 @@ public class AstRealConditionalBinaryOperatorConvolutionCalculatorTest
 
         var result = calulator.Calculate( visitor, ast );
 
-        Assert.IsNotNull( result );
-        Assert.AreEqual( expected, result );
+        Assert.That( result, Is.Not.Null );
+        Assert.That( result, Is.EqualTo( expected ) );
     }
 
     [Test]

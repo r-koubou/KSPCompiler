@@ -24,8 +24,8 @@ public class AstBooleanConvolutionEvaluatorTest
 
         var result = booleanConvolutionEvaluator.Evaluate( visitor, ast, false );
 
-        Assert.IsNotNull( result );
-        Assert.AreEqual( expected, result );
+        Assert.That( result, Is.Not.Null );
+        Assert.That( result, Is.EqualTo( expected ) );
     }
 
     [TestCase( 1, 1, true )]
@@ -83,8 +83,8 @@ public class AstBooleanConvolutionEvaluatorTest
 
         var result = booleanConvolutionEvaluator.Evaluate( visitor, ast, false );
 
-        Assert.IsNotNull( result );
-        Assert.AreEqual( !value, result );
+        Assert.That( result, Is.Not.Null );
+        Assert.That( result, Is.EqualTo( !value ) );
     }
 
     [TestCase( 1, 1, 1, 1, true )]
@@ -115,8 +115,8 @@ public class AstBooleanConvolutionEvaluatorTest
 
         var result = booleanConvolutionEvaluator.Evaluate( visitor, ast, false );
 
-        Assert.IsNotNull( result );
-        Assert.AreEqual( expected, result );
+        Assert.That( result, Is.Not.Null );
+        Assert.That( result, Is.EqualTo( expected ) );
     }
 
     [TestCase( 1, 1, 1, 1, true )]
@@ -147,8 +147,8 @@ public class AstBooleanConvolutionEvaluatorTest
 
         var result = booleanConvolutionEvaluator.Evaluate( visitor, ast, false );
 
-        Assert.IsNotNull( result );
-        Assert.AreEqual( expected, result );
+        Assert.That( result, Is.Not.Null );
+        Assert.That( result, Is.EqualTo( expected ) );
     }
 
     [TestCase( 1, 1, 1, 1, false )]
@@ -181,7 +181,7 @@ public class AstBooleanConvolutionEvaluatorTest
 
         var result = booleanConvolutionEvaluator.Evaluate( visitor, ast, false );
 
-        Assert.IsNotNull( result );
-        Assert.AreEqual( expected, result );
+        Assert.That( result, Is.Not.Null );
+        Assert.That( result, Is.EqualTo( expected ) );
     }
 }

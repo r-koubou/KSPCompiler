@@ -43,7 +43,7 @@ public class AstCallCommandEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 0, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 0 ) );
     }
 
     [Test]
@@ -77,7 +77,7 @@ public class AstCallCommandEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
     }
 
     [Test]
@@ -112,7 +112,7 @@ public class AstCallCommandEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
     }
 
     [Test]
@@ -142,6 +142,6 @@ public class AstCallCommandEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Warning ) );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Warning ), Is.EqualTo( 1 ) );
     }
 }

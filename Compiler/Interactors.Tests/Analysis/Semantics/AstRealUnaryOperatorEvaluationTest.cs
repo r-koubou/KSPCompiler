@@ -33,11 +33,11 @@ public class AstRealUnaryOperatorEvaluationTest
 
         var operatorNode = MockUtility.CreateUnaryMinusOperatorNode( variableName, DataTypeFlag.TypeReal );
 
-        Assert.DoesNotThrow( () => visitor.Visit( operatorNode ) );
+        Assert.That( () => visitor.Visit( operatorNode ), Throws.Nothing );
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsFalse( compilerMessageManger.Count() > 0 );
+        Assert.That( compilerMessageManger.Count(), Is.EqualTo( 0 ) );
     }
 
     [Test]
@@ -61,11 +61,11 @@ public class AstRealUnaryOperatorEvaluationTest
 
         var operatorNode = MockUtility.CreateUnaryNotOperatorNode( variableName, DataTypeFlag.TypeReal );
 
-        Assert.DoesNotThrow( () => visitor.Visit( operatorNode ) );
+        Assert.That( () => visitor.Visit( operatorNode ), Throws.Nothing );
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsTrue( compilerMessageManger.Count() > 0 );
+        Assert.That( compilerMessageManger.Count(), Is.GreaterThan( 0 ) );
     }
 
 }

@@ -28,9 +28,9 @@ public class AstPgsSymbolEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsTrue( result is AstExpressionNode );
-        Assert.IsTrue( ((AstExpressionNode)result).TypeFlag == DataTypeFlag.TypePgsId );
-        Assert.AreEqual( expectedErrorCount, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        Assert.That( result,                                                    Is.InstanceOf<AstExpressionNode>() );
+        Assert.That( ( (AstExpressionNode)result ).TypeFlag,                    Is.EqualTo( DataTypeFlag.TypePgsId ) );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( expectedErrorCount ) );
     }
 
     [Test]

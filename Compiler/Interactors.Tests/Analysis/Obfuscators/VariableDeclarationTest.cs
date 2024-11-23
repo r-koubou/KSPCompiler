@@ -42,7 +42,7 @@ public class VariableDeclarationTest
         visitor.Inject( evaluator );
         visitor.Visit( node );
 
-        Assert.AreEqual( $"declare {obfuscatedName}{ObfuscatorConstants.NewLine}", output.ToString() );
+        Assert.That( output.ToString(), Is.EqualTo( $"declare {obfuscatedName}{ObfuscatorConstants.NewLine}" ) );
     }
 
     [Test]
@@ -73,7 +73,7 @@ public class VariableDeclarationTest
         visitor.Inject( evaluator );
         visitor.Visit( node );
 
-        Assert.AreEqual( "", output.ToString() );
+        Assert.That( output.ToString(), Is.EqualTo( string.Empty ) );
     }
 
     [TestCase( ModifierFlag.Const, "const" )]
@@ -106,7 +106,7 @@ public class VariableDeclarationTest
         visitor.Inject( evaluator );
         visitor.Visit( node );
 
-        Assert.AreEqual( $"declare {modifierText} {obfuscatedName}{ObfuscatorConstants.NewLine}", output.ToString() );
+        Assert.That( output.ToString(), Is.EqualTo( $"declare {modifierText} {obfuscatedName}{ObfuscatorConstants.NewLine}" ) );
     }
 
     [Test]
@@ -147,7 +147,7 @@ public class VariableDeclarationTest
         visitor.Inject( evaluator );
         visitor.Visit( node );
 
-        Assert.AreEqual( expected, output.ToString() );
+        Assert.That( output.ToString(), Is.EqualTo( expected ) );
     }
 
     [Test]
@@ -194,7 +194,7 @@ public class VariableDeclarationTest
         visitor.Inject( evaluator );
         visitor.Visit( node );
 
-        Assert.AreEqual( expected, output.ToString() );
+        Assert.That( output.ToString(), Is.EqualTo( expected ) );
     }
 
     [Test]
@@ -246,7 +246,7 @@ public class VariableDeclarationTest
         visitor.Inject( evaluator );
         visitor.Visit( node );
 
-        Assert.AreEqual( expected, output.ToString() );
+        Assert.That( output.ToString(), Is.EqualTo( expected ) );
     }
 
     [Test]
@@ -300,6 +300,6 @@ public class VariableDeclarationTest
         visitor.Inject( evaluator );
         visitor.Visit( node );
 
-        Assert.AreEqual( expected, output.ToString() );
+        Assert.That( output.ToString(), Is.EqualTo( expected ) );
     }
 }

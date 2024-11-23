@@ -37,7 +37,7 @@ public class AstStringConcatenateOperatorEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( expectedErrorCount, compilerMessageManger.Count() );
+        Assert.That( compilerMessageManger.Count(), Is.EqualTo( expectedErrorCount ) );
     }
 
     #endregion

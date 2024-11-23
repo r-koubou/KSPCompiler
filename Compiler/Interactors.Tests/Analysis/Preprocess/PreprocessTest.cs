@@ -49,8 +49,8 @@ public class PreprocessTest
 
         analyzer.Traverse( ast );
 
-        Assert.AreEqual( 1, symbolTable.Count );
-        Assert.AreEqual( expectedIgnored, ifdef.Ignore );
+        Assert.That( symbolTable.Count, Is.EqualTo( 1 ) );
+        Assert.That( ifdef.Ignore,      Is.EqualTo( expectedIgnored ) );
     }
 
     [TestCase( "DEMO", "DEMO",  true )]
@@ -91,8 +91,8 @@ public class PreprocessTest
 
         analyzer.Traverse( ast );
 
-        Assert.AreEqual( 1,               symbolTable.Count );
-        Assert.AreEqual( expectedIgnored, ifdef.Ignore );
+        Assert.That( symbolTable.Count, Is.EqualTo( 1 ) );
+        Assert.That( ifdef.Ignore,      Is.EqualTo( expectedIgnored ) );
     }
 
     [Test]
@@ -125,7 +125,7 @@ public class PreprocessTest
 
         analyzer.Traverse( ast );
 
-        Assert.AreEqual( 0, symbolTable.Count );
+        Assert.That( symbolTable.Count, Is.EqualTo( 0 ) );
     }
 
 }

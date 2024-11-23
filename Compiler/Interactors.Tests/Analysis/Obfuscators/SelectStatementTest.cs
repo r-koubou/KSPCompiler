@@ -81,6 +81,6 @@ public class SelectStatementTest
         visitor.Inject( whileEvaluator );
         visitor.Visit( node );
 
-        Assert.AreEqual( expected, output.ToString() );
+        Assert.That( output.ToString(), Is.EqualTo( expected ) );
     }
 }

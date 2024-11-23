@@ -17,37 +17,37 @@ public class AstTranslatorTest
     [Test]
     public void LexerErrorTest()
     {
-        Assert.Throws<KspScriptParseException>( () => ParseTestUtility.Parse( TestDataDirectory, "LexerErrorTest.txt" ) );
+        Assert.That( () => ParseTestUtility.Parse( TestDataDirectory, "LexerErrorTest.txt" ), Throws.TypeOf<KspScriptParseException>() );
     }
 
     [Test]
     public void ParserErrorTest()
     {
-        Assert.Throws<KspScriptParseException>( () => ParseTestUtility.Parse( TestDataDirectory, "ParserErrorTest.txt" ) );
+        Assert.That( () => ParseTestUtility.Parse( TestDataDirectory, "ParserErrorTest.txt" ), Throws.TypeOf<KspScriptParseException>() );
     }
 
     [Test]
     public void ExpressionTest()
     {
-        Assert.DoesNotThrow( () => ParseTestUtility.Parse( TestDataDirectory, "ExpressionTest.txt" ) );
+        Assert.That( () => ParseTestUtility.Parse( TestDataDirectory, "ExpressionTest.txt" ), Throws.Nothing );
     }
 
     [Test]
     public void CallCommandTest()
     {
-        Assert.DoesNotThrow( () => ParseTestUtility.Parse( TestDataDirectory, "CallCommandTest.txt" ) );
+        Assert.That( () => ParseTestUtility.Parse( TestDataDirectory, "CallCommandTest.txt" ), Throws.Nothing );
     }
 
     [Test]
     public void AssignTest()
     {
-        Assert.DoesNotThrow( () => ParseTestUtility.Parse( TestDataDirectory, "AssignTest.txt" ) );
+        Assert.That( () => ParseTestUtility.Parse( TestDataDirectory, "AssignTest.txt" ), Throws.Nothing );
     }
 
     [Test]
     public void StatementTest()
     {
-        Assert.DoesNotThrow( () => ParseTestUtility.Parse( TestDataDirectory, "StatementTest.txt" ) );
+        Assert.That( () => ParseTestUtility.Parse( TestDataDirectory, "StatementTest.txt" ), Throws.Nothing );
     }
 
 }

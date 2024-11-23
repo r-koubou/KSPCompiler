@@ -50,7 +50,7 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.ImportAsync( importer );
 
-        Assert.IsTrue( result.Success );
+        Assert.That( result.Success, Is.True );
     }
 
     [Test]
@@ -66,7 +66,7 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.ExportAsync( exporter, _ => true );
 
-        Assert.IsTrue( result.Success );
+        Assert.That( result.Success, Is.True );
     }
 
     [Test]
@@ -79,8 +79,8 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.DeleteAsync( _ => true );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsFalse( (await repository.FindAllAsync()).Any() );
+        Assert.That( result.Success, Is.True );
+        Assert.That( ( await repository.FindAllAsync() ).Any(), Is.False );
     }
 
     [Test]
@@ -93,8 +93,8 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.FindAsync( _ => true );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsTrue( result.FoundSymbols.Any() );
+        Assert.That( result.Success, Is.True );
+        Assert.That( result.FoundSymbols, Is.Not.Empty );
     }
 
     #endregion
@@ -114,7 +114,7 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.ImportAsync( importer );
 
-        Assert.IsTrue( result.Success );
+        Assert.That( result.Success, Is.True );
     }
 
     [Test]
@@ -130,7 +130,7 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.ExportAsync( exporter, _ => true );
 
-        Assert.IsTrue( result.Success );
+        Assert.That( result.Success, Is.True );
     }
 
     [Test]
@@ -143,8 +143,8 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.DeleteAsync( _ => true );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsFalse( ( await repository.FindAllAsync() ).Any() );
+        Assert.That( result.Success, Is.True );
+        Assert.That( await repository.FindAllAsync(), Is.Empty );
     }
 
     [Test]
@@ -157,8 +157,8 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.FindAsync( _ => true );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsTrue( result.FoundSymbols.Any() );
+        Assert.That( result.Success, Is.True );
+        Assert.That( result.FoundSymbols, Is.Not.Empty );
     }
 
     #endregion
@@ -178,7 +178,7 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.ImportAsync( importer );
 
-        Assert.IsTrue( result.Success );
+        Assert.That( result.Success, Is.True );
     }
 
     [Test]
@@ -194,7 +194,7 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.ExportAsync( exporter, _ => true );
 
-        Assert.IsTrue( result.Success );
+        Assert.That( result.Success, Is.True );
     }
 
     [Test]
@@ -207,8 +207,8 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.DeleteAsync( _ => true );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsFalse( ( await repository.FindAllAsync() ).Any() );
+        Assert.That( result.Success, Is.True );
+        Assert.That( await repository.FindAllAsync(), Is.Empty );
     }
 
     [Test]
@@ -221,8 +221,8 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.FindAsync( _ => true );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsTrue( result.FoundSymbols.Any() );
+        Assert.That( result.Success, Is.True );
+        Assert.That( result.FoundSymbols, Is.Not.Empty );
     }
 
     #endregion
@@ -242,7 +242,7 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.ImportAsync( importer );
 
-        Assert.IsTrue( result.Success );
+        Assert.That( result.Success, Is.True );
     }
 
     [Test]
@@ -258,7 +258,7 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.ExportAsync( exporter, _ => true );
 
-        Assert.IsTrue( result.Success );
+        Assert.That( result.Success, Is.True );
     }
 
     [Test]
@@ -271,8 +271,8 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.DeleteAsync( _ => true );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsFalse( ( await repository.FindAllAsync() ).Any() );
+        Assert.That( result.Success, Is.True );
+        Assert.That( await repository.FindAllAsync(), Is.Empty );
     }
 
     [Test]
@@ -285,8 +285,8 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.FindAsync( _ => true );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsTrue( result.FoundSymbols.Any() );
+        Assert.That( result.Success, Is.True );
+        Assert.That( result.FoundSymbols, Is.Not.Empty );
     }
 
     #endregion

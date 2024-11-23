@@ -41,7 +41,7 @@ public class WhileStatementTest
         visitor.Inject( whileEvaluator );
         visitor.Visit( node );
 
-        Assert.AreEqual( expected, output.ToString() );
+        Assert.That( output.ToString(), Is.EqualTo( expected ) );
     }
 
     [Test]
@@ -84,6 +84,6 @@ public class WhileStatementTest
         visitor.Inject( continueEvaluator );
         visitor.Visit( node );
 
-        Assert.AreEqual( expected, output.ToString() );
+        Assert.That( output.ToString(), Is.EqualTo( expected ) );
     }
 }

@@ -42,9 +42,9 @@ public class AstConditionalUnaryOperatorEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 0, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
-        Assert.IsNotNull( result );
-        Assert.AreEqual( DataTypeFlag.TypeBool, result?.TypeFlag );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 0 ) );
+        Assert.That( result, Is.Not.Null );
+        Assert.That( result?.TypeFlag, Is.EqualTo( DataTypeFlag.TypeBool ) );
     }
 
     [Test]
@@ -75,8 +75,8 @@ public class AstConditionalUnaryOperatorEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
-        Assert.IsNotNull( result );
-        Assert.AreEqual( DataTypeFlag.TypeBool, result?.TypeFlag );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
+        Assert.That( result, Is.Not.Null );
+        Assert.That( result?.TypeFlag, Is.EqualTo( DataTypeFlag.TypeBool ) );
     }
 }

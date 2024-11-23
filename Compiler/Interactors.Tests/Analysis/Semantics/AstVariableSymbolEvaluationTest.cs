@@ -57,7 +57,8 @@ public class AstVariableSymbolEvaluationTest
                 : Is.InstanceOf<AstSymbolExpressionNode>()
         );
 
-        Assert.IsTrue( result.TypeFlag.IsInt() );
+
+        Assert.That( result.TypeFlag.IsInt(), Is.True );
     }
 
     [TestCase( 123)]
@@ -72,9 +73,9 @@ public class AstVariableSymbolEvaluationTest
         var result = VariableSymbolTestBody( variable );
         var literal = result as AstIntLiteralNode;
 
-        Assert.AreEqual( true, result.Constant );
-        Assert.IsNotNull( literal );
-        Assert.AreEqual( value, literal?.Value );
+        Assert.That( result.Constant, Is.True );
+        Assert.That( literal, Is.Not.Null );
+        Assert.That( literal?.Value, Is.EqualTo( value ) );
     }
 
     [TestCase( 1.23)]
@@ -89,9 +90,9 @@ public class AstVariableSymbolEvaluationTest
         var result = VariableSymbolTestBody( variable );
         var literal = result as AstRealLiteralNode;
 
-        Assert.AreEqual( true, result.Constant );
-        Assert.IsNotNull( literal );
-        Assert.AreEqual( value, literal?.Value );
+        Assert.That( result.Constant, Is.True );
+        Assert.That( literal, Is.Not.Null );
+        Assert.That( literal?.Value, Is.EqualTo( value ) );
     }
 
     [TestCase( "abc")]
@@ -106,9 +107,9 @@ public class AstVariableSymbolEvaluationTest
         var result = VariableSymbolTestBody( variable );
         var literal = result as AstStringLiteralNode;
 
-        Assert.AreEqual( true, result.Constant );
-        Assert.IsNotNull( literal );
-        Assert.AreEqual( value, literal?.Value );
+        Assert.That( result.Constant, Is.True );
+        Assert.That( literal, Is.Not.Null );
+        Assert.That( literal?.Value, Is.EqualTo( value ) );
     }
 
     [Test]
@@ -126,6 +127,6 @@ public class AstVariableSymbolEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
     }
 }

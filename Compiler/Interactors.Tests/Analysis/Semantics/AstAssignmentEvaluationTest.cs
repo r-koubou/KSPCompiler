@@ -29,9 +29,9 @@ public class AstAssignmentEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsFalse( compilerMessageManger.Count( CompilerMessageLevel.Error ) > 0 );
-        Assert.IsNotNull( result );
-        Assert.AreEqual( DataTypeFlag.TypeInt, result?.TypeFlag );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 0 ) );
+        Assert.That( result, Is.Not.Null );
+        Assert.That( result?.TypeFlag, Is.EqualTo( DataTypeFlag.TypeInt ) );
     }
 
     [Test]
@@ -52,9 +52,9 @@ public class AstAssignmentEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsTrue( compilerMessageManger.Count( CompilerMessageLevel.Error ) > 0 );
-        Assert.IsNotNull( result );
-        Assert.AreEqual( DataTypeFlag.TypeInt, result?.TypeFlag );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.GreaterThan( 0 ) );
+        Assert.That( result, Is.Not.Null );
+        Assert.That( result?.TypeFlag, Is.EqualTo( DataTypeFlag.TypeInt ) );
     }
 
     [Test]
@@ -75,9 +75,9 @@ public class AstAssignmentEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsTrue( compilerMessageManger.Count( CompilerMessageLevel.Error ) > 0 );
-        Assert.IsNotNull( result );
-        Assert.AreEqual( DataTypeFlag.TypeInt, result?.TypeFlag );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.GreaterThan( 0 ) );
+        Assert.That( result, Is.Not.Null );
+        Assert.That( result?.TypeFlag, Is.EqualTo( DataTypeFlag.TypeInt ) );
     }
 
     [Test]
@@ -96,9 +96,9 @@ public class AstAssignmentEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsTrue( compilerMessageManger.Count( CompilerMessageLevel.Error ) > 0 );
-        Assert.IsNotNull( result );
-        Assert.AreEqual( DataTypeFlag.TypeInt, result?.TypeFlag );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.GreaterThan( 0 ) );
+        Assert.That( result, Is.Not.Null );
+        Assert.That( result?.TypeFlag, Is.EqualTo( DataTypeFlag.TypeInt ) );
     }
 
     [Test]
@@ -121,9 +121,9 @@ public class AstAssignmentEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsTrue( compilerMessageManger.Count( CompilerMessageLevel.Error ) > 0 );
-        Assert.IsNotNull( result );
-        Assert.AreEqual( DataTypeFlag.TypeIntArray, result?.TypeFlag );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.GreaterThan( 0 ) );
+        Assert.That( result, Is.Not.Null );
+        Assert.That( result?.TypeFlag, Is.EqualTo( DataTypeFlag.TypeIntArray ) );
     }
 
     [Test]
@@ -146,9 +146,9 @@ public class AstAssignmentEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsTrue( compilerMessageManger.Count( CompilerMessageLevel.Error ) > 0 );
-        Assert.IsNotNull( result );
-        Assert.AreEqual( DataTypeFlag.TypeInt, result?.TypeFlag );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.GreaterThan( 0 ) );
+        Assert.That( result, Is.Not.Null );
+        Assert.That( result?.TypeFlag, Is.EqualTo( DataTypeFlag.TypeInt ) );
     }
 
     [Test]
@@ -171,8 +171,8 @@ public class AstAssignmentEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsFalse( compilerMessageManger.Count( CompilerMessageLevel.Error ) > 0 );
-        Assert.IsNotNull( result );
-        Assert.AreEqual( DataTypeFlag.TypeString, result?.TypeFlag );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 0 ) );
+        Assert.That( result, Is.Not.Null );
+        Assert.That( result?.TypeFlag, Is.EqualTo( DataTypeFlag.TypeString ) );
     }
 }

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 using KSPCompiler.Commons.Path;
 using KSPCompiler.Domain.Symbols;
@@ -43,8 +42,8 @@ public class VariableRepositoryTest
         var variable = CreateDummySymbol( "$ENGINE_PAR_VOLUME" );
         var result = repository.Store( variable );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsTrue( result.Exception == null );
+        Assert.That( result.Success, Is.True );
+        Assert.That( result.Exception, Is.Null );
     }
 
     [Test]
@@ -60,8 +59,8 @@ public class VariableRepositoryTest
 
         var result = repository.Store( variables );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsTrue( result.Exception == null );
+        Assert.That( result.Success, Is.True );
+        Assert.That( result.Exception, Is.Null );
     }
 
     [Test]
@@ -73,9 +72,9 @@ public class VariableRepositoryTest
         repository.Store( variable );
         var result = repository.Delete( variable );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsTrue( result.Exception == null );
-        Assert.IsTrue( result.DeletedCount == 1 );
+        Assert.That( result.Success, Is.True );
+        Assert.That( result.Exception, Is.Null );
+        Assert.That( result.DeletedCount, Is.EqualTo( 1 ) );
     }
 
     [Test]
@@ -91,9 +90,9 @@ public class VariableRepositoryTest
         repository.Store( variables );
         var result = repository.Delete( variables );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsTrue( result.Exception == null );
-        Assert.IsTrue( result.DeletedCount == 2 );
+        Assert.That( result.Success, Is.True );
+        Assert.That( result.Exception, Is.Null );
+        Assert.That( result.DeletedCount, Is.EqualTo( 2 ) );
     }
 
     [Test]
@@ -109,10 +108,10 @@ public class VariableRepositoryTest
         repository.Store( commands );
 
         var found = repository.FindByName( "$ENGINE_PAR_VOLUME" );
-        Assert.AreEqual( 1, found.Count() );
+        Assert.That( found.Count, Is.EqualTo( 1 ) );
 
         found = repository.FindByName( "$ENGINE_PAR_VOLUME-" );
-        Assert.AreEqual( 0, found.Count() );
+        Assert.That( found.Count, Is.EqualTo( 0 ) );
     }
 
     [Test]
@@ -128,10 +127,10 @@ public class VariableRepositoryTest
         repository.Store( commands );
 
         var found = repository.Find( x => x.Name == "$ENGINE_PAR_VOLUME" );
-        Assert.AreEqual( 1, found.Count() );
+        Assert.That( found.Count, Is.EqualTo( 1 ) );
 
         found = repository.Find( x => x.Name == "$ENGINE_PAR_VOLUME-" );
-        Assert.AreEqual( 0, found.Count() );
+        Assert.That( found.Count, Is.EqualTo( 0 ) );
     }
 
     [Test]
@@ -147,6 +146,6 @@ public class VariableRepositoryTest
         repository.Store( commands );
 
         var found = repository.FindAll();
-        Assert.AreEqual( 2, found.Count() );
+        Assert.That( found.Count, Is.EqualTo( 2 ) );
     }
 }

@@ -34,8 +34,8 @@ public class AstStringConcatenateOperatorConvolutionCalculatorTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( expectedErrorCount, compilerMessageManger.Count() );
-        Assert.AreEqual( expectedValue,      result );
+        Assert.That( compilerMessageManger.Count(), Is.EqualTo( expectedErrorCount ) );
+        Assert.That( result,                        Is.EqualTo( expectedValue ) );
     }
 
     #endregion

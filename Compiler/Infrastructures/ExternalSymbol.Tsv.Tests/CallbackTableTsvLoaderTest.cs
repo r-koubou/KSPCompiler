@@ -36,11 +36,12 @@ public class CallbackTableTsvLoaderTest
         var importer = CreateLocalImporter( path );
         var symbolTable = importer.Import();
 
-        Assert.IsTrue( symbolTable.Count == 2 );
+        Assert.That( symbolTable.Count, Is.EqualTo( 2 ) );
 
         var list = symbolTable.ToList();
-        Assert.AreEqual( SymbolBuiltIntoVersion.NotAvailable, list[ 0 ].BuiltIntoVersion );
-        Assert.AreEqual( SymbolBuiltIntoVersion.NotAvailable, list[ 1 ].BuiltIntoVersion );
+
+        Assert.That( list[ 0 ].BuiltIntoVersion, Is.EqualTo( SymbolBuiltIntoVersion.NotAvailable ) );
+        Assert.That( list[ 1 ].BuiltIntoVersion, Is.EqualTo( SymbolBuiltIntoVersion.NotAvailable ) );
     }
 
     [Test]
@@ -51,7 +52,7 @@ public class CallbackTableTsvLoaderTest
 
         await Task.Run( async () => {
             var symbolTable = await importer.ImportAsync();
-            Assert.IsTrue( symbolTable.Count == 2 );
+            Assert.That( symbolTable.Count, Is.EqualTo( 2 ) );
         });
     }
 

@@ -41,7 +41,7 @@ public class IfStatementTest
         visitor.Inject( evaluator );
         visitor.Visit( node );
 
-        Assert.AreEqual( expected, output.ToString() );
+        Assert.That( output.ToString(), Is.EqualTo( expected ) );
     }
 
     [Test]
@@ -88,7 +88,7 @@ public class IfStatementTest
         visitor.Inject( evaluator );
         visitor.Visit( node );
 
-        Assert.AreEqual( expected, output.ToString() );
+        Assert.That( output.ToString(), Is.EqualTo( expected ) );
     }
 
 }

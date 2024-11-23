@@ -42,7 +42,7 @@ public class AstWhileStatementTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( expectedErrorCount, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( expectedErrorCount ) );
     }
 
     private static void WhileStatementEvaluationTestBody( AstExpressionNode condition, int expectedErrorCount )

@@ -35,7 +35,7 @@ public class PreprocessorTest
         visitor.Inject( evaluator );
         visitor.Visit( defineNode );
 
-        Assert.AreEqual( expected, output.ToString() );
+        Assert.That( output.ToString(), Is.EqualTo( expected ) );
     }
 
     [Test]
@@ -61,7 +61,7 @@ public class PreprocessorTest
         visitor.Inject( evaluator );
         visitor.Visit( defineNode );
 
-        Assert.AreEqual( expected, output.ToString() );
+        Assert.That( output.ToString(), Is.EqualTo( expected ) );
     }
 
     [Test]
@@ -103,7 +103,7 @@ public class PreprocessorTest
         visitor.Inject( evaluator );
         visitor.Visit( ifDefineNode );
 
-        Assert.AreEqual( expected, output.ToString() );
+        Assert.That( output.ToString(), Is.EqualTo( expected ) );
     }
 
     [Test]
@@ -145,6 +145,6 @@ public class PreprocessorTest
         visitor.Inject( evaluator );
         visitor.Visit( ifNotDefineNode );
 
-        Assert.AreEqual( expected, output.ToString() );
+        Assert.That( output.ToString(), Is.EqualTo( expected ) );
     }
 }

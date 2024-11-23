@@ -35,8 +35,8 @@ public class AstCallbackDeclarationEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 0, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
-        Assert.AreEqual( 1, symbols.UserCallbacks.Count );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 0 ) );
+        Assert.That( symbols.UserCallbacks.Count, Is.EqualTo( 1 ) );
     }
 
     [TestCase( "init", false )]
@@ -62,7 +62,7 @@ public class AstCallbackDeclarationEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( allowMultiple ? 0 : 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( allowMultiple ? 0 : 1 ) );
     }
 
 }

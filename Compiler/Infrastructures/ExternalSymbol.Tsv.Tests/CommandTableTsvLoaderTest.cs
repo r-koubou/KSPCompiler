@@ -37,16 +37,18 @@ public class CommandTableTsvLoaderTest
         var importer = CreateLocalImporter( path );
         var symbolTable = importer.Import();
 
-        Assert.IsTrue( symbolTable.Count == 2 );
+        Assert.That( symbolTable.Count, Is.EqualTo( 2 ) );
 
         var symbols = symbolTable.ToList();
-        Assert.AreEqual( SymbolBuiltIntoVersion.NotAvailable, symbols[ 0 ].BuiltIntoVersion );
-        Assert.AreEqual( DataTypeFlag.TypeVoid,               symbols[ 0 ].DataType );
-        Assert.AreEqual( DataTypeFlag.MultipleType,           symbols[ 0 ].Arguments.First().DataType );
 
-        Assert.AreEqual( SymbolBuiltIntoVersion.NotAvailable, symbols[ 1 ].BuiltIntoVersion );
-        Assert.AreEqual( DataTypeFlag.TypeVoid,               symbols[ 1 ].DataType );
-        Assert.AreEqual( new string[] { "ui_*" },             symbols[ 1 ].Arguments.First().UITypeNames );
+        Assert.That( symbols[ 0 ].BuiltIntoVersion, Is.EqualTo( SymbolBuiltIntoVersion.NotAvailable ) );
+        Assert.That( symbols[ 0 ].DataType, Is.EqualTo( DataTypeFlag.TypeVoid ) );
+        Assert.That( symbols[ 0 ].Arguments.First().DataType, Is.EqualTo( DataTypeFlag.MultipleType ) );
+
+        Assert.That( symbols[ 1 ].BuiltIntoVersion, Is.EqualTo( SymbolBuiltIntoVersion.NotAvailable ) );
+        Assert.That( symbols[ 1 ].DataType, Is.EqualTo( DataTypeFlag.TypeVoid ) );
+        Assert.That( symbols[ 1 ].Arguments.First().UITypeNames, Is.EqualTo( new[] { "ui_*" } ) );
+
     }
 
     [Test]
@@ -57,7 +59,7 @@ public class CommandTableTsvLoaderTest
 
         await Task.Run( async () => {
             var symbolTable = await importer.ImportAsync();
-            Assert.IsTrue( symbolTable.Count == 2 );
+            Assert.That( symbolTable.Count, Is.EqualTo( 2 ) );
         });
     }
 

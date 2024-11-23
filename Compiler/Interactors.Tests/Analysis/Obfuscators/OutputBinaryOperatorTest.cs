@@ -22,7 +22,7 @@ public class OutputBinaryOperatorTest
         visitor.Inject( evaluator );
         visit( visitor, expr );
 
-        Assert.AreEqual( expected, output.ToString() );
+        Assert.That( output.ToString(), Is.EqualTo( expected ) );
     }
 
     [Test]

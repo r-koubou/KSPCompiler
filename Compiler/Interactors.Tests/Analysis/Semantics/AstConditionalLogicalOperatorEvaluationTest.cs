@@ -45,9 +45,9 @@ public class AstConditionalLogicalOperatorEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( expectedErrorCount, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
-        Assert.IsNotNull( result );
-        Assert.AreEqual( DataTypeFlag.TypeBool, result?.TypeFlag );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( expectedErrorCount ) );
+        Assert.That( result, Is.Not.Null );
+        Assert.That( result?.TypeFlag, Is.EqualTo( DataTypeFlag.TypeBool ) );
     }
 
     private static void ConditionalLogicalOperatorTestBody<TOperatorNode>( Func<IAstVisitor, TOperatorNode, IAstNode> visit, int expectedErrorCount )

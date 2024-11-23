@@ -26,6 +26,6 @@ public class StringConcatenateOperatorTest
         };
 
         visitor.Visit( operatorNode );
-        Assert.AreEqual( "abc & def", output.ToString() );
+        Assert.That( output.ToString(), Is.EqualTo( "abc & def" ) );
     }
 }
