@@ -17,7 +17,6 @@ using KSPCompiler.Interactors.Tests.Analysis.Semantics;
 using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Booleans;
 
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis;
 
