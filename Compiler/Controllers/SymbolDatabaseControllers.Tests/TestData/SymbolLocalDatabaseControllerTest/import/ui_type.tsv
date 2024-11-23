@@ -1,2 +1,2 @@
-# Name	Reserved	Type	Description	Require Initializer	[Initializer Argument, Description, ...]
-ui_button	true	I	Button	false	$width	Button width
+# Name	Reserved	Type	Description	built-into-version	Require Initializer	Arg1	Arg1 Description
+ui_button	true	I	Creates a button in the performance view.	N/A	false
