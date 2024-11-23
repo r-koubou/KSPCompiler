@@ -4,6 +4,7 @@ using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Interactors.Analysis.Obfuscators;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Obfuscators;
 
@@ -26,6 +27,6 @@ public class StringConcatenateOperatorTest
         };
 
         visitor.Visit( operatorNode );
-        Assert.AreEqual( "abc & def", output.ToString() );
+        ClassicAssert.AreEqual( "abc & def", output.ToString() );
     }
 }

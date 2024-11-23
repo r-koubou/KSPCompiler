@@ -8,6 +8,7 @@ using KSPCompiler.Domain.Symbols.Repositories;
 using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Callbacks;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Tests;
 
@@ -47,8 +48,8 @@ public class CallbackRepositoryTest
         var callBack = CreateDummySymbol( "init" );
         var result = repository.Store( callBack );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsTrue( result.Exception == null );
+        ClassicAssert.IsTrue( result.Success );
+        ClassicAssert.IsTrue( result.Exception == null );
     }
 
     [Test]
@@ -64,8 +65,8 @@ public class CallbackRepositoryTest
 
         var result = repository.Store( callBacks );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsTrue( result.Exception == null );
+        ClassicAssert.IsTrue( result.Success );
+        ClassicAssert.IsTrue( result.Exception == null );
     }
 
     [Test]
@@ -77,9 +78,9 @@ public class CallbackRepositoryTest
         repository.Store( callBack );
         var result = repository.Delete( callBack );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsTrue( result.Exception == null );
-        Assert.IsTrue( result.DeletedCount == 1 );
+        ClassicAssert.IsTrue( result.Success );
+        ClassicAssert.IsTrue( result.Exception == null );
+        ClassicAssert.IsTrue( result.DeletedCount == 1 );
     }
 
     [Test]
@@ -95,9 +96,9 @@ public class CallbackRepositoryTest
         repository.Store( callBacks );
         var result = repository.Delete( callBacks );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsTrue( result.Exception == null );
-        Assert.IsTrue( result.DeletedCount == 2 );
+        ClassicAssert.IsTrue( result.Success );
+        ClassicAssert.IsTrue( result.Exception == null );
+        ClassicAssert.IsTrue( result.DeletedCount == 2 );
     }
 
     [Test]
@@ -113,10 +114,10 @@ public class CallbackRepositoryTest
         repository.Store( callBacks );
 
         var found = repository.FindByName( "init" );
-        Assert.AreEqual( 1, found.Count() );
+        ClassicAssert.AreEqual( 1, found.Count() );
 
         found = repository.FindByName( "init-" );
-        Assert.AreEqual( 0, found.Count() );
+        ClassicAssert.AreEqual( 0, found.Count() );
     }
 
     [Test]
@@ -132,10 +133,10 @@ public class CallbackRepositoryTest
         repository.Store( callBacks );
 
         var found = repository.Find( x => x.Name == "init" );
-        Assert.AreEqual( 1, found.Count() );
+        ClassicAssert.AreEqual( 1, found.Count() );
 
         found = repository.Find( x => x.Name == "init-" );
-        Assert.AreEqual( 0, found.Count() );
+        ClassicAssert.AreEqual( 0, found.Count() );
     }
 
     [Test]
@@ -151,6 +152,6 @@ public class CallbackRepositoryTest
         repository.Store( callBacks );
 
         var found = repository.FindAll();
-        Assert.AreEqual( 2, found.Count() );
+        ClassicAssert.AreEqual( 2, found.Count() );
     }
 }

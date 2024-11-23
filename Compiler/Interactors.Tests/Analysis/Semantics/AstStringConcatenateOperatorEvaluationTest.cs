@@ -7,6 +7,7 @@ using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Interactors.Analysis.Semantics;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Semantics;
 
@@ -37,7 +38,7 @@ public class AstStringConcatenateOperatorEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( expectedErrorCount, compilerMessageManger.Count() );
+        ClassicAssert.AreEqual( expectedErrorCount, compilerMessageManger.Count() );
     }
 
     #endregion

@@ -17,6 +17,7 @@ using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Variables;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.SymbolDatabaseControllers.Tests;
 
@@ -50,7 +51,7 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.ImportAsync( importer );
 
-        Assert.IsTrue( result.Success );
+        ClassicAssert.IsTrue( result.Success );
     }
 
     [Test]
@@ -66,7 +67,7 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.ExportAsync( exporter, _ => true );
 
-        Assert.IsTrue( result.Success );
+        ClassicAssert.IsTrue( result.Success );
     }
 
     [Test]
@@ -79,8 +80,8 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.DeleteAsync( _ => true );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsFalse( (await repository.FindAllAsync()).Any() );
+        ClassicAssert.IsTrue( result.Success );
+        ClassicAssert.IsFalse( (await repository.FindAllAsync()).Any() );
     }
 
     [Test]
@@ -93,8 +94,8 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.FindAsync( _ => true );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsTrue( result.FoundSymbols.Any() );
+        ClassicAssert.IsTrue( result.Success );
+        ClassicAssert.IsTrue( result.FoundSymbols.Any() );
     }
 
     #endregion
@@ -114,7 +115,7 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.ImportAsync( importer );
 
-        Assert.IsTrue( result.Success );
+        ClassicAssert.IsTrue( result.Success );
     }
 
     [Test]
@@ -130,7 +131,7 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.ExportAsync( exporter, _ => true );
 
-        Assert.IsTrue( result.Success );
+        ClassicAssert.IsTrue( result.Success );
     }
 
     [Test]
@@ -143,8 +144,8 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.DeleteAsync( _ => true );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsFalse( ( await repository.FindAllAsync() ).Any() );
+        ClassicAssert.IsTrue( result.Success );
+        ClassicAssert.IsFalse( ( await repository.FindAllAsync() ).Any() );
     }
 
     [Test]
@@ -157,8 +158,8 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.FindAsync( _ => true );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsTrue( result.FoundSymbols.Any() );
+        ClassicAssert.IsTrue( result.Success );
+        ClassicAssert.IsTrue( result.FoundSymbols.Any() );
     }
 
     #endregion
@@ -178,7 +179,7 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.ImportAsync( importer );
 
-        Assert.IsTrue( result.Success );
+        ClassicAssert.IsTrue( result.Success );
     }
 
     [Test]
@@ -194,7 +195,7 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.ExportAsync( exporter, _ => true );
 
-        Assert.IsTrue( result.Success );
+        ClassicAssert.IsTrue( result.Success );
     }
 
     [Test]
@@ -207,8 +208,8 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.DeleteAsync( _ => true );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsFalse( ( await repository.FindAllAsync() ).Any() );
+        ClassicAssert.IsTrue( result.Success );
+        ClassicAssert.IsFalse( ( await repository.FindAllAsync() ).Any() );
     }
 
     [Test]
@@ -221,8 +222,8 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.FindAsync( _ => true );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsTrue( result.FoundSymbols.Any() );
+        ClassicAssert.IsTrue( result.Success );
+        ClassicAssert.IsTrue( result.FoundSymbols.Any() );
     }
 
     #endregion
@@ -242,7 +243,7 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.ImportAsync( importer );
 
-        Assert.IsTrue( result.Success );
+        ClassicAssert.IsTrue( result.Success );
     }
 
     [Test]
@@ -258,7 +259,7 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.ExportAsync( exporter, _ => true );
 
-        Assert.IsTrue( result.Success );
+        ClassicAssert.IsTrue( result.Success );
     }
 
     [Test]
@@ -271,8 +272,8 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.DeleteAsync( _ => true );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsFalse( ( await repository.FindAllAsync() ).Any() );
+        ClassicAssert.IsTrue( result.Success );
+        ClassicAssert.IsFalse( ( await repository.FindAllAsync() ).Any() );
     }
 
     [Test]
@@ -285,8 +286,8 @@ public class SymbolLocalDatabaseControllerTest
 
         var result = await controller.FindAsync( _ => true );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsTrue( result.FoundSymbols.Any() );
+        ClassicAssert.IsTrue( result.Success );
+        ClassicAssert.IsTrue( result.FoundSymbols.Any() );
     }
 
     #endregion

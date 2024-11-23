@@ -7,6 +7,7 @@ using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Integers
 using KSPCompiler.Interactors.Analysis.Semantics;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Semantics;
 
@@ -33,9 +34,9 @@ public class AstIntBinaryOperatorConvolutionTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 0, compilerMessageManger.Count() );
-        Assert.IsNotNull( result );
-        Assert.AreEqual( expected, result?.Value );
+        ClassicAssert.AreEqual( 0, compilerMessageManger.Count() );
+        ClassicAssert.IsNotNull( result );
+        ClassicAssert.AreEqual( expected, result?.Value );
     }
 
     [TestCase( 1, 1,  2 )]

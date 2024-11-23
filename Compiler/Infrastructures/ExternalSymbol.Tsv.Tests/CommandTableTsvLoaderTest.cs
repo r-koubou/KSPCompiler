@@ -10,6 +10,7 @@ using KSPCompiler.ExternalSymbol.Tsv.Commands;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.ExternalSymbol.Tsv.Tests;
 
@@ -37,16 +38,16 @@ public class CommandTableTsvLoaderTest
         var importer = CreateLocalImporter( path );
         var symbolTable = importer.Import();
 
-        Assert.IsTrue( symbolTable.Count == 2 );
+        ClassicAssert.IsTrue( symbolTable.Count == 2 );
 
         var symbols = symbolTable.ToList();
-        Assert.AreEqual( SymbolBuiltIntoVersion.NotAvailable, symbols[ 0 ].BuiltIntoVersion );
-        Assert.AreEqual( DataTypeFlag.TypeVoid,               symbols[ 0 ].DataType );
-        Assert.AreEqual( DataTypeFlag.MultipleType,           symbols[ 0 ].Arguments.First().DataType );
+        ClassicAssert.AreEqual( SymbolBuiltIntoVersion.NotAvailable, symbols[ 0 ].BuiltIntoVersion );
+        ClassicAssert.AreEqual( DataTypeFlag.TypeVoid,               symbols[ 0 ].DataType );
+        ClassicAssert.AreEqual( DataTypeFlag.MultipleType,           symbols[ 0 ].Arguments.First().DataType );
 
-        Assert.AreEqual( SymbolBuiltIntoVersion.NotAvailable, symbols[ 1 ].BuiltIntoVersion );
-        Assert.AreEqual( DataTypeFlag.TypeVoid,               symbols[ 1 ].DataType );
-        Assert.AreEqual( new string[] { "ui_*" },             symbols[ 1 ].Arguments.First().UITypeNames );
+        ClassicAssert.AreEqual( SymbolBuiltIntoVersion.NotAvailable, symbols[ 1 ].BuiltIntoVersion );
+        ClassicAssert.AreEqual( DataTypeFlag.TypeVoid,               symbols[ 1 ].DataType );
+        ClassicAssert.AreEqual( new string[] { "ui_*" },             symbols[ 1 ].Arguments.First().UITypeNames );
     }
 
     [Test]
@@ -57,7 +58,7 @@ public class CommandTableTsvLoaderTest
 
         await Task.Run( async () => {
             var symbolTable = await importer.ImportAsync();
-            Assert.IsTrue( symbolTable.Count == 2 );
+            ClassicAssert.IsTrue( symbolTable.Count == 2 );
         });
     }
 

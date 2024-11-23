@@ -5,6 +5,7 @@ using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Interactors.Analysis.Preprocessing;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Preprocess;
 
@@ -49,8 +50,8 @@ public class PreprocessTest
 
         analyzer.Traverse( ast );
 
-        Assert.AreEqual( 1, symbolTable.Count );
-        Assert.AreEqual( expectedIgnored, ifdef.Ignore );
+        ClassicAssert.AreEqual( 1, symbolTable.Count );
+        ClassicAssert.AreEqual( expectedIgnored, ifdef.Ignore );
     }
 
     [TestCase( "DEMO", "DEMO",  true )]
@@ -91,8 +92,8 @@ public class PreprocessTest
 
         analyzer.Traverse( ast );
 
-        Assert.AreEqual( 1,               symbolTable.Count );
-        Assert.AreEqual( expectedIgnored, ifdef.Ignore );
+        ClassicAssert.AreEqual( 1,               symbolTable.Count );
+        ClassicAssert.AreEqual( expectedIgnored, ifdef.Ignore );
     }
 
     [Test]
@@ -125,7 +126,7 @@ public class PreprocessTest
 
         analyzer.Traverse( ast );
 
-        Assert.AreEqual( 0, symbolTable.Count );
+        ClassicAssert.AreEqual( 0, symbolTable.Count );
     }
 
 }

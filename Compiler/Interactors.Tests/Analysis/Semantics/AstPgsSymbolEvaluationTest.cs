@@ -7,6 +7,7 @@ using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Interactors.Analysis.Semantics;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Semantics;
 
@@ -28,9 +29,9 @@ public class AstPgsSymbolEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsTrue( result is AstExpressionNode );
-        Assert.IsTrue( ((AstExpressionNode)result).TypeFlag == DataTypeFlag.TypePgsId );
-        Assert.AreEqual( expectedErrorCount, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        ClassicAssert.IsTrue( result is AstExpressionNode );
+        ClassicAssert.IsTrue( ((AstExpressionNode)result).TypeFlag == DataTypeFlag.TypePgsId );
+        ClassicAssert.AreEqual( expectedErrorCount, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
     }
 
     [Test]

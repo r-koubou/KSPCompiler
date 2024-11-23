@@ -5,6 +5,7 @@ using KSPCompiler.Interactors.Analysis.Obfuscators;
 using KSPCompiler.Interactors.Analysis.Obfuscators.Extensions;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Obfuscators;
 
@@ -33,7 +34,7 @@ public class CallbackDeclarationTest
         visitor.Inject( evaluator );
         visitor.Visit( node );
 
-        Assert.AreEqual( expected, output.ToString() );
+        ClassicAssert.AreEqual( expected, output.ToString() );
     }
 
     [Test]
@@ -70,6 +71,6 @@ public class CallbackDeclarationTest
         visitor.Inject( evaluator );
         visitor.Visit( node );
 
-        Assert.AreEqual( expected, output.ToString() );
+        ClassicAssert.AreEqual( expected, output.ToString() );
     }
 }

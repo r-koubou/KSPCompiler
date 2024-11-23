@@ -7,6 +7,7 @@ using KSPCompiler.Interactors.Analysis.Obfuscators;
 using KSPCompiler.UseCases.Analysis.Evaluations.Operators;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Obfuscators;
 
@@ -23,7 +24,7 @@ public class OutputUnaryOperatorTest
         visitor.Inject( evaluator );
         visit( visitor, expr );
 
-        Assert.AreEqual( expected, output.ToString() );
+        ClassicAssert.AreEqual( expected, output.ToString() );
     }
 
     private static (IOperatorEvaluator, StringBuilder) CreateEvaluator()

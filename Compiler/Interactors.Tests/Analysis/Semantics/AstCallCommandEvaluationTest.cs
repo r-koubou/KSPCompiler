@@ -5,6 +5,7 @@ using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Interactors.Analysis.Semantics;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Semantics;
 
@@ -43,7 +44,7 @@ public class AstCallCommandEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 0, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        ClassicAssert.AreEqual( 0, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
     }
 
     [Test]
@@ -77,7 +78,7 @@ public class AstCallCommandEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        ClassicAssert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
     }
 
     [Test]
@@ -112,7 +113,7 @@ public class AstCallCommandEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        ClassicAssert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
     }
 
     [Test]
@@ -142,6 +143,6 @@ public class AstCallCommandEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Warning ) );
+        ClassicAssert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Warning ) );
     }
 }

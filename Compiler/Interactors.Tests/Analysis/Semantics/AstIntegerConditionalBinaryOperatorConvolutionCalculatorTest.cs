@@ -4,6 +4,7 @@ using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Conditions;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Semantics;
 
@@ -27,8 +28,8 @@ public class AstIntegerConditionalBinaryOperatorConvolutionCalculatorTest
 
         var result = calulator.Calculate( visitor, ast );
 
-        Assert.IsNotNull( result );
-        Assert.AreEqual( expected, result );
+        ClassicAssert.IsNotNull( result );
+        ClassicAssert.AreEqual( expected, result );
     }
 
     [Test]

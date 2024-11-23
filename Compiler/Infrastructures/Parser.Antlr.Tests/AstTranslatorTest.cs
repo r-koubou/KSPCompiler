@@ -4,6 +4,7 @@ using KSPCompiler.Domain;
 using KSPCompiler.Parser.Antlr.Tests.Commons;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Parser.Antlr.Tests;
 
@@ -17,37 +18,37 @@ public class AstTranslatorTest
     [Test]
     public void LexerErrorTest()
     {
-        Assert.Throws<KspScriptParseException>( () => ParseTestUtility.Parse( TestDataDirectory, "LexerErrorTest.txt" ) );
+        ClassicAssert.Throws<KspScriptParseException>( () => ParseTestUtility.Parse( TestDataDirectory, "LexerErrorTest.txt" ) );
     }
 
     [Test]
     public void ParserErrorTest()
     {
-        Assert.Throws<KspScriptParseException>( () => ParseTestUtility.Parse( TestDataDirectory, "ParserErrorTest.txt" ) );
+        ClassicAssert.Throws<KspScriptParseException>( () => ParseTestUtility.Parse( TestDataDirectory, "ParserErrorTest.txt" ) );
     }
 
     [Test]
     public void ExpressionTest()
     {
-        Assert.DoesNotThrow( () => ParseTestUtility.Parse( TestDataDirectory, "ExpressionTest.txt" ) );
+        ClassicAssert.DoesNotThrow( () => ParseTestUtility.Parse( TestDataDirectory, "ExpressionTest.txt" ) );
     }
 
     [Test]
     public void CallCommandTest()
     {
-        Assert.DoesNotThrow( () => ParseTestUtility.Parse( TestDataDirectory, "CallCommandTest.txt" ) );
+        ClassicAssert.DoesNotThrow( () => ParseTestUtility.Parse( TestDataDirectory, "CallCommandTest.txt" ) );
     }
 
     [Test]
     public void AssignTest()
     {
-        Assert.DoesNotThrow( () => ParseTestUtility.Parse( TestDataDirectory, "AssignTest.txt" ) );
+        ClassicAssert.DoesNotThrow( () => ParseTestUtility.Parse( TestDataDirectory, "AssignTest.txt" ) );
     }
 
     [Test]
     public void StatementTest()
     {
-        Assert.DoesNotThrow( () => ParseTestUtility.Parse( TestDataDirectory, "StatementTest.txt" ) );
+        ClassicAssert.DoesNotThrow( () => ParseTestUtility.Parse( TestDataDirectory, "StatementTest.txt" ) );
     }
 
 }

@@ -3,6 +3,7 @@ using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Symbols.MetaData;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Semantics;
 
@@ -24,8 +25,8 @@ public class AstBooleanConvolutionEvaluatorTest
 
         var result = booleanConvolutionEvaluator.Evaluate( visitor, ast, false );
 
-        Assert.IsNotNull( result );
-        Assert.AreEqual( expected, result );
+        ClassicAssert.IsNotNull( result );
+        ClassicAssert.AreEqual( expected, result );
     }
 
     [TestCase( 1, 1, true )]
@@ -83,8 +84,8 @@ public class AstBooleanConvolutionEvaluatorTest
 
         var result = booleanConvolutionEvaluator.Evaluate( visitor, ast, false );
 
-        Assert.IsNotNull( result );
-        Assert.AreEqual( !value, result );
+        ClassicAssert.IsNotNull( result );
+        ClassicAssert.AreEqual( !value, result );
     }
 
     [TestCase( 1, 1, 1, 1, true )]
@@ -115,8 +116,8 @@ public class AstBooleanConvolutionEvaluatorTest
 
         var result = booleanConvolutionEvaluator.Evaluate( visitor, ast, false );
 
-        Assert.IsNotNull( result );
-        Assert.AreEqual( expected, result );
+        ClassicAssert.IsNotNull( result );
+        ClassicAssert.AreEqual( expected, result );
     }
 
     [TestCase( 1, 1, 1, 1, true )]
@@ -147,8 +148,8 @@ public class AstBooleanConvolutionEvaluatorTest
 
         var result = booleanConvolutionEvaluator.Evaluate( visitor, ast, false );
 
-        Assert.IsNotNull( result );
-        Assert.AreEqual( expected, result );
+        ClassicAssert.IsNotNull( result );
+        ClassicAssert.AreEqual( expected, result );
     }
 
     [TestCase( 1, 1, 1, 1, false )]
@@ -181,7 +182,7 @@ public class AstBooleanConvolutionEvaluatorTest
 
         var result = booleanConvolutionEvaluator.Evaluate( visitor, ast, false );
 
-        Assert.IsNotNull( result );
-        Assert.AreEqual( expected, result );
+        ClassicAssert.IsNotNull( result );
+        ClassicAssert.AreEqual( expected, result );
     }
 }

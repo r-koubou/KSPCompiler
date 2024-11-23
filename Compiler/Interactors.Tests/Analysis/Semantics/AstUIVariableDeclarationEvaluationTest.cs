@@ -8,6 +8,7 @@ using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Interactors.Analysis.Semantics;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Semantics;
 
@@ -56,8 +57,8 @@ public class AstUIVariableDeclarationEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 0, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
-        Assert.AreEqual( 1, symbols.Variables.Count );
+        ClassicAssert.AreEqual( 0, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        ClassicAssert.AreEqual( 1, symbols.Variables.Count );
     }
 
     [Test]
@@ -110,8 +111,8 @@ public class AstUIVariableDeclarationEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 0, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
-        Assert.AreEqual( 1, symbols.Variables.Count );
+        ClassicAssert.AreEqual( 0, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        ClassicAssert.AreEqual( 1, symbols.Variables.Count );
     }
 
     [Test]
@@ -138,8 +139,8 @@ public class AstUIVariableDeclarationEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
-        Assert.AreEqual( 0, symbols.Variables.Count );
+        ClassicAssert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        ClassicAssert.AreEqual( 0, symbols.Variables.Count );
     }
 
     [Test]
@@ -179,8 +180,8 @@ public class AstUIVariableDeclarationEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
-        Assert.AreEqual( 0, symbols.Variables.Count );
+        ClassicAssert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        ClassicAssert.AreEqual( 0, symbols.Variables.Count );
     }
 
     [Test]
@@ -224,8 +225,8 @@ public class AstUIVariableDeclarationEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
-        Assert.AreEqual( 0, symbols.Variables.Count );
+        ClassicAssert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        ClassicAssert.AreEqual( 0, symbols.Variables.Count );
     }
 
     [Test]
@@ -270,8 +271,8 @@ public class AstUIVariableDeclarationEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
-        Assert.AreEqual( 0, symbols.Variables.Count );
+        ClassicAssert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        ClassicAssert.AreEqual( 0, symbols.Variables.Count );
     }
 
     [Test]
@@ -320,7 +321,7 @@ public class AstUIVariableDeclarationEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
-        Assert.AreEqual( 1, symbols.Variables.Count );
+        ClassicAssert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        ClassicAssert.AreEqual( 1, symbols.Variables.Count );
     }
 }

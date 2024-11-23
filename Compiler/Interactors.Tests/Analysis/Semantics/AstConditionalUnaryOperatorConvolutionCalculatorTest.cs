@@ -3,6 +3,7 @@ using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Booleans;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Semantics;
 
@@ -28,7 +29,7 @@ public class AstConditionalUnaryOperatorConvolutionCalculatorTest
 
         var result = calculator.Calculate( visitor, ast );
 
-        Assert.IsNotNull( result );
-        Assert.AreEqual( !value, result );
+        ClassicAssert.IsNotNull( result );
+        ClassicAssert.AreEqual( !value, result );
     }
 }

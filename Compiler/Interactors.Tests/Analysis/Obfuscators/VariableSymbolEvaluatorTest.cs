@@ -4,6 +4,7 @@ using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Interactors.Analysis.Obfuscators;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Obfuscators;
 
@@ -31,7 +32,7 @@ public class VariableSymbolEvaluatorTest
         visitor.Inject( evaluator );
         visitor.Visit( expr );
 
-        Assert.AreEqual( obfuscatedName, output.ToString() );
+        ClassicAssert.AreEqual( obfuscatedName, output.ToString() );
     }
 
     [Test]
@@ -57,6 +58,6 @@ public class VariableSymbolEvaluatorTest
         visitor.Inject( evaluator );
         visitor.Visit( expr );
 
-        Assert.AreEqual( variableName, output.ToString() );
+        ClassicAssert.AreEqual( variableName, output.ToString() );
     }
 }

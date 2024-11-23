@@ -6,6 +6,7 @@ using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Reals;
 using KSPCompiler.Interactors.Analysis.Semantics;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Semantics;
 
@@ -33,11 +34,11 @@ public class AstRealUnaryOperatorEvaluationTest
 
         var operatorNode = MockUtility.CreateUnaryMinusOperatorNode( variableName, DataTypeFlag.TypeReal );
 
-        Assert.DoesNotThrow( () => visitor.Visit( operatorNode ) );
+        ClassicAssert.DoesNotThrow( () => visitor.Visit( operatorNode ) );
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsFalse( compilerMessageManger.Count() > 0 );
+        ClassicAssert.IsFalse( compilerMessageManger.Count() > 0 );
     }
 
     [Test]
@@ -61,11 +62,11 @@ public class AstRealUnaryOperatorEvaluationTest
 
         var operatorNode = MockUtility.CreateUnaryNotOperatorNode( variableName, DataTypeFlag.TypeReal );
 
-        Assert.DoesNotThrow( () => visitor.Visit( operatorNode ) );
+        ClassicAssert.DoesNotThrow( () => visitor.Visit( operatorNode ) );
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsTrue( compilerMessageManger.Count() > 0 );
+        ClassicAssert.IsTrue( compilerMessageManger.Count() > 0 );
     }
 
 }

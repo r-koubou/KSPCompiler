@@ -10,6 +10,7 @@ using KSPCompiler.Interactors.Analysis.Semantics;
 using KSPCompiler.UseCases.Analysis.Context;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Semantics;
 
@@ -49,9 +50,9 @@ public class SemanticAnalyzerTest
         context.ExpressionContext.AssignOperator.Evaluate( semanticAnalyzer, statement );
         context.CompilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 0,    context.CompilerMessageManger.Count() );
-        Assert.AreEqual( true, statement.Right is AstIntLiteralNode );
-        Assert.AreEqual( 6,    ( statement.Right as AstIntLiteralNode )?.Value );
+        ClassicAssert.AreEqual( 0,    context.CompilerMessageManger.Count() );
+        ClassicAssert.AreEqual( true, statement.Right is AstIntLiteralNode );
+        ClassicAssert.AreEqual( 6,    ( statement.Right as AstIntLiteralNode )?.Value );
     }
 
     [Test]
@@ -81,9 +82,9 @@ public class SemanticAnalyzerTest
         context.ExpressionContext.AssignOperator.Evaluate( semanticAnalyzer, statement );
         context.CompilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 0,    context.CompilerMessageManger.Count() );
-        Assert.AreEqual( true, statement.Right is AstRealLiteralNode );
-        Assert.AreEqual( 6,    ( statement.Right as AstRealLiteralNode )?.Value );
+        ClassicAssert.AreEqual( 0,    context.CompilerMessageManger.Count() );
+        ClassicAssert.AreEqual( true, statement.Right is AstRealLiteralNode );
+        ClassicAssert.AreEqual( 6,    ( statement.Right as AstRealLiteralNode )?.Value );
     }
 
     [Test]
@@ -114,9 +115,9 @@ public class SemanticAnalyzerTest
 
         context.CompilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 0,           context.CompilerMessageManger.Count() );
-        Assert.AreEqual( true,        statement.Right is AstStringLiteralNode );
-        Assert.AreEqual( "abc123def", ( statement.Right as AstStringLiteralNode )?.Value );
+        ClassicAssert.AreEqual( 0,           context.CompilerMessageManger.Count() );
+        ClassicAssert.AreEqual( true,        statement.Right is AstStringLiteralNode );
+        ClassicAssert.AreEqual( "abc123def", ( statement.Right as AstStringLiteralNode )?.Value );
     }
 
     [Test]
@@ -155,13 +156,13 @@ public class SemanticAnalyzerTest
         context.ExpressionContext.CallCommand.Evaluate( semanticAnalyzer, expr );
         context.CompilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 0, context.CompilerMessageManger.Count() );
+        ClassicAssert.AreEqual( 0, context.CompilerMessageManger.Count() );
 
         var args = expr.Right as AstExpressionListNode;
 
-        Assert.IsNotNull( args );
-        Assert.AreEqual( true, args?.Expressions[0] is AstIntLiteralNode );
-        Assert.AreEqual( 6,    ( args?.Expressions[ 0 ] as AstIntLiteralNode )?.Value );
+        ClassicAssert.IsNotNull( args );
+        ClassicAssert.AreEqual( true, args?.Expressions[0] is AstIntLiteralNode );
+        ClassicAssert.AreEqual( 6,    ( args?.Expressions[ 0 ] as AstIntLiteralNode )?.Value );
     }
 
     [Test]
@@ -209,9 +210,9 @@ public class SemanticAnalyzerTest
         context.DeclarationContext.Variable.Evaluate( semanticAnalyzer, statement );
         context.CompilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 0,    context.CompilerMessageManger.Count() );
-        Assert.AreEqual( true, statement.Initializer.PrimitiveInitializer.Expression is AstIntLiteralNode );
-        Assert.AreEqual( 6,    ( statement.Initializer.PrimitiveInitializer.Expression as AstIntLiteralNode )?.Value );
+        ClassicAssert.AreEqual( 0,    context.CompilerMessageManger.Count() );
+        ClassicAssert.AreEqual( true, statement.Initializer.PrimitiveInitializer.Expression is AstIntLiteralNode );
+        ClassicAssert.AreEqual( 6,    ( statement.Initializer.PrimitiveInitializer.Expression as AstIntLiteralNode )?.Value );
     }
 
     [Test]
@@ -243,10 +244,10 @@ public class SemanticAnalyzerTest
         context.ExpressionContext.ConditionalBinaryOperator.Evaluate( semanticAnalyzer, expr );
         context.CompilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 0,    context.CompilerMessageManger.Count() );
-        Assert.AreEqual( true, expr.Left is AstIntLiteralNode );
-        Assert.AreEqual( 6,    ( expr.Left as AstIntLiteralNode )?.Value );
-        Assert.AreEqual( true, expr.Right is AstIntLiteralNode );
-        Assert.AreEqual( 6,    ( expr.Right as AstIntLiteralNode )?.Value );
+        ClassicAssert.AreEqual( 0,    context.CompilerMessageManger.Count() );
+        ClassicAssert.AreEqual( true, expr.Left is AstIntLiteralNode );
+        ClassicAssert.AreEqual( 6,    ( expr.Left as AstIntLiteralNode )?.Value );
+        ClassicAssert.AreEqual( true, expr.Right is AstIntLiteralNode );
+        ClassicAssert.AreEqual( 6,    ( expr.Right as AstIntLiteralNode )?.Value );
     }
 }

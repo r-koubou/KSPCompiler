@@ -9,6 +9,7 @@ using KSPCompiler.Domain.Symbols.Repositories;
 using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.UITypes;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Tests;
 
@@ -50,8 +51,8 @@ public class UITypeRepositoryTest
         var uiType = CreateDummySymbol( "ui_button" );
         var result = repository.Store( uiType );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsTrue( result.Exception == null );
+        ClassicAssert.IsTrue( result.Success );
+        ClassicAssert.IsTrue( result.Exception == null );
     }
 
     [Test]
@@ -67,8 +68,8 @@ public class UITypeRepositoryTest
 
         var result = repository.Store( uiTypes );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsTrue( result.Exception == null );
+        ClassicAssert.IsTrue( result.Success );
+        ClassicAssert.IsTrue( result.Exception == null );
     }
 
     [Test]
@@ -80,9 +81,9 @@ public class UITypeRepositoryTest
         repository.Store( uiType );
         var result = repository.Delete( uiType );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsTrue( result.Exception == null );
-        Assert.IsTrue( result.DeletedCount == 1 );
+        ClassicAssert.IsTrue( result.Success );
+        ClassicAssert.IsTrue( result.Exception == null );
+        ClassicAssert.IsTrue( result.DeletedCount == 1 );
     }
 
     [Test]
@@ -98,9 +99,9 @@ public class UITypeRepositoryTest
         repository.Store( uiTypes );
         var result = repository.Delete( uiTypes );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsTrue( result.Exception == null );
-        Assert.IsTrue( result.DeletedCount == 2 );
+        ClassicAssert.IsTrue( result.Success );
+        ClassicAssert.IsTrue( result.Exception == null );
+        ClassicAssert.IsTrue( result.DeletedCount == 2 );
     }
 
     [Test]
@@ -116,10 +117,10 @@ public class UITypeRepositoryTest
         repository.Store( commands );
 
         var found = repository.FindByName( "ui_button" );
-        Assert.AreEqual( 1, found.Count() );
+        ClassicAssert.AreEqual( 1, found.Count() );
 
         found = repository.FindByName( "ui_button-" );
-        Assert.AreEqual( 0, found.Count() );
+        ClassicAssert.AreEqual( 0, found.Count() );
     }
 
     [Test]
@@ -135,10 +136,10 @@ public class UITypeRepositoryTest
         repository.Store( commands );
 
         var found = repository.Find( x => x.Name == "ui_button" );
-        Assert.AreEqual( 1, found.Count() );
+        ClassicAssert.AreEqual( 1, found.Count() );
 
         found = repository.Find( x => x.Name == "ui_button-" );
-        Assert.AreEqual( 0, found.Count() );
+        ClassicAssert.AreEqual( 0, found.Count() );
     }
 
     [Test]
@@ -154,6 +155,6 @@ public class UITypeRepositoryTest
         repository.Store( commands );
 
         var found = repository.FindAll();
-        Assert.AreEqual( 2, found.Count() );
+        ClassicAssert.AreEqual( 2, found.Count() );
     }
 }

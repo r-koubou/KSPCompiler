@@ -9,6 +9,7 @@ using KSPCompiler.Interactors.Analysis.Obfuscators;
 using KSPCompiler.Interactors.Analysis.Obfuscators.Extensions;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Obfuscators;
 
@@ -42,7 +43,7 @@ public class VariableDeclarationTest
         visitor.Inject( evaluator );
         visitor.Visit( node );
 
-        Assert.AreEqual( $"declare {obfuscatedName}{ObfuscatorConstants.NewLine}", output.ToString() );
+        ClassicAssert.AreEqual( $"declare {obfuscatedName}{ObfuscatorConstants.NewLine}", output.ToString() );
     }
 
     [Test]
@@ -73,7 +74,7 @@ public class VariableDeclarationTest
         visitor.Inject( evaluator );
         visitor.Visit( node );
 
-        Assert.AreEqual( "", output.ToString() );
+        ClassicAssert.AreEqual( "", output.ToString() );
     }
 
     [TestCase( ModifierFlag.Const, "const" )]
@@ -106,7 +107,7 @@ public class VariableDeclarationTest
         visitor.Inject( evaluator );
         visitor.Visit( node );
 
-        Assert.AreEqual( $"declare {modifierText} {obfuscatedName}{ObfuscatorConstants.NewLine}", output.ToString() );
+        ClassicAssert.AreEqual( $"declare {modifierText} {obfuscatedName}{ObfuscatorConstants.NewLine}", output.ToString() );
     }
 
     [Test]
@@ -147,7 +148,7 @@ public class VariableDeclarationTest
         visitor.Inject( evaluator );
         visitor.Visit( node );
 
-        Assert.AreEqual( expected, output.ToString() );
+        ClassicAssert.AreEqual( expected, output.ToString() );
     }
 
     [Test]
@@ -194,7 +195,7 @@ public class VariableDeclarationTest
         visitor.Inject( evaluator );
         visitor.Visit( node );
 
-        Assert.AreEqual( expected, output.ToString() );
+        ClassicAssert.AreEqual( expected, output.ToString() );
     }
 
     [Test]
@@ -246,7 +247,7 @@ public class VariableDeclarationTest
         visitor.Inject( evaluator );
         visitor.Visit( node );
 
-        Assert.AreEqual( expected, output.ToString() );
+        ClassicAssert.AreEqual( expected, output.ToString() );
     }
 
     [Test]
@@ -300,6 +301,6 @@ public class VariableDeclarationTest
         visitor.Inject( evaluator );
         visitor.Visit( node );
 
-        Assert.AreEqual( expected, output.ToString() );
+        ClassicAssert.AreEqual( expected, output.ToString() );
     }
 }

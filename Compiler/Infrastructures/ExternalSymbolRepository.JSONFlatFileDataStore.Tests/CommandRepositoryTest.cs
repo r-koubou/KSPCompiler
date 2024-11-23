@@ -9,6 +9,7 @@ using KSPCompiler.Domain.Symbols.Repositories;
 using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Commands;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Tests;
 
@@ -49,8 +50,8 @@ public class CommandRepositoryTest
         var command = CreateDummySymbol( "inc" );
         var result = repository.Store( command );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsTrue( result.Exception == null );
+        ClassicAssert.IsTrue( result.Success );
+        ClassicAssert.IsTrue( result.Exception == null );
     }
 
     [Test]
@@ -66,8 +67,8 @@ public class CommandRepositoryTest
 
         var result = repository.Store( commands );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsTrue( result.Exception == null );
+        ClassicAssert.IsTrue( result.Success );
+        ClassicAssert.IsTrue( result.Exception == null );
     }
 
     [Test]
@@ -79,9 +80,9 @@ public class CommandRepositoryTest
         repository.Store( command );
         var result = repository.Delete( command );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsTrue( result.Exception == null );
-        Assert.IsTrue( result.DeletedCount == 1 );
+        ClassicAssert.IsTrue( result.Success );
+        ClassicAssert.IsTrue( result.Exception == null );
+        ClassicAssert.IsTrue( result.DeletedCount == 1 );
     }
 
     [Test]
@@ -97,9 +98,9 @@ public class CommandRepositoryTest
         repository.Store( commands );
         var result = repository.Delete( commands );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsTrue( result.Exception == null );
-        Assert.IsTrue( result.DeletedCount == 2 );
+        ClassicAssert.IsTrue( result.Success );
+        ClassicAssert.IsTrue( result.Exception == null );
+        ClassicAssert.IsTrue( result.DeletedCount == 2 );
     }
 
     [Test]
@@ -115,10 +116,10 @@ public class CommandRepositoryTest
         repository.Store( commands );
 
         var found = repository.FindByName( "inc" );
-        Assert.AreEqual( 1, found.Count() );
+        ClassicAssert.AreEqual( 1, found.Count() );
 
         found = repository.FindByName( "inc-" );
-        Assert.AreEqual( 0, found.Count() );
+        ClassicAssert.AreEqual( 0, found.Count() );
     }
 
     [Test]
@@ -134,10 +135,10 @@ public class CommandRepositoryTest
         repository.Store( commands );
 
         var found = repository.Find( x => x.Name == "inc" );
-        Assert.AreEqual( 1, found.Count() );
+        ClassicAssert.AreEqual( 1, found.Count() );
 
         found = repository.Find( x => x.Name == "inc-" );
-        Assert.AreEqual( 0, found.Count() );
+        ClassicAssert.AreEqual( 0, found.Count() );
     }
 
     [Test]
@@ -153,6 +154,6 @@ public class CommandRepositoryTest
         repository.Store( commands );
 
         var found = repository.FindAll();
-        Assert.AreEqual( 2, found.Count() );
+        ClassicAssert.AreEqual( 2, found.Count() );
     }
 }

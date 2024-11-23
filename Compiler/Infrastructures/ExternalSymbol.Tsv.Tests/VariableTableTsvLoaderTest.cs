@@ -9,6 +9,7 @@ using KSPCompiler.ExternalSymbol.Tsv.Variables;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.ExternalSymbol.Tsv.Tests;
 
@@ -36,8 +37,8 @@ public class VariableTableTsvLoaderTest
         var importer = CreateLocalImporter( path );
         var symbols = importer.Import();
 
-        Assert.IsTrue( symbols.Count == 1 );
-        Assert.AreEqual( SymbolBuiltIntoVersion.NotAvailable, symbols.First().BuiltIntoVersion );
+        ClassicAssert.IsTrue( symbols.Count == 1 );
+        ClassicAssert.AreEqual( SymbolBuiltIntoVersion.NotAvailable, symbols.First().BuiltIntoVersion );
     }
 
     [Test]
@@ -48,7 +49,7 @@ public class VariableTableTsvLoaderTest
 
         await Task.Run( async () => {
             var symbols = await importer.ImportAsync();
-            Assert.IsTrue( symbols.Count == 1 );
+            ClassicAssert.IsTrue( symbols.Count == 1 );
         });
     }
 

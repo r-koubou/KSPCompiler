@@ -9,6 +9,7 @@ using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Interactors.Analysis.Semantics;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Semantics;
 
@@ -50,14 +51,14 @@ public class AstVariableSymbolEvaluationTest
 
         var result = VariableSymbolTestBody( variable );
 
-        Assert.That(
+        ClassicAssert.That(
             result,
             isConstant
                 ? Is.InstanceOf<AstIntLiteralNode>()
                 : Is.InstanceOf<AstSymbolExpressionNode>()
         );
 
-        Assert.IsTrue( result.TypeFlag.IsInt() );
+        ClassicAssert.IsTrue( result.TypeFlag.IsInt() );
     }
 
     [TestCase( 123)]
@@ -72,9 +73,9 @@ public class AstVariableSymbolEvaluationTest
         var result = VariableSymbolTestBody( variable );
         var literal = result as AstIntLiteralNode;
 
-        Assert.AreEqual( true, result.Constant );
-        Assert.IsNotNull( literal );
-        Assert.AreEqual( value, literal?.Value );
+        ClassicAssert.AreEqual( true, result.Constant );
+        ClassicAssert.IsNotNull( literal );
+        ClassicAssert.AreEqual( value, literal?.Value );
     }
 
     [TestCase( 1.23)]
@@ -89,9 +90,9 @@ public class AstVariableSymbolEvaluationTest
         var result = VariableSymbolTestBody( variable );
         var literal = result as AstRealLiteralNode;
 
-        Assert.AreEqual( true, result.Constant );
-        Assert.IsNotNull( literal );
-        Assert.AreEqual( value, literal?.Value );
+        ClassicAssert.AreEqual( true, result.Constant );
+        ClassicAssert.IsNotNull( literal );
+        ClassicAssert.AreEqual( value, literal?.Value );
     }
 
     [TestCase( "abc")]
@@ -106,9 +107,9 @@ public class AstVariableSymbolEvaluationTest
         var result = VariableSymbolTestBody( variable );
         var literal = result as AstStringLiteralNode;
 
-        Assert.AreEqual( true, result.Constant );
-        Assert.IsNotNull( literal );
-        Assert.AreEqual( value, literal?.Value );
+        ClassicAssert.AreEqual( true, result.Constant );
+        ClassicAssert.IsNotNull( literal );
+        ClassicAssert.AreEqual( value, literal?.Value );
     }
 
     [Test]
@@ -126,6 +127,6 @@ public class AstVariableSymbolEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        ClassicAssert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
     }
 }

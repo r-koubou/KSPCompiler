@@ -4,6 +4,7 @@ using System.IO;
 using JsonFlatFileDataStore;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Tests;
 

@@ -7,6 +7,7 @@ using KSPCompiler.Interactors.Analysis.Obfuscators;
 using KSPCompiler.Interactors.Analysis.Obfuscators.Extensions;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Obfuscators;
 
@@ -41,7 +42,7 @@ public class IfStatementTest
         visitor.Inject( evaluator );
         visitor.Visit( node );
 
-        Assert.AreEqual( expected, output.ToString() );
+        ClassicAssert.AreEqual( expected, output.ToString() );
     }
 
     [Test]
@@ -88,7 +89,7 @@ public class IfStatementTest
         visitor.Inject( evaluator );
         visitor.Visit( node );
 
-        Assert.AreEqual( expected, output.ToString() );
+        ClassicAssert.AreEqual( expected, output.ToString() );
     }
 
 }

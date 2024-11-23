@@ -6,6 +6,7 @@ using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Interactors.Analysis.Obfuscators;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Obfuscators;
 
@@ -22,7 +23,7 @@ public class ConditionalUnaryOperatorTest
         visitor.Inject( evaluator );
         visit( visitor, expr );
 
-        Assert.AreEqual( expected, output.ToString() );
+        ClassicAssert.AreEqual( expected, output.ToString() );
     }
 
     [Test]

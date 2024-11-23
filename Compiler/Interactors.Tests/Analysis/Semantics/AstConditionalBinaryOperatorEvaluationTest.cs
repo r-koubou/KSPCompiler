@@ -7,6 +7,7 @@ using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Interactors.Analysis.Semantics;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Semantics;
 
@@ -35,9 +36,9 @@ public class AstConditionalBinaryOperatorEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( expectedErrorCount, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
-        Assert.IsNotNull( result );
-        Assert.AreEqual( DataTypeFlag.TypeBool, result?.TypeFlag );
+        ClassicAssert.AreEqual( expectedErrorCount, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        ClassicAssert.IsNotNull( result );
+        ClassicAssert.AreEqual( DataTypeFlag.TypeBool, result?.TypeFlag );
     }
 
     [Test]
@@ -106,8 +107,8 @@ public class AstConditionalBinaryOperatorEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
-        Assert.IsNotNull( result );
-        Assert.AreEqual( DataTypeFlag.TypeBool, result?.TypeFlag );
+        ClassicAssert.AreEqual( 1, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        ClassicAssert.IsNotNull( result );
+        ClassicAssert.AreEqual( DataTypeFlag.TypeBool, result?.TypeFlag );
     }
 }

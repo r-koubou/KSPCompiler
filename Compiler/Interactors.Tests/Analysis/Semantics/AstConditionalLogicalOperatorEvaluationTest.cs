@@ -7,6 +7,7 @@ using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Interactors.Analysis.Semantics;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Semantics;
 
@@ -45,9 +46,9 @@ public class AstConditionalLogicalOperatorEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( expectedErrorCount, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
-        Assert.IsNotNull( result );
-        Assert.AreEqual( DataTypeFlag.TypeBool, result?.TypeFlag );
+        ClassicAssert.AreEqual( expectedErrorCount, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        ClassicAssert.IsNotNull( result );
+        ClassicAssert.AreEqual( DataTypeFlag.TypeBool, result?.TypeFlag );
     }
 
     private static void ConditionalLogicalOperatorTestBody<TOperatorNode>( Func<IAstVisitor, TOperatorNode, IAstNode> visit, int expectedErrorCount )

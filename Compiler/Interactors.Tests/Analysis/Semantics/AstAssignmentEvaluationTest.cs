@@ -7,6 +7,7 @@ using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Interactors.Analysis.Semantics;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Semantics;
 
@@ -29,9 +30,9 @@ public class AstAssignmentEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsFalse( compilerMessageManger.Count( CompilerMessageLevel.Error ) > 0 );
-        Assert.IsNotNull( result );
-        Assert.AreEqual( DataTypeFlag.TypeInt, result?.TypeFlag );
+        ClassicAssert.IsFalse( compilerMessageManger.Count( CompilerMessageLevel.Error ) > 0 );
+        ClassicAssert.IsNotNull( result );
+        ClassicAssert.AreEqual( DataTypeFlag.TypeInt, result?.TypeFlag );
     }
 
     [Test]
@@ -52,9 +53,9 @@ public class AstAssignmentEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsTrue( compilerMessageManger.Count( CompilerMessageLevel.Error ) > 0 );
-        Assert.IsNotNull( result );
-        Assert.AreEqual( DataTypeFlag.TypeInt, result?.TypeFlag );
+        ClassicAssert.IsTrue( compilerMessageManger.Count( CompilerMessageLevel.Error ) > 0 );
+        ClassicAssert.IsNotNull( result );
+        ClassicAssert.AreEqual( DataTypeFlag.TypeInt, result?.TypeFlag );
     }
 
     [Test]
@@ -75,9 +76,9 @@ public class AstAssignmentEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsTrue( compilerMessageManger.Count( CompilerMessageLevel.Error ) > 0 );
-        Assert.IsNotNull( result );
-        Assert.AreEqual( DataTypeFlag.TypeInt, result?.TypeFlag );
+        ClassicAssert.IsTrue( compilerMessageManger.Count( CompilerMessageLevel.Error ) > 0 );
+        ClassicAssert.IsNotNull( result );
+        ClassicAssert.AreEqual( DataTypeFlag.TypeInt, result?.TypeFlag );
     }
 
     [Test]
@@ -96,9 +97,9 @@ public class AstAssignmentEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsTrue( compilerMessageManger.Count( CompilerMessageLevel.Error ) > 0 );
-        Assert.IsNotNull( result );
-        Assert.AreEqual( DataTypeFlag.TypeInt, result?.TypeFlag );
+        ClassicAssert.IsTrue( compilerMessageManger.Count( CompilerMessageLevel.Error ) > 0 );
+        ClassicAssert.IsNotNull( result );
+        ClassicAssert.AreEqual( DataTypeFlag.TypeInt, result?.TypeFlag );
     }
 
     [Test]
@@ -121,9 +122,9 @@ public class AstAssignmentEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsTrue( compilerMessageManger.Count( CompilerMessageLevel.Error ) > 0 );
-        Assert.IsNotNull( result );
-        Assert.AreEqual( DataTypeFlag.TypeIntArray, result?.TypeFlag );
+        ClassicAssert.IsTrue( compilerMessageManger.Count( CompilerMessageLevel.Error ) > 0 );
+        ClassicAssert.IsNotNull( result );
+        ClassicAssert.AreEqual( DataTypeFlag.TypeIntArray, result?.TypeFlag );
     }
 
     [Test]
@@ -146,9 +147,9 @@ public class AstAssignmentEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsTrue( compilerMessageManger.Count( CompilerMessageLevel.Error ) > 0 );
-        Assert.IsNotNull( result );
-        Assert.AreEqual( DataTypeFlag.TypeInt, result?.TypeFlag );
+        ClassicAssert.IsTrue( compilerMessageManger.Count( CompilerMessageLevel.Error ) > 0 );
+        ClassicAssert.IsNotNull( result );
+        ClassicAssert.AreEqual( DataTypeFlag.TypeInt, result?.TypeFlag );
     }
 
     [Test]
@@ -171,8 +172,8 @@ public class AstAssignmentEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsFalse( compilerMessageManger.Count( CompilerMessageLevel.Error ) > 0 );
-        Assert.IsNotNull( result );
-        Assert.AreEqual( DataTypeFlag.TypeString, result?.TypeFlag );
+        ClassicAssert.IsFalse( compilerMessageManger.Count( CompilerMessageLevel.Error ) > 0 );
+        ClassicAssert.IsNotNull( result );
+        ClassicAssert.AreEqual( DataTypeFlag.TypeString, result?.TypeFlag );
     }
 }

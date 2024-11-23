@@ -6,6 +6,7 @@ using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Strings;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Semantics;
 
@@ -34,8 +35,8 @@ public class AstStringConcatenateOperatorConvolutionCalculatorTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( expectedErrorCount, compilerMessageManger.Count() );
-        Assert.AreEqual( expectedValue,      result );
+        ClassicAssert.AreEqual( expectedErrorCount, compilerMessageManger.Count() );
+        ClassicAssert.AreEqual( expectedValue,      result );
     }
 
     #endregion

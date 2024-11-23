@@ -6,6 +6,7 @@ using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Interactors.Analysis.Obfuscators;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Obfuscators;
 
@@ -40,6 +41,6 @@ public class CommandSymbolEvaluatorTest
         visitor.Inject( evaluator );
         visitor.Visit( expr );
 
-        Assert.AreEqual( commandName, output.ToString() );
+        ClassicAssert.AreEqual( commandName, output.ToString() );
     }
 }

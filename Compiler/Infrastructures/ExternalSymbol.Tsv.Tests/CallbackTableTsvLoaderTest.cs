@@ -9,6 +9,7 @@ using KSPCompiler.ExternalSymbol.Tsv.Callbacks;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.ExternalSymbol.Tsv.Tests;
 
@@ -36,11 +37,11 @@ public class CallbackTableTsvLoaderTest
         var importer = CreateLocalImporter( path );
         var symbolTable = importer.Import();
 
-        Assert.IsTrue( symbolTable.Count == 2 );
+        ClassicAssert.IsTrue( symbolTable.Count == 2 );
 
         var list = symbolTable.ToList();
-        Assert.AreEqual( SymbolBuiltIntoVersion.NotAvailable, list[ 0 ].BuiltIntoVersion );
-        Assert.AreEqual( SymbolBuiltIntoVersion.NotAvailable, list[ 1 ].BuiltIntoVersion );
+        ClassicAssert.AreEqual( SymbolBuiltIntoVersion.NotAvailable, list[ 0 ].BuiltIntoVersion );
+        ClassicAssert.AreEqual( SymbolBuiltIntoVersion.NotAvailable, list[ 1 ].BuiltIntoVersion );
     }
 
     [Test]
@@ -51,7 +52,7 @@ public class CallbackTableTsvLoaderTest
 
         await Task.Run( async () => {
             var symbolTable = await importer.ImportAsync();
-            Assert.IsTrue( symbolTable.Count == 2 );
+            ClassicAssert.IsTrue( symbolTable.Count == 2 );
         });
     }
 

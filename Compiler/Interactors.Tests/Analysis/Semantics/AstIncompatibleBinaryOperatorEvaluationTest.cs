@@ -9,6 +9,7 @@ using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Integers
 using KSPCompiler.Interactors.Analysis.Semantics;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Semantics;
 
@@ -41,9 +42,9 @@ public class AstIncompatibleBinaryOperatorEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.IsTrue( compilerMessageManger.Count() > 0 );
-        Assert.IsNotNull( result );
-        Assert.IsTrue( result?.TypeFlag.IsInt() );
-        Assert.IsTrue( result?.TypeFlag.IsReal() );
+        ClassicAssert.IsTrue( compilerMessageManger.Count() > 0 );
+        ClassicAssert.IsNotNull( result );
+        ClassicAssert.IsTrue( result?.TypeFlag.IsInt() );
+        ClassicAssert.IsTrue( result?.TypeFlag.IsReal() );
     }
 }

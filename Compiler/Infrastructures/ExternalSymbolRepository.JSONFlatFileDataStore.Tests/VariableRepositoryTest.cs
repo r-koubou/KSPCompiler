@@ -9,6 +9,7 @@ using KSPCompiler.Domain.Symbols.Repositories;
 using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Variables;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Tests;
 
@@ -43,8 +44,8 @@ public class VariableRepositoryTest
         var variable = CreateDummySymbol( "$ENGINE_PAR_VOLUME" );
         var result = repository.Store( variable );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsTrue( result.Exception == null );
+        ClassicAssert.IsTrue( result.Success );
+        ClassicAssert.IsTrue( result.Exception == null );
     }
 
     [Test]
@@ -60,8 +61,8 @@ public class VariableRepositoryTest
 
         var result = repository.Store( variables );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsTrue( result.Exception == null );
+        ClassicAssert.IsTrue( result.Success );
+        ClassicAssert.IsTrue( result.Exception == null );
     }
 
     [Test]
@@ -73,9 +74,9 @@ public class VariableRepositoryTest
         repository.Store( variable );
         var result = repository.Delete( variable );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsTrue( result.Exception == null );
-        Assert.IsTrue( result.DeletedCount == 1 );
+        ClassicAssert.IsTrue( result.Success );
+        ClassicAssert.IsTrue( result.Exception == null );
+        ClassicAssert.IsTrue( result.DeletedCount == 1 );
     }
 
     [Test]
@@ -91,9 +92,9 @@ public class VariableRepositoryTest
         repository.Store( variables );
         var result = repository.Delete( variables );
 
-        Assert.IsTrue( result.Success );
-        Assert.IsTrue( result.Exception == null );
-        Assert.IsTrue( result.DeletedCount == 2 );
+        ClassicAssert.IsTrue( result.Success );
+        ClassicAssert.IsTrue( result.Exception == null );
+        ClassicAssert.IsTrue( result.DeletedCount == 2 );
     }
 
     [Test]
@@ -109,10 +110,10 @@ public class VariableRepositoryTest
         repository.Store( commands );
 
         var found = repository.FindByName( "$ENGINE_PAR_VOLUME" );
-        Assert.AreEqual( 1, found.Count() );
+        ClassicAssert.AreEqual( 1, found.Count() );
 
         found = repository.FindByName( "$ENGINE_PAR_VOLUME-" );
-        Assert.AreEqual( 0, found.Count() );
+        ClassicAssert.AreEqual( 0, found.Count() );
     }
 
     [Test]
@@ -128,10 +129,10 @@ public class VariableRepositoryTest
         repository.Store( commands );
 
         var found = repository.Find( x => x.Name == "$ENGINE_PAR_VOLUME" );
-        Assert.AreEqual( 1, found.Count() );
+        ClassicAssert.AreEqual( 1, found.Count() );
 
         found = repository.Find( x => x.Name == "$ENGINE_PAR_VOLUME-" );
-        Assert.AreEqual( 0, found.Count() );
+        ClassicAssert.AreEqual( 0, found.Count() );
     }
 
     [Test]
@@ -147,6 +148,6 @@ public class VariableRepositoryTest
         repository.Store( commands );
 
         var found = repository.FindAll();
-        Assert.AreEqual( 2, found.Count() );
+        ClassicAssert.AreEqual( 2, found.Count() );
     }
 }

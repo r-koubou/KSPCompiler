@@ -17,6 +17,7 @@ using KSPCompiler.Interactors.Tests.Analysis.Semantics;
 using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Booleans;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis;
 
@@ -441,9 +442,9 @@ public static class MockUtility
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.AreEqual( expectedErrorCount, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
-        Assert.IsNotNull( result );
-        Assert.AreEqual( expectedEvaluatedType, result?.TypeFlag );
+        ClassicAssert.AreEqual( expectedErrorCount, compilerMessageManger.Count( CompilerMessageLevel.Error ) );
+        ClassicAssert.IsNotNull( result );
+        ClassicAssert.AreEqual( expectedEvaluatedType, result?.TypeFlag );
     }
 
     #endregion |~Operators

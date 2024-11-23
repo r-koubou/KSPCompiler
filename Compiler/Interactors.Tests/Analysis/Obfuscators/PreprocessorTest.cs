@@ -6,6 +6,7 @@ using KSPCompiler.Interactors.Analysis.Obfuscators;
 using KSPCompiler.Interactors.Analysis.Obfuscators.Extensions;
 
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Obfuscators;
 
@@ -35,7 +36,7 @@ public class PreprocessorTest
         visitor.Inject( evaluator );
         visitor.Visit( defineNode );
 
-        Assert.AreEqual( expected, output.ToString() );
+        ClassicAssert.AreEqual( expected, output.ToString() );
     }
 
     [Test]
@@ -61,7 +62,7 @@ public class PreprocessorTest
         visitor.Inject( evaluator );
         visitor.Visit( defineNode );
 
-        Assert.AreEqual( expected, output.ToString() );
+        ClassicAssert.AreEqual( expected, output.ToString() );
     }
 
     [Test]
@@ -103,7 +104,7 @@ public class PreprocessorTest
         visitor.Inject( evaluator );
         visitor.Visit( ifDefineNode );
 
-        Assert.AreEqual( expected, output.ToString() );
+        ClassicAssert.AreEqual( expected, output.ToString() );
     }
 
     [Test]
@@ -145,6 +146,6 @@ public class PreprocessorTest
         visitor.Inject( evaluator );
         visitor.Visit( ifNotDefineNode );
 
-        Assert.AreEqual( expected, output.ToString() );
+        ClassicAssert.AreEqual( expected, output.ToString() );
     }
 }
