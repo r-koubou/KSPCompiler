@@ -17,23 +17,23 @@ jobs:
       build-target: win-x64
       build-configuration: Debug
 
-  # build-osx-x64:
-  #   uses: ./.github/workflows/build_compiler_cli.yml
-  #   secrets: inherit
-  #   with:
-  #     build-target: osx-x64
-  #     build-configuration: Debug
+  build-osx-x64:
+    uses: ./.github/workflows/build_compiler_cli.yml
+    secrets: inherit
+    with:
+      build-target: osx-x64
+      build-configuration: Debug
 
-  # build-osx-arm64:
-  #   uses: ./.github/workflows/build_compiler_cli.yml
-  #   secrets: inherit
-  #   with:
-  #     build-target: osx-arm64
-  #     build-configuration: Debug
+  build-osx-arm64:
+    uses: ./.github/workflows/build_compiler_cli.yml
+    secrets: inherit
+    with:
+      build-target: osx-arm64
+      build-configuration: Debug
 
-  # build-osx-linux-x64:
-  #   uses: ./.github/workflows/build_compiler_cli.yml
-  #   secrets: inherit
-  #   with:
-  #     build-target: linux-x64
-  #     build-configuration: Debug
+  build-osx-linux-x64:
+    uses: ./.github/workflows/build_compiler_cli.yml
+    secrets: inherit
+    with:
+      build-target: linux-x64
+      build-configuration: Debug
