@@ -50,8 +50,8 @@ jobs:
     steps:
     - name: Show workflow inputs
       run: |
-        echo ${{ github.event.inputs.build-target }}
-        echo ${{ github.event.inputs.build-configuration }}
+        echo ${{ inputs.build-target }}
+        echo ${{ inputs.build-configuration }}
 
     - name: Checkout
       uses: actions/checkout@v4
@@ -64,11 +64,11 @@ jobs:
     - name: Build
       run: |
         pushd ${{ env.BASE_DIR }}
-        dotnet publish -r ${{ github.event.inputs.build-target }} --self-contained -c ${{ github.event.inputs.build-configuration }} -o ${{ env.PUBLISH_DIR }}/${{ env.PREFIX }}
+        dotnet publish -r ${{ inputs.build-target }} --self-contained -c ${{ inputs.build-configuration }} -o ${{ env.PUBLISH_DIR }}/${{ env.PREFIX }}
         popd
 
     - name: Archive
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ env.PREFIX }}-${{ github.event.inputs.build-target }}-${{ github.event.inputs.build-configuration }}
+        name: ${{ env.PREFIX }}-${{ inputs.build-target }}-${{ inputs.build-configuration }}
         path: ${{ env.BASE_DIR }}/${{ env.PUBLISH_DIR }}
