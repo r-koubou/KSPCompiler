@@ -12,9 +12,6 @@ on:
       build-configuration:
         required: true
         type: string
-      custom-suffix:
-        required: false
-        type: string
 
   workflow_dispatch:
     inputs:
