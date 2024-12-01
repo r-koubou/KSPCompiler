@@ -3,8 +3,12 @@ using System.IO;
 using System.Threading;
 
 using KSPCompiler.Applications.Commons.Events;
+using KSPCompiler.Commons;
 using KSPCompiler.Controllers.Compiler;
 using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.CompilerMessages.Extensions;
+using KSPCompiler.Domain.Events;
+using KSPCompiler.Domain.Events.Extensions;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Callbacks;
 using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Commands;
@@ -30,6 +34,7 @@ public static class CompilerProgram
         bool syntaxCheckOnly = false,
         bool enableObfuscation = false )
     {
+        using var subscribers = new CompositeDisposable();
         var eventDispatcher = new EventDispatcher();
         var messageManager = ICompilerMessageManger.Default;
 
@@ -48,6 +53,9 @@ public static class CompilerProgram
 
         // 追加のシンボルセットアップ処理
         SetupSymbolState( symbolTable );
+
+        // イベントディスパッチャの設定
+        SetupEventDispatcher( eventDispatcher, messageManager, subscribers );
 
         var parser = new AntlrKspFileSyntaxParser( input, eventDispatcher );
 
@@ -81,6 +89,21 @@ public static class CompilerProgram
 
         using var callbacks = new CallbackSymbolRepository( Path.Combine( basePath, "callbacks.json" ) );
         symbolTable.BuiltInCallbacks.AddRange( callbacks.FindAllAsync( CancellationToken.None ).GetAwaiter().GetResult() );
+    }
+
+    private static void SetupEventDispatcher( EventDispatcher eventDispatcher, ICompilerMessageManger messageManager, CompositeDisposable subscribers )
+    {
+        eventDispatcher.Subscribe<CompilationFatalEvent>(
+            evt => messageManager.Fatal( evt.Position, evt.Message )
+        ).AddTo( subscribers );
+
+        eventDispatcher.Subscribe<CompilationErrorEvent>(
+            evt => messageManager.Error( evt.Position, evt.Message )
+        ).AddTo( subscribers );
+
+        eventDispatcher.Subscribe<CompilationWarningEvent>(
+            evt => messageManager.Error( evt.Position, evt.Message )
+        ).AddTo( subscribers );
     }
 
     private static void SetupSymbolState( AggregateSymbolTable symbolTable )

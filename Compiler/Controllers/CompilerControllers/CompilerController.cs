@@ -33,7 +33,6 @@ public sealed class CompilerController
 
             if( !syntaxAnalysisOutput.Result )
             {
-                Console.Error.WriteLine( syntaxAnalysisOutput.Error );
                 return new CompilerResult( false, null, string.Empty );
             }
 
@@ -46,7 +45,6 @@ public sealed class CompilerController
 
             if( !preprocessOutput.Result )
             {
-                Console.Error.WriteLine( preprocessOutput.Error );
                 return new CompilerResult( false, null, string.Empty );
             }
 
@@ -54,8 +52,7 @@ public sealed class CompilerController
 
             if( !semanticAnalysisOutput.Result )
             {
-                Console.Error.WriteLine( semanticAnalysisOutput.Error );
-                return new CompilerResult( false, null, string.Empty );
+                return new CompilerResult( false, semanticAnalysisOutput.Error, string.Empty );
             }
 
 
@@ -80,7 +77,6 @@ public sealed class CompilerController
         }
         catch( Exception e )
         {
-            Console.Error.WriteLine( e );
             return new CompilerResult( false, e, string.Empty );
         }
     }
