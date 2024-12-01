@@ -4,7 +4,7 @@ using Antlr4.Runtime;
 
 using KSPCompiler.Domain;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.Events;
 using KSPCompiler.Gateways;
 using KSPCompiler.Infrastructures.Parser.Antlr.Translators;
 
@@ -14,16 +14,13 @@ public abstract class AntlrKspSyntaxParser : ISyntaxParser
 {
     protected Stream Stream { get; }
     public bool LeaveOpen { get; }
-    public ICompilerMessageManger MessageManger { get; }
+    public IEventDispatcher EventDispatcher { get; }
 
-    private readonly TextWriter errorMessageWriter;
-
-    protected AntlrKspSyntaxParser( Stream stream, ICompilerMessageManger messageManger, bool leaveOpen = false, TextWriter? errorMessageWriter = null )
+    protected AntlrKspSyntaxParser( Stream stream, IEventDispatcher eventDispatcher, bool leaveOpen = false )
     {
-        Stream                  = stream;
-        MessageManger           = messageManger;
-        LeaveOpen               = leaveOpen;
-        this.errorMessageWriter = errorMessageWriter ?? TextWriter.Null;
+        Stream          = stream;
+        EventDispatcher = eventDispatcher;
+        LeaveOpen       = leaveOpen;
     }
 
     public void Dispose()
@@ -51,8 +48,8 @@ public abstract class AntlrKspSyntaxParser : ISyntaxParser
         var tokenStream = new CommonTokenStream( lexer );
         var parser = new KSPParser( tokenStream, TextWriter.Null, TextWriter.Null );
 
-        var lexerErrorListener = new AntlrLexerErrorListener( MessageManger );
-        var parserErrorListener = new AntlrParserErrorListener( MessageManger );
+        var lexerErrorListener = new AntlrLexerErrorListener( EventDispatcher );
+        var parserErrorListener = new AntlrParserErrorListener( EventDispatcher );
 
         lexer.AddErrorListener( lexerErrorListener );
         parser.AddErrorListener( parserErrorListener );
@@ -61,7 +58,6 @@ public abstract class AntlrKspSyntaxParser : ISyntaxParser
 
         if( lexerErrorListener.HasError || parserErrorListener.HasError )
         {
-            MessageManger.WriteTo( errorMessageWriter );
             throw new KspScriptParseException( $"Syntax Invalid : {cst.exception}" );
         }
 

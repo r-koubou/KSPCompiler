@@ -1,7 +1,7 @@
 using System.IO;
 
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.Events;
 using KSPCompiler.Infrastructures.Parser.Antlr;
 
 using NUnit.Framework;
@@ -18,7 +18,7 @@ public static class ParseTestUtility
             scriptFilePath
         );
 
-        var parser = new AntlrKspFileSyntaxParser( path, ICompilerMessageManger.Default );
+        var parser = new AntlrKspFileSyntaxParser( path, NullEventDispatcher.Instance );
         var ast = parser.Parse();
         return ast;
     }

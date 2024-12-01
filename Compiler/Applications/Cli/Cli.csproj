@@ -53,6 +53,7 @@
       <ProjectReference Include="..\..\Controllers\CompilerControllers\CompilerControllers.csproj" />
       <ProjectReference Include="..\..\Infrastructures\ExternalSymbolRepository.JSONFlatFileDataStore\ExternalSymbolRepository.JSONFlatFileDataStore.csproj" />
       <ProjectReference Include="..\..\Infrastructures\Parser.Antlr\Parser.Antlr.csproj" />
+      <ProjectReference Include="..\Applications.Commons\Applications.Commons.csproj" />
     </ItemGroup>
 
     <ItemGroup>
