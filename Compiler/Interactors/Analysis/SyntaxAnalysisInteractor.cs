@@ -8,6 +8,9 @@ namespace KSPCompiler.Interactors.Analysis;
 
 public class SyntaxAnalysisInteractor : ISyntaxAnalysisUseCase
 {
+    public SyntaxAnalysisOutputData Execute( SyntaxAnalysisInputData input )
+        => ExecuteAsync( input ).GetAwaiter().GetResult();
+
     public Task<SyntaxAnalysisOutputData> ExecuteAsync( SyntaxAnalysisInputData parameter, CancellationToken cancellationToken = default )
     {
         try

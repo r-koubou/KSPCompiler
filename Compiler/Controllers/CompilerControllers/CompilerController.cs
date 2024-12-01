@@ -28,7 +28,14 @@ public sealed class CompilerController
         {
             var symbolTable = option.SymbolTable;
 
-            var ast = option.SyntaxParser.Parse();
+            var syntaxAnalysisOutput = ExecuteSyntaxAnalysis( option.SyntaxParser );
+            var ast = syntaxAnalysisOutput.OutputData;
+
+            if( !syntaxAnalysisOutput.Result )
+            {
+                Console.Error.WriteLine( syntaxAnalysisOutput.Error );
+                return new CompilerResult( false, null, string.Empty );
+            }
 
             if( option.SyntaxCheckOnly )
             {
@@ -76,6 +83,14 @@ public sealed class CompilerController
             Console.Error.WriteLine( e );
             return new CompilerResult( false, e, string.Empty );
         }
+    }
+
+    private SyntaxAnalysisOutputData ExecuteSyntaxAnalysis( ISyntaxParser parser )
+    {
+        var analyzer = new SyntaxAnalysisInteractor();
+        var input = new SyntaxAnalysisInputData( parser );
+
+        return analyzer.Execute( input );
     }
 
     private PreprocessOutputData ExecutePreprocess( ICompilerMessageManger compilerMessageManger, AstCompilationUnitNode ast, AggregateSymbolTable symbolTable )
