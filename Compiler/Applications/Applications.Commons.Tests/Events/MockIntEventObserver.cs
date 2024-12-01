@@ -1,6 +1,6 @@
 using System;
 
-namespace KSPCompiler.Applications.Shared.Tests.Events;
+namespace KSPCompiler.Applications.Commons.Tests.Events;
 
 public class MockIntEventObserver : IObserver<MockIntEvent>
 {

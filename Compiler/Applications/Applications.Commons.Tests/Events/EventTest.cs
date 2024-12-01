@@ -1,8 +1,8 @@
-using KSPCompiler.Applications.Shared.Events;
+using KSPCompiler.Applications.Commons.Events;
 
 using NUnit.Framework;
 
-namespace KSPCompiler.Applications.Shared.Tests.Events;
+namespace KSPCompiler.Applications.Commons.Tests.Events;
 
 [TestFixture]
 public class EventTest
