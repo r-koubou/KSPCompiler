@@ -2,23 +2,23 @@ using System.IO;
 
 using Antlr4.Runtime;
 
-using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.Events;
 using KSPCompiler.Resources;
 
 namespace KSPCompiler.Infrastructures.Parser.Antlr;
 
 internal class AntlrParserErrorListener : IAntlrErrorListener<IToken>
 {
-    private ICompilerMessageManger MessageManger { get; }
+    private IEventDispatcher EventDispatcher { get; }
 
     public bool HasError { get; private set; }
 
     private bool EnableDetailMessage { get; }
 
 
-    public AntlrParserErrorListener( ICompilerMessageManger messageManger, bool enableDetailMessage = true )
+    public AntlrParserErrorListener( IEventDispatcher eventDispatcher, bool enableDetailMessage = true )
     {
-        MessageManger       = messageManger;
+        EventDispatcher     = eventDispatcher;
         EnableDetailMessage = enableDetailMessage;
     }
 
@@ -33,13 +33,6 @@ internal class AntlrParserErrorListener : IAntlrErrorListener<IToken>
             message = string.Format( CompilerMessageResources.synax_error_detail, msg );
         }
 
-        var compilerMessage = MessageManger.MessageFactory.Create(
-            CompilerMessageLevel.Error,
-            line,
-            charPositionInLine,
-            message
-        );
-
-        MessageManger.Append( compilerMessage );
+        EventDispatcher.Dispatch( new CompilationErrorEvent( message, line, charPositionInLine ) );
     }
 }
