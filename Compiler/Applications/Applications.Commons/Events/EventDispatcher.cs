@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace KSPCompiler.Domain.Events;
+using KSPCompiler.Domain.Events;
+
+namespace KSPCompiler.Applications.Commons.Events;
 
 /// <summary>
 /// Default implementation of <see cref="IEventDispatcher"/>.
