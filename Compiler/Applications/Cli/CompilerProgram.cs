@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Threading;
 
+using KSPCompiler.Applications.Commons.Events;
 using KSPCompiler.Controllers.Compiler;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Symbols;
@@ -29,7 +30,9 @@ public static class CompilerProgram
         bool syntaxCheckOnly = false,
         bool enableObfuscation = false )
     {
+        var eventDispatcher = new EventDispatcher();
         var messageManager = ICompilerMessageManger.Default;
+
         var symbolTable = new AggregateSymbolTable(
             new VariableSymbolTable(),
             new UITypeSymbolTable(),
@@ -46,7 +49,7 @@ public static class CompilerProgram
         // 追加のシンボルセットアップ処理
         SetupSymbolState( symbolTable );
 
-        var parser = new AntlrKspFileSyntaxParser( input, messageManager );
+        var parser = new AntlrKspFileSyntaxParser( input, eventDispatcher );
 
         var compilerController = new CompilerController();
         var option = new CompilerOption(
