@@ -15,8 +15,6 @@ public sealed class EventDispatcher : IEventDispatcher
     /// <inheritdoc />
     public IDisposable Subscribe<TEvent>( IObserver<TEvent> observer ) where TEvent : IEvent
     {
-        _ = observer ?? throw new ArgumentNullException( nameof( observer ) );
-
         return AsObservable<TEvent>().Subscribe( observer );
     }
 
@@ -97,8 +95,6 @@ public sealed class EventDispatcher : IEventDispatcher
         /// <inheritdoc />
         public IDisposable Subscribe( IObserver<TEvent> observer )
         {
-            _ = observer ?? throw new ArgumentNullException( nameof( observer ) );
-
             subscribers.Add( observer );
 
             return new AnonymousDisposer( () =>
@@ -135,7 +131,7 @@ public sealed class EventDispatcher : IEventDispatcher
         private readonly Action dispose;
 
         public AnonymousDisposer( Action dispose )
-            => this.dispose = dispose ?? throw new ArgumentNullException( nameof( dispose ) );
+            => this.dispose = dispose;
 
         public void Dispose()
             => dispose();

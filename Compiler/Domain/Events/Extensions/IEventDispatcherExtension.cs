@@ -1,8 +1,6 @@
 using System;
 
-using KSPCompiler.Domain.Events;
-
-namespace KSPCompiler.UseCases.Events.Extensions;
+namespace KSPCompiler.Domain.Events.Extensions;
 
 public static class IEventDispatcherExtension
 {
@@ -19,7 +17,7 @@ public static class IEventDispatcherExtension
 
         public AnonymousObserver( Action<T> onNext, Action? onCompleted = null, Action<Exception>? onError = null )
         {
-            this.onNext      = onNext ?? throw new ArgumentNullException( nameof( onNext ) );
+            this.onNext      = onNext;
             this.onCompleted = onCompleted;
             this.onError     = onError;
         }
