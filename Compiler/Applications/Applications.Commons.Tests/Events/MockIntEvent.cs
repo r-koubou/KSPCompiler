@@ -1,6 +1,6 @@
 using KSPCompiler.Domain.Events;
 
-namespace KSPCompiler.Domain.Tests.Events;
+namespace KSPCompiler.Applications.Shared.Tests.Events;
 
 public class MockIntEvent( int value ) : IEvent
 {
