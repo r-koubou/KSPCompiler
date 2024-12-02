@@ -3,7 +3,7 @@ using KSPCompiler.Domain.Events;
 
 namespace KSPCompiler.Interactors.Analysis.Extensions;
 
-public static class AstNodeExtensions
+public static class IAstNodeExtensions
 {
     public static CompilationFatalEvent AsFatalEvent( this IAstNode self, string message, params object[] argv )
     {
