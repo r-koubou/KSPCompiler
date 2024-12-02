@@ -3,35 +3,31 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using KSPCompiler.Interactors.Analysis.Preprocessing;
+using KSPCompiler.UseCases;
 using KSPCompiler.UseCases.Analysis;
 
 namespace KSPCompiler.Interactors.Analysis;
 
 public class PreprocessInteractor : IPreprocessUseCase
 {
-    public Task<PreprocessOutputData> ExecuteAsync( PreprocessInputData parameter, CancellationToken cancellationToken = default )
+    public async Task<UnitOutputPort> ExecuteAsync( PreprocessInputData parameter, CancellationToken cancellationToken = default )
     {
-        var messageManger = parameter.InputData.MessageManager;
-        var node = parameter.InputData.CompilationUnitNode;
+        var eventDispatcher = parameter.InputData.EventDispatcher;
+        var ast = parameter.InputData.CompilationUnitNode;
         var symbolTable = parameter.InputData.SymbolTable;
 
-        var preprocessor = new PreprocessAnalyzer( symbolTable.PreProcessorSymbols );
+        var preprocessor = new PreprocessAnalyzer( symbolTable.PreProcessorSymbols, eventDispatcher );
 
         try
         {
-            preprocessor.Traverse( parameter.InputData.CompilationUnitNode );
+            preprocessor.Traverse( ast );
+            await Task.CompletedTask;
         }
         catch( Exception e )
         {
-            return Task.FromResult( CreateOutputData( false, e ) );
+            return new UnitOutputPort( false, e );
         }
 
-        return Task.FromResult( CreateOutputData( true, null ) );
-
-        PreprocessOutputData CreateOutputData( bool result, Exception? error )
-            => new( result, error, new PreprocessOutputDataDetail( messageManger, node, symbolTable ) );
+        return new UnitOutputPort( true );
     }
-
-    public PreprocessOutputData Execute( PreprocessInputData input )
-        => ExecuteAsync( input ).GetAwaiter().GetResult();
 }

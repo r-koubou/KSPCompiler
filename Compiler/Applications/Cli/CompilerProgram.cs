@@ -67,7 +67,7 @@ public static class CompilerProgram
             EnableObfuscation: enableObfuscation
         );
 
-        compilerController.Execute( messageManager, option );
+        compilerController.Execute( messageManager, eventDispatcher, option );
 
         messageManager.WriteTo( Console.Out );
 

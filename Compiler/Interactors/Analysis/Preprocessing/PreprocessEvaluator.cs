@@ -1,21 +1,19 @@
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations;
+using KSPCompiler.Interactors.Analysis.Extensions;
+using KSPCompiler.Resources;
 using KSPCompiler.UseCases.Analysis.Evaluations.Preprocessing;
 
 namespace KSPCompiler.Interactors.Analysis.Preprocessing;
 
-public class PreprocessEvaluator : IPreprocessEvaluator
+public class PreprocessEvaluator( IPreProcessorSymbolTable symbolTable, IEventDispatcher eventDispatcher ) : IPreprocessEvaluator
 {
-    private IPreProcessorSymbolTable SymbolTable { get; }
-
-    public PreprocessEvaluator( IPreProcessorSymbolTable symbolTable )
-    {
-        SymbolTable = symbolTable;
-    }
+    private IPreProcessorSymbolTable SymbolTable { get; } = symbolTable;
 
     public IAstNode Evaluate( IAstVisitor visitor, AstPreprocessorDefineNode node )
     {
@@ -50,7 +48,14 @@ public class PreprocessEvaluator : IPreprocessEvaluator
 
         if( !symbolNode.TypeFlag.IsPreprocessor() )
         {
-            throw new AstAnalyzeException( node, $"Symbol is not a preprocessor symbol (={symbolNode.TypeFlag})" );
+            eventDispatcher.Dispatch(
+                node.AsErrorEvent(
+                    CompilerMessageResources.preprocess_error_symbol_incompatible,
+                    symbolNode.TypeFlag
+                )
+            );
+
+            return node;
         }
 
         // シンボルが「見つからなければ」コードブロック自体を無視しても良いマークを行う
@@ -69,7 +74,14 @@ public class PreprocessEvaluator : IPreprocessEvaluator
 
         if( !symbolNode.TypeFlag.IsPreprocessor() )
         {
-            throw new AstAnalyzeException( node, $"Symbol is not a preprocessor symbol (={symbolNode.TypeFlag})" );
+            eventDispatcher.Dispatch(
+                node.AsErrorEvent(
+                    CompilerMessageResources.preprocess_error_symbol_incompatible,
+                    symbolNode.TypeFlag
+                )
+            );
+
+            return node;
         }
 
         // シンボルが「見つかれば」コードブロック自体を無視しても良いマークを行う

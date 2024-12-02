@@ -167,4 +167,7 @@
     <data name="semantic.error.assign.to.builtin.variable" xml:space="preserve">
         <value>{0}: ビルトイン変数に代入できません</value>
     </data>
+    <data name="preprocess.error.symbol.incompatible" xml:space="preserve">
+        <value>シンボルがプリプロセッサシンボルではありません (={0})</value>
+    </data>
 </root>

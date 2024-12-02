@@ -1,20 +1,17 @@
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.UseCases.Analysis;
 using KSPCompiler.UseCases.Analysis.Evaluations.Preprocessing;
 
 namespace KSPCompiler.Interactors.Analysis.Preprocessing;
 
-public class PreprocessAnalyzer : DefaultAstVisitor, IAstTraversal
+public class PreprocessAnalyzer( IPreProcessorSymbolTable symbolTable, IEventDispatcher eventDispatcher )
+    : DefaultAstVisitor, IAstTraversal
 {
-    private IPreprocessEvaluator Evaluator { get; }
-
-    public PreprocessAnalyzer( IPreProcessorSymbolTable symbolTable )
-    {
-        Evaluator = new PreprocessEvaluator( symbolTable );
-    }
+    private IPreprocessEvaluator Evaluator { get; } = new PreprocessEvaluator( symbolTable, eventDispatcher );
 
     public void Traverse( AstCompilationUnitNode node )
     {

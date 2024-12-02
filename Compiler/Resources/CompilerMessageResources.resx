@@ -174,4 +174,7 @@
     <data name="semantic.error.assign.to.builtin.variable" xml:space="preserve">
         <value>{0}: Cannot assign to built-in variable</value>
     </data>
+    <data name="preprocess.error.symbol.incompatible" xml:space="preserve">
+        <value>Symbol is not a preprocessor symbol (={0})</value>
+    </data>
 </root>

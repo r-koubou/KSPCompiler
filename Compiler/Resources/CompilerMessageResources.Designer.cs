@@ -356,5 +356,11 @@ namespace KSPCompiler.Resources {
                 return ResourceManager.GetString("semantic.error.assign.to.builtin.variable", resourceCulture);
             }
         }
+        
+        public static string preprocess_error_symbol_incompatible {
+            get {
+                return ResourceManager.GetString("preprocess.error.symbol.incompatible", resourceCulture);
+            }
+        }
     }
 }
