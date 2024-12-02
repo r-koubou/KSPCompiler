@@ -1,8 +1,13 @@
+using System;
+
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Domain.Events;
+using KSPCompiler.Domain.Events.Extensions;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Interactors.Analysis.Preprocessing;
+using KSPCompiler.Interactors.Tests.Commons;
 
 using NUnit.Framework;
 
@@ -15,8 +20,9 @@ public class PreprocessTest
     [TestCase( "DEMO", "DEMO2", true )]
     public void IfDefinedTest( string registerSymbolName, string evaluateSymbolName, bool expectedIgnored )
     {
+        var eventDispatcher = new MockEventDispatcher();
         var symbolTable = MockUtility.CreateAggregateSymbolTable().PreProcessorSymbols;
-        var analyzer = new PreprocessAnalyzer( symbolTable );
+        var analyzer = new PreprocessAnalyzer( symbolTable, eventDispatcher );
 
         /*
         on init
@@ -57,8 +63,9 @@ public class PreprocessTest
     [TestCase( "DEMO", "DEMO2", false )]
     public void IfNotDefinedTest( string registerSymbolName, string evaluateSymbolName, bool expectedIgnored )
     {
+        var eventDispatcher = new MockEventDispatcher();
         var symbolTable = MockUtility.CreateAggregateSymbolTable().PreProcessorSymbols;
-        var analyzer = new PreprocessAnalyzer( symbolTable );
+        var analyzer = new PreprocessAnalyzer( symbolTable, eventDispatcher );
 
         /*
         on init
@@ -98,8 +105,9 @@ public class PreprocessTest
     [Test]
     public void UnDefinedTest()
     {
+        var eventDispatcher = new MockEventDispatcher();
         var symbolTable = MockUtility.CreateAggregateSymbolTable().PreProcessorSymbols;
-        var analyzer = new PreprocessAnalyzer( symbolTable );
+        var analyzer = new PreprocessAnalyzer( symbolTable, eventDispatcher );
 
         /*
         on init
@@ -126,6 +134,59 @@ public class PreprocessTest
         analyzer.Traverse( ast );
 
         Assert.That( symbolTable.Count, Is.EqualTo( 0 ) );
+    }
+
+    [Test]
+    public void CannotProcessIncompatibleSymbolTest()
+    {
+        var errorCount = 0;
+        var eventDispatcher = new MockEventDispatcher();
+        eventDispatcher.Subscribe<CompilationErrorEvent>(
+            evt =>
+            {
+                Console.WriteLine( evt.Message );
+                errorCount++;
+            }
+        );
+
+        var symbolTable = MockUtility.CreateAggregateSymbolTable().PreProcessorSymbols;
+        var analyzer = new PreprocessAnalyzer( symbolTable, eventDispatcher );
+
+        /*
+        on init
+            SET_CONDITION( $DEMO ) <-- $DEMO is not a preprocessor symbol
+            USE_CODE_IF( 1 )
+            :
+            : code block
+            :
+            END_USE_CODE
+        end on
+        */
+
+        const string symbolName = "$DEMO";
+
+        var ast = new AstCompilationUnitNode();
+        var callBack = new AstCallbackDeclarationNode( ast );
+
+        callBack.Name = "init";
+        callBack.Block.Statements.Add(
+            new AstPreprocessorDefineNode( callBack, "DEMO" )
+        );
+
+        var symbol = new AstSymbolExpressionNode
+        {
+            Name     = symbolName,
+            TypeFlag = DataTypeUtility.GuessFromSymbolName( symbolName )
+        };
+
+        var ifdef = new AstPreprocessorIfdefineNode( callBack, symbol );
+        callBack.Block.Statements.Add( ifdef);
+
+        ast.GlobalBlocks.Add( callBack );
+
+        analyzer.Traverse( ast );
+
+        Assert.That( errorCount, Is.EqualTo( 1 ) );
     }
 
 }

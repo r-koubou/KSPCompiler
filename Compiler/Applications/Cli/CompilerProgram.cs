@@ -67,7 +67,7 @@ public static class CompilerProgram
             EnableObfuscation: enableObfuscation
         );
 
-        compilerController.Execute( messageManager, option );
+        compilerController.Execute( messageManager, eventDispatcher, option );
 
         messageManager.WriteTo( Console.Out );
 
@@ -91,6 +91,15 @@ public static class CompilerProgram
         symbolTable.BuiltInCallbacks.AddRange( callbacks.FindAllAsync( CancellationToken.None ).GetAwaiter().GetResult() );
     }
 
+    private static void SetupSymbolState( AggregateSymbolTable symbolTable )
+    {
+        // ビルトイン変数は初期化済み扱い
+        foreach( var variable in symbolTable.Variables )
+        {
+            variable.State = SymbolState.Initialized;
+        }
+    }
+
     private static void SetupEventDispatcher( EventDispatcher eventDispatcher, ICompilerMessageManger messageManager, CompositeDisposable subscribers )
     {
         eventDispatcher.Subscribe<CompilationFatalEvent>(
@@ -104,14 +113,5 @@ public static class CompilerProgram
         eventDispatcher.Subscribe<CompilationWarningEvent>(
             evt => messageManager.Error( evt.Position, evt.Message )
         ).AddTo( subscribers );
-    }
-
-    private static void SetupSymbolState( AggregateSymbolTable symbolTable )
-    {
-        // ビルトイン変数は初期化済み扱い
-        foreach( var variable in symbolTable.Variables )
-        {
-            variable.State = SymbolState.Initialized;
-        }
     }
 }

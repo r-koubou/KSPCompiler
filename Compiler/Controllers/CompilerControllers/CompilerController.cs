@@ -2,9 +2,11 @@ using System;
 
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Gateways;
 using KSPCompiler.Interactors.Analysis;
+using KSPCompiler.UseCases;
 using KSPCompiler.UseCases.Analysis;
 
 namespace KSPCompiler.Controllers.Compiler;
@@ -22,8 +24,10 @@ public record CompilerResult(
 
 public sealed class CompilerController
 {
-    public CompilerResult Execute( ICompilerMessageManger compilerMessageManger, CompilerOption option )
+    public CompilerResult Execute( ICompilerMessageManger compilerMessageManger, IEventDispatcher eventDispatcher, CompilerOption option )
     {
+        // TODO: CompilerMessageManger compilerMessageManger is obsolete. Use IEventDispatcher eventDispatcher instead.
+
         try
         {
             var symbolTable = option.SymbolTable;
@@ -41,7 +45,7 @@ public sealed class CompilerController
                 return new CompilerResult( true, null, string.Empty );
             }
 
-            var preprocessOutput = ExecutePreprocess( compilerMessageManger, ast, symbolTable );
+            var preprocessOutput = ExecutePreprocess( eventDispatcher, ast, symbolTable );
 
             if( !preprocessOutput.Result )
             {
@@ -89,29 +93,14 @@ public sealed class CompilerController
         return analyzer.Execute( input );
     }
 
-    private PreprocessOutputData ExecutePreprocess( ICompilerMessageManger compilerMessageManger, AstCompilationUnitNode ast, AggregateSymbolTable symbolTable )
+    private UnitOutputPort ExecutePreprocess( IEventDispatcher compilerMessageManger, AstCompilationUnitNode ast, AggregateSymbolTable symbolTable )
     {
-        var preprocessor = new PreprocessInteractor();
+        IPreprocessUseCase preprocessor = new PreprocessInteractor();
         var preprocessInput = new PreprocessInputData(
             new PreprocessInputDataDetail( compilerMessageManger, ast, symbolTable )
         );
 
-        try
-        {
-            return preprocessor.Execute( preprocessInput );
-        }
-        catch( Exception e )
-        {
-            return new PreprocessOutputData(
-                false,
-                e,
-                new PreprocessOutputDataDetail(
-                    compilerMessageManger,
-                    ast,
-                    symbolTable
-                )
-            );
-        }
+        return preprocessor.Execute( preprocessInput );
     }
 
     private SemanticAnalysisOutputData ExecuteSemanticAnalysis( ICompilerMessageManger compilerMessageManger, AstCompilationUnitNode ast, AggregateSymbolTable symbolTable )
