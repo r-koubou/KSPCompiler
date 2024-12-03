@@ -14,12 +14,12 @@ public abstract class AntlrKspSyntaxParser : ISyntaxParser
 {
     protected Stream Stream { get; }
     public bool LeaveOpen { get; }
-    public IEventDispatcher EventDispatcher { get; }
+    public IEventEmitter EventEmitter { get; }
 
-    protected AntlrKspSyntaxParser( Stream stream, IEventDispatcher eventDispatcher, bool leaveOpen = false )
+    protected AntlrKspSyntaxParser( Stream stream, IEventEmitter eventEmitter, bool leaveOpen = false )
     {
         Stream          = stream;
-        EventDispatcher = eventDispatcher;
+        EventEmitter = eventEmitter;
         LeaveOpen       = leaveOpen;
     }
 
@@ -48,8 +48,8 @@ public abstract class AntlrKspSyntaxParser : ISyntaxParser
         var tokenStream = new CommonTokenStream( lexer );
         var parser = new KSPParser( tokenStream, TextWriter.Null, TextWriter.Null );
 
-        var lexerErrorListener = new AntlrLexerErrorListener( EventDispatcher );
-        var parserErrorListener = new AntlrParserErrorListener( EventDispatcher );
+        var lexerErrorListener = new AntlrLexerErrorListener( EventEmitter );
+        var parserErrorListener = new AntlrParserErrorListener( EventEmitter );
 
         lexer.AddErrorListener( lexerErrorListener );
         parser.AddErrorListener( parserErrorListener );

@@ -8,10 +8,10 @@ using KSPCompiler.UseCases.Analysis.Evaluations.Preprocessing;
 
 namespace KSPCompiler.Interactors.Analysis.Preprocessing;
 
-public class PreprocessAnalyzer( IPreProcessorSymbolTable symbolTable, IEventDispatcher eventDispatcher )
+public class PreprocessAnalyzer( IPreProcessorSymbolTable symbolTable, IEventEmitter eventEmitter )
     : DefaultAstVisitor, IAstTraversal
 {
-    private IPreprocessEvaluator Evaluator { get; } = new PreprocessEvaluator( symbolTable, eventDispatcher );
+    private IPreprocessEvaluator Evaluator { get; } = new PreprocessEvaluator( symbolTable, eventEmitter );
 
     public void Traverse( AstCompilationUnitNode node )
     {

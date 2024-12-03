@@ -24,9 +24,9 @@ public record CompilerResult(
 
 public sealed class CompilerController
 {
-    public CompilerResult Execute( ICompilerMessageManger compilerMessageManger, IEventDispatcher eventDispatcher, CompilerOption option )
+    public CompilerResult Execute( ICompilerMessageManger compilerMessageManger, IEventEmitter eventEmitter, CompilerOption option )
     {
-        // TODO: CompilerMessageManger compilerMessageManger is obsolete. Use IEventDispatcher eventDispatcher instead.
+        // TODO: CompilerMessageManger compilerMessageManger is obsolete. Use IEventEmitter eventEmitter instead.
 
         try
         {
@@ -45,7 +45,7 @@ public sealed class CompilerController
                 return new CompilerResult( true, null, string.Empty );
             }
 
-            var preprocessOutput = ExecutePreprocess( eventDispatcher, ast, symbolTable );
+            var preprocessOutput = ExecutePreprocess( eventEmitter, ast, symbolTable );
 
             if( !preprocessOutput.Result )
             {
@@ -93,7 +93,7 @@ public sealed class CompilerController
         return analyzer.Execute( input );
     }
 
-    private UnitOutputPort ExecutePreprocess( IEventDispatcher compilerMessageManger, AstCompilationUnitNode ast, AggregateSymbolTable symbolTable )
+    private UnitOutputPort ExecutePreprocess( IEventEmitter compilerMessageManger, AstCompilationUnitNode ast, AggregateSymbolTable symbolTable )
     {
         IPreprocessUseCase preprocessor = new PreprocessInteractor();
         var preprocessInput = new PreprocessInputData(

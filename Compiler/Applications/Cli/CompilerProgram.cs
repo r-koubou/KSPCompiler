@@ -35,7 +35,7 @@ public static class CompilerProgram
         bool enableObfuscation = false )
     {
         using var subscribers = new CompositeDisposable();
-        var eventDispatcher = new EventDispatcher();
+        var eventEmitter = new EventEmitter();
         var messageManager = ICompilerMessageManger.Default;
 
         var symbolTable = new AggregateSymbolTable(
@@ -55,9 +55,9 @@ public static class CompilerProgram
         SetupSymbolState( symbolTable );
 
         // イベントディスパッチャの設定
-        SetupEventDispatcher( eventDispatcher, messageManager, subscribers );
+        SetupEventEmitter( eventEmitter, messageManager, subscribers );
 
-        var parser = new AntlrKspFileSyntaxParser( input, eventDispatcher );
+        var parser = new AntlrKspFileSyntaxParser( input, eventEmitter );
 
         var compilerController = new CompilerController();
         var option = new CompilerOption(
@@ -67,7 +67,7 @@ public static class CompilerProgram
             EnableObfuscation: enableObfuscation
         );
 
-        compilerController.Execute( messageManager, eventDispatcher, option );
+        compilerController.Execute( messageManager, eventEmitter, option );
 
         messageManager.WriteTo( Console.Out );
 
@@ -100,17 +100,17 @@ public static class CompilerProgram
         }
     }
 
-    private static void SetupEventDispatcher( EventDispatcher eventDispatcher, ICompilerMessageManger messageManager, CompositeDisposable subscribers )
+    private static void SetupEventEmitter( EventEmitter eventEmitter, ICompilerMessageManger messageManager, CompositeDisposable subscribers )
     {
-        eventDispatcher.Subscribe<CompilationFatalEvent>(
+        eventEmitter.Subscribe<CompilationFatalEvent>(
             evt => messageManager.Fatal( evt.Position, evt.Message )
         ).AddTo( subscribers );
 
-        eventDispatcher.Subscribe<CompilationErrorEvent>(
+        eventEmitter.Subscribe<CompilationErrorEvent>(
             evt => messageManager.Error( evt.Position, evt.Message )
         ).AddTo( subscribers );
 
-        eventDispatcher.Subscribe<CompilationWarningEvent>(
+        eventEmitter.Subscribe<CompilationWarningEvent>(
             evt => messageManager.Error( evt.Position, evt.Message )
         ).AddTo( subscribers );
     }

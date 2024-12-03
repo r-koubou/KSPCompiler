@@ -11,7 +11,7 @@ using KSPCompiler.UseCases.Analysis.Evaluations.Preprocessing;
 
 namespace KSPCompiler.Interactors.Analysis.Preprocessing;
 
-public class PreprocessEvaluator( IPreProcessorSymbolTable symbolTable, IEventDispatcher eventDispatcher ) : IPreprocessEvaluator
+public class PreprocessEvaluator( IPreProcessorSymbolTable symbolTable, IEventEmitter eventEmitter ) : IPreprocessEvaluator
 {
     private IPreProcessorSymbolTable SymbolTable { get; } = symbolTable;
 
@@ -48,7 +48,7 @@ public class PreprocessEvaluator( IPreProcessorSymbolTable symbolTable, IEventDi
 
         if( !symbolNode.TypeFlag.IsPreprocessor() )
         {
-            eventDispatcher.Dispatch(
+            eventEmitter.Dispatch(
                 node.AsErrorEvent(
                     CompilerMessageResources.preprocess_error_symbol_incompatible,
                     symbolNode.TypeFlag
@@ -74,7 +74,7 @@ public class PreprocessEvaluator( IPreProcessorSymbolTable symbolTable, IEventDi
 
         if( !symbolNode.TypeFlag.IsPreprocessor() )
         {
-            eventDispatcher.Dispatch(
+            eventEmitter.Dispatch(
                 node.AsErrorEvent(
                     CompilerMessageResources.preprocess_error_symbol_incompatible,
                     symbolNode.TypeFlag

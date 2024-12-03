@@ -9,16 +9,16 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr;
 
 internal class AntlrParserErrorListener : IAntlrErrorListener<IToken>
 {
-    private IEventDispatcher EventDispatcher { get; }
+    private IEventEmitter EventEmitter { get; }
 
     public bool HasError { get; private set; }
 
     private bool EnableDetailMessage { get; }
 
 
-    public AntlrParserErrorListener( IEventDispatcher eventDispatcher, bool enableDetailMessage = true )
+    public AntlrParserErrorListener( IEventEmitter eventEmitter, bool enableDetailMessage = true )
     {
-        EventDispatcher     = eventDispatcher;
+        EventEmitter     = eventEmitter;
         EnableDetailMessage = enableDetailMessage;
     }
 
@@ -33,6 +33,6 @@ internal class AntlrParserErrorListener : IAntlrErrorListener<IToken>
             message = string.Format( CompilerMessageResources.synax_error_detail, msg );
         }
 
-        EventDispatcher.Dispatch( new CompilationErrorEvent( message, line, charPositionInLine ) );
+        EventEmitter.Dispatch( new CompilationErrorEvent( message, line, charPositionInLine ) );
     }
 }

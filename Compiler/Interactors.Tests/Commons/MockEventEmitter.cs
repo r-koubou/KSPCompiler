@@ -5,7 +5,7 @@ using KSPCompiler.Domain.Events;
 
 namespace KSPCompiler.Interactors.Tests.Commons;
 
-public sealed class MockEventDispatcher : IEventDispatcher
+public sealed class MockEventEmitter : IEventEmitter
 {
     public void Dispose() {}
 
@@ -68,9 +68,9 @@ public sealed class MockEventDispatcher : IEventDispatcher
     public IObservable<TEvent> AsObservable<TEvent>() where TEvent : IEvent
         => throw new NotSupportedException();
 
-    private class MockDisposable<TEvent>( MockEventDispatcher owner, IObserver<TEvent> observer ) : IDisposable
+    private class MockDisposable<TEvent>( MockEventEmitter owner, IObserver<TEvent> observer ) : IDisposable
     {
-        private readonly MockEventDispatcher owner = owner;
+        private readonly MockEventEmitter owner = owner;
         private readonly IObserver<TEvent> observer = observer;
 
         public void Dispose()

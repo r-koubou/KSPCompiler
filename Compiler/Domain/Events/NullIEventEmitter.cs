@@ -3,13 +3,13 @@ using System;
 namespace KSPCompiler.Domain.Events;
 
 /// <summary>
-/// Empty implementation of <see cref="IEventDispatcher"/>.
+/// Empty implementation of <see cref="IEventEmitter"/>.
 /// </summary>
-public class NullEventDispatcher : IEventDispatcher
+public class NullIEventEmitter : IEventEmitter
 {
-    public static readonly NullEventDispatcher Instance = new();
+    public static readonly NullIEventEmitter Instance = new();
 
-    private NullEventDispatcher() {}
+    private NullIEventEmitter() {}
 
     public IDisposable Subscribe<TEvent>( IObserver<TEvent> observer ) where TEvent : IEvent
     {

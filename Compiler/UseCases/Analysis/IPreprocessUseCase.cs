@@ -5,11 +5,11 @@ using KSPCompiler.Domain.Symbols;
 namespace KSPCompiler.UseCases.Analysis;
 
 public sealed class PreprocessInputDataDetail(
-    IEventDispatcher eventDispatcher,
+    IEventEmitter eventEmitter,
     AstCompilationUnitNode compilationUnitNode,
     AggregateSymbolTable symbolTable )
 {
-    public IEventDispatcher EventDispatcher { get; } = eventDispatcher;
+    public IEventEmitter EventEmitter { get; } = eventEmitter;
     public AstCompilationUnitNode CompilationUnitNode { get; } = compilationUnitNode;
     public AggregateSymbolTable SymbolTable { get; } = symbolTable;
 }
