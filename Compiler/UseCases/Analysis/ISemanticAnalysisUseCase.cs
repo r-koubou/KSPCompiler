@@ -6,28 +6,48 @@ using KSPCompiler.Domain.Symbols;
 
 namespace KSPCompiler.UseCases.Analysis;
 
-public sealed class SemanticAnalysisInputDataDetail(
-    IEventEmitter eventEmitter,
-    AstCompilationUnitNode compilationUnitNode,
-    AggregateSymbolTable symbolTable )
+public sealed class SemanticAnalysisInputDataDetail
 {
-    public IEventEmitter EventEmitter { get; } = eventEmitter;
-    public AstCompilationUnitNode CompilationUnitNode { get; } = compilationUnitNode;
-    public AggregateSymbolTable SymbolTable { get; } = symbolTable;
+    public IEventEmitter EventEmitter { get; }
+
+    public AstCompilationUnitNode CompilationUnitNode { get; }
+
+    public AggregateSymbolTable SymbolTable { get; }
+
+    public SemanticAnalysisInputDataDetail(
+        IEventEmitter eventEmitter,
+        AstCompilationUnitNode compilationUnitNode,
+        AggregateSymbolTable symbolTable )
+    {
+        EventEmitter        = eventEmitter;
+        CompilationUnitNode = compilationUnitNode;
+        SymbolTable         = symbolTable;
+    }
 }
 
-public sealed class SemanticAnalysisInputData( SemanticAnalysisInputDataDetail inputData )
-    : IInputPort<SemanticAnalysisInputDataDetail>
+public sealed class SemanticAnalysisInputData : IInputPort<SemanticAnalysisInputDataDetail>
 {
-    public SemanticAnalysisInputDataDetail InputData { get; } = inputData;
+    public SemanticAnalysisInputDataDetail InputData { get; }
+
+    public SemanticAnalysisInputData( SemanticAnalysisInputDataDetail inputData )
+    {
+        InputData = inputData;
+    }
 }
 
-public sealed class SemanticAnalysisOutputDataDetail(
-    AstCompilationUnitNode compilationUnitNode,
-    AggregateSymbolTable symbolTable )
+public sealed class SemanticAnalysisOutputDataDetail
 {
-    public AstCompilationUnitNode CompilationUnitNode { get; } = compilationUnitNode;
-    public AggregateSymbolTable SymbolTable { get; } = symbolTable;
+    public AstCompilationUnitNode CompilationUnitNode { get; }
+
+    public AggregateSymbolTable SymbolTable { get; }
+
+    public SemanticAnalysisOutputDataDetail(
+        AstCompilationUnitNode compilationUnitNode,
+        AggregateSymbolTable symbolTable )
+    {
+        CompilationUnitNode = compilationUnitNode;
+        SymbolTable         = symbolTable;
+    }
 }
 
 public sealed class SemanticAnalysisOutputData( bool result, Exception? error, SemanticAnalysisOutputDataDetail outputData )

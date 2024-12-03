@@ -5,17 +5,30 @@ using KSPCompiler.Gateways;
 
 namespace KSPCompiler.UseCases.Analysis;
 
-public class SyntaxAnalysisInputData( ISyntaxParser inputData ) : IInputPort<ISyntaxParser>
+public class SyntaxAnalysisInputData : IInputPort<ISyntaxParser>
 {
-    public ISyntaxParser InputData { get; } = inputData;
+    public ISyntaxParser InputData { get; }
+
+    public SyntaxAnalysisInputData( ISyntaxParser inputData )
+    {
+        InputData = inputData;
+    }
 }
 
-public sealed class SyntaxAnalysisOutputData( bool result, Exception? error, AstCompilationUnitNode outputData )
-    : IOutputPort<AstCompilationUnitNode>
+public sealed class SyntaxAnalysisOutputData : IOutputPort<AstCompilationUnitNode>
 {
-    public bool Result { get; } = result;
-    public Exception? Error { get; } = error;
-    public AstCompilationUnitNode OutputData { get; } = outputData;
+    public bool Result { get; }
+
+    public Exception? Error { get; }
+
+    public AstCompilationUnitNode OutputData { get; }
+
+    public SyntaxAnalysisOutputData( bool result, Exception? error, AstCompilationUnitNode outputData )
+    {
+        Result     = result;
+        Error      = error;
+        OutputData = outputData;
+    }
 }
 
 public interface ISyntaxAnalysisUseCase : IUseCase<SyntaxAnalysisInputData, SyntaxAnalysisOutputData> {}

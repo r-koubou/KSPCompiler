@@ -4,20 +4,33 @@ using KSPCompiler.Domain.Symbols;
 
 namespace KSPCompiler.UseCases.Analysis;
 
-public sealed class PreprocessInputDataDetail(
-    IEventEmitter eventEmitter,
-    AstCompilationUnitNode compilationUnitNode,
-    AggregateSymbolTable symbolTable )
+public sealed class PreprocessInputDataDetail
 {
-    public IEventEmitter EventEmitter { get; } = eventEmitter;
-    public AstCompilationUnitNode CompilationUnitNode { get; } = compilationUnitNode;
-    public AggregateSymbolTable SymbolTable { get; } = symbolTable;
+    public IEventEmitter EventEmitter { get; }
+
+    public AstCompilationUnitNode CompilationUnitNode { get; }
+
+    public AggregateSymbolTable SymbolTable { get; }
+
+    public PreprocessInputDataDetail(
+        IEventEmitter eventEmitter,
+        AstCompilationUnitNode compilationUnitNode,
+        AggregateSymbolTable symbolTable )
+    {
+        EventEmitter        = eventEmitter;
+        CompilationUnitNode = compilationUnitNode;
+        SymbolTable         = symbolTable;
+    }
 }
 
-public sealed class PreprocessInputData( PreprocessInputDataDetail inputData )
-    : IInputPort<PreprocessInputDataDetail>
+public sealed class PreprocessInputData : IInputPort<PreprocessInputDataDetail>
 {
-    public PreprocessInputDataDetail InputData { get; } = inputData;
+    public PreprocessInputDataDetail InputData { get; }
+
+    public PreprocessInputData( PreprocessInputDataDetail inputData )
+    {
+        InputData = inputData;
+    }
 }
 
 public interface IPreprocessUseCase : IUseCase<PreprocessInputData, UnitOutputPort> {}
