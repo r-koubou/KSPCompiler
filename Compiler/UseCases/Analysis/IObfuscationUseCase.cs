@@ -2,25 +2,26 @@ using System;
 
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols;
 
 namespace KSPCompiler.UseCases.Analysis;
 
 public sealed class ObfuscationInputDataDetail
 {
-    public ICompilerMessageManger MessageManager { get; }
+    public IEventEmitter EventEmitter { get; }
     public AstCompilationUnitNode CompilationUnitNode { get; }
     public AggregateSymbolTable SymbolTable { get; }
 
     public int DefaultOutputBufferCapacity { get; }
 
     public ObfuscationInputDataDetail(
-        ICompilerMessageManger messageManager,
+        IEventEmitter eventEmitter,
         AstCompilationUnitNode compilationUnitNode,
         AggregateSymbolTable symbolTable,
         int defaultOutputBufferCapacity = 16384 )
     {
-        MessageManager              = messageManager;
+        EventEmitter              = eventEmitter;
         CompilationUnitNode         = compilationUnitNode;
         SymbolTable                 = symbolTable;
         DefaultOutputBufferCapacity = defaultOutputBufferCapacity;

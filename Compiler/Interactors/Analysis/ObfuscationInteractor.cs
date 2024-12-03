@@ -14,7 +14,7 @@ public class ObfuscationInteractor : IObfuscationUseCase
     {
         var output = new StringBuilder( parameter.InputData.DefaultOutputBufferCapacity );
 
-        var messageManger = parameter.InputData.MessageManager;
+        var messageManger = parameter.InputData.EventEmitter;
         var compilationUnit = parameter.InputData.CompilationUnitNode;
         var symbolTable = parameter.InputData.SymbolTable;
 

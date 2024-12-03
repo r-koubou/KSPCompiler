@@ -1,6 +1,6 @@
 using System.Text;
 
-using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Booleans;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Conditions;
@@ -24,23 +24,23 @@ namespace KSPCompiler.Interactors.Analysis.Obfuscators;
 
 public sealed class ObfuscatorContext : IAnalyzerContext
 {
-    public ICompilerMessageManger CompilerMessageManger { get; }
+    public IEventEmitter EventEmitter { get; }
     public AggregateSymbolTable SymbolTable { get; }
     public IDeclarationEvaluationContext DeclarationContext { get; }
     public IExpressionEvaluatorContext ExpressionContext { get; }
     public IStatementEvaluationContext StatementContext { get; }
 
-    public ObfuscatorContext( StringBuilder output, ICompilerMessageManger compilerMessageManger, AggregateSymbolTable symbolTable )
+    public ObfuscatorContext( StringBuilder output, IEventEmitter eventEmitter, AggregateSymbolTable symbolTable )
     {
         var obfuscatedVariables = new ObfuscatedVariableSymbolTable( symbolTable.Variables, "v" );
         var obfuscatedUserFunctions = new ObfuscatedUserFunctionSymbolTable( symbolTable.UserFunctions, "f" );
         var aggregateObfuscatedSymbols = new AggregateObfuscatedSymbolTable( obfuscatedVariables, obfuscatedUserFunctions );
 
-        CompilerMessageManger = compilerMessageManger;
-        SymbolTable           = symbolTable;
-        DeclarationContext    = new DeclarationEvaluationContext( output, symbolTable, aggregateObfuscatedSymbols );
-        ExpressionContext     = new ExpressionEvaluationContext( output, symbolTable, aggregateObfuscatedSymbols );
-        StatementContext      = new StatementEvaluationContext( output, aggregateObfuscatedSymbols );
+        EventEmitter       = eventEmitter;
+        SymbolTable        = symbolTable;
+        DeclarationContext = new DeclarationEvaluationContext( output, symbolTable, aggregateObfuscatedSymbols );
+        ExpressionContext  = new ExpressionEvaluationContext( output, symbolTable, aggregateObfuscatedSymbols );
+        StatementContext   = new StatementEvaluationContext( output, aggregateObfuscatedSymbols );
     }
 
     #region Declaration
