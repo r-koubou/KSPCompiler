@@ -59,7 +59,7 @@ public sealed class NumericUnaryOperatorEvaluator(
 
         if( !typeEvalResult )
         {
-            EventEmitter.Dispatch(
+            EventEmitter.Emit(
                 expr.AsErrorEvent(
                     CompilerMessageResources.semantic_error_unaryoprator_bitnot_compatible,
                     evaluatedLeft.TypeFlag.ToMessageString()

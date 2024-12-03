@@ -20,7 +20,7 @@ public class ContinueStatementEvaluator : IContinueStatementEvaluator
     {
         if( !statement.HasParent<AstWhileStatementNode>() )
         {
-            EventEmitter.Dispatch(
+            EventEmitter.Emit(
                 statement.AsErrorEvent(
                     CompilerMessageResources.semantic_error_continue_invalid
                 )

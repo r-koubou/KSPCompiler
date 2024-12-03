@@ -57,7 +57,7 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
         // 定数には代入できない
         if( evaluatedLeft.Constant )
         {
-            EventEmitter.Dispatch(
+            EventEmitter.Emit(
                 expr.AsErrorEvent(
                     CompilerMessageResources.semantic_error_assign_to_constant,
                     evaluatedLeft.Name
@@ -70,7 +70,7 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
         // ビルトイン変数には代入できない
         if( evaluatedLeft is AstSymbolExpressionNode { BuiltIn: true } symbolLeft )
         {
-            EventEmitter.Dispatch(
+            EventEmitter.Emit(
                 expr.AsErrorEvent(
                     CompilerMessageResources.semantic_error_assign_to_builtin_variable,
                     symbolLeft.Name
@@ -85,7 +85,7 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
 
         if( !TypeCompatibility.IsAssigningTypeCompatible( leftType, rightType ) )
         {
-            EventEmitter.Dispatch(
+            EventEmitter.Emit(
                 expr.AsErrorEvent(
                     CompilerMessageResources.semantic_error_assign_type_compatible,
                     leftType.ToMessageString(),

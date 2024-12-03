@@ -22,7 +22,7 @@ public static class AstExpressionNodeExtension
 
         if( symbolNode.SymbolState == SymbolState.UnInitialized )
         {
-            eventEmitter.Dispatch(
+            eventEmitter.Emit(
                 parent.AsErrorEvent(
                     CompilerMessageResources.semantic_error_variable_uninitialized,
                     symbolNode.Name

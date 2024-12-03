@@ -48,7 +48,7 @@ public class PreprocessEvaluator( IPreProcessorSymbolTable symbolTable, IEventEm
 
         if( !symbolNode.TypeFlag.IsPreprocessor() )
         {
-            eventEmitter.Dispatch(
+            eventEmitter.Emit(
                 node.AsErrorEvent(
                     CompilerMessageResources.preprocess_error_symbol_incompatible,
                     symbolNode.TypeFlag
@@ -74,7 +74,7 @@ public class PreprocessEvaluator( IPreProcessorSymbolTable symbolTable, IEventEm
 
         if( !symbolNode.TypeFlag.IsPreprocessor() )
         {
-            eventEmitter.Dispatch(
+            eventEmitter.Emit(
                 node.AsErrorEvent(
                     CompilerMessageResources.preprocess_error_symbol_incompatible,
                     symbolNode.TypeFlag

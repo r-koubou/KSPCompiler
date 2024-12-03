@@ -31,7 +31,7 @@ public class SelectStatementEvaluator : ISelectStatementEvaluator
         // selectの評価対象が変数ではない場合
         if( evaluatedCondition is not AstSymbolExpressionNode )
         {
-            EventEmitter.Dispatch(
+            EventEmitter.Emit(
                 statement.AsErrorEvent(
                     CompilerMessageResources.semantic_error_select_condition_notvariable
                 )
@@ -43,7 +43,7 @@ public class SelectStatementEvaluator : ISelectStatementEvaluator
         // selectの評価対象が整数ではない場合
         if( evaluatedCondition.TypeFlag != DataTypeFlag.TypeInt )
         {
-            EventEmitter.Dispatch(
+            EventEmitter.Emit(
                 statement.AsErrorEvent(
                     CompilerMessageResources.semantic_error_select_condition_incompatible
                 )
@@ -70,7 +70,7 @@ public class SelectStatementEvaluator : ISelectStatementEvaluator
         // case 条件が整数かつ定数ではない場合
         if( evaluatedCaseFrom.TypeFlag != DataTypeFlag.TypeInt || !evaluatedCaseFrom.Constant )
         {
-            EventEmitter.Dispatch(
+            EventEmitter.Emit(
                 statement.AsErrorEvent(
                     CompilerMessageResources.semantic_error_select_case_incompatible
                 )
@@ -88,7 +88,7 @@ public class SelectStatementEvaluator : ISelectStatementEvaluator
             // case 条件が整数かつ定数ではない場合
             if( evaluatedCaseTo.TypeFlag != DataTypeFlag.TypeInt || !evaluatedCaseTo.Constant )
             {
-                EventEmitter.Dispatch(
+                EventEmitter.Emit(
                     statement.AsErrorEvent(
                         CompilerMessageResources.semantic_error_select_case_incompatible
                     )
@@ -120,7 +120,7 @@ public class SelectStatementEvaluator : ISelectStatementEvaluator
         // case <from> と case <to> が同じ値の場合
         if( caseFromLiteral.Value == caseToLiteral.Value )
         {
-            EventEmitter.Dispatch(
+            EventEmitter.Emit(
                 caseFrom.AsWarningEvent(
                     CompilerMessageResources.semantic_warning_select_case_from_to_noeffect,
                     caseFromLiteral.Value
@@ -133,7 +133,7 @@ public class SelectStatementEvaluator : ISelectStatementEvaluator
         // case <from> が case <to> より大きい場合
         if( caseFromLiteral.Value > caseToLiteral.Value )
         {
-            EventEmitter.Dispatch(
+            EventEmitter.Emit(
                 caseFrom.AsErrorEvent(
                     CompilerMessageResources.semantic_error_select_case_from_grater,
                     caseFromLiteral.Value

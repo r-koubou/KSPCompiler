@@ -54,7 +54,7 @@ public class ConditionalBinaryOperatorEvaluator : IConditionalBinaryOperatorEval
 
         if( leftType != rightType )
         {
-            EventEmitter.Dispatch(
+            EventEmitter.Emit(
                 expr.AsErrorEvent(
                     CompilerMessageResources.semantic_error_binaryoprator_compatible,
                     leftType.ToMessageString(),

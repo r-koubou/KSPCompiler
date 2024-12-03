@@ -165,7 +165,7 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
             // Real型はビット演算はサポートしていない
             if( !operatorNode.Id.IsRealSupportedBinaryOperator() )
             {
-                EventEmitter.Dispatch(
+                EventEmitter.Emit(
                     operatorNode.AsErrorEvent(
                         CompilerMessageResources.semantic_error_binaryoprator_not_supported,
                         left.TypeFlag.ToMessageString(),
@@ -180,7 +180,7 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
             return true;
         }
 
-        EventEmitter.Dispatch(
+        EventEmitter.Emit(
             operatorNode.AsErrorEvent(
                 CompilerMessageResources.semantic_error_binaryoprator_compatible,
                 left.TypeFlag.ToMessageString(),

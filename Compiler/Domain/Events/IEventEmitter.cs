@@ -8,6 +8,6 @@ namespace KSPCompiler.Domain.Events;
 public interface IEventEmitter : IDisposable
 {
     IDisposable Subscribe<TEvent>( IObserver<TEvent> observer ) where TEvent : IEvent;
-    void Dispatch<TEvent>( TEvent evt ) where TEvent : IEvent;
+    void Emit<TEvent>( TEvent evt ) where TEvent : IEvent;
     IObservable<TEvent> AsObservable<TEvent>() where TEvent : IEvent;
 }

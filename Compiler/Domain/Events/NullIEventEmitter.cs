@@ -16,7 +16,7 @@ public class NullIEventEmitter : IEventEmitter
         return new NullDisposable();
     }
 
-    public void Dispatch<TEvent>( TEvent evt ) where TEvent : IEvent {}
+    public void Emit<TEvent>( TEvent evt ) where TEvent : IEvent {}
 
     public IObservable<TEvent> AsObservable<TEvent>() where TEvent : IEvent
     {

@@ -57,7 +57,7 @@ public class ConditionalUnaryOperatorEvaluator : IConditionalUnaryOperatorEvalua
 
         if( !evaluatedLeft.TypeFlag.IsBoolean() )
         {
-            EventEmitter.Dispatch(
+            EventEmitter.Emit(
                 expr.AsErrorEvent(
                     CompilerMessageResources.semantic_error_unaryoprator_logicalnot_incompatible,
                     evaluatedLeft.TypeFlag.ToMessageString()

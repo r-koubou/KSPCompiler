@@ -33,6 +33,6 @@ internal class AntlrParserErrorListener : IAntlrErrorListener<IToken>
             message = string.Format( CompilerMessageResources.synax_error_detail, msg );
         }
 
-        EventEmitter.Dispatch( new CompilationErrorEvent( message, line, charPositionInLine ) );
+        EventEmitter.Emit( new CompilationErrorEvent( message, line, charPositionInLine ) );
     }
 }

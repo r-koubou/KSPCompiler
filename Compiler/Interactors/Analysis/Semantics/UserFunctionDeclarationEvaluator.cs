@@ -23,7 +23,7 @@ public class UserFunctionDeclarationEvaluator(
 
         if( !SymbolTable.Add( thisUserFunction ) )
         {
-            EventEmitter.Dispatch(
+            EventEmitter.Emit(
                 node.AsErrorEvent(
                     CompilerMessageResources.symbol_error_declare_userfunction_already,
                     node.Name

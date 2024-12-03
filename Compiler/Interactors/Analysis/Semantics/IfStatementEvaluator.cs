@@ -29,7 +29,7 @@ public class IfStatementEvaluator : IIfStatementEvaluator
         // if条件式が条件式以外の場合
         if( !evaluatedCondition.TypeFlag.IsBoolean() )
         {
-            EventEmitter.Dispatch(
+            EventEmitter.Emit(
                 statement.AsErrorEvent(
                     CompilerMessageResources.semantic_error_if_condition_incompatible
                 )

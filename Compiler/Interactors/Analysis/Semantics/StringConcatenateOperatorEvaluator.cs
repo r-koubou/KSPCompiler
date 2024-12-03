@@ -49,7 +49,7 @@ public sealed class StringConcatenateOperatorEvaluator : IStringConcatenateOpera
         //--------------------------------------------------------------------------
         if( expr.HasParent<AstVariableInitializerNode>() )
         {
-            EventEmitter.Dispatch(
+            EventEmitter.Emit(
                 expr.AsErrorEvent(
                     CompilerMessageResources.semantic_error_variable_invalid_string_initializer
                 )
@@ -79,7 +79,7 @@ public sealed class StringConcatenateOperatorEvaluator : IStringConcatenateOpera
         // BOOL（条件式）は不可
         if( evaluatedLeft.TypeFlag.IsBoolean() || evaluatedRight.TypeFlag.IsBoolean() )
         {
-            EventEmitter.Dispatch(
+            EventEmitter.Emit(
                 expr.AsErrorEvent(
                     CompilerMessageResources.semantic_error_string_operator_conditional
                 )

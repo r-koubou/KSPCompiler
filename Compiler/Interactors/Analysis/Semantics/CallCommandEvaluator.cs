@@ -61,7 +61,7 @@ public class CallCommandEvaluator : ICallCommandEvaluator
 
         if( !Commands.TrySearchByName( evaluatedSymbolExpr.Name, out var commandSymbol ) )
         {
-            EventEmitter.Dispatch(
+            EventEmitter.Emit(
                 expr.AsWarningEvent(
                     CompilerMessageResources.semantic_warning_command_unknown,
                     evaluatedSymbolExpr.Name
@@ -88,7 +88,7 @@ public class CallCommandEvaluator : ICallCommandEvaluator
 
         if( symbolArgs.Count != callArgs.Count )
         {
-            EventEmitter.Dispatch(
+            EventEmitter.Emit(
                 expr.AsErrorEvent(
                     CompilerMessageResources.semantic_error_command_arg_count,
                     commandSymbol.Name
@@ -150,7 +150,7 @@ public class CallCommandEvaluator : ICallCommandEvaluator
                 }
             }
 
-            EventEmitter.Dispatch(
+            EventEmitter.Emit(
                 callArg.AsErrorEvent(
                     CompilerMessageResources.semantic_error_command_arg_incompatible,
                     commandSymbol.Name,

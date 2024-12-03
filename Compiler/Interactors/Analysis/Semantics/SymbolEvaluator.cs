@@ -59,7 +59,7 @@ public class SymbolEvaluator : ISymbolEvaluator
 
         // シンボルが見つからなかったのでエラー計上後、代替の評価結果を返す
 
-        EventEmitter.Dispatch(
+        EventEmitter.Emit(
             expr.AsErrorEvent(
                 CompilerMessageResources.semantic_error_variable_not_declared,
                 expr.Name
@@ -133,7 +133,7 @@ public class SymbolEvaluator : ISymbolEvaluator
         // https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/advanced-concepts#pgs
         if( expr.Name.Length > 64 )
         {
-            EventEmitter.Dispatch(
+            EventEmitter.Emit(
                 expr.AsErrorEvent(
                     CompilerMessageResources.semantic_error_pgs_name_maximam_length,
                     expr.Name[ ..16 ] + "..."

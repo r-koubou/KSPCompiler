@@ -34,7 +34,7 @@ public class CallbackDeclarationEvaluator : ICallbackDeclarationEvaluator
         // NI予約済みコールバックの検査
         if( !BuiltInCallbackSymbols.TrySearchByName( node.Name, out var builtInCallback ) )
         {
-            EventEmitter.Dispatch(
+            EventEmitter.Emit(
                 node.AsWarningEvent(
                     CompilerMessageResources.symbol_warning_declare_callback_unkown,
                     node.Name
@@ -51,7 +51,7 @@ public class CallbackDeclarationEvaluator : ICallbackDeclarationEvaluator
 
         if( !UserCallbackSymbols.Add( thisCallback ) )
         {
-            EventEmitter.Dispatch(
+            EventEmitter.Emit(
                 node.AsErrorEvent(
                     CompilerMessageResources.symbol_error_declare_callback_already,
                     node.Name

@@ -20,7 +20,7 @@ public sealed class EventEmitter : IEventEmitter
     }
 
     /// <inheritdoc />
-    public void Dispatch<TEvent>( TEvent evt ) where TEvent : IEvent
+    public void Emit<TEvent>( TEvent evt ) where TEvent : IEvent
     {
         if( TryGetObservable( out IObservable<TEvent> observable ) )
         {

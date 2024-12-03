@@ -24,7 +24,7 @@ public class CallUserFunctionEvaluator : ICallUserFunctionEvaluator
     {
         if( !UserFunctions.TrySearchByName( statement.Name, out _ ) )
         {
-            EventEmitter.Dispatch(
+            EventEmitter.Emit(
                 statement.AsErrorEvent(
                     CompilerMessageResources.semantic_error_userfunction_unknown,
                     statement.Name

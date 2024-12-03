@@ -57,7 +57,7 @@ public class ConditionalLogicalOperatorEvaluator : IConditionalLogicalOperatorEv
 
         if( !leftType.IsBoolean() || !rightType.IsBoolean() )
         {
-            EventEmitter.Dispatch(
+            EventEmitter.Emit(
                 expr.AsErrorEvent(
                     CompilerMessageResources.semantic_error_logicaloprator_incompatible,
                     leftType.ToMessageString(),

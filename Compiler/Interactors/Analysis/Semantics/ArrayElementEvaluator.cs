@@ -51,7 +51,7 @@ public class ArrayElementEvaluator : IArrayElementEvaluator
 
         if( !evaluatedRight.TypeFlag.IsInt() )
         {
-            EventEmitter.Dispatch(
+            EventEmitter.Emit(
                 expr.AsErrorEvent(
                     CompilerMessageResources.semantic_error_array_subscript_compatible,
                     evaluatedRight.TypeFlag.ToMessageString()
@@ -87,7 +87,7 @@ public class ArrayElementEvaluator : IArrayElementEvaluator
 
             if( intLiteral.Value < 0 || intLiteral.Value >= arraySize )
             {
-                EventEmitter.Dispatch(
+                EventEmitter.Emit(
                     expr.AsErrorEvent(
                         CompilerMessageResources.semantic_error_variable_array_outofbounds,
                         arraySize,
