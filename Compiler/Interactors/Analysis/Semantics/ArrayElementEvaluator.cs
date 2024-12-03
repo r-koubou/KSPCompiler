@@ -1,11 +1,11 @@
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
-using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations;
-using KSPCompiler.Interactors.Analysis.Commons.Extensions;
+using KSPCompiler.Interactors.Analysis.Extensions;
 using KSPCompiler.Resources;
 using KSPCompiler.UseCases.Analysis.Evaluations.Symbols;
 
@@ -13,13 +13,14 @@ namespace KSPCompiler.Interactors.Analysis.Semantics;
 
 public class ArrayElementEvaluator : IArrayElementEvaluator
 {
-    private ICompilerMessageManger CompilerMessageManger { get; }
+    private IEventEmitter EventEmitter { get; }
+
     private IVariableSymbolTable VariableSymbolTable { get; }
 
-    public ArrayElementEvaluator( ICompilerMessageManger compilerMessageManger, IVariableSymbolTable variableSymbolTable )
+    public ArrayElementEvaluator( IEventEmitter eventEmitter, IVariableSymbolTable variableSymbolTable )
     {
-        CompilerMessageManger = compilerMessageManger;
-        VariableSymbolTable   = variableSymbolTable;
+        EventEmitter        = eventEmitter;
+        VariableSymbolTable = variableSymbolTable;
     }
 
     public IAstNode Evaluate( IAstVisitor visitor, AstArrayElementExpressionNode expr )
@@ -50,10 +51,11 @@ public class ArrayElementEvaluator : IArrayElementEvaluator
 
         if( !evaluatedRight.TypeFlag.IsInt() )
         {
-            CompilerMessageManger.Error(
-                expr,
-                CompilerMessageResources.semantic_error_array_subscript_compatible,
-                evaluatedRight.TypeFlag.ToMessageString()
+            EventEmitter.Emit(
+                expr.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_array_subscript_compatible,
+                    evaluatedRight.TypeFlag.ToMessageString()
+                )
             );
 
             return NullAstExpressionNode.Instance;
@@ -85,11 +87,12 @@ public class ArrayElementEvaluator : IArrayElementEvaluator
 
             if( intLiteral.Value < 0 || intLiteral.Value >= arraySize )
             {
-                CompilerMessageManger.Error(
-                    expr,
-                    CompilerMessageResources.semantic_error_variable_array_outofbounds,
-                    arraySize,
-                    intLiteral.Value
+                EventEmitter.Emit(
+                    expr.AsErrorEvent(
+                        CompilerMessageResources.semantic_error_variable_array_outofbounds,
+                        arraySize,
+                        intLiteral.Value
+                    )
                 );
 
                 return false;

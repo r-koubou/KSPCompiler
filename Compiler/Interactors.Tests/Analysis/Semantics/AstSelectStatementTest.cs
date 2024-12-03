@@ -5,8 +5,12 @@ using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.CompilerMessages.Extensions;
+using KSPCompiler.Domain.Events;
+using KSPCompiler.Domain.Events.Extensions;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Interactors.Analysis.Semantics;
+using KSPCompiler.Interactors.Tests.Commons;
 
 using NUnit.Framework;
 
@@ -20,9 +24,12 @@ public class AstSelectStatementTest
     private static void SelectStatementEvaluationTestBody( Action<AstSelectStatementNode> setup, int expectedErrorCount, int expectedWarningCount = 0 )
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
+        eventEmitter.Subscribe<CompilationWarningEvent>( e => compilerMessageManger.Warning( e.Position, e.Message ) );
 
         var visitor = new MockSelectStatementVisitor();
-        var evaluator = new SelectStatementEvaluator( compilerMessageManger );
+        var evaluator = new SelectStatementEvaluator( eventEmitter );
 
         visitor.Inject( evaluator );
 

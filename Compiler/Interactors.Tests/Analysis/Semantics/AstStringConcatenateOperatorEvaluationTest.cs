@@ -3,8 +3,12 @@ using System;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.CompilerMessages.Extensions;
+using KSPCompiler.Domain.Events;
+using KSPCompiler.Domain.Events.Extensions;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Interactors.Analysis.Semantics;
+using KSPCompiler.Interactors.Tests.Commons;
 
 using NUnit.Framework;
 
@@ -18,10 +22,13 @@ public class AstStringConcatenateOperatorEvaluationTest
     private static void ConcatenateOperatorTestBody( AstExpressionNode left, AstExpressionNode right, int expectedErrorCount )
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
+
         var visitor = new MockAstStringConcatenateOperatorVisitor();
 
         var evaluator = new StringConcatenateOperatorEvaluator(
-            compilerMessageManger,
+            eventEmitter,
             new MockStringConvolutionEvaluator()
         );
 

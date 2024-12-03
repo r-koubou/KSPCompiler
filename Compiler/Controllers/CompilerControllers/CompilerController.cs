@@ -24,7 +24,7 @@ public record CompilerResult(
 
 public sealed class CompilerController
 {
-    public CompilerResult Execute( ICompilerMessageManger compilerMessageManger, IEventEmitter eventEmitter, CompilerOption option )
+    public CompilerResult Execute( IEventEmitter eventEmitter, CompilerOption option )
     {
         // TODO: CompilerMessageManger compilerMessageManger is obsolete. Use IEventEmitter eventEmitter instead.
 
@@ -52,7 +52,7 @@ public sealed class CompilerController
                 return new CompilerResult( false, null, string.Empty );
             }
 
-            var semanticAnalysisOutput = ExecuteSemanticAnalysis( compilerMessageManger, ast, symbolTable );
+            var semanticAnalysisOutput = ExecuteSemanticAnalysis( eventEmitter, ast, symbolTable );
 
             if( !semanticAnalysisOutput.Result )
             {
@@ -66,7 +66,7 @@ public sealed class CompilerController
             }
 
             var obfuscationOutput = ExecuteObfuscation(
-                compilerMessageManger,
+                eventEmitter,
                 semanticAnalysisOutput.OutputData.CompilationUnitNode,
                 semanticAnalysisOutput.OutputData.SymbolTable
             );
@@ -103,11 +103,11 @@ public sealed class CompilerController
         return preprocessor.Execute( preprocessInput );
     }
 
-    private SemanticAnalysisOutputData ExecuteSemanticAnalysis( ICompilerMessageManger compilerMessageManger, AstCompilationUnitNode ast, AggregateSymbolTable symbolTable )
+    private SemanticAnalysisOutputData ExecuteSemanticAnalysis( IEventEmitter eventEmitter, AstCompilationUnitNode ast, AggregateSymbolTable symbolTable )
     {
         var semanticAnalyzer = new SemanticAnalysisInteractor();
         var preprocessInput = new SemanticAnalysisInputData(
-            new SemanticAnalysisInputDataDetail( compilerMessageManger, ast, symbolTable )
+            new SemanticAnalysisInputDataDetail( eventEmitter, ast, symbolTable )
         );
 
         try
@@ -120,7 +120,6 @@ public sealed class CompilerController
                 false,
                 e,
                 new SemanticAnalysisOutputDataDetail(
-                    compilerMessageManger,
                     ast,
                     symbolTable
                 )
@@ -128,11 +127,11 @@ public sealed class CompilerController
         }
     }
 
-    private ObfuscationOutputData ExecuteObfuscation( ICompilerMessageManger compilerMessageManger, AstCompilationUnitNode ast, AggregateSymbolTable symbolTable )
+    private ObfuscationOutputData ExecuteObfuscation( IEventEmitter eventEmitter, AstCompilationUnitNode ast, AggregateSymbolTable symbolTable )
     {
         var obfuscator = new ObfuscationInteractor();
         var input = new ObfuscationInputData(
-            new ObfuscationInputDataDetail( compilerMessageManger, ast, symbolTable )
+            new ObfuscationInputDataDetail( eventEmitter, ast, symbolTable )
         );
 
         try

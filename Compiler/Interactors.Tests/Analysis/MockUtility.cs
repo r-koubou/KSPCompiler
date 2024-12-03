@@ -5,6 +5,9 @@ using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.CompilerMessages.Extensions;
+using KSPCompiler.Domain.Events;
+using KSPCompiler.Domain.Events.Extensions;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
@@ -14,6 +17,7 @@ using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Integers
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Reals;
 using KSPCompiler.Interactors.Analysis.Semantics;
 using KSPCompiler.Interactors.Tests.Analysis.Semantics;
+using KSPCompiler.Interactors.Tests.Commons;
 using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Booleans;
 
 using NUnit.Framework;
@@ -410,10 +414,13 @@ public static class MockUtility
         where TOperatorNode : AstExpressionNode, new()
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
+
         var visitor = new MockAstBinaryOperatorVisitor();
 
         var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
-            compilerMessageManger,
+            eventEmitter,
             CreateAggregateSymbolTable().Variables,
             new MockIntegerConvolutionEvaluator(),
             new RealConvolutionEvaluator()

@@ -1,4 +1,4 @@
-using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Booleans;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Conditions;
@@ -22,7 +22,7 @@ namespace KSPCompiler.Interactors.Analysis.Semantics;
 
 public sealed class SemanticAnalyzerContext : IAnalyzerContext
 {
-    public ICompilerMessageManger CompilerMessageManger { get; }
+    public IEventEmitter EventEmitter { get; }
     public AggregateSymbolTable SymbolTable { get; }
 
     public IDeclarationEvaluationContext DeclarationContext { get; }
@@ -30,14 +30,14 @@ public sealed class SemanticAnalyzerContext : IAnalyzerContext
     public IStatementEvaluationContext StatementContext { get; }
 
     public SemanticAnalyzerContext(
-        ICompilerMessageManger compilerMessageManger,
+        IEventEmitter eventEmitter,
         AggregateSymbolTable aggregateSymbolTable )
     {
-        CompilerMessageManger = compilerMessageManger;
-        SymbolTable           = aggregateSymbolTable;
-        DeclarationContext    = new DeclarationEvaluationContext( CompilerMessageManger, SymbolTable );
-        ExpressionContext     = new ExpressionEvaluationContext( CompilerMessageManger, SymbolTable );
-        StatementContext      = new StatementEvaluationContext( CompilerMessageManger, SymbolTable );
+        EventEmitter       = eventEmitter;
+        SymbolTable        = aggregateSymbolTable;
+        DeclarationContext = new DeclarationEvaluationContext( EventEmitter, SymbolTable );
+        ExpressionContext  = new ExpressionEvaluationContext( EventEmitter, SymbolTable );
+        StatementContext   = new StatementEvaluationContext( EventEmitter, SymbolTable );
     }
 
     #region Declaration
@@ -49,12 +49,12 @@ public sealed class SemanticAnalyzerContext : IAnalyzerContext
         public IVariableDeclarationEvaluator Variable { get; }
 
         public DeclarationEvaluationContext(
-            ICompilerMessageManger compilerMessageManger,
+            IEventEmitter eventEmitter,
             AggregateSymbolTable aggregateSymbolTable )
         {
-            Callback     = new CallbackDeclarationEvaluator( compilerMessageManger, aggregateSymbolTable.BuiltInCallbacks, aggregateSymbolTable.UserCallbacks );
-            UserFunction = new UserFunctionDeclarationEvaluator( compilerMessageManger, aggregateSymbolTable.UserFunctions );
-            Variable     = new VariableDeclarationEvaluator( compilerMessageManger, aggregateSymbolTable.Variables, aggregateSymbolTable.UITypes );
+            Callback     = new CallbackDeclarationEvaluator( eventEmitter, aggregateSymbolTable.BuiltInCallbacks, aggregateSymbolTable.UserCallbacks );
+            UserFunction = new UserFunctionDeclarationEvaluator( eventEmitter, aggregateSymbolTable.UserFunctions );
+            Variable     = new VariableDeclarationEvaluator( eventEmitter, aggregateSymbolTable.Variables, aggregateSymbolTable.UITypes );
         }
     }
 
@@ -89,7 +89,7 @@ public sealed class SemanticAnalyzerContext : IAnalyzerContext
         #endregion ~Convolution Evaluators
 
         public ExpressionEvaluationContext(
-            ICompilerMessageManger compilerMessageManger,
+            IEventEmitter eventEmitter,
             AggregateSymbolTable aggregateSymbolTable )
         {
             #region Convolutions
@@ -104,16 +104,16 @@ public sealed class SemanticAnalyzerContext : IAnalyzerContext
 
             #endregion ~Convolutions
 
-            AssignOperator             = new AssignOperatorEvaluator( compilerMessageManger, aggregateSymbolTable.Variables );
-            ConditionalBinaryOperator  = new ConditionalBinaryOperatorEvaluator( compilerMessageManger );
-            ConditionalLogicalOperator = new ConditionalLogicalOperatorEvaluator( compilerMessageManger, BooleanConvolutionEvaluator );
-            ConditionalUnaryOperator   = new ConditionalUnaryOperatorEvaluator( compilerMessageManger, BooleanConvolutionEvaluator );
-            NumericBinaryOperator      = new NumericBinaryOperatorEvaluator( compilerMessageManger, aggregateSymbolTable.Variables, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
-            NumericUnaryOperator       = new NumericUnaryOperatorEvaluator( compilerMessageManger, aggregateSymbolTable.Variables, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
-            StringConcatenateOperator  = new StringConcatenateOperatorEvaluator( compilerMessageManger, StringConvolutionEvaluator );
-            Symbol                     = new SymbolEvaluator( compilerMessageManger, aggregateSymbolTable );
-            ArrayElement               = new ArrayElementEvaluator( compilerMessageManger, aggregateSymbolTable.Variables );
-            CallCommand                = new CallCommandEvaluator( compilerMessageManger, aggregateSymbolTable.Variables, aggregateSymbolTable.Commands, aggregateSymbolTable.UITypes );
+            AssignOperator             = new AssignOperatorEvaluator( eventEmitter, aggregateSymbolTable.Variables );
+            ConditionalBinaryOperator  = new ConditionalBinaryOperatorEvaluator( eventEmitter );
+            ConditionalLogicalOperator = new ConditionalLogicalOperatorEvaluator( eventEmitter, BooleanConvolutionEvaluator );
+            ConditionalUnaryOperator   = new ConditionalUnaryOperatorEvaluator( eventEmitter, BooleanConvolutionEvaluator );
+            NumericBinaryOperator      = new NumericBinaryOperatorEvaluator( eventEmitter, aggregateSymbolTable.Variables, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
+            NumericUnaryOperator       = new NumericUnaryOperatorEvaluator( eventEmitter, aggregateSymbolTable.Variables, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
+            StringConcatenateOperator  = new StringConcatenateOperatorEvaluator( eventEmitter, StringConvolutionEvaluator );
+            Symbol                     = new SymbolEvaluator( eventEmitter, aggregateSymbolTable );
+            ArrayElement               = new ArrayElementEvaluator( eventEmitter, aggregateSymbolTable.Variables );
+            CallCommand                = new CallCommandEvaluator( eventEmitter, aggregateSymbolTable.Variables, aggregateSymbolTable.Commands, aggregateSymbolTable.UITypes );
         }
     }
 
@@ -129,15 +129,15 @@ public sealed class SemanticAnalyzerContext : IAnalyzerContext
         public IContinueStatementEvaluator Continue { get; }
 
         public StatementEvaluationContext(
-            ICompilerMessageManger compilerMessageManger,
+            IEventEmitter eventEmitter,
             AggregateSymbolTable aggregateSymbolTable )
         {
             Preprocess       = new PreprocessEvaluator();
-            CallUserFunction = new CallUserFunctionEvaluator( compilerMessageManger, aggregateSymbolTable.UserFunctions );
-            If               = new IfStatementEvaluator( compilerMessageManger );
-            Select           = new SelectStatementEvaluator( compilerMessageManger );
-            While            = new WhileStatementEvaluator( compilerMessageManger );
-            Continue         = new ContinueStatementEvaluator( compilerMessageManger );
+            CallUserFunction = new CallUserFunctionEvaluator( eventEmitter, aggregateSymbolTable.UserFunctions );
+            If               = new IfStatementEvaluator( eventEmitter );
+            Select           = new SelectStatementEvaluator( eventEmitter );
+            While            = new WhileStatementEvaluator( eventEmitter );
+            Continue         = new ContinueStatementEvaluator( eventEmitter );
         }
     }
 }

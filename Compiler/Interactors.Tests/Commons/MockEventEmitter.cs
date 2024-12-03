@@ -35,7 +35,7 @@ public sealed class MockEventEmitter : IEventEmitter
         return new MockDisposable<TEvent>( this, observer );
     }
 
-    public void Dispatch<TEvent>( TEvent evt ) where TEvent : IEvent
+    public void Emit<TEvent>( TEvent evt ) where TEvent : IEvent
     {
         switch( evt )
         {

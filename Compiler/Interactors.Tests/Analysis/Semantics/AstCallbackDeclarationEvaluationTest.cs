@@ -1,7 +1,11 @@
 using System;
 
 using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.CompilerMessages.Extensions;
+using KSPCompiler.Domain.Events;
+using KSPCompiler.Domain.Events.Extensions;
 using KSPCompiler.Interactors.Analysis.Semantics;
+using KSPCompiler.Interactors.Tests.Commons;
 
 using NUnit.Framework;
 
@@ -15,6 +19,8 @@ public class AstCallbackDeclarationEvaluationTest
     public void DeclarationTest( string name, bool builtIn )
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
         var callback = MockUtility.CreateCallback( name, false );
         callback.BuiltIn = builtIn;
@@ -28,7 +34,7 @@ public class AstCallbackDeclarationEvaluationTest
 
         var ast = MockUtility.CreateCallbackDeclarationNode( name );
         var visitor = new MockDeclarationVisitor();
-        var evaluator = new CallbackDeclarationEvaluator( compilerMessageManger, symbols.BuiltInCallbacks, symbols.UserCallbacks );
+        var evaluator = new CallbackDeclarationEvaluator( eventEmitter, symbols.BuiltInCallbacks, symbols.UserCallbacks );
 
         visitor.Inject( evaluator );
         evaluator.Evaluate( visitor, ast );
@@ -44,13 +50,15 @@ public class AstCallbackDeclarationEvaluationTest
     public void CannotDeclarationNonAllowMultipleTest( string name, bool allowMultiple )
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
         var callback = MockUtility.CreateCallback( name, allowMultiple );
         var symbols = MockUtility.CreateAggregateSymbolTable();
         symbols.BuiltInCallbacks.Add( callback );
 
         var ast = MockUtility.CreateCallbackDeclarationNode( name );
-        var evaluator = new CallbackDeclarationEvaluator( compilerMessageManger, symbols.BuiltInCallbacks, symbols.UserCallbacks );
+        var evaluator = new CallbackDeclarationEvaluator( eventEmitter, symbols.BuiltInCallbacks, symbols.UserCallbacks );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );

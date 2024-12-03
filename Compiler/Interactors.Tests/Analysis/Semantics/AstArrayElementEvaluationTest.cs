@@ -3,9 +3,13 @@ using System;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.CompilerMessages.Extensions;
+using KSPCompiler.Domain.Events;
+using KSPCompiler.Domain.Events.Extensions;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Interactors.Analysis.Semantics;
+using KSPCompiler.Interactors.Tests.Commons;
 
 using NUnit.Framework;
 
@@ -23,6 +27,9 @@ public class AstArrayElementEvaluationTest
         // %x[10]
 
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
+
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
         var variable = MockUtility.CreateVariable( variableName );
 
@@ -37,7 +44,7 @@ public class AstArrayElementEvaluationTest
         };
 
         var visitor = new MockArrayElementEvaluatorVisitor();
-        var evaluator = new ArrayElementEvaluator( compilerMessageManger, symbolTable.Variables );
+        var evaluator = new ArrayElementEvaluator( eventEmitter, symbolTable.Variables );
 
         visitor.Inject( evaluator );
         var result = (AstExpressionNode)visitor.Visit( expr );
@@ -55,6 +62,9 @@ public class AstArrayElementEvaluationTest
         // %x[arrayIndex] <-- out of bounds
 
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
+
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
         var variable = MockUtility.CreateVariable( "%x" );
 
@@ -69,7 +79,7 @@ public class AstArrayElementEvaluationTest
         };
 
         var visitor = new MockArrayElementEvaluatorVisitor();
-        var evaluator = new ArrayElementEvaluator( compilerMessageManger, symbolTable.Variables );
+        var evaluator = new ArrayElementEvaluator( eventEmitter, symbolTable.Variables );
 
         visitor.Inject( evaluator );
         visitor.Visit( expr );

@@ -4,7 +4,11 @@ using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.CompilerMessages.Extensions;
+using KSPCompiler.Domain.Events;
+using KSPCompiler.Domain.Events.Extensions;
 using KSPCompiler.Interactors.Analysis.Semantics;
+using KSPCompiler.Interactors.Tests.Commons;
 
 using NUnit.Framework;
 
@@ -19,6 +23,9 @@ public class AstVariableDeclarationEvaluationTest
         const string name = "$variable";
 
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
+
         var symbols = MockUtility.CreateAggregateSymbolTable();
 
         // Variable can declare in init callback only
@@ -26,7 +33,7 @@ public class AstVariableDeclarationEvaluationTest
         var ast = MockUtility.CreateVariableDeclarationNode( name );
         ast.Parent = callbackAst;
 
-        var evaluator = new VariableDeclarationEvaluator( compilerMessageManger, symbols.Variables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.Variables, symbols.UITypes );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -44,6 +51,9 @@ public class AstVariableDeclarationEvaluationTest
         const string name = "$variable";
 
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
+
         var symbols = MockUtility.CreateAggregateSymbolTable();
 
         // Variable can declare in init callback only
@@ -51,7 +61,7 @@ public class AstVariableDeclarationEvaluationTest
         var ast = MockUtility.CreateVariableDeclarationNode( name );
         ast.Parent = callbackAst;
 
-        var evaluator = new VariableDeclarationEvaluator( compilerMessageManger, symbols.Variables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.Variables, symbols.UITypes );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -72,6 +82,9 @@ public class AstVariableDeclarationEvaluationTest
         const string name = "$variable";
 
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
+
         var symbols = MockUtility.CreateAggregateSymbolTable();
 
         // Variable can declare in init callback only
@@ -91,7 +104,7 @@ public class AstVariableDeclarationEvaluationTest
             )
         };
 
-        var evaluator = new VariableDeclarationEvaluator( compilerMessageManger, symbols.Variables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.Variables, symbols.UITypes );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -109,6 +122,9 @@ public class AstVariableDeclarationEvaluationTest
         const string name = "$variable";
 
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
+
         var symbols = MockUtility.CreateAggregateSymbolTable();
 
         // Variable can declare in init callback only
@@ -128,7 +144,7 @@ public class AstVariableDeclarationEvaluationTest
             )
         };
 
-        var evaluator = new VariableDeclarationEvaluator( compilerMessageManger, symbols.Variables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.Variables, symbols.UITypes );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -146,6 +162,9 @@ public class AstVariableDeclarationEvaluationTest
         const string name = "$variable";
 
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
+
         var symbols = MockUtility.CreateAggregateSymbolTable();
 
         // Variable can declare in init callback only
@@ -167,7 +186,7 @@ public class AstVariableDeclarationEvaluationTest
             ArrayInitializer = arrayInitializer
         };
 
-        var evaluator = new VariableDeclarationEvaluator( compilerMessageManger, symbols.Variables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.Variables, symbols.UITypes );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -185,6 +204,9 @@ public class AstVariableDeclarationEvaluationTest
         const string name = "$variable";
 
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
+
         var symbols = MockUtility.CreateAggregateSymbolTable();
 
         // Variable can declare in init callback only
@@ -195,7 +217,7 @@ public class AstVariableDeclarationEvaluationTest
         declaration.Parent   = callbackAst;
         declaration.Modifier = new AstModiferNode( declaration, "const" );
 
-        var evaluator = new VariableDeclarationEvaluator( compilerMessageManger, symbols.Variables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.Variables, symbols.UITypes );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );

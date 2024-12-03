@@ -3,8 +3,12 @@ using System;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.CompilerMessages.Extensions;
+using KSPCompiler.Domain.Events;
+using KSPCompiler.Domain.Events.Extensions;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Interactors.Analysis.Semantics;
+using KSPCompiler.Interactors.Tests.Commons;
 
 using NUnit.Framework;
 
@@ -18,9 +22,11 @@ public class AstContinueStatementTest
     private static void ContinueStatementEvaluationTestBody( AstContinueStatementNode node, int expectedErrorCount )
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
         var visitor = new MockContinueStatementVisitor();
-        var evaluator = new ContinueStatementEvaluator( compilerMessageManger );
+        var evaluator = new ContinueStatementEvaluator( eventEmitter );
 
         visitor.Inject( evaluator );
 

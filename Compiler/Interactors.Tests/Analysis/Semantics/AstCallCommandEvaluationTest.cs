@@ -2,7 +2,11 @@ using System;
 
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.CompilerMessages.Extensions;
+using KSPCompiler.Domain.Events;
+using KSPCompiler.Domain.Events.Extensions;
 using KSPCompiler.Interactors.Analysis.Semantics;
+using KSPCompiler.Interactors.Tests.Commons;
 
 using NUnit.Framework;
 
@@ -15,6 +19,9 @@ public class AstCallCommandEvaluationTest
     public void CallCommandTest()
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
+
         var symbols = MockUtility.CreateAggregateSymbolTable();
 
         // register command `play_note`
@@ -35,7 +42,7 @@ public class AstCallCommandEvaluationTest
             new AstIntLiteralNode( 0 )
         );
 
-        var evaluator = new CallCommandEvaluator( compilerMessageManger, symbols.Variables, symbols.Commands, symbols.UITypes );
+        var evaluator = new CallCommandEvaluator( eventEmitter, symbols.Variables, symbols.Commands, symbols.UITypes );
         var visitor = new MockCallCommandExpressionVisitor();
 
         visitor.Inject( evaluator );
@@ -50,6 +57,9 @@ public class AstCallCommandEvaluationTest
     public void CannotIncompatibleArgCountTest()
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
+
         var symbols = MockUtility.CreateAggregateSymbolTable();
 
         // register command `play_note`
@@ -69,7 +79,7 @@ public class AstCallCommandEvaluationTest
             new AstIntLiteralNode( 0 )
         );
 
-        var evaluator = new CallCommandEvaluator( compilerMessageManger, symbols.Variables, symbols.Commands, symbols.UITypes );
+        var evaluator = new CallCommandEvaluator( eventEmitter, symbols.Variables, symbols.Commands, symbols.UITypes );
         var visitor = new MockCallCommandExpressionVisitor();
 
         visitor.Inject( evaluator );
@@ -84,6 +94,9 @@ public class AstCallCommandEvaluationTest
     public void CannotIncompatibleArgTypeTest()
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
+
         var symbols = MockUtility.CreateAggregateSymbolTable();
 
         // register command `play_note`
@@ -104,7 +117,7 @@ public class AstCallCommandEvaluationTest
             new AstIntLiteralNode( 0 )
         );
 
-        var evaluator = new CallCommandEvaluator( compilerMessageManger, symbols.Variables, symbols.Commands, symbols.UITypes );
+        var evaluator = new CallCommandEvaluator( eventEmitter, symbols.Variables, symbols.Commands, symbols.UITypes );
         var visitor = new MockCallCommandExpressionVisitor();
 
         visitor.Inject( evaluator );
@@ -119,6 +132,9 @@ public class AstCallCommandEvaluationTest
     public void WarningIfCommandNotRegisteredTest()
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationWarningEvent>( e => compilerMessageManger.Warning( e.Position, e.Message ) );
+
         var symbols = MockUtility.CreateAggregateSymbolTable();
 
         // Don't register the command for make a warning
@@ -134,7 +150,7 @@ public class AstCallCommandEvaluationTest
             new AstIntLiteralNode( 0 )
         );
 
-        var evaluator = new CallCommandEvaluator( compilerMessageManger, symbols.Variables, symbols.Commands, symbols.UITypes );
+        var evaluator = new CallCommandEvaluator( eventEmitter, symbols.Variables, symbols.Commands, symbols.UITypes );
         var visitor = new MockCallCommandExpressionVisitor();
 
         visitor.Inject( evaluator );

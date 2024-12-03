@@ -4,13 +4,14 @@ using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Extensions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
-using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.Extensions;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations;
 using KSPCompiler.Interactors.Analysis.Commons.Extensions;
+using KSPCompiler.Interactors.Analysis.Extensions;
 using KSPCompiler.Interactors.Analysis.Semantics.Extensions;
 using KSPCompiler.Resources;
 using KSPCompiler.UseCases.Analysis.Evaluations.Declarations;
@@ -19,18 +20,18 @@ namespace KSPCompiler.Interactors.Analysis.Semantics;
 
 public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 {
-    private ICompilerMessageManger CompilerMessageManger { get; }
+    private IEventEmitter EventEmitter { get; }
     private ISymbolTable<VariableSymbol> VariableSymbols { get; }
     private ISymbolTable<UITypeSymbol> UITypeSymbols { get; }
 
     public VariableDeclarationEvaluator(
-        ICompilerMessageManger compilerMessageManger,
+        IEventEmitter eventEmitter,
         ISymbolTable<VariableSymbol> variableSymbols,
         ISymbolTable<UITypeSymbol> uiTypeSymbols )
     {
-        CompilerMessageManger = compilerMessageManger;
-        VariableSymbols       = variableSymbols;
-        UITypeSymbols         = uiTypeSymbols;
+        EventEmitter    = eventEmitter;
+        VariableSymbols = variableSymbols;
+        UITypeSymbols   = uiTypeSymbols;
     }
 
     public IAstNode Evaluate( IAstVisitor visitor, AstVariableDeclarationNode node )
@@ -75,10 +76,11 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
     {
         if( !node.TryGetParent<AstCallbackDeclarationNode>( out var callback ) )
         {
-            CompilerMessageManger.Error(
-                node,
-                CompilerMessageResources.symbol_error_declare_variable_outside,
-                node.Name
+            EventEmitter.Emit(
+                node.AsErrorEvent(
+                    CompilerMessageResources.symbol_error_declare_variable_outside,
+                    node.Name
+                )
             );
 
             return false;
@@ -86,10 +88,11 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
         if( callback.Name != "init" )
         {
-            CompilerMessageManger.Error(
-                node,
-                CompilerMessageResources.symbol_error_declare_variable_outside,
-                node.Name
+            EventEmitter.Emit(
+                node.AsErrorEvent(
+                    CompilerMessageResources.symbol_error_declare_variable_outside,
+                    node.Name
+                )
             );
 
             return false;
@@ -104,10 +107,11 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
         if( !builtInPrefixValidator.Validate( node ) )
         {
-            CompilerMessageManger.Error(
-                node,
-                CompilerMessageResources.symbol_error_declare_variable_ni_builtin,
-                node.Name
+            EventEmitter.Emit(
+                node.AsErrorEvent(
+                    CompilerMessageResources.symbol_error_declare_variable_ni_builtin,
+                    node.Name
+                )
             );
 
             return false;
@@ -124,10 +128,11 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         if( variableType.IsArray() && node.Modifier.HasConstant() )
         {
             result = null!;
-            CompilerMessageManger.Error(
-                node,
-                CompilerMessageResources.semantic_error_declare_variable_cannot_const,
-                node.Name
+            EventEmitter.Emit(
+                node.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_declare_variable_cannot_const,
+                    node.Name
+                )
             );
 
             return false;
@@ -144,20 +149,22 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         // NI の予約変数との重複
         if( result.BuiltIn )
         {
-            CompilerMessageManger.Error(
-                node,
-                CompilerMessageResources.symbol_error_declare_variable_builtin,
-                node.Name
+            EventEmitter.Emit(
+                node.AsErrorEvent(
+                    CompilerMessageResources.symbol_error_declare_variable_builtin,
+                    node.Name
+                )
             );
 
             return false;
         }
 
         // ユーザー変数として宣言済み
-        CompilerMessageManger.Error(
-            node,
-            CompilerMessageResources.symbol_error_declare_variable_already,
-            node.Name
+        EventEmitter.Emit(
+            node.AsErrorEvent(
+                CompilerMessageResources.symbol_error_declare_variable_already,
+                node.Name
+            )
         );
 
         return false;
@@ -175,10 +182,11 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         {
             if( !UITypeSymbols.TrySearchByName( modifier, out var uiType ) )
             {
-                CompilerMessageManger.Error(
-                    node,
-                    CompilerMessageResources.semantic_error_declare_variable_unkown_ui,
-                    modifier
+                EventEmitter.Emit(
+                    node.AsErrorEvent(
+                        CompilerMessageResources.semantic_error_declare_variable_unkown_ui,
+                        modifier
+                    )
                 );
 
                 return false;
@@ -207,11 +215,13 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         // constあり＋初期化代入式が無い場合
         if( variable.Modifier.IsConstant() && node.Initializer.IsNull() )
         {
-            CompilerMessageManger.Error(
-                node,
-                CompilerMessageResources.semantic_error_declare_variable_required_initializer,
-                node.Name
+            EventEmitter.Emit(
+                node.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_declare_variable_required_initializer,
+                    node.Name
+                )
             );
+
             return false;
         }
 
@@ -263,10 +273,11 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         // プリミティブ型変数に対し、配列初期化式を用いている
         if( node.Initializer.ArrayInitializer.IsNotNull() )
         {
-            CompilerMessageManger.Error(
-                node,
-                CompilerMessageResources.semantic_error_declare_variable_invalid_initializer,
-                node.Name
+            EventEmitter.Emit(
+                node.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_declare_variable_invalid_initializer,
+                    node.Name
+                )
             );
 
             return false;
@@ -275,10 +286,11 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         // 文字列型は宣言時に初期化代入はできない
         if( variable.DataType.IsString() )
         {
-            CompilerMessageManger.Error(
-                node,
-                CompilerMessageResources.semantic_error_declare_variable_string_initializer,
-                node.Name
+            EventEmitter.Emit(
+                node.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_declare_variable_string_initializer,
+                    node.Name
+                )
             );
 
             return false;
@@ -287,10 +299,11 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         // 初期化代入式が欠落している
         if( initializer.IsNull() || initializer.Expression.IsNull() )
         {
-            CompilerMessageManger.Error(
-                node,
-                CompilerMessageResources.semantic_error_declare_variable_required_initializer,
-                node.Name
+            EventEmitter.Emit(
+                node.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_declare_variable_required_initializer,
+                    node.Name
+                )
             );
 
             return false;
@@ -304,10 +317,11 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         // リテラル or 定数でないと初期化できない
         if( !evaluated.Constant )
         {
-            CompilerMessageManger.Error(
-                node,
-                CompilerMessageResources.semantic_error_declare_variable_noconstant_initializer,
-                node.Name
+            EventEmitter.Emit(
+                node.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_declare_variable_noconstant_initializer,
+                    node.Name
+                )
             );
 
             return false;
@@ -316,11 +330,12 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         // 型の一致チェック
         if( !TypeCompatibility.IsAssigningTypeCompatible( variable.DataType, evaluated.TypeFlag ) )
         {
-            CompilerMessageManger.Error(
-                node,
-                CompilerMessageResources.semantic_error_assign_type_compatible,
-                variable.DataType.ToMessageString(),
-                evaluated.TypeFlag.ToMessageString()
+            EventEmitter.Emit(
+                node.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_assign_type_compatible,
+                    variable.DataType.ToMessageString(),
+                    evaluated.TypeFlag.ToMessageString()
+                )
             );
 
             return false;
@@ -346,10 +361,11 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         // 配列型変数に対し、プリミティブ型初期化式を用いている
         if( node.Initializer.PrimitiveInitializer.IsNotNull() )
         {
-            CompilerMessageManger.Error(
-                node,
-                CompilerMessageResources.semantic_error_declare_variable_invalid_initializer,
-                node.Name
+            EventEmitter.Emit(
+                node.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_declare_variable_invalid_initializer,
+                    node.Name
+                )
             );
 
             return false;
@@ -358,10 +374,11 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         // 配列要素サイズ・初期化代入式なし
         if( initializer.IsNull() )
         {
-            CompilerMessageManger.Error(
-                node,
-                CompilerMessageResources.semantic_error_declare_variable_required_initializer,
-                node.Name
+            EventEmitter.Emit(
+                node.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_declare_variable_required_initializer,
+                    node.Name
+                )
             );
 
             return false;
@@ -387,10 +404,11 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         // リテラル or 定数でないと初期化できない
         if( !arraySizeExpr.Constant )
         {
-            CompilerMessageManger.Error(
-                node,
-                CompilerMessageResources.semantic_error_declare_variable_arraysize,
-                node.Name
+            EventEmitter.Emit(
+                node.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_declare_variable_arraysize,
+                    node.Name
+                )
             );
 
             return false;
@@ -404,11 +422,12 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         // 配列サイズが上限を超えている
         if( arraySize.Value >= KspLanguageLimitations.MaxArraySize )
         {
-            CompilerMessageManger.Error(
-                node,
-                CompilerMessageResources.semantic_error_declare_variable_maxarraysize,
-                node.Name,
-                arraySize.Value
+            EventEmitter.Emit(
+                node.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_declare_variable_maxarraysize,
+                    node.Name,
+                    arraySize.Value
+                )
             );
 
             return false;
@@ -417,10 +436,11 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         // 配列サイズが 0 以下
         if( arraySize.Value <= 0 )
         {
-            CompilerMessageManger.Error(
-                node,
-                CompilerMessageResources.semantic_error_declare_variable_arraysize,
-                node.Name
+            EventEmitter.Emit(
+                node.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_declare_variable_arraysize,
+                    node.Name
+                )
             );
 
             return false;
@@ -428,10 +448,11 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         // 初期化要素数が配列サイズより大きい
         if( arraySize.Value < initializer.Initializer.Expressions.Count )
         {
-            CompilerMessageManger.Error(
-                node,
-                CompilerMessageResources.semantic_error_declare_variable_arrayinitilizer_sizeover,
-                node.Name
+            EventEmitter.Emit(
+                node.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_declare_variable_arrayinitilizer_sizeover,
+                    node.Name
+                )
             );
 
             return false;
@@ -471,11 +492,12 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             // リテラル or 定数でないと初期化できない
             if( !evaluated.Constant )
             {
-                CompilerMessageManger.Error(
-                    node,
-                    CompilerMessageResources.semantic_error_declare_variable_arrayinitilizer_noconstant,
-                    variable.Name,
-                    i
+                EventEmitter.Emit(
+                    node.AsErrorEvent(
+                        CompilerMessageResources.semantic_error_declare_variable_arrayinitilizer_noconstant,
+                        variable.Name,
+                        i
+                    )
                 );
 
                 result = false;
@@ -488,12 +510,13 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             {
                 result = false;
 
-                CompilerMessageManger.Error(
-                    node,
-                    CompilerMessageResources.semantic_error_declare_variable_arrayinitilizer_incompatible,
-                    variable.Name,
-                    i,
-                    evaluated.TypeFlag.ToMessageString()
+                EventEmitter.Emit(
+                    node.AsErrorEvent(
+                        CompilerMessageResources.semantic_error_declare_variable_arrayinitilizer_incompatible,
+                        variable.Name,
+                        i,
+                        evaluated.TypeFlag.ToMessageString()
+                    )
                 );
 
                 continue;
@@ -538,12 +561,13 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         // パラメータ数が一致しない
         if( initializer.Count != variable.UIType.InitializerArguments.Count )
         {
-            CompilerMessageManger.Error(
-                node,
-                CompilerMessageResources.semantic_error_declare_variable_uiinitializer_count_incompatible,
-                node.Name,
-                variable.UIType.InitializerArguments.Count,
-                initializer.Count
+            EventEmitter.Emit(
+                node.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_declare_variable_uiinitializer_count_incompatible,
+                    node.Name,
+                    variable.UIType.InitializerArguments.Count,
+                    initializer.Count
+                )
             );
 
             return false;
@@ -556,12 +580,13 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
     {
         if( expressionList.Count != uiType.InitializerArguments.Count )
         {
-            CompilerMessageManger.Error(
-                node,
-                CompilerMessageResources.semantic_error_declare_variable_uiinitializer_count_incompatible,
-                node.Name,
-                uiType.InitializerArguments.Count,
-                expressionList.Count
+            EventEmitter.Emit(
+                node.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_declare_variable_uiinitializer_count_incompatible,
+                    node.Name,
+                    uiType.InitializerArguments.Count,
+                    expressionList.Count
+                )
             );
 
             return false;
@@ -579,11 +604,12 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             // リテラル or 定数でないと初期化できない
             if( !evaluated.Constant )
             {
-                CompilerMessageManger.Error(
-                    node,
-                    CompilerMessageResources.semantic_error_declare_variable_uiinitializer_nonconstant,
-                    node.Name,
-                    i + 1 // 1 origin
+                EventEmitter.Emit(
+                    node.AsErrorEvent(
+                        CompilerMessageResources.semantic_error_declare_variable_uiinitializer_nonconstant,
+                        node.Name,
+                        i + 1 // 1 origin
+                    )
                 );
 
                 return false;
@@ -594,13 +620,13 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             // 型の一致チェック
             if( !TypeCompatibility.IsTypeCompatible( evaluated.TypeFlag, requiredType ) )
             {
-
-                CompilerMessageManger.Error(
-                    node,
-                    CompilerMessageResources.semantic_error_declare_variable_uiinitializer_incompatible,
-                    node.Name,
-                    i + 1, // 1 origin
-                    evaluated.TypeFlag.ToMessageString()
+                EventEmitter.Emit(
+                    node.AsErrorEvent(
+                        CompilerMessageResources.semantic_error_declare_variable_uiinitializer_incompatible,
+                        node.Name,
+                        i + 1, // 1 origin
+                        evaluated.TypeFlag.ToMessageString()
+                    )
                 );
 
                 return false;

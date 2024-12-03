@@ -1,8 +1,8 @@
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
-using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Interactors.Analysis.Commons.Extensions;
+using KSPCompiler.Interactors.Analysis.Extensions;
 using KSPCompiler.Resources;
 using KSPCompiler.UseCases.Analysis.Evaluations.UserFunctions;
 
@@ -10,23 +10,25 @@ namespace KSPCompiler.Interactors.Analysis.Semantics;
 
 public class CallUserFunctionEvaluator : ICallUserFunctionEvaluator
 {
-    private ICompilerMessageManger CompilerMessageManger { get; }
+    private IEventEmitter EventEmitter { get; }
+
     private IUserFunctionSymbolSymbolTable UserFunctions { get; }
 
-    public CallUserFunctionEvaluator( ICompilerMessageManger compilerMessageManger, IUserFunctionSymbolSymbolTable symbolTable )
+    public CallUserFunctionEvaluator( IEventEmitter eventEmitter, IUserFunctionSymbolSymbolTable symbolTable )
     {
-        CompilerMessageManger = compilerMessageManger;
-        UserFunctions         = symbolTable;
+        EventEmitter  = eventEmitter;
+        UserFunctions = symbolTable;
     }
 
     public IAstNode Evaluate( IAstVisitor visitor, AstCallUserFunctionStatementNode statement )
     {
         if( !UserFunctions.TrySearchByName( statement.Name, out _ ) )
         {
-            CompilerMessageManger.Error(
-                statement,
-                CompilerMessageResources.semantic_error_userfunction_unknown,
-                statement.Name
+            EventEmitter.Emit(
+                statement.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_userfunction_unknown,
+                    statement.Name
+                )
             );
         }
 

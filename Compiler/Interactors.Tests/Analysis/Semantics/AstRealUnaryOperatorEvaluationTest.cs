@@ -1,9 +1,13 @@
 using System;
 
 using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.CompilerMessages.Extensions;
+using KSPCompiler.Domain.Events;
+using KSPCompiler.Domain.Events.Extensions;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Reals;
 using KSPCompiler.Interactors.Analysis.Semantics;
+using KSPCompiler.Interactors.Tests.Commons;
 
 using NUnit.Framework;
 
@@ -18,12 +22,15 @@ public class AstRealUnaryOperatorEvaluationTest
         const string variableName = "~x";
 
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
+
         var visitor = new MockAstUnaryOperatorVisitor();
 
         var integerConvolutionEvaluator = new MockIntegerConvolutionEvaluator();
         var realConvolutionEvaluator = new RealConvolutionEvaluator();
         var unaryOperatorEvaluator = new NumericUnaryOperatorEvaluator(
-            compilerMessageManger,
+            eventEmitter,
             MockUtility.CreateAggregateSymbolTable().Variables,
             integerConvolutionEvaluator,
             realConvolutionEvaluator
@@ -46,12 +53,15 @@ public class AstRealUnaryOperatorEvaluationTest
         const string variableName = "~x";
 
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
+
         var visitor = new MockAstUnaryOperatorVisitor();
 
         var integerConvolutionEvaluator = new MockIntegerConvolutionEvaluator();
         var realConvolutionEvaluator = new RealConvolutionEvaluator();
         var unaryOperatorEvaluator = new NumericUnaryOperatorEvaluator(
-            compilerMessageManger,
+            eventEmitter,
             MockUtility.CreateAggregateSymbolTable().Variables,
             integerConvolutionEvaluator,
             realConvolutionEvaluator

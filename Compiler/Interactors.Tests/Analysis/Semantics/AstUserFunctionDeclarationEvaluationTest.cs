@@ -1,7 +1,11 @@
 using System;
 
 using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.CompilerMessages.Extensions;
+using KSPCompiler.Domain.Events;
+using KSPCompiler.Domain.Events.Extensions;
 using KSPCompiler.Interactors.Analysis.Semantics;
+using KSPCompiler.Interactors.Tests.Commons;
 
 using NUnit.Framework;
 
@@ -16,10 +20,13 @@ public class AstUserFunctionDeclarationEvaluationTest
         const string name = "function";
 
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
+
         var symbols = MockUtility.CreateAggregateSymbolTable();
 
         var ast = MockUtility.CreateUserFunctionDeclarationNode( name );
-        var evaluator = new UserFunctionDeclarationEvaluator( compilerMessageManger, symbols.UserFunctions );
+        var evaluator = new UserFunctionDeclarationEvaluator( eventEmitter, symbols.UserFunctions );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -37,10 +44,13 @@ public class AstUserFunctionDeclarationEvaluationTest
         const string name = "function";
 
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
+
         var symbols = MockUtility.CreateAggregateSymbolTable();
 
         var ast = MockUtility.CreateUserFunctionDeclarationNode( name );
-        var evaluator = new UserFunctionDeclarationEvaluator( compilerMessageManger, symbols.UserFunctions );
+        var evaluator = new UserFunctionDeclarationEvaluator( eventEmitter, symbols.UserFunctions );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );

@@ -1,10 +1,10 @@
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Extensions;
-using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations;
-using KSPCompiler.Interactors.Analysis.Commons.Extensions;
+using KSPCompiler.Interactors.Analysis.Extensions;
 using KSPCompiler.Interactors.Analysis.Semantics.Extensions;
 using KSPCompiler.Resources;
 using KSPCompiler.UseCases.Analysis.Evaluations.Operators;
@@ -13,11 +13,11 @@ namespace KSPCompiler.Interactors.Analysis.Semantics;
 
 public class ConditionalBinaryOperatorEvaluator : IConditionalBinaryOperatorEvaluator
 {
-    private ICompilerMessageManger CompilerMessageManger { get; }
+    private IEventEmitter EventEmitter { get; }
 
-    public ConditionalBinaryOperatorEvaluator( ICompilerMessageManger compilerMessageManger )
+    public ConditionalBinaryOperatorEvaluator( IEventEmitter eventEmitter )
     {
-        CompilerMessageManger = compilerMessageManger;
+        EventEmitter = eventEmitter;
     }
 
     public IAstNode Evaluate( IAstVisitor visitor, AstExpressionNode expr )
@@ -54,11 +54,12 @@ public class ConditionalBinaryOperatorEvaluator : IConditionalBinaryOperatorEval
 
         if( leftType != rightType )
         {
-            CompilerMessageManger.Error(
-                expr,
-                CompilerMessageResources.semantic_error_binaryoprator_compatible,
-                leftType.ToMessageString(),
-                rightType.ToMessageString()
+            EventEmitter.Emit(
+                expr.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_binaryoprator_compatible,
+                    leftType.ToMessageString(),
+                    rightType.ToMessageString()
+                )
             );
 
             return result;
