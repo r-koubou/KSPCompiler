@@ -6,12 +6,11 @@ using KSPCompiler.Domain.Events;
 namespace KSPCompiler.Applications.Commons.Events;
 
 /// <summary>
-/// Default implementation of <see cref="IEventDispatcher"/>.
+/// Default implementation of <see cref="IEventEmitter"/>.
 /// </summary>
-public sealed class EventDispatcher : IEventDispatcher
+public sealed class EventEmitter : IEventEmitter
 {
-    // object : DefaultEventDispatcher.EventObservable<TEvent>
-    // 任意のIObservable<T>型を出し入れしたいため
+    // object : 任意のIObservable<T>型を出し入れしたいため
     private readonly IDictionary<Type, object> registered = new Dictionary<Type, object>();
 
     /// <inheritdoc />

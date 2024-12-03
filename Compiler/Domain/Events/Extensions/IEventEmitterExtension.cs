@@ -2,9 +2,9 @@ using System;
 
 namespace KSPCompiler.Domain.Events.Extensions;
 
-public static class IEventDispatcherExtension
+public static class IEventEmitterExtension
 {
-    public static IDisposable Subscribe<TEvent>( this IEventDispatcher self, Action<TEvent> action ) where TEvent : IEvent
+    public static IDisposable Subscribe<TEvent>( this IEventEmitter self, Action<TEvent> action ) where TEvent : IEvent
     {
         return self.Subscribe( new AnonymousObserver<TEvent>( action ) );
     }

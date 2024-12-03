@@ -10,7 +10,7 @@ public class EventTest
     [Test]
     public void DispatchTest()
     {
-        var dispatcher = new EventDispatcher();
+        var dispatcher = new EventEmitter();
         var observer   = new MockIntEventObserver();
         using var token = dispatcher.Subscribe( observer );
 

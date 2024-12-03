@@ -12,11 +12,11 @@ public class PreprocessInteractor : IPreprocessUseCase
 {
     public async Task<UnitOutputPort> ExecuteAsync( PreprocessInputData parameter, CancellationToken cancellationToken = default )
     {
-        var eventDispatcher = parameter.InputData.EventDispatcher;
+        var eventEmitter = parameter.InputData.EventEmitter;
         var ast = parameter.InputData.CompilationUnitNode;
         var symbolTable = parameter.InputData.SymbolTable;
 
-        var preprocessor = new PreprocessAnalyzer( symbolTable.PreProcessorSymbols, eventDispatcher );
+        var preprocessor = new PreprocessAnalyzer( symbolTable.PreProcessorSymbols, eventEmitter );
 
         try
         {

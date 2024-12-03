@@ -20,9 +20,9 @@ public class PreprocessTest
     [TestCase( "DEMO", "DEMO2", true )]
     public void IfDefinedTest( string registerSymbolName, string evaluateSymbolName, bool expectedIgnored )
     {
-        var eventDispatcher = new MockEventDispatcher();
+        var eventEmitter = new MockEventEmitter();
         var symbolTable = MockUtility.CreateAggregateSymbolTable().PreProcessorSymbols;
-        var analyzer = new PreprocessAnalyzer( symbolTable, eventDispatcher );
+        var analyzer = new PreprocessAnalyzer( symbolTable, eventEmitter );
 
         /*
         on init
@@ -63,9 +63,9 @@ public class PreprocessTest
     [TestCase( "DEMO", "DEMO2", false )]
     public void IfNotDefinedTest( string registerSymbolName, string evaluateSymbolName, bool expectedIgnored )
     {
-        var eventDispatcher = new MockEventDispatcher();
+        var eventEmitter = new MockEventEmitter();
         var symbolTable = MockUtility.CreateAggregateSymbolTable().PreProcessorSymbols;
-        var analyzer = new PreprocessAnalyzer( symbolTable, eventDispatcher );
+        var analyzer = new PreprocessAnalyzer( symbolTable, eventEmitter );
 
         /*
         on init
@@ -105,9 +105,9 @@ public class PreprocessTest
     [Test]
     public void UnDefinedTest()
     {
-        var eventDispatcher = new MockEventDispatcher();
+        var eventEmitter = new MockEventEmitter();
         var symbolTable = MockUtility.CreateAggregateSymbolTable().PreProcessorSymbols;
-        var analyzer = new PreprocessAnalyzer( symbolTable, eventDispatcher );
+        var analyzer = new PreprocessAnalyzer( symbolTable, eventEmitter );
 
         /*
         on init
@@ -140,8 +140,8 @@ public class PreprocessTest
     public void CannotProcessIncompatibleSymbolTest()
     {
         var errorCount = 0;
-        var eventDispatcher = new MockEventDispatcher();
-        eventDispatcher.Subscribe<CompilationErrorEvent>(
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>(
             evt =>
             {
                 Console.WriteLine( evt.Message );
@@ -150,7 +150,7 @@ public class PreprocessTest
         );
 
         var symbolTable = MockUtility.CreateAggregateSymbolTable().PreProcessorSymbols;
-        var analyzer = new PreprocessAnalyzer( symbolTable, eventDispatcher );
+        var analyzer = new PreprocessAnalyzer( symbolTable, eventEmitter );
 
         /*
         on init

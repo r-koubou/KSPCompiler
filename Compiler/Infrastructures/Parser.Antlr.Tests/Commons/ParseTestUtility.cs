@@ -18,7 +18,7 @@ public static class ParseTestUtility
             scriptFilePath
         );
 
-        var parser = new AntlrKspFileSyntaxParser( path, NullEventDispatcher.Instance );
+        var parser = new AntlrKspFileSyntaxParser( path, NullIEventEmitter.Instance );
         var ast = parser.Parse();
         return ast;
     }
