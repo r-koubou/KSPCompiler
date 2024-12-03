@@ -1,7 +1,6 @@
 using System;
 
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols;
 

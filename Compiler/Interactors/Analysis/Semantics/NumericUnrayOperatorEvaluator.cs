@@ -1,13 +1,11 @@
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Extensions;
-using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations;
-using KSPCompiler.Interactors.Analysis.Commons.Extensions;
 using KSPCompiler.Interactors.Analysis.Extensions;
 using KSPCompiler.Interactors.Analysis.Semantics.Extensions;
 using KSPCompiler.Resources;
