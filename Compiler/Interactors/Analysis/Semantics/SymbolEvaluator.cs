@@ -1,10 +1,10 @@
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
-using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
-using KSPCompiler.Interactors.Analysis.Commons.Extensions;
+using KSPCompiler.Interactors.Analysis.Extensions;
 using KSPCompiler.Resources;
 using KSPCompiler.UseCases.Analysis.Evaluations.Symbols;
 
@@ -12,7 +12,7 @@ namespace KSPCompiler.Interactors.Analysis.Semantics;
 
 public class SymbolEvaluator : ISymbolEvaluator
 {
-    private ICompilerMessageManger CompilerMessageManger { get; }
+    private IEventEmitter EventEmitter { get; }
     private AggregateSymbolTable SymbolTable { get; }
 
     private static AstExpressionNode CreateEvaluateNode( AstExpressionNode source, SymbolBase symbol, ISymbolDataTypeProvider symbolType )
@@ -38,11 +38,11 @@ public class SymbolEvaluator : ISymbolEvaluator
         };
 
     public SymbolEvaluator(
-        ICompilerMessageManger compilerMessageManger,
+        IEventEmitter eventEmitter,
         AggregateSymbolTable symbolTable )
     {
-        CompilerMessageManger = compilerMessageManger;
-        SymbolTable           = symbolTable;
+        EventEmitter = eventEmitter;
+        SymbolTable  = symbolTable;
     }
 
     public IAstNode Evaluate( IAstVisitor visitor, AstSymbolExpressionNode expr )
@@ -59,10 +59,12 @@ public class SymbolEvaluator : ISymbolEvaluator
 
         // シンボルが見つからなかったのでエラー計上後、代替の評価結果を返す
 
-        CompilerMessageManger.Error(
-            expr,
-            CompilerMessageResources.semantic_error_variable_not_declared,
-            expr.Name );
+        EventEmitter.Dispatch(
+            expr.AsErrorEvent(
+                CompilerMessageResources.semantic_error_variable_not_declared,
+                expr.Name
+            )
+        );
 
         result = CreateEvaluateNode( expr, DataTypeUtility.GuessFromSymbolName( expr.Name ), expr.Constant );
 
@@ -131,10 +133,11 @@ public class SymbolEvaluator : ISymbolEvaluator
         // https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/advanced-concepts#pgs
         if( expr.Name.Length > 64 )
         {
-            CompilerMessageManger.Error(
-                expr,
-                CompilerMessageResources.semantic_error_pgs_name_maximam_length,
-                expr.Name[ ..16 ] + "..."
+            EventEmitter.Dispatch(
+                expr.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_pgs_name_maximam_length,
+                    expr.Name[ ..16 ] + "..."
+                )
             );
 
             // 上位のノードで評価を継続させるので代替のノードは生成しない

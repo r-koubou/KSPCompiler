@@ -1,11 +1,11 @@
-using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols;
 
 namespace KSPCompiler.UseCases.Analysis.Context;
 
 public interface IAnalyzerContext
 {
-    ICompilerMessageManger CompilerMessageManger { get; }
+    IEventEmitter EventEmitter { get; }
     AggregateSymbolTable SymbolTable { get; }
 
     IDeclarationEvaluationContext DeclarationContext { get; }

@@ -1,11 +1,11 @@
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
-using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations;
-using KSPCompiler.Interactors.Analysis.Commons.Extensions;
+using KSPCompiler.Interactors.Analysis.Extensions;
 using KSPCompiler.Resources;
 using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Strings;
 using KSPCompiler.UseCases.Analysis.Evaluations.Operators;
@@ -14,7 +14,7 @@ namespace KSPCompiler.Interactors.Analysis.Semantics;
 
 public sealed class StringConcatenateOperatorEvaluator : IStringConcatenateOperatorEvaluator
 {
-    private ICompilerMessageManger CompilerMessageManger { get; }
+    private IEventEmitter EventEmitter { get; }
     private IStringConvolutionEvaluator StringConvolutionEvaluator { get; }
 
     private static AstExpressionNode CreateEvaluateNode( AstExpressionNode source, DataTypeFlag type )
@@ -26,10 +26,10 @@ public sealed class StringConcatenateOperatorEvaluator : IStringConcatenateOpera
     }
 
     public StringConcatenateOperatorEvaluator(
-        ICompilerMessageManger compilerMessageManger,
+        IEventEmitter eventEmitter,
         IStringConvolutionEvaluator stringConvolutionEvaluator )
     {
-        CompilerMessageManger      = compilerMessageManger;
+        EventEmitter               = eventEmitter;
         StringConvolutionEvaluator = stringConvolutionEvaluator;
     }
 
@@ -49,9 +49,10 @@ public sealed class StringConcatenateOperatorEvaluator : IStringConcatenateOpera
         //--------------------------------------------------------------------------
         if( expr.HasParent<AstVariableInitializerNode>() )
         {
-            CompilerMessageManger.Error(
-                expr,
-                CompilerMessageResources.semantic_error_variable_invalid_string_initializer
+            EventEmitter.Dispatch(
+                expr.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_variable_invalid_string_initializer
+                )
             );
 
             return CreateEvaluateNode( expr, DataTypeFlag.TypeString );
@@ -78,9 +79,10 @@ public sealed class StringConcatenateOperatorEvaluator : IStringConcatenateOpera
         // BOOL（条件式）は不可
         if( evaluatedLeft.TypeFlag.IsBoolean() || evaluatedRight.TypeFlag.IsBoolean() )
         {
-            CompilerMessageManger.Error(
-                expr,
-                CompilerMessageResources.semantic_error_string_operator_conditional
+            EventEmitter.Dispatch(
+                expr.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_string_operator_conditional
+                )
             );
 
             return CreateEvaluateNode( expr, DataTypeFlag.TypeBool );

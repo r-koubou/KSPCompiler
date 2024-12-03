@@ -3,11 +3,11 @@ using System.Linq;
 
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
-using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations;
-using KSPCompiler.Interactors.Analysis.Commons.Extensions;
+using KSPCompiler.Interactors.Analysis.Extensions;
 using KSPCompiler.Interactors.Analysis.Semantics.Extensions;
 using KSPCompiler.Resources;
 using KSPCompiler.UseCases.Analysis.Evaluations.Commands;
@@ -16,17 +16,20 @@ namespace KSPCompiler.Interactors.Analysis.Semantics;
 
 public class CallCommandEvaluator : ICallCommandEvaluator
 {
-    private ICompilerMessageManger CompilerMessageManger { get; }
+    private IEventEmitter EventEmitter { get; }
+
     private IVariableSymbolTable Variables { get; }
+
     private ICommandSymbolTable Commands { get; }
+
     private IUITypeSymbolTable UITypes { get; }
 
-    public CallCommandEvaluator( ICompilerMessageManger compilerMessageManger, IVariableSymbolTable variables, ICommandSymbolTable commands, IUITypeSymbolTable uiTypeSymbolTable )
+    public CallCommandEvaluator( IEventEmitter eventEmitter, IVariableSymbolTable variables, ICommandSymbolTable commands, IUITypeSymbolTable uiTypeSymbolTable )
     {
-        CompilerMessageManger = compilerMessageManger;
-        Variables             = variables;
-        Commands              = commands;
-        UITypes               = uiTypeSymbolTable;
+        EventEmitter = eventEmitter;
+        Variables    = variables;
+        Commands     = commands;
+        UITypes      = uiTypeSymbolTable;
     }
 
     public IAstNode Evaluate( IAstVisitor visitor, AstCallCommandExpressionNode expr )
@@ -58,10 +61,11 @@ public class CallCommandEvaluator : ICallCommandEvaluator
 
         if( !Commands.TrySearchByName( evaluatedSymbolExpr.Name, out var commandSymbol ) )
         {
-            CompilerMessageManger.Warning(
-                expr,
-                CompilerMessageResources.semantic_warning_command_unknown,
-                evaluatedSymbolExpr.Name
+            EventEmitter.Dispatch(
+                expr.AsWarningEvent(
+                    CompilerMessageResources.semantic_warning_command_unknown,
+                    evaluatedSymbolExpr.Name
+                )
             );
 
             return false;
@@ -84,10 +88,11 @@ public class CallCommandEvaluator : ICallCommandEvaluator
 
         if( symbolArgs.Count != callArgs.Count )
         {
-            CompilerMessageManger.Error(
-                expr,
-                CompilerMessageResources.semantic_error_command_arg_count,
-                commandSymbol.Name
+            EventEmitter.Dispatch(
+                expr.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_command_arg_count,
+                    commandSymbol.Name
+                )
             );
 
             return false;
@@ -145,13 +150,14 @@ public class CallCommandEvaluator : ICallCommandEvaluator
                 }
             }
 
-            CompilerMessageManger.Error(
-                callArg,
-                CompilerMessageResources.semantic_error_command_arg_incompatible,
-                commandSymbol.Name,
-                i + 1, // 1-based index
-                symbolArg.DataType.ToMessageString(),
-                callArg.TypeFlag.ToMessageString()
+            EventEmitter.Dispatch(
+                callArg.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_command_arg_incompatible,
+                    commandSymbol.Name,
+                    i + 1, // 1-based index
+                    symbolArg.DataType.ToMessageString(),
+                    callArg.TypeFlag.ToMessageString()
+                )
             );
 
             return false;
@@ -173,6 +179,6 @@ public class CallCommandEvaluator : ICallCommandEvaluator
 
     private bool ValidateCommandArgumentState( AstCallCommandExpressionNode expr, IReadOnlyList<AstExpressionNode> callArgs )
     {
-        return callArgs.All( arg => arg.EvaluateSymbolState( expr, CompilerMessageManger, Variables ) );
+        return callArgs.All( arg => arg.EvaluateSymbolState( expr, EventEmitter, Variables ) );
     }
 }

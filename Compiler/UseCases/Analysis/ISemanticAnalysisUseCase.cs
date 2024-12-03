@@ -1,67 +1,41 @@
 using System;
 
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols;
 
 namespace KSPCompiler.UseCases.Analysis;
 
-public sealed class SemanticAnalysisInputDataDetail
+public sealed class SemanticAnalysisInputDataDetail(
+    IEventEmitter eventEmitter,
+    AstCompilationUnitNode compilationUnitNode,
+    AggregateSymbolTable symbolTable )
 {
-    public ICompilerMessageManger MessageManager { get; }
-    public AstCompilationUnitNode CompilationUnitNode { get; }
-    public AggregateSymbolTable SymbolTable { get; }
-
-    public SemanticAnalysisInputDataDetail(
-        ICompilerMessageManger messageManager,
-        AstCompilationUnitNode compilationUnitNode,
-        AggregateSymbolTable symbolTable )
-    {
-        MessageManager      = messageManager;
-        CompilationUnitNode = compilationUnitNode;
-        SymbolTable         = symbolTable;
-    }
+    public IEventEmitter EventEmitter { get; } = eventEmitter;
+    public AstCompilationUnitNode CompilationUnitNode { get; } = compilationUnitNode;
+    public AggregateSymbolTable SymbolTable { get; } = symbolTable;
 }
 
-public sealed class SemanticAnalysisInputData : IInputPort<SemanticAnalysisInputDataDetail>
+public sealed class SemanticAnalysisInputData( SemanticAnalysisInputDataDetail inputData )
+    : IInputPort<SemanticAnalysisInputDataDetail>
 {
-    public SemanticAnalysisInputDataDetail InputData { get; }
-
-    public SemanticAnalysisInputData( SemanticAnalysisInputDataDetail inputData )
-    {
-        InputData = inputData;
-    }
+    public SemanticAnalysisInputDataDetail InputData { get; } = inputData;
 }
 
-public sealed class SemanticAnalysisOutputDataDetail
+public sealed class SemanticAnalysisOutputDataDetail(
+    AstCompilationUnitNode compilationUnitNode,
+    AggregateSymbolTable symbolTable )
 {
-    public ICompilerMessageManger MessageManager { get; }
-    public AstCompilationUnitNode CompilationUnitNode { get; }
-    public AggregateSymbolTable SymbolTable { get; }
-
-    public SemanticAnalysisOutputDataDetail(
-        ICompilerMessageManger messageManager,
-        AstCompilationUnitNode compilationUnitNode,
-        AggregateSymbolTable symbolTable )
-    {
-        MessageManager      = messageManager;
-        CompilationUnitNode = compilationUnitNode;
-        SymbolTable         = symbolTable;
-    }
+    public AstCompilationUnitNode CompilationUnitNode { get; } = compilationUnitNode;
+    public AggregateSymbolTable SymbolTable { get; } = symbolTable;
 }
 
-public sealed class SemanticAnalysisOutputData : IOutputPort<SemanticAnalysisOutputDataDetail>
+public sealed class SemanticAnalysisOutputData( bool result, Exception? error, SemanticAnalysisOutputDataDetail outputData )
+    : IOutputPort<SemanticAnalysisOutputDataDetail>
 {
-    public bool Result { get; }
-    public Exception? Error { get; }
-    public SemanticAnalysisOutputDataDetail OutputData { get; }
-
-    public SemanticAnalysisOutputData( bool result, Exception? error, SemanticAnalysisOutputDataDetail outputData )
-    {
-        Result     = result;
-        Error      = error;
-        OutputData = outputData;
-    }
+    public bool Result { get; } = result;
+    public Exception? Error { get; } = error;
+    public SemanticAnalysisOutputDataDetail OutputData { get; } = outputData;
 }
 
 public interface ISemanticAnalysisUseCase : IUseCase<SemanticAnalysisInputData, SemanticAnalysisOutputData> {}

@@ -1,9 +1,9 @@
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
-using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations;
-using KSPCompiler.Interactors.Analysis.Commons.Extensions;
+using KSPCompiler.Interactors.Analysis.Extensions;
 using KSPCompiler.Resources;
 using KSPCompiler.UseCases.Analysis.Evaluations.Conditionals;
 
@@ -11,11 +11,11 @@ namespace KSPCompiler.Interactors.Analysis.Semantics;
 
 public class IfStatementEvaluator : IIfStatementEvaluator
 {
-    private ICompilerMessageManger CompilerMessageManger { get; }
+    private IEventEmitter EventEmitter { get; }
 
-    public IfStatementEvaluator( ICompilerMessageManger compilerMessageManger )
+    public IfStatementEvaluator( IEventEmitter eventEmitter )
     {
-        CompilerMessageManger = compilerMessageManger;
+        EventEmitter = eventEmitter;
     }
 
     public IAstNode Evaluate( IAstVisitor visitor, AstIfStatementNode statement )
@@ -29,9 +29,10 @@ public class IfStatementEvaluator : IIfStatementEvaluator
         // if条件式が条件式以外の場合
         if( !evaluatedCondition.TypeFlag.IsBoolean() )
         {
-            CompilerMessageManger.Error(
-                statement,
-                CompilerMessageResources.semantic_error_if_condition_incompatible
+            EventEmitter.Dispatch(
+                statement.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_if_condition_incompatible
+                )
             );
 
             return statement.Clone<AstIfStatementNode>();

@@ -1,11 +1,11 @@
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
-using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations;
-using KSPCompiler.Interactors.Analysis.Commons.Extensions;
+using KSPCompiler.Interactors.Analysis.Extensions;
 using KSPCompiler.Interactors.Analysis.Semantics.Extensions;
 using KSPCompiler.Resources;
 using KSPCompiler.UseCases.Analysis.Evaluations.Operators;
@@ -14,7 +14,8 @@ namespace KSPCompiler.Interactors.Analysis.Semantics;
 
 public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
 {
-    private ICompilerMessageManger CompilerMessageManger { get; }
+    private IEventEmitter EventEmitter { get; }
+
     private IVariableSymbolTable Variables { get; }
 
     private static AstExpressionNode CreateEvaluateNode( AstExpressionNode source, DataTypeFlag type )
@@ -25,10 +26,10 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
         return result;
     }
 
-    public AssignOperatorEvaluator( ICompilerMessageManger compilerMessageManger, IVariableSymbolTable variables )
+    public AssignOperatorEvaluator( IEventEmitter eventEmitter, IVariableSymbolTable variables )
     {
-        CompilerMessageManger = compilerMessageManger;
-        Variables             = variables;
+        EventEmitter = eventEmitter;
+        Variables    = variables;
     }
 
     public IAstNode Evaluate( IAstVisitor visitor, AstExpressionNode expr )
@@ -56,10 +57,11 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
         // 定数には代入できない
         if( evaluatedLeft.Constant )
         {
-            CompilerMessageManger.Error(
-                expr,
-                CompilerMessageResources.semantic_error_assign_to_constant,
-                evaluatedLeft.Name
+            EventEmitter.Dispatch(
+                expr.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_assign_to_constant,
+                    evaluatedLeft.Name
+                )
             );
 
             return CreateEvaluateNode( evaluatedLeft, evaluatedLeft.TypeFlag );
@@ -68,10 +70,11 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
         // ビルトイン変数には代入できない
         if( evaluatedLeft is AstSymbolExpressionNode { BuiltIn: true } symbolLeft )
         {
-            CompilerMessageManger.Error(
-                expr,
-                CompilerMessageResources.semantic_error_assign_to_builtin_variable,
-                symbolLeft.Name
+            EventEmitter.Dispatch(
+                expr.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_assign_to_builtin_variable,
+                    symbolLeft.Name
+                )
             );
 
             return CreateEvaluateNode( evaluatedLeft, evaluatedLeft.TypeFlag );
@@ -82,11 +85,12 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
 
         if( !TypeCompatibility.IsAssigningTypeCompatible( leftType, rightType ) )
         {
-            CompilerMessageManger.Error(
-                expr,
-                CompilerMessageResources.semantic_error_assign_type_compatible,
-                leftType.ToMessageString(),
-                rightType.ToMessageString()
+            EventEmitter.Dispatch(
+                expr.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_assign_type_compatible,
+                    leftType.ToMessageString(),
+                    rightType.ToMessageString()
+                )
             );
 
             // 上位のノードで評価を継続させるので代替のノードは生成しない
