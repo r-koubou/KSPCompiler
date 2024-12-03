@@ -18,9 +18,9 @@ public abstract class AntlrKspSyntaxParser : ISyntaxParser
 
     protected AntlrKspSyntaxParser( Stream stream, IEventEmitter eventEmitter, bool leaveOpen = false )
     {
-        Stream          = stream;
+        Stream       = stream;
         EventEmitter = eventEmitter;
-        LeaveOpen       = leaveOpen;
+        LeaveOpen    = leaveOpen;
     }
 
     public void Dispose()

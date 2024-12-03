@@ -18,7 +18,7 @@ internal class AntlrParserErrorListener : IAntlrErrorListener<IToken>
 
     public AntlrParserErrorListener( IEventEmitter eventEmitter, bool enableDetailMessage = true )
     {
-        EventEmitter     = eventEmitter;
+        EventEmitter        = eventEmitter;
         EnableDetailMessage = enableDetailMessage;
     }
 

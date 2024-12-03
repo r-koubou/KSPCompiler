@@ -16,7 +16,7 @@ internal class AntlrLexerErrorListener : IAntlrErrorListener<int>
 
     public AntlrLexerErrorListener( IEventEmitter eventEmitter, bool enableDetailMessage = true)
     {
-        EventEmitter     = eventEmitter;
+        EventEmitter        = eventEmitter;
         EnableDetailMessage = enableDetailMessage;
     }
 
