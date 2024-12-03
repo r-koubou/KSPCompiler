@@ -4,9 +4,13 @@ using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.CompilerMessages.Extensions;
+using KSPCompiler.Domain.Events;
+using KSPCompiler.Domain.Events.Extensions;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Interactors.Analysis.Semantics;
+using KSPCompiler.Interactors.Tests.Commons;
 using KSPCompiler.UseCases.Analysis.Context;
 
 using NUnit.Framework;
@@ -18,7 +22,7 @@ public class SemanticAnalyzerTest
 {
     private static IAnalyzerContext CreateContext()
         => new SemanticAnalyzerContext(
-            ICompilerMessageManger.Default,
+            new MockEventEmitter(),
             MockUtility.CreateAggregateSymbolTable()
         );
 
@@ -32,6 +36,9 @@ public class SemanticAnalyzerTest
         var semanticAnalyzer = new SemanticAnalyzer( context );
         var variableSymbol = MockUtility.CreateIntVariable( "$x" );
         var variable = MockUtility.CreateSymbolNode( "$x", DataTypeFlag.TypeInt );
+
+        var compilerMessageManger = ICompilerMessageManger.Default;
+        context.EventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
         context.SymbolTable.Variables.Add( variableSymbol );
 
@@ -47,9 +54,9 @@ public class SemanticAnalyzerTest
         );
 
         context.ExpressionContext.AssignOperator.Evaluate( semanticAnalyzer, statement );
-        context.EventEmitter.WriteTo( Console.Out );
+        compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.That( context.EventEmitter.Count(),           Is.EqualTo( 0 ) );
+        Assert.That( compilerMessageManger.Count(),           Is.EqualTo( 0 ) );
         Assert.That( statement.Right,                                 Is.InstanceOf<AstIntLiteralNode>() );
         Assert.That( ( statement.Right as AstIntLiteralNode )?.Value, Is.EqualTo( 6 ) );
     }
@@ -65,6 +72,9 @@ public class SemanticAnalyzerTest
         var variableSymbol = MockUtility.CreateRealVariable( "~x" );
         var variable = MockUtility.CreateSymbolNode( "~x", DataTypeFlag.TypeReal );
 
+        var compilerMessageManger = ICompilerMessageManger.Default;
+        context.EventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
+
         context.SymbolTable.Variables.Add( variableSymbol );
 
         var statement = new AstAssignmentExpressionNode(
@@ -79,9 +89,9 @@ public class SemanticAnalyzerTest
         );
 
         context.ExpressionContext.AssignOperator.Evaluate( semanticAnalyzer, statement );
-        context.EventEmitter.WriteTo( Console.Out );
+        compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.That( context.EventEmitter.Count(),            Is.EqualTo( 0 ) );
+        Assert.That( compilerMessageManger.Count(),            Is.EqualTo( 0 ) );
         Assert.That( statement.Right,                                  Is.InstanceOf<AstRealLiteralNode>() );
         Assert.That( ( statement.Right as AstRealLiteralNode )?.Value, Is.EqualTo( 6 ) );
     }
@@ -96,6 +106,9 @@ public class SemanticAnalyzerTest
         var semanticAnalyzer = new SemanticAnalyzer( context );
         var variableSymbol = MockUtility.CreateStringVariable( "@x" );
         var variable = MockUtility.CreateSymbolNode( "@x", DataTypeFlag.TypeString );
+
+        var compilerMessageManger = ICompilerMessageManger.Default;
+        context.EventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
         context.SymbolTable.Variables.Add( variableSymbol );
 
@@ -112,9 +125,9 @@ public class SemanticAnalyzerTest
 
         context.ExpressionContext.AssignOperator.Evaluate( semanticAnalyzer, statement );
 
-        context.EventEmitter.WriteTo( Console.Out );
+        compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.That( context.EventEmitter.Count(),              Is.EqualTo( 0 ) );
+        Assert.That( compilerMessageManger.Count(),              Is.EqualTo( 0 ) );
         Assert.That( statement.Right,                                    Is.InstanceOf<AstStringLiteralNode>() );
         Assert.That( ( statement.Right as AstStringLiteralNode )?.Value, Is.EqualTo( "abc123def" ) );
     }
@@ -138,6 +151,9 @@ public class SemanticAnalyzerTest
 
         var variable = MockUtility.CreateSymbolNode( "@x", DataTypeFlag.TypeString );
 
+        var compilerMessageManger = ICompilerMessageManger.Default;
+        context.EventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
+
         context.SymbolTable.Commands.Add( command );
 
         // message( 1 + 2 + 3 )
@@ -153,9 +169,9 @@ public class SemanticAnalyzerTest
         );
 
         context.ExpressionContext.CallCommand.Evaluate( semanticAnalyzer, expr );
-        context.EventEmitter.WriteTo( Console.Out );
+        compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.That( context.EventEmitter.Count(), Is.EqualTo( 0 ) );
+        Assert.That( compilerMessageManger.Count(), Is.EqualTo( 0 ) );
 
         var args = expr.Right as AstExpressionListNode;
 
@@ -206,10 +222,13 @@ public class SemanticAnalyzerTest
         statement.Parent = init;
         init.Block.Statements.Add( statement );
 
-        context.DeclarationContext.Variable.Evaluate( semanticAnalyzer, statement );
-        context.EventEmitter.WriteTo( Console.Out );
+        var compilerMessageManger = ICompilerMessageManger.Default;
+        context.EventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
-        Assert.That( context.EventEmitter.Count(),                                                 Is.EqualTo( 0 ) );
+        context.DeclarationContext.Variable.Evaluate( semanticAnalyzer, statement );
+        compilerMessageManger.WriteTo( Console.Out );
+
+        Assert.That( compilerMessageManger.Count(),                                                 Is.EqualTo( 0 ) );
         Assert.That( statement.Initializer.PrimitiveInitializer.Expression,                                 Is.InstanceOf<AstIntLiteralNode>() );
         Assert.That( ( statement.Initializer.PrimitiveInitializer.Expression as AstIntLiteralNode )?.Value, Is.EqualTo( 6 ) );
     }
@@ -240,10 +259,13 @@ public class SemanticAnalyzerTest
             )
         };
 
-        context.ExpressionContext.ConditionalBinaryOperator.Evaluate( semanticAnalyzer, expr );
-        context.EventEmitter.WriteTo( Console.Out );
+        var compilerMessageManger = ICompilerMessageManger.Default;
+        context.EventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
-        Assert.That( context.EventEmitter.Count(),      Is.EqualTo( 0 ) );
+        context.ExpressionContext.ConditionalBinaryOperator.Evaluate( semanticAnalyzer, expr );
+        compilerMessageManger.WriteTo( Console.Out );
+
+        Assert.That( compilerMessageManger.Count(),      Is.EqualTo( 0 ) );
         Assert.That( expr.Left,                                  Is.InstanceOf<AstIntLiteralNode>() );
         Assert.That( ( expr.Left as AstIntLiteralNode )?.Value,  Is.EqualTo( 6 ) );
         Assert.That( expr.Right,                                 Is.InstanceOf<AstIntLiteralNode>() );

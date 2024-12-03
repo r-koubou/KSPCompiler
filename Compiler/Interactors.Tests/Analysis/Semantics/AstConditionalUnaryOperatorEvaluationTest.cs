@@ -3,8 +3,12 @@ using System;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.CompilerMessages.Extensions;
+using KSPCompiler.Domain.Events;
+using KSPCompiler.Domain.Events.Extensions;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Interactors.Analysis.Semantics;
+using KSPCompiler.Interactors.Tests.Commons;
 
 using NUnit.Framework;
 
@@ -17,10 +21,13 @@ public class AstConditionalUnaryOperatorEvaluationTest
     public void ConditionalUnaryOperatorTest()
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
+
         var visitor = new MockAstConditionalUnaryOperatorVisitor();
 
         var conditionalBinaryOperatorEvaluator = new ConditionalUnaryOperatorEvaluator(
-            compilerMessageManger,
+            eventEmitter,
             MockUtility.CreateBooleanConvolutionEvaluator( visitor )
         );
 
@@ -51,10 +58,13 @@ public class AstConditionalUnaryOperatorEvaluationTest
     public void CannotConditionalUnaryOperatorWithoutBooleanTest()
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
+
         var visitor = new MockAstConditionalUnaryOperatorVisitor();
 
         var conditionalBinaryOperatorEvaluator = new ConditionalUnaryOperatorEvaluator(
-            compilerMessageManger,
+            eventEmitter,
             MockUtility.CreateBooleanConvolutionEvaluator( visitor )
         );
 

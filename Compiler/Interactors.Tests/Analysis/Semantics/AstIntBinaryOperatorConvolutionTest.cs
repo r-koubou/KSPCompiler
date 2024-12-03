@@ -3,8 +3,12 @@ using System;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.CompilerMessages.Extensions;
+using KSPCompiler.Domain.Events;
+using KSPCompiler.Domain.Events.Extensions;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Integers;
 using KSPCompiler.Interactors.Analysis.Semantics;
+using KSPCompiler.Interactors.Tests.Commons;
 
 using NUnit.Framework;
 
@@ -16,12 +20,15 @@ public class AstIntBinaryOperatorConvolutionTest
     private void ConvolutionTestBody( int expected, Func<IAstVisitor, AstIntLiteralNode?> visitImpl )
     {
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
+
         var visitor = new MockAstBinaryOperatorVisitor();
 
         var integerConvolutionEvaluator = new IntegerConvolutionEvaluator();
         var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
         var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
-            compilerMessageManger,
+            eventEmitter,
             MockUtility.CreateAggregateSymbolTable().Variables,
             integerConvolutionEvaluator,
             realConvolutionEvaluator

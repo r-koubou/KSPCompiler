@@ -3,10 +3,14 @@ using System;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.CompilerMessages.Extensions;
+using KSPCompiler.Domain.Events;
+using KSPCompiler.Domain.Events.Extensions;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Interactors.Analysis.Semantics;
+using KSPCompiler.Interactors.Tests.Commons;
 
 using NUnit.Framework;
 
@@ -19,11 +23,14 @@ public class AstVariableSymbolEvaluationTest
     {
         var visitor = new MockAstSymbolVisitor();
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
+
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
 
         symbolTable.Variables.Add( variable );
 
-        var symbolEvaluator = new SymbolEvaluator( compilerMessageManger, symbolTable );
+        var symbolEvaluator = new SymbolEvaluator( eventEmitter, symbolTable );
         visitor.Inject( symbolEvaluator );
 
         var node = MockUtility.CreateSymbolNode( variable.Name );
@@ -117,9 +124,12 @@ public class AstVariableSymbolEvaluationTest
     {
         var visitor = new MockAstSymbolVisitor();
         var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
+
         var symbolTable = MockUtility.CreateAggregateSymbolTable(); // no variables registered
 
-        var symbolEvaluator = new SymbolEvaluator( compilerMessageManger, symbolTable );
+        var symbolEvaluator = new SymbolEvaluator( eventEmitter, symbolTable );
         visitor.Inject( symbolEvaluator );
 
         var node = MockUtility.CreateSymbolNode( "$x" );

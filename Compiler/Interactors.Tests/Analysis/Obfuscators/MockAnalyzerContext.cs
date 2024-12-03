@@ -1,6 +1,6 @@
 using System;
 
-using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.UseCases.Analysis.Context;
 
@@ -8,7 +8,7 @@ namespace KSPCompiler.Interactors.Tests.Analysis.Obfuscators;
 
 public class MockAnalyzerContext : IAnalyzerContext
 {
-    public ICompilerMessageManger CompilerMessageManger
+    public IEventEmitter EventEmitter
         => throw new NotImplementedException();
 
     public AggregateSymbolTable SymbolTable
