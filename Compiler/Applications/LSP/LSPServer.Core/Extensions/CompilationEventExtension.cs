@@ -16,12 +16,12 @@ public static class CompilationEventExtension
             {
                 Start = new Position
                 {
-                    Line      = position.BeginLine.Value,
+                    Line      = position.BeginLine.Value - 1, // zero-based
                     Character = position.BeginColumn.Value
                 },
                 End = new Position
                 {
-                    Line      = position.EndLine.Value,
+                    Line      = position.EndLine.Value - 1, // zero-based
                     Character = position.EndColumn.Value
                 }
             },
