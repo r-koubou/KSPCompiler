@@ -24,7 +24,7 @@ internal class TextDocumentHandler : TextDocumentSyncHandlerBase
     private ILanguageServerFacade ServerFacade { get; }
     private ILanguageServerConfiguration Configuration { get; }
 
-    private CompilerService CompilerService { get; } = new();
+    private CompilerService CompilerService { get; }
     private IEventEmitter CompilerEventEmitter { get; } = new EventEmitter();
 
     private TextDocumentSelector TextDocumentSelector { get; } = new(
@@ -38,10 +38,14 @@ internal class TextDocumentHandler : TextDocumentSyncHandlerBase
         }
     );
 
-    public TextDocumentHandler( ILanguageServerFacade serverFacade, ILanguageServerConfiguration configuration )
+    public TextDocumentHandler(
+        ILanguageServerFacade serverFacade,
+        ILanguageServerConfiguration configuration,
+        CompilerService compilerService )
     {
-        ServerFacade  = serverFacade;
-        Configuration = configuration;
+        ServerFacade    = serverFacade;
+        Configuration   = configuration;
+        CompilerService = compilerService;
     }
 
     private TextDocumentSyncKind Change

@@ -1,6 +1,7 @@
 using System.IO;
 using System.Threading.Tasks;
 
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 using OmniSharp.Extensions.LanguageServer.Protocol.Window;
@@ -37,6 +38,12 @@ public class Server
                        )
                       .WithHandler<TextDocumentHandler>()
                       .WithHandler<DidChangeWatchedFilesHandler>()
+                      .WithServices(
+                           services =>
+                           {
+                               services.AddSingleton<CompilerService>();
+                           }
+                       )
                       .OnInitialize( ( server, request, token ) =>
                            {
                                server.LogInfo( "Server initialized." );
