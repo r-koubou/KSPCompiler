@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <LangVersion>default</LangVersion>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <Nullable>enable</Nullable>
+        <Copyright>R-Koubou</Copyright>
+        <Company>R-Koubou</Company>
+        <Product>KSPCompiler.LSPServer.Core</Product>
+        <AssemblyName>KSPCompiler.LSPServer.Core</AssemblyName>
+        <RootNamespace>KSPCompiler.LSPServer.Core</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="OmniSharp.Extensions.LanguageServer" Version="0.19.9" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Controllers\CompilerControllers\CompilerControllers.csproj" />
+      <ProjectReference Include="..\..\..\Infrastructures\ExternalSymbolRepository.JSONFlatFileDataStore\ExternalSymbolRepository.JSONFlatFileDataStore.csproj" />
+      <ProjectReference Include="..\..\..\Infrastructures\Parser.Antlr\Parser.Antlr.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\..\..\..\Data\Symbols\callbacks.json">
+        <Link>Data\Symbols\callbacks.json</Link>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="..\..\..\..\Data\Symbols\commands.json">
+        <Link>Data\Symbols\commands.json</Link>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="..\..\..\..\Data\Symbols\uitypes.json">
+        <Link>Data\Symbols\uitypes.json</Link>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="..\..\..\..\Data\Symbols\variables.json">
+        <Link>Data\Symbols\variables.json</Link>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
+</Project>
