@@ -20,7 +20,7 @@ compilationUnit:
     | userFunctionDeclaration
     | EOL
     | MULTI_LINE_DELIMITER
-)*
+)* EOF
 ;
 
 //------------------------------------------------------------------------------
