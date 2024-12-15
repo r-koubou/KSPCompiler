@@ -42,6 +42,7 @@ public class Server
                            services =>
                            {
                                services.AddSingleton<CompilerService>();
+                               services.AddSingleton<CompilerCache>();
                            }
                        )
                       .OnInitialize( ( server, request, token ) =>

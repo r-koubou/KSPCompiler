@@ -10,12 +10,13 @@ using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Commands;
 using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.UITypes;
 using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Variables;
 using KSPCompiler.Infrastructures.Parser.Antlr;
+using KSPCompiler.LSPServer.Core.Extensions;
 
 namespace KSPCompiler.LSPServer.Core;
 
 public class CompilerService
 {
-    private readonly AggregateSymbolTable symbolTable = new AggregateSymbolTable(
+    private readonly AggregateSymbolTable symbolTable = new(
         new VariableSymbolTable(),
         new UITypeSymbolTable(),
         new CommandSymbolTable(),
@@ -25,7 +26,7 @@ public class CompilerService
         new PreProcessorSymbolTable()
     );
 
-    private readonly CompilerController compilerController = new CompilerController();
+    private readonly CompilerController compilerController = new();
 
     public CompilerService()
     {
@@ -35,13 +36,12 @@ public class CompilerService
 
     public void Compile( string script, IEventEmitter eventEmitter )
     {
-        // 追加のシンボルセットアップ処理
-        SetupSymbolState( symbolTable );
+        SetupSymbol( this.symbolTable );
 
         var parser = new AntlrKspStringSyntaxParser( script, eventEmitter, Encoding.UTF8 );
         var option = new CompilerOption(
             SyntaxParser: parser,
-            SymbolTable: symbolTable,
+            SymbolTable: this.symbolTable,
             SyntaxCheckOnly: false,
             EnableObfuscation: false
         );
@@ -66,12 +66,20 @@ public class CompilerService
         symbolTable.BuiltInCallbacks.AddRange( callbacks.FindAllAsync( CancellationToken.None ).GetAwaiter().GetResult() );
     }
 
-    private static void SetupSymbolState( AggregateSymbolTable symbolTable )
+    private static void SetupSymbol( AggregateSymbolTable symbolTable )
     {
+        // 再突入時のため、ユーザー定義シンボルをクリア
+        symbolTable.Variables.RemoveNoReservedSymbols();
+        symbolTable.UserCallbacks.RemoveNoReservedSymbols();
+        symbolTable.UserFunctions.RemoveNoReservedSymbols();
+
         // ビルトイン変数は初期化済み扱い
         foreach( var variable in symbolTable.Variables )
         {
-            variable.State = SymbolState.Initialized;
+            if( variable.BuiltIn )
+            {
+                variable.State = SymbolState.Initialized;
+            }
         }
     }
 }

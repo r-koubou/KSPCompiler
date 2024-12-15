@@ -25,6 +25,7 @@ internal class TextDocumentHandler : TextDocumentSyncHandlerBase
     private ILanguageServerConfiguration Configuration { get; }
 
     private CompilerService CompilerService { get; }
+    private CompilerCache CompilerCache { get; }
     private IEventEmitter CompilerEventEmitter { get; } = new EventEmitter();
 
     private TextDocumentSelector TextDocumentSelector { get; } = new(
@@ -41,11 +42,13 @@ internal class TextDocumentHandler : TextDocumentSyncHandlerBase
     public TextDocumentHandler(
         ILanguageServerFacade serverFacade,
         ILanguageServerConfiguration configuration,
-        CompilerService compilerService )
+        CompilerService compilerService,
+        CompilerCache compilerCache )
     {
         ServerFacade    = serverFacade;
         Configuration   = configuration;
         CompilerService = compilerService;
+        CompilerCache   = compilerCache;
     }
 
     private TextDocumentSyncKind Change
@@ -65,6 +68,7 @@ internal class TextDocumentHandler : TextDocumentSyncHandlerBase
 
     public override async Task<Unit> Handle( DidChangeTextDocumentParams request, CancellationToken cancellationToken )
     {
+        var uri = request.TextDocument.Uri;
         var diagnostics = ImmutableArray<Diagnostic>.Empty.ToBuilder();
         var script = request.ContentChanges.First().Text;
 
@@ -76,15 +80,12 @@ internal class TextDocumentHandler : TextDocumentSyncHandlerBase
 
         CompilerService.Compile( script, CompilerEventEmitter );
 
-        if( diagnostics.Count != 0 )
-        {
-            ServerFacade.TextDocument.PublishDiagnostics( new PublishDiagnosticsParams
-                {
-                    Uri         = request.TextDocument.Uri,
-                    Diagnostics = diagnostics.ToImmutable()
-                }
-            );
-        }
+        ServerFacade.TextDocument.PublishDiagnostics( new PublishDiagnosticsParams
+            {
+                Uri         = request.TextDocument.Uri,
+                Diagnostics = diagnostics.ToImmutable()
+            }
+        );
 
         await Task.CompletedTask;
         return Unit.Value;
