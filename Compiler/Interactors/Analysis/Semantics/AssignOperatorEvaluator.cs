@@ -16,7 +16,7 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
 {
     private IEventEmitter EventEmitter { get; }
 
-    private IVariableSymbolTable Variables { get; }
+    private IVariableSymbolTable UserVariables { get; }
 
     private static AstExpressionNode CreateEvaluateNode( AstExpressionNode source, DataTypeFlag type )
     {
@@ -26,10 +26,10 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
         return result;
     }
 
-    public AssignOperatorEvaluator( IEventEmitter eventEmitter, IVariableSymbolTable variables )
+    public AssignOperatorEvaluator( IEventEmitter eventEmitter, IVariableSymbolTable userVariables )
     {
-        EventEmitter = eventEmitter;
-        Variables    = variables;
+        EventEmitter  = eventEmitter;
+        UserVariables = userVariables;
     }
 
     public IAstNode Evaluate( IAstVisitor visitor, AstExpressionNode expr )
@@ -99,7 +99,7 @@ public sealed class AssignOperatorEvaluator : IAssignOperatorEvaluator
         // 代入先変数の状態を更新
         if( evaluatedLeft is AstSymbolExpressionNode symbolNode )
         {
-            if( Variables.TrySearchByName( symbolNode.Name, out var variable ) )
+            if( UserVariables.TrySearchByName( symbolNode.Name, out var variable ) )
             {
                 variable.State = SymbolState.Loaded;
             }
