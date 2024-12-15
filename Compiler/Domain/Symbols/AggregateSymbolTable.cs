@@ -2,31 +2,42 @@ namespace KSPCompiler.Domain.Symbols;
 
 public sealed class AggregateSymbolTable
 {
-    public IVariableSymbolTable BuiltInVariables { get; }
-    public IVariableSymbolTable UserVariables { get; }
+    public AggregateIndividualSymbolTable<IVariableSymbolTable> Variables { get; }
+
+    public IVariableSymbolTable BuiltInVariables
+        => Variables.BuiltIn;
+
+    public IVariableSymbolTable UserVariables
+        => Variables.User;
+
     public IUITypeSymbolTable UITypes { get; }
+
     public ICommandSymbolTable Commands { get; }
-    public ICallbackSymbolTable UserCallbacks { get; }
-    public ICallbackSymbolTable BuiltInCallbacks { get; }
+
+    public AggregateIndividualSymbolTable<ICallbackSymbolTable>  Callbacks { get; }
+
+    public ICallbackSymbolTable BuiltInCallbacks
+        => Callbacks.BuiltIn;
+
+    public ICallbackSymbolTable UserCallbacks
+        => Callbacks.User;
+
     public IUserFunctionSymbolSymbolTable UserFunctions { get; }
+
     public IPreProcessorSymbolTable PreProcessorSymbols { get; }
 
     public AggregateSymbolTable(
-        IVariableSymbolTable builtInVariables,
-        IVariableSymbolTable userVariables,
+        AggregateVariableSymbolTable variables,
         IUITypeSymbolTable uiTypes,
         ICommandSymbolTable commands,
-        ICallbackSymbolTable userCallbacks,
-        ICallbackSymbolTable builtInCallbacks,
+        AggregateCallbackSymbolTable callbacks,
         IUserFunctionSymbolSymbolTable userFunctions,
         IPreProcessorSymbolTable preProcessorSymbols )
     {
-        BuiltInVariables    = builtInVariables;
-        UserVariables       = userVariables;
+        Variables           = variables;
         UITypes             = uiTypes;
         Commands            = commands;
-        UserCallbacks       = userCallbacks;
-        BuiltInCallbacks    = builtInCallbacks;
+        Callbacks           = callbacks;
         UserFunctions       = userFunctions;
         PreProcessorSymbols = preProcessorSymbols;
     }

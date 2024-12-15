@@ -308,13 +308,11 @@ public static class MockUtility
     #region Symbol Table
 
     public static AggregateSymbolTable CreateAggregateSymbolTable()
-        => new (
-            new VariableSymbolTable(),
-            new VariableSymbolTable(),
+        => new(
+            new AggregateVariableSymbolTable( new VariableSymbolTable(), new VariableSymbolTable() ),
             new UITypeSymbolTable(),
             new CommandSymbolTable(),
-            new CallbackSymbolTable(),
-            new CallbackSymbolTable(),
+            new AggregateCallbackSymbolTable( new CallbackSymbolTable(), new CallbackSymbolTable() ),
             new UserFunctionSymbolTable(),
             new PreProcessorSymbolTable()
         );
@@ -422,7 +420,7 @@ public static class MockUtility
 
         var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
             eventEmitter,
-            CreateAggregateSymbolTable().UserVariables,
+            CreateAggregateSymbolTable().Variables.User,
             new MockIntegerConvolutionEvaluator(),
             new RealConvolutionEvaluator()
         );

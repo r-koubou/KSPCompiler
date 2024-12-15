@@ -39,12 +39,10 @@ public static class CompilerProgram
         var messageManager = ICompilerMessageManger.Default;
 
         var symbolTable = new AggregateSymbolTable(
-            new VariableSymbolTable(),
-            new VariableSymbolTable(),
+            new AggregateVariableSymbolTable( new VariableSymbolTable(), new VariableSymbolTable() ),
             new UITypeSymbolTable(),
             new CommandSymbolTable(),
-            new CallbackSymbolTable(),
-            new CallbackSymbolTable(),
+            new AggregateCallbackSymbolTable( new CallbackSymbolTable(), new CallbackSymbolTable() ),
             new UserFunctionSymbolTable(),
             new PreProcessorSymbolTable()
         );
