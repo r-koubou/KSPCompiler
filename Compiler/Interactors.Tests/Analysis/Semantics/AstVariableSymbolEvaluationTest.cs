@@ -28,7 +28,7 @@ public class AstVariableSymbolEvaluationTest
 
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
 
-        symbolTable.Variables.Add( variable );
+        symbolTable.BuiltInVariables.Add( variable );
 
         var symbolEvaluator = new SymbolEvaluator( eventEmitter, symbolTable );
         visitor.Inject( symbolEvaluator );

@@ -310,6 +310,7 @@ public static class MockUtility
     public static AggregateSymbolTable CreateAggregateSymbolTable()
         => new (
             new VariableSymbolTable(),
+            new VariableSymbolTable(),
             new UITypeSymbolTable(),
             new CommandSymbolTable(),
             new CallbackSymbolTable(),
@@ -421,7 +422,7 @@ public static class MockUtility
 
         var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
             eventEmitter,
-            CreateAggregateSymbolTable().Variables,
+            CreateAggregateSymbolTable().BuiltInVariables,
             new MockIntegerConvolutionEvaluator(),
             new RealConvolutionEvaluator()
         );

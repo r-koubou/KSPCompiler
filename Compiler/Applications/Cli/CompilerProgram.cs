@@ -40,6 +40,7 @@ public static class CompilerProgram
 
         var symbolTable = new AggregateSymbolTable(
             new VariableSymbolTable(),
+            new VariableSymbolTable(),
             new UITypeSymbolTable(),
             new CommandSymbolTable(),
             new CallbackSymbolTable(),
@@ -79,7 +80,7 @@ public static class CompilerProgram
         var basePath = Path.Combine( "Data", "Symbols" );
 
         using var variables = new VariableSymbolRepository( Path.Combine( basePath, "variables.json" ) );
-        symbolTable.Variables.AddRange( variables.FindAllAsync( CancellationToken.None ).GetAwaiter().GetResult() );
+        symbolTable.BuiltInVariables.AddRange( variables.FindAllAsync( CancellationToken.None ).GetAwaiter().GetResult() );
 
         using var uiTypes = new UITypeSymbolRepository( Path.Combine( basePath, "uitypes.json" ) );
         symbolTable.UITypes.AddRange( uiTypes.FindAllAsync( CancellationToken.None ).GetAwaiter().GetResult() );
@@ -94,7 +95,7 @@ public static class CompilerProgram
     private static void SetupSymbolState( AggregateSymbolTable symbolTable )
     {
         // ビルトイン変数は初期化済み扱い
-        foreach( var variable in symbolTable.Variables )
+        foreach( var variable in symbolTable.BuiltInVariables )
         {
             variable.State = SymbolState.Initialized;
         }

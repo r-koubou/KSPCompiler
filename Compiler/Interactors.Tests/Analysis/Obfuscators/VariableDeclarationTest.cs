@@ -27,16 +27,16 @@ public class VariableDeclarationTest
         var variable = MockUtility.CreateIntVariable( variableName );
         variable.State = SymbolState.Loaded;
 
-        symbolTable.Variables.Add( variable );
+        symbolTable.BuiltInVariables.Add( variable );
 
-        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.Variables, "v" );
+        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.BuiltInVariables, "v" );
 
         var node = new AstVariableDeclarationNode
         {
             Name = variableName
         };
 
-        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.Variables, symbolTable.UITypes, obfuscatedTable );
+        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.BuiltInVariables, symbolTable.UITypes, obfuscatedTable );
         var visitor = new MockVariableDeclarationVisitor( output );
 
         visitor.Inject( evaluator );
@@ -58,16 +58,16 @@ public class VariableDeclarationTest
         // 初期値代入のみで参照されない状況を作成
         variable.State = SymbolState.Initialized;
 
-        symbolTable.Variables.Add( variable );
+        symbolTable.BuiltInVariables.Add( variable );
 
-        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.Variables, "v" );
+        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.BuiltInVariables, "v" );
 
         var node = new AstVariableDeclarationNode
         {
             Name = variableName
         };
 
-        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.Variables, symbolTable.UITypes, obfuscatedTable );
+        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.BuiltInVariables, symbolTable.UITypes, obfuscatedTable );
         var visitor = new MockVariableDeclarationVisitor( output );
 
         visitor.Inject( evaluator );
@@ -90,9 +90,9 @@ public class VariableDeclarationTest
         variable.Modifier = modifier;
         variable.State    = SymbolState.Loaded;
 
-        symbolTable.Variables.Add( variable );
+        symbolTable.BuiltInVariables.Add( variable );
 
-        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.Variables, "v" );
+        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.BuiltInVariables, "v" );
 
         var node = new AstVariableDeclarationNode
         {
@@ -100,7 +100,7 @@ public class VariableDeclarationTest
             Modifier = new AstModiferNode( [modifierText] )
         };
 
-        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.Variables, symbolTable.UITypes, obfuscatedTable );
+        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.BuiltInVariables, symbolTable.UITypes, obfuscatedTable );
         var visitor = new MockVariableDeclarationVisitor( output );
 
         visitor.Inject( evaluator );
@@ -125,9 +125,9 @@ public class VariableDeclarationTest
         var variable = MockUtility.CreateIntVariable( variableName );
 
         variable.State = SymbolState.Loaded;
-        symbolTable.Variables.Add( variable );
+        symbolTable.BuiltInVariables.Add( variable );
 
-        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.Variables, "v" );
+        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.BuiltInVariables, "v" );
 
         var node = new AstVariableDeclarationNode
         {
@@ -141,7 +141,7 @@ public class VariableDeclarationTest
             }
         };
 
-        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.Variables, symbolTable.UITypes, obfuscatedTable );
+        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.BuiltInVariables, symbolTable.UITypes, obfuscatedTable );
         var visitor = new MockVariableDeclarationVisitor( output );
 
         visitor.Inject( evaluator );
@@ -167,9 +167,9 @@ public class VariableDeclarationTest
         var variable = MockUtility.CreateVariable( variableName, DataTypeFlag.TypeIntArray );
         variable.State = SymbolState.Loaded;
 
-        symbolTable.Variables.Add( variable );
+        symbolTable.BuiltInVariables.Add( variable );
 
-        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.Variables, "v" );
+        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.BuiltInVariables, "v" );
 
         var initializer = new AstArrayInitializerNode
         {
@@ -188,7 +188,7 @@ public class VariableDeclarationTest
             }
         };
 
-        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.Variables, symbolTable.UITypes, obfuscatedTable );
+        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.BuiltInVariables, symbolTable.UITypes, obfuscatedTable );
         var visitor = new MockVariableDeclarationVisitor( output );
 
         visitor.Inject( evaluator );
@@ -219,9 +219,9 @@ public class VariableDeclarationTest
         variable.UIType   = ui;
         variable.State    = SymbolState.Loaded;
 
-        symbolTable.Variables.Add( variable );
+        symbolTable.BuiltInVariables.Add( variable );
 
-        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.Variables, "v" );
+        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.BuiltInVariables, "v" );
 
         var uiInitializer = new AstExpressionListNode();
         uiInitializer.Expressions.Add( new AstIntLiteralNode( 1 ) );
@@ -240,7 +240,7 @@ public class VariableDeclarationTest
             }
         };
 
-        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.Variables, symbolTable.UITypes, obfuscatedTable );
+        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.BuiltInVariables, symbolTable.UITypes, obfuscatedTable );
         var visitor = new MockVariableDeclarationVisitor( output );
 
         visitor.Inject( evaluator );
@@ -271,9 +271,9 @@ public class VariableDeclarationTest
         variable.UIType   = ui;
         variable.State    = SymbolState.Loaded;
 
-        symbolTable.Variables.Add( variable );
+        symbolTable.BuiltInVariables.Add( variable );
 
-        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.Variables, "v" );
+        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.BuiltInVariables, "v" );
 
         var uiInitializer = new AstExpressionListNode();
         uiInitializer.Expressions.Add( new AstIntLiteralNode( 1 ) );
@@ -294,7 +294,7 @@ public class VariableDeclarationTest
             }
         };
 
-        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.Variables, symbolTable.UITypes, obfuscatedTable );
+        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.BuiltInVariables, symbolTable.UITypes, obfuscatedTable );
         var visitor = new MockVariableDeclarationVisitor( output );
 
         visitor.Inject( evaluator );

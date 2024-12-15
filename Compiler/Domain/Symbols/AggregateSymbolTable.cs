@@ -2,7 +2,8 @@ namespace KSPCompiler.Domain.Symbols;
 
 public sealed class AggregateSymbolTable
 {
-    public IVariableSymbolTable Variables { get; }
+    public IVariableSymbolTable BuiltInVariables { get; }
+    public IVariableSymbolTable UserVariables { get; }
     public IUITypeSymbolTable UITypes { get; }
     public ICommandSymbolTable Commands { get; }
     public ICallbackSymbolTable UserCallbacks { get; }
@@ -11,7 +12,8 @@ public sealed class AggregateSymbolTable
     public IPreProcessorSymbolTable PreProcessorSymbols { get; }
 
     public AggregateSymbolTable(
-        IVariableSymbolTable variables,
+        IVariableSymbolTable builtInVariables,
+        IVariableSymbolTable userVariables,
         IUITypeSymbolTable uiTypes,
         ICommandSymbolTable commands,
         ICallbackSymbolTable userCallbacks,
@@ -19,7 +21,8 @@ public sealed class AggregateSymbolTable
         IUserFunctionSymbolSymbolTable userFunctions,
         IPreProcessorSymbolTable preProcessorSymbols )
     {
-        Variables           = variables;
+        BuiltInVariables    = builtInVariables;
+        UserVariables       = userVariables;
         UITypes             = uiTypes;
         Commands            = commands;
         UserCallbacks       = userCallbacks;
