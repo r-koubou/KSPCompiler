@@ -2,7 +2,7 @@ namespace KSPCompiler.Domain.Symbols;
 
 public sealed class AggregateSymbolTable
 {
-    public AggregateIndividualSymbolTable<IVariableSymbolTable> Variables { get; }
+    public AggregateVariableSymbolTable Variables { get; }
 
     public IVariableSymbolTable BuiltInVariables
         => Variables.BuiltIn;
@@ -14,7 +14,7 @@ public sealed class AggregateSymbolTable
 
     public ICommandSymbolTable Commands { get; }
 
-    public AggregateIndividualSymbolTable<ICallbackSymbolTable>  Callbacks { get; }
+    public AggregateCallbackSymbolTable Callbacks { get; }
 
     public ICallbackSymbolTable BuiltInCallbacks
         => Callbacks.BuiltIn;
