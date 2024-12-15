@@ -37,7 +37,8 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
     public IAstNode Evaluate( IAstVisitor visitor, AstVariableDeclarationNode node )
     {
         // 予約済み（NIが禁止している）接頭語検査
-        ValidateBuiltInPrefix( node );
+        // TODO: 厳密なチェックが必要になったらコメント解除
+        // ValidateBuiltInPrefix( node );
 
         // on init 外での変数宣言はエラー
         if( !ValidateCallbackNode( node ) )
