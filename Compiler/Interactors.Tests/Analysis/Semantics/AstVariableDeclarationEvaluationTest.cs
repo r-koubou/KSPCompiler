@@ -33,7 +33,7 @@ public class AstVariableDeclarationEvaluationTest
         var ast = MockUtility.CreateVariableDeclarationNode( name );
         ast.Parent = callbackAst;
 
-        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UserVariables, symbols.UITypes );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -42,7 +42,7 @@ public class AstVariableDeclarationEvaluationTest
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 0 ) );
-        Assert.That( symbols.BuiltInVariables.Count, Is.EqualTo( 1 ) );
+        Assert.That( symbols.UserVariables.Count, Is.EqualTo( 1 ) );
     }
 
     [Test]
@@ -61,7 +61,7 @@ public class AstVariableDeclarationEvaluationTest
         var ast = MockUtility.CreateVariableDeclarationNode( name );
         ast.Parent = callbackAst;
 
-        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UserVariables, symbols.UITypes );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -104,7 +104,7 @@ public class AstVariableDeclarationEvaluationTest
             )
         };
 
-        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UserVariables, symbols.UITypes );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -113,7 +113,7 @@ public class AstVariableDeclarationEvaluationTest
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 0 ) );
-        Assert.That( symbols.BuiltInVariables.Count, Is.EqualTo( 1 ) );
+        Assert.That( symbols.UserVariables.Count, Is.EqualTo( 1 ) );
     }
 
     [Test]
@@ -144,7 +144,7 @@ public class AstVariableDeclarationEvaluationTest
             )
         };
 
-        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UserVariables, symbols.UITypes );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -153,7 +153,7 @@ public class AstVariableDeclarationEvaluationTest
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
-        Assert.That( symbols.BuiltInVariables.Count, Is.EqualTo( 0 ) );
+        Assert.That( symbols.UserVariables.Count, Is.EqualTo( 0 ) );
     }
 
     [Test]
@@ -186,7 +186,7 @@ public class AstVariableDeclarationEvaluationTest
             ArrayInitializer = arrayInitializer
         };
 
-        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UserVariables, symbols.UITypes );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -195,7 +195,7 @@ public class AstVariableDeclarationEvaluationTest
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
-        Assert.That( symbols.BuiltInVariables.Count, Is.EqualTo( 0 ) );
+        Assert.That( symbols.UserVariables.Count, Is.EqualTo( 0 ) );
     }
 
     [Test]
@@ -217,7 +217,7 @@ public class AstVariableDeclarationEvaluationTest
         declaration.Parent   = callbackAst;
         declaration.Modifier = new AstModiferNode( declaration, "const" );
 
-        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UserVariables, symbols.UITypes );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -226,7 +226,7 @@ public class AstVariableDeclarationEvaluationTest
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
-        Assert.That( symbols.BuiltInVariables.Count, Is.EqualTo( 0 ) );
+        Assert.That( symbols.UserVariables.Count, Is.EqualTo( 0 ) );
     }
 
 }

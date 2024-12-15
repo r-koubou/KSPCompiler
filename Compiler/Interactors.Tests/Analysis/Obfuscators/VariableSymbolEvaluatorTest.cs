@@ -20,9 +20,9 @@ public class VariableSymbolEvaluatorTest
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
         var variable = MockUtility.CreateIntVariable( variableName );
 
-        symbolTable.BuiltInVariables.Add( variable );
+        symbolTable.UserVariables.Add( variable );
 
-        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.BuiltInVariables, "v" );
+        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.UserVariables, "v" );
 
         var expr = new AstSymbolExpressionNode( variableName );
         var evaluator = new SymbolEvaluator( output, symbolTable, obfuscatedTable );
@@ -46,9 +46,9 @@ public class VariableSymbolEvaluatorTest
         var variable = MockUtility.CreateIntVariable( variableName );
 
         variable.BuiltIn = true;
-        symbolTable.BuiltInVariables.Add( variable );
+        symbolTable.UserVariables.Add( variable );
 
-        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.BuiltInVariables, "v" );
+        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.UserVariables, "v" );
 
         var expr = new AstSymbolExpressionNode( variableName );
         var evaluator = new SymbolEvaluator( output, symbolTable, obfuscatedTable );

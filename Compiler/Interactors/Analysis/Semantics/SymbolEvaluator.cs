@@ -75,7 +75,7 @@ public class SymbolEvaluator : ISymbolEvaluator
     {
         result = NullAstExpressionNode.Instance;
 
-        if( !SymbolTable.BuiltInVariables.TrySearchByName( expr.Name, out var variable ) )
+        if( !SymbolTable.UserVariables.TrySearchByName( expr.Name, out var variable ) )
         {
             return false;
         }

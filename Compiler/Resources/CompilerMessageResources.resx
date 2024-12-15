@@ -28,7 +28,7 @@
         <value>Variable {0} declaration outside of callback scope</value>
     </data>
     <data name="symbol.error.declare.variable.builtin" xml:space="preserve">
-        <value>Variable name {0} is reserved</value>
+        <value>Variable name {0} is reserved as built-in</value>
     </data>
     <data name="symbol.error.declare.variable.ni_builtin" xml:space="preserve">
         <value>Variable name {0} contains NI reserved prefix</value>

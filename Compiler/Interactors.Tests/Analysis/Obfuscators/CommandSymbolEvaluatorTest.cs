@@ -31,7 +31,7 @@ public class CommandSymbolEvaluatorTest
 
         symbolTable.Commands.Add( commandSymbol );
 
-        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.BuiltInVariables, "v" );
+        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.UserVariables, "v" );
 
         var expr = new AstSymbolExpressionNode( commandName );
         var evaluator = new SymbolEvaluator( output, symbolTable, obfuscatedTable );

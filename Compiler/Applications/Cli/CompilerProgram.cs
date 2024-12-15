@@ -95,7 +95,7 @@ public static class CompilerProgram
     private static void SetupSymbolState( AggregateSymbolTable symbolTable )
     {
         // ビルトイン変数は初期化済み扱い
-        foreach( var variable in symbolTable.BuiltInVariables )
+        foreach( var variable in symbolTable.UserVariables )
         {
             variable.State = SymbolState.Initialized;
         }
@@ -112,7 +112,7 @@ public static class CompilerProgram
         ).AddTo( subscribers );
 
         eventEmitter.Subscribe<CompilationWarningEvent>(
-            evt => messageManager.Error( evt.Position, evt.Message )
+            evt => messageManager.Warning( evt.Position, evt.Message )
         ).AddTo( subscribers );
     }
 }

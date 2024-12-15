@@ -32,7 +32,7 @@ public sealed class ObfuscatorContext : IAnalyzerContext
 
     public ObfuscatorContext( StringBuilder output, IEventEmitter eventEmitter, AggregateSymbolTable symbolTable )
     {
-        var obfuscatedVariables = new ObfuscatedVariableSymbolTable( symbolTable.BuiltInVariables, "v" );
+        var obfuscatedVariables = new ObfuscatedVariableSymbolTable( symbolTable.UserVariables, "v" );
         var obfuscatedUserFunctions = new ObfuscatedUserFunctionSymbolTable( symbolTable.UserFunctions, "f" );
         var aggregateObfuscatedSymbols = new AggregateObfuscatedSymbolTable( obfuscatedVariables, obfuscatedUserFunctions );
 
@@ -60,7 +60,7 @@ public sealed class ObfuscatorContext : IAnalyzerContext
             UserFunction = new UserFunctionDeclarationEvaluator( output, aggregateObfuscatedSymbols.UserFunctions );
             Variable     = new VariableDeclarationEvaluator(
                 output,
-                aggregateSymbolTable.BuiltInVariables,
+                aggregateSymbolTable.UserVariables,
                 aggregateSymbolTable.UITypes,
                 aggregateObfuscatedSymbols.Variables
             );

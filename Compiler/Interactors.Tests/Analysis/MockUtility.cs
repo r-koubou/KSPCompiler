@@ -422,7 +422,7 @@ public static class MockUtility
 
         var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
             eventEmitter,
-            CreateAggregateSymbolTable().BuiltInVariables,
+            CreateAggregateSymbolTable().UserVariables,
             new MockIntegerConvolutionEvaluator(),
             new RealConvolutionEvaluator()
         );

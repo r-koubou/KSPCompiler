@@ -21,17 +21,20 @@ namespace KSPCompiler.Interactors.Analysis.Semantics;
 public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 {
     private IEventEmitter EventEmitter { get; }
-    private ISymbolTable<VariableSymbol> VariableSymbols { get; }
-    private ISymbolTable<UITypeSymbol> UITypeSymbols { get; }
+    private ISymbolTable<VariableSymbol> UserVariables { get; }
+    private ISymbolTable<VariableSymbol> BuiltInVariables { get; }
+    private ISymbolTable<UITypeSymbol> UITypes { get; }
 
     public VariableDeclarationEvaluator(
         IEventEmitter eventEmitter,
-        ISymbolTable<VariableSymbol> variableSymbols,
-        ISymbolTable<UITypeSymbol> uiTypeSymbols )
+        ISymbolTable<VariableSymbol> builtInVariables,
+        ISymbolTable<VariableSymbol> userVariables,
+        ISymbolTable<UITypeSymbol> uiTypes )
     {
-        EventEmitter    = eventEmitter;
-        VariableSymbols = variableSymbols;
-        UITypeSymbols   = uiTypeSymbols;
+        EventEmitter     = eventEmitter;
+        BuiltInVariables = builtInVariables;
+        UserVariables    = userVariables;
+        UITypes          = uiTypes;
     }
 
     public IAstNode Evaluate( IAstVisitor visitor, AstVariableDeclarationNode node )
@@ -62,7 +65,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             return node;
         }
 
-        if( !VariableSymbols.Add( variable ) )
+        if( !UserVariables.Add( variable ) )
         {
             throw new AstAnalyzeException( this, node, $"Variable symbol add failed {variable.Name}" );
         }
@@ -180,7 +183,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         // 有効な UI 型かチェック
         foreach( var modifier in node.Modifier.GetUIModifiers() )
         {
-            if( !UITypeSymbols.TrySearchByName( modifier, out var uiType ) )
+            if( !UITypes.TrySearchByName( modifier, out var uiType ) )
             {
                 EventEmitter.Emit(
                     node.AsErrorEvent(

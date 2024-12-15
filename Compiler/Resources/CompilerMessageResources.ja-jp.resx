@@ -21,7 +21,7 @@
         <value>変数 {0} はコールバック外で宣言できません</value>
     </data>
     <data name="symbol.error.declare.variable.builtin" xml:space="preserve">
-        <value>変数名 {0} は予約されています</value>
+        <value>変数名 {0} はビルトイン変数として予約されています</value>
     </data>
     <data name="symbol.error.declare.variable.ni_builtin" xml:space="preserve">
         <value>変数名 {0} は NI で予約されている接頭文字を含んでいます</value>
