@@ -111,7 +111,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         if( !builtInPrefixValidator.Validate( node ) )
         {
             EventEmitter.Emit(
-                node.AsErrorEvent(
+                node.AsWarningEvent(
                     CompilerMessageResources.symbol_error_declare_variable_ni_builtin,
                     node.Name
                 )
@@ -141,16 +141,8 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             return false;
         }
 
-        if( !VariableSymbols.TrySearchByName( node.Name, out result ) )
-        {
-            // 未定義：新規追加可能
-            result = node.As();
-
-            return true;
-        }
-
-        // NI の予約変数との重複
-        if( result.BuiltIn )
+        // ビルトイン変数との重複
+        if( BuiltInVariables.TrySearchByName( node.Name, out result ) )
         {
             EventEmitter.Emit(
                 node.AsErrorEvent(
@@ -160,6 +152,14 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             );
 
             return false;
+        }
+
+        if( !UserVariables.TrySearchByName( node.Name, out result ) )
+        {
+            // 未定義：新規追加可能
+            result = node.As();
+
+            return true;
         }
 
         // ユーザー変数として宣言済み
