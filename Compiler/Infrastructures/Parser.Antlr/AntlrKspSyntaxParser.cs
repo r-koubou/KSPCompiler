@@ -56,11 +56,6 @@ public abstract class AntlrKspSyntaxParser : ISyntaxParser
 
         var cst = parser.compilationUnit();
 
-        if( cst.IsEmpty )
-        {
-            return new AstCompilationUnitNode();
-        }
-
         if( lexerErrorListener.HasError || parserErrorListener.HasError )
         {
             throw new KspScriptParseException( $"Syntax Invalid : {cst.exception}" );
