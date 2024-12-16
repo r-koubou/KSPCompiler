@@ -12,9 +12,9 @@ public static class AstLiteralNodeExtension
             AstStringLiteralNode or
             AstBooleanLiteralNode;
 
-    public static bool TryGetLiteralNodeValue( this IAstNode self, out object value )
+    public static bool TryGetLiteralNodeValue( this IAstNode self, out object? value )
     {
-        value = null!;
+        value = null;
 
         if( self is AstIntLiteralNode intNode )
         {
