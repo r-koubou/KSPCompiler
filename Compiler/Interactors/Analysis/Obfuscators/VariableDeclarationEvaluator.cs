@@ -41,6 +41,13 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             throw new KeyNotFoundException( $"Variable not found: {node.Name} from variable symbol table" );
         }
 
+        // 定数変数はシュリンク
+        // 意味解析フェーズで定数変数の初期化式を評価済み＆畳み込み済みのため
+        if( variable.Modifier.IsConstant() )
+        {
+            return node;
+        }
+
         // 未使用の変数はシュリンク
         // （ただし、UI変数は宣言・初期化時点で有効・画面に配置される物もあるため、シュリンク対象外）
         if( variable.UIType == UITypeSymbol.Null && variable.State.IsNotUsed() )
