@@ -55,7 +55,7 @@ public abstract class SymbolBase
     public SymbolBuiltIntoVersion BuiltIntoVersion { get; set; } = SymbolBuiltIntoVersion.NotAvailable;
 
     /// <summary>
-    /// If the symbol can represent a value, this property holds the value. (e.g. constant value). Otherwise, it is null.
+    /// If the symbol can represent a constant value, this property holds the value. Otherwise, it is null.
     /// </summary>
-    public object? Value { get; set; } = null;
+    public object? ConstantValue { get; set; } = null;
 }

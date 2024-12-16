@@ -32,11 +32,11 @@ public static class MockUtility
     {
         var variable = new VariableSymbol
         {
-            Name     = name,
-            DataType = DataTypeFlag.TypeInt,
-            Modifier = ModifierFlag.Const,
-            BuiltIn  = true,
-            Value    = 0
+            Name          = name,
+            DataType      = DataTypeFlag.TypeInt,
+            Modifier      = ModifierFlag.Const,
+            BuiltIn       = true,
+            ConstantValue = 0
         };
 
         return variable;

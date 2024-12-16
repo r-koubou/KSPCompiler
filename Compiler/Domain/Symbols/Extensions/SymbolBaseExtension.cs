@@ -10,7 +10,7 @@ public static class SymbolBaseExtension
     /// <returns>If the symbol is a constant and the value is of type <typeparamref name="T"/>, the value is returned and true. Otherwise, false.</returns>
     public static bool TryGetConstantValue<T>( this SymbolBase symbol, out T result )
     {
-        var symbolValue = symbol.Value;
+        var symbolValue = symbol.ConstantValue;
         result = default!;
 
         if( !symbol.Modifier.IsConstant() )
