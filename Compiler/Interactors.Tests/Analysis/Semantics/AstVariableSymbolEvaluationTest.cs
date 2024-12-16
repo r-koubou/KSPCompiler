@@ -49,8 +49,8 @@ public class AstVariableSymbolEvaluationTest
 
         if( isConstant )
         {
-            variable.Modifier |= ModifierFlag.Const;
-            variable.Value            =  1;
+            variable.Modifier      |= ModifierFlag.Const;
+            variable.ConstantValue =  1;
         }
 
         variable.State = SymbolState.Initialized;
@@ -73,9 +73,9 @@ public class AstVariableSymbolEvaluationTest
     public void EvaluateConvolutionIntVariableTest( int value )
     {
         var variable = MockUtility.CreateVariable( "$x", DataTypeFlag.TypeInt );
-        variable.Modifier |= ModifierFlag.Const;
-        variable.Value    =  value;
-        variable.State    = SymbolState.Initialized;
+        variable.Modifier      |= ModifierFlag.Const;
+        variable.ConstantValue =  value;
+        variable.State         =  SymbolState.Initialized;
 
         var result = VariableSymbolTestBody( variable );
         var literal = result as AstIntLiteralNode;
@@ -90,9 +90,9 @@ public class AstVariableSymbolEvaluationTest
     public void EvaluateConvolutionRealVariableTest( double value )
     {
         var variable = MockUtility.CreateRealVariable( "~x" );
-        variable.Modifier |= ModifierFlag.Const;
-        variable.Value    =  value;
-        variable.State    =  SymbolState.Initialized;
+        variable.Modifier      |= ModifierFlag.Const;
+        variable.ConstantValue =  value;
+        variable.State         =  SymbolState.Initialized;
 
         var result = VariableSymbolTestBody( variable );
         var literal = result as AstRealLiteralNode;
@@ -107,9 +107,9 @@ public class AstVariableSymbolEvaluationTest
     public void EvaluateConvolutionStringVariableTest( string value )
     {
         var variable = MockUtility.CreateStringVariable( "@x" );
-        variable.Modifier |= ModifierFlag.Const;
-        variable.Value    =  value;
-        variable.State    =  SymbolState.Initialized;
+        variable.Modifier      |= ModifierFlag.Const;
+        variable.ConstantValue =  value;
+        variable.State         =  SymbolState.Initialized;
 
         var result = VariableSymbolTestBody( variable );
         var literal = result as AstStringLiteralNode;

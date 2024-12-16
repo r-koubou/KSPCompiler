@@ -102,7 +102,7 @@ public class SymbolEvaluator : ISymbolEvaluator
             return false;
         }
 
-        switch( variable.Value )
+        switch( variable.ConstantValue )
         {
             case int intValue:
                 result = new AstIntLiteralNode( intValue );
