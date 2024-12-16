@@ -348,6 +348,12 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             initializer.Expression = evaluated;
         }
 
+        // 定数型変数に対して初期化式がリテラル値であれば、その値を保持
+        if( variable.Modifier.IsConstant() && evaluated.TryGetLiteralNodeValue( out var value ))
+        {
+            variable.ConstantValue = value;
+        }
+
         return true;
     }
 
