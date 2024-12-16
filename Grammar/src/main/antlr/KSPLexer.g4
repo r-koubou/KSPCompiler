@@ -42,8 +42,6 @@ BlockComment
 
 // Variable
 DECLARE:                'declare';
-CONST:                  'const';
-POLYPHONIC:             'polyphonic';
 // Callback
 ON:                     'on';
 END:                    'end';
