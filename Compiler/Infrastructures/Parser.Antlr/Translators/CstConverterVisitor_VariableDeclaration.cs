@@ -13,7 +13,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         public override AstNode VisitVariableDeclaration( KSPParser.VariableDeclarationContext context )
         {
             var node = new AstVariableDeclarationNode();
-            node.Import( context );
+            node.Import( tokenStream, context );
             node.Name     = context.name.Text;
 
             if( context.modifier?.Accept( this ) is AstModiferNode modifier )
@@ -41,7 +41,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             }
 
             var node = new AstModiferNode( modifiers );
-            node.Import( context );
+            node.Import( tokenStream, context );
 
             return node;
         }
@@ -52,7 +52,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             var primitiveInitializer = context.primitiveInitializer();
             var arrayInitializer = context.arrayInitializer();
 
-            node.Import( context );
+            node.Import( tokenStream, context );
 
             if( primitiveInitializer?.Accept( this ) is AstPrimitiveInitializerNode astPrimitiveInitializer )
             {

@@ -35,7 +35,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
             if( childContext != null )
             {
-                child.Import( childContext );
+                child.Import( tokenStream, childContext );
             }
 
             child.Parent = parent!;
