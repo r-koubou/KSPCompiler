@@ -61,7 +61,7 @@ public abstract class AntlrKspSyntaxParser : ISyntaxParser
             throw new KspScriptParseException( $"Syntax Invalid : {cst.exception}" );
         }
 
-        var ast = cst.Accept( new CstConverterVisitor() ) as AstCompilationUnitNode;
+        var ast = cst.Accept( new CstConverterVisitor( tokenStream ) ) as AstCompilationUnitNode;
         _ = ast ?? throw new MustBeNotNullException( nameof( ast ) );
 
         return ast;
