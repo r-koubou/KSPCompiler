@@ -12,8 +12,8 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         {
             var node = new AstPreprocessorDefineNode();
 
-            node.Import( context );
-            node.Symbol.Import( context.symbol );
+            node.Import( tokenStream, context );
+            node.Symbol.Import( tokenStream, context.symbol );
             node.Symbol.Name = context.symbol.Text;
 
             return node;
@@ -23,8 +23,8 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         {
             var node = new AstPreprocessorUndefineNode();
 
-            node.Import( context );
-            node.Symbol.Import( context.symbol );
+            node.Import( tokenStream, context );
+            node.Symbol.Import( tokenStream, context.symbol );
             node.Symbol.Name = context.symbol.Text;
 
             return node;
@@ -35,8 +35,8 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             var node = new AstPreprocessorIfdefineNode();
             var block = context.block();
 
-            node.Import( context );
-            node.Condition.Import( context.symbol );
+            node.Import( tokenStream, context );
+            node.Condition.Import( tokenStream, context.symbol );
             node.Condition.Name = context.symbol.Text;
 
             if( block != null )
@@ -56,8 +56,8 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             var node = new AstPreprocessorIfnotDefineNode();
             var block = context.block();
 
-            node.Import( context );
-            node.Condition.Import( context.symbol );
+            node.Import( tokenStream, context );
+            node.Condition.Import( tokenStream, context.symbol );
             node.Condition.Name = context.symbol.Text;
 
             if( block == null )

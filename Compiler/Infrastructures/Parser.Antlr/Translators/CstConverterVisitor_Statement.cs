@@ -42,7 +42,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             }
 
             node.ElseBlock = elseBlock;
-            node.ElseBlock.Import( context.elseBlock! );
+            node.ElseBlock.Import( tokenStream, context.elseBlock! );
 
             return node;
         }
@@ -54,11 +54,11 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             var node = new AstSelectStatementNode();
 
             #region Condition
-            node.Import( context );
+            node.Import( tokenStream, context );
             node.Condition = condition.Accept( this ) as AstExpressionNode
                              ?? throw new MustBeNotNullException( nameof( node.Condition ) );
 
-            node.Condition?.Import( condition );
+            node.Condition?.Import( tokenStream, condition );
             #endregion
 
             #region CaseBlock
@@ -69,7 +69,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 _ = caseBlock ?? throw new MustBeNotNullException( nameof( caseBlock ) );
 
                 caseBlock.Parent = node;
-                caseBlock.Import( c );
+                caseBlock.Import( tokenStream, c );
                 node.CaseBlocks.Add( caseBlock );
             }
             #endregion
@@ -85,7 +85,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         public override AstNode VisitContinueStatement( KSPParser.ContinueStatementContext context )
         {
             var node = new AstContinueStatementNode();
-            node.Import( context );
+            node.Import( tokenStream, context );
 
             return node;
         }
@@ -93,7 +93,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         public override AstNode VisitCallUserFunction( KSPParser.CallUserFunctionContext context )
         {
             var node = new AstCallUserFunctionStatementNode();
-            node.Import( context );
+            node.Import( tokenStream, context );
             node.Name = context.name.Text;
 
             return node;
