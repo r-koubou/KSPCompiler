@@ -16,6 +16,13 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
     /// </summary>
     public partial class CstConverterVisitor : KSPParserBaseVisitor<AstNode>
     {
+        private readonly BufferedTokenStream tokenStream;
+
+        public CstConverterVisitor( BufferedTokenStream tokenStream )
+        {
+            this.tokenStream = tokenStream;
+        }
+
         private void SetupChildNode(
             IAstNode parent,
             IAstNode child,
@@ -28,7 +35,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
             if( childContext != null )
             {
-                child.Import( childContext );
+                child.Import( tokenStream, childContext );
             }
 
             child.Parent = parent!;

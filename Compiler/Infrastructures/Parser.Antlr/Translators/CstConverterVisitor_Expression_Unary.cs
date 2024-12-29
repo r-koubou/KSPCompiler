@@ -29,7 +29,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         {
             var node = new TNode();
 
-            node.Import( context );
+            node.Import( tokenStream, context );
             node.Left = (AstExpressionNode)left.Accept( this );
 
             return SetupUnaryOperatorNode( node );

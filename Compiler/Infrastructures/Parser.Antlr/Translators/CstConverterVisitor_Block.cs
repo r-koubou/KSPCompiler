@@ -16,7 +16,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             var node = new AstCompilationUnitNode();
             var list = new List<IParseTree>();
 
-            node.Import( context );
+            node.Import( tokenStream, context );
             list.AddRange( context.callbackDeclaration() );
             list.AddRange( context.userFunctionDeclaration() );
 
@@ -27,7 +27,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         {
             var node = new AstCallbackDeclarationNode();
 
-            node.Import( context );
+            node.Import( tokenStream, context );
             node.Name     = context.name.Text;
             node.Position = ToPosition( context );
             node.Block    = context.block().Accept( this ) as AstBlockNode
@@ -50,7 +50,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         {
             var node = new AstUserFunctionDeclarationNode();
 
-            node.Import( context );
+            node.Import( tokenStream, context );
             node.Name         = context.name.Text;
             node.Position     = ToPosition( context );
             node.Block        = context.block().Accept( this ) as AstBlockNode
@@ -65,7 +65,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         {
             var node = new AstArgumentListNode();
 
-            node.Import( context );
+            node.Import( tokenStream, context );
             VisitArgumentDefinitionListRecursive( context, node );
 
             return node;
@@ -80,7 +80,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
             var arg = new AstArgumentNode();
 
-            arg.Import( identifier );
+            arg.Import( tokenStream, identifier );
             arg.Name = identifier.GetText();
 
             //
@@ -106,7 +106,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         {
             var node = new AstBlockNode();
 
-            node.Import( context );
+            node.Import( tokenStream, context );
 
             return SetupChildrenNode(
                 node,
@@ -122,7 +122,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             var condTo = context.condTo;
             var codeBlock = context.block();
 
-            node.Import( context );
+            node.Import( tokenStream, context );
 
             if( condFrom?.Accept( this ) is AstExpressionNode condFromNode )
             {

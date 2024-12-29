@@ -37,7 +37,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         {
             var node = new TNode();
 
-            node.Import( context );
+            node.Import( tokenStream, context );
 
             if( left != null )
             {
@@ -85,7 +85,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             if( identifier != null )
             {
                 var node = new AstSymbolExpressionNode();
-                node.Import( context );
+                node.Import( tokenStream, context );
                 node.Name = identifier.GetText();
                 return node;
             }
@@ -113,14 +113,14 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                     v = int.Parse( digits );
                 }
                 var node = new AstIntLiteralNode( v );
-                node.Import( context );
+                node.Import( tokenStream, context );
                 return node;
             }
             // real value
             else if( realLiteral != null )
             {
                 var node = new AstRealLiteralNode( double.Parse( realLiteral.GetText() ) );
-                node.Import( context );
+                node.Import( tokenStream, context );
                 return node;
             }
             // string value
@@ -133,7 +133,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 value = value[ 1..^1 ];
 
                 var node = new AstStringLiteralNode( value );
-                node.Import( context );
+                node.Import( tokenStream, context );
                 return node;
             }
             #endregion Literal
@@ -171,7 +171,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             else if( callExpression != null )
             {
                 var node = VisitExpressionNodeImpl<AstCallCommandExpressionNode>( context, callExpression, callArguments );
-                node.Import( context );
+                node.Import( tokenStream, context );
 
                 return node;
             }
@@ -193,7 +193,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         public override AstNode VisitExpressionList(KSPParser.ExpressionListContext context)
         {
             var node = new AstExpressionListNode();
-            node.Import( context );
+            node.Import( tokenStream, context );
 
             VisitExpressionListRecursive( context, node );
             return node;
@@ -253,7 +253,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         public override AstNode VisitAssignmentExpressionList(KSPParser.AssignmentExpressionListContext context)
         {
             var node = new AstAssignmentExpressionListNode();
-            node.Import( context );
+            node.Import( tokenStream, context );
 
             VisitAssignmentExpressionListRecursive( context, node );
             return node;
