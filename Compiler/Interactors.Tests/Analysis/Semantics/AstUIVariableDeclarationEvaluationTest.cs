@@ -55,7 +55,7 @@ public class AstUIVariableDeclarationEvaluationTest
             new AstIntLiteralNode( 2 )
         });
 
-        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.Variables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UITypes );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -64,7 +64,7 @@ public class AstUIVariableDeclarationEvaluationTest
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 0 ) );
-        Assert.That( symbols.Variables.Count, Is.EqualTo( 1 ) );
+        Assert.That( symbols.BuiltInVariables.Count, Is.EqualTo( 1 ) );
     }
 
     [Test]
@@ -112,7 +112,7 @@ public class AstUIVariableDeclarationEvaluationTest
             new AstIntLiteralNode( 10 )
         });
 
-        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.Variables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UITypes );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -121,7 +121,7 @@ public class AstUIVariableDeclarationEvaluationTest
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 0 ) );
-        Assert.That( symbols.Variables.Count, Is.EqualTo( 1 ) );
+        Assert.That( symbols.BuiltInVariables.Count, Is.EqualTo( 1 ) );
     }
 
     [Test]
@@ -143,7 +143,7 @@ public class AstUIVariableDeclarationEvaluationTest
         declaration.Parent   = callbackAst;
         declaration.Modifier = new AstModiferNode( declaration, "ui_unknown" );
 
-        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.Variables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UITypes );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -152,7 +152,7 @@ public class AstUIVariableDeclarationEvaluationTest
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
-        Assert.That( symbols.Variables.Count, Is.EqualTo( 0 ) );
+        Assert.That( symbols.BuiltInVariables.Count, Is.EqualTo( 0 ) );
     }
 
     [Test]
@@ -187,7 +187,7 @@ public class AstUIVariableDeclarationEvaluationTest
             }
         };
 
-        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.Variables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UITypes );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -196,7 +196,7 @@ public class AstUIVariableDeclarationEvaluationTest
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
-        Assert.That( symbols.Variables.Count, Is.EqualTo( 0 ) );
+        Assert.That( symbols.BuiltInVariables.Count, Is.EqualTo( 0 ) );
     }
 
     [Test]
@@ -235,7 +235,7 @@ public class AstUIVariableDeclarationEvaluationTest
             new AstIntLiteralNode( 1 )
         });
 
-        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.Variables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UITypes );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -244,7 +244,7 @@ public class AstUIVariableDeclarationEvaluationTest
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
-        Assert.That( symbols.Variables.Count, Is.EqualTo( 0 ) );
+        Assert.That( symbols.BuiltInVariables.Count, Is.EqualTo( 0 ) );
     }
 
     [Test]
@@ -284,7 +284,7 @@ public class AstUIVariableDeclarationEvaluationTest
             new AstRealLiteralNode( 2.0 )
         });
 
-        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.Variables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UITypes );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -293,7 +293,7 @@ public class AstUIVariableDeclarationEvaluationTest
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
-        Assert.That( symbols.Variables.Count, Is.EqualTo( 0 ) );
+        Assert.That( symbols.BuiltInVariables.Count, Is.EqualTo( 0 ) );
     }
 
     [Test]
@@ -315,7 +315,7 @@ public class AstUIVariableDeclarationEvaluationTest
         symbols.UITypes.Add( uiLabelType );
 
         // no constant parameter
-        symbols.Variables.Add( MockUtility.CreateIntVariable( "$arg" ) );
+        symbols.BuiltInVariables.Add( MockUtility.CreateIntVariable( "$arg" ) );
         var argNode = MockUtility.CreateSymbolNode( "$arg", DataTypeFlag.TypeInt );
 
         // declare $variable
@@ -337,7 +337,7 @@ public class AstUIVariableDeclarationEvaluationTest
             argNode
         });
 
-        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.Variables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UITypes );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -346,6 +346,6 @@ public class AstUIVariableDeclarationEvaluationTest
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
-        Assert.That( symbols.Variables.Count, Is.EqualTo( 1 ) );
+        Assert.That( symbols.BuiltInVariables.Count, Is.EqualTo( 1 ) );
     }
 }

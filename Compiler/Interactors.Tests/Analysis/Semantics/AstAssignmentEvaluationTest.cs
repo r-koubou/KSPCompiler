@@ -26,7 +26,7 @@ public class AstAssignmentEvaluationTest
 
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
         var visitor = new MockAssignOperatorVisitor();
-        var assignEvaluator = new AssignOperatorEvaluator( eventEmitter, symbolTable.Variables );
+        var assignEvaluator = new AssignOperatorEvaluator( eventEmitter, symbolTable.BuiltInVariables );
         var variable = MockUtility.CreateSymbolNode( "$x", DataTypeFlag.TypeInt );
         var value = new AstIntLiteralNode( 1 );
         var expr = new AstAssignmentExpressionNode( variable, value );
@@ -50,7 +50,7 @@ public class AstAssignmentEvaluationTest
 
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
         var visitor = new MockAssignOperatorVisitor();
-        var assignEvaluator = new AssignOperatorEvaluator( eventEmitter, symbolTable.Variables );
+        var assignEvaluator = new AssignOperatorEvaluator( eventEmitter, symbolTable.BuiltInVariables );
         var variable = MockUtility.CreateSymbolNode( "$x", DataTypeFlag.TypeInt );
         variable.Constant = true;
 
@@ -76,7 +76,7 @@ public class AstAssignmentEvaluationTest
 
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
         var visitor = new MockAssignOperatorVisitor();
-        var assignEvaluator = new AssignOperatorEvaluator( eventEmitter, symbolTable.Variables );
+        var assignEvaluator = new AssignOperatorEvaluator( eventEmitter, symbolTable.BuiltInVariables );
         var variable = MockUtility.CreateSymbolNode( "$x", DataTypeFlag.TypeInt );
         variable.BuiltIn = true;
 
@@ -102,7 +102,7 @@ public class AstAssignmentEvaluationTest
 
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
         var visitor = new MockAssignOperatorVisitor();
-        var assignEvaluator = new AssignOperatorEvaluator( eventEmitter, symbolTable.Variables );
+        var assignEvaluator = new AssignOperatorEvaluator( eventEmitter, symbolTable.BuiltInVariables );
         var variable = MockUtility.CreateSymbolNode( "$x", DataTypeFlag.TypeInt );
         var value = MockUtility.CreateSymbolNode( "",      DataTypeFlag.TypeReal | DataTypeFlag.TypeString ); //new AstRealLiteralNode( 1.0 );
         var expr = new AstAssignmentExpressionNode( variable, value );
@@ -130,7 +130,7 @@ public class AstAssignmentEvaluationTest
 
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
         var visitor = new MockAssignOperatorVisitor();
-        var assignEvaluator = new AssignOperatorEvaluator( eventEmitter, symbolTable.Variables );
+        var assignEvaluator = new AssignOperatorEvaluator( eventEmitter, symbolTable.BuiltInVariables );
         var variable = MockUtility.CreateSymbolNode( "%x", DataTypeFlag.TypeIntArray );
         var value = new AstIntLiteralNode( 1 );
         var expr = new AstAssignmentExpressionNode( variable, value );
@@ -158,7 +158,7 @@ public class AstAssignmentEvaluationTest
 
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
         var visitor = new MockAssignOperatorVisitor();
-        var assignEvaluator = new AssignOperatorEvaluator( eventEmitter, symbolTable.Variables );
+        var assignEvaluator = new AssignOperatorEvaluator( eventEmitter, symbolTable.BuiltInVariables );
         var variable = MockUtility.CreateSymbolNode( "$x", DataTypeFlag.TypeInt );
         var value = MockUtility.CreateSymbolNode( "%y",      DataTypeFlag.TypeIntArray );
         var expr = new AstAssignmentExpressionNode( variable, value );
@@ -186,7 +186,7 @@ public class AstAssignmentEvaluationTest
 
         var symbolTable = MockUtility.CreateAggregateSymbolTable();
         var visitor = new MockAssignOperatorVisitor();
-        var assignEvaluator = new AssignOperatorEvaluator( eventEmitter, symbolTable.Variables );
+        var assignEvaluator = new AssignOperatorEvaluator( eventEmitter, symbolTable.BuiltInVariables );
         var variable = MockUtility.CreateSymbolNode( "@x", DataTypeFlag.TypeString );
         var value = new AstIntLiteralNode( 1 );
         var expr = new AstAssignmentExpressionNode( variable, value );

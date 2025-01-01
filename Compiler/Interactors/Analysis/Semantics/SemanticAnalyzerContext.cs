@@ -54,7 +54,7 @@ public sealed class SemanticAnalyzerContext : IAnalyzerContext
         {
             Callback     = new CallbackDeclarationEvaluator( eventEmitter, aggregateSymbolTable.BuiltInCallbacks, aggregateSymbolTable.UserCallbacks );
             UserFunction = new UserFunctionDeclarationEvaluator( eventEmitter, aggregateSymbolTable.UserFunctions );
-            Variable     = new VariableDeclarationEvaluator( eventEmitter, aggregateSymbolTable.Variables, aggregateSymbolTable.UITypes );
+            Variable     = new VariableDeclarationEvaluator( eventEmitter, aggregateSymbolTable.BuiltInVariables, aggregateSymbolTable.UITypes );
         }
     }
 
@@ -104,16 +104,16 @@ public sealed class SemanticAnalyzerContext : IAnalyzerContext
 
             #endregion ~Convolutions
 
-            AssignOperator             = new AssignOperatorEvaluator( eventEmitter, aggregateSymbolTable.Variables );
+            AssignOperator             = new AssignOperatorEvaluator( eventEmitter, aggregateSymbolTable.BuiltInVariables );
             ConditionalBinaryOperator  = new ConditionalBinaryOperatorEvaluator( eventEmitter );
             ConditionalLogicalOperator = new ConditionalLogicalOperatorEvaluator( eventEmitter, BooleanConvolutionEvaluator );
             ConditionalUnaryOperator   = new ConditionalUnaryOperatorEvaluator( eventEmitter, BooleanConvolutionEvaluator );
-            NumericBinaryOperator      = new NumericBinaryOperatorEvaluator( eventEmitter, aggregateSymbolTable.Variables, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
-            NumericUnaryOperator       = new NumericUnaryOperatorEvaluator( eventEmitter, aggregateSymbolTable.Variables, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
+            NumericBinaryOperator      = new NumericBinaryOperatorEvaluator( eventEmitter, aggregateSymbolTable.BuiltInVariables, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
+            NumericUnaryOperator       = new NumericUnaryOperatorEvaluator( eventEmitter, aggregateSymbolTable.BuiltInVariables, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
             StringConcatenateOperator  = new StringConcatenateOperatorEvaluator( eventEmitter, StringConvolutionEvaluator );
             Symbol                     = new SymbolEvaluator( eventEmitter, aggregateSymbolTable );
-            ArrayElement               = new ArrayElementEvaluator( eventEmitter, aggregateSymbolTable.Variables );
-            CallCommand                = new CallCommandEvaluator( eventEmitter, aggregateSymbolTable.Variables, aggregateSymbolTable.Commands, aggregateSymbolTable.UITypes );
+            ArrayElement               = new ArrayElementEvaluator( eventEmitter, aggregateSymbolTable.BuiltInVariables );
+            CallCommand                = new CallCommandEvaluator( eventEmitter, aggregateSymbolTable.BuiltInVariables, aggregateSymbolTable.Commands, aggregateSymbolTable.UITypes );
         }
     }
 
