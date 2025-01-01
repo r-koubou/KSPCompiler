@@ -36,7 +36,7 @@ public class VariableDeclarationTest
             Name = variableName
         };
 
-        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.UserVariables, symbolTable.UITypes, obfuscatedTable );
+        var evaluator = new VariableDeclarationEvaluator( output, symbolTable, obfuscatedTable );
         var visitor = new MockVariableDeclarationVisitor( output );
 
         visitor.Inject( evaluator );
@@ -67,7 +67,7 @@ public class VariableDeclarationTest
             Name = variableName
         };
 
-        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.UserVariables, symbolTable.UITypes, obfuscatedTable );
+        var evaluator = new VariableDeclarationEvaluator( output, symbolTable, obfuscatedTable );
         var visitor = new MockVariableDeclarationVisitor( output );
 
         visitor.Inject( evaluator );
@@ -76,7 +76,38 @@ public class VariableDeclarationTest
         Assert.That( output.ToString(), Is.EqualTo( string.Empty ) );
     }
 
-    [TestCase( ModifierFlag.Const, "const" )]
+    [Test]
+    public void ShrinkConstTest()
+    {
+        const string variableName = "$x";
+
+        var output = new StringBuilder();
+        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+
+        // 定数・初期値代入のみで参照ずみの状況を作成
+        var variable = MockUtility.CreateIntVariable( variableName );
+        variable.Modifier = ModifierFlag.Const;
+        variable.State    = SymbolState.Loaded;
+
+        symbolTable.UserVariables.Add( variable );
+
+        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.UserVariables, "v" );
+
+        var node = new AstVariableDeclarationNode
+        {
+            Name     = variableName,
+            Modifier = new AstModiferNode( ["const"] )
+        };
+
+        var evaluator = new VariableDeclarationEvaluator( output, symbolTable, obfuscatedTable );
+        var visitor = new MockVariableDeclarationVisitor( output );
+
+        visitor.Inject( evaluator );
+        visitor.Visit( node );
+
+        Assert.That( output.ToString(), Is.EqualTo( string.Empty ) );
+    }
+
     [TestCase( ModifierFlag.Polyphonic, "polyphonic" )]
     public void ModifierTest( ModifierFlag modifier, string modifierText )
     {
@@ -100,7 +131,7 @@ public class VariableDeclarationTest
             Modifier = new AstModiferNode( [modifierText] )
         };
 
-        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.UserVariables, symbolTable.UITypes, obfuscatedTable );
+        var evaluator = new VariableDeclarationEvaluator( output, symbolTable, obfuscatedTable );
         var visitor = new MockVariableDeclarationVisitor( output );
 
         visitor.Inject( evaluator );
@@ -141,7 +172,7 @@ public class VariableDeclarationTest
             }
         };
 
-        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.UserVariables, symbolTable.UITypes, obfuscatedTable );
+        var evaluator = new VariableDeclarationEvaluator( output, symbolTable, obfuscatedTable );
         var visitor = new MockVariableDeclarationVisitor( output );
 
         visitor.Inject( evaluator );
@@ -188,7 +219,7 @@ public class VariableDeclarationTest
             }
         };
 
-        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.UserVariables, symbolTable.UITypes, obfuscatedTable );
+        var evaluator = new VariableDeclarationEvaluator( output, symbolTable, obfuscatedTable );
         var visitor = new MockVariableDeclarationVisitor( output );
 
         visitor.Inject( evaluator );
@@ -240,7 +271,7 @@ public class VariableDeclarationTest
             }
         };
 
-        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.UserVariables, symbolTable.UITypes, obfuscatedTable );
+        var evaluator = new VariableDeclarationEvaluator( output, symbolTable, obfuscatedTable );
         var visitor = new MockVariableDeclarationVisitor( output );
 
         visitor.Inject( evaluator );
@@ -294,7 +325,7 @@ public class VariableDeclarationTest
             }
         };
 
-        var evaluator = new VariableDeclarationEvaluator( output, symbolTable.UserVariables, symbolTable.UITypes, obfuscatedTable );
+        var evaluator = new VariableDeclarationEvaluator( output, symbolTable, obfuscatedTable );
         var visitor = new MockVariableDeclarationVisitor( output );
 
         visitor.Inject( evaluator );
