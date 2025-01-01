@@ -60,8 +60,7 @@ public sealed class ObfuscatorContext : IAnalyzerContext
             UserFunction = new UserFunctionDeclarationEvaluator( output, aggregateObfuscatedSymbols.UserFunctions );
             Variable     = new VariableDeclarationEvaluator(
                 output,
-                aggregateSymbolTable.UserVariables,
-                aggregateSymbolTable.UITypes,
+                aggregateSymbolTable,
                 aggregateObfuscatedSymbols.Variables
             );
         }

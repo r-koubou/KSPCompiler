@@ -7,6 +7,7 @@ using KSPCompiler.Domain.Ast.Nodes.Extensions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
+using KSPCompiler.Interactors.Analysis.Extensions;
 using KSPCompiler.Interactors.Analysis.Obfuscators.Extensions;
 using KSPCompiler.UseCases.Analysis.Evaluations.Declarations;
 using KSPCompiler.UseCases.Analysis.Obfuscators;
@@ -16,19 +17,16 @@ namespace KSPCompiler.Interactors.Analysis.Obfuscators;
 public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 {
     private StringBuilder Output { get; }
-    private IVariableSymbolTable Variables { get; }
-    private ISymbolTable<UITypeSymbol> UITypeSymbols { get; }
+    private AggregateSymbolTable SymbolTable { get; }
     private IObfuscatedVariableTable ObfuscatedTable { get; }
 
     public VariableDeclarationEvaluator(
         StringBuilder output,
-        IVariableSymbolTable variables,
-        ISymbolTable<UITypeSymbol> uiTypeSymbols,
+        AggregateSymbolTable symbolTable,
         IObfuscatedVariableTable obfuscatedTable )
     {
         Output          = output;
-        Variables       = variables;
-        UITypeSymbols   = uiTypeSymbols;
+        SymbolTable     = symbolTable;
         ObfuscatedTable = obfuscatedTable;
     }
 
@@ -36,7 +34,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
     {
         var name = ObfuscatedTable.GetObfuscatedByName( node.Name );
 
-        if( !Variables.TrySearchByName( node.Name, out var variable ) )
+        if( !SymbolTable.TrySearchUserVariableByName( node.Name, out var variable ) )
         {
             throw new KeyNotFoundException( $"Variable not found: {node.Name} from variable symbol table" );
         }
