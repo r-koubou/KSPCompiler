@@ -26,6 +26,14 @@ class Program
             var client = await listener.AcceptTcpClientAsync();
             Console.WriteLine( "Language Client connected." );
 
+            _ = Task.Run( async () => await HandleClientAsync( client ) );
+        }
+    }
+
+    private static async Task HandleClientAsync( TcpClient client )
+    {
+        try
+        {
             var option = new Server.Option(
                 client.GetStream(),
                 client.GetStream(),
@@ -34,6 +42,15 @@ class Program
 
             var server = await Server.Create( option );
             await server.WaitForExit;
+        }
+        catch( Exception e)
+        {
+            Console.WriteLine( e );
+        }
+        finally
+        {
+            client.Close();
+            Console.WriteLine( "Language Client disconnected." );
         }
     }
 }

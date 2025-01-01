@@ -32,4 +32,7 @@ public sealed class CompilerCache
 
         return symbolTable;
     }
+
+    public bool RemoveSymbolTable( DocumentUri uri )
+        => symbolTableCache.Remove( uri );
 }

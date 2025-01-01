@@ -69,17 +69,32 @@ internal class TextDocumentHandler : TextDocumentSyncHandlerBase
     public override async Task<Unit> Handle( DidChangeTextDocumentParams request, CancellationToken cancellationToken )
     {
         var uri = request.TextDocument.Uri;
+
+        // ReSharper disable once PossiblyImpureMethodCallOnReadonlyVariable
         var diagnostics = ImmutableArray<Diagnostic>.Empty.ToBuilder();
         var script = request.ContentChanges.First().Text;
 
         using var compilerEventSubscribers = new CompositeDisposable();
-        CompilerEventEmitter.Subscribe<CompilationErrorEvent>(
-            e => diagnostics.Add( CompilationEventExtension.AsDiagnostic( (CompilationErrorEvent)e ) )
-        ).AddTo( compilerEventSubscribers );
-        CompilerEventEmitter.Subscribe<CompilationWarningEvent>( e => diagnostics.Add( e.AsDiagnostic() ) ).AddTo( compilerEventSubscribers );
 
+        // コンパイラ内のエラーを Diagnostics に変換
+        CompilerEventEmitter.Subscribe<CompilationErrorEvent>(
+            e =>
+            {
+                diagnostics.Add( CompilationEventExtension.AsDiagnostic( e ) );
+            }
+        ).AddTo( compilerEventSubscribers );
+
+        // コンパイラ内の警告を Diagnostics に変換
+        CompilerEventEmitter.Subscribe<CompilationWarningEvent>( e =>
+            {
+                diagnostics.Add( e.AsDiagnostic() );
+            }
+        ).AddTo( compilerEventSubscribers );
+
+        // コンパイラ実行
         CompilerService.Compile( script, CompilerEventEmitter );
 
+        // エラー、警告を送信
         ServerFacade.TextDocument.PublishDiagnostics( new PublishDiagnosticsParams
             {
                 Uri         = request.TextDocument.Uri,
