@@ -18,18 +18,12 @@ public class CallCommandEvaluator : ICallCommandEvaluator
 {
     private IEventEmitter EventEmitter { get; }
 
-    private IVariableSymbolTable Variables { get; }
+    private AggregateSymbolTable SymbolTable { get; }
 
-    private ICommandSymbolTable Commands { get; }
-
-    private IUITypeSymbolTable UITypes { get; }
-
-    public CallCommandEvaluator( IEventEmitter eventEmitter, IVariableSymbolTable variables, ICommandSymbolTable commands, IUITypeSymbolTable uiTypeSymbolTable )
+    public CallCommandEvaluator( IEventEmitter eventEmitter, AggregateSymbolTable symbolTable )
     {
         EventEmitter = eventEmitter;
-        Variables    = variables;
-        Commands     = commands;
-        UITypes      = uiTypeSymbolTable;
+        SymbolTable  = symbolTable;
     }
 
     public IAstNode Evaluate( IAstVisitor visitor, AstCallCommandExpressionNode expr )
@@ -59,7 +53,7 @@ public class CallCommandEvaluator : ICallCommandEvaluator
             throw new AstAnalyzeException( expr, "Failed to evaluate command symbol" );
         }
 
-        if( !Commands.TrySearchByName( evaluatedSymbolExpr.Name, out var commandSymbol ) )
+        if( !SymbolTable.TrySearchCommandByName( evaluatedSymbolExpr.Name, out var commandSymbol ) )
         {
             EventEmitter.Emit(
                 expr.AsWarningEvent(
@@ -137,7 +131,7 @@ public class CallCommandEvaluator : ICallCommandEvaluator
                         break;
                     }
 
-                    if( UITypes.TrySearchByName( uiName, out _ ) )
+                    if( SymbolTable.TrySearchUITypeByName( uiName, out _ ) )
                     {
                         matchedUiType = true;
                         break;
@@ -179,6 +173,6 @@ public class CallCommandEvaluator : ICallCommandEvaluator
 
     private bool ValidateCommandArgumentState( AstCallCommandExpressionNode expr, IReadOnlyList<AstExpressionNode> callArgs )
     {
-        return callArgs.All( arg => arg.EvaluateSymbolState( expr, EventEmitter, Variables ) );
+        return callArgs.All( arg => arg.EvaluateSymbolState( expr, EventEmitter, SymbolTable ) );
     }
 }

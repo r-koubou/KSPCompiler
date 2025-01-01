@@ -15,12 +15,12 @@ public class ArrayElementEvaluator : IArrayElementEvaluator
 {
     private IEventEmitter EventEmitter { get; }
 
-    private IVariableSymbolTable VariableSymbolTable { get; }
+    private AggregateSymbolTable SymbolTable { get; }
 
-    public ArrayElementEvaluator( IEventEmitter eventEmitter, IVariableSymbolTable variableSymbolTable )
+    public ArrayElementEvaluator( IEventEmitter eventEmitter, AggregateSymbolTable symbolTable )
     {
-        EventEmitter        = eventEmitter;
-        VariableSymbolTable = variableSymbolTable;
+        EventEmitter = eventEmitter;
+        SymbolTable  = symbolTable;
     }
 
     public IAstNode Evaluate( IAstVisitor visitor, AstArrayElementExpressionNode expr )
@@ -44,7 +44,7 @@ public class ArrayElementEvaluator : IArrayElementEvaluator
             throw new AstAnalyzeException( expr, "Failed to evaluate right side of array element" );
         }
 
-        if( !VariableSymbolTable.TrySearchByName( evaluatedLeft.Name, out var variableSymbol ) )
+        if( !SymbolTable.TrySearchVariableByName( evaluatedLeft.Name, out var variableSymbol ) )
         {
             throw new AstAnalyzeException( expr, "Failed to find variable symbol" );
         }

@@ -17,13 +17,14 @@ namespace KSPCompiler.LSPServer.Core;
 public class CompilerService
 {
     private readonly AggregateSymbolTable symbolTable = new(
-        new VariableSymbolTable(),
-        new UITypeSymbolTable(),
-        new CommandSymbolTable(),
-        new CallbackSymbolTable(),
-        new CallbackSymbolTable(),
-        new UserFunctionSymbolTable(),
-        new PreProcessorSymbolTable()
+        builtInVariables: new VariableSymbolTable(),
+        userVariables: new VariableSymbolTable(),
+        uiTypes: new UITypeSymbolTable(),
+        commands: new CommandSymbolTable(),
+        builtInCallbacks: new CallbackSymbolTable(),
+        userCallbacks: new CallbackSymbolTable(),
+        userFunctions: new UserFunctionSymbolTable(),
+        preProcessorSymbols: new PreProcessorSymbolTable()
     );
 
     private readonly CompilerController compilerController = new();
@@ -54,7 +55,7 @@ public class CompilerService
         var basePath = Path.Combine( "Data", "Symbols" );
 
         using var variables = new VariableSymbolRepository( Path.Combine( basePath, "variables.json" ) );
-        symbolTable.Variables.AddRange( variables.FindAllAsync( CancellationToken.None ).GetAwaiter().GetResult() );
+        symbolTable.BuiltInVariables.AddRange( variables.FindAllAsync( CancellationToken.None ).GetAwaiter().GetResult() );
 
         using var uiTypes = new UITypeSymbolRepository( Path.Combine( basePath, "uitypes.json" ) );
         symbolTable.UITypes.AddRange( uiTypes.FindAllAsync( CancellationToken.None ).GetAwaiter().GetResult() );
@@ -69,17 +70,14 @@ public class CompilerService
     private static void SetupSymbol( AggregateSymbolTable symbolTable )
     {
         // 再突入時のため、ユーザー定義シンボルをクリア
-        symbolTable.Variables.RemoveNoReservedSymbols();
+        symbolTable.UserVariables.RemoveNoReservedSymbols();
         symbolTable.UserCallbacks.RemoveNoReservedSymbols();
         symbolTable.UserFunctions.RemoveNoReservedSymbols();
 
         // ビルトイン変数は初期化済み扱い
-        foreach( var variable in symbolTable.Variables )
+        foreach( var variable in symbolTable.BuiltInVariables )
         {
-            if( variable.BuiltIn )
-            {
-                variable.State = SymbolState.Initialized;
-            }
+            variable.State = SymbolState.Initialized;
         }
     }
 }

@@ -18,13 +18,14 @@ public sealed class CompilerCache
         }
 
         symbolTable = new AggregateSymbolTable(
-            new VariableSymbolTable(),
-            new UITypeSymbolTable(),
-            new CommandSymbolTable(),
-            new CallbackSymbolTable(),
-            new CallbackSymbolTable(),
-            new UserFunctionSymbolTable(),
-            new PreProcessorSymbolTable()
+            builtInVariables: new VariableSymbolTable(),
+            userVariables: new VariableSymbolTable(),
+            uiTypes: new UITypeSymbolTable(),
+            commands: new CommandSymbolTable(),
+            builtInCallbacks: new CallbackSymbolTable(),
+            userCallbacks: new CallbackSymbolTable(),
+            userFunctions: new UserFunctionSymbolTable(),
+            preProcessorSymbols: new PreProcessorSymbolTable()
         );
 
         symbolTableCache.Add( uri, symbolTable );

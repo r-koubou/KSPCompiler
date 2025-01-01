@@ -35,7 +35,7 @@ public class AstArrayElementEvaluationTest
 
         variable.ArraySize = 10;
         variable.State     = SymbolState.Initialized;
-        symbolTable.Variables.Add( variable );
+        symbolTable.UserVariables.Add( variable );
 
         var expr = new AstArrayElementExpressionNode
         {
@@ -44,7 +44,7 @@ public class AstArrayElementEvaluationTest
         };
 
         var visitor = new MockArrayElementEvaluatorVisitor();
-        var evaluator = new ArrayElementEvaluator( eventEmitter, symbolTable.Variables );
+        var evaluator = new ArrayElementEvaluator( eventEmitter, symbolTable );
 
         visitor.Inject( evaluator );
         var result = (AstExpressionNode)visitor.Visit( expr );
@@ -70,7 +70,7 @@ public class AstArrayElementEvaluationTest
 
         variable.ArraySize = arraySize;
         variable.State     = SymbolState.Initialized;
-        symbolTable.Variables.Add( variable );
+        symbolTable.UserVariables.Add( variable );
 
         var expr = new AstArrayElementExpressionNode
         {
@@ -79,7 +79,7 @@ public class AstArrayElementEvaluationTest
         };
 
         var visitor = new MockArrayElementEvaluatorVisitor();
-        var evaluator = new ArrayElementEvaluator( eventEmitter, symbolTable.Variables );
+        var evaluator = new ArrayElementEvaluator( eventEmitter, symbolTable );
 
         visitor.Inject( evaluator );
         visitor.Visit( expr );
