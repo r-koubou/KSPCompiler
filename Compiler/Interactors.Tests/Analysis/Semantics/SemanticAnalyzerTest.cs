@@ -40,7 +40,7 @@ public class SemanticAnalyzerTest
         var compilerMessageManger = ICompilerMessageManger.Default;
         context.EventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
-        context.SymbolTable.Variables.Add( variableSymbol );
+        context.SymbolTable.UserVariables.Add( variableSymbol );
 
         var statement = new AstAssignmentExpressionNode(
             variable,
@@ -75,7 +75,7 @@ public class SemanticAnalyzerTest
         var compilerMessageManger = ICompilerMessageManger.Default;
         context.EventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
-        context.SymbolTable.Variables.Add( variableSymbol );
+        context.SymbolTable.UserVariables.Add( variableSymbol );
 
         var statement = new AstAssignmentExpressionNode(
             variable,
@@ -110,7 +110,7 @@ public class SemanticAnalyzerTest
         var compilerMessageManger = ICompilerMessageManger.Default;
         context.EventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
-        context.SymbolTable.Variables.Add( variableSymbol );
+        context.SymbolTable.UserVariables.Add( variableSymbol );
 
         var statement = new AstAssignmentExpressionNode(
             variable,

@@ -42,7 +42,7 @@ public class AstCallCommandEvaluationTest
             new AstIntLiteralNode( 0 )
         );
 
-        var evaluator = new CallCommandEvaluator( eventEmitter, symbols.Variables, symbols.Commands, symbols.UITypes );
+        var evaluator = new CallCommandEvaluator( eventEmitter, symbols );
         var visitor = new MockCallCommandExpressionVisitor();
 
         visitor.Inject( evaluator );
@@ -79,7 +79,7 @@ public class AstCallCommandEvaluationTest
             new AstIntLiteralNode( 0 )
         );
 
-        var evaluator = new CallCommandEvaluator( eventEmitter, symbols.Variables, symbols.Commands, symbols.UITypes );
+        var evaluator = new CallCommandEvaluator( eventEmitter, symbols );
         var visitor = new MockCallCommandExpressionVisitor();
 
         visitor.Inject( evaluator );
@@ -117,7 +117,7 @@ public class AstCallCommandEvaluationTest
             new AstIntLiteralNode( 0 )
         );
 
-        var evaluator = new CallCommandEvaluator( eventEmitter, symbols.Variables, symbols.Commands, symbols.UITypes );
+        var evaluator = new CallCommandEvaluator( eventEmitter, symbols );
         var visitor = new MockCallCommandExpressionVisitor();
 
         visitor.Inject( evaluator );
@@ -150,7 +150,7 @@ public class AstCallCommandEvaluationTest
             new AstIntLiteralNode( 0 )
         );
 
-        var evaluator = new CallCommandEvaluator( eventEmitter, symbols.Variables, symbols.Commands, symbols.UITypes );
+        var evaluator = new CallCommandEvaluator( eventEmitter, symbols );
         var visitor = new MockCallCommandExpressionVisitor();
 
         visitor.Inject( evaluator );

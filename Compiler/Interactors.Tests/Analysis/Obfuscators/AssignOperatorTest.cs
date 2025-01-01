@@ -34,14 +34,14 @@ public class AssignOperatorTest
         var variable = MockUtility.CreateIntVariable( variableName );
 
         variable.State = SymbolState.Initialized;
-        symbolTable.Variables.Add( variable );
+        symbolTable.UserVariables.Add( variable );
 
         var variableNode = MockUtility.CreateSymbolNode( variableName );
 
         var command = MockUtility.CreateMessageCommand();
         symbolTable.Commands.Add( command );
 
-        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.Variables, "v" );
+        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.UserVariables, "v" );
 
         var node = new AstAssignmentExpressionNode
         {

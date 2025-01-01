@@ -17,13 +17,13 @@ namespace KSPCompiler.Interactors.Analysis.Semantics;
 
 public sealed class NumericUnaryOperatorEvaluator(
     IEventEmitter eventEmitter,
-    IVariableSymbolTable variables,
+    AggregateSymbolTable symbolTable,
     IIntegerConvolutionEvaluator integerConvolutionEvaluator,
     IRealConvolutionEvaluator realConvolutionEvaluator )
     : IUnaryOperatorEvaluator
 {
     private IEventEmitter EventEmitter { get; } = eventEmitter;
-    private IVariableSymbolTable Variables { get; } = variables;
+    private AggregateSymbolTable SymbolTable { get; } = symbolTable;
     private IIntegerConvolutionEvaluator IntegerConvolutionEvaluator { get; } = integerConvolutionEvaluator;
     private IRealConvolutionEvaluator RealConvolutionEvaluator { get; } = realConvolutionEvaluator;
 
@@ -70,7 +70,7 @@ public sealed class NumericUnaryOperatorEvaluator(
         }
 
         // 評価対象が変数の場合、初期化されているかチェック
-        if( !evaluatedLeft.EvaluateSymbolState( expr, EventEmitter, Variables ) )
+        if( !evaluatedLeft.EvaluateSymbolState( expr, EventEmitter, SymbolTable ) )
         {
             return CreateEvaluateNode( expr, evaluatedLeft.TypeFlag );
         }

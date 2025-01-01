@@ -13,7 +13,7 @@ public static class AstExpressionNodeExtension
     /// Evaluate the symbol state is initialized or not if the expression is a <see cref="AstSymbolExpressionNode"/>.
     /// </summary>
     /// <returns>true if the symbol state is initialized or node is not a <see cref="AstSymbolExpressionNode"/>. Otherwise, false.</returns>
-    public static bool EvaluateSymbolState( this AstExpressionNode self, IAstNode parent, IEventEmitter eventEmitter, IVariableSymbolTable variables )
+    public static bool EvaluateSymbolState( this AstExpressionNode self, IAstNode parent, IEventEmitter eventEmitter, AggregateSymbolTable symbolTable )
     {
         if( self is not AstSymbolExpressionNode symbolNode )
         {
@@ -32,7 +32,7 @@ public static class AstExpressionNodeExtension
             return false;
         }
 
-        if( variables.TrySearchByName( symbolNode.Name, out var variable ) )
+        if( symbolTable.TrySearchVariableByName( symbolNode.Name, out var variable ) )
         {
             variable.State = SymbolState.Loaded;
         }
