@@ -104,16 +104,16 @@ public sealed class SemanticAnalyzerContext : IAnalyzerContext
 
             #endregion ~Convolutions
 
-            AssignOperator             = new AssignOperatorEvaluator( eventEmitter, aggregateSymbolTable.BuiltInVariables );
+            AssignOperator             = new AssignOperatorEvaluator( eventEmitter, aggregateSymbolTable );
             ConditionalBinaryOperator  = new ConditionalBinaryOperatorEvaluator( eventEmitter );
             ConditionalLogicalOperator = new ConditionalLogicalOperatorEvaluator( eventEmitter, BooleanConvolutionEvaluator );
             ConditionalUnaryOperator   = new ConditionalUnaryOperatorEvaluator( eventEmitter, BooleanConvolutionEvaluator );
-            NumericBinaryOperator      = new NumericBinaryOperatorEvaluator( eventEmitter, aggregateSymbolTable.BuiltInVariables, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
-            NumericUnaryOperator       = new NumericUnaryOperatorEvaluator( eventEmitter, aggregateSymbolTable.BuiltInVariables, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
+            NumericBinaryOperator      = new NumericBinaryOperatorEvaluator( eventEmitter, aggregateSymbolTable, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
+            NumericUnaryOperator       = new NumericUnaryOperatorEvaluator( eventEmitter, aggregateSymbolTable, IntegerConvolutionEvaluator, RealConvolutionEvaluator );
             StringConcatenateOperator  = new StringConcatenateOperatorEvaluator( eventEmitter, StringConvolutionEvaluator );
             Symbol                     = new SymbolEvaluator( eventEmitter, aggregateSymbolTable );
-            ArrayElement               = new ArrayElementEvaluator( eventEmitter, aggregateSymbolTable.BuiltInVariables );
-            CallCommand                = new CallCommandEvaluator( eventEmitter, aggregateSymbolTable.BuiltInVariables, aggregateSymbolTable.Commands, aggregateSymbolTable.UITypes );
+            ArrayElement               = new ArrayElementEvaluator( eventEmitter, aggregateSymbolTable );
+            CallCommand                = new CallCommandEvaluator( eventEmitter, aggregateSymbolTable );
         }
     }
 

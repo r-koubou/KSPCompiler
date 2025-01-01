@@ -35,7 +35,7 @@ public class AstIncompatibleBinaryOperatorEvaluationTest
         var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
         var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
             eventEmitter,
-            MockUtility.CreateAggregateSymbolTable().BuiltInVariables,
+            MockUtility.CreateAggregateSymbolTable(),
             integerConvolutionEvaluator,
             realConvolutionEvaluator
         );

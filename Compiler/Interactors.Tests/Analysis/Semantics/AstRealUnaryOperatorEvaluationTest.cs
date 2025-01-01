@@ -31,7 +31,7 @@ public class AstRealUnaryOperatorEvaluationTest
         var realConvolutionEvaluator = new RealConvolutionEvaluator();
         var unaryOperatorEvaluator = new NumericUnaryOperatorEvaluator(
             eventEmitter,
-            MockUtility.CreateAggregateSymbolTable().BuiltInVariables,
+            MockUtility.CreateAggregateSymbolTable(),
             integerConvolutionEvaluator,
             realConvolutionEvaluator
         );
@@ -62,7 +62,7 @@ public class AstRealUnaryOperatorEvaluationTest
         var realConvolutionEvaluator = new RealConvolutionEvaluator();
         var unaryOperatorEvaluator = new NumericUnaryOperatorEvaluator(
             eventEmitter,
-            MockUtility.CreateAggregateSymbolTable().BuiltInVariables,
+            MockUtility.CreateAggregateSymbolTable(),
             integerConvolutionEvaluator,
             realConvolutionEvaluator
         );

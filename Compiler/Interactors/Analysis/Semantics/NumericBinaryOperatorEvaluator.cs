@@ -18,7 +18,7 @@ namespace KSPCompiler.Interactors.Analysis.Semantics;
 public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
 {
     protected IEventEmitter EventEmitter { get; }
-    protected IVariableSymbolTable Variables { get; }
+    protected AggregateSymbolTable SymbolTable { get; }
     protected IIntegerConvolutionEvaluator IntegerConvolutionEvaluator { get; }
     protected IRealConvolutionEvaluator RealConvolutionEvaluator { get; }
 
@@ -32,12 +32,12 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
 
     public NumericBinaryOperatorEvaluator(
         IEventEmitter eventEmitter,
-        IVariableSymbolTable variables,
+        AggregateSymbolTable symbolTable,
         IIntegerConvolutionEvaluator integerConvolutionEvaluator,
         IRealConvolutionEvaluator realConvolutionEvaluator )
     {
         EventEmitter                = eventEmitter;
-        Variables                   = variables;
+        SymbolTable                 = symbolTable;
         IntegerConvolutionEvaluator = integerConvolutionEvaluator;
         RealConvolutionEvaluator    = realConvolutionEvaluator;
     }
@@ -78,8 +78,8 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
         }
 
         // 評価対象が変数の場合、初期化されているかチェック
-        if( !evaluatedLeft.EvaluateSymbolState( expr, EventEmitter, Variables ) ||
-            !evaluatedRight.EvaluateSymbolState( expr, EventEmitter, Variables ) )
+        if( !evaluatedLeft.EvaluateSymbolState( expr, EventEmitter, SymbolTable ) ||
+            !evaluatedRight.EvaluateSymbolState( expr, EventEmitter, SymbolTable ) )
         {
             return CreateEvaluateNode(
                 expr,
