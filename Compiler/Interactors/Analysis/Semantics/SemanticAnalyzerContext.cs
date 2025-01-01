@@ -54,7 +54,7 @@ public sealed class SemanticAnalyzerContext : IAnalyzerContext
         {
             Callback     = new CallbackDeclarationEvaluator( eventEmitter, aggregateSymbolTable.BuiltInCallbacks, aggregateSymbolTable.UserCallbacks );
             UserFunction = new UserFunctionDeclarationEvaluator( eventEmitter, aggregateSymbolTable.UserFunctions );
-            Variable     = new VariableDeclarationEvaluator( eventEmitter, aggregateSymbolTable.BuiltInVariables, aggregateSymbolTable.UITypes );
+            Variable     = new VariableDeclarationEvaluator( eventEmitter, aggregateSymbolTable );
         }
     }
 

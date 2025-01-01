@@ -33,7 +33,7 @@ public class AstVariableDeclarationEvaluationTest
         var ast = MockUtility.CreateVariableDeclarationNode( name );
         ast.Parent = callbackAst;
 
-        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -61,7 +61,7 @@ public class AstVariableDeclarationEvaluationTest
         var ast = MockUtility.CreateVariableDeclarationNode( name );
         ast.Parent = callbackAst;
 
-        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -104,7 +104,7 @@ public class AstVariableDeclarationEvaluationTest
             )
         };
 
-        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -144,7 +144,7 @@ public class AstVariableDeclarationEvaluationTest
             )
         };
 
-        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -186,7 +186,7 @@ public class AstVariableDeclarationEvaluationTest
             ArrayInitializer = arrayInitializer
         };
 
-        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -217,7 +217,7 @@ public class AstVariableDeclarationEvaluationTest
         declaration.Parent   = callbackAst;
         declaration.Modifier = new AstModiferNode( declaration, "const" );
 
-        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );

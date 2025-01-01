@@ -21,17 +21,14 @@ namespace KSPCompiler.Interactors.Analysis.Semantics;
 public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 {
     private IEventEmitter EventEmitter { get; }
-    private ISymbolTable<VariableSymbol> VariableSymbols { get; }
-    private ISymbolTable<UITypeSymbol> UITypeSymbols { get; }
+    private AggregateSymbolTable SymbolTables { get; }
 
     public VariableDeclarationEvaluator(
         IEventEmitter eventEmitter,
-        ISymbolTable<VariableSymbol> variableSymbols,
-        ISymbolTable<UITypeSymbol> uiTypeSymbols )
+        AggregateSymbolTable symbolTables )
     {
-        EventEmitter    = eventEmitter;
-        VariableSymbols = variableSymbols;
-        UITypeSymbols   = uiTypeSymbols;
+        EventEmitter = eventEmitter;
+        SymbolTables = symbolTables;
     }
 
     public IAstNode Evaluate( IAstVisitor visitor, AstVariableDeclarationNode node )
@@ -63,7 +60,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             return node;
         }
 
-        if( !VariableSymbols.Add( variable ) )
+        if( !SymbolTables.UserVariables.Add( variable ) )
         {
             throw new AstAnalyzeException( this, node, $"Variable symbol add failed {variable.Name}" );
         }
@@ -139,7 +136,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             return false;
         }
 
-        if( !VariableSymbols.TrySearchByName( node.Name, out result ) )
+        if( !SymbolTables.TrySearchVariableByName( node.Name, out result ) )
         {
             // 未定義：新規追加可能
             result = node.As();
@@ -181,7 +178,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         // 有効な UI 型かチェック
         foreach( var modifier in node.Modifier.GetUIModifiers() )
         {
-            if( !UITypeSymbols.TrySearchByName( modifier, out var uiType ) )
+            if( !SymbolTables.TrySearchUITypeByName( modifier, out var uiType ) )
             {
                 EventEmitter.Emit(
                     node.AsErrorEvent(

@@ -55,7 +55,7 @@ public class AstUIVariableDeclarationEvaluationTest
             new AstIntLiteralNode( 2 )
         });
 
-        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -112,7 +112,7 @@ public class AstUIVariableDeclarationEvaluationTest
             new AstIntLiteralNode( 10 )
         });
 
-        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -143,7 +143,7 @@ public class AstUIVariableDeclarationEvaluationTest
         declaration.Parent   = callbackAst;
         declaration.Modifier = new AstModiferNode( declaration, "ui_unknown" );
 
-        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -187,7 +187,7 @@ public class AstUIVariableDeclarationEvaluationTest
             }
         };
 
-        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -235,7 +235,7 @@ public class AstUIVariableDeclarationEvaluationTest
             new AstIntLiteralNode( 1 )
         });
 
-        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -284,7 +284,7 @@ public class AstUIVariableDeclarationEvaluationTest
             new AstRealLiteralNode( 2.0 )
         });
 
-        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -337,7 +337,7 @@ public class AstUIVariableDeclarationEvaluationTest
             argNode
         });
 
-        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols.BuiltInVariables, symbols.UITypes );
+        var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
