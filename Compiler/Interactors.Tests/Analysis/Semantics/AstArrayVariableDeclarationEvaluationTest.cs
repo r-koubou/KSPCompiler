@@ -61,7 +61,7 @@ public class AstArrayVariableDeclarationEvaluationTest
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 0 ) );
-        Assert.That( symbols.BuiltInVariables.Count, Is.EqualTo( 1 ) );
+        Assert.That( symbols.UserVariables.Count, Is.EqualTo( 1 ) );
     }
 
     [Test]
@@ -109,7 +109,7 @@ public class AstArrayVariableDeclarationEvaluationTest
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 2 ) );
-        Assert.That( symbols.BuiltInVariables.Count, Is.EqualTo( 0 ) );
+        Assert.That( symbols.UserVariables.Count, Is.EqualTo( 0 ) );
     }
 
     [Test]
@@ -155,7 +155,7 @@ public class AstArrayVariableDeclarationEvaluationTest
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
-        Assert.That( symbols.BuiltInVariables.Count, Is.EqualTo( 0 ) );
+        Assert.That( symbols.UserVariables.Count, Is.EqualTo( 0 ) );
     }
 
     [Test]
@@ -186,7 +186,7 @@ public class AstArrayVariableDeclarationEvaluationTest
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
-        Assert.That( symbols.BuiltInVariables.Count, Is.EqualTo( 0 ) );
+        Assert.That( symbols.UserVariables.Count, Is.EqualTo( 0 ) );
     }
 
     [Test]
@@ -225,7 +225,7 @@ public class AstArrayVariableDeclarationEvaluationTest
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
-        Assert.That( symbols.BuiltInVariables.Count, Is.EqualTo( 0 ) );
+        Assert.That( symbols.UserVariables.Count, Is.EqualTo( 0 ) );
     }
 
     [Test]
@@ -264,7 +264,7 @@ public class AstArrayVariableDeclarationEvaluationTest
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 0 ) );
-        Assert.That( symbols.BuiltInVariables.Count, Is.EqualTo( 1 ) );
+        Assert.That( symbols.UserVariables.Count, Is.EqualTo( 1 ) );
     }
 
     [TestCase( 0 )]
@@ -306,6 +306,6 @@ public class AstArrayVariableDeclarationEvaluationTest
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
-        Assert.That( symbols.BuiltInVariables.Count, Is.EqualTo( 0 ) );
+        Assert.That( symbols.UserVariables.Count, Is.EqualTo( 0 ) );
     }
 }

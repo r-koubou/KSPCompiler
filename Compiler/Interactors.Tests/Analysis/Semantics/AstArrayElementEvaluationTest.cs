@@ -35,7 +35,7 @@ public class AstArrayElementEvaluationTest
 
         variable.ArraySize = 10;
         variable.State     = SymbolState.Initialized;
-        symbolTable.BuiltInVariables.Add( variable );
+        symbolTable.UserVariables.Add( variable );
 
         var expr = new AstArrayElementExpressionNode
         {
@@ -70,7 +70,7 @@ public class AstArrayElementEvaluationTest
 
         variable.ArraySize = arraySize;
         variable.State     = SymbolState.Initialized;
-        symbolTable.BuiltInVariables.Add( variable );
+        symbolTable.UserVariables.Add( variable );
 
         var expr = new AstArrayElementExpressionNode
         {
