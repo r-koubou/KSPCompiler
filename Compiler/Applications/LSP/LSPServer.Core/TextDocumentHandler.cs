@@ -31,11 +31,7 @@ internal class TextDocumentHandler : TextDocumentSyncHandlerBase
     private TextDocumentSelector TextDocumentSelector { get; } = new(
         new TextDocumentFilter
         {
-            Pattern = "**/*.txt"
-        },
-        new TextDocumentFilter
-        {
-            Pattern = "**/*.ksp"
+            Language = "ksp"
         }
     );
 
