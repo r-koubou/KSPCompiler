@@ -26,10 +26,10 @@ public record CompilerResult(
 public sealed class CompilerController
 {
     public CompilerResult Execute( IEventEmitter eventEmitter, CompilerOption option )
-        => Execute( eventEmitter, option, CancellationToken.None ).GetAwaiter().GetResult();
+        => ExecuteAsync( eventEmitter, option, CancellationToken.None ).GetAwaiter().GetResult();
 
     // ReSharper disable once UnusedMethodReturnValue.Global
-    public async Task<CompilerResult> Execute( IEventEmitter eventEmitter, CompilerOption option, CancellationToken cancellationToken )
+    public async Task<CompilerResult> ExecuteAsync( IEventEmitter eventEmitter, CompilerOption option, CancellationToken cancellationToken )
     {
         // TODO: CompilerMessageManger compilerMessageManger is obsolete. Use IEventEmitter eventEmitter instead.
 
