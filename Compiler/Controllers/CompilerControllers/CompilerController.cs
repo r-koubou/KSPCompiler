@@ -1,7 +1,8 @@
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Gateways;
@@ -25,6 +26,10 @@ public record CompilerResult(
 public sealed class CompilerController
 {
     public CompilerResult Execute( IEventEmitter eventEmitter, CompilerOption option )
+        => Execute( eventEmitter, option, CancellationToken.None ).GetAwaiter().GetResult();
+
+    // ReSharper disable once UnusedMethodReturnValue.Global
+    public async Task<CompilerResult> Execute( IEventEmitter eventEmitter, CompilerOption option, CancellationToken cancellationToken )
     {
         // TODO: CompilerMessageManger compilerMessageManger is obsolete. Use IEventEmitter eventEmitter instead.
 
@@ -32,7 +37,7 @@ public sealed class CompilerController
         {
             var symbolTable = option.SymbolTable;
 
-            var syntaxAnalysisOutput = ExecuteSyntaxAnalysis( option.SyntaxParser );
+            var syntaxAnalysisOutput = await ExecuteSyntaxAnalysisAsync( option.SyntaxParser, cancellationToken );
             var ast = syntaxAnalysisOutput.OutputData;
 
             if( !syntaxAnalysisOutput.Result )
@@ -45,14 +50,14 @@ public sealed class CompilerController
                 return new CompilerResult( true, null, string.Empty );
             }
 
-            var preprocessOutput = ExecutePreprocess( eventEmitter, ast, symbolTable );
+            var preprocessOutput = await ExecutePreprocessAsync( eventEmitter, ast, symbolTable, cancellationToken );
 
             if( !preprocessOutput.Result )
             {
                 return new CompilerResult( false, null, string.Empty );
             }
 
-            var semanticAnalysisOutput = ExecuteSemanticAnalysis( eventEmitter, ast, symbolTable );
+            var semanticAnalysisOutput = await ExecuteSemanticAnalysisAsync( eventEmitter, ast, symbolTable, cancellationToken );
 
             if( !semanticAnalysisOutput.Result )
             {
@@ -65,10 +70,11 @@ public sealed class CompilerController
                 return new CompilerResult( true, null, string.Empty );
             }
 
-            var obfuscationOutput = ExecuteObfuscation(
+            var obfuscationOutput = await ExecuteObfuscationAsync(
                 eventEmitter,
                 semanticAnalysisOutput.OutputData.CompilationUnitNode,
-                semanticAnalysisOutput.OutputData.SymbolTable
+                semanticAnalysisOutput.OutputData.SymbolTable,
+                cancellationToken
             );
 
             Console.WriteLine( obfuscationOutput.OutputData );
@@ -85,25 +91,33 @@ public sealed class CompilerController
         }
     }
 
-    private SyntaxAnalysisOutputData ExecuteSyntaxAnalysis( ISyntaxParser parser )
+    private async Task<SyntaxAnalysisOutputData> ExecuteSyntaxAnalysisAsync( ISyntaxParser parser, CancellationToken cancellationToken)
     {
         var analyzer = new SyntaxAnalysisInteractor();
         var input = new SyntaxAnalysisInputData( parser );
 
-        return analyzer.Execute( input );
+        return await analyzer.ExecuteAsync( input, cancellationToken );
     }
 
-    private UnitOutputPort ExecutePreprocess( IEventEmitter compilerMessageManger, AstCompilationUnitNode ast, AggregateSymbolTable symbolTable )
+    private async Task<UnitOutputPort> ExecutePreprocessAsync(
+        IEventEmitter compilerMessageManger,
+        AstCompilationUnitNode ast,
+        AggregateSymbolTable symbolTable,
+        CancellationToken cancellationToken )
     {
         IPreprocessUseCase preprocessor = new PreprocessInteractor();
         var preprocessInput = new PreprocessInputData(
             new PreprocessInputDataDetail( compilerMessageManger, ast, symbolTable )
         );
 
-        return preprocessor.Execute( preprocessInput );
+        return await preprocessor.ExecuteAsync( preprocessInput, cancellationToken );
     }
 
-    private SemanticAnalysisOutputData ExecuteSemanticAnalysis( IEventEmitter eventEmitter, AstCompilationUnitNode ast, AggregateSymbolTable symbolTable )
+    private async Task<SemanticAnalysisOutputData> ExecuteSemanticAnalysisAsync(
+        IEventEmitter eventEmitter,
+        AstCompilationUnitNode ast,
+        AggregateSymbolTable symbolTable,
+        CancellationToken cancellationToken )
     {
         var semanticAnalyzer = new SemanticAnalysisInteractor();
         var preprocessInput = new SemanticAnalysisInputData(
@@ -112,7 +126,7 @@ public sealed class CompilerController
 
         try
         {
-            return semanticAnalyzer.Execute( preprocessInput );
+            return await semanticAnalyzer.ExecuteAsync( preprocessInput, cancellationToken );
         }
         catch( Exception e )
         {
@@ -127,7 +141,11 @@ public sealed class CompilerController
         }
     }
 
-    private ObfuscationOutputData ExecuteObfuscation( IEventEmitter eventEmitter, AstCompilationUnitNode ast, AggregateSymbolTable symbolTable )
+    private async Task<ObfuscationOutputData> ExecuteObfuscationAsync(
+        IEventEmitter eventEmitter,
+        AstCompilationUnitNode ast,
+        AggregateSymbolTable symbolTable,
+        CancellationToken cancellationToken )
     {
         var obfuscator = new ObfuscationInteractor();
         var input = new ObfuscationInputData(
@@ -136,7 +154,7 @@ public sealed class CompilerController
 
         try
         {
-            return obfuscator.Execute( input );
+            return await obfuscator.ExecuteAsync( input, cancellationToken );
         }
         catch( Exception e )
         {
