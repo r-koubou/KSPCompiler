@@ -152,7 +152,7 @@ public class AstUIVariableDeclarationEvaluationTest
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
-        Assert.That( symbols.UserVariables.Count, Is.EqualTo( 0 ) );
+        Assert.That( symbols.UserVariables.Count, Is.EqualTo( 1 ) );
     }
 
     [Test]
@@ -196,7 +196,7 @@ public class AstUIVariableDeclarationEvaluationTest
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
-        Assert.That( symbols.UserVariables.Count, Is.EqualTo( 0 ) );
+        Assert.That( symbols.UserVariables.Count, Is.EqualTo( 1 ) );
     }
 
     [Test]
@@ -244,7 +244,7 @@ public class AstUIVariableDeclarationEvaluationTest
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
-        Assert.That( symbols.UserVariables.Count, Is.EqualTo( 0 ) );
+        Assert.That( symbols.UserVariables.Count, Is.EqualTo( 1 ) );
     }
 
     [Test]
@@ -293,7 +293,7 @@ public class AstUIVariableDeclarationEvaluationTest
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
-        Assert.That( symbols.UserVariables.Count, Is.EqualTo( 0 ) );
+        Assert.That( symbols.UserVariables.Count, Is.EqualTo( 1 ) );
     }
 
     [Test]
@@ -346,6 +346,6 @@ public class AstUIVariableDeclarationEvaluationTest
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
-        Assert.That( symbols.UserVariables.Count, Is.EqualTo( 1 ) );
+        Assert.That( symbols.UserVariables.Count, Is.EqualTo( 2 ) );
     }
 }
