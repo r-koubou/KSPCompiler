@@ -17,7 +17,7 @@ namespace KSPCompiler.LSPServer.Core;
 
 public class CompilerService
 {
-    private readonly AggregateSymbolTable symbolTable = new(
+    private readonly AggregateSymbolTable builtInSymbolTable = new(
         builtInVariables: new VariableSymbolTable(),
         userVariables: new VariableSymbolTable(),
         uiTypes: new UITypeSymbolTable(),
@@ -33,17 +33,19 @@ public class CompilerService
     public CompilerService()
     {
         // 外部定義ファイルからビルトイン変数、コマンド、コールバック、UIタイプを構築
-        LoadSymbolTables( symbolTable );
+        LoadSymbolTables( builtInSymbolTable );
     }
 
     public async Task<CompilerResult> CompileAsync( string script, IEventEmitter eventEmitter, CancellationToken cancellationToken )
     {
-        SetupSymbol( this.symbolTable );
+        SetupSymbol( builtInSymbolTable );
 
         var parser = new AntlrKspStringSyntaxParser( script, eventEmitter, Encoding.UTF8 );
+        var symbolTableInScript = builtInSymbolTable.CreateBuiltInSymbolsOnly();
+
         var option = new CompilerOption(
             SyntaxParser: parser,
-            SymbolTable: this.symbolTable,
+            SymbolTable: symbolTableInScript,
             SyntaxCheckOnly: false,
             EnableObfuscation: false
         );
