@@ -85,6 +85,7 @@ internal class TextDocumentHandler : TextDocumentSyncHandlerBase
 
     public override async Task<Unit> Handle( DidCloseTextDocumentParams request, CancellationToken cancellationToken )
     {
+        await ClearDiagnosticAsync( request.TextDocument.Uri );
         CompilerCache.RemoveSymbolTable( request.TextDocument.Uri );
 
         await Task.CompletedTask;
@@ -102,6 +103,19 @@ internal class TextDocumentHandler : TextDocumentSyncHandlerBase
                 IncludeText = true
             }
         };
+    }
+
+    private async Task<Unit> ClearDiagnosticAsync( DocumentUri uri )
+    {
+        ServerFacade.TextDocument.PublishDiagnostics( new PublishDiagnosticsParams
+            {
+                Uri         = uri,
+                Diagnostics = ImmutableArray<Diagnostic>.Empty
+            }
+        );
+
+        await Task.CompletedTask;
+        return Unit.Value;
     }
 
     private async Task<CompilerResult> ExecuteCompilationAsync( DocumentUri uri, string script, CancellationToken cancellationToken )
