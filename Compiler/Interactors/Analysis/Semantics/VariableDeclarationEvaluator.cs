@@ -65,6 +65,8 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             throw new AstAnalyzeException( this, node, $"Variable symbol add failed {variable.Name}" );
         }
 
+        variable.DefinedPosition = node.Position;
+
         return node;
     }
 

@@ -31,6 +31,8 @@ public class UserFunctionDeclarationEvaluator(
             );
         }
 
+        thisUserFunction.DefinedPosition = node.Position;
+
         return node;
     }
 }

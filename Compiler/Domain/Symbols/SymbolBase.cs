@@ -1,3 +1,4 @@
+using KSPCompiler.Commons.Text;
 using KSPCompiler.Domain.Symbols.MetaData;
 
 namespace KSPCompiler.Domain.Symbols;
@@ -8,6 +9,11 @@ namespace KSPCompiler.Domain.Symbols;
 /// <seealso cref="ISymbolTable{TSymbol}"/>
 public abstract class SymbolBase
 {
+    /// <summary>
+    /// Symbol definition location information.
+    /// </summary>
+    public Position DefinedPosition { get; set; } = Position.Zero;
+
     /// <summary>
     /// A symbol's name
     /// </summary>
