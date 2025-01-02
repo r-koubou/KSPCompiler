@@ -33,6 +33,16 @@ public sealed class CompilerCache
         return symbolTable;
     }
 
+    public void SetSymbolTable( DocumentUri uri, AggregateSymbolTable symbolTable )
+    {
+        if( symbolTableCache.TryAdd( uri, symbolTable ) )
+        {
+            return;
+        }
+
+        symbolTableCache[ uri ] = symbolTable;
+    }
+
     public bool RemoveSymbolTable( DocumentUri uri )
         => symbolTableCache.Remove( uri );
 }

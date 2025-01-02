@@ -62,7 +62,8 @@ internal class TextDocumentHandler : TextDocumentSyncHandlerBase
         var uri = request.TextDocument.Uri;
         var script = request.TextDocument.Text;
 
-        await ExecuteCompilationAsync( uri, script, cancellationToken );
+        _ = await ExecuteCompilationAsync( uri, script, cancellationToken );
+
         return Unit.Value;
     }
 
@@ -71,7 +72,8 @@ internal class TextDocumentHandler : TextDocumentSyncHandlerBase
         var uri = request.TextDocument.Uri;
         var script = request.ContentChanges.First().Text;
 
-        await ExecuteCompilationAsync( uri, script, cancellationToken );
+        _ = await ExecuteCompilationAsync( uri, script, cancellationToken );
+
         return Unit.Value;
     }
 
@@ -83,6 +85,8 @@ internal class TextDocumentHandler : TextDocumentSyncHandlerBase
 
     public override async Task<Unit> Handle( DidCloseTextDocumentParams request, CancellationToken cancellationToken )
     {
+        CompilerCache.RemoveSymbolTable( request.TextDocument.Uri );
+
         await Task.CompletedTask;
         return Unit.Value;
     }
@@ -132,6 +136,11 @@ internal class TextDocumentHandler : TextDocumentSyncHandlerBase
                 Diagnostics = diagnostics.ToImmutable()
             }
         );
+
+        if( result.Result )
+        {
+            CompilerCache.SetSymbolTable( uri, result.SymbolTable );
+        }
 
         return result;
     }
