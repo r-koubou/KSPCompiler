@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using KSPCompiler.Controllers.Compiler;
 using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Domain.Symbols.Repositories;
 using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Callbacks;
 using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Commands;
 using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.UITypes;
@@ -57,17 +58,17 @@ public class CompilerService
     {
         var basePath = Path.Combine( "Data", "Symbols" );
 
-        using var variables = new VariableSymbolRepository( Path.Combine( basePath, "variables.json" ) );
-        symbolTable.BuiltInVariables.AddRange( variables.FindAllAsync( CancellationToken.None ).GetAwaiter().GetResult() );
+        using ISymbolRepository<VariableSymbol> variables = new VariableSymbolRepository( Path.Combine( basePath, "variables.json" ) );
+        symbolTable.BuiltInVariables.AddRange( variables.FindAll() );
 
-        using var uiTypes = new UITypeSymbolRepository( Path.Combine( basePath, "uitypes.json" ) );
-        symbolTable.UITypes.AddRange( uiTypes.FindAllAsync( CancellationToken.None ).GetAwaiter().GetResult() );
+        using ISymbolRepository<UITypeSymbol> uiTypes = new UITypeSymbolRepository( Path.Combine( basePath, "uitypes.json" ) );
+        symbolTable.UITypes.AddRange( uiTypes.FindAll() );
 
-        using var commands = new CommandSymbolRepository( Path.Combine( basePath, "commands.json" ) );
-        symbolTable.Commands.AddRange( commands.FindAllAsync( CancellationToken.None ).GetAwaiter().GetResult() );
+        using ISymbolRepository<CommandSymbol> commands = new CommandSymbolRepository( Path.Combine( basePath, "commands.json" ) );
+        symbolTable.Commands.AddRange( commands.FindAll() );
 
-        using var callbacks = new CallbackSymbolRepository( Path.Combine( basePath, "callbacks.json" ) );
-        symbolTable.BuiltInCallbacks.AddRange( callbacks.FindAllAsync( CancellationToken.None ).GetAwaiter().GetResult() );
+        using ISymbolRepository<CallbackSymbol> callbacks = new CallbackSymbolRepository( Path.Combine( basePath, "callbacks.json" ) );
+        symbolTable.BuiltInCallbacks.AddRange( callbacks.FindAll() );
     }
 
     private static void SetupSymbol( AggregateSymbolTable symbolTable )
