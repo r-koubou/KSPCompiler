@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using KSPCompiler.Commons;
+using KSPCompiler.Controllers.Compiler;
 using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Events.Extensions;
 using KSPCompiler.LSPServer.Core.Extensions;
@@ -61,9 +62,7 @@ internal class TextDocumentHandler : TextDocumentSyncHandlerBase
         var uri = request.TextDocument.Uri;
         var script = request.TextDocument.Text;
 
-        ExecuteCompilation( uri, script );
-
-        await Task.CompletedTask;
+        await ExecuteCompilationAsync( uri, script, cancellationToken );
         return Unit.Value;
     }
 
@@ -72,9 +71,7 @@ internal class TextDocumentHandler : TextDocumentSyncHandlerBase
         var uri = request.TextDocument.Uri;
         var script = request.ContentChanges.First().Text;
 
-        ExecuteCompilation( uri, script );
-
-        await Task.CompletedTask;
+        await ExecuteCompilationAsync( uri, script, cancellationToken );
         return Unit.Value;
     }
 
@@ -103,7 +100,7 @@ internal class TextDocumentHandler : TextDocumentSyncHandlerBase
         };
     }
 
-    private void ExecuteCompilation( DocumentUri uri, string script )
+    private async Task<CompilerResult> ExecuteCompilationAsync( DocumentUri uri, string script, CancellationToken cancellationToken )
     {
         // ReSharper disable once PossiblyImpureMethodCallOnReadonlyVariable
         var diagnostics = ImmutableArray<Diagnostic>.Empty.ToBuilder();
@@ -126,8 +123,7 @@ internal class TextDocumentHandler : TextDocumentSyncHandlerBase
         ).AddTo( compilerEventSubscribers );
 
         // コンパイラ実行
-        // TODO Async にする
-        CompilerService.Compile( script, CompilerEventEmitter );
+        var result = await CompilerService.CompileAsync( script, CompilerEventEmitter, cancellationToken );
 
         // エラー、警告を送信
         ServerFacade.TextDocument.PublishDiagnostics( new PublishDiagnosticsParams
@@ -136,5 +132,7 @@ internal class TextDocumentHandler : TextDocumentSyncHandlerBase
                 Diagnostics = diagnostics.ToImmutable()
             }
         );
+
+        return result;
     }
 }

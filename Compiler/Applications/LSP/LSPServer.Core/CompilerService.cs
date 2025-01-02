@@ -1,6 +1,7 @@
 using System.IO;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 using KSPCompiler.Controllers.Compiler;
 using KSPCompiler.Domain.Events;
@@ -35,7 +36,7 @@ public class CompilerService
         LoadSymbolTables( symbolTable );
     }
 
-    public void Compile( string script, IEventEmitter eventEmitter )
+    public async Task<CompilerResult> CompileAsync( string script, IEventEmitter eventEmitter, CancellationToken cancellationToken )
     {
         SetupSymbol( this.symbolTable );
 
@@ -47,7 +48,7 @@ public class CompilerService
             EnableObfuscation: false
         );
 
-        compilerController.Execute( eventEmitter, option );
+        return await compilerController.ExecuteAsync( eventEmitter, option, cancellationToken );
     }
 
     private static void LoadSymbolTables( AggregateSymbolTable symbolTable )
