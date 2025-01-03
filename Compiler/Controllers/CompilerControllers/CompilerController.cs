@@ -41,7 +41,7 @@ public sealed class CompilerController
 
             if( !syntaxAnalysisOutput.Result )
             {
-                return new CompilerResult( false, null, option.SymbolTable, string.Empty );
+                return new CompilerResult( false, syntaxAnalysisOutput.Error, option.SymbolTable, string.Empty );
             }
 
             if( option.SyntaxCheckOnly )
@@ -53,7 +53,7 @@ public sealed class CompilerController
 
             if( !preprocessOutput.Result )
             {
-                return new CompilerResult( false, null, option.SymbolTable, string.Empty );
+                return new CompilerResult( false, preprocessOutput.Error, option.SymbolTable, string.Empty );
             }
 
             var semanticAnalysisOutput = await ExecuteSemanticAnalysisAsync( eventEmitter, ast, option.SymbolTable, cancellationToken );

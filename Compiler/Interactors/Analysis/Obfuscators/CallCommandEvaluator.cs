@@ -22,12 +22,10 @@ public class CallCommandEvaluator : ICallCommandEvaluator
         node.Left.Accept( visitor );
         Output.Append( '(' );
 
-        if( node.Right is not AstExpressionListNode expressionList )
+        if( node.Right is AstExpressionListNode expressionList )
         {
-            throw new AstAnalyzeException( node, $"Invalid command arguments node type. expect: {nameof(AstExpressionListNode)} actual: {node.Right.GetType().Name}" );
+            Output.AppendExpressionList( visitor, expressionList );
         }
-
-        Output.AppendExpressionList( visitor, expressionList );
 
         Output.Append( ')' );
 
