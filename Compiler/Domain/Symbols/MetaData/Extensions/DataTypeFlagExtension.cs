@@ -6,6 +6,15 @@ namespace KSPCompiler.Domain.Symbols.MetaData.Extensions;
 [SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" )]
 public static class DataTypeFlagExtension
 {
+    public static bool IsFallBack( this DataTypeFlag flag )
+        => flag == DataTypeFlag.FallBack;
+
+    public static bool AreFallBack( this DataTypeFlag a, DataTypeFlag b )
+        => a.IsFallBack() && b.IsFallBack();
+
+    public static bool OrFallBack( this DataTypeFlag a, DataTypeFlag b )
+        => a.IsFallBack() || b.IsFallBack();
+
     public static bool IsInt( this DataTypeFlag flag )
         => flag.HasFlag( DataTypeFlag.TypeInt );
 

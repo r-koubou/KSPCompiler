@@ -10,6 +10,7 @@ public enum DataTypeFlag : uint
 {
     None                        = 0,
     All                         = 0xffffffff,
+    FallBack                    = All,
 
     #region Type
     TypeInt                     = 1 << 0,
@@ -17,7 +18,7 @@ public enum DataTypeFlag : uint
     TypeReal                    = 1 << 2,
     TypeBool                    = 1 << 3,
     TypeVoid                    = 1 << 4,
-    TypePreprocessorSymbol   = 1 << 5,
+    TypePreprocessorSymbol      = 1 << 5,
     TypePgsId                   = 1 << 6,
     TypeMask                    = 0x7fffff,
     TypeNumerical               = TypeInt | TypeReal,
