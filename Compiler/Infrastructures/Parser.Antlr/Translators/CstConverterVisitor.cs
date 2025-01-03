@@ -4,6 +4,7 @@ using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
 
 using KSPCompiler.Domain.Ast.Nodes;
+using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Extensions;
 using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
 
@@ -59,6 +60,14 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 }
             }
             return dest;
+        }
+
+        private AstNode VisitCallCommand( ParserRuleContext context, ParserRuleContext callExpression, ParserRuleContext callArguments )
+        {
+            var node = VisitExpressionNodeImpl<AstCallCommandExpressionNode>( context, callExpression, callArguments );
+            node.Import( tokenStream, context );
+
+            return node;
         }
     }
 }
