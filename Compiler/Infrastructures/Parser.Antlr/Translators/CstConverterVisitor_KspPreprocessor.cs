@@ -2,6 +2,7 @@
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
 
 namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
@@ -34,10 +35,13 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         public override AstNode VisitPreprocessorIfdefine( KSPParser.PreprocessorIfdefineContext context )
         {
             var node = new AstPreprocessorIfdefineNode();
-            var symbol = new AstSymbolExpressionNode( context.symbol.Text );
+            var symbol = new AstSymbolExpressionNode( context.symbol.Text )
+            {
+                Parent   = node,
+                TypeFlag = DataTypeFlag.TypePreprocessorSymbol
+            };
             var block = context.block();
 
-            symbol.Parent = node;
             symbol.Import( tokenStream, context.symbol );
 
             node.Import( tokenStream, context );
@@ -60,10 +64,15 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         public override AstNode VisitPreprocessorIfnotDefine( KSPParser.PreprocessorIfnotDefineContext context )
         {
             var node = new AstPreprocessorIfnotDefineNode();
-            var symbol = new AstSymbolExpressionNode( context.symbol.Text );
+            var symbol = new AstSymbolExpressionNode( context.symbol.Text )
+            {
+                Parent   = node,
+                TypeFlag = DataTypeFlag.TypePreprocessorSymbol
+            };
             var block = context.block();
 
-            symbol.Parent = node;
+            symbol.TypeFlag = DataTypeFlag.TypePreprocessorSymbol;
+            symbol.Parent   = node;
             symbol.Import( tokenStream, context.symbol );
 
             node.Import( tokenStream, context );
