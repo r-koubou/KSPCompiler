@@ -170,10 +170,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             #region Call
             else if( callExpression != null )
             {
-                var node = VisitExpressionNodeImpl<AstCallCommandExpressionNode>( context, callExpression, callArguments );
-                node.Import( tokenStream, context );
-
-                return node;
+                return VisitCallCommand( context, callExpression, callArguments );
             }
             #endregion
             //

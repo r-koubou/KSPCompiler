@@ -1,4 +1,6 @@
-﻿using Antlr4.Runtime;
+﻿using System;
+
+using Antlr4.Runtime;
 
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
@@ -99,6 +101,32 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             return node;
         }
 
+        public override AstNode VisitExpressionStatement( KSPParser.ExpressionStatementContext context )
+        {
+            var assignment = context.assignmentExpression();
+            var callExpression = context.callExpr;
+            var callArguments = context.callArgs;
 
+            //
+            // Assignment
+            //
+            #region Assignment
+            if( assignment != null )
+            {
+                return assignment.Accept( this );
+            }
+            #endregion ~Assignment
+            //
+            // Call command as statement
+            //
+            #region Call Command
+            else if( callExpression != null )
+            {
+                return VisitCallCommand( context, callExpression, callArguments );
+            }
+            #endregion ~Call Command
+
+            throw new ArgumentException( $"Unknown context:{context.GetText()}" );
+        }
     }
 }
