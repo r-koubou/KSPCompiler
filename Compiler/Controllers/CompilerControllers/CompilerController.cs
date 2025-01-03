@@ -21,53 +21,52 @@ public record CompilerOption(
 public record CompilerResult(
     bool Result,
     Exception? Error,
+    AggregateSymbolTable SymbolTable,
     string ObfuscatedScript );
 
 public sealed class CompilerController
 {
     public CompilerResult Execute( IEventEmitter eventEmitter, CompilerOption option )
-        => Execute( eventEmitter, option, CancellationToken.None ).GetAwaiter().GetResult();
+        => ExecuteAsync( eventEmitter, option, CancellationToken.None ).GetAwaiter().GetResult();
 
     // ReSharper disable once UnusedMethodReturnValue.Global
-    public async Task<CompilerResult> Execute( IEventEmitter eventEmitter, CompilerOption option, CancellationToken cancellationToken )
+    public async Task<CompilerResult> ExecuteAsync( IEventEmitter eventEmitter, CompilerOption option, CancellationToken cancellationToken )
     {
         // TODO: CompilerMessageManger compilerMessageManger is obsolete. Use IEventEmitter eventEmitter instead.
 
         try
         {
-            var symbolTable = option.SymbolTable;
-
             var syntaxAnalysisOutput = await ExecuteSyntaxAnalysisAsync( option.SyntaxParser, cancellationToken );
             var ast = syntaxAnalysisOutput.OutputData;
 
             if( !syntaxAnalysisOutput.Result )
             {
-                return new CompilerResult( false, null, string.Empty );
+                return new CompilerResult( false, null, option.SymbolTable, string.Empty );
             }
 
             if( option.SyntaxCheckOnly )
             {
-                return new CompilerResult( true, null, string.Empty );
+                return new CompilerResult( true, null, option.SymbolTable, string.Empty );
             }
 
-            var preprocessOutput = await ExecutePreprocessAsync( eventEmitter, ast, symbolTable, cancellationToken );
+            var preprocessOutput = await ExecutePreprocessAsync( eventEmitter, ast, option.SymbolTable, cancellationToken );
 
             if( !preprocessOutput.Result )
             {
-                return new CompilerResult( false, null, string.Empty );
+                return new CompilerResult( false, null, option.SymbolTable, string.Empty );
             }
 
-            var semanticAnalysisOutput = await ExecuteSemanticAnalysisAsync( eventEmitter, ast, symbolTable, cancellationToken );
+            var semanticAnalysisOutput = await ExecuteSemanticAnalysisAsync( eventEmitter, ast, option.SymbolTable, cancellationToken );
 
             if( !semanticAnalysisOutput.Result )
             {
-                return new CompilerResult( false, semanticAnalysisOutput.Error, string.Empty );
+                return new CompilerResult( false, semanticAnalysisOutput.Error, option.SymbolTable, string.Empty );
             }
 
 
             if( !option.EnableObfuscation )
             {
-                return new CompilerResult( true, null, string.Empty );
+                return new CompilerResult( true, null, option.SymbolTable, string.Empty );
             }
 
             var obfuscationOutput = await ExecuteObfuscationAsync(
@@ -82,12 +81,13 @@ public sealed class CompilerController
             return new CompilerResult(
                 obfuscationOutput.Result,
                 obfuscationOutput.Error,
+                option.SymbolTable,
                 obfuscationOutput.OutputData
             );
         }
         catch( Exception e )
         {
-            return new CompilerResult( false, e, string.Empty );
+            return new CompilerResult( false, e, option.SymbolTable, string.Empty );
         }
     }
 
