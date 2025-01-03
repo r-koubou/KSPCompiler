@@ -68,11 +68,16 @@ public static class CompilerProgram
             EnableObfuscation: enableObfuscation
         );
 
-        compilerController.Execute( eventEmitter, option );
+        var result = compilerController.Execute( eventEmitter, option );
 
         messageManager.WriteTo( Console.Out );
 
-        return messageManager.Count( CompilerMessageLevel.Error ) > 0 ? 1 : 0;
+        if( result.Error is not null )
+        {
+            Console.WriteLine( result.Error );
+        }
+
+        return ( result.Error != null || !result.Result ) ? 1 : 0;
     }
 
     private static void LoadSymbolTables( AggregateSymbolTable symbolTable )
@@ -112,7 +117,7 @@ public static class CompilerProgram
         ).AddTo( subscribers );
 
         eventEmitter.Subscribe<CompilationWarningEvent>(
-            evt => messageManager.Error( evt.Position, evt.Message )
+            evt => messageManager.Warning( evt.Position, evt.Message )
         ).AddTo( subscribers );
     }
 }
