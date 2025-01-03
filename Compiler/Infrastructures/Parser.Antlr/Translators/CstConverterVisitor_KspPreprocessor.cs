@@ -1,5 +1,6 @@
 ﻿using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
 
@@ -33,20 +34,25 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         public override AstNode VisitPreprocessorIfdefine( KSPParser.PreprocessorIfdefineContext context )
         {
             var node = new AstPreprocessorIfdefineNode();
+            var symbol = new AstSymbolExpressionNode( context.symbol.Text );
             var block = context.block();
 
+            symbol.Parent = node;
+            symbol.Import( tokenStream, context.symbol );
+
             node.Import( tokenStream, context );
-            node.Condition.Import( tokenStream, context.symbol );
-            node.Condition.Name = context.symbol.Text;
+            node.Condition = symbol;
 
-            if( block != null )
+            if( block == null )
             {
-                var b = context.block().Accept( this ) as AstBlockNode;
-                _ = b ?? throw new MustBeNotNullException( nameof( b ) );
-
-                b.Parent = node;
-                node.Block = b;
+                return node;
             }
+
+            var b = context.block().Accept( this ) as AstBlockNode;
+            _ = b ?? throw new MustBeNotNullException( nameof( b ) );
+
+            b.Parent   = node;
+            node.Block = b;
 
             return node;
         }
@@ -54,11 +60,14 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         public override AstNode VisitPreprocessorIfnotDefine( KSPParser.PreprocessorIfnotDefineContext context )
         {
             var node = new AstPreprocessorIfnotDefineNode();
+            var symbol = new AstSymbolExpressionNode( context.symbol.Text );
             var block = context.block();
 
+            symbol.Parent = node;
+            symbol.Import( tokenStream, context.symbol );
+
             node.Import( tokenStream, context );
-            node.Condition.Import( tokenStream, context.symbol );
-            node.Condition.Name = context.symbol.Text;
+            node.Condition = symbol;
 
             if( block == null )
             {
