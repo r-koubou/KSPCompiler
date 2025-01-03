@@ -15,11 +15,11 @@ public static class DataTypeFlagUtility
 
     public static bool AllFallback( params DataTypeFlag[] flags )
     {
-        return All( f => f == DataTypeFlag.FallBack );
+        return All( f => f == DataTypeFlag.FallBack, flags );
     }
 
     public static bool AnyFallback( params DataTypeFlag[] flags )
     {
-        return Any( f => f == DataTypeFlag.FallBack );
+        return Any( f => f == DataTypeFlag.FallBack, flags );
     }
 }
