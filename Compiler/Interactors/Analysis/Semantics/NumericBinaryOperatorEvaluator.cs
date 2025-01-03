@@ -110,6 +110,12 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
             return false;
         }
 
+        // フォールバックされている場合は畳み込みしない
+        if( DataTypeFlagUtility.AnyFallback( left.TypeFlag, right.TypeFlag ) )
+        {
+            return false;
+        }
+
         if( left.TypeFlag.IsArray() || right.TypeFlag.IsArray() ||
             !left.Constant || !right.Constant )
         {
@@ -151,6 +157,13 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
         out DataTypeFlag resultType )
     {
         resultType = DataTypeFlag.None;
+
+        if( DataTypeFlagUtility.AnyFallback( left.TypeFlag, right.TypeFlag ) )
+        {
+            // 評価途中でフォールバックされている場合は型判定をスキップ
+            resultType = DataTypeFlag.FallBack;
+            return true;
+        }
 
         // 個別に判定しているのは、KSP が real から int の暗黙の型変換を持っていないため
 

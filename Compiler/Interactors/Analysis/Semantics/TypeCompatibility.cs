@@ -1,3 +1,6 @@
+using System;
+using System.Linq;
+
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 
@@ -11,6 +14,12 @@ public static class TypeCompatibility
     /// <returns>true if the type of the right side can be assigned to the left side; otherwise, false.</returns>
     public static bool IsAssigningTypeCompatible( DataTypeFlag leftType, DataTypeFlag rightType )
     {
+        // フォールバック・代替などの場合は型の判定を行わない
+        if( DataTypeFlagUtility.AnyFallback( leftType, rightType ) )
+        {
+            return true;
+        }
+
         // 暗黙の型変換
         // コマンドコールの戻り値が複数の型を持つなどで暗黙の型変換を要する場合
         // 代入先の変数に合わせる。暗黙の型変換が不可能な場合は、以降の型判定で失敗させる
@@ -36,6 +45,12 @@ public static class TypeCompatibility
     private static bool IsAssigningTypeMatched( DataTypeFlag leftType, DataTypeFlag rightType )
     {
         var result = true;
+
+        // フォールバック・代替などの場合は型の判定を行わない
+        if( DataTypeFlagUtility.AnyFallback( leftType, rightType ) )
+        {
+            return true;
+        }
 
         // 代入先：配列型
         // 代入元：非配列型
@@ -68,6 +83,12 @@ public static class TypeCompatibility
     /// </summary>
     public static bool IsTypeCompatible( DataTypeFlag a, DataTypeFlag b )
     {
+        // フォールバック・代替などの場合は型の判定を行わない
+        if( DataTypeFlagUtility.AnyFallback( a, b ) )
+        {
+            return true;
+        }
+
         // 完全一致
         if( a == b )
         {
@@ -84,6 +105,12 @@ public static class TypeCompatibility
     private static bool IsTypeMatched( DataTypeFlag a, DataTypeFlag b )
     {
         var result = true;
+
+        // フォールバック・代替などの場合は型の判定を行わない
+        if( DataTypeFlagUtility.AnyFallback( a, b ) )
+        {
+            return true;
+        }
 
         // a：配列型
         // b：非配列型

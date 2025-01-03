@@ -76,16 +76,23 @@ public sealed class StringConcatenateOperatorEvaluator : IStringConcatenateOpera
         // KONTAKT内では暗黙の型変換が作動し、文字列型となる
         //----------------------------------------------------------------------
 
-        // BOOL（条件式）は不可
-        if( evaluatedLeft.TypeFlag.IsBoolean() || evaluatedRight.TypeFlag.IsBoolean() )
+        if( DataTypeFlagUtility.AnyFallback( evaluatedLeft.TypeFlag, evaluatedRight.TypeFlag ) )
         {
-            EventEmitter.Emit(
-                expr.AsErrorEvent(
-                    CompilerMessageResources.semantic_error_string_operator_conditional
-                )
-            );
+            // 評価途中でフォールバックされている場合は型判定をスキップ
+        }
+        else
+        {
+            // BOOL（条件式）は不可
+            if( evaluatedLeft.TypeFlag.IsBoolean() || evaluatedRight.TypeFlag.IsBoolean() )
+            {
+                EventEmitter.Emit(
+                    expr.AsErrorEvent(
+                        CompilerMessageResources.semantic_error_string_operator_conditional
+                    )
+                );
 
-            return CreateEvaluateNode( expr, DataTypeFlag.TypeBool );
+                return CreateEvaluateNode( expr, DataTypeFlag.TypeBool );
+            }
         }
 
         // 左辺、右辺共にリテラル、定数なら畳み込み
