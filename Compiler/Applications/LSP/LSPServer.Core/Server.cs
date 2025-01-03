@@ -37,11 +37,10 @@ public class Server
                            }
                        )
                       .WithHandler<TextDocumentHandler>()
-                      .WithHandler<DidChangeWatchedFilesHandler>()
                       .WithServices(
                            services =>
                            {
-                               services.AddSingleton<CompilerService>();
+                               services.AddSingleton<CompilationService>();
                                services.AddSingleton<CompilerCache>();
                            }
                        )
