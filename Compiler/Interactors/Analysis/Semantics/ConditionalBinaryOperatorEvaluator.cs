@@ -52,7 +52,11 @@ public class ConditionalBinaryOperatorEvaluator : IConditionalBinaryOperatorEval
         var result = expr.Clone<AstExpressionNode>();
         result.TypeFlag = DataTypeFlag.TypeBool;
 
-        if( leftType != rightType )
+        if( DataTypeFlagUtility.AnyFallback( leftType, rightType ) )
+        {
+            // 評価途中でフォールバックされている場合は型判定をスキップ
+        }
+        else if( leftType != rightType )
         {
             EventEmitter.Emit(
                 expr.AsErrorEvent(

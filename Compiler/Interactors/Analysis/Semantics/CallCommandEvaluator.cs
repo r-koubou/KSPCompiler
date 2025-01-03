@@ -5,6 +5,7 @@ using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations;
 using KSPCompiler.Interactors.Analysis.Extensions;
@@ -30,13 +31,15 @@ public class CallCommandEvaluator : ICallCommandEvaluator
     {
         if( !TryGetCommandSymbol( visitor, expr, out var commandSymbol ) )
         {
-            return NullAstExpressionNode.Instance;
+            // フォールバックに応じるため代替の式を返す
+            var alternative = expr.Clone<AstCallCommandExpressionNode>();
+            alternative.TypeFlag = DataTypeFlag.FallBack;
+
+            return alternative;
         }
 
-        if( !ValidateCommandArguments( visitor, expr, commandSymbol ) )
-        {
-            return NullAstExpressionNode.Instance;
-        }
+        // フォールバックに応じるため return せずに続行
+        ValidateCommandArguments( visitor, expr, commandSymbol );
 
         var result = expr.Clone<AstCallCommandExpressionNode>();
         result.TypeFlag = commandSymbol.DataType;
@@ -89,7 +92,8 @@ public class CallCommandEvaluator : ICallCommandEvaluator
                 )
             );
 
-            return false;
+            // フォールバックに応じるため return せずに続行
+            // return false;
         }
 
         return ValidateCommandArgumentType( visitor, expr, commandSymbol, callArgs, symbolArgs );
