@@ -1,23 +1,26 @@
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 
+using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Symbols;
 
 using OmniSharp.Extensions.LanguageServer.Protocol;
 
 namespace KSPCompiler.LSPServer.Core;
 
-public sealed class CompilerCache
+public sealed class CompilerCacheItem
 {
-    private readonly Dictionary<DocumentUri, AggregateSymbolTable> symbolTableCache = new();
+    public IReadOnlyList<string> AllLinesText { get; }
+    public AggregateSymbolTable SymbolTable { get; }
+    public AstCompilationUnitNode Ast { get; }
 
-    public AggregateSymbolTable GetSymbolTable( DocumentUri uri )
+    public CompilerCacheItem(
+        IReadOnlyList<string>? allLinesText = null,
+        AggregateSymbolTable? symbolTable = null,
+        AstCompilationUnitNode? ast = null )
     {
-        if( symbolTableCache.TryGetValue( uri, out var symbolTable ) )
-        {
-            return symbolTable;
-        }
-
-        symbolTable = new AggregateSymbolTable(
+        AllLinesText = allLinesText ?? [];
+        SymbolTable = symbolTable ?? new AggregateSymbolTable(
             builtInVariables: new VariableSymbolTable(),
             userVariables: new VariableSymbolTable(),
             uiTypes: new UITypeSymbolTable(),
@@ -27,22 +30,27 @@ public sealed class CompilerCache
             userFunctions: new UserFunctionSymbolTable(),
             preProcessorSymbols: new PreProcessorSymbolTable()
         );
-
-        symbolTableCache.Add( uri, symbolTable );
-
-        return symbolTable;
+        Ast = ast ?? new AstCompilationUnitNode();
     }
+}
 
-    public void SetSymbolTable( DocumentUri uri, AggregateSymbolTable symbolTable )
+public sealed class CompilerCache
+{
+    private readonly ConcurrentDictionary<DocumentUri, CompilerCacheItem> symbolTableCache = new();
+
+    public CompilerCacheItem GetCache( DocumentUri uri )
     {
-        if( symbolTableCache.TryAdd( uri, symbolTable ) )
-        {
-            return;
-        }
-
-        symbolTableCache[ uri ] = symbolTable;
+        return symbolTableCache.GetOrAdd(
+            uri,
+            new CompilerCacheItem()
+        );
     }
 
-    public bool RemoveSymbolTable( DocumentUri uri )
-        => symbolTableCache.Remove( uri );
+    public void UpdateCache( DocumentUri uri, CompilerCacheItem newCacheItem )
+    {
+        symbolTableCache[ uri ] = newCacheItem;
+    }
+
+    public bool RemoveCache( DocumentUri uri )
+        => symbolTableCache.TryRemove( uri, out _ );
 }
