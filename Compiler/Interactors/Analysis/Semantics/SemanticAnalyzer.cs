@@ -44,7 +44,7 @@ public class SemanticAnalyzer : DefaultAstVisitor, IAstTraversal
         {
             if( block is AstUserFunctionDeclarationNode userFunction )
             {
-                userFunction.Accept( this ); // 宣言の評価
+                userFunction.Accept( this );         // 宣言の評価
                 userFunction.AcceptChildren( this ); // 関数内のコード評価
             }
         }
