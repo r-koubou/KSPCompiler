@@ -14,35 +14,31 @@ namespace KSPCompiler.LSPServer.Core;
 public class DefinitionHandler : IDefinitionHandler
 {
     private CompilerCache CompilerCache { get; }
-    private AstNodeFinder AstNodeFinder { get; } = new();
+    private AsteclarationNodeFinder AsteclarationNodeFinder { get; } = new();
 
     public DefinitionHandler( CompilerCache compilerCache )
     {
         CompilerCache = compilerCache;
     }
 
+    #region IDefinitionHandler
     public async Task<LocationOrLocationLinks?> Handle( DefinitionParams request, CancellationToken cancellationToken )
     {
         var cache = CompilerCache.GetCache( request.TextDocument.Uri );
         var word = DocumentUtility.ExtractWord( cache.AllLinesText, request.Position );
 
-        if( !AstNodeFinder.TryFind( word, cache.Ast, out var node ) )
+        if( TryDefinitionLocateByVariableName( request, word, cache, out var result ) )
         {
-            return null;
+            return new LocationOrLocationLinks( result );
+        }
+
+        if( TryDefinitionLocateByUserFunctionName( request, word, cache, out result ) )
+        {
+            return new LocationOrLocationLinks( result );
         }
 
         await Task.CompletedTask;
-        var definition = new Location
-        {
-            Uri = request.TextDocument.Uri,
-            Range = new Range()
-            {
-                Start = node.VariableNamePosition.BeginAs(),
-                End   = node.VariableNamePosition.EndAs()
-            }
-        };
-
-        return new LocationOrLocationLinks( definition );
+        return null;
     }
 
     public DefinitionRegistrationOptions GetRegistrationOptions( DefinitionCapability capability, ClientCapabilities clientCapabilities )
@@ -52,4 +48,53 @@ public class DefinitionHandler : IDefinitionHandler
             DocumentSelector = ConstantValues.TextDocumentSelector
         };
     }
+    #endregion ~IDefinitionHandler
+
+    #region Common Logic
+    private bool TryDefinitionLocateByVariableName( DefinitionParams request, string word, CompilerCacheItem cache, out Location result )
+    {
+        result = null!;
+
+        if( !AsteclarationNodeFinder.TryFindVariableDeclarationNode( word, cache.Ast, out var node ) )
+        {
+            return false;
+        }
+
+        result = new Location
+        {
+            Uri = request.TextDocument.Uri,
+            Range = new Range()
+            {
+                Start = node.VariableNamePosition.BeginAs(),
+                End   = node.VariableNamePosition.EndAs()
+            }
+        };
+
+        return true;
+    }
+
+    private bool TryDefinitionLocateByUserFunctionName( DefinitionParams request, string word, CompilerCacheItem cache, out Location result )
+    {
+        result = null!;
+
+        if( !AsteclarationNodeFinder.TryFindUserFunctionDeclarationNode( word, cache.Ast, out var node ) )
+        {
+            return false;
+        }
+
+        result = new Location
+        {
+            Uri = request.TextDocument.Uri,
+            Range = new Range()
+            {
+                Start = node.FunctionNamePosition.BeginAs(),
+                End   = node.FunctionNamePosition.EndAs()
+            }
+        };
+
+        return true;
+    }
+
+    #endregion
+
 }
