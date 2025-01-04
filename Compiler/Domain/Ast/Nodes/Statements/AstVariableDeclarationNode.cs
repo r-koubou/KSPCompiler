@@ -1,3 +1,5 @@
+using KSPCompiler.Commons.Text;
+
 namespace KSPCompiler.Domain.Ast.Nodes.Statements
 {
     /// <summary>
@@ -23,6 +25,11 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         /// initialization statement
         /// </summary>
         public AstVariableInitializerNode Initializer { get; set; } = NullAstVariableInitializerNode.Instance;
+
+        /// <summary>
+        /// Variable name position
+        /// </summary>
+        public Position VariableNamePosition { get; set; } = new();
 
         /// <summary>
         /// Ctor

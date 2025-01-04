@@ -1,3 +1,5 @@
+using KSPCompiler.Commons.Text;
+
 namespace KSPCompiler.Domain.Ast.Nodes.Blocks
 {
     /// <summary>
@@ -10,6 +12,11 @@ namespace KSPCompiler.Domain.Ast.Nodes.Blocks
         /// </summary>
         public AstUserFunctionDeclarationNode()
             : this( NullAstNode.Instance ) {}
+
+        /// <summary>
+        /// Function name position
+        /// </summary>
+        public Position FunctionNamePosition { get; set; } = new();
 
         /// <summary>
         /// Ctor
