@@ -170,4 +170,7 @@
     <data name="preprocess.error.symbol.incompatible" xml:space="preserve">
         <value>シンボルがプリプロセッサシンボルではありません (={0})</value>
     </data>
+    <data name="semantic.error.userfunction.call.initcallback" xml:space="preserve">
+        <value>init コールバック内でユーザー定義関数を呼び出すことはできません</value>
+    </data>
 </root>
