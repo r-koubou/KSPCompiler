@@ -177,4 +177,7 @@
     <data name="preprocess.error.symbol.incompatible" xml:space="preserve">
         <value>Symbol is not a preprocessor symbol (={0})</value>
     </data>
+    <data name="semantic.error.userfunction.call.initcallback" xml:space="preserve">
+        <value>User-defined functions cannot be called within an init callback.</value>
+    </data>
 </root>

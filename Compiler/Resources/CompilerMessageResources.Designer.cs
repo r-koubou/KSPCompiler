@@ -362,5 +362,11 @@ namespace KSPCompiler.Resources {
                 return ResourceManager.GetString("preprocess.error.symbol.incompatible", resourceCulture);
             }
         }
+        
+        public static string semantic_error_userfunction_call_initcallback {
+            get {
+                return ResourceManager.GetString("semantic.error.userfunction.call.initcallback", resourceCulture);
+            }
+        }
     }
 }
