@@ -37,6 +37,7 @@ public class Server
                            }
                        )
                       .WithHandler<TextDocumentHandler>()
+                      .WithHandler<DefinitionHandler>()
                       .WithServices(
                            services =>
                            {
