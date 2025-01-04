@@ -2,7 +2,6 @@ using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
-using KSPCompiler.Interactors.Analysis.Semantics.Extensions;
 using KSPCompiler.UseCases.Analysis;
 using KSPCompiler.UseCases.Analysis.Context;
 
@@ -17,9 +16,48 @@ public class SemanticAnalyzer : DefaultAstVisitor, IAstTraversal
         Context = context;
     }
 
-    public void Traverse( AstCompilationUnitNode node )
+    public void Traverse( AstCompilationUnitNode self )
     {
-        node.AcceptChildrenPreferInitCallback( this );
+        AstCallbackDeclarationNode? initCallBackDeclare = null;
+
+        // init コールバックの宣言を見つける
+        foreach( var block in self.GlobalBlocks )
+        {
+            if( block is not AstCallbackDeclarationNode callback )
+            {
+                continue;
+            }
+
+            if( callback.Name == "init" )
+            {
+                initCallBackDeclare = callback;
+            }
+        }
+
+        // init コールバックの宣言を先に処理（見つかれば）
+        // 変数の宣言は init コールバックのでのみ可能なため
+        initCallBackDeclare?.Accept( this );         // 宣言の評価
+        initCallBackDeclare?.AcceptChildren( this ); // コールバック内のコード評価
+
+        // ユーザー定義関数の宣言の処理
+        foreach( var block in self.GlobalBlocks )
+        {
+            if( block is AstUserFunctionDeclarationNode userFunction )
+            {
+                userFunction.Accept( this );         // 宣言の評価
+                userFunction.AcceptChildren( this ); // 関数内のコード評価
+            }
+        }
+
+        // それ以外のグローバルブロック・ブロック内のコードを処理
+        foreach( var block in self.GlobalBlocks )
+        {
+            if( block != initCallBackDeclare && block is not AstUserFunctionDeclarationNode )
+            {
+                block.Accept( this );         // 宣言の評価
+                block.AcceptChildren( this ); // コールバック内のコード評価
+            }
+        }
     }
 
     #region Declarations

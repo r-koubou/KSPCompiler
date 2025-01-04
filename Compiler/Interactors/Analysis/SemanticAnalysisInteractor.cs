@@ -25,11 +25,11 @@ public class SemanticAnalysisInteractor : ISemanticAnalysisUseCase
         eventEmitter.Subscribe<CompilationErrorEvent>( _ => noError = false );
 
         var context = new SemanticAnalyzerContext( eventEmitter, symbolTable );
-        var preprocessor = new SemanticAnalyzer( context );
+        var analyzer = new SemanticAnalyzer( context );
 
         try
         {
-            preprocessor.Traverse( parameter.InputData.CompilationUnitNode );
+            analyzer.Traverse( parameter.InputData.CompilationUnitNode );
         }
         catch( Exception e )
         {
