@@ -1,3 +1,4 @@
+using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
 
@@ -21,6 +22,8 @@ public static class AstNodeExtension
         => node is null
             or NullAstNode
             or NullAstModiferNode
+            or NullAstBlockNode
+            or NullAstCaseBlockNode
             or NullAstExpressionNode
             or NullAstExpressionListNode
             or NullAstVariableInitializerNode

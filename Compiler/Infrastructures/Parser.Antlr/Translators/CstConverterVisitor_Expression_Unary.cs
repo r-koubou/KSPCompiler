@@ -51,7 +51,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 KSPLexer.BOOL_NOT =>
                     VisitUnaryExpressionImpl<AstUnaryLogicalNotExpressionNode>( context, context.logicalNot ),
                 _ =>
-                    throw new ArgumentException( $"context.opr.Type is {context.opr.Text}" ),
+                    NullAstExpressionNode.Instance
             };
             return node;
         }

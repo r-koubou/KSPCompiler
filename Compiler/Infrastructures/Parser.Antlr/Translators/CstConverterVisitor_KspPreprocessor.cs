@@ -52,8 +52,8 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 return node;
             }
 
-            var b = context.block().Accept( this ) as AstBlockNode;
-            _ = b ?? throw new MustBeNotNullException( nameof( b ) );
+            var b = context.block().Accept( this ) as AstBlockNode
+                    ?? NullAstBlockNode.Instance;
 
             b.Parent   = node;
             node.Block = b;
@@ -83,8 +83,8 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 return node;
             }
 
-            var b = context.block().Accept( this ) as AstBlockNode;
-            _ = b ?? throw new MustBeNotNullException( nameof( b ) );
+            var b = context.block().Accept( this ) as AstBlockNode
+                ?? NullAstBlockNode.Instance;
 
             b.Parent   = node;
             node.Block = b;

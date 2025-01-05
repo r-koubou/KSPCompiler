@@ -21,8 +21,8 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             var conditionNode = condition.Accept( this ) as AstExpressionNode;
             var blockNode = block.Accept( this ) as AstBlockNode;
 
-            _ = conditionNode ?? throw new MustBeNotNullException( nameof( conditionNode ) );
-            _ = blockNode ?? throw new MustBeNotNullException( nameof( blockNode ) );
+            conditionNode ??= NullAstExpressionNode.Instance;
+            blockNode     ??= NullAstBlockNode.Instance;
 
             node.Condition = conditionNode;
             node.CodeBlock = blockNode;
@@ -58,7 +58,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             #region Condition
             node.Import( tokenStream, context );
             node.Condition = condition.Accept( this ) as AstExpressionNode
-                             ?? throw new MustBeNotNullException( nameof( node.Condition ) );
+                             ?? NullAstExpressionNode.Instance;
 
             node.Condition?.Import( tokenStream, condition );
             #endregion
@@ -66,9 +66,8 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             #region CaseBlock
             foreach( var c in caseList )
             {
-                var caseBlock = c.Accept( this ) as AstCaseBlock;
-
-                _ = caseBlock ?? throw new MustBeNotNullException( nameof( caseBlock ) );
+                var caseBlock = c.Accept( this ) as AstCaseBlock
+                                ?? NullAstCaseBlockNode.Instance;
 
                 caseBlock.Parent = node;
                 caseBlock.Import( tokenStream, c );
@@ -126,7 +125,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             }
             #endregion ~Call Command
 
-            throw new ArgumentException( $"Unknown context:{context.GetText()}" );
+            return NullAstExpressionNode.Instance;
         }
     }
 }

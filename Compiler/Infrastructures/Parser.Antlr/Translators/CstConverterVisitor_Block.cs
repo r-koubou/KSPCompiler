@@ -40,15 +40,15 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 EndColumn   = context.name.Column + context.name.Text.Length
             };
 
-            node.Block    = context.block().Accept( this ) as AstBlockNode
-                            ?? throw new MustBeNotNullException( nameof( node.Block ) );
+            node.Block = context.block().Accept( this ) as AstBlockNode
+                         ?? NullAstBlockNode.Instance;
 
             node.Block.Parent = node;
 
             if( context.arguments != null )
             {
                 node.ArgumentList = context.arguments.Accept( this ) as AstArgumentListNode
-                                    ?? throw new MustBeNotNullException( nameof( node.ArgumentList ) );
+                                    ?? new AstArgumentListNode( node );
 
                 node.ArgumentList.Parent = node;
             }
@@ -73,7 +73,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             };
 
             node.Block        = context.block().Accept( this ) as AstBlockNode
-                                ?? throw new MustBeNotNullException( nameof( node.Block ) );
+                                ?? NullAstBlockNode.Instance;
 
             node.Block.Parent = node;
 
