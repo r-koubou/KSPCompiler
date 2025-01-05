@@ -1,28 +1,37 @@
+using System.Runtime.CompilerServices;
+
 using KSPCompiler.Commons.Text;
 
 namespace KSPCompiler.Domain.Events;
 
-public readonly struct LogErrorEvent : IEvent
+public readonly struct LogErrorEvent : ILogEvent
 {
     public string Message { get; }
+    public Position ScriptPosition { get; }
 
-    public Position Position { get; }
+    public string CallerFilePath { get; }
+    public int CallerLineNumber { get; }
 
-    public LogErrorEvent( string message, int line = 0, int column = 0 )
+    public LogErrorEvent(
+        string message,
+        [CallerFilePath] string callerFilePath = "",
+        [CallerLineNumber] int callerLineNumber = 0 )
     {
-        Message = message;
-        Position = new Position
-        {
-            BeginLine   = line,
-            EndLine     = line,
-            BeginColumn = column,
-            EndColumn   = column
-        };
+        Message          = message;
+        ScriptPosition   = Position.Zero;
+        CallerFilePath   = callerFilePath;
+        CallerLineNumber = callerLineNumber;
     }
 
-    public LogErrorEvent( string message, Position position )
+    public LogErrorEvent(
+        string message,
+        Position scriptPosition,
+        [CallerFilePath] string callerFilePath = "",
+        [CallerLineNumber] int callerLineNumber = 0 )
     {
-        Message  = message;
-        Position = position;
+        Message          = message;
+        ScriptPosition   = scriptPosition;
+        CallerFilePath   = callerFilePath;
+        CallerLineNumber = callerLineNumber;
     }
 }
