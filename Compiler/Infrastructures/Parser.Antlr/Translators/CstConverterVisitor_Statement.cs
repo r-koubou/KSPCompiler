@@ -3,6 +3,7 @@
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Domain.Events;
 using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
 
 namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
@@ -42,7 +43,15 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             }
 
             node.ElseBlock = elseBlock;
-            node.ElseBlock.Import( tokenStream, context.elseBlock! );
+
+            if( context.elseBlock != null )
+            {
+                node.ElseBlock.Import( tokenStream, context.elseBlock );
+            }
+            else
+            {
+                eventEmitter.Emit( new LogDebugEvent( $"{nameof( VisitIfStatement )} fallback" ) );
+            }
 
             return node;
         }
@@ -58,7 +67,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             node.Condition = condition.Accept( this ) as AstExpressionNode
                              ?? NullAstExpressionNode.Instance;
 
-            node.Condition?.Import( tokenStream, condition );
+            node.Condition.Import( tokenStream, condition );
             #endregion
 
             #region CaseBlock

@@ -2,6 +2,7 @@
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
 
@@ -15,8 +16,16 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             var node = new AstPreprocessorDefineNode();
 
             node.Import( tokenStream, context );
-            node.Symbol.Import( tokenStream, context.symbol );
-            node.Symbol.Name = context.symbol.Text;
+
+            if( context.symbol != null )
+            {
+                node.Symbol.Import( tokenStream, context.symbol );
+                node.Symbol.Name = context.symbol.Text;
+            }
+            else
+            {
+                eventEmitter.Emit( new LogDebugEvent( $"{nameof( VisitPreprocessorDefine )} fallback" ) );
+            }
 
             return node;
         }
@@ -25,9 +34,15 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         {
             var node = new AstPreprocessorUndefineNode();
 
-            node.Import( tokenStream, context );
-            node.Symbol.Import( tokenStream, context.symbol );
-            node.Symbol.Name = context.symbol.Text;
+            if( context.symbol != null )
+            {
+                node.Symbol.Import( tokenStream, context.symbol );
+                node.Symbol.Name = context.symbol.Text;
+            }
+            else
+            {
+                eventEmitter.Emit( new LogDebugEvent( $"{nameof( VisitPreprocessorUndefine )} fallback" ) );
+            }
 
             return node;
         }
@@ -35,14 +50,24 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         public override AstNode VisitPreprocessorIfdefine( KSPParser.PreprocessorIfdefineContext context )
         {
             var node = new AstPreprocessorIfdefineNode();
-            var symbol = new AstSymbolExpressionNode( context.symbol.Text )
+            var symbol = new AstSymbolExpressionNode
             {
                 Parent   = node,
                 TypeFlag = DataTypeFlag.TypePreprocessorSymbol
             };
+
+            if( context.symbol != null )
+            {
+                symbol.Import( tokenStream, context.symbol );
+                symbol.Name = context.symbol.Text;
+            }
+            else
+            {
+                eventEmitter.Emit( new LogDebugEvent( $"{nameof( VisitPreprocessorIfdefine )} fallback" ) );
+            }
+
             var block = context.block();
 
-            symbol.Import( tokenStream, context.symbol );
 
             node.Import( tokenStream, context );
             node.Condition = symbol;
@@ -64,16 +89,23 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         public override AstNode VisitPreprocessorIfnotDefine( KSPParser.PreprocessorIfnotDefineContext context )
         {
             var node = new AstPreprocessorIfnotDefineNode();
-            var symbol = new AstSymbolExpressionNode( context.symbol.Text )
+            var symbol = new AstSymbolExpressionNode()
             {
                 Parent   = node,
                 TypeFlag = DataTypeFlag.TypePreprocessorSymbol
             };
-            var block = context.block();
 
-            symbol.TypeFlag = DataTypeFlag.TypePreprocessorSymbol;
-            symbol.Parent   = node;
-            symbol.Import( tokenStream, context.symbol );
+            if( context.symbol != null )
+            {
+                symbol.Import( tokenStream, context.symbol );
+                symbol.Name = context.symbol.Text;
+            }
+            else
+            {
+                eventEmitter.Emit( new LogDebugEvent( $"{nameof( VisitPreprocessorIfnotDefine )} fallback" ) );
+            }
+
+            var block = context.block();
 
             node.Import( tokenStream, context );
             node.Condition = symbol;

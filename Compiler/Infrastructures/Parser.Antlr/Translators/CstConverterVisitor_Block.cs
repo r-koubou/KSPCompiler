@@ -5,6 +5,7 @@ using Antlr4.Runtime.Tree;
 using KSPCompiler.Commons.Text;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Domain.Events;
 using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
 
 namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
@@ -99,8 +100,15 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
             var arg = new AstArgumentNode();
 
-            arg.Import( tokenStream, identifier );
-            arg.Name = identifier.GetText();
+            if( identifier != null )
+            {
+                arg.Import( tokenStream, identifier );
+                arg.Name = identifier.GetText();
+            }
+            else
+            {
+                eventEmitter.Emit( new LogDebugEvent( $"{nameof( VisitArgumentDefinitionList )} fallback" ) );
+            }
 
             //
             // argumentDefinitionList COMMA IDENTIFIER
