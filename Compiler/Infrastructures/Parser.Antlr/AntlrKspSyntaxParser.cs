@@ -54,7 +54,7 @@ public abstract class AntlrKspSyntaxParser : ISyntaxParser
         parser.AddErrorListener( parserErrorListener );
 
         var cst = parser.compilationUnit();
-        var ast = cst.Accept( new CstConverterVisitor( tokenStream ) ) as AstCompilationUnitNode;
+        var ast = cst.Accept( new CstConverterVisitor( tokenStream, EventEmitter ) ) as AstCompilationUnitNode;
         _ = ast ?? throw new MustBeNotNullException( nameof( ast ) );
 
         return ast;
