@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
@@ -110,10 +112,12 @@ public class CompilationService
             }
         );
 
-        if( result.Result )
-        {
-            CompilerCache.SetSymbolTable( uri, result.SymbolTable );
-        }
+        var allLinesText = GetScriptLines( script );
+
+        CompilerCache.UpdateCache(
+            uri,
+            new CompilerCacheItem( allLinesText, result.SymbolTable, result.Ast )
+        );
 
         return result;
     }
@@ -186,6 +190,21 @@ public class CompilationService
         {
             variable.State = SymbolState.Initialized;
         }
+    }
+    #endregion
+
+    #region Common Logic
+    private List<string> GetScriptLines( string script )
+    {
+        var result = new List<string>( 256 );
+        using var reader = new StringReader( script );
+
+        while( reader.ReadLine() is {} line )
+        {
+            result.Add( line );
+        }
+
+        return result;
     }
     #endregion
 }

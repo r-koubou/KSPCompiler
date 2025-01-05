@@ -8,6 +8,25 @@ namespace KSPCompiler.Domain.Symbols.MetaData;
 public static class DataTypeUtility
 {
     /// <summary>
+    /// Check if the given character matches the KSP data type character.
+    /// </summary>
+    /// <param name="c">A character to check.</param>
+    /// <returns>True if the character is a KSP data type character, otherwise false.</returns>
+    public static bool IsDataTypeCharacter( char c )
+    {
+        return c switch
+        {
+            '$' => true,
+            '%' => true,
+            '~' => true,
+            '?' => true,
+            '@' => true,
+            '!' => true,
+            _   => false
+        };
+    }
+
+    /// <summary>
     /// Convert to data type from symbol name.
     /// </summary>
     /// <exception cref="ArgumentException">Unknown type</exception>

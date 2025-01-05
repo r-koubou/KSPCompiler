@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 
+using KSPCompiler.Commons.Text;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
@@ -14,7 +15,15 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         {
             var node = new AstVariableDeclarationNode();
             node.Import( tokenStream, context );
-            node.Name     = context.name.Text;
+            node.Name = context.name.Text;
+
+            node.VariableNamePosition = new Position
+            {
+                BeginLine   = context.name.Line,
+                BeginColumn = context.name.Column,
+                EndLine     = context.name.Line,
+                EndColumn   = context.name.Column + context.name.Text.Length
+            };
 
             if( context.modifier?.Accept( this ) is AstModiferNode modifier )
             {

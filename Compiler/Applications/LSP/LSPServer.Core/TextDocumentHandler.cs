@@ -16,21 +16,12 @@ namespace KSPCompiler.LSPServer.Core;
 
 internal class TextDocumentHandler : TextDocumentSyncHandlerBase
 {
-    private const string LanguageId = "ksp";
-
     private ILanguageServerFacade ServerFacade { get; }
     private ILanguageServerConfiguration Configuration { get; }
 
     private CompilationService CompilationService { get; }
     private CompilerCache CompilerCache { get; }
     private IEventEmitter CompilerEventEmitter { get; } = new EventEmitter();
-
-    private TextDocumentSelector TextDocumentSelector { get; } = new(
-        new TextDocumentFilter
-        {
-            Language = LanguageId
-        }
-    );
 
     public TextDocumentHandler(
         ILanguageServerFacade serverFacade,
@@ -47,10 +38,9 @@ internal class TextDocumentHandler : TextDocumentSyncHandlerBase
     private TextDocumentSyncKind Change
         => TextDocumentSyncKind.Full;
 
-
     public override TextDocumentAttributes GetTextDocumentAttributes( DocumentUri uri )
     {
-        return new TextDocumentAttributes( uri, LanguageId );
+        return new TextDocumentAttributes( uri, ConstantValues.LanguageId );
     }
 
     public override async Task<Unit> Handle( DidOpenTextDocumentParams request, CancellationToken cancellationToken )
@@ -85,7 +75,7 @@ internal class TextDocumentHandler : TextDocumentSyncHandlerBase
     {
         return new TextDocumentSyncRegistrationOptions
         {
-            DocumentSelector = TextDocumentSelector,
+            DocumentSelector = ConstantValues.TextDocumentSelector,
             Change           = Change,
             Save = new SaveOptions
             {
