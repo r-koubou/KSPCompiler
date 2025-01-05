@@ -30,7 +30,16 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
             node.Import( tokenStream, context );
             node.Name     = context.name.Text;
+
             node.Position = ToPosition( context );
+            node.CallvackNamePosition = new Position
+            {
+                BeginLine   = context.name.Line,
+                BeginColumn = context.name.Column,
+                EndLine     = context.name.Line,
+                EndColumn   = context.name.Column + context.name.Text.Length
+            };
+
             node.Block    = context.block().Accept( this ) as AstBlockNode
                             ?? throw new MustBeNotNullException( nameof( node.Block ) );
 

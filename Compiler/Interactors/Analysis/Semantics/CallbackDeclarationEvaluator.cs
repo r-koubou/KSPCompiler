@@ -59,7 +59,7 @@ public class CallbackDeclarationEvaluator : ICallbackDeclarationEvaluator
             );
         }
 
-        thisCallback.DefinedPosition = node.Position;
+        thisCallback.DefinedPosition = node.CallvackNamePosition;
 
         return node;
     }

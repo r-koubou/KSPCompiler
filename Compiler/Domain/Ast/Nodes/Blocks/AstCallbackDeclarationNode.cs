@@ -1,3 +1,5 @@
+using KSPCompiler.Commons.Text;
+
 namespace KSPCompiler.Domain.Ast.Nodes.Blocks
 {
     /// <summary>
@@ -5,6 +7,11 @@ namespace KSPCompiler.Domain.Ast.Nodes.Blocks
     /// </summary>
     public class AstCallbackDeclarationNode : AstFunctionalNode, IArgumentList
     {
+        /// <summary>
+        /// Callback name position
+        /// </summary>
+        public Position CallvackNamePosition { get; set; } = new();
+
         /// <summary>
         /// Ctor
         /// </summary>
