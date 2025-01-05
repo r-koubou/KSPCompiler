@@ -72,7 +72,6 @@ public class CompilationService
         var option = new CompilerOption(
             SyntaxParser: parser,
             SymbolTable: symbolTableInScript,
-            SyntaxCheckOnly: false,
             EnableObfuscation: false
         );
 
