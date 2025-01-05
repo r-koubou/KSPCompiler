@@ -38,7 +38,6 @@ internal class TextDocumentHandler : TextDocumentSyncHandlerBase
     private TextDocumentSyncKind Change
         => TextDocumentSyncKind.Full;
 
-
     public override TextDocumentAttributes GetTextDocumentAttributes( DocumentUri uri )
     {
         return new TextDocumentAttributes( uri, ConstantValues.LanguageId );

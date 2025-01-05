@@ -1,8 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-using KSPCompiler.LSPServer.Core.Ast;
 using KSPCompiler.LSPServer.Core.Extensions;
 
 using OmniSharp.Extensions.LanguageServer.Protocol.Client.Capabilities;
@@ -14,7 +14,6 @@ namespace KSPCompiler.LSPServer.Core;
 public class DefinitionHandler : IDefinitionHandler
 {
     private CompilerCache CompilerCache { get; }
-    private AsteclarationNodeFinder AsteclarationNodeFinder { get; } = new();
 
     public DefinitionHandler( CompilerCache compilerCache )
     {
@@ -26,15 +25,23 @@ public class DefinitionHandler : IDefinitionHandler
     {
         var cache = CompilerCache.GetCache( request.TextDocument.Uri );
         var word = DocumentUtility.ExtractWord( cache.AllLinesText, request.Position );
+        var links = new List<LocationOrLocationLink>();
 
-        if( TryDefinitionLocateByVariableName( request, word, cache, out var result ) )
+        // ユーザー定義変数
+        if( cache.SymbolTable.UserVariables.TrySearchDefinitionLocation( request.TextDocument.Uri, word, out var result ) )
         {
-            return new LocationOrLocationLinks( result );
+            links.Add( new LocationOrLocationLink( result ) );
         }
 
-        if( TryDefinitionLocateByUserFunctionName( request, word, cache, out result ) )
+        // ユーザー定義関数
+        if( cache.SymbolTable.UserFunctions.TrySearchDefinitionLocation( request.TextDocument.Uri, word, out result ) )
         {
-            return new LocationOrLocationLinks( result );
+            links.Add( new LocationOrLocationLink( result ) );
+        }
+
+        if( links.Any() )
+        {
+            return new LocationOrLocationLinks( links );
         }
 
         await Task.CompletedTask;
@@ -49,52 +56,5 @@ public class DefinitionHandler : IDefinitionHandler
         };
     }
     #endregion ~IDefinitionHandler
-
-    #region Common Logic
-    private bool TryDefinitionLocateByVariableName( DefinitionParams request, string word, CompilerCacheItem cache, out Location result )
-    {
-        result = null!;
-
-        if( !AsteclarationNodeFinder.TryFindVariableDeclarationNode( word, cache.Ast, out var node ) )
-        {
-            return false;
-        }
-
-        result = new Location
-        {
-            Uri = request.TextDocument.Uri,
-            Range = new Range()
-            {
-                Start = node.VariableNamePosition.BeginAs(),
-                End   = node.VariableNamePosition.EndAs()
-            }
-        };
-
-        return true;
-    }
-
-    private bool TryDefinitionLocateByUserFunctionName( DefinitionParams request, string word, CompilerCacheItem cache, out Location result )
-    {
-        result = null!;
-
-        if( !AsteclarationNodeFinder.TryFindUserFunctionDeclarationNode( word, cache.Ast, out var node ) )
-        {
-            return false;
-        }
-
-        result = new Location
-        {
-            Uri = request.TextDocument.Uri,
-            Range = new Range()
-            {
-                Start = node.FunctionNamePosition.BeginAs(),
-                End   = node.FunctionNamePosition.EndAs()
-            }
-        };
-
-        return true;
-    }
-
-    #endregion
 
 }

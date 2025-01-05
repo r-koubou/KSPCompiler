@@ -2,6 +2,9 @@ using System.Collections.Generic;
 
 using KSPCompiler.Domain.Symbols;
 
+using OmniSharp.Extensions.LanguageServer.Protocol;
+using OmniSharp.Extensions.LanguageServer.Protocol.Models;
+
 namespace KSPCompiler.LSPServer.Core.Extensions;
 
 public static class ISymbolTableExtension
@@ -22,5 +25,31 @@ public static class ISymbolTableExtension
         {
             self.Remove( x );
         }
+    }
+
+    public static bool TrySearchDefinitionLocation<TSymbol>(
+        this ISymbolTable<TSymbol> symbolTable,
+        DocumentUri documentUri,
+        string symbolName,
+        out Location result ) where TSymbol : SymbolBase
+    {
+        result = null!;
+
+        if( !symbolTable.TrySearchByName( symbolName, out var symbol ) )
+        {
+            return false;
+        }
+
+        result = new Location
+        {
+            Uri = documentUri,
+            Range = new Range()
+            {
+                Start = symbol.DefinedPosition.BeginAs(),
+                End   = symbol.DefinedPosition.EndAs()
+            }
+        };
+
+        return true;
     }
 }
