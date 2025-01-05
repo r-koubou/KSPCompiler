@@ -106,6 +106,11 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 return context.nested.Accept( this );
             }
 
+            if( context.opr == null )
+            {
+                return NullAstExpressionNode.Instance;
+            }
+
             AstExpressionNode node = context.opr.Type switch
             {
                 KSPLexer.BOOL_EQ =>
@@ -123,6 +128,11 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             if( context.nested != null )
             {
                 return context.nested.Accept( this );
+            }
+
+            if( context.opr == null )
+            {
+                return NullAstExpressionNode.Instance;
             }
 
             AstExpressionNode node = context.opr.Type switch
@@ -148,6 +158,11 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 return context.nested.Accept( this );
             }
 
+            if( context.opr == null )
+            {
+                return NullAstExpressionNode.Instance;
+            }
+
             AstExpressionNode node = context.opr.Type switch
             {
                 KSPLexer.PLUS =>
@@ -165,6 +180,11 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             if( context.nested != null )
             {
                 return context.nested.Accept( this );
+            }
+
+            if( context.opr == null )
+            {
+                return NullAstExpressionNode.Instance;
             }
 
             AstExpressionNode node = context.opr.Type switch

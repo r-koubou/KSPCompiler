@@ -30,7 +30,8 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             var node = new TNode();
 
             node.Import( tokenStream, context );
-            node.Left = (AstExpressionNode)left.Accept( this );
+            node.Left = left.Accept( this ) as AstExpressionNode
+                        ?? NullAstExpressionNode.Instance;
 
             return SetupUnaryOperatorNode( node );
         }
@@ -40,6 +41,11 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             if( context.nested != null )
             {
                 return context.nested.Accept( this );
+            }
+
+            if( context.opr == null )
+            {
+                return NullAstExpressionNode.Instance;
             }
 
             AstExpressionNode node = ( context.opr.Type ) switch

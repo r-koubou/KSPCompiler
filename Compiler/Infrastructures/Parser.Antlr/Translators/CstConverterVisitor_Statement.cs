@@ -1,6 +1,4 @@
-﻿using System;
-
-using Antlr4.Runtime;
+﻿using Antlr4.Runtime;
 
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
@@ -36,9 +34,9 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         public override AstNode VisitIfStatement( KSPParser.IfStatementContext context )
         {
             var node = VisitControlStatementImpl<AstIfStatementNode>( context.expression(), context.ifBlock );
-            var elseBlock = context.elseBlock?.Accept( this ) as AstBlockNode;
+            node.Import( tokenStream, context.ifBlock );
 
-            if( elseBlock == null )
+            if( context.elseBlock?.Accept( this ) is not AstBlockNode elseBlock )
             {
                 return node;
             }
@@ -80,7 +78,10 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         public override AstNode VisitWhileStatement( KSPParser.WhileStatementContext context )
         {
-            return VisitControlStatementImpl<AstWhileStatementNode>( context.expression(), context.block() );
+            var node = VisitControlStatementImpl<AstWhileStatementNode>( context.expression(), context.block() );
+            node.Import( tokenStream, context );
+
+            return node;
         }
 
         public override AstNode VisitContinueStatement( KSPParser.ContinueStatementContext context )

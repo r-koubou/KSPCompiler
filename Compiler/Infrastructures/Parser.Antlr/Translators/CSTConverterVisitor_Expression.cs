@@ -41,12 +41,14 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
             if( left != null )
             {
-                node.Left = (AstExpressionNode)left.Accept( this );
+                node.Left = left.Accept( this ) as AstExpressionNode
+                            ?? NullAstExpressionNode.Instance;
             }
 
             if( right != null )
             {
-                node.Right = (AstExpressionNode)right.Accept( this );
+                node.Right = right.Accept( this ) as AstExpressionNode
+                            ?? NullAstExpressionNode.Instance;
             }
 
             return SetupExpressionNode( node );
@@ -211,14 +213,16 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             {
                 VisitExpressionListRecursive( expressionList, dest );
                 dest.Expressions.Add(
-                   (AstExpressionNode)expression.Accept( this )
+                    expression.Accept( this ) as AstExpressionNode
+                    ?? NullAstExpressionNode.Instance
                 );
             }
             // expression
             else
             {
                 dest.Expressions.Add(
-                   (AstExpressionNode)expression.Accept( this )
+                    expression.Accept( this ) as AstExpressionNode
+                    ?? NullAstExpressionNode.Instance
                 );
             }
         }
