@@ -8,15 +8,15 @@ namespace KSPCompiler.Domain.Ast.Nodes.Blocks
     public class AstUserFunctionDeclarationNode : AstFunctionalNode
     {
         /// <summary>
+        /// Function name position
+        /// </summary>
+        public Position FunctionNamePosition { get; set; } = new();
+
+        /// <summary>
         /// Ctor
         /// </summary>
         public AstUserFunctionDeclarationNode()
             : this( NullAstNode.Instance ) {}
-
-        /// <summary>
-        /// Function name position
-        /// </summary>
-        public Position FunctionNamePosition { get; set; } = new();
 
         /// <summary>
         /// Ctor
