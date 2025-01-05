@@ -106,6 +106,11 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 return context.nested.Accept( this );
             }
 
+            if( context.opr == null )
+            {
+                return NullAstExpressionNode.Instance;
+            }
+
             AstExpressionNode node = context.opr.Type switch
             {
                 KSPLexer.BOOL_EQ =>
@@ -113,7 +118,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 KSPLexer.BOOL_NE =>
                     VisitExpressionNodeImpl<AstNotEqualExpressionNode>( context, context.left, context.right ),
                 _ =>
-                    throw new ArgumentException( $"context.opr.Type is {context.opr.Text}" ),
+                    NullAstExpressionNode.Instance
             };
             return node;
         }
@@ -123,6 +128,11 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             if( context.nested != null )
             {
                 return context.nested.Accept( this );
+            }
+
+            if( context.opr == null )
+            {
+                return NullAstExpressionNode.Instance;
             }
 
             AstExpressionNode node = context.opr.Type switch
@@ -136,7 +146,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 KSPLexer.BOOL_LE =>
                     VisitExpressionNodeImpl<AstLessEqualExpressionNode>( context, context.left, context.right ),
                 _ =>
-                    throw new ArgumentException( $"context.opr.Type is {context.opr.Text}" ),
+                    NullAstExpressionNode.Instance
             };
             return node;
         }
@@ -148,6 +158,11 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 return context.nested.Accept( this );
             }
 
+            if( context.opr == null )
+            {
+                return NullAstExpressionNode.Instance;
+            }
+
             AstExpressionNode node = context.opr.Type switch
             {
                 KSPLexer.PLUS =>
@@ -155,7 +170,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 KSPLexer.MINUS =>
                     VisitExpressionNodeImpl<AstSubtractionExpressionNode>( context, context.left, context.right ),
                 _ =>
-                    throw new ArgumentException( $"context.opr.Type is {context.opr.Text}" ),
+                    NullAstExpressionNode.Instance
             };
             return node;
         }
@@ -167,6 +182,11 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 return context.nested.Accept( this );
             }
 
+            if( context.opr == null )
+            {
+                return NullAstExpressionNode.Instance;
+            }
+
             AstExpressionNode node = context.opr.Type switch
             {
                 KSPLexer.MUL =>
@@ -176,7 +196,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 KSPLexer.MOD =>
                     VisitExpressionNodeImpl<AstModuloExpressionNode>( context, context.left, context.right ),
                 _ =>
-                    throw new ArgumentException( $"context.opr.Type is {context.opr.Text}" ),
+                    NullAstExpressionNode.Instance
             };
             return node;
         }

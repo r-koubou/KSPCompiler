@@ -15,15 +15,15 @@ public class AstTranslatorTest
     // ReSharper disable once UnusedMethodReturnValue.Local
 
     [Test]
-    public void LexerErrorTest()
+    public void LexerFallbackTest()
     {
-        Assert.That( () => ParseTestUtility.Parse( TestDataDirectory, "LexerErrorTest.txt" ), Throws.TypeOf<KspScriptParseException>() );
+        Assert.That( () => ParseTestUtility.Parse( TestDataDirectory, "LexerErrorTest.txt" ), Throws.Nothing );
     }
 
     [Test]
-    public void ParserErrorTest()
+    public void ParserFallbackTest()
     {
-        Assert.That( () => ParseTestUtility.Parse( TestDataDirectory, "ParserErrorTest.txt" ), Throws.TypeOf<KspScriptParseException>() );
+        Assert.That( () => ParseTestUtility.Parse( TestDataDirectory, "ParserErrorTest.txt" ), Throws.Nothing );
     }
 
     [Test]

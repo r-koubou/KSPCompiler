@@ -41,12 +41,14 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
             if( left != null )
             {
-                node.Left = (AstExpressionNode)left.Accept( this );
+                node.Left = left.Accept( this ) as AstExpressionNode
+                            ?? NullAstExpressionNode.Instance;
             }
 
             if( right != null )
             {
-                node.Right = (AstExpressionNode)right.Accept( this );
+                node.Right = right.Accept( this ) as AstExpressionNode
+                            ?? NullAstExpressionNode.Instance;
             }
 
             return SetupExpressionNode( node );
@@ -184,7 +186,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             }
             #endregion
 
-            throw new ArgumentException( $"Unknown context:{context.GetText()}" );
+            return NullAstExpressionNode.Instance;
         }
 
         public override AstNode VisitExpressionList(KSPParser.ExpressionListContext context)
@@ -211,31 +213,35 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             {
                 VisitExpressionListRecursive( expressionList, dest );
                 dest.Expressions.Add(
-                   (AstExpressionNode)expression.Accept( this )
+                    expression.Accept( this ) as AstExpressionNode
+                    ?? NullAstExpressionNode.Instance
                 );
             }
             // expression
             else
             {
                 dest.Expressions.Add(
-                   (AstExpressionNode)expression.Accept( this )
+                    expression.Accept( this ) as AstExpressionNode
+                    ?? NullAstExpressionNode.Instance
                 );
             }
         }
 
         public override AstNode VisitAssignmentExpression( KSPParser.AssignmentExpressionContext context )
         {
-            var operatorToken = context.assignmentOperator().opr.Type;
-            AstAssignmentExpressionNode.OperatorType operatorType;
+            var operatorType = AstAssignmentExpressionNode.OperatorType.Assign;
 
-            switch( operatorToken )
-            {
-                case KSPParser.ASSIGN:
-                    operatorType = AstAssignmentExpressionNode.OperatorType.Assign;
-                    break;
-                default:
-                    throw new NotSupportedException( $"Token ID: {operatorToken} is not supported" );
-            }
+            // TODO 複数の代入演算子をサポートする場合
+            // var operatorToken = context.assignmentOperator().opr.Type;
+            //
+            // switch( operatorToken )
+            // {
+            //     case KSPParser.ASSIGN:
+            //         operatorType = AstAssignmentExpressionNode.OperatorType.Assign;
+            //         break;
+            //     default:
+            //         break;
+            // }
 
             var node = VisitExpressionNodeImpl<AstAssignmentExpressionNode>(
                 context,

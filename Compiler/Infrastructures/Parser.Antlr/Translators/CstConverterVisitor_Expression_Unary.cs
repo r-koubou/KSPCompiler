@@ -30,7 +30,8 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             var node = new TNode();
 
             node.Import( tokenStream, context );
-            node.Left = (AstExpressionNode)left.Accept( this );
+            node.Left = left.Accept( this ) as AstExpressionNode
+                        ?? NullAstExpressionNode.Instance;
 
             return SetupUnaryOperatorNode( node );
         }
@@ -42,6 +43,11 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 return context.nested.Accept( this );
             }
 
+            if( context.opr == null )
+            {
+                return NullAstExpressionNode.Instance;
+            }
+
             AstExpressionNode node = ( context.opr.Type ) switch
             {
                 KSPLexer.MINUS =>
@@ -51,7 +57,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 KSPLexer.BOOL_NOT =>
                     VisitUnaryExpressionImpl<AstUnaryLogicalNotExpressionNode>( context, context.logicalNot ),
                 _ =>
-                    throw new ArgumentException( $"context.opr.Type is {context.opr.Text}" ),
+                    NullAstExpressionNode.Instance
             };
             return node;
         }

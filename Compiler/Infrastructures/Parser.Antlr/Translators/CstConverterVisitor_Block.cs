@@ -5,6 +5,7 @@ using Antlr4.Runtime.Tree;
 using KSPCompiler.Commons.Text;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Domain.Events;
 using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
 
 namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
@@ -40,15 +41,15 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 EndColumn   = context.name.Column + context.name.Text.Length
             };
 
-            node.Block    = context.block().Accept( this ) as AstBlockNode
-                            ?? throw new MustBeNotNullException( nameof( node.Block ) );
+            node.Block = context.block().Accept( this ) as AstBlockNode
+                         ?? NullAstBlockNode.Instance;
 
             node.Block.Parent = node;
 
             if( context.arguments != null )
             {
                 node.ArgumentList = context.arguments.Accept( this ) as AstArgumentListNode
-                                    ?? throw new MustBeNotNullException( nameof( node.ArgumentList ) );
+                                    ?? new AstArgumentListNode( node );
 
                 node.ArgumentList.Parent = node;
             }
@@ -73,7 +74,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             };
 
             node.Block        = context.block().Accept( this ) as AstBlockNode
-                                ?? throw new MustBeNotNullException( nameof( node.Block ) );
+                                ?? NullAstBlockNode.Instance;
 
             node.Block.Parent = node;
 
@@ -99,8 +100,15 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
             var arg = new AstArgumentNode();
 
-            arg.Import( tokenStream, identifier );
-            arg.Name = identifier.GetText();
+            if( identifier != null )
+            {
+                arg.Import( tokenStream, identifier );
+                arg.Name = identifier.GetText();
+            }
+            else
+            {
+                eventEmitter.Emit( new LogDebugEvent( $"{nameof( VisitArgumentDefinitionList )} fallback" ) );
+            }
 
             //
             // argumentDefinitionList COMMA IDENTIFIER

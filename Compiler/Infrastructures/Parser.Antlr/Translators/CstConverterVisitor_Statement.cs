@@ -1,10 +1,9 @@
-﻿using System;
-
-using Antlr4.Runtime;
+﻿using Antlr4.Runtime;
 
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Domain.Events;
 using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
 
 namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
@@ -21,8 +20,8 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             var conditionNode = condition.Accept( this ) as AstExpressionNode;
             var blockNode = block.Accept( this ) as AstBlockNode;
 
-            _ = conditionNode ?? throw new MustBeNotNullException( nameof( conditionNode ) );
-            _ = blockNode ?? throw new MustBeNotNullException( nameof( blockNode ) );
+            conditionNode ??= NullAstExpressionNode.Instance;
+            blockNode     ??= NullAstBlockNode.Instance;
 
             node.Condition = conditionNode;
             node.CodeBlock = blockNode;
@@ -36,15 +35,23 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         public override AstNode VisitIfStatement( KSPParser.IfStatementContext context )
         {
             var node = VisitControlStatementImpl<AstIfStatementNode>( context.expression(), context.ifBlock );
-            var elseBlock = context.elseBlock?.Accept( this ) as AstBlockNode;
+            node.Import( tokenStream, context.ifBlock );
 
-            if( elseBlock == null )
+            if( context.elseBlock?.Accept( this ) is not AstBlockNode elseBlock )
             {
                 return node;
             }
 
             node.ElseBlock = elseBlock;
-            node.ElseBlock.Import( tokenStream, context.elseBlock! );
+
+            if( context.elseBlock != null )
+            {
+                node.ElseBlock.Import( tokenStream, context.elseBlock );
+            }
+            else
+            {
+                eventEmitter.Emit( new LogDebugEvent( $"{nameof( VisitIfStatement )} fallback" ) );
+            }
 
             return node;
         }
@@ -58,17 +65,16 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             #region Condition
             node.Import( tokenStream, context );
             node.Condition = condition.Accept( this ) as AstExpressionNode
-                             ?? throw new MustBeNotNullException( nameof( node.Condition ) );
+                             ?? NullAstExpressionNode.Instance;
 
-            node.Condition?.Import( tokenStream, condition );
+            node.Condition.Import( tokenStream, condition );
             #endregion
 
             #region CaseBlock
             foreach( var c in caseList )
             {
-                var caseBlock = c.Accept( this ) as AstCaseBlock;
-
-                _ = caseBlock ?? throw new MustBeNotNullException( nameof( caseBlock ) );
+                var caseBlock = c.Accept( this ) as AstCaseBlock
+                                ?? NullAstCaseBlockNode.Instance;
 
                 caseBlock.Parent = node;
                 caseBlock.Import( tokenStream, c );
@@ -81,7 +87,10 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         public override AstNode VisitWhileStatement( KSPParser.WhileStatementContext context )
         {
-            return VisitControlStatementImpl<AstWhileStatementNode>( context.expression(), context.block() );
+            var node = VisitControlStatementImpl<AstWhileStatementNode>( context.expression(), context.block() );
+            node.Import( tokenStream, context );
+
+            return node;
         }
 
         public override AstNode VisitContinueStatement( KSPParser.ContinueStatementContext context )
@@ -126,7 +135,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             }
             #endregion ~Call Command
 
-            throw new ArgumentException( $"Unknown context:{context.GetText()}" );
+            return NullAstExpressionNode.Instance;
         }
     }
 }

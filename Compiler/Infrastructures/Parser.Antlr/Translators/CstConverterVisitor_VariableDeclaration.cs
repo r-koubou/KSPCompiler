@@ -90,12 +90,12 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             if( expression != null )
             {
                 expressionNode = expression.Accept( this ) as AstExpressionNode
-                                 ?? throw new MustBeNotNullException( nameof( expressionNode ) );
+                                 ?? NullAstExpressionNode.Instance;
             }
             else if( uiInitializer != null )
             {
                 uiInitializerNode = uiInitializer.Accept( this ) as AstExpressionListNode
-                                     ?? throw new MustBeNotNullException( nameof( uiInitializerNode ) );
+                                     ?? NullAstExpressionListNode.Instance;
             }
 
             return new AstPrimitiveInitializerNode( NullAstNode.Instance, expressionNode, uiInitializerNode );
@@ -109,12 +109,12 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             var expressionList = context.expressionList();
 
             node.Size = arraySizeExpression.Accept( this ) as AstExpressionNode
-                        ?? throw new MustBeNotNullException( nameof( node.Size ) );
+                        ?? NullAstExpressionNode.Instance;
 
             if( expressionList != null )
             {
                 node.Initializer = expressionList.Accept( this ) as AstExpressionListNode
-                                   ?? throw new MustBeNotNullException( nameof( node.Initializer ) );
+                                   ?? NullAstExpressionListNode.Instance;
             }
 
             return node;
@@ -129,7 +129,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             if( expressionList != null )
             {
                 var expressionListNode = expressionList.Accept( this ) as AstExpressionListNode
-                    ?? throw new MustBeNotNullException( nameof( expressionList ) );
+                    ?? NullAstExpressionListNode.Instance;
 
                 node.Expressions.AddRange( expressionListNode.Expressions );
             }

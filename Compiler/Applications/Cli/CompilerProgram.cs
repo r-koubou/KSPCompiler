@@ -27,11 +27,9 @@ public static class CompilerProgram
     /// A compiler program for KSP (Kontakt Script Processor)
     /// </summary>
     /// <param name="input">A script file path to compile.</param>
-    /// <param name="syntaxCheckOnly">Syntax check only. (No semantic analysis)</param>
     /// <param name="enableObfuscation">Run obfuscation after compiling.</param>
     public static int ExecuteCompiler(
         string input,
-        bool syntaxCheckOnly = false,
         bool enableObfuscation = false )
     {
         using var subscribers = new CompositeDisposable();
@@ -64,7 +62,6 @@ public static class CompilerProgram
         var option = new CompilerOption(
             SyntaxParser: parser,
             SymbolTable: symbolTable,
-            SyntaxCheckOnly: syntaxCheckOnly,
             EnableObfuscation: enableObfuscation
         );
 

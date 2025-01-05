@@ -6,6 +6,7 @@ using Antlr4.Runtime.Tree;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Extensions;
+using KSPCompiler.Domain.Events;
 using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
 
 // ReSharper disable UnusedMember.Local
@@ -18,10 +19,12 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
     public partial class CstConverterVisitor : KSPParserBaseVisitor<AstNode>
     {
         private readonly BufferedTokenStream tokenStream;
+        private readonly IEventEmitter eventEmitter;
 
-        public CstConverterVisitor( BufferedTokenStream tokenStream )
+        public CstConverterVisitor( BufferedTokenStream tokenStream, IEventEmitter eventEmitter )
         {
-            this.tokenStream = tokenStream;
+            this.tokenStream  = tokenStream;
+            this.eventEmitter = eventEmitter;
         }
 
         private void SetupChildNode(

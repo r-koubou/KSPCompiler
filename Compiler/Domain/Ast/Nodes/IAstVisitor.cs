@@ -6,8 +6,18 @@ namespace KSPCompiler.Domain.Ast.Nodes
 {
     public interface IAstVisitor<out T>
     {
+        #region Null Ast Node
         public T Visit( NullAstNode node );
+        public T Visit( NullAstModiferNode node );
+        public T Visit( NullAstBlockNode node );
+        public T Visit( NullAstCaseBlockNode node );
         public T Visit( NullAstExpressionNode node );
+        public T Visit( NullAstExpressionListNode node );
+        public T Visit( NullAstVariableInitializerNode node );
+        public T Visit( NullAstPrimitiveInitializerNode node );
+        public T Visit( NullAstArrayInitializerNode node );
+        #endregion ~Null Ast Node
+
         public T Visit( AstCompilationUnitNode node );
         public T Visit( AstCallbackDeclarationNode node );
         public T Visit( AstUserFunctionDeclarationNode node );

@@ -13,14 +13,37 @@ public abstract class DefaultAstVisitor : IAstVisitor
         return node;
     }
 
+    #region Null AstNode
     public virtual IAstNode Visit( NullAstNode node )
         => VisitChildren( node );
 
-    public IAstNode Visit( NullAstExpressionNode node )
+    public virtual IAstNode Visit( NullAstModiferNode node )
+        => VisitChildren( node );
+
+    public virtual IAstNode Visit( NullAstBlockNode node )
+        => VisitChildren( node );
+
+    public virtual IAstNode Visit( NullAstCaseBlockNode node )
+        => VisitChildren( node );
+
+    public virtual IAstNode Visit( NullAstExpressionNode node )
+        => VisitChildren( node );
+
+    public virtual IAstNode Visit( NullAstExpressionListNode node )
+        => VisitChildren( node );
+
+    public virtual IAstNode Visit( NullAstVariableInitializerNode node )
+        => VisitChildren( node );
+
+    public virtual IAstNode Visit( NullAstPrimitiveInitializerNode node )
+        => VisitChildren( node );
+
+    public virtual IAstNode Visit( NullAstArrayInitializerNode node )
         => VisitChildren( node );
 
     public virtual IAstNode Visit( AstCompilationUnitNode node )
         => VisitChildren( node );
+    #endregion ~Null AstNode
 
     public virtual IAstNode Visit( AstCallbackDeclarationNode node )
         => VisitChildren( node );

@@ -15,7 +15,6 @@ namespace KSPCompiler.Controllers.Compiler;
 public record CompilerOption(
     ISyntaxParser SyntaxParser,
     AggregateSymbolTable SymbolTable,
-    bool SyntaxCheckOnly,
     bool EnableObfuscation );
 
 public record CompilerResult(
@@ -39,16 +38,6 @@ public sealed class CompilerController
         {
             var syntaxAnalysisOutput = await ExecuteSyntaxAnalysisAsync( option.SyntaxParser, cancellationToken );
             var ast = syntaxAnalysisOutput.OutputData;
-
-            if( !syntaxAnalysisOutput.Result )
-            {
-                return new CompilerResult( false, syntaxAnalysisOutput.Error, ast, option.SymbolTable, string.Empty );
-            }
-
-            if( option.SyntaxCheckOnly )
-            {
-                return new CompilerResult( true, null, ast, option.SymbolTable, string.Empty );
-            }
 
             var preprocessOutput = await ExecutePreprocessAsync( eventEmitter, ast, option.SymbolTable, cancellationToken );
 

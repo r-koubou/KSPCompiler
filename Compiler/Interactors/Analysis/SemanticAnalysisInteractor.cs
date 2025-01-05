@@ -20,15 +20,15 @@ public class SemanticAnalysisInteractor : ISemanticAnalysisUseCase
         var noError = true;
         var eventEmitter = parameter.InputData.EventEmitter;
 
-        using var subscribers = new CompositeDisposable();
-        eventEmitter.Subscribe<CompilationFatalEvent>( _ => noError = false );
-        eventEmitter.Subscribe<CompilationErrorEvent>( _ => noError = false );
-
-        var context = new SemanticAnalyzerContext( eventEmitter, symbolTable );
-        var analyzer = new SemanticAnalyzer( context );
-
         try
         {
+            using var subscribers = new CompositeDisposable();
+            eventEmitter.Subscribe<CompilationFatalEvent>( _ => noError = false ).AddTo( subscribers );
+            eventEmitter.Subscribe<CompilationErrorEvent>( _ => noError = false ).AddTo( subscribers );
+
+            var context = new SemanticAnalyzerContext( eventEmitter, symbolTable );
+            var analyzer = new SemanticAnalyzer( context );
+
             analyzer.Traverse( parameter.InputData.CompilationUnitNode );
         }
         catch( Exception e )
