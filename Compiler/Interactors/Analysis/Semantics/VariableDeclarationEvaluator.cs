@@ -1,3 +1,5 @@
+using System.Threading;
+
 using KSPCompiler.Domain;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
@@ -33,38 +35,37 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
     public IAstNode Evaluate( IAstVisitor visitor, AstVariableDeclarationNode node )
     {
+        var variable = node.As();
+
+        //
+        // 以降の解析を継続させるため、誤りがあっても処理を続行してシンボルテーブルに追加させる
+        //
+
         // 予約済み（NIが禁止している）接頭語検査
         // TODO: 厳密なチェックが必要になったらコメント解除
         // ValidateBuiltInPrefix( node );
 
         // on init 外での変数宣言はエラー
-        if( !ValidateCallbackNode( node ) )
-        {
-            return node;
-        }
+        ValidateCallbackNode( node );
+
+        // 変数名の検査
+        ValidateVariableName( node, variable );
 
         // 定義済みの検査
-        if( !TryCreateNewSymbol( node, out var variable ) )
-        {
-            return node;
-        }
+        CanCreateNewSymbol( node );
 
         // UI型の検査
-        // 以降の解析を継続させるため、UIの型情報に誤りがあっても処理を続行して
-        // シンボルテーブルに追加させる
         ValidateUIType( node, variable );
 
         // 初期化式の検査
-        // 以降の解析を継続させるため、初期化式に誤りがあっても処理を続行して
-        // シンボルテーブルに追加させる
         ValidateInitialValue( visitor, node, variable );
 
-        if( !SymbolTables.UserVariables.Add( variable ) )
+        // シンボルテーブルに追加
+        if( SymbolTables.UserVariables.Add( variable ) )
         {
-            throw new AstAnalyzeException( this, node, $"Variable symbol add failed {variable.Name}" );
+            // 成功時（宣言の初回登場）のみ位置情報を設定
+            variable.DefinedPosition = node.VariableNamePosition;
         }
-
-        variable.DefinedPosition = node.VariableNamePosition;
 
         return node;
     }
@@ -119,14 +120,13 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         return true;
     }
 
-    private bool TryCreateNewSymbol( AstVariableDeclarationNode node, out VariableSymbol result )
+    private bool CanCreateNewSymbol( AstVariableDeclarationNode node )
     {
         var variableType = DataTypeUtility.GuessFromSymbolName( node.Name );
 
         // 配列型に const は付与できない
         if( variableType.IsArray() && node.Modifier.HasConstant() )
         {
-            result = null!;
             EventEmitter.Emit(
                 node.AsErrorEvent(
                     CompilerMessageResources.semantic_error_declare_variable_cannot_const,
@@ -137,25 +137,10 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             return false;
         }
 
-        if( !SymbolTables.TrySearchVariableByName( node.Name, out result ) )
+        if( !SymbolTables.TrySearchVariableByName( node.Name, out _ ) )
         {
             // 未定義：新規追加可能
-            result = node.As();
-
             return true;
-        }
-
-        // NI の予約変数との重複
-        if( result.BuiltIn )
-        {
-            EventEmitter.Emit(
-                node.AsErrorEvent(
-                    CompilerMessageResources.symbol_error_declare_variable_builtin,
-                    node.Name
-                )
-            );
-
-            return false;
         }
 
         // ユーザー変数として宣言済み
@@ -167,6 +152,24 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         );
 
         return false;
+    }
+
+    private bool ValidateVariableName( AstVariableDeclarationNode node, VariableSymbol symbol )
+    {
+        // NI の予約変数との重複
+        if( symbol.BuiltIn )
+        {
+            EventEmitter.Emit(
+                node.AsErrorEvent(
+                    CompilerMessageResources.symbol_error_declare_variable_builtin,
+                    node.Name
+                )
+            );
+
+            return false;
+        }
+
+        return true;
     }
 
     private void ValidateUIType( AstVariableDeclarationNode node, VariableSymbol variable )
