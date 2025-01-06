@@ -38,11 +38,13 @@ public class Server
                        )
                       .WithHandler<TextDocumentHandler>()
                       .WithHandler<DefinitionHandler>()
+                      .WithHandler<DocumentSymbolHandler>()
                       .WithServices(
                            services =>
                            {
                                services.AddSingleton<CompilationService>();
                                services.AddSingleton<CompilerCache>();
+                               services.AddSingleton<SymbolInformationService>();
                            }
                        )
                       .OnInitialize( ( server, request, token ) =>
