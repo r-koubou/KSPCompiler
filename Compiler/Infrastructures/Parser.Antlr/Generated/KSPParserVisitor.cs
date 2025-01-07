@@ -171,12 +171,6 @@ public interface IKSPParserVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitCallUserFunction([NotNull] KSPParser.CallUserFunctionContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="KSPParser.exitStatement"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitExitStatement([NotNull] KSPParser.ExitStatementContext context);
-	/// <summary>
 	/// Visit a parse tree produced by <see cref="KSPParser.expressionStatement"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
