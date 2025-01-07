@@ -173,4 +173,10 @@
     <data name="semantic.error.userfunction.call.initcallback" xml:space="preserve">
         <value>init コールバック内でユーザー定義関数を呼び出すことはできません</value>
     </data>
+    <data name="semantic.error.declare.variable.arrayinitializer.need.assign.operator" xml:space="preserve">
+        <value>初期化に `:=` 演算子が必要です</value>
+    </data>
+    <data name="semantic.error.declare.variable.uiinitializer.not.need.assign.opetator" xml:space="preserve">
+        <value>`:=` 演算子は不要です</value>
+    </data>
 </root>

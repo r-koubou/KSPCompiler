@@ -180,4 +180,10 @@
     <data name="semantic.error.userfunction.call.initcallback" xml:space="preserve">
         <value>User-defined functions cannot be called within an init callback.</value>
     </data>
+    <data name="semantic.error.declare.variable.arrayinitializer.need.assign.operator" xml:space="preserve">
+        <value>Requires `:=` operator for initialization</value>
+    </data>
+    <data name="semantic.error.declare.variable.uiinitializer.not.need.assign.opetator" xml:space="preserve">
+        <value>The `:=` operator is not needed</value>
+    </data>
 </root>

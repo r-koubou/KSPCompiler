@@ -29,6 +29,14 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
         }
 
         /// <summary>
+        /// Has assign operator (`:=`)
+        /// </summary>
+        /// <remarks>
+        /// Used to determine if it is a UI array variable during semantic analysis.
+        /// </remarks>
+        public virtual bool HasAssignOperator { get; set; }
+
+        /// <summary>
         /// Ctor
         /// </summary>
         public AstArrayInitializerNode()

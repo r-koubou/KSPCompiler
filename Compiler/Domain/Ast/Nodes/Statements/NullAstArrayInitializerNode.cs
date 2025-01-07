@@ -25,6 +25,9 @@ public sealed class NullAstArrayInitializerNode : AstArrayInitializerNode
     public override AstExpressionListNode Initializer
         => NullAstExpressionListNode.Instance;
 
+    public override bool HasAssignOperator
+        => false;
+
     /// <summary>
     /// Always return zero and the set is ignored.
     /// </summary>
