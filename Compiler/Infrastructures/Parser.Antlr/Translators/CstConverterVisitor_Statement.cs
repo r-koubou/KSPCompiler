@@ -101,6 +101,14 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             return node;
         }
 
+        public override AstNode VisitExitStatement( KSPParser.ExitStatementContext context )
+        {
+            var node = new AstExitStatementNode();
+            node.Import( tokenStream, context );
+
+            return node;
+        }
+
         public override AstNode VisitCallUserFunction( KSPParser.CallUserFunctionContext context )
         {
             var node = new AstCallUserFunctionStatementNode();
