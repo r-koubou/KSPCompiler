@@ -5,7 +5,7 @@ using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations;
 using KSPCompiler.Interactors.Analysis.Extensions;
 using KSPCompiler.Resources;
-using KSPCompiler.UseCases.Analysis.Evaluations.Conditionals;
+using KSPCompiler.UseCases.Analysis.Evaluations.Statements;
 
 namespace KSPCompiler.Interactors.Analysis.Semantics;
 

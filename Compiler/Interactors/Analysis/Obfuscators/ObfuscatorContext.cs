@@ -9,7 +9,6 @@ using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Reals;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Strings;
 using KSPCompiler.UseCases.Analysis.Context;
 using KSPCompiler.UseCases.Analysis.Evaluations.Commands;
-using KSPCompiler.UseCases.Analysis.Evaluations.Conditionals;
 using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Booleans;
 using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Integers;
 using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Reals;
@@ -17,6 +16,7 @@ using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Strings;
 using KSPCompiler.UseCases.Analysis.Evaluations.Declarations;
 using KSPCompiler.UseCases.Analysis.Evaluations.Operators;
 using KSPCompiler.UseCases.Analysis.Evaluations.Preprocessing;
+using KSPCompiler.UseCases.Analysis.Evaluations.Statements;
 using KSPCompiler.UseCases.Analysis.Evaluations.Symbols;
 using KSPCompiler.UseCases.Analysis.Evaluations.UserFunctions;
 

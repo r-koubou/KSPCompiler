@@ -3,7 +3,7 @@ using System.Text;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Interactors.Analysis.Obfuscators.Extensions;
-using KSPCompiler.UseCases.Analysis.Evaluations.Conditionals;
+using KSPCompiler.UseCases.Analysis.Evaluations.Statements;
 
 namespace KSPCompiler.Interactors.Analysis.Obfuscators;
 
