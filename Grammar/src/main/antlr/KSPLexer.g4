@@ -145,7 +145,11 @@ fragment EscapeSequence
 // 識別子
 //------------------------------------------------------------------------------
 
-IDENTIFIER: VARIABLE_PREFIX? LETTER LETTER_OR_DIGIT*;
+// 一般的なプログラミング言語と同じ、先頭文字に数字を指定することをさせない場合
+// IDENTIFIER: VARIABLE_PREFIX? LETTER LETTER_OR_DIGIT*;
+
+// KSPは変数名の先頭に数字を指定することができる
+IDENTIFIER: VARIABLE_PREFIX? LETTER_OR_DIGIT+;
 
 fragment LETTER
     : [a-zA-Z_]

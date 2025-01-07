@@ -111,11 +111,15 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             node.Size = arraySizeExpression.Accept( this ) as AstExpressionNode
                         ?? NullAstExpressionNode.Instance;
 
+            node.HasAssignOperator = context.ASSIGN() != null;
+
             if( expressionList != null )
             {
                 node.Initializer = expressionList.Accept( this ) as AstExpressionListNode
                                    ?? NullAstExpressionListNode.Instance;
             }
+
+            node.Import( tokenStream, context );
 
             return node;
         }
