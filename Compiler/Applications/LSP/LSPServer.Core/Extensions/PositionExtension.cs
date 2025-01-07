@@ -3,6 +3,7 @@ using KSPCompiler.Commons.Text;
 namespace KSPCompiler.LSPServer.Core.Extensions;
 
 using OmniSharpPosition = OmniSharp.Extensions.LanguageServer.Protocol.Models.Position;
+using OmniSharpRange = OmniSharp.Extensions.LanguageServer.Protocol.Models.Range;
 
 public static class PositionExtension
 {
@@ -23,4 +24,14 @@ public static class PositionExtension
             Character = position.EndColumn.Value,
         };
     }
+
+    public static OmniSharpRange AsRange( this Position position )
+    {
+        return new OmniSharpRange
+        {
+            Start = position.BeginAs(),
+            End = position.EndAs()
+        };
+    }
+
 }
