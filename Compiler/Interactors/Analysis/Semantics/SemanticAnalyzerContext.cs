@@ -7,7 +7,6 @@ using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Reals;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Strings;
 using KSPCompiler.UseCases.Analysis.Context;
 using KSPCompiler.UseCases.Analysis.Evaluations.Commands;
-using KSPCompiler.UseCases.Analysis.Evaluations.Conditionals;
 using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Booleans;
 using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Integers;
 using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Reals;
@@ -15,6 +14,7 @@ using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Strings;
 using KSPCompiler.UseCases.Analysis.Evaluations.Declarations;
 using KSPCompiler.UseCases.Analysis.Evaluations.Operators;
 using KSPCompiler.UseCases.Analysis.Evaluations.Preprocessing;
+using KSPCompiler.UseCases.Analysis.Evaluations.Statements;
 using KSPCompiler.UseCases.Analysis.Evaluations.Symbols;
 using KSPCompiler.UseCases.Analysis.Evaluations.UserFunctions;
 
@@ -127,6 +127,7 @@ public sealed class SemanticAnalyzerContext : IAnalyzerContext
         public ISelectStatementEvaluator Select { get; }
         public IWhileStatementEvaluator While { get; }
         public IContinueStatementEvaluator Continue { get; }
+        public IExitStatementEvaluator Exit { get; }
 
         public StatementEvaluationContext(
             IEventEmitter eventEmitter,
@@ -138,6 +139,7 @@ public sealed class SemanticAnalyzerContext : IAnalyzerContext
             Select           = new SelectStatementEvaluator( eventEmitter );
             While            = new WhileStatementEvaluator( eventEmitter );
             Continue         = new ContinueStatementEvaluator( eventEmitter );
+            Exit             = new ExitStatementEvaluator( eventEmitter );
         }
     }
 }

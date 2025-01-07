@@ -262,6 +262,16 @@ public interface IKSPParserListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitCallUserFunction([NotNull] KSPParser.CallUserFunctionContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="KSPParser.exitStatement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterExitStatement([NotNull] KSPParser.ExitStatementContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="KSPParser.exitStatement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitExitStatement([NotNull] KSPParser.ExitStatementContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="KSPParser.expressionStatement"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

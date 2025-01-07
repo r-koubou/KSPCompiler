@@ -59,5 +59,6 @@ namespace KSPCompiler.Domain.Ast.Nodes
         PrimitiveInitializer,
         ArrayInitializer,
         ContinueStatement,
+        ExitStatement,
     }
 }

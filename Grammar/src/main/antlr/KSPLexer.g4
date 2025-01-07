@@ -54,6 +54,7 @@ CASE:                   'case';
 TO:                     'to';
 WHILE:                  'while';
 CALL:                   'call';
+EXIT:                   'exit';
 // Control Statement
 CONTINUE:               'continue';
 

@@ -144,6 +144,7 @@ statement
     | whileStatement
     | continueStatement
     | callUserFunction
+    | exitStatement
     | expressionStatement
 ;
 
@@ -278,6 +279,14 @@ continueStatement:
 
 callUserFunction:
     CALL MULTI_LINE_DELIMITER* name = IDENTIFIER
+;
+
+//------------------------------------------------------------------------------
+// コールバック・KSP ユーザー定義関数の呼び出し終了
+//------------------------------------------------------------------------------
+
+exitStatement:
+    EXIT
 ;
 
 //------------------------------------------------------------------------------

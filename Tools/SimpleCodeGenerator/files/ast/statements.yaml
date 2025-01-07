@@ -55,6 +55,11 @@ classes:
     templates:
       - name: ${TEMPLATE}
 
+  - name: ExitStatement
+    description: "an exit statement"
+    templates:
+      - name: ${TEMPLATE}
+
   #--------------------------------------------
   # KSPユーザー定義関数
   #--------------------------------------------

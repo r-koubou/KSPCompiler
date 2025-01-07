@@ -7,18 +7,18 @@ using KSPCompiler.UseCases.Analysis.Evaluations.Statements;
 
 namespace KSPCompiler.Interactors.Analysis.Obfuscators;
 
-public class ContinueStatementEvaluator : IContinueStatementEvaluator
+public class ExitStatementEvaluator : IExitStatementEvaluator
 {
     private StringBuilder Output { get; }
 
-    public ContinueStatementEvaluator( StringBuilder output )
+    public ExitStatementEvaluator( StringBuilder output )
     {
         Output = output;
     }
 
-    public IAstNode Evaluate( IAstVisitor visitor, AstContinueStatementNode statement )
+    public IAstNode Evaluate( IAstVisitor visitor, AstExitStatementNode statement )
     {
-        Output.Append( "continue" )
+        Output.Append( "exit" )
               .NewLine();
 
         return statement;
