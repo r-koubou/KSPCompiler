@@ -12,5 +12,4 @@ public interface IStatementEvaluationContext
     ISelectStatementEvaluator Select { get; }
     IWhileStatementEvaluator While { get; }
     IContinueStatementEvaluator Continue { get; }
-    IExitStatementEvaluator Exit { get; }
 }

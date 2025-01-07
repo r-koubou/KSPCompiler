@@ -313,18 +313,6 @@ public partial class KSPParserBaseListener : IKSPParserListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitCallUserFunction([NotNull] KSPParser.CallUserFunctionContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="KSPParser.exitStatement"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterExitStatement([NotNull] KSPParser.ExitStatementContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="KSPParser.exitStatement"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitExitStatement([NotNull] KSPParser.ExitStatementContext context) { }
-	/// <summary>
 	/// Enter a parse tree produced by <see cref="KSPParser.expressionStatement"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>

@@ -200,7 +200,4 @@ public abstract class DefaultAstVisitor : IAstVisitor
 
     public virtual IAstNode Visit( AstContinueStatementNode node )
         => VisitChildren( node );
-
-    public virtual IAstNode Visit( AstExitStatementNode node )
-        => VisitChildren( node );
 }
