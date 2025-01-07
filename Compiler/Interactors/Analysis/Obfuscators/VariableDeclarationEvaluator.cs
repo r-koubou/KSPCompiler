@@ -60,11 +60,6 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             Output.Append( $" {modifier}" );
         }
 
-        if( variable.UIType != UITypeSymbol.Null )
-        {
-            Output.Append( $" {variable.UIType.Name}" );
-        }
-
         Output.Append( $" {name}" );
 
         if( node.Initializer.IsNotNull() )
@@ -159,7 +154,6 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
     private void OutputUIArguments( IAstVisitor visitor, AstExpressionListNode expressionList )
     {
-        Output.Append( " := " );
         Output.Append( '(' );
 
         Output.AppendExpressionList( visitor, expressionList );
