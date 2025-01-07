@@ -374,7 +374,12 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             return;
         }
 
-        // 配列要素サイズ・初期化代入式なし
+        if( !ValidateArraySize( visitor, node, initializer, variable ) )
+        {
+            return;
+        }
+
+        // 初期化代入式なし
         if( initializer.IsNull() )
         {
             EventEmitter.Emit(
@@ -387,8 +392,17 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             return;
         }
 
-        if( !ValidateArraySize( visitor, node, initializer, variable ) )
+        // 文法解析で判定したかったが、KSPの文法仕様（配列変数とUI配列変数の初期値代入）が
+        // 微妙な差があるため、意味解析でチェック（ := の有無の違い、という微妙な差を文法解析で表現すると複雑になる）
+        if( !initializer.Initializer.Expressions.Empty && !initializer.HasAssignOperator )
         {
+            EventEmitter.Emit(
+                node.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_declare_variable_arrayinitializer_need_assign_operator,
+                    node.Name
+                )
+            );
+
             return;
         }
 
@@ -550,6 +564,21 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             return;
         }
 
+        // 文法解析で判定したかったが、KSPの文法仕様（配列変数とUI配列変数の初期値代入）が
+        // 微妙な差があるため、意味解析でチェック（ := の有無の違い、という微妙な差を文法解析で表現すると複雑になる）
+        if( initializer.HasAssignOperator )
+        {
+            EventEmitter.Emit(
+                node.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_declare_variable_uiinitializer_not_need_assign_opetator,
+                    node.Name
+                )
+            );
+
+            return;
+        }
+
+        // 配列要素の型チェック
         ValidateUIArguments( visitor, node, initializer.Initializer, variable.UIType );
     }
 

@@ -368,5 +368,17 @@ namespace KSPCompiler.Resources {
                 return ResourceManager.GetString("semantic.error.userfunction.call.initcallback", resourceCulture);
             }
         }
+        
+        public static string semantic_error_declare_variable_arrayinitializer_need_assign_operator {
+            get {
+                return ResourceManager.GetString("semantic.error.declare.variable.arrayinitializer.need.assign.operator", resourceCulture);
+            }
+        }
+        
+        public static string semantic_error_declare_variable_uiinitializer_not_need_assign_opetator {
+            get {
+                return ResourceManager.GetString("semantic.error.declare.variable.uiinitializer.not.need.assign.opetator", resourceCulture);
+            }
+        }
     }
 }
