@@ -127,6 +127,7 @@ public sealed class SemanticAnalyzerContext : IAnalyzerContext
         public ISelectStatementEvaluator Select { get; }
         public IWhileStatementEvaluator While { get; }
         public IContinueStatementEvaluator Continue { get; }
+        public IExitStatementEvaluator Exit { get; }
 
         public StatementEvaluationContext(
             IEventEmitter eventEmitter,
@@ -138,6 +139,7 @@ public sealed class SemanticAnalyzerContext : IAnalyzerContext
             Select           = new SelectStatementEvaluator( eventEmitter );
             While            = new WhileStatementEvaluator( eventEmitter );
             Continue         = new ContinueStatementEvaluator( eventEmitter );
+            Exit             = new ExitStatementEvaluator( eventEmitter );
         }
     }
 }

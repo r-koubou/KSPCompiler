@@ -3,7 +3,7 @@ using KSPCompiler.Domain.Ast.Nodes.Statements;
 
 namespace KSPCompiler.UseCases.Analysis.Evaluations.Statements;
 
-public interface IControlStatementEvaluator
+public interface IExitStatementEvaluator
 {
     public IAstNode Evaluate( IAstVisitor visitor, AstExitStatementNode node );
 }

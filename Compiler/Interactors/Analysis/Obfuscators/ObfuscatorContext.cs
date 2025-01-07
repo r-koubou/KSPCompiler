@@ -138,6 +138,7 @@ public sealed class ObfuscatorContext : IAnalyzerContext
         public ISelectStatementEvaluator Select { get; }
         public IWhileStatementEvaluator While { get; }
         public IContinueStatementEvaluator Continue { get; }
+        public IExitStatementEvaluator Exit { get; }
 
         public StatementEvaluationContext(
             StringBuilder output,
@@ -149,6 +150,7 @@ public sealed class ObfuscatorContext : IAnalyzerContext
             Select           = new SelectStatementEvaluator( output );
             While            = new WhileStatementEvaluator( output );
             Continue         = new ContinueStatementEvaluator( output );
+            Exit             = new ExitStatementEvaluator( output );
         }
     }
 
