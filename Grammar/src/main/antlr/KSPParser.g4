@@ -300,10 +300,12 @@ expressionStatement
     //------------------------------------------------------------------------------
     |
         callExpr = primaryExpression
-        LPARENT
-            // argumentExpressionList? MULTI_LINE_DELIMITER* // TODO: コマンド・関数の引数に代入式をサポートする場合に使用
-            callArgs = expressionList? MULTI_LINE_DELIMITER*
-        RPARENT
+        (
+            LPARENT
+                // argumentExpressionList? MULTI_LINE_DELIMITER* // TODO: コマンド・関数の引数に代入式をサポートする場合に使用
+                callArgs = expressionList? MULTI_LINE_DELIMITER*
+            RPARENT
+        )?
 ;
 
 //------------------------------------------------------------------------------
