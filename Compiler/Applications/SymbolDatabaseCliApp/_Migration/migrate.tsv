@@ -36,7 +36,7 @@ disable_logging	true	Quickly disabling emission of messages, warnings or watched
 disallow_group	true	disallows the specified group, i.e. makes it unavailable for playback	N/A	V	I	group-index	arg 1 description
 dont_use_machine_mode	true	play the specified event in sampler mode	N/A	V	I	ID-number	arg 1 description
 event_status	true	retrieve the status of a particular note event (or MIDI event in the<br>  multi script)	N/A	I||S	I	ID-number	arg 1 description
-exit	true	immediately stops a callback or exits a function	N/A	V		exit	arg 1 description
+exit	true	immediately stops a callback or exits a function	N/A	V
 exp	true	exponential function (returns the value of e^x)	N/A	R||S	R	x	arg 1 description
 fade_in	true	perform a fade-in for a specific note event	N/A	V	I	ID-number	arg 1 description	I	fade-time	arg 2 description
 fade_out	true	perform a fade-out for a specific note event	N/A	V	I	ID-number	arg 1 description	I	fade-time	arg 2 description	I	stop-voice	arg 3 description
@@ -89,9 +89,9 @@ get_zone_par	true	Returns the zone parameters	N/A	I||S	I	zone-id	arg 1 descripti
 get_zone_status	true	Queries the status of the zone ID in<br>  question. Zone status has four possible states:<br>    - $NI_ZONE_STATUS_EMPTY - zone is a user zone and has no sample<br>  loaded<br>    - $NI_ZONE_STATUS_LOADED - zone is a user zone and has a sample<br>  loaded<br>    - $NI_ZONE_STATUS_PURGED - zone is purged from memory (valid for both<br>  regular and user<br>    zones)<br>    - $NI_ZONE_STATUS_IGNORED - zone is ignored by the user response in the<br>  Content Missing<br>    dialog (valid for both regular and user zones)	N/A	I||S	I	zone-id	arg 1 description
 group_name	true	returns the group name for the specified group	N/A	S	I	group-index	arg 1 description
 hide_part	true	hide specific parts of user interface controls	N/A	V	ui_*	variable	arg 1 description	I	hide-mask	arg 2 description
-ignore_controller	true	ignore a controller event in a controller callback	N/A	V		ignore_controller	arg 1 description
+ignore_controller	true	ignore a controller event in a controller callback	N/A	V
 ignore_event	true	ignore a note event in a note on or note off callback	N/A	V	I	ID-number	arg 1 description
-ignore_midi	true	Like ignore_event(), ignore_midi is a very "strong" command.<br>  Keep in mind that ignore_midi will ignore all incoming MIDI events. If you<br>  simply want to change the MIDI channel and/or any of the MIDI bytes, you can<br>  also use set_event_par().	N/A	V		ignore_midi	arg 1 description
+ignore_midi	true	Like ignore_event(), ignore_midi is a very "strong" command.<br>  Keep in mind that ignore_midi will ignore all incoming MIDI events. If you<br>  simply want to change the MIDI channel and/or any of the MIDI bytes, you can<br>  also use set_event_par().	N/A	V
 in_range	true	Boolean Operator: true if x is between y and z	N/A	B	I	x	arg 1 description	I	y	arg 2 description	I	z	arg 3 description
 inc	true	increment an expression by 1 (x + 1)	N/A	V	I	x	arg 1 description
 int	true	converts an integer value into a real number	N/A	I||S	R	real	arg 1 description
@@ -107,7 +107,7 @@ load_performance_view	true	Loads a performance view file (NCKP) that was created
 log	true	logarithmic function	N/A	R||S	R	x	arg 1 description
 lsb	true	return the LSB portion (least significant byte) of a 14 bit value	N/A	I||S	I	value	arg 1 description
 make_instr_persistent	true	retain the value of a variable only with the instrument	N/A	V	*	variable	arg 1 description
-make_perfview	true	activates the performance view for the respective script	N/A	V		make_perfview	arg 1 description
+make_perfview	true	activates the performance view for the respective script	N/A	V
 make_persistent	true	retain the value of a variable whith the instrument and snapshot	N/A	V	*	variable	arg 1 description
 message	true	display text in the status line of KONTAKT	N/A	V	S||I||R	variable_or_text	arg 1 description
 mf_copy_export_area	true	Copies the content of MIDI export area 0 to the specified index.	N/A	V	I	index	arg 1 description
@@ -153,14 +153,14 @@ num_elements	true	returns the number of elements in an array	N/A	I||S	I[]||R[]||
 num_slices	true	Undocumented	N/A	I||S	I	arg1	arg 1 description
 num_slices_zone	true	returns the number of slices of the specified zone	N/A	I||S	I	zone-ID	arg 1 description
 output_channel_name	true	returns the channel name for the specified output	N/A	S	I	output-number	arg 1 description
-pgs_create_key	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	V	P	key-id	arg 1 description	I	size	arg 2 description
-pgs_create_str_key	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	V	P	key-id	arg 1 description
-pgs_get_key_val	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	I||S	P	key-id	arg 1 description	I	index	arg 2 description
-pgs_get_str_key_val	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	S	P	key-id	arg 1 description
-pgs_key_exists	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	B	P	key-id	arg 1 description
-pgs_set_key_val	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	V	P	key-id	arg 1 description	I	index	arg 2 description	I	value	arg 3 description
-pgs_set_str_key_val	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	V	P	key-id	arg 1 description	S||I||R	<br>stringvalue	arg 2 description
-pgs_str_key_exists	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	B	P	key-id	arg 1 description
+pgs_create_key	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	V	K	key-id	arg 1 description	I	size	arg 2 description
+pgs_create_str_key	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	V	K	key-id	arg 1 description
+pgs_get_key_val	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	I||S	K	key-id	arg 1 description	I	index	arg 2 description
+pgs_get_str_key_val	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	S	K	key-id	arg 1 description
+pgs_key_exists	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	B	K	key-id	arg 1 description
+pgs_set_key_val	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	V	K	key-id	arg 1 description	I	index	arg 2 description	I	value	arg 3 description
+pgs_set_str_key_val	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	V	K	key-id	arg 1 description	S||I||R	<br>stringvalue	arg 2 description
+pgs_str_key_exists	true	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.	N/A	B	K	key-id	arg 1 description
 play_note	true	generate a MIDI note, i.e. generate a note on message followed by a note<br>  off message	N/A	I||S	I	note-number	arg 1 description	I	velocity	arg 2 description	I	sample-offset	arg 3 description	I	duration	arg 4 description
 pow	true	power (returns the value of x^y)	N/A	R||S	R	x	arg 1 description	R	y	arg 2 description
 purge_group	true	purges (i.e. unloads from RAM) the samples of the specified group	N/A	V	I	group-index	arg 1 description	I	mode	arg 2 description
@@ -172,7 +172,7 @@ redirect_midi	true	Undocumented	N/A	V	*	arg1	arg 1 description
 redirect_output	true	Routes the audio signal of the specified event to a specific output or<br>  bus	N/A	V	I	ID-number	arg 1 description	I	output-type	arg 2 description	I	index	arg 3 description
 remove_keyrange	true	assigns a text string to the specified range of keys	N/A	V	I	note-nr	arg 1 description
 reset_engine	true	Undocumented	N/A	V
-reset_ksp_timer	true	resets the KSP timer ($KSP_TIMER) to zero	N/A	V		reset_ksp_timer	arg 1 description
+reset_ksp_timer	true	resets the KSP timer ($KSP_TIMER) to zero	N/A	V
 reset_rls_trig_counter	true	dresets the release trigger counter (used by the release trigger system<br>  script)	N/A	V	I	note	arg 1 description
 round	true	round (round to nearest) round(2.3) = 2.0 round(2.8) = 3.0	N/A	R||S	R	x	arg 1 description
 save_array	true	saves an array to an external file (i.e. an .nka file)	N/A	I||S	I[]||S[]	array-variable	arg 1 description	I	mode	arg 2 description
@@ -228,7 +228,7 @@ set_zone_par	true	Sets the user zone parameters	N/A	I||S	I	zone-id	arg 1 descrip
 sgn	true	Signum function (returns -1 if the number is negative, 0 if it's zero, 1<br>  if it's positive)	N/A	I||S	I	x	arg 1 description
 sh_left	true	shifts the bits in <expression> by the amount of <shift-bits><br>  to the left	N/A	I||S	I	expression	arg 1 description	I	shift-bits	arg 2 description
 sh_right	true	shifts the bits in <expression> by the amount of <shift-bits><br>  to the right	N/A	I||S	I	expression	arg 1 description	I	shift-bits	arg 2 description
-show_library_tab	true	Undocumented	N/A	V		show_library_tab	arg 1 description
+show_library_tab	true	Undocumented	N/A	V
 signbit	true	Sign bit (returns 1 if the number is negative, 0 otherwise)	N/A	I||S	I	x	arg 1 description
 sin	true	sine function	N/A	R||S	R	x	arg 1 description
 slice_idx_loop_end	true	Undocumented	N/A	I||S	I	arg1	arg 1 description	I	arg2	arg 2 description

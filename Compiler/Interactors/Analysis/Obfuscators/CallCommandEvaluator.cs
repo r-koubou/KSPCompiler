@@ -3,6 +3,7 @@ using System.Text;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Domain.Ast.Nodes.Extensions;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations;
 using KSPCompiler.Interactors.Analysis.Obfuscators.Extensions;
 using KSPCompiler.UseCases.Analysis.Evaluations.Commands;
@@ -20,14 +21,21 @@ public class CallCommandEvaluator : ICallCommandEvaluator
     public IAstNode Evaluate( IAstVisitor visitor, AstCallCommandExpressionNode node )
     {
         node.Left.Accept( visitor );
-        Output.Append( '(' );
+
+        if( node.Right.IsNotNull() )
+        {
+            Output.Append( '(' );
+        }
 
         if( node.Right is AstExpressionListNode expressionList )
         {
             Output.AppendExpressionList( visitor, expressionList );
         }
 
-        Output.Append( ')' );
+        if( node.Right.IsNotNull() )
+        {
+            Output.Append( ')' );
+        }
 
         /*
             このコマンド呼び出しが式中ではなくステートメントの場合は改行する

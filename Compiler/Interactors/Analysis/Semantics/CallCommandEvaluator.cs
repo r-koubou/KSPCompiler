@@ -3,6 +3,7 @@ using System.Linq;
 
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Domain.Ast.Nodes.Extensions;
 using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
@@ -75,12 +76,33 @@ public class CallCommandEvaluator : ICallCommandEvaluator
 
     private bool ValidateCommandArguments( IAstVisitor visitor, AstCallCommandExpressionNode expr, CommandSymbol commandSymbol )
     {
+        var symbolArgs = commandSymbol.Arguments.ToList();
+
+        #region No arguments command calling
+        if( expr.Right.IsNull() )
+        {
+            if( symbolArgs.Count == 0 )
+            {
+                return true;
+            }
+
+            EventEmitter.Emit(
+                expr.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_command_arg_count,
+                    commandSymbol.Name
+                )
+            );
+
+            return false;
+        }
+        #endregion ~No arguments command calling
+
+        #region With arguments command calling
         if( expr.Right is not AstExpressionListNode arguments )
         {
             throw new AstAnalyzeException( expr, "Failed to evaluate command arguments" );
         }
 
-        var symbolArgs = commandSymbol.Arguments.ToList();
         var callArgs   = arguments.Expressions.ToList();
 
         if( symbolArgs.Count != callArgs.Count )
@@ -97,6 +119,7 @@ public class CallCommandEvaluator : ICallCommandEvaluator
         }
 
         return ValidateCommandArgumentType( visitor, expr, commandSymbol, callArgs, symbolArgs );
+        #endregion ~With arguments command calling
     }
 
     private bool ValidateCommandArgumentType( IAstVisitor visitor, AstCallCommandExpressionNode expr, CommandSymbol commandSymbol, IReadOnlyList<AstExpressionNode> callArgs, IReadOnlyList<CommandArgumentSymbol> symbolArgs )
