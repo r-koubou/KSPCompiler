@@ -58,7 +58,7 @@ public static class DataTypeUtility
             //--------------------------------------------------------------------------
             // For internal processing
             //--------------------------------------------------------------------------
-            '*' => DataTypeFlag.MultipleType,
+            '*' => DataTypeFlag.All,
             _   => throw new ArgumentException( $"unknown ksp type : {typePrefix} ({nameof(symbolName)}={symbolName})" )
         };
     }
@@ -104,7 +104,7 @@ public static class DataTypeUtility
                 "V"   => DataTypeFlag.TypeVoid,
                 "P"   => DataTypeFlag.TypePreprocessorSymbol,
                 "K"   => DataTypeFlag.TypePgsId,
-                "*"   => DataTypeFlag.MultipleType,
+                "*"   => DataTypeFlag.All,
                 _     => DataTypeFlag.None
             };
         }
@@ -180,7 +180,7 @@ public static class DataTypeUtility
     {
         var resultTexts = new List<string>();
 
-        if( typeFlag == DataTypeFlag.MultipleType )
+        if( typeFlag == DataTypeFlag.All )
         {
             return "*";
         }

@@ -37,7 +37,7 @@ public sealed class UITypeSymbol : SymbolBase, ISymbolDataTypeProvider
         AnyUI = new UITypeSymbol( false )
         {
             Name     = "ui_*",
-            DataType = DataTypeFlag.MultipleType,
+            DataType = DataTypeFlag.All,
             BuiltIn  = true
         };
     }

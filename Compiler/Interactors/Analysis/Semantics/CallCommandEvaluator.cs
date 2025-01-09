@@ -141,10 +141,11 @@ public class CallCommandEvaluator : ICallCommandEvaluator
             // プリミティブ型の型評価
             if( TypeCompatibility.IsTypeCompatible( evaluatedArg.TypeFlag, symbolArg.DataType ) )
             {
-                if( !symbolArg.UITypeNames.Any() )
-                {
-                    continue;
-                }
+                continue;
+            }
+            else
+            {
+                // UIチェック
 
                 // UI情報を持つ場合
                 var matchedUiType = false;
@@ -158,11 +159,22 @@ public class CallCommandEvaluator : ICallCommandEvaluator
                         break;
                     }
 
-                    if( SymbolTable.TrySearchUITypeByName( uiName, out _ ) )
+                    // 個別のUIのチェック
+
+                    if( !SymbolTable.TrySearchUITypeByName( uiName, out var uiTypeSymbol ) )
                     {
-                        matchedUiType = true;
+                        // UIが見つからない場合は型不一致としてエラー
                         break;
                     }
+
+                    // UIで定義する変数データ型と一致するかどうかチェック
+                    if( !TypeCompatibility.IsTypeCompatible( evaluatedArg.TypeFlag, uiTypeSymbol.DataType ) )
+                    {
+                        continue;
+                    }
+
+                    matchedUiType = true;
+                    break;
                 }
 
                 if( matchedUiType )

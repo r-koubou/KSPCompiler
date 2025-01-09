@@ -89,6 +89,12 @@ public static class TypeCompatibility
             return true;
         }
 
+        // どちらかが全ての型を許容する場合は型の判定を行わない
+        if( a == DataTypeFlag.All || b == DataTypeFlag.All )
+        {
+            return true;
+        }
+
         // 完全一致
         if( a == b )
         {

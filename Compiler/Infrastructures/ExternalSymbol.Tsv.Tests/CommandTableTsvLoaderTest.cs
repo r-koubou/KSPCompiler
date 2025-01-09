@@ -43,7 +43,7 @@ public class CommandTableTsvLoaderTest
 
         Assert.That( symbols[ 0 ].BuiltIntoVersion, Is.EqualTo( SymbolBuiltIntoVersion.NotAvailable ) );
         Assert.That( symbols[ 0 ].DataType, Is.EqualTo( DataTypeFlag.TypeVoid ) );
-        Assert.That( symbols[ 0 ].Arguments.First().DataType, Is.EqualTo( DataTypeFlag.MultipleType ) );
+        Assert.That( symbols[ 0 ].Arguments.First().DataType, Is.EqualTo( DataTypeFlag.All ) );
 
         Assert.That( symbols[ 1 ].BuiltIntoVersion, Is.EqualTo( SymbolBuiltIntoVersion.NotAvailable ) );
         Assert.That( symbols[ 1 ].DataType, Is.EqualTo( DataTypeFlag.TypeVoid ) );

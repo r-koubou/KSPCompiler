@@ -239,7 +239,7 @@ public static class MockUtility
             new CommandArgumentSymbol
             {
                 Name     = "message",
-                DataType = DataTypeFlag.MultipleType
+                DataType = DataTypeFlag.All
             }
         );
 

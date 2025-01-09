@@ -25,7 +25,7 @@ public class CommandSymbolEvaluatorTest
             new CommandArgumentSymbol
             {
                 Name     = "arg",
-                DataType = DataTypeFlag.MultipleType
+                DataType = DataTypeFlag.All
             }
         );
 

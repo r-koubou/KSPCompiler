@@ -57,7 +57,7 @@ public static class DataTypeFlagExtension
         => a.IsNumerical() && b.IsNumerical();
 
     public static bool IsMultiType( this DataTypeFlag flag )
-        => flag.HasFlag( DataTypeFlag.MultipleType );
+        => flag.HasFlag( DataTypeFlag.All );
 
     public static bool AreMultiType( this DataTypeFlag a, DataTypeFlag b )
         => a.IsMultiType() && b.IsMultiType();
