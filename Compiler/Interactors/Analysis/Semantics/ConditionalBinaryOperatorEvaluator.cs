@@ -56,7 +56,7 @@ public class ConditionalBinaryOperatorEvaluator : IConditionalBinaryOperatorEval
         {
             // 評価途中でフォールバックされている場合は型判定をスキップ
         }
-        else if( leftType != rightType )
+        else if( !TypeCompatibility.IsTypeCompatible( leftType, rightType ) )
         {
             EventEmitter.Emit(
                 expr.AsErrorEvent(
