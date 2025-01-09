@@ -5,6 +5,7 @@ using KSPCompiler.Domain.Ast.Nodes.Extensions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols.MetaData;
+using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations;
 using KSPCompiler.Interactors.Analysis.Extensions;
 using KSPCompiler.Resources;
@@ -28,20 +29,8 @@ public class SelectStatementEvaluator : ISelectStatementEvaluator
             throw new AstAnalyzeException( statement, "Failed to evaluate condition" );
         }
 
-        // selectの評価対象が変数ではない場合
-        if( evaluatedCondition is not AstSymbolExpressionNode )
-        {
-            EventEmitter.Emit(
-                statement.AsErrorEvent(
-                    CompilerMessageResources.semantic_error_select_condition_notvariable
-                )
-            );
-
-            return statement.Clone<AstSelectStatementNode>();
-        }
-
         // selectの評価対象が整数ではない場合
-        if( evaluatedCondition.TypeFlag != DataTypeFlag.TypeInt )
+        if( !evaluatedCondition.TypeFlag.IsInt() )
         {
             EventEmitter.Emit(
                 statement.AsErrorEvent(
