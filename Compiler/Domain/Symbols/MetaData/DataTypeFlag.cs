@@ -23,7 +23,6 @@ public enum DataTypeFlag : uint
     TypeMask                    = 0x7fffff,
     TypeNumerical               = TypeInt | TypeReal,
     TypeNonVariable             = TypePreprocessorSymbol | TypePgsId,
-    MultipleType                = 0x00ffffff & ~TypeNonVariable,
     #endregion
 
     #region Attribute

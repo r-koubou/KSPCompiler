@@ -145,7 +145,7 @@ public class SemanticAnalyzerTest
             DataTypeFlag.TypeVoid,
             new CommandArgumentSymbol
             {
-                DataType = DataTypeFlag.MultipleType
+                DataType = DataTypeFlag.All
             }
         );
 
