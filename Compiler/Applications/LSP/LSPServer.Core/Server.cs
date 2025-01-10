@@ -39,6 +39,7 @@ public class Server
                       .WithHandler<TextDocumentHandler>()
                       .WithHandler<DefinitionHandler>()
                       .WithHandler<DocumentSymbolHandler>()
+                      .WithHandler<DocumentHighlightHandler>()
                       .WithServices(
                            services =>
                            {
