@@ -12,7 +12,8 @@ public static class DocumentUtility
     {
         var c = text[ index ];
 
-        return char.IsLetterOrDigit( c )
+        return c == '_'
+               || char.IsLetterOrDigit( c )
                || DataTypeUtility.IsDataTypeCharacter( c );
     }
 
