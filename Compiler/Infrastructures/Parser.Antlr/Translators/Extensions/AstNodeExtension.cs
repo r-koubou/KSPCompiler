@@ -33,12 +33,12 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions
 
             // トークンの長さを計算
             // var leadingCount = startHiddenTokens?.Sum( x => x.Text.Length ) ?? 0;
-            var trailingCount = stopHiddenTokens?.Sum( x => x.Text.Length ) ?? 0;
+            var trailingCount = stopHiddenTokens?.Sum( x => x.Text.Trim().Length ) ?? 0;
 
             // 列情報を計算
             // var beginColumn = context.Start.Column + leadingCount;
             var beginColumn = context.Start.Column;
-            var endColumn = context.Stop.Column + ( context.Stop.Text?.Length ?? 0 ) + trailingCount;
+            var endColumn = context.Stop.Column + ( context.Stop.Text?.Trim().Length ?? 0 ) + trailingCount;
 
             // 改行を跨ぐ場合の補正
             if( context.Start.Line != context.Stop.Line )
