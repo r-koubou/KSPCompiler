@@ -11,7 +11,7 @@ using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
-namespace KSPCompiler.LSPServer.Core;
+namespace KSPCompiler.LSPServer.Core.Completions;
 
 public class CompletionListService
 {

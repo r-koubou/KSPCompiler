@@ -7,10 +7,9 @@ using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.LSPServer.Core.Extensions;
 
-using OmniSharp.Extensions.LanguageServer.Protocol;
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
-namespace KSPCompiler.LSPServer.Core;
+namespace KSPCompiler.LSPServer.Core.Symbols;
 
 public class SymbolInformationService
 {

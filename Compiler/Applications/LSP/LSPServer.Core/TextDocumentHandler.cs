@@ -2,6 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using KSPCompiler.Domain.Events;
+using KSPCompiler.LSPServer.Core.Compilations;
 
 using OmniSharp.Extensions.LanguageServer.Protocol;
 using OmniSharp.Extensions.LanguageServer.Protocol.Client.Capabilities;
