@@ -5,6 +5,7 @@ using KSPCompiler.LSPServer.Core.Compilations;
 using KSPCompiler.LSPServer.Core.Completions;
 using KSPCompiler.LSPServer.Core.Definitions;
 using KSPCompiler.LSPServer.Core.DocumentHighlights;
+using KSPCompiler.LSPServer.Core.Hovers;
 using KSPCompiler.LSPServer.Core.Symbols;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -48,6 +49,7 @@ public class Server
                       .WithHandler<DocumentHighlightHandler>()
                       .WithHandler<CompletionHandler>()
                       .WithHandler<CompletionResolveHandler>()
+                      .WithHandler<HoverHandler>()
                       .WithServices(
                            services =>
                            {
@@ -57,6 +59,7 @@ public class Server
                                services.AddSingleton<SymbolInformationService>();
                                services.AddSingleton<DocumentHighlightService>();
                                services.AddSingleton<CompletionListService>();
+                               services.AddSingleton<HoverService>();
                            }
                        )
                       .OnInitialize( ( server, request, token ) =>
