@@ -53,6 +53,7 @@ public class Server
                            {
                                services.AddSingleton<CompilationService>();
                                services.AddSingleton<CompilerCacheService>();
+                               services.AddSingleton<DefinitionService>();
                                services.AddSingleton<SymbolInformationService>();
                                services.AddSingleton<DocumentHighlightService>();
                                services.AddSingleton<CompletionListService>();

@@ -12,50 +12,18 @@ using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
 namespace KSPCompiler.LSPServer.Core.Definitions;
 
-public class DefinitionHandler : IDefinitionHandler
+public class DefinitionHandler( DefinitionService definitionService ) : IDefinitionHandler
 {
-    private CompilerCacheService CompilerCacheService { get; }
-
-    public DefinitionHandler( CompilerCacheService compilerCacheService )
-    {
-        CompilerCacheService = compilerCacheService;
-    }
+    private DefinitionService DefinitionService { get; } = definitionService;
 
     #region IDefinitionHandler
     public async Task<LocationOrLocationLinks?> Handle( DefinitionParams request, CancellationToken cancellationToken )
-    {
-        var cache = CompilerCacheService.GetCache( request.TextDocument.Uri );
-        var word = DocumentUtility.ExtractWord( cache.AllLinesText, request.Position );
-        var links = new List<LocationOrLocationLink>();
-
-        // ユーザー定義変数
-        if( cache.SymbolTable.UserVariables.TrySearchDefinitionLocation( request.TextDocument.Uri, word, out var result ) )
-        {
-            links.Add( new LocationOrLocationLink( result ) );
-        }
-
-        // ユーザー定義関数
-        if( cache.SymbolTable.UserFunctions.TrySearchDefinitionLocation( request.TextDocument.Uri, word, out result ) )
-        {
-            links.Add( new LocationOrLocationLink( result ) );
-        }
-
-        if( links.Any() )
-        {
-            return new LocationOrLocationLinks( links );
-        }
-
-        await Task.CompletedTask;
-        return null;
-    }
+        => await DefinitionService.HandleAsync( request, cancellationToken );
 
     public DefinitionRegistrationOptions GetRegistrationOptions( DefinitionCapability capability, ClientCapabilities clientCapabilities )
-    {
-        return new DefinitionRegistrationOptions()
+        => new()
         {
             DocumentSelector = ConstantValues.TextDocumentSelector
         };
-    }
     #endregion ~IDefinitionHandler
-
 }
