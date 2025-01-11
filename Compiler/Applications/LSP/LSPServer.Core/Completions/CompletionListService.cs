@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
+using KSPCompiler.LSPServer.Core.Compilations;
 
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
@@ -16,9 +17,9 @@ namespace KSPCompiler.LSPServer.Core.Completions;
 public class CompletionListService
 {
     // ReSharper disable once MemberCanBeMadeStatic.Global
-    public async Task<CompletionList> HandleAsync( CompilerCache compilerCache, CompletionParams request, CancellationToken cancellationToken )
+    public async Task<CompletionList> HandleAsync( CompilerCacheService compilerCacheService, CompletionParams request, CancellationToken cancellationToken )
     {
-        var cache = compilerCache.GetCache( request.TextDocument.Uri );
+        var cache = compilerCacheService.GetCache( request.TextDocument.Uri );
         var symbolTable = cache.SymbolTable;
         var line = cache.AllLinesText[ request.Position.Line ];
         var word = DocumentUtility.ExtractWord( cache.AllLinesText, request.Position );

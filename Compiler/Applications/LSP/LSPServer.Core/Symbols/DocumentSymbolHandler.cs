@@ -1,6 +1,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 
+using KSPCompiler.LSPServer.Core.Compilations;
+
 using OmniSharp.Extensions.LanguageServer.Protocol.Client.Capabilities;
 using OmniSharp.Extensions.LanguageServer.Protocol.Document;
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
@@ -8,15 +10,15 @@ using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 namespace KSPCompiler.LSPServer.Core.Symbols;
 
 public class DocumentSymbolHandler(
-    CompilerCache compilerCache,
+    CompilerCacheService compilerCacheService,
     SymbolInformationService symbolInformationService ) : IDocumentSymbolHandler
 {
-    private CompilerCache CompilerCache { get; } = compilerCache;
+    private CompilerCacheService CompilerCacheService { get; } = compilerCacheService;
     private SymbolInformationService SymbolInformationService { get; } = symbolInformationService;
 
     public async Task<SymbolInformationOrDocumentSymbolContainer?> Handle( DocumentSymbolParams request, CancellationToken cancellationToken )
     {
-        return await SymbolInformationService.HandleAsync( CompilerCache, request, cancellationToken );
+        return await SymbolInformationService.HandleAsync( CompilerCacheService, request, cancellationToken );
     }
 
     public DocumentSymbolRegistrationOptions GetRegistrationOptions( DocumentSymbolCapability capability, ClientCapabilities clientCapabilities )

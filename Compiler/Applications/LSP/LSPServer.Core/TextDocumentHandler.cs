@@ -21,19 +21,19 @@ internal class TextDocumentHandler : TextDocumentSyncHandlerBase
     private ILanguageServerConfiguration Configuration { get; }
 
     private CompilationService CompilationService { get; }
-    private CompilerCache CompilerCache { get; }
+    private CompilerCacheService CompilerCacheService { get; }
     private IEventEmitter CompilerEventEmitter { get; } = new EventEmitter();
 
     public TextDocumentHandler(
         ILanguageServerFacade serverFacade,
         ILanguageServerConfiguration configuration,
         CompilationService compilationService,
-        CompilerCache compilerCache )
+        CompilerCacheService compilerCacheService )
     {
         ServerFacade       = serverFacade;
         Configuration      = configuration;
         CompilationService = compilationService;
-        CompilerCache      = compilerCache;
+        CompilerCacheService      = compilerCacheService;
     }
 
     private TextDocumentSyncKind Change
