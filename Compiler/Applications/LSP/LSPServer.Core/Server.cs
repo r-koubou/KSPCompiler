@@ -52,7 +52,7 @@ public class Server
                            services =>
                            {
                                services.AddSingleton<CompilationService>();
-                               services.AddSingleton<CompilerCache>();
+                               services.AddSingleton<CompilerCacheService>();
                                services.AddSingleton<SymbolInformationService>();
                                services.AddSingleton<CompletionListService>();
                            }

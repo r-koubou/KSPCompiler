@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
+using KSPCompiler.LSPServer.Core.Compilations;
 using KSPCompiler.LSPServer.Core.Extensions;
 
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
@@ -121,9 +122,9 @@ public class SymbolInformationService
         await Task.CompletedTask;
     }
 
-    public async Task<SymbolInformationOrDocumentSymbolContainer?> HandleAsync( CompilerCache compilerCache, DocumentSymbolParams request, CancellationToken cancellationToken )
+    public async Task<SymbolInformationOrDocumentSymbolContainer?> HandleAsync( CompilerCacheService compilerCacheService, DocumentSymbolParams request, CancellationToken cancellationToken )
     {
-        var cache = compilerCache.GetCache( request.TextDocument.Uri );
+        var cache = compilerCacheService.GetCache( request.TextDocument.Uri );
         var symbolTable = cache.SymbolTable;
         var result = new List<SymbolInformationOrDocumentSymbol>();
 

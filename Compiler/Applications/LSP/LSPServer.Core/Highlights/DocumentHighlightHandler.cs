@@ -8,6 +8,7 @@ using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Interactors.Analysis.Extensions;
+using KSPCompiler.LSPServer.Core.Compilations;
 using KSPCompiler.LSPServer.Core.Extensions;
 
 using OmniSharp.Extensions.LanguageServer.Protocol.Client.Capabilities;
@@ -18,16 +19,16 @@ namespace KSPCompiler.LSPServer.Core.Highlights;
 
 public class DocumentHighlightHandler : IDocumentHighlightHandler
 {
-    private CompilerCache CompilerCache { get; }
+    private CompilerCacheService CompilerCacheService { get; }
 
-    public DocumentHighlightHandler( CompilerCache compilerCache )
+    public DocumentHighlightHandler( CompilerCacheService compilerCacheService )
     {
-        CompilerCache = compilerCache;
+        CompilerCacheService = compilerCacheService;
     }
 
     public async Task<DocumentHighlightContainer?> Handle( DocumentHighlightParams request, CancellationToken cancellationToken )
     {
-        var cache = CompilerCache.GetCache( request.TextDocument.Uri );
+        var cache = CompilerCacheService.GetCache( request.TextDocument.Uri );
         var word = DocumentUtility.ExtractWord( cache.AllLinesText, request.Position );
         var highlights = new List<DocumentHighlight>();
 

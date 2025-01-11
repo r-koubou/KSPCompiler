@@ -42,7 +42,7 @@ public class CompilationService
     private ILanguageServerFacade ServerFacade { get; }
     private ILanguageServerConfiguration Configuration { get; }
 
-    private CompilerCache CompilerCache { get; }
+    private CompilerCacheService CompilerCacheService { get; }
     private IEventEmitter CompilerEventEmitter { get; } = new EventEmitter();
 
     private readonly CompilerController compilerController = new();
@@ -50,11 +50,11 @@ public class CompilationService
     public CompilationService(
         ILanguageServerFacade serverFacade,
         ILanguageServerConfiguration configuration,
-        CompilerCache compilerCache )
+        CompilerCacheService compilerCacheService )
     {
         ServerFacade  = serverFacade;
         Configuration = configuration;
-        CompilerCache = compilerCache;
+        CompilerCacheService = compilerCacheService;
 
         // 外部定義ファイルからビルトイン変数、コマンド、コールバック、UIタイプを構築
         LoadSymbolTables( builtInSymbolTable );
@@ -112,7 +112,7 @@ public class CompilationService
 
         var allLinesText = GetScriptLines( script );
 
-        CompilerCache.UpdateCache(
+        CompilerCacheService.UpdateCache(
             uri,
             new CompilerCacheItem( allLinesText, result.SymbolTable, result.Ast )
         );

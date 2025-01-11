@@ -6,7 +6,7 @@ using KSPCompiler.Domain.Symbols;
 
 using OmniSharp.Extensions.LanguageServer.Protocol;
 
-namespace KSPCompiler.LSPServer.Core;
+namespace KSPCompiler.LSPServer.Core.Compilations;
 
 public sealed class CompilerCacheItem
 {
@@ -34,7 +34,7 @@ public sealed class CompilerCacheItem
     }
 }
 
-public sealed class CompilerCache
+public sealed class CompilerCacheService
 {
     private readonly ConcurrentDictionary<DocumentUri, CompilerCacheItem> symbolTableCache = new();
 

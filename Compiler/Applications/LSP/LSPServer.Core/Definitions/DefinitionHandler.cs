@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
+using KSPCompiler.LSPServer.Core.Compilations;
 using KSPCompiler.LSPServer.Core.Extensions;
 
 using OmniSharp.Extensions.LanguageServer.Protocol.Client.Capabilities;
@@ -13,17 +14,17 @@ namespace KSPCompiler.LSPServer.Core.Definitions;
 
 public class DefinitionHandler : IDefinitionHandler
 {
-    private CompilerCache CompilerCache { get; }
+    private CompilerCacheService CompilerCacheService { get; }
 
-    public DefinitionHandler( CompilerCache compilerCache )
+    public DefinitionHandler( CompilerCacheService compilerCacheService )
     {
-        CompilerCache = compilerCache;
+        CompilerCacheService = compilerCacheService;
     }
 
     #region IDefinitionHandler
     public async Task<LocationOrLocationLinks?> Handle( DefinitionParams request, CancellationToken cancellationToken )
     {
-        var cache = CompilerCache.GetCache( request.TextDocument.Uri );
+        var cache = CompilerCacheService.GetCache( request.TextDocument.Uri );
         var word = DocumentUtility.ExtractWord( cache.AllLinesText, request.Position );
         var links = new List<LocationOrLocationLink>();
 

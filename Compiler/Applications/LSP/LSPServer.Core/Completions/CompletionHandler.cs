@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using KSPCompiler.Domain.Symbols.MetaData;
+using KSPCompiler.LSPServer.Core.Compilations;
 
 using OmniSharp.Extensions.LanguageServer.Protocol.Client.Capabilities;
 using OmniSharp.Extensions.LanguageServer.Protocol.Document;
@@ -14,14 +15,14 @@ public class CompletionHandler : ICompletionHandler
 {
     private readonly CompletionRegistrationOptions options;
 
-    private CompilerCache CompilerCache { get; }
+    private CompilerCacheService CompilerCacheService { get; }
     private CompletionListService CompletionListService { get; }
 
     public CompletionHandler(
-        CompilerCache compilerCache,
+        CompilerCacheService compilerCacheService,
         CompletionListService completionListService )
     {
-        CompilerCache         = compilerCache;
+        CompilerCacheService         = compilerCacheService;
         CompletionListService = completionListService;
 
         var triggerCharacters = new List<string>();
@@ -37,7 +38,7 @@ public class CompletionHandler : ICompletionHandler
     }
 
     public async Task<CompletionList> Handle( CompletionParams request, CancellationToken cancellationToken )
-        => await CompletionListService.HandleAsync( CompilerCache, request, cancellationToken );
+        => await CompletionListService.HandleAsync( CompilerCacheService, request, cancellationToken );
 
     public CompletionRegistrationOptions GetRegistrationOptions( CompletionCapability capability, ClientCapabilities clientCapabilities )
         => options;
