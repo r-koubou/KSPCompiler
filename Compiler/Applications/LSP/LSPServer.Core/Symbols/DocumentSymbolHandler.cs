@@ -1,16 +1,11 @@
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Domain.Symbols.MetaData.Extensions;
-using KSPCompiler.LSPServer.Core.Extensions;
 
 using OmniSharp.Extensions.LanguageServer.Protocol.Client.Capabilities;
 using OmniSharp.Extensions.LanguageServer.Protocol.Document;
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
-namespace KSPCompiler.LSPServer.Core;
+namespace KSPCompiler.LSPServer.Core.Symbols;
 
 public class DocumentSymbolHandler(
     CompilerCache compilerCache,
