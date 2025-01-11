@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
+using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
@@ -23,6 +25,12 @@ public class CompletionListService
         var completions = new List<CompletionItem>();
 
         #region Collection of target symbols
+        // プリプロセッサ
+        var preprocessors = MatchCompletionItem(
+            symbolTable.PreProcessorSymbols,
+            word
+        );
+
         // ユーザー定義変数
         var userVariables = MatchCompletionItem(
             symbolTable.UserVariables,
@@ -63,6 +71,7 @@ public class CompletionListService
         #endregion ~Collection of target symbols
 
         #region Build completion list
+        BuildCompletionItem( preprocessors,    word, CompletionItemKind.Keyword,  "Preprocessor",      completions );
         BuildCompletionItem( userVariables,    word, CompletionItemKind.Function, "User Variable",     completions );
         BuildCompletionItem( builtInVariables, word, CompletionItemKind.Function, "Built-in Variable", completions );
         BuildCompletionItem( uiTypes,          word, CompletionItemKind.Class,    "UI Type",           completions );
@@ -96,24 +105,110 @@ public class CompletionListService
         string detail,
         List<CompletionItem> target ) where TSymbol : SymbolBase
     {
+        var stringBuilder = new StringBuilder(256);
+
         foreach( var symbol in symbols )
         {
-            var insertText = symbol.Name.Value;
+            stringBuilder.Clear();
 
-            if( DataTypeUtility.StartsWithDataTypeCharacter( partialName ) )
+            if( symbol is CommandSymbol commandSymbol )
             {
-                insertText = symbol.Name.Value[ 1.. ];
+                var completionItem = BuildCommandSnippet( commandSymbol, stringBuilder );
+
+                target.Add( completionItem );
+                continue;
+            }
+
+            if( symbol is VariableSymbol variableSymbol )
+            {
+                var item = BuildVariableItem( variableSymbol, partialName );
+
+                target.Add( item );
+                continue;
             }
 
             target.Add(
                 new CompletionItem
                 {
-                    Label      = symbol.Name.Value,
-                    Kind       = kind,
-                    Detail     = detail,
-                    InsertText = insertText
+                    Label            = symbol.Name.Value,
+                    Kind             = kind,
+                    Detail           = detail,
+                    InsertTextFormat = InsertTextFormat.PlainText,
+                    InsertText       = symbol.Name.Value
                 }
             );
         }
+    }
+
+    private static CompletionItem BuildVariableItem( VariableSymbol variableSymbol, string partialName )
+    {
+        var insertText = variableSymbol.Name.Value;
+        var kind = CompletionItemKind.Variable;
+
+        if( variableSymbol.Modifier.IsConstant() )
+        {
+            kind = CompletionItemKind.Constant;
+        }
+
+        if( DataTypeUtility.StartsWithDataTypeCharacter( partialName ) )
+        {
+            insertText = variableSymbol.Name.Value[ 1.. ];
+        }
+
+        return new CompletionItem
+        {
+            Label            = variableSymbol.Name.Value,
+            Kind             = kind,
+            Detail           = variableSymbol.BuiltIn ? "Built-in Variable" : "User Variable",
+            InsertTextFormat = InsertTextFormat.PlainText,
+            InsertText       = insertText
+        };
+    }
+
+    private static CompletionItem BuildCommandSnippet( CommandSymbol commandSymbol, StringBuilder stringBuilder )
+    {
+        if( commandSymbol.Arguments.Count == 0 )
+        {
+            return new CompletionItem
+            {
+                Label            = commandSymbol.Name.Value,
+                Kind             = CompletionItemKind.Method,
+                Detail           = "Command",
+                InsertTextFormat = InsertTextFormat.PlainText,
+                InsertText       = commandSymbol.Name.Value
+            };
+        }
+
+        stringBuilder.Append( commandSymbol.Name.Value );
+        stringBuilder.Append( "(" );
+
+        var index = 1;
+        var argCount = commandSymbol.Arguments.Count;
+
+        foreach( var arg in commandSymbol.Arguments )
+        {
+            stringBuilder.Append( "${" )
+                         .Append( index ).Append( ":" )
+                         .Append( arg.Name.Value )
+                         .Append( "}" );
+
+            if( index < argCount )
+            {
+                stringBuilder.Append( ", " );
+            }
+
+            index++;
+        }
+
+        stringBuilder.Append( ")" );
+
+        return new CompletionItem
+        {
+            Label            = commandSymbol.Name.Value,
+            Kind             = CompletionItemKind.Method,
+            Detail           = "Command",
+            InsertTextFormat = InsertTextFormat.Snippet,
+            InsertText       = stringBuilder.ToString()
+        };
     }
 }

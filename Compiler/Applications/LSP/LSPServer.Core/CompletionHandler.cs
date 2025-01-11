@@ -17,7 +17,9 @@ public class CompletionHandler : ICompletionHandler
     private CompilerCache CompilerCache { get; }
     private CompletionListService CompletionListService { get; }
 
-    public CompletionHandler( CompilerCache compilerCache, CompletionListService completionListService )
+    public CompletionHandler(
+        CompilerCache compilerCache,
+        CompletionListService completionListService )
     {
         CompilerCache         = compilerCache;
         CompletionListService = completionListService;
@@ -35,11 +37,7 @@ public class CompletionHandler : ICompletionHandler
     }
 
     public async Task<CompletionList> Handle( CompletionParams request, CancellationToken cancellationToken )
-    {
-        var completions = await CompletionListService.HandleAsync( CompilerCache, request, cancellationToken );
-
-        return completions;
-    }
+        => await CompletionListService.HandleAsync( CompilerCache, request, cancellationToken );
 
     public CompletionRegistrationOptions GetRegistrationOptions( CompletionCapability capability, ClientCapabilities clientCapabilities )
         => options;
