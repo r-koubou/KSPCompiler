@@ -48,6 +48,7 @@ public class Server
                                services.AddSingleton<CompilationService>();
                                services.AddSingleton<CompilerCache>();
                                services.AddSingleton<SymbolInformationService>();
+                               services.AddSingleton<CompletionListService>();
                            }
                        )
                       .OnInitialize( ( server, request, token ) =>
