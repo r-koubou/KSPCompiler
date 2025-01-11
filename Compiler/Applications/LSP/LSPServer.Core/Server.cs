@@ -40,6 +40,8 @@ public class Server
                       .WithHandler<DefinitionHandler>()
                       .WithHandler<DocumentSymbolHandler>()
                       .WithHandler<DocumentHighlightHandler>()
+                      .WithHandler<CompletionHandler>()
+                      .WithHandler<CompletionResolveHandler>()
                       .WithServices(
                            services =>
                            {

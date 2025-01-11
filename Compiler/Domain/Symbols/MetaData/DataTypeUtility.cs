@@ -7,6 +7,40 @@ namespace KSPCompiler.Domain.Symbols.MetaData;
 
 public static class DataTypeUtility
 {
+
+    #region KSP Language data type tables
+    private static readonly char[] KspTypeCharactersTable =
+    [
+        '$', '%', '~', '?', '@', '!'
+    ];
+
+    /// <summary>
+    /// Get KSP data type characters list.
+    /// </summary>
+    // ReSharper disable once MemberCanBePrivate.Global
+    public static IReadOnlyCollection<char> KspTypeCharacters { get; }
+        = KspTypeCharactersTable;
+
+    /// <summary>
+    /// Get KSP data type characters list.
+    /// </summary>
+    public static IReadOnlyCollection<string> KspTypeCharactersAsString { get; }
+        = KspTypeCharactersTable.Select( x => x.ToString() ).ToList();
+
+    /// <summary>
+    /// Get KSP data type character mapped to data type flag.
+    /// </summary>
+    public static IReadOnlyDictionary<char, DataTypeFlag> KspTypeCharacterType { get; } = new Dictionary<char, DataTypeFlag>
+    {
+        { '$', DataTypeFlag.TypeInt },
+        { '%', DataTypeFlag.TypeIntArray },
+        { '~', DataTypeFlag.TypeReal },
+        { '?', DataTypeFlag.TypeRealArray },
+        { '@', DataTypeFlag.TypeString },
+        { '!', DataTypeFlag.TypeStringArray }
+    };
+    #endregion
+
     /// <summary>
     /// Check if the given character matches the KSP data type character.
     /// </summary>
@@ -14,16 +48,15 @@ public static class DataTypeUtility
     /// <returns>True if the character is a KSP data type character, otherwise false.</returns>
     public static bool IsDataTypeCharacter( char c )
     {
-        return c switch
-        {
-            '$' => true,
-            '%' => true,
-            '~' => true,
-            '?' => true,
-            '@' => true,
-            '!' => true,
-            _   => false
-        };
+        return KspTypeCharacters.Contains( c );
+    }
+
+    /// <summary>
+    /// Check if the given character matches the KSP data type character.
+    /// </summary>
+    public static bool StartsWithDataTypeCharacter( string text )
+    {
+        return text.Length > 0 && IsDataTypeCharacter( text[ 0 ] );
     }
 
     /// <summary>
