@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using KSPCompiler.LSPServer.Core.Compilations;
 using KSPCompiler.LSPServer.Core.Completions;
 using KSPCompiler.LSPServer.Core.Definitions;
-using KSPCompiler.LSPServer.Core.Highlights;
+using KSPCompiler.LSPServer.Core.DocumentHighlights;
 using KSPCompiler.LSPServer.Core.Symbols;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -54,6 +54,7 @@ public class Server
                                services.AddSingleton<CompilationService>();
                                services.AddSingleton<CompilerCacheService>();
                                services.AddSingleton<SymbolInformationService>();
+                               services.AddSingleton<DocumentHighlightService>();
                                services.AddSingleton<CompletionListService>();
                            }
                        )
