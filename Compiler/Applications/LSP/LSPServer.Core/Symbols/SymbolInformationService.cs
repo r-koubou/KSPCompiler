@@ -12,7 +12,7 @@ using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
 namespace KSPCompiler.LSPServer.Core.Symbols;
 
-public class SymbolInformationService
+public sealed class SymbolInformationService
 {
     private static readonly IReadOnlyDictionary<DataTypeFlag, string> DataTypeTextMap = new Dictionary<DataTypeFlag, string>
     {

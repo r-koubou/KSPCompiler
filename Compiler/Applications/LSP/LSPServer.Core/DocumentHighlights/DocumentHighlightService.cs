@@ -9,7 +9,7 @@ using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
 namespace KSPCompiler.LSPServer.Core.DocumentHighlights;
 
-public class DocumentHighlightService( CompilerCacheService compilerCacheService )
+public sealed class DocumentHighlightService( CompilerCacheService compilerCacheService )
 {
     private CompilerCacheService CompilerCacheService { get; } = compilerCacheService;
 
