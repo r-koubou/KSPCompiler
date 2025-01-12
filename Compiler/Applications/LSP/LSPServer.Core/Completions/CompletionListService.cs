@@ -72,8 +72,8 @@ public sealed class CompletionListService
         #endregion ~Collection of target symbols
 
         #region Build completion list
-        BuildCompletionItem( preprocessors,    word, CompletionItemKind.Keyword,  "Preprocessor",      completions );
-        BuildCompletionItem( userVariables,    word, CompletionItemKind.Function, "User Variable",     completions );
+        BuildCompletionItem( preprocessors,    word, CompletionItemKind.Variable, "Preprocessor",      completions );
+        BuildCompletionItem( userVariables,    word, CompletionItemKind.Variable, "User Variable",     completions );
         BuildCompletionItem( builtInVariables, word, CompletionItemKind.Function, "Built-in Variable", completions );
         BuildCompletionItem( uiTypes,          word, CompletionItemKind.Class,    "UI Type",           completions );
         BuildCompletionItem( commands,         word, CompletionItemKind.Method,   "Command",           completions );
@@ -146,7 +146,7 @@ public sealed class CompletionListService
         var insertText = variableSymbol.Name.Value;
         var kind = CompletionItemKind.Variable;
 
-        if( variableSymbol.Modifier.IsConstant() )
+        if( !variableSymbol.BuiltIn && variableSymbol.Modifier.IsConstant() )
         {
             kind = CompletionItemKind.Constant;
         }
