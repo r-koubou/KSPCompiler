@@ -15,7 +15,8 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         {
             var node = new AstVariableDeclarationNode();
             node.Import( tokenStream, context );
-            node.Name = context.name.Text;
+            node.Name         = context.name.Text;
+            node.CommentLines = GetCommentTextLinesToLeft( context );
 
             node.VariableNamePosition = new Position
             {

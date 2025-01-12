@@ -26,7 +26,7 @@ using OmniSharp.Extensions.LanguageServer.Protocol.Server;
 
 namespace KSPCompiler.LSPServer.Core.Compilations;
 
-public class CompilationService
+public sealed class CompilationService
 {
     private readonly AggregateSymbolTable builtInSymbolTable = new(
         builtInVariables: new VariableSymbolTable(),

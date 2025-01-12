@@ -30,7 +30,8 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             var node = new AstCallbackDeclarationNode();
 
             node.Import( tokenStream, context );
-            node.Name     = context.name.Text;
+            node.Name         = context.name.Text;
+            node.CommentLines = GetCommentTextLinesToLeft( context );
 
             node.Position = ToPosition( context );
             node.CallvackNamePosition = new Position
@@ -62,7 +63,8 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             var node = new AstUserFunctionDeclarationNode();
 
             node.Import( tokenStream, context );
-            node.Name                 = context.name.Text;
+            node.Name         = context.name.Text;
+            node.CommentLines = GetCommentTextLinesToLeft( context );
 
             node.Position             = ToPosition( context );
             node.FunctionNamePosition = new Position

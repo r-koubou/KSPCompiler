@@ -46,7 +46,8 @@ public class CallbackDeclarationEvaluator : ICallbackDeclarationEvaluator
         }
         else
         {
-            thisCallback = builtInCallback;
+            thisCallback              = builtInCallback.Clone<CallbackSymbol>();
+            thisCallback.CommentLines = node.CommentLines;
         }
 
         if( !UserCallbackSymbols.Add( thisCallback ) )

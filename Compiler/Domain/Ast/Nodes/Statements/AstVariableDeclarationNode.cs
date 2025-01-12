@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 using KSPCompiler.Commons.Text;
 
 namespace KSPCompiler.Domain.Ast.Nodes.Statements
@@ -7,6 +9,11 @@ namespace KSPCompiler.Domain.Ast.Nodes.Statements
     /// </summary>
     public class AstVariableDeclarationNode : AstStatementNode, INameable
     {
+        /// <summary>
+        /// Comment lines if written above the variable declaration, otherwise empty
+        /// </summary>
+        public IReadOnlyCollection<string> CommentLines { get; set; } = new List<string>();
+
         /// <summary>
         /// modifier
         /// </summary>

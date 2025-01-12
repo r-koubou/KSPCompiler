@@ -14,7 +14,7 @@ using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
 namespace KSPCompiler.LSPServer.Core.Completions;
 
-public class CompletionListService
+public sealed class CompletionListService
 {
     // ReSharper disable once MemberCanBeMadeStatic.Global
     public async Task<CompletionList> HandleAsync( CompilerCacheService compilerCacheService, CompletionParams request, CancellationToken cancellationToken )

@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 using KSPCompiler.Commons.Text;
 using KSPCompiler.Domain.Symbols.MetaData;
 
@@ -7,8 +10,16 @@ namespace KSPCompiler.Domain.Symbols;
 /// Represents a symbol in the symbol table.
 /// </summary>
 /// <seealso cref="ISymbolTable{TSymbol}"/>
-public abstract class SymbolBase
+public abstract class SymbolBase : ICloneable
 {
+    /// <summary>
+    /// If comment text above declaration exists.
+    /// </summary>
+    /// <remarks>
+    /// In semantic analysis, if ast node has a comment, it is stored in this property.
+    /// </remarks>
+    public IReadOnlyCollection<string> CommentLines { get; set; } = new List<string>();
+
     /// <summary>
     /// Symbol definition location information.
     /// </summary>
@@ -64,4 +75,21 @@ public abstract class SymbolBase
     /// If the symbol can represent a constant value, this property holds the value. Otherwise, it is null.
     /// </summary>
     public object? ConstantValue { get; set; } = null;
+
+    /// <summary>
+    /// <seealso cref="System.ICloneable.Clone()"/>
+    /// </summary>
+    object ICloneable.Clone()
+    {
+        return Clone<object>();
+    }
+
+    /// <summary>
+    /// <seealso cref="System.ICloneable.Clone()"/>
+    /// </summary>
+    // ReSharper disable once MemberCanBePrivate.Global
+    public T Clone<T>() where T : class
+    {
+        return (T)MemberwiseClone();
+    }
 }
