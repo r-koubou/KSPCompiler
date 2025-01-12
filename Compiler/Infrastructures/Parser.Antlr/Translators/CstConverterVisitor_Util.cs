@@ -98,9 +98,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             text = text.Replace( "{", "" )
                        .Replace( "}", "" );
 
-            return RegexNewLine.Split( text )
-                               .Where( x => !string.IsNullOrWhiteSpace( x ) )
-                               .ToList();
+            return RegexNewLine.Split( text ).ToList();
         }
 
         #endregion ~Comments
