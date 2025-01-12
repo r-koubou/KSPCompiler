@@ -40,10 +40,10 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         private static readonly Regex RegexNewLine = new Regex( @"\r\n|\r|\n" );
 
-        private IReadOnlyCollection<IToken> GetCommentsToLeft( ParserRuleContext context )
-            => GetCommentsToLeft( context.Start.TokenIndex );
+        private IReadOnlyCollection<IToken> GetCommentTokensToLeft( ParserRuleContext context )
+            => GetCommentTokensToLeft( context.Start.TokenIndex );
 
-        private IReadOnlyCollection<IToken> GetCommentsToLeft( int tokenIndex )
+        private IReadOnlyCollection<IToken> GetCommentTokensToLeft( int tokenIndex )
         {
             var comments = new List<IToken>();
 
@@ -72,6 +72,23 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             comments.Reverse();
 
             return comments;
+        }
+
+        private IReadOnlyCollection<string> GetCommentTextLinesToLeft( ParserRuleContext context )
+            => GetCommentTextLinesToLeft( context.Start.TokenIndex );
+
+        private IReadOnlyCollection<string> GetCommentTextLinesToLeft( int tokenIndex )
+        {
+            var tokens = GetCommentTokensToLeft( tokenIndex );
+
+            var result = new List<string>();
+
+            if( tokens.Any() )
+            {
+                result.AddRange( GetCommentText( tokens.Last().Text ) );
+            }
+
+            return result;
         }
 
         private static IReadOnlyCollection<string> GetCommentText( string commentText )

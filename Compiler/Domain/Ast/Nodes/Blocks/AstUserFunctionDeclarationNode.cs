@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 using KSPCompiler.Commons.Text;
 
 namespace KSPCompiler.Domain.Ast.Nodes.Blocks
@@ -7,6 +9,11 @@ namespace KSPCompiler.Domain.Ast.Nodes.Blocks
     /// </summary>
     public class AstUserFunctionDeclarationNode : AstFunctionalNode
     {
+        /// <summary>
+        /// Comment lines if written above the variable declaration, otherwise empty
+        /// </summary>
+        public IReadOnlyCollection<string> CommentLines { get; set; } = new List<string>();
+
         /// <summary>
         /// Function name position
         /// </summary>
