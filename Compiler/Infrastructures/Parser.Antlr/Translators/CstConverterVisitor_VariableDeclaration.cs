@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 using KSPCompiler.Commons.Text;
 using KSPCompiler.Domain.Ast.Nodes;
@@ -13,9 +14,18 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
     {
         public override AstNode VisitVariableDeclaration( KSPParser.VariableDeclarationContext context )
         {
+            var comments = GetCommentsToLeft( context );
+            var commentLines = new List<string>();
+
+            if( comments.Any() )
+            {
+                commentLines.AddRange( GetCommentText( comments.Last().Text ) );
+            }
+
             var node = new AstVariableDeclarationNode();
             node.Import( tokenStream, context );
             node.Name = context.name.Text;
+            node.CommentLines = commentLines;
 
             node.VariableNamePosition = new Position
             {

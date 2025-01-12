@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -34,6 +36,23 @@ public sealed class HoverService( CompilerCacheService compilerCacheService )
     {
         var cache = CompilerCacheService.GetCache( request.TextDocument.Uri );
         var word = DocumentUtility.ExtractWord( cache.AllLinesText, request.Position );
+
+        // ユーザー定義変数(コメントがある場合)
+        if( cache.SymbolTable.UserVariables.TrySearchByName( word, out var userVariableSymbol ) )
+        {
+            if( !userVariableSymbol.CommentLines.Any() )
+            {
+                return null;
+            }
+            return new Hover
+            {
+                Contents = new MarkedStringsOrMarkupContent(
+                    new MarkedString(
+                        BuildHoverTextFromUserComment( userVariableSymbol.CommentLines )
+                    )
+                )
+            };
+        }
 
         // ビルトイン変数
         if( cache.SymbolTable.BuiltInVariables.TrySearchByName( word, out var builtInVariableSymbol ) )
@@ -166,6 +185,27 @@ public sealed class HoverService( CompilerCacheService compilerCacheService )
             {
                 builder.AppendLine( $"  - {argType}" );
             }
+        }
+
+        return builder.ToString();
+    }
+
+    private static string BuildHoverTextFromUserComment( IReadOnlyCollection<string> commentLines )
+    {
+        var builder = new StringBuilder( 64 );
+
+        var  minIndent = commentLines
+                       .Where( line => line.Trim().Length > 0 )
+                       .Select( line => line.Length - line.TrimStart().Length )
+                       .DefaultIfEmpty( 0 )
+                       .Min();
+
+        var normalizedLines = commentLines
+           .Select( line => line.Length >= minIndent ? line.Substring( minIndent ) : line );
+
+        foreach( var line in normalizedLines )
+        {
+            builder.AppendLine( line );
         }
 
         return builder.ToString();

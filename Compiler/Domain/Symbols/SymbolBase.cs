@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 using KSPCompiler.Commons.Text;
 using KSPCompiler.Domain.Symbols.MetaData;
 
@@ -9,6 +11,14 @@ namespace KSPCompiler.Domain.Symbols;
 /// <seealso cref="ISymbolTable{TSymbol}"/>
 public abstract class SymbolBase
 {
+    /// <summary>
+    /// If comment text above declaration exists.
+    /// </summary>
+    /// <remarks>
+    /// In semantic analysis, if ast node has a comment, it is stored in this property.
+    /// </remarks>
+    public IReadOnlyCollection<string> CommentLines { get; set; } = new List<string>();
+
     /// <summary>
     /// Symbol definition location information.
     /// </summary>
