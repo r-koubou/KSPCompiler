@@ -9,9 +9,10 @@ public static class AstCallbackDeclarationExtension
     {
         var result = new CallbackSymbol( false )
         {
-            Name        = self.Name,
-            BuiltIn     = false,
-            Description = $"Created from {nameof( AstCallbackDeclarationExtension )}.{nameof( As )}"
+            Name         = self.Name,
+            BuiltIn      = false,
+            Description  = $"Created from {nameof( AstCallbackDeclarationExtension )}.{nameof( As )}",
+            CommentLines = self.CommentLines
         };
 
         foreach ( var arg in self.ArgumentList.Arguments )

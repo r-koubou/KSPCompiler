@@ -51,6 +51,12 @@ public sealed class HoverService( CompilerCacheService compilerCacheService )
             return hover;
         }
 
+        // ユーザー定義コールバック(コメントがある場合)
+        if( TryBuildHoverForUserDefinition( cache.SymbolTable.UserCallbacks, word, out hover ) )
+        {
+            return hover;
+        }
+
         #endregion ~User deffinitions
 
         #region BuiltIn
@@ -71,6 +77,13 @@ public sealed class HoverService( CompilerCacheService compilerCacheService )
         {
             return hover;
         }
+
+        // ユーザー定義コールバック(コメントが無い場合はビルトインのコールバックのDescriptionを表示)
+        if( TryBuildHover( cache.SymbolTable.BuiltInCallbacks, word, out hover ) )
+        {
+            return hover;
+        }
+
         #endregion ~BuiltIn
 
         await Task.CompletedTask;
