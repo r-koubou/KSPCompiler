@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,67 +38,94 @@ public sealed class HoverService( CompilerCacheService compilerCacheService )
         var cache = CompilerCacheService.GetCache( request.TextDocument.Uri );
         var word = DocumentUtility.ExtractWord( cache.AllLinesText, request.Position );
 
+        #region User deffinitions
         // ユーザー定義変数(コメントがある場合)
-        if( cache.SymbolTable.UserVariables.TrySearchByName( word, out var userVariableSymbol ) )
+        if( TryBuildHoverForUserDefinition( cache.SymbolTable.UserVariables, word, out var hover ) )
         {
-            if( !userVariableSymbol.CommentLines.Any() )
-            {
-                return null;
-            }
-            return new Hover
-            {
-                Contents = new MarkedStringsOrMarkupContent(
-                    new MarkedString(
-                        BuildHoverTextFromUserComment( userVariableSymbol.CommentLines )
-                    )
-                )
-            };
+            return hover;
         }
 
-        // ビルトイン変数
-        if( cache.SymbolTable.BuiltInVariables.TrySearchByName( word, out var builtInVariableSymbol ) )
+        // ユーザー定義関数(コメントがある場合)
+        if( TryBuildHoverForUserDefinition( cache.SymbolTable.UserFunctions, word, out hover ) )
         {
-            return new Hover
-            {
-                Contents = new MarkedStringsOrMarkupContent(
-                    new MarkedString(
-                        builtInVariableSymbol.Description.Value
-                    )
-                )
-            };
+            return hover;
+        }
+
+        #endregion ~User deffinitions
+
+        #region BuiltIn
+        // ビルトイン変数
+        if( TryBuildHover( cache.SymbolTable.BuiltInVariables, word, out hover ) )
+        {
+            return hover;
         }
 
         // UI型
-        if( cache.SymbolTable.UITypes.TrySearchByName( word, out var uiTypeSymbol ) )
+        if( TryBuildHover( cache.SymbolTable.UITypes, word, out hover, GetUIypeHoverText ) )
         {
-            var hoverText = GetUIypeHoverText( uiTypeSymbol );
-
-            return new Hover
-            {
-                Contents = new MarkedStringsOrMarkupContent(
-                    new MarkedString(
-                        hoverText
-                    )
-                )
-            };
+            return hover;
         }
 
         // コマンド
-        if( cache.SymbolTable.Commands.TrySearchByName( word, out var commandSymbol ) )
+        if( TryBuildHover( cache.SymbolTable.Commands, word, out hover, GetCommandHoverText ) )
         {
-            var hoverText = GetCommandHoverText( commandSymbol );
-
-            return new Hover
-            {
-                Contents = new MarkedStringsOrMarkupContent(
-                    new MarkedString( hoverText )
-                )
-            };
+            return hover;
         }
+        #endregion ~BuiltIn
 
         await Task.CompletedTask;
 
         return null;
+    }
+
+    private static bool TryBuildHover<TSymbol>(
+        ISymbolTable<TSymbol> symbols,
+        string word,
+        out Hover? result,
+        Func<TSymbol, string>? hoverTextBuilder = null )
+        where TSymbol : SymbolBase
+    {
+        result = null;
+
+        if( !symbols.TrySearchByName( word, out var symbol ) )
+        {
+            return false;
+        }
+
+        var hoverText = symbol.Description.Value;
+
+        if( hoverTextBuilder!= null )
+        {
+            hoverText = hoverTextBuilder( symbol );
+        }
+
+        if( string.IsNullOrWhiteSpace( hoverText ) )
+        {
+            return false;
+        }
+
+        result = new Hover
+        {
+            Contents = new MarkedStringsOrMarkupContent(
+                new MarkedString( hoverText )
+            )
+        };
+
+        return true;
+    }
+
+    private static bool TryBuildHoverForUserDefinition<TSymbol>(
+        ISymbolTable<TSymbol> symbols,
+        string word,
+        out Hover? result )
+        where TSymbol : SymbolBase
+    {
+        return TryBuildHover(
+            symbols,
+            word,
+            out result,
+            symbol => BuildHoverTextFromUserComment( symbol.CommentLines )
+        );
     }
 
     private static string GetUIypeHoverText( UITypeSymbol uiTypeSymbol )
