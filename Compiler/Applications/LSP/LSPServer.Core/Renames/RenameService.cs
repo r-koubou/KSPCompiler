@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-using KSPCompiler.Domain.Symbols.MetaData;
+using KSPCompiler.LSPServer.Core.Ast;
 using KSPCompiler.LSPServer.Core.Compilations;
+using KSPCompiler.LSPServer.Core.Extensions;
 
 using OmniSharp.Extensions.LanguageServer.Protocol;
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
-using Range = OmniSharp.Extensions.LanguageServer.Protocol.Models.Range;
+using DomainPosition = KSPCompiler.Commons.Text.Position;
 
 namespace KSPCompiler.LSPServer.Core.Renames;
 
@@ -25,40 +25,28 @@ public sealed class RenameService( CompilerCacheService compilerCacheService )
         var orgName = DocumentUtility.ExtractWord( cache.AllLinesText, request.Position );
         var newName = request.NewName;
         var changes = new Dictionary<DocumentUri, IEnumerable<TextEdit>>();
-        var lineIndex = -1;
 
-        var regex = new Regex( $@"\b{orgName}\b" );
+        var variableFinder = new VariableSymbolAppearanceFinder( orgName, cache.SymbolTable.UserVariables );
+        var variableAppearances = variableFinder.Find( cache.Ast );
 
-        if( DataTypeUtility.IsDataTypeCharacter( orgName[ 0 ] ) )
+        BuildChanges( uri, orgName, newName, variableAppearances, changes );
+
+        await Task.CompletedTask;
+
+        return new WorkspaceEdit
         {
-            regex = new Regex( $@"\{orgName}\b" );
-        }
+            Changes = changes
+        };
+    }
 
-        foreach( var line in cache.AllLinesText )
+    private static void BuildChanges( DocumentUri uri, string orgName, string newName, IEnumerable<DomainPosition> appearances, Dictionary<DocumentUri, IEnumerable<TextEdit>> changes )
+    {
+        foreach( var x in appearances )
         {
-            lineIndex++;
-
-            var newLine = line;
-            var orgLineLength = line.Length;
-            var matches = regex.Matches( line );
-
-            if( matches.Count == 0 )
-            {
-                continue;
-            }
-
-            foreach( Match m in matches )
-            {
-                newLine = regex.Replace( newLine, newName );
-            }
-
             var textEdit = new TextEdit
             {
-                NewText = newLine,
-                Range = new Range(
-                    new Position( lineIndex, 0 ),
-                    new Position( lineIndex, orgLineLength )
-                )
+                NewText = newName,
+                Range   = x.AsRange()
             };
 
             if( changes.TryGetValue( uri, out var edits ) )
@@ -70,13 +58,6 @@ public sealed class RenameService( CompilerCacheService compilerCacheService )
                 changes.Add( uri, [textEdit] );
             }
         }
-
-        await Task.CompletedTask;
-
-        return new WorkspaceEdit
-        {
-            Changes = changes
-        };
     }
 
     public async Task<RangeOrPlaceholderRange?> HandleAsync( PrepareRenameParams request, CancellationToken cancellationToken )

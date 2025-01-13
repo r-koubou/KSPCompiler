@@ -52,6 +52,7 @@ public class Server
                       .WithHandler<CompletionResolveHandler>()
                       .WithHandler<HoverHandler>()
                       .WithHandler<RenameHandler>()
+                      .WithHandler<PrepareRenameHandler>()
                       .WithServices(
                            services =>
                            {
