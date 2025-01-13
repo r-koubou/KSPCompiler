@@ -204,7 +204,7 @@ public static class MockUtility
 
     public static AstSymbolExpressionNode CreateAstSymbolExpression( VariableSymbol variable )
     {
-        return new AstSymbolExpressionNode( variable.Name, NullAstExpressionNode.Instance )
+        return new AstSymbolExpressionNode( variable.Name )
         {
             TypeFlag = variable.DataType,
             Constant = variable.Modifier.IsConstant()

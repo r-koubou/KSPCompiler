@@ -23,42 +23,17 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
         /// <summary>
         /// Ctor
         /// </summary>
-        public AstSymbolExpressionNode( string name, IAstNode parent, AstExpressionNode left )
-            : base( AstNodeId.Symbol, parent, left, NullAstExpressionNode.Instance )
+        public AstSymbolExpressionNode( IAstNode parent, string name )
+            : base( AstNodeId.Symbol, parent, NullAstExpressionNode.Instance, NullAstExpressionNode.Instance )
         {
             Name = name;
-        }
-
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        public AstSymbolExpressionNode( string name, AstExpressionNode left )
-            : base( AstNodeId.Symbol, left, NullAstExpressionNode.Instance )
-        {
-            Name = name;
-        }
-
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        public AstSymbolExpressionNode( IAstNode parent, AstExpressionNode left )
-            : this( string.Empty, parent, left )
-        {
-        }
-
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        public AstSymbolExpressionNode( AstExpressionNode left )
-            : this( string.Empty, left )
-        {
         }
 
         /// <summary>
         /// Ctor
         /// </summary>
         public AstSymbolExpressionNode( string name )
-            : this( name, NullAstExpressionNode.Instance )
+            : this()
         {
             Name = name;
         }
