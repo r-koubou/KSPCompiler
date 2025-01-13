@@ -17,7 +17,7 @@ namespace KSPCompiler.Domain.Ast.Nodes.Blocks
         /// <summary>
         /// Callback name position
         /// </summary>
-        public Position CallvackNamePosition { get; set; } = new();
+        public Position CallbackNamePosition { get; set; } = new();
 
         /// <summary>
         /// Ctor

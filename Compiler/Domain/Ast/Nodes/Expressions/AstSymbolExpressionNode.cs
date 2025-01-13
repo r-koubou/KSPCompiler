@@ -13,52 +13,19 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
         public virtual bool BuiltIn { get; set; }
 
         /// <summary>
-        /// Represents a symbol state for evaluation in analysis.
-        /// </summary>
-        /// <remarks>
-        /// Typically, this property will be set in evaluation process as return evaluation result.
-        /// </remarks>
-        public SymbolState SymbolState { get; set; } = SymbolState.UnInitialized;
-
-        /// <summary>
         /// Ctor
         /// </summary>
-        public AstSymbolExpressionNode( string name, IAstNode parent, AstExpressionNode left )
-            : base( AstNodeId.Symbol, parent, left, NullAstExpressionNode.Instance )
+        public AstSymbolExpressionNode( IAstNode parent, string name )
+            : base( AstNodeId.Symbol, parent, NullAstExpressionNode.Instance, NullAstExpressionNode.Instance )
         {
             Name = name;
-        }
-
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        public AstSymbolExpressionNode( string name, AstExpressionNode left )
-            : base( AstNodeId.Symbol, left, NullAstExpressionNode.Instance )
-        {
-            Name = name;
-        }
-
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        public AstSymbolExpressionNode( IAstNode parent, AstExpressionNode left )
-            : this( string.Empty, parent, left )
-        {
-        }
-
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        public AstSymbolExpressionNode( AstExpressionNode left )
-            : this( string.Empty, left )
-        {
         }
 
         /// <summary>
         /// Ctor
         /// </summary>
         public AstSymbolExpressionNode( string name )
-            : this( name, NullAstExpressionNode.Instance )
+            : this()
         {
             Name = name;
         }

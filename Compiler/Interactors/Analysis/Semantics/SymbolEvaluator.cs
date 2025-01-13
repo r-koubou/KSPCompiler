@@ -17,20 +17,19 @@ public class SymbolEvaluator : ISymbolEvaluator
 
     private static AstExpressionNode CreateEvaluateNode( AstExpressionNode source, SymbolBase symbol, ISymbolDataTypeProvider symbolType )
     {
-        var result = new AstSymbolExpressionNode( symbol.Name, source.Left )
+        var result = new AstSymbolExpressionNode( source.Left, symbol.Name )
         {
             Parent      = source.Parent,
             TypeFlag    = symbolType.DataType,
             Constant    = symbol.Modifier.IsConstant(),
-            BuiltIn     = symbol.BuiltIn,
-            SymbolState = symbol.State
+            BuiltIn     = symbol.BuiltIn
         };
 
         return result;
     }
 
     private static AstExpressionNode CreateEvaluateNode( AstExpressionNode source, DataTypeFlag type, bool isConstant )
-        => new AstSymbolExpressionNode( source.Name, source.Left )
+        => new AstSymbolExpressionNode( source.Left, source.Name )
         {
             Parent   = source.Parent,
             TypeFlag = type,
