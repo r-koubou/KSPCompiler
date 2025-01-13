@@ -60,6 +60,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             Output.Append( $" {modifier}" );
         }
 
+
         Output.Append( $" {name}" );
 
         if( node.Initializer.IsNotNull() )
@@ -105,6 +106,12 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
     private void OutputArrayInitializer( IAstVisitor visitor, AstVariableDeclarationNode node )
     {
         OutputArraySize( visitor, node.Initializer.ArrayInitializer );
+
+        if( node.Initializer.ArrayInitializer.HasAssignOperator )
+        {
+            Output.Append( " := " );
+        }
+
         OutputArrayElements( visitor, node.Initializer.ArrayInitializer );
     }
 
@@ -137,6 +144,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         }
         else
         {
+            Output.Append( " := " );
             OutputPrimitiveBasedUIInitializer( visitor, node.Initializer.PrimitiveInitializer.UIInitializer );
         }
     }
@@ -144,6 +152,12 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
     private void OutputArrayBasedUIInitializer( IAstVisitor visitor, AstVariableDeclarationNode node )
     {
         OutputArraySize( visitor, node.Initializer.ArrayInitializer );
+
+        if( node.Initializer.ArrayInitializer.HasAssignOperator )
+        {
+            Output.Append( " := " );
+        }
+
         OutputUIArguments( visitor, node.Initializer.ArrayInitializer.Initializer );
     }
 
