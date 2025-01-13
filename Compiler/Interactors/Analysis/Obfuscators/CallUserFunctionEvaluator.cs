@@ -21,7 +21,7 @@ public class CallUserFunctionEvaluator : ICallUserFunctionEvaluator
 
     public IAstNode Evaluate( IAstVisitor visitor, AstCallUserFunctionStatementNode statement )
     {
-        var name = ObfuscatedTable.GetObfuscatedByName( statement.Name );
+        var name = ObfuscatedTable.GetObfuscatedByName( statement.Symbol.Name );
 
         Output.Append( $"call {name}" ).NewLine();
 

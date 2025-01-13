@@ -375,7 +375,7 @@ public static class MockUtility
     {
         return new AstCallUserFunctionStatementNode
         {
-            Name = function.Name
+            Symbol = new AstSymbolExpressionNode( function.Name )
         };
     }
 
@@ -383,7 +383,7 @@ public static class MockUtility
     {
         return new AstCallUserFunctionStatementNode
         {
-            Name = name
+            Symbol = new AstSymbolExpressionNode( name )
         };
     }
 

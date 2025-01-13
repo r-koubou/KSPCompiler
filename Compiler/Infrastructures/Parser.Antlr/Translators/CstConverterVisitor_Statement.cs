@@ -2,6 +2,7 @@
 
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Domain.Events;
 using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
@@ -103,9 +104,13 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
         public override AstNode VisitCallUserFunction( KSPParser.CallUserFunctionContext context )
         {
+            var symbol = new AstSymbolExpressionNode( context.name.Text );
+            symbol.Import( tokenStream, context.name );
+
             var node = new AstCallUserFunctionStatementNode();
             node.Import( tokenStream, context );
-            node.Name = context.name.Text;
+            symbol.Parent = node;
+            node.Symbol = symbol;
 
             return node;
         }
