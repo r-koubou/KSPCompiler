@@ -43,7 +43,7 @@ public class AstPgsSymbolEvaluationTest
     [Test]
     public void PgsSymbolEvalTest()
     {
-        var symbolExpr = new AstSymbolExpressionNode( "TEST", NullAstExpressionNode.Instance );
+        var symbolExpr = new AstSymbolExpressionNode( "TEST" );
         PgsSymbolTestBody( symbolExpr, 0 );
     }
 
@@ -51,7 +51,7 @@ public class AstPgsSymbolEvaluationTest
     public void CannotEvaluatePgsIdIsOver64Characters()
     {
         var over64Chars = new string( 'A', 65 );
-        var symbolExpr = new AstSymbolExpressionNode( over64Chars, NullAstExpressionNode.Instance );
+        var symbolExpr = new AstSymbolExpressionNode( over64Chars );
         PgsSymbolTestBody( symbolExpr, 1 );
     }
 }

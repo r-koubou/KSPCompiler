@@ -34,7 +34,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             node.CommentLines = GetCommentTextLinesToLeft( context );
 
             node.Position = ToPosition( context );
-            node.CallvackNamePosition = new Position
+            node.CallbackNamePosition = new Position
             {
                 BeginLine   = context.name.Line,
                 BeginColumn = context.name.Column,

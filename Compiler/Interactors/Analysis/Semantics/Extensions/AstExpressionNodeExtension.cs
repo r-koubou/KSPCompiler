@@ -20,7 +20,12 @@ public static class AstExpressionNodeExtension
             return true;
         }
 
-        if( symbolNode.SymbolState == SymbolState.UnInitialized )
+        if( !symbolTable.TrySearchVariableByName( symbolNode.Name, out var variable ) )
+        {
+            return true;
+        }
+
+        if( variable.State == SymbolState.UnInitialized )
         {
             eventEmitter.Emit(
                 parent.AsErrorEvent(
@@ -32,10 +37,7 @@ public static class AstExpressionNodeExtension
             return false;
         }
 
-        if( symbolTable.TrySearchVariableByName( symbolNode.Name, out var variable ) )
-        {
-            variable.State = SymbolState.Loaded;
-        }
+        variable.State = SymbolState.Loaded;
 
         return true;
     }

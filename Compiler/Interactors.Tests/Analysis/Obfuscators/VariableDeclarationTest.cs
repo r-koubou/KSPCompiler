@@ -261,6 +261,7 @@ public class VariableDeclarationTest
         var node = new AstVariableDeclarationNode
         {
             Name = variableName,
+            Modifier = new AstModiferNode( ui.Name ),
             Initializer = new AstVariableInitializerNode
             {
                 PrimitiveInitializer = new AstPrimitiveInitializerNode(
@@ -313,12 +314,14 @@ public class VariableDeclarationTest
         var arraySize = new AstArrayInitializerNode
         {
             Size = new AstIntLiteralNode( 2 ),
-            Initializer = uiInitializer
+            Initializer = uiInitializer,
+            HasAssignOperator = true,
         };
 
         var node = new AstVariableDeclarationNode
         {
-            Name = variableName,
+            Name     = variableName,
+            Modifier = new AstModiferNode( ui.Name ),
             Initializer = new AstVariableInitializerNode
             {
                 ArrayInitializer = arraySize
