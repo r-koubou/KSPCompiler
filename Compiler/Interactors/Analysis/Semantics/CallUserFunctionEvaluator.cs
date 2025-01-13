@@ -29,17 +29,17 @@ public class CallUserFunctionEvaluator : ICallUserFunctionEvaluator
             EventEmitter.Emit(
                 statement.AsErrorEvent(
                     CompilerMessageResources.semantic_error_userfunction_call_initcallback,
-                    statement.Name,
+                    statement.Symbol.Name,
                     callback.Name
                 )
             );
         }
-        else if( !UserFunctions.TrySearchByName( statement.Name, out _ ) )
+        else if( !UserFunctions.TrySearchByName( statement.Symbol.Name, out _ ) )
         {
             EventEmitter.Emit(
                 statement.AsErrorEvent(
                     CompilerMessageResources.semantic_error_userfunction_unknown,
-                    statement.Name
+                    statement.Symbol.Name
                 )
             );
         }

@@ -60,7 +60,7 @@ public class DocumentHighlightFinder(AstCompilationUnitNode ast, AggregateSymbol
 
     public override IAstNode Visit( AstCallUserFunctionStatementNode node )
     {
-        if( !SymbolTable.TrySearchVariableByName( node.Name, out var v ) )
+        if( !SymbolTable.TrySearchVariableByName( node.Symbol.Name, out var v ) )
         {
             return node.Clone<AstCallUserFunctionStatementNode>();
         }
@@ -78,5 +78,6 @@ public class DocumentHighlightFinder(AstCompilationUnitNode ast, AggregateSymbol
             }
         );
 
-        return base.Visit( node );        }
+        return base.Visit( node );
+    }
 }

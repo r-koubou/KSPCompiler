@@ -17,24 +17,41 @@ public static class DocumentUtility
                || DataTypeUtility.IsDataTypeCharacter( c );
     }
 
-    public static string ExtractWord( IReadOnlyList<string> lines, Position position )
+    public static(int start, int end) GetWordRange( string line, int column )
     {
-        var line = lines[ position.Line ];
         var length = line.Length;
-        var start = position.Character;
-        var end = position.Character;
+        var start = column;
+        var end = column;
 
-
-        while ( start > 0 && IsIdentifierChar( line, start - 1 ) )
+        while( start > 0 && IsIdentifierChar( line, start - 1 ) )
         {
             start--;
         }
 
-        while ( end < length && IsIdentifierChar( line, end ) )
+        while( end < length && IsIdentifierChar( line, end ) )
         {
             end++;
         }
 
+        return ( start, end );
+    }
+
+    public static string ExtractWord( IReadOnlyList<string> lines, Position position )
+    {
+        var line = lines[ position.Line ];
+        var (start, end) = GetWordRange( line, position.Character );
+
         return line.Substring( start, end - start ).Trim();
+    }
+
+    public static Range ExtractWordRange( IReadOnlyList<string> lines, Position position )
+    {
+        var line = lines[ position.Line ];
+        var (start, end) = GetWordRange( line, position.Character );
+
+        return new Range(
+            new Position( position.Line, start ),
+            new Position( position.Line, end )
+        );
     }
 }

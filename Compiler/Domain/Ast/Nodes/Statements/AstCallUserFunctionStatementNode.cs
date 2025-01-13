@@ -1,18 +1,16 @@
+using KSPCompiler.Domain.Ast.Nodes.Expressions;
+
 namespace KSPCompiler.Domain.Ast.Nodes.Statements
 {
     /// <summary>
     /// AST node representing a call statement
     /// </summary>
-    public class AstCallUserFunctionStatementNode : AstStatementNode, INameable
+    public class AstCallUserFunctionStatementNode : AstStatementNode
     {
-        #region INamable
-
         /// <summary>
         /// An user function name
         /// </summary>
-        public string Name { get; set; } = string.Empty;
-
-        #endregion INamable
+        public AstSymbolExpressionNode Symbol { get; set; } = new();
 
         /// <summary>
         /// Ctor

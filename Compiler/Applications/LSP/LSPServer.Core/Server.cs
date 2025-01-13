@@ -6,6 +6,7 @@ using KSPCompiler.LSPServer.Core.Completions;
 using KSPCompiler.LSPServer.Core.Definitions;
 using KSPCompiler.LSPServer.Core.DocumentHighlights;
 using KSPCompiler.LSPServer.Core.Hovers;
+using KSPCompiler.LSPServer.Core.Renames;
 using KSPCompiler.LSPServer.Core.Symbols;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -50,6 +51,8 @@ public class Server
                       .WithHandler<CompletionHandler>()
                       .WithHandler<CompletionResolveHandler>()
                       .WithHandler<HoverHandler>()
+                      .WithHandler<RenameHandler>()
+                      .WithHandler<PrepareRenameHandler>()
                       .WithServices(
                            services =>
                            {
@@ -60,6 +63,7 @@ public class Server
                                services.AddSingleton<DocumentHighlightService>();
                                services.AddSingleton<CompletionListService>();
                                services.AddSingleton<HoverService>();
+                               services.AddSingleton<RenameService>();
                            }
                        )
                       .OnInitialize( ( server, request, token ) =>

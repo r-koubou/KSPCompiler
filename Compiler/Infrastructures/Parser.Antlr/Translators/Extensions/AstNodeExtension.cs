@@ -58,21 +58,12 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions
 
         private static Position ToPosition( BufferedTokenStream tokenStream, IToken token )
         {
-            // 隠しトークンを取得（context.Startの直前とcontext.Stopの直後）
-            var startHiddenTokens = tokenStream.GetHiddenTokensToLeft( token.TokenIndex );
-
-            // 隠しトークンの長さを計算
-            var leadingCount = startHiddenTokens?.Sum( x => x.Text.Length ) ?? 0;
-
-            // 列情報を計算
-            var beginColumn = token.Column + leadingCount;
-
             return new Position()
             {
                 BeginLine   = token.Line,
-                BeginColumn = beginColumn,
-                EndLine     = LineNumber.Unknown,
-                EndColumn   = Column.Unknown
+                BeginColumn = token.Column,
+                EndLine     = token.Line,
+                EndColumn   = token.Column + token.Text.Length
             };
         }
     }

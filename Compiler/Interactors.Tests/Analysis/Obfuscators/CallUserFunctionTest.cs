@@ -1,5 +1,6 @@
 using System.Text;
 
+using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Interactors.Analysis.Obfuscators;
 using KSPCompiler.Interactors.Analysis.Obfuscators.Extensions;
@@ -29,7 +30,7 @@ public class CallUserFunctionTest
 
         var node = new AstCallUserFunctionStatementNode
         {
-            Name = functionName
+            Symbol = new AstSymbolExpressionNode( functionName )
         };
 
         var evaluator = new CallUserFunctionEvaluator( output, obfuscatedTable );
