@@ -22,8 +22,7 @@ public class SymbolEvaluator : ISymbolEvaluator
             Parent      = source.Parent,
             TypeFlag    = symbolType.DataType,
             Constant    = symbol.Modifier.IsConstant(),
-            BuiltIn     = symbol.BuiltIn,
-            SymbolState = symbol.State
+            BuiltIn     = symbol.BuiltIn
         };
 
         return result;

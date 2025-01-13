@@ -174,8 +174,7 @@ public static class MockUtility
             Left = new AstSymbolExpressionNode
             {
                 Name        = variableName,
-                TypeFlag    = type,
-                SymbolState = SymbolState.Initialized
+                TypeFlag    = type
             },
         };
     }
@@ -187,8 +186,7 @@ public static class MockUtility
             Left = new AstSymbolExpressionNode
             {
                 Name        = variableName,
-                TypeFlag    = type,
-                SymbolState = SymbolState.Initialized
+                TypeFlag    = type
             },
         };
     }

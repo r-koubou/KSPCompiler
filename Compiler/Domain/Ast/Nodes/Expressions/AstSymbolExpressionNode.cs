@@ -13,14 +13,6 @@ namespace KSPCompiler.Domain.Ast.Nodes.Expressions
         public virtual bool BuiltIn { get; set; }
 
         /// <summary>
-        /// Represents a symbol state for evaluation in analysis.
-        /// </summary>
-        /// <remarks>
-        /// Typically, this property will be set in evaluation process as return evaluation result.
-        /// </remarks>
-        public SymbolState SymbolState { get; set; } = SymbolState.UnInitialized;
-
-        /// <summary>
         /// Ctor
         /// </summary>
         public AstSymbolExpressionNode( IAstNode parent, string name )
