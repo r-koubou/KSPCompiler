@@ -29,7 +29,11 @@ public sealed class RenameService( CompilerCacheService compilerCacheService )
         var variableFinder = new VariableSymbolAppearanceFinder( orgName, cache.SymbolTable.UserVariables );
         var variableAppearances = variableFinder.Find( cache.Ast );
 
+        var functionFinder = new UserFunctionSymbolAppearanceFinder( orgName, cache.SymbolTable.UserFunctions );
+        var functionAppearances = functionFinder.Find( cache.Ast );
+
         BuildChanges( uri, orgName, newName, variableAppearances, changes );
+        BuildChanges( uri, orgName, newName, functionAppearances, changes );
 
         await Task.CompletedTask;
 
@@ -63,10 +67,29 @@ public sealed class RenameService( CompilerCacheService compilerCacheService )
     public async Task<RangeOrPlaceholderRange?> HandleAsync( PrepareRenameParams request, CancellationToken cancellationToken )
     {
         var cache = CompilerCacheService.GetCache( request.TextDocument.Uri );
+        var orgName = DocumentUtility.ExtractWord( cache.AllLinesText, request.Position );
         var range = DocumentUtility.ExtractWordRange( cache.AllLinesText, request.Position );
+
+        // 対象はユーザー定義変数 or ユーザー定義関数
+
+        var variableFinder = new VariableSymbolAppearanceFinder( orgName, cache.SymbolTable.UserVariables );
+        var variableAppearances = variableFinder.Find( cache.Ast );
+
+        if( variableAppearances.Any() )
+        {
+            return new RangeOrPlaceholderRange( range );
+        }
+
+        var functionFinder = new UserFunctionSymbolAppearanceFinder( orgName, cache.SymbolTable.UserFunctions );
+        var functionAppearances = functionFinder.Find( cache.Ast );
+
+        if( functionAppearances.Any() )
+        {
+            return new RangeOrPlaceholderRange( range );
+        }
 
         await Task.CompletedTask;
 
-        return new RangeOrPlaceholderRange( range );
+        return null;
     }
 }
