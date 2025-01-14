@@ -26,10 +26,10 @@ public sealed class RenameService( CompilerCacheService compilerCacheService )
         var newName = request.NewName;
         var changes = new Dictionary<DocumentUri, IEnumerable<TextEdit>>();
 
-        var variableFinder = new VariableSymbolAppearanceFinder( orgName, cache.SymbolTable.UserVariables );
+        var variableFinder = new VariableSymbolAppearanceFinder( orgName );
         var variableAppearances = variableFinder.Find( cache.Ast );
 
-        var functionFinder = new UserFunctionSymbolAppearanceFinder( orgName, cache.SymbolTable.UserFunctions );
+        var functionFinder = new UserFunctionSymbolAppearanceFinder( orgName );
         var functionAppearances = functionFinder.Find( cache.Ast );
 
         BuildChanges( uri, orgName, newName, variableAppearances, changes );
@@ -72,7 +72,7 @@ public sealed class RenameService( CompilerCacheService compilerCacheService )
 
         // 対象はユーザー定義変数 or ユーザー定義関数
 
-        var variableFinder = new VariableSymbolAppearanceFinder( orgName, cache.SymbolTable.UserVariables );
+        var variableFinder = new VariableSymbolAppearanceFinder( orgName );
         var variableAppearances = variableFinder.Find( cache.Ast );
 
         if( variableAppearances.Any() )
@@ -80,7 +80,7 @@ public sealed class RenameService( CompilerCacheService compilerCacheService )
             return new RangeOrPlaceholderRange( range );
         }
 
-        var functionFinder = new UserFunctionSymbolAppearanceFinder( orgName, cache.SymbolTable.UserFunctions );
+        var functionFinder = new UserFunctionSymbolAppearanceFinder( orgName );
         var functionAppearances = functionFinder.Find( cache.Ast );
 
         if( functionAppearances.Any() )

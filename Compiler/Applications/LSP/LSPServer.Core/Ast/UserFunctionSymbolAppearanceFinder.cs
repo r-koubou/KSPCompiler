@@ -8,11 +8,13 @@ using KSPCompiler.Domain.Symbols;
 
 namespace KSPCompiler.LSPServer.Core.Ast;
 
-public sealed class UserFunctionSymbolAppearanceFinder( string symbolName, ISymbolTable<UserFunctionSymbol> symbolTable )
+public sealed class UserFunctionSymbolAppearanceFinder(
+    string symbolName,
+    bool referenceOnly = false )
     : DefaultAstVisitor, ISymbolAppearanceFinder
 {
     private string SymbolName { get; } = symbolName;
-    private ISymbolTable<UserFunctionSymbol> SymbolTable { get; } = symbolTable;
+    private bool ReferenceOnly { get; } = referenceOnly;
     private List<Position> Result { get; } = [];
 
     public IReadOnlyCollection<Position> Find( AstCompilationUnitNode ast )
@@ -26,7 +28,7 @@ public sealed class UserFunctionSymbolAppearanceFinder( string symbolName, ISymb
 
     public override IAstNode Visit( AstUserFunctionDeclarationNode node )
     {
-        if( node.Name == SymbolName )
+        if( !ReferenceOnly && node.Name == SymbolName )
         {
             Result.Add( node.FunctionNamePosition );
         }
