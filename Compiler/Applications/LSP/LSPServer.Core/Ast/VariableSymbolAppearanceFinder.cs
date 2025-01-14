@@ -5,17 +5,16 @@ using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
-using KSPCompiler.Domain.Symbols;
 
 namespace KSPCompiler.LSPServer.Core.Ast;
 
 public sealed class VariableSymbolAppearanceFinder(
     string symbolName,
-    bool referenceOnly = false )
+    AppearanceFinderMode mode = AppearanceFinderMode.All )
     : DefaultAstVisitor, ISymbolAppearanceFinder
 {
     private string SymbolName { get; } = symbolName;
-    private bool ReferenceOnly { get; } = referenceOnly;
+    private AppearanceFinderMode Mode { get; } = mode;
     private List<Position> Result { get; } = [];
 
     public IReadOnlyCollection<Position> Find( AstCompilationUnitNode ast )
@@ -29,7 +28,7 @@ public sealed class VariableSymbolAppearanceFinder(
 
     public override IAstNode Visit( AstVariableDeclarationNode node )
     {
-        if( !ReferenceOnly && node.Name == SymbolName )
+        if( Mode.HasFlag( AppearanceFinderMode.Declaration ) && node.Name == SymbolName )
         {
             Result.Add( node.VariableNamePosition );
         }
@@ -39,7 +38,7 @@ public sealed class VariableSymbolAppearanceFinder(
 
     public override IAstNode Visit( AstSymbolExpressionNode node )
     {
-        if( node.Name == SymbolName )
+        if( Mode.HasFlag( AppearanceFinderMode.Reference ) && node.Name == SymbolName )
         {
             Result.Add( node.Position );
         }
