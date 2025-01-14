@@ -14,21 +14,15 @@ using KSPCompiler.UseCases.Analysis.Obfuscators;
 
 namespace KSPCompiler.Interactors.Analysis.Obfuscators;
 
-public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
+public class VariableDeclarationEvaluator(
+    StringBuilder output,
+    AggregateSymbolTable symbolTable,
+    AggregateObfuscatedSymbolTable obfuscatedTable )
+    : IVariableDeclarationEvaluator
 {
-    private StringBuilder Output { get; }
-    private AggregateSymbolTable SymbolTable { get; }
-    private IObfuscatedVariableTable ObfuscatedTable { get; }
-
-    public VariableDeclarationEvaluator(
-        StringBuilder output,
-        AggregateSymbolTable symbolTable,
-        IObfuscatedVariableTable obfuscatedTable )
-    {
-        Output          = output;
-        SymbolTable     = symbolTable;
-        ObfuscatedTable = obfuscatedTable;
-    }
+    private StringBuilder Output { get; } = output;
+    private AggregateSymbolTable SymbolTable { get; } = symbolTable;
+    private IObfuscatedVariableTable ObfuscatedTable { get; } = obfuscatedTable.Variables;
 
     public IAstNode Evaluate( IAstVisitor visitor, AstVariableDeclarationNode node )
     {

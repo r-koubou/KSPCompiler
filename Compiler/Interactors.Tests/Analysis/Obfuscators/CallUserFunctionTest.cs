@@ -26,7 +26,8 @@ public class CallUserFunctionTest
 
         symbolTable.UserFunctions.Add( MockUtility.CreateUserFunction( functionName ) );
 
-        var obfuscatedTable = new ObfuscatedUserFunctionSymbolTable( symbolTable.UserFunctions, "f" );
+        //var obfuscatedTable = new ObfuscatedUserFunctionSymbolTable( symbolTable.UserFunctions, "f" );
+        var obfuscatedTable = MockUtility.CreateAggregateObfuscatedSymbolTable( symbolTable, functionPrefix: "f" );
 
         var node = new AstCallUserFunctionStatementNode
         {

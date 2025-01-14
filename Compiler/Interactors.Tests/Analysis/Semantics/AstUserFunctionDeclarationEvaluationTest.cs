@@ -26,7 +26,7 @@ public class AstUserFunctionDeclarationEvaluationTest
         var symbols = MockUtility.CreateAggregateSymbolTable();
 
         var ast = MockUtility.CreateUserFunctionDeclarationNode( name );
-        var evaluator = new UserFunctionDeclarationEvaluator( eventEmitter, symbols.UserFunctions );
+        var evaluator = new UserFunctionDeclarationEvaluator( eventEmitter, symbols );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );
@@ -50,7 +50,7 @@ public class AstUserFunctionDeclarationEvaluationTest
         var symbols = MockUtility.CreateAggregateSymbolTable();
 
         var ast = MockUtility.CreateUserFunctionDeclarationNode( name );
-        var evaluator = new UserFunctionDeclarationEvaluator( eventEmitter, symbols.UserFunctions );
+        var evaluator = new UserFunctionDeclarationEvaluator( eventEmitter, symbols );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );

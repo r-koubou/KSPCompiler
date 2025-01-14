@@ -10,17 +10,12 @@ using KSPCompiler.UseCases.Analysis.Evaluations.UserFunctions;
 
 namespace KSPCompiler.Interactors.Analysis.Semantics;
 
-public class CallUserFunctionEvaluator : ICallUserFunctionEvaluator
+public class CallUserFunctionEvaluator( IEventEmitter eventEmitter, AggregateSymbolTable symbolTable )
+    : ICallUserFunctionEvaluator
 {
-    private IEventEmitter EventEmitter { get; }
+    private IEventEmitter EventEmitter { get; } = eventEmitter;
 
-    private IUserFunctionSymbolSymbolTable UserFunctions { get; }
-
-    public CallUserFunctionEvaluator( IEventEmitter eventEmitter, IUserFunctionSymbolSymbolTable symbolTable )
-    {
-        EventEmitter  = eventEmitter;
-        UserFunctions = symbolTable;
-    }
+    private IUserFunctionSymbolSymbolTable UserFunctions { get; } = symbolTable.UserFunctions;
 
     public IAstNode Evaluate( IAstVisitor visitor, AstCallUserFunctionStatementNode statement )
     {

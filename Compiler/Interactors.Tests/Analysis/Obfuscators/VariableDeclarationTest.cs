@@ -29,7 +29,7 @@ public class VariableDeclarationTest
 
         symbolTable.UserVariables.Add( variable );
 
-        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.UserVariables, "v" );
+        var obfuscatedTable = MockUtility.CreateAggregateObfuscatedSymbolTable( symbolTable, functionPrefix: "v" );
 
         var node = new AstVariableDeclarationNode
         {
@@ -60,7 +60,7 @@ public class VariableDeclarationTest
 
         symbolTable.UserVariables.Add( variable );
 
-        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.UserVariables, "v" );
+        var obfuscatedTable = MockUtility.CreateAggregateObfuscatedSymbolTable( symbolTable, functionPrefix: "v" );
 
         var node = new AstVariableDeclarationNode
         {
@@ -91,7 +91,7 @@ public class VariableDeclarationTest
 
         symbolTable.UserVariables.Add( variable );
 
-        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.UserVariables, "v" );
+        var obfuscatedTable = MockUtility.CreateAggregateObfuscatedSymbolTable( symbolTable, functionPrefix: "v" );
 
         var node = new AstVariableDeclarationNode
         {
@@ -123,7 +123,7 @@ public class VariableDeclarationTest
 
         symbolTable.UserVariables.Add( variable );
 
-        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.UserVariables, "v" );
+        var obfuscatedTable = MockUtility.CreateAggregateObfuscatedSymbolTable( symbolTable, functionPrefix: "v" );
 
         var node = new AstVariableDeclarationNode
         {
@@ -158,7 +158,7 @@ public class VariableDeclarationTest
         variable.State = SymbolState.Loaded;
         symbolTable.UserVariables.Add( variable );
 
-        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.UserVariables, "v" );
+        var obfuscatedTable = MockUtility.CreateAggregateObfuscatedSymbolTable( symbolTable, functionPrefix: "v" );
 
         var node = new AstVariableDeclarationNode
         {
@@ -200,7 +200,7 @@ public class VariableDeclarationTest
 
         symbolTable.UserVariables.Add( variable );
 
-        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.UserVariables, "v" );
+        var obfuscatedTable = MockUtility.CreateAggregateObfuscatedSymbolTable( symbolTable, functionPrefix: "v" );
 
         var initializer = new AstArrayInitializerNode
         {
@@ -252,7 +252,7 @@ public class VariableDeclarationTest
 
         symbolTable.UserVariables.Add( variable );
 
-        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.UserVariables, "v" );
+        var obfuscatedTable = MockUtility.CreateAggregateObfuscatedSymbolTable( symbolTable, functionPrefix: "v" );
 
         var uiInitializer = new AstExpressionListNode();
         uiInitializer.Expressions.Add( new AstIntLiteralNode( 1 ) );
@@ -305,7 +305,7 @@ public class VariableDeclarationTest
 
         symbolTable.UserVariables.Add( variable );
 
-        var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.UserVariables, "v" );
+        var obfuscatedTable = MockUtility.CreateAggregateObfuscatedSymbolTable( symbolTable, functionPrefix: "v" );
 
         var uiInitializer = new AstExpressionListNode();
         uiInitializer.Expressions.Add( new AstIntLiteralNode( 1 ) );

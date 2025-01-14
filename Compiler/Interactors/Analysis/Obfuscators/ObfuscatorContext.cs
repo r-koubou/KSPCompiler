@@ -45,25 +45,15 @@ public sealed class ObfuscatorContext : IAnalyzerContext
 
     #region Declaration
 
-    private class DeclarationEvaluationContext : IDeclarationEvaluationContext
+    private class DeclarationEvaluationContext(
+        StringBuilder output,
+        AggregateSymbolTable aggregateSymbolTable,
+        AggregateObfuscatedSymbolTable aggregateObfuscatedSymbols )
+        : IDeclarationEvaluationContext
     {
-        public ICallbackDeclarationEvaluator Callback { get; }
-        public IUserFunctionDeclarationEvaluator UserFunction { get; }
-        public IVariableDeclarationEvaluator Variable { get; }
-
-        public DeclarationEvaluationContext(
-            StringBuilder output,
-            AggregateSymbolTable aggregateSymbolTable,
-            AggregateObfuscatedSymbolTable aggregateObfuscatedSymbols )
-        {
-            Callback     = new CallbackDeclarationEvaluator( output );
-            UserFunction = new UserFunctionDeclarationEvaluator( output, aggregateObfuscatedSymbols.UserFunctions );
-            Variable     = new VariableDeclarationEvaluator(
-                output,
-                aggregateSymbolTable,
-                aggregateObfuscatedSymbols.Variables
-            );
-        }
+        public ICallbackDeclarationEvaluator Callback { get; } = new CallbackDeclarationEvaluator( output );
+        public IUserFunctionDeclarationEvaluator UserFunction { get; } = new UserFunctionDeclarationEvaluator( output, aggregateObfuscatedSymbols );
+        public IVariableDeclarationEvaluator Variable { get; } = new VariableDeclarationEvaluator( output, aggregateSymbolTable, aggregateObfuscatedSymbols );
     }
 
     #endregion ~Declaration
@@ -120,7 +110,7 @@ public sealed class ObfuscatorContext : IAnalyzerContext
             NumericBinaryOperator      = new NumericBinaryOperatorEvaluator( output );
             NumericUnaryOperator       = new NumericUnaryOperatorEvaluator( output );
             StringConcatenateOperator  = new StringConcatenateOperatorEvaluator( output );
-            Symbol                     = new SymbolEvaluator( output, aggregateSymbolTable, obfuscatedSymbols.Variables );
+            Symbol                     = new SymbolEvaluator( output, aggregateSymbolTable, obfuscatedSymbols );
             ArrayElement               = new ArrayElementEvaluator( output );
             CallCommand                = new CallCommandEvaluator( output );
         }
@@ -130,26 +120,17 @@ public sealed class ObfuscatorContext : IAnalyzerContext
 
     #region Statement
 
-    private class StatementEvaluationContext : IStatementEvaluationContext
+    private class StatementEvaluationContext(
+        StringBuilder output,
+        AggregateObfuscatedSymbolTable obfuscatedSymbols )
+        : IStatementEvaluationContext
     {
-        public IPreprocessEvaluator Preprocess { get; }
-        public ICallUserFunctionEvaluator CallUserFunction { get; }
-        public IIfStatementEvaluator If { get; }
-        public ISelectStatementEvaluator Select { get; }
-        public IWhileStatementEvaluator While { get; }
-        public IContinueStatementEvaluator Continue { get; }
-
-        public StatementEvaluationContext(
-            StringBuilder output,
-            AggregateObfuscatedSymbolTable obfuscatedSymbols )
-        {
-            Preprocess       = new PreprocessEvaluator( output );
-            CallUserFunction = new CallUserFunctionEvaluator( output, obfuscatedSymbols.UserFunctions );
-            If               = new IfStatementEvaluator( output );
-            Select           = new SelectStatementEvaluator( output );
-            While            = new WhileStatementEvaluator( output );
-            Continue         = new ContinueStatementEvaluator( output );
-        }
+        public IPreprocessEvaluator Preprocess { get; } = new PreprocessEvaluator( output );
+        public ICallUserFunctionEvaluator CallUserFunction { get; } = new CallUserFunctionEvaluator( output, obfuscatedSymbols );
+        public IIfStatementEvaluator If { get; } = new IfStatementEvaluator( output );
+        public ISelectStatementEvaluator Select { get; } = new SelectStatementEvaluator( output );
+        public IWhileStatementEvaluator While { get; } = new WhileStatementEvaluator( output );
+        public IContinueStatementEvaluator Continue { get; } = new ContinueStatementEvaluator( output );
     }
 
     #endregion ~Statement

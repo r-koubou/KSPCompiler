@@ -8,21 +8,15 @@ using KSPCompiler.UseCases.Analysis.Obfuscators;
 
 namespace KSPCompiler.Interactors.Analysis.Obfuscators;
 
-public class SymbolEvaluator : ISymbolEvaluator
+public class SymbolEvaluator(
+    StringBuilder output,
+    AggregateSymbolTable symbolTable,
+    AggregateObfuscatedSymbolTable obfuscatedSymbolTable )
+    : ISymbolEvaluator
 {
-    private StringBuilder Output { get; }
-    private AggregateSymbolTable SymbolTable { get; }
-    private IObfuscatedVariableTable ObfuscatedVariableTable { get; }
-
-    public SymbolEvaluator(
-        StringBuilder output,
-        AggregateSymbolTable symbolTable,
-        IObfuscatedVariableTable obfuscatedVariableTable )
-    {
-        Output                  = output;
-        SymbolTable             = symbolTable;
-        ObfuscatedVariableTable = obfuscatedVariableTable;
-    }
+    private StringBuilder Output { get; } = output;
+    private AggregateSymbolTable SymbolTable { get; } = symbolTable;
+    private IObfuscatedVariableTable ObfuscatedVariableTable { get; } = obfuscatedSymbolTable.Variables;
 
     public IAstNode Evaluate( IAstVisitor visitor, AstSymbolExpressionNode expr )
     {

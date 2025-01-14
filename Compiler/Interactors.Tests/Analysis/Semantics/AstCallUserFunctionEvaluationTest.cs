@@ -33,7 +33,7 @@ public class AstCallUserFunctionEvaluationTest
         // call my_function
         var callFunctionAst = MockUtility.CreateCallUserFunctionNode( function );
 
-        var evaluator = new CallUserFunctionEvaluator( eventEmitter, symbols.UserFunctions );
+        var evaluator = new CallUserFunctionEvaluator( eventEmitter, symbols );
         var visitor = new MockCallUserFunctionStatementVisitor();
 
         visitor.Inject( evaluator );
@@ -60,7 +60,7 @@ public class AstCallUserFunctionEvaluationTest
         // Creation of a non-existent call command expression node
         var callFunctionAst = MockUtility.CreateCallUserFunctionNode( "my_function" );
 
-        var evaluator = new CallUserFunctionEvaluator( eventEmitter, symbols.UserFunctions );
+        var evaluator = new CallUserFunctionEvaluator( eventEmitter, symbols );
         var visitor = new MockCallUserFunctionStatementVisitor();
 
         visitor.Inject( evaluator );

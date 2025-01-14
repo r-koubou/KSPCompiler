@@ -34,7 +34,7 @@ public class AstCallbackDeclarationEvaluationTest
 
         var ast = MockUtility.CreateCallbackDeclarationNode( name );
         var visitor = new MockDeclarationVisitor();
-        var evaluator = new CallbackDeclarationEvaluator( eventEmitter, symbols.BuiltInCallbacks, symbols.UserCallbacks );
+        var evaluator = new CallbackDeclarationEvaluator( eventEmitter, symbols );
 
         visitor.Inject( evaluator );
         evaluator.Evaluate( visitor, ast );
@@ -58,7 +58,7 @@ public class AstCallbackDeclarationEvaluationTest
         symbols.BuiltInCallbacks.Add( callback );
 
         var ast = MockUtility.CreateCallbackDeclarationNode( name );
-        var evaluator = new CallbackDeclarationEvaluator( eventEmitter, symbols.BuiltInCallbacks, symbols.UserCallbacks );
+        var evaluator = new CallbackDeclarationEvaluator( eventEmitter, symbols );
         var visitor = new MockDeclarationVisitor();
 
         visitor.Inject( evaluator );

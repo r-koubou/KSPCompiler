@@ -9,23 +9,16 @@ using KSPCompiler.UseCases.Analysis.Evaluations.Declarations;
 
 namespace KSPCompiler.Interactors.Analysis.Semantics;
 
-public class CallbackDeclarationEvaluator : ICallbackDeclarationEvaluator
+public class CallbackDeclarationEvaluator(
+    IEventEmitter eventEmitter,
+    AggregateSymbolTable symbolTable )
+    : ICallbackDeclarationEvaluator
 {
-    private IEventEmitter EventEmitter { get; }
+    private IEventEmitter EventEmitter { get; } = eventEmitter;
 
-    private ISymbolTable<CallbackSymbol> BuiltInCallbackSymbols { get; }
+    private ISymbolTable<CallbackSymbol> BuiltInCallbackSymbols { get; } = symbolTable.BuiltInCallbacks;
 
-    private ISymbolTable<CallbackSymbol> UserCallbackSymbols { get; }
-
-    public CallbackDeclarationEvaluator(
-        IEventEmitter eventEmitter,
-        ISymbolTable<CallbackSymbol> builtInCallbackSymbols,
-        ISymbolTable<CallbackSymbol> userCallbackSymbols )
-    {
-        EventEmitter           = eventEmitter;
-        BuiltInCallbackSymbols = builtInCallbackSymbols;
-        UserCallbackSymbols    = userCallbackSymbols;
-    }
+    private ISymbolTable<CallbackSymbol> UserCallbackSymbols { get; } = symbolTable.UserCallbacks;
 
     public IAstNode Evaluate( IAstVisitor visitor, AstCallbackDeclarationNode node )
     {
