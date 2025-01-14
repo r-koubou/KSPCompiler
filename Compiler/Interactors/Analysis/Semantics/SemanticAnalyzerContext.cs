@@ -52,8 +52,8 @@ public sealed class SemanticAnalyzerContext : IAnalyzerContext
             IEventEmitter eventEmitter,
             AggregateSymbolTable aggregateSymbolTable )
         {
-            Callback     = new CallbackDeclarationEvaluator( eventEmitter, aggregateSymbolTable.BuiltInCallbacks, aggregateSymbolTable.UserCallbacks );
-            UserFunction = new UserFunctionDeclarationEvaluator( eventEmitter, aggregateSymbolTable.UserFunctions );
+            Callback     = new CallbackDeclarationEvaluator( eventEmitter, aggregateSymbolTable );
+            UserFunction = new UserFunctionDeclarationEvaluator( eventEmitter, aggregateSymbolTable );
             Variable     = new VariableDeclarationEvaluator( eventEmitter, aggregateSymbolTable );
         }
     }
@@ -133,7 +133,7 @@ public sealed class SemanticAnalyzerContext : IAnalyzerContext
             AggregateSymbolTable aggregateSymbolTable )
         {
             Preprocess       = new PreprocessEvaluator();
-            CallUserFunction = new CallUserFunctionEvaluator( eventEmitter, aggregateSymbolTable.UserFunctions );
+            CallUserFunction = new CallUserFunctionEvaluator( eventEmitter, aggregateSymbolTable );
             If               = new IfStatementEvaluator( eventEmitter );
             Select           = new SelectStatementEvaluator( eventEmitter );
             While            = new WhileStatementEvaluator( eventEmitter );

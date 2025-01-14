@@ -8,16 +8,11 @@ using KSPCompiler.UseCases.Analysis.Obfuscators;
 
 namespace KSPCompiler.Interactors.Analysis.Obfuscators;
 
-public class CallUserFunctionEvaluator : ICallUserFunctionEvaluator
+public class CallUserFunctionEvaluator( StringBuilder output, AggregateObfuscatedSymbolTable obfuscatedTable )
+    : ICallUserFunctionEvaluator
 {
-    private StringBuilder Output { get; }
-    private IObfuscatedUserFunctionTable ObfuscatedTable { get; }
-
-    public CallUserFunctionEvaluator( StringBuilder output, IObfuscatedUserFunctionTable obfuscatedTable )
-    {
-        Output          = output;
-        ObfuscatedTable = obfuscatedTable;
-    }
+    private StringBuilder Output { get; } = output;
+    private IObfuscatedUserFunctionTable ObfuscatedTable { get; } = obfuscatedTable.UserFunctions;
 
     public IAstNode Evaluate( IAstVisitor visitor, AstCallUserFunctionStatementNode statement )
     {

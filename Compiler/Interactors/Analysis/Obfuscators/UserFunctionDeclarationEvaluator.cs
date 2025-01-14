@@ -8,18 +8,13 @@ using KSPCompiler.UseCases.Analysis.Obfuscators;
 
 namespace KSPCompiler.Interactors.Analysis.Obfuscators;
 
-public class UserFunctionDeclarationEvaluator : IUserFunctionDeclarationEvaluator
+public class UserFunctionDeclarationEvaluator(
+    StringBuilder output,
+    AggregateObfuscatedSymbolTable obfuscatedTable )
+    : IUserFunctionDeclarationEvaluator
 {
-    private StringBuilder Output { get; }
-    private IObfuscatedUserFunctionTable ObfuscatedTable { get; }
-
-    public UserFunctionDeclarationEvaluator(
-        StringBuilder output,
-        IObfuscatedUserFunctionTable obfuscatedTable )
-    {
-        Output          = output;
-        ObfuscatedTable = obfuscatedTable;
-    }
+    private StringBuilder Output { get; } = output;
+    private IObfuscatedUserFunctionTable ObfuscatedTable { get; } = obfuscatedTable.UserFunctions;
 
     public IAstNode Evaluate( IAstVisitor visitor, AstUserFunctionDeclarationNode node )
     {

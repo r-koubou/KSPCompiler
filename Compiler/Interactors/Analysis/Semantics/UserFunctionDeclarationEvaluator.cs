@@ -11,11 +11,11 @@ namespace KSPCompiler.Interactors.Analysis.Semantics;
 
 public class UserFunctionDeclarationEvaluator(
     IEventEmitter eventEmitter,
-    ISymbolTable<UserFunctionSymbol> symbolTable )
+    AggregateSymbolTable symbolTable )
     : IUserFunctionDeclarationEvaluator
 {
     private IEventEmitter EventEmitter { get; } = eventEmitter;
-    private ISymbolTable<UserFunctionSymbol> SymbolTable { get; } = symbolTable;
+    private ISymbolTable<UserFunctionSymbol> SymbolTable { get; } = symbolTable.UserFunctions;
 
     public IAstNode Evaluate( IAstVisitor visitor, AstUserFunctionDeclarationNode node )
     {

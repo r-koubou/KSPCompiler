@@ -15,12 +15,14 @@ using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Booleans
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Conditions;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Integers;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Reals;
-using KSPCompiler.Interactors.Analysis.Semantics;
+using KSPCompiler.Interactors.Analysis.Obfuscators;
 using KSPCompiler.Interactors.Tests.Analysis.Semantics;
 using KSPCompiler.Interactors.Tests.Commons;
 using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Booleans;
 
 using NUnit.Framework;
+
+using NumericBinaryOperatorEvaluator = KSPCompiler.Interactors.Analysis.Semantics.NumericBinaryOperatorEvaluator;
 
 namespace KSPCompiler.Interactors.Tests.Analysis;
 
@@ -315,6 +317,12 @@ public static class MockUtility
             userCallbacks: new CallbackSymbolTable(),
             userFunctions: new UserFunctionSymbolTable(),
             preProcessorSymbols: new PreProcessorSymbolTable()
+        );
+
+    public static AggregateObfuscatedSymbolTable CreateAggregateObfuscatedSymbolTable( AggregateSymbolTable source, string variablePrefix = "v", string functionPrefix = "f" )
+        => new(
+            new ObfuscatedVariableSymbolTable( source.UserVariables, variablePrefix ),
+            new ObfuscatedUserFunctionSymbolTable( source.UserFunctions, functionPrefix )
         );
 
     #endregion ~Symbol Table
