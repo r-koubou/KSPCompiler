@@ -9,11 +9,13 @@ using KSPCompiler.Domain.Symbols;
 
 namespace KSPCompiler.LSPServer.Core.Ast;
 
-public sealed class VariableSymbolAppearanceFinder( string symbolName, ISymbolTable<VariableSymbol> symbolTable )
+public sealed class VariableSymbolAppearanceFinder(
+    string symbolName,
+    bool referenceOnly = false )
     : DefaultAstVisitor, ISymbolAppearanceFinder
 {
     private string SymbolName { get; } = symbolName;
-    private ISymbolTable<VariableSymbol> SymbolTable { get; } = symbolTable;
+    private bool ReferenceOnly { get; } = referenceOnly;
     private List<Position> Result { get; } = [];
 
     public IReadOnlyCollection<Position> Find( AstCompilationUnitNode ast )
@@ -27,7 +29,7 @@ public sealed class VariableSymbolAppearanceFinder( string symbolName, ISymbolTa
 
     public override IAstNode Visit( AstVariableDeclarationNode node )
     {
-        if( SymbolTable.TrySearchByName( SymbolName, out _ ) )
+        if( !ReferenceOnly && node.Name == SymbolName )
         {
             Result.Add( node.VariableNamePosition );
         }
@@ -37,7 +39,7 @@ public sealed class VariableSymbolAppearanceFinder( string symbolName, ISymbolTa
 
     public override IAstNode Visit( AstSymbolExpressionNode node )
     {
-        if( SymbolTable.TrySearchByName( SymbolName, out _ ) )
+        if( node.Name == SymbolName )
         {
             Result.Add( node.Position );
         }
