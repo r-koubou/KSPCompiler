@@ -8,6 +8,7 @@ using KSPCompiler.LSPServer.Core.DocumentHighlights;
 using KSPCompiler.LSPServer.Core.Hovers;
 using KSPCompiler.LSPServer.Core.References;
 using KSPCompiler.LSPServer.Core.Renames;
+using KSPCompiler.LSPServer.Core.SignatureHelps;
 using KSPCompiler.LSPServer.Core.Symbols;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -55,6 +56,7 @@ public class Server
                       .WithHandler<RenameHandler>()
                       .WithHandler<PrepareRenameHandler>()
                       .WithHandler<ReferencesHandler>()
+                      .WithHandler<SignatureHelpHandler>()
                       .WithServices(
                            services =>
                            {
@@ -67,6 +69,7 @@ public class Server
                                services.AddSingleton<HoverService>();
                                services.AddSingleton<RenameService>();
                                services.AddSingleton<ReferencesService>();
+                                 services.AddSingleton<SignatureHelpService>();
                            }
                        )
                       .OnInitialize( ( server, request, token ) =>

@@ -54,4 +54,24 @@ public static class DocumentUtility
             new Position( position.Line, end )
         );
     }
+
+    public static string ExtractCallCommandName( IReadOnlyList<string> lines, Position position )
+    {
+        var line = lines[ position.Line ];
+        var length = line.Length;
+        var start = position.Character - 1; // zero-based index
+
+        // 行頭からコマンド呼び出しの開始位置を探す
+        while( start >= 0 && line[ start ] != '(' )
+        {
+            start--;
+        }
+
+        if( start < 0 )
+        {
+            return string.Empty;
+        }
+
+        return ExtractWord( lines, new Position( position.Line, start ) );
+    }
 }
