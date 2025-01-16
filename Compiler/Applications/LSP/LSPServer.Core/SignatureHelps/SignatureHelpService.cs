@@ -3,8 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using KSPCompiler.LSPServer.Core.Compilations;
-using KSPCompiler.LSPServer.Core.Hovers;
-using KSPCompiler.LSPServer.Core.Hovers.Extensions;
+using KSPCompiler.LSPServer.Core.SignatureHelps.Extensions;
 
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
@@ -27,28 +26,13 @@ public sealed class SignatureHelpService( CompilerCacheService compilerCacheServ
 
         Console.WriteLine( word );
 
-        if( !symbols.Commands.TryBuildHoverText( word, out var hoverText, new CommandHoverTextBuilder() ) )
+        if( !symbols.Commands.TryBuildSignatureHelp( word, out var signatureHelp ) )
         {
             return null;
         }
 
-        var signatureInformation = new SignatureInformation
-        {
-            Label = word,
-            Documentation = new StringOrMarkupContent(
-                new MarkupContent
-                {
-                    Kind  = MarkupKind.Markdown,
-                    Value = hoverText
-                }
-            )
-        };
-
         await Task.CompletedTask;
 
-        return new SignatureHelp
-        {
-            Signatures = new Container<SignatureInformation>( signatureInformation ),
-        };
+        return signatureHelp;
     }
 }
