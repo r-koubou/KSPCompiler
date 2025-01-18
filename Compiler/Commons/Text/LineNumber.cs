@@ -2,7 +2,7 @@ using KSPCompiler.Commons.ValueObjects;
 
 namespace KSPCompiler.Commons.Text;
 
-public sealed record LineNumber( int Value ) : ValueObject<int>( Value )
+public sealed record LineNumber( int Value ) : IntValueObject( Value )
 {
     public static readonly LineNumber Unknown = -1;
 
