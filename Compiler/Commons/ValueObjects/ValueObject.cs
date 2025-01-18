@@ -8,4 +8,6 @@ public abstract record ValueObject<TValue>( TValue Value ) : IValueObject<TValue
     // ReSharper disable once VirtualMemberNeverOverridden.Global
     protected virtual string ToStringImpl()
         => Value.ToString();
+
+    public abstract bool Equals( TValue other );
 }
