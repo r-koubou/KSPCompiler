@@ -33,7 +33,7 @@ internal class FromCallbackSymbolModelTranslator : IDataTranslator<IEnumerable<C
                 };
 
                 argument.DataType = DataTypeUtility.GuessFromSymbolName( argument.Name );
-                command.AddArgument( argument );
+                command.Arguments.Add( argument );
             }
 
             result.Add( command );

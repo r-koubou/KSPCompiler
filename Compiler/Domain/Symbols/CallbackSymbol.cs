@@ -10,10 +10,7 @@ public sealed record CallbackSymbol( bool AllowMultipleDeclaration ) : SymbolBas
     public override SymbolType Type
         => SymbolType.Callback;
 
-    private readonly List<CallbackArgumentSymbol> arguments = new ();
-
-    public IReadOnlyCollection<CallbackArgumentSymbol> Arguments
-        => arguments;
+    public CallbackArgumentSymbolList Arguments { get; } = [];
 
     public int ArgumentCount
         => Arguments.Count;
@@ -28,15 +25,6 @@ public sealed record CallbackSymbol( bool AllowMultipleDeclaration ) : SymbolBas
 
     public CallbackSymbol( bool allowMultipleDeclaration, IEnumerable<CallbackArgumentSymbol> args ) : this( allowMultipleDeclaration )
     {
-        arguments.AddRange( args );
-    }
-
-    public void AddArgument( CallbackArgumentSymbol arg )
-    {
-        if( arguments.Contains( arg ))
-        {
-            throw new InvalidOperationException( $"Argument {arg.Name} already exists in command {Name}" );
-        }
-        arguments.Add( arg );
+        Arguments.AddRange( args );
     }
 }
