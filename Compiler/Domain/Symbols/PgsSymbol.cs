@@ -2,7 +2,7 @@ using KSPCompiler.Domain.Symbols.MetaData;
 
 namespace KSPCompiler.Domain.Symbols;
 
-public sealed class PgsSymbol : SymbolBase, ISymbolDataTypeProvider
+public sealed record PgsSymbol : SymbolBase, ISymbolDataTypeProvider
 {
     #region Properties
 
