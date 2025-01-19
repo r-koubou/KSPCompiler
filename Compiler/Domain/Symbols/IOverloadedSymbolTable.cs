@@ -41,10 +41,19 @@ public interface IOverloadedSymbolTable<TSymbol, TOverload>
     TOverload NoOverloadValue { get; }
 
     /// <summary>
+    /// Searches whether the specified symbol name
+    /// </summary>
+    /// <remarks>
+    /// This method attempts to search for symbols that are expected to have no overloads.
+    /// </remarks>
+    /// <returns>Valid instance, null if not found</returns>
+    bool TryGet( SymbolName name, out TSymbol result, bool enableSearchParent = true );
+
+    /// <summary>
     /// Searches whether the specified symbol name and overload is registered in the table
     /// </summary>
     /// <returns>Valid instance, null if not found</returns>
-    bool TrySearch( SymbolName name, TOverload overload, out TSymbol result, bool enableSearchParent = true );
+    bool TryGet( SymbolName name, TOverload overload, out TSymbol result, bool enableSearchParent = true );
 
     /// <summary>
     /// Searches whether the specified symbol name is registered in the table
@@ -65,7 +74,12 @@ public interface IOverloadedSymbolTable<TSymbol, TOverload>
     /// <summary>
     /// Searches whether the specified symbol name and overload is registered in the table
     /// </summary>
-    bool TrySearchIndexByName( SymbolName name, TOverload overload, out UniqueSymbolIndex result, bool enableSearchParent = true );
+    bool TryGetNoOverloadIndexByName( SymbolName name, out UniqueSymbolIndex result, bool enableSearchParent = true );
+
+    /// <summary>
+    /// Searches whether the specified symbol name and overload is registered in the table
+    /// </summary>
+    bool TryGetOverloadIndexByName( SymbolName name, TOverload overload, out UniqueSymbolIndex result, bool enableSearchParent = true );
 
     /// <summary>
     /// Add a symbol to the table without overload

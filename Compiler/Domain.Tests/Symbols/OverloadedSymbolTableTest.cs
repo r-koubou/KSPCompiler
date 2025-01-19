@@ -12,7 +12,7 @@ namespace KSPCompiler.Domain.Tests.Symbols;
 [TestFixture]
 public class CallbackSymbolTableTest
 {
-    private OverloadedSymbolTable<CallbackSymbol, SymbolName> symbolTable;
+    private CallbackSymbolTable symbolTable;
 
     [SetUp]
     public void SetUp()
@@ -20,41 +20,266 @@ public class CallbackSymbolTableTest
         symbolTable = new CallbackSymbolTable();
     }
 
-    #region Convinience Methods
-    private static CallbackSymbol CreateSymbol( string name )
-        => new CallbackSymbol( true )
-        {
-            Name = new SymbolName( name )
-        };
-    #endregion ~Convinience Methods
-
-
-    #region Find
+    #region Get by no overload
     [Test]
-    public void TrySearchWithOverloadReturnsFalseWhenSymbolNotFound()
+    public void TableCanSearchWithNoOverload()
     {
-        var result = symbolTable.TrySearch( new SymbolName( "Test" ), new SymbolName( "abc" ), out var symbol );
+        var symbol = MockUtility.CreateCallbackSymbol( "init" );
+        symbolTable.AddAsNoOverload( symbol );
+
+        var result = symbolTable.TryGet( new SymbolName( "init" ), out _ );
+        Assert.That( result, Is.True );
+    }
+
+    [Test]
+    public void TableCannotSearchNoExistWithNoOverload()
+    {
+        var symbol = MockUtility.CreateCallbackSymbol( "init" );
+        var overload1 = MockUtility.CreateArgumentSymbol( "overload1" );
+        var overload2 = MockUtility.CreateArgumentSymbol( "overload2" );
+
+        symbolTable.AddAsOverload( symbol, overload1.Name );
+        symbolTable.AddAsOverload( symbol, overload2.Name );
+
+        var result = symbolTable.TryGet( new SymbolName( "init" ), new SymbolName( "xyz" ), out _ );
         Assert.That( result, Is.False );
-        Assert.That( symbol, Is.Null );
+    }
+    #endregion ~Find with no overload
+
+    #region Get by overload
+    [Test]
+    public void TableCannotSearchNoExistWithOverload()
+    {
+        const string callbackName = "init";
+
+        Assert.That( symbolTable.TryGet( new SymbolName( callbackName ), out _ ), Is.False );
     }
     #endregion ~Find
+
+    #region Search by Name
+    [Test]
+    public void SymbolCanSearchByName()
+    {
+        const string callbackName1 = "init";
+        var callback1 = MockUtility.CreateCallbackSymbol( callbackName1 );
+
+        const string callbackName2 = "ui_control";
+        const string overloadName = "$overload1";
+        var callback2 = MockUtility.CreateCallbackSymbol( callbackName2 );
+        callback2.Arguments.Add( MockUtility.CreateArgumentSymbol( overloadName ) );
+
+        symbolTable.AddAsNoOverload( callback1 );
+        symbolTable.AddAsOverload( callback2, overloadName );
+
+        const string searchCallbackName = callbackName1;
+        Assert.That( symbolTable.TrySearchByName( searchCallbackName, out var result1 ), Is.True );
+        Assert.That( result1.Count,                                                      Is.EqualTo( 1 ) );
+
+        const string searchCallbackName2 = callbackName2;
+        Assert.That( symbolTable.TrySearchByName( searchCallbackName2, out var result2 ), Is.True );
+        Assert.That( result2.Count,                                                       Is.EqualTo( 1 ) );
+    }
+
+    [Test]
+    public void SymbolCannotSearchByNameWithoutNoExist()
+    {
+        const string callbackName1 = "init";
+        var callback1 = MockUtility.CreateCallbackSymbol( callbackName1 );
+
+        const string callbackName2 = "ui_control";
+        const string overloadName = "$overload1";
+        var callback2 = MockUtility.CreateCallbackSymbol( callbackName2 );
+        callback2.Arguments.Add( MockUtility.CreateArgumentSymbol( overloadName ) );
+
+        symbolTable.AddAsNoOverload( callback1 );
+        symbolTable.AddAsOverload( callback2, overloadName );
+
+        const string searchCallbackName = "non_exist_name1";
+        Assert.That( symbolTable.TrySearchByName( searchCallbackName, out _ ), Is.False );
+
+        const string searchCallbackName2 = "non_exist_name2";
+        Assert.That( symbolTable.TrySearchByName( searchCallbackName2, out _ ), Is.False );
+    }
+
+    #endregion
+
+    #region Search by Index
+    [Test]
+    public void SymbolCanSearchByIndex()
+    {
+        const string callbackName1 = "init";
+        var callback1 = MockUtility.CreateCallbackSymbol( callbackName1 );
+
+        const string callbackName2 = "ui_control";
+        const string overloadName = "$overload1";
+        var callback2 = MockUtility.CreateCallbackSymbol( callbackName2 );
+        callback2.Arguments.Add( MockUtility.CreateArgumentSymbol( overloadName ) );
+
+        symbolTable.AddAsNoOverload( callback1 );
+        symbolTable.AddAsOverload( callback2, overloadName );
+
+        var searchIndex1 = new UniqueSymbolIndex( 0 );
+        Assert.That( symbolTable.TrySearchByIndex( searchIndex1, out _ ), Is.True );
+
+        var searchIndex2 = new UniqueSymbolIndex( 1 );
+        Assert.That( symbolTable.TrySearchByIndex( searchIndex2, out _ ), Is.True );
+    }
+
+    [Test]
+    public void SymbolCannotSearchByIndexWithoutNoExist()
+    {
+        const string callbackName1 = "init";
+        var callback1 = MockUtility.CreateCallbackSymbol( callbackName1 );
+
+        const string callbackName2 = "ui_control";
+        const string overloadName = "$overload1";
+        var callback2 = MockUtility.CreateCallbackSymbol( callbackName2 );
+        callback2.Arguments.Add( MockUtility.CreateArgumentSymbol( overloadName ) );
+
+        symbolTable.AddAsNoOverload( callback1 );
+        symbolTable.AddAsOverload( callback2, overloadName );
+
+        var searchIndex1 = new UniqueSymbolIndex( 123 );
+        Assert.That( symbolTable.TrySearchByIndex( searchIndex1, out _ ), Is.False );
+
+        var searchIndex2 = new UniqueSymbolIndex( 456 );
+        Assert.That( symbolTable.TrySearchByIndex( searchIndex2, out _ ), Is.False );
+    }
+
+    #endregion ~Search by Index
+
+    #region Search indexes by name
+    [Test]
+    public void SymbolCanSearchIndexesByName()
+    {
+        const string callbackName1 = "init";
+        var callback1 = MockUtility.CreateCallbackSymbol( callbackName1 );
+
+        const string callbackName2 = "ui_control";
+        const string overloadName = "$overload1";
+        var callback2 = MockUtility.CreateCallbackSymbol( callbackName2 );
+        callback2.Arguments.Add( MockUtility.CreateArgumentSymbol( overloadName ) );
+
+        symbolTable.AddAsNoOverload( callback1 );
+        symbolTable.AddAsOverload( callback2, overloadName );
+
+        var expextedIndex1 = new UniqueSymbolIndex( 0 );
+        Assert.That( symbolTable.TrySearchIndexByName( callbackName1, out var result1 ), Is.True );
+        Assert.That( result1.Contains( expextedIndex1 ),                                 Is.True );
+
+        var expextedIndex2 = new UniqueSymbolIndex( 1 );
+        Assert.That( symbolTable.TrySearchIndexByName( callbackName2, out var result2 ), Is.True );
+        Assert.That( result2.Contains( expextedIndex2 ),                                 Is.True );
+    }
+
+    [Test]
+    public void SymbolCannotSearchIndexesByNameWithoutNoExist()
+    {
+        const string callbackName1 = "init";
+        var callback = MockUtility.CreateCallbackSymbol( callbackName1 );
+
+        symbolTable.AddAsNoOverload( callback );
+
+        const string callbackName2 = "ui_control";
+        const string overloadName = "$overload1";
+        var callback2 = MockUtility.CreateCallbackSymbol( callbackName2 );
+
+        callback2.Arguments.Add( MockUtility.CreateArgumentSymbol( overloadName ) );
+        symbolTable.AddAsOverload( callback2, overloadName );
+
+        const string searchCallbackName1 = "non_exist_name";
+        Assert.That( symbolTable.TrySearchIndexByName( searchCallbackName1, out _ ), Is.False );
+    }
+    #endregion ~Search index by name
+
+    #region Get index by name
+    [Test]
+    public void SymbolCanGetIndexByName()
+    {
+        const string callbackName1 = "init";
+        var callback1 = MockUtility.CreateCallbackSymbol( callbackName1 );
+
+        const string callbackName2 = "ui_control";
+        const string overloadName = "$overload1";
+        var callback2 = MockUtility.CreateCallbackSymbol( callbackName2 );
+        callback2.Arguments.Add( MockUtility.CreateArgumentSymbol( overloadName ) );
+
+        symbolTable.AddAsNoOverload( callback1 );
+        symbolTable.AddAsOverload( callback2, overloadName );
+
+        var expectedIndex1 = new UniqueSymbolIndex( 0 );
+        Assert.That( symbolTable.TryGetNoOverloadIndexByName( callbackName1, out var result1 ), Is.True );
+        Assert.That( result1,                                                                   Is.EqualTo( expectedIndex1 ) );
+
+        var expectedIndex2 = new UniqueSymbolIndex( 1 );
+        Assert.That( symbolTable.TryGetOverloadIndexByName( callbackName2, overloadName, out var result2 ), Is.True );
+        Assert.That( result2,                                                                               Is.EqualTo( expectedIndex2 ) );
+    }
+
+    [Test]
+    public void SymbolCannotGetIndexByNameWithoutNoExist()
+    {
+        const string callbackName1 = "init";
+        var callback1 = MockUtility.CreateCallbackSymbol( callbackName1 );
+
+        const string callbackName2 = "ui_control";
+        const string overloadName = "$overload1";
+        var callback2 = MockUtility.CreateCallbackSymbol( callbackName2 );
+        callback2.Arguments.Add( MockUtility.CreateArgumentSymbol( overloadName ) );
+
+        symbolTable.AddAsNoOverload( callback1 );
+        symbolTable.AddAsOverload( callback2, overloadName );
+
+        const string searchCallbackName1 = "non_exist_name1";
+        Assert.That( symbolTable.TryGetNoOverloadIndexByName( searchCallbackName1, out _ ), Is.False );
+
+        const string searchCallbackName2 = "non_exist_name2";
+        Assert.That( symbolTable.TryGetOverloadIndexByName( searchCallbackName2, overloadName, out _ ), Is.False );
+    }
+    #endregion ~Get index by name
+
+    #region Add No Overload and Overload mixed
+    [Test]
+    public void SymbolCanAdd()
+    {
+        const string callbackName1 = "init";
+        var callback1 = MockUtility.CreateCallbackSymbol( callbackName1 );
+
+        const string callbackName2 = "ui_control";
+        const string overloadName = "$overload1";
+        var callback2 = MockUtility.CreateCallbackSymbol( callbackName2, "$arg" );
+
+        Assert.That( symbolTable.AddAsNoOverload( callback1 ), Is.True );
+        Assert.That( symbolTable.AddAsOverload( callback2, overloadName ), Is.True );
+        Assert.That( symbolTable.Contains( callbackName1 ) );
+        Assert.That( symbolTable.Contains( callbackName2, overloadName ) );
+    }
+    #endregion ~Add No Overload and Overload mixed
 
     #region Add No Overload
     [Test]
     public void SymbolCanAddWithoutOverload()
     {
-        var symbol = CreateSymbol( "Test" );
-        var result = symbolTable.AddAsNoOverload( symbol );
-        Assert.That( result,                              Is.True );
-        Assert.That( symbolTable.Contains( symbol.Name ), Is.True );
+        const string callbackName = "init";
+
+        var callback = MockUtility.CreateCallbackSymbol( callbackName );
+        var result = symbolTable.AddAsNoOverload( callback );
+
+        Assert.That( result,                                Is.True );
+        Assert.That( symbolTable.Contains( callback.Name ), Is.True );
     }
 
     [Test]
     public void SymbolCannotAddOverloadWhenAddAsNoOverloadOnce()
     {
-        var symbol = CreateSymbol( "Test" );
-        Assert.That( symbolTable.AddAsNoOverload( symbol ),                        Is.True );
-        Assert.That( symbolTable.AddAsOverload( symbol, new SymbolName( "abc" ) ), Is.False );
+        const string callbackName = "ui_control";
+        const string overloadName = "$overload1";
+
+        var callback = MockUtility.CreateCallbackSymbol( callbackName, overloadName );
+
+        Assert.That( symbolTable.AddAsNoOverload( callback ),                        Is.True );
+        Assert.That( symbolTable.AddAsNoOverload( callback ),                        Is.False );
+        Assert.That( symbolTable.AddAsOverload( callback, new SymbolName( "abc" ) ), Is.False );
     }
     #endregion ~Add No Overload
 
@@ -62,23 +287,126 @@ public class CallbackSymbolTableTest
     [Test]
     public void SymbolCanAddWithOverload()
     {
-        var symbol = CreateSymbol( "Test" );
-        var overload1 = new SymbolName( "abc" );
-        var overload2 = new SymbolName( "def" );
-        Assert.That( symbolTable.AddAsOverload( symbol, overload1 ), Is.True );
-        Assert.That( symbolTable.AddAsOverload( symbol, overload2 ), Is.True );
-        Assert.That( symbolTable.Contains( symbol.Name, overload1 ), Is.True );
-        Assert.That( symbolTable.Contains( symbol.Name, overload2 ), Is.True );
+        const string callbackName = "ui_control";
+        const string overloadName1 = "$overload1";
+        const string overloadName2 = "$overload2";
+
+        var callback1 = MockUtility.CreateCallbackSymbol( callbackName, overloadName1 );
+        var callback2 = MockUtility.CreateCallbackSymbol( callbackName, overloadName2 );
+
+        Assert.That( symbolTable.AddAsOverload( callback1, overloadName1 ), Is.True );
+        Assert.That( symbolTable.AddAsOverload( callback2, overloadName2 ), Is.True );
+
+        Assert.That( symbolTable.Contains( callbackName, overloadName1 ), Is.True );
+        Assert.That( symbolTable.Contains( callbackName, overloadName2 ), Is.True );
     }
 
     [Test]
     public void SymbolCannotDuplicateAddWithOverload()
     {
-        var symbol = CreateSymbol( "Test" );
-        Assert.That( symbolTable.AddAsOverload( symbol, symbol.Name ), Is.True );
-        Assert.That( symbolTable.AddAsOverload( symbol, symbol.Name ), Is.False, "Duplicate add should return false" );
+        const string callbackName = "ui_control";
+        const string overloadName = "$overload1";
+
+        var callback = MockUtility.CreateCallbackSymbol( callbackName );
+        Assert.That( symbolTable.AddAsOverload( callback, overloadName ), Is.True );
+        Assert.That( symbolTable.AddAsOverload( callback, overloadName ), Is.False, "Duplicate add should return false" );
     }
     #endregion ~Add Overload
+
+    #region Remove
+    [Test]
+    public void SymbolCanRemove()
+    {
+        const string callbackName1 = "init";
+        var callback1 = MockUtility.CreateCallbackSymbol( callbackName1 );
+
+        const string callbackName2 = "ui_control";
+        const string overloadName1 = "$overload1";
+        const string overloadName2 = "$overload2";
+
+        var callback2 = MockUtility.CreateCallbackSymbol( callbackName2 );
+        callback2.Arguments.Add( MockUtility.CreateArgumentSymbol( overloadName1 ) );
+
+        symbolTable.AddAsNoOverload( callback1 );
+        symbolTable.AddAsOverload( callback2, overloadName1 );
+        symbolTable.AddAsOverload( callback2, overloadName2 );
+
+        Assert.That( symbolTable.Remove( callback1 ), Is.True );
+        Assert.That( symbolTable.Count,               Is.EqualTo( 2 ) );
+
+        Assert.That( symbolTable.Remove( callback2, overloadName1 ), Is.True );
+        Assert.That( symbolTable.Count,                              Is.EqualTo( 1 ) );
+
+        Assert.That( symbolTable.Contains( callbackName1 ),                Is.False );
+        Assert.That( symbolTable.Contains( callbackName2, overloadName1 ), Is.False );
+    }
+
+    [Test]
+    public void SymbolCannotRemoveNoExist()
+    {
+        const string callbackName1 = "init";
+        var callback1 = MockUtility.CreateCallbackSymbol( callbackName1 );
+
+        const string callbackName2 = "ui_control";
+        const string overloadName = "$overload1";
+        var callback2 = MockUtility.CreateCallbackSymbol( callbackName2 );
+        callback2.Arguments.Add( MockUtility.CreateArgumentSymbol( overloadName ) );
+
+        symbolTable.AddAsNoOverload( callback1 );
+        symbolTable.AddAsOverload( callback2, overloadName );
+
+        var nonExistSymbol = MockUtility.CreateCallbackSymbol( "non_exist" );
+
+        Assert.That( symbolTable.Remove( nonExistSymbol ),               Is.False );
+        Assert.That( symbolTable.Remove( nonExistSymbol, overloadName ), Is.False );
+
+        Assert.That( symbolTable.Count, Is.EqualTo( 2 ) );
+
+    }
+
+    [Test]
+    public void AllSymbolsCanClear()
+    {
+        const string callbackName1 = "init";
+        var callback1 = MockUtility.CreateCallbackSymbol( callbackName1 );
+
+        const string callbackName2 = "ui_control";
+        const string overloadName = "$overload1";
+        var callback2 = MockUtility.CreateCallbackSymbol( callbackName2 );
+        callback2.Arguments.Add( MockUtility.CreateArgumentSymbol( overloadName ) );
+
+        symbolTable.AddAsNoOverload( callback1 );
+        symbolTable.AddAsOverload( callback2, overloadName );
+
+        symbolTable.Clear();
+
+        Assert.That( symbolTable.Count, Is.EqualTo( 0 ) );
+    }
+    #endregion ~Remove
+
+    #region Convert
+    [Test]
+    public void SymbolTableToListConvertTest()
+    {
+        const string callbackName1 = "init";
+        var callback1 = MockUtility.CreateCallbackSymbol( callbackName1 );
+
+        const string callbackName2 = "ui_control";
+        const string overloadName = "$overload1";
+        var callback2 = MockUtility.CreateCallbackSymbol( callbackName2 );
+        callback2.Arguments.Add( MockUtility.CreateArgumentSymbol( overloadName ) );
+
+        symbolTable.AddAsNoOverload( callback1 );
+        symbolTable.AddAsOverload( callback2, overloadName );
+
+        var list = symbolTable.ToList();
+
+        Assert.That( list.Count, Is.EqualTo( 2 ) );
+
+        Assert.That( list[ 0 ].Name.Value, Is.EqualTo( callbackName1 ) );
+        Assert.That( list[ 1 ].Name.Value, Is.EqualTo( callbackName2 ) );
+    }
+    #endregion ~Convert
 }
 
 public class CallbackSymbolTable : OverloadedSymbolTable<CallbackSymbol, SymbolName>
@@ -88,17 +416,17 @@ public class CallbackSymbolTable : OverloadedSymbolTable<CallbackSymbol, SymbolN
     ) : base( parent ) {}
 
     public CallbackSymbolTable(
-        IOverloadedSymbolTable<CallbackSymbol, SymbolName>? parent,
-        UniqueSymbolIndex startUniqueIndex
-    ) : base( parent, startUniqueIndex ) {}
+        UniqueSymbolIndex startUniqueIndex,
+        IOverloadedSymbolTable<CallbackSymbol, SymbolName>? parent = null
+    ) : base( startUniqueIndex, parent ) {}
 
     public override SymbolName NoOverloadValue
         => SymbolName.Empty;
 }
 
 public abstract class OverloadedSymbolTable<TSymbol, TOverload>(
-    IOverloadedSymbolTable<TSymbol, TOverload>? parent,
-    UniqueSymbolIndex startUniqueIndex
+    UniqueSymbolIndex startUniqueIndex,
+    IOverloadedSymbolTable<TSymbol, TOverload>? parent
 ) : IOverloadedSymbolTable<TSymbol, TOverload>
     where TSymbol : SymbolBase
     where TOverload : IEquatable<TOverload>
@@ -126,7 +454,7 @@ public abstract class OverloadedSymbolTable<TSymbol, TOverload>(
 
     protected OverloadedSymbolTable(
         IOverloadedSymbolTable<TSymbol, TOverload>? parent
-    ) : this( parent, UniqueSymbolIndex.Zero ) {}
+    ) : this( UniqueSymbolIndex.Zero, parent ) {}
 
     #region IEnumerator
     public IEnumerator<IReadOnlyDictionary<TOverload, TSymbol>> GetEnumerator()
@@ -142,7 +470,10 @@ public abstract class OverloadedSymbolTable<TSymbol, TOverload>(
     #endregion ~IEnumerator
 
     #region Find
-    public virtual bool TrySearch( SymbolName name, TOverload overload, out TSymbol result, bool enableSearchParent = true )
+    public bool TryGet( SymbolName name, out TSymbol result, bool enableSearchParent = true )
+        => TryGet( name, NoOverloadValue, out result, enableSearchParent );
+
+    public virtual bool TryGet( SymbolName name, TOverload overload, out TSymbol result, bool enableSearchParent = true )
     {
         result = null!;
 
@@ -151,20 +482,112 @@ public abstract class OverloadedSymbolTable<TSymbol, TOverload>(
             return false;
         }
 
-        return overloads.TryGetValue( overload, out result! );
+        if( overloads.TryGetValue( overload, out result! ) )
+        {
+            return true;
+        }
+
+        if( !enableSearchParent || Parent == null )
+        {
+            return false;
+        }
+
+        return Parent.TryGet( name, overload, out result, enableSearchParent );
     }
 
     public virtual bool TrySearchByName( SymbolName name, out IReadOnlyCollection<TSymbol> result, bool enableSearchParent = true )
-        => throw new NotImplementedException();
+    {
+        result = null!;
+
+        if( !table.TryGetValue( name, out var overloads ) )
+        {
+            return false;
+        }
+
+        result = overloads.Values.ToList();
+
+        if( !enableSearchParent || Parent == null )
+        {
+            return true;
+        }
+
+        if( Parent.TrySearchByName( name, out var parentResult, enableSearchParent ) )
+        {
+            result = result.Concat( parentResult ).ToList();
+        }
+
+        return true;
+    }
 
     public virtual bool TrySearchByIndex( UniqueSymbolIndex index, out TSymbol result, bool enableSearchParent = true )
-        => throw new NotImplementedException();
+    {
+        result = null!;
+
+        foreach( var overloads in table.Values )
+        {
+            foreach( var symbol in overloads.Values )
+            {
+                if( symbol.TableIndex == index )
+                {
+                    result = symbol;
+                    return true;
+                }
+            }
+        }
+
+        if( !enableSearchParent || Parent == null )
+        {
+            return false;
+        }
+
+        return Parent.TrySearchByIndex( index, out result, enableSearchParent );
+    }
 
     public virtual bool TrySearchIndexByName( SymbolName name, out IReadOnlyCollection<UniqueSymbolIndex> result, bool enableSearchParent = true )
-        => throw new NotImplementedException();
+    {
+        result = null!;
 
-    public virtual bool TrySearchIndexByName( SymbolName name, TOverload overload, out UniqueSymbolIndex result, bool enableSearchParent = true )
-        => throw new NotImplementedException();
+        if( !table.TryGetValue( name, out var overloads ) )
+        {
+            return false;
+        }
+
+        result = overloads.Values.Select( x => x.TableIndex ).ToList();
+
+        if( !enableSearchParent || Parent == null )
+        {
+            return true;
+        }
+
+        if( Parent.TrySearchIndexByName( name, out var parentResult, enableSearchParent ) )
+        {
+            result = result.Concat( parentResult ).ToList();
+        }
+
+        return true;
+    }
+
+    public virtual bool TryGetNoOverloadIndexByName( SymbolName name, out UniqueSymbolIndex result, bool enableSearchParent = true )
+        => TryGetOverloadIndexByName( name, NoOverloadValue, out result, enableSearchParent );
+
+    public virtual bool TryGetOverloadIndexByName( SymbolName name, TOverload overload, out UniqueSymbolIndex result, bool enableSearchParent = true )
+    {
+        result = null!;
+
+        if( !table.TryGetValue( name, out var overloads ) )
+        {
+            return false;
+        }
+
+        if( !overloads.TryGetValue( overload, out var symbol ) )
+        {
+            return false;
+        }
+
+        result = symbol.TableIndex;
+
+        return true;
+    }
     #endregion ~Find
 
     #region Add
