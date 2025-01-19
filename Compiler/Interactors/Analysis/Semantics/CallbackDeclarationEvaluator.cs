@@ -39,7 +39,7 @@ public class CallbackDeclarationEvaluator(
         }
         else
         {
-            thisCallback              = builtInCallback.Clone<CallbackSymbol>();
+            thisCallback              = builtInCallback.MemberwiseClone<CallbackSymbol>();
             thisCallback.CommentLines = node.CommentLines;
         }
 

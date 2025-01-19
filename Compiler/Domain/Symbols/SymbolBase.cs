@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 using KSPCompiler.Commons.Text;
@@ -10,7 +9,7 @@ namespace KSPCompiler.Domain.Symbols;
 /// Represents a symbol in the symbol table.
 /// </summary>
 /// <seealso cref="ISymbolTable{TSymbol}"/>
-public abstract class SymbolBase : ICloneable
+public abstract record SymbolBase
 {
     /// <summary>
     /// If comment text above declaration exists.
@@ -77,18 +76,11 @@ public abstract class SymbolBase : ICloneable
     public object? ConstantValue { get; set; } = null;
 
     /// <summary>
-    /// <seealso cref="System.ICloneable.Clone()"/>
+    /// Convenience method for <see cref="object.MemberwiseClone"/>.
     /// </summary>
-    object ICloneable.Clone()
-    {
-        return Clone<object>();
-    }
-
-    /// <summary>
-    /// <seealso cref="System.ICloneable.Clone()"/>
-    /// </summary>
+    /// <returns></returns>
     // ReSharper disable once MemberCanBePrivate.Global
-    public T Clone<T>() where T : class
+    public T MemberwiseClone<T>() where T : SymbolBase
     {
         return (T)MemberwiseClone();
     }
