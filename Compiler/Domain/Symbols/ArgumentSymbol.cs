@@ -2,13 +2,13 @@ using System.Collections.Generic;
 
 namespace KSPCompiler.Domain.Symbols;
 
-public abstract class ArgumentSymbol : VariableSymbol
+public abstract record ArgumentSymbol : VariableSymbol
 {
     public virtual IReadOnlyList<string> UITypeNames { get; }
     public virtual IReadOnlyList<string> OtherTypeNames { get; }
 
     protected ArgumentSymbol()
-        : this( new string[] {} ) {}
+        : this( [] ) {}
 
     protected ArgumentSymbol( IReadOnlyList<string> uiTypeNames, IReadOnlyList<string> otherTypeNames )
     {
@@ -17,5 +17,5 @@ public abstract class ArgumentSymbol : VariableSymbol
     }
 
     protected ArgumentSymbol( IReadOnlyList<string> uiTypeNames )
-        : this( uiTypeNames, new string[] {} ) {}
+        : this( uiTypeNames, [] ) {}
 }

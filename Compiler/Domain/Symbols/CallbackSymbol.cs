@@ -5,7 +5,7 @@ using KSPCompiler.Domain.Symbols.MetaData;
 
 namespace KSPCompiler.Domain.Symbols;
 
-public sealed class CallbackSymbol : SymbolBase
+public sealed record CallbackSymbol( bool AllowMultipleDeclaration ) : SymbolBase
 {
     public override SymbolType Type
         => SymbolType.Callback;
@@ -24,12 +24,7 @@ public sealed class CallbackSymbol : SymbolBase
     /// <remarks>
     /// Some callbacks allows duplicated callback definitions in script.
     /// </remarks>
-    public bool AllowMultipleDeclaration { get; }
-
-    public CallbackSymbol( bool allowMultipleDeclaration )
-    {
-        AllowMultipleDeclaration = allowMultipleDeclaration;
-    }
+    public bool AllowMultipleDeclaration { get; } = AllowMultipleDeclaration;
 
     public CallbackSymbol( bool allowMultipleDeclaration, IEnumerable<CallbackArgumentSymbol> args ) : this( allowMultipleDeclaration )
     {

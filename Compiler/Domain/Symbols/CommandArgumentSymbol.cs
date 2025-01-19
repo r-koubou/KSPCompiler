@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace KSPCompiler.Domain.Symbols;
 
-public sealed class CommandArgumentSymbol : ArgumentSymbol
+public sealed record CommandArgumentSymbol : ArgumentSymbol
 {
     public CommandArgumentSymbol() {}
 
