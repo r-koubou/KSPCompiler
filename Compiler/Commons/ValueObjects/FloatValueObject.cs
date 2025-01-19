@@ -15,9 +15,6 @@ public abstract record FloatValueObject( float Value ) : ValueObject<float>( Val
     public override int GetHashCode()
         => HashCode.Combine( Value );
 
-    public override bool Equals( float other )
-        => Math.Abs( Value - other ) < Epsilon;
-
     public virtual bool Equals( FloatValueObject? other )
-        => other is not null && Equals( other.Value );
+        => other is not null && Math.Abs( Value - other.Value ) < Epsilon;
 }
