@@ -15,9 +15,6 @@ public abstract record DoubleValueObject( double Value ) : ValueObject<double>( 
     public override int GetHashCode()
         => HashCode.Combine( Value );
 
-    public override bool Equals( double other )
-        => Math.Abs( Value - other ) < Epsilon;
-
     public virtual bool Equals( DoubleValueObject? other )
-        => other is not null && Equals( other.Value );
+        => other is not null && Math.Abs( Value - other.Value ) < Epsilon;
 }
