@@ -1,28 +1,16 @@
 namespace KSPCompiler.Domain.Symbols;
 
-public class CallbackSymbolTable : SymbolTable<CallbackSymbol>, ICallbackSymbolTable
+public class CallbackSymbolTable : OverloadedSymbolTable<CallbackSymbol, SymbolName>
 {
-    public override bool Add( CallbackSymbol symbol, bool overwrite = false )
-    {
-        var contains = table.ContainsKey( symbol.Name );
+    public CallbackSymbolTable(
+        IOverloadedSymbolTable<CallbackSymbol, SymbolName>? parent = null
+    ) : base( parent ) {}
 
-        // 既に登録済みの場合
-        if( contains && !overwrite)
-        {
-            // 多重定義を許可されていないコールバックの場合は追加失敗扱い
-            if( !symbol.AllowMultipleDeclaration )
-            {
-                return false;
-            }
-            // そうでない場合は追加済みとして扱う
-            OnWillAdd( symbol );
-            return true;
-        }
+    public CallbackSymbolTable(
+        UniqueSymbolIndex startUniqueIndex,
+        IOverloadedSymbolTable<CallbackSymbol, SymbolName>? parent = null
+    ) : base( startUniqueIndex, parent ) {}
 
-        // 新規登録
-        OnWillAdd( symbol );
-        symbol.TableIndex    = uniqueIndexGenerator.Next();
-        table[ symbol.Name ] = symbol;
-        return true;
-    }
+    public override SymbolName NoOverloadValue
+        => SymbolName.Empty;
 }
