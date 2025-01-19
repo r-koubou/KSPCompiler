@@ -84,7 +84,7 @@ public static class MockSymbolTableUtility
             BuiltIn    = true
         };
 
-        example.AddArgument( new CallbackArgumentSymbol( false )
+        example.Arguments.Add( new CallbackArgumentSymbol( false )
             {
                 Name        = "$button",
                 DataType    = DataTypeFlag.TypeInt,

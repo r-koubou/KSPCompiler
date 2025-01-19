@@ -24,7 +24,7 @@ public static class AstCallbackDeclarationExtension
             };
 
             argument.DataType = DataTypeUtility.GuessFromSymbolName( argument.Name );
-            result.AddArgument( argument );
+            result.Arguments.Add( argument );
         }
 
         return result;
