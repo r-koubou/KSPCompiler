@@ -31,6 +31,7 @@ public class UserFunctionDeclarationEvaluator(
             );
         }
 
+        thisUserFunction.Range           = node.Position;
         thisUserFunction.DefinedPosition = node.FunctionNamePosition;
 
         return node;

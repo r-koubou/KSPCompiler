@@ -36,7 +36,7 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         public override AstNode VisitIfStatement( KSPParser.IfStatementContext context )
         {
             var node = VisitControlStatementImpl<AstIfStatementNode>( context.expression(), context.ifBlock );
-            node.Import( tokenStream, context.ifBlock );
+            node.Import( tokenStream, context );
 
             if( context.elseBlock?.Accept( this ) is not AstBlockNode elseBlock )
             {

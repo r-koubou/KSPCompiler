@@ -34,6 +34,17 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 EndColumn   = Column.Unknown
             };
         }
+
+        public static Position ToPosition( IToken beginToken, IToken endToken )
+        {
+            return new Position
+            {
+                BeginLine   = beginToken.Line,
+                BeginColumn = beginToken.Column,
+                EndLine     = endToken.Line,
+                EndColumn   = endToken.Column
+            };
+        }
         #endregion TokenPosition
 
         #region Comments

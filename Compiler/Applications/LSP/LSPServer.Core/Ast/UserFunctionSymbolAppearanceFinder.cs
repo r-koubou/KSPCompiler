@@ -10,7 +10,7 @@ namespace KSPCompiler.LSPServer.Core.Ast;
 public sealed class UserFunctionSymbolAppearanceFinder(
     string symbolName,
     AppearanceFinderMode mode = AppearanceFinderMode.All )
-    : DefaultAstVisitor, ISymbolAppearanceFinder
+    : DefaultAstVisitor, IAstAppearanceFinder
 {
     private string SymbolName { get; } = symbolName;
     private AppearanceFinderMode Mode { get; } = mode;
