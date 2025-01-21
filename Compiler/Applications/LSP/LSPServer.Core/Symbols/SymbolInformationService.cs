@@ -90,14 +90,14 @@ public sealed class SymbolInformationService
 
     private static async Task CollectCallbackAsync( ICallbackSymbolTable symbolTable, List<SymbolInformationOrDocumentSymbol> result )
     {
-        foreach( var variable in symbolTable )
+        foreach( var callback in symbolTable.ToList() )
         {
             result.Add( new DocumentSymbol
                 {
-                    Name           = variable.Name,
+                    Name           = callback.Name,
                     Kind           = SymbolKind.Event,
-                    Range          = variable.DefinedPosition.AsRange(),
-                    SelectionRange = variable.DefinedPosition.AsRange()
+                    Range          = callback.DefinedPosition.AsRange(),
+                    SelectionRange = callback.DefinedPosition.AsRange()
                 }
             );
         }

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 using KSPCompiler.Domain.Symbols;
 
 namespace KSPCompiler.Domain.Tests.Symbols;
@@ -15,11 +17,17 @@ internal static class MockUtility
         {
             Name = new SymbolName( name )
         };
-    public static CallbackArgumentSymbol CreateArgumentSymbol( SymbolName name, bool requiredDeclareOnInit = true )
-        => new CallbackArgumentSymbol( requiredDeclareOnInit )
+    public static CallbackArgumentSymbolList CreateArgumentSymbolList( params string[] names )
+    {
+        var result = new CallbackArgumentSymbolList();
+
+        foreach ( var name in names )
         {
-            Name = name
-        };
+            result.Add( CreateArgumentSymbol( name ) );
+        }
+
+        return result;
+    }
 
     public static CallbackSymbol CreateCallbackSymbol( string name )
         => new CallbackSymbol( true )

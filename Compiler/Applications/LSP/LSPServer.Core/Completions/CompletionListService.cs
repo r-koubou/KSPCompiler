@@ -99,6 +99,22 @@ public sealed class CompletionListService
         ).ToList();
     }
 
+    private static List<TSymbol> MatchCompletionItem<TSymbol, TOverload>(
+        IOverloadedSymbolTable<TSymbol, TOverload> symbols,
+        string partialName,
+        Func<TSymbol, bool>? extracCondition = null )
+        where TSymbol : SymbolBase
+        where TOverload : IEquatable<TOverload>
+    {
+        var list = symbols.Where(
+            x => x.First().Value.Name != partialName
+                 && x.First().Value.Name.Value.Contains( partialName )
+                 && ( extracCondition == null || extracCondition.Invoke( x.First().Value ) )
+        ).ToList();
+
+        return list.Select( x => x.First().Value ).ToList();
+    }
+
     private static void BuildCompletionItem<TSymbol>(
         IReadOnlyCollection<TSymbol> symbols,
         string partialName,

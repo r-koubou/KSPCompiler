@@ -5,12 +5,12 @@ using KSPCompiler.Domain.Symbols.MetaData;
 
 namespace KSPCompiler.Domain.Symbols;
 
-public sealed record CallbackSymbol( bool AllowMultipleDeclaration ) : SymbolBase
+public sealed class CallbackSymbol( bool allowMultipleDeclaration ) : SymbolBase, ICloneable
 {
     public override SymbolType Type
         => SymbolType.Callback;
 
-    public CallbackArgumentSymbolList Arguments { get; } = [];
+    public CallbackArgumentSymbolList Arguments { get; } = new();
 
     public int ArgumentCount
         => Arguments.Count;
@@ -21,10 +21,31 @@ public sealed record CallbackSymbol( bool AllowMultipleDeclaration ) : SymbolBas
     /// <remarks>
     /// Some callbacks allows duplicated callback definitions in script.
     /// </remarks>
-    public bool AllowMultipleDeclaration { get; } = AllowMultipleDeclaration;
+    public bool AllowMultipleDeclaration { get; } = allowMultipleDeclaration;
 
     public CallbackSymbol( bool allowMultipleDeclaration, IEnumerable<CallbackArgumentSymbol> args ) : this( allowMultipleDeclaration )
     {
         Arguments.AddRange( args );
+    }
+
+    public object Clone()
+    {
+        var newSymbol = new CallbackSymbol( AllowMultipleDeclaration )
+        {
+            CommentLines = CommentLines,
+            DefinedPosition = DefinedPosition,
+            Name = Name,
+            BuiltIn = BuiltIn,
+            State = State,
+            Modifier = Modifier,
+            TableIndex = TableIndex
+        };
+
+        foreach( var arg in Arguments )
+        {
+            newSymbol.Arguments.Add( arg );
+        }
+
+        return newSymbol;
     }
 }

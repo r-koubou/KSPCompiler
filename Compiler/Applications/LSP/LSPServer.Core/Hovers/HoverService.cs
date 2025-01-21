@@ -32,11 +32,12 @@ public sealed class HoverService( CompilerCacheService compilerCacheService )
             return hoverText.AsHover();
         }
 
-        // ユーザー定義コールバック(コメントがある場合)
-        if( symbols.UserCallbacks.TryBuildHoverText(word, out hoverText, new UserDefinedSymbolHoverTextBuilder<CallbackSymbol>() ) )
-        {
-            return hoverText.AsHover();
-        }
+        // TODO
+        // // ユーザー定義コールバック(コメントがある場合)
+        // if( symbols.UserCallbacks.TryBuildHoverText(word, out hoverText, new UserDefinedSymbolHoverTextBuilder<CallbackSymbol>() ) )
+        // {
+        //     return hoverText.AsHover();
+        // }
 
         #endregion ~User deffinitions
 

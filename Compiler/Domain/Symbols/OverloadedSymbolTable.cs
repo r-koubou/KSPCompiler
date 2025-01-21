@@ -185,13 +185,13 @@ public abstract class OverloadedSymbolTable<TSymbol, TOverload>(
         {
             // 1つ目の登録時にオーバーロードしてい無しで登録されていた場合
             // 後からオーバーロードを追加することはできない
-            if( !overwrite && overloads.ContainsKey( NoOverloadValue ) )
+            if( !overwrite && overloads.Keys.Any( key => key.Equals( NoOverloadValue ) ) )
             {
                 return false;
             }
 
             // 既にオーバーロードが存在する場合 && 上書き不可の場合
-            if( !overwrite && overloads.ContainsKey( overload ) )
+            if( !overwrite && overloads.Keys.Any( key => key.Equals( overload ) ) )
             {
                 return false;
             }

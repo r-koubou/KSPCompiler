@@ -9,7 +9,7 @@ namespace KSPCompiler.Domain.Symbols;
 /// Represents a symbol in the symbol table.
 /// </summary>
 /// <seealso cref="ISymbolTable{TSymbol}"/>
-public abstract record SymbolBase
+public abstract class SymbolBase
 {
     /// <summary>
     /// If comment text above declaration exists.
@@ -74,14 +74,4 @@ public abstract record SymbolBase
     /// If the symbol can represent a constant value, this property holds the value. Otherwise, it is null.
     /// </summary>
     public object? ConstantValue { get; set; } = null;
-
-    /// <summary>
-    /// Convenience method for <see cref="object.MemberwiseClone"/>.
-    /// </summary>
-    /// <returns></returns>
-    // ReSharper disable once MemberCanBePrivate.Global
-    public T MemberwiseClone<T>() where T : SymbolBase
-    {
-        return (T)MemberwiseClone();
-    }
 }

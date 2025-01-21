@@ -4,6 +4,7 @@ using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.CompilerMessages.Extensions;
 using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Events.Extensions;
+using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Interactors.Analysis.Semantics;
 using KSPCompiler.Interactors.Tests.Commons;
 
@@ -29,7 +30,7 @@ public class AstCallbackDeclarationEvaluationTest
 
         if( builtIn )
         {
-            symbols.BuiltInCallbacks.Add( callback );
+            symbols.BuiltInCallbacks.AddAsNoOverload( callback );
         }
 
         var ast = MockUtility.CreateCallbackDeclarationNode( name );
@@ -53,9 +54,22 @@ public class AstCallbackDeclarationEvaluationTest
         var eventEmitter = new MockEventEmitter();
         eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
+        var overload = new CallbackArgumentSymbolList
+        {
+            new CallbackArgumentSymbol( true ) { Name = new SymbolName( "arg1" ) }
+        };
+
         var callback = MockUtility.CreateCallback( name, allowMultiple );
         var symbols = MockUtility.CreateAggregateSymbolTable();
-        symbols.BuiltInCallbacks.Add( callback );
+
+        if( allowMultiple )
+        {
+            symbols.BuiltInCallbacks.AddAsOverload( callback, overload );
+        }
+        else
+        {
+            symbols.BuiltInCallbacks.AddAsNoOverload( callback );
+        }
 
         var ast = MockUtility.CreateCallbackDeclarationNode( name );
         var evaluator = new CallbackDeclarationEvaluator( eventEmitter, symbols );
@@ -70,7 +84,19 @@ public class AstCallbackDeclarationEvaluationTest
 
         compilerMessageManger.WriteTo( Console.Out );
 
-        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( allowMultiple ? 0 : 1 ) );
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
+
+        return;
+
+        CallbackArgumentSymbolList CreateOverload( string argName )
+        {
+            var result = new CallbackArgumentSymbolList
+            {
+                new CallbackArgumentSymbol( true ) { Name = new SymbolName( argName ) }
+            };
+
+            return result;
+        }
     }
 
 }
