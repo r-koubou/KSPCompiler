@@ -5,7 +5,7 @@ using KSPCompiler.Domain.Ast.Nodes.Blocks;
 
 namespace KSPCompiler.LSPServer.Core.Ast;
 
-public interface ISymbolAppearanceFinder
+public interface IAstAppearanceFinder
 {
     IReadOnlyCollection<Position> Find( AstCompilationUnitNode ast );
 }
