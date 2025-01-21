@@ -35,30 +35,30 @@ public static class AggregateSymbolTableExtension
 
     #region Callbacks
 
-    public static bool TrySearchCallbackByName( this AggregateSymbolTable symbolTable, SymbolName name, out CallbackSymbol result, bool enableSearchParent = true )
-    {
-        if( symbolTable.BuiltInCallbacks.TrySearchByName( name, out result, enableSearchParent ) )
-        {
-            return true;
-        }
-
-        if( symbolTable.UserCallbacks.TrySearchByName( name, out result, enableSearchParent ) )
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-    public static bool TrySearchBuiltInCallbackByName( this AggregateSymbolTable symbolTable, SymbolName name, out CallbackSymbol result, bool enableSearchParent = true )
-    {
-        return symbolTable.BuiltInCallbacks.TrySearchByName( name, out result, enableSearchParent );
-    }
-
-    public static bool TrySearchUserCallbackByName( this AggregateSymbolTable symbolTable, SymbolName name, out CallbackSymbol result, bool enableSearchParent = true )
-    {
-        return symbolTable.UserCallbacks.TrySearchByName( name, out result, enableSearchParent );
-    }
+    // public static bool TrySearchCallbackByName( this AggregateSymbolTable symbolTable, SymbolName name, out CallbackSymbol result, bool enableSearchParent = true )
+    // {
+    //     if( symbolTable.BuiltInCallbacks.TrySearchByName( name, out result, enableSearchParent ) )
+    //     {
+    //         return true;
+    //     }
+    //
+    //     if( symbolTable.UserCallbacks.TrySearchByName( name, out result, enableSearchParent ) )
+    //     {
+    //         return true;
+    //     }
+    //
+    //     return false;
+    // }
+    //
+    // public static bool TrySearchBuiltInCallbackByName( this AggregateSymbolTable symbolTable, SymbolName name, out CallbackSymbol result, bool enableSearchParent = true )
+    // {
+    //     return symbolTable.BuiltInCallbacks.TrySearchByName( name, out result, enableSearchParent );
+    // }
+    //
+    // public static bool TrySearchUserCallbackByName( this AggregateSymbolTable symbolTable, SymbolName name, out CallbackSymbol result, bool enableSearchParent = true )
+    // {
+    //     return symbolTable.UserCallbacks.TrySearchByName( name, out result, enableSearchParent );
+    // }
 
     #endregion ~Callbacks
 

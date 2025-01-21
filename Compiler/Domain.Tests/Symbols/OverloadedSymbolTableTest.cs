@@ -32,13 +32,16 @@ public class CallbackSymbolTableTest
     public void TableCannotSearchNoExistWithNoOverload()
     {
         var symbol = MockUtility.CreateCallbackSymbol( "init" );
-        var overload1 = MockUtility.CreateArgumentSymbol( "overload1" );
-        var overload2 = MockUtility.CreateArgumentSymbol( "overload2" );
+        var overload1 = MockUtility.CreateArgumentSymbolList( "overload1" );
+        var overload2 = MockUtility.CreateArgumentSymbolList( "overload2" );
 
-        symbolTable.AddAsOverload( symbol, overload1.Name );
-        symbolTable.AddAsOverload( symbol, overload2.Name );
 
-        var result = symbolTable.TryGet( new SymbolName( "init" ), new SymbolName( "xyz" ), out _ );
+        symbolTable.AddAsOverload( symbol, overload1 );
+        symbolTable.AddAsOverload( symbol, overload2 );
+
+        var notExisiList = MockUtility.CreateArgumentSymbolList( "not_exist" );
+
+        var result = symbolTable.TryGet( new SymbolName( "init" ), notExisiList, out _ );
         Assert.That( result, Is.False );
     }
     #endregion ~Find with no overload
@@ -61,12 +64,13 @@ public class CallbackSymbolTableTest
         var callback1 = MockUtility.CreateCallbackSymbol( callbackName1 );
 
         const string callbackName2 = "ui_control";
-        const string overloadName = "$overload1";
+        var overload = MockUtility.CreateArgumentSymbolList( "overload1" );
+
         var callback2 = MockUtility.CreateCallbackSymbol( callbackName2 );
-        callback2.Arguments.Add( MockUtility.CreateArgumentSymbol( overloadName ) );
+        callback2.Arguments.Add( overload[ 0 ] );
 
         symbolTable.AddAsNoOverload( callback1 );
-        symbolTable.AddAsOverload( callback2, overloadName );
+        symbolTable.AddAsOverload( callback2, overload );
 
         const string searchCallbackName = callbackName1;
         Assert.That( symbolTable.TrySearchByName( searchCallbackName, out var result1 ), Is.True );
@@ -84,12 +88,12 @@ public class CallbackSymbolTableTest
         var callback1 = MockUtility.CreateCallbackSymbol( callbackName1 );
 
         const string callbackName2 = "ui_control";
-        const string overloadName = "$overload1";
+        var overload = MockUtility.CreateArgumentSymbolList( "overload1" );
         var callback2 = MockUtility.CreateCallbackSymbol( callbackName2 );
-        callback2.Arguments.Add( MockUtility.CreateArgumentSymbol( overloadName ) );
+        callback2.Arguments.Add( overload[ 0 ] );
 
         symbolTable.AddAsNoOverload( callback1 );
-        symbolTable.AddAsOverload( callback2, overloadName );
+        symbolTable.AddAsOverload( callback2, overload );
 
         const string searchCallbackName = "non_exist_name1";
         Assert.That( symbolTable.TrySearchByName( searchCallbackName, out _ ), Is.False );
@@ -97,7 +101,6 @@ public class CallbackSymbolTableTest
         const string searchCallbackName2 = "non_exist_name2";
         Assert.That( symbolTable.TrySearchByName( searchCallbackName2, out _ ), Is.False );
     }
-
     #endregion
 
     #region Search by Index
@@ -108,12 +111,12 @@ public class CallbackSymbolTableTest
         var callback1 = MockUtility.CreateCallbackSymbol( callbackName1 );
 
         const string callbackName2 = "ui_control";
-        const string overloadName = "$overload1";
+        var overload = MockUtility.CreateArgumentSymbolList( "overload1" );
         var callback2 = MockUtility.CreateCallbackSymbol( callbackName2 );
-        callback2.Arguments.Add( MockUtility.CreateArgumentSymbol( overloadName ) );
+        callback2.Arguments.Add( overload[ 0 ] );
 
         symbolTable.AddAsNoOverload( callback1 );
-        symbolTable.AddAsOverload( callback2, overloadName );
+        symbolTable.AddAsOverload( callback2, overload );
 
         var searchIndex1 = new UniqueSymbolIndex( 0 );
         Assert.That( symbolTable.TrySearchByIndex( searchIndex1, out _ ), Is.True );
@@ -129,12 +132,12 @@ public class CallbackSymbolTableTest
         var callback1 = MockUtility.CreateCallbackSymbol( callbackName1 );
 
         const string callbackName2 = "ui_control";
-        const string overloadName = "$overload1";
+        var overload = MockUtility.CreateArgumentSymbolList( "overload1" );
         var callback2 = MockUtility.CreateCallbackSymbol( callbackName2 );
-        callback2.Arguments.Add( MockUtility.CreateArgumentSymbol( overloadName ) );
+        callback2.Arguments.Add( overload[ 0 ] );
 
         symbolTable.AddAsNoOverload( callback1 );
-        symbolTable.AddAsOverload( callback2, overloadName );
+        symbolTable.AddAsOverload( callback2, overload );
 
         var searchIndex1 = new UniqueSymbolIndex( 123 );
         Assert.That( symbolTable.TrySearchByIndex( searchIndex1, out _ ), Is.False );
@@ -142,7 +145,6 @@ public class CallbackSymbolTableTest
         var searchIndex2 = new UniqueSymbolIndex( 456 );
         Assert.That( symbolTable.TrySearchByIndex( searchIndex2, out _ ), Is.False );
     }
-
     #endregion ~Search by Index
 
     #region Search indexes by name
@@ -153,12 +155,12 @@ public class CallbackSymbolTableTest
         var callback1 = MockUtility.CreateCallbackSymbol( callbackName1 );
 
         const string callbackName2 = "ui_control";
-        const string overloadName = "$overload1";
+        var overload = MockUtility.CreateArgumentSymbolList( "overload1" );
         var callback2 = MockUtility.CreateCallbackSymbol( callbackName2 );
-        callback2.Arguments.Add( MockUtility.CreateArgumentSymbol( overloadName ) );
+        callback2.Arguments.Add( overload[ 0 ] );
 
         symbolTable.AddAsNoOverload( callback1 );
-        symbolTable.AddAsOverload( callback2, overloadName );
+        symbolTable.AddAsOverload( callback2, overload );
 
         var expextedIndex1 = new UniqueSymbolIndex( 0 );
         Assert.That( symbolTable.TrySearchIndexByName( callbackName1, out var result1 ), Is.True );
@@ -179,10 +181,12 @@ public class CallbackSymbolTableTest
 
         const string callbackName2 = "ui_control";
         const string overloadName = "$overload1";
+
+        var overload = MockUtility.CreateArgumentSymbolList( overloadName );
         var callback2 = MockUtility.CreateCallbackSymbol( callbackName2 );
 
         callback2.Arguments.Add( MockUtility.CreateArgumentSymbol( overloadName ) );
-        symbolTable.AddAsOverload( callback2, overloadName );
+        symbolTable.AddAsOverload( callback2, overload );
 
         const string searchCallbackName1 = "non_exist_name";
         Assert.That( symbolTable.TrySearchIndexByName( searchCallbackName1, out _ ), Is.False );
@@ -197,20 +201,20 @@ public class CallbackSymbolTableTest
         var callback1 = MockUtility.CreateCallbackSymbol( callbackName1 );
 
         const string callbackName2 = "ui_control";
-        const string overloadName = "$overload1";
+        var overload = MockUtility.CreateArgumentSymbolList( "overload1" );
         var callback2 = MockUtility.CreateCallbackSymbol( callbackName2 );
-        callback2.Arguments.Add( MockUtility.CreateArgumentSymbol( overloadName ) );
+        callback2.Arguments.Add( overload[ 0 ] );
 
         symbolTable.AddAsNoOverload( callback1 );
-        symbolTable.AddAsOverload( callback2, overloadName );
+        symbolTable.AddAsOverload( callback2, overload );
 
         var expectedIndex1 = new UniqueSymbolIndex( 0 );
         Assert.That( symbolTable.TryGetNoOverloadIndexByName( callbackName1, out var result1 ), Is.True );
         Assert.That( result1,                                                                   Is.EqualTo( expectedIndex1 ) );
 
         var expectedIndex2 = new UniqueSymbolIndex( 1 );
-        Assert.That( symbolTable.TryGetOverloadIndexByName( callbackName2, overloadName, out var result2 ), Is.True );
-        Assert.That( result2,                                                                               Is.EqualTo( expectedIndex2 ) );
+        Assert.That( symbolTable.TryGetOverloadIndexByName( callbackName2, overload, out var result2 ), Is.True );
+        Assert.That( result2,                                                                           Is.EqualTo( expectedIndex2 ) );
     }
 
     [Test]
@@ -220,18 +224,18 @@ public class CallbackSymbolTableTest
         var callback1 = MockUtility.CreateCallbackSymbol( callbackName1 );
 
         const string callbackName2 = "ui_control";
-        const string overloadName = "$overload1";
+        var overload = MockUtility.CreateArgumentSymbolList( "overload1" );
         var callback2 = MockUtility.CreateCallbackSymbol( callbackName2 );
-        callback2.Arguments.Add( MockUtility.CreateArgumentSymbol( overloadName ) );
+        callback2.Arguments.Add( overload[ 0 ] );
 
         symbolTable.AddAsNoOverload( callback1 );
-        symbolTable.AddAsOverload( callback2, overloadName );
+        symbolTable.AddAsOverload( callback2, overload );
 
         const string searchCallbackName1 = "non_exist_name1";
         Assert.That( symbolTable.TryGetNoOverloadIndexByName( searchCallbackName1, out _ ), Is.False );
 
         const string searchCallbackName2 = "non_exist_name2";
-        Assert.That( symbolTable.TryGetOverloadIndexByName( searchCallbackName2, overloadName, out _ ), Is.False );
+        Assert.That( symbolTable.TryGetOverloadIndexByName( searchCallbackName2, overload, out _ ), Is.False );
     }
     #endregion ~Get index by name
 
@@ -244,12 +248,15 @@ public class CallbackSymbolTableTest
 
         const string callbackName2 = "ui_control";
         const string overloadName = "$overload1";
-        var callback2 = MockUtility.CreateCallbackSymbol( callbackName2, "$arg" );
 
-        Assert.That( symbolTable.AddAsNoOverload( callback1 ), Is.True );
-        Assert.That( symbolTable.AddAsOverload( callback2, overloadName ), Is.True );
+        var overload = MockUtility.CreateArgumentSymbolList( overloadName );
+        var callback2 = MockUtility.CreateCallbackSymbol( callbackName2, "$arg" );
+        callback2.Arguments.Add( overload[ 0 ] );
+
+        Assert.That( symbolTable.AddAsNoOverload( callback1 ),         Is.True );
+        Assert.That( symbolTable.AddAsOverload( callback2, overload ), Is.True );
         Assert.That( symbolTable.Contains( callbackName1 ) );
-        Assert.That( symbolTable.Contains( callbackName2, overloadName ) );
+        Assert.That( symbolTable.Contains( callbackName2, overload ) );
     }
     #endregion ~Add No Overload and Overload mixed
 
@@ -274,9 +281,9 @@ public class CallbackSymbolTableTest
 
         var callback = MockUtility.CreateCallbackSymbol( callbackName, overloadName );
 
-        Assert.That( symbolTable.AddAsNoOverload( callback ),                        Is.True );
-        Assert.That( symbolTable.AddAsNoOverload( callback ),                        Is.False );
-        Assert.That( symbolTable.AddAsOverload( callback, new SymbolName( "abc" ) ), Is.False );
+        Assert.That( symbolTable.AddAsNoOverload( callback ),   Is.True );
+        Assert.That( symbolTable.AddAsNoOverload( callback ),   Is.False );
+        Assert.That( symbolTable.AddAsOverload( callback, [] ), Is.False );
     }
     #endregion ~Add No Overload
 
@@ -288,14 +295,17 @@ public class CallbackSymbolTableTest
         const string overloadName1 = "$overload1";
         const string overloadName2 = "$overload2";
 
+        var overload1 = MockUtility.CreateArgumentSymbolList( overloadName1 );
+        var overload2 = MockUtility.CreateArgumentSymbolList( overloadName2 );
+
         var callback1 = MockUtility.CreateCallbackSymbol( callbackName, overloadName1 );
         var callback2 = MockUtility.CreateCallbackSymbol( callbackName, overloadName2 );
 
-        Assert.That( symbolTable.AddAsOverload( callback1, overloadName1 ), Is.True );
-        Assert.That( symbolTable.AddAsOverload( callback2, overloadName2 ), Is.True );
+        Assert.That( symbolTable.AddAsOverload( callback1, overload1 ), Is.True );
+        Assert.That( symbolTable.AddAsOverload( callback2, overload2 ), Is.True );
 
-        Assert.That( symbolTable.Contains( callbackName, overloadName1 ), Is.True );
-        Assert.That( symbolTable.Contains( callbackName, overloadName2 ), Is.True );
+        Assert.That( symbolTable.Contains( callbackName, overload1 ), Is.True );
+        Assert.That( symbolTable.Contains( callbackName, overload2 ), Is.True );
     }
 
     [Test]
@@ -304,9 +314,11 @@ public class CallbackSymbolTableTest
         const string callbackName = "ui_control";
         const string overloadName = "$overload1";
 
+        var overload = MockUtility.CreateArgumentSymbolList( overloadName );
         var callback = MockUtility.CreateCallbackSymbol( callbackName );
-        Assert.That( symbolTable.AddAsOverload( callback, overloadName ), Is.True );
-        Assert.That( symbolTable.AddAsOverload( callback, overloadName ), Is.False, "Duplicate add should return false" );
+
+        Assert.That( symbolTable.AddAsOverload( callback, overload ), Is.True );
+        Assert.That( symbolTable.AddAsOverload( callback, overload ), Is.False, "Duplicate add should return false" );
     }
     #endregion ~Add Overload
 
@@ -321,21 +333,27 @@ public class CallbackSymbolTableTest
         const string overloadName1 = "$overload1";
         const string overloadName2 = "$overload2";
 
+        var overload1 = MockUtility.CreateArgumentSymbolList( overloadName1 );
+        var overload2 = MockUtility.CreateArgumentSymbolList( overloadName2 );
+
         var callback2 = MockUtility.CreateCallbackSymbol( callbackName2 );
         callback2.Arguments.Add( MockUtility.CreateArgumentSymbol( overloadName1 ) );
 
         symbolTable.AddAsNoOverload( callback1 );
-        symbolTable.AddAsOverload( callback2, overloadName1 );
-        symbolTable.AddAsOverload( callback2, overloadName2 );
+        symbolTable.AddAsOverload( callback2, overload1 );
+        symbolTable.AddAsOverload( callback2, overload2 );
 
         Assert.That( symbolTable.Remove( callback1 ), Is.True );
         Assert.That( symbolTable.Count,               Is.EqualTo( 2 ) );
 
-        Assert.That( symbolTable.Remove( callback2, overloadName1 ), Is.True );
-        Assert.That( symbolTable.Count,                              Is.EqualTo( 1 ) );
+        Assert.That( symbolTable.Remove( callback2, overload1 ), Is.True );
+        Assert.That( symbolTable.Count,                          Is.EqualTo( 1 ) );
 
-        Assert.That( symbolTable.Contains( callbackName1 ),                Is.False );
-        Assert.That( symbolTable.Contains( callbackName2, overloadName1 ), Is.False );
+        Assert.That( symbolTable.Remove( callback2, overload2 ), Is.True );
+        Assert.That( symbolTable.Count,                          Is.EqualTo( 0 ) );
+
+        Assert.That( symbolTable.Contains( callbackName1 ),            Is.False );
+        Assert.That( symbolTable.Contains( callbackName2, overload1 ), Is.False );
     }
 
     [Test]
@@ -346,19 +364,20 @@ public class CallbackSymbolTableTest
 
         const string callbackName2 = "ui_control";
         const string overloadName = "$overload1";
+
+        var overload = MockUtility.CreateArgumentSymbolList( overloadName );
         var callback2 = MockUtility.CreateCallbackSymbol( callbackName2 );
         callback2.Arguments.Add( MockUtility.CreateArgumentSymbol( overloadName ) );
 
         symbolTable.AddAsNoOverload( callback1 );
-        symbolTable.AddAsOverload( callback2, overloadName );
+        symbolTable.AddAsOverload( callback2, overload );
 
         var nonExistSymbol = MockUtility.CreateCallbackSymbol( "non_exist" );
 
-        Assert.That( symbolTable.Remove( nonExistSymbol ),               Is.False );
-        Assert.That( symbolTable.Remove( nonExistSymbol, overloadName ), Is.False );
+        Assert.That( symbolTable.Remove( nonExistSymbol ),           Is.False );
+        Assert.That( symbolTable.Remove( nonExistSymbol, overload ), Is.False );
 
         Assert.That( symbolTable.Count, Is.EqualTo( 2 ) );
-
     }
 
     [Test]
@@ -369,11 +388,13 @@ public class CallbackSymbolTableTest
 
         const string callbackName2 = "ui_control";
         const string overloadName = "$overload1";
+
+        var overload = MockUtility.CreateArgumentSymbolList( overloadName );
         var callback2 = MockUtility.CreateCallbackSymbol( callbackName2 );
         callback2.Arguments.Add( MockUtility.CreateArgumentSymbol( overloadName ) );
 
         symbolTable.AddAsNoOverload( callback1 );
-        symbolTable.AddAsOverload( callback2, overloadName );
+        symbolTable.AddAsOverload( callback2, overload );
 
         symbolTable.Clear();
 
@@ -390,11 +411,13 @@ public class CallbackSymbolTableTest
 
         const string callbackName2 = "ui_control";
         const string overloadName = "$overload1";
+
+        var overload = MockUtility.CreateArgumentSymbolList( overloadName );
         var callback2 = MockUtility.CreateCallbackSymbol( callbackName2 );
         callback2.Arguments.Add( MockUtility.CreateArgumentSymbol( overloadName ) );
 
         symbolTable.AddAsNoOverload( callback1 );
-        symbolTable.AddAsOverload( callback2, overloadName );
+        symbolTable.AddAsOverload( callback2, overload );
 
         var list = symbolTable.ToList();
 

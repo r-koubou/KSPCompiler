@@ -51,7 +51,7 @@ public sealed class ObfuscatorContext : IAnalyzerContext
         AggregateObfuscatedSymbolTable aggregateObfuscatedSymbols )
         : IDeclarationEvaluationContext
     {
-        public ICallbackDeclarationEvaluator Callback { get; } = new CallbackDeclarationEvaluator( output );
+        public ICallbackDeclarationEvaluator Callback { get; } = new CallbackDeclarationEvaluator( output, aggregateObfuscatedSymbols );
         public IUserFunctionDeclarationEvaluator UserFunction { get; } = new UserFunctionDeclarationEvaluator( output, aggregateObfuscatedSymbols );
         public IVariableDeclarationEvaluator Variable { get; } = new VariableDeclarationEvaluator( output, aggregateSymbolTable, aggregateObfuscatedSymbols );
     }

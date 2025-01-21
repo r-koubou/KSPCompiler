@@ -74,14 +74,4 @@ public abstract record SymbolBase
     /// If the symbol can represent a constant value, this property holds the value. Otherwise, it is null.
     /// </summary>
     public object? ConstantValue { get; set; } = null;
-
-    /// <summary>
-    /// Convenience method for <see cref="object.MemberwiseClone"/>.
-    /// </summary>
-    /// <returns></returns>
-    // ReSharper disable once MemberCanBePrivate.Global
-    public T MemberwiseClone<T>() where T : SymbolBase
-    {
-        return (T)MemberwiseClone();
-    }
 }

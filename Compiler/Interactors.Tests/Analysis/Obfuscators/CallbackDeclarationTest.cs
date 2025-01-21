@@ -1,6 +1,7 @@
 using System.Text;
 
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Interactors.Analysis.Obfuscators;
 using KSPCompiler.Interactors.Analysis.Obfuscators.Extensions;
 
@@ -27,7 +28,10 @@ public class CallbackDeclarationTest
             Name = callbackName
         };
 
-        var evaluator = new CallbackDeclarationEvaluator( output );
+        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var obfuscatedTable = MockUtility.CreateAggregateObfuscatedSymbolTable( symbolTable, functionPrefix: "v" );
+
+        var evaluator = new CallbackDeclarationEvaluator( output, obfuscatedTable );
         var visitor = new MockCallbackDeclarationVisitor( output );
 
         visitor.Inject( evaluator );
@@ -40,7 +44,7 @@ public class CallbackDeclarationTest
     public void ArgumentCallbackTest()
     {
         const string callbackName = "ui_control";
-        const string argumentName = "$Knob";
+        const string argumentName = "$v0";
 
         var expected = new StringBuilder()
                       .Append( $"on {callbackName} ({argumentName})" )
@@ -64,7 +68,14 @@ public class CallbackDeclarationTest
             }
         };
 
-        var evaluator = new CallbackDeclarationEvaluator( output );
+        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var variable = MockUtility.CreateIntVariable( argumentName );
+        variable.State = SymbolState.Loaded;
+
+        symbolTable.UserVariables.Add( variable );
+        var obfuscatedTable = MockUtility.CreateAggregateObfuscatedSymbolTable( symbolTable, functionPrefix: "v" );
+
+        var evaluator = new CallbackDeclarationEvaluator( output, obfuscatedTable );
         var visitor = new MockCallbackDeclarationVisitor( output );
 
         visitor.Inject( evaluator );

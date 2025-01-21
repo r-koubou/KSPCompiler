@@ -1,16 +1,20 @@
 namespace KSPCompiler.Domain.Symbols;
 
-public class CallbackSymbolTable : OverloadedSymbolTable<CallbackSymbol, SymbolName>
+public class CallbackSymbolTable
+    : OverloadedSymbolTable<CallbackSymbol, CallbackArgumentSymbolList>,
+    ICallbackSymbolTable
 {
+    public CallbackSymbolTable() : this( null ) {}
+
     public CallbackSymbolTable(
-        IOverloadedSymbolTable<CallbackSymbol, SymbolName>? parent = null
+        IOverloadedSymbolTable<CallbackSymbol, CallbackArgumentSymbolList>? parent = null
     ) : base( parent ) {}
 
     public CallbackSymbolTable(
         UniqueSymbolIndex startUniqueIndex,
-        IOverloadedSymbolTable<CallbackSymbol, SymbolName>? parent = null
+        IOverloadedSymbolTable<CallbackSymbol, CallbackArgumentSymbolList>? parent = null
     ) : base( startUniqueIndex, parent ) {}
 
-    public override SymbolName NoOverloadValue
-        => SymbolName.Empty;
+    public override CallbackArgumentSymbolList NoOverloadValue
+        => CallbackArgumentSymbolList.Null;
 }

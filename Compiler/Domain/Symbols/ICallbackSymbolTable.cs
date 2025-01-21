@@ -1,3 +1,4 @@
 namespace KSPCompiler.Domain.Symbols;
 
-public interface ICallbackSymbolTable : IOverloadedSymbolTable<CallbackSymbol, SymbolName>;
+public interface ICallbackSymbolTable
+    : IOverloadedSymbolTable<CallbackSymbol, CallbackArgumentSymbolList>;

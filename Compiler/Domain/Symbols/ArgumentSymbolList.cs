@@ -4,15 +4,15 @@ using System.Collections.Generic;
 
 namespace KSPCompiler.Domain.Symbols;
 
-public class ArgumentSymbolList<TArgumentSymbol>
+public abstract class ArgumentSymbolList<TArgumentSymbol>
     : IArgumentSymbolList<TArgumentSymbol>
     where TArgumentSymbol : ArgumentSymbol
 {
     private readonly List<TArgumentSymbol> arguments = [];
 
-    public ArgumentSymbolList() {}
+    protected ArgumentSymbolList() {}
 
-    public ArgumentSymbolList( IEnumerable<TArgumentSymbol> initialArguments )
+    protected ArgumentSymbolList( IEnumerable<TArgumentSymbol> initialArguments )
     {
         arguments.AddRange( initialArguments );
     }
@@ -29,7 +29,6 @@ public class ArgumentSymbolList<TArgumentSymbol>
         {
             throw new InvalidOperationException( $"Argument {item.Name} already exists" );
         }
-        arguments.Add( item );
         arguments.Add( item );
     }
 
@@ -50,7 +49,7 @@ public class ArgumentSymbolList<TArgumentSymbol>
     public virtual void CopyTo( TArgumentSymbol[] array, int arrayIndex )
         => arguments.CopyTo( array, arrayIndex );
 
-    public bool Remove( TArgumentSymbol item )
+    public virtual bool Remove( TArgumentSymbol item )
         => arguments.Remove( item );
 
     public virtual int Count
@@ -62,43 +61,15 @@ public class ArgumentSymbolList<TArgumentSymbol>
     public virtual int IndexOf( TArgumentSymbol item )
         => arguments.IndexOf( item );
 
-    public void Insert( int index, TArgumentSymbol item )
+    public virtual void Insert( int index, TArgumentSymbol item )
         => arguments.Insert( index, item );
 
-    public void RemoveAt( int index )
+    public virtual void RemoveAt( int index )
         => arguments.RemoveAt( index );
 
     public virtual TArgumentSymbol this[ int index ]
     {
         get => arguments[ index ];
         set => arguments[ index ] = value;
-    }
-
-    public virtual bool Equals( ArgumentSymbolList<TArgumentSymbol>? other )
-    {
-        if( other is null )
-        {
-            return false;
-        }
-
-        if( ReferenceEquals( this, other ) )
-        {
-            return true;
-        }
-
-        if( Count != other.Count )
-        {
-            return false;
-        }
-
-        for( var i = 0; i < Count; i++ )
-        {
-            if( !this[ i ].Equals( other[ i ] ) )
-            {
-                return false;
-            }
-        }
-
-        return true;
     }
 }

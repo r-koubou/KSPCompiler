@@ -173,15 +173,27 @@ public sealed class CompilationService
         symbolTable.Commands.AddRange( commands.FindAll() );
 
         using ISymbolRepository<CallbackSymbol> callbacks = new CallbackSymbolRepository( Path.Combine( basePath, "callbacks.json" ) );
-        symbolTable.BuiltInCallbacks.AddRange( callbacks.FindAll() );
+        var foundCallbacks = callbacks.FindAll();
+
+        foreach( var x in foundCallbacks )
+        {
+            if( x.AllowMultipleDeclaration )
+            {
+                symbolTable.UserCallbacks.AddAsOverload( x, x.Arguments );
+            }
+            else
+            {
+                symbolTable.UserCallbacks.AddAsNoOverload( x );
+            }
+        }
     }
 
     private static void SetupSymbol( AggregateSymbolTable symbolTable )
     {
         // 再突入時のため、ユーザー定義シンボルをクリア
-        symbolTable.UserVariables.RemoveNoReservedSymbols();
-        symbolTable.UserCallbacks.RemoveNoReservedSymbols();
-        symbolTable.UserFunctions.RemoveNoReservedSymbols();
+        symbolTable.UserVariables.Clear();
+        symbolTable.UserCallbacks.Clear();
+        symbolTable.UserFunctions.Clear();
 
         // ビルトイン変数は初期化済み扱い
         foreach( var variable in symbolTable.BuiltInVariables )
