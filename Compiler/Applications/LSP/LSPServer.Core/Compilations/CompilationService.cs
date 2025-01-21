@@ -179,11 +179,11 @@ public sealed class CompilationService
         {
             if( x.AllowMultipleDeclaration )
             {
-                symbolTable.UserCallbacks.AddAsOverload( x, x.Arguments );
+                symbolTable.BuiltInCallbacks.AddAsOverload( x, x.Arguments );
             }
             else
             {
-                symbolTable.UserCallbacks.AddAsNoOverload( x );
+                symbolTable.BuiltInCallbacks.AddAsNoOverload( x );
             }
         }
     }
