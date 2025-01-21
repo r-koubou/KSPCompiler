@@ -9,7 +9,7 @@ namespace KSPCompiler.Domain.Symbols;
 /// Represents a symbol in the symbol table.
 /// </summary>
 /// <seealso cref="ISymbolTable{TSymbol}"/>
-public abstract record SymbolBase
+public abstract class SymbolBase
 {
     /// <summary>
     /// If comment text above declaration exists.

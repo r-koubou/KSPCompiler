@@ -43,7 +43,7 @@ public class CallbackDeclarationEvaluator(
         else
         {
             // 現状同名のコールバックで引数構成が異なる仕様ではないので First() のみ
-            thisCallback              = builtInCallback.First().DeepClone();
+            thisCallback              = (CallbackSymbol)builtInCallback.First().Clone();
             thisCallback.CommentLines = node.CommentLines;
         }
 

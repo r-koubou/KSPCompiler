@@ -1,6 +1,6 @@
 namespace KSPCompiler.Domain.Symbols;
 
-public sealed record CallbackArgumentSymbol( bool RequiredDeclareOnInit ) : ArgumentSymbol
+public sealed class CallbackArgumentSymbol( bool RequiredDeclareOnInit ) : ArgumentSymbol
 {
     /// <summary>
     /// This argument must be declared in the `on init` callback.

@@ -1,3 +1,3 @@
 namespace KSPCompiler.Domain.Symbols;
 
-public record UIInitializerArgumentSymbol : VariableSymbol;
+public class UIInitializerArgumentSymbol : VariableSymbol;

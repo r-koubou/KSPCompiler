@@ -5,7 +5,7 @@ using KSPCompiler.Domain.Symbols.MetaData;
 
 namespace KSPCompiler.Domain.Symbols;
 
-public sealed record CommandSymbol : SymbolBase, ISymbolDataTypeProvider
+public sealed class CommandSymbol : SymbolBase, ISymbolDataTypeProvider
 {
     public override SymbolType Type
         => SymbolType.Command;

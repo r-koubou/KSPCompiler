@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace KSPCompiler.Domain.Symbols;
 
-public abstract record ArgumentSymbol : VariableSymbol
+public abstract class ArgumentSymbol : VariableSymbol
 {
     public virtual IReadOnlyList<string> UITypeNames { get; }
     public virtual IReadOnlyList<string> OtherTypeNames { get; }
