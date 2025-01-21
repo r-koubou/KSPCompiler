@@ -32,17 +32,7 @@ public class CallbackArgumentSymbolList
             var thisArg = this[ i ];
             var otherArg = other[ i ];
 
-            if( thisArg.Name != otherArg.Name )
-            {
-                return false;
-            }
-
-            if( thisArg.DataType != otherArg.DataType )
-            {
-                return false;
-            }
-
-            if( thisArg.UIType != otherArg.UIType )
+            if( !thisArg.Equals( otherArg ) )
             {
                 return false;
             }
