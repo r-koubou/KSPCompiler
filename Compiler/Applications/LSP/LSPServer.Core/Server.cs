@@ -9,6 +9,7 @@ using KSPCompiler.LSPServer.Core.Foldings;
 using KSPCompiler.LSPServer.Core.Hovers;
 using KSPCompiler.LSPServer.Core.References;
 using KSPCompiler.LSPServer.Core.Renames;
+using KSPCompiler.LSPServer.Core.SignatureHelps;
 using KSPCompiler.LSPServer.Core.Symbols;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -57,6 +58,7 @@ public class Server
                       .WithHandler<PrepareRenameHandler>()
                       .WithHandler<ReferencesHandler>()
                       .WithHandler<FoldingRangeHandler>()
+                      .WithHandler<SignatureHelpHandler>()
                       .WithServices(
                            services =>
                            {
@@ -69,7 +71,8 @@ public class Server
                                services.AddSingleton<HoverService>();
                                services.AddSingleton<RenameService>();
                                services.AddSingleton<ReferencesService>();
-                                 services.AddSingleton<FoldingRangeService>();
+                               services.AddSingleton<FoldingRangeService>();
+                               services.AddSingleton<SignatureHelpService>();
                            }
                        )
                       .OnInitialize( ( server, request, token ) =>
