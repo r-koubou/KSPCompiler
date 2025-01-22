@@ -14,6 +14,7 @@ public static class SymbolTableExtension
     public static bool TryBuildSignatureHelp(
         this ICommandSymbolTable self,
         string symbolName,
+        int activeParameter,
         out SignatureHelp result,
         ISignatureHelpBuilder<CommandSymbol>? builder = null )
     {
@@ -25,7 +26,7 @@ public static class SymbolTableExtension
         }
 
         builder ??= DefaultBuilder;
-        result = builder.Build( symbol );
+        result  =   builder.Build( symbol, activeParameter );
 
         return result.Signatures.Any();
     }

@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,16 +17,15 @@ public sealed class SignatureHelpService( CompilerCacheService compilerCacheServ
     {
         var cache = CompilerCacheService.GetCache( request.TextDocument.Uri );
         var symbols = cache.SymbolTable;
-        var word = DocumentUtility.ExtractCallCommandName( cache.AllLinesText, request.Position );
+        var word = ExtractCallCommandName( cache.AllLinesText, request.Position );
+        var activeParameter = GetCallCommandActiveArgument( cache.AllLinesText, request.Position );
 
         if( string.IsNullOrEmpty( word ) )
         {
             return null;
         }
 
-        Console.WriteLine( word );
-
-        if( !symbols.Commands.TryBuildSignatureHelp( word, out var signatureHelp ) )
+        if( !symbols.Commands.TryBuildSignatureHelp( word, activeParameter, out var signatureHelp ) )
         {
             return null;
         }
@@ -34,5 +33,58 @@ public sealed class SignatureHelpService( CompilerCacheService compilerCacheServ
         await Task.CompletedTask;
 
         return signatureHelp;
+    }
+
+    private static string ExtractCallCommandName( IReadOnlyList<string> lines, Position position )
+    {
+        var line = lines[ position.Line ];
+        var start = position.Character - 1; // zero-based index
+
+        // 行頭からコマンド呼び出しの開始位置を探す
+        while( start >= 0 && line[ start ] != '(' )
+        {
+            start--;
+        }
+
+        if( start < 0 )
+        {
+            return string.Empty;
+        }
+
+        return DocumentUtility.ExtractWord( lines, new Position( position.Line, start ) );
+    }
+
+    private static int GetCallCommandActiveArgument( IReadOnlyList<string> lines, Position position )
+    {
+        var line = lines[ position.Line ];
+        var length = line.Length;
+        var start = position.Character - 1; // zero-based index
+
+        // 行頭からコマンド呼び出しの開始位置を探す
+        while( start >= 0 && line[ start ] != '(' )
+        {
+            start--;
+        }
+
+        if( start < 0 )
+        {
+            return 0;
+        }
+
+        var activeArgument = 0;
+
+        for( var i = start + 1; i < length; i++ )
+        {
+            if( line[ i ] == ',' )
+            {
+                activeArgument++;
+            }
+            else if( line[ i ] == ')' )
+            {
+                break;
+            }
+        }
+
+        return activeArgument;
     }
 }

@@ -8,5 +8,5 @@ namespace KSPCompiler.LSPServer.Core.SignatureHelps;
 
 public interface ISignatureHelpBuilder<in TSymbol> where TSymbol : SymbolBase
 {
-    SignatureHelp Build( TSymbol symbol );
+    SignatureHelp Build( TSymbol symbol, int activeParameter );
 }

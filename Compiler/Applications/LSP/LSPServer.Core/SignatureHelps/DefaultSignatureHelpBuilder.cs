@@ -9,18 +9,16 @@ namespace KSPCompiler.LSPServer.Core.SignatureHelps;
 
 public class DefaultSignatureHelpBuilder : ISignatureHelpBuilder<CommandSymbol>
 {
-    public SignatureHelp Build( CommandSymbol symbol )
+    public SignatureHelp Build( CommandSymbol symbol, int activeParameter )
     {
         return new()
         {
-            Signatures = new Container<SignatureInformation>( BuildInformation( symbol ) )
-            //ActiveSignature = 0
+            Signatures = new Container<SignatureInformation>( BuildInformation( symbol, activeParameter ) ),
         };
     }
 
-    private static SignatureInformation BuildInformation( CommandSymbol symbol )
+    private static SignatureInformation BuildInformation( CommandSymbol symbol, int activeParameter )
     {
-
         var label = string.Empty;
 
         if( symbol.ArgumentCount > 0 )
@@ -38,8 +36,8 @@ public class DefaultSignatureHelpBuilder : ISignatureHelpBuilder<CommandSymbol>
                     Value = symbol.Description.Value
                 }
             ),
-            Parameters = BuildParameterInformation( symbol )
-            //ActiveParameter =
+            Parameters = BuildParameterInformation( symbol ),
+            ActiveParameter = activeParameter
         };
     }
 
@@ -54,17 +52,22 @@ public class DefaultSignatureHelpBuilder : ISignatureHelpBuilder<CommandSymbol>
 
         foreach( var arg in symbol.Arguments )
         {
+            if( string.IsNullOrEmpty( arg.Description ) )
+            {
+                continue;
+            }
+
             result.Add(
                 new ParameterInformation
                 {
                     Label =　arg.Name.Value,
-                    // Documentation = new StringOrMarkupContent(
-                    //     new MarkupContent
-                    //     {
-                    //         Kind  = MarkupKind.Markdown,
-                    //         Value = arg.Description.Value
-                    //     }
-                    // )
+                    Documentation = new StringOrMarkupContent(
+                        new MarkupContent
+                        {
+                            Kind  = MarkupKind.Markdown,
+                            Value = arg.Description.Value
+                        }
+                    )
                 }
             );
         }
