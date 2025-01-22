@@ -54,4 +54,49 @@ public static class DocumentUtility
             new Position( position.Line, end )
         );
     }
+
+    public static bool IsInCommentToLeft( IReadOnlyList<string> lines, Position position )
+    {
+        var begin = position.Line;
+        var beginColumn = position.Character - 1;
+
+        for( var line = begin; line >= 0; line-- )
+        {
+            var text = lines[ line ];
+            var startColumn = line == begin ? beginColumn : text.Length - 1;
+
+            for( var column = startColumn; column >= 0; column-- )
+            {
+                if( text[ column ] == '{' )
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public static bool IsInCommentToRight( IReadOnlyList<string> lines, Position position )
+    {
+        var begin = position.Line;
+        var beginColumn = position.Character;
+        var first = true;
+
+        for( var line = begin; line < lines.Count; line++ )
+        {
+            var text = lines[ line ];
+            var startColumn = first ? beginColumn : 0;
+
+            for( var column = startColumn; column < text.Length; column++ )
+            {
+                if( text[ column ] == '}' )
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
 }

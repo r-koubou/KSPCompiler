@@ -17,6 +17,12 @@ public sealed class SignatureHelpService( CompilerCacheService compilerCacheServ
     {
         var cache = CompilerCacheService.GetCache( request.TextDocument.Uri );
         var symbols = cache.SymbolTable;
+
+        if( DocumentUtility.IsInCommentToLeft( cache.AllLinesText, request.Position ) )
+        {
+            return null;
+        }
+
         var word = ExtractCallCommandName( cache.AllLinesText, request.Position );
         var activeParameter = GetCallCommandActiveArgument( cache.AllLinesText, request.Position );
 
@@ -38,7 +44,7 @@ public sealed class SignatureHelpService( CompilerCacheService compilerCacheServ
     private static string ExtractCallCommandName( IReadOnlyList<string> lines, Position position )
     {
         var line = lines[ position.Line ];
-        var start = position.Character - 1; // zero-based index
+        var start = position.Character - 1; // caret position - 1
 
         // 行頭からコマンド呼び出しの開始位置を探す
         while( start >= 0 && line[ start ] != '(' )
@@ -58,7 +64,7 @@ public sealed class SignatureHelpService( CompilerCacheService compilerCacheServ
     {
         var line = lines[ position.Line ];
         var length = line.Length;
-        var start = position.Character - 1; // zero-based index
+        var start = position.Character - 1; // caret position - 1
 
         // 行頭からコマンド呼び出しの開始位置を探す
         while( start >= 0 && line[ start ] != '(' )
