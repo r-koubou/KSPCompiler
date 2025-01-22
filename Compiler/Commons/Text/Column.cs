@@ -2,7 +2,7 @@ using KSPCompiler.Commons.ValueObjects;
 
 namespace KSPCompiler.Commons.Text;
 
-public record Column( int Value ) : ValueObject<int>( Value )
+public record Column( int Value ) : IntValueObject( Value )
 {
     public static readonly Column Unknown = -1;
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace KSPCompiler.Domain.Symbols;
@@ -8,7 +9,7 @@ public abstract class ArgumentSymbol : VariableSymbol
     public virtual IReadOnlyList<string> OtherTypeNames { get; }
 
     protected ArgumentSymbol()
-        : this( new string[] {} ) {}
+        : this( Array.Empty<string>(), Array.Empty<string>() ) {}
 
     protected ArgumentSymbol( IReadOnlyList<string> uiTypeNames, IReadOnlyList<string> otherTypeNames )
     {
@@ -17,5 +18,5 @@ public abstract class ArgumentSymbol : VariableSymbol
     }
 
     protected ArgumentSymbol( IReadOnlyList<string> uiTypeNames )
-        : this( uiTypeNames, new string[] {} ) {}
+        : this( uiTypeNames, Array.Empty<string>() ) {}
 }

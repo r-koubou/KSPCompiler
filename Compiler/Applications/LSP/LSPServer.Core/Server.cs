@@ -5,6 +5,7 @@ using KSPCompiler.LSPServer.Core.Compilations;
 using KSPCompiler.LSPServer.Core.Completions;
 using KSPCompiler.LSPServer.Core.Definitions;
 using KSPCompiler.LSPServer.Core.DocumentHighlights;
+using KSPCompiler.LSPServer.Core.Foldings;
 using KSPCompiler.LSPServer.Core.Hovers;
 using KSPCompiler.LSPServer.Core.References;
 using KSPCompiler.LSPServer.Core.Renames;
@@ -56,6 +57,7 @@ public class Server
                       .WithHandler<RenameHandler>()
                       .WithHandler<PrepareRenameHandler>()
                       .WithHandler<ReferencesHandler>()
+                      .WithHandler<FoldingRangeHandler>()
                       .WithHandler<SignatureHelpHandler>()
                       .WithServices(
                            services =>
@@ -69,7 +71,8 @@ public class Server
                                services.AddSingleton<HoverService>();
                                services.AddSingleton<RenameService>();
                                services.AddSingleton<ReferencesService>();
-                                 services.AddSingleton<SignatureHelpService>();
+                               services.AddSingleton<FoldingRangeService>();
+                               services.AddSingleton<SignatureHelpService>();
                            }
                        )
                       .OnInitialize( ( server, request, token ) =>

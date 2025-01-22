@@ -91,7 +91,19 @@ public static class CompilerProgram
         symbolTable.Commands.AddRange( commands.FindAllAsync( CancellationToken.None ).GetAwaiter().GetResult() );
 
         using var callbacks = new CallbackSymbolRepository( Path.Combine( basePath, "callbacks.json" ) );
-        symbolTable.BuiltInCallbacks.AddRange( callbacks.FindAllAsync( CancellationToken.None ).GetAwaiter().GetResult() );
+        var foundCallbacks = callbacks.FindAllAsync( CancellationToken.None ).GetAwaiter().GetResult();
+
+        foreach( var x in foundCallbacks )
+        {
+            if( x.AllowMultipleDeclaration )
+            {
+                symbolTable.BuiltInCallbacks.AddAsOverload( x, x.Arguments );
+            }
+            else
+            {
+                symbolTable.BuiltInCallbacks.AddAsNoOverload( x );
+            }
+        }
     }
 
     private static void SetupSymbolState( AggregateSymbolTable symbolTable )

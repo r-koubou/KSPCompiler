@@ -1,19 +1,22 @@
 using System;
 using System.Collections.Generic;
 
+using KSPCompiler.Commons.Text;
 using KSPCompiler.Domain.Symbols.MetaData;
 
 namespace KSPCompiler.Domain.Symbols;
 
-public sealed class CallbackSymbol : SymbolBase
+public sealed class CallbackSymbol( bool allowMultipleDeclaration ) : SymbolBase, ICloneable
 {
+    /// <summary>
+    /// Symbol definition to end location information.
+    /// </summary>
+    public Position Range { get; set; } = Position.Zero;
+
     public override SymbolType Type
         => SymbolType.Callback;
 
-    private readonly List<CallbackArgumentSymbol> arguments = new ();
-
-    public IReadOnlyCollection<CallbackArgumentSymbol> Arguments
-        => arguments;
+    public CallbackArgumentSymbolList Arguments { get; } = new();
 
     public int ArgumentCount
         => Arguments.Count;
@@ -24,24 +27,31 @@ public sealed class CallbackSymbol : SymbolBase
     /// <remarks>
     /// Some callbacks allows duplicated callback definitions in script.
     /// </remarks>
-    public bool AllowMultipleDeclaration { get; }
-
-    public CallbackSymbol( bool allowMultipleDeclaration )
-    {
-        AllowMultipleDeclaration = allowMultipleDeclaration;
-    }
+    public bool AllowMultipleDeclaration { get; } = allowMultipleDeclaration;
 
     public CallbackSymbol( bool allowMultipleDeclaration, IEnumerable<CallbackArgumentSymbol> args ) : this( allowMultipleDeclaration )
     {
-        arguments.AddRange( args );
+        Arguments.AddRange( args );
     }
 
-    public void AddArgument( CallbackArgumentSymbol arg )
+    public object Clone()
     {
-        if( arguments.Contains( arg ))
+        var newSymbol = new CallbackSymbol( AllowMultipleDeclaration )
         {
-            throw new InvalidOperationException( $"Argument {arg.Name} already exists in command {Name}" );
+            CommentLines = CommentLines,
+            DefinedPosition = DefinedPosition,
+            Name = Name,
+            BuiltIn = BuiltIn,
+            State = State,
+            Modifier = Modifier,
+            TableIndex = TableIndex
+        };
+
+        foreach( var arg in Arguments )
+        {
+            newSymbol.Arguments.Add( arg );
         }
-        arguments.Add( arg );
+
+        return newSymbol;
     }
 }

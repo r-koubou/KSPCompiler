@@ -29,7 +29,7 @@ public class CallbackRepositoryTest
             Description = "Initialize callback",
         };
 
-        callback.AddArgument( new CallbackArgumentSymbol( false )
+        callback.Arguments.Add( new CallbackArgumentSymbol( false )
         {
             Name = "$arg1",
             Description = "Argument 1",

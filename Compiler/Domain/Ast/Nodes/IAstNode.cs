@@ -15,7 +15,7 @@ namespace KSPCompiler.Domain.Ast.Nodes
         public AstNodeId Id => AstNodeId.None;
 
         /// <summary>
-        /// Token location information.
+        /// Location information in the source code.
         /// </summary>
         public Position Position { get; set; }
 
