@@ -9,6 +9,7 @@ using KSPCompiler.LSPServer.Core.Foldings;
 using KSPCompiler.LSPServer.Core.Hovers;
 using KSPCompiler.LSPServer.Core.References;
 using KSPCompiler.LSPServer.Core.Renames;
+using KSPCompiler.LSPServer.Core.SemanticTokensRanges;
 using KSPCompiler.LSPServer.Core.SignatureHelps;
 using KSPCompiler.LSPServer.Core.Symbols;
 
@@ -59,6 +60,7 @@ public class Server
                       .WithHandler<ReferencesHandler>()
                       .WithHandler<FoldingRangeHandler>()
                       .WithHandler<SignatureHelpHandler>()
+                      .WithHandler<SemanticTokensRangeHandler>()
                       .WithServices(
                            services =>
                            {
@@ -73,6 +75,7 @@ public class Server
                                services.AddSingleton<ReferencesService>();
                                services.AddSingleton<FoldingRangeService>();
                                services.AddSingleton<SignatureHelpService>();
+                               services.AddSingleton<SemanticTokensRangeService>();
                            }
                        )
                       .OnInitialize( ( server, request, token ) =>
