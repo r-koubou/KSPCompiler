@@ -21,6 +21,18 @@ public sealed class FoldingSupportedNodeAppearanceFinder
         return new List<Position>( Result );
     }
 
+    public override IAstNode Visit( AstPreprocessorIfdefineNode node )
+    {
+        Result.Add( node.Position );
+        return base.Visit( node );
+    }
+
+    public override IAstNode Visit( AstPreprocessorIfnotDefineNode node )
+    {
+        Result.Add( node.Position );
+        return base.Visit( node );
+    }
+
     public override IAstNode Visit( AstIfStatementNode node )
     {
         Result.Add( node.Position );
