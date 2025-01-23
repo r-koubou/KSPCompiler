@@ -64,11 +64,9 @@ public sealed class CompletionListService
         );
 
         // ビルトインコールバック
+        // onをトリガーにすべてのビルトインコールバックを表示する
         // ユーザー定義のコールバックについてははビルトインのコールバック名なので扱わない
-        var builtInCallBacks = MatchCompletionItem(
-            symbolTable.BuiltInCallbacks,
-            word
-        );
+        var builtInCallBacks = symbolTable.BuiltInCallbacks.ToList();
         #endregion ~Collection of target symbols
 
         #region Build completion list
@@ -78,12 +76,12 @@ public sealed class CompletionListService
         BuildCompletionItem( uiTypes,          word, CompletionItemKind.Class,    "UI Type",           completions );
         BuildCompletionItem( commands,         word, CompletionItemKind.Method,   "Command",           completions );
         BuildCompletionItem( userFunctions,    word, CompletionItemKind.Function, "User Function",     completions );
-        BuildCompletionItem( builtInCallBacks, word, CompletionItemKind.Function, "Callback",          completions );
+        BuildCompletionItem( builtInCallBacks, word, CompletionItemKind.Event,    "Callback",          completions );
         #endregion ~Build completion list
 
         await Task.CompletedTask;
 
-        return new CompletionList( completions );
+        return new CompletionList( completions, isIncomplete: true );
     }
 
     private static List<TSymbol> MatchCompletionItem<TSymbol>(
@@ -122,17 +120,27 @@ public sealed class CompletionListService
         string detail,
         List<CompletionItem> target ) where TSymbol : SymbolBase
     {
-        var stringBuilder = new StringBuilder(256);
+        var stringBuilder = new StringBuilder( 256 );
 
         foreach( var symbol in symbols )
         {
             stringBuilder.Clear();
 
+            if( symbol is CallbackSymbol callbackSymbol )
+            {
+                if( TryBuildCallbackSnippetItem( callbackSymbol, partialName, stringBuilder, out var completionItem ) )
+                {
+                    target.Add( completionItem );
+                    continue;
+                }
+            }
+
             if( symbol is CommandSymbol commandSymbol )
             {
-                var completionItem = BuildCommandSnippet( commandSymbol, stringBuilder );
+                var completionItem = BuildCommandItem( commandSymbol );
 
                 target.Add( completionItem );
+
                 continue;
             }
 
@@ -141,8 +149,12 @@ public sealed class CompletionListService
                 var item = BuildVariableItem( variableSymbol, partialName );
 
                 target.Add( item );
+
                 continue;
             }
+
+            var document = symbol.Description.Value;
+            document = string.IsNullOrEmpty( document ) ? null : document;
 
             target.Add(
                 new CompletionItem
@@ -150,6 +162,7 @@ public sealed class CompletionListService
                     Label            = symbol.Name.Value,
                     Kind             = kind,
                     Detail           = detail,
+                    Documentation    = document,
                     InsertTextFormat = InsertTextFormat.PlainText,
                     InsertText       = symbol.Name.Value
                 }
@@ -157,10 +170,68 @@ public sealed class CompletionListService
         }
     }
 
+    private static bool TryBuildCallbackSnippetItem( CallbackSymbol callbackSymbol, string partialName, StringBuilder stringBuilder, out CompletionItem result )
+    {
+        var document = callbackSymbol.Description.Value;
+        document = string.IsNullOrEmpty( document ) ? null : document;
+
+        result = null!;
+
+        if( !partialName.StartsWith( "on" ) )
+        {
+            return false;
+        }
+
+        if( callbackSymbol.ArgumentCount > 0 )
+        {
+            stringBuilder.Append( "on " ).Append( callbackSymbol.Name.Value ).Append( '(' );
+
+            for( var snippetIndex = 0; snippetIndex < callbackSymbol.ArgumentCount; snippetIndex++ )
+            {
+                stringBuilder.Append( "${" )
+                             .Append( snippetIndex + 1 ).Append( ':' )
+                             .Append( callbackSymbol.Arguments[ snippetIndex ].Name.Value )
+                             .Append( '}' );
+
+                if( snippetIndex < callbackSymbol.ArgumentCount - 1 )
+                {
+                    stringBuilder.Append( ", " );
+                }
+            }
+
+            var codeIndex = callbackSymbol.ArgumentCount + 1;
+
+            stringBuilder.AppendLine( ")" )
+                         .AppendLine( $"    ${{{codeIndex}:code}}" )
+                         .AppendLine( "end on" );
+        }
+        else
+        {
+            stringBuilder.Append( "on " ).AppendLine( callbackSymbol.Name.Value )
+                         .AppendLine( "    ${1:code}" )
+                         .AppendLine( "end on" );
+        }
+
+        result = new CompletionItem
+        {
+            Label            = $"on {callbackSymbol.Name.Value}",
+            Kind             = CompletionItemKind.Snippet,
+            Detail           = "Callback",
+            Documentation    = document,
+            InsertTextFormat = InsertTextFormat.Snippet,
+            InsertText       = stringBuilder.ToString()
+        };
+
+        return true;
+    }
+
     private static CompletionItem BuildVariableItem( VariableSymbol variableSymbol, string partialName )
     {
         var insertText = variableSymbol.Name.Value;
         var kind = CompletionItemKind.Variable;
+
+        var document = variableSymbol.Description.Value;
+        document = string.IsNullOrEmpty( document ) ? null : document;
 
         if( !variableSymbol.BuiltIn && variableSymbol.Modifier.IsConstant() )
         {
@@ -177,13 +248,33 @@ public sealed class CompletionListService
             Label            = variableSymbol.Name.Value,
             Kind             = kind,
             Detail           = variableSymbol.BuiltIn ? "Built-in Variable" : "User Variable",
+            Documentation    = document,
             InsertTextFormat = InsertTextFormat.PlainText,
             InsertText       = insertText
         };
     }
 
+    private static CompletionItem BuildCommandItem( CommandSymbol commandSymbol )
+    {
+        var document = commandSymbol.Description.Value;
+        document = string.IsNullOrEmpty( document ) ? null : document;
+
+        return new CompletionItem
+        {
+            Label            = commandSymbol.Name.Value,
+            Kind             = CompletionItemKind.Method,
+            Detail           = "Command",
+            InsertTextFormat = InsertTextFormat.PlainText,
+            Documentation    = document,
+            InsertText       = commandSymbol.Name.Value
+        };
+    }
+
     private static CompletionItem BuildCommandSnippet( CommandSymbol commandSymbol, StringBuilder stringBuilder )
     {
+        var document = commandSymbol.Description.Value;
+        document = string.IsNullOrEmpty( document ) ? null : document;
+
         if( commandSymbol.Arguments.Count == 0 )
         {
             return new CompletionItem
@@ -191,6 +282,7 @@ public sealed class CompletionListService
                 Label            = commandSymbol.Name.Value,
                 Kind             = CompletionItemKind.Method,
                 Detail           = "Command",
+                Documentation    = document,
                 InsertTextFormat = InsertTextFormat.PlainText,
                 InsertText       = commandSymbol.Name.Value
             };
@@ -224,6 +316,7 @@ public sealed class CompletionListService
             Label            = commandSymbol.Name.Value,
             Kind             = CompletionItemKind.Method,
             Detail           = "Command",
+            Documentation    = document,
             InsertTextFormat = InsertTextFormat.Snippet,
             InsertText       = stringBuilder.ToString()
         };
