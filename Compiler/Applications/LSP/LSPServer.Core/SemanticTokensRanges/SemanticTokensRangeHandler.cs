@@ -18,9 +18,16 @@ public class SemanticTokensRangeHandler( SemanticTokensRangeService semanticToke
         => new()
         {
             DocumentSelector = ConstantValues.TextDocumentSelector,
+            Range            = false,
+            Id               = ConstantValues.LanguageId,
             Full = new SemanticTokensCapabilityRequestFull
             {
                 Delta = false
             },
+            Legend = new()
+            {
+                TokenTypes     = SemanticTokensRangeService.LegendTokenTypes,
+                TokenModifiers = SemanticTokensRangeService.LegendTokenModifiers
+            }
         };
 }
