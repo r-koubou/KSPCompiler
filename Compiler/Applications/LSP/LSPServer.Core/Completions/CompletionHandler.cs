@@ -22,7 +22,7 @@ public class CompletionHandler : ICompletionHandler
         CompilerCacheService compilerCacheService,
         CompletionListService completionListService )
     {
-        CompilerCacheService         = compilerCacheService;
+        CompilerCacheService  = compilerCacheService;
         CompletionListService = completionListService;
 
         var triggerCharacters = new List<string>();
