@@ -7,6 +7,8 @@ namespace KSPCompiler.Domain.Symbols.Repositories;
 
 public interface ISymbolRepository<TSymbol> : IDisposable where TSymbol : SymbolBase
 {
+    public int Count { get; }
+
     public StoreResult Store( TSymbol symbol )
         => StoreAsync( symbol ).GetAwaiter().GetResult();
 
