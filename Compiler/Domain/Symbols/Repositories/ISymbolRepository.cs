@@ -43,4 +43,12 @@ public interface ISymbolRepository<TSymbol> : IDisposable where TSymbol : Symbol
         => FindAllAsync().GetAwaiter().GetResult();
 
     public Task<IReadOnlyCollection<TSymbol>> FindAllAsync( CancellationToken cancellationToken = default );
+
+    public void Flush()
+        => FlushAsync().GetAwaiter().GetResult();
+
+    public async Task FlushAsync()
+    {
+        await Task.CompletedTask;
+    }
 }
