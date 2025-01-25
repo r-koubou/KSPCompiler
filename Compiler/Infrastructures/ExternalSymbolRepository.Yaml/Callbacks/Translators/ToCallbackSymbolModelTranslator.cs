@@ -2,6 +2,7 @@ using System;
 
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks.Models;
 
 namespace KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks.Translators;
@@ -27,6 +28,7 @@ public class ToCallbackSymbolModelTranslator : IDataTranslator<CallbackSymbol, C
             var argument = new CallbackArgumentModel
             {
                 Name            = arg.Name,
+                DataType        = DataTypeUtility.ToString( arg.DataType ),
                 RequiredDeclare = arg.RequiredDeclareOnInit,
                 Description     = arg.Description
             };

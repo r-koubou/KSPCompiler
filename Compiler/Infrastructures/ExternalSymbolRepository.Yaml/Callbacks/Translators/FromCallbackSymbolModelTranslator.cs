@@ -26,7 +26,7 @@ public class FromCallbackSymbolModelTranslator : IDataTranslator<CallBackSymbolM
                 BuiltIn     = false
             };
 
-            argument.DataType = DataTypeUtility.GuessFromSymbolName( argument.Name );
+            argument.DataType = DataTypeUtility.GuessFromSymbolName( arg.Name );
             model.Arguments.Add( argument );
         }
 
