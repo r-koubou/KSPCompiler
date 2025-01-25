@@ -31,6 +31,10 @@ public abstract class SymbolRepository<TSymbol, TModel> : ISymbolRepository<TSym
     public int Count
         => Collection.Count;
 
+    [Obsolete("For temporary use only.")]
+    public List<TModel> All
+        => Collection.AsQueryable().ToList();
+
     public SymbolRepository(
         FilePath repositoryPath,
         IDataTranslator<IEnumerable<TSymbol>, IReadOnlyCollection<TModel>> toModelTranslator,

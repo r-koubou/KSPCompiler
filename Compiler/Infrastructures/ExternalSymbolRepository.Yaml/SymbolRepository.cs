@@ -11,7 +11,6 @@ using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.Repositories;
 
 using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.NamingConventions;
 
 namespace KSPCompiler.ExternalSymbolRepository.Yaml;
 
@@ -35,6 +34,10 @@ public abstract class SymbolRepository<TSymbol, TRootModel, TModel> : ISymbolRep
     public int Count
         => Models.Count;
 
+    [Obsolete("For temporary use only.")]
+    public List<TModel> All
+        => [..Models];
+
     protected SymbolRepository(
         FilePath repositoryPath,
         IDataTranslator<TSymbol, TModel> toModelTranslator,
@@ -57,7 +60,6 @@ public abstract class SymbolRepository<TSymbol, TRootModel, TModel> : ISymbolRep
 
         var yamlText = File.ReadAllText( RepositoryPath.Path );
         var root = new DeserializerBuilder()
-                  .WithNamingConvention( CamelCaseNamingConvention.Instance )
                   .Build()
                   .Deserialize<TRootModel>( yamlText );
 
@@ -82,7 +84,6 @@ public abstract class SymbolRepository<TSymbol, TRootModel, TModel> : ISymbolRep
             Data = sorted
         };
         var yamlText = new SerializerBuilder()
-                      .WithNamingConvention( CamelCaseNamingConvention.Instance )
                       .Build()
                       .Serialize( root );
 
