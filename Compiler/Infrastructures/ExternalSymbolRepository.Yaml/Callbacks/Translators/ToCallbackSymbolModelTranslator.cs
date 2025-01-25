@@ -6,7 +6,7 @@ using KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks.Models;
 
 namespace KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks.Translators;
 
-internal class ToCallbackSymbolModelTranslator : IDataTranslator<CallbackSymbol, CallBackSymbolModel>
+public class ToCallbackSymbolModelTranslator : IDataTranslator<CallbackSymbol, CallBackSymbolModel>
 {
     public CallBackSymbolModel Translate( CallbackSymbol source )
     {
