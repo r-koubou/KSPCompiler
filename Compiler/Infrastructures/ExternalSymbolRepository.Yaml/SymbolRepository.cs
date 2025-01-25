@@ -34,7 +34,7 @@ public abstract class SymbolRepository<TSymbol, TRootModel, TModel> : ISymbolRep
     public int Count
         => Models.Count;
 
-    [Obsolete("For temporary use only.")]
+    [Obsolete( "For temporary use only." )]
     public List<TModel> All
         => [..Models];
 
