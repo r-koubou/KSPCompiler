@@ -18,4 +18,13 @@
       <ProjectReference Include="..\ExternalSymbolRepository.Yaml\ExternalSymbolRepository.Yaml.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="TestData\Callbacks\FindTest.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\Callbacks\DeleteTest.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>

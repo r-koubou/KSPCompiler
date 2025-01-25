@@ -10,7 +10,7 @@ public sealed class DeleteResult
 
     public Exception? Exception { get; }
 
-    public DeleteResult( bool success, int deletedCount, int failedCount, Exception? exception = null )
+    public DeleteResult( bool success = true, int deletedCount = 0, int failedCount = 0, Exception? exception = null )
     {
         Success      = success;
         DeletedCount = deletedCount;
