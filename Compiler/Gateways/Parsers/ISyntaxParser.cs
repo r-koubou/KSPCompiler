@@ -3,7 +3,7 @@ using System;
 using KSPCompiler.Domain;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 
-namespace KSPCompiler.Gateways
+namespace KSPCompiler.Gateways.Parsers
 {
     /// <summary>
     /// Parses KSP and generates an abstract syntax tree (AST).
