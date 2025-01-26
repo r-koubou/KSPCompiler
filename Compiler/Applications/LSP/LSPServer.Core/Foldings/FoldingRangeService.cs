@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 
 using KSPCompiler.LSPServer.Core.Ast;
 using KSPCompiler.LSPServer.Core.Compilations;
-using KSPCompiler.LSPServer.Core.Extensions;
 using KSPCompiler.LSPServer.Core.Foldings.Extensions;
 
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;

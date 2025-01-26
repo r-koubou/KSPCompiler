@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 
+using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
 namespace KSPCompiler.ExternalSymbolRepository.Yaml.UITypes.Models;
@@ -15,7 +16,7 @@ public sealed class UITypeSymbolModel : ISymbolModel
 
     public string VariableType { get; set; } = string.Empty;
 
-    [YamlMember( ScalarStyle = YamlDotNet.Core.ScalarStyle.Literal )]
+    [YamlMember( ScalarStyle = ScalarStyle.Literal )]
     public string Description { get; set; } = string.Empty;
 
     public string BuiltIntoVersion { get; set; } = string.Empty;

@@ -1,6 +1,4 @@
-﻿using System;
-
-using Antlr4.Runtime;
+﻿using Antlr4.Runtime;
 
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;

@@ -6,7 +6,6 @@ using KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks.Models;
 using NUnit.Framework;
 
 using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.NamingConventions;
 
 namespace KSPCompiler.ExternalSymbolRepository.Yaml.Tests;
 
