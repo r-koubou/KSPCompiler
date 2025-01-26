@@ -1,0 +1,4300 @@
+FormatVersion: 1.0.0
+Data:
+- Id: fb903925-68f0-4eff-a056-0c15c0372b5c
+  Name: abs
+  BuiltIn: true
+  Description: |-
+    Absolute value
+  BuiltIntoVersion: N/A
+  ReturnType: I||S||R
+  Arguments:
+  - Name: x
+    DataType: I||R
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1017040Z
+  UpdatedAt: 2025-01-26T06:28:18.1017040Z
+- Id: 3ba3e4f9-e852-479e-a0d4-d117652f10a2
+  Name: acos
+  BuiltIn: true
+  Description: |-
+    arccosine function
+  BuiltIntoVersion: N/A
+  ReturnType: S||R
+  Arguments:
+  - Name: x
+    DataType: R
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1025820Z
+  UpdatedAt: 2025-01-26T06:28:18.1025820Z
+- Id: 9fbb051d-0544-4204-b0f2-91052d1cb949
+  Name: add_menu_item
+  BuiltIn: true
+  Description: |-
+    create a menu entry
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: variable
+    DataType: ui_menu
+    Description: |-
+      arg 1 description
+  - Name: text
+    DataType: S
+    Description: |-
+      arg 2 description
+  - Name: value
+    DataType: I
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1026660Z
+  UpdatedAt: 2025-01-26T06:28:18.1026660Z
+- Id: 5d0f0344-698b-4c0d-a115-ddf681834c46
+  Name: add_text_line
+  BuiltIn: true
+  Description: |-
+    add a new text line in the specified label without erasing existing text
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: variable
+    DataType: ui_label
+    Description: |-
+      arg 1 description
+  - Name: text
+    DataType: S
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1027370Z
+  UpdatedAt: 2025-01-26T06:28:18.1027370Z
+- Id: fb96149a-aa32-4973-b57c-ed4fa63ce054
+  Name: allow_group
+  BuiltIn: true
+  Description: |-
+    allows the specified group, i.e. makes it available for playback
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: group-index
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1027450Z
+  UpdatedAt: 2025-01-26T06:28:18.1027450Z
+- Id: c7627f5b-32e4-4230-8157-66d0d30456d1
+  Name: array_equal
+  BuiltIn: true
+  Description: |-
+    checks the values of two arrays, true if all values are equal, false if<br>  not
+  BuiltIntoVersion: N/A
+  ReturnType: B
+  Arguments:
+  - Name: array-variable
+    DataType: I[]
+    Description: |-
+      arg 1 description
+  - Name: array-variable
+    DataType: I[]
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1027530Z
+  UpdatedAt: 2025-01-26T06:28:18.1027530Z
+- Id: 5ed30f68-945e-4b8a-96a7-a7ef24109de7
+  Name: asin
+  BuiltIn: true
+  Description: |-
+    arcsine (inverse sine function)
+  BuiltIntoVersion: N/A
+  ReturnType: S||R
+  Arguments:
+  - Name: x
+    DataType: R
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1027610Z
+  UpdatedAt: 2025-01-26T06:28:18.1027610Z
+- Id: bbad8f7e-55d0-4285-ba5c-26150b3102ac
+  Name: atan
+  BuiltIn: true
+  Description: |-
+    arctangent (inverse tangent function)
+  BuiltIntoVersion: N/A
+  ReturnType: S||R
+  Arguments:
+  - Name: x
+    DataType: R
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1027680Z
+  UpdatedAt: 2025-01-26T06:28:18.1027680Z
+- Id: 1abb0fdd-da0f-45a6-9362-11733e5e1fa7
+  Name: attach_level_meter
+  BuiltIn: true
+  Description: |-
+    attach a level meter to a certain position within the instrument to read<br>  volume data
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: ui-ID
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: group
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: slot
+    DataType: I
+    Description: |-
+      arg 3 description
+  - Name: channel
+    DataType: I
+    Description: |-
+      arg 4 description
+  - Name: bus
+    DataType: I
+    Description: |-
+      arg 5 description
+  CreatedAt: 2025-01-26T06:28:18.1027810Z
+  UpdatedAt: 2025-01-26T06:28:18.1027810Z
+- Id: 094991e7-ad30-4947-a202-23d5477c6ee1
+  Name: attach_zone
+  BuiltIn: true
+  Description: |-
+    connects the corresponding zone to the waveform so that it shows up<br>  within the display
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: variable
+    DataType: ui_waveform
+    Description: |-
+      arg 1 description
+  - Name: zone-id
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: flags
+    DataType: I
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1027930Z
+  UpdatedAt: 2025-01-26T06:28:18.1027930Z
+- Id: f01a3f5a-3499-4875-a71f-db880541b9f0
+  Name: by_marks
+  BuiltIn: true
+  Description: |-
+    a user defined group of events (or event IDs)
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: bit-mask
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1028010Z
+  UpdatedAt: 2025-01-26T06:28:18.1028010Z
+- Id: 4bd25399-e75b-4af3-ae81-53360fc0d956
+  Name: by_track
+  BuiltIn: true
+  Description: |-
+    can be used to group events by their track number
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: track
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1028080Z
+  UpdatedAt: 2025-01-26T06:28:18.1028080Z
+- Id: 10be7be8-9ffd-4a20-bd60-33ecbff4ffa5
+  Name: cbrt
+  BuiltIn: true
+  Description: |-
+    Cube root function
+  BuiltIntoVersion: N/A
+  ReturnType: S||R
+  Arguments:
+  - Name: x
+    DataType: R
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1028150Z
+  UpdatedAt: 2025-01-26T06:28:18.1028150Z
+- Id: 032c9615-c6e9-4265-9d70-b3cccbf7ead5
+  Name: cc_delivery_request
+  BuiltIn: true
+  Description: |-
+    Undocumented
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: arg1
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1028220Z
+  UpdatedAt: 2025-01-26T06:28:18.1028220Z
+- Id: 777a69e9-2005-4518-a09c-100091f5488a
+  Name: ceil
+  BuiltIn: true
+  Description: |-
+    ceiling (round up) ceil(2.3) = 3.0
+  BuiltIntoVersion: N/A
+  ReturnType: S||R
+  Arguments:
+  - Name: x
+    DataType: R
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1028290Z
+  UpdatedAt: 2025-01-26T06:28:18.1028290Z
+- Id: 4694d8a1-1d3c-404e-8dfe-884f01afc0ec
+  Name: change_listener_par
+  BuiltIn: true
+  Description: |-
+    changes the parameters of the on listener callback. Can be used in every<br>  callback.
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: signal-type
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: parameter
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1028370Z
+  UpdatedAt: 2025-01-26T06:28:18.1028370Z
+- Id: afe2f32b-bc61-45cb-b0f8-54877df61cc8
+  Name: change_note
+  BuiltIn: true
+  Description: |-
+    change the note number of a specific note event
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: ID-number
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: note-number
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1028450Z
+  UpdatedAt: 2025-01-26T06:28:18.1028450Z
+- Id: 16122706-fe3b-411c-8e38-61742d28cc32
+  Name: change_pan
+  BuiltIn: true
+  Description: |-
+    change the pan position of a specific note event
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: ID-number
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: panorama
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: relative-bit
+    DataType: I
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1028540Z
+  UpdatedAt: 2025-01-26T06:28:18.1028540Z
+- Id: c8624209-d909-4f9a-9881-14f6ca439db4
+  Name: change_time_with_pitch
+  BuiltIn: true
+  Description: |-
+    Undocumented
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: arg1
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: ''
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1028630Z
+  UpdatedAt: 2025-01-26T06:28:18.1028630Z
+- Id: 18210dd8-0539-4f3f-b9c4-d8299ab81f51
+  Name: change_tune
+  BuiltIn: true
+  Description: |-
+    change the tuning of a specific note event in millicent
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: ID-number
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: tune-amount
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: relative-bit
+    DataType: I
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1028720Z
+  UpdatedAt: 2025-01-26T06:28:18.1028720Z
+- Id: d5879643-a1e5-4a86-93d1-37fee164d163
+  Name: change_velo
+  BuiltIn: true
+  Description: |-
+    change the velocity of a specific note event
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: ID-number
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: velocity
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1028800Z
+  UpdatedAt: 2025-01-26T06:28:18.1028800Z
+- Id: 47818dad-2e49-491c-bc84-1cb2c29eae63
+  Name: change_vol
+  BuiltIn: true
+  Description: |-
+    change the volume of a specific note event in millidecibel
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: ID-number
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: volume
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: relative-bit
+    DataType: I
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1028890Z
+  UpdatedAt: 2025-01-26T06:28:18.1028890Z
+- Id: 52894d94-37a4-41b9-9b73-d51abe383e0d
+  Name: cos
+  BuiltIn: true
+  Description: |-
+    cosine function
+  BuiltIntoVersion: N/A
+  ReturnType: S||R
+  Arguments:
+  - Name: x
+    DataType: R
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1028980Z
+  UpdatedAt: 2025-01-26T06:28:18.1028980Z
+- Id: 7ce979c1-e5d4-4d01-a8d4-986aa01f803d
+  Name: dec
+  BuiltIn: true
+  Description: |-
+    decrement an expression by 1 (x - 1)
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: x
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1029050Z
+  UpdatedAt: 2025-01-26T06:28:18.1029050Z
+- Id: 86099b7c-a439-483b-bc59-5deff08855a6
+  Name: delete_event_mark
+  BuiltIn: true
+  Description: |-
+    delete an event mark, i.e. ungroup the specified event from an event<br>  group
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: ID-number
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: bit-mark
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1029130Z
+  UpdatedAt: 2025-01-26T06:28:18.1029130Z
+- Id: 055b12a4-878c-4fb0-a0b4-e64f27e041ba
+  Name: detect_drum_type
+  BuiltIn: true
+  Description: |-
+    Assigns <drum-type-result> a $NI_DETECT_DRUM_TYPE tag describing<br>  the drum type of an audio sample.
+  BuiltIntoVersion: N/A
+  ReturnType: S||R
+  Arguments:
+  - Name: zone-id
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: drum-type-result
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1029210Z
+  UpdatedAt: 2025-01-26T06:28:18.1029210Z
+- Id: 975b5287-8712-4d58-959d-ae53a6f646a5
+  Name: detect_instrument_type
+  BuiltIn: true
+  Description: |-
+    Assigns <drum-type-result> a $NI_DETECT_INSTRUMENT_TYPE tag<br>  describing the in- strument type of an audio sample.
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: zone-id
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: instrument-type-result
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1029300Z
+  UpdatedAt: 2025-01-26T06:28:18.1029300Z
+- Id: bb9e8fde-e5bc-4b40-8831-00031363746a
+  Name: detect_key
+  BuiltIn: true
+  Description: |-
+    Assigns <key-result> a $NI_DETECT_KEY tag describing the musical<br>  key of the audio sample. If detection fails, the function will return<br>  $NI_DETECT_KEY_INVALID.
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: zone-id
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: key-result
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1029390Z
+  UpdatedAt: 2025-01-26T06:28:18.1029390Z
+- Id: 037e0a82-6d93-4898-bab0-76aac15fe010
+  Name: detect_loudness
+  BuiltIn: true
+  Description: |-
+    Returns a real value representing the loudness of an audio sample in dB.
+  BuiltIntoVersion: N/A
+  ReturnType: S||R
+  Arguments:
+  - Name: zone-id
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: loudness-result
+    DataType: R
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1029480Z
+  UpdatedAt: 2025-01-26T06:28:18.1029480Z
+- Id: 8474db25-7f72-46fd-8aa3-cd66470e6ad8
+  Name: detect_peak
+  BuiltIn: true
+  Description: |-
+    Returns a real value representing peak level of an audio sample in dB.
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: zone-id
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: peak-result
+    DataType: R
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1029570Z
+  UpdatedAt: 2025-01-26T06:28:18.1029570Z
+- Id: 95b656db-0168-4146-8de8-a995c71e5f2d
+  Name: detect_pitch
+  BuiltIn: true
+  Description: |-
+    Returns a real value representing the fundamental frequency of an audio<br>  sample, in semi- tones and cents
+  BuiltIntoVersion: N/A
+  ReturnType: S||R
+  Arguments:
+  - Name: zone-id
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: pitch-result
+    DataType: R
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1029660Z
+  UpdatedAt: 2025-01-26T06:28:18.1029660Z
+- Id: 2fd70e1e-8808-405f-8acb-aacf31b9711e
+  Name: detect_rms
+  BuiltIn: true
+  Description: |-
+    Returns a real value representing the RMS level of an audio sample in<br>  dB. 
+  BuiltIntoVersion: N/A
+  ReturnType: S||R
+  Arguments:
+  - Name: zone-id
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: rms-result
+    DataType: R
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1029750Z
+  UpdatedAt: 2025-01-26T06:28:18.1029750Z
+- Id: 05bb570e-caa4-4d82-9ac3-a3f17a392ea1
+  Name: detect_sample_type
+  BuiltIn: true
+  Description: |-
+    Assigns <sample-type-result> a $NI_DETECT_SAMPLE_TYPE tag<br>  describing the whether an audio sample is a drum or an instrument.
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: zone-id
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: sample-type-result
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1029850Z
+  UpdatedAt: 2025-01-26T06:28:18.1029850Z
+- Id: 986d47e3-903c-4fc4-b043-c56bc37ca6e8
+  Name: detect_tempo
+  BuiltIn: true
+  Description: |-
+    Returns a real value representing the detected tempo of the audio sample,<br>  in BPM. If detection fails, the function will return<br>  ~NI_DETECT_TEMPO_INVALID.
+  BuiltIntoVersion: N/A
+  ReturnType: S||R
+  Arguments:
+  - Name: zone-id
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: tempo-result
+    DataType: R
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1029940Z
+  UpdatedAt: 2025-01-26T06:28:18.1029940Z
+- Id: 44c45dc6-0e2e-4533-8f7a-4fc2a2097782
+  Name: disable_logging
+  BuiltIn: true
+  Description: |-
+    Quickly disabling emission of messages, warnings or watched<br>  variable<br>    events to both the Kontakt Status Bar<br>    $NI_LOG_MESSAGE, $NI_LOG_WARNING, $NI_LOG_WATCHING
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: type
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1030020Z
+  UpdatedAt: 2025-01-26T06:28:18.1030020Z
+- Id: 12652db2-b07f-46d8-bba5-d52b1732179c
+  Name: disallow_group
+  BuiltIn: true
+  Description: |-
+    disallows the specified group, i.e. makes it unavailable for playback
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: group-index
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1030100Z
+  UpdatedAt: 2025-01-26T06:28:18.1030100Z
+- Id: a1977a63-f942-4d72-b6f7-ecf48a667d03
+  Name: dont_use_machine_mode
+  BuiltIn: true
+  Description: |-
+    play the specified event in sampler mode
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: ID-number
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1030180Z
+  UpdatedAt: 2025-01-26T06:28:18.1030180Z
+- Id: 5d1bd1c6-e3f5-464e-bc18-34dc3f941ac2
+  Name: event_status
+  BuiltIn: true
+  Description: |-
+    retrieve the status of a particular note event (or MIDI event in the<br>  multi script)
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: ID-number
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1030260Z
+  UpdatedAt: 2025-01-26T06:28:18.1030260Z
+- Id: 181532f9-ac74-4d53-b519-2f49a39f7252
+  Name: exit
+  BuiltIn: true
+  Description: |-
+    immediately stops a callback or exits a function
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments: []
+  CreatedAt: 2025-01-26T06:28:18.1030350Z
+  UpdatedAt: 2025-01-26T06:28:18.1030350Z
+- Id: b660c2b9-1412-4e13-ae18-af07237a73c0
+  Name: exp
+  BuiltIn: true
+  Description: |-
+    exponential function (returns the value of e^x)
+  BuiltIntoVersion: N/A
+  ReturnType: S||R
+  Arguments:
+  - Name: x
+    DataType: R
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1030540Z
+  UpdatedAt: 2025-01-26T06:28:18.1030540Z
+- Id: c8e7537f-a1c8-4b4e-912d-5d9e0ed03aa3
+  Name: fade_in
+  BuiltIn: true
+  Description: |-
+    perform a fade-in for a specific note event
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: ID-number
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: fade-time
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1030650Z
+  UpdatedAt: 2025-01-26T06:28:18.1030650Z
+- Id: f756e5ee-7a60-47a8-87ec-73ebb086e3e9
+  Name: fade_out
+  BuiltIn: true
+  Description: |-
+    perform a fade-out for a specific note event
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: ID-number
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: fade-time
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: stop-voice
+    DataType: I
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1030750Z
+  UpdatedAt: 2025-01-26T06:28:18.1030750Z
+- Id: d874b139-c730-40b2-8190-0c12ddc0382a
+  Name: find_group
+  BuiltIn: true
+  Description: |-
+    returns the group index for the specified group name
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: group-name
+    DataType: S
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1030850Z
+  UpdatedAt: 2025-01-26T06:28:18.1030850Z
+- Id: b7d55e1a-c240-4769-be7e-e17e25d706b4
+  Name: find_mod
+  BuiltIn: true
+  Description: |-
+    returns the slot index of an internal modulator or external modulation<br>  slot
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: group-index
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: mod-name
+    DataType: S
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1030940Z
+  UpdatedAt: 2025-01-26T06:28:18.1030940Z
+- Id: a4ccbcc1-8db6-40fc-870d-40ff05cb5108
+  Name: find_target
+  BuiltIn: true
+  Description: |-
+    returns the slot index of a modulation slot of an internal modulator
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: group-index
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: mod-index
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: target-name
+    DataType: S
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1031050Z
+  UpdatedAt: 2025-01-26T06:28:18.1031050Z
+- Id: f96bc8c1-442b-4a47-9623-099271471de0
+  Name: find_zone
+  BuiltIn: true
+  Description: |-
+    returns the zone ID for the specified zone name. Only availabe in the<br>  init callback.
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: zone-name
+    DataType: S
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1031140Z
+  UpdatedAt: 2025-01-26T06:28:18.1031140Z
+- Id: b53f13c8-9c08-48b5-b6be-a89776f38761
+  Name: floor
+  BuiltIn: true
+  Description: |-
+    floor (round down) floor(2.8) = 2.0
+  BuiltIntoVersion: N/A
+  ReturnType: S||R
+  Arguments:
+  - Name: x
+    DataType: R
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1031230Z
+  UpdatedAt: 2025-01-26T06:28:18.1031230Z
+- Id: 17716591-d8cc-42fc-9850-bcf3c0c08cc5
+  Name: fs_get_filename
+  BuiltIn: true
+  Description: |-
+    return the filename of the last selected file in the UI file browser.
+  BuiltIntoVersion: N/A
+  ReturnType: S
+  Arguments:
+  - Name: ui-ID
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: return-parameter
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1031330Z
+  UpdatedAt: 2025-01-26T06:28:18.1031330Z
+- Id: 3c718a6c-993a-4f43-95c8-aa6639d7f834
+  Name: fs_navigate
+  BuiltIn: true
+  Description: |-
+    jump to the next/previous file in an ui file selector and trigger its<br>  callback.
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: ui-ID
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: direction
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1031430Z
+  UpdatedAt: 2025-01-26T06:28:18.1031430Z
+- Id: e6a15487-3ac3-4191-b04c-aa88842a443a
+  Name: get_control_par
+  BuiltIn: true
+  Description: |-
+    retrieve various parameters of the specified gui control
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: ui-ID
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: control-parameter
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1031530Z
+  UpdatedAt: 2025-01-26T06:28:18.1031530Z
+- Id: 1a1ec091-dd26-4fb0-a144-4f1b7f8780e7
+  Name: get_control_par_arr
+  BuiltIn: true
+  Description: |-
+    Undocumented
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: arg1
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: arg2
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: arg3
+    DataType: I
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1031640Z
+  UpdatedAt: 2025-01-26T06:28:18.1031640Z
+- Id: 99faf964-6f33-4e82-8283-a8a8c43cc941
+  Name: get_control_par_real_arr
+  BuiltIn: true
+  Description: |-
+    Undocumented
+  BuiltIntoVersion: N/A
+  ReturnType: I||S||R
+  Arguments:
+  - Name: arg1
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: arg2
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: arg3
+    DataType: I
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1031760Z
+  UpdatedAt: 2025-01-26T06:28:18.1031760Z
+- Id: f32eadcf-53e0-4b25-8f9a-a1aee3bfa78f
+  Name: get_control_par_str
+  BuiltIn: true
+  Description: |-
+    Undocumented
+  BuiltIntoVersion: N/A
+  ReturnType: S
+  Arguments:
+  - Name: arg1
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: arg2
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1031870Z
+  UpdatedAt: 2025-01-26T06:28:18.1031870Z
+- Id: 666fc01f-e1dd-42ec-ab31-ee29e9b18d78
+  Name: get_control_par_str_arr
+  BuiltIn: true
+  Description: |-
+    Undocumented
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: arg1
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: arg2
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: arg3
+    DataType: I
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1031980Z
+  UpdatedAt: 2025-01-26T06:28:18.1031980Z
+- Id: f45031d6-1401-4de4-9c86-42c049c241fb
+  Name: get_engine_par
+  BuiltIn: true
+  Description: |-
+    returns the value of a specific engine parameter
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: parameter
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: group
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: slot
+    DataType: I
+    Description: |-
+      arg 3 description
+  - Name: generic
+    DataType: I
+    Description: |-
+      arg 4 description
+  CreatedAt: 2025-01-26T06:28:18.1032110Z
+  UpdatedAt: 2025-01-26T06:28:18.1032110Z
+- Id: 086e9b88-f4d6-435e-90c0-8471e8219986
+  Name: get_engine_par_disp
+  BuiltIn: true
+  Description: |-
+    returns the displayed string of a specific engine parameter
+  BuiltIntoVersion: N/A
+  ReturnType: S
+  Arguments:
+  - Name: parameter
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: group
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: slot
+    DataType: I
+    Description: |-
+      arg 3 description
+  - Name: generic
+    DataType: I
+    Description: |-
+      arg 4 description
+  CreatedAt: 2025-01-26T06:28:18.1032240Z
+  UpdatedAt: 2025-01-26T06:28:18.1032240Z
+- Id: d26a539d-b707-4a43-b442-6da1c64d02a3
+  Name: get_engine_par_disp_m
+  BuiltIn: true
+  Description: |-
+    Undocumented
+  BuiltIntoVersion: N/A
+  ReturnType: S
+  Arguments:
+  - Name: arg1
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: arg2
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: arg3
+    DataType: I
+    Description: |-
+      arg 3 description
+  - Name: arg4
+    DataType: I
+    Description: |-
+      arg 4 description
+  CreatedAt: 2025-01-26T06:28:18.1032360Z
+  UpdatedAt: 2025-01-26T06:28:18.1032360Z
+- Id: 6b388b83-b9c3-4a4e-a852-0891d89d8bea
+  Name: get_engine_par_m
+  BuiltIn: true
+  Description: |-
+    Undocumented
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: arg1
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: arg2
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: arg3
+    DataType: I
+    Description: |-
+      arg 3 description
+  - Name: arg4
+    DataType: I
+    Description: |-
+      arg 4 description
+  CreatedAt: 2025-01-26T06:28:18.1032490Z
+  UpdatedAt: 2025-01-26T06:28:18.1032490Z
+- Id: fedbe562-007b-4cea-90bc-fac6e4a44c46
+  Name: get_event_ids
+  BuiltIn: true
+  Description: |-
+    fills the specified array with all active event IDs.
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: array-name
+    DataType: I[]
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1032600Z
+  UpdatedAt: 2025-01-26T06:28:18.1032600Z
+- Id: 5552e1b1-b8f5-41e8-a00a-58e17a8cc64a
+  Name: get_event_mark
+  BuiltIn: true
+  Description: |-
+    Check if the specified event belongs to a specific event group (returns 1<br>  if the bitmark is set, 0 otherwise)
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: ID-number
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: bit-mark
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1032700Z
+  UpdatedAt: 2025-01-26T06:28:18.1032700Z
+- Id: 2649f581-8c80-4896-bb6d-2b7fce0d72e1
+  Name: get_event_par
+  BuiltIn: true
+  Description: |-
+    return the value of a specific event parameter of the specified event
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: ID-number
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: parameter
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1032810Z
+  UpdatedAt: 2025-01-26T06:28:18.1032810Z
+- Id: 1a930d81-dcd6-417e-8e49-5f264c8a57b5
+  Name: get_event_par_arr
+  BuiltIn: true
+  Description: |-
+    special form of get_event_par(), used to retrieve the group allow state<br>  of the specified event
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: ID-number
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: parameter
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: group-index
+    DataType: I
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1032930Z
+  UpdatedAt: 2025-01-26T06:28:18.1032930Z
+- Id: 755f0064-4eb7-4215-a2b4-36eaa2197a5e
+  Name: get_folder
+  BuiltIn: true
+  Description: |-
+    returns the path specified with the built-in path variable
+  BuiltIntoVersion: N/A
+  ReturnType: S
+  Arguments:
+  - Name: path-variable
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1033040Z
+  UpdatedAt: 2025-01-26T06:28:18.1033040Z
+- Id: 74563b7e-32ad-4615-bbdc-3cf5a7d50107
+  Name: get_font_id
+  BuiltIn: true
+  Description: |-
+    Enables use of custom dynamic fonts
+  BuiltIntoVersion: N/A
+  ReturnType: I
+  Arguments:
+  - Name: id
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1033130Z
+  UpdatedAt: 2025-01-26T06:28:18.1033130Z
+- Id: a3c85684-52bd-462e-b396-6fcf7a8a9dd6
+  Name: get_group_idx
+  BuiltIn: true
+  Description: |-
+    returns the group index for the specified group name
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: group-name
+    DataType: S
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1033230Z
+  UpdatedAt: 2025-01-26T06:28:18.1033230Z
+- Id: ae38f30a-351e-4c51-8f7c-dc6e7b31b6c5
+  Name: get_key_color
+  BuiltIn: true
+  Description: |-
+    returns the color constant of the specified note number
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: note-nr
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1033330Z
+  UpdatedAt: 2025-01-26T06:28:18.1033330Z
+- Id: 7eb989e2-fcb1-4d04-92fa-7e8cfbba477e
+  Name: get_key_name
+  BuiltIn: true
+  Description: |-
+    returns the name of the specified key
+  BuiltIntoVersion: N/A
+  ReturnType: S
+  Arguments:
+  - Name: note-nr
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1033430Z
+  UpdatedAt: 2025-01-26T06:28:18.1033430Z
+- Id: 3c42ecfc-79f3-463c-92df-74f9acdbfbec
+  Name: get_key_triggerstate
+  BuiltIn: true
+  Description: |-
+    returns the pressed state of the specified note number (i.e. key) on the<br>  KONTAKT keyboard, can be either 1 (key pressed) or 0 (key released)
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: note-nr
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1033530Z
+  UpdatedAt: 2025-01-26T06:28:18.1033530Z
+- Id: 76afe17b-6cdc-42ca-9481-8d13b37a4aa2
+  Name: get_key_type
+  BuiltIn: true
+  Description: |-
+    returns the key type constant of the specified key.
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: note-nr
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1033640Z
+  UpdatedAt: 2025-01-26T06:28:18.1033640Z
+- Id: af28dbf1-8808-488a-92b4-ca583db43a3b
+  Name: get_keyrange_max_note
+  BuiltIn: true
+  Description: |-
+    returns the highest note of the specified key range
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: note-nr
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1033740Z
+  UpdatedAt: 2025-01-26T06:28:18.1033740Z
+- Id: 0d6ce2f7-dc7a-494e-ada2-031eb429a265
+  Name: get_keyrange_min_note
+  BuiltIn: true
+  Description: |-
+    returns the lowest note of the specified key range
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: note-nr
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1033840Z
+  UpdatedAt: 2025-01-26T06:28:18.1033840Z
+- Id: 784d7aef-deb5-49fe-84bd-f80a16396f04
+  Name: get_keyrange_name
+  BuiltIn: true
+  Description: |-
+    returns the name of the specified key range
+  BuiltIntoVersion: N/A
+  ReturnType: S
+  Arguments:
+  - Name: note-nr
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1033950Z
+  UpdatedAt: 2025-01-26T06:28:18.1033950Z
+- Id: 97c591f0-8c0b-4457-abdd-19212938ce94
+  Name: get_loop_par
+  BuiltIn: true
+  Description: |-
+    Returns the loop parameters of a zone
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: zone-id
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: loop_index
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: parameter
+    DataType: I
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1034060Z
+  UpdatedAt: 2025-01-26T06:28:18.1034060Z
+- Id: e6451e83-eae0-41ca-8409-f535c8d0b696
+  Name: get_loop_sample
+  BuiltIn: true
+  Description: |-
+    Returns paths, file names and extensions of samples
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: zone-id
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: return-parameter
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1034190Z
+  UpdatedAt: 2025-01-26T06:28:18.1034190Z
+- Id: 995220d7-2417-4582-ad6f-b257528dca87
+  Name: get_menu_item_str
+  BuiltIn: true
+  Description: |-
+    returns the string value of the menu's entry.
+  BuiltIntoVersion: N/A
+  ReturnType: S
+  Arguments:
+  - Name: menu-ID
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: index
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1034310Z
+  UpdatedAt: 2025-01-26T06:28:18.1034310Z
+- Id: 26e1a9d3-aa8b-49a7-92bb-6d72796e1090
+  Name: get_menu_item_value
+  BuiltIn: true
+  Description: |-
+    returns the value of the menu's entry.
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: menu-ID
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: index
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1034430Z
+  UpdatedAt: 2025-01-26T06:28:18.1034430Z
+- Id: 55725230-3bdc-4310-9e0e-e89198f93108
+  Name: get_menu_item_visibility
+  BuiltIn: true
+  Description: |-
+    returns 1 if the menu entry is visible, otherwise 0.
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: menu-ID
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: index
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1034550Z
+  UpdatedAt: 2025-01-26T06:28:18.1034550Z
+- Id: fadd0fef-cff0-471e-a22b-c2a410b5df4a
+  Name: get_mod_idx
+  BuiltIn: true
+  Description: |-
+    Returns the slot index of an internal modulator or external modulation<br>  slot
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: group-index
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: mod-name
+    DataType: S
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1034670Z
+  UpdatedAt: 2025-01-26T06:28:18.1034670Z
+- Id: fb0dee6e-ef8f-4d71-a2b6-bb7452eeeae6
+  Name: get_num_zones
+  BuiltIn: true
+  Description: |-
+    Returns the total number of all zones that are present in the instrument<br>  (regular and user zones)
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments: []
+  CreatedAt: 2025-01-26T06:28:18.1034780Z
+  UpdatedAt: 2025-01-26T06:28:18.1034780Z
+- Id: 789a36d1-9a3d-492e-b7d6-698ba8f9839c
+  Name: get_purge_state
+  BuiltIn: true
+  Description: |-
+    returns the purge state of the specified group. 0=purged, 1=not purged
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: group-index
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1034880Z
+  UpdatedAt: 2025-01-26T06:28:18.1034880Z
+- Id: ba572664-adbb-495f-9631-7f3611a911b4
+  Name: get_sample_length
+  BuiltIn: true
+  Description: |-
+    returns the length of the specified zone's sample in microseconds
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: zone-ID
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1034990Z
+  UpdatedAt: 2025-01-26T06:28:18.1034990Z
+- Id: 6b912d49-e769-44bf-a0ed-cdcbac51730a
+  Name: get_sel_zones_idx
+  BuiltIn: true
+  Description: |-
+    Fills the specified array with indices of all selected zones in KONTAKT's<br>  Mapping Editor.
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: array-name
+    DataType: I[]
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1035100Z
+  UpdatedAt: 2025-01-26T06:28:18.1035100Z
+- Id: f0f8472c-bc4b-4ed0-99e6-b3c64812938f
+  Name: get_target_idx
+  BuiltIn: true
+  Description: |-
+    Returns the modulation target slot index of an internal modulator
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: group-index
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: mod-index
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: target-name
+    DataType: S
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1035230Z
+  UpdatedAt: 2025-01-26T06:28:18.1035230Z
+- Id: ad69ab1c-41a1-4306-922a-1da5c03c5b27
+  Name: get_ui_id
+  BuiltIn: true
+  Description: |-
+    retrieve the ID number of an ui control
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: variable
+    DataType: ui_*
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1035370Z
+  UpdatedAt: 2025-01-26T06:28:18.1035370Z
+- Id: 23f08fb6-18a9-483c-be7d-fc4a3a70e970
+  Name: get_ui_wf_property
+  BuiltIn: true
+  Description: |-
+    returns the value of the waveform's different properties.
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: variable
+    DataType: ui_waveform
+    Description: |-
+      arg 1 description
+  - Name: property
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: index
+    DataType: I
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1035510Z
+  UpdatedAt: 2025-01-26T06:28:18.1035510Z
+- Id: c9ca0b3d-3906-4519-aee0-0c30dbbeb148
+  Name: get_voice_limit
+  BuiltIn: true
+  Description: |-
+    retunrs the voice limit for the Time Machine Pro mode of the source<br>  module
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: voice-type
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1035630Z
+  UpdatedAt: 2025-01-26T06:28:18.1035630Z
+- Id: 9b560811-06aa-49da-ba74-f0fd35770af3
+  Name: get_zone_id
+  BuiltIn: true
+  Description: |-
+    Returns the ID of the zone with the specified zone index
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: zone-index
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1035740Z
+  UpdatedAt: 2025-01-26T06:28:18.1035740Z
+- Id: cdef1a70-f80e-467e-83f6-03857ba1a0dc
+  Name: get_zone_par
+  BuiltIn: true
+  Description: |-
+    Returns the zone parameters
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: zone-id
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: parameter
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1035860Z
+  UpdatedAt: 2025-01-26T06:28:18.1035860Z
+- Id: 1e75e8f7-7378-4836-a814-f51dec639983
+  Name: get_zone_status
+  BuiltIn: true
+  Description: |-
+    Queries the status of the zone ID in<br>  question. Zone status has four possible states:<br>    - $NI_ZONE_STATUS_EMPTY - zone is a user zone and has no sample<br>  loaded<br>    - $NI_ZONE_STATUS_LOADED - zone is a user zone and has a sample<br>  loaded<br>    - $NI_ZONE_STATUS_PURGED - zone is purged from memory (valid for both<br>  regular and user<br>    zones)<br>    - $NI_ZONE_STATUS_IGNORED - zone is ignored by the user response in the<br>  Content Missing<br>    dialog (valid for both regular and user zones)
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: zone-id
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1035990Z
+  UpdatedAt: 2025-01-26T06:28:18.1035990Z
+- Id: 22781d1c-1660-4083-bc0a-f15dc1599d3f
+  Name: group_name
+  BuiltIn: true
+  Description: |-
+    returns the group name for the specified group
+  BuiltIntoVersion: N/A
+  ReturnType: S
+  Arguments:
+  - Name: group-index
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1036110Z
+  UpdatedAt: 2025-01-26T06:28:18.1036110Z
+- Id: 3f8c8726-2b4d-46a9-ad5a-46022c09a2ab
+  Name: hide_part
+  BuiltIn: true
+  Description: |-
+    hide specific parts of user interface controls
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: variable
+    DataType: ui_*
+    Description: |-
+      arg 1 description
+  - Name: hide-mask
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1036240Z
+  UpdatedAt: 2025-01-26T06:28:18.1036240Z
+- Id: 9adc1b07-3619-4e6f-86d3-1565c3d878b2
+  Name: ignore_controller
+  BuiltIn: true
+  Description: |-
+    ignore a controller event in a controller callback
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments: []
+  CreatedAt: 2025-01-26T06:28:18.1036350Z
+  UpdatedAt: 2025-01-26T06:28:18.1036350Z
+- Id: ea050a55-da10-493c-95aa-e9cb9ec14238
+  Name: ignore_event
+  BuiltIn: true
+  Description: |-
+    ignore a note event in a note on or note off callback
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: ID-number
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1036460Z
+  UpdatedAt: 2025-01-26T06:28:18.1036460Z
+- Id: 8e066922-627e-454e-8eb2-8203ac2bcd42
+  Name: ignore_midi
+  BuiltIn: true
+  Description: |-
+    Like ignore_event(), ignore_midi is a very "strong" command.<br>  Keep in mind that ignore_midi will ignore all incoming MIDI events. If you<br>  simply want to change the MIDI channel and/or any of the MIDI bytes, you can<br>  also use set_event_par().
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments: []
+  CreatedAt: 2025-01-26T06:28:18.1036580Z
+  UpdatedAt: 2025-01-26T06:28:18.1036580Z
+- Id: 2f5138fb-79f3-41a3-8144-1cfb7102d5eb
+  Name: in_range
+  BuiltIn: true
+  Description: |-
+    Boolean Operator: true if x is between y and z
+  BuiltIntoVersion: N/A
+  ReturnType: B
+  Arguments:
+  - Name: x
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: y
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: z
+    DataType: I
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1036710Z
+  UpdatedAt: 2025-01-26T06:28:18.1036710Z
+- Id: c294f969-ba2f-47ef-b118-7f556960d8c5
+  Name: inc
+  BuiltIn: true
+  Description: |-
+    increment an expression by 1 (x + 1)
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: x
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1036840Z
+  UpdatedAt: 2025-01-26T06:28:18.1036840Z
+- Id: 170609e5-59ad-40cb-9fa7-ba45e81ba8ce
+  Name: int
+  BuiltIn: true
+  Description: |-
+    converts an integer value into a real number
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: real
+    DataType: R
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1036970Z
+  UpdatedAt: 2025-01-26T06:28:18.1036970Z
+- Id: a466b088-0aa7-4e55-950a-1b3dceb064b8
+  Name: int_to_real
+  BuiltIn: true
+  Description: |-
+    converts an integer value into a real number
+  BuiltIntoVersion: N/A
+  ReturnType: S||R
+  Arguments:
+  - Name: integer
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1037100Z
+  UpdatedAt: 2025-01-26T06:28:18.1037100Z
+- Id: 7c0d8eb3-e85a-4690-9dee-7028170d1f88
+  Name: is_zone_empty
+  BuiltIn: true
+  Description: |-
+    Returns 1 if a zone is empty (has no sample), otherwise returns 0
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: zone-id
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1037220Z
+  UpdatedAt: 2025-01-26T06:28:18.1037220Z
+- Id: ac8178b1-538e-4dff-817a-841e6c51f640
+  Name: load_array
+  BuiltIn: true
+  Description: |-
+    loads an array from an external file (.nka file)
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: array-variable
+    DataType: I[]||S[]
+    Description: |-
+      arg 1 description
+  - Name: mode
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1037360Z
+  UpdatedAt: 2025-01-26T06:28:18.1037360Z
+- Id: 784e6eb2-8be1-4c56-af03-9a49325aa294
+  Name: load_array_str
+  BuiltIn: true
+  Description: |-
+    loads an array from an external file (.nka file) using the file's<br>  absolute path
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: array-variable
+    DataType: I[]||S[]
+    Description: |-
+      arg 1 description
+  - Name: path
+    DataType: I||S
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1037520Z
+  UpdatedAt: 2025-01-26T06:28:18.1037520Z
+- Id: 39acc1ce-4230-4634-9977-1d6f9bf0224b
+  Name: load_ir_sample
+  BuiltIn: true
+  Description: |-
+    loads an impulse response sample into KONTAKT's convolution effect
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: file-path
+    DataType: S
+    Description: |-
+      arg 1 description
+  - Name: slot
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: generic
+    DataType: I
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1037670Z
+  UpdatedAt: 2025-01-26T06:28:18.1037670Z
+- Id: 8fd04fc9-7750-4801-9bef-cdf0966e3ce7
+  Name: load_ir_sample_m
+  BuiltIn: true
+  Description: |-
+    Undocumented
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: arg1
+    DataType: '*'
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1037810Z
+  UpdatedAt: 2025-01-26T06:28:18.1037810Z
+- Id: 8748a0a3-ca6f-4103-a229-6a19a01974c5
+  Name: load_midi_file
+  BuiltIn: true
+  Description: |-
+    Load MIDI file from path (*Non documented)
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: path
+    DataType: S
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1037940Z
+  UpdatedAt: 2025-01-26T06:28:18.1037940Z
+- Id: 3811cfa3-636a-4d43-b076-4aaf60b09feb
+  Name: load_patch
+  BuiltIn: true
+  Description: |-
+    Undocumented
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: arg1
+    DataType: S
+    Description: |-
+      arg 1 description
+  - Name: arg2
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1038080Z
+  UpdatedAt: 2025-01-26T06:28:18.1038080Z
+- Id: 4b3f13cd-db4f-4f92-a3df-babc8f6008d3
+  Name: load_performance_view
+  BuiltIn: true
+  Description: |-
+    Loads a performance view file (NCKP) that was created in the Creator<br>  Tools GUI Designer <filename>. The filename of the NCKP file, without<br>  extension, as a string (in quotation marks)
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: filename
+    DataType: S
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1038210Z
+  UpdatedAt: 2025-01-26T06:28:18.1038210Z
+- Id: b8ead008-c19b-40bb-b298-964e11b31ea3
+  Name: log
+  BuiltIn: true
+  Description: |-
+    logarithmic function
+  BuiltIntoVersion: N/A
+  ReturnType: S||R
+  Arguments:
+  - Name: x
+    DataType: R
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1038340Z
+  UpdatedAt: 2025-01-26T06:28:18.1038350Z
+- Id: f5db7081-4e2d-4a06-9269-b87baf4e35c3
+  Name: lsb
+  BuiltIn: true
+  Description: |-
+    return the LSB portion (least significant byte) of a 14 bit value
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: value
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1038480Z
+  UpdatedAt: 2025-01-26T06:28:18.1038480Z
+- Id: ea845ae4-14f0-4e89-a065-f211c12442d4
+  Name: make_instr_persistent
+  BuiltIn: true
+  Description: |-
+    retain the value of a variable only with the instrument
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: variable
+    DataType: '*'
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1038610Z
+  UpdatedAt: 2025-01-26T06:28:18.1038610Z
+- Id: ede7b0fa-8280-488e-86b0-f71f7dcc1062
+  Name: make_perfview
+  BuiltIn: true
+  Description: |-
+    activates the performance view for the respective script
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments: []
+  CreatedAt: 2025-01-26T06:28:18.1038740Z
+  UpdatedAt: 2025-01-26T06:28:18.1038740Z
+- Id: 3bf7587c-5b96-4b1b-8b2f-31104e674f3b
+  Name: make_persistent
+  BuiltIn: true
+  Description: |-
+    retain the value of a variable whith the instrument and snapshot
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: variable
+    DataType: '*'
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1038870Z
+  UpdatedAt: 2025-01-26T06:28:18.1038870Z
+- Id: bf7152bf-5fd5-40b3-a44e-73205a222361
+  Name: message
+  BuiltIn: true
+  Description: |-
+    display text in the status line of KONTAKT
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: variable_or_text
+    DataType: I||S||R
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1039000Z
+  UpdatedAt: 2025-01-26T06:28:18.1039000Z
+- Id: 1b93db96-22ff-40b0-8c16-e7a961146b80
+  Name: mf_copy_export_area
+  BuiltIn: true
+  Description: |-
+    Copies the content of MIDI export area 0 to the specified index.
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: index
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1039140Z
+  UpdatedAt: 2025-01-26T06:28:18.1039140Z
+- Id: 576b2a78-ad82-47f0-b06d-baf78f9ea7d6
+  Name: mf_get_buffer_size
+  BuiltIn: true
+  Description: |-
+    returns the size of the MIDI event buffer
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments: []
+  CreatedAt: 2025-01-26T06:28:18.1039270Z
+  UpdatedAt: 2025-01-26T06:28:18.1039270Z
+- Id: 7ee9684d-11f5-4670-b3b5-07b9069e4fdf
+  Name: mf_get_byte_one
+  BuiltIn: true
+  Description: |-
+    Undocumented
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments: []
+  CreatedAt: 2025-01-26T06:28:18.1039400Z
+  UpdatedAt: 2025-01-26T06:28:18.1039400Z
+- Id: 43562816-c2d9-436f-95a7-4a938a92f3ef
+  Name: mf_get_byte_two
+  BuiltIn: true
+  Description: |-
+    Undocumented
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments: []
+  CreatedAt: 2025-01-26T06:28:18.1039520Z
+  UpdatedAt: 2025-01-26T06:28:18.1039520Z
+- Id: 676775f5-bff1-4a4c-bf0f-9548a8ea36dd
+  Name: mf_get_channel
+  BuiltIn: true
+  Description: |-
+    Undocumented
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments: []
+  CreatedAt: 2025-01-26T06:28:18.1039650Z
+  UpdatedAt: 2025-01-26T06:28:18.1039650Z
+- Id: f897ba53-2397-40f2-8762-5345f28f94ea
+  Name: mf_get_command
+  BuiltIn: true
+  Description: |-
+    Undocumented
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments: []
+  CreatedAt: 2025-01-26T06:28:18.1039780Z
+  UpdatedAt: 2025-01-26T06:28:18.1039780Z
+- Id: 689d9d2b-3886-4e2e-8f1e-8179336bf557
+  Name: mf_get_event_par
+  BuiltIn: true
+  Description: |-
+    returns the value of an event parameter
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: event-id
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: parameter
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1039920Z
+  UpdatedAt: 2025-01-26T06:28:18.1039920Z
+- Id: d2709529-a859-4758-b485-525342cf090a
+  Name: mf_get_first
+  BuiltIn: true
+  Description: |-
+    moves the position marker to the first event in the MIDI track
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: track-index
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1040070Z
+  UpdatedAt: 2025-01-26T06:28:18.1040070Z
+- Id: 82e1fd80-163f-49db-a779-b227ddde47c8
+  Name: mf_get_id
+  BuiltIn: true
+  Description: |-
+    returns the ID of the currently selected event (when using the navigation<br>  commands like mf_get_first(), and mf_get_next(), etc)
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments: []
+  CreatedAt: 2025-01-26T06:28:18.1040200Z
+  UpdatedAt: 2025-01-26T06:28:18.1040200Z
+- Id: 7ecb071d-cb6c-4f90-8225-39bb83fdc357
+  Name: mf_get_last
+  BuiltIn: true
+  Description: |-
+    moves the position marker to the last event in the MIDI track
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: track-index
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1040340Z
+  UpdatedAt: 2025-01-26T06:28:18.1040340Z
+- Id: b231e764-acb7-4f2e-96f7-c7768721029d
+  Name: mf_get_last_filename
+  BuiltIn: true
+  Description: |-
+    Returns the filename (not the full path!) of the last MIDI file that was<br>  inserted into KONTAKT, either via mf_insert_file(), or via drag and drop<br>  operation on ui_mouse_area.
+  BuiltIntoVersion: N/A
+  ReturnType: S
+  Arguments: []
+  CreatedAt: 2025-01-26T06:28:18.1040470Z
+  UpdatedAt: 2025-01-26T06:28:18.1040480Z
+- Id: 79049356-8a0f-40ba-8c1c-497bdc5a3096
+  Name: mf_get_mark
+  BuiltIn: true
+  Description: |-
+    checks if an event is marked or not. Returns 1 if it is marked, or 0 if<br>  it is not.
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: event-id
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: mark
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1040620Z
+  UpdatedAt: 2025-01-26T06:28:18.1040620Z
+- Id: a8c88e01-2d42-40dc-b461-82b85f6c064d
+  Name: mf_get_next
+  BuiltIn: true
+  Description: |-
+    moves the position marker to the next event in the MIDI track
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: track-index
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1040770Z
+  UpdatedAt: 2025-01-26T06:28:18.1040770Z
+- Id: 8677662b-9c83-4ec3-88e5-8ab7142ff70d
+  Name: mf_get_next_at
+  BuiltIn: true
+  Description: |-
+    moves the position marker to the next event in the MIDI track right after<br>  the defined position.
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: track-index
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: pos
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1040920Z
+  UpdatedAt: 2025-01-26T06:28:18.1040920Z
+- Id: 120a4f69-6417-4c4e-bbe4-351d8c9f1916
+  Name: mf_get_note_length
+  BuiltIn: true
+  Description: |-
+    Undocumented
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments: []
+  CreatedAt: 2025-01-26T06:28:18.1041060Z
+  UpdatedAt: 2025-01-26T06:28:18.1041060Z
+- Id: 129402ab-a959-4790-99cd-29db28697a06
+  Name: mf_get_num_tracks
+  BuiltIn: true
+  Description: |-
+    returns the number of tracks in a MIDI object.
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments: []
+  CreatedAt: 2025-01-26T06:28:18.1041190Z
+  UpdatedAt: 2025-01-26T06:28:18.1041190Z
+- Id: 51d82993-606a-4a8c-9823-5d2018ef0253
+  Name: mf_get_pos
+  BuiltIn: true
+  Description: |-
+    Undocumented
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments: []
+  CreatedAt: 2025-01-26T06:28:18.1041330Z
+  UpdatedAt: 2025-01-26T06:28:18.1041330Z
+- Id: 4a3c0379-def1-4a8b-b5e8-57ad0e9737c4
+  Name: mf_get_prev
+  BuiltIn: true
+  Description: |-
+    moves the position marker to the previous event in the MIDI track
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: track-index
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1041480Z
+  UpdatedAt: 2025-01-26T06:28:18.1041480Z
+- Id: 2264885e-54bb-4674-b690-2fcbdf0117d3
+  Name: mf_get_prev_at
+  BuiltIn: true
+  Description: |-
+    moves the position marker to the first event before the defined position
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: track-index
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: pos
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1041630Z
+  UpdatedAt: 2025-01-26T06:28:18.1041630Z
+- Id: d1dd92a3-8839-40b5-8ec4-684e8111e033
+  Name: mf_get_track_idx
+  BuiltIn: true
+  Description: |-
+    Undocumented
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments: []
+  CreatedAt: 2025-01-26T06:28:18.1041780Z
+  UpdatedAt: 2025-01-26T06:28:18.1041780Z
+- Id: 6365b014-1da8-4590-8d19-1e3a58f89078
+  Name: mf_insert_event
+  BuiltIn: true
+  Description: |-
+    activates an inactive MIDI event in the MIDI object. However, because the<br>  command and position are defined in this command, it can be considered as an<br>  insertion.
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: track
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: pos
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: command
+    DataType: I
+    Description: |-
+      arg 3 description
+  - Name: byte1
+    DataType: I
+    Description: |-
+      arg 4 description
+  - Name: byte2
+    DataType: I
+    Description: |-
+      arg 5 description
+  CreatedAt: 2025-01-26T06:28:18.1041950Z
+  UpdatedAt: 2025-01-26T06:28:18.1041950Z
+- Id: f61940f9-5343-40f6-8534-597841c8fbf9
+  Name: mf_insert_file
+  BuiltIn: true
+  Description: |-
+    inserts a MIDI file into the MIDI object.
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: path
+    DataType: S
+    Description: |-
+      arg 1 description
+  - Name: track-offset
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: position-offset
+    DataType: I
+    Description: |-
+      arg 3 description
+  - Name: mode
+    DataType: I
+    Description: |-
+      arg 4 description
+  CreatedAt: 2025-01-26T06:28:18.1042140Z
+  UpdatedAt: 2025-01-26T06:28:18.1042140Z
+- Id: 2fa96a55-dfeb-459c-823a-167eb65dc6a6
+  Name: mf_remove_event
+  BuiltIn: true
+  Description: |-
+    deactivates an event in the MIDI object, effectively removing it
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: event-id
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1042310Z
+  UpdatedAt: 2025-01-26T06:28:18.1042310Z
+- Id: e9dd243d-2155-4bf3-9097-86affb2191f5
+  Name: mf_reset
+  BuiltIn: true
+  Description: |-
+    resets the MIDI object, sets the event buffer to zero, and removes all<br>  events
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments: []
+  CreatedAt: 2025-01-26T06:28:18.1042450Z
+  UpdatedAt: 2025-01-26T06:28:18.1042450Z
+- Id: 2347c761-81d3-4b8f-82cd-a1894e1c78e3
+  Name: mf_set_buffer_size
+  BuiltIn: true
+  Description: |-
+    defines a number of inactive MIDI events, that can be activated and<br>  edited
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: size
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1042600Z
+  UpdatedAt: 2025-01-26T06:28:18.1042600Z
+- Id: a6d4c1b8-bb66-4522-af84-00919c34def5
+  Name: mf_set_byte_one
+  BuiltIn: true
+  Description: |-
+    Non documented
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: value
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1042750Z
+  UpdatedAt: 2025-01-26T06:28:18.1042750Z
+- Id: b3437f4d-f11f-4221-9e1a-e5ef586d4c52
+  Name: mf_set_byte_two
+  BuiltIn: true
+  Description: |-
+    Non documented
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: value
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1042900Z
+  UpdatedAt: 2025-01-26T06:28:18.1042900Z
+- Id: ecaf16d1-a302-40e1-b5c6-fefba76b6d18
+  Name: mf_set_channel
+  BuiltIn: true
+  Description: |-
+    Undocumented
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: value
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1043060Z
+  UpdatedAt: 2025-01-26T06:28:18.1043060Z
+- Id: 13abe07e-d67c-4ff1-88e0-a8bbab1f9f5f
+  Name: mf_set_command
+  BuiltIn: true
+  Description: |-
+    Non documented
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: value
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1043210Z
+  UpdatedAt: 2025-01-26T06:28:18.1043210Z
+- Id: 0395debe-6d6b-4f7e-bc20-d4122d520b3e
+  Name: mf_set_event_par
+  BuiltIn: true
+  Description: |-
+    sets an event parameter
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: event-id
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: parameter
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: value
+    DataType: I
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1043380Z
+  UpdatedAt: 2025-01-26T06:28:18.1043380Z
+- Id: b54b6f72-ffeb-4bf8-bfbf-aac9bb3bfb8c
+  Name: mf_set_export_area
+  BuiltIn: true
+  Description: |-
+    defines the part of the MIDI object that will be exported when using a<br>  drag and drop area, or the save_midi_file() command.
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: name
+    DataType: S
+    Description: |-
+      arg 1 description
+  - Name: start-pos
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: end-pos
+    DataType: I
+    Description: |-
+      arg 3 description
+  - Name: start-track
+    DataType: I
+    Description: |-
+      arg 4 description
+  - Name: end-track
+    DataType: I
+    Description: |-
+      arg 5 description
+  CreatedAt: 2025-01-26T06:28:18.1043570Z
+  UpdatedAt: 2025-01-26T06:28:18.1043570Z
+- Id: ea20c193-fb52-49d6-a0fd-7e2ef9270f08
+  Name: mf_set_mark
+  BuiltIn: true
+  Description: |-
+    marks an event, so that you may groups events together and process that<br>  group quickly
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: event-id
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: mark
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: status
+    DataType: I
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1043760Z
+  UpdatedAt: 2025-01-26T06:28:18.1043760Z
+- Id: 65d6887b-9a0d-4163-ba74-d85c12963a9a
+  Name: mf_set_num_export_areas
+  BuiltIn: true
+  Description: |-
+    Sets the number of export areas, with a maximum of 512.
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: num
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1043920Z
+  UpdatedAt: 2025-01-26T06:28:18.1043920Z
+- Id: a7d62b12-94fd-4148-b396-c65a7b1ea480
+  Name: mf_set_pos
+  BuiltIn: true
+  Description: |-
+    Non documented
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: value
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1044080Z
+  UpdatedAt: 2025-01-26T06:28:18.1044080Z
+- Id: eac2e65e-b634-4ced-a145-49a6c7463840
+  Name: move_control
+  BuiltIn: true
+  Description: |-
+    position ui elements in the standard KONTAKT grid
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: variable
+    DataType: ui_*
+    Description: |-
+      arg 1 description
+  - Name: x-position
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: y-position
+    DataType: I
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1044260Z
+  UpdatedAt: 2025-01-26T06:28:18.1044260Z
+- Id: 383ee506-6241-49d6-ab0f-deeccf9eb793
+  Name: move_control_px
+  BuiltIn: true
+  Description: |-
+    position ui elements in pixels
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: variable
+    DataType: ui_*
+    Description: |-
+      arg 1 description
+  - Name: x-position
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: y-position
+    DataType: I
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1044460Z
+  UpdatedAt: 2025-01-26T06:28:18.1044460Z
+- Id: 75c55b5f-d89a-457b-9d7b-587d73054b80
+  Name: ms_to_ticks
+  BuiltIn: true
+  Description: |-
+    converts a microseconds value into a tempo dependent ticks value
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: microseconds
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1044630Z
+  UpdatedAt: 2025-01-26T06:28:18.1044630Z
+- Id: 35089435-11f4-45a5-8d39-6cd13d9d1921
+  Name: msb
+  BuiltIn: true
+  Description: |-
+    return the MSB portion (most significant byte) of a 14 bit value
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: value
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1044790Z
+  UpdatedAt: 2025-01-26T06:28:18.1044790Z
+- Id: 248f51a5-176f-4206-8373-db27960a1038
+  Name: note_off
+  BuiltIn: true
+  Description: |-
+    send a note off message to a specific note
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: ID-number
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1044950Z
+  UpdatedAt: 2025-01-26T06:28:18.1044960Z
+- Id: ea6f3cc2-8d94-4539-9a9f-72bd3f8c0a96
+  Name: num_elements
+  BuiltIn: true
+  Description: |-
+    returns the number of elements in an array
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: array-variable
+    DataType: I[]||S[]||R[]
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1045130Z
+  UpdatedAt: 2025-01-26T06:28:18.1045130Z
+- Id: 7157eb21-56a4-45a6-88e0-0f20d8216d01
+  Name: num_slices
+  BuiltIn: true
+  Description: |-
+    Undocumented
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: arg1
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1045290Z
+  UpdatedAt: 2025-01-26T06:28:18.1045290Z
+- Id: 732ceb01-2148-40ab-9f50-507bdcd912c3
+  Name: num_slices_zone
+  BuiltIn: true
+  Description: |-
+    returns the number of slices of the specified zone
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: zone-ID
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1045460Z
+  UpdatedAt: 2025-01-26T06:28:18.1045460Z
+- Id: 9d166192-5d57-436a-b572-3fbc2455dbf3
+  Name: output_channel_name
+  BuiltIn: true
+  Description: |-
+    returns the channel name for the specified output
+  BuiltIntoVersion: N/A
+  ReturnType: S
+  Arguments:
+  - Name: output-number
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1045620Z
+  UpdatedAt: 2025-01-26T06:28:18.1045620Z
+- Id: b8cfac18-1d9c-4a12-a09d-0dcfcf7d3b6f
+  Name: pgs_create_key
+  BuiltIn: true
+  Description: |-
+    It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: key-id
+    DataType: P
+    Description: |-
+      arg 1 description
+  - Name: size
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1045800Z
+  UpdatedAt: 2025-01-26T06:28:18.1045800Z
+- Id: 772a8d26-2fa8-4738-8d04-0bfa9cd399d8
+  Name: pgs_create_str_key
+  BuiltIn: true
+  Description: |-
+    It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: key-id
+    DataType: P
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1045970Z
+  UpdatedAt: 2025-01-26T06:28:18.1045970Z
+- Id: 3ee681e3-d7fd-4755-ba90-087b048e6459
+  Name: pgs_get_key_val
+  BuiltIn: true
+  Description: |-
+    It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: key-id
+    DataType: P
+    Description: |-
+      arg 1 description
+  - Name: index
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1046140Z
+  UpdatedAt: 2025-01-26T06:28:18.1046140Z
+- Id: d46d8077-6d4e-44bd-8215-d7f0571e1589
+  Name: pgs_get_str_key_val
+  BuiltIn: true
+  Description: |-
+    It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.
+  BuiltIntoVersion: N/A
+  ReturnType: S
+  Arguments:
+  - Name: key-id
+    DataType: P
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1046310Z
+  UpdatedAt: 2025-01-26T06:28:18.1046310Z
+- Id: 133114c9-2bf1-4825-ae26-1be8e05c99c0
+  Name: pgs_key_exists
+  BuiltIn: true
+  Description: |-
+    It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.
+  BuiltIntoVersion: N/A
+  ReturnType: B
+  Arguments:
+  - Name: key-id
+    DataType: P
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1046470Z
+  UpdatedAt: 2025-01-26T06:28:18.1046470Z
+- Id: b140c859-1a53-4f09-bd2d-252adba5c6d8
+  Name: pgs_set_key_val
+  BuiltIn: true
+  Description: |-
+    It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: key-id
+    DataType: P
+    Description: |-
+      arg 1 description
+  - Name: index
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: value
+    DataType: I
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1046650Z
+  UpdatedAt: 2025-01-26T06:28:18.1046650Z
+- Id: 0e33b6d7-2b37-40c3-8aa8-02e6d6160ec7
+  Name: pgs_set_str_key_val
+  BuiltIn: true
+  Description: |-
+    It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: key-id
+    DataType: P
+    Description: |-
+      arg 1 description
+  - Name: <br>stringvalue
+    DataType: I||S||R
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1046840Z
+  UpdatedAt: 2025-01-26T06:28:18.1046840Z
+- Id: bd4cbddd-7b1c-4dd1-a3fa-b7841d02428d
+  Name: pgs_str_key_exists
+  BuiltIn: true
+  Description: |-
+    It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.
+  BuiltIntoVersion: N/A
+  ReturnType: B
+  Arguments:
+  - Name: key-id
+    DataType: P
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1047010Z
+  UpdatedAt: 2025-01-26T06:28:18.1047010Z
+- Id: 6215535e-7e0f-4095-b175-c1aaa7146583
+  Name: play_note
+  BuiltIn: true
+  Description: |-
+    generate a MIDI note, i.e. generate a note on message followed by a note<br>  off message
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: note-number
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: velocity
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: sample-offset
+    DataType: I
+    Description: |-
+      arg 3 description
+  - Name: duration
+    DataType: I
+    Description: |-
+      arg 4 description
+  CreatedAt: 2025-01-26T06:28:18.1047190Z
+  UpdatedAt: 2025-01-26T06:28:18.1047190Z
+- Id: 8823e46c-4831-4884-b995-1025d2bdfb05
+  Name: pow
+  BuiltIn: true
+  Description: |-
+    power (returns the value of x^y)
+  BuiltIntoVersion: N/A
+  ReturnType: S||R
+  Arguments:
+  - Name: x
+    DataType: R
+    Description: |-
+      arg 1 description
+  - Name: y
+    DataType: R
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1047380Z
+  UpdatedAt: 2025-01-26T06:28:18.1047380Z
+- Id: f398ca7f-2eec-4d44-9b7c-c328acf2a20b
+  Name: purge_group
+  BuiltIn: true
+  Description: |-
+    purges (i.e. unloads from RAM) the samples of the specified group
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: group-index
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: mode
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1047560Z
+  UpdatedAt: 2025-01-26T06:28:18.1047560Z
+- Id: 7bab36b1-b175-491d-9957-af46a5960ced
+  Name: random
+  BuiltIn: true
+  Description: |-
+    generate a random integer in the range <min> to <max>
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: min
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: max
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1047740Z
+  UpdatedAt: 2025-01-26T06:28:18.1047740Z
+- Id: 12b789e1-6fbe-44dc-af07-172f8872ac9a
+  Name: read_persistent_var
+  BuiltIn: true
+  Description: |-
+    instantly reloads the value of a variable that was saved via the<br>  make_persistent()command
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: variable
+    DataType: '*'
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1047920Z
+  UpdatedAt: 2025-01-26T06:28:18.1047920Z
+- Id: 3738b6a7-5439-43b1-a1de-280d1783e54f
+  Name: real
+  BuiltIn: true
+  Description: |-
+    converts a real number into an integer
+  BuiltIntoVersion: N/A
+  ReturnType: S||R
+  Arguments:
+  - Name: integer
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1048080Z
+  UpdatedAt: 2025-01-26T06:28:18.1048080Z
+- Id: ca0e963f-7bd8-428e-b618-e30ebae5b1cc
+  Name: real_to_int
+  BuiltIn: true
+  Description: |-
+    converts a real number into an integer
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: real
+    DataType: R
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1048260Z
+  UpdatedAt: 2025-01-26T06:28:18.1048260Z
+- Id: 26327c50-d453-4fad-b523-6de012e58bef
+  Name: redirect_midi
+  BuiltIn: true
+  Description: |-
+    Undocumented
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: arg1
+    DataType: '*'
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1048430Z
+  UpdatedAt: 2025-01-26T06:28:18.1048430Z
+- Id: 30cad230-941a-4d0d-a6e9-b13316b96c4b
+  Name: redirect_output
+  BuiltIn: true
+  Description: |-
+    Routes the audio signal of the specified event to a specific output or<br>  bus
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: ID-number
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: output-type
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: index
+    DataType: I
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1048600Z
+  UpdatedAt: 2025-01-26T06:28:18.1048600Z
+- Id: 25d14931-676a-44e3-856f-5be219438452
+  Name: remove_keyrange
+  BuiltIn: true
+  Description: |-
+    assigns a text string to the specified range of keys
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: note-nr
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1048790Z
+  UpdatedAt: 2025-01-26T06:28:18.1048790Z
+- Id: 9e45be7f-fdb5-4be8-bf8d-e1758d86d992
+  Name: reset_engine
+  BuiltIn: true
+  Description: |-
+    Undocumented
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments: []
+  CreatedAt: 2025-01-26T06:28:18.1048950Z
+  UpdatedAt: 2025-01-26T06:28:18.1048950Z
+- Id: 8a8d463b-a17d-4023-8c06-fdd56f2d4487
+  Name: reset_ksp_timer
+  BuiltIn: true
+  Description: |-
+    resets the KSP timer ($KSP_TIMER) to zero
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments: []
+  CreatedAt: 2025-01-26T06:28:18.1049110Z
+  UpdatedAt: 2025-01-26T06:28:18.1049110Z
+- Id: f6923eee-3f1e-4750-9f08-9ae5593eb1f3
+  Name: reset_rls_trig_counter
+  BuiltIn: true
+  Description: |-
+    dresets the release trigger counter (used by the release trigger system<br>  script)
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: note
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1049280Z
+  UpdatedAt: 2025-01-26T06:28:18.1049280Z
+- Id: 7a0b3076-16b0-4f40-a7a4-87a44d4d13df
+  Name: round
+  BuiltIn: true
+  Description: |-
+    round (round to nearest) round(2.3) = 2.0 round(2.8) = 3.0
+  BuiltIntoVersion: N/A
+  ReturnType: S||R
+  Arguments:
+  - Name: x
+    DataType: R
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1049450Z
+  UpdatedAt: 2025-01-26T06:28:18.1049450Z
+- Id: 30c522dc-a601-4213-8c8c-bc63b18e9cb0
+  Name: save_array
+  BuiltIn: true
+  Description: |-
+    saves an array to an external file (i.e. an .nka file)
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: array-variable
+    DataType: I[]||S[]
+    Description: |-
+      arg 1 description
+  - Name: mode
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1049640Z
+  UpdatedAt: 2025-01-26T06:28:18.1049640Z
+- Id: 318540a5-9a2e-474e-8f02-efb583f47fc2
+  Name: save_array_str
+  BuiltIn: true
+  Description: |-
+    saves an array to an external file (i.e. an .nka file), using the<br>  specified absolute path
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: array-variable
+    DataType: I[]||S[]
+    Description: |-
+      arg 1 description
+  - Name: path
+    DataType: I||S
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1049830Z
+  UpdatedAt: 2025-01-26T06:28:18.1049830Z
+- Id: e9a4cb47-b704-494d-8bc6-316b467c0201
+  Name: save_midi_file
+  BuiltIn: true
+  Description: |-
+    saves a MIDI file with a range specified by the mf_set_export_area()<br>  command.
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: path
+    DataType: S
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1050030Z
+  UpdatedAt: 2025-01-26T06:28:18.1050030Z
+- Id: 2370f87b-d7c0-4603-89fa-db540d3bd6e5
+  Name: search
+  BuiltIn: true
+  Description: |-
+    searches the specified array for the specified value and returns the<br>  index of its first position.
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: array-variable
+    DataType: I[]
+    Description: |-
+      arg 1 description
+  - Name: value
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1050210Z
+  UpdatedAt: 2025-01-26T06:28:18.1050210Z
+- Id: 69ec4f59-e881-4b2f-bf3b-79d2ac418e87
+  Name: set_control_help
+  BuiltIn: true
+  Description: |-
+    assigns a text string to be displayed when hovering the ui control. The<br>  text will appear in KONTAKT's info pane.
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: variable
+    DataType: ui_*
+    Description: |-
+      arg 1 description
+  - Name: text
+    DataType: S
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1050410Z
+  UpdatedAt: 2025-01-26T06:28:18.1050410Z
+- Id: 2c6c6fad-bb5a-497a-a2bb-cea691e31e8b
+  Name: set_control_par
+  BuiltIn: true
+  Description: |-
+    change various parameters of the specified gui control
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: ui-ID
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: control-parameter
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: value
+    DataType: I
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1050600Z
+  UpdatedAt: 2025-01-26T06:28:18.1050600Z
+- Id: 5354169f-1e56-44ad-b3cb-645815ce1549
+  Name: set_control_par_arr
+  BuiltIn: true
+  Description: |-
+    change various parameters of an element within an array based gui control<br>  (for example: cursors in the XY pad)
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: ui-ID
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: control-parameter
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: value
+    DataType: I
+    Description: |-
+      arg 3 description
+  - Name: index
+    DataType: I
+    Description: |-
+      arg 4 description
+  CreatedAt: 2025-01-26T06:28:18.1050810Z
+  UpdatedAt: 2025-01-26T06:28:18.1050810Z
+- Id: 269f6410-cabb-47e6-927a-4b739479e9bc
+  Name: set_control_par_real_arr
+  BuiltIn: true
+  Description: |-
+    change various parameters of an element within an array-based UI widget,<br>  e.g. ui_xy cursors.
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: ui-ID
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: control-parameter
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: value
+    DataType: I||R
+    Description: |-
+      arg 3 description
+  - Name: index
+    DataType: I
+    Description: |-
+      arg 4 description
+  CreatedAt: 2025-01-26T06:28:18.1051020Z
+  UpdatedAt: 2025-01-26T06:28:18.1051020Z
+- Id: 2ae9ba68-93be-4473-9dbb-0d68dd05380f
+  Name: set_control_par_str
+  BuiltIn: true
+  Description: |-
+    A variation of the command for usage with text strings. ( see:<br>  set_control_par() Remarks)
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: ui-ID
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: CONTROL_PAR_xxx
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: value
+    DataType: I||S
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1051230Z
+  UpdatedAt: 2025-01-26T06:28:18.1051230Z
+- Id: f7e590a8-7184-4848-a362-149d67545b3c
+  Name: set_control_par_str_arr
+  BuiltIn: true
+  Description: |-
+    A variation of the command for usage with text strings. ( see:<br>  set_control_par_arr() Remarks)
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: ui-ID
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: control-parameter
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: value
+    DataType: I||S
+    Description: |-
+      arg 3 description
+  - Name: index
+    DataType: I
+    Description: |-
+      arg 4 description
+  CreatedAt: 2025-01-26T06:28:18.1051440Z
+  UpdatedAt: 2025-01-26T06:28:18.1051440Z
+- Id: 58d181a0-5fe6-45df-8960-05306e10e1e8
+  Name: set_controller
+  BuiltIn: true
+  Description: |-
+    send a MIDI CC, pitchbend or channel pressure value
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: MIDICCnumber/$VCC_PITCH_BEND/$VCC_MONO
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: value
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1051640Z
+  UpdatedAt: 2025-01-26T06:28:18.1051640Z
+- Id: 67c44311-1587-46e3-9023-596c4c4777ad
+  Name: set_engine_par
+  BuiltIn: true
+  Description: |-
+    control automatable KONTAKT parameters and bypass buttons
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: parameter
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: value
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: group
+    DataType: I
+    Description: |-
+      arg 3 description
+  - Name: slot
+    DataType: I
+    Description: |-
+      arg 4 description
+  - Name: generic
+    DataType: I
+    Description: |-
+      arg 5 description
+  CreatedAt: 2025-01-26T06:28:18.1051860Z
+  UpdatedAt: 2025-01-26T06:28:18.1051870Z
+- Id: 353092dd-3765-4191-a191-bea2d26c1a59
+  Name: set_engine_par_m
+  BuiltIn: true
+  Description: |-
+    Undocumented
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: arg1
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: arg2
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: arg3
+    DataType: I
+    Description: |-
+      arg 3 description
+  - Name: arg4
+    DataType: I
+    Description: |-
+      arg 4 description
+  - Name: arg5
+    DataType: I
+    Description: |-
+      arg 5 description
+  CreatedAt: 2025-01-26T06:28:18.1052090Z
+  UpdatedAt: 2025-01-26T06:28:18.1052090Z
+- Id: 71d50d66-95a4-4dfc-9aec-5a90840a5046
+  Name: set_event_mark
+  BuiltIn: true
+  Description: |-
+    Assign the specified event to a specific event group
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: ID-number
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: bit-mark
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1052300Z
+  UpdatedAt: 2025-01-26T06:28:18.1052300Z
+- Id: 46803fd2-caf4-4d4c-a33b-b24750b7c4cb
+  Name: set_event_par
+  BuiltIn: true
+  Description: |-
+    assign a parameter to a specific event
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: ID-number
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: parameter
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: value
+    DataType: I
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1052500Z
+  UpdatedAt: 2025-01-26T06:28:18.1052500Z
+- Id: 6f182a39-1012-4435-8c5e-46f92ab2f2a3
+  Name: set_event_par_arr
+  BuiltIn: true
+  Description: |-
+    special form of set_event_par(), used to set the group allow state of the<br>  specified event
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: ID-number
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: parameter
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: value
+    DataType: I
+    Description: |-
+      arg 3 description
+  - Name: group-index
+    DataType: I
+    Description: |-
+      arg 4 description
+  CreatedAt: 2025-01-26T06:28:18.1052710Z
+  UpdatedAt: 2025-01-26T06:28:18.1052710Z
+- Id: c48bb77a-ee85-45d1-8991-c362ed9786c6
+  Name: set_key_color
+  BuiltIn: true
+  Description: |-
+    sets the color of the specified key (i.e. MIDI note) on the KONTAKT<br>  keyboard. use $KEY_COLOR_****
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: note-nr
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: key-color-constant
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1052910Z
+  UpdatedAt: 2025-01-26T06:28:18.1052910Z
+- Id: 66f6c441-3dc4-432f-8efc-13578a171f37
+  Name: set_key_name
+  BuiltIn: true
+  Description: |-
+    assigns a text string to the specified key
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: note-nr
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: name
+    DataType: S
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1053110Z
+  UpdatedAt: 2025-01-26T06:28:18.1053110Z
+- Id: 4e57c2ba-bbcc-4d40-b4e1-b95f14ca34e3
+  Name: set_key_pressed
+  BuiltIn: true
+  Description: |-
+    sets the trigger state of the specified key on KONTAKT's keyboard either<br>  to pressed/on (1) or released/off (0)
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: note-nr
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: value
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1053310Z
+  UpdatedAt: 2025-01-26T06:28:18.1053310Z
+- Id: 2bdbfa6f-b63a-472e-bd9e-aabbd3092328
+  Name: set_key_pressed_support
+  BuiltIn: true
+  Description: |-
+    sets the pressed state support mode for KONTAKT'S keyboard. The available<br>  modes are:<br>    0: KONTAKT handles all pressed states, set_key_pressed() commands are<br>  ignored (default mode)<br>    1: KONTAKT's keyboard is only affected by set_key_pressed() commands
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: mode
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1053500Z
+  UpdatedAt: 2025-01-26T06:28:18.1053500Z
+- Id: f1cc8afd-b4f0-469a-9c12-f97e1e258698
+  Name: set_key_type
+  BuiltIn: true
+  Description: |-
+    assigns a key type to the specified key.<br>    The following key types are available:<br>    $NI_KEY_TYPE_DEFAULT (i.e. normal mapped notes that produce sound)<br>    $NI_KEY_TYPE_CONTROL (i.e. key switches or other notes that do not produce<br>  sound)<br>    $NI_KEY_TYPE_NONE (resets the key to its normal KONTAKT behaviour)
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: note-nr
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: key-type-constant
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1053690Z
+  UpdatedAt: 2025-01-26T06:28:18.1053690Z
+- Id: 23cff349-2f54-494e-86b8-30d718f8fd32
+  Name: set_keyrange
+  BuiltIn: true
+  Description: |-
+    assigns a text string to the specified range of keys.
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: min-note
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: max-note
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: name
+    DataType: S
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1053900Z
+  UpdatedAt: 2025-01-26T06:28:18.1053900Z
+- Id: 338551ce-df9b-491e-963d-be692ca0c65d
+  Name: set_knob_defval
+  BuiltIn: true
+  Description: |-
+    assign a default value to a knob to which the knob is reset when<br>  Cmd-clicking (mac) or Ctrl-clicking (PC) the knob.
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: variable
+    DataType: ui_knob||ui_slider
+    Description: |-
+      arg 1 description
+  - Name: value
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1054140Z
+  UpdatedAt: 2025-01-26T06:28:18.1054140Z
+- Id: 5993cb24-27c7-4761-a39a-3b21758b9dc2
+  Name: set_knob_label
+  BuiltIn: true
+  Description: |-
+    assign a text string to a knob
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: variable
+    DataType: ui_knob
+    Description: |-
+      arg 1 description
+  - Name: text
+    DataType: S
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1054350Z
+  UpdatedAt: 2025-01-26T06:28:18.1054350Z
+- Id: 1d98b092-3995-47c4-ba23-6c2370152aad
+  Name: set_knob_unit
+  BuiltIn: true
+  Description: |-
+    assign a unit mark to a knob.
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: variable
+    DataType: ui_knob
+    Description: |-
+      arg 1 description
+  - Name: knob-unit-constant
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1054570Z
+  UpdatedAt: 2025-01-26T06:28:18.1054570Z
+- Id: 12939db5-b6a2-489f-ad5d-b5bdc361b2cd
+  Name: set_listener
+  BuiltIn: true
+  Description: |-
+    Sets the signals on which the listener callback should react to. Can only<br>  be used in the init callback.
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: signal-type
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: parameter
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1054770Z
+  UpdatedAt: 2025-01-26T06:28:18.1054770Z
+- Id: b62dc3e4-6f45-49fd-94b1-9f8571fbbeef
+  Name: set_loop_par
+  BuiltIn: true
+  Description: |-
+    Sets the loop parameters of a user zone
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: zone-id
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: loop_index
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: parameter
+    DataType: I
+    Description: |-
+      arg 3 description
+  - Name: value
+    DataType: I
+    Description: |-
+      arg 4 description
+  CreatedAt: 2025-01-26T06:28:18.1054980Z
+  UpdatedAt: 2025-01-26T06:28:18.1054980Z
+- Id: b6f041b9-40f8-4350-89bd-a25ea3a73b75
+  Name: set_map_editor_event_color
+  BuiltIn: true
+  Description: |-
+    Assigns the specified color to events generated in the current script<br>  slot, visible in KONTAKT's Mapping Editor.
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: hex-value
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1055190Z
+  UpdatedAt: 2025-01-26T06:28:18.1055190Z
+- Id: 110e637b-2f19-4ecc-8bd1-52fc16dee625
+  Name: set_menu_item_str
+  BuiltIn: true
+  Description: |-
+    sets the value of a menu entry.
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: menu-id
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: index
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: string
+    DataType: I||S
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1055400Z
+  UpdatedAt: 2025-01-26T06:28:18.1055400Z
+- Id: 75943e16-5b3b-44bc-9a1f-038010684952
+  Name: set_menu_item_value
+  BuiltIn: true
+  Description: |-
+    sets the value of a menu entry.
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: menu-id
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: index
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: value
+    DataType: I
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1055630Z
+  UpdatedAt: 2025-01-26T06:28:18.1055630Z
+- Id: 44d4e6c2-637f-4d5d-9316-bb60d2672fa6
+  Name: set_menu_item_visibility
+  BuiltIn: true
+  Description: |-
+    sets the visibility of a menu entry.
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: menu-id
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: index
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: visibility
+    DataType: I
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1055840Z
+  UpdatedAt: 2025-01-26T06:28:18.1055840Z
+- Id: cf2391ba-666f-4045-89b9-fa7567ff5eb0
+  Name: set_midi
+  BuiltIn: true
+  Description: |-
+    create any type of MIDI event. If you simply want to change the MIDI<br>  channel and/or any of the MIDI bytes, you can also use set_event_par().
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: channel
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: command
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: byte1
+    DataType: I
+    Description: |-
+      arg 3 description
+  - Name: byte2
+    DataType: I
+    Description: |-
+      arg 4 description
+  CreatedAt: 2025-01-26T06:28:18.1056080Z
+  UpdatedAt: 2025-01-26T06:28:18.1056080Z
+- Id: 76c48fc9-e92e-4639-a4c5-8d99bf299648
+  Name: set_note_controller
+  BuiltIn: true
+  Description: |-
+    Sends a MIDI 2.0 Registered Per-Note Controller, MIDI 2.0 Assignable<br>  Per-Note Controller or MIDI 2.0 Per-Note Pitch Bend message.
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: controller
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: note-number
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: value
+    DataType: I
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1056320Z
+  UpdatedAt: 2025-01-26T06:28:18.1056320Z
+- Id: 79843a0a-ee11-436b-b5a3-192c1369fa4f
+  Name: set_nrpn
+  BuiltIn: true
+  Description: |-
+    send a nrpn message
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: address
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: value
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1056550Z
+  UpdatedAt: 2025-01-26T06:28:18.1056550Z
+- Id: 1f17ff0b-5e53-487f-abad-78a6970642fa
+  Name: set_num_user_zones
+  BuiltIn: true
+  Description: |-
+    Creates empty user zones
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: number_of_user_zones
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1056760Z
+  UpdatedAt: 2025-01-26T06:28:18.1056760Z
+- Id: f0f49333-090d-4a3e-b099-ddbc790583fd
+  Name: set_poly_at
+  BuiltIn: true
+  Description: |-
+    Sends a MIDI Polyphonic Aftertouch message.
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: note-number
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: value
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1056980Z
+  UpdatedAt: 2025-01-26T06:28:18.1056980Z
+- Id: 4f41b7c1-a9a0-41b2-b925-098a3bb9893c
+  Name: set_rpn
+  BuiltIn: true
+  Description: |-
+    send a rpn message
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: address
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: value
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1057200Z
+  UpdatedAt: 2025-01-26T06:28:18.1057200Z
+- Id: d0afc67e-e665-413a-9f32-a2084f674bc6
+  Name: set_sample
+  BuiltIn: true
+  Description: |-
+    Sets the user sample in a zone
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: zone-id
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: sample-path
+    DataType: S
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1057430Z
+  UpdatedAt: 2025-01-26T06:28:18.1057430Z
+- Id: 5138f48b-5c4f-44a0-8442-1ae6e86b23a6
+  Name: set_script_title
+  BuiltIn: true
+  Description: |-
+    set the script title
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: text
+    DataType: S
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1057650Z
+  UpdatedAt: 2025-01-26T06:28:18.1057650Z
+- Id: f5a71fa7-0a90-4bc6-895c-a948f49eba92
+  Name: set_skin_offset
+  BuiltIn: true
+  Description: |-
+    offsets the chosen background picture file by the specified number of<br>  pixels
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: offset-in-pixel
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1057860Z
+  UpdatedAt: 2025-01-26T06:28:18.1057860Z
+- Id: 61362cab-52fc-4ea4-87b5-8697b88bb2b8
+  Name: set_snapshot_type
+  BuiltIn: true
+  Description: |-
+    configures the KSP processor behavior of all five slots when a snapshot<br>  is recalled
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: type
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1058060Z
+  UpdatedAt: 2025-01-26T06:28:18.1058060Z
+- Id: 674427df-b2e5-4fe6-8555-ce6a27df041d
+  Name: set_table_steps_shown
+  BuiltIn: true
+  Description: |-
+    changes the number of displayed columns in an ui table
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: variable
+    DataType: ui_table
+    Description: |-
+      arg 1 description
+  - Name: num-of-steps
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1058280Z
+  UpdatedAt: 2025-01-26T06:28:18.1058280Z
+- Id: d32d13fe-24ee-454a-8a31-652194f042f1
+  Name: set_text
+  BuiltIn: true
+  Description: |-
+    when applied to a label: delete the text currently visible in the<br>  specified label and add new text.<br>    when applied to knobs, buttons, switches and value edits: set the display<br>  name of the ui element.
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: variable
+    DataType: ui_button||ui_knob||ui_label||ui_switch||ui_value_edit
+    Description: |-
+      arg 1 description
+  - Name: text
+    DataType: I||S||R
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1058560Z
+  UpdatedAt: 2025-01-26T06:28:18.1058560Z
+- Id: 9e343445-5d69-4953-a77f-f578b91bd23c
+  Name: set_ui_color
+  BuiltIn: true
+  Description: |-
+    set the main background color of the performance view
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: hex-values
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: text
+    DataType: S
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1058780Z
+  UpdatedAt: 2025-01-26T06:28:18.1058780Z
+- Id: 747164e6-7d4f-4010-835f-cd8ab1c8e346
+  Name: set_ui_height
+  BuiltIn: true
+  Description: |-
+    set the height of a script performance view in grid units
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: height
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1058990Z
+  UpdatedAt: 2025-01-26T06:28:18.1058990Z
+- Id: 9bd5908f-afec-498d-a84a-2d9043338e3a
+  Name: set_ui_height_px
+  BuiltIn: true
+  Description: |-
+    set the height of a script performance view in pixels
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: height
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1059190Z
+  UpdatedAt: 2025-01-26T06:28:18.1059190Z
+- Id: ccc88c0a-7f30-40e7-8619-129879018bc0
+  Name: set_ui_wf_property
+  BuiltIn: true
+  Description: |-
+    sets different properties for the waveform control
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: variable
+    DataType: ui_waveform
+    Description: |-
+      arg 1 description
+  - Name: property
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: index
+    DataType: I
+    Description: |-
+      arg 3 description
+  - Name: value
+    DataType: I
+    Description: |-
+      arg 4 description
+  CreatedAt: 2025-01-26T06:28:18.1059420Z
+  UpdatedAt: 2025-01-26T06:28:18.1059420Z
+- Id: 7bd4dbd1-ea93-4266-8cda-9b77e504ac92
+  Name: set_ui_width_px
+  BuiltIn: true
+  Description: |-
+    set the width of a script performance view in pixels
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: width
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1059650Z
+  UpdatedAt: 2025-01-26T06:28:18.1059650Z
+- Id: ce2fb2d1-b480-47b1-9a22-ca05403accfc
+  Name: set_voice_limit
+  BuiltIn: true
+  Description: |-
+    sets the voice limit for the Time Machine Pro mode of the source module
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: voice-type
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: value
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1059860Z
+  UpdatedAt: 2025-01-26T06:28:18.1059860Z
+- Id: d5c94b1f-95e2-4708-8372-4cda93f30565
+  Name: set_zone_par
+  BuiltIn: true
+  Description: |-
+    Sets the user zone parameters
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: zone-id
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: parameter
+    DataType: I
+    Description: |-
+      arg 2 description
+  - Name: value
+    DataType: I
+    Description: |-
+      arg 3 description
+  CreatedAt: 2025-01-26T06:28:18.1060080Z
+  UpdatedAt: 2025-01-26T06:28:18.1060080Z
+- Id: 565ca5fc-7307-4f8f-9ee5-4e987362a878
+  Name: sgn
+  BuiltIn: true
+  Description: |-
+    Signum function (returns -1 if the number is negative, 0 if it's zero, 1<br>  if it's positive)
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: x
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1060300Z
+  UpdatedAt: 2025-01-26T06:28:18.1060300Z
+- Id: 711c2d51-58c1-4617-b526-56a43eed4918
+  Name: sh_left
+  BuiltIn: true
+  Description: |-
+    shifts the bits in <expression> by the amount of <shift-bits><br>  to the left
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: expression
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: shift-bits
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1060520Z
+  UpdatedAt: 2025-01-26T06:28:18.1060520Z
+- Id: f98845e0-0b3e-44e1-a5d2-17b3165e89c9
+  Name: sh_right
+  BuiltIn: true
+  Description: |-
+    shifts the bits in <expression> by the amount of <shift-bits><br>  to the right
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: expression
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: shift-bits
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1060740Z
+  UpdatedAt: 2025-01-26T06:28:18.1060740Z
+- Id: ed6566f8-f661-45e3-838c-d3f498a01a0e
+  Name: show_library_tab
+  BuiltIn: true
+  Description: |-
+    Undocumented
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments: []
+  CreatedAt: 2025-01-26T06:28:18.1060950Z
+  UpdatedAt: 2025-01-26T06:28:18.1060950Z
+- Id: 321761cf-09b9-42a1-9b54-88a527d8b335
+  Name: signbit
+  BuiltIn: true
+  Description: |-
+    Sign bit (returns 1 if the number is negative, 0 otherwise)
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: x
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1061150Z
+  UpdatedAt: 2025-01-26T06:28:18.1061150Z
+- Id: 57d23178-9f59-46b7-a0cf-a01f9cf08235
+  Name: sin
+  BuiltIn: true
+  Description: |-
+    sine function
+  BuiltIntoVersion: N/A
+  ReturnType: S||R
+  Arguments:
+  - Name: x
+    DataType: R
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1061360Z
+  UpdatedAt: 2025-01-26T06:28:18.1061360Z
+- Id: 8461b793-6e49-45d3-aede-1d992057c948
+  Name: slice_idx_loop_end
+  BuiltIn: true
+  Description: |-
+    Undocumented
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: arg1
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: arg2
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1061580Z
+  UpdatedAt: 2025-01-26T06:28:18.1061580Z
+- Id: 5818ca91-5afe-479d-9352-b165f837c51e
+  Name: slice_idx_loop_start
+  BuiltIn: true
+  Description: |-
+    Undocumented
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: arg1
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: arg2
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1061800Z
+  UpdatedAt: 2025-01-26T06:28:18.1061800Z
+- Id: 243caf0e-2773-4c3a-969d-b0a82b8f75bf
+  Name: slice_length
+  BuiltIn: true
+  Description: |-
+    Undocumented
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: arg1
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: arg2
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1062030Z
+  UpdatedAt: 2025-01-26T06:28:18.1062030Z
+- Id: b57665c0-aa76-42a0-bf05-fef64d28a27e
+  Name: slice_loop_count
+  BuiltIn: true
+  Description: |-
+    Undocumented
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: arg1
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: arg2
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1062250Z
+  UpdatedAt: 2025-01-26T06:28:18.1062250Z
+- Id: f192bb2a-0549-48d1-9efe-b155b72a71cf
+  Name: slice_start
+  BuiltIn: true
+  Description: |-
+    Undocumented
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: arg1
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: arg2
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1062480Z
+  UpdatedAt: 2025-01-26T06:28:18.1062480Z
+- Id: 3056dcdf-492a-4123-84eb-9cd4eeb16c07
+  Name: sort
+  BuiltIn: true
+  Description: |-
+    searches the specified array for the specified value and returns the<br>  index of its first position.
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: array-variable
+    DataType: I[]||R[]
+    Description: |-
+      arg 1 description
+  - Name: direction
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1062710Z
+  UpdatedAt: 2025-01-26T06:28:18.1062710Z
+- Id: 343974b4-7c85-496c-b8e1-cf4bc317070f
+  Name: sqrt
+  BuiltIn: true
+  Description: |-
+    square root
+  BuiltIntoVersion: N/A
+  ReturnType: S||R
+  Arguments:
+  - Name: x
+    DataType: R
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1062930Z
+  UpdatedAt: 2025-01-26T06:28:18.1062930Z
+- Id: db17104f-7195-48f5-a3e6-3925a9685239
+  Name: stop_wait
+  BuiltIn: true
+  Description: |-
+    stops wait commands in the specified callback
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: callback-ID
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: parameter
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1063150Z
+  UpdatedAt: 2025-01-26T06:28:18.1063150Z
+- Id: 03dec549-dcb5-4ef1-a8d0-ffdf1a250fe8
+  Name: tan
+  BuiltIn: true
+  Description: |-
+    tangent function
+  BuiltIntoVersion: N/A
+  ReturnType: S||R
+  Arguments:
+  - Name: x
+    DataType: R
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1063380Z
+  UpdatedAt: 2025-01-26T06:28:18.1063380Z
+- Id: 8dace9c5-7096-4c42-8cff-dca16f90ddcf
+  Name: ticks_to_ms
+  BuiltIn: true
+  Description: |-
+    converts a tempo dependent ticks value into a microseconds value
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: ticks
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1063590Z
+  UpdatedAt: 2025-01-26T06:28:18.1063590Z
+- Id: 0d14cd0c-0970-4c5d-9f2b-77d2f14c6a7c
+  Name: unload_slot
+  BuiltIn: true
+  Description: |-
+    Undocumented
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: arg1
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1063810Z
+  UpdatedAt: 2025-01-26T06:28:18.1063810Z
+- Id: 3cbca000-f5ce-4aad-96ef-bb6d8fc0a8af
+  Name: wait
+  BuiltIn: true
+  Description: |-
+    pauses the callback for the specified time in microseconds
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: wait-time
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1064020Z
+  UpdatedAt: 2025-01-26T06:28:18.1064020Z
+- Id: cd289aae-e3cd-4684-9a4e-d3aa1d78f31a
+  Name: wait_async
+  BuiltIn: true
+  Description: |-
+    waits until the async command identified by the <asyncID> is<br>  finished
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: asyncID
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1064240Z
+  UpdatedAt: 2025-01-26T06:28:18.1064240Z
+- Id: 852f39d0-2297-40bf-b3a3-14512ced38dc
+  Name: wait_ticks
+  BuiltIn: true
+  Description: |-
+    pauses the callback for the specified time in ticks
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: wait-time
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1064460Z
+  UpdatedAt: 2025-01-26T06:28:18.1064460Z
+- Id: 0546c0d9-abd4-41a7-9278-c18a68295757
+  Name: watch_array_idx
+  BuiltIn: true
+  Description: |-
+    Variable watching through Creator Tools
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: arr
+    DataType: I[]||S[]||R[]
+    Description: |-
+      arg 1 description
+  - Name: idx
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1064690Z
+  UpdatedAt: 2025-01-26T06:28:18.1064690Z
+- Id: 17145f1e-d8d1-4c86-b1c3-2b10294aae2a
+  Name: watch_var
+  BuiltIn: true
+  Description: |-
+    Variable watching through Creator Tools
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: var
+    DataType: I||S||R
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1064920Z
+  UpdatedAt: 2025-01-26T06:28:18.1064920Z
+- Id: 9148c408-2cd2-44a1-8db4-df1cca5c382d
+  Name: will_never_terminate
+  BuiltIn: true
+  Description: |-
+    Tells the script engine that this event will never be finished (used by the release trigger system script).
+  BuiltIntoVersion: N/A
+  ReturnType: V
+  Arguments:
+  - Name: event-id
+    DataType: I
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1065140Z
+  UpdatedAt: 2025-01-26T06:28:18.1065140Z
+- Id: 7ee3e6db-c2d5-44ce-8270-3fa7d25d0fbd
+  Name: zone_slice_idx_loop_end
+  BuiltIn: true
+  Description: |-
+    returns the index number of the slice at the loop end
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: zone-ID
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: loop-index
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1065370Z
+  UpdatedAt: 2025-01-26T06:28:18.1065370Z
+- Id: 2c888e45-f25e-4bca-b8ad-351fbccd4697
+  Name: zone_slice_idx_loop_start
+  BuiltIn: true
+  Description: |-
+    returns the index number of the slice at the loop start
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: zone-ID
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: loop-index
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1065590Z
+  UpdatedAt: 2025-01-26T06:28:18.1065590Z
+- Id: 854a93aa-2d2a-4ccd-a166-27d8c84203f0
+  Name: zone_slice_length
+  BuiltIn: true
+  Description: |-
+    returns the length in microseconds of the specified slice with respect to<br>  the current tempo
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: zone-ID
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: slice-index
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1065830Z
+  UpdatedAt: 2025-01-26T06:28:18.1065830Z
+- Id: 78636b13-a43c-4c65-82e2-7374e143aa0b
+  Name: zone_slice_loop_count
+  BuiltIn: true
+  Description: |-
+    returns the loop count of the specified loop
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: zone-ID
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: loop-index
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1066060Z
+  UpdatedAt: 2025-01-26T06:28:18.1066060Z
+- Id: d732dac5-8164-49a9-a338-1d34a47989cb
+  Name: zone_slice_start
+  BuiltIn: true
+  Description: |-
+    returns the absolute start point of the specified slice in microseconds,<br>  independent of the current tempo
+  BuiltIntoVersion: N/A
+  ReturnType: I||S
+  Arguments:
+  - Name: zone-ID
+    DataType: I
+    Description: |-
+      arg 1 description
+  - Name: slice-index
+    DataType: I
+    Description: |-
+      arg 2 description
+  CreatedAt: 2025-01-26T06:28:18.1066290Z
+  UpdatedAt: 2025-01-26T06:28:18.1066290Z
