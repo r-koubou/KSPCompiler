@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using KSPCompiler.Commons.Path;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.ExternalSymbol.Tsv.Callbacks;
-using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Callbacks;
+using KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
 using KSPCompiler.SymbolDatabaseControllers;
 
