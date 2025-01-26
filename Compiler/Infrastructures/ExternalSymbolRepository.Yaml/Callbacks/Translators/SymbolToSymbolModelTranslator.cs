@@ -1,12 +1,12 @@
 using System;
 
-using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks.Models;
 
 namespace KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks.Translators;
 
-public class ToCallbackSymbolModelTranslator : IDataTranslator<CallbackSymbol, CallBackSymbolModel>
+public class SymbolToSymbolModelTranslator
+    : ISymbolToSymbolModelTranslator<CallbackSymbol, CallBackSymbolModel>
 {
     public CallBackSymbolModel Translate( CallbackSymbol source )
     {

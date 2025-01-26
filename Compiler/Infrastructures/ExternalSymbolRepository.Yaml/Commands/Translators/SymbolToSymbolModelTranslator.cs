@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Models;
 
 namespace KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Translators;
 
-public class ToCommandSymbolModelTranslator : IDataTranslator<CommandSymbol, CommandSymbolModel>
+public class SymbolToSymbolModelTranslator
+    : ISymbolToSymbolModelTranslator<CommandSymbol, CommandSymbolModel>
 {
     public CommandSymbolModel Translate( CommandSymbol source )
     {

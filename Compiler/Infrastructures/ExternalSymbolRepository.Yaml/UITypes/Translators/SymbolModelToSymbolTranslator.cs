@@ -1,11 +1,11 @@
-using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.ExternalSymbolRepository.Yaml.UITypes.Models;
 
 namespace KSPCompiler.ExternalSymbolRepository.Yaml.UITypes.Translators;
 
-public class FromUITypeModelTranslator : IDataTranslator<UITypeSymbolModel, UITypeSymbol>
+public class SymbolModelToSymbolTranslator
+    : ISymbolModelToSymbolTranslator<UITypeSymbolModel, UITypeSymbol>
 {
     public UITypeSymbol Translate( UITypeSymbolModel source )
     {

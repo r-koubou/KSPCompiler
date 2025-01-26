@@ -8,7 +8,7 @@ namespace KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks;
 public class CallbackSymbolRepository( FilePath repositoryPath, bool autoFlush = false )
     : SymbolRepository<CallbackSymbol, CallbackSymbolRootModel, CallBackSymbolModel>(
         repositoryPath,
-        new ToCallbackSymbolModelTranslator(),
-        new FromCallbackSymbolModelTranslator(),
+        new SymbolToSymbolModelTranslator(),
+        new SymbolModelToSymbolTranslator(),
         autoFlush
     );

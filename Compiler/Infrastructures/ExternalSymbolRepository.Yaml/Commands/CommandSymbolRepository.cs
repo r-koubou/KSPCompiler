@@ -8,6 +8,6 @@ namespace KSPCompiler.ExternalSymbolRepository.Yaml.Commands;
 public class CommandSymbolRepository( FilePath repositoryPath )
     : SymbolRepository<CommandSymbol, CommandSymbolRootModel, CommandSymbolModel>(
         repositoryPath,
-        new ToCommandSymbolModelTranslator(),
-        new FromCommandSymbolModelTranslator()
+        new SymbolToSymbolModelTranslator(),
+        new SymbolModelToSymbolTranslator()
     );

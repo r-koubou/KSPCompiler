@@ -8,6 +8,6 @@ namespace KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
 public class VariableSymbolRepository( FilePath repositoryPath )
     : SymbolRepository<VariableSymbol, VariableSymbolRootModel, VariableSymbolModel>(
         repositoryPath,
-        new ToVariableSymbolModelTranslator(),
-        new FromVariableSymbolModelTranslator()
+        new SymbolToSymbolModelTranslator(),
+        new SymbolModelToSymbolTranslator()
     );

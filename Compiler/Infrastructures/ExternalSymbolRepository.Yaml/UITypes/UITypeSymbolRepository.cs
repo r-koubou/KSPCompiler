@@ -10,7 +10,7 @@ public class UITypeSymbolRepository : SymbolRepository<UITypeSymbol, UITypeSymbo
     private const string RepositoryIdentifier = "ui_type";
     private const int CurrentVersion = 1;
 
-    public UITypeSymbolRepository( FilePath repositoryPath ) : base( repositoryPath, new ToUITypeModelTranslator(), new FromUITypeModelTranslator() )
+    public UITypeSymbolRepository( FilePath repositoryPath ) : base( repositoryPath, new SymbolToSymbolModelTranslator(), new SymbolModelToSymbolTranslator() )
     {
     }
 }

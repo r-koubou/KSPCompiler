@@ -1,11 +1,11 @@
-using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Models;
 
 namespace KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Translators;
 
-public class FromVariableSymbolModelTranslator : IDataTranslator<VariableSymbolModel, VariableSymbol>
+public class SymbolModelToSymbolTranslator
+    : ISymbolModelToSymbolTranslator<VariableSymbolModel, VariableSymbol>
 {
     public VariableSymbol Translate( VariableSymbolModel source )
     {
