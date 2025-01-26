@@ -1,13 +1,13 @@
-using KSPCompiler.Commons.Text;
+using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
 namespace KSPCompiler.LSPServer.Core.Extensions;
 
-using OmniSharpPosition = OmniSharp.Extensions.LanguageServer.Protocol.Models.Position;
-using OmniSharpRange = OmniSharp.Extensions.LanguageServer.Protocol.Models.Range;
+using OmniSharpPosition = Position;
+using OmniSharpRange = Range;
 
 public static class PositionExtension
 {
-    public static OmniSharpPosition BeginAs( this Position position )
+    public static OmniSharpPosition BeginAs( this Commons.Text.Position position )
     {
         return new OmniSharpPosition()
         {
@@ -16,7 +16,7 @@ public static class PositionExtension
         };
     }
 
-    public static OmniSharpPosition EndAs( this Position position )
+    public static OmniSharpPosition EndAs( this Commons.Text.Position position )
     {
         return new OmniSharpPosition()
         {
@@ -25,7 +25,7 @@ public static class PositionExtension
         };
     }
 
-    public static OmniSharpRange AsRange( this Position position )
+    public static OmniSharpRange AsRange( this Commons.Text.Position position )
     {
         return new OmniSharpRange
         {

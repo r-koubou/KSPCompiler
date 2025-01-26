@@ -1,5 +1,3 @@
-using System.Threading;
-
 using KSPCompiler.Domain;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
