@@ -1,6 +1,7 @@
 using System;
 
 using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Gateways.Symbols;
 
 namespace KSPCompiler.UseCases.Symbols;
 
