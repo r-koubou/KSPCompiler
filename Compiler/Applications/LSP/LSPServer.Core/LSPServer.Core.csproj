@@ -17,7 +17,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\Controllers\CompilerControllers\CompilerControllers.csproj" />
-      <ProjectReference Include="..\..\..\Infrastructures\ExternalSymbolRepository.JSONFlatFileDataStore\ExternalSymbolRepository.JSONFlatFileDataStore.csproj" />
+      <ProjectReference Include="..\..\..\Infrastructures\ExternalSymbolRepository.Yaml\ExternalSymbolRepository.Yaml.csproj" />
       <ProjectReference Include="..\..\..\Infrastructures\Parser.Antlr\Parser.Antlr.csproj" />
     </ItemGroup>
 

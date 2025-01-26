@@ -7,6 +7,8 @@ namespace KSPCompiler.Domain.Symbols.Repositories;
 
 public interface ISymbolRepository<TSymbol> : IDisposable where TSymbol : SymbolBase
 {
+    public int Count { get; }
+
     public StoreResult Store( TSymbol symbol )
         => StoreAsync( symbol ).GetAwaiter().GetResult();
 
@@ -41,4 +43,12 @@ public interface ISymbolRepository<TSymbol> : IDisposable where TSymbol : Symbol
         => FindAllAsync().GetAwaiter().GetResult();
 
     public Task<IReadOnlyCollection<TSymbol>> FindAllAsync( CancellationToken cancellationToken = default );
+
+    public void Flush()
+        => FlushAsync().GetAwaiter().GetResult();
+
+    public async Task FlushAsync()
+    {
+        await Task.CompletedTask;
+    }
 }

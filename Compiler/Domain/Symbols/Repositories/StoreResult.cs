@@ -11,7 +11,7 @@ public sealed class StoreResult
 
     public Exception? Exception { get; }
 
-    public StoreResult( bool success, int createdCount, int updatedCount, int failedCount, Exception? exception = null )
+    public StoreResult( bool success = true, int createdCount = 0, int updatedCount = 0, int failedCount = 0, Exception? exception = null )
     {
         Success      = success;
         CreatedCount = createdCount;

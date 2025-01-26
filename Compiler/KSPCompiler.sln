@@ -78,6 +78,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LSPServer.Core", "Applicati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LSPServer.Remote", "Applications\LSP\LSPServer.Remote\LSPServer.Remote.csproj", "{ACA59F4E-C9BF-4D6A-BAB5-377FB7AA1BBB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalSymbolRepository.Yaml", "Infrastructures\ExternalSymbolRepository.Yaml\ExternalSymbolRepository.Yaml.csproj", "{4AD01764-38A5-49E2-AE42-ADF61041C2D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalSymbolRepository.Yaml.Tests", "Infrastructures\ExternalSymbolRepository.Yaml.Tests\ExternalSymbolRepository.Yaml.Tests.csproj", "{E25A9B9C-27BE-41B9-94A5-152C42F2E02F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -184,6 +188,14 @@ Global
 		{ACA59F4E-C9BF-4D6A-BAB5-377FB7AA1BBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACA59F4E-C9BF-4D6A-BAB5-377FB7AA1BBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACA59F4E-C9BF-4D6A-BAB5-377FB7AA1BBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AD01764-38A5-49E2-AE42-ADF61041C2D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AD01764-38A5-49E2-AE42-ADF61041C2D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AD01764-38A5-49E2-AE42-ADF61041C2D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AD01764-38A5-49E2-AE42-ADF61041C2D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E25A9B9C-27BE-41B9-94A5-152C42F2E02F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E25A9B9C-27BE-41B9-94A5-152C42F2E02F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E25A9B9C-27BE-41B9-94A5-152C42F2E02F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E25A9B9C-27BE-41B9-94A5-152C42F2E02F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{DC135E43-6ACC-4708-983B-03BB9FBFC64C} = {D9F235EC-F610-4F08-B031-5B8528EA70E4}
@@ -219,5 +231,7 @@ Global
 		{2E24E20E-FC3B-442A-8C3C-C0CF48D2F031} = {12448860-8B00-4A42-979E-326E486AA3DD}
 		{06442EE4-946B-403D-8940-846BA3B97890} = {2E24E20E-FC3B-442A-8C3C-C0CF48D2F031}
 		{ACA59F4E-C9BF-4D6A-BAB5-377FB7AA1BBB} = {2E24E20E-FC3B-442A-8C3C-C0CF48D2F031}
+		{4AD01764-38A5-49E2-AE42-ADF61041C2D6} = {8871A492-CE96-41F3-9504-A0047D00BF1C}
+		{E25A9B9C-27BE-41B9-94A5-152C42F2E02F} = {8871A492-CE96-41F3-9504-A0047D00BF1C}
 	EndGlobalSection
 EndGlobal
