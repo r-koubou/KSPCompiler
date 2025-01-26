@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Domain.Symbols.Repositories;
+using KSPCompiler.Gateways.Symbols;
 using KSPCompiler.Interactors.Symbols;
 using KSPCompiler.UseCases.Symbols;
 

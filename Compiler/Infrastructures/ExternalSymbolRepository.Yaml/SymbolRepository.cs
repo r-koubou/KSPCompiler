@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using KSPCompiler.Commons;
 using KSPCompiler.Commons.Path;
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Domain.Symbols.Repositories;
+using KSPCompiler.Gateways.Symbols;
 
 using YamlDotNet.Serialization;
 
