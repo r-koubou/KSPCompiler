@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Threading;
 
@@ -10,10 +11,10 @@ using KSPCompiler.Domain.CompilerMessages.Extensions;
 using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Events.Extensions;
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Callbacks;
-using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Commands;
-using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.UITypes;
-using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Variables;
+using KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks;
+using KSPCompiler.ExternalSymbolRepository.Yaml.Commands;
+using KSPCompiler.ExternalSymbolRepository.Yaml.UITypes;
+using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
 using KSPCompiler.Infrastructures.Parser.Antlr;
 
 namespace KSPCompiler.Applications.Cli;
@@ -81,16 +82,16 @@ public static class CompilerProgram
     {
         var basePath = Path.Combine( "Data", "Symbols" );
 
-        using var variables = new VariableSymbolRepository( Path.Combine( basePath, "variables.json" ) );
+        using var variables = new VariableSymbolRepository( Path.Combine( basePath, "variables.yaml" ) );
         symbolTable.BuiltInVariables.AddRange( variables.FindAllAsync( CancellationToken.None ).GetAwaiter().GetResult() );
 
-        using var uiTypes = new UITypeSymbolRepository( Path.Combine( basePath, "uitypes.json" ) );
+        using var uiTypes = new UITypeSymbolRepository( Path.Combine( basePath, "uitypes.yaml" ) );
         symbolTable.UITypes.AddRange( uiTypes.FindAllAsync( CancellationToken.None ).GetAwaiter().GetResult() );
 
-        using var commands = new CommandSymbolRepository( Path.Combine( basePath, "commands.json" ) );
+        using var commands = new CommandSymbolRepository( Path.Combine( basePath, "commands.yaml" ) );
         symbolTable.Commands.AddRange( commands.FindAllAsync( CancellationToken.None ).GetAwaiter().GetResult() );
 
-        using var callbacks = new CallbackSymbolRepository( Path.Combine( basePath, "callbacks.json" ) );
+        using var callbacks = new CallbackSymbolRepository( Path.Combine( basePath, "callbacks.yaml" ) );
         var foundCallbacks = callbacks.FindAllAsync( CancellationToken.None ).GetAwaiter().GetResult();
 
         foreach( var x in foundCallbacks )
