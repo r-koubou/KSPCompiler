@@ -2,7 +2,9 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace KSPCompiler.Domain.Symbols;
+using KSPCompiler.Domain.Symbols;
+
+namespace KSPCompiler.Gateways.Symbols;
 
 public interface ISymbolImporter<TSymbol> where TSymbol : SymbolBase
 {

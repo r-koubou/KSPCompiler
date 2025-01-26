@@ -7,6 +7,7 @@ using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.ExternalSymbol.Commons;
 using KSPCompiler.ExternalSymbol.Tsv.Commands;
+using KSPCompiler.Gateways.Symbols;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
 
 using NUnit.Framework;

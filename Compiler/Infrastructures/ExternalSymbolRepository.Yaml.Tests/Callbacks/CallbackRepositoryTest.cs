@@ -2,8 +2,8 @@ using System.IO;
 
 using KSPCompiler.Commons.Path;
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Domain.Symbols.Repositories;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks;
+using KSPCompiler.Gateways.Symbols;
 
 using NUnit.Framework;
 

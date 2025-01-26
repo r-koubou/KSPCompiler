@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using KSPCompiler.Commons.Contents;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.ExternalSymbol.Tsv.UITypes.Translators;
+using KSPCompiler.Gateways.Symbols;
 
 namespace KSPCompiler.ExternalSymbol.Tsv.UITypes;
 

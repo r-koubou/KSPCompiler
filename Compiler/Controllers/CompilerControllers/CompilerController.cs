@@ -6,6 +6,7 @@ using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Gateways;
+using KSPCompiler.Gateways.Parsers;
 using KSPCompiler.Interactors.Analysis;
 using KSPCompiler.UseCases;
 using KSPCompiler.UseCases.Analysis;

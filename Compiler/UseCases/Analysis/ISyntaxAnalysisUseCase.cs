@@ -2,6 +2,7 @@ using System;
 
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Gateways;
+using KSPCompiler.Gateways.Parsers;
 
 namespace KSPCompiler.UseCases.Analysis;
 
