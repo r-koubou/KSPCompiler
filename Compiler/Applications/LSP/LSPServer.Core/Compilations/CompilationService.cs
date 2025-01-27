@@ -11,11 +11,11 @@ using KSPCompiler.Controllers.Compiler;
 using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Events.Extensions;
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Domain.Symbols.Repositories;
-using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Callbacks;
-using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Commands;
-using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.UITypes;
-using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Variables;
+using KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks;
+using KSPCompiler.ExternalSymbolRepository.Yaml.Commands;
+using KSPCompiler.ExternalSymbolRepository.Yaml.UITypes;
+using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
+using KSPCompiler.Gateways.Symbols;
 using KSPCompiler.Infrastructures.Parser.Antlr;
 using KSPCompiler.LSPServer.Core.Extensions;
 

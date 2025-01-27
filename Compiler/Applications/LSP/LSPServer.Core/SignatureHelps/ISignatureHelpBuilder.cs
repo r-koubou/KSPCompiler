@@ -1,5 +1,3 @@
-using System;
-
 using KSPCompiler.Domain.Symbols;
 
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;

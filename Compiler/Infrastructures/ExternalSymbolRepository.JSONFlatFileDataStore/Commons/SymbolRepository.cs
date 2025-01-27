@@ -9,8 +9,8 @@ using JsonFlatFileDataStore;
 using KSPCompiler.Commons;
 using KSPCompiler.Commons.Path;
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Domain.Symbols.Repositories;
 using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Commons.Models;
+using KSPCompiler.Gateways.Symbols;
 
 namespace KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Commons;
 
@@ -30,6 +30,10 @@ public abstract class SymbolRepository<TSymbol, TModel> : ISymbolRepository<TSym
 
     public int Count
         => Collection.Count;
+
+    [Obsolete("For temporary use only.")]
+    public List<TModel> All
+        => Collection.AsQueryable().ToList();
 
     public SymbolRepository(
         FilePath repositoryPath,

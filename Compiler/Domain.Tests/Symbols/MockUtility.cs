@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 using KSPCompiler.Domain.Symbols;
 
 namespace KSPCompiler.Domain.Tests.Symbols;

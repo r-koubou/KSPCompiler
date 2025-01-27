@@ -16,6 +16,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Domain.Tests\Domain.Tests.csproj" />
+      <ProjectReference Include="..\ExternalSymbol.Commons.Tests\ExternalSymbol.Commons.Tests.csproj" />
       <ProjectReference Include="..\ExternalSymbol.Tsv\ExternalSymbol.Tsv.csproj" />
     </ItemGroup>
 

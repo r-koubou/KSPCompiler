@@ -1,6 +1,5 @@
 using System.IO;
 
-using KSPCompiler.Domain;
 using KSPCompiler.Parser.Antlr.Tests.Commons;
 
 using NUnit.Framework;

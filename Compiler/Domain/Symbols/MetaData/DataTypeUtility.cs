@@ -205,6 +205,7 @@ public static class DataTypeUtility
         }
     }
 
+    #region Data type to string signature
     /// <summary>
     /// Convert to this compiler formated string from data type with separated '||' if multiple types.
     /// </summary>
@@ -266,4 +267,52 @@ public static class DataTypeUtility
 
         outputTextTo.Add( result );
     }
+
+    public static void ToDataTypeString( StringBuilder result, ArgumentSymbol x, string separator = "||" )
+    {
+        var appendSeparator = false;
+
+        if( x.DataType != DataTypeFlag.None )
+        {
+            appendSeparator = true;
+            result.Append( ToString( x.DataType ) );
+        }
+
+        if( x.UITypeNames.Any() )
+        {
+            if( appendSeparator )
+            {
+                result.Append( separator );
+            }
+
+            appendSeparator = x.UITypeNames.Any();
+            ToDataTypeString( result, x.UITypeNames );
+        }
+
+        if( x.OtherTypeNames.Any() )
+        {
+            if( appendSeparator )
+            {
+                result.Append( separator );
+            }
+
+            ToDataTypeString( result, x.OtherTypeNames );
+        }
+    }
+
+    private static void ToDataTypeString( StringBuilder result, IReadOnlyList<string> types, string separator = "||" )
+    {
+        var count = types.Count;
+
+        for( var k = 0; k < count; k++ )
+        {
+            result.Append( types[ k ] );
+
+            if( k != count - 1 )
+            {
+                result.Append( separator );
+            }
+        }
+    }
+    #endregion ~Data type to string signature
 }

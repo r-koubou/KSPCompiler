@@ -5,7 +5,6 @@ using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Interactors.Analysis.Extensions;
 using KSPCompiler.Resources;
-using KSPCompiler.Resources;
 using KSPCompiler.UseCases.Analysis.Evaluations.UserFunctions;
 
 namespace KSPCompiler.Interactors.Analysis.Semantics;
