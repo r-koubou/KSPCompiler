@@ -15,7 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ExternalSymbol.Commons\ExternalSymbol.Commons.csproj" />
+      <ProjectReference Include="..\ExternalSymbol.Commons.Tests\ExternalSymbol.Commons.Tests.csproj" />
       <ProjectReference Include="..\ExternalSymbol.Yaml\ExternalSymbol.Yaml.csproj" />
       <ProjectReference Include="..\Infrastructures.Commons\Infrastructures.Commons.csproj" />
     </ItemGroup>

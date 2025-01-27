@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 using KSPCompiler.Commons.Path;
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.ExternalSymbol.Commons;
+using KSPCompiler.ExternalSymbol.Commons.Tests;
 using KSPCompiler.ExternalSymbol.Yaml.Variables;
 using KSPCompiler.Gateways.Symbols;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
