@@ -1,11 +1,9 @@
-using System.Collections.Generic;
-
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
-namespace KSPCompiler.ExternalSymbol.Yaml.Commands.Models;
+namespace KSPCompiler.ExternalSymbol.Yaml.Variables.Models;
 
-public sealed class CommandSymbolModel
+public sealed class VariableSymbolModel
 {
     public string Name { get; set; } = string.Empty;
 
@@ -15,8 +13,4 @@ public sealed class CommandSymbolModel
     public string Description { get; set; } = string.Empty;
 
     public string BuiltIntoVersion { get; set; } = string.Empty;
-
-    public string ReturnType { get; set; } = string.Empty;
-
-    public List<CommandArgumentModel> Arguments { get; set; } = [];
 }

@@ -11,7 +11,7 @@ public class SymbolModelToSymbolTranslator
 {
     public CommandSymbol Translate( CommandSymbolModel source )
     {
-        var symbol = new CommandSymbol
+        var command = new CommandSymbol
         {
             Name             = source.Name,
             BuiltIn          = source.BuiltIn,
@@ -27,17 +27,17 @@ public class SymbolModelToSymbolTranslator
 
             DataTypeUtility.GuessFromTypeString( arg.DataType, out var dataType, ref uiType, ref otherType );
 
-            var argument = new CommandArgumentSymbol
+            var argument = new CommandArgumentSymbol( uiType, otherType )
             {
                 Name        = arg.Name,
                 DataType    = dataType,
                 BuiltIn     = false,
-                Description = arg.Description
+                Description = arg.Description,
             };
 
-            symbol.AddArgument( argument );
+            command.AddArgument( argument );
         }
 
-        return symbol;
+        return command;
     }
 }

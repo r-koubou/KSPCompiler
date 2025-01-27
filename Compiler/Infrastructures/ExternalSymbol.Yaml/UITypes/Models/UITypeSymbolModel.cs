@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
-namespace KSPCompiler.ExternalSymbol.Yaml.Commands.Models;
+namespace KSPCompiler.ExternalSymbol.Yaml.UITypes.Models;
 
-public sealed class CommandSymbolModel
+public sealed class UITypeSymbolModel
 {
     public string Name { get; set; } = string.Empty;
 
-    public bool BuiltIn { get; set; } = true;
+    public bool BuiltIn { get; set; }
+
+    public string VariableType { get; set; } = string.Empty;
 
     [YamlMember( ScalarStyle = ScalarStyle.Literal )]
     public string Description { get; set; } = string.Empty;
 
     public string BuiltIntoVersion { get; set; } = string.Empty;
 
-    public string ReturnType { get; set; } = string.Empty;
+    public bool RequireInitializer { get; set; }
 
-    public List<CommandArgumentModel> Arguments { get; set; } = [];
+    public List<UITypeSymbolArgumentModel> InitializerArguments { get; set; } = [];
 }

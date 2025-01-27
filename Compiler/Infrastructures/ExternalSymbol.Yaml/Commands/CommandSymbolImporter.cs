@@ -5,7 +5,7 @@ using KSPCompiler.ExternalSymbol.Yaml.Commands.Translators;
 
 namespace KSPCompiler.ExternalSymbol.Yaml.Commands;
 
-public class CallbackSymbolImporter( ITextContentReader writer ) :
+public class CommandSymbolImporter( ITextContentReader writer ) :
     SymbolImporter<
         CommandSymbol,
         CommandSymbolRootModel,
