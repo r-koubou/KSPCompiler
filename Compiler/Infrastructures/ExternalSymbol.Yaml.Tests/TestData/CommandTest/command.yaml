@@ -1,0 +1,24 @@
+FormatVersion: 1.0.0
+Data:
+  - Name: abs
+    BuiltIn: true
+    Description: |-
+      Absolute value
+    BuiltIntoVersion: N/A
+    ReturnType: I||S||R
+    Arguments:
+      - Name: x
+        DataType: I||R
+        Description: |-
+          arg 1 description
+  - Name: baba
+    BuiltIn: true
+    Description: |-
+      arccosine function
+    BuiltIntoVersion: N/A
+    ReturnType: V
+    Arguments:
+      - Name: x
+        DataType: ui_*
+        Description: |-
+          arg 1 description

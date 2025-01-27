@@ -14,4 +14,30 @@
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\ExternalSymbol.Commons\ExternalSymbol.Commons.csproj" />
+      <ProjectReference Include="..\ExternalSymbol.Yaml\ExternalSymbol.Yaml.csproj" />
+      <ProjectReference Include="..\Infrastructures.Commons\Infrastructures.Commons.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="TestData\CallbackTest\callback.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\CommandTest\command.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\UITypeTest\uitype.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\VariableTest\variable.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="TestData\UITypeTest\" />
+      <Folder Include="TestData\VariableTest\" />
+    </ItemGroup>
+
 </Project>

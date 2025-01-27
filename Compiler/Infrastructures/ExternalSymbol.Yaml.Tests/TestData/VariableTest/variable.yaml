@@ -1,0 +1,12 @@
+FormatVersion: 1.0.0
+Data:
+- Name: '!NI_DND_ITEMS_ARRAY'
+  BuiltIn: true
+  Description: |-
+    Built-in Variable: !NI_DND_ITEMS_ARRAY
+  BuiltIntoVersion: N/A
+- Name: '!NI_DND_ITEMS_AUDIO'
+  BuiltIn: true
+  Description: |-
+    Built-in Variable: !NI_DND_ITEMS_AUDIO
+  BuiltIntoVersion: N/A
