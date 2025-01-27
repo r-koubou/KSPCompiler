@@ -1,0 +1,24 @@
+FormatVersion: 1.0.0
+Data:
+  - Name: test
+    BuiltIn: true
+    AllowMultipleDeclaration: false
+    Description: |-
+      test description
+    BuiltIntoVersion: N/A
+    Arguments:
+      - Name: '*ui_widget_name'
+        RequiredDeclare: true
+        Description: |-
+          UI widget variable
+  - Name: baba
+    BuiltIn: true
+    AllowMultipleDeclaration: false
+    Description: |-
+      baba description
+    BuiltIntoVersion: N/A
+    Arguments:
+      - Name: '$number'
+        RequiredDeclare: true
+        Description: |-
+          number variable  

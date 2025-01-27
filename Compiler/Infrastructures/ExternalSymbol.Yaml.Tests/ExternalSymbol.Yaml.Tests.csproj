@@ -3,7 +3,7 @@
     <PropertyGroup>
         <LangVersion>default</LangVersion>
         <TargetFramework>net9.0</TargetFramework>
-        <RootNamespace>KSPCompiler.ExternalSymbol.Tsv.Tests</RootNamespace>
+        <RootNamespace>KSPCompiler.ExternalSymbol.Yaml.Tests</RootNamespace>
         <Nullable>enable</Nullable>
         <IsPackable>false</IsPackable>
     </PropertyGroup>
@@ -15,27 +15,29 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Domain.Tests\Domain.Tests.csproj" />
       <ProjectReference Include="..\ExternalSymbol.Commons.Tests\ExternalSymbol.Commons.Tests.csproj" />
-      <ProjectReference Include="..\ExternalSymbol.Tsv\ExternalSymbol.Tsv.csproj" />
+      <ProjectReference Include="..\ExternalSymbol.Yaml\ExternalSymbol.Yaml.csproj" />
+      <ProjectReference Include="..\Infrastructures.Commons\Infrastructures.Commons.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="TestData\Variables\VariableTable.txt">
+      <None Update="TestData\CallbackTest\callback.yaml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="TestData\VariableTableTsvLoaderTest\VariableTable.txt">
+      <None Update="TestData\CommandTest\command.yaml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="TestData\CommandTableTsvLoaderTest\CommandTable.txt">
+      <None Update="TestData\UITypeTest\uitype.yaml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="TestData\UiTypeTableTsvLoaderTest\UiTypeTable.txt">
+      <None Update="TestData\VariableTest\variable.yaml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="TestData\CallbackTableTsvLoaderTest\CallbackTable.txt">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="TestData\UITypeTest\" />
+      <Folder Include="TestData\VariableTest\" />
     </ItemGroup>
 
 </Project>

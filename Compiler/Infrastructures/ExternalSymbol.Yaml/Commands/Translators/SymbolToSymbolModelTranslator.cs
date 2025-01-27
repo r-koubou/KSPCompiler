@@ -1,11 +1,10 @@
-using System;
 using System.Text;
 
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Models;
+using KSPCompiler.ExternalSymbol.Yaml.Commands.Models;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Translators;
+namespace KSPCompiler.ExternalSymbol.Yaml.Commands.Translators;
 
 public class SymbolToSymbolModelTranslator
     : ISymbolToSymbolModelTranslator<CommandSymbol, CommandSymbolModel>
@@ -14,7 +13,6 @@ public class SymbolToSymbolModelTranslator
     {
         var model = new CommandSymbolModel
         {
-            Id               = Guid.NewGuid(),
             Name             = source.Name.Value,
             BuiltIn          = source.BuiltIn,
             ReturnType       = DataTypeUtility.ToString( source.DataType ),

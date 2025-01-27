@@ -5,35 +5,35 @@ using System.Threading.Tasks;
 using KSPCompiler.Commons.Path;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.ExternalSymbol.Commons.Tests;
-using KSPCompiler.ExternalSymbol.Tsv.Callbacks;
+using KSPCompiler.ExternalSymbol.Yaml.Callbacks;
 using KSPCompiler.Gateways.Symbols;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
 
 using NUnit.Framework;
 
-namespace KSPCompiler.ExternalSymbol.Tsv.Tests;
+namespace KSPCompiler.ExternalSymbol.Yaml.Tests;
 
 [TestFixture]
-public class CallbackTableTsvLoaderTest
+public class CallbackTest
 {
-    private static readonly string TestDataDirectory = Path.Combine( "TestData", "CallbackTableTsvLoaderTest" );
+    private static readonly string TestDataDirectory = Path.Combine( "TestData", "CallbackTest" );
 
     private static ISymbolImporter<CallbackSymbol> CreateLocalImporter( string path )
     {
         var reader = new LocalTextContentReader( new FilePath( path ) );
-        return new TsvCallbackSymbolImporter( reader );
+        return new CallbackSymbolImporter( reader );
     }
 
     private static ISymbolExporter<CallbackSymbol> CreateLocalExporter( string path )
     {
         var writer = new LocalTextContentWriter( new FilePath( path ) );
-        return new TsvCallbackSymbolExporter( writer );
+        return new CallbackSymbolExporter( writer );
     }
 
     [Test]
     public void TranslateSymbolTable()
     {
-        var path = Path.Combine( TestDataDirectory, "CallbackTable.txt" );
+        var path = Path.Combine( TestDataDirectory, "callback.yaml" );
         var importer = CreateLocalImporter( path );
         var symbolTable = importer.Import();
 
@@ -48,7 +48,7 @@ public class CallbackTableTsvLoaderTest
     [Test]
     public async Task TranslateSymbolTableAsync()
     {
-        var path = Path.Combine( TestDataDirectory, "CallbackTable.txt" );
+        var path = Path.Combine( TestDataDirectory, "callback.yaml" );
         var importer = CreateLocalImporter( path );
 
         await Task.Run( async () => {
@@ -60,7 +60,7 @@ public class CallbackTableTsvLoaderTest
     [Test]
     public void StoreTest()
     {
-        var path = Path.Combine( TestDataDirectory, "CallbackTable.tsv" );
+        var path = Path.Combine( TestDataDirectory, "callback_out.yaml" );
         var exporter = CreateLocalExporter( path );
         var symbols = MockSymbolTableUtility.CreateDummyCallbackSymbols();
 
@@ -70,7 +70,7 @@ public class CallbackTableTsvLoaderTest
     [Test]
     public async Task StoreAsyncTest()
     {
-        var path = Path.Combine( TestDataDirectory, "CallbackTable.tsv" );
+        var path = Path.Combine( TestDataDirectory, "callback_out.yaml" );
         var exporter = CreateLocalExporter( path );
         var symbolTable = MockSymbolTableUtility.CreateDummyCallbackSymbols();
 
