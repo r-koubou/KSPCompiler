@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Callback Editor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 40px;
+        }
+        .entry {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            width: 50%;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, textarea {
+            width: 80%;
+            padding: 5px;
+            margin-top: 5px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Callback Editor</h1>
+    <div id="editor"></div>
+    <button id="addEntry">Add New Entry</button>
+    <button id="exportYaml">Export YAML</button>
+    <textarea id="output" rows="10" placeholder="Exported YAML will appear here..."></textarea>
+
+    <script>
+        const yamlData = {
+            FormatVersion: "1.0.0",
+            Data: [
+            ]
+        };
+
+        const editor = document.getElementById('editor');
+
+        function renderEditor() {
+            editor.innerHTML = '';
+            yamlData.Data.forEach((entry, index) => {
+                const div = document.createElement('div');
+                div.className = 'entry';
+                div.innerHTML = `
+                    <label>Name:</label>
+                    <input type="text" value="${entry.Name}" onchange="updateEntry(${index}, 'Name', this.value)">
+
+                    <label>Description:</label>
+                    <textarea onchange="updateEntry(${index}, 'Description', this.value)">${entry.Description}</textarea>
+
+                    <label>BuiltIn:</label>
+                    <input type="checkbox" ${entry.BuiltIn ? 'checked' : ''} onchange="updateEntry(${index}, 'BuiltIn', this.checked)">
+
+                    <label>AllowMultipleDeclaration:</label>
+                    <input type="checkbox" ${entry.AllowMultipleDeclaration ? 'checked' : ''} onchange="updateEntry(${index}, 'AllowMultipleDeclaration', this.checked)">
+
+                    <label>Arguments:</label>
+                    <div id="arguments-${index}">
+                        ${entry.Arguments.map((arg, argIndex) => `
+                            <div>
+                                <label>Argument Name:</label>
+                                <input type="text" value="${arg.Name}" onchange="updateArgument(${index}, ${argIndex}, 'Name', this.value)">
+
+                                <label>Required:</label>
+                                <input type="checkbox" ${arg.RequiredDeclare ? 'checked' : ''} onchange="updateArgument(${index}, ${argIndex}, 'RequiredDeclare', this.checked)">
+
+                                <label>Argument Description:</label>
+                                <textarea onchange="updateArgument(${index}, ${argIndex}, 'Description', this.value)">${arg.Description}</textarea>
+                                <button onclick="deleteArgument(${index}, ${argIndex})">Delete Argument</button>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <button onclick="addArgument(${index})">Add Argument</button>
+
+                    <button onclick="deleteEntry(${index})">Delete Entry</button>
+                `;
+                editor.appendChild(div);
+            });
+        }
+
+        function updateEntry(index, key, value) {
+            yamlData.Data[index][key] = value;
+            renderEditor();
+        }
+
+        function updateArgument(entryIndex, argIndex, key, value) {
+            yamlData.Data[entryIndex].Arguments[argIndex][key] = value;
+            renderEditor();
+        }
+
+        function addArgument(entryIndex) {
+            yamlData.Data[entryIndex].Arguments.push({
+                Name: '',
+                RequiredDeclare: false,
+                Description: ''
+            });
+            renderEditor();
+        }
+
+        function deleteArgument(entryIndex, argIndex) {
+            yamlData.Data[entryIndex].Arguments.splice(argIndex, 1);
+            renderEditor();
+        }
+
+        function deleteEntry(index) {
+            yamlData.Data.splice(index, 1);
+            renderEditor();
+        }
+
+        document.getElementById('addEntry').addEventListener('click', () => {
+            yamlData.Data.push({
+                Name: '',
+                BuiltIn: true,
+                AllowMultipleDeclaration: false,
+                Description: '',
+                BuiltIntoVersion: "N/A",
+                Arguments: []
+            });
+            renderEditor();
+        });
+
+        document.getElementById('exportYaml').addEventListener('click', () => {
+            const yaml = generateYaml(yamlData);
+            document.getElementById('output').value = yaml;
+        });
+
+        function generateYaml(obj, indent = 0) {
+            const spaces = ' '.repeat(indent);
+            if (Array.isArray(obj)) {
+                return obj.map(item => `${spaces}- ${generateYaml(item, indent + 2).trimStart()}`).join('\n');
+            } else if (typeof obj === 'object' && obj !== null) {
+                return Object.entries(obj).map(([key, value]) => {
+                    if (key === 'Description' && typeof value === 'string' && value.includes('\n')) {
+                        return `${spaces}${key}: |-\n${value.split('\n').map(line => `${spaces}  ${line}`).join('\n')}`;
+                    }
+                    const formattedValue = generateYaml(value, indent + 2);
+                    return `${spaces}${key}: ${formattedValue.includes('\n') ? `\n${formattedValue}` : formattedValue}`;
+                }).join('\n');
+            } else {
+                return `${obj}`;
+            }
+        }
+
+        renderEditor();
+    </script>
+</body>
+</html>
