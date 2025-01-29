@@ -20,7 +20,7 @@ public class TsvCallbackSymbolExporter : ISymbolExporter<CallbackSymbol>
 
     public async Task ExportAsync( IEnumerable<CallbackSymbol> symbols, CancellationToken cancellationToken = default )
     {
-        var tsv = new ToTsvTranslator().Translate( symbols );
+        var tsv = new SymbolToTsvTranslator().Translate( symbols );
         await contentWriter.WriteContentAsync( tsv, cancellationToken );
     }
 

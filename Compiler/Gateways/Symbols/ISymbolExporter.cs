@@ -14,15 +14,21 @@ public interface ISymbolExporter<in TSymbol> where TSymbol : SymbolBase
     public static ISymbolExporter<TSymbol> Null { get; } = new NullSymbolExporter<TSymbol>();
 
     /// <summary>
-    /// Export symbol table to repository.
+    /// Export symbol table.
     /// </summary>
     void Export( IEnumerable<TSymbol> symbols )
         => ExportAsync( symbols ).GetAwaiter().GetResult();
 
     /// <summary>
-    /// Export symbol table to repository.
+    /// Export symbol table.
     /// </summary>
     Task ExportAsync( IEnumerable<TSymbol> store, CancellationToken cancellationToken = default );
+
+    /// <summary>
+    /// Export symbol table template.
+    /// </summary>
+    Task ExportTemplateAsync( CancellationToken cancellationToken = default )
+        => Task.CompletedTask;
 }
 
 /// <summary>
@@ -32,5 +38,8 @@ public interface ISymbolExporter<in TSymbol> where TSymbol : SymbolBase
 internal sealed class NullSymbolExporter<TSymbol> : ISymbolExporter<TSymbol> where TSymbol : SymbolBase
 {
     public async Task ExportAsync( IEnumerable<TSymbol> store, CancellationToken cancellationToken = default )
+        => await Task.CompletedTask;
+
+    public async Task ExportTemplateAsync( CancellationToken cancellationToken = default )
         => await Task.CompletedTask;
 }
