@@ -61,22 +61,10 @@ internal class SymbolToTsvTranslator : IDataTranslator<IEnumerable<CallbackSymbo
         csvWriter.Context.RegisterClassMap<CallbackModelClassMap>();
 
         // Header
-        csvWriter.WriteField( nameof( CallbackModel.Name ) );
-        csvWriter.WriteField( nameof( CallbackModel.BuiltIn ) );
-        csvWriter.WriteField( nameof( CallbackModel.AllowMultipleDeclaration ) );
-        csvWriter.WriteField( nameof( CallbackModel.BuiltIntoVersion ) );
-        csvWriter.WriteField( nameof( CallbackModel.Description ) );
-
-        // Header(Arguments)
-        for( var i = 1; i <= maxArgumentCount; i++ )
-        {
-            csvWriter.WriteField( $"Argument Name{i}" );
-            csvWriter.WriteField( $"{nameof( CallbackArgumentModel.RequiredDeclareOnInit )}{i}" );
-            csvWriter.WriteField( $"{nameof( CallbackArgumentModel.Description )}{i}" );
-        }
-
+        TsvHeaderUtil.WriteHeader( csvWriter, maxArgumentCount: maxArgumentCount );
         csvWriter.NextRecord();
 
+        // Body
         csvWriter.WriteRecords( models );
         csvWriter.Flush();
 
