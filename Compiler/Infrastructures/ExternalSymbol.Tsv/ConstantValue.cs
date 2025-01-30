@@ -7,7 +7,8 @@ namespace KSPCompiler.ExternalSymbol.Tsv;
 public static class ConstantValue
 {
     public const string DefaultBuiltIntoVersion = "N/A";
-    public const string ArgumentStartName = "Argument Name1";
+    public const string ArgumentStartNamePrefix = "Argument Name";
+    public const string ArgumentStartName = $"{ArgumentStartNamePrefix}1";
 
     public static readonly CsvConfiguration ReaderConfiguration = new( CultureInfo.InvariantCulture )
     {
