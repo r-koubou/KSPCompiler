@@ -10,10 +10,7 @@ public sealed class CommandSymbol : SymbolBase, ISymbolDataTypeProvider
     public override SymbolType Type
         => SymbolType.Command;
 
-    private readonly List<CommandArgumentSymbol> arguments = new ();
-
-    public IReadOnlyCollection<CommandArgumentSymbol> Arguments
-        => arguments;
+    public CommandArgumentSymbolList Arguments { get; } = new ();
 
     /// <summary>
     /// Represents the return type of the command.
@@ -27,15 +24,15 @@ public sealed class CommandSymbol : SymbolBase, ISymbolDataTypeProvider
 
     public CommandSymbol( IEnumerable<CommandArgumentSymbol> args )
     {
-        arguments.AddRange( args );
+        Arguments.AddRange( args );
     }
 
     public void AddArgument( CommandArgumentSymbol arg )
     {
-        if( arguments.Contains( arg ))
+        if( Arguments.Contains( arg ))
         {
             throw new InvalidOperationException( $"Argument {arg.Name} already exists in command {Name}" );
         }
-        arguments.Add( arg );
+        Arguments.Add( arg );
     }
 }
