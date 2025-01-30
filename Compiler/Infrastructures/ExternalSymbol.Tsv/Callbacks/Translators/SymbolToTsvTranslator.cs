@@ -61,8 +61,7 @@ internal class SymbolToTsvTranslator : IDataTranslator<IEnumerable<CallbackSymbo
         csvWriter.Context.RegisterClassMap<CallbackModelClassMap>();
 
         // Header
-        TsvHeaderUtil.WriteHeader( csvWriter, maxArgumentCount: maxArgumentCount );
-        csvWriter.NextRecord();
+        ColumnHeaderUtil.WriteHeader( csvWriter, maxArgumentCount: maxArgumentCount );
 
         // Body
         csvWriter.WriteRecords( models );

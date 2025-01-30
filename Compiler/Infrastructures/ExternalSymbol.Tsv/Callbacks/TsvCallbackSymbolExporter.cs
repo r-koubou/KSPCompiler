@@ -7,6 +7,7 @@ using CsvHelper;
 
 using KSPCompiler.Commons.Contents;
 using KSPCompiler.Domain.Symbols;
+using KSPCompiler.ExternalSymbol.Tsv.Callbacks.Models.CsvHelperMappings;
 using KSPCompiler.ExternalSymbol.Tsv.Callbacks.Translators;
 using KSPCompiler.Gateways.Symbols;
 
@@ -32,7 +33,7 @@ public class TsvCallbackSymbolExporter : ISymbolExporter<CallbackSymbol>
         await using var writer = new StringWriter();
         await using var csvWriter = new CsvWriter( writer, ConstantValue.WriterConfiguration );
 
-        TsvHeaderUtil.WriteHeader( csvWriter );
+        ColumnHeaderUtil.WriteHeader( csvWriter );
         await csvWriter.FlushAsync();
 
         await contentWriter.WriteContentAsync( writer.ToString(), cancellationToken );
