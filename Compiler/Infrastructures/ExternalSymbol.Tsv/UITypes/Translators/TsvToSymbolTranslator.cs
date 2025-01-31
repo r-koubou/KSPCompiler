@@ -30,9 +30,9 @@ public class TsvToSymbolTranslator : IDataTranslator<string, IReadOnlyCollection
             {
                 Name             = record.Name,
                 BuiltIn          = record.BuiltIn,
-                DataType         = DataTypeUtility.GuessFromTypeString( record.DataType ),
                 Description      = record.Description,
                 BuiltIntoVersion = record.BuiltIntoVersion,
+                DataType         = DataTypeUtility.GuessFromTypeString( record.DataType )
             };
 
             foreach( var argument in record.Arguments )
