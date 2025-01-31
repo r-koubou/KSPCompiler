@@ -31,11 +31,10 @@ public sealed class UITypeArgumentConverter : DefaultTypeConverter
             return values;
         }
 
-        for( var i = startIndex; i < row.Parser.Count; i += 3 )
+        for( var i = startIndex; i < row.Parser.Count; i += 2 )
         {
             var name = row.GetField( i + 0 );
-            var dataType = row.GetField( i + 1 ) ?? string.Empty;
-            var description = row.GetField( i + 2 ) ?? string.Empty;
+            var description = row.GetField( i + 1 ) ?? string.Empty;
 
             if( string.IsNullOrEmpty( name ) )
             {

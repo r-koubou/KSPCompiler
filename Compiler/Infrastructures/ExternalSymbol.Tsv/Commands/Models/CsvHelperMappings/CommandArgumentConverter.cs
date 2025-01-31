@@ -54,7 +54,7 @@ public sealed class CommandArgumentConverter : DefaultTypeConverter
         return values;
     }
 
-    public override string? ConvertToString( object? value, IWriterRow row, MemberMapData memberMapData )
+    public override string ConvertToString( object? value, IWriterRow row, MemberMapData memberMapData )
     {
         var arguments = (List<CommandArgumentModel>)value!;
 
