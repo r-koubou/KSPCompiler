@@ -1,2 +1,2 @@
-# Name	Reserved	Type	Description	built-into-versionRequire	Initializer	[Initializer Argument, Description, ...]
+Name	BuiltIn	DataType	Description	BuiltIntoVersion	InitializerRequired	Argument Name1	Description1
 ui_button	true	I	Button	N/A	false	$width	Button width

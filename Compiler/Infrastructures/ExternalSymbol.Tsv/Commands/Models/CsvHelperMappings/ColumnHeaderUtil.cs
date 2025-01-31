@@ -1,7 +1,5 @@
 using CsvHelper;
 
-using KSPCompiler.ExternalSymbol.Tsv.Callbacks.Models;
-
 namespace KSPCompiler.ExternalSymbol.Tsv.Commands.Models.CsvHelperMappings;
 
 public static class ColumnHeaderUtil
@@ -20,7 +18,7 @@ public static class ColumnHeaderUtil
         {
             csvWriter.WriteField( $"{ConstantValue.ArgumentStartNamePrefix}{i}" );
             csvWriter.WriteField( $"{nameof( CommandArgumentModel.DataType )}{i}" );
-            csvWriter.WriteField( $"{nameof( CallbackArgumentModel.Description )}{i}" );
+            csvWriter.WriteField( $"{nameof( CommandArgumentModel.Description )}{i}" );
         }
 
         csvWriter.NextRecord();

@@ -1,7 +1,9 @@
+using System;
 using System.Text;
 
 namespace KSPCompiler.ExternalSymbol.Tsv.Extensions;
 
+[Obsolete]
 internal static class StringBuilderExtension
 {
     private const string Tab = "\t";
