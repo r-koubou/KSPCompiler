@@ -1,2 +1,2 @@
-# name	reserved	description	built-into-version
-name	true	Built-in Variable: name	N/A
+Name	BuiltIn	Description	BuiltIntoVersion
+$hoge	true	hoge	N/A

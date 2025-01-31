@@ -97,6 +97,18 @@ public class SymbolLocalDatabaseControllerTest
         Assert.That( result.FoundSymbols, Is.Not.Empty );
     }
 
+    [Test]
+    public async Task ExportVariablesTemplateTest()
+    {
+        var exportPath = new FilePath( Path.Combine( ExportTestDataDirectory, "variable_template.tsv" ) );
+
+        ITextContentWriter writer = new LocalTextContentWriter( exportPath );
+        ISymbolExporter<VariableSymbol> exporter = new TsvVariableSymbolExporter( writer );
+        var controller = new SymbolTemplateController<VariableSymbol>();
+        var result = await controller.ExportAsync( exporter );
+
+        Assert.That( result.Success, Is.True );
+    }
     #endregion
 
     #region Command
@@ -161,6 +173,18 @@ public class SymbolLocalDatabaseControllerTest
         Assert.That( result.FoundSymbols, Is.Not.Empty );
     }
 
+    [Test]
+    public async Task ExportCommandsTemplateTest()
+    {
+        var exportPath = new FilePath( Path.Combine( ExportTestDataDirectory, "command_template.tsv" ) );
+
+        ITextContentWriter writer = new LocalTextContentWriter( exportPath );
+        ISymbolExporter<CommandSymbol> exporter = new TsvCommandSymbolExporter( writer );
+        var controller = new SymbolTemplateController<CommandSymbol>();
+        var result = await controller.ExportAsync( exporter );
+
+        Assert.That( result.Success, Is.True );
+    }
     #endregion
 
     #region Callback
@@ -225,6 +249,18 @@ public class SymbolLocalDatabaseControllerTest
         Assert.That( result.FoundSymbols, Is.Not.Empty );
     }
 
+    [Test]
+    public async Task ExportCallbacksTemplateTest()
+    {
+        var exportPath = new FilePath( Path.Combine( ExportTestDataDirectory, "callback_template.tsv" ) );
+
+        ITextContentWriter writer = new LocalTextContentWriter( exportPath );
+        ISymbolExporter<CallbackSymbol> exporter = new TsvCallbackSymbolExporter( writer );
+        var controller = new SymbolTemplateController<CallbackSymbol>();
+        var result = await controller.ExportAsync( exporter );
+
+        Assert.That( result.Success, Is.True );
+    }
     #endregion
 
     #region UIType
@@ -289,5 +325,17 @@ public class SymbolLocalDatabaseControllerTest
         Assert.That( result.FoundSymbols, Is.Not.Empty );
     }
 
+    [Test]
+    public async Task ExportUITypesTemplateTest()
+    {
+        var exportPath = new FilePath( Path.Combine( ExportTestDataDirectory, "ui_type_template.tsv" ) );
+
+        ITextContentWriter writer = new LocalTextContentWriter( exportPath );
+        ISymbolExporter<UITypeSymbol> exporter = new TsvUITypeSymbolExporter( writer );
+        var controller = new SymbolTemplateController<UITypeSymbol>();
+        var result = await controller.ExportAsync( exporter );
+
+        Assert.That( result.Success, Is.True );
+    }
     #endregion
 }
