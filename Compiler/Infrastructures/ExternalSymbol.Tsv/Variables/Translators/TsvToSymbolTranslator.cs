@@ -6,8 +6,8 @@ using CsvHelper;
 using KSPCompiler.Commons;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
-using KSPCompiler.ExternalSymbol.Tsv.UITypes.Models.CsvHelperMappings;
 using KSPCompiler.ExternalSymbol.Tsv.Variables.Models;
+using KSPCompiler.ExternalSymbol.Tsv.Variables.Models.CsvHelperMappings;
 
 namespace KSPCompiler.ExternalSymbol.Tsv.Variables.Translators;
 
@@ -20,7 +20,7 @@ public class TsvToSymbolTranslator : IDataTranslator<string, IReadOnlyCollection
         using var reader = new StringReader( source );
         using var csvReader = new CsvReader( reader, ConstantValue.ReaderConfiguration );
 
-        csvReader.Context.RegisterClassMap<UITypeModelClassMap>();
+        csvReader.Context.RegisterClassMap<VariableModelClassMap>();
 
         var records = csvReader.GetRecords<VariableModel>();
 
