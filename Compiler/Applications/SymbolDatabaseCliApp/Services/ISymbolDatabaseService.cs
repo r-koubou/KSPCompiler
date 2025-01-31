@@ -8,7 +8,7 @@ namespace KSPCompiler.Apps.SymbolDbManager.Services;
 
 // ReSharper disable LocalizableElement
 
-public partial interface ISymbolDatabaseService
+public interface ISymbolDatabaseService
 {
     public Task<ImportResult> ImportSymbolsAsync( string databaseFilePath, string importFilePath, CancellationToken cancellationToken = default );
     public Task<ExportResult> ExportSymbolsAsync( string databaseFilePath, string exportFilePath, string exportPattern, CancellationToken cancellationToken = default );
@@ -22,8 +22,3 @@ public partial interface ISymbolDatabaseService
         );
     }
 }
-
-public interface IVariableSymbolDatabaseService : ISymbolDatabaseService {}
-public interface ICommandSymbolDatabaseService : ISymbolDatabaseService {}
-public interface ICallbackSymbolDatabaseService : ISymbolDatabaseService {}
-public interface IUITypeSymbolDatabaseService : ISymbolDatabaseService {}
