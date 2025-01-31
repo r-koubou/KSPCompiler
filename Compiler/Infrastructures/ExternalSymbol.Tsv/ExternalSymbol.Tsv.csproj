@@ -18,4 +18,8 @@
       <ProjectReference Include="..\Infrastructures.Commons\Infrastructures.Commons.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="CsvHelper" Version="33.0.1" />
+    </ItemGroup>
+
 </Project>

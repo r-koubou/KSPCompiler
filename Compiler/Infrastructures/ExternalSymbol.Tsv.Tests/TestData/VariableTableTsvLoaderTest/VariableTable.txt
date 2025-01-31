@@ -1,2 +1,2 @@
-# name, reserved, description, built-into-version
+Name	BuiltIn	Description	BuiltIntoVersion
 $hoge	true	hoge	N/A

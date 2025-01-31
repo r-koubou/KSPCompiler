@@ -48,10 +48,7 @@ public sealed class UITypeSymbol : SymbolBase, ISymbolDataTypeProvider
     public override SymbolType Type
         => SymbolType.UI;
 
-    private readonly List<UIInitializerArgumentSymbol> initializerArguments = new ();
-
-    public IReadOnlyList<UIInitializerArgumentSymbol> InitializerArguments
-        => initializerArguments;
+    public UIInitializerArgumentSymbolList InitializerArguments { get; } = [];
 
     /// <summary>
     /// True if the UI type requires an initializer.
@@ -64,7 +61,7 @@ public sealed class UITypeSymbol : SymbolBase, ISymbolDataTypeProvider
     public UITypeSymbol( bool initializerRequired, IEnumerable<UIInitializerArgumentSymbol> initializerArguments )
     {
         InitializerRequired = initializerRequired;
-        this.initializerArguments.AddRange( initializerArguments );
+        this.InitializerArguments.AddRange( initializerArguments );
         Modifier = ModifierFlag.UI;
     }
 
@@ -75,11 +72,11 @@ public sealed class UITypeSymbol : SymbolBase, ISymbolDataTypeProvider
 
     public void AddInitializerArgument( UIInitializerArgumentSymbol arg )
     {
-        if( initializerArguments.Contains( arg ))
+        if( InitializerArguments.Contains( arg ))
         {
             throw new InvalidOperationException( $"Initializer argument {arg.Name} already exists in {Name}" );
         }
-        initializerArguments.Add( arg );
+        InitializerArguments.Add( arg );
     }
 
     // TODO Implementation
