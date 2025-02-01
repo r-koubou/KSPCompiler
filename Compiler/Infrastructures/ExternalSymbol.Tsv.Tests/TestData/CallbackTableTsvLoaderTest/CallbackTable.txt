@@ -1,3 +1,3 @@
-# name	reserved	allow duplicate	description	built-into-version	[argument1	require declare in on_init	...]
-init	true	false	initialization point	N/A
-ui_control	true	true	ui event handling	N/A	$button	true	ui variable
+Name	BuiltIn	AllowMultipleDeclaration	BuiltIntoVersion	Description	Argument Name1	RequiredDeclareOnInit1	Description1
+init	True	False	N/A	initialization point
+ui_control	True	True	N/A	ui event handling	$button	True	ui variable

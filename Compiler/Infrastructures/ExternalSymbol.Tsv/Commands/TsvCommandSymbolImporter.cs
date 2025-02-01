@@ -22,6 +22,6 @@ public class TsvCommandSymbolImporter : ISymbolImporter<CommandSymbol>
     {
         var tsv = await contentReader.ReadContentAsync( cancellationToken );
 
-        return new FromTsvTranslator().Translate( tsv );
+        return new TsvToSymbolTranslator().Translate( tsv );
     }
 }

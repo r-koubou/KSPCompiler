@@ -33,7 +33,7 @@ public static class MockSymbolTableUtility
             DataType    = DataTypeFlag.TypeVoid
         };
 
-        var ui = new string[] { "ui_*" };
+        var ui = new [] { "ui_*" };
 
         example.AddArgument( new CommandArgumentSymbol( ui )
             {

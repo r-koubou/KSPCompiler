@@ -1,2 +1,2 @@
-# Name	Reserved	Type	Description	built-into-version	Require Initializer	Arg1	Arg1 Description
-ui_button	true	I	Creates a button in the performance view.	N/A	false
+Name	BuiltIn	DataType	Description	BuiltIntoVersion	InitializerRequired	Argument Name1	Description1
+ui_button	true	I	Button	N/A	false	$width	Button width
