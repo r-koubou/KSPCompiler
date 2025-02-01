@@ -163,16 +163,16 @@ public sealed class CompilationService
     {
         var basePath = Path.Combine( "Data", "Symbols" );
 
-        using ISymbolRepository<VariableSymbol> variables = new VariableSymbolRepository( Path.Combine( basePath, "variables.json" ) );
+        using ISymbolRepository<VariableSymbol> variables = new VariableSymbolRepository( Path.Combine( basePath, "variables.yaml" ) );
         symbolTable.BuiltInVariables.AddRange( variables.FindAll() );
 
-        using ISymbolRepository<UITypeSymbol> uiTypes = new UITypeSymbolRepository( Path.Combine( basePath, "uitypes.json" ) );
+        using ISymbolRepository<UITypeSymbol> uiTypes = new UITypeSymbolRepository( Path.Combine( basePath, "uitypes.yaml" ) );
         symbolTable.UITypes.AddRange( uiTypes.FindAll() );
 
-        using ISymbolRepository<CommandSymbol> commands = new CommandSymbolRepository( Path.Combine( basePath, "commands.json" ) );
+        using ISymbolRepository<CommandSymbol> commands = new CommandSymbolRepository( Path.Combine( basePath, "commands.yaml" ) );
         symbolTable.Commands.AddRange( commands.FindAll() );
 
-        using ISymbolRepository<CallbackSymbol> callbacks = new CallbackSymbolRepository( Path.Combine( basePath, "callbacks.json" ) );
+        using ISymbolRepository<CallbackSymbol> callbacks = new CallbackSymbolRepository( Path.Combine( basePath, "callbacks.yaml" ) );
         var foundCallbacks = callbacks.FindAll();
 
         foreach( var x in foundCallbacks )
