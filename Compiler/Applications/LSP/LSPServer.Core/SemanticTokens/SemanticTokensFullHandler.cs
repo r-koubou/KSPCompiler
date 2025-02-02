@@ -5,14 +5,14 @@ using OmniSharp.Extensions.LanguageServer.Protocol.Client.Capabilities;
 using OmniSharp.Extensions.LanguageServer.Protocol.Document;
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
-namespace KSPCompiler.LSPServer.Core.SemanticTokensRanges;
+namespace KSPCompiler.LSPServer.Core.SemanticTokens;
 
-public class SemanticTokensRangeHandler( SemanticTokensRangeService semanticTokensRangeService ) : ISemanticTokensRangeHandler
+public class SemanticTokensFullHandler( SemanticTokensFullService semanticTokensFullService ) : ISemanticTokensFullHandler
 {
-    private SemanticTokensRangeService SemanticTokensRangeService { get; } = semanticTokensRangeService;
+    private SemanticTokensFullService SemanticTokensFullService { get; } = semanticTokensFullService;
 
-    public async Task<SemanticTokens?> Handle( SemanticTokensRangeParams request, CancellationToken cancellationToken )
-        => await SemanticTokensRangeService.HandleAsync( request, cancellationToken );
+    public async Task<OmniSharp.Extensions.LanguageServer.Protocol.Models.SemanticTokens?> Handle( SemanticTokensParams request, CancellationToken cancellationToken )
+        => await SemanticTokensFullService.HandleAsync( request, cancellationToken );
 
     public SemanticTokensRegistrationOptions GetRegistrationOptions( SemanticTokensCapability capability, ClientCapabilities clientCapabilities )
         => new()
@@ -26,8 +26,8 @@ public class SemanticTokensRangeHandler( SemanticTokensRangeService semanticToke
             },
             Legend = new()
             {
-                TokenTypes     = SemanticTokensRangeService.LegendTokenTypes,
-                TokenModifiers = SemanticTokensRangeService.LegendTokenModifiers
+                TokenTypes     = SemanticTokensFullService.LegendTokenTypes,
+                TokenModifiers = SemanticTokensFullService.LegendTokenModifiers
             }
         };
 }

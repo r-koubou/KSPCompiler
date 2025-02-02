@@ -8,7 +8,7 @@ using KSPCompiler.Domain.Symbols;
 
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
-namespace KSPCompiler.LSPServer.Core.SemanticTokensRanges;
+namespace KSPCompiler.LSPServer.Core.SemanticTokens.Full;
 
 public class AstSemanticTokenFinder(
     AggregateSymbolTable symbolTable,

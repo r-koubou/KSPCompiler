@@ -6,12 +6,15 @@ using KSPCompiler.LSPServer.Core.Compilations;
 
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
-namespace KSPCompiler.LSPServer.Core.SemanticTokensRanges;
+namespace KSPCompiler.LSPServer.Core.SemanticTokens;
 
-public sealed class SemanticTokensRangeService( CompilerCacheService compilerCacheService )
+public sealed class SemanticTokensFullService( CompilerCacheService compilerCacheService )
 {
     public static readonly ImmutableArray<SemanticTokenType> LegendTokenTypes = ImmutableArray.Create(
         SemanticTokenType.Function,
+        SemanticTokenType.Method,
+        SemanticTokenType.Event,
+        SemanticTokenType.Keyword,
         SemanticTokenType.String,
         SemanticTokenType.Variable
     );
@@ -24,7 +27,7 @@ public sealed class SemanticTokensRangeService( CompilerCacheService compilerCac
 
     private CompilerCacheService CompilerCacheService { get; } = compilerCacheService;
 
-    public async Task<SemanticTokens?> HandleAsync( SemanticTokensRangeParams request, CancellationToken cancellationToken )
+    public async Task<OmniSharp.Extensions.LanguageServer.Protocol.Models.SemanticTokens?> HandleAsync( SemanticTokensParams request, CancellationToken cancellationToken )
     {
         var cache = CompilerCacheService.GetCache( request.TextDocument.Uri );
         var finder = new AstSemanticTokenFinder(
@@ -35,7 +38,7 @@ public sealed class SemanticTokensRangeService( CompilerCacheService compilerCac
 
         await Task.CompletedTask;
 
-        return new SemanticTokens
+        return new OmniSharp.Extensions.LanguageServer.Protocol.Models.SemanticTokens
         {
             Data = finder.Find( cache.Ast )
         };
