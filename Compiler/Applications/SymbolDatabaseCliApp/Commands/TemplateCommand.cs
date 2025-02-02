@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ConsoleAppFramework;
 
 using KSPCompiler.Apps.SymbolDbManager.Services;
+using KSPCompiler.Domain.Symbols;
 using KSPCompiler.SymbolDatabaseControllers;
 
 namespace KSPCompiler.Apps.SymbolDbManager.Commands;
@@ -32,7 +33,7 @@ public class TemplateCommand
     /// <param name="exportFilePath">-e, Export file path.</param>
     /// <param name="cancellationToken"></param>
     [Command( "generate-template-variables" )]
-    public async Task ExportVariablesTemplateAsync( [FromServices] ISymbolTemplateService service, string exportFilePath, CancellationToken cancellationToken = default )
+    public async Task ExportVariablesTemplateAsync( [FromServices] SymbolTemplateService<VariableSymbol> service, string exportFilePath, CancellationToken cancellationToken = default )
     {
         var result = await service.ExportSymbolTemplateAsync( exportFilePath, cancellationToken );
         HandleExportResult( result );
@@ -45,7 +46,7 @@ public class TemplateCommand
     /// <param name="exportFilePath">-e, Export file path.</param>
     /// <param name="cancellationToken"></param>
     [Command( "generate-template-commands" )]
-    public async Task ExportCommandsTemplateAsync( [FromServices] ISymbolTemplateService service, string exportFilePath, CancellationToken cancellationToken = default )
+    public async Task ExportCommandsTemplateAsync( [FromServices] SymbolTemplateService<CommandSymbol> service, string exportFilePath, CancellationToken cancellationToken = default )
     {
         var result = await service.ExportSymbolTemplateAsync( exportFilePath, cancellationToken );
         HandleExportResult( result );
@@ -58,7 +59,7 @@ public class TemplateCommand
     /// <param name="exportFilePath">-e, Export file path.</param>
     /// <param name="cancellationToken"></param>
     [Command( "generate-template-callbacks" )]
-    public async Task ExportCallbacksTemplateAsync( [FromServices] ISymbolTemplateService service, string exportFilePath, CancellationToken cancellationToken = default )
+    public async Task ExportCallbacksTemplateAsync( [FromServices] SymbolTemplateService<CallbackSymbol> service, string exportFilePath, CancellationToken cancellationToken = default )
     {
         var result = await service.ExportSymbolTemplateAsync( exportFilePath, cancellationToken );
         HandleExportResult( result );
@@ -71,7 +72,7 @@ public class TemplateCommand
     /// <param name="exportFilePath">-e, Export file path.</param>
     /// <param name="cancellationToken"></param>
     [Command( "generate-template-ui-types" )]
-    public async Task ExportUITypesTemplateAsync( [FromServices] ISymbolTemplateService service, string exportFilePath, CancellationToken cancellationToken = default )
+    public async Task ExportUITypesTemplateAsync( [FromServices] SymbolTemplateService<UITypeSymbol> service, string exportFilePath, CancellationToken cancellationToken = default )
     {
         var result = await service.ExportSymbolTemplateAsync( exportFilePath, cancellationToken );
         HandleExportResult( result );

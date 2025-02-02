@@ -2,19 +2,20 @@ using ConsoleAppFramework;
 
 using KSPCompiler.Apps.SymbolDbManager.Commands;
 using KSPCompiler.Apps.SymbolDbManager.Services;
+using KSPCompiler.Domain.Symbols;
 
 using Microsoft.Extensions.DependencyInjection;
 
 var serviceCollection = new ServiceCollection();
-serviceCollection.AddSingleton<ISymbolDatabaseService, VariableSymbolDatabaseService>();
-serviceCollection.AddSingleton<ISymbolDatabaseService, CommandSymbolDatabaseService>();
-serviceCollection.AddSingleton<ISymbolDatabaseService, CallbackSymbolDatabaseService>();
-serviceCollection.AddSingleton<ISymbolDatabaseService, UITypeSymbolDatabaseService>();
+serviceCollection.AddSingleton<IVariableSymbolDatabaseService, VariableSymbolDatabaseService>();
+serviceCollection.AddSingleton<ICommandSymbolDatabaseService, CommandSymbolDatabaseService>();
+serviceCollection.AddSingleton<ICallbackSymbolDatabaseService, CallbackSymbolDatabaseService>();
+serviceCollection.AddSingleton<IUITypeSymbolDatabaseService, UITypeSymbolDatabaseService>();
 
-serviceCollection.AddSingleton<ISymbolTemplateService, VariableSymbolTemplateService>();
-serviceCollection.AddSingleton<ISymbolTemplateService, CommandSymbolTemplateService>();
-serviceCollection.AddSingleton<ISymbolTemplateService, CallbackSymbolTemplateService>();
-serviceCollection.AddSingleton<ISymbolTemplateService, UITypeSymbolTemplateService>();
+serviceCollection.AddSingleton<SymbolTemplateService<VariableSymbol>, VariableSymbolTemplateService>();
+serviceCollection.AddSingleton<SymbolTemplateService<CommandSymbol>, CommandSymbolTemplateService>();
+serviceCollection.AddSingleton<SymbolTemplateService<CallbackSymbol>, CallbackSymbolTemplateService>();
+serviceCollection.AddSingleton<SymbolTemplateService<UITypeSymbol>, UITypeSymbolTemplateService>();
 
 await using var serviceProvider = serviceCollection.BuildServiceProvider();
 

@@ -15,7 +15,7 @@ namespace KSPCompiler.Apps.SymbolDbManager.Services;
 
 // ReSharper disable LocalizableElement
 
-public class CommandSymbolDatabaseService : ISymbolDatabaseService
+public class CommandSymbolDatabaseService : ICommandSymbolDatabaseService
 {
     public async Task<ImportResult> ImportSymbolsAsync( string databaseFilePath, string importFilePath, CancellationToken cancellationToken = default )
     {
