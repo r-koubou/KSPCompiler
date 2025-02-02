@@ -34,7 +34,7 @@ public class ExportCommand
     /// <param name="exportPattern">-p, Export symbol name pattern. Wildcard is supported.</param>
     /// <param name="cancellationToken"></param>
     [Command( "export-variables" )]
-    public async Task ExportVariablesAsync( [FromServices] ISymbolDatabaseService service, string databaseFilePath, string exportFilePath, string exportPattern = "*", CancellationToken cancellationToken = default )
+    public async Task ExportVariablesAsync( [FromServices] IVariableSymbolDatabaseService service, string databaseFilePath, string exportFilePath, string exportPattern = "*", CancellationToken cancellationToken = default )
     {
         var result = await service.ExportSymbolsAsync( databaseFilePath, exportFilePath, exportPattern, cancellationToken );
         HandleExportResult( result );
@@ -49,7 +49,7 @@ public class ExportCommand
     /// <param name="exportPattern">-p, Export symbol name pattern. Wildcard is supported.</param>
     /// <param name="cancellationToken"></param>
     [Command( "export-commands" )]
-    public async Task ExportCommandsAsync( [FromServices] ISymbolDatabaseService service, string databaseFilePath, string exportFilePath, string exportPattern = "*", CancellationToken cancellationToken = default )
+    public async Task ExportCommandsAsync( [FromServices] ICommandSymbolDatabaseService service, string databaseFilePath, string exportFilePath, string exportPattern = "*", CancellationToken cancellationToken = default )
     {
         var result = await service.ExportSymbolsAsync( databaseFilePath, exportFilePath, exportPattern, cancellationToken );
         HandleExportResult( result );
@@ -64,7 +64,7 @@ public class ExportCommand
     /// <param name="exportPattern">-p, Export symbol name pattern. Wildcard is supported.</param>
     /// <param name="cancellationToken"></param>
     [Command( "export-callbacks" )]
-    public async Task ExportCallbacksAsync( [FromServices] ISymbolDatabaseService service, string databaseFilePath, string exportFilePath, string exportPattern = "*", CancellationToken cancellationToken = default )
+    public async Task ExportCallbacksAsync( [FromServices] ICallbackSymbolDatabaseService service, string databaseFilePath, string exportFilePath, string exportPattern = "*", CancellationToken cancellationToken = default )
     {
         var result = await service.ExportSymbolsAsync( databaseFilePath, exportFilePath, exportPattern, cancellationToken );
         HandleExportResult( result );
@@ -79,7 +79,7 @@ public class ExportCommand
     /// <param name="exportPattern">-p, Export symbol name pattern. Wildcard is supported.</param>
     /// <param name="cancellationToken"></param>
     [Command( "export-ui-types" )]
-    public async Task ExportUITypeAsync( [FromServices] ISymbolDatabaseService service, string databaseFilePath, string exportFilePath, string exportPattern = "*", CancellationToken cancellationToken = default )
+    public async Task ExportUITypeAsync( [FromServices] IUITypeSymbolDatabaseService service, string databaseFilePath, string exportFilePath, string exportPattern = "*", CancellationToken cancellationToken = default )
     {
         var result = await service.ExportSymbolsAsync( databaseFilePath, exportFilePath, exportPattern, cancellationToken );
         HandleExportResult( result );

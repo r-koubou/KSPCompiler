@@ -42,7 +42,7 @@ public abstract class SymbolRepository<TSymbol, TRootModel, TModel> : ISymbolRep
         FilePath repositoryPath,
         IDataTranslator<TSymbol, TModel> toModelTranslator,
         IDataTranslator<TModel, TSymbol> fromModelTranslator,
-        bool autoFlush = false )
+        bool autoFlush = true )
     {
         RepositoryPath      = repositoryPath;
         ToModelTranslator   = toModelTranslator;
@@ -137,6 +137,7 @@ public abstract class SymbolRepository<TSymbol, TRootModel, TModel> : ISymbolRep
 
         var index = Models.IndexOf( existing );
 
+        existing           = ToModelTranslator.Translate( symbol );
         existing.UpdatedAt = DateTime.UtcNow;
         Models[ index ]    = existing;
 
