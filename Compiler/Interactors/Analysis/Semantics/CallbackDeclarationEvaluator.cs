@@ -82,7 +82,7 @@ public class CallbackDeclarationEvaluator(
         }
 
         thisCallback.Range           = node.Position;
-        thisCallback.DefinedPosition = node.CallbackNamePosition;
+        thisCallback.DefinedPosition = node.NamePosition;
 
         return node;
     }

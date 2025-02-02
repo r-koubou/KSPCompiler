@@ -1,4 +1,5 @@
-﻿using KSPCompiler.Domain.Ast.Nodes.Blocks;
+﻿using KSPCompiler.Commons.Text;
+using KSPCompiler.Domain.Ast.Nodes.Blocks;
 
 namespace KSPCompiler.Domain.Ast.Nodes
 {
@@ -7,6 +8,11 @@ namespace KSPCompiler.Domain.Ast.Nodes
     /// </summary>
     public abstract class AstFunctionalNode : AstNode, INameable
     {
+        public Position BeginOnPosition { get; set; } = new();
+        public Position NamePosition { get; set; } = new();
+        public Position EndPosition { get; set; } = new();
+        public Position EndOnPosition { get; set; } = new();
+
         /// <summary>
         /// Statements, expressions
         /// </summary>

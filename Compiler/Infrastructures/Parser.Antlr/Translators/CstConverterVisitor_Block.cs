@@ -33,14 +33,11 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             node.Name         = context.name.Text;
             node.CommentLines = GetCommentTextLinesToLeft( context );
 
-            node.Position = ToPosition( context );
-            node.CallbackNamePosition = new Position
-            {
-                BeginLine   = context.name.Line,
-                BeginColumn = context.name.Column,
-                EndLine     = context.name.Line,
-                EndColumn   = context.name.Column + context.name.Text.Length
-            };
+            node.Position        = ToPosition( context );
+            node.BeginOnPosition = ToPosition( context.beginOn );
+            node.NamePosition    = ToPosition( context.name );
+            node.EndPosition     = ToPosition( context.end );
+            node.EndOnPosition   = ToPosition( context.endOn );
 
             node.Block = context.block().Accept( this ) as AstBlockNode
                          ?? NullAstBlockNode.Instance;

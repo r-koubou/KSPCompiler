@@ -15,11 +15,6 @@ namespace KSPCompiler.Domain.Ast.Nodes.Blocks
         public IReadOnlyCollection<string> CommentLines { get; set; } = new List<string>();
 
         /// <summary>
-        /// Callback name position
-        /// </summary>
-        public Position CallbackNamePosition { get; set; } = new();
-
-        /// <summary>
         /// Ctor
         /// </summary>
         public AstCallbackDeclarationNode() : this( NullAstNode.Instance ) {}

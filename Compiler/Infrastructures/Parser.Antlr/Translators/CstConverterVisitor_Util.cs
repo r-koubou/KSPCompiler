@@ -30,8 +30,8 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
             {
                 BeginLine   = token.Line,
                 BeginColumn = token.Column,
-                EndLine     = LineNumber.Unknown,
-                EndColumn   = Column.Unknown
+                EndLine     = token.Line,
+                EndColumn   = token.Column + token.Text.Length
             };
         }
 
@@ -48,7 +48,6 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
         #endregion TokenPosition
 
         #region Comments
-
         private static readonly Regex RegexNewLine = new Regex( @"\r\n|\r|\n" );
 
         private IReadOnlyCollection<IToken> GetCommentTokensToLeft( ParserRuleContext context )
@@ -111,7 +110,6 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
 
             return RegexNewLine.Split( text ).ToList();
         }
-
         #endregion ~Comments
     }
 }

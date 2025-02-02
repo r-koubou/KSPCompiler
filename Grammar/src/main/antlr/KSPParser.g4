@@ -34,7 +34,7 @@ declarationModifier:
 // コールバック定義
 //------------------------------------------------------------------------------
 callbackDeclaration:
-    ON
+    beginOn = ON
         MULTI_LINE_DELIMITER* name = IDENTIFIER
         MULTI_LINE_DELIMITER*
         (
@@ -44,7 +44,7 @@ callbackDeclaration:
         )?
     EOL
     block
-    END MULTI_LINE_DELIMITER* ON
+    end = END MULTI_LINE_DELIMITER* endOn = ON
 ;
 
 //
