@@ -22,3 +22,8 @@ public interface ISymbolDatabaseService
         );
     }
 }
+
+public interface ICallbackSymbolDatabaseService : ISymbolDatabaseService;
+public interface ICommandSymbolDatabaseService : ISymbolDatabaseService;
+public interface IVariableSymbolDatabaseService : ISymbolDatabaseService;
+public interface IUITypeSymbolDatabaseService : ISymbolDatabaseService;
