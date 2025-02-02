@@ -34,7 +34,7 @@ public class DeleteCommand
     /// <param name="deletePattern">-p, Delete symbol name pattern. Wildcard is supported.</param>
     /// <param name="cancellationToken"></param>
     [Command( "delete-variables" )]
-    public async Task DeleteVariablesAsync( [FromServices] ISymbolDatabaseService service, string databaseFilePath, string deletePattern = "*", CancellationToken cancellationToken = default )
+    public async Task DeleteVariablesAsync( [FromServices] IVariableSymbolDatabaseService service, string databaseFilePath, string deletePattern = "*", CancellationToken cancellationToken = default )
     {
         var result = await service.DeleteSymbolsAsync( databaseFilePath, deletePattern, cancellationToken );
         HandleDeleteResult( result );
@@ -48,7 +48,7 @@ public class DeleteCommand
     /// <param name="deletePattern">-p, Delete symbol name pattern. Wildcard is supported.</param>
     /// <param name="cancellationToken"></param>
     [Command( "delete-commands" )]
-    public async Task DeleteCommandsAsync( [FromServices] ISymbolDatabaseService service, string databaseFilePath, string deletePattern = "*", CancellationToken cancellationToken = default )
+    public async Task DeleteCommandsAsync( [FromServices] ICommandSymbolDatabaseService service, string databaseFilePath, string deletePattern = "*", CancellationToken cancellationToken = default )
     {
         var result = await service.DeleteSymbolsAsync( databaseFilePath, deletePattern, cancellationToken );
         HandleDeleteResult( result );
@@ -62,7 +62,7 @@ public class DeleteCommand
     /// <param name="deletePattern">-p, Delete symbol name pattern. Wildcard is supported.</param>
     /// <param name="cancellationToken"></param>
     [Command( "delete-callbacks" )]
-    public async Task DeleteCallbacksAsync( [FromServices] ISymbolDatabaseService service, string databaseFilePath, string deletePattern = "*", CancellationToken cancellationToken = default )
+    public async Task DeleteCallbacksAsync( [FromServices] ICallbackSymbolDatabaseService service, string databaseFilePath, string deletePattern = "*", CancellationToken cancellationToken = default )
     {
         var result = await service.DeleteSymbolsAsync( databaseFilePath, deletePattern, cancellationToken );
         HandleDeleteResult( result );
@@ -76,7 +76,7 @@ public class DeleteCommand
     /// <param name="deletePattern">-p, Delete symbol name pattern. Wildcard is supported.</param>
     /// <param name="cancellationToken"></param>
     [Command( "delete-ui-types" )]
-    public async Task DeleteUITypeAsync( [FromServices] ISymbolDatabaseService service, string databaseFilePath, string deletePattern = "*", CancellationToken cancellationToken = default )
+    public async Task DeleteUITypeAsync( [FromServices] IUITypeSymbolDatabaseService service, string databaseFilePath, string deletePattern = "*", CancellationToken cancellationToken = default )
     {
         var result = await service.DeleteSymbolsAsync( databaseFilePath, deletePattern, cancellationToken );
         HandleDeleteResult( result );
