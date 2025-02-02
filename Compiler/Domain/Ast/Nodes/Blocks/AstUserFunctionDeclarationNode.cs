@@ -15,11 +15,6 @@ namespace KSPCompiler.Domain.Ast.Nodes.Blocks
         public IReadOnlyCollection<string> CommentLines { get; set; } = new List<string>();
 
         /// <summary>
-        /// Function name position
-        /// </summary>
-        public Position FunctionNamePosition { get; set; } = new();
-
-        /// <summary>
         /// Ctor
         /// </summary>
         public AstUserFunctionDeclarationNode()

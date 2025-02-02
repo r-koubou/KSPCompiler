@@ -538,17 +538,20 @@ public partial class KSPParser : Parser {
 	}
 
 	public partial class UserFunctionDeclarationContext : ParserRuleContext {
+		public IToken beginFunction;
 		public IToken name;
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] FUNCTION() { return GetTokens(KSPParser.FUNCTION); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode FUNCTION(int i) {
-			return GetToken(KSPParser.FUNCTION, i);
-		}
+		public IToken end;
+		public IToken endFunction;
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode EOL() { return GetToken(KSPParser.EOL, 0); }
 		[System.Diagnostics.DebuggerNonUserCode] public BlockContext block() {
 			return GetRuleContext<BlockContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode END() { return GetToken(KSPParser.END, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] FUNCTION() { return GetTokens(KSPParser.FUNCTION); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode FUNCTION(int i) {
+			return GetToken(KSPParser.FUNCTION, i);
+		}
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode IDENTIFIER() { return GetToken(KSPParser.IDENTIFIER, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode END() { return GetToken(KSPParser.END, 0); }
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] MULTI_LINE_DELIMITER() { return GetTokens(KSPParser.MULTI_LINE_DELIMITER); }
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode MULTI_LINE_DELIMITER(int i) {
 			return GetToken(KSPParser.MULTI_LINE_DELIMITER, i);
@@ -587,7 +590,7 @@ public partial class KSPParser : Parser {
 			EnterOuterAlt(_localctx, 1);
 			{
 			State = 153;
-			Match(FUNCTION);
+			_localctx.beginFunction = Match(FUNCTION);
 			State = 157;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.LA(1);
@@ -621,7 +624,7 @@ public partial class KSPParser : Parser {
 			State = 166;
 			block();
 			State = 167;
-			Match(END);
+			_localctx.end = Match(END);
 			State = 171;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.LA(1);
@@ -637,7 +640,7 @@ public partial class KSPParser : Parser {
 				_la = TokenStream.LA(1);
 			}
 			State = 174;
-			Match(FUNCTION);
+			_localctx.endFunction = Match(FUNCTION);
 			}
 		}
 		catch (RecognitionException re) {

@@ -29,7 +29,7 @@ public sealed class UserFunctionSymbolAppearanceFinder(
     {
         if( Mode.HasFlag( AppearanceFinderMode.Declaration ) && node.Name == SymbolName )
         {
-            Result.Add( node.FunctionNamePosition );
+            Result.Add( node.NamePosition );
         }
 
         return base.Visit( node );

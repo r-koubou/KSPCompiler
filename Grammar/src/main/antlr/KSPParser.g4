@@ -60,10 +60,10 @@ argumentDefinitionList
 //------------------------------------------------------------------------------
 
 userFunctionDeclaration:
-    FUNCTION MULTI_LINE_DELIMITER* name = IDENTIFIER (LPARENT RPARENT)?
+    beginFunction = FUNCTION MULTI_LINE_DELIMITER* name = IDENTIFIER (LPARENT RPARENT)?
     EOL
     block
-    END MULTI_LINE_DELIMITER* FUNCTION
+    end = END MULTI_LINE_DELIMITER* endFunction = FUNCTION
 ;
 
 //------------------------------------------------------------------------------

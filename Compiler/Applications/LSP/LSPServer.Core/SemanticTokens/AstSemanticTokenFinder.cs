@@ -31,29 +31,29 @@ public class AstSemanticTokenFinder(
         return ImmutableArray.Create( Result.ToArray() );
     }
 
-    private void Add( KSPCompilerPosition position, SemanticTokenType tokenType, SemanticTokenModifier tokenModifier )
+    private void Add( KSPCompilerPosition position, SemanticTokenType tokenType )
     {
         Result.Add( position.BeginLine.Value - 1 );
         Result.Add( position.BeginColumn.Value );
         Result.Add( position.EndColumn.Value - position.BeginColumn.Value );
         Result.Add( LegendTokenTypes.IndexOf( tokenType ) );
-        Result.Add( LegendTokenModifiers.IndexOf( tokenModifier ) );
+        Result.Add( 0 );
     }
 
-    private void Add( KSPCompilerPosition begin, KSPCompilerPosition end, SemanticTokenType tokenType, SemanticTokenModifier tokenModifier )
+    private void Add( KSPCompilerPosition begin, KSPCompilerPosition end, SemanticTokenType tokenType )
     {
         Result.Add( begin.BeginLine.Value - 1 );
         Result.Add( begin.BeginColumn.Value );
         Result.Add( end.EndColumn.Value - begin.BeginColumn.Value );
         Result.Add( LegendTokenTypes.IndexOf( tokenType ) );
-        Result.Add( LegendTokenModifiers.IndexOf( tokenModifier ) );
+        Result.Add( 0 );
     }
 
     public override IAstNode Visit( AstSymbolExpressionNode node )
     {
         if( SymbolTable.BuiltInVariables.TrySearchByName( node.Name, out var builtInVariable ) )
         {
-            Add( node.Position, SemanticTokenType.Variable, SemanticTokenModifier.DefaultLibrary );
+            Add( node.Position, SemanticTokenType.Variable );
         }
 
         return base.Visit( node );
@@ -63,7 +63,7 @@ public class AstSemanticTokenFinder(
     {
         if( SymbolTable.Commands.TrySearchByName( node.Left.Name, out var commandSymbol ) )
         {
-            Add( node.Position, SemanticTokenType.Method, SemanticTokenModifier.DefaultLibrary );
+            Add( node.Position, SemanticTokenType.Method );
         }
 
         return base.Visit( node );
@@ -74,13 +74,30 @@ public class AstSemanticTokenFinder(
         if( SymbolTable.UserCallbacks.TrySearchByName( node.Name, out _ ) )
         {
             // on
-            Add( node.BeginOnPosition, SemanticTokenType.Keyword, SemanticTokenModifier.DefaultLibrary );
+            Add( node.BeginOnKeywordPosition, SemanticTokenType.Keyword );
 
             // callback name
-            Add( node.NamePosition, SemanticTokenType.Method, SemanticTokenModifier.DefaultLibrary );
+            Add( node.NamePosition, SemanticTokenType.Method );
 
             // end on
-            Add( node.EndPosition, node.EndOnPosition, SemanticTokenType.Keyword, SemanticTokenModifier.DefaultLibrary );
+            Add( node.EndKeywordPosition, node.EndOnKeywordPosition, SemanticTokenType.Keyword );
+        }
+
+        return base.Visit( node );
+    }
+
+    public override IAstNode Visit( AstUserFunctionDeclarationNode node )
+    {
+        if( SymbolTable.UserFunctions.TrySearchByName( node.Name, out _ ) )
+        {
+            // function
+            Add( node.BeginOnKeywordPosition, SemanticTokenType.Keyword );
+
+            // function name
+            Add( node.NamePosition, SemanticTokenType.Keyword );
+
+            // end function
+            Add( node.EndKeywordPosition, node.EndOnKeywordPosition, SemanticTokenType.Keyword );
         }
 
         return base.Visit( node );

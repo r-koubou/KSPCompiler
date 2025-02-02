@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using Antlr4.Runtime;
 
 using KSPCompiler.Commons.Text;
+using KSPCompiler.Domain.Ast.Nodes;
 
 // ReSharper disable UnusedMember.Local
 
@@ -44,6 +45,14 @@ namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
                 EndLine     = endToken.Line,
                 EndColumn   = endToken.Column
             };
+        }
+
+        public static void SetFunctionalPosition( AstFunctionalNode node, IToken beginOn, IToken name, IToken end, IToken endOn )
+        {
+            node.BeginOnKeywordPosition = ToPosition( beginOn );
+            node.NamePosition           = ToPosition( name );
+            node.EndKeywordPosition     = ToPosition( end );
+            node.EndOnKeywordPosition   = ToPosition( endOn );
         }
         #endregion TokenPosition
 

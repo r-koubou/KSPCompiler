@@ -10,20 +10,11 @@ namespace KSPCompiler.LSPServer.Core.SemanticTokens;
 
 public sealed class SemanticTokensFullService( CompilerCacheService compilerCacheService )
 {
-    public static readonly ImmutableArray<SemanticTokenType> LegendTokenTypes = ImmutableArray.Create(
-        SemanticTokenType.Function,
-        SemanticTokenType.Method,
-        SemanticTokenType.Event,
-        SemanticTokenType.Keyword,
-        SemanticTokenType.String,
-        SemanticTokenType.Variable
-    );
+    public static readonly ImmutableArray<SemanticTokenType> LegendTokenTypes
+        = SemanticTokenType.Defaults.ToImmutableArray();
 
-    public static readonly ImmutableArray<SemanticTokenModifier> LegendTokenModifiers = ImmutableArray.Create(
-        SemanticTokenModifier.Readonly,
-        SemanticTokenModifier.DefaultLibrary,
-        SemanticTokenModifier.Declaration
-    );
+    public static readonly ImmutableArray<SemanticTokenModifier> LegendTokenModifiers
+        = SemanticTokenModifier.Defaults.ToImmutableArray();
 
     private CompilerCacheService CompilerCacheService { get; } = compilerCacheService;
 

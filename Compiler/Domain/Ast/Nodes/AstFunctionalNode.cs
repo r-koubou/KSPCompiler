@@ -8,10 +8,25 @@ namespace KSPCompiler.Domain.Ast.Nodes
     /// </summary>
     public abstract class AstFunctionalNode : AstNode, INameable
     {
-        public Position BeginOnPosition { get; set; } = new();
+        /// <summary>
+        /// Position of prefix function or callback keyword ("on", "function", etc.)
+        /// </summary>
+        public Position BeginOnKeywordPosition { get; set; } = new();
+
+        /// <summary>
+        /// Position of function or callback name
+        /// </summary>
         public Position NamePosition { get; set; } = new();
-        public Position EndPosition { get; set; } = new();
-        public Position EndOnPosition { get; set; } = new();
+
+        /// <summary>
+        /// Position of prefix end function or end callback keyword (="end")
+        /// </summary>
+        public Position EndKeywordPosition { get; set; } = new();
+
+        /// <summary>
+        /// Position of end function or end callback keyword ("on", "function", etc.)
+        /// </summary>
+        public Position EndOnKeywordPosition { get; set; } = new();
 
         /// <summary>
         /// Statements, expressions
