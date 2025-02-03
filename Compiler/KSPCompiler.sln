@@ -90,6 +90,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalSymbol.Yaml", "Infr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalSymbol.Commons.Tests", "Infrastructures\ExternalSymbol.Commons.Tests\ExternalSymbol.Commons.Tests.csproj", "{DA7D2AA2-AB60-4385-86D6-051C68C26D6B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LSPServer.Embedded", "Applications\LSP\LSPServer.Embedded\LSPServer.Embedded.csproj", "{62510825-5B2A-47B6-8166-BA52F914EFF8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -216,6 +218,10 @@ Global
 		{DA7D2AA2-AB60-4385-86D6-051C68C26D6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA7D2AA2-AB60-4385-86D6-051C68C26D6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA7D2AA2-AB60-4385-86D6-051C68C26D6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62510825-5B2A-47B6-8166-BA52F914EFF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62510825-5B2A-47B6-8166-BA52F914EFF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62510825-5B2A-47B6-8166-BA52F914EFF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62510825-5B2A-47B6-8166-BA52F914EFF8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{DC135E43-6ACC-4708-983B-03BB9FBFC64C} = {D9F235EC-F610-4F08-B031-5B8528EA70E4}
@@ -257,5 +263,6 @@ Global
 		{655D4BF9-6D24-4CFF-910A-583021A70786} = {04971CF5-28E9-4BFB-8435-265901E76658}
 		{921D9062-72EE-46FA-A40F-D81910A4D528} = {04971CF5-28E9-4BFB-8435-265901E76658}
 		{DA7D2AA2-AB60-4385-86D6-051C68C26D6B} = {D55D3A25-AC60-49A7-B1A8-E61FCF5D9ACF}
+		{62510825-5B2A-47B6-8166-BA52F914EFF8} = {2E24E20E-FC3B-442A-8C3C-C0CF48D2F031}
 	EndGlobalSection
 EndGlobal
