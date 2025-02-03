@@ -40,7 +40,7 @@ class Program
                 LogLevel.Trace
             );
 
-            var server = await Server.Create( option );
+            var server = await Server.CreateAsync( option );
             await server.WaitForExit;
         }
         catch( Exception e)
