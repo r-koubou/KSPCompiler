@@ -36,7 +36,7 @@ public class Server
         }
     }
 
-    public static async Task<LanguageServer> Create( Option option )
+    public static async Task<LanguageServer> CreateAsync( Option option )
     {
         return await LanguageServer.From(
             options => options

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -161,7 +162,9 @@ public sealed class CompilationService
     #region Setup Symbols
     private static void LoadSymbolTables( AggregateSymbolTable symbolTable )
     {
-        var basePath = Path.Combine( "Data", "Symbols" );
+        var baseDir = Path.GetDirectoryName( Assembly.GetExecutingAssembly().Location ) ?? ".";
+
+        var basePath = Path.Combine( baseDir, "Data", "Symbols" );
 
         using ISymbolRepository<VariableSymbol> variables = new VariableSymbolRepository( Path.Combine( basePath, "variables.yaml" ) );
         symbolTable.BuiltInVariables.AddRange( variables.FindAll() );

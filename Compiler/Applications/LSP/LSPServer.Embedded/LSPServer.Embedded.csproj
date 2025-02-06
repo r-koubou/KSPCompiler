@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <LangVersion>default</LangVersion>
+        <TargetFramework>.net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <Copyright>R-Koubou</Copyright>
+        <Company>R-Koubou</Company>
+        <Product>KSPCompiler.Apps.LSPServer.Embedded</Product>
+        <AssemblyName>KSPCompiler.Apps.LSPServer.Embedded</AssemblyName>
+        <RootNamespace>KSPCompiler.Apps.LSPServer.Embedded</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\LSPServer.Core\LSPServer.Core.csproj" />
+    </ItemGroup>
+
+</Project>
