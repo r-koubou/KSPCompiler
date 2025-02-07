@@ -29,6 +29,13 @@ namespace KSPCompiler.LSPServer.Core.Compilations;
 
 public sealed class CompilationService
 {
+    public sealed class ExecuteCompileOption(
+        bool enableObfuscation = false
+    )
+    {
+        public bool EnableObfuscation { get; } = enableObfuscation;
+    }
+
     private readonly AggregateSymbolTable builtInSymbolTable = new(
         builtInVariables: new VariableSymbolTable(),
         userVariables: new VariableSymbolTable(),
@@ -62,7 +69,7 @@ public sealed class CompilationService
     }
 
     #region Compilation
-    private async Task<CompilerResult> CompileAsync( string script, IEventEmitter eventEmitter, CancellationToken cancellationToken )
+    private async Task<CompilerResult> CompileAsync( string script, IEventEmitter eventEmitter, ExecuteCompileOption executeOption, CancellationToken cancellationToken )
     {
         SetupSymbol( builtInSymbolTable );
 
@@ -72,13 +79,22 @@ public sealed class CompilationService
         var option = new CompilerOption(
             SyntaxParser: parser,
             SymbolTable: symbolTableInScript,
-            EnableObfuscation: false
+            EnableObfuscation: executeOption.EnableObfuscation
         );
 
         return await compilerController.ExecuteAsync( eventEmitter, option, cancellationToken );
     }
 
-    private async Task<CompilerResult> ExecuteCompilationAsync( DocumentUri uri, string script, CancellationToken cancellationToken )
+    public async Task<CompilerResult> ExecuteCompilationAsync( DocumentUri uri, ExecuteCompileOption executeOption, CancellationToken cancellationToken )
+    {
+        var script = await File.ReadAllTextAsync( uri.Path, cancellationToken );
+
+        await ClearDiagnosticAsync( uri );
+
+        return await ExecuteCompilationAsync( uri, script, executeOption, cancellationToken );
+    }
+
+    public async Task<CompilerResult> ExecuteCompilationAsync( DocumentUri uri, string script, ExecuteCompileOption executeOption, CancellationToken cancellationToken )
     {
         // ReSharper disable once PossiblyImpureMethodCallOnReadonlyVariable
         var diagnostics = ImmutableArray<Diagnostic>.Empty.ToBuilder();
@@ -101,7 +117,7 @@ public sealed class CompilationService
         ).AddTo( compilerEventSubscribers );
 
         // コンパイラ実行
-        var result = await CompileAsync( script, CompilerEventEmitter, cancellationToken );
+        var result = await CompileAsync( script, CompilerEventEmitter, executeOption, cancellationToken );
 
         // エラー、警告を送信
         ServerFacade.TextDocument.PublishDiagnostics( new PublishDiagnosticsParams
@@ -115,7 +131,7 @@ public sealed class CompilationService
 
         CompilerCacheService.UpdateCache(
             uri,
-            new CompilerCacheItem( allLinesText, result.SymbolTable, result.Ast )
+            new CompilerCacheItem( uri, allLinesText, result.SymbolTable, result.Ast )
         );
 
         return result;
@@ -128,7 +144,11 @@ public sealed class CompilationService
         var uri = request.TextDocument.Uri;
         var script = request.TextDocument.Text;
 
-        await ExecuteCompilationAsync( uri, script, cancellationToken );
+        var executeOption = new ExecuteCompileOption(
+            enableObfuscation: false
+        );
+
+        await ExecuteCompilationAsync( uri, script, executeOption, cancellationToken );
     }
 
     public async Task HandleCloseTextDocumentAsync( DidCloseTextDocumentParams request, CancellationToken cancellationToken )
@@ -142,11 +162,15 @@ public sealed class CompilationService
         var uri = request.TextDocument.Uri;
         var script = request.ContentChanges.First().Text;
 
+        var executeOption = new ExecuteCompileOption(
+            enableObfuscation: false
+        );
+
         await ClearDiagnosticAsync( uri );
-        await ExecuteCompilationAsync( uri, script, cancellationToken );
+        await ExecuteCompilationAsync( uri, script, executeOption, cancellationToken );
     }
 
-    private async Task ClearDiagnosticAsync( DocumentUri uri )
+    public async Task ClearDiagnosticAsync( DocumentUri uri )
     {
         ServerFacade.TextDocument.PublishDiagnostics( new PublishDiagnosticsParams
             {
