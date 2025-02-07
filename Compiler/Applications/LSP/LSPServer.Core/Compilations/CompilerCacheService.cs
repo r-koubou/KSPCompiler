@@ -10,11 +10,13 @@ namespace KSPCompiler.LSPServer.Core.Compilations;
 
 public sealed class CompilerCacheItem
 {
+    public DocumentUri Uri { get; }
     public IReadOnlyList<string> AllLinesText { get; }
     public AggregateSymbolTable SymbolTable { get; }
     public AstCompilationUnitNode Ast { get; }
 
     public CompilerCacheItem(
+        DocumentUri uri,
         IReadOnlyList<string>? allLinesText = null,
         AggregateSymbolTable? symbolTable = null,
         AstCompilationUnitNode? ast = null )
@@ -42,7 +44,7 @@ public sealed class CompilerCacheService
     {
         return symbolTableCache.GetOrAdd(
             uri,
-            new CompilerCacheItem()
+            new CompilerCacheItem( uri )
         );
     }
 
