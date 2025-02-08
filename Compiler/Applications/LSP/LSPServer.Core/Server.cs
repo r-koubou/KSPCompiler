@@ -5,6 +5,7 @@ using KSPCompiler.LSPServer.Core.Compilations;
 using KSPCompiler.LSPServer.Core.Completions;
 using KSPCompiler.LSPServer.Core.Definitions;
 using KSPCompiler.LSPServer.Core.DocumentHighlights;
+using KSPCompiler.LSPServer.Core.ExecuteCommands;
 using KSPCompiler.LSPServer.Core.Foldings;
 using KSPCompiler.LSPServer.Core.Hovers;
 using KSPCompiler.LSPServer.Core.References;
@@ -59,6 +60,7 @@ public class Server
                       .WithHandler<ReferencesHandler>()
                       .WithHandler<FoldingRangeHandler>()
                       .WithHandler<SignatureHelpHandler>()
+                      .WithHandler<ObfuscationCommandHandler>()
                       .WithServices(
                            services =>
                            {

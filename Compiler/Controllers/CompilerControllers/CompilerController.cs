@@ -66,8 +66,6 @@ public sealed class CompilerController
                 cancellationToken
             );
 
-            Console.WriteLine( obfuscationOutput.OutputData );
-
             return new CompilerResult(
                 obfuscationOutput.Result,
                 obfuscationOutput.Error,
