@@ -2,8 +2,10 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
+using KSPCompiler.Commons;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Events;
+using KSPCompiler.Domain.Events.Extensions;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Gateways.Parsers;
 using KSPCompiler.Interactors.Analysis;
@@ -34,11 +36,23 @@ public sealed class CompilerController
     {
         // TODO: CompilerMessageManger compilerMessageManger is obsolete. Use IEventEmitter eventEmitter instead.
 
+        bool noAnalysisError = true;
+
         try
         {
+            using var subscribers = new CompositeDisposable();
+            eventEmitter.Subscribe<CompilationFatalEvent>( _ => noAnalysisError = false ).AddTo( subscribers );
+            eventEmitter.Subscribe<CompilationErrorEvent>( _ => noAnalysisError = false ).AddTo( subscribers );
+
+            //-------------------------------------------------
+            // Syntax Analysis
+            //-------------------------------------------------
             var syntaxAnalysisOutput = await ExecuteSyntaxAnalysisAsync( option.SyntaxParser, cancellationToken );
             var ast = syntaxAnalysisOutput.OutputData;
 
+            //-------------------------------------------------
+            // Preprocess
+            //-------------------------------------------------
             var preprocessOutput = await ExecutePreprocessAsync( eventEmitter, ast, option.SymbolTable, cancellationToken );
 
             if( !preprocessOutput.Result )
@@ -46,6 +60,9 @@ public sealed class CompilerController
                 return new CompilerResult( false, preprocessOutput.Error, ast, option.SymbolTable, string.Empty );
             }
 
+            //-------------------------------------------------
+            // Semantic Analysis
+            //-------------------------------------------------
             var semanticAnalysisOutput = await ExecuteSemanticAnalysisAsync( eventEmitter, ast, option.SymbolTable, cancellationToken );
 
             if( !semanticAnalysisOutput.Result )
@@ -53,10 +70,12 @@ public sealed class CompilerController
                 return new CompilerResult( false, semanticAnalysisOutput.Error, ast, option.SymbolTable, string.Empty );
             }
 
-
-            if( !option.EnableObfuscation )
+            //-------------------------------------------------
+            // Obfuscation
+            //-------------------------------------------------
+            if( !option.EnableObfuscation || !noAnalysisError )
             {
-                return new CompilerResult( true, null, ast, option.SymbolTable, string.Empty );
+                return new CompilerResult( noAnalysisError, null, ast, option.SymbolTable, string.Empty );
             }
 
             var obfuscationOutput = await ExecuteObfuscationAsync(

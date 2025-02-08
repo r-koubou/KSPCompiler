@@ -162,7 +162,10 @@ public class Obfuscator : DefaultAstVisitor, IAstTraversal
 
     public override IAstNode Visit( AstStringLiteralNode node )
     {
-        Output.Append( node.Value );
+        Output.Append( '"' )
+              .Append( node.Value )
+              .Append( '"' );
+
         return node;
     }
 
