@@ -4,7 +4,7 @@ using KSPCompiler.Domain.Symbols;
 
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
-namespace KSPCompiler.LSPServer.Core.SignatureHelps.Extensions;
+namespace KSPCompiler.Applications.LSPServer.Core.SignatureHelps.Extensions;
 
 public static class SymbolTableExtension
 {

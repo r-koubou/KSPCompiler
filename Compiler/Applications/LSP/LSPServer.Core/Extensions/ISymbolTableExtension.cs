@@ -5,7 +5,7 @@ using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
 using Range = OmniSharp.Extensions.LanguageServer.Protocol.Models.Range;
 
-namespace KSPCompiler.LSPServer.Core.Extensions;
+namespace KSPCompiler.Applications.LSPServer.Core.Extensions;
 
 public static class ISymbolTableExtension
 {

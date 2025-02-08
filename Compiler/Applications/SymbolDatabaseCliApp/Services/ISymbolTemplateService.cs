@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 using KSPCompiler.SymbolDatabaseControllers;
 
-namespace KSPCompiler.Apps.SymbolDbManager.Services;
+namespace KSPCompiler.Applications.SymbolDbManager.Services;
 
 // ReSharper disable LocalizableElement
 

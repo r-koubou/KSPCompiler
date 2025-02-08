@@ -3,7 +3,7 @@ using System.Text;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 
-namespace KSPCompiler.LSPServer.Core.Hovers;
+namespace KSPCompiler.Applications.LSPServer.Core.Hovers;
 
 public class CommandHoverTextBuilder : IHoverTextBuilder<CommandSymbol>
 {

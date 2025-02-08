@@ -1,13 +1,13 @@
 using System.Threading;
 using System.Threading.Tasks;
 
+using KSPCompiler.Applications.LSPServer.Core.Compilations;
+using KSPCompiler.Applications.LSPServer.Core.Hovers.Extensions;
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.LSPServer.Core.Compilations;
-using KSPCompiler.LSPServer.Core.Hovers.Extensions;
 
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
-namespace KSPCompiler.LSPServer.Core.Hovers;
+namespace KSPCompiler.Applications.LSPServer.Core.Hovers;
 
 public sealed class HoverService( CompilerCacheService compilerCacheService )
 {

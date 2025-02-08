@@ -7,9 +7,9 @@
         <Nullable>enable</Nullable>
         <Copyright>R-Koubou</Copyright>
         <Company>R-Koubou</Company>
-        <Product>KSPCompiler.Apps.LSPServer.Embedded</Product>
-        <AssemblyName>KSPCompiler.Apps.LSPServer.Embedded</AssemblyName>
-        <RootNamespace>KSPCompiler.Apps.LSPServer.Embedded</RootNamespace>
+        <Product>KSPCompiler.Applications.LSPServer.Embedded</Product>
+        <AssemblyName>KSPCompiler.Applications.LSPServer.Embedded</AssemblyName>
+        <RootNamespace>KSPCompiler.Applications.LSPServer.Embedded</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

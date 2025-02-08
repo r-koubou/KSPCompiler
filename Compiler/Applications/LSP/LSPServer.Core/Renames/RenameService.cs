@@ -3,16 +3,16 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-using KSPCompiler.LSPServer.Core.Ast;
-using KSPCompiler.LSPServer.Core.Compilations;
-using KSPCompiler.LSPServer.Core.Extensions;
+using KSPCompiler.Applications.LSPServer.Core.Ast;
+using KSPCompiler.Applications.LSPServer.Core.Compilations;
+using KSPCompiler.Applications.LSPServer.Core.Extensions;
 
 using OmniSharp.Extensions.LanguageServer.Protocol;
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
 using DomainPosition = KSPCompiler.Commons.Text.Position;
 
-namespace KSPCompiler.LSPServer.Core.Renames;
+namespace KSPCompiler.Applications.LSPServer.Core.Renames;
 
 public sealed class RenameService( CompilerCacheService compilerCacheService )
 {

@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 
 using ConsoleAppFramework;
 
-using KSPCompiler.Apps.SymbolDbManager.Services;
+using KSPCompiler.Applications.SymbolDbManager.Services;
 using KSPCompiler.SymbolDatabaseControllers;
 
-namespace KSPCompiler.Apps.SymbolDbManager.Commands;
+namespace KSPCompiler.Applications.SymbolDbManager.Commands;
 
 // ReSharper disable LocalizableElement
 public class DeleteCommand

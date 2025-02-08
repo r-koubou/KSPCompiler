@@ -3,7 +3,7 @@ using KSPCompiler.Domain.Symbols;
 using KSPCompiler.ExternalSymbol.Tsv.Commands;
 using KSPCompiler.Gateways.Symbols;
 
-namespace KSPCompiler.Apps.SymbolDbManager.Services;
+namespace KSPCompiler.Applications.SymbolDbManager.Services;
 
 public sealed class CommandSymbolTemplateService : SymbolTemplateService<CommandSymbol>
 {

@@ -3,7 +3,7 @@ using KSPCompiler.Domain.Symbols;
 using KSPCompiler.ExternalSymbol.Tsv.Variables;
 using KSPCompiler.Gateways.Symbols;
 
-namespace KSPCompiler.Apps.SymbolDbManager.Services;
+namespace KSPCompiler.Applications.SymbolDbManager.Services;
 
 public sealed class VariableSymbolTemplateService : SymbolTemplateService<VariableSymbol>
 {

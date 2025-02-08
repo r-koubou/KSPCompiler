@@ -5,7 +5,7 @@ using OmniSharp.Extensions.LanguageServer.Protocol.Client.Capabilities;
 using OmniSharp.Extensions.LanguageServer.Protocol.Document;
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
-namespace KSPCompiler.LSPServer.Core.DocumentHighlights;
+namespace KSPCompiler.Applications.LSPServer.Core.DocumentHighlights;
 
 public class DocumentHighlightHandler( DocumentHighlightService documentHighlightService ) : IDocumentHighlightHandler
 {

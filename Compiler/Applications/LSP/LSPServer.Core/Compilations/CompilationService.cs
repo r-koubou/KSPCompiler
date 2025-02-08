@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
+using KSPCompiler.Applications.LSPServer.Core.Extensions;
 using KSPCompiler.Commons;
 using KSPCompiler.Controllers.Compiler;
 using KSPCompiler.Domain.Events;
@@ -18,14 +19,13 @@ using KSPCompiler.ExternalSymbolRepository.Yaml.UITypes;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
 using KSPCompiler.Gateways.Symbols;
 using KSPCompiler.Infrastructures.Parser.Antlr;
-using KSPCompiler.LSPServer.Core.Extensions;
 
 using OmniSharp.Extensions.LanguageServer.Protocol;
 using OmniSharp.Extensions.LanguageServer.Protocol.Document;
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 using OmniSharp.Extensions.LanguageServer.Protocol.Server;
 
-namespace KSPCompiler.LSPServer.Core.Compilations;
+namespace KSPCompiler.Applications.LSPServer.Core.Compilations;
 
 public sealed class CompilationService
 {

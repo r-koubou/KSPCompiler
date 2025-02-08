@@ -1,11 +1,11 @@
 using System;
 using System.Threading.Tasks;
 
-using KSPCompiler.LSPServer.Core;
+using KSPCompiler.Applications.LSPServer.Core;
 
 using Microsoft.Extensions.Logging;
 
-namespace KSPCompiler.Apps.LSPServer.Embedded;
+namespace KSPCompiler.Applications.LSPServer.Embedded;
 
 public static class Program
 {

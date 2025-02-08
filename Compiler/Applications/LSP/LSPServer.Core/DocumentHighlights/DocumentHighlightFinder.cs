@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 
+using KSPCompiler.Applications.LSPServer.Core.Extensions;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Interactors.Analysis.Extensions;
-using KSPCompiler.LSPServer.Core.Extensions;
 
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
-namespace KSPCompiler.LSPServer.Core.DocumentHighlights;
+namespace KSPCompiler.Applications.LSPServer.Core.DocumentHighlights;
 
 public class DocumentHighlightFinder(AstCompilationUnitNode ast, AggregateSymbolTable symbolTable, SymbolBase symbolAtCursor) : DefaultAstVisitor
 {

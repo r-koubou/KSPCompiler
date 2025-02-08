@@ -1,6 +1,6 @@
 using System;
 
-namespace KSPCompiler.LSPServer.Core.Ast;
+namespace KSPCompiler.Applications.LSPServer.Core.Ast;
 
 [Flags]
 public enum AppearanceFinderMode

@@ -4,7 +4,7 @@ using KSPCompiler.Domain.Symbols.MetaData;
 
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
-namespace KSPCompiler.LSPServer.Core;
+namespace KSPCompiler.Applications.LSPServer.Core;
 
 public static class DocumentUtility
 {

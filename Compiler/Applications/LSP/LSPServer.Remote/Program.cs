@@ -3,11 +3,11 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 
-using KSPCompiler.LSPServer.Core;
+using KSPCompiler.Applications.LSPServer.Core;
 
 using Microsoft.Extensions.Logging;
 
-namespace KSPCompiler.LSPServer.Remote;
+namespace KSPCompiler.Applications.LSPServer.Remote;
 
 class Program
 {

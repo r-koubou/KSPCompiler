@@ -1,7 +1,7 @@
 using ConsoleAppFramework;
 
-using KSPCompiler.Apps.SymbolDbManager.Commands;
-using KSPCompiler.Apps.SymbolDbManager.Services;
+using KSPCompiler.Applications.SymbolDbManager.Commands;
+using KSPCompiler.Applications.SymbolDbManager.Services;
 using KSPCompiler.Domain.Symbols;
 
 using Microsoft.Extensions.DependencyInjection;
