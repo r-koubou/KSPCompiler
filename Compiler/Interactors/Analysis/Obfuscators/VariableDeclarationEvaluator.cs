@@ -118,7 +118,11 @@ public class VariableDeclarationEvaluator(
 
     private void OutputArrayElements( IAstVisitor visitor, AstArrayInitializerNode initializer )
     {
-        Output.Append( " := " );
+        if( initializer.Initializer.Empty )
+        {
+            return;
+        }
+
         Output.Append( '(' );
 
         Output.AppendExpressionList( visitor, initializer.Initializer );
@@ -138,7 +142,6 @@ public class VariableDeclarationEvaluator(
         }
         else
         {
-            Output.Append( " := " );
             OutputPrimitiveBasedUIInitializer( visitor, node.Initializer.PrimitiveInitializer.UIInitializer );
         }
     }
@@ -162,6 +165,11 @@ public class VariableDeclarationEvaluator(
 
     private void OutputUIArguments( IAstVisitor visitor, AstExpressionListNode expressionList )
     {
+        if( expressionList.Empty )
+        {
+            return;
+        }
+
         Output.Append( '(' );
 
         Output.AppendExpressionList( visitor, expressionList );
