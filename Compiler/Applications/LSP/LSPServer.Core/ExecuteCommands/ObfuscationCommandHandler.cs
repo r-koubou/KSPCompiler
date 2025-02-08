@@ -29,7 +29,7 @@ namespace KSPCompiler.LSPServer.Core.ExecuteCommands;
 /// </remarks>
 public class ObfuscationCommandHandler( CompilationService compilationService ) : IExecuteCommandHandler<string>
 {
-    private const string ObfuscationCommand = "kspcompiler.obfuscate";
+    private const string ObfuscationCommand = "ksp.obfuscate";
 
     private CompilationService CompilationService { get; } = compilationService;
 
