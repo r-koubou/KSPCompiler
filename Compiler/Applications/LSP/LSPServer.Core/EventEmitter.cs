@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using KSPCompiler.Domain.Events;
 
-namespace KSPCompiler.LSPServer.Core;
+namespace KSPCompiler.Applications.LSPServer.Core;
 
 /// <summary>
 /// Default implementation of <see cref="IEventEmitter"/>.

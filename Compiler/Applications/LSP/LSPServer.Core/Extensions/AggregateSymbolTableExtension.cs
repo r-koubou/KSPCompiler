@@ -1,6 +1,6 @@
 using KSPCompiler.Domain.Symbols;
 
-namespace KSPCompiler.LSPServer.Core.Extensions;
+namespace KSPCompiler.Applications.LSPServer.Core.Extensions;
 
 public static class AggregateSymbolTableExtension
 {

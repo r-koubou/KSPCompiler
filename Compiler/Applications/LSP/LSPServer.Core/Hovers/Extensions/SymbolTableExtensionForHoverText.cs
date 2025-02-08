@@ -1,6 +1,6 @@
 using KSPCompiler.Domain.Symbols;
 
-namespace KSPCompiler.LSPServer.Core.Hovers.Extensions;
+namespace KSPCompiler.Applications.LSPServer.Core.Hovers.Extensions;
 
 public static class SymbolTableExtensionForHoverText
 {

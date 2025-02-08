@@ -9,7 +9,7 @@ using KSPCompiler.Gateways.Symbols;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
 using KSPCompiler.SymbolDatabaseControllers;
 
-namespace KSPCompiler.Apps.SymbolDbManager.Services;
+namespace KSPCompiler.Applications.SymbolDbManager.Services;
 
 public abstract class SymbolTemplateService<TSymbol> : ISymbolTemplateService where TSymbol : SymbolBase
 {

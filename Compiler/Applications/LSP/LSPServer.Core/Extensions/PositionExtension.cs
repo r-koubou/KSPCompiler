@@ -1,6 +1,6 @@
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
-namespace KSPCompiler.LSPServer.Core.Extensions;
+namespace KSPCompiler.Applications.LSPServer.Core.Extensions;
 
 using OmniSharpPosition = Position;
 using OmniSharpRange = Range;

@@ -6,7 +6,7 @@ using KSPCompiler.Domain.Symbols;
 
 using OmniSharp.Extensions.LanguageServer.Protocol;
 
-namespace KSPCompiler.LSPServer.Core.Compilations;
+namespace KSPCompiler.Applications.LSPServer.Core.Compilations;
 
 public sealed class CompilerCacheItem
 {

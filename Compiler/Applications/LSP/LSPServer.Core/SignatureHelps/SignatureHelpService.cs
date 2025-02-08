@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-using KSPCompiler.LSPServer.Core.Compilations;
-using KSPCompiler.LSPServer.Core.SignatureHelps.Extensions;
+using KSPCompiler.Applications.LSPServer.Core.Compilations;
+using KSPCompiler.Applications.LSPServer.Core.SignatureHelps.Extensions;
 
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
-namespace KSPCompiler.LSPServer.Core.SignatureHelps;
+namespace KSPCompiler.Applications.LSPServer.Core.SignatureHelps;
 
 public sealed class SignatureHelpService( CompilerCacheService compilerCacheService )
 {

@@ -5,7 +5,7 @@ using KSPCompiler.Domain.Symbols;
 
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
-namespace KSPCompiler.LSPServer.Core.SignatureHelps;
+namespace KSPCompiler.Applications.LSPServer.Core.SignatureHelps;
 
 public class DefaultSignatureHelpBuilder : ISignatureHelpBuilder<CommandSymbol>
 {

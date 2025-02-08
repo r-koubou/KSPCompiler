@@ -2,13 +2,13 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-using KSPCompiler.LSPServer.Core.Ast;
-using KSPCompiler.LSPServer.Core.Compilations;
-using KSPCompiler.LSPServer.Core.Foldings.Extensions;
+using KSPCompiler.Applications.LSPServer.Core.Ast;
+using KSPCompiler.Applications.LSPServer.Core.Compilations;
+using KSPCompiler.Applications.LSPServer.Core.Foldings.Extensions;
 
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
-namespace KSPCompiler.LSPServer.Core.Foldings;
+namespace KSPCompiler.Applications.LSPServer.Core.Foldings;
 
 public class FoldingRangeService( CompilerCacheService compilerCacheService )
 {

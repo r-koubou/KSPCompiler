@@ -1,8 +1,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 
+using KSPCompiler.Applications.LSPServer.Core.Compilations;
 using KSPCompiler.Domain.Events;
-using KSPCompiler.LSPServer.Core.Compilations;
 
 using OmniSharp.Extensions.LanguageServer.Protocol;
 using OmniSharp.Extensions.LanguageServer.Protocol.Client.Capabilities;
@@ -13,7 +13,7 @@ using OmniSharp.Extensions.LanguageServer.Protocol.Server.Capabilities;
 
 using Unit = MediatR.Unit;
 
-namespace KSPCompiler.LSPServer.Core;
+namespace KSPCompiler.Applications.LSPServer.Core;
 
 internal class TextDocumentHandler : TextDocumentSyncHandlerBase
 {

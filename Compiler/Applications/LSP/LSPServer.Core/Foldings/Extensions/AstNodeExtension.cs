@@ -2,7 +2,7 @@ using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
 using KspPosition = KSPCompiler.Commons.Text.Position;
 
-namespace KSPCompiler.LSPServer.Core.Foldings.Extensions;
+namespace KSPCompiler.Applications.LSPServer.Core.Foldings.Extensions;
 
 public static class AstNodeExtension
 {

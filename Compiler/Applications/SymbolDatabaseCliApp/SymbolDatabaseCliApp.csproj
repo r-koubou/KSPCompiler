@@ -7,9 +7,9 @@
         <Nullable>enable</Nullable>
         <Copyright>R-Koubou</Copyright>
         <Company>R-Koubou</Company>
-        <Product>KSPCompiler.Apps.SymbolDbManager</Product>
-        <AssemblyName>KSPCompiler.Apps.SymbolDbManager</AssemblyName>
-        <RootNamespace>KSPCompiler.Apps.SymbolDbManager</RootNamespace>
+        <Product>KSPCompiler.Applications.SymbolDbManager</Product>
+        <AssemblyName>KSPCompiler.Applications.SymbolDbManager</AssemblyName>
+        <RootNamespace>KSPCompiler.Applications.SymbolDbManager</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

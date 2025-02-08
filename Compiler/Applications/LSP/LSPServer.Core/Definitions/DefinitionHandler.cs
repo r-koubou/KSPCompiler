@@ -5,7 +5,7 @@ using OmniSharp.Extensions.LanguageServer.Protocol.Client.Capabilities;
 using OmniSharp.Extensions.LanguageServer.Protocol.Document;
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
-namespace KSPCompiler.LSPServer.Core.Definitions;
+namespace KSPCompiler.Applications.LSPServer.Core.Definitions;
 
 public class DefinitionHandler( DefinitionService definitionService ) : IDefinitionHandler
 {

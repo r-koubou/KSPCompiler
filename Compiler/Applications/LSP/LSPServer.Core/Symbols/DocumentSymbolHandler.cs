@@ -1,13 +1,13 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-using KSPCompiler.LSPServer.Core.Compilations;
+using KSPCompiler.Applications.LSPServer.Core.Compilations;
 
 using OmniSharp.Extensions.LanguageServer.Protocol.Client.Capabilities;
 using OmniSharp.Extensions.LanguageServer.Protocol.Document;
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
-namespace KSPCompiler.LSPServer.Core.Symbols;
+namespace KSPCompiler.Applications.LSPServer.Core.Symbols;
 
 public class DocumentSymbolHandler(
     CompilerCacheService compilerCacheService,

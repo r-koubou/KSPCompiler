@@ -6,7 +6,7 @@ using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
 
-namespace KSPCompiler.LSPServer.Core.Ast;
+namespace KSPCompiler.Applications.LSPServer.Core.Ast;
 
 public sealed class VariableSymbolAppearanceFinder(
     string symbolName,

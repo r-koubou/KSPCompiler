@@ -2,14 +2,14 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-using KSPCompiler.LSPServer.Core.Compilations;
+using KSPCompiler.Applications.LSPServer.Core.Compilations;
 
 using OmniSharp.Extensions.LanguageServer.Protocol;
 using OmniSharp.Extensions.LanguageServer.Protocol.Client.Capabilities;
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 using OmniSharp.Extensions.LanguageServer.Protocol.Workspace;
 
-namespace KSPCompiler.LSPServer.Core.ExecuteCommands;
+namespace KSPCompiler.Applications.LSPServer.Core.ExecuteCommands;
 
 /// <summary>
 /// Implementation of Obfuscation Command

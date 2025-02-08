@@ -3,7 +3,7 @@ using KSPCompiler.Domain.Symbols;
 using KSPCompiler.ExternalSymbol.Tsv.Callbacks;
 using KSPCompiler.Gateways.Symbols;
 
-namespace KSPCompiler.Apps.SymbolDbManager.Services;
+namespace KSPCompiler.Applications.SymbolDbManager.Services;
 
 public sealed class CallbackSymbolTemplateService : SymbolTemplateService<CallbackSymbol>
 {

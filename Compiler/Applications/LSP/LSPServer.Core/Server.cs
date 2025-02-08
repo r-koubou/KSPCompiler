@@ -1,17 +1,17 @@
 using System.IO;
 using System.Threading.Tasks;
 
-using KSPCompiler.LSPServer.Core.Compilations;
-using KSPCompiler.LSPServer.Core.Completions;
-using KSPCompiler.LSPServer.Core.Definitions;
-using KSPCompiler.LSPServer.Core.DocumentHighlights;
-using KSPCompiler.LSPServer.Core.ExecuteCommands;
-using KSPCompiler.LSPServer.Core.Foldings;
-using KSPCompiler.LSPServer.Core.Hovers;
-using KSPCompiler.LSPServer.Core.References;
-using KSPCompiler.LSPServer.Core.Renames;
-using KSPCompiler.LSPServer.Core.SignatureHelps;
-using KSPCompiler.LSPServer.Core.Symbols;
+using KSPCompiler.Applications.LSPServer.Core.Compilations;
+using KSPCompiler.Applications.LSPServer.Core.Completions;
+using KSPCompiler.Applications.LSPServer.Core.Definitions;
+using KSPCompiler.Applications.LSPServer.Core.DocumentHighlights;
+using KSPCompiler.Applications.LSPServer.Core.ExecuteCommands;
+using KSPCompiler.Applications.LSPServer.Core.Foldings;
+using KSPCompiler.Applications.LSPServer.Core.Hovers;
+using KSPCompiler.Applications.LSPServer.Core.References;
+using KSPCompiler.Applications.LSPServer.Core.Renames;
+using KSPCompiler.Applications.LSPServer.Core.SignatureHelps;
+using KSPCompiler.Applications.LSPServer.Core.Symbols;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -19,7 +19,7 @@ using Microsoft.Extensions.Logging;
 using OmniSharp.Extensions.LanguageServer.Protocol.Window;
 using OmniSharp.Extensions.LanguageServer.Server;
 
-namespace KSPCompiler.LSPServer.Core;
+namespace KSPCompiler.Applications.LSPServer.Core;
 
 public class Server
 {

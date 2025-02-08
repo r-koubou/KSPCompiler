@@ -7,9 +7,9 @@
         <Nullable>enable</Nullable>
         <Copyright>R-Koubou</Copyright>
         <Company>R-Koubou</Company>
-        <Product>KSPCompiler.LSPServer.Remote</Product>
-        <AssemblyName>KSPCompiler.LSPServer.Remote</AssemblyName>
-        <RootNamespace>KSPCompiler.LSPServer.Remote</RootNamespace>
+        <Product>KSPCompiler.Applications.LSPServer.Remote</Product>
+        <AssemblyName>KSPCompiler.Applications.LSPServer.Remote</AssemblyName>
+        <RootNamespace>KSPCompiler.Applications.LSPServer.Remote</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

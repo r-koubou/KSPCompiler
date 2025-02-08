@@ -11,7 +11,7 @@ using KSPCompiler.SymbolDatabaseControllers;
 
 using DeleteResult = KSPCompiler.SymbolDatabaseControllers.DeleteResult;
 
-namespace KSPCompiler.Apps.SymbolDbManager.Services;
+namespace KSPCompiler.Applications.SymbolDbManager.Services;
 
 // ReSharper disable LocalizableElement
 

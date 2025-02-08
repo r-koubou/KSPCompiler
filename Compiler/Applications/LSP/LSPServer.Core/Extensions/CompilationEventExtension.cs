@@ -4,7 +4,7 @@ using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
 using CompilerPosition = KSPCompiler.Commons.Text.Position;
 
-namespace KSPCompiler.LSPServer.Core.Extensions;
+namespace KSPCompiler.Applications.LSPServer.Core.Extensions;
 
 public static class CompilationEventExtension
 {

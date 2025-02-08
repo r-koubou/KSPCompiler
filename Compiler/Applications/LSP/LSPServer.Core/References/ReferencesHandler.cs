@@ -5,7 +5,7 @@ using OmniSharp.Extensions.LanguageServer.Protocol.Client.Capabilities;
 using OmniSharp.Extensions.LanguageServer.Protocol.Document;
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
-namespace KSPCompiler.LSPServer.Core.References;
+namespace KSPCompiler.Applications.LSPServer.Core.References;
 
 public class ReferencesHandler( ReferencesService referencesService ) : IReferencesHandler
 {

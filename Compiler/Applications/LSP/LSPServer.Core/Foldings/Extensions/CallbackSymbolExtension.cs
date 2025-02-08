@@ -2,7 +2,7 @@ using KSPCompiler.Domain.Symbols;
 
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 
-namespace KSPCompiler.LSPServer.Core.Foldings.Extensions;
+namespace KSPCompiler.Applications.LSPServer.Core.Foldings.Extensions;
 
 public static class CallbackSymbolExtension
 {

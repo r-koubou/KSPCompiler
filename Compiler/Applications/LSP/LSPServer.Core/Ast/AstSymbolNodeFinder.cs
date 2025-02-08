@@ -1,12 +1,12 @@
+using KSPCompiler.Applications.LSPServer.Core.Extensions;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
-using KSPCompiler.LSPServer.Core.Extensions;
 
 using OmniSharpPosition = OmniSharp.Extensions.LanguageServer.Protocol.Models.Position;
 
-namespace KSPCompiler.LSPServer.Core.Ast;
+namespace KSPCompiler.Applications.LSPServer.Core.Ast;
 
 
 

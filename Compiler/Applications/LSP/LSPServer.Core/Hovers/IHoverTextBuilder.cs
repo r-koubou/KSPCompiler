@@ -1,6 +1,6 @@
 using KSPCompiler.Domain.Symbols;
 
-namespace KSPCompiler.LSPServer.Core.Hovers;
+namespace KSPCompiler.Applications.LSPServer.Core.Hovers;
 
 public interface IHoverTextBuilder<in TSymbol> where TSymbol : SymbolBase
 {

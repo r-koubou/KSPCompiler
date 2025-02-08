@@ -6,9 +6,9 @@
         <Nullable>enable</Nullable>
         <Copyright>R-Koubou</Copyright>
         <Company>R-Koubou</Company>
-        <Product>KSPCompiler.LSPServer.Core</Product>
-        <AssemblyName>KSPCompiler.LSPServer.Core</AssemblyName>
-        <RootNamespace>KSPCompiler.LSPServer.Core</RootNamespace>
+        <Product>KSPCompiler.Applications.LSPServer.Core</Product>
+        <AssemblyName>KSPCompiler.Applications.LSPServer.Core</AssemblyName>
+        <RootNamespace>KSPCompiler.Applications.LSPServer.Core</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
