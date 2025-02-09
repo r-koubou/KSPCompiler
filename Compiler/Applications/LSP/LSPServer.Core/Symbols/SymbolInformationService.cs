@@ -1,11 +1,11 @@
 using System.Collections.Generic;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 using KSPCompiler.Applications.LSPServer.Core.Compilations;
 using KSPCompiler.Applications.LSPServer.Core.Extensions;
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
@@ -14,47 +14,25 @@ namespace KSPCompiler.Applications.LSPServer.Core.Symbols;
 
 public sealed class SymbolInformationService
 {
-    private static readonly IReadOnlyDictionary<DataTypeFlag, string> DataTypeTextMap = new Dictionary<DataTypeFlag, string>
+    private static string GetArgumentDetailText<TArgumentSymbol>( IArgumentSymbolList<TArgumentSymbol> arguments, StringBuilder builder )
+        where TArgumentSymbol : ArgumentSymbol
     {
-        { DataTypeFlag.None, "unknown" },
-        { DataTypeFlag.TypeInt, "integer" },
-        { DataTypeFlag.TypeString, "string" },
-        { DataTypeFlag.TypeReal, "real" },
-        { DataTypeFlag.TypePreprocessorSymbol, "preprocessor" },
-        { DataTypeFlag.TypePgsId, "Pgs" }
-    };
+        var argumentCount = arguments.Count;
 
-    public static string GetTypeText( DataTypeFlag flag )
-    {
-        var typeMasked = flag.TypeMasked();
-        var isArray = flag.IsArray();
+        builder.Clear();
 
-        if( DataTypeTextMap.TryGetValue( flag, out var messageText ) )
+        for( var i = 0; i < argumentCount; i++ )
         {
-            return messageText;
+            var argument = arguments[i];
+            builder.Append( argument.Name.Value );
+
+            if( i < argumentCount - 1 )
+            {
+                builder.Append( ", " );
+            }
         }
 
-        var result = "";
-        var foundCount = 0;
-
-        foreach( var (k,v) in DataTypeTextMap )
-        {
-            var type = typeMasked & k;
-            if( type == 0 )
-            {
-                continue;
-            }
-
-            if( foundCount > 0 )
-            {
-                result += " / ";
-            }
-
-            result += $"{v}{( isArray ? "[]" : string.Empty )}";
-            foundCount++;
-        }
-
-        return result;
+        return builder.ToString();
     }
 
     private static async Task CollectVariablesAsync( IVariableSymbolTable symbolTable, List<SymbolInformationOrDocumentSymbol> result )
@@ -90,11 +68,16 @@ public sealed class SymbolInformationService
 
     private static async Task CollectCallbackAsync( ICallbackSymbolTable symbolTable, List<SymbolInformationOrDocumentSymbol> result )
     {
+        var detailBuilder = new StringBuilder();
+
         foreach( var callback in symbolTable.ToList() )
         {
+            var detail = GetArgumentDetailText( callback.Arguments, detailBuilder );
+
             result.Add( new DocumentSymbol
                 {
                     Name           = callback.Name,
+                    Detail         = detail,
                     Kind           = SymbolKind.Event,
                     Range          = callback.DefinedPosition.AsRange(),
                     SelectionRange = callback.DefinedPosition.AsRange()
@@ -107,14 +90,14 @@ public sealed class SymbolInformationService
 
     private static async Task CollectUserFunctionAsync( IUserFunctionSymbolSymbolTable symbolTable, List<SymbolInformationOrDocumentSymbol> result )
     {
-        foreach( var variable in symbolTable )
+        foreach( var function in symbolTable )
         {
             result.Add( new DocumentSymbol
                 {
-                    Name           = variable.Name,
+                    Name           = function.Name,
                     Kind           = SymbolKind.Function,
-                    Range          = variable.DefinedPosition.AsRange(),
-                    SelectionRange = variable.DefinedPosition.AsRange()
+                    Range          = function.DefinedPosition.AsRange(),
+                    SelectionRange = function.DefinedPosition.AsRange()
                 }
             );
         }
