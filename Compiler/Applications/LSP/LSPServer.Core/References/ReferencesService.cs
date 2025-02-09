@@ -25,10 +25,10 @@ public class ReferencesService( CompilerCacheService compilerCacheService )
         var word = DocumentUtility.ExtractWord( cache.AllLinesText, request.Position );
         var locations = new List<Location>();
 
-        var variableFinder = new VariableSymbolAppearanceFinder( word, mode:AppearanceFinderMode.Reference );
+        var variableFinder = new VariableSymbolAppearanceFinder( word, mode:AppearanceFinderMode.All );
         var variableAppearances = variableFinder.Find( cache.Ast );
 
-        var functionFinder = new UserFunctionSymbolAppearanceFinder( word, AppearanceFinderMode.Reference );
+        var functionFinder = new UserFunctionSymbolAppearanceFinder( word, AppearanceFinderMode.All );
         var functionAppearances = functionFinder.Find( cache.Ast );
 
         BuildReferences( uri, variableAppearances, locations );
