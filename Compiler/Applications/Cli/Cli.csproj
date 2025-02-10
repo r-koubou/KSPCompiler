@@ -16,40 +16,25 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Content Include="..\..\..\Data\Symbols\callbacks.json">
-          <Link>Data\Symbols\callbacks.json</Link>
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
         <Content Include="..\..\..\Data\Symbols\callbacks.yaml">
           <Link>Data\Symbols\callbacks.yaml</Link>
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
-        <Content Include="..\..\..\Data\Symbols\commands.json">
-          <Link>Data\Symbols\commands.json</Link>
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
         <Content Include="..\..\..\Data\Symbols\commands.yaml">
           <Link>Data\Symbols\commands.yaml</Link>
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
-        <Content Include="..\..\..\Data\Symbols\uitypes.json">
-          <Link>Data\Symbols\uitypes.json</Link>
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
         <Content Include="..\..\..\Data\Symbols\uitypes.yaml">
           <Link>Data\Symbols\uitypes.yaml</Link>
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
-        <Content Include="..\..\..\Data\Symbols\variables.json">
-          <Link>Data\Symbols\variables.json</Link>
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        <Content Include="..\..\..\Data\Symbols\variables.yaml">
+            <Link>Data\Symbols\variables.yaml</Link>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="..\..\..\Data\Symbols\variables.yaml">
-          <Link>Data\Symbols\variables.yaml</Link>
-        </Content>
         <Content Include="..\..\..\LICENSE">
             <Link>LICENSE</Link>
         </Content>
