@@ -1,4 +1,4 @@
-name: build-compiler-development
+name: Build KSP Compiler (develop)
 
 on:
   push:

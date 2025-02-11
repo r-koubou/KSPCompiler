@@ -1,4 +1,4 @@
-name: build-lsp-server-remote
+name: Build LSP Server Remote (develop)
 
 env:
   DOTNET_SDK_VERSION: '9.0.*'

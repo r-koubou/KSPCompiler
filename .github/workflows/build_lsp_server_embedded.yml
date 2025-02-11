@@ -1,4 +1,4 @@
-name: build-lsp-server-embedded
+name: Build LSP Server (Embedded)
 
 env:
   DOTNET_SDK_VERSION: '9.0.*'

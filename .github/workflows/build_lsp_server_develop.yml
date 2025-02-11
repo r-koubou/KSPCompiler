@@ -1,4 +1,4 @@
-name: lsp-server-develop
+name: Build LSP Server (develop)
 
 on:
   push:
