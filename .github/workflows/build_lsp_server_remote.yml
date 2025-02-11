@@ -1,30 +1,17 @@
-name: build-compiler-cli
+name: build-lsp-server-remote
 
 env:
   DOTNET_SDK_VERSION: '9.0.*'
-  PREFIX: KSPCompiler
+  PREFIX: KSP-LSP-Server-Remote
 on:
   workflow_call:
     inputs:
-      build-target:
-        required: true
-        type: string
       build-configuration:
         required: true
         type: string
 
   workflow_dispatch:
     inputs:
-      build-target:
-        description: "Target platform"
-        required: true
-        type: choice
-        options:
-          - dotnet
-          - win-x64
-          - osx-x64
-          - osx-arm64
-          - linux-x64
       build-configuration:
         description: "Build configuration for msbuild"
         required: true
@@ -35,20 +22,19 @@ on:
 
 jobs:
   #--------------------------------------------------------------
-  # Build Compiler CLI
+  # Build LSP Server
   #--------------------------------------------------------------
   build:
     runs-on: ubuntu-latest
     env:
       DOTNET_CLI_TELEMETRY_OPTOUT: 1
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
-      BASE_DIR: Compiler/Applications/Cli
-      PUBLISH_DIR: publish
+      BASE_DIR: ${{ github.workspace }}/Compiler/Applications/LSP/LSPServer.Remote
+      PUBLISH_DIR: publish/remote
 
     steps:
     - name: Show workflow inputs
       run: |
-        echo ${{ inputs.build-target }}
         echo ${{ inputs.build-configuration }}
 
     - name: Sanitize Branch Name
@@ -57,27 +43,25 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
+    #----------------------------------------------------------
+    # Setup .NET SDK
+    #----------------------------------------------------------
     - name: Install SDK
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: ${{ env.DOTNET_SDK_VERSION }}
 
-    - name: Build AOT
-      if: ${{ inputs.build-target != 'dotnet' }}
+    #----------------------------------------------------------
+    # Build LSP Server Remote
+    #----------------------------------------------------------
+    - name: Build LSP Server
       run: |
         pushd ${{ env.BASE_DIR }}
-        dotnet publish -r ${{ inputs.build-target }} --self-contained -c ${{ inputs.build-configuration }} -o ${{ env.PUBLISH_DIR }}/${{ env.PREFIX }}
-        popd
-
-    - name: Build for dotnet
-      if: ${{ inputs.build-target == 'dotnet' }}
-      run: |
-        pushd ${{ env.BASE_DIR }}
-        dotnet publish -c ${{ inputs.build-configuration }} -o ${{ env.PUBLISH_DIR }}/${{ env.PREFIX }}
+        dotnet publish -c ${{ inputs.build-configuration }} -o ${{ env.PUBLISH_DIR }}
         popd
 
     - name: Archive
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ env.PREFIX }}-${{ inputs.build-target }}-${{ inputs.build-configuration }}
+        name: ${{ env.PREFIX }}-${{ inputs.build-configuration }}-${{ env.BRANCH_NAME}}
         path: ${{ env.BASE_DIR }}/${{ env.PUBLISH_DIR }}

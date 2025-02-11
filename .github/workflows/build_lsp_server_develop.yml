@@ -1,0 +1,26 @@
+name: lsp-server-develop
+
+on:
+  push:
+    branches:
+      - develop
+    paths-ignore:
+      - "**.md"
+
+  workflow_dispatch:
+
+jobs:
+  #--------------------------------------------------------------
+  # Build LSP Server
+  #--------------------------------------------------------------
+  build-lsp-server-embedded:
+    uses: ./.github/workflows/build_lsp_server_embedded.yml
+    secrets: inherit
+    with:
+      build-configuration: Debug
+
+  build-lsp-server-remote:
+    uses: ./.github/workflows/build_lsp_server_remote.yml
+    secrets: inherit
+    with:
+      build-configuration: Debug
