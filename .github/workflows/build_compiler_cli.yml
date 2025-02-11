@@ -20,6 +20,7 @@ on:
         required: true
         type: choice
         options:
+          - dotnet
           - win-x64
           - osx-x64
           - osx-arm64
@@ -50,6 +51,9 @@ jobs:
         echo ${{ inputs.build-target }}
         echo ${{ inputs.build-configuration }}
 
+    - name: Sanitize Branch Name
+      run: echo "BRANCH_NAME=$(echo ${{ github.ref_name }} | sed 's|/|-|g')" >> $GITHUB_ENV
+
     - name: Checkout
       uses: actions/checkout@v4
 
@@ -58,10 +62,18 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_SDK_VERSION }}
 
-    - name: Build
+    - name: Build AOT
+      if: ${{ inputs.build-target != 'dotnet' }}
       run: |
         pushd ${{ env.BASE_DIR }}
         dotnet publish -r ${{ inputs.build-target }} --self-contained -c ${{ inputs.build-configuration }} -o ${{ env.PUBLISH_DIR }}/${{ env.PREFIX }}
+        popd
+
+    - name: Build for dotnet
+      if: ${{ inputs.build-target == 'dotnet' }}
+      run: |
+        pushd ${{ env.BASE_DIR }}
+        dotnet publish -c ${{ inputs.build-configuration }} -o ${{ env.PUBLISH_DIR }}/${{ env.PREFIX }}
         popd
 
     - name: Archive

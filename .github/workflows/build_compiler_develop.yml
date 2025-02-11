@@ -1,4 +1,4 @@
-name: develop
+name: build-compiler-development
 
 on:
   push:
@@ -10,28 +10,35 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-win-x64:
+  build-compiler-dotnet:
+    uses: ./.github/workflows/build_compiler_cli.yml
+    secrets: inherit
+    with:
+      build-target: dotnet
+      build-configuration: Debug
+
+  build-compiler-win-x64:
     uses: ./.github/workflows/build_compiler_cli.yml
     secrets: inherit
     with:
       build-target: win-x64
       build-configuration: Debug
 
-  build-osx-x64:
+  build-compiler-osx-x64:
     uses: ./.github/workflows/build_compiler_cli.yml
     secrets: inherit
     with:
       build-target: osx-x64
       build-configuration: Debug
 
-  build-osx-arm64:
+  build-compiler-osx-arm64:
     uses: ./.github/workflows/build_compiler_cli.yml
     secrets: inherit
     with:
       build-target: osx-arm64
       build-configuration: Debug
 
-  build-osx-linux-x64:
+  build-compiler-linux-x64:
     uses: ./.github/workflows/build_compiler_cli.yml
     secrets: inherit
     with:
