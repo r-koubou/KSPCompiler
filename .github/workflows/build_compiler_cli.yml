@@ -1,4 +1,4 @@
-name: build-compiler-cli
+name: Build KSP Compiler CLI
 
 env:
   DOTNET_SDK_VERSION: '9.0.*'
