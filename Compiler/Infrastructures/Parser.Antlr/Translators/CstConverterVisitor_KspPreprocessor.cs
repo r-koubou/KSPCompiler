@@ -2,8 +2,8 @@
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
-using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols.MetaData;
+using KSPCompiler.Gateways.EventEmitting;
 using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
 
 namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators

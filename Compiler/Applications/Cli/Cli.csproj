@@ -51,6 +51,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Controllers\CompilerControllers\CompilerControllers.csproj" />
+      <ProjectReference Include="..\..\Infrastructures\EventEmitting.Default\EventEmitting.Default.csproj" />
       <ProjectReference Include="..\..\Infrastructures\ExternalSymbolRepository.Yaml\ExternalSymbolRepository.Yaml.csproj" />
       <ProjectReference Include="..\..\Infrastructures\Parser.Antlr\Parser.Antlr.csproj" />
       <ProjectReference Include="..\Applications.Commons\Applications.Commons.csproj" />

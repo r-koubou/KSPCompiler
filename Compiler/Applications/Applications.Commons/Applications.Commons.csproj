@@ -12,12 +12,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Events\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\..\Commons\Commons.csproj" />
       <ProjectReference Include="..\..\Domain\Domain.csproj" />
+      <ProjectReference Include="..\..\Gateways\Gateways.csproj" />
     </ItemGroup>
 
 </Project>

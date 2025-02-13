@@ -1,5 +1,5 @@
 using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Events;
+using KSPCompiler.Gateways.EventEmitting;
 
 namespace KSPCompiler.Interactors.Analysis.Extensions;
 

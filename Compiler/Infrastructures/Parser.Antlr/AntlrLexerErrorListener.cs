@@ -2,7 +2,7 @@ using System.IO;
 
 using Antlr4.Runtime;
 
-using KSPCompiler.Domain.Events;
+using KSPCompiler.Gateways.EventEmitting;
 using KSPCompiler.Resources;
 
 namespace KSPCompiler.Infrastructures.Parser.Antlr;

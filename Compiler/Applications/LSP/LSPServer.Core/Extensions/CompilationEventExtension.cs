@@ -1,4 +1,4 @@
-using KSPCompiler.Domain.Events;
+using KSPCompiler.Gateways.EventEmitting;
 
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 

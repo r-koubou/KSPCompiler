@@ -2,7 +2,8 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using KSPCompiler.Applications.LSPServer.Core.Compilations;
-using KSPCompiler.Domain.Events;
+using KSPCompiler.Gateways.EventEmitting;
+using KSPCompiler.Infrastructures.EventEmitting.Default;
 
 using OmniSharp.Extensions.LanguageServer.Protocol;
 using OmniSharp.Extensions.LanguageServer.Protocol.Client.Capabilities;
@@ -30,10 +31,10 @@ internal class TextDocumentHandler : TextDocumentSyncHandlerBase
         CompilationService compilationService,
         CompilerCacheService compilerCacheService )
     {
-        ServerFacade       = serverFacade;
-        Configuration      = configuration;
-        CompilationService = compilationService;
-        CompilerCacheService      = compilerCacheService;
+        ServerFacade         = serverFacade;
+        Configuration        = configuration;
+        CompilationService   = compilationService;
+        CompilerCacheService = compilerCacheService;
     }
 
     private TextDocumentSyncKind Change

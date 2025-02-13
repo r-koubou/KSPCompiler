@@ -1,8 +1,8 @@
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
-using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Gateways.EventEmitting;
 using KSPCompiler.Interactors.Analysis.Extensions;
 using KSPCompiler.Resources;
 using KSPCompiler.UseCases.Analysis.Evaluations.UserFunctions;

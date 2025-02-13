@@ -1,4 +1,4 @@
-namespace KSPCompiler.Domain.Events;
+namespace KSPCompiler.Gateways.EventEmitting;
 
 /// <summary>
 /// The base interface for configuring events.

@@ -1,7 +1,7 @@
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
-using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
+using KSPCompiler.Gateways.EventEmitting;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations;
 using KSPCompiler.Interactors.Analysis.Extensions;
 using KSPCompiler.Resources;

@@ -1,14 +1,14 @@
 using KSPCompiler.Commons.Text;
 
-namespace KSPCompiler.Domain.Events;
+namespace KSPCompiler.Gateways.EventEmitting;
 
-public readonly struct CompilationFatalEvent : IEvent
+public readonly struct CompilationErrorEvent : IEvent
 {
     public string Message { get; }
 
     public Position Position { get; }
 
-    public CompilationFatalEvent( string message, int line = 0, int column = 0 )
+    public CompilationErrorEvent( string message, int line = 0, int column = 0 )
     {
         Message = message;
         Position = new Position
@@ -20,7 +20,7 @@ public readonly struct CompilationFatalEvent : IEvent
         };
     }
 
-    public CompilationFatalEvent( string message, Position position )
+    public CompilationErrorEvent( string message, Position position )
     {
         Message  = message;
         Position = position;

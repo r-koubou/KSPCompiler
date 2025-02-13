@@ -1,6 +1,6 @@
 using System;
 
-namespace KSPCompiler.Domain.Events;
+namespace KSPCompiler.Gateways.EventEmitting;
 
 /// <summary>
 /// Empty implementation of <see cref="IEventEmitter"/>.

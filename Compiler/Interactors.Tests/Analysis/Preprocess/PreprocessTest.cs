@@ -3,9 +3,9 @@ using System;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
-using KSPCompiler.Domain.Events;
-using KSPCompiler.Domain.Events.Extensions;
 using KSPCompiler.Domain.Symbols.MetaData;
+using KSPCompiler.Gateways.EventEmitting;
+using KSPCompiler.Gateways.EventEmitting.Extensions;
 using KSPCompiler.Interactors.Analysis.Preprocessing;
 using KSPCompiler.Interactors.Tests.Commons;
 
