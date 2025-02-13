@@ -3,8 +3,8 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using KSPCompiler.Commons;
-using KSPCompiler.Domain.Events;
-using KSPCompiler.Domain.Events.Extensions;
+using KSPCompiler.Gateways.EventEmitting;
+using KSPCompiler.Gateways.EventEmitting.Extensions;
 using KSPCompiler.Interactors.Analysis.Semantics;
 using KSPCompiler.UseCases.Analysis;
 

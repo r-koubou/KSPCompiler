@@ -5,7 +5,7 @@ using Antlr4.Runtime.Tree;
 using KSPCompiler.Commons.Text;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Domain.Events;
+using KSPCompiler.Gateways.EventEmitting;
 using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
 
 namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators

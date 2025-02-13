@@ -1,7 +1,7 @@
 using System;
 
-using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Gateways.EventEmitting;
 using KSPCompiler.UseCases.Analysis.Context;
 
 namespace KSPCompiler.Interactors.Tests.Analysis.Obfuscators;

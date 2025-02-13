@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-using KSPCompiler.Domain.Events;
+using KSPCompiler.Gateways.EventEmitting;
 
 namespace KSPCompiler.Interactors.Tests.Commons;
 

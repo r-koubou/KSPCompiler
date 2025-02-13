@@ -1,5 +1,5 @@
-using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Gateways.EventEmitting;
 
 namespace KSPCompiler.UseCases.Analysis.Context;
 

@@ -1,7 +1,7 @@
 using System.IO;
 
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Domain.Events;
+using KSPCompiler.Gateways.EventEmitting;
 using KSPCompiler.Infrastructures.Parser.Antlr;
 
 using NUnit.Framework;

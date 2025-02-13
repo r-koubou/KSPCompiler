@@ -1,7 +1,7 @@
 using System.IO;
 using System.Text;
 
-using KSPCompiler.Domain.Events;
+using KSPCompiler.Gateways.EventEmitting;
 
 namespace KSPCompiler.Infrastructures.Parser.Antlr;
 

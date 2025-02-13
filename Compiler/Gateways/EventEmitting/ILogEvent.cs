@@ -1,6 +1,6 @@
 using KSPCompiler.Commons.Text;
 
-namespace KSPCompiler.Domain.Events;
+namespace KSPCompiler.Gateways.EventEmitting;
 
 public interface ILogEvent : IEvent
 {

@@ -1,5 +1,5 @@
-using KSPCompiler.Domain.Events;
 using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Gateways.EventEmitting;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Booleans;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Conditions;
 using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Integers;

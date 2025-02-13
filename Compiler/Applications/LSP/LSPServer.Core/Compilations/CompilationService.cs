@@ -10,14 +10,15 @@ using System.Threading.Tasks;
 using KSPCompiler.Applications.LSPServer.Core.Extensions;
 using KSPCompiler.Commons;
 using KSPCompiler.Controllers.Compiler;
-using KSPCompiler.Domain.Events;
-using KSPCompiler.Domain.Events.Extensions;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Commands;
 using KSPCompiler.ExternalSymbolRepository.Yaml.UITypes;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
+using KSPCompiler.Gateways.EventEmitting;
+using KSPCompiler.Gateways.EventEmitting.Extensions;
 using KSPCompiler.Gateways.Symbols;
+using KSPCompiler.Infrastructures.EventEmitting.Default;
 using KSPCompiler.Infrastructures.Parser.Antlr;
 
 using OmniSharp.Extensions.LanguageServer.Protocol;

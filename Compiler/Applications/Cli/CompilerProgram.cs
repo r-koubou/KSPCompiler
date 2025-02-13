@@ -2,18 +2,18 @@ using System;
 using System.IO;
 using System.Threading;
 
-using KSPCompiler.Applications.Commons.Events;
 using KSPCompiler.Commons;
 using KSPCompiler.Controllers.Compiler;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.CompilerMessages.Extensions;
-using KSPCompiler.Domain.Events;
-using KSPCompiler.Domain.Events.Extensions;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Commands;
 using KSPCompiler.ExternalSymbolRepository.Yaml.UITypes;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
+using KSPCompiler.Gateways.EventEmitting;
+using KSPCompiler.Gateways.EventEmitting.Extensions;
+using KSPCompiler.Infrastructures.EventEmitting.Default;
 using KSPCompiler.Infrastructures.Parser.Antlr;
 
 namespace KSPCompiler.Applications.Cli;

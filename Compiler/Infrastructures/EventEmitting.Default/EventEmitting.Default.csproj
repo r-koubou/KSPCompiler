@@ -6,17 +6,13 @@
         <Nullable>enable</Nullable>
         <Copyright>R-Koubou</Copyright>
         <Company>R-Koubou</Company>
-        <Product>KSPCompiler.Domain</Product>
-        <AssemblyName>KSPCompiler.Domain</AssemblyName>
-        <RootNamespace>KSPCompiler.Domain</RootNamespace>
+        <Product>KSPCompiler.Infrastructures.EventEmitting.Default</Product>
+        <AssemblyName>KSPCompiler.Infrastructures.EventEmitting.Default</AssemblyName>
+        <RootNamespace>KSPCompiler.Infrastructures.EventEmitting.Default</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Commons\Commons.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Events\" />
+      <ProjectReference Include="..\..\Gateways\Gateways.csproj" />
     </ItemGroup>
 
 </Project>

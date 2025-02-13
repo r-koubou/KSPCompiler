@@ -1,6 +1,6 @@
 using System;
 
-namespace KSPCompiler.Domain.Events.Extensions;
+namespace KSPCompiler.Gateways.EventEmitting.Extensions;
 
 public static class IEventEmitterExtension
 {

@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 
-using KSPCompiler.Domain.Events;
+using KSPCompiler.Gateways.EventEmitting;
 
-namespace KSPCompiler.Applications.LSPServer.Core;
+namespace KSPCompiler.Infrastructures.EventEmitting.Default;
 
 /// <summary>
 /// Default implementation of <see cref="IEventEmitter"/>.

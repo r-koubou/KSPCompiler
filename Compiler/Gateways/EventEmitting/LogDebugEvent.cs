@@ -2,9 +2,9 @@ using System.Runtime.CompilerServices;
 
 using KSPCompiler.Commons.Text;
 
-namespace KSPCompiler.Domain.Events;
+namespace KSPCompiler.Gateways.EventEmitting;
 
-public readonly struct LogErrorEvent : ILogEvent
+public readonly struct LogDebugEvent : ILogEvent
 {
     public string Message { get; }
     public Position ScriptPosition { get; }
@@ -12,7 +12,7 @@ public readonly struct LogErrorEvent : ILogEvent
     public string CallerFilePath { get; }
     public int CallerLineNumber { get; }
 
-    public LogErrorEvent(
+    public LogDebugEvent(
         string message,
         [CallerFilePath] string callerFilePath = "",
         [CallerLineNumber] int callerLineNumber = 0 )
@@ -23,7 +23,7 @@ public readonly struct LogErrorEvent : ILogEvent
         CallerLineNumber = callerLineNumber;
     }
 
-    public LogErrorEvent(
+    public LogDebugEvent(
         string message,
         Position scriptPosition,
         [CallerFilePath] string callerFilePath = "",
