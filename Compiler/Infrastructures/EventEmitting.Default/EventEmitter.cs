@@ -10,6 +10,8 @@ namespace KSPCompiler.Infrastructures.EventEmitting.Default;
 /// </summary>
 public sealed class EventEmitter : IEventEmitter
 {
+    private readonly object lockObject = new();
+
     // object : 任意のIObservable<T>型を出し入れしたいため
     private readonly IDictionary<Type, object> registered = new Dictionary<Type, object>();
 
@@ -31,36 +33,49 @@ public sealed class EventEmitter : IEventEmitter
     /// <inheritdoc />
     public IObservable<TEvent> AsObservable<TEvent>() where TEvent : IEvent
     {
-        if( TryGetObservable( out IObservable<TEvent> result ) )
+        lock( lockObject )
         {
+            if( TryGetObservable( out IObservable<TEvent> result ) )
+            {
+                return result;
+            }
+
+            result = new EventObservable<TEvent>();
+
+            if( !registered.TryAdd( typeof( TEvent ), result ) )
+            {
+                throw new InvalidOperationException( $"Failed to register {typeof( TEvent ).Name}." );
+            }
+
             return result;
         }
-
-        result = new EventObservable<TEvent>();
-        registered.Add( typeof( TEvent ), result );
-
-        return result;
     }
 
     public void Dispose()
     {
-        registered.Clear();
+        lock( lockObject )
+        {
+            registered.Clear();
+        }
     }
 
     private bool TryGetObservable<TEvent>( out IObservable<TEvent> result ) where TEvent : IEvent
     {
-        var type = typeof( TEvent );
-
-        result = NullObservable<TEvent>.Instance;
-
-        if( !registered.TryGetValue( type, out var value ) )
+        lock( lockObject )
         {
-            return false;
+            var type = typeof( TEvent );
+
+            result = NullObservable<TEvent>.Instance;
+
+            if( !registered.TryGetValue( type, out var value ) )
+            {
+                return false;
+            }
+
+            result = (IObservable<TEvent>)value;
+
+            return true;
         }
-
-        result = (IObservable<TEvent>)value;
-
-        return true;
     }
 
     #region IObservable Implementation
@@ -89,6 +104,7 @@ public sealed class EventEmitter : IEventEmitter
 
     private class EventObservable<TEvent> : IObservable<TEvent> where TEvent : IEvent
     {
+        private readonly object lockObject = new();
         private readonly List<IObserver<TEvent>> subscribers = [];
 
         #region IObservable
@@ -96,12 +112,19 @@ public sealed class EventEmitter : IEventEmitter
         /// <inheritdoc />
         public IDisposable Subscribe( IObserver<TEvent> observer )
         {
-            subscribers.Add( observer );
+            lock( lockObject )
+            {
+                subscribers.Add( observer );
+            }
 
             return new AnonymousDisposer( () =>
                 {
-                    observer.OnCompleted();
-                    subscribers.Remove( observer );
+
+                    lock( lockObject )
+                    {
+                        observer.OnCompleted();
+                        subscribers.Remove( observer );
+                    }
                 }
             );
         }
@@ -110,7 +133,14 @@ public sealed class EventEmitter : IEventEmitter
 
         public void Publish( TEvent evt )
         {
-            foreach( var subscriber in subscribers )
+            List<IObserver<TEvent>> snapshot;
+
+            lock( lockObject )
+            {
+                snapshot = new List<IObserver<TEvent>>( subscribers );
+            }
+
+            foreach( var subscriber in snapshot )
             {
                 try
                 {
