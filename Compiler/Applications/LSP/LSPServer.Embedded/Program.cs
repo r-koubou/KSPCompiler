@@ -14,6 +14,7 @@ public static class Program
         var option = new Server.Option(
             input: Console.OpenStandardInput(),
             output: Console.OpenStandardOutput(),
+            loggerFactory: ZLoggerFactory.Create(),
             minimumLevel: LogLevel.Trace
         );
 

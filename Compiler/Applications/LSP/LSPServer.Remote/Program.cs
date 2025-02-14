@@ -35,9 +35,10 @@ class Program
         try
         {
             var option = new Server.Option(
-                client.GetStream(),
-                client.GetStream(),
-                LogLevel.Trace
+                input: client.GetStream(),
+                output: client.GetStream(),
+                loggerFactory: ZLoggerFactory.Create(),
+                minimumLevel: LogLevel.Trace
             );
 
             var server = await Server.CreateAsync( option );
