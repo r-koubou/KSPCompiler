@@ -15,6 +15,7 @@ using KSPCompiler.Applications.LSPServer.Core.Symbols;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 using OmniSharp.Extensions.LanguageServer.Protocol.Window;
 using OmniSharp.Extensions.LanguageServer.Server;
@@ -25,15 +26,21 @@ public class Server
 {
     public class Option
     {
-        public Stream Input { get;  }
+        public Stream Input { get; }
         public Stream Output { get; }
+        public ILoggerFactory? LoggerFactory { get; }
         public LogLevel MinimumLevel { get; }
 
-        public Option( Stream input, Stream output, LogLevel minimumLevel )
+        public Option(
+            Stream input,
+            Stream output,
+            ILoggerFactory? loggerFactory = null,
+            LogLevel minimumLevel = LogLevel.Information )
         {
-            Input    = input;
-            Output   = output;
-            MinimumLevel = minimumLevel;
+            Input         = input;
+            Output        = output;
+            LoggerFactory = loggerFactory;
+            MinimumLevel  = minimumLevel;
         }
     }
 
@@ -48,6 +55,7 @@ public class Server
                                logging.SetMinimumLevel( option.MinimumLevel );
                            }
                        )
+                      .WithLoggerFactory( option.LoggerFactory ?? NullLoggerFactory.Instance )
                       .WithHandler<TextDocumentHandler>()
                       .WithHandler<DefinitionHandler>()
                       .WithHandler<DocumentSymbolHandler>()
@@ -64,6 +72,7 @@ public class Server
                       .WithServices(
                            services =>
                            {
+                               services.AddSingleton<EventEmittingService>();
                                services.AddSingleton<CompilationService>();
                                services.AddSingleton<CompilerCacheService>();
                                services.AddSingleton<DefinitionService>();
