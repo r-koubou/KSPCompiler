@@ -204,7 +204,8 @@ public class VariableDeclarationTest
 
         var initializer = new AstArrayInitializerNode
         {
-            Size = new AstIntLiteralNode( 3 )
+            Size = new AstIntLiteralNode( 3 ),
+            HasAssignOperator = true
         };
         initializer.Initializer.Expressions.Add( new AstIntLiteralNode( 1 ) );
         initializer.Initializer.Expressions.Add( new AstIntLiteralNode( 2 ) );
@@ -236,7 +237,7 @@ public class VariableDeclarationTest
         const string variableName = "$x";
         const string obfuscatedName = "$v0";
         var expected = new StringBuilder()
-                      .Append( $"declare ui_label {obfuscatedName} := (1, 2)" )
+                      .Append( $"declare ui_label {obfuscatedName}(1, 2)" )
                       .NewLine().ToString();
 
         var output = new StringBuilder();
