@@ -27,11 +27,11 @@ namespace KSPCompiler.Applications.LSPServer.Core.ExecuteCommands;
 ///     </item>
 /// </list>
 /// </remarks>
-public class ObfuscationCommandHandler( CompilationService compilationService ) : IExecuteCommandHandler<string>
+public class ObfuscationCommandHandler( LspCompilationService lspCompilationService ) : IExecuteCommandHandler<string>
 {
     private const string ObfuscationCommand = "ksp.obfuscate";
 
-    private CompilationService CompilationService { get; } = compilationService;
+    private LspCompilationService LspCompilationService { get; } = lspCompilationService;
 
     /// <returns>Obfuscated Script if successful, otherwise empty string</returns>
     public async Task<string> Handle( ExecuteCommandParams<string> request, CancellationToken cancellationToken )
@@ -45,9 +45,9 @@ public class ObfuscationCommandHandler( CompilationService compilationService ) 
 
         var uri = DocumentUri.Parse( path );
 
-        var result = await CompilationService.ExecuteCompilationAsync(
+        var result = await LspCompilationService.ExecuteCompilationAsync(
             uri,
-            new CompilationService.ExecuteCompileOption( enableObfuscation: true ),
+            new LspCompilationService.ExecuteCompileOption( enableObfuscation: true ),
             cancellationToken
         );
 

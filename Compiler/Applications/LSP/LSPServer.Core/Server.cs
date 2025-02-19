@@ -73,7 +73,7 @@ public class Server
                            services =>
                            {
                                services.AddSingleton<EventEmittingService>();
-                               services.AddSingleton<CompilationService>();
+                               services.AddSingleton<LspCompilationService>();
                                services.AddSingleton<CompilerCacheService>();
                                services.AddSingleton<DefinitionService>();
                                services.AddSingleton<SymbolInformationService>();

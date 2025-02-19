@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 using KSPCompiler.Applications.LSPServer.Core.Extensions;
 using KSPCompiler.Commons;
-using KSPCompiler.Controllers.Compiler;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Commands;
@@ -20,6 +19,8 @@ using KSPCompiler.Gateways.EventEmitting.Extensions;
 using KSPCompiler.Gateways.Symbols;
 using KSPCompiler.Infrastructures.EventEmitting.Default;
 using KSPCompiler.Infrastructures.Parser.Antlr;
+using KSPCompiler.Interactors.ApplicationServices;
+using KSPCompiler.Interactors.ApplicationServices.Compilation;
 
 using OmniSharp.Extensions.LanguageServer.Protocol;
 using OmniSharp.Extensions.LanguageServer.Protocol.Document;
@@ -28,7 +29,7 @@ using OmniSharp.Extensions.LanguageServer.Protocol.Server;
 
 namespace KSPCompiler.Applications.LSPServer.Core.Compilations;
 
-public sealed class CompilationService
+public sealed class LspCompilationService
 {
     public sealed class ExecuteCompileOption(
         bool enableObfuscation = false
@@ -54,9 +55,9 @@ public sealed class CompilationService
     private CompilerCacheService CompilerCacheService { get; }
     private IEventEmitter CompilerEventEmitter { get; } = new EventEmitter();
 
-    private readonly CompilerController compilerController = new();
+    private readonly CompilationApplicationService compilationApplicationService = new();
 
-    public CompilationService(
+    public LspCompilationService(
         ILanguageServerFacade serverFacade,
         ILanguageServerConfiguration configuration,
         CompilerCacheService compilerCacheService )
@@ -70,23 +71,23 @@ public sealed class CompilationService
     }
 
     #region Compilation
-    private async Task<CompilerResult> CompileAsync( string script, IEventEmitter eventEmitter, ExecuteCompileOption executeOption, CancellationToken cancellationToken )
+    private async Task<CompilationResult> CompileAsync( string script, IEventEmitter eventEmitter, ExecuteCompileOption executeOption, CancellationToken cancellationToken )
     {
         SetupSymbol( builtInSymbolTable );
 
         var parser = new AntlrKspStringSyntaxParser( script, eventEmitter, Encoding.UTF8 );
         var symbolTableInScript = builtInSymbolTable.CreateBuiltInSymbolsOnly();
 
-        var option = new CompilerOption(
+        var option = new CompilationOption(
             SyntaxParser: parser,
             SymbolTable: symbolTableInScript,
             EnableObfuscation: executeOption.EnableObfuscation
         );
 
-        return await compilerController.ExecuteAsync( eventEmitter, option, cancellationToken );
+        return await compilationApplicationService.ExecuteAsync( eventEmitter, option, cancellationToken );
     }
 
-    public async Task<CompilerResult> ExecuteCompilationAsync( DocumentUri uri, ExecuteCompileOption executeOption, CancellationToken cancellationToken )
+    public async Task<CompilationResult> ExecuteCompilationAsync( DocumentUri uri, ExecuteCompileOption executeOption, CancellationToken cancellationToken )
     {
         var script = await File.ReadAllTextAsync( uri.Path, cancellationToken );
 
@@ -95,7 +96,7 @@ public sealed class CompilationService
         return await ExecuteCompilationAsync( uri, script, executeOption, cancellationToken );
     }
 
-    public async Task<CompilerResult> ExecuteCompilationAsync( DocumentUri uri, string script, ExecuteCompileOption executeOption, CancellationToken cancellationToken )
+    public async Task<CompilationResult> ExecuteCompilationAsync( DocumentUri uri, string script, ExecuteCompileOption executeOption, CancellationToken cancellationToken )
     {
         // ReSharper disable once PossiblyImpureMethodCallOnReadonlyVariable
         var diagnostics = ImmutableArray<Diagnostic>.Empty.ToBuilder();

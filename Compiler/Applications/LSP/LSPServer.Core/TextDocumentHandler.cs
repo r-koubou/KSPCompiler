@@ -21,19 +21,19 @@ internal class TextDocumentHandler : TextDocumentSyncHandlerBase
     private ILanguageServerFacade ServerFacade { get; }
     private ILanguageServerConfiguration Configuration { get; }
 
-    private CompilationService CompilationService { get; }
+    private LspCompilationService LspCompilationService { get; }
     private CompilerCacheService CompilerCacheService { get; }
     private IEventEmitter CompilerEventEmitter { get; } = new EventEmitter();
 
     public TextDocumentHandler(
         ILanguageServerFacade serverFacade,
         ILanguageServerConfiguration configuration,
-        CompilationService compilationService,
+        LspCompilationService lspCompilationService,
         CompilerCacheService compilerCacheService )
     {
         ServerFacade         = serverFacade;
         Configuration        = configuration;
-        CompilationService   = compilationService;
+        LspCompilationService   = lspCompilationService;
         CompilerCacheService = compilerCacheService;
     }
 
@@ -47,14 +47,14 @@ internal class TextDocumentHandler : TextDocumentSyncHandlerBase
 
     public override async Task<Unit> Handle( DidOpenTextDocumentParams request, CancellationToken cancellationToken )
     {
-        await CompilationService.HandleOpenTextDocumentAsync( request, cancellationToken );
+        await LspCompilationService.HandleOpenTextDocumentAsync( request, cancellationToken );
 
         return Unit.Value;
     }
 
     public override async Task<Unit> Handle( DidChangeTextDocumentParams request, CancellationToken cancellationToken )
     {
-        await CompilationService.HandleChangTextDocumentAsync( request, cancellationToken );
+        await LspCompilationService.HandleChangTextDocumentAsync( request, cancellationToken );
 
         return Unit.Value;
     }
@@ -68,7 +68,7 @@ internal class TextDocumentHandler : TextDocumentSyncHandlerBase
 
     public override async Task<Unit> Handle( DidCloseTextDocumentParams request, CancellationToken cancellationToken )
     {
-        await CompilationService.HandleCloseTextDocumentAsync( request, cancellationToken );
+        await LspCompilationService.HandleCloseTextDocumentAsync( request, cancellationToken );
 
         return Unit.Value;
     }
