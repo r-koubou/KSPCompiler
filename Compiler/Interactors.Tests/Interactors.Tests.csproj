@@ -21,52 +21,52 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseControllerTest\delete\repository_callback.json">
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\delete\repository_callback.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseControllerTest\delete\repository_command.json">
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\delete\repository_command.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseControllerTest\delete\repository_ui_type.json">
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\delete\repository_ui_type.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseControllerTest\delete\repository_variable.json">
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\delete\repository_variable.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseControllerTest\export\repository_callback.json">
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\export\repository_callback.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseControllerTest\export\repository_command.json">
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\export\repository_command.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseControllerTest\export\repository_ui_type.json">
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\export\repository_ui_type.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseControllerTest\export\repository_variable.json">
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\export\repository_variable.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseControllerTest\find\repository_callback.json">
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\find\repository_callback.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseControllerTest\find\repository_command.json">
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\find\repository_command.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseControllerTest\find\repository_ui_type.json">
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\find\repository_ui_type.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseControllerTest\find\repository_variable.json">
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\find\repository_variable.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseControllerTest\import\callback.tsv">
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\import\command.tsv">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseControllerTest\import\command.tsv">
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\import\callback.tsv">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseControllerTest\import\ui_type.tsv">
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\import\ui_type.tsv">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseControllerTest\import\variable.tsv">
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\import\variable.tsv">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>

@@ -19,12 +19,12 @@ using KSPCompiler.Interactors.ApplicationServices.Symbol;
 
 using NUnit.Framework;
 
-namespace KSPCompiler.Interactors.Tests.ApplicationServices;
+namespace KSPCompiler.Interactors.Tests.ApplicationServices.Symbol;
 
 [TestFixture]
-public class SymbolLocalDatabaseControllerTest
+public class SymbolLocalDatabaseApplicationServiceTest
 {
-    private static readonly string TestDataDirectory = Path.Combine( "ApplicationServices", "TestData", "SymbolLocalDatabaseControllerTest" );
+    private static readonly string TestDataDirectory = Path.Combine( "ApplicationServices", "TestData", "SymbolLocalDatabaseApplicationServiceTest" );
     private static readonly string ImportTestDataDirectory = Path.Combine( TestDataDirectory, "import" );
     private static readonly string ExportTestDataDirectory = Path.Combine( TestDataDirectory, "export" );
     private static readonly string DeleteTestDataDirectory = Path.Combine( TestDataDirectory, "delete" );
@@ -46,9 +46,9 @@ public class SymbolLocalDatabaseControllerTest
         ITextContentReader reader = new LocalTextContentReader( importPath );
         ISymbolImporter<VariableSymbol> importer = new TsvVariableSymbolImporter( reader );
         using ISymbolRepository<VariableSymbol> repository = new VariableSymbolRepository( repositoryPath );
-        var controller = new SymbolDatabaseApplicationService<VariableSymbol>( repository );
+        var applicationService = new SymbolDatabaseApplicationService<VariableSymbol>( repository );
 
-        var result = await controller.ImportAsync( importer );
+        var result = await applicationService.ImportAsync( importer );
 
         Assert.That( result.Success, Is.True );
     }
@@ -62,9 +62,9 @@ public class SymbolLocalDatabaseControllerTest
         ITextContentWriter writer = new LocalTextContentWriter( exportPath );
         ISymbolExporter<VariableSymbol> exporter = new TsvVariableSymbolExporter( writer );
         using ISymbolRepository<VariableSymbol> repository = new VariableSymbolRepository( repositoryPath );
-        var controller = new SymbolDatabaseApplicationService<VariableSymbol>( repository );
+        var applicationService = new SymbolDatabaseApplicationService<VariableSymbol>( repository );
 
-        var result = await controller.ExportAsync( exporter, _ => true );
+        var result = await applicationService.ExportAsync( exporter, _ => true );
 
         Assert.That( result.Success, Is.True );
     }
@@ -75,9 +75,9 @@ public class SymbolLocalDatabaseControllerTest
         var repositoryPath = new FilePath( Path.Combine( DeleteTestDataDirectory, "repository_variable.json" ) );
 
         using ISymbolRepository<VariableSymbol> repository = new VariableSymbolRepository( repositoryPath );
-        var controller = new SymbolDatabaseApplicationService<VariableSymbol>( repository );
+        var applicationService = new SymbolDatabaseApplicationService<VariableSymbol>( repository );
 
-        var result = await controller.DeleteAsync( _ => true );
+        var result = await applicationService.DeleteAsync( _ => true );
 
         Assert.That( result.Success, Is.True );
         Assert.That( ( await repository.FindAllAsync() ).Any(), Is.False );
@@ -89,9 +89,9 @@ public class SymbolLocalDatabaseControllerTest
         var repositoryPath = new FilePath( Path.Combine( FindTestDataDirectory, "repository_variable.json" ) );
 
         using ISymbolRepository<VariableSymbol> repository = new VariableSymbolRepository( repositoryPath );
-        var controller = new SymbolDatabaseApplicationService<VariableSymbol>( repository );
+        var applicationService = new SymbolDatabaseApplicationService<VariableSymbol>( repository );
 
-        var result = await controller.FindAsync( _ => true );
+        var result = await applicationService.FindAsync( _ => true );
 
         Assert.That( result.Success, Is.True );
         Assert.That( result.FoundSymbols, Is.Not.Empty );
@@ -104,8 +104,8 @@ public class SymbolLocalDatabaseControllerTest
 
         ITextContentWriter writer = new LocalTextContentWriter( exportPath );
         ISymbolExporter<VariableSymbol> exporter = new TsvVariableSymbolExporter( writer );
-        var controller = new SymbolTemplateApplicationService<VariableSymbol>();
-        var result = await controller.ExportAsync( exporter );
+        var applicationService = new SymbolTemplateApplicationService<VariableSymbol>();
+        var result = await applicationService.ExportAsync( exporter );
 
         Assert.That( result.Success, Is.True );
     }
@@ -121,9 +121,9 @@ public class SymbolLocalDatabaseControllerTest
         ITextContentReader reader = new LocalTextContentReader( importPath );
         ISymbolImporter<CommandSymbol> importer = new TsvCommandSymbolImporter( reader );
         using ISymbolRepository<CommandSymbol> repository = new CommandSymbolRepository( repositoryPath );
-        var controller = new SymbolDatabaseApplicationService<CommandSymbol>( repository );
+        var applicationService = new SymbolDatabaseApplicationService<CommandSymbol>( repository );
 
-        var result = await controller.ImportAsync( importer );
+        var result = await applicationService.ImportAsync( importer );
 
         Assert.That( result.Success, Is.True );
     }
@@ -137,9 +137,9 @@ public class SymbolLocalDatabaseControllerTest
         ITextContentWriter writer = new LocalTextContentWriter( exportPath );
         ISymbolExporter<CommandSymbol> exporter = new TsvCommandSymbolExporter( writer );
         using ISymbolRepository<CommandSymbol> repository = new CommandSymbolRepository( repositoryPath );
-        var controller = new SymbolDatabaseApplicationService<CommandSymbol>( repository );
+        var applicationService = new SymbolDatabaseApplicationService<CommandSymbol>( repository );
 
-        var result = await controller.ExportAsync( exporter, _ => true );
+        var result = await applicationService.ExportAsync( exporter, _ => true );
 
         Assert.That( result.Success, Is.True );
     }
@@ -150,9 +150,9 @@ public class SymbolLocalDatabaseControllerTest
         var repositoryPath = new FilePath( Path.Combine( DeleteTestDataDirectory, "repository_command.json" ) );
 
         using ISymbolRepository<CommandSymbol> repository = new CommandSymbolRepository( repositoryPath );
-        var controller = new SymbolDatabaseApplicationService<CommandSymbol>( repository );
+        var applicationService = new SymbolDatabaseApplicationService<CommandSymbol>( repository );
 
-        var result = await controller.DeleteAsync( _ => true );
+        var result = await applicationService.DeleteAsync( _ => true );
 
         Assert.That( result.Success, Is.True );
         Assert.That( await repository.FindAllAsync(), Is.Empty );
@@ -164,9 +164,9 @@ public class SymbolLocalDatabaseControllerTest
         var repositoryPath = new FilePath( Path.Combine( FindTestDataDirectory, "repository_command.json" ) );
 
         using ISymbolRepository<CommandSymbol> repository = new CommandSymbolRepository( repositoryPath );
-        var controller = new SymbolDatabaseApplicationService<CommandSymbol>( repository );
+        var applicationService = new SymbolDatabaseApplicationService<CommandSymbol>( repository );
 
-        var result = await controller.FindAsync( _ => true );
+        var result = await applicationService.FindAsync( _ => true );
 
         Assert.That( result.Success, Is.True );
         Assert.That( result.FoundSymbols, Is.Not.Empty );
@@ -179,8 +179,8 @@ public class SymbolLocalDatabaseControllerTest
 
         ITextContentWriter writer = new LocalTextContentWriter( exportPath );
         ISymbolExporter<CommandSymbol> exporter = new TsvCommandSymbolExporter( writer );
-        var controller = new SymbolTemplateApplicationService<CommandSymbol>();
-        var result = await controller.ExportAsync( exporter );
+        var applicationService = new SymbolTemplateApplicationService<CommandSymbol>();
+        var result = await applicationService.ExportAsync( exporter );
 
         Assert.That( result.Success, Is.True );
     }
@@ -196,9 +196,9 @@ public class SymbolLocalDatabaseControllerTest
         ITextContentReader reader = new LocalTextContentReader( importPath );
         ISymbolImporter<CallbackSymbol> importer = new TsvCallbackSymbolImporter( reader );
         using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryPath );
-        var controller = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
+        var applicationService = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
 
-        var result = await controller.ImportAsync( importer );
+        var result = await applicationService.ImportAsync( importer );
 
         Assert.That( result.Success, Is.True );
     }
@@ -212,9 +212,9 @@ public class SymbolLocalDatabaseControllerTest
         ITextContentWriter writer = new LocalTextContentWriter( exportPath );
         ISymbolExporter<CallbackSymbol> exporter = new TsvCallbackSymbolExporter( writer );
         using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryPath );
-        var controller = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
+        var applicationService = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
 
-        var result = await controller.ExportAsync( exporter, _ => true );
+        var result = await applicationService.ExportAsync( exporter, _ => true );
 
         Assert.That( result.Success, Is.True );
     }
@@ -225,9 +225,9 @@ public class SymbolLocalDatabaseControllerTest
         var repositoryPath = new FilePath( Path.Combine( DeleteTestDataDirectory, "repository_callback.json" ) );
 
         using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryPath );
-        var controller = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
+        var applicationService = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
 
-        var result = await controller.DeleteAsync( _ => true );
+        var result = await applicationService.DeleteAsync( _ => true );
 
         Assert.That( result.Success, Is.True );
         Assert.That( await repository.FindAllAsync(), Is.Empty );
@@ -239,9 +239,9 @@ public class SymbolLocalDatabaseControllerTest
         var repositoryPath = new FilePath( Path.Combine( FindTestDataDirectory, "repository_callback.json" ) );
 
         using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryPath );
-        var controller = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
+        var applicationService = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
 
-        var result = await controller.FindAsync( _ => true );
+        var result = await applicationService.FindAsync( _ => true );
 
         Assert.That( result.Success, Is.True );
         Assert.That( result.FoundSymbols, Is.Not.Empty );
@@ -254,8 +254,8 @@ public class SymbolLocalDatabaseControllerTest
 
         ITextContentWriter writer = new LocalTextContentWriter( exportPath );
         ISymbolExporter<CallbackSymbol> exporter = new TsvCallbackSymbolExporter( writer );
-        var controller = new SymbolTemplateApplicationService<CallbackSymbol>();
-        var result = await controller.ExportAsync( exporter );
+        var applicationService = new SymbolTemplateApplicationService<CallbackSymbol>();
+        var result = await applicationService.ExportAsync( exporter );
 
         Assert.That( result.Success, Is.True );
     }
@@ -271,9 +271,9 @@ public class SymbolLocalDatabaseControllerTest
         ITextContentReader reader = new LocalTextContentReader( importPath );
         ISymbolImporter<UITypeSymbol> importer = new TsvUITypeSymbolImporter( reader );
         using ISymbolRepository<UITypeSymbol> repository = new UITypeSymbolRepository( repositoryPath );
-        var controller = new SymbolDatabaseApplicationService<UITypeSymbol>( repository );
+        var applicationService = new SymbolDatabaseApplicationService<UITypeSymbol>( repository );
 
-        var result = await controller.ImportAsync( importer );
+        var result = await applicationService.ImportAsync( importer );
 
         Assert.That( result.Success, Is.True );
     }
@@ -287,9 +287,9 @@ public class SymbolLocalDatabaseControllerTest
         ITextContentWriter writer = new LocalTextContentWriter( exportPath );
         ISymbolExporter<UITypeSymbol> exporter = new TsvUITypeSymbolExporter( writer );
         using ISymbolRepository<UITypeSymbol> repository = new UITypeSymbolRepository( repositoryPath );
-        var controller = new SymbolDatabaseApplicationService<UITypeSymbol>( repository );
+        var applicationService = new SymbolDatabaseApplicationService<UITypeSymbol>( repository );
 
-        var result = await controller.ExportAsync( exporter, _ => true );
+        var result = await applicationService.ExportAsync( exporter, _ => true );
 
         Assert.That( result.Success, Is.True );
     }
@@ -300,9 +300,9 @@ public class SymbolLocalDatabaseControllerTest
         var repositoryPath = new FilePath( Path.Combine( DeleteTestDataDirectory, "repository_ui_type.json" ) );
 
         using ISymbolRepository<UITypeSymbol> repository = new UITypeSymbolRepository( repositoryPath );
-        var controller = new SymbolDatabaseApplicationService<UITypeSymbol>( repository );
+        var applicationService = new SymbolDatabaseApplicationService<UITypeSymbol>( repository );
 
-        var result = await controller.DeleteAsync( _ => true );
+        var result = await applicationService.DeleteAsync( _ => true );
 
         Assert.That( result.Success, Is.True );
         Assert.That( await repository.FindAllAsync(), Is.Empty );
@@ -314,9 +314,9 @@ public class SymbolLocalDatabaseControllerTest
         var repositoryPath = new FilePath( Path.Combine( FindTestDataDirectory, "repository_ui_type.json" ) );
 
         using ISymbolRepository<UITypeSymbol> repository = new UITypeSymbolRepository( repositoryPath );
-        var controller = new SymbolDatabaseApplicationService<UITypeSymbol>( repository );
+        var applicationService = new SymbolDatabaseApplicationService<UITypeSymbol>( repository );
 
-        var result = await controller.FindAsync( _ => true );
+        var result = await applicationService.FindAsync( _ => true );
 
         Assert.That( result.Success, Is.True );
         Assert.That( result.FoundSymbols, Is.Not.Empty );
@@ -329,8 +329,8 @@ public class SymbolLocalDatabaseControllerTest
 
         ITextContentWriter writer = new LocalTextContentWriter( exportPath );
         ISymbolExporter<UITypeSymbol> exporter = new TsvUITypeSymbolExporter( writer );
-        var controller = new SymbolTemplateApplicationService<UITypeSymbol>();
-        var result = await controller.ExportAsync( exporter );
+        var applicationService = new SymbolTemplateApplicationService<UITypeSymbol>();
+        var result = await applicationService.ExportAsync( exporter );
 
         Assert.That( result.Success, Is.True );
     }
