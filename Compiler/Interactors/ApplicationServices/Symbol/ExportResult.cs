@@ -1,6 +1,6 @@
 using System;
 
-namespace KSPCompiler.SymbolDatabaseControllers;
+namespace KSPCompiler.Interactors.ApplicationServices.Symbol;
 
 public class ExportResult
 {

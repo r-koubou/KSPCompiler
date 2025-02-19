@@ -7,14 +7,13 @@ using KSPCompiler.Domain.Symbols;
 using KSPCompiler.ExternalSymbol.Tsv.Variables;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
-using KSPCompiler.SymbolDatabaseControllers;
+using KSPCompiler.Interactors.ApplicationServices.Symbol;
 
-using DeleteResult = KSPCompiler.SymbolDatabaseControllers.DeleteResult;
+using DeleteResult = KSPCompiler.Interactors.ApplicationServices.Symbol.DeleteResult;
 
 namespace KSPCompiler.Applications.SymbolDbManager.Services;
 
 // ReSharper disable LocalizableElement
-
 public class VariableSymbolDatabaseService : IVariableSymbolDatabaseService
 {
     public async Task<ImportResult> ImportSymbolsAsync( string databaseFilePath, string importFilePath, CancellationToken cancellationToken = default )
@@ -26,9 +25,9 @@ public class VariableSymbolDatabaseService : IVariableSymbolDatabaseService
             var reader = new LocalTextContentReader( importPath );
             var importer = new TsvVariableSymbolImporter( reader );
             using var repository = new VariableSymbolRepository( repositoryPath );
-            var controller = new SymbolDatabaseController<VariableSymbol>( repository );
+            var applicationService = new SymbolDatabaseApplicationService<VariableSymbol>( repository );
 
-            return await controller.ImportAsync( importer, cancellationToken );
+            return await applicationService.ImportAsync( importer, cancellationToken );
         }
         catch( Exception e )
         {
@@ -46,9 +45,9 @@ public class VariableSymbolDatabaseService : IVariableSymbolDatabaseService
             var writer = new LocalTextContentWriter( exportPath );
             using var repository = new VariableSymbolRepository( repositoryPath );
             var exporter = new TsvVariableSymbolExporter( writer );
-            var controller = new SymbolDatabaseController<VariableSymbol>( repository );
+            var applicationService = new SymbolDatabaseApplicationService<VariableSymbol>( repository );
 
-            return await controller.ExportAsync(
+            return await applicationService.ExportAsync(
                 exporter,
                 symbol => regexPattern.IsMatch( symbol.Name.Value ),
                 cancellationToken
@@ -67,9 +66,9 @@ public class VariableSymbolDatabaseService : IVariableSymbolDatabaseService
             var regexPattern = ISymbolDatabaseService.WildCardToRegexPattern( deletePattern );
             var repositoryPath = new FilePath( databaseFilePath );
             using var repository = new VariableSymbolRepository( repositoryPath );
-            var controller = new SymbolDatabaseController<VariableSymbol>( repository );
+            var applicationService = new SymbolDatabaseApplicationService<VariableSymbol>( repository );
 
-            return await controller.DeleteAsync(
+            return await applicationService.DeleteAsync(
                 symbol => regexPattern.IsMatch( symbol.Name.Value ),
                 cancellationToken
             );

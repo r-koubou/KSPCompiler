@@ -6,7 +6,7 @@ using ConsoleAppFramework;
 
 using KSPCompiler.Applications.SymbolDbManager.Services;
 using KSPCompiler.Domain.Symbols;
-using KSPCompiler.SymbolDatabaseControllers;
+using KSPCompiler.Interactors.ApplicationServices.Symbol;
 
 namespace KSPCompiler.Applications.SymbolDbManager.Commands;
 

@@ -7,7 +7,7 @@ using KSPCompiler.Commons.Path;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Gateways.Symbols;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
-using KSPCompiler.SymbolDatabaseControllers;
+using KSPCompiler.Interactors.ApplicationServices.Symbol;
 
 namespace KSPCompiler.Applications.SymbolDbManager.Services;
 
@@ -22,9 +22,9 @@ public abstract class SymbolTemplateService<TSymbol> : ISymbolTemplateService wh
             var exportPath = new FilePath( exportFilePath );
             var writer = new LocalTextContentWriter( exportPath );
             var exporter = GetExporter( writer );
-            var controller = new SymbolTemplateController<TSymbol>();
+            var applicationService = new SymbolTemplateApplicationService<TSymbol>();
 
-            return await controller.ExportAsync( exporter, cancellationToken );
+            return await applicationService.ExportAsync( exporter, cancellationToken );
         }
         catch( Exception e )
         {

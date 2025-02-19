@@ -7,16 +7,12 @@ using KSPCompiler.Gateways.Symbols;
 using KSPCompiler.Interactors.Symbols;
 using KSPCompiler.UseCases.Symbols;
 
-namespace KSPCompiler.SymbolDatabaseControllers;
+namespace KSPCompiler.Interactors.ApplicationServices.Symbol;
 
-public class SymbolDatabaseController<TSymbol> where TSymbol : SymbolBase
+public sealed class SymbolDatabaseApplicationService<TSymbol>( ISymbolRepository<TSymbol> repository )
+    where TSymbol : SymbolBase
 {
-    private ISymbolRepository<TSymbol> Repository { get; }
-
-    public SymbolDatabaseController( ISymbolRepository<TSymbol> repository )
-    {
-        Repository = repository;
-    }
+    private ISymbolRepository<TSymbol> Repository { get; } = repository;
 
     public async Task<ImportResult> ImportAsync( ISymbolImporter<TSymbol> importer, CancellationToken cancellationToken = default )
     {
@@ -86,5 +82,4 @@ public class SymbolDatabaseController<TSymbol> where TSymbol : SymbolBase
             outputPort.Error
         );
     }
-
 }

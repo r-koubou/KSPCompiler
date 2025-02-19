@@ -7,9 +7,7 @@ using KSPCompiler.Domain.Symbols;
 using KSPCompiler.ExternalSymbol.Tsv.Commands;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Commands;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
-using KSPCompiler.SymbolDatabaseControllers;
-
-using DeleteResult = KSPCompiler.SymbolDatabaseControllers.DeleteResult;
+using KSPCompiler.Interactors.ApplicationServices.Symbol;
 
 namespace KSPCompiler.Applications.SymbolDbManager.Services;
 
@@ -26,9 +24,9 @@ public class CommandSymbolDatabaseService : ICommandSymbolDatabaseService
             var reader = new LocalTextContentReader( importPath );
             var importer = new TsvCommandSymbolImporter( reader );
             using var repository = new CommandSymbolRepository( repositoryPath );
-            var controller = new SymbolDatabaseController<CommandSymbol>( repository );
+            var applicationService = new SymbolDatabaseApplicationService<CommandSymbol>( repository );
 
-            return await controller.ImportAsync( importer, cancellationToken );
+            return await applicationService.ImportAsync( importer, cancellationToken );
         }
         catch( Exception e )
         {
@@ -46,9 +44,9 @@ public class CommandSymbolDatabaseService : ICommandSymbolDatabaseService
             var writer = new LocalTextContentWriter( exportPath );
             using var repository = new CommandSymbolRepository( repositoryPath );
             var exporter = new TsvCommandSymbolExporter( writer );
-            var controller = new SymbolDatabaseController<CommandSymbol>( repository );
+            var applicationService = new SymbolDatabaseApplicationService<CommandSymbol>( repository );
 
-            return await controller.ExportAsync(
+            return await applicationService.ExportAsync(
                 exporter,
                 symbol => regexPattern.IsMatch( symbol.Name.Value ),
                 cancellationToken
@@ -67,9 +65,9 @@ public class CommandSymbolDatabaseService : ICommandSymbolDatabaseService
             var regexPattern = ISymbolDatabaseService.WildCardToRegexPattern( deletePattern );
             var repositoryPath = new FilePath( databaseFilePath );
             using var repository = new CommandSymbolRepository( repositoryPath );
-            var controller = new SymbolDatabaseController<CommandSymbol>( repository );
+            var applicationService = new SymbolDatabaseApplicationService<CommandSymbol>( repository );
 
-            return await controller.DeleteAsync(
+            return await applicationService.DeleteAsync(
                 symbol => regexPattern.IsMatch( symbol.Name.Value ),
                 cancellationToken
             );
