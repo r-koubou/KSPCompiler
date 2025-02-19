@@ -24,7 +24,12 @@ namespace KSPCompiler.Interactors.Tests.ApplicationServices.Symbol;
 [TestFixture]
 public class SymbolLocalDatabaseApplicationServiceTest
 {
-    private static readonly string TestDataDirectory = Path.Combine( "ApplicationServices", "TestData", "SymbolLocalDatabaseApplicationServiceTest" );
+    private static readonly string TestDataDirectory = Path.Combine(
+        "ApplicationServices",
+        "Symbol",
+        "TestData",
+        "SymbolLocalDatabaseApplicationServiceTest"
+    );
     private static readonly string ImportTestDataDirectory = Path.Combine( TestDataDirectory, "import" );
     private static readonly string ExportTestDataDirectory = Path.Combine( TestDataDirectory, "export" );
     private static readonly string DeleteTestDataDirectory = Path.Combine( TestDataDirectory, "delete" );
