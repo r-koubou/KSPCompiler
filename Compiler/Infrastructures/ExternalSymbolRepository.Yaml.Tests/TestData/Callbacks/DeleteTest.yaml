@@ -1,18 +1,12 @@
-formatVersion: 1.0.0
-data:
-  - id: 8a010cf7-55ad-4cb7-b9e2-da0386f8a3c3
-    name: Test
-    builtIn: true
-    allowMultipleDeclaration: true
-    description: |-
-      hoge Description
-    builtIntoVersion: 1.0.0
-    arguments:
-      - name: arg1
-        requiredDeclare: true
-        description: |-
-          arg1 description
-          ## Note
-          aaaa.
-    createdAt: 2025-01-25T14:03:48.0951620Z
-    updatedAt: 2025-01-25T14:03:48.0951620Z
+FormatVersion: 1.0.0
+Data:
+  - Id: 7395eded-e86d-45a8-8082-11a2b0cd54fe
+    Name: async_complete
+    BuiltIn: false
+    AllowMultipleDeclaration: false
+    Description: |-
+      Async complete callback, triggered after the execution of any command that is executed asynchronously, for example various loading or saving related commands.
+    BuiltIntoVersion: N/A
+    Arguments: []
+    CreatedAt: 2025-01-26T06:28:17.9807940Z
+    UpdatedAt: 2025-01-26T06:28:17.9807940Z
