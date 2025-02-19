@@ -15,7 +15,60 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Infrastructures\ExternalSymbol.Tsv\ExternalSymbol.Tsv.csproj" />
+      <ProjectReference Include="..\Infrastructures\ExternalSymbolRepository.JSONFlatFileDataStore\ExternalSymbolRepository.JSONFlatFileDataStore.csproj" />
       <ProjectReference Include="..\Interactors\Interactors.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\delete\repository_callback.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\delete\repository_command.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\delete\repository_ui_type.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\delete\repository_variable.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\export\repository_callback.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\export\repository_command.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\export\repository_ui_type.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\export\repository_variable.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\find\repository_callback.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\find\repository_command.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\find\repository_ui_type.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\find\repository_variable.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\import\command.tsv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\import\callback.tsv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\import\ui_type.tsv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\Symbol\TestData\SymbolLocalDatabaseApplicationServiceTest\import\variable.tsv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

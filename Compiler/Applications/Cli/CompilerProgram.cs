@@ -3,7 +3,6 @@ using System.IO;
 using System.Threading;
 
 using KSPCompiler.Commons;
-using KSPCompiler.Controllers.Compiler;
 using KSPCompiler.Domain.CompilerMessages;
 using KSPCompiler.Domain.CompilerMessages.Extensions;
 using KSPCompiler.Domain.Symbols;
@@ -15,6 +14,7 @@ using KSPCompiler.Gateways.EventEmitting;
 using KSPCompiler.Gateways.EventEmitting.Extensions;
 using KSPCompiler.Infrastructures.EventEmitting.Default;
 using KSPCompiler.Infrastructures.Parser.Antlr;
+using KSPCompiler.Interactors.ApplicationServices.Compilation;
 
 namespace KSPCompiler.Applications.Cli;
 
@@ -58,14 +58,14 @@ public static class CompilerProgram
 
         var parser = new AntlrKspFileSyntaxParser( input, eventEmitter );
 
-        var compilerController = new CompilerController();
-        var option = new CompilerOption(
+        var compilationService = new CompilationApplicationService();
+        var option = new CompilationOption(
             SyntaxParser: parser,
             SymbolTable: symbolTable,
             EnableObfuscation: enableObfuscation
         );
 
-        var result = compilerController.Execute( eventEmitter, option );
+        var result = compilationService.Execute( eventEmitter, option );
 
         messageManager.WriteTo( Console.Out );
 

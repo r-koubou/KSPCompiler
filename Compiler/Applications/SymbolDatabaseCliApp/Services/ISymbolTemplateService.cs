@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-using KSPCompiler.SymbolDatabaseControllers;
+using KSPCompiler.Interactors.ApplicationServices.Symbol;
 
 namespace KSPCompiler.Applications.SymbolDbManager.Services;
 

@@ -7,9 +7,9 @@ using KSPCompiler.Domain.Symbols;
 using KSPCompiler.ExternalSymbol.Tsv.UITypes;
 using KSPCompiler.ExternalSymbolRepository.Yaml.UITypes;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
-using KSPCompiler.SymbolDatabaseControllers;
+using KSPCompiler.Interactors.ApplicationServices.Symbol;
 
-using DeleteResult = KSPCompiler.SymbolDatabaseControllers.DeleteResult;
+using DeleteResult = KSPCompiler.Interactors.ApplicationServices.Symbol.DeleteResult;
 
 namespace KSPCompiler.Applications.SymbolDbManager.Services;
 
@@ -26,9 +26,9 @@ public class UITypeSymbolDatabaseService : IUITypeSymbolDatabaseService
             var reader = new LocalTextContentReader( importPath );
             var importer = new TsvUITypeSymbolImporter( reader );
             using var repository = new UITypeSymbolRepository( repositoryPath );
-            var controller = new SymbolDatabaseController<UITypeSymbol>( repository );
+            var applicationService = new SymbolDatabaseApplicationService<UITypeSymbol>( repository );
 
-            return await controller.ImportAsync( importer, cancellationToken );
+            return await applicationService.ImportAsync( importer, cancellationToken );
         }
         catch( Exception e )
         {
@@ -46,9 +46,9 @@ public class UITypeSymbolDatabaseService : IUITypeSymbolDatabaseService
             var writer = new LocalTextContentWriter( exportPath );
             using var repository = new UITypeSymbolRepository( repositoryPath );
             var exporter = new TsvUITypeSymbolExporter( writer );
-            var controller = new SymbolDatabaseController<UITypeSymbol>( repository );
+            var applicationService = new SymbolDatabaseApplicationService<UITypeSymbol>( repository );
 
-            return await controller.ExportAsync(
+            return await applicationService.ExportAsync(
                 exporter,
                 symbol => regexPattern.IsMatch( symbol.Name.Value ),
                 cancellationToken
@@ -67,9 +67,9 @@ public class UITypeSymbolDatabaseService : IUITypeSymbolDatabaseService
             var regexPattern = ISymbolDatabaseService.WildCardToRegexPattern( deletePattern );
             var repositoryPath = new FilePath( databaseFilePath );
             using var repository = new UITypeSymbolRepository( repositoryPath );
-            var controller = new SymbolDatabaseController<UITypeSymbol>( repository );
+            var applicationService = new SymbolDatabaseApplicationService<UITypeSymbol>( repository );
 
-            return await controller.DeleteAsync(
+            return await applicationService.DeleteAsync(
                 symbol => regexPattern.IsMatch( symbol.Name.Value ),
                 cancellationToken
             );

@@ -6,9 +6,9 @@ using KSPCompiler.Gateways.Symbols;
 using KSPCompiler.Interactors.Symbols;
 using KSPCompiler.UseCases.Symbols;
 
-namespace KSPCompiler.SymbolDatabaseControllers;
+namespace KSPCompiler.Interactors.ApplicationServices.Symbol;
 
-public class SymbolTemplateController<TSymbol> where TSymbol : SymbolBase
+public sealed class SymbolTemplateApplicationService<TSymbol> where TSymbol : SymbolBase
 {
     public async Task<ExportResult> ExportAsync( ISymbolExporter<TSymbol> exporter, CancellationToken cancellationToken = default )
     {

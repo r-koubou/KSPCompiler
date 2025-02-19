@@ -40,9 +40,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Controllers\SymbolDatabaseControllers\SymbolDatabaseControllers.csproj" />
       <ProjectReference Include="..\..\Infrastructures\ExternalSymbol.Tsv\ExternalSymbol.Tsv.csproj" />
       <ProjectReference Include="..\..\Infrastructures\ExternalSymbolRepository.Yaml\ExternalSymbolRepository.Yaml.csproj" />
+      <ProjectReference Include="..\..\Interactors\Interactors.csproj" />
     </ItemGroup>
 
 </Project>

@@ -7,9 +7,7 @@ using KSPCompiler.Domain.Symbols;
 using KSPCompiler.ExternalSymbol.Tsv.Callbacks;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
-using KSPCompiler.SymbolDatabaseControllers;
-
-using DeleteResult = KSPCompiler.SymbolDatabaseControllers.DeleteResult;
+using KSPCompiler.Interactors.ApplicationServices.Symbol;
 
 namespace KSPCompiler.Applications.SymbolDbManager.Services;
 
@@ -26,7 +24,7 @@ public class CallbackSymbolDatabaseService : ICallbackSymbolDatabaseService
             var reader = new LocalTextContentReader( importPath );
             var importer = new TsvCallbackSymbolImporter( reader );
             using var repository = new CallbackSymbolRepository( repositoryPath );
-            var controller = new SymbolDatabaseController<CallbackSymbol>( repository );
+            var controller = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
 
             return await controller.ImportAsync( importer, cancellationToken );
         }
@@ -46,7 +44,7 @@ public class CallbackSymbolDatabaseService : ICallbackSymbolDatabaseService
             var writer = new LocalTextContentWriter( exportPath );
             using var repository = new CallbackSymbolRepository( repositoryPath );
             var exporter = new TsvCallbackSymbolExporter( writer );
-            var controller = new SymbolDatabaseController<CallbackSymbol>( repository );
+            var controller = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
 
             return await controller.ExportAsync(
                 exporter,
@@ -67,7 +65,7 @@ public class CallbackSymbolDatabaseService : ICallbackSymbolDatabaseService
             var regexPattern = ISymbolDatabaseService.WildCardToRegexPattern( deletePattern );
             var repositoryPath = new FilePath( databaseFilePath );
             using var repository = new CallbackSymbolRepository( repositoryPath );
-            var controller = new SymbolDatabaseController<CallbackSymbol>( repository );
+            var controller = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
 
             return await controller.DeleteAsync(
                 symbol => regexPattern.IsMatch( symbol.Name.Value ),
