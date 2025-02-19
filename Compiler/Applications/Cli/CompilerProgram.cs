@@ -14,7 +14,6 @@ using KSPCompiler.Gateways.EventEmitting;
 using KSPCompiler.Gateways.EventEmitting.Extensions;
 using KSPCompiler.Infrastructures.EventEmitting.Default;
 using KSPCompiler.Infrastructures.Parser.Antlr;
-using KSPCompiler.Interactors.ApplicationServices;
 using KSPCompiler.Interactors.ApplicationServices.Compilation;
 
 namespace KSPCompiler.Applications.Cli;
