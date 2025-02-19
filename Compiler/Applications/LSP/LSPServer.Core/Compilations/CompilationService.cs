@@ -29,7 +29,7 @@ using OmniSharp.Extensions.LanguageServer.Protocol.Server;
 
 namespace KSPCompiler.Applications.LSPServer.Core.Compilations;
 
-public sealed class LspCompilationService
+public sealed class CompilationService
 {
     public sealed class ExecuteCompileOption(
         bool enableObfuscation = false
@@ -57,7 +57,7 @@ public sealed class LspCompilationService
 
     private readonly CompilationApplicationService compilationApplicationService = new();
 
-    public LspCompilationService(
+    public CompilationService(
         ILanguageServerFacade serverFacade,
         ILanguageServerConfiguration configuration,
         CompilerCacheService compilerCacheService )
