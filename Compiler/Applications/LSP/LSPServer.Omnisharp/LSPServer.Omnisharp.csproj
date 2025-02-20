@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <LangVersion>default</LangVersion>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <Nullable>enable</Nullable>
+        <Copyright>R-Koubou</Copyright>
+        <Company>R-Koubou</Company>
+        <Product>KSPCompiler.LSPServer.Omnisharp</Product>
+        <AssemblyName>KSPCompiler.LSPServer.Omnisharp</AssemblyName>
+        <RootNamespace>KSPCompiler.LSPServer.Omnisharp</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="OmniSharp.Extensions.LanguageServer" Version="0.19.9" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Infrastructures\EventEmitting.Default\EventEmitting.Default.csproj" />
+      <ProjectReference Include="..\..\..\Infrastructures\ExternalSymbolRepository.Yaml\ExternalSymbolRepository.Yaml.csproj" />
+      <ProjectReference Include="..\..\..\Infrastructures\Parser.Antlr\Parser.Antlr.csproj" />
+      <ProjectReference Include="..\LSPServer.CoreNew\LSPServer.CoreNew.csproj" />
+    </ItemGroup>
+
+</Project>

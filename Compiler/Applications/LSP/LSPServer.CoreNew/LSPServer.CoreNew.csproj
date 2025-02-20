@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <LangVersion>default</LangVersion>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <Nullable>enable</Nullable>
+        <Copyright>R-Koubou</Copyright>
+        <Company>R-Koubou</Company>
+        <Product>KSPCompiler.Applications.LSPServer.CoreNew</Product>
+        <AssemblyName>KSPCompiler.Applications.LSPServer.CoreNew</AssemblyName>
+        <RootNamespace>KSPCompiler.Applications.LSPServer.CoreNew</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Interactors\Interactors.csproj" />
+    </ItemGroup>
+
+</Project>
