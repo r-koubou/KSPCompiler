@@ -6,13 +6,13 @@
         <Nullable>enable</Nullable>
         <Copyright>R-Koubou</Copyright>
         <Company>R-Koubou</Company>
-        <Product>KSPCompiler.Domain</Product>
-        <AssemblyName>KSPCompiler.Domain</AssemblyName>
-        <RootNamespace>KSPCompiler.Domain</RootNamespace>
+        <Product>KSPCompiler.Applications.LSPServer.CoreNew</Product>
+        <AssemblyName>KSPCompiler.Applications.LSPServer.CoreNew</AssemblyName>
+        <RootNamespace>KSPCompiler.Applications.LSPServer.CoreNew</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Commons\Commons.csproj" />
+      <ProjectReference Include="..\..\..\Interactors\Interactors.csproj" />
     </ItemGroup>
 
 </Project>
