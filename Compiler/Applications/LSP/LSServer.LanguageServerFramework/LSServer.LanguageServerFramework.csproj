@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <LangVersion>default</LangVersion>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <Copyright>R-Koubou</Copyright>
+        <Company>R-Koubou</Company>
+        <Product>KSPCompiler.Applications.LSServer.LanguageServerFramework</Product>
+        <AssemblyName>KSPCompiler.Applications.LSServer.LanguageServerFramework</AssemblyName>
+        <RootNamespace>KSPCompiler.Applications.LSServer.LanguageServerFramework</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="EmmyLua.LanguageServer.Framework" Version="0.8.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\LSPServer.CoreNew\LSPServer.CoreNew.csproj" />
+    </ItemGroup>
+
+</Project>
