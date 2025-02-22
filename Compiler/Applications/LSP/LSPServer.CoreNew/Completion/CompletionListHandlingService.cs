@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
+using KSPCompiler.Applications.LSPServer.CoreNew.Compilation;
 using KSPCompiler.Commons.Text;
 using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Domain.Symbols.MetaData;
 using KSPCompiler.Domain.Symbols.MetaData.Extensions;
 
-namespace KSPCompiler.Applications.LSPServer.CoreNew.Compilation;
+namespace KSPCompiler.Applications.LSPServer.CoreNew.Completion;
 
 public sealed class CompletionListHandlingService
 {
