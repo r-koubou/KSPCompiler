@@ -5,7 +5,10 @@ public static class StringExtension
     public static HoverItem AsHover( this string self )
         => new()
         {
-            Content = self,
-            IsMarkdown = true
+            Content = new StringOrMarkdownContent
+            {
+                Value      = self,
+                IsMarkdown = true
+            }
         };
 }
