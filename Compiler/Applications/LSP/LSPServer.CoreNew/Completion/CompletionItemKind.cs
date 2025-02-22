@@ -1,4 +1,4 @@
-namespace KSPCompiler.Applications.LSPServer.CoreNew.Compilation;
+namespace KSPCompiler.Applications.LSPServer.CoreNew.Completion;
 
 public enum CompletionItemKind
 {
