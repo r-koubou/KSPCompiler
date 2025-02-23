@@ -7,6 +7,7 @@ using EmmyLua.LanguageServer.Framework.Server;
 
 using KSPCompiler.Applications.LSPServer.CoreNew.Compilation;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Hover;
+using KSPCompiler.Applications.LSServer.LanguageServerFramework.ReferenceSymbol;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Commands;
 using KSPCompiler.ExternalSymbolRepository.Yaml.UITypes;
@@ -47,8 +48,8 @@ public sealed class Program
                 symbolRepositories
             )
         );
-
         server.AddHandler( new HoverHandler( compilationCacheManager ) );
+        server.AddHandler( new ReferencesHandler( compilationCacheManager ) );
         #endregion ~Register Handlers
 
         await server.Run();
