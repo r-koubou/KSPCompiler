@@ -9,6 +9,7 @@ using KSPCompiler.Applications.LSPServer.CoreNew.Compilation;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Completion;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Definition;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.FindReferences;
+using KSPCompiler.Applications.LSServer.LanguageServerFramework.Folding;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Hover;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Renaming;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks;
@@ -53,6 +54,7 @@ public sealed class Program
         );
         server.AddHandler( new CompletionHandler( compilationCacheManager ) );
         server.AddHandler( new DefinitionHandler( compilationCacheManager ) );
+        server.AddHandler( new FoldingRabgeHandler( compilationCacheManager ) );
         server.AddHandler( new HoverHandler( compilationCacheManager ) );
         server.AddHandler( new ReferencesHandler( compilationCacheManager ) );
         server.AddHandler( new RenameHandler( compilationCacheManager ) );
