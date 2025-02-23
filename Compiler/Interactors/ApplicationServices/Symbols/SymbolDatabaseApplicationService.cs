@@ -7,7 +7,7 @@ using KSPCompiler.Gateways.Symbols;
 using KSPCompiler.Interactors.Symbols;
 using KSPCompiler.UseCases.Symbols;
 
-namespace KSPCompiler.Interactors.ApplicationServices.Symbol;
+namespace KSPCompiler.Interactors.ApplicationServices.Symbols;
 
 public sealed class SymbolDatabaseApplicationService<TSymbol>( ISymbolRepository<TSymbol> repository )
     where TSymbol : SymbolBase

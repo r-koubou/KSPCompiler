@@ -11,16 +11,7 @@ public sealed class LoadBuiltinSymbolInteractor : ILoadBuiltinSymbolUseCase
 {
     public async Task<LoadBuiltinSymbolOutputData> ExecuteAsync( LoadBuiltinSymbolInputData parameter, CancellationToken cancellationToken = default )
     {
-        var symbolTables = new AggregateSymbolTable(
-            builtInVariables: new VariableSymbolTable(),
-            userVariables: new VariableSymbolTable(),
-            uiTypes: new UITypeSymbolTable(),
-            commands: new CommandSymbolTable(),
-            builtInCallbacks: new CallbackSymbolTable(),
-            userCallbacks: new CallbackSymbolTable(),
-            userFunctions: new UserFunctionSymbolTable(),
-            preProcessorSymbols: new PreProcessorSymbolTable()
-        );
+        var symbolTables = AggregateSymbolTable.Default();
 
         try
         {

@@ -308,16 +308,7 @@ public static class MockUtility
     #region Symbol Table
 
     public static AggregateSymbolTable CreateAggregateSymbolTable()
-        => new(
-            builtInVariables: new VariableSymbolTable(),
-            userVariables: new VariableSymbolTable(),
-            uiTypes: new UITypeSymbolTable(),
-            commands: new CommandSymbolTable(),
-            builtInCallbacks: new CallbackSymbolTable(),
-            userCallbacks: new CallbackSymbolTable(),
-            userFunctions: new UserFunctionSymbolTable(),
-            preProcessorSymbols: new PreProcessorSymbolTable()
-        );
+        => AggregateSymbolTable.Default();
 
     public static AggregateObfuscatedSymbolTable CreateAggregateObfuscatedSymbolTable( AggregateSymbolTable source, string variablePrefix = "v", string functionPrefix = "f" )
         => new(

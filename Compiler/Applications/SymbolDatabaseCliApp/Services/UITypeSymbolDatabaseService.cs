@@ -7,9 +7,9 @@ using KSPCompiler.Domain.Symbols;
 using KSPCompiler.ExternalSymbol.Tsv.UITypes;
 using KSPCompiler.ExternalSymbolRepository.Yaml.UITypes;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
-using KSPCompiler.Interactors.ApplicationServices.Symbol;
+using KSPCompiler.Interactors.ApplicationServices.Symbols;
 
-using DeleteResult = KSPCompiler.Interactors.ApplicationServices.Symbol.DeleteResult;
+using DeleteResult = KSPCompiler.Interactors.ApplicationServices.Symbols.DeleteResult;
 
 namespace KSPCompiler.Applications.SymbolDbManager.Services;
 
