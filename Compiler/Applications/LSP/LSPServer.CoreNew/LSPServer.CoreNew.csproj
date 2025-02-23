@@ -15,4 +15,8 @@
       <ProjectReference Include="..\..\..\Interactors\Interactors.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Definition\Extensions\" />
+    </ItemGroup>
+
 </Project>
