@@ -29,7 +29,7 @@ public sealed class LoadingBuiltinSymbolApplicationService(
 
         if( !result.Result )
         {
-            throw new InvalidOperationException( "Failed to load built-in symbols." );
+            throw new InvalidOperationException( "Failed to load built-in symbols.", result.Error );
         }
 
         builtInSymbolTable = result.OutputData;
