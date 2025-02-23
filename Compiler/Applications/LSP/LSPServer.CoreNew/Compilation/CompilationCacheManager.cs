@@ -15,16 +15,7 @@ public sealed class CompilationCacheItem(
     public ScriptLocation ScriptLocation { get; } = scriptLocation;
     public IReadOnlyList<string> AllLinesText { get; } = allLinesText ?? [];
 
-    public AggregateSymbolTable SymbolTable { get; } = symbolTable ?? new AggregateSymbolTable(
-        builtInVariables: new VariableSymbolTable(),
-        userVariables: new VariableSymbolTable(),
-        uiTypes: new UITypeSymbolTable(),
-        commands: new CommandSymbolTable(),
-        builtInCallbacks: new CallbackSymbolTable(),
-        userCallbacks: new CallbackSymbolTable(),
-        userFunctions: new UserFunctionSymbolTable(),
-        preProcessorSymbols: new PreProcessorSymbolTable()
-    );
+    public AggregateSymbolTable SymbolTable { get; } = symbolTable ?? AggregateSymbolTable.Default();
 
     public AstCompilationUnitNode Ast { get; } = ast ?? new AstCompilationUnitNode();
 }
