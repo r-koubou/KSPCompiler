@@ -183,7 +183,8 @@ public sealed class CompilationApplicationService(
     #region Setup Symbols
     private static void SetupSymbolTable( AggregateSymbolTable builtin, AggregateSymbolTable user )
     {
-        AggregateSymbolTable.Merge( builtin, user, clearTarget: true );
+        user.Clear();
+        AggregateSymbolTable.Merge( builtin, user );
 
         // ビルトイン変数は初期化済み扱い
         foreach( var variable in user.BuiltInVariables )

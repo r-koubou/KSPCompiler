@@ -55,13 +55,8 @@ public sealed class AggregateSymbolTable
         PreProcessorSymbols.Clear();
     }
 
-    public static void Merge( AggregateSymbolTable source, AggregateSymbolTable target, bool clearTarget = false )
+    public static void Merge( AggregateSymbolTable source, AggregateSymbolTable target )
     {
-        if( clearTarget )
-        {
-            target.Clear();
-        }
-
         // Variables
         // UI Type
         // Command
