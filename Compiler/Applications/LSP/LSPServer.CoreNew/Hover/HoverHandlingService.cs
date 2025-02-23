@@ -11,12 +11,17 @@ namespace KSPCompiler.Applications.LSPServer.CoreNew.Hover;
 public sealed class HoverHandlingService
 {
     public async Task<HoverItem?> HandleAsync(
-        CompilationCacheManager compilerCacheService,
+        CompilationCacheManager compilerCacheManager,
         ScriptLocation scriptLocation,
         Position position,
         CancellationToken _ )
     {
-        var cache = compilerCacheService.GetCache( scriptLocation );
+        if( !compilerCacheManager.ContainsCache( scriptLocation ) )
+        {
+            return null;
+        }
+
+        var cache = compilerCacheManager.GetCache( scriptLocation );
         var symbols = cache.SymbolTable;
         var word = DocumentUtility.ExtractWord( cache.AllLinesText, position );
 

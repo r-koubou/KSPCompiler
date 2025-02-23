@@ -83,9 +83,10 @@ public sealed class CompilationServerService(
         compilationCacheManager.UpdateCache(
             scriptLocation,
             new CompilationCacheItem(
-                scriptLocation,
-                allLinesText,
-                compilationResult.SymbolTable
+                scriptLocation: scriptLocation,
+                allLinesText: allLinesText,
+                symbolTable: compilationResult.SymbolTable,
+                ast: compilationResult.Ast
             )
         );
     }
