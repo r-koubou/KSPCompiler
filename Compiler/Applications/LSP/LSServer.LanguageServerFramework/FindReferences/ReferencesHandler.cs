@@ -7,13 +7,13 @@ using EmmyLua.LanguageServer.Framework.Protocol.Message.Reference;
 using EmmyLua.LanguageServer.Framework.Server.Handler;
 
 using KSPCompiler.Applications.LSPServer.CoreNew.Compilation;
-using KSPCompiler.Applications.LSPServer.CoreNew.Reference;
+using KSPCompiler.Applications.LSPServer.CoreNew.FindReferences;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.ReferenceSymbol.Extensions;
+using KSPCompiler.Applications.LSServer.LanguageServerFramework.FindReferences.Extensions;
 
-namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.ReferenceSymbol;
+namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.FindReferences;
 
-public class ReferencesHandler(
+public sealed class ReferencesHandler(
     CompilationCacheManager compilationCacheManager
     )
 : ReferenceHandlerBase
