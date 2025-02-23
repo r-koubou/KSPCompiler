@@ -1,6 +1,6 @@
 using KSPCompiler.Commons.Text;
 
-namespace KSPCompiler.Applications.LSPServer.CoreNew.Reference;
+namespace KSPCompiler.Applications.LSPServer.CoreNew.FindReferences;
 
 public sealed record ReferenceItem
 {

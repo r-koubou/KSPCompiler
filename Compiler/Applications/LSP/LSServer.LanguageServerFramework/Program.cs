@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using EmmyLua.LanguageServer.Framework.Server;
 
 using KSPCompiler.Applications.LSPServer.CoreNew.Compilation;
+using KSPCompiler.Applications.LSServer.LanguageServerFramework.FindReferences;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Hover;
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.ReferenceSymbol;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Commands;
 using KSPCompiler.ExternalSymbolRepository.Yaml.UITypes;

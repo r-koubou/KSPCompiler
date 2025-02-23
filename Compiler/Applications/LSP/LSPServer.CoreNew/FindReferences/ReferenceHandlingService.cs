@@ -6,7 +6,7 @@ using KSPCompiler.Applications.LSPServer.CoreNew.Ast;
 using KSPCompiler.Applications.LSPServer.CoreNew.Compilation;
 using KSPCompiler.Commons.Text;
 
-namespace KSPCompiler.Applications.LSPServer.CoreNew.Reference;
+namespace KSPCompiler.Applications.LSPServer.CoreNew.FindReferences;
 
 public sealed class ReferenceHandlingService
 {
