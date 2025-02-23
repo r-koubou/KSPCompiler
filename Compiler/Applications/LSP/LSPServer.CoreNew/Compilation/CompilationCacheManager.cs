@@ -33,6 +33,9 @@ public sealed class CompilationCacheManager
 {
     private readonly ConcurrentDictionary<ScriptLocation, CompilationCacheItem> symbolTableCache = new();
 
+    public bool ContainsCache( ScriptLocation scriptLocation )
+        => symbolTableCache.ContainsKey( scriptLocation );
+
     public CompilationCacheItem GetCache( ScriptLocation scriptLocation )
     {
         return symbolTableCache.GetOrAdd(

@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 using KSPCompiler.Applications.LSPServer.Core.Extensions;
 using KSPCompiler.Commons;
-using KSPCompiler.Domain.Symbols;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Commands;
 using KSPCompiler.ExternalSymbolRepository.Yaml.UITypes;
@@ -20,6 +19,7 @@ using KSPCompiler.Gateways.Symbols;
 using KSPCompiler.Infrastructures.EventEmitting.Default;
 using KSPCompiler.Infrastructures.Parser.Antlr;
 using KSPCompiler.Interactors.ApplicationServices.Compilation;
+using KSPCompiler.Interactors.Symbols;
 
 using OmniSharp.Extensions.LanguageServer.Protocol;
 using OmniSharp.Extensions.LanguageServer.Protocol.Document;
@@ -37,24 +37,13 @@ public sealed class CompilationService
         public bool EnableObfuscation { get; } = enableObfuscation;
     }
 
-    private readonly AggregateSymbolTable builtInSymbolTable = new(
-        builtInVariables: new VariableSymbolTable(),
-        userVariables: new VariableSymbolTable(),
-        uiTypes: new UITypeSymbolTable(),
-        commands: new CommandSymbolTable(),
-        builtInCallbacks: new CallbackSymbolTable(),
-        userCallbacks: new CallbackSymbolTable(),
-        userFunctions: new UserFunctionSymbolTable(),
-        preProcessorSymbols: new PreProcessorSymbolTable()
-    );
-
     private ILanguageServerFacade ServerFacade { get; }
     private ILanguageServerConfiguration Configuration { get; }
 
     private CompilerCacheService CompilerCacheService { get; }
     private IEventEmitter CompilerEventEmitter { get; } = new EventEmitter();
 
-    private readonly CompilationApplicationService compilationApplicationService = new();
+    private readonly CompilationApplicationService compilationApplicationService;
 
     public CompilationService(
         ILanguageServerFacade serverFacade,
@@ -65,21 +54,18 @@ public sealed class CompilationService
         Configuration = configuration;
         CompilerCacheService = compilerCacheService;
 
-        // 外部定義ファイルからビルトイン変数、コマンド、コールバック、UIタイプを構築
-        LoadSymbolTables( builtInSymbolTable );
+        compilationApplicationService = new CompilationApplicationService(
+            new LoadBuiltinSymbolInteractor(),
+            CreateSymbolRepositories()
+        );
     }
 
     #region Compilation
     private async Task<CompilationResult> CompileAsync( string script, IEventEmitter eventEmitter, ExecuteCompileOption executeOption, CancellationToken cancellationToken )
     {
-        SetupSymbol( builtInSymbolTable );
-
         var parser = new AntlrKspStringSyntaxParser( script, eventEmitter, Encoding.UTF8 );
-        var symbolTableInScript = builtInSymbolTable.CreateBuiltInSymbolsOnly();
-
         var option = new CompilationOption(
             SyntaxParser: parser,
-            SymbolTable: symbolTableInScript,
             EnableObfuscation: executeOption.EnableObfuscation
         );
 
@@ -185,49 +171,18 @@ public sealed class CompilationService
     #endregion
 
     #region Setup Symbols
-    private static void LoadSymbolTables( AggregateSymbolTable symbolTable )
+    private static AggregateSymbolRepository CreateSymbolRepositories()
     {
         var baseDir = Path.GetDirectoryName( Assembly.GetExecutingAssembly().Location ) ?? ".";
-
         var basePath = Path.Combine( baseDir, "Data", "Symbols" );
 
-        using ISymbolRepository<VariableSymbol> variables = new VariableSymbolRepository( Path.Combine( basePath, "variables.yaml" ) );
-        symbolTable.BuiltInVariables.AddRange( variables.FindAll() );
-
-        using ISymbolRepository<UITypeSymbol> uiTypes = new UITypeSymbolRepository( Path.Combine( basePath, "uitypes.yaml" ) );
-        symbolTable.UITypes.AddRange( uiTypes.FindAll() );
-
-        using ISymbolRepository<CommandSymbol> commands = new CommandSymbolRepository( Path.Combine( basePath, "commands.yaml" ) );
-        symbolTable.Commands.AddRange( commands.FindAll() );
-
-        using ISymbolRepository<CallbackSymbol> callbacks = new CallbackSymbolRepository( Path.Combine( basePath, "callbacks.yaml" ) );
-        var foundCallbacks = callbacks.FindAll();
-
-        foreach( var x in foundCallbacks )
-        {
-            if( x.AllowMultipleDeclaration )
-            {
-                symbolTable.BuiltInCallbacks.AddAsOverload( x, x.Arguments );
-            }
-            else
-            {
-                symbolTable.BuiltInCallbacks.AddAsNoOverload( x );
-            }
-        }
-    }
-
-    private static void SetupSymbol( AggregateSymbolTable symbolTable )
-    {
-        // 再突入時のため、ユーザー定義シンボルをクリア
-        symbolTable.UserVariables.Clear();
-        symbolTable.UserCallbacks.Clear();
-        symbolTable.UserFunctions.Clear();
-
-        // ビルトイン変数は初期化済み扱い
-        foreach( var variable in symbolTable.BuiltInVariables )
-        {
-            variable.State = SymbolState.Initialized;
-        }
+        return new AggregateSymbolRepository(
+            new VariableSymbolRepository( Path.Combine( basePath, "variables.yaml" ) ),
+            new UITypeSymbolRepository( Path.Combine( basePath, "uitypes.yaml" ) ),
+            new CommandSymbolRepository( Path.Combine( basePath, "commands.yaml" ) ),
+            new CallbackSymbolRepository( Path.Combine( basePath, "callbacks.yaml" )
+            )
+        );
     }
     #endregion
 

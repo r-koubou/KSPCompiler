@@ -5,22 +5,10 @@ using KSPCompiler.Gateways.Symbols;
 
 namespace KSPCompiler.UseCases.Symbols;
 
-public sealed class LoadBuiltinSymbolInputDataDetail(
-    ISymbolRepository<VariableSymbol> variableSymbolRepository,
-    ISymbolRepository<UITypeSymbol> uiTypeSymbolRepository,
-    ISymbolRepository<CommandSymbol> commandSymbolRepository,
-    ISymbolRepository<CallbackSymbol> callbackSymbolRepository )
+public sealed class LoadBuiltinSymbolInputData( AggregateSymbolRepository inputData )
+    : IInputPort<AggregateSymbolRepository>
 {
-    public ISymbolRepository<VariableSymbol> VariableSymbolRepository { get; } = variableSymbolRepository;
-    public ISymbolRepository<UITypeSymbol> UITypeSymbolRepository { get; } = uiTypeSymbolRepository;
-    public ISymbolRepository<CommandSymbol> CommandSymbolRepository { get; } = commandSymbolRepository;
-    public ISymbolRepository<CallbackSymbol> CallbackSymbolRepository { get; } = callbackSymbolRepository;
-}
-
-public sealed class LoadBuiltinSymbolInputData( LoadBuiltinSymbolInputDataDetail inputData )
-    : IInputPort<LoadBuiltinSymbolInputDataDetail>
-{
-    public LoadBuiltinSymbolInputDataDetail InputData { get; } = inputData;
+    public AggregateSymbolRepository InputData { get; } = inputData;
 }
 
 public sealed class LoadBuiltinSymbolOutputData( AggregateSymbolTable outputData, bool result, Exception? error = null ) : IOutputPort

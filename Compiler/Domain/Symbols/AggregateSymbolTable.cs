@@ -67,12 +67,11 @@ public sealed class AggregateSymbolTable
         // Command
         // User Function
         // PreProcessor Symbol
-        source.BuiltInVariables.AddRange( target.BuiltInVariables );
-        source.UserVariables.AddRange( target.UserVariables );
-        source.UITypes.AddRange( target.UITypes );
-        source.Commands.AddRange( target.Commands );
-        source.UserFunctions.AddRange( target.UserFunctions );
-        source.PreProcessorSymbols.AddRange( target.PreProcessorSymbols );
+        target.BuiltInVariables.AddRange( source.BuiltInVariables );
+        target.UserVariables.AddRange( source.UserVariables );
+        target.UITypes.AddRange( source.UITypes );
+        target.Commands.AddRange( source.Commands );
+        target.UserFunctions.AddRange( source.UserFunctions );
 
         // Callback
         foreach( var x in source.BuiltInCallbacks )
