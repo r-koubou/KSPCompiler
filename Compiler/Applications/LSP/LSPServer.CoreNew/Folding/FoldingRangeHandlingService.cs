@@ -5,16 +5,14 @@ using System.Threading.Tasks;
 using KSPCompiler.Applications.LSPServer.CoreNew.Ast;
 using KSPCompiler.Applications.LSPServer.CoreNew.Compilation;
 using KSPCompiler.Applications.LSPServer.CoreNew.Folding.Extensions;
-using KSPCompiler.Commons.Text;
 
 namespace KSPCompiler.Applications.LSPServer.CoreNew.Folding;
 
 public sealed class FoldingRangeHandlingService
 {
-    public async Task<List<FoldingItem>?> HandleAsync(
+    public async Task<List<FoldingItem>> HandleAsync(
         CompilationCacheManager compilerCacheService,
         ScriptLocation scriptLocation,
-        Position position,
         CancellationToken _ )
     {
         var cache = compilerCacheService.GetCache( scriptLocation );
