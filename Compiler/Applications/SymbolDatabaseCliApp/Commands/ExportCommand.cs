@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using ConsoleAppFramework;
 
 using KSPCompiler.Applications.SymbolDbManager.Services;
-using KSPCompiler.Interactors.ApplicationServices.Symbol;
+using KSPCompiler.Interactors.ApplicationServices.Symbols;
 
 namespace KSPCompiler.Applications.SymbolDbManager.Commands;
 

@@ -22,17 +22,8 @@ public sealed class CompilerCacheItem
         AstCompilationUnitNode? ast = null )
     {
         AllLinesText = allLinesText ?? [];
-        SymbolTable = symbolTable ?? new AggregateSymbolTable(
-            builtInVariables: new VariableSymbolTable(),
-            userVariables: new VariableSymbolTable(),
-            uiTypes: new UITypeSymbolTable(),
-            commands: new CommandSymbolTable(),
-            builtInCallbacks: new CallbackSymbolTable(),
-            userCallbacks: new CallbackSymbolTable(),
-            userFunctions: new UserFunctionSymbolTable(),
-            preProcessorSymbols: new PreProcessorSymbolTable()
-        );
-        Ast = ast ?? new AstCompilationUnitNode();
+        SymbolTable  = symbolTable ?? AggregateSymbolTable.Default();
+        Ast          = ast ?? new AstCompilationUnitNode();
     }
 }
 
