@@ -42,4 +42,52 @@ public sealed class AggregateSymbolTable
             userFunctions: new UserFunctionSymbolTable(),
             preProcessorSymbols: new PreProcessorSymbolTable()
         );
+
+    public void Clear()
+    {
+        BuiltInVariables.Clear();
+        UserVariables.Clear();
+        UITypes.Clear();
+        Commands.Clear();
+        UserCallbacks.Clear();
+        BuiltInCallbacks.Clear();
+        UserFunctions.Clear();
+        PreProcessorSymbols.Clear();
+    }
+
+    public static void Merge( AggregateSymbolTable source, AggregateSymbolTable target, bool clearTarget = false )
+    {
+        if( clearTarget )
+        {
+            target.Clear();
+        }
+
+        // Variables
+        // UI Type
+        // Command
+        // User Function
+        // PreProcessor Symbol
+        source.BuiltInVariables.AddRange( target.BuiltInVariables );
+        source.UserVariables.AddRange( target.UserVariables );
+        source.UITypes.AddRange( target.UITypes );
+        source.Commands.AddRange( target.Commands );
+        source.UserFunctions.AddRange( target.UserFunctions );
+        source.PreProcessorSymbols.AddRange( target.PreProcessorSymbols );
+
+        // Callback
+        foreach( var x in source.BuiltInCallbacks )
+        {
+            foreach( var symbol in x.Values )
+            {
+                if( symbol.AllowMultipleDeclaration )
+                {
+                    target.BuiltInCallbacks.AddAsOverload( symbol, symbol.Arguments );
+                }
+                else
+                {
+                    target.BuiltInCallbacks.AddAsNoOverload( symbol );
+                }
+            }
+        }
+    }
 }
