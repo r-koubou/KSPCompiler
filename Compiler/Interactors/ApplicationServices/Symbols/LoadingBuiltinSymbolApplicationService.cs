@@ -6,7 +6,7 @@ using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Gateways.Symbols;
 using KSPCompiler.UseCases.Symbols;
 
-namespace KSPCompiler.Interactors.ApplicationServices.Symbol;
+namespace KSPCompiler.Interactors.ApplicationServices.Symbols;
 
 public sealed class LoadingBuiltinSymbolApplicationService(
     ILoadBuiltinSymbolUseCase loadBuiltinSymbolUseCase,

@@ -15,7 +15,7 @@ using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.UITypes;
 using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Variables;
 using KSPCompiler.Gateways.Symbols;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
-using KSPCompiler.Interactors.ApplicationServices.Symbol;
+using KSPCompiler.Interactors.ApplicationServices.Symbols;
 
 using NUnit.Framework;
 

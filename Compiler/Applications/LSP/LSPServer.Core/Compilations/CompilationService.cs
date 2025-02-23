@@ -19,7 +19,7 @@ using KSPCompiler.Gateways.Symbols;
 using KSPCompiler.Infrastructures.EventEmitting.Default;
 using KSPCompiler.Infrastructures.Parser.Antlr;
 using KSPCompiler.Interactors.ApplicationServices.Compilation;
-using KSPCompiler.Interactors.ApplicationServices.Symbol;
+using KSPCompiler.Interactors.ApplicationServices.Symbols;
 using KSPCompiler.Interactors.Symbols;
 
 using OmniSharp.Extensions.LanguageServer.Protocol;

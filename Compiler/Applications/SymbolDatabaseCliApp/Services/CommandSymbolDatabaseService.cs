@@ -7,7 +7,7 @@ using KSPCompiler.Domain.Symbols;
 using KSPCompiler.ExternalSymbol.Tsv.Commands;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Commands;
 using KSPCompiler.Infrastructures.Commons.LocalStorages;
-using KSPCompiler.Interactors.ApplicationServices.Symbol;
+using KSPCompiler.Interactors.ApplicationServices.Symbols;
 
 namespace KSPCompiler.Applications.SymbolDbManager.Services;
 

@@ -9,7 +9,7 @@ using KSPCompiler.Gateways.EventEmitting;
 using KSPCompiler.Gateways.EventEmitting.Extensions;
 using KSPCompiler.Gateways.Parsers;
 using KSPCompiler.Interactors.Analysis;
-using KSPCompiler.Interactors.ApplicationServices.Symbol;
+using KSPCompiler.Interactors.ApplicationServices.Symbols;
 using KSPCompiler.UseCases;
 using KSPCompiler.UseCases.Analysis;
 
