@@ -30,4 +30,16 @@ public sealed class AggregateSymbolTable
         UserFunctions       = userFunctions;
         PreProcessorSymbols = preProcessorSymbols;
     }
+
+    public static AggregateSymbolTable Default()
+        => new(
+            builtInVariables: new VariableSymbolTable(),
+            userVariables: new VariableSymbolTable(),
+            uiTypes: new UITypeSymbolTable(),
+            commands: new CommandSymbolTable(),
+            builtInCallbacks: new CallbackSymbolTable(),
+            userCallbacks: new CallbackSymbolTable(),
+            userFunctions: new UserFunctionSymbolTable(),
+            preProcessorSymbols: new PreProcessorSymbolTable()
+        );
 }
