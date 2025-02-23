@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 using EmmyLua.LanguageServer.Framework.Protocol.Capabilities.Client.ClientCapabilities;
 using EmmyLua.LanguageServer.Framework.Protocol.Capabilities.Server;
+using EmmyLua.LanguageServer.Framework.Protocol.Capabilities.Server.Options;
 using EmmyLua.LanguageServer.Framework.Protocol.Message.TextDocument;
 using EmmyLua.LanguageServer.Framework.Protocol.Model.TextEdit;
 using EmmyLua.LanguageServer.Framework.Server.Handler;
@@ -19,21 +20,37 @@ public sealed class TextDocumentHandler( CompilationCacheManager compilationCach
     private readonly CompilationApplicationService service = new();
 
     protected override Task Handle( DidOpenTextDocumentParams request, CancellationToken token )
-        => throw new System.NotImplementedException();
+    {
+        throw new System.NotImplementedException();
+    }
 
     protected override Task Handle( DidChangeTextDocumentParams request, CancellationToken token )
-        => throw new System.NotImplementedException();
+    {
+        throw new System.NotImplementedException();
+    }
 
     protected override Task Handle( DidCloseTextDocumentParams request, CancellationToken token )
-        => throw new System.NotImplementedException();
+    {
+        throw new System.NotImplementedException();
+    }
 
     protected override Task Handle( WillSaveTextDocumentParams request, CancellationToken token )
-        => throw new System.NotImplementedException();
+    {
+        throw new System.NotImplementedException();
+    }
 
     protected override Task<List<TextEdit>?> HandleRequest( WillSaveTextDocumentParams request, CancellationToken token )
-        => throw new System.NotImplementedException();
+    {
+        throw new System.NotImplementedException();
+    }
 
     public override void RegisterCapability( ServerCapabilities serverCapabilities, ClientCapabilities clientCapabilities )
     {
+        serverCapabilities.TextDocumentSync = new TextDocumentSyncOptions
+        {
+            Change = TextDocumentSyncKind.Full,
+            OpenClose = true,
+            Save = new SaveOptions { IncludeText = true }
+        };
     }
 }
