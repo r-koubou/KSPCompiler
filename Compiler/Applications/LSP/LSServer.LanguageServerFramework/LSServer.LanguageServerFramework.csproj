@@ -17,7 +17,29 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\Infrastructures\EventEmitting.Default\EventEmitting.Default.csproj" />
+      <ProjectReference Include="..\..\..\Infrastructures\ExternalSymbolRepository.Yaml\ExternalSymbolRepository.Yaml.csproj" />
+      <ProjectReference Include="..\..\..\Infrastructures\Parser.Antlr\Parser.Antlr.csproj" />
       <ProjectReference Include="..\LSPServer.CoreNew\LSPServer.CoreNew.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="..\..\..\..\Data\Symbols\callbacks.yaml">
+            <Link>Data\Symbols\callbacks.yaml</Link>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="..\..\..\..\Data\Symbols\commands.yaml">
+            <Link>Data\Symbols\commands.yaml</Link>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="..\..\..\..\Data\Symbols\uitypes.yaml">
+            <Link>Data\Symbols\uitypes.yaml</Link>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="..\..\..\..\Data\Symbols\variables.yaml">
+            <Link>Data\Symbols\variables.yaml</Link>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
 
 </Project>
