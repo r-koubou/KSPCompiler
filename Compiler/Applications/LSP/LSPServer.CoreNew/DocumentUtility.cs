@@ -37,7 +37,7 @@ internal static class DocumentUtility
 
     public static string ExtractWord( IReadOnlyList<string> lines, Position position )
     {
-        var line = lines[ position.BeginLine.Value ];
+        var line = lines[ position.BeginLine.Value - 1 ]; // 0-based
         var (start, end) = GetWordRange( line, position.BeginColumn.Value );
 
         return line.Substring( start, end - start ).Trim();

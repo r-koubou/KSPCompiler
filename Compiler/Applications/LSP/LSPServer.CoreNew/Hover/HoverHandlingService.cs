@@ -20,6 +20,11 @@ public sealed class HoverHandlingService
         var symbols = cache.SymbolTable;
         var word = DocumentUtility.ExtractWord( cache.AllLinesText, position );
 
+        if( string.IsNullOrEmpty( word ) )
+        {
+            return null;
+        }
+
         #region User deffinitions
         // ユーザー定義変数(コメントがある場合)
         if( symbols.UserVariables.TryBuildHoverText(word, out var hoverText, new UserDefinedSymbolHoverTextBuilder<VariableSymbol>() ) )
