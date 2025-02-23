@@ -19,6 +19,7 @@ using KSPCompiler.Gateways.Symbols;
 using KSPCompiler.Infrastructures.EventEmitting.Default;
 using KSPCompiler.Infrastructures.Parser.Antlr;
 using KSPCompiler.Interactors.ApplicationServices.Compilation;
+using KSPCompiler.Interactors.ApplicationServices.Symbol;
 using KSPCompiler.Interactors.Symbols;
 
 using OmniSharp.Extensions.LanguageServer.Protocol;
@@ -38,6 +39,8 @@ public sealed class CompilationService
     }
 
     private ILanguageServerFacade ServerFacade { get; }
+
+    // ReSharper disable once UnusedAutoPropertyAccessor.Local
     private ILanguageServerConfiguration Configuration { get; }
 
     private CompilerCacheService CompilerCacheService { get; }
@@ -54,9 +57,13 @@ public sealed class CompilationService
         Configuration = configuration;
         CompilerCacheService = compilerCacheService;
 
+        using var repositories = CreateSymbolRepositories();
+
         compilationApplicationService = new CompilationApplicationService(
-            new LoadBuiltinSymbolInteractor(),
-            CreateSymbolRepositories()
+            new LoadingBuiltinSymbolApplicationService(
+                new LoadBuiltinSymbolInteractor(),
+                repositories
+            )
         );
     }
 

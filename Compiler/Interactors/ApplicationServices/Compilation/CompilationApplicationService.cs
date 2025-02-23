@@ -8,11 +8,10 @@ using KSPCompiler.Domain.Symbols;
 using KSPCompiler.Gateways.EventEmitting;
 using KSPCompiler.Gateways.EventEmitting.Extensions;
 using KSPCompiler.Gateways.Parsers;
-using KSPCompiler.Gateways.Symbols;
 using KSPCompiler.Interactors.Analysis;
+using KSPCompiler.Interactors.ApplicationServices.Symbol;
 using KSPCompiler.UseCases;
 using KSPCompiler.UseCases.Analysis;
-using KSPCompiler.UseCases.Symbols;
 
 namespace KSPCompiler.Interactors.ApplicationServices.Compilation;
 
@@ -28,13 +27,11 @@ public sealed record CompilationResult(
     string ObfuscatedScript );
 
 public sealed class CompilationApplicationService(
-    ILoadBuiltinSymbolUseCase loadBuiltinSymbolUseCase,
-    AggregateSymbolRepository symbolRepositories
+    LoadingBuiltinSymbolApplicationService loadingBuiltinSymbolApplicationService
 )
 {
-    private readonly ILoadBuiltinSymbolUseCase loadBuiltinSymbolUseCase = loadBuiltinSymbolUseCase;
-    private readonly AggregateSymbolRepository symbolRepositories = symbolRepositories;
-    private AggregateSymbolTable? builtInSymbolTable;
+    private readonly LoadingBuiltinSymbolApplicationService loadingBuiltinSymbolApplicationService
+        = loadingBuiltinSymbolApplicationService;
 
     public CompilationResult Execute( IEventEmitter eventEmitter, CompilationOption option )
         => ExecuteAsync( eventEmitter, option, CancellationToken.None ).GetAwaiter().GetResult();
@@ -44,16 +41,7 @@ public sealed class CompilationApplicationService(
     {
         // TODO: CompilerMessageManger compilerMessageManger is obsolete. Use IEventEmitter eventEmitter instead.
 
-        if( builtInSymbolTable == null )
-        {
-            await LoadBuiltInSymbolsAsync( cancellationToken );
-        }
-
-        if( builtInSymbolTable == null )
-        {
-            throw new InvalidOperationException( "Failed to load built-in symbols." );
-        }
-
+        var builtInSymbolTable = await loadingBuiltinSymbolApplicationService.LoadAsync( cancellationToken );
         var userSymbolTable = AggregateSymbolTable.Default();
 
         SetupSymbolTable( builtInSymbolTable, userSymbolTable );
@@ -193,25 +181,6 @@ public sealed class CompilationApplicationService(
     }
 
     #region Setup Symbols
-    private async Task LoadBuiltInSymbolsAsync( CancellationToken cancellationToken )
-    {
-        if( builtInSymbolTable is not null )
-        {
-            return;
-        }
-
-        var input = new LoadBuiltinSymbolInputData( symbolRepositories );
-        var result = await loadBuiltinSymbolUseCase.ExecuteAsync( input, cancellationToken );
-
-        if( !result.Result )
-        {
-            throw new InvalidOperationException( "Failed to load built-in symbols.", result.Error );
-        }
-
-        builtInSymbolTable = result.OutputData;
-        symbolRepositories.Dispose();
-    }
-
     private static void SetupSymbolTable( AggregateSymbolTable builtin, AggregateSymbolTable user )
     {
         AggregateSymbolTable.Merge( builtin, user, clearTarget: true );

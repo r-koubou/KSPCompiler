@@ -15,6 +15,7 @@ using KSPCompiler.Gateways.Symbols;
 using KSPCompiler.Infrastructures.EventEmitting.Default;
 using KSPCompiler.Infrastructures.Parser.Antlr;
 using KSPCompiler.Interactors.ApplicationServices.Compilation;
+using KSPCompiler.Interactors.ApplicationServices.Symbol;
 using KSPCompiler.Interactors.Symbols;
 
 namespace KSPCompiler.Applications.Cli;
@@ -40,11 +41,14 @@ public static class CompilerProgram
         // イベントディスパッチャの設定
         SetupEventEmitter( eventEmitter, messageManager, subscribers );
 
+        using var repositories = CreateSymbolRepositories();
         var parser = new AntlrKspFileSyntaxParser( input, eventEmitter );
 
         var compilationService = new CompilationApplicationService(
-            new LoadBuiltinSymbolInteractor(),
-            CreateSymbolRepositories()
+            new LoadingBuiltinSymbolApplicationService(
+                new LoadBuiltinSymbolInteractor(),
+                repositories
+            )
         );
 
         var option = new CompilationOption(
