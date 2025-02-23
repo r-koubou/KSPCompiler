@@ -59,7 +59,7 @@ public sealed class RenameHandlingService
         }
     }
 
-    public async Task<Position?> HandlePrepareAsync(
+    public async Task<(bool result, Position position)> HandlePrepareAsync(
         CompilationCacheManager compilerCacheService,
         ScriptLocation scriptLocation,
         Position position,
@@ -76,7 +76,7 @@ public sealed class RenameHandlingService
 
         if( variableAppearances.Any() )
         {
-            return range;
+            return ( true, range );
         }
 
         var functionFinder = new UserFunctionSymbolAppearanceFinder( orgName );
@@ -84,11 +84,11 @@ public sealed class RenameHandlingService
 
         if( functionAppearances.Any() )
         {
-            return range;
+            return ( true, range );
         }
 
         await Task.CompletedTask;
 
-        return null;
+        return ( false, default );
     }
 }

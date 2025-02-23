@@ -13,7 +13,7 @@ using KSPCompiler.Applications.LSServer.LanguageServerFramework.FindReferences.E
 
 namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.FindReferences;
 
-public class ReferencesHandler(
+public sealed class ReferencesHandler(
     CompilationCacheManager compilationCacheManager
     )
 : ReferenceHandlerBase
