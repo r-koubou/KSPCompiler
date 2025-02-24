@@ -2,10 +2,10 @@ using System.Collections.Generic;
 
 using EmmyLua.LanguageServer.Framework.Protocol.Model.TextEdit;
 
-using KSPCompiler.Applications.LSPServer.CoreNew.Renaming;
+using KSPCompiler.Applications.LSPServer.Core.Renaming;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
 
-using RenamingResult = System.Collections.Generic.Dictionary<KSPCompiler.Applications.LSPServer.CoreNew.ScriptLocation, System.Collections.Generic.List<KSPCompiler.Applications.LSPServer.CoreNew.Renaming.RenamingItem>>;
+using RenamingResult = System.Collections.Generic.Dictionary<KSPCompiler.Applications.LSPServer.Core.ScriptLocation, System.Collections.Generic.List<KSPCompiler.Applications.LSPServer.Core.Renaming.RenamingItem>>;
 using FrameworkRenamingResult = System.Collections.Generic.Dictionary<EmmyLua.LanguageServer.Framework.Protocol.Model.DocumentUri, System.Collections.Generic.List<EmmyLua.LanguageServer.Framework.Protocol.Model.TextEdit.TextEdit>>;
 
 namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Renaming.Extensions;

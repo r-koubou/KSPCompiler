@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-using KSPCompiler.Applications.LSPServer.CoreNew.Folding;
+using KSPCompiler.Applications.LSPServer.Core.Folding;
 
 using FrameworkFoldingRange = EmmyLua.LanguageServer.Framework.Protocol.Message.FoldingRange.FoldingRange;
 using FrameworkFoldingRangeKind = EmmyLua.LanguageServer.Framework.Protocol.Message.FoldingRange.FoldingRangeKind;

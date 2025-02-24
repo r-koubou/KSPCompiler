@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-using KSPCompiler.Applications.LSPServer.CoreNew.Symbol;
+using KSPCompiler.Applications.LSPServer.Core.Symbol;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
 
 using FrameworkDocumentSymbol = EmmyLua.LanguageServer.Framework.Protocol.Message.DocumentSymbol.DocumentSymbol;

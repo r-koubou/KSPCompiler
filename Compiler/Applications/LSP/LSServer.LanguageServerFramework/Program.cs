@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 using EmmyLua.LanguageServer.Framework.Server;
 
-using KSPCompiler.Applications.LSPServer.CoreNew.Compilation;
+using KSPCompiler.Applications.LSPServer.Core.Compilation;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Completion;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Definition;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.FindReferences;

@@ -8,8 +8,8 @@ using EmmyLua.LanguageServer.Framework.Protocol.Message.Client.PublishDiagnostic
 using EmmyLua.LanguageServer.Framework.Protocol.Model.Diagnostic;
 using EmmyLua.LanguageServer.Framework.Server;
 
-using KSPCompiler.Applications.LSPServer.CoreNew;
-using KSPCompiler.Applications.LSPServer.CoreNew.Compilation;
+using KSPCompiler.Applications.LSPServer.Core;
+using KSPCompiler.Applications.LSPServer.Core.Compilation;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Compilation.Extensions;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
 using KSPCompiler.Commons;

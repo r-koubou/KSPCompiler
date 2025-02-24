@@ -1,21 +1,17 @@
-using KSPCompiler.Applications.LSPServer.Core.Extensions;
+using KSPCompiler.Commons.Text;
 using KSPCompiler.Domain.Ast.Nodes;
 using KSPCompiler.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Domain.Ast.Nodes.Expressions;
 using KSPCompiler.Domain.Ast.Nodes.Statements;
 
-using OmniSharpPosition = OmniSharp.Extensions.LanguageServer.Protocol.Models.Position;
-
 namespace KSPCompiler.Applications.LSPServer.Core.Ast;
-
-
 
 public sealed class AstSymbolNodeFinder : DefaultAstVisitor
 {
-    private OmniSharpPosition Position { get; set; } = new();
+    private Position Position { get; set; }
     private IAstNode? Result { get; set; }
 
-    public bool TryFindNode( AstCompilationUnitNode ast, OmniSharpPosition position, out IAstNode result )
+    public bool TryFindNode( AstCompilationUnitNode ast, Position position, out IAstNode result )
     {
         Result   = null;
         result   = null!;
@@ -33,13 +29,13 @@ public sealed class AstSymbolNodeFinder : DefaultAstVisitor
         return true;
     }
 
-    private static bool IsPositionInNode( OmniSharpPosition position, IAstNode node )
+    private static bool IsPositionInNode( Position position, IAstNode node )
     {
-        var range = node.Position.AsRange();
+        var range = node.Position;
 
-        return range.Start.Line == position.Line
-               && position.Character >= range.Start.Character
-               && position.Character <= range.End.Character;
+        return range.BeginLine.Value == position.BeginLine.Value
+               && position.BeginColumn.Value >= range.BeginColumn.Value
+               && position.EndColumn.Value <= range.EndColumn.Value;
     }
 
     public override IAstNode Visit( AstCallbackDeclarationNode node )

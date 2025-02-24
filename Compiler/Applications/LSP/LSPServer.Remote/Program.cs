@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 
-using KSPCompiler.Applications.LSPServer.Core;
+using KSPCompiler.Applications.LSPServer.Omnisharp;
 
 using Microsoft.Extensions.Logging;
 

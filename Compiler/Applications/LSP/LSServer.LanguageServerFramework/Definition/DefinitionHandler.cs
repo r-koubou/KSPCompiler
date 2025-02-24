@@ -6,8 +6,8 @@ using EmmyLua.LanguageServer.Framework.Protocol.Capabilities.Server;
 using EmmyLua.LanguageServer.Framework.Protocol.Message.Definition;
 using EmmyLua.LanguageServer.Framework.Server.Handler;
 
-using KSPCompiler.Applications.LSPServer.CoreNew.Compilation;
-using KSPCompiler.Applications.LSPServer.CoreNew.Definition;
+using KSPCompiler.Applications.LSPServer.Core.Compilation;
+using KSPCompiler.Applications.LSPServer.Core.Definition;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
 
 namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Definition;

@@ -1,19 +1,14 @@
 using KSPCompiler.Domain.Symbols;
 
-using OmniSharp.Extensions.LanguageServer.Protocol;
-using OmniSharp.Extensions.LanguageServer.Protocol.Models;
-
-using Range = OmniSharp.Extensions.LanguageServer.Protocol.Models.Range;
-
 namespace KSPCompiler.Applications.LSPServer.Core.Extensions;
 
 public static class ISymbolTableExtension
 {
     public static bool TrySearchDefinitionLocation<TSymbol>(
         this ISymbolTable<TSymbol> symbolTable,
-        DocumentUri documentUri,
+        ScriptLocation documentUri,
         string symbolName,
-        out Location result ) where TSymbol : SymbolBase
+        out LocationLink result ) where TSymbol : SymbolBase
     {
         result = null!;
 
@@ -22,14 +17,10 @@ public static class ISymbolTableExtension
             return false;
         }
 
-        result = new Location
+        result = new LocationLink
         {
-            Uri = documentUri,
-            Range = new Range()
-            {
-                Start = symbol.DefinedPosition.BeginAs(),
-                End   = symbol.DefinedPosition.EndAs()
-            }
+            Location = documentUri,
+            Range    = symbol.DefinedPosition
         };
 
         return true;
