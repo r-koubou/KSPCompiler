@@ -13,7 +13,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\LSPServer.Core\LSPServer.Core.csproj" />
+      <ProjectReference Include="..\LSPServer.Omnisharp\LSPServer.Omnisharp.csproj" />
     </ItemGroup>
 
     <ItemGroup>

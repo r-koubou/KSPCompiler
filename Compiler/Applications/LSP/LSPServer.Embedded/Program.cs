@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-using KSPCompiler.Applications.LSPServer.Core;
+using KSPCompiler.Applications.LSPServer.Omnisharp;
 
 using Microsoft.Extensions.Logging;
 
