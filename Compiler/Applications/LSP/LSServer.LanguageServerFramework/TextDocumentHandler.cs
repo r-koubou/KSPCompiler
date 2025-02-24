@@ -70,6 +70,7 @@ public sealed class TextDocumentHandler(
         var scriptLocation = request.TextDocument.Uri.AsScriptLocation();
 
         await compilationSeverService.ClearDiagnosticAsync( scriptLocation, token );
+        compilationCacheManager.RemoveCache( scriptLocation );
     }
 
     protected override async Task Handle( WillSaveTextDocumentParams request, CancellationToken token )

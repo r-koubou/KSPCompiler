@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -47,6 +48,9 @@ public sealed class SignatureHelpHandlingService
         var line = lines[ position.BeginLine.Value - 1 ];
         var start = position.BeginColumn.Value; // caret position - 1
 
+        // カーソル位置がEOFの場合、最後の文字に設定
+        start = Math.Min( line.Length - 1, start );
+
         // 行頭からコマンド呼び出しの開始位置を探す
         while( start >= 0 && line[ start ] != '(' )
         {
@@ -72,7 +76,11 @@ public sealed class SignatureHelpHandlingService
     {
         var line = lines[ position.BeginLine.Value - 1 ];
         var length = line.Length;
+        var caret = position.BeginColumn.Value;
         var start = position.BeginColumn.Value - 1; // caret position - 1
+
+        // カーソル位置がEOFの場合、最後の文字に設定
+        start = Math.Min( line.Length - 1, start );
 
         // 行頭からコマンド呼び出しの開始位置を探す
         while( start >= 0 && line[ start ] != '(' )
@@ -87,7 +95,8 @@ public sealed class SignatureHelpHandlingService
 
         var activeArgument = 0;
 
-        for( var i = start + 1; i < length; i++ )
+        // カーソル位置までのカンマの数を数える
+        for( var i = start + 1; i < caret && i < length; i++ )
         {
             if( line[ i ] == ',' )
             {
