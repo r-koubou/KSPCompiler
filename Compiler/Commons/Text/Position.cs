@@ -14,22 +14,22 @@ namespace KSPCompiler.Commons.Text
         };
 
         /// <summary>
-        /// Starting line number.
+        /// Starting line number. (1-based)
         /// </summary>
         public LineNumber BeginLine;
 
         /// <summary>
-        /// End Line Number. It's -1 if it's unknown.
+        /// End Line Number. It's -1 if it's unknown. (1-based)
         /// </summary>
         public LineNumber EndLine;
 
         /// <summary>
-        /// Start column number.
+        /// Start column number. (0-based)
         /// </summary>
         public Column BeginColumn;
 
         /// <summary>
-        /// End Column Number. It's -1 if it's unknown.
+        /// End Column Number. It's -1 if it's unknown. (0-based)
         /// </summary>
         public Column EndColumn;
 

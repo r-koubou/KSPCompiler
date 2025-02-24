@@ -12,6 +12,7 @@ using KSPCompiler.Applications.LSServer.LanguageServerFramework.FindReferences;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Folding;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Hover;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Renaming;
+using KSPCompiler.Applications.LSServer.LanguageServerFramework.SignatureHelp;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Commands;
 using KSPCompiler.ExternalSymbolRepository.Yaml.UITypes;
@@ -58,6 +59,7 @@ public sealed class Program
         server.AddHandler( new HoverHandler( compilationCacheManager ) );
         server.AddHandler( new ReferencesHandler( compilationCacheManager ) );
         server.AddHandler( new RenameHandler( compilationCacheManager ) );
+        server.AddHandler( new SignatureHelpHandler( compilationCacheManager ) );
         #endregion ~Register Handlers
 
         await server.Run();
