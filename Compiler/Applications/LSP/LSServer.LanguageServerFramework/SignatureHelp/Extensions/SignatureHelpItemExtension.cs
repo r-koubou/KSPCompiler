@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-using KSPCompiler.Applications.LSPServer.CoreNew.SignatureHelp;
+using KSPCompiler.Applications.LSPServer.Core.SignatureHelp;
 
 using FrameworkSignatureHelp = EmmyLua.LanguageServer.Framework.Protocol.Message.SignatureHelp.SignatureHelp;
 using FrameworkSignatureInformation = EmmyLua.LanguageServer.Framework.Protocol.Message.SignatureHelp.SignatureInformation;

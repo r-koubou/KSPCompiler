@@ -6,8 +6,8 @@ using EmmyLua.LanguageServer.Framework.Protocol.Capabilities.Server;
 using EmmyLua.LanguageServer.Framework.Protocol.Message.FoldingRange;
 using EmmyLua.LanguageServer.Framework.Server.Handler;
 
-using KSPCompiler.Applications.LSPServer.CoreNew.Compilation;
-using KSPCompiler.Applications.LSPServer.CoreNew.Folding;
+using KSPCompiler.Applications.LSPServer.Core.Compilation;
+using KSPCompiler.Applications.LSPServer.Core.Folding;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Folding.Extensions;
 

@@ -11,7 +11,7 @@ using EmmyLua.LanguageServer.Framework.Protocol.Model.TextEdit;
 using EmmyLua.LanguageServer.Framework.Server;
 using EmmyLua.LanguageServer.Framework.Server.Handler;
 
-using KSPCompiler.Applications.LSPServer.CoreNew.Compilation;
+using KSPCompiler.Applications.LSPServer.Core.Compilation;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Compilation;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
 using KSPCompiler.Gateways.Symbols;

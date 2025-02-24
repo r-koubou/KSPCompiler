@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 using EmmyLua.LanguageServer.Framework.Protocol.Model;
 
-using KSPCompiler.Applications.LSPServer.CoreNew.FindReferences;
+using KSPCompiler.Applications.LSPServer.Core.FindReferences;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
 
 namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.FindReferences.Extensions;

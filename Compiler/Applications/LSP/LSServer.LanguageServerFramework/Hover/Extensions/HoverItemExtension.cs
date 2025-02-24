@@ -1,6 +1,6 @@
 using EmmyLua.LanguageServer.Framework.Protocol.Message.Hover;
 
-using KSPCompiler.Applications.LSPServer.CoreNew.Hover;
+using KSPCompiler.Applications.LSPServer.Core.Hover;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
 
 namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Hover.Extensions;

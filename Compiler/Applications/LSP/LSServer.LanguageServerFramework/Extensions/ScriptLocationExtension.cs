@@ -2,7 +2,7 @@ using System;
 
 using EmmyLua.LanguageServer.Framework.Protocol.Model;
 
-using KSPCompiler.Applications.LSPServer.CoreNew;
+using KSPCompiler.Applications.LSPServer.Core;
 
 namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
 

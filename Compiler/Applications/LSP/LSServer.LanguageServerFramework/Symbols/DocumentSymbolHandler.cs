@@ -6,8 +6,8 @@ using EmmyLua.LanguageServer.Framework.Protocol.Capabilities.Server;
 using EmmyLua.LanguageServer.Framework.Protocol.Message.DocumentSymbol;
 using EmmyLua.LanguageServer.Framework.Server.Handler;
 
-using KSPCompiler.Applications.LSPServer.CoreNew.Compilation;
-using KSPCompiler.Applications.LSPServer.CoreNew.Symbol;
+using KSPCompiler.Applications.LSPServer.Core.Compilation;
+using KSPCompiler.Applications.LSPServer.Core.Symbol;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Symbols.Extensions;
 

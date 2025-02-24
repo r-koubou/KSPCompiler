@@ -6,8 +6,8 @@ using EmmyLua.LanguageServer.Framework.Protocol.Capabilities.Server;
 using EmmyLua.LanguageServer.Framework.Protocol.Message.Reference;
 using EmmyLua.LanguageServer.Framework.Server.Handler;
 
-using KSPCompiler.Applications.LSPServer.CoreNew.Compilation;
-using KSPCompiler.Applications.LSPServer.CoreNew.FindReferences;
+using KSPCompiler.Applications.LSPServer.Core.Compilation;
+using KSPCompiler.Applications.LSPServer.Core.FindReferences;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.FindReferences.Extensions;
 

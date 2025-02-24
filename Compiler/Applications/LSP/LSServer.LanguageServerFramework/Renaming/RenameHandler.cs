@@ -7,8 +7,8 @@ using EmmyLua.LanguageServer.Framework.Protocol.Message.Rename;
 using EmmyLua.LanguageServer.Framework.Protocol.Model;
 using EmmyLua.LanguageServer.Framework.Server.Handler;
 
-using KSPCompiler.Applications.LSPServer.CoreNew.Compilation;
-using KSPCompiler.Applications.LSPServer.CoreNew.Renaming;
+using KSPCompiler.Applications.LSPServer.Core.Compilation;
+using KSPCompiler.Applications.LSPServer.Core.Renaming;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Renaming.Extensions;
 
