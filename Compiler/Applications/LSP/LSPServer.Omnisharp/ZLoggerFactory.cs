@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using ZLogger;
 using ZLogger.Formatters;
 
-namespace KSPCompiler.Applications.LSPServer.Remote;
+namespace KSPCompiler.Applications.LSPServer.Omnisharp;
 
 public static class ZLoggerFactory
 {
@@ -12,12 +12,6 @@ public static class ZLoggerFactory
         return LoggerFactory.Create( configure =>
             {
                 configure.SetMinimumLevel( LogLevel.Trace );
-                configure.AddZLoggerConsole( options =>
-                    {
-                        options.UsePlainTextFormatter( SetupFormatter );
-
-                    }
-                );
                 configure.AddZLoggerFile( "log.txt", options =>
                     {
                         options.UsePlainTextFormatter( SetupFormatter );
