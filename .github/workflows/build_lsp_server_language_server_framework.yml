@@ -1,8 +1,8 @@
-name: Build LSP Server (Embedded)
+name: Build LSP Server (using LanguageServer.Framework)
 
 env:
   DOTNET_SDK_VERSION: '9.0.*'
-  PREFIX: KSP-LSP-Server-Embedded
+  PREFIX: KSP-LSP-Server-LanguageServer.Framework
 on:
   workflow_call:
     inputs:
@@ -22,15 +22,15 @@ on:
 
 jobs:
   #--------------------------------------------------------------
-  # Build LSP Server
+  # Build LSP Server (using LanguageServer.Framework)
   #--------------------------------------------------------------
   build:
     runs-on: ubuntu-latest
     env:
       DOTNET_CLI_TELEMETRY_OPTOUT: 1
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
-      BASE_DIR: ${{ github.workspace }}/Compiler/Applications/LSP/LSPServer.Embedded
-      PUBLISH_DIR: publish/embedded
+      BASE_DIR: ${{ github.workspace }}/Compiler/Applications/LSP/LSServer.LanguageServerFramework
+      PUBLISH_DIR: publish/LanguageServer.Framework
 
     steps:
     - name: Show workflow inputs
@@ -52,7 +52,7 @@ jobs:
         dotnet-version: ${{ env.DOTNET_SDK_VERSION }}
 
     #----------------------------------------------------------
-    # Build LSP Server Embedded
+    # Build
     #----------------------------------------------------------
     - name: Build LSP Server
       run: |
@@ -63,5 +63,5 @@ jobs:
     - name: Archive
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ env.PREFIX }}-${{ inputs.build-configuration }}-${{ env.BRANCH_NAME }}
+        name: ${{ env.PREFIX }}-${{ inputs.build-configuration }}-${{ env.BRANCH_NAME}}
         path: ${{ env.BASE_DIR }}/${{ env.PUBLISH_DIR }}

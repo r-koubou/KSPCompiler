@@ -13,14 +13,14 @@ jobs:
   #--------------------------------------------------------------
   # Build LSP Server
   #--------------------------------------------------------------
-  build-lsp-server-embedded:
-    uses: ./.github/workflows/build_lsp_server_embedded.yml
+  build-lsp-server-omnisharp:
+    uses: ./.github/workflows/build_lsp_server_omnisharp.yml
     secrets: inherit
     with:
       build-configuration: Debug
 
-  build-lsp-server-remote:
-    uses: ./.github/workflows/build_lsp_server_remote.yml
+  build-lsp-server-language-server-framework:
+    uses: ./.github/workflows/build_lsp_server_language_server_framework.yml
     secrets: inherit
     with:
       build-configuration: Debug
