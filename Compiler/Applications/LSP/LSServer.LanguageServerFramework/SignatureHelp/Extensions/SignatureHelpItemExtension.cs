@@ -7,7 +7,7 @@ using FrameworkSignatureInformation = EmmyLua.LanguageServer.Framework.Protocol.
 using FrameworkParameterInformation = EmmyLua.LanguageServer.Framework.Protocol.Message.SignatureHelp.ParameterInformation;
 using FrameworkStringOrMarkupContent = EmmyLua.LanguageServer.Framework.Protocol.Model.Union.StringOrMarkupContent;
 
-namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Hover.Extensions;
+namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.SignatureHelp.Extensions;
 
 public static class SignatureHelpItemExtension
 {

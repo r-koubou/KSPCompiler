@@ -11,6 +11,7 @@ using KSPCompiler.Applications.LSPServer.CoreNew.Compilation;
 using KSPCompiler.Applications.LSPServer.CoreNew.SignatureHelp;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Hover.Extensions;
+using KSPCompiler.Applications.LSServer.LanguageServerFramework.SignatureHelp.Extensions;
 
 using FrameworkSignatureHelp = EmmyLua.LanguageServer.Framework.Protocol.Message.SignatureHelp.SignatureHelp;
 
