@@ -2,15 +2,11 @@ using KSPCompiler.Commons;
 
 namespace KSPCompiler.UseCases;
 
-public interface IInputPort {}
+public class InputPort;
 
-public interface IInputPort<out TInput> : IInputPort
+public abstract class InputPort<TInput>( TInput inputData ) : InputPort
 {
-    public TInput InputData { get; }
+    public TInput InputData { get; } = inputData;
 }
 
-public sealed class UnitInputPort : IInputPort<Unit>
-{
-    public static readonly UnitInputPort Default = new();
-    public Unit InputData => Unit.Default;
-}
+public sealed class UnitInputPort() : InputPort<Unit>( Unit.Default );
