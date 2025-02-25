@@ -7,14 +7,11 @@ using KSPCompiler.UseCases.Symbols;
 
 namespace KSPCompiler.Interactors.Symbols;
 
-public class ImportSymbolToRepositoryInteractor<TSymbol> : IImportSymbolUseCase<TSymbol> where TSymbol : SymbolBase
+public class ImportSymbolToRepositoryInteractor<TSymbol>(
+    ISymbolRepository<TSymbol> repository
+) : IImportSymbolUseCase<TSymbol> where TSymbol : SymbolBase
 {
-    private ISymbolRepository<TSymbol> Repository { get; }
-
-    public ImportSymbolToRepositoryInteractor( ISymbolRepository<TSymbol> repository )
-    {
-        Repository = repository;
-    }
+    private ISymbolRepository<TSymbol> Repository { get; } = repository;
 
     public async Task<ImportSymbolOutputPort> ExecuteAsync( ImportSymbolInputPort<TSymbol> parameter, CancellationToken cancellationToken = default )
     {
@@ -28,8 +25,8 @@ public class ImportSymbolToRepositoryInteractor<TSymbol> : IImportSymbolUseCase<
         );
 
         return new ImportSymbolOutputPort(
-            storeResult.Success,
             detail,
+            storeResult.Success,
             storeResult.Exception
         );
     }

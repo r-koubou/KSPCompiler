@@ -16,11 +16,11 @@ public class SyntaxAnalysisInteractor : ISyntaxAnalysisUseCase
         try
         {
             var ast = parameter.InputData.Parse();
-            return Task.FromResult( new SyntaxAnalysisOutputData( true, null, ast ) );
+            return Task.FromResult( new SyntaxAnalysisOutputData( ast, true, null ) );
         }
         catch( KspScriptParseException e )
         {
-            return Task.FromResult( new SyntaxAnalysisOutputData( false, e, default! ) );
+            return Task.FromResult( new SyntaxAnalysisOutputData( default!, false, e ) );
         }
     }
 }

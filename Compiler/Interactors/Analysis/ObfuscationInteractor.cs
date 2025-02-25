@@ -33,7 +33,7 @@ public class ObfuscationInteractor : IObfuscationUseCase
         return Task.FromResult( CreateOutputData( true, null ) );
 
         ObfuscationOutputData CreateOutputData( bool result, Exception? error )
-            => new( result, error, output.ToString() );
+            => new( output.ToString(), result, error );
     }
 
     public ObfuscationOutputData Execute( ObfuscationInputData input )

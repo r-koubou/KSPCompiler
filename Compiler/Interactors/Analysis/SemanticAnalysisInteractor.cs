@@ -39,7 +39,7 @@ public class SemanticAnalysisInteractor : ISemanticAnalysisUseCase
         return Task.FromResult( CreateOutputData( noError, null ) );
 
         SemanticAnalysisOutputData CreateOutputData( bool result, Exception? error )
-            => new( result, error, new SemanticAnalysisOutputDataDetail( node, symbolTable ) );
+            => new( new SemanticAnalysisOutputDataDetail( node, symbolTable ), result, error );
     }
 
     public SemanticAnalysisOutputData Execute( SemanticAnalysisInputData input )
