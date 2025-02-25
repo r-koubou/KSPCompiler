@@ -27,28 +27,15 @@ public sealed class ObfuscationInputDataDetail
     }
 }
 
-public sealed class ObfuscationInputData : IInputPort<ObfuscationInputDataDetail>
-{
-    public ObfuscationInputDataDetail InputData { get; }
+public sealed class ObfuscationInputData(
+    ObfuscationInputDataDetail inputData
+) : InputPort<ObfuscationInputDataDetail>( inputData );
 
-    public ObfuscationInputData( ObfuscationInputDataDetail inputData )
-    {
-        InputData = inputData;
-    }
-}
+public sealed class ObfuscationOutputData(
+    string outputData,
+    bool result,
+    Exception? error = null
+) : OutputPort<string>( outputData, result, error );
 
-public sealed class ObfuscationOutputData : IOutputPort<string>
-{
-    public bool Result { get; }
-    public Exception? Error { get; }
-    public string OutputData { get; }
-
-    public ObfuscationOutputData( bool result, Exception? error, string outputData )
-    {
-        Result     = result;
-        Error      = error;
-        OutputData = outputData;
-    }
-}
-
-public interface IObfuscationUseCase : IUseCase<ObfuscationInputData, ObfuscationOutputData> {}
+public interface IObfuscationUseCase
+    : IUseCase<ObfuscationInputData, ObfuscationOutputData> {}

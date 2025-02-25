@@ -24,11 +24,11 @@ public class FindSymbolFromRepositoryInteractor<TSymbol> : IFindSymbolUseCase<TS
             var predicate = parameter.InputData;
             var symbols = await Repository.FindAsync( predicate, cancellationToken );
 
-            return new FindSymbolOutputData<TSymbol>( true, symbols );
+            return new FindSymbolOutputData<TSymbol>( symbols, true );
         }
         catch( Exception e )
         {
-            return new FindSymbolOutputData<TSymbol>( false, Array.Empty<TSymbol>(), e );
+            return new FindSymbolOutputData<TSymbol>( Array.Empty<TSymbol>(), false, e );
         }
     }
 }

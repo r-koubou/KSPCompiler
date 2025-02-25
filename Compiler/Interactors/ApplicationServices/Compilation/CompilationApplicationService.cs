@@ -148,13 +148,10 @@ public sealed class CompilationApplicationService(
         }
         catch( Exception e )
         {
-            return new SemanticAnalysisOutputData(
-                false,
-                e,
-                new SemanticAnalysisOutputDataDetail(
-                    ast,
-                    symbolTable
-                )
+            return new SemanticAnalysisOutputData( new SemanticAnalysisOutputDataDetail(
+                                                       ast,
+                                                       symbolTable
+                                                   ), false, e
             );
         }
     }
@@ -176,7 +173,7 @@ public sealed class CompilationApplicationService(
         }
         catch( Exception e )
         {
-            return new ObfuscationOutputData( false, e, string.Empty );
+            return new ObfuscationOutputData( string.Empty, false, e );
         }
     }
 
