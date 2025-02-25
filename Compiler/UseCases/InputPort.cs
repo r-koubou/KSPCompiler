@@ -4,9 +4,9 @@ namespace KSPCompiler.UseCases;
 
 public class InputPort;
 
-public abstract class InputPort<TInput>( TInput inputData ) : InputPort
+public abstract class InputPort<TInput>( TInput handlingInputData ) : InputPort
 {
-    public TInput InputData { get; } = inputData;
+    public TInput HandlingInputData { get; } = handlingInputData;
 }
 
 public sealed class UnitInputPort() : InputPort<Unit>( Unit.Default );
