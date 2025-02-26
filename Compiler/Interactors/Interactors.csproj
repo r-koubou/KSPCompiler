@@ -15,4 +15,8 @@
       <ProjectReference Include="..\UseCases\UseCases.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="LanguageServer\Symbol\" />
+    </ItemGroup>
+
 </Project>

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 using KSPCompiler.Commons.Text;
 using KSPCompiler.UseCases.LanguageServer.Compilation;
