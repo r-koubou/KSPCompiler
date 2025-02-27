@@ -24,8 +24,8 @@ public sealed class PreprocessInputDataDetail
 }
 
 public sealed class PreprocessInputData(
-    PreprocessInputDataDetail inputData
-) : InputPort<PreprocessInputDataDetail>( inputData );
+    PreprocessInputDataDetail inputInput
+) : InputPort<PreprocessInputDataDetail>( inputInput );
 
 public interface IPreprocessUseCase
     : IUseCase<PreprocessInputData, UnitOutputPort> {}

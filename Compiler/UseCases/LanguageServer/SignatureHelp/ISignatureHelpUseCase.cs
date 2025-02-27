@@ -16,8 +16,8 @@ public sealed class SignatureHelpInputPortDetail(
 }
 
 public sealed class SignatureHelpInputPort(
-    SignatureHelpInputPortDetail data
-) : InputPort<SignatureHelpInputPortDetail>( data );
+    SignatureHelpInputPortDetail input
+) : InputPort<SignatureHelpInputPortDetail>( input );
 
 public sealed class SignatureHelpOutputPort(
     SignatureHelpItem? signatureHelp,

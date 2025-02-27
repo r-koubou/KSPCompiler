@@ -21,10 +21,10 @@ public sealed class RenamingInteractor : IRenamingUseCase
     {
         try
         {
-            var compilationCacheManager = parameter.Data.Cache;
-            var scriptLocation = parameter.Data.Location;
-            var position = parameter.Data.Position;
-            var newName = parameter.Data.NewName;
+            var compilationCacheManager = parameter.Input.Cache;
+            var scriptLocation = parameter.Input.Location;
+            var position = parameter.Input.Position;
+            var newName = parameter.Input.NewName;
 
             var cache = compilationCacheManager.GetCache( scriptLocation );
             var orgName = DocumentUtility.ExtractWord( cache.AllLinesText, position );

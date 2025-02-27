@@ -37,11 +37,21 @@ public class CompletionHandler(
         }
 
         var input = new CompletionHandlingInputPort(
-            new CompletionHandlingInputPortDetail( compilationCacheManager, scriptLocation, position )
+            new CompletionHandlingInputPortDetail(
+                compilationCacheManager,
+                scriptLocation,
+                position
+            )
         );
-        var result = await interactor.ExecuteAsync( input, token );
 
-        return new CompletionResponse( result.OutputData.As() );
+        var output = await interactor.ExecuteAsync( input, token );
+
+        if( !output.Result || output.OutputData.Count == 0 )
+        {
+            return null;
+        }
+
+        return new CompletionResponse( output.OutputData.As() );
     }
 
     protected override async Task<CompletionItem> Resolve( CompletionItem item, CancellationToken token )

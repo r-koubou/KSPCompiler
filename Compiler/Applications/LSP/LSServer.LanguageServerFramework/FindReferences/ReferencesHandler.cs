@@ -32,11 +32,21 @@ public sealed class ReferencesHandler(
         }
 
         var input = new FindReferenceInputPort(
-            new FindReferenceInputPortDetail( compilationCacheManager, scriptLocation, position )
+            new FindReferenceInputPortDetail(
+                compilationCacheManager,
+                scriptLocation,
+                position
+            )
         );
-        var result = await interactor.ExecuteAsync( input, cancellationToken );
 
-        return new ReferenceResponse( result.OutputData.As() );
+        var output = await interactor.ExecuteAsync( input, cancellationToken );
+
+        if( !output.Result || output.OutputData.Count == 0 )
+        {
+            return null;
+        }
+
+        return new ReferenceResponse( output.OutputData.As() );
 
     }
 

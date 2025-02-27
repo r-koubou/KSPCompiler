@@ -31,11 +31,20 @@ public sealed class FoldingRabgeHandler(
         }
 
         var input = new FoldingRangeInputPort(
-            new FoldingRangeInputPortDetail( compilationCacheManager, scriptLocation )
+            new FoldingRangeInputPortDetail(
+                compilationCacheManager,
+                scriptLocation
+            )
         );
-        var result = await interactor.ExecuteAsync( input, token );
 
-        return new FoldingRangeResponse( result.OutputData.As() );
+        var output = await interactor.ExecuteAsync( input, token );
+
+        if( !output.Result || output.OutputData.Count == 0 )
+        {
+            return new FoldingRangeResponse( [] );
+        }
+
+        return new FoldingRangeResponse( output.OutputData.As() );
     }
 
     public override void RegisterCapability( ServerCapabilities serverCapabilities, ClientCapabilities clientCapabilities )

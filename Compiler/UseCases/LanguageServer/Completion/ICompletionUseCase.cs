@@ -18,8 +18,8 @@ public sealed class CompletionHandlingInputPortDetail(
 }
 
 public sealed class CompletionHandlingInputPort(
-    CompletionHandlingInputPortDetail inputData
-) : InputPort<CompletionHandlingInputPortDetail>( inputData );
+    CompletionHandlingInputPortDetail inputInput
+) : InputPort<CompletionHandlingInputPortDetail>( inputInput );
 
 public sealed class CompletionHandlingOutput(
     List<CompletionItem> outputData,

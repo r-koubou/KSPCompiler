@@ -26,12 +26,20 @@ public sealed class DocumentSymbolHandler(
         var scriptLocation = request.TextDocument.Uri.AsScriptLocation();
 
         var input = new DocumentSymbolInputPort(
-            new DocumentSymbolInputPortDetail( compilationCacheManager, scriptLocation )
+            new DocumentSymbolInputPortDetail(
+                compilationCacheManager,
+                scriptLocation
+            )
         );
 
-        var result = await interactor.ExecuteAsync( input, token );
+        var output = await interactor.ExecuteAsync( input, token );
 
-        return new DocumentSymbolResponse( result.OutputData.As() );
+        if( output.OutputData.Count == 0 )
+        {
+            return new DocumentSymbolResponse( [] );
+        }
+
+        return new DocumentSymbolResponse( output.OutputData.As() );
     }
 
     public override void RegisterCapability( ServerCapabilities serverCapabilities, ClientCapabilities clientCapabilities )

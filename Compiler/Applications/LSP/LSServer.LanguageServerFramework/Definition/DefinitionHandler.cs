@@ -31,11 +31,21 @@ public class DefinitionHandler(
         }
 
         var input = new DefinitionInputPort(
-            new DefinitionInputPortDetail( compilationCacheManager, scriptLocation, position )
+            new DefinitionInputPortDetail(
+                compilationCacheManager,
+                scriptLocation,
+                position
+            )
         );
-        var result = await interactor.ExecuteAsync( input, cancellationToken );
 
-        return new DefinitionResponse( result.OutputData.As() );
+        var output = await interactor.ExecuteAsync( input, cancellationToken );
+
+        if( !output.Result || output.OutputData.Count == 0 )
+        {
+            return null;
+        }
+
+        return new DefinitionResponse( output.OutputData.As() );
     }
 
     public override void RegisterCapability( ServerCapabilities serverCapabilities, ClientCapabilities clientCapabilities )

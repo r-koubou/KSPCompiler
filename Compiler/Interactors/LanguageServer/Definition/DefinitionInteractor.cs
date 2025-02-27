@@ -17,9 +17,9 @@ public sealed class DefinitionInteractor : IDefinitionHandlingUseCase
     {
         try
         {
-            var compilationCacheManager = parameter.Data.Cache;
-            var scriptLocation = parameter.Data.Location;
-            var position = parameter.Data.Position;
+            var compilationCacheManager = parameter.Input.Cache;
+            var scriptLocation = parameter.Input.Location;
+            var position = parameter.Input.Position;
 
             if( !compilationCacheManager.ContainsCache( scriptLocation ) )
             {

@@ -12,11 +12,11 @@ public class ObfuscationInteractor : IObfuscationUseCase
 {
     public Task<ObfuscationOutputData> ExecuteAsync( ObfuscationInputData parameter, CancellationToken cancellationToken = default )
     {
-        var output = new StringBuilder( parameter.Data.DefaultOutputBufferCapacity );
+        var output = new StringBuilder( parameter.Input.DefaultOutputBufferCapacity );
 
-        var messageManger = parameter.Data.EventEmitter;
-        var compilationUnit = parameter.Data.CompilationUnitNode;
-        var symbolTable = parameter.Data.SymbolTable;
+        var messageManger = parameter.Input.EventEmitter;
+        var compilationUnit = parameter.Input.CompilationUnitNode;
+        var symbolTable = parameter.Input.SymbolTable;
 
         var context = new ObfuscatorContext( output, messageManger, symbolTable );
         var obfuscator = new Obfuscator( context, output );

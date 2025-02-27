@@ -25,11 +25,21 @@ public sealed class HoverHandler( ICompilationCacheManager compilationCacheManag
         var position = request.Position.As();
 
         var input = new HoverInputPort(
-            new HoverInputPortDetail( compilationCacheManager, scriptLocation, position )
+            new HoverInputPortDetail(
+                compilationCacheManager,
+                scriptLocation,
+                position
+            )
         );
-        var result = await interactor.ExecuteAsync( input, token );
 
-        return result.OutputData?.As();
+        var output = await interactor.ExecuteAsync( input, token );
+
+        if( !output.Result || output.OutputData == null )
+        {
+            return null;
+        }
+
+        return output.OutputData.As();
     }
 
     public override void RegisterCapability( ServerCapabilities serverCapabilities, ClientCapabilities clientCapabilities )

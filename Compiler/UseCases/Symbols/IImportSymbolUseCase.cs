@@ -6,8 +6,8 @@ using KSPCompiler.Gateways.Symbols;
 namespace KSPCompiler.UseCases.Symbols;
 
 public sealed class ImportSymbolInputPort<TSymbol>(
-    ISymbolImporter<TSymbol> inputData
-) : InputPort<ISymbolImporter<TSymbol>>( inputData ) where TSymbol : SymbolBase;
+    ISymbolImporter<TSymbol> inputInput
+) : InputPort<ISymbolImporter<TSymbol>>( inputInput ) where TSymbol : SymbolBase;
 
 public sealed class ImportSymbolOutputPort(
     ImportSymbolOutputPortDetail outputData,

@@ -14,8 +14,8 @@ public sealed class DocumentSymbolInputPortDetail(
 }
 
 public sealed class DocumentSymbolInputPort(
-    DocumentSymbolInputPortDetail data
-) : InputPort<DocumentSymbolInputPortDetail>( data );
+    DocumentSymbolInputPortDetail input
+) : InputPort<DocumentSymbolInputPortDetail>( input );
 
 public sealed class DocumentSymbolOutputPort(
     List<DocumentSymbol> symbols,

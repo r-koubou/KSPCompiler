@@ -28,8 +28,8 @@ public sealed class ObfuscationInputDataDetail
 }
 
 public sealed class ObfuscationInputData(
-    ObfuscationInputDataDetail inputData
-) : InputPort<ObfuscationInputDataDetail>( inputData );
+    ObfuscationInputDataDetail inputInput
+) : InputPort<ObfuscationInputDataDetail>( inputInput );
 
 public sealed class ObfuscationOutputData(
     string outputData,

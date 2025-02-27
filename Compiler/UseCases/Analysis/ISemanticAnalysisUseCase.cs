@@ -19,8 +19,8 @@ public sealed class SemanticAnalysisInputDataDetail(
 }
 
 public sealed class SemanticAnalysisInputData(
-    SemanticAnalysisInputDataDetail inputData
-) : InputPort<SemanticAnalysisInputDataDetail>( inputData );
+    SemanticAnalysisInputDataDetail inputInput
+) : InputPort<SemanticAnalysisInputDataDetail>( inputInput );
 
 public sealed class SemanticAnalysisOutputDataDetail(
     AstCompilationUnitNode compilationUnitNode,
