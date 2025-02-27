@@ -22,8 +22,8 @@ public class ExportSymbolFromRepositoryInteractor<TSymbol> : IExportSymbolUseCas
     {
         try
         {
-            var exporter = parameter.InputData.Exporter;
-            var predicate = parameter.InputData.Predicate;
+            var exporter = parameter.Data.Exporter;
+            var predicate = parameter.Data.Predicate;
             var symbols = await Repository.FindAsync( predicate, cancellationToken );
 
             await exporter.ExportAsync( symbols, cancellationToken );

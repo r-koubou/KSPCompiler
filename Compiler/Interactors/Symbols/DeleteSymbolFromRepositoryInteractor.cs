@@ -18,7 +18,7 @@ public class DeleteSymbolFromRepositoryInteractor<TSymbol> : IDeleteSymbolUseCas
 
     public async Task<DeleteOutputData> ExecuteAsync( DeleteSymbolInputData<TSymbol> parameter, CancellationToken cancellationToken = default )
     {
-        var symbols = await Repository.FindAsync( parameter.InputData, cancellationToken );
+        var symbols = await Repository.FindAsync( parameter.Data, cancellationToken );
         var deleteResult = await Repository.DeleteAsync( symbols, cancellationToken );
 
         return new DeleteOutputData( new DeleteOutputDetail( deleteResult.DeletedCount

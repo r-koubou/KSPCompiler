@@ -14,11 +14,11 @@ public class SemanticAnalysisInteractor : ISemanticAnalysisUseCase
 {
     public Task<SemanticAnalysisOutputData> ExecuteAsync( SemanticAnalysisInputData parameter, CancellationToken cancellationToken = default )
     {
-        var node = parameter.InputData.CompilationUnitNode;
-        var symbolTable = parameter.InputData.SymbolTable;
+        var node = parameter.Data.CompilationUnitNode;
+        var symbolTable = parameter.Data.SymbolTable;
 
         var noError = true;
-        var eventEmitter = parameter.InputData.EventEmitter;
+        var eventEmitter = parameter.Data.EventEmitter;
 
         try
         {
@@ -29,7 +29,7 @@ public class SemanticAnalysisInteractor : ISemanticAnalysisUseCase
             var context = new SemanticAnalyzerContext( eventEmitter, symbolTable );
             var analyzer = new SemanticAnalyzer( context );
 
-            analyzer.Traverse( parameter.InputData.CompilationUnitNode );
+            analyzer.Traverse( parameter.Data.CompilationUnitNode );
         }
         catch( Exception e )
         {
