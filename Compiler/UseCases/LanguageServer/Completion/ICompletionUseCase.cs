@@ -27,5 +27,5 @@ public sealed class CompletionHandlingOutput(
     Exception? error = null
 ) : OutputPort<List<CompletionItem>>( outputData, result, error );
 
-public interface ICompletionHandlingUseCase
+public interface ICompletionUseCase
     : IUseCase<CompletionHandlingInputPort, CompletionHandlingOutput>;

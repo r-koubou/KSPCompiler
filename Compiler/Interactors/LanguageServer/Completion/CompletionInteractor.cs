@@ -13,7 +13,7 @@ using KSPCompiler.UseCases.LanguageServer.Completion;
 
 namespace KSPCompiler.Interactors.LanguageServer.Completion;
 
-public sealed class CompletionHandlingInteractor : ICompletionHandlingUseCase
+public sealed class CompletionInteractor : ICompletionUseCase
 {
     public async Task<CompletionHandlingOutput> ExecuteAsync( CompletionHandlingInputPort parameter, CancellationToken cancellationToken = default )
     {

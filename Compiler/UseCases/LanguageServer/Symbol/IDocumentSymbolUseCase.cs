@@ -5,7 +5,7 @@ using KSPCompiler.UseCases.LanguageServer.Compilation;
 
 namespace KSPCompiler.UseCases.LanguageServer.Symbol;
 
-public sealed class SymbolInformationInputPortDetail(
+public sealed class DocumentSymbolInputPortDetail(
     ICompilationCacheManager cache,
     ScriptLocation location )
 {
@@ -13,15 +13,15 @@ public sealed class SymbolInformationInputPortDetail(
     public ScriptLocation Location { get; } = location;
 }
 
-public sealed class SymbolInformationInputPort(
-    SymbolInformationInputPortDetail handlingInputData
-) : InputPort<SymbolInformationInputPortDetail>( handlingInputData );
+public sealed class DocumentSymbolInputPort(
+    DocumentSymbolInputPortDetail handlingInputData
+) : InputPort<DocumentSymbolInputPortDetail>( handlingInputData );
 
-public sealed class SymbolInformationOutputPort(
+public sealed class DocumentSymbolOutputPort(
     List<DocumentSymbol> symbols,
     bool result,
     Exception? error = null
 ) : OutputPort<List<DocumentSymbol>>( symbols, result, error );
 
-public interface ISymbolInformationUseCase
-    : IUseCase<SymbolInformationInputPort, SymbolInformationOutputPort>;
+public interface IDocumentSymbolUseCase
+    : IUseCase<DocumentSymbolInputPort, DocumentSymbolOutputPort>;

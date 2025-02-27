@@ -24,5 +24,5 @@ public sealed class FoldingOutputPort(
     Exception? error = null
 ) : OutputPort<List<FoldingItem>>( ranges, result, error );
 
-public interface IFoldingUseCase
+public interface IFoldingRangeUseCase
     : IUseCase<FoldingInputPort, FoldingOutputPort>;

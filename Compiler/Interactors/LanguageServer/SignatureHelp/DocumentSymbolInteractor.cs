@@ -10,9 +10,9 @@ using KSPCompiler.UseCases.LanguageServer.Symbol;
 
 namespace KSPCompiler.Interactors.LanguageServer.SignatureHelp;
 
-public sealed class SymbolInformationInteractor : ISymbolInformationUseCase
+public sealed class DocumentSymbolInteractor : IDocumentSymbolUseCase
 {
-    public async Task<SymbolInformationOutputPort> ExecuteAsync( SymbolInformationInputPort parameter, CancellationToken cancellationToken = default )
+    public async Task<DocumentSymbolOutputPort> ExecuteAsync( DocumentSymbolInputPort parameter, CancellationToken cancellationToken = default )
     {
         try
         {
@@ -27,11 +27,11 @@ public sealed class SymbolInformationInteractor : ISymbolInformationUseCase
             await CollectCallbackAsync( symbolTable.UserCallbacks, result );
             await CollectUserFunctionAsync( symbolTable.UserFunctions, result );
 
-            return new SymbolInformationOutputPort( result, true );
+            return new DocumentSymbolOutputPort( result, true );
         }
         catch( Exception e )
         {
-            return new SymbolInformationOutputPort( [ ], false, e );
+            return new DocumentSymbolOutputPort( [ ], false, e );
         }
     }
 

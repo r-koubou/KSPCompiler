@@ -9,7 +9,7 @@ using KSPCompiler.UseCases.LanguageServer.Folding;
 
 namespace KSPCompiler.Interactors.LanguageServer.Folding;
 
-public sealed class FoldingInteractor : IFoldingUseCase
+public sealed class FoldingRangeInteractor : IFoldingRangeUseCase
 {
     public async Task<FoldingOutputPort> ExecuteAsync(
         FoldingInputPort parameter,
