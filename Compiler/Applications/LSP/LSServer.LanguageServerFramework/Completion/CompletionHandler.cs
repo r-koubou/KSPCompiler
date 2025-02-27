@@ -24,7 +24,7 @@ public class CompletionHandler(
 ) : CompletionHandlerBase
 {
     private readonly CompilationCacheManager compilationCacheManager = compilationCacheManager;
-    private readonly CompletionInteractor service = new();
+    private readonly CompletionInteractor interactor = new();
 
     protected override async Task<CompletionResponse?> Handle( CompletionParams request, CancellationToken token )
     {
@@ -39,7 +39,7 @@ public class CompletionHandler(
         var input = new CompletionHandlingInputPort(
             new CompletionHandlingInputPortDetail( compilationCacheManager, scriptLocation, position )
         );
-        var result = await service.ExecuteAsync( input, token );
+        var result = await interactor.ExecuteAsync( input, token );
 
         return new CompletionResponse( result.OutputData.As() );
     }

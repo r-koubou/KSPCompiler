@@ -18,7 +18,7 @@ public class DefinitionHandler(
 ) : DefinitionHandlerBase
 {
     private readonly CompilationCacheManager compilationCacheManager = compilationCacheManager;
-    private readonly DefinitionInteractor service = new();
+    private readonly DefinitionInteractor interactor = new();
 
     protected override async Task<DefinitionResponse?> Handle( DefinitionParams request, CancellationToken cancellationToken )
     {
@@ -33,7 +33,7 @@ public class DefinitionHandler(
         var input = new DefinitionInputPort(
             new DefinitionInputPortDetail( compilationCacheManager, scriptLocation, position )
         );
-        var result = await service.ExecuteAsync( input, cancellationToken );
+        var result = await interactor.ExecuteAsync( input, cancellationToken );
 
         return new DefinitionResponse( result.OutputData.As() );
     }
