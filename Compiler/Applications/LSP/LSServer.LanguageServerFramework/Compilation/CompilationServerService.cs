@@ -16,7 +16,6 @@ using KSPCompiler.Gateways.EventEmitting.Extensions;
 using KSPCompiler.Infrastructures.EventEmitting.Default;
 using KSPCompiler.Infrastructures.Parser.Antlr;
 using KSPCompiler.Interactors.ApplicationServices.Compilation;
-using KSPCompiler.Interactors.LanguageServer.Compilation;
 using KSPCompiler.UseCases.LanguageServer;
 using KSPCompiler.UseCases.LanguageServer.Compilation;
 
@@ -31,7 +30,7 @@ public sealed class CompilationServerService(
     private readonly CompilationApplicationService applicationService = applicationService;
 
     public async Task CompileAsync(
-        CompilationCacheManager compilationCacheManager,
+        ICompilationCacheManager compilationCacheManager,
         ScriptLocation scriptLocation,
         string script,
         bool enableObfuscation = false,

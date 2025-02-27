@@ -7,17 +7,17 @@ using EmmyLua.LanguageServer.Framework.Protocol.Message.Definition;
 using EmmyLua.LanguageServer.Framework.Server.Handler;
 
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
-using KSPCompiler.Interactors.LanguageServer.Compilation;
 using KSPCompiler.Interactors.LanguageServer.Definition;
+using KSPCompiler.UseCases.LanguageServer.Compilation;
 using KSPCompiler.UseCases.LanguageServer.Definition;
 
 namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Definition;
 
 public class DefinitionHandler(
-    CompilationCacheManager compilationCacheManager
+    ICompilationCacheManager compilationCacheManager
 ) : DefinitionHandlerBase
 {
-    private readonly CompilationCacheManager compilationCacheManager = compilationCacheManager;
+    private readonly ICompilationCacheManager compilationCacheManager = compilationCacheManager;
     private readonly DefinitionInteractor interactor = new();
 
     protected override async Task<DefinitionResponse?> Handle( DefinitionParams request, CancellationToken cancellationToken )

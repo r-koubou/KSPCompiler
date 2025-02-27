@@ -9,15 +9,15 @@ using EmmyLua.LanguageServer.Framework.Server.Handler;
 
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Renaming.Extensions;
-using KSPCompiler.Interactors.LanguageServer.Compilation;
 using KSPCompiler.Interactors.LanguageServer.Renaming;
+using KSPCompiler.UseCases.LanguageServer.Compilation;
 using KSPCompiler.UseCases.LanguageServer.Renaming;
 
 namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Renaming;
 
-public sealed class RenameHandler( CompilationCacheManager compilationCacheManager ) : RenameHandlerBase
+public sealed class RenameHandler( ICompilationCacheManager compilationCacheManager ) : RenameHandlerBase
 {
-    private readonly CompilationCacheManager compilationCacheManager = compilationCacheManager;
+    private readonly ICompilationCacheManager compilationCacheManager = compilationCacheManager;
     private readonly RenamingInteractor interactor = new();
 
     protected override async Task<WorkspaceEdit?> Handle( RenameParams request, CancellationToken token )

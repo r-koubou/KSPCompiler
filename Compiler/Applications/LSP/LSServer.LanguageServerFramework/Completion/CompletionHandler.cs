@@ -11,8 +11,8 @@ using EmmyLua.LanguageServer.Framework.Server.Handler;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Completion.Extensions;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
 using KSPCompiler.Domain.Symbols.MetaData;
-using KSPCompiler.Interactors.LanguageServer.Compilation;
 using KSPCompiler.Interactors.LanguageServer.Completion;
+using KSPCompiler.UseCases.LanguageServer.Compilation;
 using KSPCompiler.UseCases.LanguageServer.Completion;
 
 using CompletionItem = EmmyLua.LanguageServer.Framework.Protocol.Message.Completion.CompletionItem;
@@ -20,10 +20,10 @@ using CompletionItem = EmmyLua.LanguageServer.Framework.Protocol.Message.Complet
 namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Completion;
 
 public class CompletionHandler(
-    CompilationCacheManager compilationCacheManager
+    ICompilationCacheManager compilationCacheManager
 ) : CompletionHandlerBase
 {
-    private readonly CompilationCacheManager compilationCacheManager = compilationCacheManager;
+    private readonly ICompilationCacheManager compilationCacheManager = compilationCacheManager;
     private readonly CompletionInteractor interactor = new();
 
     protected override async Task<CompletionResponse?> Handle( CompletionParams request, CancellationToken token )

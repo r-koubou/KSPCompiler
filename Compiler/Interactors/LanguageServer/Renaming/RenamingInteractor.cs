@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 using KSPCompiler.Commons.Text;
 using KSPCompiler.Interactors.LanguageServer.Ast;
-using KSPCompiler.Interactors.LanguageServer.Compilation;
 using KSPCompiler.UseCases.LanguageServer;
+using KSPCompiler.UseCases.LanguageServer.Compilation;
 using KSPCompiler.UseCases.LanguageServer.Renaming;
 
 using RenamingResult
@@ -71,7 +71,7 @@ public sealed class RenamingInteractor : IRenamingUseCase
     }
 
     public async Task<(bool result, Position position)> HandlePrepareAsync(
-        CompilationCacheManager compilerCacheService,
+        ICompilationCacheManager compilerCacheService,
         ScriptLocation scriptLocation,
         Position position,
         CancellationToken _ )

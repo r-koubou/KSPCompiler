@@ -8,17 +8,17 @@ using EmmyLua.LanguageServer.Framework.Server.Handler;
 
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.FindReferences.Extensions;
-using KSPCompiler.Interactors.LanguageServer.Compilation;
 using KSPCompiler.Interactors.LanguageServer.FindReferences;
+using KSPCompiler.UseCases.LanguageServer.Compilation;
 using KSPCompiler.UseCases.LanguageServer.FindReferences;
 
 namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.FindReferences;
 
 public sealed class ReferencesHandler(
-    CompilationCacheManager compilationCacheManager
+    ICompilationCacheManager compilationCacheManager
 ) : ReferenceHandlerBase
 {
-    private readonly CompilationCacheManager compilationCacheManager = compilationCacheManager;
+    private readonly ICompilationCacheManager compilationCacheManager = compilationCacheManager;
     private readonly FindReferenceInteractor interactor = new ();
 
     protected override async Task<ReferenceResponse?> Handle( ReferenceParams request, CancellationToken cancellationToken )

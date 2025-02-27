@@ -8,17 +8,17 @@ using EmmyLua.LanguageServer.Framework.Server.Handler;
 
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Folding.Extensions;
-using KSPCompiler.Interactors.LanguageServer.Compilation;
 using KSPCompiler.Interactors.LanguageServer.Folding;
+using KSPCompiler.UseCases.LanguageServer.Compilation;
 using KSPCompiler.UseCases.LanguageServer.Folding;
 
 namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Folding;
 
 public sealed class FoldingRabgeHandler(
-    CompilationCacheManager compilationCacheManager
+    ICompilationCacheManager compilationCacheManager
 ) : FoldingRangeHandlerBase
 {
-    private readonly CompilationCacheManager compilationCacheManager = compilationCacheManager;
+    private readonly ICompilationCacheManager compilationCacheManager = compilationCacheManager;
     private readonly FoldingRangeInteractor interactor = new();
 
     protected override async Task<FoldingRangeResponse> Handle( FoldingRangeParams request, CancellationToken token )

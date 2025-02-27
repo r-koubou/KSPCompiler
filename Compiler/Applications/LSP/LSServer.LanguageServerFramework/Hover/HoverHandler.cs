@@ -8,15 +8,15 @@ using EmmyLua.LanguageServer.Framework.Server.Handler;
 
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Hover.Extensions;
-using KSPCompiler.Interactors.LanguageServer.Compilation;
 using KSPCompiler.Interactors.LanguageServer.Hover;
+using KSPCompiler.UseCases.LanguageServer.Compilation;
 using KSPCompiler.UseCases.LanguageServer.Hover;
 
 namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Hover;
 
-public sealed class HoverHandler( CompilationCacheManager compilationCacheManager ) : HoverHandlerBase
+public sealed class HoverHandler( ICompilationCacheManager compilationCacheManager ) : HoverHandlerBase
 {
-    private readonly CompilationCacheManager compilationCacheManager = compilationCacheManager;
+    private readonly ICompilationCacheManager compilationCacheManager = compilationCacheManager;
     private readonly HoverInteractor interactor = new();
 
     protected override async Task<HoverResponse?> Handle( HoverParams request, CancellationToken token )
