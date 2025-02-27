@@ -84,7 +84,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventEmitting.Default", "In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventEmitting.Default.Tests", "Infrastructures\EventEmitting.Default.Tests\EventEmitting.Default.Tests.csproj", "{AA2BCDFA-9D9C-4C49-ACF9-735D10E9CF52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LSPServer.Core", "Applications\LSP\LSPServer.Core\LSPServer.Core.csproj", "{72B773AC-2E14-4109-A1A6-BCB439256891}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LSPServer.Core.Obsoleted", "Applications\LSP\LSPServer.Core.Obsoleted\LSPServer.Core.Obsoleted.csproj", "{72B773AC-2E14-4109-A1A6-BCB439256891}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LSServer.LanguageServerFramework", "Applications\LSP\LSServer.LanguageServerFramework\LSServer.LanguageServerFramework.csproj", "{675226C5-374C-4A1F-9695-5E255B7B6574}"
 EndProject
