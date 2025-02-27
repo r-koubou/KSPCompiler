@@ -29,7 +29,7 @@ public sealed class CompilationServerService(
     private readonly ClientProxy client = client;
     private readonly CompilationApplicationService applicationService = applicationService;
 
-    public async Task CompileAsync(
+    public async Task<CompilationResult> CompileAsync(
         ICompilationCacheManager compilationCacheManager,
         ScriptLocation scriptLocation,
         string script,
@@ -89,6 +89,8 @@ public sealed class CompilationServerService(
                 ast: compilationResult.Ast
             )
         );
+
+        return compilationResult;
     }
 
     public async Task ClearDiagnosticAsync( ScriptLocation scriptLocation, CancellationToken _ )
