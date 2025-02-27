@@ -11,8 +11,8 @@ namespace KSPCompiler.Interactors.LanguageServer.Folding;
 
 public sealed class FoldingRangeInteractor : IFoldingRangeUseCase
 {
-    public async Task<FoldingOutputPort> ExecuteAsync(
-        FoldingInputPort parameter,
+    public async Task<FoldingRangeOutputPort> ExecuteAsync(
+        FoldingRangeInputPort parameter,
         CancellationToken cancellationToken = default )
     {
         try
@@ -45,11 +45,11 @@ public sealed class FoldingRangeInteractor : IFoldingRangeUseCase
 
             await Task.CompletedTask;
 
-            return new FoldingOutputPort( items, true );
+            return new FoldingRangeOutputPort( items, true );
         }
         catch( Exception e )
         {
-            return new FoldingOutputPort( [], false, e );
+            return new FoldingRangeOutputPort( [], false, e );
         }
     }
 }

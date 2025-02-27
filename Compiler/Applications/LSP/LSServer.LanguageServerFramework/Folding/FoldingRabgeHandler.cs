@@ -6,10 +6,11 @@ using EmmyLua.LanguageServer.Framework.Protocol.Capabilities.Server;
 using EmmyLua.LanguageServer.Framework.Protocol.Message.FoldingRange;
 using EmmyLua.LanguageServer.Framework.Server.Handler;
 
-using KSPCompiler.Applications.LSPServer.Core.Compilation;
-using KSPCompiler.Applications.LSPServer.Core.Folding;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Folding.Extensions;
+using KSPCompiler.Interactors.LanguageServer.Compilation;
+using KSPCompiler.Interactors.LanguageServer.Folding;
+using KSPCompiler.UseCases.LanguageServer.Folding;
 
 namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Folding;
 
@@ -18,7 +19,7 @@ public sealed class FoldingRabgeHandler(
 ) : FoldingRangeHandlerBase
 {
     private readonly CompilationCacheManager compilationCacheManager = compilationCacheManager;
-    private readonly FoldingRangeHandlingService service = new();
+    private readonly FoldingRangeInteractor interactor = new();
 
     protected override async Task<FoldingRangeResponse> Handle( FoldingRangeParams request, CancellationToken token )
     {
@@ -29,9 +30,12 @@ public sealed class FoldingRabgeHandler(
             return new FoldingRangeResponse( [] );
         }
 
-        var result = await service.HandleAsync( compilationCacheManager, scriptLocation, token );
+        var input = new FoldingRangeInputPort(
+            new FoldingRangeInputPortDetail( compilationCacheManager, scriptLocation )
+        );
+        var result = await interactor.ExecuteAsync( input, token );
 
-        return new FoldingRangeResponse( result.As() );
+        return new FoldingRangeResponse( result.OutputData.As() );
     }
 
     public override void RegisterCapability( ServerCapabilities serverCapabilities, ClientCapabilities clientCapabilities )

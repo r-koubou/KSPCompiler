@@ -5,7 +5,7 @@ using KSPCompiler.UseCases.LanguageServer.Compilation;
 
 namespace KSPCompiler.UseCases.LanguageServer.Folding;
 
-public sealed class FoldingInputPortDetail(
+public sealed class FoldingRangeInputPortDetail(
     ICompilationCacheManager cache,
     ScriptLocation location
 )
@@ -14,15 +14,15 @@ public sealed class FoldingInputPortDetail(
     public ScriptLocation Location { get; } = location;
 }
 
-public sealed class FoldingInputPort(
-    FoldingInputPortDetail data
-) : InputPort<FoldingInputPortDetail>( data );
+public sealed class FoldingRangeInputPort(
+    FoldingRangeInputPortDetail data
+) : InputPort<FoldingRangeInputPortDetail>( data );
 
-public sealed class FoldingOutputPort(
+public sealed class FoldingRangeOutputPort(
     List<FoldingItem> ranges,
     bool result,
     Exception? error = null
 ) : OutputPort<List<FoldingItem>>( ranges, result, error );
 
 public interface IFoldingRangeUseCase
-    : IUseCase<FoldingInputPort, FoldingOutputPort>;
+    : IUseCase<FoldingRangeInputPort, FoldingRangeOutputPort>;
