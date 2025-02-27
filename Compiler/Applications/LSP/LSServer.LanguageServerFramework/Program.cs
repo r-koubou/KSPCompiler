@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 using EmmyLua.LanguageServer.Framework.Server;
 
+using KSPCompiler.Applications.LSServer.LanguageServerFramework.Commands;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Completion;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Definition;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.FindReferences;
@@ -62,6 +63,15 @@ public sealed class Program
         server.AddHandler( new RenameHandler( compilationCacheManager ) );
         server.AddHandler( new SignatureHelpHandler( compilationCacheManager ) );
         server.AddHandler( new DocumentSymbolHandler( compilationCacheManager ) );
+
+        server.AddHandler(
+            new ObfuscationCommandExecutor(
+                server,
+                compilationCacheManager,
+                symbolRepositories
+            )
+        );
+
         #endregion ~Register Handlers
 
         await server.Run();
