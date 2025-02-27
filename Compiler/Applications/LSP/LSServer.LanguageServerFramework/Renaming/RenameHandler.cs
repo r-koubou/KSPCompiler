@@ -7,17 +7,18 @@ using EmmyLua.LanguageServer.Framework.Protocol.Message.Rename;
 using EmmyLua.LanguageServer.Framework.Protocol.Model;
 using EmmyLua.LanguageServer.Framework.Server.Handler;
 
-using KSPCompiler.Applications.LSPServer.Core.Compilation;
-using KSPCompiler.Applications.LSPServer.Core.Renaming;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Renaming.Extensions;
+using KSPCompiler.Interactors.LanguageServer.Compilation;
+using KSPCompiler.Interactors.LanguageServer.Renaming;
+using KSPCompiler.UseCases.LanguageServer.Renaming;
 
 namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Renaming;
 
 public sealed class RenameHandler( CompilationCacheManager compilationCacheManager ) : RenameHandlerBase
 {
     private readonly CompilationCacheManager compilationCacheManager = compilationCacheManager;
-    private readonly RenameHandlingService service = new();
+    private readonly RenamingInteractor interactor = new();
 
     protected override async Task<WorkspaceEdit?> Handle( RenameParams request, CancellationToken token )
     {
@@ -25,22 +26,20 @@ public sealed class RenameHandler( CompilationCacheManager compilationCacheManag
         var position = request.Position.As();
         var newName = request.NewName;
 
-        var result = await service.HandleAsync(
-            compilationCacheManager,
-            scriptLocation,
-            position,
-            newName,
-            token
+        var input = new RenamingInputPort(
+            new RenamingInputPortDetail( compilationCacheManager, scriptLocation, position, newName )
         );
 
-        if( result.Count == 0 )
+        var result = await interactor.ExecuteAsync( input, token );
+
+        if( !result.Result || result.OutputData.Count == 0 )
         {
             return null;
         }
 
         return new WorkspaceEdit
         {
-            Changes = result.As()
+            Changes = result.OutputData.As()
         };
     }
 
@@ -49,7 +48,7 @@ public sealed class RenameHandler( CompilationCacheManager compilationCacheManag
         var scriptLocation = request.TextDocument.Uri.AsScriptLocation();
         var position = request.Position.As();
 
-        var result = await service.HandlePrepareAsync( compilationCacheManager, scriptLocation, position, token );
+        var result = await interactor.HandlePrepareAsync( compilationCacheManager, scriptLocation, position, token );
 
         return !result.result
             ? new PrepareRenameResponse( defaultBehavior: false )
