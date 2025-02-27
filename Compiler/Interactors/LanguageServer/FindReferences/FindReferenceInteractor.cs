@@ -18,9 +18,9 @@ public sealed class FindReferenceInteractor : IFindReferenceUseCase
     {
         try
         {
-            var compilationCacheManager = parameter.Data.Cache;
-            var scriptLocation = parameter.Data.Location;
-            var position = parameter.Data.Position;
+            var compilationCacheManager = parameter.Input.Cache;
+            var scriptLocation = parameter.Input.Location;
+            var position = parameter.Input.Position;
 
             var cache = compilationCacheManager.GetCache( scriptLocation );
             var word = DocumentUtility.ExtractWord( cache.AllLinesText, position );

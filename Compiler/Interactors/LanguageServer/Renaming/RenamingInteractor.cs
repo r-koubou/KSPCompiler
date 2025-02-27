@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 using KSPCompiler.Commons.Text;
 using KSPCompiler.Interactors.LanguageServer.Ast;
-using KSPCompiler.Interactors.LanguageServer.Compilation;
 using KSPCompiler.UseCases.LanguageServer;
+using KSPCompiler.UseCases.LanguageServer.Compilation;
 using KSPCompiler.UseCases.LanguageServer.Renaming;
 
 using RenamingResult
@@ -21,10 +21,10 @@ public sealed class RenamingInteractor : IRenamingUseCase
     {
         try
         {
-            var compilationCacheManager = parameter.Data.Cache;
-            var scriptLocation = parameter.Data.Location;
-            var position = parameter.Data.Position;
-            var newName = parameter.Data.NewName;
+            var compilationCacheManager = parameter.Input.Cache;
+            var scriptLocation = parameter.Input.Location;
+            var position = parameter.Input.Position;
+            var newName = parameter.Input.NewName;
 
             var cache = compilationCacheManager.GetCache( scriptLocation );
             var orgName = DocumentUtility.ExtractWord( cache.AllLinesText, position );
@@ -71,7 +71,7 @@ public sealed class RenamingInteractor : IRenamingUseCase
     }
 
     public async Task<(bool result, Position position)> HandlePrepareAsync(
-        CompilationCacheManager compilerCacheService,
+        ICompilationCacheManager compilerCacheService,
         ScriptLocation scriptLocation,
         Position position,
         CancellationToken _ )

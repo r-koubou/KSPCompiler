@@ -18,8 +18,8 @@ public sealed class DefinitionInputPortDetail(
 }
 
 public sealed class DefinitionInputPort(
-    DefinitionInputPortDetail data
-) : InputPort<DefinitionInputPortDetail>( data );
+    DefinitionInputPortDetail input
+) : InputPort<DefinitionInputPortDetail>( input );
 
 public sealed class DefinitionOutputPort(
     List<LocationLink> links,

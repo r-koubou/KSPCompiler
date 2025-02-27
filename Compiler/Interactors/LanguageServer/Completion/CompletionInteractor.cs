@@ -19,9 +19,9 @@ public sealed class CompletionInteractor : ICompletionUseCase
     {
         try
         {
-            var compilerCacheService = parameter.Data.Cache;
-            var scriptLocation = parameter.Data.Location;
-            var position = parameter.Data.Position;
+            var compilerCacheService = parameter.Input.Cache;
+            var scriptLocation = parameter.Input.Location;
+            var position = parameter.Input.Position;
 
             var cache = compilerCacheService.GetCache( scriptLocation );
             var symbolTable = cache.SymbolTable;

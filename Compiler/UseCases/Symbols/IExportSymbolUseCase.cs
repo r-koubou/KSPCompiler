@@ -6,8 +6,8 @@ using KSPCompiler.Gateways.Symbols;
 namespace KSPCompiler.UseCases.Symbols;
 
 public sealed class ExportSymbolInputData<TSymbol>(
-    ExportSymbolInputDataDetail<TSymbol> inputData
-) : InputPort<ExportSymbolInputDataDetail<TSymbol>>( inputData ) where TSymbol : SymbolBase;
+    ExportSymbolInputDataDetail<TSymbol> inputInput
+) : InputPort<ExportSymbolInputDataDetail<TSymbol>>( inputInput ) where TSymbol : SymbolBase;
 
 public sealed class ExportSymbolInputDataDetail<TSymbol>(
     ISymbolExporter<TSymbol> exporter,

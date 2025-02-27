@@ -6,8 +6,8 @@ using KSPCompiler.Gateways.Parsers;
 namespace KSPCompiler.UseCases.Analysis;
 
 public class SyntaxAnalysisInputData(
-    ISyntaxParser inputData
-) : InputPort<ISyntaxParser>( inputData );
+    ISyntaxParser inputInput
+) : InputPort<ISyntaxParser>( inputInput );
 
 public sealed class SyntaxAnalysisOutputData(
     AstCompilationUnitNode outputData,

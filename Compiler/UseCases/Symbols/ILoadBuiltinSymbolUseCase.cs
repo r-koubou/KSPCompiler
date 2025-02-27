@@ -6,8 +6,8 @@ using KSPCompiler.Gateways.Symbols;
 namespace KSPCompiler.UseCases.Symbols;
 
 public sealed class LoadBuiltinSymbolInputData(
-    AggregateSymbolRepository inputData
-) : InputPort<AggregateSymbolRepository>( inputData );
+    AggregateSymbolRepository inputInput
+) : InputPort<AggregateSymbolRepository>( inputInput );
 
 public sealed class LoadBuiltinSymbolOutputData(
     AggregateSymbolTable outputData,

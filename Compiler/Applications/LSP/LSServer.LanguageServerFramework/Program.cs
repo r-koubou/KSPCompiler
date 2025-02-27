@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 using EmmyLua.LanguageServer.Framework.Server;
 
-using KSPCompiler.Applications.LSPServer.Core.Compilation;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Completion;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Definition;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.FindReferences;
@@ -19,6 +18,7 @@ using KSPCompiler.ExternalSymbolRepository.Yaml.Commands;
 using KSPCompiler.ExternalSymbolRepository.Yaml.UITypes;
 using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
 using KSPCompiler.Gateways.Symbols;
+using KSPCompiler.Interactors.LanguageServer.Compilation;
 
 namespace KSPCompiler.Applications.LSServer.LanguageServerFramework;
 

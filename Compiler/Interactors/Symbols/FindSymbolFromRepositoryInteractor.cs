@@ -21,7 +21,7 @@ public class FindSymbolFromRepositoryInteractor<TSymbol> : IFindSymbolUseCase<TS
     {
         try
         {
-            var predicate = parameter.Data;
+            var predicate = parameter.Input;
             var symbols = await Repository.FindAsync( predicate, cancellationToken );
 
             return new FindSymbolOutputData<TSymbol>( symbols, true );

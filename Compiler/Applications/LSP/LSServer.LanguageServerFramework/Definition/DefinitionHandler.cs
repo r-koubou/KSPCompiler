@@ -6,18 +6,19 @@ using EmmyLua.LanguageServer.Framework.Protocol.Capabilities.Server;
 using EmmyLua.LanguageServer.Framework.Protocol.Message.Definition;
 using EmmyLua.LanguageServer.Framework.Server.Handler;
 
-using KSPCompiler.Applications.LSPServer.Core.Compilation;
-using KSPCompiler.Applications.LSPServer.Core.Definition;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
+using KSPCompiler.Interactors.LanguageServer.Definition;
+using KSPCompiler.UseCases.LanguageServer.Compilation;
+using KSPCompiler.UseCases.LanguageServer.Definition;
 
 namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Definition;
 
 public class DefinitionHandler(
-    CompilationCacheManager compilationCacheManager
+    ICompilationCacheManager compilationCacheManager
 ) : DefinitionHandlerBase
 {
-    private readonly CompilationCacheManager compilationCacheManager = compilationCacheManager;
-    private readonly DefinitionHandlingService service = new();
+    private readonly ICompilationCacheManager compilationCacheManager = compilationCacheManager;
+    private readonly DefinitionInteractor interactor = new();
 
     protected override async Task<DefinitionResponse?> Handle( DefinitionParams request, CancellationToken cancellationToken )
     {
@@ -29,9 +30,22 @@ public class DefinitionHandler(
             return null;
         }
 
-        var result = await service.HandleAsync( compilationCacheManager, scriptLocation, position, cancellationToken );
+        var input = new DefinitionInputPort(
+            new DefinitionInputPortDetail(
+                compilationCacheManager,
+                scriptLocation,
+                position
+            )
+        );
 
-        return new DefinitionResponse( result.As() );
+        var output = await interactor.ExecuteAsync( input, cancellationToken );
+
+        if( !output.Result || output.OutputData.Count == 0 )
+        {
+            return null;
+        }
+
+        return new DefinitionResponse( output.OutputData.As() );
     }
 
     public override void RegisterCapability( ServerCapabilities serverCapabilities, ClientCapabilities clientCapabilities )

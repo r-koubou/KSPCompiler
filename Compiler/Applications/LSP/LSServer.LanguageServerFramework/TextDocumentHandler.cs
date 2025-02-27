@@ -11,23 +11,24 @@ using EmmyLua.LanguageServer.Framework.Protocol.Model.TextEdit;
 using EmmyLua.LanguageServer.Framework.Server;
 using EmmyLua.LanguageServer.Framework.Server.Handler;
 
-using KSPCompiler.Applications.LSPServer.Core.Compilation;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Compilation;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
 using KSPCompiler.Gateways.Symbols;
 using KSPCompiler.Interactors.ApplicationServices.Compilation;
 using KSPCompiler.Interactors.ApplicationServices.Symbols;
+using KSPCompiler.Interactors.LanguageServer.Compilation;
 using KSPCompiler.Interactors.Symbols;
+using KSPCompiler.UseCases.LanguageServer.Compilation;
 
 namespace KSPCompiler.Applications.LSServer.LanguageServerFramework;
 
 public sealed class TextDocumentHandler(
     LanguageServer server,
-    CompilationCacheManager compilationCacheManager,
+    ICompilationCacheManager compilationCacheManager,
     AggregateSymbolRepository symbolRepositories
 ) : TextDocumentHandlerBase
 {
-    private readonly CompilationCacheManager compilationCacheManager = compilationCacheManager;
+    private readonly ICompilationCacheManager compilationCacheManager = compilationCacheManager;
 
     private readonly CompilationServerService compilationSeverService = new(
         server.Client,

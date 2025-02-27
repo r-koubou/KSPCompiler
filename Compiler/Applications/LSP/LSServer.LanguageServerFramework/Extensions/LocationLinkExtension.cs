@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-using KSPCompiler.Applications.LSPServer.Core;
+using KSPCompiler.UseCases.LanguageServer;
 
 using FrameworkLocationLink = EmmyLua.LanguageServer.Framework.Protocol.Model.LocationLink;
 

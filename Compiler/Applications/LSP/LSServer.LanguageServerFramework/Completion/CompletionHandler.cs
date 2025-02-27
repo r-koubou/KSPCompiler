@@ -8,22 +8,23 @@ using EmmyLua.LanguageServer.Framework.Protocol.Capabilities.Server.Options;
 using EmmyLua.LanguageServer.Framework.Protocol.Message.Completion;
 using EmmyLua.LanguageServer.Framework.Server.Handler;
 
-using KSPCompiler.Applications.LSPServer.Core.Compilation;
-using KSPCompiler.Applications.LSPServer.Core.Completion;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Completion.Extensions;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
 using KSPCompiler.Domain.Symbols.MetaData;
+using KSPCompiler.Interactors.LanguageServer.Completion;
+using KSPCompiler.UseCases.LanguageServer.Compilation;
+using KSPCompiler.UseCases.LanguageServer.Completion;
 
 using CompletionItem = EmmyLua.LanguageServer.Framework.Protocol.Message.Completion.CompletionItem;
 
 namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Completion;
 
 public class CompletionHandler(
-    CompilationCacheManager compilationCacheManager
+    ICompilationCacheManager compilationCacheManager
 ) : CompletionHandlerBase
 {
-    private readonly CompilationCacheManager compilationCacheManager = compilationCacheManager;
-    private readonly CompletionListHandlingService service = new();
+    private readonly ICompilationCacheManager compilationCacheManager = compilationCacheManager;
+    private readonly CompletionInteractor interactor = new();
 
     protected override async Task<CompletionResponse?> Handle( CompletionParams request, CancellationToken token )
     {
@@ -35,9 +36,22 @@ public class CompletionHandler(
             return null;
         }
 
-        var result = await service.HandleAsync( compilationCacheManager, scriptLocation, position, token );
+        var input = new CompletionHandlingInputPort(
+            new CompletionHandlingInputPortDetail(
+                compilationCacheManager,
+                scriptLocation,
+                position
+            )
+        );
 
-        return new CompletionResponse( result.As() );
+        var output = await interactor.ExecuteAsync( input, token );
+
+        if( !output.Result || output.OutputData.Count == 0 )
+        {
+            return null;
+        }
+
+        return new CompletionResponse( output.OutputData.As() );
     }
 
     protected override async Task<CompletionItem> Resolve( CompletionItem item, CancellationToken token )

@@ -18,8 +18,8 @@ public sealed class FindReferenceInputPortDetail(
 }
 
 public sealed class FindReferenceInputPort(
-    FindReferenceInputPortDetail inputData
-) : InputPort<FindReferenceInputPortDetail>( inputData );
+    FindReferenceInputPortDetail inputInput
+) : InputPort<FindReferenceInputPortDetail>( inputInput );
 
 public sealed class FindReferenceOutputPort(
     List<ReferenceItem> references,

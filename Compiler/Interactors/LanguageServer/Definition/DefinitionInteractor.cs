@@ -9,7 +9,7 @@ using KSPCompiler.UseCases.LanguageServer.Definition;
 
 namespace KSPCompiler.Interactors.LanguageServer.Definition;
 
-public sealed class DefinitionHandlingInteractor : IDefinitionHandlingUseCase
+public sealed class DefinitionInteractor : IDefinitionHandlingUseCase
 {
     public async Task<DefinitionOutputPort> ExecuteAsync(
         DefinitionInputPort parameter,
@@ -17,9 +17,9 @@ public sealed class DefinitionHandlingInteractor : IDefinitionHandlingUseCase
     {
         try
         {
-            var compilationCacheManager = parameter.Data.Cache;
-            var scriptLocation = parameter.Data.Location;
-            var position = parameter.Data.Position;
+            var compilationCacheManager = parameter.Input.Cache;
+            var scriptLocation = parameter.Input.Location;
+            var position = parameter.Input.Position;
 
             if( !compilationCacheManager.ContainsCache( scriptLocation ) )
             {

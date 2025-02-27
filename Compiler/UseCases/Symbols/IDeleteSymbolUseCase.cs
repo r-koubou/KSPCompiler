@@ -5,8 +5,8 @@ using KSPCompiler.Domain.Symbols;
 namespace KSPCompiler.UseCases.Symbols;
 
 public sealed class DeleteSymbolInputData<TSymbol>(
-    Predicate<TSymbol> inputData
-) : InputPort<Predicate<TSymbol>>( inputData ) where TSymbol : SymbolBase;
+    Predicate<TSymbol> inputInput
+) : InputPort<Predicate<TSymbol>>( inputInput ) where TSymbol : SymbolBase;
 
 public sealed class DeleteOutputData(
     DeleteOutputDetail outputData,

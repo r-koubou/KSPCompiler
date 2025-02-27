@@ -8,8 +8,6 @@ using EmmyLua.LanguageServer.Framework.Protocol.Message.Client.PublishDiagnostic
 using EmmyLua.LanguageServer.Framework.Protocol.Model.Diagnostic;
 using EmmyLua.LanguageServer.Framework.Server;
 
-using KSPCompiler.Applications.LSPServer.Core;
-using KSPCompiler.Applications.LSPServer.Core.Compilation;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Compilation.Extensions;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
 using KSPCompiler.Commons;
@@ -18,6 +16,8 @@ using KSPCompiler.Gateways.EventEmitting.Extensions;
 using KSPCompiler.Infrastructures.EventEmitting.Default;
 using KSPCompiler.Infrastructures.Parser.Antlr;
 using KSPCompiler.Interactors.ApplicationServices.Compilation;
+using KSPCompiler.UseCases.LanguageServer;
+using KSPCompiler.UseCases.LanguageServer.Compilation;
 
 namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Compilation;
 
@@ -30,7 +30,7 @@ public sealed class CompilationServerService(
     private readonly CompilationApplicationService applicationService = applicationService;
 
     public async Task CompileAsync(
-        CompilationCacheManager compilationCacheManager,
+        ICompilationCacheManager compilationCacheManager,
         ScriptLocation scriptLocation,
         string script,
         bool enableObfuscation = false,
