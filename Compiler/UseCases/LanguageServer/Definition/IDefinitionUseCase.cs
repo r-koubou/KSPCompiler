@@ -27,5 +27,5 @@ public sealed class DefinitionOutputPort(
     Exception? error = null
 ) : OutputPort<List<LocationLink>>( links, result, error );
 
-public interface IDefinitionHandlingInteractor
+public interface IDefinitionHandlingUseCase
     : IUseCase<DefinitionInputPort, DefinitionOutputPort>;

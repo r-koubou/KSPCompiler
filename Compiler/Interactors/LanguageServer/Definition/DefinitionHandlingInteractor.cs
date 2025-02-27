@@ -9,7 +9,7 @@ using KSPCompiler.UseCases.LanguageServer.Definition;
 
 namespace KSPCompiler.Interactors.LanguageServer.Definition;
 
-public sealed class DefinitionHandlingInteractor : IDefinitionHandlingInteractor
+public sealed class DefinitionHandlingInteractor : IDefinitionHandlingUseCase
 {
     public async Task<DefinitionOutputPort> ExecuteAsync(
         DefinitionInputPort parameter,
