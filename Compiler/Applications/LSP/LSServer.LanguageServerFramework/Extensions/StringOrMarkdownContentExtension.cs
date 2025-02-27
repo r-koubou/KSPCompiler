@@ -1,6 +1,6 @@
 using EmmyLua.LanguageServer.Framework.Protocol.Model.Markup;
 
-using KSPCompiler.Applications.LSPServer.Core;
+using KSPCompiler.UseCases.LanguageServer;
 
 namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
 
