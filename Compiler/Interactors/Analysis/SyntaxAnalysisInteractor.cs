@@ -15,7 +15,7 @@ public class SyntaxAnalysisInteractor : ISyntaxAnalysisUseCase
     {
         try
         {
-            var ast = parameter.HandlingInputData.Parse();
+            var ast = parameter.Data.Parse();
             return Task.FromResult( new SyntaxAnalysisOutputData( ast, true, null ) );
         }
         catch( KspScriptParseException e )

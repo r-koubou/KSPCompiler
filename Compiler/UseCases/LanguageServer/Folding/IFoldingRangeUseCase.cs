@@ -15,8 +15,8 @@ public sealed class FoldingInputPortDetail(
 }
 
 public sealed class FoldingInputPort(
-    FoldingInputPortDetail handlingInputData
-) : InputPort<FoldingInputPortDetail>( handlingInputData );
+    FoldingInputPortDetail data
+) : InputPort<FoldingInputPortDetail>( data );
 
 public sealed class FoldingOutputPort(
     List<FoldingItem> ranges,

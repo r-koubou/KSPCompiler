@@ -15,11 +15,11 @@ public sealed class LoadBuiltinSymbolInteractor : ILoadBuiltinSymbolUseCase
 
         try
         {
-            symbolTables.BuiltInVariables.AddRange( await parameter.HandlingInputData.VariableSymbolRepository.FindAllAsync( cancellationToken ) );
-            symbolTables.UITypes.AddRange( await parameter.HandlingInputData.UITypeSymbolRepository.FindAllAsync( cancellationToken ) );
-            symbolTables.Commands.AddRange( await parameter.HandlingInputData.CommandSymbolRepository.FindAllAsync( cancellationToken ) );
+            symbolTables.BuiltInVariables.AddRange( await parameter.Data.VariableSymbolRepository.FindAllAsync( cancellationToken ) );
+            symbolTables.UITypes.AddRange( await parameter.Data.UITypeSymbolRepository.FindAllAsync( cancellationToken ) );
+            symbolTables.Commands.AddRange( await parameter.Data.CommandSymbolRepository.FindAllAsync( cancellationToken ) );
 
-            var foundCallbacks = await parameter.HandlingInputData.CallbackSymbolRepository.FindAllAsync( cancellationToken );
+            var foundCallbacks = await parameter.Data.CallbackSymbolRepository.FindAllAsync( cancellationToken );
 
             foreach( var x in foundCallbacks )
             {

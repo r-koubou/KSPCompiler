@@ -16,8 +16,8 @@ public sealed class HoverInputPortDetail(
 }
 
 public sealed class HoverInputPort(
-    HoverInputPortDetail handlingInputData
-) : InputPort<HoverInputPortDetail>( handlingInputData );
+    HoverInputPortDetail data
+) : InputPort<HoverInputPortDetail>( data );
 
 public sealed class HoverOutputPort(
     HoverItem? hoverItem,

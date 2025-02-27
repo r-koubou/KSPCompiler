@@ -15,7 +15,7 @@ public class ExportSymbolTemplateInteractor<TSymbol>
     {
         try
         {
-            await parameter.HandlingInputData.ExportTemplateAsync( cancellationToken );
+            await parameter.Data.ExportTemplateAsync( cancellationToken );
 
             return new UnitOutputPort( true );
         }

@@ -15,7 +15,7 @@ public class ImportSymbolToRepositoryInteractor<TSymbol>(
 
     public async Task<ImportSymbolOutputPort> ExecuteAsync( ImportSymbolInputPort<TSymbol> parameter, CancellationToken cancellationToken = default )
     {
-        var symbols  = await parameter.HandlingInputData.ImportAsync( cancellationToken );
+        var symbols  = await parameter.Data.ImportAsync( cancellationToken );
         var storeResult = await Repository.StoreAsync( symbols, cancellationToken );
 
         var detail = new ImportSymbolOutputPortDetail(

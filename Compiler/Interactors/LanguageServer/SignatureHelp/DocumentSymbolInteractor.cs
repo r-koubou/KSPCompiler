@@ -16,8 +16,8 @@ public sealed class DocumentSymbolInteractor : IDocumentSymbolUseCase
     {
         try
         {
-            var compilationCacheManager = parameter.HandlingInputData.Cache;
-            var scriptLocation = parameter.HandlingInputData.Location;
+            var compilationCacheManager = parameter.Data.Cache;
+            var scriptLocation = parameter.Data.Location;
 
             var cache = compilationCacheManager.GetCache( scriptLocation );
             var symbolTable = cache.SymbolTable;

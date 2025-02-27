@@ -19,8 +19,8 @@ public sealed class RenamingInputPortDetail(
 }
 
 public sealed class RenamingInputPort(
-    RenamingInputPortDetail handlingInputData
-) : InputPort<RenamingInputPortDetail>( handlingInputData );
+    RenamingInputPortDetail data
+) : InputPort<RenamingInputPortDetail>( data );
 
 public sealed class RenamingOutputPort(
     Dictionary<ScriptLocation, List<RenamingItem>> changes,
