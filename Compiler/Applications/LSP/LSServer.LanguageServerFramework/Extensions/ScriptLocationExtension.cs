@@ -12,4 +12,15 @@ public static class ScriptLocationExtension
     {
         return new DocumentUri( new Uri( self.Value, uriKind: UriKind.RelativeOrAbsolute ) );
     }
+
+    public static ScriptLocation RemoveFileSchemeString( this ScriptLocation self )
+    {
+        if( self.Value.StartsWith( "file://" ) )
+        {
+            return new ScriptLocation( self.Value[7..] );
+        }
+
+        return self;
+    }
+
 }
