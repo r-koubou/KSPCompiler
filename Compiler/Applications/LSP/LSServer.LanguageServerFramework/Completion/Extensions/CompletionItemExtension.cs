@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 using EmmyLua.LanguageServer.Framework.Protocol.Model.Union;
 
-using KSPCompiler.Applications.LSPServer.Core.Completion;
+using KSPCompiler.UseCases.LanguageServer.Completion;
 
 using FrameworkCompletionItem = EmmyLua.LanguageServer.Framework.Protocol.Message.Completion.CompletionItem;
 using FrameworkCompletionItemKind = EmmyLua.LanguageServer.Framework.Protocol.Message.Completion.CompletionItemKind;

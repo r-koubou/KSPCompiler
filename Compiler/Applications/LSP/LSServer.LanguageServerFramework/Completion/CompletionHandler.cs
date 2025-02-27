@@ -8,11 +8,12 @@ using EmmyLua.LanguageServer.Framework.Protocol.Capabilities.Server.Options;
 using EmmyLua.LanguageServer.Framework.Protocol.Message.Completion;
 using EmmyLua.LanguageServer.Framework.Server.Handler;
 
-using KSPCompiler.Applications.LSPServer.Core.Compilation;
-using KSPCompiler.Applications.LSPServer.Core.Completion;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Completion.Extensions;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
 using KSPCompiler.Domain.Symbols.MetaData;
+using KSPCompiler.Interactors.LanguageServer.Compilation;
+using KSPCompiler.Interactors.LanguageServer.Completion;
+using KSPCompiler.UseCases.LanguageServer.Completion;
 
 using CompletionItem = EmmyLua.LanguageServer.Framework.Protocol.Message.Completion.CompletionItem;
 
@@ -23,7 +24,7 @@ public class CompletionHandler(
 ) : CompletionHandlerBase
 {
     private readonly CompilationCacheManager compilationCacheManager = compilationCacheManager;
-    private readonly CompletionListHandlingService service = new();
+    private readonly CompletionInteractor service = new();
 
     protected override async Task<CompletionResponse?> Handle( CompletionParams request, CancellationToken token )
     {
@@ -35,9 +36,12 @@ public class CompletionHandler(
             return null;
         }
 
-        var result = await service.HandleAsync( compilationCacheManager, scriptLocation, position, token );
+        var input = new CompletionHandlingInputPort(
+            new CompletionHandlingInputPortDetail( compilationCacheManager, scriptLocation, position )
+        );
+        var result = await service.ExecuteAsync( input, token );
 
-        return new CompletionResponse( result.As() );
+        return new CompletionResponse( result.OutputData.As() );
     }
 
     protected override async Task<CompletionItem> Resolve( CompletionItem item, CancellationToken token )
