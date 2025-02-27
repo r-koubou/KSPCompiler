@@ -6,9 +6,10 @@ using EmmyLua.LanguageServer.Framework.Protocol.Capabilities.Server;
 using EmmyLua.LanguageServer.Framework.Protocol.Message.Definition;
 using EmmyLua.LanguageServer.Framework.Server.Handler;
 
-using KSPCompiler.Applications.LSPServer.Core.Compilation;
-using KSPCompiler.Applications.LSPServer.Core.Definition;
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
+using KSPCompiler.Interactors.LanguageServer.Compilation;
+using KSPCompiler.Interactors.LanguageServer.Definition;
+using KSPCompiler.UseCases.LanguageServer.Definition;
 
 namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Definition;
 
@@ -17,7 +18,7 @@ public class DefinitionHandler(
 ) : DefinitionHandlerBase
 {
     private readonly CompilationCacheManager compilationCacheManager = compilationCacheManager;
-    private readonly DefinitionHandlingService service = new();
+    private readonly DefinitionInteractor service = new();
 
     protected override async Task<DefinitionResponse?> Handle( DefinitionParams request, CancellationToken cancellationToken )
     {
@@ -29,9 +30,12 @@ public class DefinitionHandler(
             return null;
         }
 
-        var result = await service.HandleAsync( compilationCacheManager, scriptLocation, position, cancellationToken );
+        var input = new DefinitionInputPort(
+            new DefinitionInputPortDetail( compilationCacheManager, scriptLocation, position )
+        );
+        var result = await service.ExecuteAsync( input, cancellationToken );
 
-        return new DefinitionResponse( result.As() );
+        return new DefinitionResponse( result.OutputData.As() );
     }
 
     public override void RegisterCapability( ServerCapabilities serverCapabilities, ClientCapabilities clientCapabilities )
