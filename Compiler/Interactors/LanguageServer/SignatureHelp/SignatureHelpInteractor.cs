@@ -32,7 +32,7 @@ public sealed class SignatureHelpInteractor : ISignatureHelpUseCase
             var iterator = new BackwardIterator(
                 cache.AllLinesText,
                 position.BeginLine.Value - 1,     // 0-based
-                position.BeginColumn.Value
+                position.BeginColumn.Value - 1 // 0-based and caret position - 1
             );
 
             var activeParameter = NewGetCallCommandActiveArgument( iterator );
@@ -243,23 +243,25 @@ internal class BackwardIterator(
 
     public char GetNext()
     {
-        if( columnIndex > 0 )
+        if( columnIndex < 0 )
         {
-            columnIndex--;
+            if( lineIndex > 0 )
+            {
 
-            return lines[ lineIndex ][ columnIndex ];
+                lineIndex--;
+                columnIndex = lines[ lineIndex ].Length - 1;
+
+                return '\n';
+            }
+
+            lineIndex = -1;
+
+            return '\0';
         }
 
-        if( lineIndex > 0 )
-        {
-            lineIndex--;
-            columnIndex = lines[ lineIndex ].Length - 1;
+        var c = lines[ lineIndex ][ columnIndex ];
+        columnIndex--;
 
-            return '\n';
-        }
-
-        lineIndex = -1;
-
-        return '\0';
+        return c;
     }
 }
