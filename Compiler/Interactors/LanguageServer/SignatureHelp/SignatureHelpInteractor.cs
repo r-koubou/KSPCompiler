@@ -1,9 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-using KSPCompiler.Commons.Text;
 using KSPCompiler.UseCases.LanguageServer.SignatureHelp;
 using KSPCompiler.UseCases.LanguageServer.SignatureHelp.Extensions;
 
@@ -27,8 +25,20 @@ public sealed class SignatureHelpInteractor : ISignatureHelpUseCase
                 return new SignatureHelpOutputPort( null, true );
             }
 
-            var word = ExtractCallCommandName( cache.AllLinesText, position );
-            var activeParameter = GetCallCommandActiveArgument( cache.AllLinesText, position );
+            var iterator = new BackwardIterator(
+                cache.AllLinesText,
+                position.BeginLine.Value - 1,     // 0-based
+                position.BeginColumn.Value - 1 // 0-based and caret position - 1
+            );
+
+            var activeParameter = GetActiveArgument( iterator );
+
+            if( activeParameter < 0 )
+            {
+                return new SignatureHelpOutputPort( null, true );
+            }
+
+            var word = GetIdentifier( iterator );
 
             if( string.IsNullOrEmpty( word ) )
             {
@@ -50,71 +60,89 @@ public sealed class SignatureHelpInteractor : ISignatureHelpUseCase
         }
     }
 
-    private static string ExtractCallCommandName( IReadOnlyList<string> lines, Position position )
+    //--------------------------------------------------------------------------------------------------------
+    // Implemented based on Part of PHP Signature Help Provider implementation. (signatureHelpProvider.ts)
+    // https://github.com/microsoft/vscode/blob/main/extensions/php-language-features/src/features/signatureHelpProvider.ts
+    //--------------------------------------------------------------------------------------------------------
+
+    private static int GetActiveArgument( BackwardIterator iterator )
     {
-        var line = lines[ position.BeginLine.Value - 1 ];
-        var start = position.BeginColumn.Value; // caret position - 1
-
-        // カーソル位置がEOFの場合、最後の文字に設定
-        start = Math.Min( line.Length - 1, start );
-
-        // 行頭からコマンド呼び出しの開始位置を探す
-        while( start >= 0 && line[ start ] != '(' )
-        {
-            start--;
-        }
-
-        if( start < 0 )
-        {
-            return string.Empty;
-        }
-
-        return DocumentUtility.ExtractWord(
-            lines,
-            new Position
-            {
-                BeginLine   = position.BeginLine,
-                BeginColumn = start
-            }
-        );
-    }
-
-    private static int GetCallCommandActiveArgument( IReadOnlyList<string> lines, Position position )
-    {
-        var line = lines[ position.BeginLine.Value - 1 ];
-        var length = line.Length;
-        var caret = position.BeginColumn.Value;
-        var start = position.BeginColumn.Value - 1; // caret position - 1
-
-        // カーソル位置がEOFの場合、最後の文字に設定
-        start = Math.Min( line.Length - 1, start );
-
-        // 行頭からコマンド呼び出しの開始位置を探す
-        while( start >= 0 && line[ start ] != '(' )
-        {
-            start--;
-        }
-
-        if( start < 0 )
-        {
-            return 0;
-        }
-
+        var parentNestDepth = 0;
+        var bracketNestDepth = 0;
         var activeArgument = 0;
 
-        // カーソル位置までのカンマの数を数える
-        for( var i = start + 1; i < caret && i < length; i++ )
+        while( iterator.HasNext )
         {
-            if( line[ i ] == ',' )
+            var c = iterator.GetNext();
+
+            switch( c )
             {
-                activeArgument++;
-            }
-            else if( line[ i ] == ')' )
-            {
-                break;
+                case '(':
+                    parentNestDepth--;
+
+                    if( parentNestDepth < 0 )
+                    {
+                        return activeArgument;
+                    }
+
+                    break;
+                case ')':
+                    parentNestDepth++;
+
+                    break;
+
+                case '[':
+                    bracketNestDepth--;
+
+                    break;
+
+                case ']':
+                    bracketNestDepth++;
+
+                    break;
+
+                case ',':
+                    if( parentNestDepth == 0 && bracketNestDepth == 0 )
+                    {
+                        activeArgument++;
+                    }
+                    break;
             }
         }
 
-        return activeArgument;
+        return -1;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+    // Implemented based on Part of PHP Signature Help Provider implementation. (signatureHelpProvider.ts)
+    // https://github.com/microsoft/vscode/blob/main/extensions/php-language-features/src/features/signatureHelpProvider.ts
+    //--------------------------------------------------------------------------------------------------------
+
+    private static string GetIdentifier( BackwardIterator iterator )
+    {
+        var identStarted = false;
+        var ident = string.Empty;
+
+        while( iterator.HasNext )
+        {
+            var ch = iterator.GetNext();
+
+            if( !identStarted && DocumentUtility.IsSkipChar( ch ) )
+            {
+                continue;
+            }
+
+            if( DocumentUtility.IsIdentifierChar( ch ) )
+            {
+                identStarted = true;
+                ident        = ch + ident;
+            }
+            else if( identStarted )
+            {
+                return ident;
+            }
+        }
+
+        return ident;
     }
 }
