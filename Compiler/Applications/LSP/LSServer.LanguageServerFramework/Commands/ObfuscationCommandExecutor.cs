@@ -10,7 +10,6 @@ using EmmyLua.LanguageServer.Framework.Server;
 using EmmyLua.LanguageServer.Framework.Server.Handler;
 
 using KSPCompiler.Applications.LSServer.LanguageServerFramework.Compilation;
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
 using KSPCompiler.Gateways.Symbols;
 using KSPCompiler.Interactors.ApplicationServices.Compilation;
 using KSPCompiler.Interactors.ApplicationServices.Symbols;
@@ -24,7 +23,6 @@ public class ObfuscationCommandExecutor(
     LanguageServer server,
     ICompilationCacheManager compilationCacheManager,
     AggregateSymbolRepository symbolRepositories
-
 ) : ExecuteCommandHandlerBase
 {
     private const string CommandName = "ksp.obfuscate";
@@ -41,6 +39,23 @@ public class ObfuscationCommandExecutor(
         )
     );
 
+    private static ScriptLocation ToScriptLocation( string documentUri )
+    {
+        var uri = new Uri( documentUri );
+        var filePath = uri.LocalPath + Uri.UnescapeDataString( uri.Fragment );
+
+        // Fix for Windows file system
+        // Remove '/' from the start of the path if it is a drive letter
+        if( filePath.StartsWith( '/' ) && filePath.Length > 2 && filePath[ 2 ] == ':' )
+        {
+            filePath = filePath[ 1.. ];
+        }
+
+        var fileInfo = new FileInfo( filePath );
+
+        return new ScriptLocation( fileInfo.FullName );
+    }
+
     protected override async Task<ExecuteCommandResponse> Handle( ExecuteCommandParams request, CancellationToken token )
     {
         if( request.Command != CommandName )
@@ -48,9 +63,10 @@ public class ObfuscationCommandExecutor(
             return new ExecuteCommandResponse( null );
         }
 
+        var documentUri = request.Arguments?[ 0 ].Value?.ToString();
+        _ = documentUri ?? throw new ArgumentException( $"{nameof( documentUri )} is null" );
 
-        var uri = request.Arguments?[ 0 ].Value?.ToString();
-        var scriptLocation = new ScriptLocation( uri! ).RemoveFileSchemeString();
+        var scriptLocation = ToScriptLocation( documentUri! );
 
         if( !compilationCacheManager.ContainsCache( scriptLocation ) )
         {
