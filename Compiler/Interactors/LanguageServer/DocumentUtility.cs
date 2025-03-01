@@ -8,23 +8,34 @@ namespace KSPCompiler.Interactors.LanguageServer;
 
 internal static class DocumentUtility
 {
-    private static bool IsIdentifierChar( string text, int index )
+    // ReSharper disable once MemberCanBePrivate.Global
+    public static bool IsIdentifierChar( char c )
     {
-        var c = text[ index ];
-
         return c == '_'
                || char.IsLetterOrDigit( c )
                || DataTypeUtility.IsDataTypeCharacter( c );
     }
 
-    private static bool IsSkipChar( string text, int index )
+    // ReSharper disable once MemberCanBePrivate.Global
+    public static bool IsIdentifierChar( string text, int index )
     {
-        var c = text[ index ];
+        return IsIdentifierChar( text[ index ] );
+    }
 
+    // ReSharper disable once MemberCanBePrivate.Global
+    public static bool IsSkipChar( char c )
+    {
         return char.IsWhiteSpace( c )
                || char.IsControl( c );
     }
 
+    // ReSharper disable once MemberCanBePrivate.Global
+    public static bool IsSkipChar( string text, int index )
+    {
+        return IsSkipChar( text[ index ] );
+    }
+
+    // ReSharper disable once MemberCanBePrivate.Global
     public static(int start, int end) GetWordRange( string line, int column )
     {
         var length = line.Length;
@@ -70,6 +81,7 @@ internal static class DocumentUtility
         return ( start, end );
     }
 
+    // ReSharper disable once MemberCanBePrivate.Global
     public static string ExtractWord( IReadOnlyList<string> lines, Position position )
     {
         var line = lines[ position.BeginLine.Value - 1 ]; // 0-based
@@ -78,6 +90,7 @@ internal static class DocumentUtility
         return line.Substring( start, end - start ).Trim();
     }
 
+    // ReSharper disable once MemberCanBePrivate.Global
     public static Position ExtractWordRange( IReadOnlyList<string> lines, Position position )
     {
         var line = lines[ position.BeginLine.Value ];
@@ -92,6 +105,7 @@ internal static class DocumentUtility
         };
     }
 
+    // ReSharper disable once MemberCanBePrivate.Global
     public static bool IsInCommentToLeft( IReadOnlyList<string> lines, Position position )
     {
         var begin = position.BeginLine.Value - 1; // 0-based
