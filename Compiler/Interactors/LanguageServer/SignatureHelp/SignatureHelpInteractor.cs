@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -27,15 +26,13 @@ public sealed class SignatureHelpInteractor : ISignatureHelpUseCase
                 return new SignatureHelpOutputPort( null, true );
             }
 
-            // var word = ExtractCallCommandName( cache.AllLinesText, position );
-            // var activeParameter = GetCallCommandActiveArgument( cache.AllLinesText, position );
             var iterator = new BackwardIterator(
                 cache.AllLinesText,
                 position.BeginLine.Value - 1,     // 0-based
                 position.BeginColumn.Value - 1 // 0-based and caret position - 1
             );
 
-            var activeParameter = NewGetCallCommandActiveArgument( iterator );
+            var activeParameter = GetActiveArgument( iterator );
 
             if( activeParameter < 0 )
             {
@@ -64,80 +61,12 @@ public sealed class SignatureHelpInteractor : ISignatureHelpUseCase
         }
     }
 
-    private static string ExtractCallCommandName( IReadOnlyList<string> lines, Position position )
-    {
-        var line = lines[ position.BeginLine.Value - 1 ];
-        var start = position.BeginColumn.Value; // caret position - 1
-
-        // カーソル位置がEOFの場合、最後の文字に設定
-        start = Math.Min( line.Length - 1, start );
-
-        // 行頭からコマンド呼び出しの開始位置を探す
-        while( start >= 0 && line[ start ] != '(' )
-        {
-            start--;
-        }
-
-        if( start < 0 )
-        {
-            return string.Empty;
-        }
-
-        return DocumentUtility.ExtractWord(
-            lines,
-            new Position
-            {
-                BeginLine   = position.BeginLine,
-                BeginColumn = start
-            }
-        );
-    }
-
-    private static int GetCallCommandActiveArgument( IReadOnlyList<string> lines, Position position )
-    {
-        var line = lines[ position.BeginLine.Value - 1 ];
-        var length = line.Length;
-        var caret = position.BeginColumn.Value;
-        var start = position.BeginColumn.Value - 1; // caret position - 1
-
-        // カーソル位置がEOFの場合、最後の文字に設定
-        start = Math.Min( line.Length - 1, start );
-
-        // 行頭からコマンド呼び出しの開始位置を探す
-        while( start >= 0 && line[ start ] != '(' )
-        {
-            start--;
-        }
-
-        if( start < 0 )
-        {
-            return 0;
-        }
-
-        var activeArgument = 0;
-
-        // カーソル位置までのカンマの数を数える
-        for( var i = start + 1; i < caret && i < length; i++ )
-        {
-            if( line[ i ] == ',' )
-            {
-                activeArgument++;
-            }
-            else if( line[ i ] == ')' )
-            {
-                break;
-            }
-        }
-
-        return activeArgument;
-    }
-
     //--------------------------------------------------------------------------------------------------------
     // Implemented based on Part of PHP Signature Help Provider implementation. (signatureHelpProvider.ts)
-    // https://github.com/microsoft/vscode
+    // https://github.com/microsoft/vscode/blob/main/extensions/php-language-features/src/features/signatureHelpProvider.ts
     //--------------------------------------------------------------------------------------------------------
 
-    private static int NewGetCallCommandActiveArgument( BackwardIterator iterator )
+    private static int GetActiveArgument( BackwardIterator iterator )
     {
         var parentNestDepth = 0;
         var bracketNestDepth = 0;
@@ -172,21 +101,7 @@ public sealed class SignatureHelpInteractor : ISignatureHelpUseCase
                     bracketNestDepth++;
 
                     break;
-/*
-                case '\'':
-                case '\"':
-                    while( iterator.HasNext )
-                    {
-                        var c2 = iterator.GetNext();
 
-                        if( c2 == c )
-                        {
-                            break;
-                        }
-                    }
-
-                    break;
-*/
                 case ',':
                     if( parentNestDepth == 0 && bracketNestDepth == 0 )
                     {
@@ -225,43 +140,5 @@ public sealed class SignatureHelpInteractor : ISignatureHelpUseCase
         }
 
         return ident;
-    }
-}
-
-internal class BackwardIterator(
-    IReadOnlyList<string> lines,
-    int beginLine,
-    int beginColumn
-)
-{
-    private readonly IReadOnlyList<string> lines = lines;
-    private int lineIndex = beginLine;
-    private int columnIndex = beginColumn;
-
-    public bool HasNext
-        => lineIndex >= 0;
-
-    public char GetNext()
-    {
-        if( columnIndex < 0 )
-        {
-            if( lineIndex > 0 )
-            {
-
-                lineIndex--;
-                columnIndex = lines[ lineIndex ].Length - 1;
-
-                return '\n';
-            }
-
-            lineIndex = -1;
-
-            return '\0';
-        }
-
-        var c = lines[ lineIndex ][ columnIndex ];
-        columnIndex--;
-
-        return c;
     }
 }
