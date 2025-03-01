@@ -27,8 +27,22 @@ public sealed class SignatureHelpInteractor : ISignatureHelpUseCase
                 return new SignatureHelpOutputPort( null, true );
             }
 
-            var word = ExtractCallCommandName( cache.AllLinesText, position );
-            var activeParameter = GetCallCommandActiveArgument( cache.AllLinesText, position );
+            // var word = ExtractCallCommandName( cache.AllLinesText, position );
+            // var activeParameter = GetCallCommandActiveArgument( cache.AllLinesText, position );
+            var iterator = new BackwardIterator(
+                cache.AllLinesText,
+                position.BeginLine.Value - 1,     // 0-based
+                position.BeginColumn.Value
+            );
+
+            var activeParameter = NewGetCallCommandActiveArgument( iterator );
+
+            if( activeParameter < 0 )
+            {
+                return new SignatureHelpOutputPort( null, true );
+            }
+
+            var word = GetIdentifier( iterator );
 
             if( string.IsNullOrEmpty( word ) )
             {
@@ -116,5 +130,136 @@ public sealed class SignatureHelpInteractor : ISignatureHelpUseCase
         }
 
         return activeArgument;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+    // Implemented based on Part of PHP Signature Help Provider implementation. (signatureHelpProvider.ts)
+    // https://github.com/microsoft/vscode
+    //--------------------------------------------------------------------------------------------------------
+
+    private static int NewGetCallCommandActiveArgument( BackwardIterator iterator )
+    {
+        var parentNestDepth = 0;
+        var bracketNestDepth = 0;
+        var activeArgument = 0;
+
+        while( iterator.HasNext )
+        {
+            var c = iterator.GetNext();
+
+            switch( c )
+            {
+                case '(':
+                    parentNestDepth--;
+
+                    if( parentNestDepth < 0 )
+                    {
+                        return activeArgument;
+                    }
+
+                    break;
+                case ')':
+                    parentNestDepth++;
+
+                    break;
+
+                case '[':
+                    bracketNestDepth--;
+
+                    break;
+
+                case ']':
+                    bracketNestDepth++;
+
+                    break;
+/*
+                case '\'':
+                case '\"':
+                    while( iterator.HasNext )
+                    {
+                        var c2 = iterator.GetNext();
+
+                        if( c2 == c )
+                        {
+                            break;
+                        }
+                    }
+
+                    break;
+*/
+                case ',':
+                    if( parentNestDepth == 0 && bracketNestDepth == 0 )
+                    {
+                        activeArgument++;
+                    }
+                    break;
+            }
+        }
+
+        return -1;
+    }
+
+    private static string GetIdentifier( BackwardIterator iterator )
+    {
+        var identStarted = false;
+        var ident = string.Empty;
+
+        while( iterator.HasNext )
+        {
+            var ch = iterator.GetNext();
+
+            if( !identStarted && DocumentUtility.IsSkipChar( ch ) )
+            {
+                continue;
+            }
+
+            if( DocumentUtility.IsIdentifierChar( ch ) )
+            {
+                identStarted = true;
+                ident        = ch + ident;
+            }
+            else if( identStarted )
+            {
+                return ident;
+            }
+        }
+
+        return ident;
+    }
+}
+
+internal class BackwardIterator(
+    IReadOnlyList<string> lines,
+    int beginLine,
+    int beginColumn
+)
+{
+    private readonly IReadOnlyList<string> lines = lines;
+    private int lineIndex = beginLine;
+    private int columnIndex = beginColumn;
+
+    public bool HasNext
+        => lineIndex >= 0;
+
+    public char GetNext()
+    {
+        if( columnIndex > 0 )
+        {
+            columnIndex--;
+
+            return lines[ lineIndex ][ columnIndex ];
+        }
+
+        if( lineIndex > 0 )
+        {
+            lineIndex--;
+            columnIndex = lines[ lineIndex ].Length - 1;
+
+            return '\n';
+        }
+
+        lineIndex = -1;
+
+        return '\0';
     }
 }
