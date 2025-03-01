@@ -67,12 +67,6 @@ public class ObfuscationCommandExecutor(
         _ = documentUri ?? throw new ArgumentException( $"{nameof( documentUri )} is null" );
 
         var scriptLocation = ToScriptLocation( documentUri! );
-
-        if( !compilationCacheManager.ContainsCache( scriptLocation ) )
-        {
-            return new ExecuteCommandResponse( string.Empty );
-        }
-
         var script = await File.ReadAllTextAsync( scriptLocation.Value, token );
 
         var result = await compilationSeverService.CompileAsync(
