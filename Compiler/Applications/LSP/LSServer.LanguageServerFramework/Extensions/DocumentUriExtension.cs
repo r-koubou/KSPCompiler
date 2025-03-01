@@ -6,8 +6,8 @@ namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
 
 public static class DocumentUriExtension
 {
-    public static ScriptLocation AsScriptLocation( this DocumentUri uri )
+    public static ScriptLocation AsScriptLocation( this DocumentUri documentUri )
     {
-        return new ScriptLocation( uri.Uri.AbsolutePath );
+        return new ScriptLocation( documentUri.FileSystemPath );
     }
 }
