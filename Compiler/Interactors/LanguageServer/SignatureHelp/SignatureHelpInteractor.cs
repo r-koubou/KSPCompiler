@@ -2,7 +2,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-using KSPCompiler.Commons.Text;
 using KSPCompiler.UseCases.LanguageServer.SignatureHelp;
 using KSPCompiler.UseCases.LanguageServer.SignatureHelp.Extensions;
 
@@ -113,6 +112,11 @@ public sealed class SignatureHelpInteractor : ISignatureHelpUseCase
 
         return -1;
     }
+
+    //--------------------------------------------------------------------------------------------------------
+    // Implemented based on Part of PHP Signature Help Provider implementation. (signatureHelpProvider.ts)
+    // https://github.com/microsoft/vscode/blob/main/extensions/php-language-features/src/features/signatureHelpProvider.ts
+    //--------------------------------------------------------------------------------------------------------
 
     private static string GetIdentifier( BackwardIterator iterator )
     {
