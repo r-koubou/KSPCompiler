@@ -1,14 +1,15 @@
-using KSPCompiler.Commons.Text;
+using KSPCompiler.Shared.EventEmitting;
+using KSPCompiler.Shared.Text;
 
-namespace KSPCompiler.Gateways.EventEmitting;
+namespace KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 
-public readonly struct CompilationWarningEvent : IEvent
+public readonly struct CompilationErrorEvent : IEvent
 {
     public string Message { get; }
 
     public Position Position { get; }
 
-    public CompilationWarningEvent( string message, int line = 0, int column = 0 )
+    public CompilationErrorEvent( string message, int line = 0, int column = 0 )
     {
         Message = message;
         Position = new Position
@@ -20,7 +21,7 @@ public readonly struct CompilationWarningEvent : IEvent
         };
     }
 
-    public CompilationWarningEvent( string message, Position position )
+    public CompilationErrorEvent( string message, Position position )
     {
         Message  = message;
         Position = position;

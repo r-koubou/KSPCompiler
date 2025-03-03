@@ -1,6 +1,7 @@
-using KSPCompiler.Commons.Text;
+using KSPCompiler.Shared.EventEmitting;
+using KSPCompiler.Shared.Text;
 
-namespace KSPCompiler.Gateways.EventEmitting;
+namespace KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 
 public readonly struct CompilationFatalEvent : IEvent
 {
