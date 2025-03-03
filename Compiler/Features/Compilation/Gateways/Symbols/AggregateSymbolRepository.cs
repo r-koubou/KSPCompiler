@@ -1,8 +1,8 @@
 using System;
 
-using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Features.Compilation.Domain.Symbols;
 
-namespace KSPCompiler.Gateways.Symbols;
+namespace KSPCompiler.Features.Compilation.Gateways.Symbols;
 
 public sealed class AggregateSymbolRepository(
     ISymbolRepository<VariableSymbol> variableSymbolRepository,

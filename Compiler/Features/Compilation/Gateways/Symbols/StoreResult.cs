@@ -1,6 +1,6 @@
 using System;
 
-namespace KSPCompiler.Gateways.Symbols;
+namespace KSPCompiler.Features.Compilation.Gateways.Symbols;
 
 public sealed class StoreResult
 {

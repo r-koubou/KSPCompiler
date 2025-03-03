@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Features.Compilation.Domain.Symbols;
 
-namespace KSPCompiler.Gateways.Symbols;
+namespace KSPCompiler.Features.Compilation.Gateways.Symbols;
 
 public interface ISymbolRepository<TSymbol> : IDisposable where TSymbol : SymbolBase
 {
