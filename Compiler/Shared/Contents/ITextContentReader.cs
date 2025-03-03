@@ -1,3 +1,3 @@
-namespace KSPCompiler.Commons.Contents;
+namespace KSPCompiler.Shared.Contents;
 
 public interface ITextContentReader : IContentReader<string>{}

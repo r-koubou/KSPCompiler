@@ -1,6 +1,6 @@
-using KSPCompiler.Commons.ValueObjects;
+using KSPCompiler.Shared.ValueObjects;
 
-namespace KSPCompiler.Commons.Text;
+namespace KSPCompiler.Shared.Text;
 
 public sealed record LineNumber( int Value ) : IntValueObject( Value )
 {

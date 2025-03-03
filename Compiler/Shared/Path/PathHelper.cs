@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Text;
 
-namespace KSPCompiler.Commons.Path
+namespace KSPCompiler.Shared.Path
 {
     public static class PathHelper
     {

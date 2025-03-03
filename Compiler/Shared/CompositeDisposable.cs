@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace KSPCompiler.Commons;
+namespace KSPCompiler.Shared;
 
 public sealed class CompositeDisposable : IDisposable
 {

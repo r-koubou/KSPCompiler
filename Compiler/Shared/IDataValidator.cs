@@ -1,4 +1,4 @@
-namespace KSPCompiler.Commons;
+namespace KSPCompiler.Shared;
 
 /// <summary>
 /// Represents a validation rule for a data.

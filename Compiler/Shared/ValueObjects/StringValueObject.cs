@@ -1,4 +1,4 @@
-namespace KSPCompiler.Commons.ValueObjects;
+namespace KSPCompiler.Shared.ValueObjects;
 
 public abstract record StringValueObject( string Value ) : ValueObject<string>( Value )
 {

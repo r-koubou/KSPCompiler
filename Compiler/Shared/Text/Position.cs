@@ -1,6 +1,6 @@
 using System;
 
-namespace KSPCompiler.Commons.Text
+namespace KSPCompiler.Shared.Text
 {
     // ReSharper disable InconsistentNaming
     public struct Position : IEquatable<Position>

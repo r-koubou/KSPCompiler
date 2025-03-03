@@ -3,7 +3,7 @@
 
 using System;
 
-namespace KSPCompiler.Commons.ValueObjects;
+namespace KSPCompiler.Shared.ValueObjects;
 
 public class EmptyStringValueException : Exception
 {

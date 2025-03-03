@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace KSPCompiler.Commons.Path
+namespace KSPCompiler.Shared.Path
 {
     public class FilePath : IPath
     {

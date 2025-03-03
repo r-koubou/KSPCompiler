@@ -1,6 +1,6 @@
 using System;
 
-namespace KSPCompiler.Commons.ValueObjects;
+namespace KSPCompiler.Shared.ValueObjects;
 
 // ReSharper disable once UnusedType.Global
 public abstract record DoubleValueObject( double Value ) : ValueObject<double>( Value )

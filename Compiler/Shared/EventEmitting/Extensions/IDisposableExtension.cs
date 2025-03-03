@@ -1,8 +1,6 @@
 using System;
 
-using KSPCompiler.Commons;
-
-namespace KSPCompiler.Gateways.EventEmitting.Extensions;
+namespace KSPCompiler.Shared.EventEmitting.Extensions;
 
 public static class IDisposableExtension
 {

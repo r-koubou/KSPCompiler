@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace KSPCompiler.Commons.Contents;
+namespace KSPCompiler.Shared.Contents;
 
 public interface IContentWriter<in T>
 {

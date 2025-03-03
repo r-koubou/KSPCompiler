@@ -1,4 +1,4 @@
-namespace KSPCompiler.Commons.ValueObjects;
+namespace KSPCompiler.Shared.ValueObjects;
 
 public abstract record ValueObject<TValue>( TValue Value ) : IValueObject<TValue> where TValue : notnull
 {

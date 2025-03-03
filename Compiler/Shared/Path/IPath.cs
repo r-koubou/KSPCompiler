@@ -1,4 +1,4 @@
-namespace KSPCompiler.Commons.Path
+namespace KSPCompiler.Shared.Path
 {
     public interface IPath
     {

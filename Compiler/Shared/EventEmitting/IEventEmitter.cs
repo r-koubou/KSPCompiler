@@ -1,6 +1,6 @@
 using System;
 
-namespace KSPCompiler.Gateways.EventEmitting;
+namespace KSPCompiler.Shared.EventEmitting;
 
 /// <summary>
 /// The basic interface for managing event subscribers and building event transmission management and execution.

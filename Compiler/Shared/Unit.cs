@@ -1,6 +1,6 @@
 using System;
 
-namespace KSPCompiler.Commons;
+namespace KSPCompiler.Shared;
 
 [Serializable]
 public sealed class Unit : IEquatable<Unit>

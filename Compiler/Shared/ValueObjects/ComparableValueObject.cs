@@ -1,6 +1,6 @@
 using System;
 
-namespace KSPCompiler.Commons.ValueObjects;
+namespace KSPCompiler.Shared.ValueObjects;
 
 public abstract record ComparableValueObject<TValue>( TValue Value )
     : ValueObject<TValue>( Value ), IComparable<ComparableValueObject<TValue>>

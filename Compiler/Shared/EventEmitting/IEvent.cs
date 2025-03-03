@@ -1,4 +1,4 @@
-namespace KSPCompiler.Gateways.EventEmitting;
+namespace KSPCompiler.Shared.EventEmitting;
 
 /// <summary>
 /// The base interface for configuring events.

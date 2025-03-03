@@ -1,4 +1,4 @@
-namespace KSPCompiler.Commons.ValueObjects;
+namespace KSPCompiler.Shared.ValueObjects;
 
 public interface IValueObject<TValue> where TValue : notnull
 {

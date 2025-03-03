@@ -1,4 +1,4 @@
-namespace KSPCompiler.Commons;
+namespace KSPCompiler.Shared;
 
 public interface IDataTranslator<in TSource, out TTarget>
 {
