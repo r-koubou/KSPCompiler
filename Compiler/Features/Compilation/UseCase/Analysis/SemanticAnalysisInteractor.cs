@@ -2,10 +2,12 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
+using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 using KSPCompiler.Features.Compilation.UseCase.Abstractions;
-using KSPCompiler.Features.Compilation.UseCase.Analysis.Extensions;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
 using KSPCompiler.Shared;
+
+using CompilationFatalEvent = KSPCompiler.Features.Compilation.UseCase.Analysis.Extensions.CompilationFatalEvent;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis;
 

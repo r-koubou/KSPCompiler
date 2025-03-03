@@ -1,8 +1,22 @@
+using KSPCompiler.Features.Compilation.Domain.Symbols;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Context;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Commands;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Convolutions.Booleans;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Convolutions.Integers;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Convolutions.Reals;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Convolutions.Strings;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Declarations;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Operators;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Preprocessing;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Statements;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Symbols;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.UserFunctions;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Convolutions.Booleans;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Convolutions.Conditions;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Convolutions.Integers;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Convolutions.Reals;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Convolutions.Strings;
+using KSPCompiler.Shared.EventEmitting;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
 

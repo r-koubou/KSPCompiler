@@ -1,4 +1,5 @@
 using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
+using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Extensions;
 

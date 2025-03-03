@@ -1,3 +1,10 @@
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Context;
+
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
 
 public class SemanticAnalyzer : DefaultAstVisitor, IAstTraversal
