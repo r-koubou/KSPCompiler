@@ -10,6 +10,8 @@ using KSPCompiler.Features.Compilation.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Commands;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Extensions;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics.Extensions;
+using KSPCompiler.Resources;
 using KSPCompiler.Shared.EventEmitting;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;

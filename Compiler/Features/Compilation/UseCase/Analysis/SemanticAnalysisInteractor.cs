@@ -6,8 +6,7 @@ using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 using KSPCompiler.Features.Compilation.UseCase.Abstractions;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
 using KSPCompiler.Shared;
-
-using CompilationFatalEvent = KSPCompiler.Features.Compilation.UseCase.Analysis.Extensions.CompilationFatalEvent;
+using KSPCompiler.Shared.EventEmitting.Extensions;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis;
 

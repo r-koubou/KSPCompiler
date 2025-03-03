@@ -2,6 +2,7 @@ using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
 using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Statements;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Extensions;
+using KSPCompiler.Resources;
 using KSPCompiler.Shared.EventEmitting;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;

@@ -20,5 +20,3 @@ public static class IAstNodeExtensions
         return new CompilationWarningEvent( string.Format( message, argv ), self.Position );
     }
 }
-
-internal class CompilationFatalEvent {}

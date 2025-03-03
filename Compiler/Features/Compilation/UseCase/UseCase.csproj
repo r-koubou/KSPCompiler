@@ -15,6 +15,7 @@
       <ProjectReference Include="..\..\..\Shared\Shared.csproj" />
       <ProjectReference Include="..\Domain\Domain.csproj" />
       <ProjectReference Include="..\Gateways\Gateways.csproj" />
+      <ProjectReference Include="..\Resources\Resources.csproj" />
     </ItemGroup>
 
 </Project>
