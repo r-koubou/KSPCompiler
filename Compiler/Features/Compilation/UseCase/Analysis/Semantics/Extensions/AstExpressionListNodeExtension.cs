@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Expressions;
 
-namespace KSPCompiler.Interactors.Analysis.Semantics.Extensions;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics.Extensions;
 
 /// <summary>
 /// If evaluated arguments are literals, replace the convoluted expressions with the evaluated nodes.

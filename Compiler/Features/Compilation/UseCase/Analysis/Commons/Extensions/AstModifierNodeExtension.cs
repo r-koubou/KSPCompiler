@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using KSPCompiler.Domain.Ast.Nodes;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
 
-namespace KSPCompiler.Interactors.Analysis.Commons.Extensions;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Extensions;
 
 public static class AstModifierNodeExtension
 {

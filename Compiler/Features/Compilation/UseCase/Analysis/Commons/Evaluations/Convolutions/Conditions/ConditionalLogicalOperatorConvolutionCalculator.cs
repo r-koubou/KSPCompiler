@@ -1,10 +1,10 @@
 using System;
 
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Symbols.MetaData.Extensions;
-using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Booleans;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
+using KSPCompiler.Features.Compilation.Domain.Symbols.MetaData.Extensions;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Convolutions.Booleans;
 
-namespace KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Conditions;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Convolutions.Conditions;
 
 public class ConditionalLogicalOperatorConvolutionCalculator : IConditionalLogicalOperatorConvolutionCalculator
 {

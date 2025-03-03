@@ -1,11 +1,4 @@
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Domain.Ast.Nodes.Expressions;
-using KSPCompiler.Domain.Ast.Nodes.Statements;
-using KSPCompiler.UseCases.Analysis;
-using KSPCompiler.UseCases.Analysis.Context;
-
-namespace KSPCompiler.Interactors.Analysis.Semantics;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
 
 public class SemanticAnalyzer : DefaultAstVisitor, IAstTraversal
 {

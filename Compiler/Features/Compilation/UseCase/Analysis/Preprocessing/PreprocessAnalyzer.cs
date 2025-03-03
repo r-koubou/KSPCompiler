@@ -1,12 +1,12 @@
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Domain.Ast.Nodes.Statements;
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Gateways.EventEmitting;
-using KSPCompiler.UseCases.Analysis;
-using KSPCompiler.UseCases.Analysis.Evaluations.Preprocessing;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Features.Compilation.Domain.Symbols;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Preprocessing;
+using KSPCompiler.Shared.EventEmitting;
 
-namespace KSPCompiler.Interactors.Analysis.Preprocessing;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Preprocessing;
 
 public class PreprocessAnalyzer( IPreProcessorSymbolTable symbolTable, IEventEmitter eventEmitter )
     : DefaultAstVisitor, IAstTraversal

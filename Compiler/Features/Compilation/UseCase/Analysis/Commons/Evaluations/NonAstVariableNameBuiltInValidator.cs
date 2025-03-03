@@ -1,9 +1,9 @@
 using System.Linq;
 
-using KSPCompiler.Commons;
-using KSPCompiler.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Shared;
 
-namespace KSPCompiler.Interactors.Analysis.Commons.Evaluations;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations;
 
 /// <summary>
 /// Validates that a variable name does not start with a built-in prefix.

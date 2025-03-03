@@ -1,22 +1,21 @@
-using KSPCompiler.Domain;
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Domain.Ast.Nodes.Expressions;
-using KSPCompiler.Domain.Ast.Nodes.Extensions;
-using KSPCompiler.Domain.Ast.Nodes.Statements;
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Domain.Symbols.Extensions;
-using KSPCompiler.Domain.Symbols.MetaData;
-using KSPCompiler.Domain.Symbols.MetaData.Extensions;
-using KSPCompiler.Gateways.EventEmitting;
-using KSPCompiler.Interactors.Analysis.Commons.Evaluations;
-using KSPCompiler.Interactors.Analysis.Commons.Extensions;
-using KSPCompiler.Interactors.Analysis.Extensions;
-using KSPCompiler.Interactors.Analysis.Semantics.Extensions;
-using KSPCompiler.Resources;
-using KSPCompiler.UseCases.Analysis.Evaluations.Declarations;
+using KSPCompiler.Features.Compilation.Domain;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Extensions;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Features.Compilation.Domain.Symbols;
+using KSPCompiler.Features.Compilation.Domain.Symbols.Extensions;
+using KSPCompiler.Features.Compilation.Domain.Symbols.MetaData;
+using KSPCompiler.Features.Compilation.Domain.Symbols.MetaData.Extensions;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Declarations;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Extensions;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Extensions;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics.Extensions;
+using KSPCompiler.Shared.EventEmitting;
 
-namespace KSPCompiler.Interactors.Analysis.Semantics;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
 
 public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 {

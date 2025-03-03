@@ -1,13 +1,13 @@
 using System.Text;
 
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Domain.Ast.Nodes.Expressions;
-using KSPCompiler.Domain.Ast.Nodes.Statements;
-using KSPCompiler.UseCases.Analysis;
-using KSPCompiler.UseCases.Analysis.Context;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Context;
 
-namespace KSPCompiler.Interactors.Analysis.Obfuscators;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators;
 
 public class Obfuscator : DefaultAstVisitor, IAstTraversal
 {

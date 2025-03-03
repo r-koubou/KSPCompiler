@@ -1,13 +1,13 @@
 using System.Text;
 
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Domain.Ast.Nodes.Expressions;
-using KSPCompiler.Domain.Ast.Nodes.Extensions;
-using KSPCompiler.Interactors.Analysis.Obfuscators.Extensions;
-using KSPCompiler.UseCases.Analysis.Evaluations.Commands;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Extensions;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Commands;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators.Extensions;
 
-namespace KSPCompiler.Interactors.Analysis.Obfuscators;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators;
 
 public class CallCommandEvaluator : ICallCommandEvaluator
 {

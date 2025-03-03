@@ -1,6 +1,4 @@
-using KSPCompiler.Domain.Symbols;
-
-namespace KSPCompiler.Interactors.Analysis.Obfuscators.Extensions;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators.Extensions;
 
 public static class SymbolStateExtension
 {

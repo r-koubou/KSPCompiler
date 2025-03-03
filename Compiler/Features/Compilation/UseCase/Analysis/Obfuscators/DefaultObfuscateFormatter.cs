@@ -1,7 +1,4 @@
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.UseCases.Analysis.Obfuscators;
-
-namespace KSPCompiler.Interactors.Analysis.Obfuscators;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators;
 
 public sealed class DefaultObfuscateFormatter : IObfuscateFormatter
 {

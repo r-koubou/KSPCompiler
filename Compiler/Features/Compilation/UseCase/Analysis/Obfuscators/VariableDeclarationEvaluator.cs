@@ -1,18 +1,18 @@
 using System.Collections.Generic;
 using System.Text;
 
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Ast.Nodes.Expressions;
-using KSPCompiler.Domain.Ast.Nodes.Extensions;
-using KSPCompiler.Domain.Ast.Nodes.Statements;
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Domain.Symbols.MetaData.Extensions;
-using KSPCompiler.Interactors.Analysis.Extensions;
-using KSPCompiler.Interactors.Analysis.Obfuscators.Extensions;
-using KSPCompiler.UseCases.Analysis.Evaluations.Declarations;
-using KSPCompiler.UseCases.Analysis.Obfuscators;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Extensions;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Features.Compilation.Domain.Symbols;
+using KSPCompiler.Features.Compilation.Domain.Symbols.MetaData.Extensions;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Declarations;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Obfuscators;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Extensions;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators.Extensions;
 
-namespace KSPCompiler.Interactors.Analysis.Obfuscators;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators;
 
 public class VariableDeclarationEvaluator(
     StringBuilder output,

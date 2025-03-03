@@ -2,13 +2,12 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-using KSPCompiler.Commons;
-using KSPCompiler.Gateways.EventEmitting;
-using KSPCompiler.Gateways.EventEmitting.Extensions;
-using KSPCompiler.Interactors.Analysis.Semantics;
-using KSPCompiler.UseCases.Analysis;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Extensions;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
+using KSPCompiler.Shared;
 
-namespace KSPCompiler.Interactors.Analysis;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis;
 
 public class SemanticAnalysisInteractor : ISemanticAnalysisUseCase
 {

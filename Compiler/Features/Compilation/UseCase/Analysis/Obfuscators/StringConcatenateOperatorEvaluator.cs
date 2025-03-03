@@ -1,9 +1,6 @@
 using System.Text;
 
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.UseCases.Analysis.Evaluations.Operators;
-
-namespace KSPCompiler.Interactors.Analysis.Obfuscators;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators;
 
 public class StringConcatenateOperatorEvaluator : IStringConcatenateOperatorEvaluator
 {

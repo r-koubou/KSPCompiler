@@ -1,13 +1,12 @@
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Domain.Ast.Nodes.Statements;
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Gateways.EventEmitting;
-using KSPCompiler.Interactors.Analysis.Extensions;
-using KSPCompiler.Resources;
-using KSPCompiler.UseCases.Analysis.Evaluations.UserFunctions;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Features.Compilation.Domain.Symbols;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.UserFunctions;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Extensions;
+using KSPCompiler.Shared.EventEmitting;
 
-namespace KSPCompiler.Interactors.Analysis.Semantics;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
 
 public class CallUserFunctionEvaluator( IEventEmitter eventEmitter, AggregateSymbolTable symbolTable )
     : ICallUserFunctionEvaluator

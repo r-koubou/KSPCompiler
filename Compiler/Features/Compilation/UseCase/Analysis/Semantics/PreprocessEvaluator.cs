@@ -1,8 +1,4 @@
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Ast.Nodes.Statements;
-using KSPCompiler.UseCases.Analysis.Evaluations.Preprocessing;
-
-namespace KSPCompiler.Interactors.Analysis.Semantics;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
 
 public class PreprocessEvaluator : IPreprocessEvaluator
 {

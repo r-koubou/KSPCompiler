@@ -1,7 +1,7 @@
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Expressions;
 
-namespace KSPCompiler.Interactors.Analysis.Semantics.Extensions;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics.Extensions;
 
 public static class AstLiteralNodeExtension
 {

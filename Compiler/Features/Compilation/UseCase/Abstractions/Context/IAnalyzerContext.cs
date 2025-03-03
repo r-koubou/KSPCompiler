@@ -1,7 +1,7 @@
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Gateways.EventEmitting;
+using KSPCompiler.Features.Compilation.Domain.Symbols;
+using KSPCompiler.Shared.EventEmitting;
 
-namespace KSPCompiler.UseCases.Analysis.Context;
+namespace KSPCompiler.Features.Compilation.UseCase.Abstractions.Context;
 
 public interface IAnalyzerContext
 {

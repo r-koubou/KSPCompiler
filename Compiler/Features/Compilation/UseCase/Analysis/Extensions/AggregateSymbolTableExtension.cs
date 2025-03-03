@@ -1,6 +1,6 @@
-using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Features.Compilation.Domain.Symbols;
 
-namespace KSPCompiler.Interactors.Analysis.Extensions;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Extensions;
 
 public static class AggregateSymbolTableExtension
 {

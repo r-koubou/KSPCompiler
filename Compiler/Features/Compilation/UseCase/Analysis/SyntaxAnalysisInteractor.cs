@@ -1,10 +1,10 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-using KSPCompiler.Domain;
-using KSPCompiler.UseCases.Analysis;
+using KSPCompiler.Features.Compilation.Domain;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions;
 
-namespace KSPCompiler.Interactors.Analysis;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis;
 
 public class SyntaxAnalysisInteractor : ISyntaxAnalysisUseCase
 {

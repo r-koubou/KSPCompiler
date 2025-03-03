@@ -1,9 +1,9 @@
 using System;
 
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.CompilerMessages;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
+using KSPCompiler.Features.Compilation.Domain.Messages;
 
-namespace KSPCompiler.Interactors.Analysis.Commons.Extensions;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Extensions;
 
 /// <summary>
 /// Extension for <see cref="ICompilerMessageManger"/>

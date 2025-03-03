@@ -1,7 +1,7 @@
-using KSPCompiler.Domain.Symbols.MetaData;
-using KSPCompiler.Domain.Symbols.MetaData.Extensions;
+using KSPCompiler.Features.Compilation.Domain.Symbols.MetaData;
+using KSPCompiler.Features.Compilation.Domain.Symbols.MetaData.Extensions;
 
-namespace KSPCompiler.Interactors.Analysis.Semantics;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
 
 public static class TypeCompatibility
 {

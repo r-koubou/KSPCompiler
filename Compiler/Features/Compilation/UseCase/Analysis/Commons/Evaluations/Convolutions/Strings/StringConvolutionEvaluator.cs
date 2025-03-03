@@ -1,7 +1,7 @@
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Strings;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Convolutions.Strings;
 
-namespace KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Strings;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Convolutions.Strings;
 
 /// <summary>
 /// Evaluating string convolution expressions

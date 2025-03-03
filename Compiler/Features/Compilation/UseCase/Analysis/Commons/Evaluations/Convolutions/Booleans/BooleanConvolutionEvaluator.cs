@@ -1,11 +1,11 @@
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Ast.Nodes.Extensions;
-using KSPCompiler.Domain.Symbols.MetaData.Extensions;
-using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Conditions;
-using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Booleans;
-using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Conditions;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Extensions;
+using KSPCompiler.Features.Compilation.Domain.Symbols.MetaData.Extensions;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Convolutions.Booleans;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Convolutions.Conditions;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Convolutions.Conditions;
 
-namespace KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Booleans;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Convolutions.Booleans;
 
 public class BooleanConvolutionEvaluator : IBooleanConvolutionEvaluator
 {

@@ -1,6 +1,6 @@
-using KSPCompiler.UseCases.Analysis.Obfuscators;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Obfuscators;
 
-namespace KSPCompiler.Interactors.Analysis.Obfuscators;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators;
 
 public sealed class AggregateObfuscatedSymbolTable
 {

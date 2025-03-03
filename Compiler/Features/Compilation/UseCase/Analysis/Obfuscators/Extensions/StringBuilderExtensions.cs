@@ -1,9 +1,9 @@
 using System.Text;
 
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Expressions;
 
-namespace KSPCompiler.Interactors.Analysis.Obfuscators.Extensions;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators.Extensions;
 
 public static class StringBuilderExtensions
 {

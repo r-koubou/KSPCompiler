@@ -1,9 +1,9 @@
 using System;
 
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Reals;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Convolutions.Reals;
 
-namespace KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Reals;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Convolutions.Reals;
 
 /// <summary>
 /// Calculator for convolution operations with unary operators

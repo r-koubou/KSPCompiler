@@ -1,4 +1,4 @@
-namespace KSPCompiler.Interactors.Analysis.Obfuscators;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators;
 
 public static class ObfuscatorConstants
 {

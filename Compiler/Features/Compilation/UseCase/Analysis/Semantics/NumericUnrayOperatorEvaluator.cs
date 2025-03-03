@@ -1,19 +1,6 @@
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Ast.Nodes.Expressions;
-using KSPCompiler.Domain.Ast.Nodes.Extensions;
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Domain.Symbols.MetaData;
-using KSPCompiler.Domain.Symbols.MetaData.Extensions;
-using KSPCompiler.Gateways.EventEmitting;
-using KSPCompiler.Interactors.Analysis.Commons.Evaluations;
-using KSPCompiler.Interactors.Analysis.Extensions;
-using KSPCompiler.Interactors.Analysis.Semantics.Extensions;
-using KSPCompiler.Resources;
-using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Integers;
-using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Reals;
-using KSPCompiler.UseCases.Analysis.Evaluations.Operators;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations;
 
-namespace KSPCompiler.Interactors.Analysis.Semantics;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
 
 public sealed class NumericUnaryOperatorEvaluator(
     IEventEmitter eventEmitter,

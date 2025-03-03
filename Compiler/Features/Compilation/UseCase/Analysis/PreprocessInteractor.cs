@@ -2,11 +2,11 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-using KSPCompiler.Interactors.Analysis.Preprocessing;
-using KSPCompiler.UseCases;
-using KSPCompiler.UseCases.Analysis;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Preprocessing;
+using KSPCompiler.Shared.UseCase;
 
-namespace KSPCompiler.Interactors.Analysis;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis;
 
 public class PreprocessInteractor : IPreprocessUseCase
 {

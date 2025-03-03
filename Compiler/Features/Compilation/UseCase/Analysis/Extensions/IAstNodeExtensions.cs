@@ -1,7 +1,6 @@
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Gateways.EventEmitting;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
 
-namespace KSPCompiler.Interactors.Analysis.Extensions;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Extensions;
 
 public static class IAstNodeExtensions
 {
@@ -20,3 +19,5 @@ public static class IAstNodeExtensions
         return new CompilationWarningEvent( string.Format( message, argv ), self.Position );
     }
 }
+
+internal class CompilationFatalEvent {}

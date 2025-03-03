@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.UseCases.Analysis.Obfuscators;
+using KSPCompiler.Features.Compilation.Domain.Symbols;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Obfuscators;
 
-namespace KSPCompiler.Interactors.Analysis.Obfuscators;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators;
 
 public abstract class ObfuscatedSymbolTable<TSymbol> : IObfuscatedTable<TSymbol> where TSymbol : SymbolBase
 {

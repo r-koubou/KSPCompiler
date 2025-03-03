@@ -1,11 +1,10 @@
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Ast.Nodes.Expressions;
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Gateways.EventEmitting;
-using KSPCompiler.Interactors.Analysis.Extensions;
-using KSPCompiler.Resources;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Features.Compilation.Domain.Symbols;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Extensions;
+using KSPCompiler.Shared.EventEmitting;
 
-namespace KSPCompiler.Interactors.Analysis.Semantics.Extensions;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics.Extensions;
 
 public static class AstExpressionNodeExtension
 {

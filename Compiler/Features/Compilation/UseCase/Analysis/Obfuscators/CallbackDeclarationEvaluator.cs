@@ -1,12 +1,12 @@
 using System.Text;
 
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Interactors.Analysis.Obfuscators.Extensions;
-using KSPCompiler.UseCases.Analysis.Evaluations.Declarations;
-using KSPCompiler.UseCases.Analysis.Obfuscators;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Declarations;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Obfuscators;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators.Extensions;
 
-namespace KSPCompiler.Interactors.Analysis.Obfuscators;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators;
 
 public class CallbackDeclarationEvaluator(
     StringBuilder output,

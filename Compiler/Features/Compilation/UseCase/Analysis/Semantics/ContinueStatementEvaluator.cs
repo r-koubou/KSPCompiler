@@ -1,11 +1,4 @@
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Ast.Nodes.Statements;
-using KSPCompiler.Gateways.EventEmitting;
-using KSPCompiler.Interactors.Analysis.Extensions;
-using KSPCompiler.Resources;
-using KSPCompiler.UseCases.Analysis.Evaluations.Statements;
-
-namespace KSPCompiler.Interactors.Analysis.Semantics;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
 
 public class ContinueStatementEvaluator : IContinueStatementEvaluator
 {

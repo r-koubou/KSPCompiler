@@ -1,8 +1,8 @@
 using System;
 
-using KSPCompiler.Domain.Ast.Nodes;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
 
-namespace KSPCompiler.Interactors.Analysis.Commons.Evaluations;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations;
 
 public class AstAnalyzeException : Exception
 {

@@ -1,24 +1,10 @@
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Gateways.EventEmitting;
-using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Booleans;
-using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Conditions;
-using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Integers;
-using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Reals;
-using KSPCompiler.Interactors.Analysis.Commons.Evaluations.Convolutions.Strings;
-using KSPCompiler.UseCases.Analysis.Context;
-using KSPCompiler.UseCases.Analysis.Evaluations.Commands;
-using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Booleans;
-using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Integers;
-using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Reals;
-using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Strings;
-using KSPCompiler.UseCases.Analysis.Evaluations.Declarations;
-using KSPCompiler.UseCases.Analysis.Evaluations.Operators;
-using KSPCompiler.UseCases.Analysis.Evaluations.Preprocessing;
-using KSPCompiler.UseCases.Analysis.Evaluations.Statements;
-using KSPCompiler.UseCases.Analysis.Evaluations.Symbols;
-using KSPCompiler.UseCases.Analysis.Evaluations.UserFunctions;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Convolutions.Booleans;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Convolutions.Conditions;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Convolutions.Integers;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Convolutions.Reals;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Convolutions.Strings;
 
-namespace KSPCompiler.Interactors.Analysis.Semantics;
+namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
 
 public sealed class SemanticAnalyzerContext : IAnalyzerContext
 {
