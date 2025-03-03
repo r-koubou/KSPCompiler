@@ -1,4 +1,4 @@
-namespace KSPCompiler.Domain.Ast.Nodes.Expressions
+namespace KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Expressions
 {
     /// <summary>
     /// AST node representing a string concatenation operator (&)

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace KSPCompiler.Domain.Ast.Nodes
+namespace KSPCompiler.Features.Compilation.Domain.Ast.Nodes
 {
     /// <summary>
     /// Represents a modifier information node.

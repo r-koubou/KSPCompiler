@@ -1,7 +1,7 @@
-using KSPCompiler.Domain.Symbols.MetaData;
-using KSPCompiler.Domain.Symbols.MetaData.Extensions;
+using KSPCompiler.Features.Compilation.Domain.Symbols.MetaData;
+using KSPCompiler.Features.Compilation.Domain.Symbols.MetaData.Extensions;
 
-namespace KSPCompiler.Domain.Symbols;
+namespace KSPCompiler.Features.Compilation.Domain.Symbols;
 
 public class VariableSymbolTable : SymbolTable<VariableSymbol>, IVariableSymbolTable
 {

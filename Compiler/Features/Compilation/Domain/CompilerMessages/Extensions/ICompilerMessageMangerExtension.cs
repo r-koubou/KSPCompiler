@@ -1,8 +1,8 @@
 using System;
 
-using KSPCompiler.Commons.Text;
+using KSPCompiler.Shared.Text;
 
-namespace KSPCompiler.Domain.CompilerMessages.Extensions;
+namespace KSPCompiler.Features.Compilation.Domain.CompilerMessages.Extensions;
 
 /// <summary>
 /// Extension for <see cref="ICompilerMessageManger"/>
@@ -84,7 +84,7 @@ public static class ICompilerMessageMangerExtension
     /// Alias for <see cref="ICompilerMessageManger.Append(CompilerMessage)"/> with <see cref="CompilerMessageLevel.Info"/>.
     /// </summary>
     /// <remarks>
-    /// Format support version of <see cref="Info(KSPCompiler.Domain.CompilerMessages.ICompilerMessageManger,int,int,string,System.Exception?)"/>.
+    /// Format support version of <see cref="Info(KSPCompiler.Features.Compilation.Domain.CompilerMessages.ICompilerMessageManger,int,int,string,System.Exception?)"/>.
     /// </remarks>
     /// <seealso cref="string.Format(System.IFormatProvider,string,object)"/>
     public static void Info( this ICompilerMessageManger self, int lineNo, int column, string format, params object[] parameters )
@@ -94,7 +94,7 @@ public static class ICompilerMessageMangerExtension
     /// Alias for <see cref="ICompilerMessageManger.Append(CompilerMessage)"/> with <see cref="CompilerMessageLevel.Warning"/>.
     /// </summary>
     /// <remarks>
-    /// Format support version of <see cref="Warning(KSPCompiler.Domain.CompilerMessages.ICompilerMessageManger,int,int,string,System.Exception?)"/>.
+    /// Format support version of <see cref="Warning(KSPCompiler.Features.Compilation.Domain.CompilerMessages.ICompilerMessageManger,int,int,string,System.Exception?)"/>.
     /// </remarks>
     /// <seealso cref="string.Format(System.IFormatProvider,string,object)"/>
     public static void Warning( this ICompilerMessageManger self, int lineNo, int column, string format, params object[] parameters )
@@ -104,7 +104,7 @@ public static class ICompilerMessageMangerExtension
     /// Alias for <see cref="ICompilerMessageManger.Append(CompilerMessage)"/> with <see cref="CompilerMessageLevel.Error"/>.
     /// </summary>
     /// <remarks>
-    /// Format support version of <see cref="Error(KSPCompiler.Domain.CompilerMessages.ICompilerMessageManger,int,int,string,System.Exception?)"/>.
+    /// Format support version of <see cref="Error(KSPCompiler.Features.Compilation.Domain.CompilerMessages.ICompilerMessageManger,int,int,string,System.Exception?)"/>.
     /// </remarks>
     /// <seealso cref="string.Format(System.IFormatProvider,string,object)"/>
     public static void Error( this ICompilerMessageManger self, int lineNo, int column, string format, params object[] parameters )
@@ -114,7 +114,7 @@ public static class ICompilerMessageMangerExtension
     /// Alias for <see cref="ICompilerMessageManger.Append(CompilerMessage)"/> with <see cref="CompilerMessageLevel.Fatal"/>.
     /// </summary>
     /// <remarks>
-    /// Format support version of <see cref="Fatal(KSPCompiler.Domain.CompilerMessages.ICompilerMessageManger,int,int,string,System.Exception?)"/>.
+    /// Format support version of <see cref="Fatal(KSPCompiler.Features.Compilation.Domain.CompilerMessages.ICompilerMessageManger,int,int,string,System.Exception?)"/>.
     /// </remarks>
     /// <seealso cref="string.Format(System.IFormatProvider,string,object)"/>
     public static void Fatal( this ICompilerMessageManger self, int lineNo, int column, string format, params object[] parameters )
@@ -128,7 +128,7 @@ public static class ICompilerMessageMangerExtension
     /// Alias for <see cref="ICompilerMessageManger.Append(CompilerMessage)"/> with <see cref="CompilerMessageLevel.Info"/>.
     /// </summary>
     /// <remarks>
-    /// Format support version of <see cref="Info(KSPCompiler.Domain.CompilerMessages.ICompilerMessageManger,int,int,string,System.Exception?)"/>.
+    /// Format support version of <see cref="Info(KSPCompiler.Features.Compilation.Domain.CompilerMessages.ICompilerMessageManger,int,int,string,System.Exception?)"/>.
     /// </remarks>
     /// <seealso cref="string.Format(System.IFormatProvider,string,object)"/>
     public static void Info( this ICompilerMessageManger self, Position position, string format, params object[] parameters )
@@ -138,7 +138,7 @@ public static class ICompilerMessageMangerExtension
     /// Alias for <see cref="ICompilerMessageManger.Append(CompilerMessage)"/> with <see cref="CompilerMessageLevel.Warning"/>.
     /// </summary>
     /// <remarks>
-    /// Format support version of <see cref="Warning(KSPCompiler.Domain.CompilerMessages.ICompilerMessageManger,int,int,string,System.Exception?)"/>.
+    /// Format support version of <see cref="Warning(KSPCompiler.Features.Compilation.Domain.CompilerMessages.ICompilerMessageManger,int,int,string,System.Exception?)"/>.
     /// </remarks>
     /// <seealso cref="string.Format(System.IFormatProvider,string,object)"/>
     public static void Warning( this ICompilerMessageManger self, Position position, string format, params object[] parameters )
@@ -148,7 +148,7 @@ public static class ICompilerMessageMangerExtension
     /// Alias for <see cref="ICompilerMessageManger.Append(CompilerMessage)"/> with <see cref="CompilerMessageLevel.Error"/>.
     /// </summary>
     /// <remarks>
-    /// Format support version of <see cref="Error(KSPCompiler.Domain.CompilerMessages.ICompilerMessageManger,int,int,string,System.Exception?)"/>.
+    /// Format support version of <see cref="Error(KSPCompiler.Features.Compilation.Domain.CompilerMessages.ICompilerMessageManger,int,int,string,System.Exception?)"/>.
     /// </remarks>
     /// <seealso cref="string.Format(System.IFormatProvider,string,object)"/>
     public static void Error( this ICompilerMessageManger self, Position position, string format, params object[] parameters )
@@ -158,7 +158,7 @@ public static class ICompilerMessageMangerExtension
     /// Alias for <see cref="ICompilerMessageManger.Append(CompilerMessage)"/> with <see cref="CompilerMessageLevel.Fatal"/>.
     /// </summary>
     /// <remarks>
-    /// Format support version of <see cref="Fatal(KSPCompiler.Domain.CompilerMessages.ICompilerMessageManger,int,int,string,System.Exception?)"/>.
+    /// Format support version of <see cref="Fatal(KSPCompiler.Features.Compilation.Domain.CompilerMessages.ICompilerMessageManger,int,int,string,System.Exception?)"/>.
     /// </remarks>
     /// <seealso cref="string.Format(System.IFormatProvider,string,object)"/>
     public static void Fatal( this ICompilerMessageManger self, Position position, string format, params object[] parameters )

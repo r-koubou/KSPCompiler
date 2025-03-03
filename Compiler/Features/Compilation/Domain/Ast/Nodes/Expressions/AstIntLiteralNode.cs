@@ -1,6 +1,6 @@
-using KSPCompiler.Domain.Symbols.MetaData;
+using KSPCompiler.Features.Compilation.Domain.Symbols.MetaData;
 
-namespace KSPCompiler.Domain.Ast.Nodes.Expressions
+namespace KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Expressions
 {
     /// <summary>
     /// AST node representing an integer literal

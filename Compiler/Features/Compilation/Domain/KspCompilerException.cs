@@ -1,6 +1,6 @@
 using System;
 
-namespace KSPCompiler.Domain;
+namespace KSPCompiler.Features.Compilation.Domain;
 
 public abstract class KspCompilerException : Exception
 {

@@ -1,8 +1,8 @@
 using System;
 
-using KSPCompiler.Commons.Text;
+using KSPCompiler.Shared.Text;
 
-namespace KSPCompiler.Domain.CompilerMessages;
+namespace KSPCompiler.Features.Compilation.Domain.CompilerMessages;
 
 /// <summary>
 /// Represents the message data per case.

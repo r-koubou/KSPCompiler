@@ -1,6 +1,6 @@
-using KSPCompiler.Domain.Symbols.MetaData.Extensions;
+using KSPCompiler.Features.Compilation.Domain.Symbols.MetaData.Extensions;
 
-namespace KSPCompiler.Domain.Symbols.Extensions;
+namespace KSPCompiler.Features.Compilation.Domain.Symbols.Extensions;
 
 public static class SymbolBaseExtension
 {

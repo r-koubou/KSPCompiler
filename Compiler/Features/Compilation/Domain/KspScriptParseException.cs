@@ -1,4 +1,4 @@
-namespace KSPCompiler.Domain;
+namespace KSPCompiler.Features.Compilation.Domain;
 
 public class KspScriptParseException : KspCompilerException
 {

@@ -1,4 +1,4 @@
-﻿namespace KSPCompiler.Domain.Symbols
+﻿namespace KSPCompiler.Features.Compilation.Domain.Symbols
 {
     /// <summary>
     /// Represents the state of a symbol for evaluation in analysis.

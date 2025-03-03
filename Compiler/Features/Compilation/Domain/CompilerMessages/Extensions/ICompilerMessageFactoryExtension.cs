@@ -1,8 +1,8 @@
 using System;
 
-using KSPCompiler.Commons.Text;
+using KSPCompiler.Shared.Text;
 
-namespace KSPCompiler.Domain.CompilerMessages.Extensions;
+namespace KSPCompiler.Features.Compilation.Domain.CompilerMessages.Extensions;
 
 /// <summary>
 /// Extension for <see cref="ICompilerMessageFactory"/>
@@ -12,31 +12,31 @@ public static class ICompilerMessageFactoryExtension
 {
     #region Alias with specific line and column
     /// <summary>
-    /// Alias for <see cref="ICompilerMessageFactory.Create(KSPCompiler.Domain.CompilerMessages.CompilerMessageLevel,KSPCompiler.Commons.Text.Position,string,System.Exception?)"/>.
+    /// Alias for <see cref="ICompilerMessageFactory.Create(CompilerMessageLevel,Position,string,System.Exception?)"/>.
     /// </summary>
     private static CompilerMessage Create( this ICompilerMessageFactory self, CompilerMessageLevel level, int lineNo, int column, string message, Exception? exception = null )
         => self.Create( level, lineNo, column, message, exception );
 
     /// <summary>
-    /// Alias for <see cref="ICompilerMessageFactory.Create(KSPCompiler.Domain.CompilerMessages.CompilerMessageLevel,KSPCompiler.Commons.Text.Position,string,System.Exception?)"/> with <see cref="CompilerMessageLevel.Info"/>.
+    /// Alias for <see cref="ICompilerMessageFactory.Create(CompilerMessageLevel,Position,string,System.Exception?)"/> with <see cref="CompilerMessageLevel.Info"/>.
     /// </summary>
     public static CompilerMessage Info( this ICompilerMessageFactory self, int lineNo, int column, string message, Exception? exception = null )
         => Create( self, CompilerMessageLevel.Info, lineNo, column, message, exception );
 
     /// <summary>
-    /// Alias for <see cref="ICompilerMessageFactory.Create(KSPCompiler.Domain.CompilerMessages.CompilerMessageLevel,KSPCompiler.Commons.Text.Position,string,System.Exception?)"/> with <see cref="CompilerMessageLevel.Warning"/>.
+    /// Alias for <see cref="ICompilerMessageFactory.Create(CompilerMessageLevel,Position,string,System.Exception?)"/> with <see cref="CompilerMessageLevel.Warning"/>.
     /// </summary>
     public static CompilerMessage Warning( this ICompilerMessageFactory self, int lineNo, int column, string message, Exception? exception = null )
         => Create( self, CompilerMessageLevel.Warning, lineNo, column, message, exception );
 
     /// <summary>
-    /// Alias for <see cref="ICompilerMessageFactory.Create(KSPCompiler.Domain.CompilerMessages.CompilerMessageLevel,KSPCompiler.Commons.Text.Position,string,System.Exception?)"/> with <see cref="CompilerMessageLevel.Error"/>.
+    /// Alias for <see cref="ICompilerMessageFactory.Create(CompilerMessageLevel,Position,string,System.Exception?)"/> with <see cref="CompilerMessageLevel.Error"/>.
     /// </summary>
     public static CompilerMessage Error( this ICompilerMessageFactory self, int lineNo, int column, string message, Exception? exception = null )
         => Create( self, CompilerMessageLevel.Error, lineNo, column, message, exception );
 
     /// <summary>
-    /// Alias for <see cref="ICompilerMessageFactory.Create(KSPCompiler.Domain.CompilerMessages.CompilerMessageLevel,KSPCompiler.Commons.Text.Position,string,System.Exception?)"/> with <see cref="CompilerMessageLevel.Fatal"/>.
+    /// Alias for <see cref="ICompilerMessageFactory.Create(CompilerMessageLevel,Position,string,System.Exception?)"/> with <see cref="CompilerMessageLevel.Fatal"/>.
     /// </summary>
     public static CompilerMessage Fatal( this ICompilerMessageFactory self, int lineNo, int column, string message, Exception? exception = null )
         => Create( self, CompilerMessageLevel.Fatal, lineNo, column, message, exception );
@@ -46,31 +46,31 @@ public static class ICompilerMessageFactoryExtension
     #region Alias with specific posision
 
     /// <summary>
-    /// Alias for <see cref="ICompilerMessageFactory.Create(KSPCompiler.Domain.CompilerMessages.CompilerMessageLevel,KSPCompiler.Commons.Text.Position,string,System.Exception?)"/>.
+    /// Alias for <see cref="ICompilerMessageFactory.Create(CompilerMessageLevel,Position,string,System.Exception?)"/>.
     /// </summary>
     private static CompilerMessage Create( this ICompilerMessageFactory self, CompilerMessageLevel level, Position position, string message, Exception? exception = null )
         => self.Create( level, position, message, exception );
 
     /// <summary>
-    /// Alias for <see cref="ICompilerMessageFactory.Create(KSPCompiler.Domain.CompilerMessages.CompilerMessageLevel,KSPCompiler.Commons.Text.Position,string,System.Exception?)"/> with <see cref="CompilerMessageLevel.Info"/>.
+    /// Alias for <see cref="ICompilerMessageFactory.Create(CompilerMessageLevel,Position,string,System.Exception?)"/> with <see cref="CompilerMessageLevel.Info"/>.
     /// </summary>
     public static CompilerMessage Info( this ICompilerMessageFactory self, Position position, string message, Exception? exception = null )
         => Create( self, CompilerMessageLevel.Info, position, message, exception );
 
     /// <summary>
-    /// Alias for <see cref="ICompilerMessageFactory.Create(KSPCompiler.Domain.CompilerMessages.CompilerMessageLevel,KSPCompiler.Commons.Text.Position,string,System.Exception?)"/> with <see cref="CompilerMessageLevel.Warning"/>.
+    /// Alias for <see cref="ICompilerMessageFactory.Create(CompilerMessageLevel,Position,string,System.Exception?)"/> with <see cref="CompilerMessageLevel.Warning"/>.
     /// </summary>
     public static CompilerMessage Warning( this ICompilerMessageFactory self, Position position, string message, Exception? exception = null )
         => Create( self, CompilerMessageLevel.Warning, position, message, exception );
 
     /// <summary>
-    /// Alias for <see cref="ICompilerMessageFactory.Create(KSPCompiler.Domain.CompilerMessages.CompilerMessageLevel,KSPCompiler.Commons.Text.Position,string,System.Exception?)"/> with <see cref="CompilerMessageLevel.Error"/>.
+    /// Alias for <see cref="ICompilerMessageFactory.Create(CompilerMessageLevel,Position,string,System.Exception?)"/> with <see cref="CompilerMessageLevel.Error"/>.
     /// </summary>
     public static CompilerMessage Error( this ICompilerMessageFactory self, Position position, string message, Exception? exception = null )
         => Create( self, CompilerMessageLevel.Error, position, message, exception );
 
     /// <summary>
-    /// Alias for <see cref="ICompilerMessageFactory.Create(KSPCompiler.Domain.CompilerMessages.CompilerMessageLevel,KSPCompiler.Commons.Text.Position,string,System.Exception?)"/> with <see cref="CompilerMessageLevel.Fatal"/>.
+    /// Alias for <see cref="ICompilerMessageFactory.Create(CompilerMessageLevel,Position,string,System.Exception?)"/> with <see cref="CompilerMessageLevel.Fatal"/>.
     /// </summary>
     public static CompilerMessage Fatal( this ICompilerMessageFactory self, Position position, string message, Exception? exception = null )
         => Create( self, CompilerMessageLevel.Fatal, position, message, exception );
@@ -81,40 +81,40 @@ public static class ICompilerMessageFactoryExtension
     #region Alias with specific line and column / Format Support
 
     /// <summary>
-    /// Alias for <see cref="ICompilerMessageFactory.Create(KSPCompiler.Domain.CompilerMessages.CompilerMessageLevel,KSPCompiler.Commons.Text.Position,string,System.Exception?)"/> with <see cref="CompilerMessageLevel.Info"/>.
+    /// Alias for <see cref="ICompilerMessageFactory.Create(CompilerMessageLevel,Position,string,System.Exception?)"/> with <see cref="CompilerMessageLevel.Info"/>.
     /// </summary>
     /// <remarks>
-    /// Format support version of <see cref="Info(KSPCompiler.Domain.CompilerMessages.ICompilerMessageFactory,int,int,string,System.Exception?)"/>
+    /// Format support version of <see cref="Info(ICompilerMessageFactory,int,int,string,System.Exception?)"/>
     /// </remarks>
     /// <seealso cref="string.Format(System.IFormatProvider,string,object)"/>
     public static CompilerMessage Info( this ICompilerMessageFactory self, int lineNo, int column, string message, params object[] parameters )
         => Create( self, CompilerMessageLevel.Info, lineNo, column, string.Format( message, parameters ) );
 
     /// <summary>
-    /// Alias for <see cref="ICompilerMessageFactory.Create(KSPCompiler.Domain.CompilerMessages.CompilerMessageLevel,KSPCompiler.Commons.Text.Position,string,System.Exception?)"/> with <see cref="CompilerMessageLevel.Warning"/>.
+    /// Alias for <see cref="ICompilerMessageFactory.Create(CompilerMessageLevel,Position,string,System.Exception?)"/> with <see cref="CompilerMessageLevel.Warning"/>.
     /// </summary>
     /// <remarks>
-    /// Format support version of <see cref="Warning(KSPCompiler.Domain.CompilerMessages.ICompilerMessageFactory,int,int,string,System.Exception?)"/>
+    /// Format support version of <see cref="Warning(ICompilerMessageFactory,int,int,string,System.Exception?)"/>
     /// </remarks>
     /// <seealso cref="string.Format(System.IFormatProvider,string,object)"/>
     public static CompilerMessage Warning( this ICompilerMessageFactory self, int lineNo, int column, string message, params object[] parameters )
         => Create( self, CompilerMessageLevel.Warning, lineNo, column, string.Format( message, parameters ) );
 
     /// <summary>
-    /// Alias for <see cref="ICompilerMessageFactory.Create(KSPCompiler.Domain.CompilerMessages.CompilerMessageLevel,KSPCompiler.Commons.Text.Position,string,System.Exception?)"/> with <see cref="CompilerMessageLevel.Error"/>.
+    /// Alias for <see cref="ICompilerMessageFactory.Create(CompilerMessageLevel,Position,string,System.Exception?)"/> with <see cref="CompilerMessageLevel.Error"/>.
     /// </summary>
     /// <remarks>
-    /// Format support version of <see cref="Error(KSPCompiler.Domain.CompilerMessages.ICompilerMessageFactory,int,int,string,System.Exception?)"/>
+    /// Format support version of <see cref="Error(ICompilerMessageFactory,int,int,string,System.Exception?)"/>
     /// </remarks>
     /// <seealso cref="string.Format(System.IFormatProvider,string,object)"/>
     public static CompilerMessage Error( this ICompilerMessageFactory self, int lineNo, int column, string message, params object[] parameters )
         => Create( self, CompilerMessageLevel.Error, lineNo, column, string.Format( message, parameters ) );
 
     /// <summary>
-    /// Alias for <see cref="ICompilerMessageFactory.Create(KSPCompiler.Domain.CompilerMessages.CompilerMessageLevel,KSPCompiler.Commons.Text.Position,string,System.Exception?)"/> with <see cref="CompilerMessageLevel.Fatal"/>.
+    /// Alias for <see cref="ICompilerMessageFactory.Create(CompilerMessageLevel,Position,string,System.Exception?)"/> with <see cref="CompilerMessageLevel.Fatal"/>.
     /// </summary>
     /// <remarks>
-    /// Format support version of <see cref="Fatal(KSPCompiler.Domain.CompilerMessages.ICompilerMessageFactory,int,int,string,System.Exception?)"/>
+    /// Format support version of <see cref="Fatal(ICompilerMessageFactory,int,int,string,System.Exception?)"/>
     /// </remarks>
     /// <seealso cref="string.Format(System.IFormatProvider,string,object)"/>
     public static CompilerMessage Fatal( this ICompilerMessageFactory self, int lineNo, int column, string message, params object[] parameters )

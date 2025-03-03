@@ -1,7 +1,7 @@
-using KSPCompiler.Domain.Ast.Nodes.Expressions;
-using KSPCompiler.Domain.Symbols.MetaData;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Features.Compilation.Domain.Symbols.MetaData;
 
-namespace KSPCompiler.Domain.Ast.Nodes.Statements
+namespace KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Statements
 {
     /// <summary>
     /// AST node representing a KSP Preprocessor: RESET_CONDITION

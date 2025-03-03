@@ -1,6 +1,6 @@
-using KSPCompiler.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Expressions;
 
-namespace KSPCompiler.Domain.Ast.Nodes.Statements
+namespace KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Statements
 {
     /// <summary>
     /// Ast node representing a primitive variable initialization

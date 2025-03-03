@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace KSPCompiler.Domain.Symbols.MetaData;
+namespace KSPCompiler.Features.Compilation.Domain.Symbols.MetaData;
 
 public static class DataTypeUtility
 {

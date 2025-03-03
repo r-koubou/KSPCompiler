@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-namespace KSPCompiler.Domain.Symbols.MetaData.Extensions;
+namespace KSPCompiler.Features.Compilation.Domain.Symbols.MetaData.Extensions;
 
 [SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" )]
 public static class DataTypeFlagExtension

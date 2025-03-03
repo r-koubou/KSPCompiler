@@ -1,6 +1,6 @@
-using KSPCompiler.Commons.ValueObjects;
+using KSPCompiler.Shared.ValueObjects;
 
-namespace KSPCompiler.Domain.Symbols;
+namespace KSPCompiler.Features.Compilation.Domain.Symbols;
 
 public record SymbolName( string Value ) : StringValueObject( Value )
 {

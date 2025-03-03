@@ -1,4 +1,4 @@
-namespace KSPCompiler.Domain.CompilerMessages;
+namespace KSPCompiler.Features.Compilation.Domain.CompilerMessages;
 
 /// <summary>
 /// The event handler in <see cref="ICompilerMessageManger"/> processes the message.

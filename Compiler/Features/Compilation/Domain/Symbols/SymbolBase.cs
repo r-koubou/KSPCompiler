@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 
-using KSPCompiler.Commons.Text;
-using KSPCompiler.Domain.Symbols.MetaData;
+using KSPCompiler.Features.Compilation.Domain.Symbols.MetaData;
+using KSPCompiler.Shared.Text;
 
-namespace KSPCompiler.Domain.Symbols;
+namespace KSPCompiler.Features.Compilation.Domain.Symbols;
 
 /// <summary>
 /// Represents a symbol in the symbol table.

@@ -1,6 +1,6 @@
 using System;
 
-namespace KSPCompiler.Domain.Ast;
+namespace KSPCompiler.Features.Compilation.Domain.Ast;
 
 /// <summary>
 /// Exception thrown if the expected node is not found when searching for the parent AST node.

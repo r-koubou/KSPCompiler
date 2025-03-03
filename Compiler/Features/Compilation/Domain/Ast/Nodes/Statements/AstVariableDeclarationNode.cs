@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-using KSPCompiler.Commons.Text;
+using KSPCompiler.Shared.Text;
 
-namespace KSPCompiler.Domain.Ast.Nodes.Statements
+namespace KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Statements
 {
     /// <summary>
     /// AST node representing a variable declaration

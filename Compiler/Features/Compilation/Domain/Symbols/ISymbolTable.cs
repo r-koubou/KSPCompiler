@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace KSPCompiler.Domain.Symbols;
+namespace KSPCompiler.Features.Compilation.Domain.Symbols;
 
 // ReSharper disable UnusedMemberInSuper.Global
 // ReSharper disable UnusedMember.Global

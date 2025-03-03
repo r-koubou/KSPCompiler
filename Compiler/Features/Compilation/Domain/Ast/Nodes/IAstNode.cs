@@ -1,8 +1,8 @@
 using System.IO;
 
-using KSPCompiler.Commons.Text;
+using KSPCompiler.Shared.Text;
 
-namespace KSPCompiler.Domain.Ast.Nodes
+namespace KSPCompiler.Features.Compilation.Domain.Ast.Nodes
 {
     /// <summary>
     /// Representation of AST node tree.

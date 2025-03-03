@@ -1,7 +1,7 @@
-using KSPCompiler.Commons.Text;
-using KSPCompiler.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Shared.Text;
 
-namespace KSPCompiler.Domain.Ast.Nodes.Statements;
+namespace KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Statements;
 
 public sealed class NullAstArrayInitializerNode : AstArrayInitializerNode
 {

@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 
-using KSPCompiler.Commons.Text;
-using KSPCompiler.Domain.Symbols.MetaData;
+using KSPCompiler.Features.Compilation.Domain.Symbols.MetaData;
+using KSPCompiler.Shared.Text;
 
-namespace KSPCompiler.Domain.Symbols;
+namespace KSPCompiler.Features.Compilation.Domain.Symbols;
 
 public sealed class CallbackSymbol( bool allowMultipleDeclaration ) : SymbolBase, ICloneable
 {

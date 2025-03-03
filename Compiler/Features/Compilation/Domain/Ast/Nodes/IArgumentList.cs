@@ -1,6 +1,6 @@
-﻿using KSPCompiler.Domain.Ast.Nodes.Blocks;
+﻿using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Blocks;
 
-namespace KSPCompiler.Domain.Ast.Nodes
+namespace KSPCompiler.Features.Compilation.Domain.Ast.Nodes
 {
     /// <summary>
     /// Declaration of nodes containing arguments.

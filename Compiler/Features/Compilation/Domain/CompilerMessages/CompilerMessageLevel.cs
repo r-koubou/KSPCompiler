@@ -1,4 +1,4 @@
-namespace KSPCompiler.Domain.CompilerMessages;
+namespace KSPCompiler.Features.Compilation.Domain.CompilerMessages;
 
 /// <summary>
 /// Defines the level of the message.

@@ -1,4 +1,4 @@
-namespace KSPCompiler.Domain.Ast.Nodes.Blocks
+namespace KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Blocks
 {
     /// <summary>
     /// Ast node representing a case block in the select statement

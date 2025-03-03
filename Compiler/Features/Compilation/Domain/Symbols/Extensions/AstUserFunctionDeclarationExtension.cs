@@ -1,6 +1,6 @@
-using KSPCompiler.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Blocks;
 
-namespace KSPCompiler.Domain.Symbols.Extensions;
+namespace KSPCompiler.Features.Compilation.Domain.Symbols.Extensions;
 
 public static class AstUserFunctionDeclarationExtension
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KSPCompiler.Domain.Symbols.MetaData;
+namespace KSPCompiler.Features.Compilation.Domain.Symbols.MetaData;
 
 /// <summary>
 /// Representation of data type identifiers.

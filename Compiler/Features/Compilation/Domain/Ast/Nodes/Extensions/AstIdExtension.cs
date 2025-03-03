@@ -1,4 +1,4 @@
-namespace KSPCompiler.Domain.Ast.Nodes.Extensions;
+namespace KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Extensions;
 
 public static class AstIdExtension
 {

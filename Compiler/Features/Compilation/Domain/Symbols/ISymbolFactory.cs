@@ -1,6 +1,6 @@
-using KSPCompiler.Domain.Ast.Nodes;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
 
-namespace KSPCompiler.Domain.Symbols;
+namespace KSPCompiler.Features.Compilation.Domain.Symbols;
 
 public interface ISymbolFactory<in TAstNode, out TSymbol>
     where TAstNode: AstNode

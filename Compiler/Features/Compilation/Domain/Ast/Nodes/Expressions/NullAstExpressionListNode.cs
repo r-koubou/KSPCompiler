@@ -1,4 +1,4 @@
-namespace KSPCompiler.Domain.Ast.Nodes.Expressions;
+namespace KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Expressions;
 
 public sealed class NullAstExpressionListNode : AstExpressionListNode
 {

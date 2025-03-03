@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace KSPCompiler.Domain.CompilerMessages;
+namespace KSPCompiler.Features.Compilation.Domain.CompilerMessages;
 
 /// <summary>
 /// Base interface for compiler message management during compilation.

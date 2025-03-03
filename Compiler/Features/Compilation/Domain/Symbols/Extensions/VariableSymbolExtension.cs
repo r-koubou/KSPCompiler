@@ -1,4 +1,4 @@
-namespace KSPCompiler.Domain.Symbols.Extensions;
+namespace KSPCompiler.Features.Compilation.Domain.Symbols.Extensions;
 
 /// <summary>
 /// Extension for <see cref="VariableSymbol"/>

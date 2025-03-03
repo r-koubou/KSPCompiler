@@ -1,4 +1,4 @@
-namespace KSPCompiler.Domain.Ast.Nodes
+namespace KSPCompiler.Features.Compilation.Domain.Ast.Nodes
 {
     public enum AstNodeId
     {

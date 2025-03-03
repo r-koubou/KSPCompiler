@@ -1,4 +1,4 @@
-﻿namespace KSPCompiler.Domain.Symbols
+﻿namespace KSPCompiler.Features.Compilation.Domain.Symbols
 {
     /// <summary>
     /// Definition of a constant values.

@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace KSPCompiler.Domain.Symbols.MetaData;
+namespace KSPCompiler.Features.Compilation.Domain.Symbols.MetaData;
 
 public static class DataTypeFlagUtility
 {

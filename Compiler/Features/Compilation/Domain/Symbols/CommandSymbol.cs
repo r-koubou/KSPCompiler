@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 
-using KSPCompiler.Domain.Symbols.MetaData;
+using KSPCompiler.Features.Compilation.Domain.Symbols.MetaData;
 
-namespace KSPCompiler.Domain.Symbols;
+namespace KSPCompiler.Features.Compilation.Domain.Symbols;
 
 public sealed class CommandSymbol : SymbolBase, ISymbolDataTypeProvider
 {

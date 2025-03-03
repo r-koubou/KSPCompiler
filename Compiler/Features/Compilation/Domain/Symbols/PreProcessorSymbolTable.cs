@@ -1,4 +1,4 @@
-namespace KSPCompiler.Domain.Symbols;
+namespace KSPCompiler.Features.Compilation.Domain.Symbols;
 
 public class PreProcessorSymbolTable : SymbolTable<PreProcessorSymbol>, IPreProcessorSymbolTable
 {

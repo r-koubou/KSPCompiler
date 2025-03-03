@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace KSPCompiler.Domain.Symbols
+namespace KSPCompiler.Features.Compilation.Domain.Symbols
 {
     /// <summary>
     /// Definitions of regular expressions used in AST analysis in general.
