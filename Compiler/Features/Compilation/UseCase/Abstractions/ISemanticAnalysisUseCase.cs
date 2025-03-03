@@ -1,10 +1,11 @@
 using System;
 
-using KSPCompiler.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Gateways.EventEmitting;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Features.Compilation.Domain.Symbols;
+using KSPCompiler.Shared.EventEmitting;
+using KSPCompiler.Shared.UseCase;
 
-namespace KSPCompiler.UseCases.Analysis;
+namespace KSPCompiler.Features.Compilation.UseCase.Abstractions;
 
 public sealed class SemanticAnalysisInputDataDetail(
     IEventEmitter eventEmitter,

@@ -1,12 +1,12 @@
-using KSPCompiler.UseCases.Analysis.Evaluations.Commands;
-using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Booleans;
-using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Integers;
-using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Reals;
-using KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Strings;
-using KSPCompiler.UseCases.Analysis.Evaluations.Operators;
-using KSPCompiler.UseCases.Analysis.Evaluations.Symbols;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Commands;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Convolutions.Booleans;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Convolutions.Integers;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Convolutions.Reals;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Convolutions.Strings;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Operators;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Symbols;
 
-namespace KSPCompiler.UseCases.Analysis.Context;
+namespace KSPCompiler.Features.Compilation.UseCase.Abstractions.Context;
 
 public interface IExpressionEvaluatorContext
 {

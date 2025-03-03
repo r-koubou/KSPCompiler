@@ -1,7 +1,7 @@
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Statements;
 
-namespace KSPCompiler.UseCases.Analysis.Evaluations.Preprocessing;
+namespace KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Preprocessing;
 
 public interface IPreprocessEvaluator
 {

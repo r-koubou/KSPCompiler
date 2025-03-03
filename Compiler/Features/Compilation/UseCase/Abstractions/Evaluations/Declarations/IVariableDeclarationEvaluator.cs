@@ -1,5 +1,5 @@
-using KSPCompiler.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Statements;
 
-namespace KSPCompiler.UseCases.Analysis.Evaluations.Declarations;
+namespace KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Declarations;
 
 public interface IVariableDeclarationEvaluator : IDeclarationEvaluator<AstVariableDeclarationNode> {}

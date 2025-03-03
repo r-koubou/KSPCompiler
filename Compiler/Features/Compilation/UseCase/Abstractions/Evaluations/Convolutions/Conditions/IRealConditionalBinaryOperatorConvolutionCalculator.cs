@@ -1,4 +1,4 @@
-namespace KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Conditions;
+namespace KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Convolutions.Conditions;
 
 /// <summary>
 /// Calculator for convolution operations with conditional operators (real)

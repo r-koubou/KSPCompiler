@@ -1,4 +1,4 @@
-namespace KSPCompiler.UseCases.Analysis.Evaluations.Convolutions;
+namespace KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Convolutions;
 
 /// <summary>
 /// Calculator for convolution operations with constant/literal for struct (primitive) types

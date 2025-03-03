@@ -1,6 +1,6 @@
-using KSPCompiler.UseCases.Analysis.Evaluations.Declarations;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Declarations;
 
-namespace KSPCompiler.UseCases.Analysis.Context;
+namespace KSPCompiler.Features.Compilation.UseCase.Abstractions.Context;
 
 public interface IDeclarationEvaluationContext
 {

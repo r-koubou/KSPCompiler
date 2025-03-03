@@ -1,6 +1,4 @@
-using KSPCompiler.Commons;
-
-namespace KSPCompiler.UseCases;
+namespace KSPCompiler.Shared.UseCase;
 
 public class InputPort;
 

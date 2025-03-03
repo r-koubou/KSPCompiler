@@ -1,7 +1,7 @@
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Statements;
 
-namespace KSPCompiler.UseCases.Analysis.Evaluations.UserFunctions;
+namespace KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.UserFunctions;
 
 public interface ICallUserFunctionEvaluator
 {

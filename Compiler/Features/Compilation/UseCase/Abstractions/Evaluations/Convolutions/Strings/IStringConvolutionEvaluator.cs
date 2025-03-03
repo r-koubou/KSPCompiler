@@ -1,4 +1,4 @@
-namespace KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Strings;
+namespace KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Convolutions.Strings;
 
 /// <summary>
 /// Interface for evaluating convolution expressions for string.

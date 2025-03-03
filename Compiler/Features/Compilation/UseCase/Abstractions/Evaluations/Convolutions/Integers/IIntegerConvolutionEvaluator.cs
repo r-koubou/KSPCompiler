@@ -1,4 +1,4 @@
-namespace KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Integers;
+namespace KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Convolutions.Integers;
 
 /// <summary>
 /// Interface for evaluating convolution expressions for integer.

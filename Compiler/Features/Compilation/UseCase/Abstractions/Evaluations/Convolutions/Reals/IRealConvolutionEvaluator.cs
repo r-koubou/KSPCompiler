@@ -1,4 +1,4 @@
-namespace KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Reals;
+namespace KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Convolutions.Reals;
 
 /// <summary>
 /// Interface for evaluating convolution expressions (real)

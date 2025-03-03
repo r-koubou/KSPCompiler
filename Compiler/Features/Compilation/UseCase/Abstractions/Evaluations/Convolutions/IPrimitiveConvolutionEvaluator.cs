@@ -1,6 +1,6 @@
-using KSPCompiler.Domain.Ast.Nodes;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
 
-namespace KSPCompiler.UseCases.Analysis.Evaluations.Convolutions;
+namespace KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Convolutions;
 
 /// <summary>
 /// Interface for evaluating convolution expressions for struct (primitive) types

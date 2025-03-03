@@ -1,3 +1,3 @@
-namespace KSPCompiler.UseCases.Analysis.Evaluations.Convolutions.Booleans;
+namespace KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Convolutions.Booleans;
 
 public interface IBooleanConvolutionEvaluator : IPrimitiveConvolutionEvaluator<bool> {}

@@ -1,7 +1,7 @@
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Expressions;
 
-namespace KSPCompiler.UseCases.Analysis.Evaluations.Symbols;
+namespace KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Symbols;
 
 public interface ISymbolEvaluator
 {

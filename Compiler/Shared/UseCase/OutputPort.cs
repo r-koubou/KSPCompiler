@@ -1,8 +1,6 @@
 using System;
 
-using KSPCompiler.Commons;
-
-namespace KSPCompiler.UseCases;
+namespace KSPCompiler.Shared.UseCase;
 
 public abstract class OutputPort( bool result, Exception? error = null )
 {

@@ -1,6 +1,6 @@
-using KSPCompiler.Domain.Ast.Nodes;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
 
-namespace KSPCompiler.UseCases.Analysis.Evaluations.Operators;
+namespace KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Operators;
 
 public interface IOperatorEvaluator
 {

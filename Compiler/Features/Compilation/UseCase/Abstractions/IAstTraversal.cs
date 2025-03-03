@@ -1,6 +1,6 @@
-using KSPCompiler.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Blocks;
 
-namespace KSPCompiler.UseCases.Analysis;
+namespace KSPCompiler.Features.Compilation.UseCase.Abstractions;
 
 public interface IAstTraversal
 {

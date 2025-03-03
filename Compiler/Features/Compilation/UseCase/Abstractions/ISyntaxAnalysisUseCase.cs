@@ -1,9 +1,10 @@
 using System;
 
-using KSPCompiler.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Gateways.Parsers;
+using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Features.Compilation.Gateways.Parsers;
+using KSPCompiler.Shared.UseCase;
 
-namespace KSPCompiler.UseCases.Analysis;
+namespace KSPCompiler.Features.Compilation.UseCase.Abstractions;
 
 public class SyntaxAnalysisInputData(
     ISyntaxParser inputInput

@@ -1,8 +1,8 @@
-using KSPCompiler.UseCases.Analysis.Evaluations.Preprocessing;
-using KSPCompiler.UseCases.Analysis.Evaluations.Statements;
-using KSPCompiler.UseCases.Analysis.Evaluations.UserFunctions;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Preprocessing;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Statements;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.UserFunctions;
 
-namespace KSPCompiler.UseCases.Analysis.Context;
+namespace KSPCompiler.Features.Compilation.UseCase.Abstractions.Context;
 
 public interface IStatementEvaluationContext
 {
