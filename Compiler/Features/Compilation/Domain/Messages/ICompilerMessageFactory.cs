@@ -2,7 +2,7 @@ using System;
 
 using KSPCompiler.Shared.Text;
 
-namespace KSPCompiler.Features.Compilation.Domain.CompilerMessages;
+namespace KSPCompiler.Features.Compilation.Domain.Messages;
 
 /// <summary>
 /// Base interface for factories that generate messages.

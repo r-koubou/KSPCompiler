@@ -1,6 +1,6 @@
 using KSPCompiler.Shared.ValueObjects;
 
-namespace KSPCompiler.Features.Compilation.Domain.CompilerMessages;
+namespace KSPCompiler.Features.Compilation.Domain.Messages;
 
 /// <summary>
 /// The value object that represents the text of the message.

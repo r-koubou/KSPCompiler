@@ -1,4 +1,4 @@
-namespace KSPCompiler.Features.Compilation.Domain.CompilerMessages;
+namespace KSPCompiler.Features.Compilation.Domain.Messages;
 
 /// <summary>
 /// Base interface for making the final output format of the message body arbitrarily configurable.

@@ -2,7 +2,7 @@ using System;
 
 using KSPCompiler.Shared.Text;
 
-namespace KSPCompiler.Features.Compilation.Domain.CompilerMessages.Extensions;
+namespace KSPCompiler.Features.Compilation.Domain.Messages.Extensions;
 
 /// <summary>
 /// Extension for <see cref="ICompilerMessageFactory"/>
