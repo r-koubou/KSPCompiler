@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <LangVersion>default</LangVersion>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <Nullable>enable</Nullable>
+        <Copyright>R-Koubou</Copyright>
+        <Company>R-Koubou</Company>
+        <Product>KSPCompiler.KSPCompiler.Features.Compilation.Applications.Compilation.Cli</Product>
+        <AssemblyName>KSPCompiler.KSPCompiler.Features.Compilation.Applications.Compilation.Cli</AssemblyName>
+        <RootNamespace>KSPCompiler.KSPCompiler.Features.Compilation.Applications.Compilation.Cli</RootNamespace>
+    </PropertyGroup>
+
+</Project>
