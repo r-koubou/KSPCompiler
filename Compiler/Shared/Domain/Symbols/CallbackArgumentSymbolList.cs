@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace KSPCompiler.Features.Compilation.Domain.Symbols;
+namespace KSPCompiler.Shared.Domain.Symbols;
 
 public class CallbackArgumentSymbolList
     : ArgumentSymbolList<CallbackArgumentSymbol>,

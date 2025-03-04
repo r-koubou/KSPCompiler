@@ -1,6 +1,5 @@
 using System.Text;
 
-using KSPCompiler.Features.Compilation.Domain.Symbols;
 using KSPCompiler.Features.Compilation.UseCase.Abstractions.Context;
 using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Commands;
 using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Convolutions.Booleans;
@@ -18,6 +17,7 @@ using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Conv
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Convolutions.Integers;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Convolutions.Reals;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Convolutions.Strings;
+using KSPCompiler.Shared.Domain.Symbols;
 using KSPCompiler.Shared.EventEmitting;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators;

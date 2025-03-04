@@ -1,6 +1,6 @@
-using KSPCompiler.Features.Compilation.Domain.Symbols.MetaData;
+using KSPCompiler.Shared.Domain.Symbols.MetaData;
 
-namespace KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Expressions
+namespace KSPCompiler.Shared.Domain.Ast.Nodes.Expressions
 {
     /// <summary>
     /// AST node representing a string literal

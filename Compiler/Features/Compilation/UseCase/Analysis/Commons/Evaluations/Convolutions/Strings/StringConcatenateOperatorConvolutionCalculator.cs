@@ -1,7 +1,7 @@
 using System;
 
-using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
 using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Convolutions.Strings;
+using KSPCompiler.Shared.Domain.Ast.Nodes;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Convolutions.Strings;
 

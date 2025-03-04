@@ -1,6 +1,6 @@
-using KSPCompiler.Features.Compilation.Domain.Symbols.MetaData;
+using KSPCompiler.Shared.Domain.Symbols.MetaData;
 
-namespace KSPCompiler.Features.Compilation.Domain.Symbols;
+namespace KSPCompiler.Shared.Domain.Symbols;
 
 public class VariableSymbol : SymbolBase, ISymbolDataTypeProvider
 {

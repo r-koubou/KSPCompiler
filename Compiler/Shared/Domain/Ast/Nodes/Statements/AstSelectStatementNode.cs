@@ -1,6 +1,6 @@
-using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Blocks;
 
-namespace KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Statements
+namespace KSPCompiler.Shared.Domain.Ast.Nodes.Statements
 {
     /// <summary>
     /// AST node representing a select statement

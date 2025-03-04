@@ -1,4 +1,4 @@
-using KSPCompiler.Features.Compilation.Domain.Symbols;
+using KSPCompiler.Shared.Domain.Symbols;
 using KSPCompiler.Shared.EventEmitting;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Abstractions.Context;

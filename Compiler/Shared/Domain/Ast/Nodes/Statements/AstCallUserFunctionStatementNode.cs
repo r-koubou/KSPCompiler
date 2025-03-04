@@ -1,6 +1,6 @@
-using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Expressions;
 
-namespace KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Statements
+namespace KSPCompiler.Shared.Domain.Ast.Nodes.Statements
 {
     /// <summary>
     /// AST node representing a call statement

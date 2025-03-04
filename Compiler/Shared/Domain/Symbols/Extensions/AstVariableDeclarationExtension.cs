@@ -1,7 +1,7 @@
-using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Statements;
-using KSPCompiler.Features.Compilation.Domain.Symbols.MetaData;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Shared.Domain.Symbols.MetaData;
 
-namespace KSPCompiler.Features.Compilation.Domain.Symbols.Extensions;
+namespace KSPCompiler.Shared.Domain.Symbols.Extensions;
 
 public static class AstVariableDeclarationExtension
 {

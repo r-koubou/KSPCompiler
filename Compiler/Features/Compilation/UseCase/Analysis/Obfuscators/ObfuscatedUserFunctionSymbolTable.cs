@@ -1,5 +1,5 @@
-using KSPCompiler.Features.Compilation.Domain.Symbols;
 using KSPCompiler.Features.Compilation.UseCase.Abstractions.Obfuscators;
+using KSPCompiler.Shared.Domain.Symbols;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators;
 

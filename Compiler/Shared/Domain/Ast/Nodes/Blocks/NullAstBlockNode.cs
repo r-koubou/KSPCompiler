@@ -1,4 +1,4 @@
-namespace KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Blocks;
+namespace KSPCompiler.Shared.Domain.Ast.Nodes.Blocks;
 
 public sealed class NullAstBlockNode : AstBlockNode
 {

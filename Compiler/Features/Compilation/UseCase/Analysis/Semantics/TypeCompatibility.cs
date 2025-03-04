@@ -1,5 +1,5 @@
-using KSPCompiler.Features.Compilation.Domain.Symbols.MetaData;
-using KSPCompiler.Features.Compilation.Domain.Symbols.MetaData.Extensions;
+using KSPCompiler.Shared.Domain.Symbols.MetaData;
+using KSPCompiler.Shared.Domain.Symbols.MetaData.Extensions;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
 

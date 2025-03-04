@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 using System.Text;
 
-using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
-using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Expressions;
-using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Extensions;
-using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Statements;
-using KSPCompiler.Features.Compilation.Domain.Symbols;
-using KSPCompiler.Features.Compilation.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Declarations;
 using KSPCompiler.Features.Compilation.UseCase.Abstractions.Obfuscators;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Extensions;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators.Extensions;
+using KSPCompiler.Shared.Domain.Ast.Nodes;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Extensions;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Domain.Symbols.MetaData.Extensions;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators;
 

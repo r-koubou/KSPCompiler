@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace KSPCompiler.Features.Compilation.Domain.Symbols;
+namespace KSPCompiler.Shared.Domain.Symbols;
 
 public sealed class CommandArgumentSymbol : ArgumentSymbol
 {

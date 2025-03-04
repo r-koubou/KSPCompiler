@@ -1,7 +1,7 @@
 using System.Linq;
 
-using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Shared;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Statements;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations;
 

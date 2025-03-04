@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace KSPCompiler.Features.Compilation.Domain.Ast.Nodes
+namespace KSPCompiler.Shared.Domain.Ast.Nodes
 {
     /// <summary>
     /// List representation of a node.

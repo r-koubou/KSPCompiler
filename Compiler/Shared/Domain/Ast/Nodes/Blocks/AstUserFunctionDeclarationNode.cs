@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 using KSPCompiler.Shared.Text;
 
-namespace KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Blocks
+namespace KSPCompiler.Shared.Domain.Ast.Nodes.Blocks
 {
     /// <summary>
     /// AST node representing an user Defined Functions (KSP)

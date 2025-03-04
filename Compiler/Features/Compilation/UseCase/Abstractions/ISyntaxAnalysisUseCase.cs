@@ -1,7 +1,7 @@
 using System;
 
-using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Features.Compilation.Gateways.Parsers;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Shared.UseCase;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Abstractions;

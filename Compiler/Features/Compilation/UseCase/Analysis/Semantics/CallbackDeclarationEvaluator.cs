@@ -1,13 +1,13 @@
 using System.Linq;
 
-using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
-using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Features.Compilation.Domain.Symbols;
-using KSPCompiler.Features.Compilation.Domain.Symbols.Extensions;
-using KSPCompiler.Features.Compilation.Domain.Symbols.MetaData;
 using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Declarations;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Extensions;
 using KSPCompiler.Resources;
+using KSPCompiler.Shared.Domain.Ast.Nodes;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Domain.Symbols.Extensions;
+using KSPCompiler.Shared.Domain.Symbols.MetaData;
 using KSPCompiler.Shared.EventEmitting;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;

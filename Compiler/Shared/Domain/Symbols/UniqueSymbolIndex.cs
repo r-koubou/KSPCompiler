@@ -1,6 +1,6 @@
 using KSPCompiler.Shared.ValueObjects;
 
-namespace KSPCompiler.Features.Compilation.Domain.Symbols;
+namespace KSPCompiler.Shared.Domain.Symbols;
 
 public record UniqueSymbolIndex( int Value ) : IntValueObject( Value )
 {

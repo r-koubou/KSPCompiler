@@ -1,5 +1,5 @@
-using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Features.Compilation.Domain.Symbols;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Shared.Domain.Symbols;
 using KSPCompiler.Shared.EventEmitting;
 using KSPCompiler.Shared.UseCase;
 

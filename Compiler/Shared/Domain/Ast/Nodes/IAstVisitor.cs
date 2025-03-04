@@ -1,8 +1,8 @@
-using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Expressions;
-using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Statements;
 
-namespace KSPCompiler.Features.Compilation.Domain.Ast.Nodes
+namespace KSPCompiler.Shared.Domain.Ast.Nodes
 {
     public interface IAstVisitor<out T>
     {

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace KSPCompiler.Features.Compilation.Domain.Symbols;
+namespace KSPCompiler.Shared.Domain.Symbols;
 
 public abstract class OverloadedSymbolTable<TSymbol, TOverload>(
     UniqueSymbolIndex startUniqueIndex,

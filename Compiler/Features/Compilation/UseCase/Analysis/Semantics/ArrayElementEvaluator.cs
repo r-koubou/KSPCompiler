@@ -1,12 +1,12 @@
-using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
-using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Expressions;
-using KSPCompiler.Features.Compilation.Domain.Symbols;
-using KSPCompiler.Features.Compilation.Domain.Symbols.MetaData;
-using KSPCompiler.Features.Compilation.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Symbols;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Extensions;
 using KSPCompiler.Resources;
+using KSPCompiler.Shared.Domain.Ast.Nodes;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Domain.Symbols.MetaData;
+using KSPCompiler.Shared.Domain.Symbols.MetaData.Extensions;
 using KSPCompiler.Shared.EventEmitting;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;

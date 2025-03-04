@@ -1,4 +1,4 @@
-namespace KSPCompiler.Features.Compilation.Domain.Symbols;
+namespace KSPCompiler.Shared.Domain.Symbols;
 
 public class CallbackSymbolTable
     : OverloadedSymbolTable<CallbackSymbol, CallbackArgumentSymbolList>,

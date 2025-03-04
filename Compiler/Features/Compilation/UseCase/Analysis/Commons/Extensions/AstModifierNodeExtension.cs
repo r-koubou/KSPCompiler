@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
+using KSPCompiler.Shared.Domain.Ast.Nodes;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Extensions;
 

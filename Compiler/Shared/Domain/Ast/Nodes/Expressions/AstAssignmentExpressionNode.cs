@@ -1,4 +1,4 @@
-namespace KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Expressions
+namespace KSPCompiler.Shared.Domain.Ast.Nodes.Expressions
 {
     /// <summary>
     /// AST node representing an assignment (:=)

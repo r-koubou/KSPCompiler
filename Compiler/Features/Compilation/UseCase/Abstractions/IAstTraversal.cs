@@ -1,4 +1,4 @@
-using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Blocks;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Abstractions;
 

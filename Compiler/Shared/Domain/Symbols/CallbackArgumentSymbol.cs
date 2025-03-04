@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace KSPCompiler.Features.Compilation.Domain.Symbols;
+namespace KSPCompiler.Shared.Domain.Symbols;
 
 public sealed class CallbackArgumentSymbol( bool requiredDeclareOnInit )
     : ArgumentSymbol, IEquatable<CallbackArgumentSymbol>

@@ -1,6 +1,6 @@
 ﻿using KSPCompiler.Shared.Text;
 
-namespace KSPCompiler.Features.Compilation.Domain.Ast.Nodes
+namespace KSPCompiler.Shared.Domain.Ast.Nodes
 {
     /// <summary>
     /// Null Object of <see cref="IAstNode"/>

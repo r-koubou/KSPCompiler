@@ -1,4 +1,4 @@
-using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
+using KSPCompiler.Shared.Domain.Ast.Nodes;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Operators;
 

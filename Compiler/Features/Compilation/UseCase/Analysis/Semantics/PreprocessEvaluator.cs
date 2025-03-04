@@ -1,6 +1,6 @@
-using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
-using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Statements;
 using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Preprocessing;
+using KSPCompiler.Shared.Domain.Ast.Nodes;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Statements;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
 

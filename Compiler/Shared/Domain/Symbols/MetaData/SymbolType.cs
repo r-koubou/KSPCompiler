@@ -1,4 +1,4 @@
-namespace KSPCompiler.Features.Compilation.Domain.Symbols.MetaData;
+namespace KSPCompiler.Shared.Domain.Symbols.MetaData;
 
 public enum SymbolType
 {

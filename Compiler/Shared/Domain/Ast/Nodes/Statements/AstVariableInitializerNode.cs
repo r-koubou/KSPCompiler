@@ -1,4 +1,4 @@
-namespace KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Statements
+namespace KSPCompiler.Shared.Domain.Ast.Nodes.Statements
 {
     /// <summary>
     /// AST node representing a variable initialization

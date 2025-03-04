@@ -1,4 +1,4 @@
-using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Statements;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Declarations;
 

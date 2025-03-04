@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 
-namespace KSPCompiler.Features.Compilation.Domain.Symbols.MetaData.Extensions;
+namespace KSPCompiler.Shared.Domain.Symbols.MetaData.Extensions;
 
 [SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" )]
 public static class ModifierFlagExtension

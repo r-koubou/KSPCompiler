@@ -1,10 +1,10 @@
 using System.Text;
 
-using KSPCompiler.Features.Compilation.Domain.Ast.Nodes;
-using KSPCompiler.Features.Compilation.Domain.Ast.Nodes.Expressions;
-using KSPCompiler.Features.Compilation.Domain.Symbols;
 using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Symbols;
 using KSPCompiler.Features.Compilation.UseCase.Abstractions.Obfuscators;
+using KSPCompiler.Shared.Domain.Ast.Nodes;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Shared.Domain.Symbols;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators;
 

@@ -1,4 +1,4 @@
-namespace KSPCompiler.Features.Compilation.Domain.Symbols;
+namespace KSPCompiler.Shared.Domain.Symbols;
 
 public class UserFunctionSymbolTable : SymbolTable<UserFunctionSymbol>, IUserFunctionSymbolSymbolTable
 {
