@@ -1,8 +1,8 @@
 using System.IO;
 
-using KSPCompiler.Gateways.EventEmitting;
+using KSPCompiler.Shared.EventEmitting;
 
-namespace KSPCompiler.Infrastructures.Parser.Antlr;
+namespace KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr;
 
 public class AntlrKspFileSyntaxParser : AntlrKspSyntaxParser
 {

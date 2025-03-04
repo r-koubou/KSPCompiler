@@ -4,11 +4,12 @@ using System.Text.RegularExpressions;
 
 using Antlr4.Runtime;
 
-using KSPCompiler.Commons.Text;
+using KSPCompiler.Infrastructures.Parser.Antlr;
+using KSPCompiler.Shared.Text;
 
 // ReSharper disable UnusedMember.Local
 
-namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
+namespace KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translators
 {
     public partial class CstConverterVisitor
     {

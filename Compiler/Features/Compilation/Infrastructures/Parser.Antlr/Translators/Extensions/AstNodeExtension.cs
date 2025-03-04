@@ -3,10 +3,10 @@
 using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
 
-using KSPCompiler.Commons.Text;
-using KSPCompiler.Domain.Ast.Nodes;
+using KSPCompiler.Shared.Domain.Ast.Nodes;
+using KSPCompiler.Shared.Text;
 
-namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions
+namespace KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translators.Extensions
 {
     internal static class AstNodeExtension
     {

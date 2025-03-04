@@ -2,13 +2,14 @@
 
 using Antlr4.Runtime.Tree;
 
-using KSPCompiler.Commons.Text;
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Gateways.EventEmitting;
-using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
+using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
+using KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translators.Extensions;
+using KSPCompiler.Infrastructures.Parser.Antlr;
+using KSPCompiler.Shared.Domain.Ast.Nodes;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Shared.Text;
 
-namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
+namespace KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translators
 {
     // Implementation of root, callback and user-defined function node generation
     public partial class CstConverterVisitor

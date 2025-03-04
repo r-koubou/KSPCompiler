@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-using KSPCompiler.Gateways.EventEmitting;
-
-namespace KSPCompiler.Infrastructures.EventEmitting.Default;
+namespace KSPCompiler.Shared.EventEmitting;
 
 /// <summary>
 /// Default implementation of <see cref="IEventEmitter"/>.

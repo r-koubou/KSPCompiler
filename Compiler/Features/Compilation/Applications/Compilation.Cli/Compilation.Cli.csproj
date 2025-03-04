@@ -2,13 +2,27 @@
 
     <PropertyGroup>
         <LangVersion>default</LangVersion>
-        <TargetFramework>netstandard2.1</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <Copyright>R-Koubou</Copyright>
         <Company>R-Koubou</Company>
         <Product>KSPCompiler.KSPCompiler.Features.Compilation.Applications.Compilation.Cli</Product>
         <AssemblyName>KSPCompiler.KSPCompiler.Features.Compilation.Applications.Compilation.Cli</AssemblyName>
         <RootNamespace>KSPCompiler.KSPCompiler.Features.Compilation.Applications.Compilation.Cli</RootNamespace>
+        <OutputType>Exe</OutputType>
     </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\..\Shared\Shared.csproj" />
+      <ProjectReference Include="..\..\Domain\Domain.csproj" />
+      <ProjectReference Include="..\..\Infrastructures\Parser.Antlr\Parser.Antlr.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="ConsoleAppFramework" Version="5.4.1">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+    </ItemGroup>
 
 </Project>

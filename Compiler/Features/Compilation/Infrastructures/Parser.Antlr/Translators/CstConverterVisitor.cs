@@ -3,15 +3,16 @@
 using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
 
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Ast.Nodes.Expressions;
-using KSPCompiler.Domain.Ast.Nodes.Extensions;
-using KSPCompiler.Gateways.EventEmitting;
-using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
+using KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translators.Extensions;
+using KSPCompiler.Infrastructures.Parser.Antlr;
+using KSPCompiler.Shared.Domain.Ast.Nodes;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Extensions;
+using KSPCompiler.Shared.EventEmitting;
 
 // ReSharper disable UnusedMember.Local
 
-namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
+namespace KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translators
 {
     /// <summary>
     /// Implementation of AST generation process based on CST.

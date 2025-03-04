@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 
-using KSPCompiler.Commons.Text;
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Ast.Nodes.Expressions;
-using KSPCompiler.Domain.Ast.Nodes.Statements;
-using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
+using KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translators.Extensions;
+using KSPCompiler.Infrastructures.Parser.Antlr;
+using KSPCompiler.Shared.Domain.Ast.Nodes;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Shared.Text;
 
-namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
+namespace KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translators
 {
     // implementation of the variable declaration node
     public partial class CstConverterVisitor

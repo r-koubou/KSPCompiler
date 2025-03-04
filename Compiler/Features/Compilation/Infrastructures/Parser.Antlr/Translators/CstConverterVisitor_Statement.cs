@@ -1,13 +1,14 @@
 ﻿using Antlr4.Runtime;
 
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Domain.Ast.Nodes.Expressions;
-using KSPCompiler.Domain.Ast.Nodes.Statements;
-using KSPCompiler.Gateways.EventEmitting;
-using KSPCompiler.Infrastructures.Parser.Antlr.Translators.Extensions;
+using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
+using KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translators.Extensions;
+using KSPCompiler.Infrastructures.Parser.Antlr;
+using KSPCompiler.Shared.Domain.Ast.Nodes;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Statements;
 
-namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators
+namespace KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translators
 {
     // implementation of the statement node
     public partial class CstConverterVisitor

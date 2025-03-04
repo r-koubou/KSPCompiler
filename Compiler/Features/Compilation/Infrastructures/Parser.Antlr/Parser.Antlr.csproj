@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <LangVersion>default</LangVersion>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <Nullable>enable</Nullable>
+        <Copyright>R-Koubou</Copyright>
+        <Company>R-Koubou</Company>
+        <Product>KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr</Product>
+        <AssemblyName>KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr</AssemblyName>
+        <RootNamespace>KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\..\Shared\Shared.csproj" />
+      <ProjectReference Include="..\..\Gateways\Gateways.csproj" />
+      <ProjectReference Include="..\..\Resources\Resources.csproj" />
+    </ItemGroup>
+
+</Project>

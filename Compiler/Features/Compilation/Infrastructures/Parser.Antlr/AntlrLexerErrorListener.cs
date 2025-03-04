@@ -2,10 +2,11 @@ using System.IO;
 
 using Antlr4.Runtime;
 
-using KSPCompiler.Gateways.EventEmitting;
+using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 using KSPCompiler.Resources;
+using KSPCompiler.Shared.EventEmitting;
 
-namespace KSPCompiler.Infrastructures.Parser.Antlr;
+namespace KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr;
 
 internal class AntlrLexerErrorListener : IAntlrErrorListener<int>
 {

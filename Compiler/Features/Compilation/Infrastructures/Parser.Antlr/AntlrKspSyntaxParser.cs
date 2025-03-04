@@ -2,12 +2,13 @@ using System.IO;
 
 using Antlr4.Runtime;
 
-using KSPCompiler.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Gateways.EventEmitting;
-using KSPCompiler.Gateways.Parsers;
-using KSPCompiler.Infrastructures.Parser.Antlr.Translators;
+using KSPCompiler.Features.Compilation.Gateways.Parsers;
+using KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translators;
+using KSPCompiler.Infrastructures.Parser.Antlr;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Shared.EventEmitting;
 
-namespace KSPCompiler.Infrastructures.Parser.Antlr;
+namespace KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr;
 
 public abstract class AntlrKspSyntaxParser : ISyntaxParser
 {

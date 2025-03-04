@@ -1,6 +1,6 @@
 using System;
 
-namespace KSPCompiler.Infrastructures.Parser.Antlr.Translators;
+namespace KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translators;
 
 /// <summary>
 /// Throws when a variable expected to be not null, but it is null.

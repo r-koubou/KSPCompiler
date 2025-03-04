@@ -2,23 +2,16 @@ using System;
 using System.IO;
 using System.Reflection;
 
-using KSPCompiler.Commons;
-using KSPCompiler.Domain.CompilerMessages;
-using KSPCompiler.Domain.CompilerMessages.Extensions;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Commands;
-using KSPCompiler.ExternalSymbolRepository.Yaml.UITypes;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
-using KSPCompiler.Gateways.EventEmitting;
-using KSPCompiler.Gateways.EventEmitting.Extensions;
-using KSPCompiler.Gateways.Symbols;
-using KSPCompiler.Infrastructures.EventEmitting.Default;
-using KSPCompiler.Infrastructures.Parser.Antlr;
-using KSPCompiler.Interactors.ApplicationServices.Compilation;
-using KSPCompiler.Interactors.ApplicationServices.Symbols;
-using KSPCompiler.Interactors.Symbols;
+using KSPCompiler.Features.Compilation.Domain.Messages;
+using KSPCompiler.Features.Compilation.Domain.Messages.Extensions;
+using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
+using KSPCompiler.Features.Compilation.Gateways.Symbols;
+using KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr;
+using KSPCompiler.Shared;
+using KSPCompiler.Shared.EventEmitting;
+using KSPCompiler.Shared.EventEmitting.Extensions;
 
-namespace KSPCompiler.Applications.Cli;
+namespace KSPCompiler.KSPCompiler.Features.Compilation.Applications.Compilation.Cli;
 
 /// <summary>
 /// Body of the compiler program.
