@@ -1,5 +1,5 @@
 using KSPCompiler.Features.Compilation.Domain;
-using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Declarations;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Evaluations.Declarations;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Extensions;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Extensions;

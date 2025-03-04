@@ -1,4 +1,4 @@
-using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Symbols;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Evaluations.Symbols;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Extensions;
 using KSPCompiler.Resources;
 using KSPCompiler.Shared.Domain.Ast.Nodes;

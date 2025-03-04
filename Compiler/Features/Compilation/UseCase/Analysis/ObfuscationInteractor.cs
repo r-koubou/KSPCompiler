@@ -3,7 +3,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-using KSPCompiler.Features.Compilation.UseCase.Abstractions;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis;

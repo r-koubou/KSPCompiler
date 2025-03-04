@@ -1,6 +1,6 @@
 using System.Linq;
 
-using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Declarations;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Evaluations.Declarations;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Extensions;
 using KSPCompiler.Resources;
 using KSPCompiler.Shared.Domain.Ast.Nodes;

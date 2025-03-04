@@ -2,7 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using KSPCompiler.Features.Compilation.Domain;
-using KSPCompiler.Features.Compilation.UseCase.Abstractions;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis;
 

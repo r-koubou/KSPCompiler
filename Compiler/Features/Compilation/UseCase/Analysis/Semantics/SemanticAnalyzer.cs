@@ -1,5 +1,5 @@
-using KSPCompiler.Features.Compilation.UseCase.Abstractions;
-using KSPCompiler.Features.Compilation.UseCase.Abstractions.Context;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Context;
 using KSPCompiler.Shared.Domain.Ast.Nodes;
 using KSPCompiler.Shared.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Shared.Domain.Ast.Nodes.Expressions;

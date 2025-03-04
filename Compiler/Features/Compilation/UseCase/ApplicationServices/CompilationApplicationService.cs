@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 
 using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 using KSPCompiler.Features.Compilation.Gateways.Parsers;
-using KSPCompiler.Features.Compilation.UseCase.Abstractions;
 using KSPCompiler.Features.Compilation.UseCase.Analysis;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions;
 using KSPCompiler.Shared;
 using KSPCompiler.Shared.Domain.Ast.Nodes.Blocks;
 using KSPCompiler.Shared.Domain.Symbols;

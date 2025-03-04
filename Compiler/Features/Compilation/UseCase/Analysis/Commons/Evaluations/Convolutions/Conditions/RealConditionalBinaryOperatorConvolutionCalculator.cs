@@ -1,7 +1,7 @@
 using System;
 
-using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Convolutions.Conditions;
-using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Convolutions.Reals;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Evaluations.Convolutions.Conditions;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Evaluations.Convolutions.Reals;
 using KSPCompiler.Shared.Domain.Ast.Nodes;
 using KSPCompiler.Shared.Domain.Symbols.MetaData.Extensions;
 

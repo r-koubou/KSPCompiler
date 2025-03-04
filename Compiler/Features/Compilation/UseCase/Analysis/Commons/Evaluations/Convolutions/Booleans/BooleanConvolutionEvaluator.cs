@@ -1,5 +1,5 @@
-using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Convolutions.Booleans;
-using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Convolutions.Conditions;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Evaluations.Convolutions.Booleans;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Evaluations.Convolutions.Conditions;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Convolutions.Conditions;
 using KSPCompiler.Shared.Domain.Ast.Nodes;
 using KSPCompiler.Shared.Domain.Ast.Nodes.Extensions;

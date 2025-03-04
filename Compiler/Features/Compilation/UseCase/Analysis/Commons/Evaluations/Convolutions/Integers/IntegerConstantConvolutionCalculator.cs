@@ -1,6 +1,6 @@
 using System;
 
-using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Convolutions.Integers;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Evaluations.Convolutions.Integers;
 using KSPCompiler.Shared.Domain.Ast.Nodes;
 using KSPCompiler.Shared.Domain.Ast.Nodes.Expressions;
 

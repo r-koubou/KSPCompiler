@@ -1,6 +1,6 @@
 using System.Text;
 
-using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Symbols;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Evaluations.Symbols;
 using KSPCompiler.Shared.Domain.Ast.Nodes;
 using KSPCompiler.Shared.Domain.Ast.Nodes.Expressions;
 

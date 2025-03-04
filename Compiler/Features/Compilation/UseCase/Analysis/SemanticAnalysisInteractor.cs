@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
-using KSPCompiler.Features.Compilation.UseCase.Abstractions;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
 using KSPCompiler.Shared;
 using KSPCompiler.Shared.EventEmitting.Extensions;

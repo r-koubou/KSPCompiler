@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using KSPCompiler.Features.Compilation.Gateways.Symbols;
-using KSPCompiler.Features.Compilation.UseCase.Abstractions;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions;
 using KSPCompiler.Shared.Domain.Symbols;
 
 namespace KSPCompiler.Features.Compilation.UseCase.ApplicationServices;

@@ -1,7 +1,7 @@
 using System.Text;
 
-using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.UserFunctions;
-using KSPCompiler.Features.Compilation.UseCase.Abstractions.Obfuscators;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Evaluations.UserFunctions;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Obfuscators;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators.Extensions;
 using KSPCompiler.Shared.Domain.Ast.Nodes;
 using KSPCompiler.Shared.Domain.Ast.Nodes.Statements;

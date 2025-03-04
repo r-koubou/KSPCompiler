@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-using KSPCompiler.Features.Compilation.UseCase.Abstractions.Obfuscators;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Obfuscators;
 using KSPCompiler.Shared.Domain.Symbols;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators;

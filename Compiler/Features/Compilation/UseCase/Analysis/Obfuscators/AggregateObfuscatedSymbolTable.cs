@@ -1,4 +1,4 @@
-using KSPCompiler.Features.Compilation.UseCase.Abstractions.Obfuscators;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Obfuscators;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators;
 

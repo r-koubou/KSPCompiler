@@ -1,7 +1,7 @@
 using System;
 
-using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Convolutions;
-using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Convolutions.Booleans;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Evaluations.Convolutions;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Evaluations.Convolutions.Booleans;
 using KSPCompiler.Shared.Domain.Ast.Nodes;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Convolutions.Booleans;

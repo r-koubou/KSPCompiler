@@ -1,4 +1,4 @@
-using KSPCompiler.Features.Compilation.UseCase.Abstractions.Evaluations.Preprocessing;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Evaluations.Preprocessing;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Extensions;
 using KSPCompiler.Resources;
