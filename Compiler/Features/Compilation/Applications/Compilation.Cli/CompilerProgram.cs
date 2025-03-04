@@ -6,7 +6,13 @@ using KSPCompiler.Features.Compilation.Domain.Messages;
 using KSPCompiler.Features.Compilation.Domain.Messages.Extensions;
 using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 using KSPCompiler.Features.Compilation.Gateways.Symbols;
+using KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml.Callbacks;
+using KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml.Commands;
+using KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml.UITypes;
+using KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml.Variables;
 using KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr;
+using KSPCompiler.Features.Compilation.UseCase.Analysis;
+using KSPCompiler.Features.Compilation.UseCase.ApplicationServices;
 using KSPCompiler.Shared;
 using KSPCompiler.Shared.EventEmitting;
 using KSPCompiler.Shared.EventEmitting.Extensions;
@@ -57,6 +63,8 @@ public static class CompilerProgram
         {
             Console.WriteLine( result.Error );
         }
+
+        Console.WriteLine(result.ObfuscatedScript);
 
         return ( result.Error != null || !result.Result ) ? 1 : 0;
     }

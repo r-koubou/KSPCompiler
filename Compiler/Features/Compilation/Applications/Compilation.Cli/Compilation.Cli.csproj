@@ -11,11 +11,13 @@
         <RootNamespace>KSPCompiler.KSPCompiler.Features.Compilation.Applications.Compilation.Cli</RootNamespace>
         <OutputType>Exe</OutputType>
     </PropertyGroup>
-
+    
     <ItemGroup>
       <ProjectReference Include="..\..\..\..\Shared\Shared.csproj" />
       <ProjectReference Include="..\..\Domain\Domain.csproj" />
+      <ProjectReference Include="..\..\Infrastructures\ExternalSymbolRepository.Yaml\ExternalSymbolRepository.Yaml.csproj" />
       <ProjectReference Include="..\..\Infrastructures\Parser.Antlr\Parser.Antlr.csproj" />
+      <ProjectReference Include="..\..\UseCase\UseCase.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -23,6 +25,31 @@
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\..\..\..\..\Data\Symbols\callbacks.yaml">
+        <Link>Data\Symbols\callbacks.yaml</Link>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="..\..\..\..\..\Data\Symbols\commands.yaml">
+        <Link>Data\Symbols\commands.yaml</Link>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="..\..\..\..\..\Data\Symbols\uitypes.yaml">
+        <Link>Data\Symbols\uitypes.yaml</Link>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="..\..\..\..\..\Data\Symbols\variables.yaml">
+        <Link>Data\Symbols\variables.yaml</Link>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="example.ksp">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

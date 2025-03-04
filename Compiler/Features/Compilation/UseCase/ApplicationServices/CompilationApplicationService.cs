@@ -2,18 +2,18 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-using KSPCompiler.Commons;
-using KSPCompiler.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Gateways.EventEmitting;
-using KSPCompiler.Gateways.EventEmitting.Extensions;
-using KSPCompiler.Gateways.Parsers;
-using KSPCompiler.Interactors.Analysis;
-using KSPCompiler.Interactors.ApplicationServices.Symbols;
-using KSPCompiler.UseCases;
-using KSPCompiler.UseCases.Analysis;
+using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
+using KSPCompiler.Features.Compilation.Gateways.Parsers;
+using KSPCompiler.Features.Compilation.UseCase.Abstractions;
+using KSPCompiler.Features.Compilation.UseCase.Analysis;
+using KSPCompiler.Shared;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.EventEmitting;
+using KSPCompiler.Shared.EventEmitting.Extensions;
+using KSPCompiler.Shared.UseCase;
 
-namespace KSPCompiler.Interactors.ApplicationServices.Compilation;
+namespace KSPCompiler.Features.Compilation.UseCase.ApplicationServices;
 
 public sealed record CompilationOption(
     ISyntaxParser SyntaxParser,
