@@ -1,14 +1,13 @@
-using KSPCompiler.Commons.Path;
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks.Models;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks.Translators;
+using KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml.Callbacks.Models;
+using KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml.Callbacks.Translators;
+using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Path;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks;
+namespace KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml.Callbacks;
 
 public class CallbackSymbolRepository( FilePath repositoryPath, bool autoFlush = false )
     : SymbolRepository<CallbackSymbol, CallbackSymbolRootModel, CallBackSymbolModel>(
         repositoryPath,
-        new SymbolToSymbolModelTranslator(),
         new SymbolModelToSymbolTranslator(),
         autoFlush
     );

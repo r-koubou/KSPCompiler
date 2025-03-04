@@ -1,7 +1,7 @@
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml.UITypes.Models;
+namespace KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml.UITypes.Models;
 
 public sealed class UITypeSymbolArgumentModel
 {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml;
+namespace KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml;
 
 public interface ISymbolRootModel<TModel> where TModel : ISymbolModel
 {

@@ -1,7 +1,7 @@
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Models;
+namespace KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml.Commands.Models;
 
 public sealed class CommandArgumentModel
 {

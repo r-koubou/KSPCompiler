@@ -6,19 +6,18 @@
         <Nullable>enable</Nullable>
         <Copyright>R-Koubou</Copyright>
         <Company>R-Koubou</Company>
-        <Product>KSPCompiler.ExternalSymbolRepository.Yaml</Product>
-        <AssemblyName>KSPCompiler.ExternalSymbolRepository.Yaml</AssemblyName>
-        <RootNamespace>KSPCompiler.ExternalSymbolRepository.Yaml</RootNamespace>
+        <Product>KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml</Product>
+        <AssemblyName>KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml</AssemblyName>
+        <RootNamespace>KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Commons\Commons.csproj" />
-      <ProjectReference Include="..\..\Domain\Domain.csproj" />
-      <ProjectReference Include="..\..\Gateways\Gateways.csproj" />
+      <PackageReference Include="YamlDotNet" Version="16.3.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="YamlDotNet" Version="16.3.0" />
+      <ProjectReference Include="..\..\..\..\Shared\Shared.csproj" />
+      <ProjectReference Include="..\..\Gateways\Gateways.csproj" />
     </ItemGroup>
 
 </Project>

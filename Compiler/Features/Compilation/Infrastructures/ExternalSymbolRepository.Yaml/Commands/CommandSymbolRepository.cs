@@ -1,13 +1,12 @@
-using KSPCompiler.Commons.Path;
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Models;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Translators;
+using KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml.Commands.Models;
+using KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml.Commands.Translators;
+using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Path;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml.Commands;
+namespace KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml.Commands;
 
 public class CommandSymbolRepository( FilePath repositoryPath )
     : SymbolRepository<CommandSymbol, CommandSymbolRootModel, CommandSymbolModel>(
         repositoryPath,
-        new SymbolToSymbolModelTranslator(),
         new SymbolModelToSymbolTranslator()
     );

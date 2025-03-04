@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks.Models;
+namespace KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml.Callbacks.Models;
 
 public sealed class CallBackSymbolModel : ISymbolModel
 {

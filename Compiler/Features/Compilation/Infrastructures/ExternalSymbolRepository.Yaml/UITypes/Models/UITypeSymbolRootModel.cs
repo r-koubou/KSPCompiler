@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml.UITypes.Models;
+namespace KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml.UITypes.Models;
 
 public sealed class UITypeSymbolRootModel : ISymbolRootModel<UITypeSymbolModel>
 {

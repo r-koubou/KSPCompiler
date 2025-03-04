@@ -1,8 +1,8 @@
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Domain.Symbols.MetaData;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks.Models;
+using KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml.Callbacks.Models;
+using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Domain.Symbols.MetaData;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks.Translators;
+namespace KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml.Callbacks.Translators;
 
 public class SymbolModelToSymbolTranslator
     : ISymbolModelToSymbolTranslator<CallBackSymbolModel, CallbackSymbol>

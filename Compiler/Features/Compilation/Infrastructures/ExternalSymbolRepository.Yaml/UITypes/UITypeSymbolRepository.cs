@@ -1,16 +1,16 @@
-using KSPCompiler.Commons.Path;
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.ExternalSymbolRepository.Yaml.UITypes.Models;
-using KSPCompiler.ExternalSymbolRepository.Yaml.UITypes.Translators;
+using KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml.UITypes.Models;
+using KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml.UITypes.Translators;
+using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Path;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml.UITypes;
+namespace KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml.UITypes;
 
 public class UITypeSymbolRepository : SymbolRepository<UITypeSymbol, UITypeSymbolRootModel, UITypeSymbolModel>
 {
     private const string RepositoryIdentifier = "ui_type";
     private const int CurrentVersion = 1;
 
-    public UITypeSymbolRepository( FilePath repositoryPath ) : base( repositoryPath, new SymbolToSymbolModelTranslator(), new SymbolModelToSymbolTranslator() )
+    public UITypeSymbolRepository( FilePath repositoryPath ) : base( repositoryPath, new SymbolModelToSymbolTranslator() )
     {
     }
 }

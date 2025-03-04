@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Domain.Symbols.MetaData;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Models;
+using KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml.Commands.Models;
+using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Domain.Symbols.MetaData;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Translators;
+namespace KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml.Commands.Translators;
 
 public class SymbolModelToSymbolTranslator
     : ISymbolModelToSymbolTranslator<CommandSymbolModel, CommandSymbol>

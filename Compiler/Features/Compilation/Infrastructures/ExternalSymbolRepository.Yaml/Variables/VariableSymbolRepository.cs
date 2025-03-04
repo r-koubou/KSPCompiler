@@ -1,13 +1,12 @@
-using KSPCompiler.Commons.Path;
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Models;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Translators;
+using KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml.Variables.Models;
+using KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml.Variables.Translators;
+using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Path;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
+namespace KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml.Variables;
 
 public class VariableSymbolRepository( FilePath repositoryPath )
     : SymbolRepository<VariableSymbol, VariableSymbolRootModel, VariableSymbolModel>(
         repositoryPath,
-        new SymbolToSymbolModelTranslator(),
         new SymbolModelToSymbolTranslator()
     );

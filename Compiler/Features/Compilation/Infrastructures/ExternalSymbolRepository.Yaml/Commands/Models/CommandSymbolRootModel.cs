@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml.Commands.Models;
+namespace KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml.Commands.Models;
 
 public sealed class CommandSymbolRootModel : ISymbolRootModel<CommandSymbolModel>
 {

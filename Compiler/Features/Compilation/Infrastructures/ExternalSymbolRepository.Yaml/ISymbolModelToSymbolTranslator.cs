@@ -1,7 +1,7 @@
-using KSPCompiler.Commons;
-using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Shared;
+using KSPCompiler.Shared.Domain.Symbols;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml;
+namespace KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml;
 
 public interface ISymbolModelToSymbolTranslator<in TSymbolModel, out TSymbol>
     : IDataTranslator<TSymbolModel, TSymbol>

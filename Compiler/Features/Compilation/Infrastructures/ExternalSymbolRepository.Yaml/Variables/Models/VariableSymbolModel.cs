@@ -3,7 +3,7 @@ using System;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Models;
+namespace KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml.Variables.Models;
 
 public sealed class VariableSymbolModel : ISymbolModel
 {

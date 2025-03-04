@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml.Variables.Models;
+namespace KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml.Variables.Models;
 
 public sealed class VariableSymbolRootModel : ISymbolRootModel<VariableSymbolModel>
 {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks.Models;
+namespace KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml.Callbacks.Models;
 
 public class CallbackSymbolRootModel : ISymbolRootModel<CallBackSymbolModel>
 {

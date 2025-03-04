@@ -5,14 +5,14 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-using KSPCompiler.Commons;
-using KSPCompiler.Commons.Path;
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Gateways.Symbols;
+using KSPCompiler.Features.Compilation.Gateways.Symbols;
+using KSPCompiler.Shared;
+using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Path;
 
 using YamlDotNet.Serialization;
 
-namespace KSPCompiler.ExternalSymbolRepository.Yaml;
+namespace KSPCompiler.Features.Compilation.Infrastructures.ExternalSymbolRepository.Yaml;
 
 public abstract class SymbolRepository<TSymbol, TRootModel, TModel> : ISymbolRepository<TSymbol>
     where TSymbol : SymbolBase
@@ -23,7 +23,6 @@ public abstract class SymbolRepository<TSymbol, TRootModel, TModel> : ISymbolRep
 
     protected FilePath RepositoryPath { get; }
     protected List<TModel> Models { get; }
-    protected IDataTranslator<TSymbol, TModel> ToModelTranslator { get; }
     protected IDataTranslator<TModel, TSymbol> FromModelTranslator { get; }
 
     private bool Disposed { get; set; }
@@ -40,12 +39,10 @@ public abstract class SymbolRepository<TSymbol, TRootModel, TModel> : ISymbolRep
 
     protected SymbolRepository(
         FilePath repositoryPath,
-        IDataTranslator<TSymbol, TModel> toModelTranslator,
         IDataTranslator<TModel, TSymbol> fromModelTranslator,
         bool autoFlush = true )
     {
         RepositoryPath      = repositoryPath;
-        ToModelTranslator   = toModelTranslator;
         FromModelTranslator = fromModelTranslator;
         Models              = Load();
         AutoFlush           = autoFlush;
@@ -115,184 +112,6 @@ public abstract class SymbolRepository<TSymbol, TRootModel, TModel> : ISymbolRep
         finally
         {
             Disposed = true;
-        }
-    }
-
-    private async Task<StoreResult> StoreAsyncImpl( TSymbol symbol, CancellationToken _ = default )
-    {
-        var existing = Models.FirstOrDefault( x => x.Name == symbol.Name );
-
-        if( existing == null )
-        {
-            Models.Add( ToModelTranslator.Translate( symbol ) );
-            Dirty = true;
-
-            return new StoreResult(
-                success: true,
-                createdCount: 1,
-                updatedCount: 0,
-                failedCount: 0
-            );
-        }
-
-        var index = Models.IndexOf( existing );
-
-        existing           = ToModelTranslator.Translate( symbol );
-        existing.UpdatedAt = DateTime.UtcNow;
-        Models[ index ]    = existing;
-
-        Dirty = true;
-
-        await Task.CompletedTask;
-
-        return new StoreResult(
-            success: true,
-            createdCount: 0,
-            updatedCount: 1,
-            failedCount: 0
-        );
-    }
-
-    ///
-    /// <inheritdoc />
-    ///
-    public virtual async Task<StoreResult> StoreAsync( TSymbol symbol, CancellationToken cancellationToken = default )
-    {
-        try
-        {
-            var result = await Lock( async () => await StoreAsyncImpl( symbol, cancellationToken ) );
-
-            return await result;
-        }
-        catch( Exception e )
-        {
-            return new StoreResult(
-                success: false,
-                createdCount: 0,
-                updatedCount: 0,
-                failedCount: 1,
-                exception: e
-            );
-        }
-    }
-
-    ///
-    /// <inheritdoc />
-    ///
-    public virtual async Task<StoreResult> StoreAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default )
-    {
-        var createdCount = 0;
-        var updatedCount = 0;
-        var failedCount = 0;
-
-        try
-        {
-            await Lock( async () =>
-                {
-                    foreach( var x in symbols )
-                    {
-                        var result = await StoreAsyncImpl( x, cancellationToken );
-
-                        createdCount += result.CreatedCount;
-                        updatedCount += result.UpdatedCount;
-                        failedCount  += result.FailedCount;
-                    }
-                }
-            );
-
-            return new StoreResult(
-                success: true,
-                createdCount: createdCount,
-                updatedCount: updatedCount,
-                failedCount: failedCount
-            );
-        }
-        catch( Exception e )
-        {
-            return new StoreResult(
-                success: false,
-                createdCount: createdCount,
-                updatedCount: updatedCount,
-                failedCount: failedCount,
-                exception: e
-            );
-        }
-    }
-
-    private async Task<DeleteResult> DeleteAsyncImpl( TSymbol symbol, CancellationToken _ = default )
-    {
-        var existing = Models.FirstOrDefault( x => x.Name == symbol.Name );
-
-        if( existing == null )
-        {
-            return new DeleteResult();
-        }
-
-        Models.Remove( existing );
-        Dirty = true;
-
-        await Task.CompletedTask;
-
-        return new DeleteResult( deletedCount: 1 );
-    }
-
-    ///
-    /// <inheritdoc />
-    ///
-    public virtual async Task<DeleteResult> DeleteAsync( TSymbol symbol, CancellationToken cancellationToken = default )
-    {
-        try
-        {
-            var result = await Lock( async () => await DeleteAsyncImpl( symbol, cancellationToken ) );
-
-            return await result;
-        }
-        catch( Exception e )
-        {
-            return new DeleteResult(
-                success: false,
-                failedCount: 1,
-                exception: e
-            );
-        }
-    }
-
-    ///
-    /// <inheritdoc />
-    ///
-    public virtual async Task<DeleteResult> DeleteAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default )
-    {
-        var deletedCount = 0;
-        var failedCount = 0;
-
-        try
-        {
-            await Lock( async () =>
-                {
-                    foreach( var x in symbols )
-                    {
-                        var result = await DeleteAsyncImpl( x, cancellationToken );
-
-                        deletedCount += result.DeletedCount;
-                        failedCount  += result.FailedCount;
-                    }
-                }
-            );
-
-            return new DeleteResult(
-                success: true,
-                deletedCount: deletedCount,
-                failedCount: failedCount
-            );
-        }
-        catch( Exception e )
-        {
-            return new DeleteResult(
-                success: false,
-                deletedCount: deletedCount,
-                failedCount: failedCount,
-                exception: e
-            );
         }
     }
 
