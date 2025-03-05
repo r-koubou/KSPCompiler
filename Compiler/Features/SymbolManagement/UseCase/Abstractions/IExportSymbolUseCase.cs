@@ -4,7 +4,7 @@ using KSPCompiler.Features.SymbolManagement.Gateways;
 using KSPCompiler.Shared.Domain.Symbols;
 using KSPCompiler.Shared.UseCase;
 
-namespace KSPCompiler.Features.SymbolManagement.UseCase;
+namespace KSPCompiler.Features.SymbolManagement.UseCase.Abstractions;
 
 public sealed class ExportSymbolInputData<TSymbol>(
     ExportSymbolInputDataDetail<TSymbol> inputInput

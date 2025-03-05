@@ -3,7 +3,7 @@ using System;
 using KSPCompiler.Shared.Domain.Symbols;
 using KSPCompiler.Shared.UseCase;
 
-namespace KSPCompiler.Features.SymbolManagement.UseCase;
+namespace KSPCompiler.Features.SymbolManagement.UseCase.Abstractions;
 
 public sealed class DeleteSymbolInputData<TSymbol>(
     Predicate<TSymbol> inputInput

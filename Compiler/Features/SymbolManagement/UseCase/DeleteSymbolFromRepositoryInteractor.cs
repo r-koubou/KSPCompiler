@@ -1,11 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Gateways.Symbols;
-using KSPCompiler.UseCases.Symbols;
+using KSPCompiler.Features.SymbolManagement.Gateways;
+using KSPCompiler.Features.SymbolManagement.UseCase.Abstractions;
+using KSPCompiler.Shared.Domain.Symbols;
 
-namespace KSPCompiler.Interactors.Symbols;
+namespace KSPCompiler.Features.SymbolManagement.UseCase;
 
 public class DeleteSymbolFromRepositoryInteractor<TSymbol> : IDeleteSymbolUseCase<TSymbol> where TSymbol : SymbolBase
 {
