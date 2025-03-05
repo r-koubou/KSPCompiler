@@ -1,9 +1,10 @@
 using System;
 
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Gateways.Symbols;
+using KSPCompiler.Features.SymbolManagement.Gateways;
+using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.UseCase;
 
-namespace KSPCompiler.UseCases.Symbols;
+namespace KSPCompiler.Features.SymbolManagement.UseCase;
 
 public sealed class ImportSymbolInputPort<TSymbol>(
     ISymbolImporter<TSymbol> inputInput

@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 
-using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.UseCase;
 
-namespace KSPCompiler.UseCases.Symbols;
+namespace KSPCompiler.Features.SymbolManagement.UseCase;
 
 public sealed class FindSymbolInputData<TSymbol>(
     Predicate<TSymbol> inputInput
