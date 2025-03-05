@@ -1,0 +1,18 @@
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Evaluations.Statements;
+using KSPCompiler.Shared.Domain.Ast.Nodes;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Statements;
+
+namespace KSPCompiler.Features.Compilation.UseCase.Tests.Analysis.Semantics;
+
+public class MockWhileStatementVisitor : DefaultAstVisitor
+{
+    private IWhileStatementEvaluator Evaluator { get; set; } = new MockWhileStatementEvaluator();
+
+    public void Inject( IWhileStatementEvaluator evaluator )
+    {
+        Evaluator = evaluator;
+    }
+
+    public override IAstNode Visit( AstWhileStatementNode node )
+        => Evaluator.Evaluate( this, node );
+}
