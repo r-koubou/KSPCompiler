@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 
-using KSPCompiler.Domain.Ast.Nodes;
-using KSPCompiler.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Shared.Domain.Ast.Nodes;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Expressions;
 
 using NUnit.Framework;
 
-namespace KSPCompiler.Parser.Antlr.Tests
+namespace KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Tests
 {
     public class AstListedNodeTest
     {

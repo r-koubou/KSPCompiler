@@ -1,12 +1,11 @@
 using System.IO;
 
-using KSPCompiler.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Gateways.EventEmitting;
-using KSPCompiler.Infrastructures.Parser.Antlr;
+using KSPCompiler.Shared.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Shared.EventEmitting;
 
 using NUnit.Framework;
 
-namespace KSPCompiler.Parser.Antlr.Tests.Commons;
+namespace KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Tests.Commons;
 
 public static class ParseTestUtility
 {

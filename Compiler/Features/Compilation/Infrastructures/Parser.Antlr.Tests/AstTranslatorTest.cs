@@ -1,10 +1,10 @@
 using System.IO;
 
-using KSPCompiler.Parser.Antlr.Tests.Commons;
+using KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Tests.Commons;
 
 using NUnit.Framework;
 
-namespace KSPCompiler.Parser.Antlr.Tests;
+namespace KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Tests;
 
 [TestFixture]
 public class AstTranslatorTest
