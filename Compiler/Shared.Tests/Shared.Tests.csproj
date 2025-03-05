@@ -3,7 +3,7 @@
     <PropertyGroup>
         <LangVersion>default</LangVersion>
         <TargetFramework>net9.0</TargetFramework>
-        <RootNamespace>KSPCompiler.Domain.Tests</RootNamespace>
+        <RootNamespace>KSPCompiler.Shared.Tests</RootNamespace>
         <Nullable>enable</Nullable>
         <IsPackable>false</IsPackable>
     </PropertyGroup>
@@ -15,8 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Domain\Domain.csproj" />
-      <ProjectReference Include="..\UseCases\UseCases.csproj" />
+      <ProjectReference Include="..\Shared\Shared.csproj" />
     </ItemGroup>
 
 </Project>

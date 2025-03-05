@@ -1,10 +1,10 @@
 using System.Linq;
 
-using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Shared.Domain.Symbols;
 
 using NUnit.Framework;
 
-namespace KSPCompiler.Domain.Tests.Symbols;
+namespace KSPCompiler.Shared.Tests.Domain.Symbols;
 
 [TestFixture]
 public class CallbackSymbolTableTest

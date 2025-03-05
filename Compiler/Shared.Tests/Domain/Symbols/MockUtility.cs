@@ -1,6 +1,6 @@
-using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Shared.Domain.Symbols;
 
-namespace KSPCompiler.Domain.Tests.Symbols;
+namespace KSPCompiler.Shared.Tests.Domain.Symbols;
 
 internal static class MockUtility
 {
