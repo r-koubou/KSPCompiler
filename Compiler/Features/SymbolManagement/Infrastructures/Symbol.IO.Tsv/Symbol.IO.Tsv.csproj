@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <LangVersion>default</LangVersion>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <Nullable>enable</Nullable>
+        <Copyright>R-Koubou</Copyright>
+        <Company>R-Koubou</Company>
+        <Product>KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv</Product>
+        <AssemblyName>KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv</AssemblyName>
+        <RootNamespace>KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv</RootNamespace>
+    </PropertyGroup>
+
+
+    <ItemGroup>
+      <PackageReference Include="CsvHelper" Version="33.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\..\Shared\Shared.csproj" />
+      <ProjectReference Include="..\..\Gateways\Gateways.csproj" />
+    </ItemGroup>
+
+</Project>

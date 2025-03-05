@@ -11,6 +11,26 @@ public interface ISymbolRepository<TSymbol> : IDisposable where TSymbol : Symbol
 {
     public int Count { get; }
 
+    public StoreResult Store( TSymbol symbol )
+        => StoreAsync( symbol ).GetAwaiter().GetResult();
+
+    public Task<StoreResult> StoreAsync( TSymbol symbol, CancellationToken cancellationToken = default );
+
+    public StoreResult Store( IEnumerable<TSymbol> symbols )
+        => StoreAsync( symbols ).GetAwaiter().GetResult();
+
+    public Task<StoreResult> StoreAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default );
+
+    public DeleteResult Delete( TSymbol symbol )
+        => DeleteAsync( symbol ).GetAwaiter().GetResult();
+
+    public Task<DeleteResult> DeleteAsync( TSymbol symbol, CancellationToken cancellationToken = default );
+
+    public DeleteResult Delete( IEnumerable<TSymbol> symbols )
+        => DeleteAsync( symbols ).GetAwaiter().GetResult();
+
+    public Task<DeleteResult> DeleteAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default );
+
     public IReadOnlyCollection<TSymbol> FindByName( string name )
         => FindByNameAsync( name ).GetAwaiter().GetResult();
 
@@ -25,4 +45,12 @@ public interface ISymbolRepository<TSymbol> : IDisposable where TSymbol : Symbol
         => FindAllAsync().GetAwaiter().GetResult();
 
     public Task<IReadOnlyCollection<TSymbol>> FindAllAsync( CancellationToken cancellationToken = default );
+
+    public void Flush()
+        => FlushAsync().GetAwaiter().GetResult();
+
+    public async Task FlushAsync()
+    {
+        await Task.CompletedTask;
+    }
 }
