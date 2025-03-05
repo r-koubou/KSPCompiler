@@ -2,31 +2,30 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-using KSPCompiler.Commons.Contents;
-using KSPCompiler.Commons.Path;
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.ExternalSymbol.Tsv.Callbacks;
-using KSPCompiler.ExternalSymbol.Tsv.Commands;
-using KSPCompiler.ExternalSymbol.Tsv.UITypes;
-using KSPCompiler.ExternalSymbol.Tsv.Variables;
-using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Callbacks;
-using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Commands;
-using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.UITypes;
-using KSPCompiler.ExternalSymbolRepository.JSONFlatFileDataStore.Variables;
-using KSPCompiler.Gateways.Symbols;
-using KSPCompiler.Infrastructures.Commons.LocalStorages;
-using KSPCompiler.Interactors.ApplicationServices.Symbols;
+using KSPCompiler.Features.Shared.IO.LocalStorages;
+using KSPCompiler.Features.SymbolManagement.Gateways;
+using KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv.Callbacks;
+using KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv.Commands;
+using KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv.UITypes;
+using KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv.Variables;
+using KSPCompiler.Features.SymbolManagement.UseCase.ApplicationServices;
+using KSPCompiler.Shared.Contents;
+using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Path;
+using KSPCompiler.SymbolManagement.Repository.Yaml.Callbacks;
+using KSPCompiler.SymbolManagement.Repository.Yaml.Commands;
+using KSPCompiler.SymbolManagement.Repository.Yaml.UITypes;
+using KSPCompiler.SymbolManagement.Repository.Yaml.Variables;
 
 using NUnit.Framework;
 
-namespace KSPCompiler.Interactors.Tests.ApplicationServices.Symbol;
+namespace KSPCompiler.Interactors.Tests.ApplicationServices;
 
 [TestFixture]
 public class SymbolLocalDatabaseApplicationServiceTest
 {
     private static readonly string TestDataDirectory = Path.Combine(
         "ApplicationServices",
-        "Symbol",
         "TestData",
         "SymbolLocalDatabaseApplicationServiceTest"
     );
@@ -46,7 +45,7 @@ public class SymbolLocalDatabaseApplicationServiceTest
     public async Task ImportVariablesTest()
     {
         var importPath = new FilePath( Path.Combine( ImportTestDataDirectory, "variable.tsv" ) );
-        var repositoryPath = new FilePath( Path.Combine( ImportTestDataDirectory, "repository_variable.json" ) );
+        var repositoryPath = new FilePath( Path.Combine( ImportTestDataDirectory, "repository_variable.yaml" ) );
 
         ITextContentReader reader = new LocalTextContentReader( importPath );
         ISymbolImporter<VariableSymbol> importer = new TsvVariableSymbolImporter( reader );
@@ -62,7 +61,7 @@ public class SymbolLocalDatabaseApplicationServiceTest
     public async Task ExportVariablesTest()
     {
         var exportPath = new FilePath( Path.Combine( ExportTestDataDirectory, "variable.tsv" ) );
-        var repositoryPath = new FilePath( Path.Combine( ExportTestDataDirectory, "repository_variable.json" ) );
+        var repositoryPath = new FilePath( Path.Combine( ExportTestDataDirectory, "repository_variable.yaml" ) );
 
         ITextContentWriter writer = new LocalTextContentWriter( exportPath );
         ISymbolExporter<VariableSymbol> exporter = new TsvVariableSymbolExporter( writer );
@@ -77,7 +76,7 @@ public class SymbolLocalDatabaseApplicationServiceTest
     [Test]
     public async Task DeleteVariablesTest()
     {
-        var repositoryPath = new FilePath( Path.Combine( DeleteTestDataDirectory, "repository_variable.json" ) );
+        var repositoryPath = new FilePath( Path.Combine( DeleteTestDataDirectory, "repository_variable.yaml" ) );
 
         using ISymbolRepository<VariableSymbol> repository = new VariableSymbolRepository( repositoryPath );
         var applicationService = new SymbolDatabaseApplicationService<VariableSymbol>( repository );
@@ -91,7 +90,7 @@ public class SymbolLocalDatabaseApplicationServiceTest
     [Test]
     public async Task FindVariablesTest()
     {
-        var repositoryPath = new FilePath( Path.Combine( FindTestDataDirectory, "repository_variable.json" ) );
+        var repositoryPath = new FilePath( Path.Combine( FindTestDataDirectory, "repository_variable.yaml" ) );
 
         using ISymbolRepository<VariableSymbol> repository = new VariableSymbolRepository( repositoryPath );
         var applicationService = new SymbolDatabaseApplicationService<VariableSymbol>( repository );
@@ -121,7 +120,7 @@ public class SymbolLocalDatabaseApplicationServiceTest
     public async Task ImportCommandsTest()
     {
         var importPath = new FilePath( Path.Combine( ImportTestDataDirectory, "command.tsv" ) );
-        var repositoryPath = new FilePath( Path.Combine( ImportTestDataDirectory, "repository_command.json" ) );
+        var repositoryPath = new FilePath( Path.Combine( ImportTestDataDirectory, "repository_command.yaml" ) );
 
         ITextContentReader reader = new LocalTextContentReader( importPath );
         ISymbolImporter<CommandSymbol> importer = new TsvCommandSymbolImporter( reader );
@@ -137,7 +136,7 @@ public class SymbolLocalDatabaseApplicationServiceTest
     public async Task ExportCommandsTest()
     {
         var exportPath = new FilePath( Path.Combine( ExportTestDataDirectory, "command.tsv" ) );
-        var repositoryPath = new FilePath( Path.Combine( ExportTestDataDirectory, "repository_command.json" ) );
+        var repositoryPath = new FilePath( Path.Combine( ExportTestDataDirectory, "repository_command.yaml" ) );
 
         ITextContentWriter writer = new LocalTextContentWriter( exportPath );
         ISymbolExporter<CommandSymbol> exporter = new TsvCommandSymbolExporter( writer );
@@ -152,7 +151,7 @@ public class SymbolLocalDatabaseApplicationServiceTest
     [Test]
     public async Task DeleteCommandsTest()
     {
-        var repositoryPath = new FilePath( Path.Combine( DeleteTestDataDirectory, "repository_command.json" ) );
+        var repositoryPath = new FilePath( Path.Combine( DeleteTestDataDirectory, "repository_command.yaml" ) );
 
         using ISymbolRepository<CommandSymbol> repository = new CommandSymbolRepository( repositoryPath );
         var applicationService = new SymbolDatabaseApplicationService<CommandSymbol>( repository );
@@ -166,7 +165,7 @@ public class SymbolLocalDatabaseApplicationServiceTest
     [Test]
     public async Task FindCommandsTest()
     {
-        var repositoryPath = new FilePath( Path.Combine( FindTestDataDirectory, "repository_command.json" ) );
+        var repositoryPath = new FilePath( Path.Combine( FindTestDataDirectory, "repository_command.yaml" ) );
 
         using ISymbolRepository<CommandSymbol> repository = new CommandSymbolRepository( repositoryPath );
         var applicationService = new SymbolDatabaseApplicationService<CommandSymbol>( repository );
@@ -196,7 +195,7 @@ public class SymbolLocalDatabaseApplicationServiceTest
     public async Task ImportCallbacksTest()
     {
         var importPath = new FilePath( Path.Combine( ImportTestDataDirectory, "callback.tsv" ) );
-        var repositoryPath = new FilePath( Path.Combine( ImportTestDataDirectory, "repository_callback.json" ) );
+        var repositoryPath = new FilePath( Path.Combine( ImportTestDataDirectory, "repository_callback.yaml" ) );
 
         ITextContentReader reader = new LocalTextContentReader( importPath );
         ISymbolImporter<CallbackSymbol> importer = new TsvCallbackSymbolImporter( reader );
@@ -212,7 +211,7 @@ public class SymbolLocalDatabaseApplicationServiceTest
     public async Task ExportCallbacksTest()
     {
         var exportPath = new FilePath( Path.Combine( ExportTestDataDirectory, "callback.tsv" ) );
-        var repositoryPath = new FilePath( Path.Combine( ExportTestDataDirectory, "repository_callback.json" ) );
+        var repositoryPath = new FilePath( Path.Combine( ExportTestDataDirectory, "repository_callback.yaml" ) );
 
         ITextContentWriter writer = new LocalTextContentWriter( exportPath );
         ISymbolExporter<CallbackSymbol> exporter = new TsvCallbackSymbolExporter( writer );
@@ -227,7 +226,7 @@ public class SymbolLocalDatabaseApplicationServiceTest
     [Test]
     public async Task DeleteCallbacksTest()
     {
-        var repositoryPath = new FilePath( Path.Combine( DeleteTestDataDirectory, "repository_callback.json" ) );
+        var repositoryPath = new FilePath( Path.Combine( DeleteTestDataDirectory, "repository_callback.yaml" ) );
 
         using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryPath );
         var applicationService = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
@@ -241,7 +240,7 @@ public class SymbolLocalDatabaseApplicationServiceTest
     [Test]
     public async Task FindCallbacksTest()
     {
-        var repositoryPath = new FilePath( Path.Combine( FindTestDataDirectory, "repository_callback.json" ) );
+        var repositoryPath = new FilePath( Path.Combine( FindTestDataDirectory, "repository_callback.yaml" ) );
 
         using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryPath );
         var applicationService = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
@@ -271,7 +270,7 @@ public class SymbolLocalDatabaseApplicationServiceTest
     public async Task ImportUITypeTest()
     {
         var importPath = new FilePath( Path.Combine( ImportTestDataDirectory, "ui_type.tsv" ) );
-        var repositoryPath = new FilePath( Path.Combine( ImportTestDataDirectory, "repository_ui_type.json" ) );
+        var repositoryPath = new FilePath( Path.Combine( ImportTestDataDirectory, "repository_ui_type.yaml" ) );
 
         ITextContentReader reader = new LocalTextContentReader( importPath );
         ISymbolImporter<UITypeSymbol> importer = new TsvUITypeSymbolImporter( reader );
@@ -287,7 +286,7 @@ public class SymbolLocalDatabaseApplicationServiceTest
     public async Task ExportUITypeTest()
     {
         var exportPath = new FilePath( Path.Combine( ExportTestDataDirectory, "ui_type.tsv" ) );
-        var repositoryPath = new FilePath( Path.Combine( ExportTestDataDirectory, "repository_ui_type.json" ) );
+        var repositoryPath = new FilePath( Path.Combine( ExportTestDataDirectory, "repository_ui_type.yaml" ) );
 
         ITextContentWriter writer = new LocalTextContentWriter( exportPath );
         ISymbolExporter<UITypeSymbol> exporter = new TsvUITypeSymbolExporter( writer );
@@ -302,7 +301,7 @@ public class SymbolLocalDatabaseApplicationServiceTest
     [Test]
     public async Task DeleteUITypeTest()
     {
-        var repositoryPath = new FilePath( Path.Combine( DeleteTestDataDirectory, "repository_ui_type.json" ) );
+        var repositoryPath = new FilePath( Path.Combine( DeleteTestDataDirectory, "repository_ui_type.yaml" ) );
 
         using ISymbolRepository<UITypeSymbol> repository = new UITypeSymbolRepository( repositoryPath );
         var applicationService = new SymbolDatabaseApplicationService<UITypeSymbol>( repository );
@@ -316,7 +315,7 @@ public class SymbolLocalDatabaseApplicationServiceTest
     [Test]
     public async Task FindUITypeTest()
     {
-        var repositoryPath = new FilePath( Path.Combine( FindTestDataDirectory, "repository_ui_type.json" ) );
+        var repositoryPath = new FilePath( Path.Combine( FindTestDataDirectory, "repository_ui_type.yaml" ) );
 
         using ISymbolRepository<UITypeSymbol> repository = new UITypeSymbolRepository( repositoryPath );
         var applicationService = new SymbolDatabaseApplicationService<UITypeSymbol>( repository );

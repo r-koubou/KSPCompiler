@@ -1,0 +1,18 @@
+FormatVersion: 1.0.0
+Data:
+- Id: ddeff4ea-283c-4bbc-9b05-34ac91dd7d8c
+  Name: '!NI_DND_ITEMS_ARRAY'
+  BuiltIn: true
+  Description: |-
+    Built-in Variable: !NI_DND_ITEMS_ARRAY
+  BuiltIntoVersion: N/A
+  CreatedAt: 2025-01-26T06:28:18.3596380Z
+  UpdatedAt: 2025-01-26T06:28:18.3596380Z
+- Id: fbed017b-42b2-4e86-ba44-b494f6b6b959
+  Name: '!NI_DND_ITEMS_AUDIO'
+  BuiltIn: true
+  Description: |-
+    Built-in Variable: !NI_DND_ITEMS_AUDIO
+  BuiltIntoVersion: N/A
+  CreatedAt: 2025-01-26T06:28:18.3596790Z
+  UpdatedAt: 2025-01-26T06:28:18.3596790Z

@@ -1,0 +1,24 @@
+FormatVersion: 1.0.0
+Data:
+- Id: 7eb866d4-468d-4f1f-8594-aee0af2de0ce
+  Name: ui_button
+  BuiltIn: false
+  VariableType: I
+  Description: |-
+    Creates a button in the performance view.
+  BuiltIntoVersion: N/A
+  RequireInitializer: false
+  InitializerArguments: []
+  CreatedAt: 2025-01-26T06:28:18.1809660Z
+  UpdatedAt: 2025-01-26T06:28:18.1809660Z
+- Id: eacf73b9-61ca-4fd7-9dca-f6078e6fb546
+  Name: ui_file_selector
+  BuiltIn: false
+  VariableType: I
+  Description: |-
+    Creates a file selector in the performance view.
+  BuiltIntoVersion: N/A
+  RequireInitializer: false
+  InitializerArguments: []
+  CreatedAt: 2025-01-26T06:28:18.1810570Z
+  UpdatedAt: 2025-01-26T06:28:18.1810570Z
