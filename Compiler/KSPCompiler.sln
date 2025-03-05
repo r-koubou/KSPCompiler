@@ -50,6 +50,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Symbol.IO", "Symbol.IO", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Symbol Reposotories", "Symbol Reposotories", "{D74D681E-0AD5-4D8D-8F1F-5CBE78AAFFED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SymbolRepository.Yaml", "Features\SymbolManagement\Infrastructures\SymbolRepository.Yaml\SymbolRepository.Yaml.csproj", "{E28D70E3-EC93-4040-83BE-393BA4E2595A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SymbolRepository.Yaml.Tests", "Features\SymbolManagement\Infrastructures\SymbolRepository.Yaml.Tests\SymbolRepository.Yaml.Tests.csproj", "{AC50CC4C-46FA-4C8C-87A0-7FEE7A08C907}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -120,6 +124,14 @@ Global
 		{453F46A1-8D5A-4DA4-8154-C5BAEDA59936}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{453F46A1-8D5A-4DA4-8154-C5BAEDA59936}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{453F46A1-8D5A-4DA4-8154-C5BAEDA59936}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E28D70E3-EC93-4040-83BE-393BA4E2595A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E28D70E3-EC93-4040-83BE-393BA4E2595A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E28D70E3-EC93-4040-83BE-393BA4E2595A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E28D70E3-EC93-4040-83BE-393BA4E2595A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC50CC4C-46FA-4C8C-87A0-7FEE7A08C907}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC50CC4C-46FA-4C8C-87A0-7FEE7A08C907}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC50CC4C-46FA-4C8C-87A0-7FEE7A08C907}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC50CC4C-46FA-4C8C-87A0-7FEE7A08C907}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{73586D91-B9CA-4555-8540-410A74C8E60A} = {249A6BEA-D69A-4F19-96F2-C55C0058F99B}
@@ -145,5 +157,7 @@ Global
 		{DFB3E0B9-CC56-40A9-B7B2-7E7D6729BBE6} = {1F8D3489-CF2D-47BF-BFF0-71695609CAC6}
 		{453F46A1-8D5A-4DA4-8154-C5BAEDA59936} = {1F8D3489-CF2D-47BF-BFF0-71695609CAC6}
 		{D74D681E-0AD5-4D8D-8F1F-5CBE78AAFFED} = {E4600810-747E-4B41-8D6C-3CD424F4CEC8}
+		{E28D70E3-EC93-4040-83BE-393BA4E2595A} = {D74D681E-0AD5-4D8D-8F1F-5CBE78AAFFED}
+		{AC50CC4C-46FA-4C8C-87A0-7FEE7A08C907} = {D74D681E-0AD5-4D8D-8F1F-5CBE78AAFFED}
 	EndGlobalSection
 EndGlobal
