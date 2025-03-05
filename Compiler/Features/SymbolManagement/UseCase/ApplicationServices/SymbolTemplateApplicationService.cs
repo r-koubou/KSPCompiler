@@ -1,12 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Gateways.Symbols;
-using KSPCompiler.Interactors.Symbols;
-using KSPCompiler.UseCases.Symbols;
+using KSPCompiler.Features.SymbolManagement.Gateways;
+using KSPCompiler.Features.SymbolManagement.UseCase.Abstractions;
+using KSPCompiler.Shared.Domain.Symbols;
 
-namespace KSPCompiler.Interactors.ApplicationServices.Symbols;
+namespace KSPCompiler.Features.SymbolManagement.UseCase.ApplicationServices;
 
 public sealed class SymbolTemplateApplicationService<TSymbol> where TSymbol : SymbolBase
 {

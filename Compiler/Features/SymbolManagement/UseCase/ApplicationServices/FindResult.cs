@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 
-using KSPCompiler.Domain.Symbols;
+using KSPCompiler.Shared.Domain.Symbols;
 
-namespace KSPCompiler.Interactors.ApplicationServices.Symbols;
+namespace KSPCompiler.Features.SymbolManagement.UseCase.ApplicationServices;
 
 public sealed class FindResult<TSymbol> where TSymbol : SymbolBase
 {

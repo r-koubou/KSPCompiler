@@ -1,6 +1,6 @@
 using System;
 
-namespace KSPCompiler.Interactors.ApplicationServices.Symbols;
+namespace KSPCompiler.Features.SymbolManagement.UseCase.ApplicationServices;
 
 public class ImportResult
 {

@@ -16,4 +16,8 @@
       <ProjectReference Include="..\Gateways\Gateways.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="ApplicationServices\" />
+    </ItemGroup>
+
 </Project>
