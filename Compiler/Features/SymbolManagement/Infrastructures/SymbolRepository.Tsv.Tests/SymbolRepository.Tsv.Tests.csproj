@@ -34,7 +34,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\..\Shared.IO\Shared.IO.csproj" />
-      <ProjectReference Include="..\ExternalSymbol.Tsv\ExternalSymbol.Tsv.csproj" />
+      <ProjectReference Include="..\SymbolRepository.Tsv\SymbolRepository.Tsv.csproj" />
       <ProjectReference Include="..\Infrastructures.Commons.Tests\Infrastructures.Commons.Tests.csproj" />
     </ItemGroup>
 

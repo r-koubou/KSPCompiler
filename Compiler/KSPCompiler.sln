@@ -32,9 +32,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateways", "Features\Symbol
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructures", "Infrastructures", "{E4600810-747E-4B41-8D6C-3CD424F4CEC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalSymbol.Tsv", "Features\SymbolManagement\Infrastructures\ExternalSymbol.Tsv\ExternalSymbol.Tsv.csproj", "{BD60E9D8-44B7-48E9-92B7-A3674F6C601C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SymbolRepository.Tsv", "Features\SymbolManagement\Infrastructures\SymbolRepository.Tsv\SymbolRepository.Tsv.csproj", "{BD60E9D8-44B7-48E9-92B7-A3674F6C601C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalSymbol.Tsv.Tests", "Features\SymbolManagement\Infrastructures\ExternalSymbol.Tsv.Tests\ExternalSymbol.Tsv.Tests.csproj", "{CCCAE12E-E70A-4DF7-809D-5E7E9813914C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SymbolRepository.Tsv.Tests", "Features\SymbolManagement\Infrastructures\SymbolRepository.Tsv.Tests\SymbolRepository.Tsv.Tests.csproj", "{CCCAE12E-E70A-4DF7-809D-5E7E9813914C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{5FFC4E1C-7553-4C11-A22C-8A3CDFA6643E}"
 EndProject
