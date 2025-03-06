@@ -2,9 +2,9 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-using KSPCompiler.Interactors.ApplicationServices.Symbols;
+using KSPCompiler.Features.SymbolManagement.Gateways;
 
-namespace KSPCompiler.Applications.SymbolDbManager.Services;
+namespace KSPCompiler.Features.SymbolManagement.Applications.SymbolDbManager.Services;
 
 // ReSharper disable LocalizableElement
 

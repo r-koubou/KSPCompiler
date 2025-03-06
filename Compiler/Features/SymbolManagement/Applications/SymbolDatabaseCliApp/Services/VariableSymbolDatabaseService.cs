@@ -2,20 +2,18 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-using KSPCompiler.Commons.Path;
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.ExternalSymbol.Tsv.UITypes;
-using KSPCompiler.ExternalSymbolRepository.Yaml.UITypes;
-using KSPCompiler.Infrastructures.Commons.LocalStorages;
-using KSPCompiler.Interactors.ApplicationServices.Symbols;
+using KSPCompiler.Features.Shared.IO.LocalStorages;
+using KSPCompiler.Features.SymbolManagement.Gateways;
+using KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv.Variables;
+using KSPCompiler.Features.SymbolManagement.UseCase.ApplicationServices;
+using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Path;
+using KSPCompiler.SymbolManagement.Repository.Yaml.Variables;
 
-using DeleteResult = KSPCompiler.Interactors.ApplicationServices.Symbols.DeleteResult;
-
-namespace KSPCompiler.Applications.SymbolDbManager.Services;
+namespace KSPCompiler.Features.SymbolManagement.Applications.SymbolDbManager.Services;
 
 // ReSharper disable LocalizableElement
-
-public class UITypeSymbolDatabaseService : IUITypeSymbolDatabaseService
+public class VariableSymbolDatabaseService : IVariableSymbolDatabaseService
 {
     public async Task<ImportResult> ImportSymbolsAsync( string databaseFilePath, string importFilePath, CancellationToken cancellationToken = default )
     {
@@ -24,9 +22,9 @@ public class UITypeSymbolDatabaseService : IUITypeSymbolDatabaseService
             var importPath = new FilePath( importFilePath );
             var repositoryPath = new FilePath( databaseFilePath );
             var reader = new LocalTextContentReader( importPath );
-            var importer = new TsvUITypeSymbolImporter( reader );
-            using var repository = new UITypeSymbolRepository( repositoryPath );
-            var applicationService = new SymbolDatabaseApplicationService<UITypeSymbol>( repository );
+            var importer = new TsvVariableSymbolImporter( reader );
+            using var repository = new VariableSymbolRepository( repositoryPath );
+            var applicationService = new SymbolDatabaseApplicationService<VariableSymbol>( repository );
 
             return await applicationService.ImportAsync( importer, cancellationToken );
         }
@@ -44,9 +42,9 @@ public class UITypeSymbolDatabaseService : IUITypeSymbolDatabaseService
             var exportPath = new FilePath( exportFilePath );
             var repositoryPath = new FilePath( databaseFilePath );
             var writer = new LocalTextContentWriter( exportPath );
-            using var repository = new UITypeSymbolRepository( repositoryPath );
-            var exporter = new TsvUITypeSymbolExporter( writer );
-            var applicationService = new SymbolDatabaseApplicationService<UITypeSymbol>( repository );
+            using var repository = new VariableSymbolRepository( repositoryPath );
+            var exporter = new TsvVariableSymbolExporter( writer );
+            var applicationService = new SymbolDatabaseApplicationService<VariableSymbol>( repository );
 
             return await applicationService.ExportAsync(
                 exporter,
@@ -66,8 +64,8 @@ public class UITypeSymbolDatabaseService : IUITypeSymbolDatabaseService
         {
             var regexPattern = ISymbolDatabaseService.WildCardToRegexPattern( deletePattern );
             var repositoryPath = new FilePath( databaseFilePath );
-            using var repository = new UITypeSymbolRepository( repositoryPath );
-            var applicationService = new SymbolDatabaseApplicationService<UITypeSymbol>( repository );
+            using var repository = new VariableSymbolRepository( repositoryPath );
+            var applicationService = new SymbolDatabaseApplicationService<VariableSymbol>( repository );
 
             return await applicationService.DeleteAsync(
                 symbol => regexPattern.IsMatch( symbol.Name.Value ),
@@ -76,7 +74,12 @@ public class UITypeSymbolDatabaseService : IUITypeSymbolDatabaseService
         }
         catch( Exception e )
         {
-            return new DeleteResult( false, 0, e );
+            return new DeleteResult(
+                success: false,
+                deletedCount: 0,
+                failedCount: 0,
+                exception: e
+            );
         }
     }
 }

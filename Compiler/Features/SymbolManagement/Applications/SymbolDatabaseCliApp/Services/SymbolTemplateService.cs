@@ -2,14 +2,14 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-using KSPCompiler.Commons.Contents;
-using KSPCompiler.Commons.Path;
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Gateways.Symbols;
-using KSPCompiler.Infrastructures.Commons.LocalStorages;
-using KSPCompiler.Interactors.ApplicationServices.Symbols;
+using KSPCompiler.Features.Shared.IO.LocalStorages;
+using KSPCompiler.Features.SymbolManagement.Gateways;
+using KSPCompiler.Features.SymbolManagement.UseCase.ApplicationServices;
+using KSPCompiler.Shared.Contents;
+using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Path;
 
-namespace KSPCompiler.Applications.SymbolDbManager.Services;
+namespace KSPCompiler.Features.SymbolManagement.Applications.SymbolDbManager.Services;
 
 public abstract class SymbolTemplateService<TSymbol> : ISymbolTemplateService where TSymbol : SymbolBase
 {

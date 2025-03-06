@@ -2,18 +2,19 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-using KSPCompiler.Commons.Path;
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.ExternalSymbol.Tsv.Callbacks;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks;
-using KSPCompiler.Infrastructures.Commons.LocalStorages;
-using KSPCompiler.Interactors.ApplicationServices.Symbols;
+using KSPCompiler.Features.Shared.IO.LocalStorages;
+using KSPCompiler.Features.SymbolManagement.Gateways;
+using KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv.UITypes;
+using KSPCompiler.Features.SymbolManagement.UseCase.ApplicationServices;
+using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Path;
+using KSPCompiler.SymbolManagement.Repository.Yaml.UITypes;
 
-namespace KSPCompiler.Applications.SymbolDbManager.Services;
+namespace KSPCompiler.Features.SymbolManagement.Applications.SymbolDbManager.Services;
 
 // ReSharper disable LocalizableElement
 
-public class CallbackSymbolDatabaseService : ICallbackSymbolDatabaseService
+public class UITypeSymbolDatabaseService : IUITypeSymbolDatabaseService
 {
     public async Task<ImportResult> ImportSymbolsAsync( string databaseFilePath, string importFilePath, CancellationToken cancellationToken = default )
     {
@@ -22,11 +23,11 @@ public class CallbackSymbolDatabaseService : ICallbackSymbolDatabaseService
             var importPath = new FilePath( importFilePath );
             var repositoryPath = new FilePath( databaseFilePath );
             var reader = new LocalTextContentReader( importPath );
-            var importer = new TsvCallbackSymbolImporter( reader );
-            using var repository = new CallbackSymbolRepository( repositoryPath );
-            var controller = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
+            var importer = new TsvUITypeSymbolImporter( reader );
+            using var repository = new UITypeSymbolRepository( repositoryPath );
+            var applicationService = new SymbolDatabaseApplicationService<UITypeSymbol>( repository );
 
-            return await controller.ImportAsync( importer, cancellationToken );
+            return await applicationService.ImportAsync( importer, cancellationToken );
         }
         catch( Exception e )
         {
@@ -42,11 +43,11 @@ public class CallbackSymbolDatabaseService : ICallbackSymbolDatabaseService
             var exportPath = new FilePath( exportFilePath );
             var repositoryPath = new FilePath( databaseFilePath );
             var writer = new LocalTextContentWriter( exportPath );
-            using var repository = new CallbackSymbolRepository( repositoryPath );
-            var exporter = new TsvCallbackSymbolExporter( writer );
-            var controller = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
+            using var repository = new UITypeSymbolRepository( repositoryPath );
+            var exporter = new TsvUITypeSymbolExporter( writer );
+            var applicationService = new SymbolDatabaseApplicationService<UITypeSymbol>( repository );
 
-            return await controller.ExportAsync(
+            return await applicationService.ExportAsync(
                 exporter,
                 symbol => regexPattern.IsMatch( symbol.Name.Value ),
                 cancellationToken
@@ -64,17 +65,17 @@ public class CallbackSymbolDatabaseService : ICallbackSymbolDatabaseService
         {
             var regexPattern = ISymbolDatabaseService.WildCardToRegexPattern( deletePattern );
             var repositoryPath = new FilePath( databaseFilePath );
-            using var repository = new CallbackSymbolRepository( repositoryPath );
-            var controller = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
+            using var repository = new UITypeSymbolRepository( repositoryPath );
+            var applicationService = new SymbolDatabaseApplicationService<UITypeSymbol>( repository );
 
-            return await controller.DeleteAsync(
+            return await applicationService.DeleteAsync(
                 symbol => regexPattern.IsMatch( symbol.Name.Value ),
                 cancellationToken
             );
         }
         catch( Exception e )
         {
-            return new DeleteResult( false, 0, e );
+            return new DeleteResult( false, 0, 0, e );
         }
     }
 }

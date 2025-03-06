@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 
 using ConsoleAppFramework;
 
-using KSPCompiler.Applications.SymbolDbManager.Services;
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.Interactors.ApplicationServices.Symbols;
+using KSPCompiler.Features.SymbolManagement.Applications.SymbolDbManager.Services;
+using KSPCompiler.Features.SymbolManagement.Gateways;
+using KSPCompiler.Shared.Domain.Symbols;
 
-namespace KSPCompiler.Applications.SymbolDbManager.Commands;
+namespace KSPCompiler.Features.SymbolManagement.Applications.SymbolDbManager.Commands;
 
 // ReSharper disable LocalizableElement
 public class TemplateCommand

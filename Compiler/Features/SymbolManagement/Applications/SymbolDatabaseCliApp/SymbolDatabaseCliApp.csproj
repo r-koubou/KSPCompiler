@@ -7,9 +7,9 @@
         <Nullable>enable</Nullable>
         <Copyright>R-Koubou</Copyright>
         <Company>R-Koubou</Company>
-        <Product>KSPCompiler.Applications.SymbolDbManager</Product>
-        <AssemblyName>KSPCompiler.Applications.SymbolDbManager</AssemblyName>
-        <RootNamespace>KSPCompiler.Applications.SymbolDbManager</RootNamespace>
+        <Product>KSPCompiler.Features.SymbolManagement.SymbolDbManager</Product>
+        <AssemblyName>KSPCompiler.Features.SymbolManagement.Applications.SymbolDbManager</AssemblyName>
+        <RootNamespace>KSPCompiler.Features.SymbolManagement.Applications.SymbolDbManager</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -21,28 +21,29 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="..\..\..\Data\Symbols\callbacks.yaml">
-            <Link>Data\Symbols\callbacks.yaml</Link>
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
-        <Content Include="..\..\..\Data\Symbols\commands.yaml">
-            <Link>Data\Symbols\commands.yaml</Link>
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
-        <Content Include="..\..\..\Data\Symbols\uitypes.yaml">
-            <Link>Data\Symbols\uitypes.yaml</Link>
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
-        <Content Include="..\..\..\Data\Symbols\variables.yaml">
-            <Link>Data\Symbols\variables.yaml</Link>
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
+        <ProjectReference Include="..\..\..\..\Shared.IO\Shared.IO.csproj" />
+        <ProjectReference Include="..\..\Infrastructures\Symbol.IO.Tsv\Symbol.IO.Tsv.csproj" />
+        <ProjectReference Include="..\..\Infrastructures\SymbolRepository.Yaml\SymbolRepository.Yaml.csproj" />
+        <ProjectReference Include="..\..\UseCase\UseCase.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Infrastructures\ExternalSymbol.Tsv\ExternalSymbol.Tsv.csproj" />
-      <ProjectReference Include="..\..\Infrastructures\ExternalSymbolRepository.Yaml\ExternalSymbolRepository.Yaml.csproj" />
-      <ProjectReference Include="..\..\Interactors\Interactors.csproj" />
+        <Content Include="..\..\..\..\..\Data\Symbols\callbacks.yaml">
+            <Link>Data\Symbols\callbacks.yaml</Link>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="..\..\..\..\..\Data\Symbols\commands.yaml">
+            <Link>Data\Symbols\commands.yaml</Link>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="..\..\..\..\..\Data\Symbols\uitypes.yaml">
+            <Link>Data\Symbols\uitypes.yaml</Link>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="..\..\..\..\..\Data\Symbols\variables.yaml">
+            <Link>Data\Symbols\variables.yaml</Link>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
 
 </Project>

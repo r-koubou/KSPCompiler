@@ -2,14 +2,15 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-using KSPCompiler.Commons.Path;
-using KSPCompiler.Domain.Symbols;
-using KSPCompiler.ExternalSymbol.Tsv.Commands;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Commands;
-using KSPCompiler.Infrastructures.Commons.LocalStorages;
-using KSPCompiler.Interactors.ApplicationServices.Symbols;
+using KSPCompiler.Features.Shared.IO.LocalStorages;
+using KSPCompiler.Features.SymbolManagement.Gateways;
+using KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv.Commands;
+using KSPCompiler.Features.SymbolManagement.UseCase.ApplicationServices;
+using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Path;
+using KSPCompiler.SymbolManagement.Repository.Yaml.Commands;
 
-namespace KSPCompiler.Applications.SymbolDbManager.Services;
+namespace KSPCompiler.Features.SymbolManagement.Applications.SymbolDbManager.Services;
 
 // ReSharper disable LocalizableElement
 
@@ -74,7 +75,7 @@ public class CommandSymbolDatabaseService : ICommandSymbolDatabaseService
         }
         catch( Exception e )
         {
-            return new DeleteResult( false, 0, e );
+            return new DeleteResult( success: false, exception: e );
         }
     }
 }
