@@ -7,9 +7,9 @@
         <Nullable>enable</Nullable>
         <Copyright>R-Koubou</Copyright>
         <Company>R-Koubou</Company>
-        <Product>KSPCompiler.Applications.LSServer.LanguageServerFramework</Product>
-        <AssemblyName>KSPCompiler.Applications.LSServer.LanguageServerFramework</AssemblyName>
-        <RootNamespace>KSPCompiler.Applications.LSServer.LanguageServerFramework</RootNamespace>
+        <Product>KSPCompiler.Features..Applications.LanguageServer.LanguageServerFramework</Product>
+        <AssemblyName>KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework</AssemblyName>
+        <RootNamespace>KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
