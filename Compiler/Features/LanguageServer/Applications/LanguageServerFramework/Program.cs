@@ -3,25 +3,23 @@ using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 
-using EmmyLua.LanguageServer.Framework.Server;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Commands;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Completion;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Definition;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.FindReferences;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Folding;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Hover;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Renaming;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.SignatureHelp;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Symbols;
+using KSPCompiler.Features.Compilation.Gateways.Symbols;
+using KSPCompiler.Features.Compilation.Infrastructures.SymbolRepository.Yaml.Callbacks;
+using KSPCompiler.Features.Compilation.Infrastructures.SymbolRepository.Yaml.Commands;
+using KSPCompiler.Features.Compilation.Infrastructures.SymbolRepository.Yaml.UITypes;
+using KSPCompiler.Features.Compilation.Infrastructures.SymbolRepository.Yaml.Variables;
+using KSPCompiler.Features.LanguageServer.UseCase.Compilation;
 
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.Commands;
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.Completion;
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.Definition;
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.FindReferences;
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.Folding;
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.Hover;
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.Renaming;
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.SignatureHelp;
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.Symbols;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Callbacks;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Commands;
-using KSPCompiler.ExternalSymbolRepository.Yaml.UITypes;
-using KSPCompiler.ExternalSymbolRepository.Yaml.Variables;
-using KSPCompiler.Gateways.Symbols;
-using KSPCompiler.Interactors.LanguageServer.Compilation;
-
-namespace KSPCompiler.Applications.LSServer.LanguageServerFramework;
+namespace KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework;
 
 public sealed class Program
 {
@@ -30,7 +28,7 @@ public sealed class Program
         var input = Console.OpenStandardInput();
         var output = Console.OpenStandardOutput();
 
-        var server = LanguageServer.From( input, output );
+        var server = EmmyLua.LanguageServer.Framework.Server.LanguageServer.From( input, output );
         server.OnInitialize( async ( initializeParams, serverInfo ) =>
             {
                 serverInfo.Name    = "ksp";

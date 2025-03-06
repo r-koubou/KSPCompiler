@@ -6,13 +6,13 @@ using EmmyLua.LanguageServer.Framework.Protocol.Capabilities.Server;
 using EmmyLua.LanguageServer.Framework.Protocol.Message.DocumentSymbol;
 using EmmyLua.LanguageServer.Framework.Server.Handler;
 
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.Symbols.Extensions;
-using KSPCompiler.Interactors.LanguageServer.SignatureHelp;
-using KSPCompiler.UseCases.LanguageServer.Compilation;
-using KSPCompiler.UseCases.LanguageServer.Symbol;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Extensions;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Symbols.Extensions;
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Compilation;
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Symbol;
+using KSPCompiler.Features.LanguageServer.UseCase.SignatureHelp;
 
-namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Symbols;
+namespace KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Symbols;
 
 public sealed class DocumentSymbolHandler(
     ICompilationCacheManager compilationCacheManager

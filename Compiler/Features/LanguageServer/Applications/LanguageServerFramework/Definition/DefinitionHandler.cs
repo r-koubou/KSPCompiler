@@ -6,12 +6,12 @@ using EmmyLua.LanguageServer.Framework.Protocol.Capabilities.Server;
 using EmmyLua.LanguageServer.Framework.Protocol.Message.Definition;
 using EmmyLua.LanguageServer.Framework.Server.Handler;
 
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
-using KSPCompiler.Interactors.LanguageServer.Definition;
-using KSPCompiler.UseCases.LanguageServer.Compilation;
-using KSPCompiler.UseCases.LanguageServer.Definition;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Extensions;
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Compilation;
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Definition;
+using KSPCompiler.Features.LanguageServer.UseCase.Definition;
 
-namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Definition;
+namespace KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Definition;
 
 public class DefinitionHandler(
     ICompilationCacheManager compilationCacheManager

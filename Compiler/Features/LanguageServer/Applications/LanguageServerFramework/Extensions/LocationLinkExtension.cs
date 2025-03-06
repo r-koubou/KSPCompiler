@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 
-using KSPCompiler.UseCases.LanguageServer;
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions;
 
 using FrameworkLocationLink = EmmyLua.LanguageServer.Framework.Protocol.Model.LocationLink;
 
 
-namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
+namespace KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Extensions;
 
 public static class LocationLinkExtension
 {

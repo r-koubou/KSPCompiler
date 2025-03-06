@@ -6,13 +6,13 @@ using EmmyLua.LanguageServer.Framework.Protocol.Capabilities.Server;
 using EmmyLua.LanguageServer.Framework.Protocol.Message.FoldingRange;
 using EmmyLua.LanguageServer.Framework.Server.Handler;
 
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.Folding.Extensions;
-using KSPCompiler.Interactors.LanguageServer.Folding;
-using KSPCompiler.UseCases.LanguageServer.Compilation;
-using KSPCompiler.UseCases.LanguageServer.Folding;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Extensions;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Folding.Extensions;
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Compilation;
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Folding;
+using KSPCompiler.Features.LanguageServer.UseCase.Folding;
 
-namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Folding;
+namespace KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Folding;
 
 public sealed class FoldingRabgeHandler(
     ICompilationCacheManager compilationCacheManager

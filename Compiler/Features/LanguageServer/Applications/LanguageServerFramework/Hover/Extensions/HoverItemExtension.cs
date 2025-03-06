@@ -1,9 +1,9 @@
 using EmmyLua.LanguageServer.Framework.Protocol.Message.Hover;
 
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
-using KSPCompiler.UseCases.LanguageServer.Hover;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Extensions;
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Hover;
 
-namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Hover.Extensions;
+namespace KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Hover.Extensions;
 
 public static class HoverItemExtension
 {

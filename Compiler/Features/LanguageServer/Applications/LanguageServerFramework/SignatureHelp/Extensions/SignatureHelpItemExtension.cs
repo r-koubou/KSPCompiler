@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 
-using KSPCompiler.UseCases.LanguageServer.SignatureHelp;
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.SignatureHelp;
 
 using FrameworkSignatureHelp = EmmyLua.LanguageServer.Framework.Protocol.Message.SignatureHelp.SignatureHelp;
 using FrameworkSignatureInformation = EmmyLua.LanguageServer.Framework.Protocol.Message.SignatureHelp.SignatureInformation;
 using FrameworkParameterInformation = EmmyLua.LanguageServer.Framework.Protocol.Message.SignatureHelp.ParameterInformation;
 using FrameworkStringOrMarkupContent = EmmyLua.LanguageServer.Framework.Protocol.Model.Union.StringOrMarkupContent;
 
-namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.SignatureHelp.Extensions;
+namespace KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.SignatureHelp.Extensions;
 
 public static class SignatureHelpItemExtension
 {

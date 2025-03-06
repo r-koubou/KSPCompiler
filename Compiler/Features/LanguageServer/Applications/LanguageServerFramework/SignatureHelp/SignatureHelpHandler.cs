@@ -7,15 +7,15 @@ using EmmyLua.LanguageServer.Framework.Protocol.Capabilities.Server.Options;
 using EmmyLua.LanguageServer.Framework.Protocol.Message.SignatureHelp;
 using EmmyLua.LanguageServer.Framework.Server.Handler;
 
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.SignatureHelp.Extensions;
-using KSPCompiler.Interactors.LanguageServer.SignatureHelp;
-using KSPCompiler.UseCases.LanguageServer.Compilation;
-using KSPCompiler.UseCases.LanguageServer.SignatureHelp;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Extensions;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.SignatureHelp.Extensions;
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Compilation;
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.SignatureHelp;
+using KSPCompiler.Features.LanguageServer.UseCase.SignatureHelp;
 
 using FrameworkSignatureHelp = EmmyLua.LanguageServer.Framework.Protocol.Message.SignatureHelp.SignatureHelp;
 
-namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.SignatureHelp;
+namespace KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.SignatureHelp;
 
 public class SignatureHelpHandler( ICompilationCacheManager compilationCacheManager ) : SignatureHelpHandlerBase
 {

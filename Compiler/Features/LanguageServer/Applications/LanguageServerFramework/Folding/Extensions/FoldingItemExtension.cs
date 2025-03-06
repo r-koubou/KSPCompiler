@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 
-using KSPCompiler.UseCases.LanguageServer.Folding;
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Folding;
 
 using FrameworkFoldingRange = EmmyLua.LanguageServer.Framework.Protocol.Message.FoldingRange.FoldingRange;
 using FrameworkFoldingRangeKind = EmmyLua.LanguageServer.Framework.Protocol.Message.FoldingRange.FoldingRangeKind;
 
-namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Folding.Extensions;
+namespace KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Folding.Extensions;
 
 public static class FoldingItemExtension
 {

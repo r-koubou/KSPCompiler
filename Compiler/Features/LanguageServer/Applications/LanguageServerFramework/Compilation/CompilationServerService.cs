@@ -8,18 +8,18 @@ using EmmyLua.LanguageServer.Framework.Protocol.Message.Client.PublishDiagnostic
 using EmmyLua.LanguageServer.Framework.Protocol.Model.Diagnostic;
 using EmmyLua.LanguageServer.Framework.Server;
 
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.Compilation.Extensions;
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
-using KSPCompiler.Commons;
-using KSPCompiler.Gateways.EventEmitting;
-using KSPCompiler.Gateways.EventEmitting.Extensions;
-using KSPCompiler.Infrastructures.EventEmitting.Default;
-using KSPCompiler.Infrastructures.Parser.Antlr;
-using KSPCompiler.Interactors.ApplicationServices.Compilation;
-using KSPCompiler.UseCases.LanguageServer;
-using KSPCompiler.UseCases.LanguageServer.Compilation;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Compilation.Extensions;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Extensions;
+using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
+using KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr;
+using KSPCompiler.Features.Compilation.UseCase.ApplicationServices;
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions;
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Compilation;
+using KSPCompiler.Shared;
+using KSPCompiler.Shared.EventEmitting;
+using KSPCompiler.Shared.EventEmitting.Extensions;
 
-namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Compilation;
+namespace KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Compilation;
 
 public sealed class CompilationServerService(
     ClientProxy client,

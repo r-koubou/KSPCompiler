@@ -7,13 +7,13 @@ using EmmyLua.LanguageServer.Framework.Protocol.Message.Rename;
 using EmmyLua.LanguageServer.Framework.Protocol.Model;
 using EmmyLua.LanguageServer.Framework.Server.Handler;
 
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.Renaming.Extensions;
-using KSPCompiler.Interactors.LanguageServer.Renaming;
-using KSPCompiler.UseCases.LanguageServer.Compilation;
-using KSPCompiler.UseCases.LanguageServer.Renaming;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Extensions;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Renaming.Extensions;
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Compilation;
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Renaming;
+using KSPCompiler.Features.LanguageServer.UseCase.Renaming;
 
-namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Renaming;
+namespace KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Renaming;
 
 public sealed class RenameHandler( ICompilationCacheManager compilationCacheManager ) : RenameHandlerBase
 {

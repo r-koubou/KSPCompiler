@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
-using KSPCompiler.UseCases.LanguageServer.Symbol;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Extensions;
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Symbol;
 
 using FrameworkDocumentSymbol = EmmyLua.LanguageServer.Framework.Protocol.Message.DocumentSymbol.DocumentSymbol;
 using FrameworkSymbolKind = EmmyLua.LanguageServer.Framework.Protocol.Message.DocumentSymbol.SymbolKind;
 
-namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Symbols.Extensions;
+namespace KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Symbols.Extensions;
 
 public static class DocumentSymbolExtension
 {

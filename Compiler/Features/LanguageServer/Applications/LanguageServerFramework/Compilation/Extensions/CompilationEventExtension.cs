@@ -1,10 +1,10 @@
 using EmmyLua.LanguageServer.Framework.Protocol.Model.Diagnostic;
 
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
-using KSPCompiler.Commons.Text;
-using KSPCompiler.Gateways.EventEmitting;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Extensions;
+using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
+using KSPCompiler.Shared.Text;
 
-namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Compilation.Extensions;
+namespace KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Compilation.Extensions;
 
 public static class CompilationEventExtension
 {

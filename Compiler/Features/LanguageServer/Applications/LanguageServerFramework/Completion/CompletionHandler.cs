@@ -8,16 +8,16 @@ using EmmyLua.LanguageServer.Framework.Protocol.Capabilities.Server.Options;
 using EmmyLua.LanguageServer.Framework.Protocol.Message.Completion;
 using EmmyLua.LanguageServer.Framework.Server.Handler;
 
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.Completion.Extensions;
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
-using KSPCompiler.Domain.Symbols.MetaData;
-using KSPCompiler.Interactors.LanguageServer.Completion;
-using KSPCompiler.UseCases.LanguageServer.Compilation;
-using KSPCompiler.UseCases.LanguageServer.Completion;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Completion.Extensions;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Extensions;
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Compilation;
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Completion;
+using KSPCompiler.Features.LanguageServer.UseCase.Completion;
+using KSPCompiler.Shared.Domain.Symbols.MetaData;
 
-using CompletionItem = EmmyLua.LanguageServer.Framework.Protocol.Message.Completion.CompletionItem;
+using FrameworkCompletionItem = EmmyLua.LanguageServer.Framework.Protocol.Message.Completion.CompletionItem;
 
-namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Completion;
+namespace KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Completion;
 
 public class CompletionHandler(
     ICompilationCacheManager compilationCacheManager
@@ -54,7 +54,7 @@ public class CompletionHandler(
         return new CompletionResponse( output.OutputData.As() );
     }
 
-    protected override async Task<CompletionItem> Resolve( CompletionItem item, CancellationToken token )
+    protected override async Task<FrameworkCompletionItem> Resolve( FrameworkCompletionItem item, CancellationToken token )
     {
         await Task.CompletedTask;
 

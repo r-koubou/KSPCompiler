@@ -2,9 +2,9 @@ using System;
 
 using EmmyLua.LanguageServer.Framework.Protocol.Model;
 
-using KSPCompiler.UseCases.LanguageServer;
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions;
 
-namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
+namespace KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Extensions;
 
 public static class ScriptLocationExtension
 {

@@ -6,21 +6,19 @@ using System.Threading.Tasks;
 using EmmyLua.LanguageServer.Framework.Protocol.Capabilities.Client.ClientCapabilities;
 using EmmyLua.LanguageServer.Framework.Protocol.Capabilities.Server;
 using EmmyLua.LanguageServer.Framework.Protocol.Message.ExecuteCommand;
-using EmmyLua.LanguageServer.Framework.Server;
 using EmmyLua.LanguageServer.Framework.Server.Handler;
 
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.Compilation;
-using KSPCompiler.Gateways.Symbols;
-using KSPCompiler.Interactors.ApplicationServices.Compilation;
-using KSPCompiler.Interactors.ApplicationServices.Symbols;
-using KSPCompiler.Interactors.Symbols;
-using KSPCompiler.UseCases.LanguageServer;
-using KSPCompiler.UseCases.LanguageServer.Compilation;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Compilation;
+using KSPCompiler.Features.Compilation.Gateways.Symbols;
+using KSPCompiler.Features.Compilation.UseCase.Analysis;
+using KSPCompiler.Features.Compilation.UseCase.ApplicationServices;
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions;
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Compilation;
 
-namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Commands;
+namespace KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Commands;
 
 public class ObfuscationCommandExecutor(
-    LanguageServer server,
+    EmmyLua.LanguageServer.Framework.Server.LanguageServer server,
     ICompilationCacheManager compilationCacheManager,
     AggregateSymbolRepository symbolRepositories
 ) : ExecuteCommandHandlerBase

@@ -2,10 +2,10 @@ using System.Collections.Generic;
 
 using EmmyLua.LanguageServer.Framework.Protocol.Model;
 
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
-using KSPCompiler.UseCases.LanguageServer.FindReferences;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Extensions;
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.FindReferences;
 
-namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.FindReferences.Extensions;
+namespace KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.FindReferences.Extensions;
 
 public static class ReferenceItemExtension
 {

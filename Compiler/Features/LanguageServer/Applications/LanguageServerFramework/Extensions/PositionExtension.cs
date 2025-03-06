@@ -1,22 +1,22 @@
-using KSPCompiler.Commons.Text;
+using EmmyLua.LanguageServer.Framework.Protocol.Model;
 
-namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
+namespace KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Extensions;
 
-using FrameworkPosition = EmmyLua.LanguageServer.Framework.Protocol.Model.Position;
-using FrameworkRange = EmmyLua.LanguageServer.Framework.Protocol.Model.DocumentRange;
+using FrameworkPosition = Position;
+using FrameworkRange = DocumentRange;
 
 public static class PositionExtension
 {
-    public static Position As( this FrameworkPosition self )
+    public static Shared.Text.Position As( this FrameworkPosition self )
     {
-        return new Position
+        return new Shared.Text.Position
         {
             BeginLine   = self.Line + 1,
             BeginColumn = self.Character
         };
     }
 
-    public static FrameworkPosition As( this Position self )
+    public static FrameworkPosition As( this Shared.Text.Position self )
     {
         return new FrameworkPosition
         {
@@ -25,7 +25,7 @@ public static class PositionExtension
         };
     }
 
-    public static FrameworkRange AsRange( this Position self )
+    public static FrameworkRange AsRange( this Shared.Text.Position self )
     {
         return new FrameworkRange
         {

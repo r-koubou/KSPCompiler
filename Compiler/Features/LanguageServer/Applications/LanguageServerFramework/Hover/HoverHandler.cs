@@ -6,13 +6,13 @@ using EmmyLua.LanguageServer.Framework.Protocol.Capabilities.Server;
 using EmmyLua.LanguageServer.Framework.Protocol.Message.Hover;
 using EmmyLua.LanguageServer.Framework.Server.Handler;
 
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.Extensions;
-using KSPCompiler.Applications.LSServer.LanguageServerFramework.Hover.Extensions;
-using KSPCompiler.Interactors.LanguageServer.Hover;
-using KSPCompiler.UseCases.LanguageServer.Compilation;
-using KSPCompiler.UseCases.LanguageServer.Hover;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Extensions;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Hover.Extensions;
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Compilation;
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Hover;
+using KSPCompiler.Features.LanguageServer.UseCase.Hover;
 
-namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Hover;
+namespace KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Hover;
 
 public sealed class HoverHandler( ICompilationCacheManager compilationCacheManager ) : HoverHandlerBase
 {

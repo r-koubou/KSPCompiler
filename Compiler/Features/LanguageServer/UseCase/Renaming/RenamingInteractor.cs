@@ -11,8 +11,7 @@ using KSPCompiler.Features.LanguageServer.UseCase.Ast;
 using KSPCompiler.Shared.Text;
 
 using RenamingResult
-    = System.Collections.Generic.Dictionary<KSPCompiler.Features.LanguageServer.UseCase.Abstractions.ScriptLocation,
-        System.Collections.Generic.List<KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Renaming.RenamingItem>>;
+    = System.Collections.Generic.Dictionary<KSPCompiler.Features.LanguageServer.UseCase.Abstractions.ScriptLocation, System.Collections.Generic.List<KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Renaming.RenamingItem>>;
 
 namespace KSPCompiler.Features.LanguageServer.UseCase.Renaming;
 

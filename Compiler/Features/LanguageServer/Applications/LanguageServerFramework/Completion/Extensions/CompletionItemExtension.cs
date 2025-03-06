@@ -2,13 +2,13 @@ using System.Collections.Generic;
 
 using EmmyLua.LanguageServer.Framework.Protocol.Model.Union;
 
-using KSPCompiler.UseCases.LanguageServer.Completion;
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Completion;
 
 using FrameworkCompletionItem = EmmyLua.LanguageServer.Framework.Protocol.Message.Completion.CompletionItem;
 using FrameworkCompletionItemKind = EmmyLua.LanguageServer.Framework.Protocol.Message.Completion.CompletionItemKind;
 using FrameworkInsertTextFormat = EmmyLua.LanguageServer.Framework.Protocol.Model.Kind.InsertTextFormat;
 
-namespace KSPCompiler.Applications.LSServer.LanguageServerFramework.Completion.Extensions;
+namespace KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Completion.Extensions;
 
 public static class CompletionItemExtension
 {
