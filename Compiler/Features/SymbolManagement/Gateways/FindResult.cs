@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using KSPCompiler.Shared.Domain.Symbols;
 
-namespace KSPCompiler.Features.SymbolManagement.UseCase.ApplicationServices;
+namespace KSPCompiler.Features.SymbolManagement.Gateways;
 
 public sealed class FindResult<TSymbol> where TSymbol : SymbolBase
 {

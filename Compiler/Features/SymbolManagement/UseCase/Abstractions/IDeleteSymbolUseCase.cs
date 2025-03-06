@@ -15,9 +15,10 @@ public sealed class DeleteOutputData(
     Exception? error = null
 ) : OutputPort<DeleteOutputDetail>( outputData, result, error );
 
-public sealed class DeleteOutputDetail( int deletedCount )
+public sealed class DeleteOutputDetail( int deletedCount, int failedCount )
 {
     public int DeletedCount { get; } = deletedCount;
+    public int FailedCount { get; } = failedCount;
 }
 
 public interface IDeleteSymbolUseCase<TSymbol>

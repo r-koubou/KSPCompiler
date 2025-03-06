@@ -63,9 +63,10 @@ public sealed class SymbolDatabaseApplicationService<TSymbol>( ISymbolRepository
         var outputPort = await useCase.ExecuteAsync( inputPort, cancellationToken );
 
         return new DeleteResult(
-            outputPort.Result,
-            outputPort.OutputData.DeletedCount,
-            outputPort.Error
+            success: outputPort.Result,
+            deletedCount: outputPort.OutputData.DeletedCount,
+            failedCount: outputPort.OutputData.FailedCount,
+            exception: outputPort.Error
         );
     }
 

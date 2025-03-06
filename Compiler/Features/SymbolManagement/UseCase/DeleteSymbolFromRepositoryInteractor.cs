@@ -21,8 +21,10 @@ public class DeleteSymbolFromRepositoryInteractor<TSymbol> : IDeleteSymbolUseCas
         var symbols = await Repository.FindAsync( parameter.Input, cancellationToken );
         var deleteResult = await Repository.DeleteAsync( symbols, cancellationToken );
 
-        return new DeleteOutputData( new DeleteOutputDetail( deleteResult.DeletedCount
-                                     ), deleteResult.Success, deleteResult.Exception
+        return new DeleteOutputData(
+            outputData: new DeleteOutputDetail( deleteResult.DeletedCount, deleteResult.FailedCount ),
+            result: deleteResult.Success,
+            error: deleteResult.Exception
         );
     }
 }
