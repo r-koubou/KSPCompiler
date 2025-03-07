@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
 using KSPCompiler.Features.Compilation.Infrastructures.SymbolRepository.Yaml.Commands.Models;
-using KSPCompiler.Shared.Domain.Symbols;
-using KSPCompiler.Shared.Domain.Symbols.MetaData;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
+using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
 
 namespace KSPCompiler.Features.Compilation.Infrastructures.SymbolRepository.Yaml.Commands.Translators;
 

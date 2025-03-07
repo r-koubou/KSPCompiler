@@ -1,5 +1,5 @@
-using KSPCompiler.Shared.Domain.Symbols;
-using KSPCompiler.Shared.Domain.Symbols.MetaData;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
+using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
 using KSPCompiler.SymbolManagement.Repository.Yaml.Callbacks.Models;
 
 namespace KSPCompiler.SymbolManagement.Repository.Yaml.Callbacks.Translators;

@@ -3,10 +3,10 @@
 using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 using KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translators.Extensions;
 using KSPCompiler.Infrastructures.Parser.Antlr;
-using KSPCompiler.Shared.Domain.Ast.Nodes;
-using KSPCompiler.Shared.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Shared.Domain.Ast.Nodes.Expressions;
-using KSPCompiler.Shared.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes;
+using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Blocks;
+using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Expressions;
+using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Statements;
 
 namespace KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translators
 {

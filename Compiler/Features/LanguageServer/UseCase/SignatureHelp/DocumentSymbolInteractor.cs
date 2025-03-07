@@ -5,8 +5,8 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Symbol;
-using KSPCompiler.Shared.Domain.Symbols;
-using KSPCompiler.Shared.Domain.Symbols.MetaData.Extensions;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
+using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData.Extensions;
 
 namespace KSPCompiler.Features.LanguageServer.UseCase.SignatureHelp;
 

@@ -7,8 +7,9 @@ using KSPCompiler.Features.Compilation.Gateways.Parsers;
 using KSPCompiler.Features.Compilation.UseCase.Analysis;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions;
 using KSPCompiler.Shared;
-using KSPCompiler.Shared.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Domain.Compilation;
+using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Blocks;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.EventEmitting;
 using KSPCompiler.Shared.EventEmitting.Extensions;
 using KSPCompiler.Shared.UseCase;
@@ -18,13 +19,6 @@ namespace KSPCompiler.Features.Compilation.UseCase.ApplicationServices;
 public sealed record CompilationOption(
     ISyntaxParser SyntaxParser,
     bool EnableObfuscation );
-
-public sealed record CompilationResult(
-    bool Result,
-    Exception? Error,
-    AstCompilationUnitNode? Ast,
-    AggregateSymbolTable SymbolTable,
-    string ObfuscatedScript );
 
 public sealed class CompilationApplicationService(
     LoadingBuiltinSymbolApplicationService loadingBuiltinSymbolApplicationService

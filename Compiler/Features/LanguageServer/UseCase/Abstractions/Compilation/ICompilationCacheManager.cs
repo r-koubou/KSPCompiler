@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 
-using KSPCompiler.Shared.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Blocks;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
 
 namespace KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Compilation;
 

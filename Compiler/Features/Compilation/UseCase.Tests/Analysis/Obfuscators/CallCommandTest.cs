@@ -2,9 +2,9 @@ using System.Text;
 
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators.Extensions;
-using KSPCompiler.Shared.Domain.Ast.Nodes.Blocks;
-using KSPCompiler.Shared.Domain.Ast.Nodes.Expressions;
-using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Blocks;
+using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Expressions;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
 
 using NUnit.Framework;
 

@@ -6,7 +6,7 @@ using KSPCompiler.Features.Shared.IO.LocalStorages;
 using KSPCompiler.Features.SymbolManagement.Gateways;
 using KSPCompiler.Features.SymbolManagement.Infrastructures.Commons.Tests;
 using KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Repository.Yaml.Variables;
-using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.Path;
 
 using NUnit.Framework;

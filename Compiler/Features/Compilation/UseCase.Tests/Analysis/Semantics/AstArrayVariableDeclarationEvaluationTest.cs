@@ -6,9 +6,9 @@ using KSPCompiler.Features.Compilation.Domain.Messages.Extensions;
 using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
 using KSPCompiler.Features.Compilation.UseCase.Tests.Commons;
-using KSPCompiler.Shared.Domain.Ast.Nodes;
-using KSPCompiler.Shared.Domain.Ast.Nodes.Expressions;
-using KSPCompiler.Shared.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes;
+using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Expressions;
+using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Statements;
 using KSPCompiler.Shared.EventEmitting.Extensions;
 
 using NUnit.Framework;

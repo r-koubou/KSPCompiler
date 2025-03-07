@@ -9,7 +9,7 @@ using KSPCompiler.Features.SymbolManagement.Gateways;
 using KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv.Callbacks.Models.CsvHelperMappings;
 using KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv.Callbacks.Translators;
 using KSPCompiler.Shared.Contents;
-using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
 
 namespace KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv.Callbacks;
 

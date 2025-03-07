@@ -6,7 +6,7 @@ using ConsoleAppFramework;
 
 using KSPCompiler.Features.SymbolManagement.Applications.SymbolDbManager.Services;
 using KSPCompiler.Features.SymbolManagement.Gateways;
-using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
 
 namespace KSPCompiler.Features.SymbolManagement.Applications.SymbolDbManager.Commands;
 

@@ -6,8 +6,8 @@ using CsvHelper;
 using KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv.Callbacks.Models;
 using KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv.Callbacks.Models.CsvHelperMappings;
 using KSPCompiler.Shared;
-using KSPCompiler.Shared.Domain.Symbols;
-using KSPCompiler.Shared.Domain.Symbols.MetaData;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
+using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
 
 namespace KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv.Callbacks.Translators;
 

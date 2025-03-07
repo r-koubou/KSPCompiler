@@ -1,7 +1,7 @@
 using System.Text;
 
-using KSPCompiler.Shared.Domain.Symbols;
-using KSPCompiler.Shared.Domain.Symbols.MetaData.Extensions;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
+using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData.Extensions;
 
 namespace KSPCompiler.Features.LanguageServer.UseCase.Hover;
 

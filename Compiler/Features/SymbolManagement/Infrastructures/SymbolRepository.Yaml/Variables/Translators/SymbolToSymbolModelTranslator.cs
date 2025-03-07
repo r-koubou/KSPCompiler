@@ -1,4 +1,4 @@
-using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.SymbolManagement.Repository.Yaml.Variables.Models;
 
 namespace KSPCompiler.SymbolManagement.Repository.Yaml.Variables.Translators;

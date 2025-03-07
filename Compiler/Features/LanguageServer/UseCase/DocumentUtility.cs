@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-using KSPCompiler.Shared.Domain.Symbols.MetaData;
+using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
 using KSPCompiler.Shared.Text;
 
 namespace KSPCompiler.Features.LanguageServer.UseCase;

@@ -1,7 +1,7 @@
 using System.Text;
 
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators;
-using KSPCompiler.Shared.Domain.Ast.Nodes.Expressions;
+using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Expressions;
 
 using NUnit.Framework;
 

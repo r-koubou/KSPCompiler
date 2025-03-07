@@ -1,7 +1,7 @@
 using System.IO;
 
 using KSPCompiler.Features.SymbolManagement.Gateways;
-using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.Path;
 using KSPCompiler.SymbolManagement.Repository.Yaml.Callbacks;
 

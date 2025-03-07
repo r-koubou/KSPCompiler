@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
 
 namespace KSPCompiler.Features.SymbolManagement.Gateways;
 

@@ -3,7 +3,7 @@
 using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
 
-using KSPCompiler.Shared.Domain.Ast.Nodes;
+using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes;
 using KSPCompiler.Shared.Text;
 
 namespace KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translators.Extensions

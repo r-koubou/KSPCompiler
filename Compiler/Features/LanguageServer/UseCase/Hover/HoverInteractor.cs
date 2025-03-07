@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Hover;
 using KSPCompiler.Features.LanguageServer.UseCase.Hover.Extensions;
-using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
 
 namespace KSPCompiler.Features.LanguageServer.UseCase.Hover;
 

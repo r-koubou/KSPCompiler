@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using KSPCompiler.Features.SymbolManagement.Gateways;
 using KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv.Commands.Translators;
 using KSPCompiler.Shared.Contents;
-using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
 
 namespace KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv.Commands;
 

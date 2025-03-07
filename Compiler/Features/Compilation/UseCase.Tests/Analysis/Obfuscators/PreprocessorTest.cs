@@ -2,8 +2,8 @@ using System.Text;
 
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators.Extensions;
-using KSPCompiler.Shared.Domain.Ast.Nodes.Expressions;
-using KSPCompiler.Shared.Domain.Ast.Nodes.Statements;
+using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Expressions;
+using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Statements;
 
 using NUnit.Framework;
 

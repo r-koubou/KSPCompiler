@@ -1,6 +1,6 @@
 using System.IO;
 
-using KSPCompiler.Shared.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Blocks;
 using KSPCompiler.Shared.EventEmitting;
 
 using NUnit.Framework;

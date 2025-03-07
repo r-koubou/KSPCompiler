@@ -1,7 +1,7 @@
 using System;
 
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Context;
-using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.EventEmitting;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Tests.Analysis.Obfuscators;

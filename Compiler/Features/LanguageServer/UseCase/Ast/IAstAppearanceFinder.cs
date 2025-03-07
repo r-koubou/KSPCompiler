@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-using KSPCompiler.Shared.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Blocks;
 using KSPCompiler.Shared.Text;
 
 namespace KSPCompiler.Features.LanguageServer.UseCase.Ast;

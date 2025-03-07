@@ -13,7 +13,7 @@ using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.E
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Compilation;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Completion;
 using KSPCompiler.Features.LanguageServer.UseCase.Completion;
-using KSPCompiler.Shared.Domain.Symbols.MetaData;
+using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
 
 using FrameworkCompletionItem = EmmyLua.LanguageServer.Framework.Protocol.Message.Completion.CompletionItem;
 

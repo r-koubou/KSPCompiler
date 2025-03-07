@@ -1,6 +1,6 @@
 using System.Linq;
 
-using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
 
 namespace KSPCompiler.Features.LanguageServer.UseCase.Abstractions.SignatureHelp.Extensions;
 

@@ -7,7 +7,7 @@ using CsvHelper;
 using KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv.Variables.Models;
 using KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv.Variables.Models.CsvHelperMappings;
 using KSPCompiler.Shared;
-using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
 
 namespace KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv.Variables.Translators;
 

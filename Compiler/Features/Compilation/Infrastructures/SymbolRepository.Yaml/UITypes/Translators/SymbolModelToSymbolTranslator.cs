@@ -1,6 +1,6 @@
 using KSPCompiler.Features.Compilation.Infrastructures.SymbolRepository.Yaml.UITypes.Models;
-using KSPCompiler.Shared.Domain.Symbols;
-using KSPCompiler.Shared.Domain.Symbols.MetaData;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
+using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
 
 namespace KSPCompiler.Features.Compilation.Infrastructures.SymbolRepository.Yaml.UITypes.Translators;
 

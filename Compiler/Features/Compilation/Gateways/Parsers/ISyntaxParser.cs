@@ -1,7 +1,7 @@
 using System;
 
 using KSPCompiler.Features.Compilation.Domain;
-using KSPCompiler.Shared.Domain.Ast.Nodes.Blocks;
+using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Blocks;
 
 namespace KSPCompiler.Features.Compilation.Gateways.Parsers
 {

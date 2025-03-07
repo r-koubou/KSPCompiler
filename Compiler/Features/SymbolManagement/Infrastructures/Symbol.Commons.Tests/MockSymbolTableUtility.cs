@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 
-using KSPCompiler.Shared.Domain.Symbols;
-using KSPCompiler.Shared.Domain.Symbols.MetaData;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
+using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
 
 namespace KSPCompiler.Features.SymbolManagement.Infrastructures.Commons.Tests;
 

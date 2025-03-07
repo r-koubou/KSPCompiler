@@ -1,6 +1,6 @@
 using System;
 
-using KSPCompiler.Shared.Domain.Ast.Nodes;
+using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations;
 

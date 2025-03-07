@@ -10,7 +10,7 @@ using KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv.UIType
 using KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv.Variables;
 using KSPCompiler.Features.SymbolManagement.UseCase.ApplicationServices;
 using KSPCompiler.Shared.Contents;
-using KSPCompiler.Shared.Domain.Symbols;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.Path;
 using KSPCompiler.SymbolManagement.Repository.Yaml.Callbacks;
 using KSPCompiler.SymbolManagement.Repository.Yaml.Commands;
