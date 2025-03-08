@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
+using KSPCompiler.Features.Compilation.Domain;
 using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 using KSPCompiler.Features.Compilation.Gateways.Parsers;
 using KSPCompiler.Features.Compilation.UseCase.Analysis;

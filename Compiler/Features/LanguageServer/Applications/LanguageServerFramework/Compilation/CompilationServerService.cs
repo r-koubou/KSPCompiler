@@ -10,6 +10,7 @@ using EmmyLua.LanguageServer.Framework.Server;
 
 using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Compilation.Extensions;
 using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Extensions;
+using KSPCompiler.Features.Compilation.Domain;
 using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 using KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr;
 using KSPCompiler.Features.Compilation.UseCase.ApplicationServices;

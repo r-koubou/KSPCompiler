@@ -3,7 +3,7 @@ using System;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Blocks;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 
-namespace KSPCompiler.Shared.Domain.Compilation;
+namespace KSPCompiler.Features.Compilation.Domain;
 
 public sealed record CompilationResult(
     bool Result,
