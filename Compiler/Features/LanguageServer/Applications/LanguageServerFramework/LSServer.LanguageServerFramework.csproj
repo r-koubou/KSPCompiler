@@ -21,10 +21,6 @@
       <ProjectReference Include="..\..\..\Compilation\Infrastructures\Parser.Antlr\Parser.Antlr.csproj" />
       <ProjectReference Include="..\..\..\Compilation\Infrastructures\SymbolRepository.Yaml\SymbolRepository.Yaml.csproj" />
       <ProjectReference Include="..\..\..\Compilation\UseCase\UseCase.csproj" />
-      <ProjectReference Include="..\..\..\Infrastructures\EventEmitting.Default\EventEmitting.Default.csproj" />
-      <ProjectReference Include="..\..\..\Infrastructures\ExternalSymbolRepository.Yaml\ExternalSymbolRepository.Yaml.csproj" />
-      <ProjectReference Include="..\..\..\Infrastructures\Parser.Antlr\Parser.Antlr.csproj" />
-      <ProjectReference Include="..\..\..\Interactors\Interactors.csproj" />
       <ProjectReference Include="..\..\UseCase\UseCase.csproj" />
     </ItemGroup>
 
