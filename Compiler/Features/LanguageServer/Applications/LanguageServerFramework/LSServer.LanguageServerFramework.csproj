@@ -25,19 +25,19 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="..\..\..\..\Data\Symbols\callbacks.yaml">
+        <Content Include="..\..\..\..\..\Data\Symbols\callbacks.yaml">
             <Link>Data\Symbols\callbacks.yaml</Link>
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
-        <Content Include="..\..\..\..\Data\Symbols\commands.yaml">
+        <Content Include="..\..\..\..\..\Data\Symbols\commands.yaml">
             <Link>Data\Symbols\commands.yaml</Link>
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
-        <Content Include="..\..\..\..\Data\Symbols\uitypes.yaml">
+        <Content Include="..\..\..\..\..\Data\Symbols\uitypes.yaml">
             <Link>Data\Symbols\uitypes.yaml</Link>
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
-        <Content Include="..\..\..\..\Data\Symbols\variables.yaml">
+        <Content Include="..\..\..\..\..\Data\Symbols\variables.yaml">
             <Link>Data\Symbols\variables.yaml</Link>
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
