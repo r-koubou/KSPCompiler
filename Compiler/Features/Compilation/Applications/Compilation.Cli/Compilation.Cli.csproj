@@ -17,7 +17,6 @@
       <ProjectReference Include="..\..\Domain\Domain.csproj" />
       <ProjectReference Include="..\..\Infrastructures\BuiltInSymbolLoader.Yaml\BuiltInSymbolLoader.Yaml.csproj" />
       <ProjectReference Include="..\..\Infrastructures\Parser.Antlr\Parser.Antlr.csproj" />
-      <ProjectReference Include="..\..\Infrastructures\SymbolRepository.Yaml\SymbolRepository.Yaml.csproj" />
       <ProjectReference Include="..\..\UseCase\UseCase.csproj" />
     </ItemGroup>
 
