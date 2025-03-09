@@ -3,10 +3,10 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using KSPCompiler.Features.SymbolManagement.Gateways;
-using KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv.UITypes;
 using KSPCompiler.Features.SymbolManagement.UseCase.ApplicationServices;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
-using KSPCompiler.Shared.IO.Abstractions.LocalStorages;
+using KSPCompiler.Shared.IO.Local;
+using KSPCompiler.Shared.IO.Symbols.Tsv.UITypes;
 using KSPCompiler.Shared.Path;
 using KSPCompiler.SymbolManagement.Repository.Yaml.UITypes;
 

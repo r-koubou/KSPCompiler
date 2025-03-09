@@ -6,7 +6,8 @@ using KSPCompiler.Features.SymbolManagement.Gateways;
 using KSPCompiler.Features.SymbolManagement.UseCase.ApplicationServices;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.IO.Abstractions.Contents;
-using KSPCompiler.Shared.IO.Abstractions.LocalStorages;
+using KSPCompiler.Shared.IO.Abstractions.Symbol;
+using KSPCompiler.Shared.IO.Local;
 using KSPCompiler.Shared.Path;
 
 namespace KSPCompiler.Features.SymbolManagement.Applications.SymbolDbManager.Services;

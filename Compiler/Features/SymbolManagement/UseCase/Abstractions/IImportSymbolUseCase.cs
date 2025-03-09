@@ -2,6 +2,7 @@ using System;
 
 using KSPCompiler.Features.SymbolManagement.Gateways;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
+using KSPCompiler.Shared.IO.Abstractions.Symbol;
 using KSPCompiler.Shared.UseCase;
 
 namespace KSPCompiler.Features.SymbolManagement.UseCase.Abstractions;

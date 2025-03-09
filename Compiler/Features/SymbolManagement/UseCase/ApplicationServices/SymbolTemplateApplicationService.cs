@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using KSPCompiler.Features.SymbolManagement.Gateways;
 using KSPCompiler.Features.SymbolManagement.UseCase.Abstractions;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
+using KSPCompiler.Shared.IO.Abstractions.Symbol;
 
 namespace KSPCompiler.Features.SymbolManagement.UseCase.ApplicationServices;
 
