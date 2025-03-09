@@ -308,7 +308,7 @@ public static class MockUtility
     #region Symbol Table
 
     public static AggregateSymbolTable CreateAggregateSymbolTable()
-        => AggregateSymbolTable.Default();
+        => new();
 
     public static AggregateObfuscatedSymbolTable CreateAggregateObfuscatedSymbolTable( AggregateSymbolTable source, string variablePrefix = "v", string functionPrefix = "f" )
         => new(

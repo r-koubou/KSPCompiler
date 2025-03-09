@@ -33,19 +33,6 @@ public sealed class AggregateSymbolTable
         PreProcessorSymbols = preProcessorSymbols ?? new PreProcessorSymbolTable();
     }
 
-    [Obsolete("Use constructor instead")]
-    public static AggregateSymbolTable Default()
-        => new(
-            builtInVariables: new VariableSymbolTable(),
-            userVariables: new VariableSymbolTable(),
-            uiTypes: new UITypeSymbolTable(),
-            commands: new CommandSymbolTable(),
-            builtInCallbacks: new CallbackSymbolTable(),
-            userCallbacks: new CallbackSymbolTable(),
-            userFunctions: new UserFunctionSymbolTable(),
-            preProcessorSymbols: new PreProcessorSymbolTable()
-        );
-
     public void Clear()
     {
         BuiltInVariables.Clear();

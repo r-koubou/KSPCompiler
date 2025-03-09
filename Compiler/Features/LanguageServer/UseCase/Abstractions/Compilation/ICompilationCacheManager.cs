@@ -21,6 +21,6 @@ public sealed class CompilationCacheItem(
 {
     public ScriptLocation ScriptLocation { get; } = scriptLocation;
     public IReadOnlyList<string> AllLinesText { get; } = allLinesText ?? [ ];
-    public AggregateSymbolTable SymbolTable { get; } = symbolTable ?? AggregateSymbolTable.Default();
+    public AggregateSymbolTable SymbolTable { get; } = symbolTable ?? new AggregateSymbolTable();
     public AstCompilationUnitNode Ast { get; } = ast ?? new AstCompilationUnitNode();
 }
