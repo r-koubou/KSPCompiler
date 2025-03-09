@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using KSPCompiler.Shared.Contents;
 using KSPCompiler.Shared.Path;
 
-namespace KSPCompiler.Features.Shared.IO.LocalStorages;
+namespace KSPCompiler.Shared.IO.LocalStorages;
 
 public sealed class LocalBinaryContentWriter : IBinaryContentWriter
 {

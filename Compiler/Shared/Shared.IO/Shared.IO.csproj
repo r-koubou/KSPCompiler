@@ -6,9 +6,9 @@
         <Nullable>enable</Nullable>
         <Copyright>R-Koubou</Copyright>
         <Company>R-Koubou</Company>
-        <Product>KSPCompiler.Features.Shared.IO</Product>
-        <AssemblyName>KSPCompiler.Features.Shared.IO</AssemblyName>
-        <RootNamespace>KSPCompiler.Features.Shared.IO</RootNamespace>
+        <Product>KSPCompiler.Shared.IO</Product>
+        <AssemblyName>KSPCompiler.Shared.IO</AssemblyName>
+        <RootNamespace>KSPCompiler.Shared.IO</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

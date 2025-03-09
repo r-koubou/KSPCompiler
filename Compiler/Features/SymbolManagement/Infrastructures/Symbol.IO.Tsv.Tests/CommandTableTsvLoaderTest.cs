@@ -2,12 +2,12 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-using KSPCompiler.Features.Shared.IO.LocalStorages;
 using KSPCompiler.Features.SymbolManagement.Gateways;
 using KSPCompiler.Features.SymbolManagement.Infrastructures.Commons.Tests;
 using KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv.Commands;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
+using KSPCompiler.Shared.IO.LocalStorages;
 using KSPCompiler.Shared.Path;
 
 using NUnit.Framework;
