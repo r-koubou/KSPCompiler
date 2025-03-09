@@ -12,9 +12,18 @@ using KSPCompiler.Shared.IO.Symbols.Yaml.Variables;
 
 namespace KSPCompiler.Features.Compilation.Infrastructures.BuiltInSymbolLoader.Yaml;
 
-public sealed class YamlBuiltInSymbolLoader( string baseDirectory ) : IBuiltInSymbolLoader
+public sealed class YamlBuiltInSymbolLoader(
+    string baseDirectory,
+    string variablesFileName = "variables.yaml",
+    string uiTypesFileName = "uitypes.yaml",
+    string commandsFileName = "commands.yaml",
+    string callbacksFileName = "callbacks.yaml"
+) : IBuiltInSymbolLoader
 {
-    private string BaseDirectory { get; } = baseDirectory;
+    private string VariablesFilePath { get; } = Path.Combine( baseDirectory, variablesFileName );
+    private string UITypesFilePath { get; } = Path.Combine( baseDirectory, uiTypesFileName );
+    private string CommandsFilePath { get; } = Path.Combine( baseDirectory, commandsFileName );
+    private string CallbacksFilePath { get; } = Path.Combine( baseDirectory, callbacksFileName );
 
     public async Task<AggregateSymbolTable> LoadAsync( CancellationToken cancellationToken = default )
     {
@@ -33,8 +42,7 @@ public sealed class YamlBuiltInSymbolLoader( string baseDirectory ) : IBuiltInSy
 
     private async Task<VariableSymbolTable> LoadVariableSymbolsAsync( CancellationToken cancellationToken = default )
     {
-        var filePath = Path.Combine( BaseDirectory, "variables.yaml" );
-        var contentReader = new LocalTextContentReader( filePath );
+        var contentReader = new LocalTextContentReader( VariablesFilePath );
         var symbolReader = new YamlVariableSymbolImporter( contentReader );
         var symbols = await symbolReader.ImportAsync( cancellationToken );
         var symbolTable = new VariableSymbolTable();
@@ -45,8 +53,7 @@ public sealed class YamlBuiltInSymbolLoader( string baseDirectory ) : IBuiltInSy
 
     private async Task<UITypeSymbolTable> LoadUITypeSymbolsAsync( CancellationToken cancellationToken = default )
     {
-        var filePath = Path.Combine( BaseDirectory, "uitypes.yaml" );
-        var contentReader = new LocalTextContentReader( filePath );
+        var contentReader = new LocalTextContentReader( UITypesFilePath );
         var symbolReader = new YamlUITypeSymbolImporter( contentReader );
         var symbols = await symbolReader.ImportAsync( cancellationToken );
         var symbolTable = new UITypeSymbolTable();
@@ -57,8 +64,7 @@ public sealed class YamlBuiltInSymbolLoader( string baseDirectory ) : IBuiltInSy
 
     private async Task<CommandSymbolTable> LoadCommandSymbolsAsync( CancellationToken cancellationToken = default )
     {
-        var filePath = Path.Combine( BaseDirectory, "commands.yaml" );
-        var contentReader = new LocalTextContentReader( filePath );
+        var contentReader = new LocalTextContentReader( CommandsFilePath );
         var symbolReader = new YamlCommandSymbolImporter( contentReader );
         var symbols = await symbolReader.ImportAsync( cancellationToken );
         var symbolTable = new CommandSymbolTable();
@@ -69,8 +75,7 @@ public sealed class YamlBuiltInSymbolLoader( string baseDirectory ) : IBuiltInSy
 
     private async Task<CallbackSymbolTable> LoadCallbackSymbolsAsync( CancellationToken cancellationToken = default )
     {
-        var filePath = Path.Combine( BaseDirectory, "callbacks.yaml" );
-        var contentReader = new LocalTextContentReader( filePath );
+        var contentReader = new LocalTextContentReader( CallbacksFilePath );
         var symbolReader = new YamlCallbackSymbolImporter( contentReader );
         var symbols = await symbolReader.ImportAsync( cancellationToken );
         var symbolTable = new CallbackSymbolTable();
