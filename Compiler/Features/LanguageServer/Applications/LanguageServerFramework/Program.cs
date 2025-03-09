@@ -13,10 +13,7 @@ using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.R
 using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.SignatureHelp;
 using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Symbols;
 using KSPCompiler.Features.Compilation.Gateways.Symbols;
-using KSPCompiler.Features.Compilation.Infrastructures.SymbolRepository.Yaml.Callbacks;
-using KSPCompiler.Features.Compilation.Infrastructures.SymbolRepository.Yaml.Commands;
-using KSPCompiler.Features.Compilation.Infrastructures.SymbolRepository.Yaml.UITypes;
-using KSPCompiler.Features.Compilation.Infrastructures.SymbolRepository.Yaml.Variables;
+using KSPCompiler.Features.Compilation.Infrastructures.BuiltInSymbolLoader.Yaml;
 using KSPCompiler.Features.LanguageServer.UseCase.Compilation;
 
 namespace KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework;
@@ -44,13 +41,13 @@ public sealed class Program
 
         #region Register Handlers
         var compilationCacheManager = new CompilationCacheManager();
-        using var symbolRepositories = CreateSymbolRepositories();
+        var builtinSymbolLoader = CreateBuiltinSymbolLoader();
 
         server.AddHandler(
             new TextDocumentHandler(
                 server,
                 compilationCacheManager,
-                symbolRepositories
+                builtinSymbolLoader
             )
         );
         server.AddHandler( new CompletionHandler( compilationCacheManager ) );
@@ -66,7 +63,7 @@ public sealed class Program
             new ObfuscationCommandExecutor(
                 server,
                 compilationCacheManager,
-                symbolRepositories
+                builtinSymbolLoader
             )
         );
 
@@ -76,18 +73,11 @@ public sealed class Program
     }
 
     #region Setup Symbols
-    private static AggregateSymbolRepository CreateSymbolRepositories()
+    private static IBuiltInSymbolLoader CreateBuiltinSymbolLoader()
     {
         var baseDir = Path.GetDirectoryName( Assembly.GetExecutingAssembly().Location ) ?? ".";
         var basePath = Path.Combine( baseDir, "Data", "Symbols" );
-
-        return new AggregateSymbolRepository(
-            new VariableSymbolRepository( Path.Combine( basePath, "variables.yaml" ) ),
-            new UITypeSymbolRepository( Path.Combine( basePath, "uitypes.yaml" ) ),
-            new CommandSymbolRepository( Path.Combine( basePath, "commands.yaml" ) ),
-            new CallbackSymbolRepository( Path.Combine( basePath, "callbacks.yaml" )
-            )
-        );
+        return new YamlBuiltInSymbolLoader( basePath );
     }
     #endregion
 }

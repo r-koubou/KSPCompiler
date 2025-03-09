@@ -18,6 +18,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\Compilation\Gateways\Gateways.csproj" />
+      <ProjectReference Include="..\..\..\Compilation\Infrastructures\BuiltInSymbolLoader.Yaml\BuiltInSymbolLoader.Yaml.csproj" />
       <ProjectReference Include="..\..\..\Compilation\Infrastructures\Parser.Antlr\Parser.Antlr.csproj" />
       <ProjectReference Include="..\..\..\Compilation\Infrastructures\SymbolRepository.Yaml\SymbolRepository.Yaml.csproj" />
       <ProjectReference Include="..\..\..\Compilation\UseCase\UseCase.csproj" />

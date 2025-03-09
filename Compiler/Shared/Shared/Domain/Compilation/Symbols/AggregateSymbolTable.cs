@@ -1,3 +1,5 @@
+using System;
+
 namespace KSPCompiler.Shared.Domain.Compilation.Symbols;
 
 public sealed class AggregateSymbolTable
@@ -12,25 +14,26 @@ public sealed class AggregateSymbolTable
     public IPreProcessorSymbolTable PreProcessorSymbols { get; }
 
     public AggregateSymbolTable(
-        IVariableSymbolTable builtInVariables,
-        IVariableSymbolTable userVariables,
-        IUITypeSymbolTable uiTypes,
-        ICommandSymbolTable commands,
-        ICallbackSymbolTable builtInCallbacks,
-        ICallbackSymbolTable userCallbacks,
-        IUserFunctionSymbolSymbolTable userFunctions,
-        IPreProcessorSymbolTable preProcessorSymbols )
+        IVariableSymbolTable? builtInVariables = null,
+        IVariableSymbolTable? userVariables = null,
+        IUITypeSymbolTable? uiTypes = null,
+        ICommandSymbolTable? commands = null,
+        ICallbackSymbolTable? builtInCallbacks = null,
+        ICallbackSymbolTable? userCallbacks = null,
+        IUserFunctionSymbolSymbolTable? userFunctions = null,
+        IPreProcessorSymbolTable? preProcessorSymbols = null )
     {
-        BuiltInVariables    = builtInVariables;
-        UserVariables       = userVariables;
-        UITypes             = uiTypes;
-        Commands            = commands;
-        UserCallbacks       = userCallbacks;
-        BuiltInCallbacks    = builtInCallbacks;
-        UserFunctions       = userFunctions;
-        PreProcessorSymbols = preProcessorSymbols;
+        BuiltInVariables    = builtInVariables ?? new VariableSymbolTable();
+        UserVariables       = userVariables ?? new VariableSymbolTable();
+        UITypes             = uiTypes ?? new UITypeSymbolTable();
+        Commands            = commands ?? new CommandSymbolTable();
+        UserCallbacks       = userCallbacks ?? new CallbackSymbolTable();
+        BuiltInCallbacks    = builtInCallbacks ?? new CallbackSymbolTable();
+        UserFunctions       = userFunctions ?? new UserFunctionSymbolTable();
+        PreProcessorSymbols = preProcessorSymbols ?? new PreProcessorSymbolTable();
     }
 
+    [Obsolete("Use constructor instead")]
     public static AggregateSymbolTable Default()
         => new(
             builtInVariables: new VariableSymbolTable(),

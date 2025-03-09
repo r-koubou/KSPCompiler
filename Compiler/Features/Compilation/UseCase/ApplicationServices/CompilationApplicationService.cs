@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using KSPCompiler.Features.Compilation.Domain;
 using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 using KSPCompiler.Features.Compilation.Gateways.Parsers;
+using KSPCompiler.Features.Compilation.Gateways.Symbols;
 using KSPCompiler.Features.Compilation.UseCase.Analysis;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions;
 using KSPCompiler.Shared;
@@ -21,11 +22,10 @@ public sealed record CompilationOption(
     bool EnableObfuscation );
 
 public sealed class CompilationApplicationService(
-    LoadingBuiltinSymbolApplicationService loadingBuiltinSymbolApplicationService
+    IBuiltInSymbolLoader builtinSymbolLoader
 )
 {
-    private readonly LoadingBuiltinSymbolApplicationService loadingBuiltinSymbolApplicationService
-        = loadingBuiltinSymbolApplicationService;
+    private readonly IBuiltInSymbolLoader builtinSymbolLoader = builtinSymbolLoader;
 
     public CompilationResult Execute( IEventEmitter eventEmitter, CompilationOption option )
         => ExecuteAsync( eventEmitter, option, CancellationToken.None ).GetAwaiter().GetResult();
@@ -35,8 +35,8 @@ public sealed class CompilationApplicationService(
     {
         // TODO: CompilerMessageManger compilerMessageManger is obsolete. Use IEventEmitter eventEmitter instead.
 
-        var builtInSymbolTable = await loadingBuiltinSymbolApplicationService.LoadAsync( cancellationToken );
-        var userSymbolTable = AggregateSymbolTable.Default();
+        var builtInSymbolTable = await builtinSymbolLoader.LoadAsync( cancellationToken );
+        var userSymbolTable = new AggregateSymbolTable();
 
         SetupSymbolTable( builtInSymbolTable, userSymbolTable );
 

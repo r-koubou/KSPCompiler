@@ -10,7 +10,6 @@ using EmmyLua.LanguageServer.Framework.Server.Handler;
 
 using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Compilation;
 using KSPCompiler.Features.Compilation.Gateways.Symbols;
-using KSPCompiler.Features.Compilation.UseCase.Analysis;
 using KSPCompiler.Features.Compilation.UseCase.ApplicationServices;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Compilation;
@@ -20,7 +19,7 @@ namespace KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramewo
 public class ObfuscationCommandExecutor(
     EmmyLua.LanguageServer.Framework.Server.LanguageServer server,
     ICompilationCacheManager compilationCacheManager,
-    AggregateSymbolRepository symbolRepositories
+    IBuiltInSymbolLoader builtInSymbolLoader
 ) : ExecuteCommandHandlerBase
 {
     private const string CommandName = "ksp.obfuscate";
@@ -29,12 +28,7 @@ public class ObfuscationCommandExecutor(
 
     private readonly CompilationServerService compilationSeverService = new(
         server.Client,
-        new CompilationApplicationService(
-            new LoadingBuiltinSymbolApplicationService(
-                new LoadBuiltinSymbolInteractor(),
-                symbolRepositories
-            )
-        )
+        new CompilationApplicationService( builtInSymbolLoader )
     );
 
     private static ScriptLocation ToScriptLocation( string documentUri )

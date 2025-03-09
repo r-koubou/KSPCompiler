@@ -80,6 +80,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.IO.Symbols.Yaml", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.IO.Symbols.Yaml.Tests", "Shared\Shared.IO.Symbols.Yaml.Tests\Shared.IO.Symbols.Yaml.Tests.csproj", "{682C4CA6-12A8-4DEB-A8D7-17F9A7163001}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuiltInSymbolLoader.Yaml", "Features\Compilation\Infrastructures\BuiltInSymbolLoader.Yaml\BuiltInSymbolLoader.Yaml.csproj", "{D63E089B-B5B0-4045-A999-10AB8D21D32E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -194,6 +196,10 @@ Global
 		{682C4CA6-12A8-4DEB-A8D7-17F9A7163001}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{682C4CA6-12A8-4DEB-A8D7-17F9A7163001}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{682C4CA6-12A8-4DEB-A8D7-17F9A7163001}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D63E089B-B5B0-4045-A999-10AB8D21D32E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D63E089B-B5B0-4045-A999-10AB8D21D32E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D63E089B-B5B0-4045-A999-10AB8D21D32E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D63E089B-B5B0-4045-A999-10AB8D21D32E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{73586D91-B9CA-4555-8540-410A74C8E60A} = {249A6BEA-D69A-4F19-96F2-C55C0058F99B}
@@ -234,5 +240,6 @@ Global
 		{14CD2C75-A245-4E0A-8ACF-D9DDC836DC48} = {56C178A3-9A17-4DA0-BDB7-EAC73DFC772D}
 		{155604CF-C7CC-4B8D-97DE-50BC9BB89268} = {56C178A3-9A17-4DA0-BDB7-EAC73DFC772D}
 		{682C4CA6-12A8-4DEB-A8D7-17F9A7163001} = {56C178A3-9A17-4DA0-BDB7-EAC73DFC772D}
+		{D63E089B-B5B0-4045-A999-10AB8D21D32E} = {9D200B63-E620-4612-93B0-A85FB4EB9D5C}
 	EndGlobalSection
 EndGlobal

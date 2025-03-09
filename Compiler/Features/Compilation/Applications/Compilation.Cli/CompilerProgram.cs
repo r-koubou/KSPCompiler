@@ -6,12 +6,8 @@ using KSPCompiler.Features.Compilation.Domain.Messages;
 using KSPCompiler.Features.Compilation.Domain.Messages.Extensions;
 using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 using KSPCompiler.Features.Compilation.Gateways.Symbols;
+using KSPCompiler.Features.Compilation.Infrastructures.BuiltInSymbolLoader.Yaml;
 using KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr;
-using KSPCompiler.Features.Compilation.Infrastructures.SymbolRepository.Yaml.Callbacks;
-using KSPCompiler.Features.Compilation.Infrastructures.SymbolRepository.Yaml.Commands;
-using KSPCompiler.Features.Compilation.Infrastructures.SymbolRepository.Yaml.UITypes;
-using KSPCompiler.Features.Compilation.Infrastructures.SymbolRepository.Yaml.Variables;
-using KSPCompiler.Features.Compilation.UseCase.Analysis;
 using KSPCompiler.Features.Compilation.UseCase.ApplicationServices;
 using KSPCompiler.Shared;
 using KSPCompiler.Shared.EventEmitting;
@@ -40,15 +36,10 @@ public static class CompilerProgram
         // イベントディスパッチャの設定
         SetupEventEmitter( eventEmitter, messageManager, subscribers );
 
-        using var repositories = CreateSymbolRepositories();
         var parser = new AntlrKspFileSyntaxParser( input, eventEmitter );
+        var builtinSymbolLoader = CreateBuiltinSymbolLoader();
 
-        var compilationService = new CompilationApplicationService(
-            new LoadingBuiltinSymbolApplicationService(
-                new LoadBuiltinSymbolInteractor(),
-                repositories
-            )
-        );
+        var compilationService = new CompilationApplicationService( builtinSymbolLoader );
 
         var option = new CompilationOption(
             SyntaxParser: parser,
@@ -69,18 +60,11 @@ public static class CompilerProgram
         return ( result.Error != null || !result.Result ) ? 1 : 0;
     }
 
-    private static AggregateSymbolRepository CreateSymbolRepositories()
+    private static IBuiltInSymbolLoader CreateBuiltinSymbolLoader()
     {
         var baseDir = Path.GetDirectoryName( Assembly.GetExecutingAssembly().Location ) ?? ".";
         var basePath = Path.Combine( baseDir, "Data", "Symbols" );
-
-        return new AggregateSymbolRepository(
-            new VariableSymbolRepository( Path.Combine( basePath, "variables.yaml" ) ),
-            new UITypeSymbolRepository( Path.Combine( basePath, "uitypes.yaml" ) ),
-            new CommandSymbolRepository( Path.Combine( basePath, "commands.yaml" ) ),
-            new CallbackSymbolRepository( Path.Combine( basePath, "callbacks.yaml" )
-            )
-        );
+        return new YamlBuiltInSymbolLoader( basePath );
     }
 
     private static void SetupEventEmitter( EventEmitter eventEmitter, ICompilerMessageManger messageManager, CompositeDisposable subscribers )
