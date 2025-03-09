@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
@@ -11,6 +12,27 @@ namespace KSPCompiler.Shared.Domain.Compilation.Symbols;
 /// <seealso cref="ISymbolTable{TSymbol}"/>
 public abstract class SymbolBase
 {
+    /// <summary>
+    /// GUID of the symbol.
+    /// </summary>
+    public Guid Id { get; set; } = Guid.NewGuid();
+
+    /// <summary>
+    /// Creation date of the symbol.
+    /// </summary>
+    /// <remarks>
+    /// This datetime is used when storing in the repository.
+    /// </remarks>
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+    /// <summary>
+    /// Last updated date of the symbol.
+    /// </summary>
+    /// <remarks>
+    /// This datetime is used when storing in the repository.
+    /// </remarks>
+    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+
     /// <summary>
     /// If comment text above declaration exists.
     /// </summary>

@@ -15,6 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\..\..\Shared\Shared.IO.Local\Shared.IO.Local.csproj" />
         <ProjectReference Include="..\SymbolRepository.Yaml\SymbolRepository.Yaml.csproj" />
     </ItemGroup>
 

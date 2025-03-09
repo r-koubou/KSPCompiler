@@ -5,10 +5,10 @@ using KSPCompiler.Shared.IO.Symbols.Yaml.Variables.Translators;
 
 namespace KSPCompiler.Shared.IO.Symbols.Yaml.Variables;
 
-public class VariableSymbolImporter( ITextContentReader writer ) :
-    SymbolImporter<
+public class YamlVariableSymbolExporter( ITextContentWriter writer ) :
+    YamlSymbolExporter<
         VariableSymbol,
         VariableSymbolRootModel,
         VariableSymbolModel,
-        SymbolModelToSymbolTranslator
+        SymbolToSymbolModelTranslator
     >( writer );

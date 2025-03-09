@@ -5,10 +5,10 @@ using KSPCompiler.Shared.IO.Symbols.Yaml.Callbacks.Translators;
 
 namespace KSPCompiler.Shared.IO.Symbols.Yaml.Callbacks;
 
-public class CallbackSymbolExporter( ITextContentWriter writer ) :
-    SymbolExporter<
+public class YamlCallbackSymbolImporter( ITextContentReader writer ) :
+    YamlSymbolImporter<
         CallbackSymbol,
         CallbackSymbolRootModel,
         CallBackSymbolModel,
-        SymbolToSymbolModelTranslator
+        SymbolModelToSymbolTranslator
     >( writer );

@@ -8,7 +8,7 @@ using KSPCompiler.Shared.IO.Abstractions.Symbol;
 
 namespace KSPCompiler.Shared.IO.Symbols.Yaml;
 
-public abstract class SymbolExporter<TSymbol, TRootModel, TModel, TTranslator>( ITextContentWriter writer )
+public abstract class YamlSymbolExporter<TSymbol, TRootModel, TModel, TTranslator>( ITextContentWriter writer )
     : ISymbolExporter<TSymbol>
     where TSymbol : SymbolBase
     where TModel : ISymbolModel

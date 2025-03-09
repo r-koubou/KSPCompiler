@@ -7,8 +7,8 @@ using KSPCompiler.Features.SymbolManagement.UseCase.ApplicationServices;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.IO.Local;
 using KSPCompiler.Shared.IO.Symbols.Tsv.Callbacks;
-using KSPCompiler.Shared.Path;
-using KSPCompiler.SymbolManagement.Repository.Yaml.Callbacks;
+using KSPCompiler.Shared.IO.Symbols.Yaml.Callbacks;
+using KSPCompiler.SymbolManagement.Repository.Yaml;
 
 namespace KSPCompiler.Features.SymbolManagement.Applications.SymbolDbManager.Services;
 
@@ -20,14 +20,18 @@ public class CallbackSymbolDatabaseService : ICallbackSymbolDatabaseService
     {
         try
         {
-            var importPath = new FilePath( importFilePath );
-            var repositoryPath = new FilePath( databaseFilePath );
-            var reader = new LocalTextContentReader( importPath );
-            var importer = new TsvCallbackSymbolImporter( reader );
-            using var repository = new CallbackSymbolRepository( repositoryPath );
-            var controller = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
+            var repositoryReader = new YamlCallbackSymbolImporter( new LocalTextContentReader( databaseFilePath ) );
+            var repositoryWriter = new YamlCallbackSymbolExporter( new LocalTextContentWriter( databaseFilePath ) );
+            var importer = new TsvCallbackSymbolImporter( new LocalTextContentReader( importFilePath ) );
 
-            return await controller.ImportAsync( importer, cancellationToken );
+            using var repository = new CallbackSymbolRepository(
+                repositoryReader: repositoryReader,
+                repositoryWriter: repositoryWriter
+            );
+
+            var service = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
+
+            return await service.ImportAsync( importer, cancellationToken );
         }
         catch( Exception e )
         {
@@ -40,14 +44,19 @@ public class CallbackSymbolDatabaseService : ICallbackSymbolDatabaseService
         try
         {
             var regexPattern = ISymbolDatabaseService.WildCardToRegexPattern( exportPattern );
-            var exportPath = new FilePath( exportFilePath );
-            var repositoryPath = new FilePath( databaseFilePath );
-            var writer = new LocalTextContentWriter( exportPath );
-            using var repository = new CallbackSymbolRepository( repositoryPath );
-            var exporter = new TsvCallbackSymbolExporter( writer );
-            var controller = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
 
-            return await controller.ExportAsync(
+            var repositoryReader = new YamlCallbackSymbolImporter( new LocalTextContentReader( databaseFilePath ) );
+            var repositoryWriter = new YamlCallbackSymbolExporter( new LocalTextContentWriter( databaseFilePath ) );
+            var exporter = new TsvCallbackSymbolExporter( new LocalTextContentWriter( exportFilePath ) );
+
+            using var repository = new CallbackSymbolRepository(
+                repositoryReader: repositoryReader,
+                repositoryWriter: repositoryWriter
+            );
+
+            var service = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
+
+            return await service.ExportAsync(
                 exporter,
                 symbol => regexPattern.IsMatch( symbol.Name.Value ),
                 cancellationToken
@@ -64,11 +73,18 @@ public class CallbackSymbolDatabaseService : ICallbackSymbolDatabaseService
         try
         {
             var regexPattern = ISymbolDatabaseService.WildCardToRegexPattern( deletePattern );
-            var repositoryPath = new FilePath( databaseFilePath );
-            using var repository = new CallbackSymbolRepository( repositoryPath );
-            var controller = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
 
-            return await controller.DeleteAsync(
+            var repositoryReader = new YamlCallbackSymbolImporter( new LocalTextContentReader( databaseFilePath ) );
+            var repositoryWriter = new YamlCallbackSymbolExporter( new LocalTextContentWriter( databaseFilePath ) );
+
+            using var repository = new CallbackSymbolRepository(
+                repositoryReader: repositoryReader,
+                repositoryWriter: repositoryWriter
+            );
+
+            var service = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
+
+            return await service.DeleteAsync(
                 symbol => regexPattern.IsMatch( symbol.Name.Value ),
                 cancellationToken
             );

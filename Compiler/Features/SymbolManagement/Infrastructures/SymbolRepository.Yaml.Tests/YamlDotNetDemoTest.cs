@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-using KSPCompiler.SymbolManagement.Repository.Yaml.Callbacks.Models;
+using KSPCompiler.Shared.IO.Symbols.Yaml.Callbacks.Models;
 
 using NUnit.Framework;
 

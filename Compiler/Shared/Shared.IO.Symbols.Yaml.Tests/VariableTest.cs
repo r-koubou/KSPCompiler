@@ -20,13 +20,13 @@ public class VariableTest
     private static ISymbolImporter<VariableSymbol> CreateLocalImporter( string path )
     {
         var reader = new LocalTextContentReader( new FilePath( path ) );
-        return new VariableSymbolImporter( reader );
+        return new YamlVariableSymbolImporter( reader );
     }
 
     private static ISymbolExporter<VariableSymbol> CreateLocalExporter( string path )
     {
         var writer = new LocalTextContentWriter( new FilePath( path ) );
-        return new VariableSymbolExporter( writer );
+        return new YamlVariableSymbolExporter( writer );
     }
 
     [Test]

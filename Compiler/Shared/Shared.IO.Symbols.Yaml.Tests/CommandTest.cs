@@ -22,14 +22,14 @@ public class CommandTest
     {
         var reader = new LocalTextContentReader( new FilePath( path ) );
 
-        return new CommandSymbolImporter( reader );
+        return new YamlCommandSymbolImporter( reader );
     }
 
     private static ISymbolExporter<CommandSymbol> CreateLocalExporter( string path )
     {
         var writer = new LocalTextContentWriter( new FilePath( path ) );
 
-        return new CommandSymbolExporter( writer );
+        return new YamlCommandSymbolExporter( writer );
     }
 
     [Test]

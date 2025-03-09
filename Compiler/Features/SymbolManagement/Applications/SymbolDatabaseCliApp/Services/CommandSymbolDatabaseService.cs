@@ -7,8 +7,8 @@ using KSPCompiler.Features.SymbolManagement.UseCase.ApplicationServices;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.IO.Local;
 using KSPCompiler.Shared.IO.Symbols.Tsv.Commands;
-using KSPCompiler.Shared.Path;
-using KSPCompiler.SymbolManagement.Repository.Yaml.Commands;
+using KSPCompiler.Shared.IO.Symbols.Yaml.Commands;
+using KSPCompiler.SymbolManagement.Repository.Yaml;
 
 namespace KSPCompiler.Features.SymbolManagement.Applications.SymbolDbManager.Services;
 
@@ -20,14 +20,18 @@ public class CommandSymbolDatabaseService : ICommandSymbolDatabaseService
     {
         try
         {
-            var importPath = new FilePath( importFilePath );
-            var repositoryPath = new FilePath( databaseFilePath );
-            var reader = new LocalTextContentReader( importPath );
-            var importer = new TsvCommandSymbolImporter( reader );
-            using var repository = new CommandSymbolRepository( repositoryPath );
-            var applicationService = new SymbolDatabaseApplicationService<CommandSymbol>( repository );
+            var repositoryReader = new YamlCommandSymbolImporter( new LocalTextContentReader( databaseFilePath ) );
+            var repositoryWriter = new YamlCommandSymbolExporter( new LocalTextContentWriter( databaseFilePath ) );
+            var importer = new TsvCommandSymbolImporter( new LocalTextContentReader( importFilePath ) );
 
-            return await applicationService.ImportAsync( importer, cancellationToken );
+            using var repository = new CommandSymbolRepository(
+                repositoryReader: repositoryReader,
+                repositoryWriter: repositoryWriter
+            );
+
+            var service = new SymbolDatabaseApplicationService<CommandSymbol>( repository );
+
+            return await service.ImportAsync( importer, cancellationToken );
         }
         catch( Exception e )
         {
@@ -40,14 +44,19 @@ public class CommandSymbolDatabaseService : ICommandSymbolDatabaseService
         try
         {
             var regexPattern = ISymbolDatabaseService.WildCardToRegexPattern( exportPattern );
-            var exportPath = new FilePath( exportFilePath );
-            var repositoryPath = new FilePath( databaseFilePath );
-            var writer = new LocalTextContentWriter( exportPath );
-            using var repository = new CommandSymbolRepository( repositoryPath );
-            var exporter = new TsvCommandSymbolExporter( writer );
-            var applicationService = new SymbolDatabaseApplicationService<CommandSymbol>( repository );
 
-            return await applicationService.ExportAsync(
+            var repositoryReader = new YamlCommandSymbolImporter( new LocalTextContentReader( databaseFilePath ) );
+            var repositoryWriter = new YamlCommandSymbolExporter( new LocalTextContentWriter( databaseFilePath ) );
+            var exporter = new TsvCommandSymbolExporter( new LocalTextContentWriter( exportFilePath ) );
+
+            using var repository = new CommandSymbolRepository(
+                repositoryReader: repositoryReader,
+                repositoryWriter: repositoryWriter
+            );
+
+            var service = new SymbolDatabaseApplicationService<CommandSymbol>( repository );
+
+            return await service.ExportAsync(
                 exporter,
                 symbol => regexPattern.IsMatch( symbol.Name.Value ),
                 cancellationToken
@@ -64,11 +73,18 @@ public class CommandSymbolDatabaseService : ICommandSymbolDatabaseService
         try
         {
             var regexPattern = ISymbolDatabaseService.WildCardToRegexPattern( deletePattern );
-            var repositoryPath = new FilePath( databaseFilePath );
-            using var repository = new CommandSymbolRepository( repositoryPath );
-            var applicationService = new SymbolDatabaseApplicationService<CommandSymbol>( repository );
 
-            return await applicationService.DeleteAsync(
+            var repositoryReader = new YamlCommandSymbolImporter( new LocalTextContentReader( databaseFilePath ) );
+            var repositoryWriter = new YamlCommandSymbolExporter( new LocalTextContentWriter( databaseFilePath ) );
+
+            using var repository = new CommandSymbolRepository(
+                repositoryReader: repositoryReader,
+                repositoryWriter: repositoryWriter
+            );
+
+            var service = new SymbolDatabaseApplicationService<CommandSymbol>( repository );
+
+            return await service.DeleteAsync(
                 symbol => regexPattern.IsMatch( symbol.Name.Value ),
                 cancellationToken
             );

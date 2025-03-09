@@ -2,8 +2,9 @@ using System.IO;
 
 using KSPCompiler.Features.SymbolManagement.Gateways;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
-using KSPCompiler.Shared.Path;
-using KSPCompiler.SymbolManagement.Repository.Yaml.Callbacks;
+using KSPCompiler.Shared.IO.Local;
+using KSPCompiler.Shared.IO.Symbols.Yaml.Callbacks;
+using KSPCompiler.SymbolManagement.Repository.Yaml;
 
 using NUnit.Framework;
 
@@ -19,7 +20,8 @@ public class CallbackRepositoryTest
     public void FindByNameTest()
     {
         var dbPath = Path.Combine( TestDataDirectory, "FindTest.yaml" );
-        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( new FilePath( dbPath ) );
+        var importer = new YamlCallbackSymbolImporter( new LocalTextContentReader( dbPath ) );
+        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryReader: importer );
 
         var symbols = repository.FindByName( "Test" );
 
@@ -30,7 +32,8 @@ public class CallbackRepositoryTest
     public void CannotFindByNotExistNameTest()
     {
         var dbPath = Path.Combine( TestDataDirectory, "FindTest.yaml" );
-        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( new FilePath( dbPath ) );
+        var importer = new YamlCallbackSymbolImporter( new LocalTextContentReader( dbPath ) );
+        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryReader: importer );
 
         var symbols = repository.FindByName( "hogehoge" );
 
@@ -41,7 +44,8 @@ public class CallbackRepositoryTest
     public void FindAllTest()
     {
         var dbPath = Path.Combine( TestDataDirectory, "FindTest.yaml" );
-        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( new FilePath( dbPath ) );
+        var importer = new YamlCallbackSymbolImporter( new LocalTextContentReader( dbPath ) );
+        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryReader: importer );
 
         var symbol = repository.FindAll();
 
@@ -65,7 +69,8 @@ public class CallbackRepositoryTest
         var dbFilePath = Path.Combine( TestDataDirectory, "StoreTest.yaml" );
         CleanUp( dbFilePath );
 
-        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( new FilePath( dbFilePath ), autoFlush: true );
+        var exporter = new YamlCallbackSymbolExporter( new LocalTextContentWriter( dbFilePath ) );
+        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryWriter: exporter, autoFlush: true );
 
         var symbol = MockUtility.CreateCallbackSymbolModel( "test" );
         var result = repository.Store( symbol );
@@ -87,7 +92,8 @@ public class CallbackRepositoryTest
         var dbFilePath = Path.Combine( TestDataDirectory, "StoreTest.yaml" );
         CleanUp( dbFilePath );
 
-        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( new FilePath( dbFilePath ), autoFlush: true );
+        var exporter = new YamlCallbackSymbolExporter( new LocalTextContentWriter( dbFilePath ) );
+        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryWriter: exporter, autoFlush: true );
 
         var symbol = MockUtility.CreateCallbackSymbolModel( "test" );
         var result = repository.Store( symbol );
@@ -111,7 +117,8 @@ public class CallbackRepositoryTest
         var dbFilePath = Path.Combine( TestDataDirectory, "DeleteTest.yaml" );
         CleanUp( dbFilePath );
 
-        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( new FilePath( dbFilePath ), autoFlush: true );
+        var exporter = new YamlCallbackSymbolExporter( new LocalTextContentWriter( dbFilePath ) );
+        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryWriter: exporter, autoFlush: true );
 
         var symbol = MockUtility.CreateCallbackSymbolModel( "test" );
         var result = repository.Store( symbol );

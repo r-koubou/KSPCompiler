@@ -5,10 +5,10 @@ using KSPCompiler.Shared.IO.Symbols.Yaml.Commands.Translators;
 
 namespace KSPCompiler.Shared.IO.Symbols.Yaml.Commands;
 
-public class CommandSymbolImporter( ITextContentReader writer ) :
-    SymbolImporter<
+public class YamlCommandSymbolExporter( ITextContentWriter writer ) :
+    YamlSymbolExporter<
         CommandSymbol,
         CommandSymbolRootModel,
         CommandSymbolModel,
-        SymbolModelToSymbolTranslator
+        SymbolToSymbolModelTranslator
     >( writer );

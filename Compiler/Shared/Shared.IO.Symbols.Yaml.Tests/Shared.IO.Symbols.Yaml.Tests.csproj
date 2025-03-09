@@ -20,4 +20,19 @@
       <ProjectReference Include="..\Shared.IO.Symbols.Yaml\Shared.IO.Symbols.Yaml.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="TestData\UITypeTest\uitype.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\VariableTest\variable.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\CallbackTest\callback.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="TestData\CommandTest\command.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>

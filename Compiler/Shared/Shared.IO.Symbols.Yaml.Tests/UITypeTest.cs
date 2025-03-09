@@ -20,13 +20,13 @@ public class UITypeTest
     private static ISymbolImporter<UITypeSymbol> CreateLocalImporter( string path )
     {
         var reader = new LocalTextContentReader( new FilePath( path ) );
-        return new UITypeSymbolImporter( reader );
+        return new YamlUITypeSymbolImporter( reader );
     }
 
     private static ISymbolExporter<UITypeSymbol> CreateLocalExporter( string path )
     {
         var writer = new LocalTextContentWriter( new FilePath( path ) );
-        return new UITypeSymbolExporter( writer );
+        return new YamlUITypeSymbolExporter( writer );
     }
 
     [Test]

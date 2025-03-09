@@ -16,6 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\..\Shared\Shared.IO.Symbols.Yaml\Shared.IO.Symbols.Yaml.csproj" />
       <ProjectReference Include="..\..\Gateways\Gateways.csproj" />
     </ItemGroup>
 

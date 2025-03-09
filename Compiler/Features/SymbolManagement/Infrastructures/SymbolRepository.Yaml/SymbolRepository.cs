@@ -1,93 +1,55 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 using KSPCompiler.Features.SymbolManagement.Gateways;
-using KSPCompiler.Shared;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
-using KSPCompiler.Shared.Path;
-
-using YamlDotNet.Serialization;
+using KSPCompiler.Shared.IO.Abstractions.Symbol;
 
 namespace KSPCompiler.SymbolManagement.Repository.Yaml;
 
-public abstract class SymbolRepository<TSymbol, TRootModel, TModel> : ISymbolRepository<TSymbol>
-    where TSymbol : SymbolBase
-    where TRootModel : ISymbolRootModel<TModel>, new()
-    where TModel : ISymbolModel
+public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> where TSymbol : SymbolBase
 {
     private readonly SemaphoreSlim semaphore = new( 1, 1 );
 
-    protected FilePath RepositoryPath { get; }
-    protected List<TModel> Models { get; }
-    protected IDataTranslator<TSymbol, TModel> ToModelTranslator { get; }
-    protected IDataTranslator<TModel, TSymbol> FromModelTranslator { get; }
+    protected List<TSymbol> Models { get; }
+    protected ISymbolExporter<TSymbol>? RepositoryWriter { get; }
 
     private bool Disposed { get; set; }
     private bool Dirty { get; set; }
-
     public bool AutoFlush { get; set; }
 
     public int Count
         => Models.Count;
 
-    [Obsolete( "For temporary use only." )]
-    public List<TModel> All
-        => [..Models];
-
     protected SymbolRepository(
-        FilePath repositoryPath,
-        IDataTranslator<TSymbol, TModel> toModelTranslator,
-        IDataTranslator<TModel, TSymbol> fromModelTranslator,
+        ISymbolImporter<TSymbol>? repositoryReader = null,
+        ISymbolExporter<TSymbol>? repositoryWriter = null,
         bool autoFlush = true )
     {
-        RepositoryPath      = repositoryPath;
-        ToModelTranslator   = toModelTranslator;
-        FromModelTranslator = fromModelTranslator;
-        Models              = Load();
-        AutoFlush           = autoFlush;
-    }
-
-    private List<TModel> Load()
-    {
-        if( !RepositoryPath.Exists )
-        {
-            return [];
-        }
-
-        var yamlText = File.ReadAllText( RepositoryPath.Path );
-        var root = new DeserializerBuilder()
-                  .Build()
-                  .Deserialize<TRootModel>( yamlText );
-
-        if( root == null )
-        {
-            throw new InvalidOperationException( "Could not load models from repository." );
-        }
-
-        return root.Data;
+        RepositoryWriter  = repositoryWriter;
+        Models    = repositoryReader == null ? [] : repositoryReader.Import().ToList();
+        AutoFlush = autoFlush;
     }
 
     public async Task FlushAsync()
     {
+        if( Disposed )
+        {
+            throw new ObjectDisposedException( nameof( SymbolRepository<TSymbol> ) );
+        }
+
         if( !Dirty )
         {
             return;
         }
 
-        var sorted = Models.OrderBy( x => x.Name ).ToList();
-        var root = new TRootModel
+        if( RepositoryWriter != null )
         {
-            Data = sorted
-        };
-        var yamlText = new SerializerBuilder()
-                      .Build()
-                      .Serialize( root );
-
-        await File.WriteAllTextAsync( RepositoryPath.Path, yamlText );
+            await RepositoryWriter.ExportAsync( Models, CancellationToken.None );
+        }
 
         Dirty = false;
     }
@@ -102,7 +64,7 @@ public abstract class SymbolRepository<TSymbol, TRootModel, TModel> : ISymbolRep
     {
         if( Disposed )
         {
-            throw new ObjectDisposedException( nameof( SymbolRepository<TSymbol, TRootModel, TModel> ) );
+            throw new ObjectDisposedException( nameof( SymbolRepository<TSymbol> ) );
         }
 
         try
@@ -124,7 +86,10 @@ public abstract class SymbolRepository<TSymbol, TRootModel, TModel> : ISymbolRep
 
         if( existing == null )
         {
-            Models.Add( ToModelTranslator.Translate( symbol ) );
+            symbol.CreatedAt = DateTime.UtcNow;
+            symbol.UpdatedAt = DateTime.UtcNow;
+
+            Models.Add( symbol );
             Dirty = true;
 
             return new StoreResult(
@@ -137,7 +102,7 @@ public abstract class SymbolRepository<TSymbol, TRootModel, TModel> : ISymbolRep
 
         var index = Models.IndexOf( existing );
 
-        existing           = ToModelTranslator.Translate( symbol );
+        existing           = symbol;
         existing.UpdatedAt = DateTime.UtcNow;
         Models[ index ]    = existing;
 
@@ -307,7 +272,6 @@ public abstract class SymbolRepository<TSymbol, TRootModel, TModel> : ISymbolRep
         return await Lock(
             () => new List<TSymbol>(
                 Models
-                   .Select( FromModelTranslator.Translate )
                    .Where( x => predicate( x ) )
             )
         );
@@ -316,9 +280,7 @@ public abstract class SymbolRepository<TSymbol, TRootModel, TModel> : ISymbolRep
     public virtual async Task<IReadOnlyCollection<TSymbol>> FindAllAsync( CancellationToken cancellationToken = default )
     {
         return await Lock(
-            () => new List<TSymbol>(
-                Models.Select( FromModelTranslator.Translate )
-            )
+            () => new List<TSymbol>( Models )
         );
     }
 

@@ -5,10 +5,10 @@ using KSPCompiler.Shared.IO.Symbols.Yaml.UITypes.Translators;
 
 namespace KSPCompiler.Shared.IO.Symbols.Yaml.UITypes;
 
-public class UITypeSymbolExporter( ITextContentWriter writer ) :
-    SymbolExporter<
+public class YamlUITypeSymbolImporter( ITextContentReader writer ) :
+    YamlSymbolImporter<
         UITypeSymbol,
         UITypeSymbolRootModel,
         UITypeSymbolModel,
-        SymbolToSymbolModelTranslator
+        SymbolModelToSymbolTranslator
     >( writer );

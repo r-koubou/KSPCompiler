@@ -20,13 +20,13 @@ public class CallbackTest
     private static ISymbolImporter<CallbackSymbol> CreateLocalImporter( string path )
     {
         var reader = new LocalTextContentReader( new FilePath( path ) );
-        return new CallbackSymbolImporter( reader );
+        return new YamlCallbackSymbolImporter( reader );
     }
 
     private static ISymbolExporter<CallbackSymbol> CreateLocalExporter( string path )
     {
         var writer = new LocalTextContentWriter( new FilePath( path ) );
-        return new CallbackSymbolExporter( writer );
+        return new YamlCallbackSymbolExporter( writer );
     }
 
     [Test]

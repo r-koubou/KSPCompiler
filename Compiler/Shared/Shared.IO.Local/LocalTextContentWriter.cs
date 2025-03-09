@@ -7,17 +7,21 @@ using KSPCompiler.Shared.Path;
 
 namespace KSPCompiler.Shared.IO.Local;
 
-public sealed class LocalTextContentWriter : ITextContentWriter
+public sealed class LocalTextContentWriter( FilePath filePath ) : ITextContentWriter
 {
     // ReSharper disable MemberCanBePrivate.Global
-    public FilePath FilePath { get; }
+    public FilePath FilePath { get; } = filePath;
     // ReSharper restore MemberCanBePrivate.Global
 
-    public LocalTextContentWriter( FilePath filePath )
-    {
-        FilePath = filePath;
-    }
-
     public async Task WriteContentAsync( string content, CancellationToken cancellationToken = default )
-        => await File.WriteAllTextAsync( FilePath.Path, content, cancellationToken );
+    {
+        var directory = System.IO.Path.GetDirectoryName( FilePath.Path );
+
+        if( directory != null && !Directory.Exists( directory ) )
+        {
+            Directory.CreateDirectory( directory );
+        }
+
+        await File.WriteAllTextAsync( FilePath.Path, content, cancellationToken );
+    }
 }
