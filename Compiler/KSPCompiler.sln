@@ -6,7 +6,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Compilation", "Compilation"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Features\Compilation\Domain\Domain.csproj", "{154B766A-C10F-495D-AE2B-B3279AF6B928}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{F4F3E7B5-7F39-4514-A780-E715517FEFD3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared\Shared.csproj", "{F4F3E7B5-7F39-4514-A780-E715517FEFD3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UseCase", "Features\Compilation\UseCase\UseCase.csproj", "{5BA11763-0041-40BA-9B38-2AB4602D9C00}"
 EndProject
@@ -36,7 +36,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Symbol.IO.Tsv.Tests", "Feat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{5FFC4E1C-7553-4C11-A22C-8A3CDFA6643E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.IO", "Shared.IO\Shared.IO.csproj", "{B27D61D3-58DA-4055-97DA-F2612B5429BC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.IO", "Shared\Shared.IO\Shared.IO.csproj", "{B27D61D3-58DA-4055-97DA-F2612B5429BC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Symbol.Commons.Tests", "Features\SymbolManagement\Infrastructures\Symbol.Commons.Tests\Symbol.Commons.Tests.csproj", "{A3F8AAAB-12E4-4B2F-8FD2-D7145C096AE3}"
 EndProject
@@ -60,7 +60,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UseCase.Tests", "Features\S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser.Antlr.Tests", "Features\Compilation\Infrastructures\Parser.Antlr.Tests\Parser.Antlr.Tests.csproj", "{0BE10BDB-153F-4251-BB88-337AF7A7E03A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Tests", "Shared.Tests\Shared.Tests.csproj", "{8B1CCB5F-CDFB-40BD-BB1F-1C4845BAC2B2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Tests", "Shared\Shared.Tests\Shared.Tests.csproj", "{8B1CCB5F-CDFB-40BD-BB1F-1C4845BAC2B2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{00ECF8F8-D6F8-4265-AFD8-1AC1C8B7906A}"
 EndProject
