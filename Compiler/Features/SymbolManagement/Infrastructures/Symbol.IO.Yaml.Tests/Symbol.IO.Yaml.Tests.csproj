@@ -35,7 +35,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\..\Shared\Shared.IO\Shared.IO.csproj" />
+      <ProjectReference Include="..\..\..\..\Shared\Shared.IO.Abstractions\Shared.IO.Abstractions.csproj" />
       <ProjectReference Include="..\Symbol.IO.Yaml\Symbol.IO.Yaml.csproj" />
       <ProjectReference Include="..\Symbol.Commons.Tests\Symbol.Commons.Tests.csproj" />
     </ItemGroup>

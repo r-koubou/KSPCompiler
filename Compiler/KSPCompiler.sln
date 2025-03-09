@@ -36,7 +36,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Symbol.IO.Tsv.Tests", "Feat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{5FFC4E1C-7553-4C11-A22C-8A3CDFA6643E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.IO", "Shared\Shared.IO\Shared.IO.csproj", "{B27D61D3-58DA-4055-97DA-F2612B5429BC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.IO.Abstractions", "Shared\Shared.IO.Abstractions\Shared.IO.Abstractions.csproj", "{B27D61D3-58DA-4055-97DA-F2612B5429BC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Symbol.Commons.Tests", "Features\SymbolManagement\Infrastructures\Symbol.Commons.Tests\Symbol.Commons.Tests.csproj", "{A3F8AAAB-12E4-4B2F-8FD2-D7145C096AE3}"
 EndProject

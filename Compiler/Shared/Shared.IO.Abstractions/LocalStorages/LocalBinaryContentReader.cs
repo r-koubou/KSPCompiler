@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using KSPCompiler.Shared.Contents;
 using KSPCompiler.Shared.Path;
 
-namespace KSPCompiler.Shared.IO.LocalStorages;
+namespace KSPCompiler.Shared.IO.Abstractions.LocalStorages;
 
 public sealed class LocalBinaryContentReader : IBinaryContentReader
 {
