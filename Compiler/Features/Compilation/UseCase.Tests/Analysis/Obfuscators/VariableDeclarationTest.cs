@@ -22,7 +22,7 @@ public class VariableDeclarationTest
         const string obfuscatedName = "$v0";
 
         var output = new StringBuilder();
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var symbolTable = new AggregateSymbolTable();
 
         var variable = MockUtility.CreateIntVariable( variableName );
         variable.State = SymbolState.Loaded;
@@ -51,7 +51,7 @@ public class VariableDeclarationTest
         const string variableName = "$x";
 
         var output = new StringBuilder();
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var symbolTable = new AggregateSymbolTable();
 
         var variable = MockUtility.CreateIntVariable( variableName );
 
@@ -82,7 +82,7 @@ public class VariableDeclarationTest
         const string variableName = "$x";
 
         var output = new StringBuilder();
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var symbolTable = new AggregateSymbolTable();
 
         // 定数・初期値代入のみで参照ずみの状況を作成
         var variable = MockUtility.CreateIntVariable( variableName );
@@ -115,7 +115,7 @@ public class VariableDeclarationTest
         const string obfuscatedName = "$v0";
 
         var output = new StringBuilder();
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var symbolTable = new AggregateSymbolTable();
 
         var variable = MockUtility.CreateIntVariable( variableName );
         variable.Modifier = modifier;
@@ -152,7 +152,7 @@ public class VariableDeclarationTest
                       .NewLine().ToString();
 
         var output = new StringBuilder();
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var symbolTable = new AggregateSymbolTable();
         var variable = MockUtility.CreateIntVariable( variableName );
 
         variable.State = SymbolState.Loaded;
@@ -193,7 +193,7 @@ public class VariableDeclarationTest
                       .NewLine().ToString();
 
         var output = new StringBuilder();
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var symbolTable = new AggregateSymbolTable();
 
         var variable = MockUtility.CreateVariable( variableName, DataTypeFlag.TypeIntArray );
         variable.State = SymbolState.Loaded;
@@ -241,7 +241,7 @@ public class VariableDeclarationTest
                       .NewLine().ToString();
 
         var output = new StringBuilder();
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var symbolTable = new AggregateSymbolTable();
 
         var ui = MockUtility.CreateUILabel();
         symbolTable.UITypes.Add( ui );
@@ -294,7 +294,7 @@ public class VariableDeclarationTest
                       .NewLine().ToString();
 
         var output = new StringBuilder();
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var symbolTable = new AggregateSymbolTable();
 
         var ui = MockUtility.CreateUITable();
         symbolTable.UITypes.Add( ui );

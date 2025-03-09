@@ -23,7 +23,7 @@ public class SemanticAnalyzerTest
     private static IAnalyzerContext CreateContext()
         => new SemanticAnalyzerContext(
             new MockEventEmitter(),
-            MockUtility.CreateAggregateSymbolTable()
+            new AggregateSymbolTable()
         );
 
     [Test]

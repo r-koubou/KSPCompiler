@@ -8,6 +8,7 @@ using KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
 using KSPCompiler.Features.Compilation.UseCase.Tests.Commons;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Expressions;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.EventEmitting.Extensions;
 
 using NUnit.Framework;
@@ -29,7 +30,7 @@ public class AstIntBinaryOperatorConvolutionTest
         var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
         var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
             eventEmitter,
-            MockUtility.CreateAggregateSymbolTable(),
+            new AggregateSymbolTable(),
             integerConvolutionEvaluator,
             realConvolutionEvaluator
         );

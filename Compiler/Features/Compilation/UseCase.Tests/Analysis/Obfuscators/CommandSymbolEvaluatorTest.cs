@@ -18,7 +18,7 @@ public class CommandSymbolEvaluatorTest
         const string commandName = "message";
 
         var output = new StringBuilder();
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var symbolTable = new AggregateSymbolTable();
         var commandSymbol = MockUtility.CreateCommand(
             commandName,
             DataTypeFlag.TypeVoid,

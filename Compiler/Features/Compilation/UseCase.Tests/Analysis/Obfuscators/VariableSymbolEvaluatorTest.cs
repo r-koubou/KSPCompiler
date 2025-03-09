@@ -2,6 +2,7 @@ using System.Text;
 
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Expressions;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
 
 using NUnit.Framework;
 
@@ -17,7 +18,7 @@ public class VariableSymbolEvaluatorTest
         const string obfuscatedName = "$v0";
 
         var output = new StringBuilder();
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var symbolTable = new AggregateSymbolTable();
         var variable = MockUtility.CreateIntVariable( variableName );
 
         symbolTable.UserVariables.Add( variable );
@@ -42,7 +43,7 @@ public class VariableSymbolEvaluatorTest
         const string variableName = "$ENGINE_PAR_DEMO";
 
         var output = new StringBuilder();
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var symbolTable = new AggregateSymbolTable();
         var variable = MockUtility.CreateIntVariable( variableName );
 
         variable.BuiltIn = true;

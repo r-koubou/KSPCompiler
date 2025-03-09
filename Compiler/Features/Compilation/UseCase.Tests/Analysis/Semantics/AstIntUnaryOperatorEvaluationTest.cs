@@ -6,6 +6,7 @@ using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Convolutions.Integers;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
 using KSPCompiler.Features.Compilation.UseCase.Tests.Commons;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
 using KSPCompiler.Shared.EventEmitting.Extensions;
 
@@ -31,7 +32,7 @@ public class AstIntUnaryOperatorEvaluationTest
         var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
         var unaryOperatorEvaluator = new NumericUnaryOperatorEvaluator(
             eventEmitter,
-            MockUtility.CreateAggregateSymbolTable(),
+            new AggregateSymbolTable(),
             integerConvolutionEvaluator,
             realConvolutionEvaluator
         );
@@ -62,7 +63,7 @@ public class AstIntUnaryOperatorEvaluationTest
         var realConvolutionEvaluator = new MockRealConvolutionEvaluator();
         var unaryOperatorEvaluator = new NumericUnaryOperatorEvaluator(
             eventEmitter,
-            MockUtility.CreateAggregateSymbolTable(),
+            new AggregateSymbolTable(),
             integerConvolutionEvaluator,
             realConvolutionEvaluator
         );

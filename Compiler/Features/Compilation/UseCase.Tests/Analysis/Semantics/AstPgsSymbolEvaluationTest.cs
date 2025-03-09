@@ -7,6 +7,7 @@ using KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
 using KSPCompiler.Features.Compilation.UseCase.Tests.Commons;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Expressions;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
 using KSPCompiler.Shared.EventEmitting.Extensions;
 
@@ -26,7 +27,7 @@ public class AstPgsSymbolEvaluationTest
         eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
         var visitor = new MockAstSymbolVisitor();
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var symbolTable = new AggregateSymbolTable();
 
         var symbolEvaluator = new SymbolEvaluator( eventEmitter, symbolTable );
         visitor.Inject( symbolEvaluator );

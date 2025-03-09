@@ -6,6 +6,7 @@ using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
 using KSPCompiler.Features.Compilation.UseCase.Tests.Commons;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Expressions;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.EventEmitting.Extensions;
 
 using NUnit.Framework;
@@ -22,7 +23,7 @@ public class AstCallCommandEvaluationTest
         var eventEmitter = new MockEventEmitter();
         eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
-        var symbols = MockUtility.CreateAggregateSymbolTable();
+        var symbols = new AggregateSymbolTable();
 
         // register command `play_note`
         // play_note(<note-number>, <velocity>, <sample-offset>, <duration>)
@@ -60,7 +61,7 @@ public class AstCallCommandEvaluationTest
         var eventEmitter = new MockEventEmitter();
         eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
-        var symbols = MockUtility.CreateAggregateSymbolTable();
+        var symbols = new AggregateSymbolTable();
 
         // register command `play_note`
         // play_note(<note-number>, <velocity>, <sample-offset>, <duration>)
@@ -97,7 +98,7 @@ public class AstCallCommandEvaluationTest
         var eventEmitter = new MockEventEmitter();
         eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
-        var symbols = MockUtility.CreateAggregateSymbolTable();
+        var symbols = new AggregateSymbolTable();
 
         // register command `play_note`
         // play_note(<note-number>, <velocity>, <sample-offset>, <duration>)
@@ -135,7 +136,7 @@ public class AstCallCommandEvaluationTest
         var eventEmitter = new MockEventEmitter();
         eventEmitter.Subscribe<CompilationWarningEvent>( e => compilerMessageManger.Warning( e.Position, e.Message ) );
 
-        var symbols = MockUtility.CreateAggregateSymbolTable();
+        var symbols = new AggregateSymbolTable();
 
         // Don't register the command for make a warning
         // var command = MockUtility.CreatePlayNoteCommand();

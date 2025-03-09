@@ -28,7 +28,7 @@ public class CallbackDeclarationTest
             Name = callbackName
         };
 
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var symbolTable = new AggregateSymbolTable();
         var obfuscatedTable = MockUtility.CreateAggregateObfuscatedSymbolTable( symbolTable, functionPrefix: "v" );
 
         var evaluator = new CallbackDeclarationEvaluator( output, obfuscatedTable );
@@ -68,7 +68,7 @@ public class CallbackDeclarationTest
             }
         };
 
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var symbolTable = new AggregateSymbolTable();
         var variable = MockUtility.CreateIntVariable( argumentName );
         variable.State = SymbolState.Loaded;
 

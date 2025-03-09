@@ -306,10 +306,6 @@ public static class MockUtility
     #endregion
 
     #region Symbol Table
-
-    public static AggregateSymbolTable CreateAggregateSymbolTable()
-        => new();
-
     public static AggregateObfuscatedSymbolTable CreateAggregateObfuscatedSymbolTable( AggregateSymbolTable source, string variablePrefix = "v", string functionPrefix = "f" )
         => new(
             new ObfuscatedVariableSymbolTable( source.UserVariables, variablePrefix ),
@@ -419,7 +415,7 @@ public static class MockUtility
 
         var binaryOperatorEvaluator = new SemanticNumericBinaryOperatorEvaluator(
             eventEmitter,
-            CreateAggregateSymbolTable(),
+            new AggregateSymbolTable(),
             new MockIntegerConvolutionEvaluator(),
             new RealConvolutionEvaluator()
         );

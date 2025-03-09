@@ -30,7 +30,7 @@ public class AssignOperatorTest
                       .NewLine().ToString();
 
         var output = new StringBuilder();
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var symbolTable = new AggregateSymbolTable();
         var variable = MockUtility.CreateIntVariable( variableName );
 
         variable.State = SymbolState.Initialized;

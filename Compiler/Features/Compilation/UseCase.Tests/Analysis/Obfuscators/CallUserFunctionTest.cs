@@ -4,6 +4,7 @@ using KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators.Extensions;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Expressions;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Statements;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
 
 using NUnit.Framework;
 
@@ -22,7 +23,7 @@ public class CallUserFunctionTest
                       .NewLine().ToString();
 
         var output = new StringBuilder();
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var symbolTable = new AggregateSymbolTable();
 
         symbolTable.UserFunctions.Add( MockUtility.CreateUserFunction( functionName ) );
 

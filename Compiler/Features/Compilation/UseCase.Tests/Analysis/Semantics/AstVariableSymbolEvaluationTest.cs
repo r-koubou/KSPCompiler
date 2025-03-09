@@ -26,7 +26,7 @@ public class AstVariableSymbolEvaluationTest
         var eventEmitter = new MockEventEmitter();
         eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var symbolTable = new AggregateSymbolTable();
 
         symbolTable.UserVariables.Add( variable );
 
@@ -127,7 +127,7 @@ public class AstVariableSymbolEvaluationTest
         var eventEmitter = new MockEventEmitter();
         eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
-        var symbolTable = MockUtility.CreateAggregateSymbolTable(); // no variables registered
+        var symbolTable = new AggregateSymbolTable(); // no variables registered
 
         var symbolEvaluator = new SymbolEvaluator( eventEmitter, symbolTable );
         visitor.Inject( symbolEvaluator );

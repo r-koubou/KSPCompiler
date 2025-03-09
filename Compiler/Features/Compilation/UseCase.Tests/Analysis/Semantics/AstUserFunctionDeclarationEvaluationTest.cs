@@ -5,6 +5,7 @@ using KSPCompiler.Features.Compilation.Domain.Messages.Extensions;
 using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
 using KSPCompiler.Features.Compilation.UseCase.Tests.Commons;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.EventEmitting.Extensions;
 
 using NUnit.Framework;
@@ -23,7 +24,7 @@ public class AstUserFunctionDeclarationEvaluationTest
         var eventEmitter = new MockEventEmitter();
         eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
-        var symbols = MockUtility.CreateAggregateSymbolTable();
+        var symbols = new AggregateSymbolTable();
 
         var ast = MockUtility.CreateUserFunctionDeclarationNode( name );
         var evaluator = new UserFunctionDeclarationEvaluator( eventEmitter, symbols );
@@ -47,7 +48,7 @@ public class AstUserFunctionDeclarationEvaluationTest
         var eventEmitter = new MockEventEmitter();
         eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
-        var symbols = MockUtility.CreateAggregateSymbolTable();
+        var symbols = new AggregateSymbolTable();
 
         var ast = MockUtility.CreateUserFunctionDeclarationNode( name );
         var evaluator = new UserFunctionDeclarationEvaluator( eventEmitter, symbols );

@@ -30,7 +30,7 @@ public class AstArrayElementEvaluationTest
         var eventEmitter = new MockEventEmitter();
         eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var symbolTable = new AggregateSymbolTable();
         var variable = MockUtility.CreateVariable( variableName );
 
         variable.ArraySize = 10;
@@ -63,7 +63,7 @@ public class AstArrayElementEvaluationTest
         var eventEmitter = new MockEventEmitter();
         eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var symbolTable = new AggregateSymbolTable();
         var variable = MockUtility.CreateVariable( "%x" );
 
         variable.ArraySize = arraySize;

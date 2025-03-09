@@ -26,7 +26,7 @@ public class AstCallbackDeclarationEvaluationTest
         var callback = MockUtility.CreateCallback( name, false );
         callback.BuiltIn = builtIn;
 
-        var symbols = MockUtility.CreateAggregateSymbolTable();
+        var symbols = new AggregateSymbolTable();
 
         if( builtIn )
         {
@@ -60,7 +60,7 @@ public class AstCallbackDeclarationEvaluationTest
         };
 
         var callback = MockUtility.CreateCallback( name, allowMultiple );
-        var symbols = MockUtility.CreateAggregateSymbolTable();
+        var symbols = new AggregateSymbolTable();
 
         if( allowMultiple )
         {

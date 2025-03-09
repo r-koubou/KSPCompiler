@@ -6,6 +6,7 @@ using KSPCompiler.Features.Compilation.UseCase.Tests.Commons;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Blocks;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Expressions;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Statements;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
 using KSPCompiler.Shared.EventEmitting.Extensions;
 
@@ -21,7 +22,7 @@ public class PreprocessTest
     public void IfDefinedTest( string registerSymbolName, string evaluateSymbolName, bool expectedIgnored )
     {
         var eventEmitter = new MockEventEmitter();
-        var symbolTable = MockUtility.CreateAggregateSymbolTable().PreProcessorSymbols;
+        var symbolTable = new AggregateSymbolTable().PreProcessorSymbols;
         var analyzer = new PreprocessAnalyzer( symbolTable, eventEmitter );
 
         /*
@@ -64,7 +65,7 @@ public class PreprocessTest
     public void IfNotDefinedTest( string registerSymbolName, string evaluateSymbolName, bool expectedIgnored )
     {
         var eventEmitter = new MockEventEmitter();
-        var symbolTable = MockUtility.CreateAggregateSymbolTable().PreProcessorSymbols;
+        var symbolTable = new AggregateSymbolTable().PreProcessorSymbols;
         var analyzer = new PreprocessAnalyzer( symbolTable, eventEmitter );
 
         /*
@@ -106,7 +107,7 @@ public class PreprocessTest
     public void UnDefinedTest()
     {
         var eventEmitter = new MockEventEmitter();
-        var symbolTable = MockUtility.CreateAggregateSymbolTable().PreProcessorSymbols;
+        var symbolTable = new AggregateSymbolTable().PreProcessorSymbols;
         var analyzer = new PreprocessAnalyzer( symbolTable, eventEmitter );
 
         /*
@@ -149,7 +150,7 @@ public class PreprocessTest
             }
         );
 
-        var symbolTable = MockUtility.CreateAggregateSymbolTable().PreProcessorSymbols;
+        var symbolTable = new AggregateSymbolTable().PreProcessorSymbols;
         var analyzer = new PreprocessAnalyzer( symbolTable, eventEmitter );
 
         /*

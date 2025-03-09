@@ -8,6 +8,7 @@ using KSPCompiler.Features.Compilation.UseCase.Tests.Commons;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Expressions;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Statements;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
 using KSPCompiler.Shared.EventEmitting.Extensions;
 
@@ -27,7 +28,7 @@ public class AstUIVariableDeclarationEvaluationTest
         var eventEmitter = new MockEventEmitter();
         eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
-        var symbols = MockUtility.CreateAggregateSymbolTable();
+        var symbols = new AggregateSymbolTable();
 
         // Variable can declare in init callback only
         var callbackAst = MockUtility.CreateCallbackDeclarationNode( "init" );
@@ -78,7 +79,7 @@ public class AstUIVariableDeclarationEvaluationTest
         var eventEmitter = new MockEventEmitter();
         eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
-        var symbols = MockUtility.CreateAggregateSymbolTable();
+        var symbols = new AggregateSymbolTable();
 
         // Variable can declare in init callback only
         var callbackAst = MockUtility.CreateCallbackDeclarationNode( "init" );
@@ -133,7 +134,7 @@ public class AstUIVariableDeclarationEvaluationTest
         var eventEmitter = new MockEventEmitter();
         eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
-        var symbols = MockUtility.CreateAggregateSymbolTable();
+        var symbols = new AggregateSymbolTable();
 
         // Variable can declare in init callback only
         var callbackAst = MockUtility.CreateCallbackDeclarationNode( "init" );
@@ -164,7 +165,7 @@ public class AstUIVariableDeclarationEvaluationTest
         var eventEmitter = new MockEventEmitter();
         eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
-        var symbols = MockUtility.CreateAggregateSymbolTable();
+        var symbols = new AggregateSymbolTable();
 
         // Variable can declare in init callback only
         var callbackAst = MockUtility.CreateCallbackDeclarationNode( "init" );
@@ -208,7 +209,7 @@ public class AstUIVariableDeclarationEvaluationTest
         var eventEmitter = new MockEventEmitter();
         eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
-        var symbols = MockUtility.CreateAggregateSymbolTable();
+        var symbols = new AggregateSymbolTable();
 
         // Variable can declare in init callback only
         var callbackAst = MockUtility.CreateCallbackDeclarationNode( "init" );
@@ -256,7 +257,7 @@ public class AstUIVariableDeclarationEvaluationTest
         var eventEmitter = new MockEventEmitter();
         eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
-        var symbols = MockUtility.CreateAggregateSymbolTable();
+        var symbols = new AggregateSymbolTable();
 
         // Variable can declare in init callback only
         var callbackAst = MockUtility.CreateCallbackDeclarationNode( "init" );
@@ -305,7 +306,7 @@ public class AstUIVariableDeclarationEvaluationTest
         var eventEmitter = new MockEventEmitter();
         eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
-        var symbols = MockUtility.CreateAggregateSymbolTable();
+        var symbols = new AggregateSymbolTable();
 
         // Variable can declare in init callback only
         var callbackAst = MockUtility.CreateCallbackDeclarationNode( "init" );

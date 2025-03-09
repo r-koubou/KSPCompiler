@@ -24,7 +24,7 @@ public class CallCommandTest
         const string expected = $"message({obfuscatedName})";
 
         var output = new StringBuilder();
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var symbolTable = new AggregateSymbolTable();
         var variable = MockUtility.CreateIntVariable( variableName );
 
         variable.State = SymbolState.Initialized;
@@ -70,7 +70,7 @@ public class CallCommandTest
                       .NewLine().ToString();
 
         var output = new StringBuilder();
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var symbolTable = new AggregateSymbolTable();
         var variable = MockUtility.CreateIntVariable( variableName );
 
         variable.State = SymbolState.Initialized;

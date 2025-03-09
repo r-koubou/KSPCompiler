@@ -7,6 +7,7 @@ using KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
 using KSPCompiler.Features.Compilation.UseCase.Tests.Commons;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Expressions;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
 using KSPCompiler.Shared.EventEmitting.Extensions;
 
@@ -24,7 +25,7 @@ public class AstAssignmentEvaluationTest
         var eventEmitter = new MockEventEmitter();
         eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var symbolTable = new AggregateSymbolTable();
         var visitor = new MockAssignOperatorVisitor();
         var assignEvaluator = new AssignOperatorEvaluator( eventEmitter, symbolTable );
         var variable = MockUtility.CreateSymbolNode( "$x", DataTypeFlag.TypeInt );
@@ -48,7 +49,7 @@ public class AstAssignmentEvaluationTest
         var eventEmitter = new MockEventEmitter();
         eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var symbolTable = new AggregateSymbolTable();
         var visitor = new MockAssignOperatorVisitor();
         var assignEvaluator = new AssignOperatorEvaluator( eventEmitter, symbolTable );
         var variable = MockUtility.CreateSymbolNode( "$x", DataTypeFlag.TypeInt );
@@ -74,7 +75,7 @@ public class AstAssignmentEvaluationTest
         var eventEmitter = new MockEventEmitter();
         eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var symbolTable = new AggregateSymbolTable();
         var visitor = new MockAssignOperatorVisitor();
         var assignEvaluator = new AssignOperatorEvaluator( eventEmitter, symbolTable );
         var variable = MockUtility.CreateSymbolNode( "$x", DataTypeFlag.TypeInt );
@@ -100,7 +101,7 @@ public class AstAssignmentEvaluationTest
         var eventEmitter = new MockEventEmitter();
         eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var symbolTable = new AggregateSymbolTable();
         var visitor = new MockAssignOperatorVisitor();
         var assignEvaluator = new AssignOperatorEvaluator( eventEmitter, symbolTable );
         var variable = MockUtility.CreateSymbolNode( "$x", DataTypeFlag.TypeInt );
@@ -128,7 +129,7 @@ public class AstAssignmentEvaluationTest
         var eventEmitter = new MockEventEmitter();
         eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var symbolTable = new AggregateSymbolTable();
         var visitor = new MockAssignOperatorVisitor();
         var assignEvaluator = new AssignOperatorEvaluator( eventEmitter, symbolTable );
         var variable = MockUtility.CreateSymbolNode( "%x", DataTypeFlag.TypeIntArray );
@@ -156,7 +157,7 @@ public class AstAssignmentEvaluationTest
         var eventEmitter = new MockEventEmitter();
         eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var symbolTable = new AggregateSymbolTable();
         var visitor = new MockAssignOperatorVisitor();
         var assignEvaluator = new AssignOperatorEvaluator( eventEmitter, symbolTable );
         var variable = MockUtility.CreateSymbolNode( "$x", DataTypeFlag.TypeInt );
@@ -184,7 +185,7 @@ public class AstAssignmentEvaluationTest
         var eventEmitter = new MockEventEmitter();
         eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
-        var symbolTable = MockUtility.CreateAggregateSymbolTable();
+        var symbolTable = new AggregateSymbolTable();
         var visitor = new MockAssignOperatorVisitor();
         var assignEvaluator = new AssignOperatorEvaluator( eventEmitter, symbolTable );
         var variable = MockUtility.CreateSymbolNode( "@x", DataTypeFlag.TypeString );
