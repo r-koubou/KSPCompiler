@@ -11,6 +11,7 @@ namespace KSPCompiler.Shared.IO.Symbols.Yaml;
 public abstract class SymbolImporter<TSymbol, TRootModel, TModel, TTranslator>( ITextContentReader reader )
     : ISymbolImporter<TSymbol>
     where TSymbol : SymbolBase
+    where TModel : ISymbolModel
     where TRootModel : ISymbolRootModel<TModel>, new()
     where TTranslator : ISymbolModelToSymbolTranslator<TModel, TSymbol>, new()
 {

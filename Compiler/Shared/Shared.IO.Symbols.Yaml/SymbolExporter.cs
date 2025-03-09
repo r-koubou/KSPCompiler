@@ -11,6 +11,7 @@ namespace KSPCompiler.Shared.IO.Symbols.Yaml;
 public abstract class SymbolExporter<TSymbol, TRootModel, TModel, TTranslator>( ITextContentWriter writer )
     : ISymbolExporter<TSymbol>
     where TSymbol : SymbolBase
+    where TModel : ISymbolModel
     where TRootModel : ISymbolRootModel<TModel>, new()
     where TTranslator : ISymbolToSymbolModelTranslator<TSymbol, TModel>, new()
 {

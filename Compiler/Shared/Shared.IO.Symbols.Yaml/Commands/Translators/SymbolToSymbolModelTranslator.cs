@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
@@ -13,6 +14,7 @@ public class SymbolToSymbolModelTranslator
     {
         var model = new CommandSymbolModel
         {
+            Id               = Guid.NewGuid(),
             Name             = source.Name.Value,
             BuiltIn          = source.BuiltIn,
             ReturnType       = DataTypeUtility.ToString( source.DataType ),
