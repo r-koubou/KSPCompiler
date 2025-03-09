@@ -9,7 +9,7 @@ using EmmyLua.LanguageServer.Framework.Protocol.Message.ExecuteCommand;
 using EmmyLua.LanguageServer.Framework.Server.Handler;
 
 using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Compilation;
-using KSPCompiler.Features.Compilation.Gateways.Symbols;
+using KSPCompiler.Features.Compilation.Gateways.Symbol;
 using KSPCompiler.Features.Compilation.UseCase.ApplicationServices;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Compilation;

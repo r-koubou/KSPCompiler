@@ -2,7 +2,7 @@ using System.IO;
 
 using Antlr4.Runtime;
 
-using KSPCompiler.Features.Compilation.Gateways.Parsers;
+using KSPCompiler.Features.Compilation.Gateways.Parser;
 using KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translators;
 using KSPCompiler.Infrastructures.Parser.Antlr;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Blocks;

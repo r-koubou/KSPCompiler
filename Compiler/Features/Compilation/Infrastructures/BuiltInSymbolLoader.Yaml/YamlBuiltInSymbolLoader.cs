@@ -2,7 +2,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-using KSPCompiler.Features.Compilation.Gateways.Symbols;
+using KSPCompiler.Features.Compilation.Gateways.Symbol;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.IO.Local;
 using KSPCompiler.Shared.IO.Symbols.Yaml.Callbacks;

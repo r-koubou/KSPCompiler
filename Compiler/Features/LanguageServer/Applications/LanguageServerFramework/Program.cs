@@ -12,7 +12,7 @@ using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.H
 using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Renaming;
 using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.SignatureHelp;
 using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Symbols;
-using KSPCompiler.Features.Compilation.Gateways.Symbols;
+using KSPCompiler.Features.Compilation.Gateways.Symbol;
 using KSPCompiler.Features.Compilation.Infrastructures.BuiltInSymbolLoader.Yaml;
 using KSPCompiler.Features.LanguageServer.UseCase.Compilation;
 

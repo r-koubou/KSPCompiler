@@ -1,6 +1,6 @@
 using System;
 
-using KSPCompiler.Features.Compilation.Gateways.Parsers;
+using KSPCompiler.Features.Compilation.Gateways.Parser;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Blocks;
 using KSPCompiler.Shared.UseCase;
 

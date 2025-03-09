@@ -5,7 +5,7 @@ using System.Reflection;
 using KSPCompiler.Features.Compilation.Domain.Messages;
 using KSPCompiler.Features.Compilation.Domain.Messages.Extensions;
 using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
-using KSPCompiler.Features.Compilation.Gateways.Symbols;
+using KSPCompiler.Features.Compilation.Gateways.Symbol;
 using KSPCompiler.Features.Compilation.Infrastructures.BuiltInSymbolLoader.Yaml;
 using KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr;
 using KSPCompiler.Features.Compilation.UseCase.ApplicationServices;
