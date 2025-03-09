@@ -26,6 +26,7 @@ public sealed class CompilationApplicationService(
 )
 {
     private readonly IBuiltInSymbolLoader builtinSymbolLoader = builtinSymbolLoader;
+    private AggregateSymbolTable? builtinSymbolTable;
 
     public CompilationResult Execute( IEventEmitter eventEmitter, CompilationOption option )
         => ExecuteAsync( eventEmitter, option, CancellationToken.None ).GetAwaiter().GetResult();
@@ -35,10 +36,11 @@ public sealed class CompilationApplicationService(
     {
         // TODO: CompilerMessageManger compilerMessageManger is obsolete. Use IEventEmitter eventEmitter instead.
 
-        var builtInSymbolTable = await builtinSymbolLoader.LoadAsync( cancellationToken );
+        builtinSymbolTable ??= await builtinSymbolLoader.LoadAsync( cancellationToken );
+
         var userSymbolTable = new AggregateSymbolTable();
 
-        SetupSymbolTable( builtInSymbolTable, userSymbolTable );
+        SetupSymbolTable( builtinSymbolTable, userSymbolTable );
 
         var noAnalysisError = true;
 
@@ -142,10 +144,11 @@ public sealed class CompilationApplicationService(
         }
         catch( Exception e )
         {
-            return new SemanticAnalysisOutputData( new SemanticAnalysisOutputDataDetail(
-                                                       ast,
-                                                       symbolTable
-                                                   ), false, e
+            return new SemanticAnalysisOutputData(
+                new SemanticAnalysisOutputDataDetail(
+                    ast,
+                    symbolTable
+                ), false, e
             );
         }
     }
