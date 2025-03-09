@@ -8,8 +8,8 @@ using KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv.Comman
 using KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv.UITypes;
 using KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv.Variables;
 using KSPCompiler.Features.SymbolManagement.UseCase.ApplicationServices;
-using KSPCompiler.Shared.Contents;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
+using KSPCompiler.Shared.IO.Abstractions.Contents;
 using KSPCompiler.Shared.IO.Abstractions.LocalStorages;
 using KSPCompiler.Shared.Path;
 using KSPCompiler.SymbolManagement.Repository.Yaml.Callbacks;

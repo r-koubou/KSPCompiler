@@ -17,6 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\..\Shared\Shared.IO.Abstractions\Shared.IO.Abstractions.csproj" />
       <ProjectReference Include="..\..\..\..\Shared\Shared\Shared.csproj" />
       <ProjectReference Include="..\..\Gateways\Gateways.csproj" />
     </ItemGroup>

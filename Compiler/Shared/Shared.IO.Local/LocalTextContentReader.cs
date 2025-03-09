@@ -2,7 +2,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-using KSPCompiler.Shared.Contents;
+using KSPCompiler.Shared.IO.Abstractions.Contents;
 using KSPCompiler.Shared.Path;
 
 namespace KSPCompiler.Shared.IO.Abstractions.LocalStorages;

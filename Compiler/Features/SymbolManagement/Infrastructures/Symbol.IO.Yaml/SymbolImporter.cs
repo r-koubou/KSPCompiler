@@ -3,8 +3,8 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using KSPCompiler.Features.SymbolManagement.Gateways;
-using KSPCompiler.Shared.Contents;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
+using KSPCompiler.Shared.IO.Abstractions.Contents;
 
 namespace KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Repository.Yaml;
 

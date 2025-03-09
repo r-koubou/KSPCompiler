@@ -8,8 +8,8 @@ using CsvHelper;
 using KSPCompiler.Features.SymbolManagement.Gateways;
 using KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv.Commands.Models.CsvHelperMappings;
 using KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv.Commands.Translators;
-using KSPCompiler.Shared.Contents;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
+using KSPCompiler.Shared.IO.Abstractions.Contents;
 
 namespace KSPCompiler.Features.SymbolManagement.Infrastructures.Symbol.IO.Tsv.Commands;
 

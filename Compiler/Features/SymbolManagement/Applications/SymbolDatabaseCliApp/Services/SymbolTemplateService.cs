@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 
 using KSPCompiler.Features.SymbolManagement.Gateways;
 using KSPCompiler.Features.SymbolManagement.UseCase.ApplicationServices;
-using KSPCompiler.Shared.Contents;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
+using KSPCompiler.Shared.IO.Abstractions.Contents;
 using KSPCompiler.Shared.IO.Abstractions.LocalStorages;
 using KSPCompiler.Shared.Path;
 

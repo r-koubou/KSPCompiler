@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <LangVersion>default</LangVersion>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <Nullable>enable</Nullable>
+        <Copyright>R-Koubou</Copyright>
+        <Company>R-Koubou</Company>
+        <Product>KSPCompiler.Shared.IO.Local</Product>
+        <AssemblyName>KSPCompiler.Shared.IO.Local</AssemblyName>
+        <RootNamespace>KSPCompiler.Shared.IO.Local</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Shared.IO.Abstractions\Shared.IO.Abstractions.csproj" />
+    </ItemGroup>
+
+</Project>

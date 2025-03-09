@@ -74,6 +74,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Application
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LSServer.LanguageServerFramework", "Features\LanguageServer\Applications\LanguageServerFramework\LSServer.LanguageServerFramework.csproj", "{EF6BAA6D-3235-442B-B10E-67FDFF561309}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.IO.Local", "Shared\Shared.IO.Local\Shared.IO.Local.csproj", "{82A9129D-D22F-4C64-B0A5-AE44CD13762C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -180,6 +182,10 @@ Global
 		{EF6BAA6D-3235-442B-B10E-67FDFF561309}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF6BAA6D-3235-442B-B10E-67FDFF561309}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF6BAA6D-3235-442B-B10E-67FDFF561309}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82A9129D-D22F-4C64-B0A5-AE44CD13762C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82A9129D-D22F-4C64-B0A5-AE44CD13762C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82A9129D-D22F-4C64-B0A5-AE44CD13762C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82A9129D-D22F-4C64-B0A5-AE44CD13762C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{73586D91-B9CA-4555-8540-410A74C8E60A} = {249A6BEA-D69A-4F19-96F2-C55C0058F99B}
@@ -217,5 +223,6 @@ Global
 		{A3149611-21A5-4D6B-BF99-9D7CD13A49E0} = {55453A7A-45EC-4A56-943D-9B4E7BE9AD7C}
 		{4429EBAB-7062-4E31-ABD5-92D3B324D663} = {55453A7A-45EC-4A56-943D-9B4E7BE9AD7C}
 		{EF6BAA6D-3235-442B-B10E-67FDFF561309} = {4429EBAB-7062-4E31-ABD5-92D3B324D663}
+		{82A9129D-D22F-4C64-B0A5-AE44CD13762C} = {5FFC4E1C-7553-4C11-A22C-8A3CDFA6643E}
 	EndGlobalSection
 EndGlobal
