@@ -17,7 +17,6 @@ using KSPCompiler.Features.Compilation.UseCase.ApplicationServices;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Compilation;
 using KSPCompiler.Shared;
-using KSPCompiler.Shared.Domain.Compilation;
 using KSPCompiler.Shared.EventEmitting;
 using KSPCompiler.Shared.EventEmitting.Extensions;
 

@@ -8,7 +8,6 @@ using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.IO.Local;
 using KSPCompiler.Shared.IO.Symbols.Tsv.UITypes;
 using KSPCompiler.Shared.IO.Symbols.Yaml.UITypes;
-using KSPCompiler.Shared.Path;
 using KSPCompiler.SymbolManagement.Repository.Yaml;
 
 namespace KSPCompiler.Features.SymbolManagement.Applications.SymbolDbManager.Services;

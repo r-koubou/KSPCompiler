@@ -8,7 +8,6 @@ using KSPCompiler.Features.Compilation.Gateways.Parsers;
 using KSPCompiler.Features.Compilation.UseCase.Analysis;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions;
 using KSPCompiler.Shared;
-using KSPCompiler.Shared.Domain.Compilation;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Blocks;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.EventEmitting;
