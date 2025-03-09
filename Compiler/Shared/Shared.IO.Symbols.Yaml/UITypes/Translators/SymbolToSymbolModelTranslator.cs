@@ -11,6 +11,9 @@ public class SymbolToSymbolModelTranslator
     {
         var symbol = new UITypeSymbolModel
         {
+            Id                 = source.Id,
+            CreatedAt          = source.CreatedAt,
+            UpdatedAt          = source.UpdatedAt,
             Name               = source.Name.Value,
             BuiltIn            = source.BuiltIn,
             VariableType       = DataTypeUtility.ToString( source.DataType ),

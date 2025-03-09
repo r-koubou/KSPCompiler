@@ -1,5 +1,3 @@
-using System;
-
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.IO.Symbols.Yaml.Callbacks.Models;
 
@@ -12,9 +10,9 @@ public class SymbolToSymbolModelTranslator
     {
         var symbol = new CallBackSymbolModel
         {
-            Id                       = Guid.NewGuid(),
-            CreatedAt                = DateTime.UtcNow,
-            UpdatedAt                = DateTime.UtcNow,
+            Id                       = source.Id,
+            CreatedAt                = source.CreatedAt,
+            UpdatedAt                = source.UpdatedAt,
             Name                     = source.Name.Value,
             BuiltIn                  = source.BuiltIn,
             AllowMultipleDeclaration = source.AllowMultipleDeclaration,

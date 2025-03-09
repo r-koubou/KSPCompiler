@@ -10,6 +10,9 @@ public class SymbolToSymbolModelTranslator
     {
         var symbol = new VariableSymbolModel
         {
+            Id               = source.Id,
+            CreatedAt        = source.CreatedAt,
+            UpdatedAt        = source.UpdatedAt,
             Name             = source.Name.Value,
             BuiltIn          = source.BuiltIn,
             Description      = source.Description.Value,
