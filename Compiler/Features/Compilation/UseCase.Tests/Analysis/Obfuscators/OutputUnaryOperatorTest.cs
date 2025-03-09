@@ -8,7 +8,7 @@ using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Expressions;
 
 using NUnit.Framework;
 
-namespace KSPCompiler.Features.Compilation.UseCase.Tests.Analysis.Obfuscators;
+namespace KSPCompiler.Features.SymbolManagement.UseCase.Tests.Analysis.Obfuscators;
 
 [TestFixture]
 public class OutputUnaryOperatorTest

@@ -9,8 +9,8 @@ using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Conv
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Convolutions.Integers;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Convolutions.Reals;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators;
-using KSPCompiler.Features.Compilation.UseCase.Tests.Analysis.Semantics;
-using KSPCompiler.Features.Compilation.UseCase.Tests.Commons;
+using KSPCompiler.Features.SymbolManagement.UseCase.Tests.Analysis.Semantics;
+using KSPCompiler.Features.SymbolManagement.UseCase.Tests.Commons;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Blocks;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Expressions;
@@ -24,7 +24,7 @@ using NUnit.Framework;
 
 using SemanticNumericBinaryOperatorEvaluator = KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics.NumericBinaryOperatorEvaluator;
 
-namespace KSPCompiler.Features.Compilation.UseCase.Tests.Analysis;
+namespace KSPCompiler.Features.SymbolManagement.UseCase.Tests.Analysis;
 
 public static class MockUtility
 {

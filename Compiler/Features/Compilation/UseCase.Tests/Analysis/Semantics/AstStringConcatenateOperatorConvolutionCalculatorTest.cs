@@ -7,7 +7,7 @@ using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Expressions;
 
 using NUnit.Framework;
 
-namespace KSPCompiler.Features.Compilation.UseCase.Tests.Analysis.Semantics;
+namespace KSPCompiler.Features.SymbolManagement.UseCase.Tests.Analysis.Semantics;
 
 [TestFixture]
 public class AstStringConcatenateOperatorConvolutionCalculatorTest

@@ -2,7 +2,7 @@ using System;
 
 using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Preprocessing;
-using KSPCompiler.Features.Compilation.UseCase.Tests.Commons;
+using KSPCompiler.Features.SymbolManagement.UseCase.Tests.Commons;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Blocks;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Expressions;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Statements;
@@ -12,7 +12,7 @@ using KSPCompiler.Shared.EventEmitting.Extensions;
 
 using NUnit.Framework;
 
-namespace KSPCompiler.Features.Compilation.UseCase.Tests.Analysis.Preprocess;
+namespace KSPCompiler.Features.SymbolManagement.UseCase.Tests.Analysis.Preprocess;
 
 [TestFixture]
 public class PreprocessTest

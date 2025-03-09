@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 using KSPCompiler.Shared.EventEmitting;
 
-namespace KSPCompiler.Features.Compilation.UseCase.Tests.Commons;
+namespace KSPCompiler.Features.SymbolManagement.UseCase.Tests.Commons;
 
 public sealed class MockEventEmitter : IEventEmitter
 {

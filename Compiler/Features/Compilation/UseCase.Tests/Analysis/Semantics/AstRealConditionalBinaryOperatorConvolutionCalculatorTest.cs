@@ -5,7 +5,7 @@ using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
 
 using NUnit.Framework;
 
-namespace KSPCompiler.Features.Compilation.UseCase.Tests.Analysis.Semantics;
+namespace KSPCompiler.Features.SymbolManagement.UseCase.Tests.Analysis.Semantics;
 
 [TestFixture]
 public class AstRealConditionalBinaryOperatorConvolutionCalculatorTest

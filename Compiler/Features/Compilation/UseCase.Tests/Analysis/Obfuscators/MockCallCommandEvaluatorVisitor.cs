@@ -6,7 +6,7 @@ using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Obfuscators
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Expressions;
 
-namespace KSPCompiler.Features.Compilation.UseCase.Tests.Analysis.Obfuscators;
+namespace KSPCompiler.Features.SymbolManagement.UseCase.Tests.Analysis.Obfuscators;
 
 public class MockCallCommandEvaluatorVisitor : DefaultAstVisitor
 {

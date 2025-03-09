@@ -4,7 +4,7 @@ using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Evaluations
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Expressions;
 
-namespace KSPCompiler.Features.Compilation.UseCase.Tests.Analysis.Obfuscators;
+namespace KSPCompiler.Features.SymbolManagement.UseCase.Tests.Analysis.Obfuscators;
 
 public class MockBinaryOperatorVisitor : DefaultAstVisitor
 {

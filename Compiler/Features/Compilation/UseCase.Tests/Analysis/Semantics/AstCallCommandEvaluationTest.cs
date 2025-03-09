@@ -4,14 +4,14 @@ using KSPCompiler.Features.Compilation.Domain.Messages;
 using KSPCompiler.Features.Compilation.Domain.Messages.Extensions;
 using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
-using KSPCompiler.Features.Compilation.UseCase.Tests.Commons;
+using KSPCompiler.Features.SymbolManagement.UseCase.Tests.Commons;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Expressions;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.EventEmitting.Extensions;
 
 using NUnit.Framework;
 
-namespace KSPCompiler.Features.Compilation.UseCase.Tests.Analysis.Semantics;
+namespace KSPCompiler.Features.SymbolManagement.UseCase.Tests.Analysis.Semantics;
 
 [TestFixture]
 public class AstCallCommandEvaluationTest

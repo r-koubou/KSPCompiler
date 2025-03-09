@@ -7,7 +7,7 @@ using KSPCompiler.Shared.Domain.Compilation.Symbols;
 
 using NUnit.Framework;
 
-namespace KSPCompiler.Features.Compilation.UseCase.Tests.Analysis.Obfuscators;
+namespace KSPCompiler.Features.SymbolManagement.UseCase.Tests.Analysis.Obfuscators;
 
 [TestFixture]
 public class UserFunctionDeclarationTest

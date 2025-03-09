@@ -7,7 +7,7 @@ using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Expressions;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Statements;
 
-namespace KSPCompiler.Features.Compilation.UseCase.Tests.Analysis.Obfuscators;
+namespace KSPCompiler.Features.SymbolManagement.UseCase.Tests.Analysis.Obfuscators;
 
 public class MockSelectStatementVisitor : DefaultAstVisitor
 {

@@ -3,7 +3,7 @@ using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Blocks;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Statements;
 
-namespace KSPCompiler.Features.Compilation.UseCase.Tests.Analysis.Semantics;
+namespace KSPCompiler.Features.SymbolManagement.UseCase.Tests.Analysis.Semantics;
 
 public class MockDeclarationVisitor : DefaultAstVisitor
 {

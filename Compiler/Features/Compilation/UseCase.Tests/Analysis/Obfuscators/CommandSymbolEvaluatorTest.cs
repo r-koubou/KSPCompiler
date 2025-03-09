@@ -7,7 +7,7 @@ using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
 
 using NUnit.Framework;
 
-namespace KSPCompiler.Features.Compilation.UseCase.Tests.Analysis.Obfuscators;
+namespace KSPCompiler.Features.SymbolManagement.UseCase.Tests.Analysis.Obfuscators;
 
 [TestFixture]
 public class CommandSymbolEvaluatorTest
