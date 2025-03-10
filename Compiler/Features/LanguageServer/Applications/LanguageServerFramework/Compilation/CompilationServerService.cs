@@ -13,7 +13,6 @@ using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.E
 using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 using KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions;
-using KSPCompiler.Features.Compilation.UseCase.ApplicationServices;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Compilation;
 using KSPCompiler.Shared;
@@ -61,13 +60,8 @@ public sealed class CompilationServerService(
         #endregion ~Event Subscription
 
         #region Compilation
-        var compileOption = new CompilationOption(
-            new AntlrKspStringSyntaxParser( script, eventEmitter, Encoding.UTF8 ),
-            enableObfuscation
-        );
-
         var request = new CompilationRequest(
-            SyntaxParser: compileOption.SyntaxParser,
+            SyntaxParser: new AntlrKspStringSyntaxParser( script, eventEmitter, Encoding.UTF8 ),
             BuiltinSymbolTable: builtinSymbolTable,
             EventEmitter: eventEmitter,
             EnableObfuscation: enableObfuscation
