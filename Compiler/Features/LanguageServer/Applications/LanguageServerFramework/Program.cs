@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 
 using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Commands;
+using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Compilation;
 using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Completion;
 using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Definition;
 using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.FindReferences;
@@ -14,6 +15,7 @@ using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.S
 using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Symbols;
 using KSPCompiler.Features.Compilation.Gateways.Symbol;
 using KSPCompiler.Features.Compilation.Infrastructures.BuiltInSymbolLoader.Yaml;
+using KSPCompiler.Features.Compilation.UseCase.ApplicationServices;
 using KSPCompiler.Features.LanguageServer.UseCase.Compilation;
 
 namespace KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework;
@@ -42,12 +44,22 @@ public sealed class Program
         #region Register Handlers
         var compilationCacheManager = new CompilationCacheManager();
         var builtinSymbolLoader = CreateBuiltinSymbolLoader();
+        var builtinSymbolTable = await builtinSymbolLoader.LoadAsync();
+
+        var compilationRequestHandler = new CompilationRequestHandler();
+        var compilationMediator = new CompilationMediator( compilationRequestHandler );
+
+        var compilationSeverService = new CompilationServerService(
+            server.Client,
+            compilationMediator,
+            builtinSymbolTable
+        );
 
         server.AddHandler(
             new TextDocumentHandler(
                 server,
                 compilationCacheManager,
-                builtinSymbolLoader
+                compilationSeverService
             )
         );
         server.AddHandler( new CompletionHandler( compilationCacheManager ) );
@@ -63,7 +75,7 @@ public sealed class Program
             new ObfuscationCommandExecutor(
                 server,
                 compilationCacheManager,
-                builtinSymbolLoader
+                compilationSeverService
             )
         );
 

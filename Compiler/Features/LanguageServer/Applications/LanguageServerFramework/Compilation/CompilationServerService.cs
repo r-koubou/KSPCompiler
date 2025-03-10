@@ -10,13 +10,14 @@ using EmmyLua.LanguageServer.Framework.Server;
 
 using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Compilation.Extensions;
 using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Extensions;
-using KSPCompiler.Features.Compilation.Domain;
 using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 using KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions;
 using KSPCompiler.Features.Compilation.UseCase.ApplicationServices;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Compilation;
 using KSPCompiler.Shared;
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.EventEmitting;
 using KSPCompiler.Shared.EventEmitting.Extensions;
 
@@ -24,13 +25,15 @@ namespace KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramewo
 
 public sealed class CompilationServerService(
     ClientProxy client,
-    CompilationApplicationService applicationService
+    ICompilationMediator applicationService,
+    AggregateSymbolTable builtinSymbolTable
 )
 {
     private readonly ClientProxy client = client;
-    private readonly CompilationApplicationService applicationService = applicationService;
+    private readonly ICompilationMediator applicationService = applicationService;
+    private readonly AggregateSymbolTable builtinSymbolTable = builtinSymbolTable;
 
-    public async Task<CompilationResult> CompileAsync(
+    public async Task<CompilationResponse> CompileAsync(
         ICompilationCacheManager compilationCacheManager,
         ScriptLocation scriptLocation,
         string script,
@@ -63,11 +66,14 @@ public sealed class CompilationServerService(
             enableObfuscation
         );
 
-        var compilationResult = await applicationService.ExecuteAsync(
-            eventEmitter,
-            compileOption,
-            cancellationToken
+        var request = new CompilationRequest(
+            SyntaxParser: compileOption.SyntaxParser,
+            BuiltinSymbolTable: builtinSymbolTable,
+            EventEmitter: eventEmitter,
+            EnableObfuscation: enableObfuscation
         );
+
+        var compilationResult = await applicationService.RequestAsync( request, cancellationToken );
         #endregion ~Compilation
 
         #region Publish Diagnostics

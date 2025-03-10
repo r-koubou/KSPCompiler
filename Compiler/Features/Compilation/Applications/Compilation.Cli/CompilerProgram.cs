@@ -1,6 +1,8 @@
 using System;
 using System.IO;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 
 using KSPCompiler.Features.Compilation.Domain.Messages;
 using KSPCompiler.Features.Compilation.Domain.Messages.Extensions;
@@ -8,6 +10,7 @@ using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 using KSPCompiler.Features.Compilation.Gateways.Symbol;
 using KSPCompiler.Features.Compilation.Infrastructures.BuiltInSymbolLoader.Yaml;
 using KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions;
 using KSPCompiler.Features.Compilation.UseCase.ApplicationServices;
 using KSPCompiler.Shared;
 using KSPCompiler.Shared.EventEmitting;
@@ -25,9 +28,11 @@ public static class CompilerProgram
     /// </summary>
     /// <param name="input">A script file path to compile.</param>
     /// <param name="enableObfuscation">Run obfuscation after compiling.</param>
-    public static int ExecuteCompiler(
+    /// <param name="cancellationToken"></param>
+    public static async Task<int> ExecuteCompilerAsync(
         string input,
-        bool enableObfuscation = false )
+        bool enableObfuscation = false,
+        CancellationToken cancellationToken = default )
     {
         using var subscribers = new CompositeDisposable();
         var eventEmitter = new EventEmitter();
@@ -38,26 +43,29 @@ public static class CompilerProgram
 
         var parser = new AntlrKspFileSyntaxParser( input, eventEmitter );
         var builtinSymbolLoader = CreateBuiltinSymbolLoader();
+        var builtinSymbolTable = await builtinSymbolLoader.LoadAsync( cancellationToken );
+        var compilationRequestHandler = new CompilationRequestHandler();
+        ICompilationMediator compilationMediator = new CompilationMediator( compilationRequestHandler );
 
-        var compilationService = new CompilationApplicationService( builtinSymbolLoader );
-
-        var option = new CompilationOption(
+        var request = new CompilationRequest(
             SyntaxParser: parser,
+            BuiltinSymbolTable: builtinSymbolTable,
+            EventEmitter: eventEmitter,
             EnableObfuscation: enableObfuscation
         );
 
-        var result = compilationService.Execute( eventEmitter, option );
+        var response = await compilationMediator.RequestAsync( request, cancellationToken );
 
         messageManager.WriteTo( Console.Out );
 
-        if( result.Error is not null )
+        if( response.Error is not null )
         {
-            Console.WriteLine( result.Error );
+            Console.WriteLine( response.Error );
         }
 
-        Console.WriteLine(result.ObfuscatedScript);
+        Console.WriteLine(response.ObfuscatedScript);
 
-        return ( result.Error != null || !result.Result ) ? 1 : 0;
+        return ( response.Error != null || !response.Result ) ? 1 : 0;
     }
 
     private static IBuiltInSymbolLoader CreateBuiltinSymbolLoader()

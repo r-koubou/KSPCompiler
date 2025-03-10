@@ -2,10 +2,8 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-using KSPCompiler.Features.Compilation.Domain;
 using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 using KSPCompiler.Features.Compilation.Gateways.Parser;
-using KSPCompiler.Features.Compilation.Gateways.Symbol;
 using KSPCompiler.Features.Compilation.UseCase.Analysis;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions;
 using KSPCompiler.Shared;
@@ -17,44 +15,28 @@ using KSPCompiler.Shared.UseCase;
 
 namespace KSPCompiler.Features.Compilation.UseCase.ApplicationServices;
 
-public sealed record CompilationOption(
-    ISyntaxParser SyntaxParser,
-    bool EnableObfuscation );
-
-[Obsolete("Use ICompilationRequestHandler, ICompilationMediator instead.")]
-public sealed class CompilationApplicationService(
-    IBuiltInSymbolLoader builtinSymbolLoader
-)
+public sealed class CompilationRequestHandler : ICompilationRequestHandler
 {
-    private readonly IBuiltInSymbolLoader builtinSymbolLoader = builtinSymbolLoader;
-    private AggregateSymbolTable? builtinSymbolTable;
-
-    public CompilationResult Execute( IEventEmitter eventEmitter, CompilationOption option )
-        => ExecuteAsync( eventEmitter, option, CancellationToken.None ).GetAwaiter().GetResult();
-
-    // ReSharper disable once UnusedMethodReturnValue.Global
-    public async Task<CompilationResult> ExecuteAsync( IEventEmitter eventEmitter, CompilationOption option, CancellationToken cancellationToken )
+    public async Task<CompilationResponse> HandleAsync( CompilationRequest request, CancellationToken cancellationToken = default )
     {
-        // TODO: CompilerMessageManger compilerMessageManger is obsolete. Use IEventEmitter eventEmitter instead.
-
-        builtinSymbolTable ??= await builtinSymbolLoader.LoadAsync( cancellationToken );
-
         var userSymbolTable = new AggregateSymbolTable();
 
-        SetupSymbolTable( builtinSymbolTable, userSymbolTable );
+        SetupSymbolTable( request.BuiltinSymbolTable, userSymbolTable );
 
         var noAnalysisError = true;
 
         try
         {
+            var eventEmitter = request.EventEmitter;
             using var subscribers = new CompositeDisposable();
+
             eventEmitter.Subscribe<CompilationFatalEvent>( _ => noAnalysisError = false ).AddTo( subscribers );
             eventEmitter.Subscribe<CompilationErrorEvent>( _ => noAnalysisError = false ).AddTo( subscribers );
 
             //-------------------------------------------------
             // Syntax Analysis
             //-------------------------------------------------
-            var syntaxAnalysisOutput = await ExecuteSyntaxAnalysisAsync( option.SyntaxParser, cancellationToken );
+            var syntaxAnalysisOutput = await ExecuteSyntaxAnalysisAsync( request.SyntaxParser, cancellationToken );
             var ast = syntaxAnalysisOutput.OutputData;
 
             //-------------------------------------------------
@@ -64,7 +46,7 @@ public sealed class CompilationApplicationService(
 
             if( !preprocessOutput.Result )
             {
-                return new CompilationResult( false, preprocessOutput.Error, ast, userSymbolTable, string.Empty );
+                return new CompilationResponse( false, preprocessOutput.Error, ast, userSymbolTable, string.Empty );
             }
 
             //-------------------------------------------------
@@ -74,15 +56,15 @@ public sealed class CompilationApplicationService(
 
             if( !semanticAnalysisOutput.Result )
             {
-                return new CompilationResult( false, semanticAnalysisOutput.Error, ast, userSymbolTable, string.Empty );
+                return new CompilationResponse( false, semanticAnalysisOutput.Error, ast, userSymbolTable, string.Empty );
             }
 
             //-------------------------------------------------
             // Obfuscation
             //-------------------------------------------------
-            if( !option.EnableObfuscation || !noAnalysisError )
+            if( !request.EnableObfuscation || !noAnalysisError )
             {
-                return new CompilationResult( noAnalysisError, null, ast, userSymbolTable, string.Empty );
+                return new CompilationResponse( noAnalysisError, null, ast, userSymbolTable, string.Empty );
             }
 
             var obfuscationOutput = await ExecuteObfuscationAsync(
@@ -92,7 +74,7 @@ public sealed class CompilationApplicationService(
                 cancellationToken
             );
 
-            return new CompilationResult(
+            return new CompilationResponse(
                 obfuscationOutput.Result,
                 obfuscationOutput.Error,
                 ast,
@@ -102,7 +84,7 @@ public sealed class CompilationApplicationService(
         }
         catch( Exception e )
         {
-            return new CompilationResult( false, e, null, userSymbolTable, string.Empty );
+            return new CompilationResponse( false, e, null, userSymbolTable, string.Empty );
         }
     }
 
