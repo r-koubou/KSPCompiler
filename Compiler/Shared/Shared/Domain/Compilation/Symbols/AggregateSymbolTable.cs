@@ -1,5 +1,3 @@
-using System;
-
 namespace KSPCompiler.Shared.Domain.Compilation.Symbols;
 
 public sealed class AggregateSymbolTable
