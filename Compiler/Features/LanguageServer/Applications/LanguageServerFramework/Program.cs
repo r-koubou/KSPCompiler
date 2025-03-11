@@ -57,7 +57,6 @@ public sealed class Program
 
         server.AddHandler(
             new TextDocumentHandler(
-                server,
                 compilationCacheManager,
                 compilationSeverService
             )
@@ -73,7 +72,6 @@ public sealed class Program
 
         server.AddHandler(
             new ObfuscationCommandExecutor(
-                server,
                 compilationCacheManager,
                 compilationSeverService
             )

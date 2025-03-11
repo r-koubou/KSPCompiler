@@ -15,7 +15,6 @@ using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Compilation;
 namespace KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Commands;
 
 public class ObfuscationCommandExecutor(
-    EmmyLua.LanguageServer.Framework.Server.LanguageServer server,
     ICompilationCacheManager compilationCacheManager,
     CompilationServerService compilationServerService
 ) : ExecuteCommandHandlerBase

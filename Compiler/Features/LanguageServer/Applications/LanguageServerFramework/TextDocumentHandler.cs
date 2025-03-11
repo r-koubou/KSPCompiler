@@ -17,7 +17,6 @@ using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Compilation;
 namespace KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework;
 
 public sealed class TextDocumentHandler(
-    EmmyLua.LanguageServer.Framework.Server.LanguageServer server,
     ICompilationCacheManager compilationCacheManager,
     CompilationServerService compilationServerService
 ) : TextDocumentHandlerBase

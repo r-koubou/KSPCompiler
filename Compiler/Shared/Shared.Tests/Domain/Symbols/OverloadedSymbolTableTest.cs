@@ -9,7 +9,7 @@ namespace KSPCompiler.Shared.Tests.Domain.Symbols;
 [TestFixture]
 public class CallbackSymbolTableTest
 {
-    private CallbackSymbolTable symbolTable;
+    private CallbackSymbolTable symbolTable = null!;
 
     [SetUp]
     public void SetUp()
