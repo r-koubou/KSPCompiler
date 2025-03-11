@@ -85,18 +85,5 @@ public class AstCallbackDeclarationEvaluationTest
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
-
-        return;
-
-        CallbackArgumentSymbolList CreateOverload( string argName )
-        {
-            var result = new CallbackArgumentSymbolList
-            {
-                new CallbackArgumentSymbol( true ) { Name = new SymbolName( argName ) }
-            };
-
-            return result;
-        }
     }
-
 }
