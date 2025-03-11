@@ -13,14 +13,8 @@ jobs:
   #--------------------------------------------------------------
   # Build LSP Server
   #--------------------------------------------------------------
-  build-lsp-server-omnisharp:
-    uses: ./.github/workflows/build_lsp_server_omnisharp.yml
-    secrets: inherit
-    with:
-      build-configuration: Debug
-
-  build-lsp-server-language-server-framework:
-    uses: ./.github/workflows/build_lsp_server_language_server_framework.yml
+  build-language-server:
+    uses: ./.github/workflows/build_language_server.yml
     secrets: inherit
     with:
       build-configuration: Debug

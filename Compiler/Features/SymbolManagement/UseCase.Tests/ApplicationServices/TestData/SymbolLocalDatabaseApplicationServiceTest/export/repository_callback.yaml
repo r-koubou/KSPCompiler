@@ -1,0 +1,22 @@
+FormatVersion: 1.0.0
+Data:
+- Id: 7395eded-e86d-45a8-8082-11a2b0cd54fe
+  Name: async_complete
+  BuiltIn: false
+  AllowMultipleDeclaration: false
+  Description: |-
+    Async complete callback, triggered after the execution of any command that is executed asynchronously, for example various loading or saving related commands.
+  BuiltIntoVersion: N/A
+  Arguments: []
+  CreatedAt: 2025-01-26T06:28:17.9807940Z
+  UpdatedAt: 2025-01-26T06:28:17.9807940Z
+- Id: a9212dc3-6a74-4990-a5e4-b9c209985e54
+  Name: controller
+  BuiltIn: false
+  AllowMultipleDeclaration: false
+  Description: |-
+    MIDI controller callback, executed whenever a MIDI CC, Pitch Bend or Channel Pressure message is received.
+  BuiltIntoVersion: N/A
+  Arguments: []
+  CreatedAt: 2025-01-26T06:28:17.9841600Z
+  UpdatedAt: 2025-01-26T06:28:17.9841600Z

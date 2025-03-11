@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <LangVersion>default</LangVersion>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <Nullable>enable</Nullable>
+        <Copyright>R-Koubou</Copyright>
+        <Company>R-Koubou</Company>
+        <Product>KSPCompiler.Features.SymbolManagement.Gateways</Product>
+        <AssemblyName>KSPCompiler.Features.SymbolManagement.Gateways</AssemblyName>
+        <RootNamespace>KSPCompiler.Features.SymbolManagement.Gateways</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Shared\Shared\Shared.csproj" />
+    </ItemGroup>
+
+</Project>

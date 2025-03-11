@@ -37,12 +37,12 @@ jobs:
   #--------------------------------------------------------------
   # Build Compiler CLI
   #--------------------------------------------------------------
-  build:
+  build-compiler-cli:
     runs-on: ubuntu-latest
     env:
       DOTNET_CLI_TELEMETRY_OPTOUT: 1
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
-      BASE_DIR: Compiler/Applications/Cli
+      BASE_DIR: Compiler/Features/Compilation/Applications/Compilation.Cli
       PUBLISH_DIR: publish
 
     steps:

@@ -1,0 +1,55 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <LangVersion>default</LangVersion>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <Copyright>R-Koubou</Copyright>
+        <Company>R-Koubou</Company>
+        <Product>KSPCompiler.KSPCompiler.Features.Compilation.Applications.Compilation.Cli</Product>
+        <AssemblyName>KSPCompiler.KSPCompiler.Features.Compilation.Applications.Compilation.Cli</AssemblyName>
+        <RootNamespace>KSPCompiler.KSPCompiler.Features.Compilation.Applications.Compilation.Cli</RootNamespace>
+        <OutputType>Exe</OutputType>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\..\Shared\Shared\Shared.csproj" />
+      <ProjectReference Include="..\..\Domain\Domain.csproj" />
+      <ProjectReference Include="..\..\Infrastructures\BuiltInSymbolLoader.Yaml\BuiltInSymbolLoader.Yaml.csproj" />
+      <ProjectReference Include="..\..\Infrastructures\Parser.Antlr\Parser.Antlr.csproj" />
+      <ProjectReference Include="..\..\UseCase\UseCase.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="ConsoleAppFramework" Version="5.4.1">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\..\..\..\..\Data\Symbols\callbacks.yaml">
+        <Link>Data\Symbols\callbacks.yaml</Link>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="..\..\..\..\..\Data\Symbols\commands.yaml">
+        <Link>Data\Symbols\commands.yaml</Link>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="..\..\..\..\..\Data\Symbols\uitypes.yaml">
+        <Link>Data\Symbols\uitypes.yaml</Link>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="..\..\..\..\..\Data\Symbols\variables.yaml">
+        <Link>Data\Symbols\variables.yaml</Link>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="example.ksp">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+</Project>

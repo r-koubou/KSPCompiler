@@ -1,0 +1,76 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <LangVersion>default</LangVersion>
+        <TargetFramework>net9.0</TargetFramework>
+        <RootNamespace>KSPCompiler.Interactors.Tests</RootNamespace>
+        <Nullable>enable</Nullable>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="nunit" Version="4.2.2" />
+        <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Shared\Shared.IO.Abstractions\Shared.IO.Abstractions.csproj" />
+      <ProjectReference Include="..\..\..\Shared\Shared.IO.Local\Shared.IO.Local.csproj" />
+      <ProjectReference Include="..\..\..\Shared\Shared.IO.Symbols.Tsv\Shared.IO.Symbols.Tsv.csproj" />
+      <ProjectReference Include="..\Infrastructures\SymbolRepository.Yaml\SymbolRepository.Yaml.csproj" />
+      <ProjectReference Include="..\UseCase\UseCase.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseApplicationServiceTest\delete\repository_callback.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseApplicationServiceTest\delete\repository_command.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseApplicationServiceTest\delete\repository_ui_type.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseApplicationServiceTest\delete\repository_variable.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseApplicationServiceTest\export\repository_callback.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseApplicationServiceTest\export\repository_command.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseApplicationServiceTest\export\repository_ui_type.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseApplicationServiceTest\export\repository_variable.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseApplicationServiceTest\find\repository_callback.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseApplicationServiceTest\find\repository_command.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseApplicationServiceTest\find\repository_ui_type.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseApplicationServiceTest\find\repository_variable.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseApplicationServiceTest\import\callback.tsv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseApplicationServiceTest\import\ui_type.tsv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseApplicationServiceTest\import\command.tsv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ApplicationServices\TestData\SymbolLocalDatabaseApplicationServiceTest\import\variable.tsv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+</Project>

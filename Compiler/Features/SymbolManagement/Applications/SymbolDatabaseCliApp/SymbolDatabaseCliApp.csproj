@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net9.0</TargetFramework>
+        <LangVersion>default</LangVersion>
+        <Nullable>enable</Nullable>
+        <Copyright>R-Koubou</Copyright>
+        <Company>R-Koubou</Company>
+        <Product>KSPCompiler.Features.SymbolManagement.SymbolDbManager</Product>
+        <AssemblyName>KSPCompiler.Features.SymbolManagement.Applications.SymbolDbManager</AssemblyName>
+        <RootNamespace>KSPCompiler.Features.SymbolManagement.Applications.SymbolDbManager</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="ConsoleAppFramework" Version="5.2.4">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\..\Shared\Shared.IO.Abstractions\Shared.IO.Abstractions.csproj" />
+        <ProjectReference Include="..\..\..\..\Shared\Shared.IO.Local\Shared.IO.Local.csproj" />
+        <ProjectReference Include="..\..\..\..\Shared\Shared.IO.Symbols.Tsv\Shared.IO.Symbols.Tsv.csproj" />
+        <ProjectReference Include="..\..\..\..\Shared\Shared.IO.Symbols.Yaml\Shared.IO.Symbols.Yaml.csproj" />
+        <ProjectReference Include="..\..\Infrastructures\SymbolRepository.Yaml\SymbolRepository.Yaml.csproj" />
+        <ProjectReference Include="..\..\UseCase\UseCase.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="..\..\..\..\..\Data\Symbols\callbacks.yaml">
+            <Link>Data\Symbols\callbacks.yaml</Link>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="..\..\..\..\..\Data\Symbols\commands.yaml">
+            <Link>Data\Symbols\commands.yaml</Link>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="..\..\..\..\..\Data\Symbols\uitypes.yaml">
+            <Link>Data\Symbols\uitypes.yaml</Link>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="..\..\..\..\..\Data\Symbols\variables.yaml">
+            <Link>Data\Symbols\variables.yaml</Link>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+</Project>
