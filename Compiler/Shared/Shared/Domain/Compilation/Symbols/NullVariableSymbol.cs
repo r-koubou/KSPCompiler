@@ -5,7 +5,7 @@ namespace KSPCompiler.Shared.Domain.Compilation.Symbols;
 /// <summary>
 /// Null object for <see cref="VariableSymbol"/>
 /// </summary>
-public class NullVariableSymbol : VariableSymbol
+public record NullVariableSymbol : VariableSymbol
 {
     public static readonly VariableSymbol Instance = new NullVariableSymbol();
 
