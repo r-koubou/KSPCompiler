@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace KSPCompiler.Shared.Domain.Compilation.Symbols;
 
-public abstract class ArgumentSymbol : VariableSymbol
+public abstract record ArgumentSymbol : VariableSymbol
 {
     public virtual IReadOnlyList<string> UITypeNames { get; }
     public virtual IReadOnlyList<string> OtherTypeNames { get; }

@@ -5,12 +5,12 @@ using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
 
 namespace KSPCompiler.Shared.Domain.Compilation.Symbols;
 
-public sealed class CommandSymbol : SymbolBase, ISymbolDataTypeProvider
+public sealed record CommandSymbol : SymbolBase, ISymbolDataTypeProvider
 {
     public override SymbolType Type
         => SymbolType.Command;
 
-    public CommandArgumentSymbolList Arguments { get; } = new ();
+    public CommandArgumentSymbolList Arguments { get; } = [];
 
     /// <summary>
     /// Represents the return type of the command.

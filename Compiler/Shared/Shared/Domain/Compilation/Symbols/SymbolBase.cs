@@ -10,12 +10,12 @@ namespace KSPCompiler.Shared.Domain.Compilation.Symbols;
 /// Represents a symbol in the symbol table.
 /// </summary>
 /// <seealso cref="ISymbolTable{TSymbol}"/>
-public abstract class SymbolBase
+public abstract record SymbolBase
 {
     /// <summary>
     /// GUID of the symbol.
     /// </summary>
-    public Guid Id { get; set; } = Guid.NewGuid();
+    public Guid Id { get; init; } = Guid.NewGuid();
 
     /// <summary>
     /// Creation date of the symbol.
@@ -23,6 +23,7 @@ public abstract class SymbolBase
     /// <remarks>
     /// This datetime is used when storing in the repository.
     /// </remarks>
+    // ReSharper disable once PropertyCanBeMadeInitOnly.Global
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     /// <summary>
@@ -31,6 +32,7 @@ public abstract class SymbolBase
     /// <remarks>
     /// This datetime is used when storing in the repository.
     /// </remarks>
+    // ReSharper disable once PropertyCanBeMadeInitOnly.Global
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
     /// <summary>
@@ -44,36 +46,43 @@ public abstract class SymbolBase
     /// <summary>
     /// Symbol definition location information.
     /// </summary>
+    // ReSharper disable once PropertyCanBeMadeInitOnly.Global
     public Position DefinedPosition { get; set; } = Position.Zero;
 
     /// <summary>
     /// A symbol's name
     /// </summary>
+    // ReSharper disable once PropertyCanBeMadeInitOnly.Global
     public SymbolName Name { get; set; } = SymbolName.Empty;
 
     /// <summary>
     /// Built-In symbol in external.
     /// </summary>
+    // ReSharper disable once PropertyCanBeMadeInitOnly.Global
     public bool BuiltIn { get; set; } = false;
 
     /// <summary>
     /// A symbol's state for evaluation in analysis.
     /// </summary>
+    // ReSharper disable once PropertyCanBeMadeInitOnly.Global
     public SymbolState State { get; set; } = SymbolState.UnInitialized;
 
     /// <summary>
     /// A symbol's type
     /// </summary>
+    // ReSharper disable once PropertyCanBeMadeInitOnly.Global
     public abstract SymbolType Type { get; }
 
     /// <summary>
     /// A symbol's modifier
     /// </summary>
+    // ReSharper disable once PropertyCanBeMadeInitOnly.Global
     public ModifierFlag Modifier { get; set; } = ModifierFlag.None;
 
     /// <summary>
     /// Index number when stored in <see cref="ISymbolTable{TSymbol}"/>
     /// </summary>
+    // ReSharper disable once PropertyCanBeMadeInitOnly.Global
     public UniqueSymbolIndex TableIndex { get; set; } = UniqueSymbolIndex.Null;
 
     /// <summary>
@@ -82,6 +91,7 @@ public abstract class SymbolBase
     /// <remarks>
     /// Empty characters are also acceptable since they correspond to document comments.
     /// </remarks>
+    // ReSharper disable once PropertyCanBeMadeInitOnly.Global
     public SymbolDescription Description { get; set; } = SymbolDescription.Empty;
 
     /// <summary>
@@ -90,6 +100,7 @@ public abstract class SymbolBase
     /// <remarks>
     /// Empty if unknown.
     /// </remarks>
+    // ReSharper disable once PropertyCanBeMadeInitOnly.Global
     public SymbolBuiltIntoVersion BuiltIntoVersion { get; set; } = SymbolBuiltIntoVersion.NotAvailable;
 
     /// <summary>
