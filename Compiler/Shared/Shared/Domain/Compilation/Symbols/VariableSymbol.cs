@@ -2,7 +2,7 @@ using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
 
 namespace KSPCompiler.Shared.Domain.Compilation.Symbols;
 
-public record VariableSymbol : SymbolBase, ISymbolDataTypeProvider
+public class VariableSymbol : SymbolBase, ISymbolDataTypeProvider
 {
     #region Properties
     public override SymbolType Type

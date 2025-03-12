@@ -5,7 +5,7 @@ using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
 
 namespace KSPCompiler.Shared.Domain.Compilation.Symbols;
 
-public sealed record UITypeSymbol : SymbolBase, ISymbolDataTypeProvider
+public sealed class UITypeSymbol : SymbolBase, ISymbolDataTypeProvider
 {
     /// <summary>
     /// Null Object
