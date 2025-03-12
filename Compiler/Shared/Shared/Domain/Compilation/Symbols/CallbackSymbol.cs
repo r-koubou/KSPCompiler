@@ -38,13 +38,13 @@ public sealed class CallbackSymbol( bool allowMultipleDeclaration ) : SymbolBase
     {
         var newSymbol = new CallbackSymbol( AllowMultipleDeclaration )
         {
-            CommentLines = CommentLines,
+            CommentLines    = CommentLines,
             DefinedPosition = DefinedPosition,
-            Name = Name,
-            BuiltIn = BuiltIn,
-            State = State,
-            Modifier = Modifier,
-            TableIndex = TableIndex
+            Name            = Name,
+            BuiltIn         = BuiltIn,
+            State           = State,
+            Modifier        = Modifier,
+            TableIndex      = TableIndex
         };
 
         foreach( var arg in Arguments )

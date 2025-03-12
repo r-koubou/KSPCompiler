@@ -102,14 +102,12 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
 
         var index = Models.IndexOf( existing );
 
-        existing = symbol with
-        {
-            Id = existing.Id,
-            UpdatedAt = DateTime.UtcNow
-        };
+        symbol.Id        = existing.Id;
+        symbol.CreatedAt = existing.CreatedAt;
+        symbol.UpdatedAt = DateTime.UtcNow;
 
-        Models[ index ]    = existing;
-        Dirty = true;
+        Models[ index ] = symbol;
+        Dirty           = true;
 
         await Task.CompletedTask;
 
