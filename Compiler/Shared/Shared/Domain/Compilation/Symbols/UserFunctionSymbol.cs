@@ -3,7 +3,7 @@ using KSPCompiler.Shared.Text;
 
 namespace KSPCompiler.Shared.Domain.Compilation.Symbols;
 
-public sealed record UserFunctionSymbol : SymbolBase
+public sealed class UserFunctionSymbol : SymbolBase
 {
     /// <summary>
     /// Symbol definition to end location information.

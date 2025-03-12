@@ -2,7 +2,7 @@ using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
 
 namespace KSPCompiler.Shared.Domain.Compilation.Symbols;
 
-public sealed record PreProcessorSymbol : SymbolBase, ISymbolDataTypeProvider
+public sealed class PreProcessorSymbol : SymbolBase, ISymbolDataTypeProvider
 {
     #region Properties
 
