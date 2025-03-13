@@ -44,8 +44,7 @@ internal static class DocumentUtility
 
         while( start > 0 )
         {
-            if( IsIdentifierChar( line, start - 1 ) ||
-                IsSkipChar( line, start - 1 ) )
+            if( IsIdentifierChar( line, start - 1 ) )
             {
                 start--;
             }
@@ -57,8 +56,7 @@ internal static class DocumentUtility
 
         while( end < length )
         {
-            if( IsIdentifierChar( line, end ) ||
-                IsSkipChar( line, end ) )
+            if( IsIdentifierChar( line, end ) )
             {
                 end++;
             }
