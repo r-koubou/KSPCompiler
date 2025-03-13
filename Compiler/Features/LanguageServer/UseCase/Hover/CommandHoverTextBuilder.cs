@@ -58,28 +58,33 @@ public class CommandHoverTextBuilder : IHoverTextBuilder<CommandSymbol>
 
         /*
          * Arguments:
-         *   - arg1
-         *     - type1
-         *  - arg2
-         *    - type2
+         *   - arg1 : type1
+         *     - description1 (if not empty)
+         *   - arg2 : type2
+         *     - description2 (if not empty)
          * :
          * :
          */
-        builder.AppendLine( "**Arguments:**" );
+        builder.AppendLine( "**Argument(s):**" );
 
         foreach( var arg in symbol.Arguments )
         {
             var argType = arg.DataType.ToMessageString();
 
-            builder.AppendLine( $"- {arg.Name}" );
+            builder.Append( $"- {arg.Name} : " );
 
             if( arg.UITypeNames.Count > 0 )
             {
-                builder.AppendLine( $"  - {string.Join( ", ", arg.UITypeNames )}" );
+                builder.AppendLine( $"{string.Join( ", ", arg.UITypeNames )}" );
             }
             else
             {
-                builder.AppendLine( $"  - {argType}" );
+                builder.AppendLine( $"{argType}" );
+            }
+
+            if( !string.IsNullOrEmpty( arg.Description ) )
+            {
+                builder.AppendLine( $"  - {arg.Description}" );
             }
         }
 
