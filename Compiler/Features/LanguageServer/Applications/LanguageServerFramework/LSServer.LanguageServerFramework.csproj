@@ -4,6 +4,7 @@
         <OutputType>Exe</OutputType>
         <LangVersion>default</LangVersion>
         <TargetFramework>net9.0</TargetFramework>
+        <TieredCompilationQuickJit>false</TieredCompilationQuickJit>
         <Nullable>enable</Nullable>
         <Copyright>R-Koubou</Copyright>
         <Company>R-Koubou</Company>
