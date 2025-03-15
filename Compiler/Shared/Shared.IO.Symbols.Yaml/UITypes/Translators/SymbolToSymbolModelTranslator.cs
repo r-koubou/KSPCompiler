@@ -4,7 +4,7 @@ using KSPCompiler.Shared.IO.Symbols.Yaml.UITypes.Models;
 
 namespace KSPCompiler.Shared.IO.Symbols.Yaml.UITypes.Translators;
 
-public class SymbolToSymbolModelTranslator
+public sealed class SymbolToSymbolModelTranslator
     : ISymbolToSymbolModelTranslator<UITypeSymbol, UITypeSymbolModel>
 {
     public UITypeSymbolModel Translate( UITypeSymbol source )

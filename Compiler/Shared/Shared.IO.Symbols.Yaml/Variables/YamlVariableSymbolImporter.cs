@@ -5,7 +5,7 @@ using KSPCompiler.Shared.IO.Symbols.Yaml.Variables.Translators;
 
 namespace KSPCompiler.Shared.IO.Symbols.Yaml.Variables;
 
-public class YamlVariableSymbolImporter( ITextContentReader writer ) :
+public sealed class YamlVariableSymbolImporter( ITextContentReader writer ) :
     YamlSymbolImporter<
         VariableSymbol,
         VariableSymbolRootModel,

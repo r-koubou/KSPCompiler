@@ -5,7 +5,7 @@ using KSPCompiler.Shared.IO.Symbols.Yaml.Callbacks.Translators;
 
 namespace KSPCompiler.Shared.IO.Symbols.Yaml.Callbacks;
 
-public class YamlCallbackSymbolExporter( ITextContentWriter writer ) :
+public sealed class YamlCallbackSymbolExporter( ITextContentWriter writer ) :
     YamlSymbolExporter<
         CallbackSymbol,
         CallbackSymbolRootModel,

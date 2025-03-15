@@ -5,7 +5,7 @@ using KSPCompiler.Shared.IO.Symbols.Yaml.Commands.Translators;
 
 namespace KSPCompiler.Shared.IO.Symbols.Yaml.Commands;
 
-public class YamlCommandSymbolExporter( ITextContentWriter writer ) :
+public sealed class YamlCommandSymbolExporter( ITextContentWriter writer ) :
     YamlSymbolExporter<
         CommandSymbol,
         CommandSymbolRootModel,
