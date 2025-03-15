@@ -12,18 +12,13 @@ using KSPCompiler.Shared.IO.Abstractions.Symbol;
 
 namespace KSPCompiler.Shared.IO.Symbols.Tsv;
 
-public class TsvSymbolExporter<TSymbol, TTranslator, THeaderRecordWriter>
+public class TsvSymbolExporter<TSymbol, TTranslator, THeaderRecordWriter>( ITextContentWriter contentWriter )
     : ISymbolExporter<TSymbol>
     where TSymbol : SymbolBase
     where TTranslator : IDataTranslator<IEnumerable<TSymbol>, string>, new()
     where THeaderRecordWriter : ITsvHeaderRecordWriter, new()
 {
-    private readonly ITextContentWriter contentWriter;
-
-    public TsvSymbolExporter( ITextContentWriter writer )
-    {
-        contentWriter = writer;
-    }
+    private readonly ITextContentWriter contentWriter = contentWriter;
 
     public async Task ExportAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default )
     {

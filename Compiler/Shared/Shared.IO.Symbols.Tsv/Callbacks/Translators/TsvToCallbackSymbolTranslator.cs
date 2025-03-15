@@ -10,7 +10,7 @@ using KSPCompiler.Shared.IO.Symbols.Tsv.Callbacks.Models.CsvHelperMappings;
 
 namespace KSPCompiler.Shared.IO.Symbols.Tsv.Callbacks.Translators;
 
-internal class TsvToSymbolTranslator : IDataTranslator<string, IReadOnlyCollection<CallbackSymbol>>
+public class TsvToCallbackSymbolTranslator : IDataTranslator<string, IReadOnlyCollection<CallbackSymbol>>
 {
     public IReadOnlyCollection<CallbackSymbol> Translate( string source )
     {

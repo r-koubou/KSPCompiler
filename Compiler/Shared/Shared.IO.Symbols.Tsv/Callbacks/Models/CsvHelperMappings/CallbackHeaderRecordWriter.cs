@@ -2,9 +2,9 @@ using CsvHelper;
 
 namespace KSPCompiler.Shared.IO.Symbols.Tsv.Callbacks.Models.CsvHelperMappings;
 
-public static class ColumnHeaderUtil
+public sealed class CallbackHeaderRecordWriter : ITsvHeaderRecordWriter
 {
-    public static void WriteHeader( CsvWriter csvWriter, int maxArgumentCount = 16 )
+    public void WriteHeaderRecord( CsvWriter csvWriter, int maxArgumentCount = 16 )
     {
         // Header
         csvWriter.WriteField( nameof( CallbackModel.Name ) );

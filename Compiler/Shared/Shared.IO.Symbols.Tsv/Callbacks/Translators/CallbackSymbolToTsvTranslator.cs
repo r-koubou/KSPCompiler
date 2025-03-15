@@ -10,7 +10,7 @@ using KSPCompiler.Shared.IO.Symbols.Tsv.Callbacks.Models.CsvHelperMappings;
 
 namespace KSPCompiler.Shared.IO.Symbols.Tsv.Callbacks.Translators;
 
-internal class SymbolToTsvTranslator : IDataTranslator<IEnumerable<CallbackSymbol>, string>
+public sealed class CallbackSymbolToTsvTranslator : IDataTranslator<IEnumerable<CallbackSymbol>, string>
 {
     public string Translate( IEnumerable<CallbackSymbol> source )
     {
@@ -60,7 +60,8 @@ internal class SymbolToTsvTranslator : IDataTranslator<IEnumerable<CallbackSymbo
         csvWriter.Context.RegisterClassMap<CallbackModelClassMap>();
 
         // Header
-        ColumnHeaderUtil.WriteHeader( csvWriter, maxArgumentCount: maxArgumentCount );
+        var headerWriter = new CallbackHeaderRecordWriter();
+        headerWriter.WriteHeaderRecord( csvWriter, maxArgumentCount: maxArgumentCount );
 
         // Body
         csvWriter.WriteRecords( models );
