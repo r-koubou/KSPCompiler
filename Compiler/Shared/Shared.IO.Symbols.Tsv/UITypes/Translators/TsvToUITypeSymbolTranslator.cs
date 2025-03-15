@@ -10,7 +10,7 @@ using KSPCompiler.Shared.IO.Symbols.Tsv.UITypes.Models.CsvHelperMappings;
 
 namespace KSPCompiler.Shared.IO.Symbols.Tsv.UITypes.Translators;
 
-public class TsvToSymbolTranslator : IDataTranslator<string, IReadOnlyCollection<UITypeSymbol>>
+public sealed class TsvToUITypeSymbolTranslator : IDataTranslator<string, IReadOnlyCollection<UITypeSymbol>>
 {
     public IReadOnlyCollection<UITypeSymbol> Translate( string source )
     {
