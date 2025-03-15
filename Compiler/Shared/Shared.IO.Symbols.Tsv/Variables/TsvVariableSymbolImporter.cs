@@ -4,5 +4,5 @@ using KSPCompiler.Shared.IO.Symbols.Tsv.Variables.Translators;
 
 namespace KSPCompiler.Shared.IO.Symbols.Tsv.Variables;
 
-public class TsvVariableSymbolImporter( ITextContentReader reader )
+public sealed class TsvVariableSymbolImporter( ITextContentReader reader )
     : TsvSymbolImporter<VariableSymbol, TsvToVariableSymbolTranslator>( reader );

@@ -4,5 +4,5 @@ using KSPCompiler.Shared.IO.Symbols.Tsv.Callbacks.Translators;
 
 namespace KSPCompiler.Shared.IO.Symbols.Tsv.Callbacks;
 
-public class TsvCallbackSymbolImporter( ITextContentReader reader )
+public sealed class TsvCallbackSymbolImporter( ITextContentReader reader )
     : TsvSymbolImporter<CallbackSymbol, TsvToCallbackSymbolTranslator>( reader );

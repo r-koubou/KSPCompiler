@@ -4,5 +4,5 @@ using KSPCompiler.Shared.IO.Symbols.Tsv.Commands.Translators;
 
 namespace KSPCompiler.Shared.IO.Symbols.Tsv.Commands;
 
-public class TsvCommandSymbolImporter( ITextContentReader reader )
+public sealed class TsvCommandSymbolImporter( ITextContentReader reader )
     : TsvSymbolImporter<CommandSymbol, TsvToCommandSymbolTranslator>( reader );

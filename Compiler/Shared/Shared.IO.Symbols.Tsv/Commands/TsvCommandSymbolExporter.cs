@@ -5,7 +5,7 @@ using KSPCompiler.Shared.IO.Symbols.Tsv.Commands.Translators;
 
 namespace KSPCompiler.Shared.IO.Symbols.Tsv.Commands;
 
-public class TsvCommandSymbolExporter( ITextContentWriter contentWriter )
+public sealed class TsvCommandSymbolExporter( ITextContentWriter contentWriter )
     : TsvSymbolExporter<
         CommandSymbol,
         CommandSymbolToTsvTranslator,

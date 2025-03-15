@@ -12,7 +12,7 @@ using KSPCompiler.Shared.IO.Symbols.Tsv.Commands.Models.CsvHelperMappings;
 
 namespace KSPCompiler.Shared.IO.Symbols.Tsv.Commands.Translators;
 
-public class CommandSymbolToTsvTranslator : IDataTranslator<IEnumerable<CommandSymbol>, string>
+public sealed class CommandSymbolToTsvTranslator : IDataTranslator<IEnumerable<CommandSymbol>, string>
 {
     public string Translate( IEnumerable<CommandSymbol> source )
     {

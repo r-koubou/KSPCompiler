@@ -5,7 +5,7 @@ using KSPCompiler.Shared.IO.Symbols.Tsv.UITypes.Translators;
 
 namespace KSPCompiler.Shared.IO.Symbols.Tsv.UITypes;
 
-public class TsvUITypeSymbolExporter( ITextContentWriter contentWriter )
+public sealed class TsvUITypeSymbolExporter( ITextContentWriter contentWriter )
     : TsvSymbolExporter<
         UITypeSymbol,
         UITypeSymbolToTsvTranslator,

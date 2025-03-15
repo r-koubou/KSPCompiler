@@ -4,5 +4,5 @@ using KSPCompiler.Shared.IO.Symbols.Tsv.UITypes.Translators;
 
 namespace KSPCompiler.Shared.IO.Symbols.Tsv.UITypes;
 
-public class TsvUITypeSymbolImporter( ITextContentReader reader )
+public sealed class TsvUITypeSymbolImporter( ITextContentReader reader )
     : TsvSymbolImporter<UITypeSymbol, TsvToUITypeSymbolTranslator>( reader );

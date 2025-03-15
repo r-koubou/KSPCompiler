@@ -5,7 +5,7 @@ using KSPCompiler.Shared.IO.Symbols.Tsv.Callbacks.Translators;
 
 namespace KSPCompiler.Shared.IO.Symbols.Tsv.Callbacks;
 
-public class TsvCallbackSymbolExporter( ITextContentWriter contentWriter )
+public sealed class TsvCallbackSymbolExporter( ITextContentWriter contentWriter )
     : TsvSymbolExporter<
         CallbackSymbol,
         CallbackSymbolToTsvTranslator,

@@ -12,7 +12,7 @@ using KSPCompiler.Shared.IO.Abstractions.Symbol;
 
 namespace KSPCompiler.Shared.IO.Symbols.Tsv;
 
-public class TsvSymbolExporter<TSymbol, TTranslator, THeaderRecordWriter>( ITextContentWriter contentWriter )
+public abstract class TsvSymbolExporter<TSymbol, TTranslator, THeaderRecordWriter>( ITextContentWriter contentWriter )
     : ISymbolExporter<TSymbol>
     where TSymbol : SymbolBase
     where TTranslator : IDataTranslator<IEnumerable<TSymbol>, string>, new()

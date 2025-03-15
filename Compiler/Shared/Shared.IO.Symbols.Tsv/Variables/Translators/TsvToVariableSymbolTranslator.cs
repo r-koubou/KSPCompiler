@@ -10,7 +10,7 @@ using KSPCompiler.Shared.IO.Symbols.Tsv.Variables.Models.CsvHelperMappings;
 
 namespace KSPCompiler.Shared.IO.Symbols.Tsv.Variables.Translators;
 
-public class TsvToVariableSymbolTranslator : IDataTranslator<string, IReadOnlyCollection<VariableSymbol>>
+public sealed class TsvToVariableSymbolTranslator : IDataTranslator<string, IReadOnlyCollection<VariableSymbol>>
 {
     public IReadOnlyCollection<VariableSymbol> Translate( string source )
     {

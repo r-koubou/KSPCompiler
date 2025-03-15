@@ -8,7 +8,7 @@ using KSPCompiler.Shared.IO.Abstractions.Symbol;
 
 namespace KSPCompiler.Shared.IO.Symbols.Tsv;
 
-public class TsvSymbolImporter<TSymbol, TTranslator>( ITextContentReader reader )
+public abstract class TsvSymbolImporter<TSymbol, TTranslator>( ITextContentReader reader )
     : ISymbolImporter<TSymbol>
     where TSymbol : SymbolBase
     where TTranslator : IDataTranslator<string, IReadOnlyCollection<TSymbol>>, new()

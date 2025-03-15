@@ -5,7 +5,7 @@ using KSPCompiler.Shared.IO.Symbols.Tsv.Variables.Translators;
 
 namespace KSPCompiler.Shared.IO.Symbols.Tsv.Variables;
 
-public class TsvVariableSymbolExporter( ITextContentWriter contentWriter )
+public sealed class TsvVariableSymbolExporter( ITextContentWriter contentWriter )
     : TsvSymbolExporter<
         VariableSymbol,
         VariableSymbolToTsvTranslator,
