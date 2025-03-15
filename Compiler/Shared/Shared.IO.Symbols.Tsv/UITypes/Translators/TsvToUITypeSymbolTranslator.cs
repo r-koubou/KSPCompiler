@@ -5,43 +5,40 @@ using CsvHelper;
 
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
-using KSPCompiler.Shared.IO.Symbols.Tsv.Commands.Models;
-using KSPCompiler.Shared.IO.Symbols.Tsv.Commands.Models.CsvHelperMappings;
+using KSPCompiler.Shared.IO.Symbols.Tsv.UITypes.Models;
+using KSPCompiler.Shared.IO.Symbols.Tsv.UITypes.Models.CsvHelperMappings;
 
-namespace KSPCompiler.Shared.IO.Symbols.Tsv.Commands.Translators;
+namespace KSPCompiler.Shared.IO.Symbols.Tsv.UITypes.Translators;
 
-public class TsvToSymbolTranslator : IDataTranslator<string, IReadOnlyCollection<CommandSymbol>>
+public sealed class TsvToUITypeSymbolTranslator : IDataTranslator<string, IReadOnlyCollection<UITypeSymbol>>
 {
-    public IReadOnlyCollection<CommandSymbol> Translate( string source )
+    public IReadOnlyCollection<UITypeSymbol> Translate( string source )
     {
-        var result = new List<CommandSymbol>();
+        var result = new List<UITypeSymbol>();
 
         using var reader = new StringReader( source );
         using var csvReader = new CsvReader( reader, ConstantValue.ReaderConfiguration );
 
-        csvReader.Context.RegisterClassMap<CommandModelClassMap>();
+        csvReader.Context.RegisterClassMap<UITypeModelClassMap>();
 
-        var records = csvReader.GetRecords<CommandModel>();
+        var records = csvReader.GetRecords<UITypeModel>();
 
         foreach( var record in records )
         {
-            var symbol = new CommandSymbol
+            var symbol = new UITypeSymbol( record.InitializerRequired )
             {
                 Name             = record.Name,
                 BuiltIn          = record.BuiltIn,
                 Description      = record.Description,
                 BuiltIntoVersion = record.BuiltIntoVersion,
-                DataType         = DataTypeUtility.GuessFromTypeString( record.ReturnType )
+                DataType         = DataTypeUtility.GuessFromTypeString( record.DataType )
             };
 
             foreach( var argument in record.Arguments )
             {
-                var uiTypeNames = new List<string>();
-                var otherTypeNames = new List<string>();
+                var typeFlag = DataTypeUtility.GuessFromSymbolName( argument.Name );
 
-                DataTypeUtility.GuessFromTypeString( argument.DataType, out var typeFlag, ref uiTypeNames, ref otherTypeNames );
-
-                symbol.AddArgument( new CommandArgumentSymbol( uiTypeNames, otherTypeNames )
+                symbol.AddInitializerArgument( new UIInitializerArgumentSymbol
                     {
                         Name        = argument.Name,
                         Description = argument.Description,

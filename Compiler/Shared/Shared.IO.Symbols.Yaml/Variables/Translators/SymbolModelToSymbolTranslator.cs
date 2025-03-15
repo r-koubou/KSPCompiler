@@ -4,7 +4,7 @@ using KSPCompiler.Shared.IO.Symbols.Yaml.Variables.Models;
 
 namespace KSPCompiler.Shared.IO.Symbols.Yaml.Variables.Translators;
 
-public class SymbolModelToSymbolTranslator
+public sealed class SymbolModelToSymbolTranslator
     : ISymbolModelToSymbolTranslator<VariableSymbolModel, VariableSymbol>
 {
     public VariableSymbol Translate( VariableSymbolModel source )

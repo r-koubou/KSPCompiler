@@ -4,7 +4,7 @@ using KSPCompiler.Shared.IO.Symbols.Yaml.Callbacks.Models;
 
 namespace KSPCompiler.Shared.IO.Symbols.Yaml.Callbacks.Translators;
 
-public class SymbolModelToSymbolTranslator
+public sealed class SymbolModelToSymbolTranslator
     : ISymbolModelToSymbolTranslator<CallBackSymbolModel, CallbackSymbol>
 {
     public CallbackSymbol Translate( CallBackSymbolModel source )

@@ -12,7 +12,7 @@ using KSPCompiler.Shared.IO.Symbols.Tsv.Commands.Models.CsvHelperMappings;
 
 namespace KSPCompiler.Shared.IO.Symbols.Tsv.Commands.Translators;
 
-public class SymbolToTsvTranslator : IDataTranslator<IEnumerable<CommandSymbol>, string>
+public sealed class CommandSymbolToTsvTranslator : IDataTranslator<IEnumerable<CommandSymbol>, string>
 {
     public string Translate( IEnumerable<CommandSymbol> source )
     {
@@ -66,7 +66,8 @@ public class SymbolToTsvTranslator : IDataTranslator<IEnumerable<CommandSymbol>,
         csvWriter.Context.RegisterClassMap<CommandModelClassMap>();
 
         // Header
-        ColumnHeaderUtil.WriteHeader( csvWriter, maxArgumentCount: maxArgumentCount );
+        var headerRecordWriter = new CommandSymbolHeaderRecordWriter();
+        headerRecordWriter.WriteHeaderRecord( csvWriter, maxArgumentCount: maxArgumentCount );
 
         // Body
         csvWriter.WriteRecords( models );

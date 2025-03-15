@@ -2,9 +2,9 @@ using CsvHelper;
 
 namespace KSPCompiler.Shared.IO.Symbols.Tsv.UITypes.Models.CsvHelperMappings;
 
-public static class UITypeColumnHeaderUtil
+public sealed class UITypeHeaderRecordWriter : ITsvHeaderRecordWriter
 {
-    public static void WriteHeader( CsvWriter csvWriter, int maxArgumentCount = 16 )
+    public void WriteHeaderRecord( CsvWriter csvWriter, int maxArgumentCount = 16 )
     {
         // Header
         csvWriter.WriteField( nameof( UITypeModel.Name ) );

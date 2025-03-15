@@ -10,7 +10,7 @@ using KSPCompiler.Shared.IO.Symbols.Tsv.Variables.Models.CsvHelperMappings;
 
 namespace KSPCompiler.Shared.IO.Symbols.Tsv.Variables.Translators;
 
-public class SymbolToTsvTranslator : IDataTranslator<IEnumerable<VariableSymbol>, string>
+public sealed class VariableSymbolToTsvTranslator : IDataTranslator<IEnumerable<VariableSymbol>, string>
 {
     public string Translate( IEnumerable<VariableSymbol> source )
     {
@@ -37,7 +37,8 @@ public class SymbolToTsvTranslator : IDataTranslator<IEnumerable<VariableSymbol>
         csvWriter.Context.RegisterClassMap<VariableModelClassMap>();
 
         // Header
-        VariableColumnHeaderUtil.WriteHeader( csvWriter );
+        var headerWriter = new VariableHeaderRecordWriter();
+        headerWriter.WriteHeaderRecord( csvWriter );
 
         // Body
         csvWriter.WriteRecords( models );

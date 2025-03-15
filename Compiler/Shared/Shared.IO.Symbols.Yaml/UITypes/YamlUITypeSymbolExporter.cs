@@ -5,7 +5,7 @@ using KSPCompiler.Shared.IO.Symbols.Yaml.UITypes.Translators;
 
 namespace KSPCompiler.Shared.IO.Symbols.Yaml.UITypes;
 
-public class YamlUITypeSymbolExporter( ITextContentWriter writer ) :
+public sealed class YamlUITypeSymbolExporter( ITextContentWriter writer ) :
     YamlSymbolExporter<
         UITypeSymbol,
         UITypeSymbolRootModel,

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,10 +20,11 @@ public abstract class YamlSymbolExporter<TSymbol, TRootModel, TModel, TTranslato
 
     public async Task ExportAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default )
     {
+        var sorted = symbols.OrderBy( x => x.Name.Value ).ToList();
         var models = new List<TModel>();
         var translator = new TTranslator();
 
-        foreach( var symbol in symbols )
+        foreach( var symbol in sorted )
         {
             models.Add( translator.Translate( symbol ) );
         }
