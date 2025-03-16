@@ -13,9 +13,24 @@ public static class SignatureHelpItemExtension
 {
     public static FrameworkSignatureHelp As( this SignatureHelpItem self )
     {
+        uint? activeSignature = 0;
+        uint? activeParameter = null;
+
+        if( self.ActiveSignature != null )
+        {
+            activeSignature = (uint)self.ActiveSignature.Value;
+        }
+
+        if( self.ActiveParameter != null )
+        {
+            activeParameter = (uint)self.ActiveParameter.Value;
+        }
+
         return new FrameworkSignatureHelp
         {
-            Signatures = self.Signatures.As()
+            Signatures      = self.Signatures.As(),
+            ActiveSignature = activeSignature,
+            ActiveParameter = activeParameter
         };
     }
 
