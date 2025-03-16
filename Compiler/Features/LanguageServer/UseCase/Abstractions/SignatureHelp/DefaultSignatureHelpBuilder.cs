@@ -11,7 +11,8 @@ public class DefaultSignatureHelpBuilder : ISignatureHelpBuilder<CommandSymbol>
     {
         return new SignatureHelpItem
         {
-            Signatures = [BuildInformation( symbol, activeParameter )]
+            Signatures      = [ BuildInformation( symbol, activeParameter ) ],
+            ActiveParameter = activeParameter
         };
     }
 
@@ -48,10 +49,9 @@ public class DefaultSignatureHelpBuilder : ISignatureHelpBuilder<CommandSymbol>
 
         foreach( var arg in symbol.Arguments )
         {
-            if( string.IsNullOrEmpty( arg.Description ) )
-            {
-                continue;
-            }
+            var description = !string.IsNullOrEmpty( arg.Description )
+                ? arg.Description.Value
+                : string.Empty;
 
             result.Add(
                 new SignatureHelpParameterItem
@@ -60,7 +60,7 @@ public class DefaultSignatureHelpBuilder : ISignatureHelpBuilder<CommandSymbol>
                     Documentation = new StringOrMarkdownContent
                     {
                         IsMarkdown = true,
-                        Value      = arg.Description.Value
+                        Value      = description
                     }
                 }
             );
