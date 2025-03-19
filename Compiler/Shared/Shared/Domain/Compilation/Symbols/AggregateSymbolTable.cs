@@ -1,3 +1,5 @@
+using System;
+
 namespace KSPCompiler.Shared.Domain.Compilation.Symbols;
 
 public sealed class AggregateSymbolTable
@@ -5,7 +7,9 @@ public sealed class AggregateSymbolTable
     public IVariableSymbolTable BuiltInVariables { get; }
     public IVariableSymbolTable UserVariables { get; }
     public IUITypeSymbolTable UITypes { get; }
+    [Obsolete]
     public ICommandSymbolTable Commands { get; }
+    public ICommandSymbolTableNew CommandsNew { get; }
     public ICallbackSymbolTable UserCallbacks { get; }
     public ICallbackSymbolTable BuiltInCallbacks { get; }
     public IUserFunctionSymbolSymbolTable UserFunctions { get; }
@@ -16,6 +20,7 @@ public sealed class AggregateSymbolTable
         IVariableSymbolTable? userVariables = null,
         IUITypeSymbolTable? uiTypes = null,
         ICommandSymbolTable? commands = null,
+        ICommandSymbolTableNew? commandsNew = null,
         ICallbackSymbolTable? builtInCallbacks = null,
         ICallbackSymbolTable? userCallbacks = null,
         IUserFunctionSymbolSymbolTable? userFunctions = null,
@@ -25,6 +30,7 @@ public sealed class AggregateSymbolTable
         UserVariables       = userVariables ?? new VariableSymbolTable();
         UITypes             = uiTypes ?? new UITypeSymbolTable();
         Commands            = commands ?? new CommandSymbolTable();
+        CommandsNew         = commandsNew ?? new CommandSymbolTableNew();
         UserCallbacks       = userCallbacks ?? new CallbackSymbolTable();
         BuiltInCallbacks    = builtInCallbacks ?? new CallbackSymbolTable();
         UserFunctions       = userFunctions ?? new UserFunctionSymbolTable();
@@ -37,6 +43,7 @@ public sealed class AggregateSymbolTable
         UserVariables.Clear();
         UITypes.Clear();
         Commands.Clear();
+        CommandsNew.Clear();
         UserCallbacks.Clear();
         BuiltInCallbacks.Clear();
         UserFunctions.Clear();
@@ -55,6 +62,15 @@ public sealed class AggregateSymbolTable
         target.UITypes.AddRange( source.UITypes );
         target.Commands.AddRange( source.Commands );
         target.UserFunctions.AddRange( source.UserFunctions );
+
+        // Command
+        foreach( var x in source.CommandsNew )
+        {
+            foreach( var symbol in x.Values )
+            {
+                target.CommandsNew.AddAsOverload( symbol, symbol.Arguments );
+            }
+        }
 
         // Callback
         foreach( var x in source.BuiltInCallbacks )
