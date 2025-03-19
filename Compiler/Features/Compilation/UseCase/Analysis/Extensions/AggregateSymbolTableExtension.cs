@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Extensions;
@@ -38,9 +41,15 @@ public static class AggregateSymbolTableExtension
         return symbolTable.UserFunctions.TrySearchByName( name, out result, enableSearchParent );
     }
 
+    [Obsolete]
     public static bool TrySearchCommandByName( this AggregateSymbolTable symbolTable, SymbolName name, out CommandSymbol result, bool enableSearchParent = true )
     {
         return symbolTable.Commands.TrySearchByName( name, out result, enableSearchParent );
+    }
+
+    public static bool TrySearchCommandByNameNew( this AggregateSymbolTable symbolTable, SymbolName name, out IReadOnlyCollection<CommandSymbol> result, bool enableSearchParent = true )
+    {
+        return symbolTable.CommandsNew.TrySearchByName( name, out result, enableSearchParent );
     }
 
     public static bool TrySearchUITypeByName( this AggregateSymbolTable symbolTable, SymbolName name, out UITypeSymbol result, bool enableSearchParent = true )
