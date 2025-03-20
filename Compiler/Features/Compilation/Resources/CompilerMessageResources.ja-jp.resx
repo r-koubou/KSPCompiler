@@ -179,4 +179,7 @@
     <data name="semantic.error.declare.variable.uiinitializer.not.need.assign.opetator" xml:space="preserve">
         <value>`:=` 演算子は不要です</value>
     </data>
+    <data name="semantic.error.command.arg.incompatible_new" xml:space="preserve">
+        <value>{0}: コマンド引数のデータ型が一致していません - 期待: {1}, 実際: {2}</value>
+    </data>
 </root>
