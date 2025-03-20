@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 using KSPCompiler.Features.Compilation.Domain.Messages;
 using KSPCompiler.Features.Compilation.Domain.Messages.Extensions;
@@ -271,6 +272,42 @@ public static class MockUtility
                 Name     = "duration",
                 DataType = DataTypeFlag.TypeInt
             }
+        );
+
+        return result;
+    }
+
+    public static List<CommandSymbol> CreateNoteOffCommand()
+    {
+        var result = new List<CommandSymbol>();
+
+        result.Add(
+            CreateCommand(
+                "note_off",
+                DataTypeFlag.TypeVoid,
+                new CommandArgumentSymbol
+                {
+                    Name     = "event_id",
+                    DataType = DataTypeFlag.TypeInt
+                }
+            )
+        );
+
+        result.Add(
+            CreateCommand(
+                "note_off",
+                DataTypeFlag.TypeVoid,
+                new CommandArgumentSymbol
+                {
+                    Name     = "event_id",
+                    DataType = DataTypeFlag.TypeInt
+                },
+                new CommandArgumentSymbol
+                {
+                    Name     = "time_offset",
+                    DataType = DataTypeFlag.TypeInt
+                }
+            )
         );
 
         return result;

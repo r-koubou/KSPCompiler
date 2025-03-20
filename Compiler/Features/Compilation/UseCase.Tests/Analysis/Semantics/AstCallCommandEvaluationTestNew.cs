@@ -69,7 +69,7 @@ public class AstCallCommandEvaluationTestNew
         var command = MockUtility.CreatePlayNoteCommand();
 
         // register the command
-        symbols.Commands.Add( command );
+        symbols.CommandsNew.AddAsOverload( command, command.Arguments );
 
         // Create a call command expression node
         // play_note( 40, 100, 0 ) // missing 1 argument (Expected 4 arguments)
@@ -80,7 +80,48 @@ public class AstCallCommandEvaluationTestNew
             new AstIntLiteralNode( 0 )
         );
 
-        var evaluator = new CallCommandEvaluator( eventEmitter, symbols );
+        var evaluator = new CallCommandEvaluatorNew( eventEmitter, symbols );
+        var visitor = new MockCallCommandExpressionVisitor();
+
+        visitor.Inject( evaluator );
+        evaluator.Evaluate( visitor, callCommandAst );
+
+        compilerMessageManger.WriteTo( Console.Out );
+
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
+    }
+
+    [Test]
+    public void CannotIncompatibleArgCountWithOverloadedTest()
+    {
+        var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
+
+        var symbols = new AggregateSymbolTable();
+
+        // register command `note_off`
+        // note_off(<event-id>)
+        // note_off(<event-id>, <time-offset>)
+        // https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/general-commands#note_off--
+        var commands = MockUtility.CreateNoteOffCommand();
+
+        // register the command
+        foreach( var x in commands )
+        {
+            symbols.CommandsNew.AddAsOverload( x, x.Arguments );
+        }
+
+        // Create a call command expression node
+        // note_off() // missing argument(s)
+        // [Expected]
+        // note_off(<event-id>)
+        // note_off(<event-id>, <time-offset>)
+        var callCommandAst = MockUtility.CreateCommandExpressionNode(
+            "note_off"
+        );
+
+        var evaluator = new CallCommandEvaluatorNew( eventEmitter, symbols );
         var visitor = new MockCallCommandExpressionVisitor();
 
         visitor.Inject( evaluator );
@@ -106,7 +147,7 @@ public class AstCallCommandEvaluationTestNew
         var command = MockUtility.CreatePlayNoteCommand();
 
         // register the command
-        symbols.Commands.Add( command );
+        symbols.CommandsNew.AddAsOverload( command, command.Arguments );
 
         // Create a call command expression node
         // play_note( "40", 100, 0, 0 ) // incompatible type (Expected int, but got string)
@@ -118,7 +159,49 @@ public class AstCallCommandEvaluationTestNew
             new AstIntLiteralNode( 0 )
         );
 
-        var evaluator = new CallCommandEvaluator( eventEmitter, symbols );
+        var evaluator = new CallCommandEvaluatorNew( eventEmitter, symbols );
+        var visitor = new MockCallCommandExpressionVisitor();
+
+        visitor.Inject( evaluator );
+        evaluator.Evaluate( visitor, callCommandAst );
+
+        compilerMessageManger.WriteTo( Console.Out );
+
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
+    }
+
+    [Test]
+    public void CannotIncompatibleArgTypeWithOverloadedTest()
+    {
+        var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
+
+        var symbols = new AggregateSymbolTable();
+
+        // register command `note_off`
+        // note_off(<event-id>)
+        // note_off(<event-id>, <time-offset>)
+        // https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/general-commands#note_off--
+        var commands = MockUtility.CreateNoteOffCommand();
+
+        // register the command
+        foreach( var x in commands )
+        {
+            symbols.CommandsNew.AddAsOverload( x, x.Arguments );
+        }
+
+        // Create a call command expression node
+        // note_off("10") // incompatible type (Expected int, but got string)
+        // [Expected]
+        // note_off(<event-id>)
+        // note_off(<event-id>, <time-offset>)
+        var callCommandAst = MockUtility.CreateCommandExpressionNode(
+            "note_off",
+            new AstStringLiteralNode( "10" )
+        );
+
+        var evaluator = new CallCommandEvaluatorNew( eventEmitter, symbols );
         var visitor = new MockCallCommandExpressionVisitor();
 
         visitor.Inject( evaluator );

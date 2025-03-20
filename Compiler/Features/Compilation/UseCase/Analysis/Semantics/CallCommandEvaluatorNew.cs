@@ -11,7 +11,6 @@ using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Expressions;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Extensions;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
-using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData.Extensions;
 using KSPCompiler.Shared.EventEmitting;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
@@ -81,6 +80,14 @@ public class CallCommandEvaluatorNew : ICallCommandEvaluator
         AstCallCommandExpressionNode expr,
         IReadOnlyCollection<CommandSymbol> commandSymbols )
     {
+        var arguments = expr.Right as AstExpressionListNode;
+        var callArgs = new List<AstExpressionNode>();
+
+        if( arguments != null )
+        {
+            callArgs.AddRange( arguments.Expressions );
+        }
+
         foreach( var x in commandSymbols )
         {
             var symbolArgs = x.Arguments.ToList();
@@ -96,26 +103,16 @@ public class CallCommandEvaluatorNew : ICallCommandEvaluator
             #endregion ~No arguments command calling
 
             #region With arguments command calling
-            if( expr.Right is not AstExpressionListNode arguments )
+            if( arguments == null )
             {
                 throw new AstAnalyzeException( expr, "Failed to evaluate command arguments" );
             }
 
-            var callArgs   = arguments.Expressions.ToList();
-
-            // 引数オーバーロード導入のため、引数の数チェックは行わない
-            // if( symbolArgs.Count != callArgs.Count )
-            // {
-            //     EventEmitter.Emit(
-            //         expr.AsErrorEvent(
-            //             CompilerMessageResources.semantic_error_command_arg_count,
-            //             x.Name
-            //         )
-            //     );
-            //
-            //     // フォールバックに応じるため return せずに続行
-            //     // return false;
-            // }
+            // 引数オーバーロード毎の引数の数が一致しない時点で評価はここまで
+            if( symbolArgs.Count != callArgs.Count )
+            {
+                continue;
+            }
 
             if( ValidateCommandArgumentType( visitor, expr, x, callArgs, symbolArgs ) )
             {
@@ -124,12 +121,14 @@ public class CallCommandEvaluatorNew : ICallCommandEvaluator
             #endregion ~With arguments command calling
         }
 
-        // 全てのコマンド引数オーバーロードと一致しなかった場合はエラー
-
+        // 全てのコマンド引数オーバーロードの評価がパスできなかった場合はエラー
+        var commandName = commandSymbols.First().Name;
         EventEmitter.Emit(
             expr.AsErrorEvent(
-                CompilerMessageResources.semantic_error_command_arg_incompatible,
-                commandSymbols.First().Name
+                CompilerMessageResources.semantic_error_command_arg_incompatible_new,
+                commandName,
+                commandSymbols.ToIncompatibleMessage(),
+                callArgs.ToIncompatibleMessage( commandName )
             )
         );
 
@@ -197,16 +196,7 @@ public class CallCommandEvaluatorNew : ICallCommandEvaluator
                 }
             }
 
-            EventEmitter.Emit(
-                callArg.AsErrorEvent(
-                    CompilerMessageResources.semantic_error_command_arg_incompatible,
-                    commandSymbol.Name,
-                    i + 1, // 1-based index
-                    symbolArg.DataType.ToMessageString(),
-                    callArg.TypeFlag.ToMessageString()
-                )
-            );
-
+            // 引数の型が不一致
             return false;
         }
 
