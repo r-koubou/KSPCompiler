@@ -113,7 +113,7 @@ public sealed class SemanticAnalyzerContext : IAnalyzerContext
             StringConcatenateOperator  = new StringConcatenateOperatorEvaluator( eventEmitter, StringConvolutionEvaluator );
             Symbol                     = new SymbolEvaluator( eventEmitter, aggregateSymbolTable );
             ArrayElement               = new ArrayElementEvaluator( eventEmitter, aggregateSymbolTable );
-            CallCommand                = new CallCommandEvaluator( eventEmitter, aggregateSymbolTable );
+            CallCommand                = new CallCommandEvaluatorNew( eventEmitter, aggregateSymbolTable );
         }
     }
 
