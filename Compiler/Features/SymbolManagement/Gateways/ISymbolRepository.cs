@@ -12,38 +12,28 @@ public interface ISymbolRepository<TSymbol> : IDisposable where TSymbol : Symbol
     int Count { get; }
 
     List<TSymbol> ToList();
-
     Task<List<TSymbol>> ToListAsync( CancellationToken cancellationToken = default );
 
-    StoreResult Store( TSymbol symbol )
-        => StoreAsync( symbol ).GetAwaiter().GetResult();
-
+    #region Store
+    StoreResult Store( TSymbol symbol );
     Task<StoreResult> StoreAsync( TSymbol symbol, CancellationToken cancellationToken = default );
-
-    StoreResult Store( IEnumerable<TSymbol> symbols )
-        => StoreAsync( symbols ).GetAwaiter().GetResult();
-
+    StoreResult Store( IEnumerable<TSymbol> symbols );
     Task<StoreResult> StoreAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default );
+    #endregion ~Store
 
-    DeleteResult Delete( TSymbol symbol )
-        => DeleteAsync( symbol ).GetAwaiter().GetResult();
-
+    #region Delete
+    DeleteResult Delete( TSymbol symbol );
     Task<DeleteResult> DeleteAsync( TSymbol symbol, CancellationToken cancellationToken = default );
-
-    DeleteResult Delete( IEnumerable<TSymbol> symbols )
-        => DeleteAsync( symbols ).GetAwaiter().GetResult();
-
+    DeleteResult Delete( IEnumerable<TSymbol> symbols );
     Task<DeleteResult> DeleteAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default );
+    #endregion ~Delete
 
-    IReadOnlyCollection<TSymbol> FindByName( string name )
-        => FindByNameAsync( name ).GetAwaiter().GetResult();
-
-    Task<IReadOnlyCollection<TSymbol>>  FindByNameAsync( string name, CancellationToken cancellationToken = default );
-
-    IReadOnlyCollection<TSymbol> Find( Predicate<TSymbol> predicate )
-        => FindAsync( predicate ).GetAwaiter().GetResult();
-
+    #region Find
+    IReadOnlyCollection<TSymbol> FindByName( string name );
+    Task<IReadOnlyCollection<TSymbol>> FindByNameAsync( string name, CancellationToken cancellationToken = default );
+    IReadOnlyCollection<TSymbol> Find( Predicate<TSymbol> predicate );
     Task<IReadOnlyCollection<TSymbol>> FindAsync( Predicate<TSymbol> predicate, CancellationToken cancellationToken = default );
+    #endregion ~Find
 
     void Flush()
         => FlushAsync().GetAwaiter().GetResult();
