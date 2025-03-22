@@ -49,13 +49,10 @@ public class SymbolLocalDatabaseApplicationServiceTest
         var importPath = new FilePath( Path.Combine( ImportTestDataDirectory, "variable.tsv" ) );
         var repositoryPath = new FilePath( Path.Combine( ImportTestDataDirectory, "repository_variable.yaml" ) );
 
-        ITextContentReader contentReader = new LocalTextContentReader( repositoryPath );
-        ISymbolImporter<VariableSymbol> repositoryReader = new YamlVariableSymbolImporter( contentReader );
-
         ITextContentWriter contentWriter = new LocalTextContentWriter( repositoryPath );
         ISymbolExporter<VariableSymbol> repositoryWriter = new YamlVariableSymbolExporter( contentWriter );
 
-        using ISymbolRepository<VariableSymbol> repository = new VariableSymbolRepository( repositoryReader: repositoryReader, repositoryWriter: repositoryWriter );
+        using ISymbolRepository<VariableSymbol> repository = new VariableSymbolRepository( repositoryWriter: repositoryWriter );
         var applicationService = new SymbolDatabaseApplicationService<VariableSymbol>( repository );
 
         ITextContentReader tsvReader = new LocalTextContentReader( importPath );
