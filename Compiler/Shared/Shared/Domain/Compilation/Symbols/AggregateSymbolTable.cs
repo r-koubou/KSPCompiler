@@ -47,14 +47,21 @@ public sealed class AggregateSymbolTable
     {
         // Variables
         // UI Type
-        // Command
         // User Function
         // PreProcessor Symbol
         target.BuiltInVariables.AddRange( source.BuiltInVariables );
         target.UserVariables.AddRange( source.UserVariables );
         target.UITypes.AddRange( source.UITypes );
-        target.Commands.AddRange( source.Commands );
         target.UserFunctions.AddRange( source.UserFunctions );
+
+        // Command
+        foreach( var x in source.Commands )
+        {
+            foreach( var symbol in x.Values )
+            {
+                target.Commands.AddAsOverload( symbol, symbol.Arguments );
+            }
+        }
 
         // Callback
         foreach( var x in source.BuiltInCallbacks )

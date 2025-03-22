@@ -68,7 +68,11 @@ public sealed class YamlBuiltInSymbolLoader(
         var symbolReader = new YamlCommandSymbolImporter( contentReader );
         var symbols = await symbolReader.ImportAsync( cancellationToken );
         var symbolTable = new CommandSymbolTable();
-        symbolTable.AddRange( symbols );
+
+        foreach( var x in symbols )
+        {
+            symbolTable.AddAsOverload( x, x.Arguments );
+        }
 
         return symbolTable;
     }
