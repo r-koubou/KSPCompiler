@@ -24,6 +24,7 @@ public sealed class CommandSymbolToTsvTranslator : IDataTranslator<IEnumerable<C
         {
             var model = new CommandModel
             {
+                Id               = v.Id.ToString("D"),
                 Name             = v.Name,
                 BuiltIn          = v.BuiltIn,
                 BuiltIntoVersion = v.BuiltIntoVersion,

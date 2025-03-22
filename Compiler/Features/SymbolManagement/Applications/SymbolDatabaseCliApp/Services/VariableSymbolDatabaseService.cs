@@ -24,8 +24,8 @@ public class VariableSymbolDatabaseService : IVariableSymbolDatabaseService
             var importer = new TsvVariableSymbolImporter( new LocalTextContentReader( importFilePath ) );
 
             using var repository = new VariableSymbolRepository(
-                repositoryReader: repositoryReader,
-                repositoryWriter: repositoryWriter
+                repositoryImporter: repositoryReader,
+                repositoryExporter: repositoryWriter
             );
 
             var service = new SymbolDatabaseApplicationService<VariableSymbol>( repository );
@@ -49,8 +49,8 @@ public class VariableSymbolDatabaseService : IVariableSymbolDatabaseService
             var exporter = new TsvVariableSymbolExporter( new LocalTextContentWriter( exportFilePath ) );
 
             using var repository = new VariableSymbolRepository(
-                repositoryReader: repositoryReader,
-                repositoryWriter: repositoryWriter
+                repositoryImporter: repositoryReader,
+                repositoryExporter: repositoryWriter
             );
 
             var service = new SymbolDatabaseApplicationService<VariableSymbol>( repository );
@@ -77,8 +77,8 @@ public class VariableSymbolDatabaseService : IVariableSymbolDatabaseService
             var repositoryWriter = new YamlVariableSymbolExporter( new LocalTextContentWriter( databaseFilePath ) );
 
             using var repository = new VariableSymbolRepository(
-                repositoryReader: repositoryReader,
-                repositoryWriter: repositoryWriter
+                repositoryImporter: repositoryReader,
+                repositoryExporter: repositoryWriter
             );
 
             var service = new SymbolDatabaseApplicationService<VariableSymbol>( repository );

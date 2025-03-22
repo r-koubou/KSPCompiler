@@ -11,7 +11,6 @@ using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Expressions;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Extensions;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
-using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData.Extensions;
 using KSPCompiler.Shared.EventEmitting;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
@@ -30,7 +29,7 @@ public class CallCommandEvaluator : ICallCommandEvaluator
 
     public IAstNode Evaluate( IAstVisitor visitor, AstCallCommandExpressionNode expr )
     {
-        if( !TryGetCommandSymbol( visitor, expr, out var commandSymbol ) )
+        if( !TryGetCommandSymbol( visitor, expr, out var symbols ) )
         {
             // フォールバックに応じるため代替の式を返す
             var alternative = expr.Clone<AstCallCommandExpressionNode>();
@@ -40,15 +39,17 @@ public class CallCommandEvaluator : ICallCommandEvaluator
         }
 
         // フォールバックに応じるため return せずに続行
-        ValidateCommandArguments( visitor, expr, commandSymbol );
+        ValidateCommandArguments( visitor, expr, symbols );
 
         var result = expr.Clone<AstCallCommandExpressionNode>();
-        result.TypeFlag = commandSymbol.DataType;
+
+        // 引数オーバーロードが複数あっても、戻り値の型は同じ想定
+        result.TypeFlag = symbols.First().DataType;
 
         return result;
     }
 
-    private bool TryGetCommandSymbol( IAstVisitor visitor, AstCallCommandExpressionNode expr, out CommandSymbol result )
+    private bool TryGetCommandSymbol( IAstVisitor visitor, AstCallCommandExpressionNode expr, out IReadOnlyCollection<CommandSymbol> result )
     {
         result = default!;
 
@@ -74,52 +75,59 @@ public class CallCommandEvaluator : ICallCommandEvaluator
         return true;
     }
 
-    private bool ValidateCommandArguments( IAstVisitor visitor, AstCallCommandExpressionNode expr, CommandSymbol commandSymbol )
+    private bool ValidateCommandArguments(
+        IAstVisitor visitor,
+        AstCallCommandExpressionNode expr,
+        IReadOnlyCollection<CommandSymbol> commandSymbols )
     {
-        var symbolArgs = commandSymbol.Arguments.ToList();
+        var arguments = expr.Right as AstExpressionListNode;
+        var callArgs = new List<AstExpressionNode>();
 
-        #region No arguments command calling
-        if( expr.Right.IsNull() )
+        if( arguments != null )
         {
-            if( symbolArgs.Count == 0 )
+            callArgs.AddRange( arguments.Expressions );
+        }
+
+        foreach( var x in commandSymbols )
+        {
+            var symbolArgs = x.Arguments.ToList();
+
+            #region No arguments command calling
+            if( expr.Right.IsNull() )
+            {
+                if( symbolArgs.Count == 0 )
+                {
+                    return true;
+                }
+            }
+            #endregion ~No arguments command calling
+
+            #region With arguments command calling
+            // 引数オーバーロード毎の引数の数が一致しない時点で評価はここまで
+            if( symbolArgs.Count != callArgs.Count )
+            {
+                continue;
+            }
+
+            if( ValidateCommandArgumentType( visitor, expr, x, callArgs, symbolArgs ) )
             {
                 return true;
             }
-
-            EventEmitter.Emit(
-                expr.AsErrorEvent(
-                    CompilerMessageResources.semantic_error_command_arg_count,
-                    commandSymbol.Name
-                )
-            );
-
-            return false;
-        }
-        #endregion ~No arguments command calling
-
-        #region With arguments command calling
-        if( expr.Right is not AstExpressionListNode arguments )
-        {
-            throw new AstAnalyzeException( expr, "Failed to evaluate command arguments" );
+            #endregion ~With arguments command calling
         }
 
-        var callArgs   = arguments.Expressions.ToList();
+        // 全てのコマンド引数オーバーロードの評価がパスできなかった場合はエラー
+        var commandName = commandSymbols.First().Name;
+        EventEmitter.Emit(
+            expr.AsErrorEvent(
+                CompilerMessageResources.semantic_error_command_arg_incompatible,
+                commandName,
+                commandSymbols.ToIncompatibleMessage(),
+                callArgs.ToIncompatibleMessage( commandName )
+            )
+        );
 
-        if( symbolArgs.Count != callArgs.Count )
-        {
-            EventEmitter.Emit(
-                expr.AsErrorEvent(
-                    CompilerMessageResources.semantic_error_command_arg_count,
-                    commandSymbol.Name
-                )
-            );
-
-            // フォールバックに応じるため return せずに続行
-            // return false;
-        }
-
-        return ValidateCommandArgumentType( visitor, expr, commandSymbol, callArgs, symbolArgs );
-        #endregion ~With arguments command calling
+        return false;
     }
 
     private bool ValidateCommandArgumentType( IAstVisitor visitor, AstCallCommandExpressionNode expr, CommandSymbol commandSymbol, IReadOnlyList<AstExpressionNode> callArgs, IReadOnlyList<CommandArgumentSymbol> symbolArgs )
@@ -183,16 +191,7 @@ public class CallCommandEvaluator : ICallCommandEvaluator
                 }
             }
 
-            EventEmitter.Emit(
-                callArg.AsErrorEvent(
-                    CompilerMessageResources.semantic_error_command_arg_incompatible,
-                    commandSymbol.Name,
-                    i + 1, // 1-based index
-                    symbolArg.DataType.ToMessageString(),
-                    callArg.TypeFlag.ToMessageString()
-                )
-            );
-
+            // 引数の型が不一致
             return false;
         }
 
@@ -208,10 +207,5 @@ public class CallCommandEvaluator : ICallCommandEvaluator
         {
             args.ReplaceConvolutedExpressions( evaluatedArgs, args );
         }
-    }
-
-    private bool ValidateCommandArgumentState( AstCallCommandExpressionNode expr, IReadOnlyList<AstExpressionNode> callArgs )
-    {
-        return callArgs.All( arg => arg.EvaluateSymbolState( expr, EventEmitter, SymbolTable ) );
     }
 }

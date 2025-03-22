@@ -9,47 +9,36 @@ namespace KSPCompiler.Features.SymbolManagement.Gateways;
 
 public interface ISymbolRepository<TSymbol> : IDisposable where TSymbol : SymbolBase
 {
-    public int Count { get; }
+    int Count { get; }
 
-    public StoreResult Store( TSymbol symbol )
-        => StoreAsync( symbol ).GetAwaiter().GetResult();
+    List<TSymbol> ToList();
+    Task<List<TSymbol>> ToListAsync( CancellationToken cancellationToken = default );
 
-    public Task<StoreResult> StoreAsync( TSymbol symbol, CancellationToken cancellationToken = default );
+    #region Store
+    StoreResult Store( TSymbol symbol );
+    Task<StoreResult> StoreAsync( TSymbol symbol, CancellationToken cancellationToken = default );
+    StoreResult Store( IEnumerable<TSymbol> symbols );
+    Task<StoreResult> StoreAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default );
+    #endregion ~Store
 
-    public StoreResult Store( IEnumerable<TSymbol> symbols )
-        => StoreAsync( symbols ).GetAwaiter().GetResult();
+    #region Delete
+    DeleteResult Delete( TSymbol symbol );
+    Task<DeleteResult> DeleteAsync( TSymbol symbol, CancellationToken cancellationToken = default );
+    DeleteResult Delete( IEnumerable<TSymbol> symbols );
+    Task<DeleteResult> DeleteAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default );
+    #endregion ~Delete
 
-    public Task<StoreResult> StoreAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default );
+    #region Find
+    IReadOnlyCollection<TSymbol> FindByName( string name );
+    Task<IReadOnlyCollection<TSymbol>> FindByNameAsync( string name, CancellationToken cancellationToken = default );
+    IReadOnlyCollection<TSymbol> Find( Predicate<TSymbol> predicate );
+    Task<IReadOnlyCollection<TSymbol>> FindAsync( Predicate<TSymbol> predicate, CancellationToken cancellationToken = default );
+    #endregion ~Find
 
-    public DeleteResult Delete( TSymbol symbol )
-        => DeleteAsync( symbol ).GetAwaiter().GetResult();
-
-    public Task<DeleteResult> DeleteAsync( TSymbol symbol, CancellationToken cancellationToken = default );
-
-    public DeleteResult Delete( IEnumerable<TSymbol> symbols )
-        => DeleteAsync( symbols ).GetAwaiter().GetResult();
-
-    public Task<DeleteResult> DeleteAsync( IEnumerable<TSymbol> symbols, CancellationToken cancellationToken = default );
-
-    public IReadOnlyCollection<TSymbol> FindByName( string name )
-        => FindByNameAsync( name ).GetAwaiter().GetResult();
-
-    public Task<IReadOnlyCollection<TSymbol>>  FindByNameAsync( string name, CancellationToken cancellationToken = default );
-
-    public IReadOnlyCollection<TSymbol> Find( Predicate<TSymbol> predicate )
-        => FindAsync( predicate ).GetAwaiter().GetResult();
-
-    public Task<IReadOnlyCollection<TSymbol>> FindAsync( Predicate<TSymbol> predicate, CancellationToken cancellationToken = default );
-
-    public IReadOnlyCollection<TSymbol> FindAll()
-        => FindAllAsync().GetAwaiter().GetResult();
-
-    public Task<IReadOnlyCollection<TSymbol>> FindAllAsync( CancellationToken cancellationToken = default );
-
-    public void Flush()
+    void Flush()
         => FlushAsync().GetAwaiter().GetResult();
 
-    public async Task FlushAsync()
+    async Task FlushAsync()
     {
         await Task.CompletedTask;
     }

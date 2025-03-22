@@ -2,7 +2,7 @@ using KSPCompiler.Shared.Domain.Compilation.Symbols;
 
 namespace KSPCompiler.Features.LanguageServer.UseCase.Hover.Extensions;
 
-public static class SymbolTableExtensionForHoverText
+public static class SymbolTableExtensionForHoverTextExtension
 {
     public static bool TryBuildHoverText<TSymbol>( this ISymbolTable<TSymbol> self, string symbolName, out string result, IHoverTextBuilder<TSymbol>? builder = null )
         where TSymbol : SymbolBase

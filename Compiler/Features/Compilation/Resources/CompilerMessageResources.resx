@@ -136,7 +136,7 @@
         <value>{0}: Unmatched number of command arguments</value>
     </data>
     <data name="semantic.error.command.arg.incompatible" xml:space="preserve">
-        <value>{0}: Command arguments [{1}] is not compatible type (Expected: {2}, Actual: {3})</value>
+        <value>{0}: Command argument(s) are not compatible type(s) - expected: {1}, actual: {2}</value>
     </data>
     <data name="semantic.error.unaryoprator.logicalnot.incompatible" xml:space="preserve">
         <value>Unary operator not available boolean expression only</value>

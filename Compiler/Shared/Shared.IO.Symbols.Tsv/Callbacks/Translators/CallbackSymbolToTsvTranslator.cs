@@ -22,6 +22,7 @@ public sealed class CallbackSymbolToTsvTranslator : IDataTranslator<IEnumerable<
         {
             var model = new CallbackModel
             {
+                Id                       = v.Id.ToString("D"),
                 Name                     = v.Name,
                 BuiltIn                  = v.BuiltIn,
                 AllowMultipleDeclaration = v.AllowMultipleDeclaration,

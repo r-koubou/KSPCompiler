@@ -6,6 +6,7 @@ public sealed class CommandModelClassMap : ClassMap<CommandModel>
 {
     public CommandModelClassMap()
     {
+        Map( x => x.Id ).Name( nameof( CommandModel.Id ) );
         Map( x => x.Name ).Name( nameof( CommandModel.Name ) );
         Map( x => x.BuiltIn ).Name( nameof( CommandModel.BuiltIn ) );
         Map( x => x.BuiltIntoVersion ).Name( nameof( CommandModel.BuiltIntoVersion ) );

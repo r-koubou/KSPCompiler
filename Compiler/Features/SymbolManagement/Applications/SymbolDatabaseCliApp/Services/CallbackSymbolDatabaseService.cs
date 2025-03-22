@@ -25,8 +25,8 @@ public class CallbackSymbolDatabaseService : ICallbackSymbolDatabaseService
             var importer = new TsvCallbackSymbolImporter( new LocalTextContentReader( importFilePath ) );
 
             using var repository = new CallbackSymbolRepository(
-                repositoryReader: repositoryReader,
-                repositoryWriter: repositoryWriter
+                repositoryImporter: repositoryReader,
+                repositoryExporter: repositoryWriter
             );
 
             var service = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
@@ -50,8 +50,8 @@ public class CallbackSymbolDatabaseService : ICallbackSymbolDatabaseService
             var exporter = new TsvCallbackSymbolExporter( new LocalTextContentWriter( exportFilePath ) );
 
             using var repository = new CallbackSymbolRepository(
-                repositoryReader: repositoryReader,
-                repositoryWriter: repositoryWriter
+                repositoryImporter: repositoryReader,
+                repositoryExporter: repositoryWriter
             );
 
             var service = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
@@ -78,8 +78,8 @@ public class CallbackSymbolDatabaseService : ICallbackSymbolDatabaseService
             var repositoryWriter = new YamlCallbackSymbolExporter( new LocalTextContentWriter( databaseFilePath ) );
 
             using var repository = new CallbackSymbolRepository(
-                repositoryReader: repositoryReader,
-                repositoryWriter: repositoryWriter
+                repositoryImporter: repositoryReader,
+                repositoryExporter: repositoryWriter
             );
 
             var service = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );

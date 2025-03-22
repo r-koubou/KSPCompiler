@@ -1,15 +1,34 @@
+using System.Collections.Generic;
 using System.Text;
 
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 
 namespace KSPCompiler.Features.LanguageServer.UseCase.Hover;
 
-public class CommandHoverTextBuilder : IHoverTextBuilder<CommandSymbol>
+public sealed class CommandHoverTextBuilder : IOverloadedHoverTextBuilder<CommandSymbol>
 {
-    public string BuildHoverText( CommandSymbol symbol )
+    public string BuildHoverText( IReadOnlyCollection<CommandSymbol> symbols )
     {
-        var builder = new StringBuilder( 64 );
+        var builder = new StringBuilder( 128 );
+        var count = symbols.Count;
+        var i = 0;
 
+        foreach( var x in symbols )
+        {
+            BuildHoverText( x, builder );
+            if( i < count - 1 )
+            {
+                builder.AppendLine( "or" );
+                builder.AppendLine();
+            }
+            i++;
+        }
+
+        return builder.ToString();
+    }
+
+    private void BuildHoverText( CommandSymbol symbol, StringBuilder builder )
+    {
         /*
          * command_name(arg1, arg2, ...)
          * Description
@@ -50,7 +69,7 @@ public class CommandHoverTextBuilder : IHoverTextBuilder<CommandSymbol>
 
         if( symbol.ArgumentCount == 0 )
         {
-            return builder.ToString();
+            return;
         }
 
         builder.AppendLine();
@@ -78,6 +97,6 @@ public class CommandHoverTextBuilder : IHoverTextBuilder<CommandSymbol>
             }
         }
 
-        return builder.ToString();
+        builder.AppendLine();
     }
 }

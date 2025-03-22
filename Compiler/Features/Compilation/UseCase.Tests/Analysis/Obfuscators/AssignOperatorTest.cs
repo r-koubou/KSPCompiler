@@ -39,7 +39,7 @@ public class AssignOperatorTest
         var variableNode = MockUtility.CreateSymbolNode( variableName );
 
         var command = MockUtility.CreateMessageCommand();
-        symbolTable.Commands.Add( command );
+        symbolTable.Commands.AddAsOverload( command, command.Arguments );
 
         var obfuscatedTable = new ObfuscatedVariableSymbolTable( symbolTable.UserVariables, "v" );
 
