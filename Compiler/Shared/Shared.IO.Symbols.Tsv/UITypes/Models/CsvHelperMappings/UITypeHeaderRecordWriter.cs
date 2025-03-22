@@ -7,6 +7,7 @@ public sealed class UITypeHeaderRecordWriter : ITsvHeaderRecordWriter
     public void WriteHeaderRecord( CsvWriter csvWriter, int maxArgumentCount = 16 )
     {
         // Header
+        csvWriter.WriteField( nameof( UITypeModel.Id ) );
         csvWriter.WriteField( nameof( UITypeModel.Name ) );
         csvWriter.WriteField( nameof( UITypeModel.BuiltIn ) );
         csvWriter.WriteField( nameof( UITypeModel.DataType ) );

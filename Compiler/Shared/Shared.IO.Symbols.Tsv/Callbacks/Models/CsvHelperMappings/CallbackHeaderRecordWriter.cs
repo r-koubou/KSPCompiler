@@ -7,6 +7,7 @@ public sealed class CallbackHeaderRecordWriter : ITsvHeaderRecordWriter
     public void WriteHeaderRecord( CsvWriter csvWriter, int maxArgumentCount = 16 )
     {
         // Header
+        csvWriter.WriteField( nameof( CallbackModel.Id ) );
         csvWriter.WriteField( nameof( CallbackModel.Name ) );
         csvWriter.WriteField( nameof( CallbackModel.BuiltIn ) );
         csvWriter.WriteField( nameof( CallbackModel.AllowMultipleDeclaration ) );

@@ -25,8 +25,8 @@ public class CommandSymbolDatabaseService : ICommandSymbolDatabaseService
             var importer = new TsvCommandSymbolImporter( new LocalTextContentReader( importFilePath ) );
 
             using var repository = new CommandSymbolRepository(
-                repositoryReader: repositoryReader,
-                repositoryWriter: repositoryWriter
+                repositoryImporter: repositoryReader,
+                repositoryExporter: repositoryWriter
             );
 
             var service = new SymbolDatabaseApplicationService<CommandSymbol>( repository );
@@ -50,8 +50,8 @@ public class CommandSymbolDatabaseService : ICommandSymbolDatabaseService
             var exporter = new TsvCommandSymbolExporter( new LocalTextContentWriter( exportFilePath ) );
 
             using var repository = new CommandSymbolRepository(
-                repositoryReader: repositoryReader,
-                repositoryWriter: repositoryWriter
+                repositoryImporter: repositoryReader,
+                repositoryExporter: repositoryWriter
             );
 
             var service = new SymbolDatabaseApplicationService<CommandSymbol>( repository );
@@ -78,8 +78,8 @@ public class CommandSymbolDatabaseService : ICommandSymbolDatabaseService
             var repositoryWriter = new YamlCommandSymbolExporter( new LocalTextContentWriter( databaseFilePath ) );
 
             using var repository = new CommandSymbolRepository(
-                repositoryReader: repositoryReader,
-                repositoryWriter: repositoryWriter
+                repositoryImporter: repositoryReader,
+                repositoryExporter: repositoryWriter
             );
 
             var service = new SymbolDatabaseApplicationService<CommandSymbol>( repository );

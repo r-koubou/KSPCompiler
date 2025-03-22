@@ -25,8 +25,8 @@ public class UITypeSymbolDatabaseService : IUITypeSymbolDatabaseService
             var importer = new TsvUITypeSymbolImporter( new LocalTextContentReader( importFilePath ) );
 
             using var repository = new UITypeSymbolRepository(
-                repositoryReader: repositoryReader,
-                repositoryWriter: repositoryWriter
+                repositoryImporter: repositoryReader,
+                repositoryExporter: repositoryWriter
             );
 
             var service = new SymbolDatabaseApplicationService<UITypeSymbol>( repository );
@@ -50,8 +50,8 @@ public class UITypeSymbolDatabaseService : IUITypeSymbolDatabaseService
             var exporter = new TsvUITypeSymbolExporter( new LocalTextContentWriter( exportFilePath ) );
 
             using var repository = new UITypeSymbolRepository(
-                repositoryReader: repositoryReader,
-                repositoryWriter: repositoryWriter
+                repositoryImporter: repositoryReader,
+                repositoryExporter: repositoryWriter
             );
 
             var service = new SymbolDatabaseApplicationService<UITypeSymbol>( repository );
@@ -78,8 +78,8 @@ public class UITypeSymbolDatabaseService : IUITypeSymbolDatabaseService
             var repositoryWriter = new YamlUITypeSymbolExporter( new LocalTextContentWriter( databaseFilePath ) );
 
             using var repository = new UITypeSymbolRepository(
-                repositoryReader: repositoryReader,
-                repositoryWriter: repositoryWriter
+                repositoryImporter: repositoryReader,
+                repositoryExporter: repositoryWriter
             );
 
             var service = new SymbolDatabaseApplicationService<UITypeSymbol>( repository );

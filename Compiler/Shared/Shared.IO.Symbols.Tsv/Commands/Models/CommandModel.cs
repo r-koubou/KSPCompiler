@@ -4,6 +4,7 @@ namespace KSPCompiler.Shared.IO.Symbols.Tsv.Commands.Models;
 
 public sealed class CommandModel
 {
+    public string Id { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
     public bool BuiltIn { get; set; } = true;
     public string BuiltIntoVersion { get; set; } = ConstantValue.DefaultBuiltIntoVersion;

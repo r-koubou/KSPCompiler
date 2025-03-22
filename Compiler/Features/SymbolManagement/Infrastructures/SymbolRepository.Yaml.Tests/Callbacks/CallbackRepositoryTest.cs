@@ -21,7 +21,7 @@ public class CallbackRepositoryTest
     {
         var dbPath = Path.Combine( TestDataDirectory, "FindTest.yaml" );
         var importer = new YamlCallbackSymbolImporter( new LocalTextContentReader( dbPath ) );
-        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryReader: importer );
+        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryImporter: importer );
 
         var symbols = repository.FindByName( "Test" );
 
@@ -33,7 +33,7 @@ public class CallbackRepositoryTest
     {
         var dbPath = Path.Combine( TestDataDirectory, "FindTest.yaml" );
         var importer = new YamlCallbackSymbolImporter( new LocalTextContentReader( dbPath ) );
-        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryReader: importer );
+        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryImporter: importer );
 
         var symbols = repository.FindByName( "hogehoge" );
 
@@ -45,9 +45,9 @@ public class CallbackRepositoryTest
     {
         var dbPath = Path.Combine( TestDataDirectory, "FindTest.yaml" );
         var importer = new YamlCallbackSymbolImporter( new LocalTextContentReader( dbPath ) );
-        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryReader: importer );
+        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryImporter: importer );
 
-        var symbol = repository.FindAll();
+        var symbol = repository.ToList();
 
         Assert.That( symbol.Count, Is.GreaterThan( 0 ) );
         Assert.That( symbol.Count, Is.EqualTo( repository.Count ) );
@@ -70,7 +70,7 @@ public class CallbackRepositoryTest
         CleanUp( dbFilePath );
 
         var exporter = new YamlCallbackSymbolExporter( new LocalTextContentWriter( dbFilePath ) );
-        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryWriter: exporter, autoFlush: true );
+        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryExporter: exporter, autoFlush: true );
 
         var symbol = MockUtility.CreateCallbackSymbolModel( "test" );
         var result = repository.Store( symbol );
@@ -93,7 +93,7 @@ public class CallbackRepositoryTest
         CleanUp( dbFilePath );
 
         var exporter = new YamlCallbackSymbolExporter( new LocalTextContentWriter( dbFilePath ) );
-        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryWriter: exporter, autoFlush: true );
+        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryExporter: exporter, autoFlush: true );
 
         var symbol = MockUtility.CreateCallbackSymbolModel( "test" );
         var result = repository.Store( symbol );
@@ -118,7 +118,7 @@ public class CallbackRepositoryTest
         CleanUp( dbFilePath );
 
         var exporter = new YamlCallbackSymbolExporter( new LocalTextContentWriter( dbFilePath ) );
-        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryWriter: exporter, autoFlush: true );
+        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryExporter: exporter, autoFlush: true );
 
         var symbol = MockUtility.CreateCallbackSymbolModel( "test" );
         var result = repository.Store( symbol );

@@ -1,5 +1,4 @@
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 using KSPCompiler.Features.SymbolManagement.Gateways;
@@ -50,9 +49,9 @@ public class SymbolLocalDatabaseApplicationServiceTest
         var repositoryPath = new FilePath( Path.Combine( ImportTestDataDirectory, "repository_variable.yaml" ) );
 
         ITextContentWriter contentWriter = new LocalTextContentWriter( repositoryPath );
-        ISymbolExporter<VariableSymbol> repositoryWriter = new YamlVariableSymbolExporter( contentWriter );
+        ISymbolExporter<VariableSymbol> repositoryExporter = new YamlVariableSymbolExporter( contentWriter );
 
-        using ISymbolRepository<VariableSymbol> repository = new VariableSymbolRepository( repositoryWriter: repositoryWriter );
+        using ISymbolRepository<VariableSymbol> repository = new VariableSymbolRepository( repositoryExporter: repositoryExporter );
         var applicationService = new SymbolDatabaseApplicationService<VariableSymbol>( repository );
 
         ITextContentReader tsvReader = new LocalTextContentReader( importPath );
@@ -70,9 +69,9 @@ public class SymbolLocalDatabaseApplicationServiceTest
         var repositoryPath = new FilePath( Path.Combine( ExportTestDataDirectory, "repository_variable.yaml" ) );
 
         ITextContentReader contentReader = new LocalTextContentReader( repositoryPath );
-        ISymbolImporter<VariableSymbol> repositoryReader = new YamlVariableSymbolImporter( contentReader );
+        ISymbolImporter<VariableSymbol> repositoryImporter = new YamlVariableSymbolImporter( contentReader );
 
-        using ISymbolRepository<VariableSymbol> repository = new VariableSymbolRepository( repositoryReader: repositoryReader );
+        using ISymbolRepository<VariableSymbol> repository = new VariableSymbolRepository( repositoryImporter: repositoryImporter );
         var applicationService = new SymbolDatabaseApplicationService<VariableSymbol>( repository );
 
         ITextContentWriter writer = new LocalTextContentWriter( exportPath );
@@ -89,18 +88,18 @@ public class SymbolLocalDatabaseApplicationServiceTest
         var repositoryPath = new FilePath( Path.Combine( DeleteTestDataDirectory, "repository_variable.yaml" ) );
 
         ITextContentReader contentReader = new LocalTextContentReader( repositoryPath );
-        ISymbolImporter<VariableSymbol> repositoryReader = new YamlVariableSymbolImporter( contentReader );
+        ISymbolImporter<VariableSymbol> repositoryImporter = new YamlVariableSymbolImporter( contentReader );
 
         ITextContentWriter contentWriter = new LocalTextContentWriter( repositoryPath );
-        ISymbolExporter<VariableSymbol> repositoryWriter = new YamlVariableSymbolExporter( contentWriter );
+        ISymbolExporter<VariableSymbol> repositoryExporter = new YamlVariableSymbolExporter( contentWriter );
 
-        using ISymbolRepository<VariableSymbol> repository = new VariableSymbolRepository( repositoryReader: repositoryReader, repositoryWriter: repositoryWriter );
+        using ISymbolRepository<VariableSymbol> repository = new VariableSymbolRepository( repositoryImporter: repositoryImporter, repositoryExporter: repositoryExporter );
         var applicationService = new SymbolDatabaseApplicationService<VariableSymbol>( repository );
 
         var result = await applicationService.DeleteAsync( _ => true );
 
         Assert.That( result.Success, Is.True );
-        Assert.That( ( await repository.FindAllAsync() ).Any(), Is.False );
+        Assert.That( (await repository.ToListAsync()).Count != 0, Is.False );
     }
 
     [Test]
@@ -109,9 +108,9 @@ public class SymbolLocalDatabaseApplicationServiceTest
         var repositoryPath = new FilePath( Path.Combine( FindTestDataDirectory, "repository_variable.yaml" ) );
 
         ITextContentReader contentReader = new LocalTextContentReader( repositoryPath );
-        ISymbolImporter<VariableSymbol> repositoryReader = new YamlVariableSymbolImporter( contentReader );
+        ISymbolImporter<VariableSymbol> repositoryImporter = new YamlVariableSymbolImporter( contentReader );
 
-        using ISymbolRepository<VariableSymbol> repository = new VariableSymbolRepository( repositoryReader: repositoryReader );
+        using ISymbolRepository<VariableSymbol> repository = new VariableSymbolRepository( repositoryImporter: repositoryImporter );
         var applicationService = new SymbolDatabaseApplicationService<VariableSymbol>( repository );
 
         var result = await applicationService.FindAsync( _ => true );
@@ -144,9 +143,9 @@ public class SymbolLocalDatabaseApplicationServiceTest
         var repositoryPath = new FilePath( Path.Combine( ImportTestDataDirectory, "repository_command.yaml" ) );
 
         ITextContentWriter contentWriter = new LocalTextContentWriter( repositoryPath );
-        ISymbolExporter<CommandSymbol> repositoryWriter = new YamlCommandSymbolExporter( contentWriter );
+        ISymbolExporter<CommandSymbol> repositoryExporter = new YamlCommandSymbolExporter( contentWriter );
 
-        using ISymbolRepository<CommandSymbol> repository = new CommandSymbolRepository( repositoryWriter: repositoryWriter );
+        using ISymbolRepository<CommandSymbol> repository = new CommandSymbolRepository( repositoryExporter: repositoryExporter );
 
         var applicationService = new SymbolDatabaseApplicationService<CommandSymbol>( repository );
 
@@ -165,15 +164,15 @@ public class SymbolLocalDatabaseApplicationServiceTest
         var repositoryPath = new FilePath( Path.Combine( ExportTestDataDirectory, "repository_command.yaml" ) );
 
         ITextContentReader contentReader = new LocalTextContentReader( repositoryPath );
-        ISymbolImporter<CommandSymbol> repositoryReader = new YamlCommandSymbolImporter( contentReader );
+        ISymbolImporter<CommandSymbol> repositoryImporter = new YamlCommandSymbolImporter( contentReader );
 
-        using ISymbolRepository<CommandSymbol> repository = new CommandSymbolRepository( repositoryReader: repositoryReader );
+        using ISymbolRepository<CommandSymbol> repository = new CommandSymbolRepository( repositoryImporter: repositoryImporter );
         var applicationService = new SymbolDatabaseApplicationService<CommandSymbol>( repository );
 
         ITextContentWriter writer = new LocalTextContentWriter( exportPath );
-        ISymbolExporter<CommandSymbol> exporter = new TsvCommandSymbolExporter( writer );
+        ISymbolExporter<CommandSymbol> repositoryExporter = new TsvCommandSymbolExporter( writer );
 
-        var result = await applicationService.ExportAsync( exporter, _ => true );
+        var result = await applicationService.ExportAsync( repositoryExporter, _ => true );
 
         Assert.That( result.Success, Is.True );
     }
@@ -184,18 +183,18 @@ public class SymbolLocalDatabaseApplicationServiceTest
         var repositoryPath = new FilePath( Path.Combine( DeleteTestDataDirectory, "repository_command.yaml" ) );
 
         ITextContentReader contentReader = new LocalTextContentReader( repositoryPath );
-        ISymbolImporter<CommandSymbol> repositoryReader = new YamlCommandSymbolImporter( contentReader );
+        ISymbolImporter<CommandSymbol> repositoryImporter = new YamlCommandSymbolImporter( contentReader );
 
         ITextContentWriter contentWriter = new LocalTextContentWriter( repositoryPath );
-        ISymbolExporter<CommandSymbol> repositoryWriter = new YamlCommandSymbolExporter( contentWriter );
+        ISymbolExporter<CommandSymbol> repositoryExporter = new YamlCommandSymbolExporter( contentWriter );
 
-        using ISymbolRepository<CommandSymbol> repository = new CommandSymbolRepository( repositoryReader: repositoryReader, repositoryWriter: repositoryWriter );
+        using ISymbolRepository<CommandSymbol> repository = new CommandSymbolRepository( repositoryImporter: repositoryImporter, repositoryExporter: repositoryExporter );
         var applicationService = new SymbolDatabaseApplicationService<CommandSymbol>( repository );
 
         var result = await applicationService.DeleteAsync( _ => true );
 
         Assert.That( result.Success, Is.True );
-        Assert.That( ( await repository.FindAllAsync() ).Any(), Is.False );
+        Assert.That( (await repository.ToListAsync()).Count != 0, Is.False );
     }
 
     [Test]
@@ -204,9 +203,9 @@ public class SymbolLocalDatabaseApplicationServiceTest
         var repositoryPath = new FilePath( Path.Combine( FindTestDataDirectory, "repository_command.yaml" ) );
 
         ITextContentReader contentReader = new LocalTextContentReader( repositoryPath );
-        ISymbolImporter<CommandSymbol> repositoryReader = new YamlCommandSymbolImporter( contentReader );
+        ISymbolImporter<CommandSymbol> repositoryImporter = new YamlCommandSymbolImporter( contentReader );
 
-        using ISymbolRepository<CommandSymbol> repository = new CommandSymbolRepository( repositoryReader: repositoryReader );
+        using ISymbolRepository<CommandSymbol> repository = new CommandSymbolRepository( repositoryImporter: repositoryImporter );
         var applicationService = new SymbolDatabaseApplicationService<CommandSymbol>( repository );
 
         var result = await applicationService.FindAsync( _ => true );
@@ -221,10 +220,10 @@ public class SymbolLocalDatabaseApplicationServiceTest
         var exportPath = new FilePath( Path.Combine( ExportTestDataDirectory, "command_template.tsv" ) );
 
         ITextContentWriter writer = new LocalTextContentWriter( exportPath );
-        ISymbolExporter<CommandSymbol> exporter = new TsvCommandSymbolExporter( writer );
+        ISymbolExporter<CommandSymbol> repositoryExporter = new TsvCommandSymbolExporter( writer );
 
         var applicationService = new SymbolTemplateApplicationService<CommandSymbol>();
-        var result = await applicationService.ExportAsync( exporter );
+        var result = await applicationService.ExportAsync( repositoryExporter );
 
         Assert.That( result.Success, Is.True );
     }
@@ -238,9 +237,9 @@ public class SymbolLocalDatabaseApplicationServiceTest
         var repositoryPath = new FilePath( Path.Combine( ImportTestDataDirectory, "repository_callback.yaml" ) );
 
         ITextContentWriter contentWriter = new LocalTextContentWriter( repositoryPath );
-        ISymbolExporter<CallbackSymbol> repositoryWriter = new YamlCallbackSymbolExporter( contentWriter );
+        ISymbolExporter<CallbackSymbol> repositoryExporter = new YamlCallbackSymbolExporter( contentWriter );
 
-        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryWriter: repositoryWriter );
+        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryExporter: repositoryExporter );
 
         var applicationService = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
 
@@ -259,9 +258,9 @@ public class SymbolLocalDatabaseApplicationServiceTest
         var repositoryPath = new FilePath( Path.Combine( ExportTestDataDirectory, "repository_callback.yaml" ) );
 
         ITextContentReader contentReader = new LocalTextContentReader( repositoryPath );
-        ISymbolImporter<CallbackSymbol> repositoryReader = new YamlCallbackSymbolImporter( contentReader );
+        ISymbolImporter<CallbackSymbol> repositoryImporter = new YamlCallbackSymbolImporter( contentReader );
 
-        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryReader: repositoryReader );
+        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryImporter: repositoryImporter );
         var applicationService = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
 
         ITextContentWriter writer = new LocalTextContentWriter( exportPath );
@@ -278,18 +277,18 @@ public class SymbolLocalDatabaseApplicationServiceTest
         var repositoryPath = new FilePath( Path.Combine( DeleteTestDataDirectory, "repository_callback.yaml" ) );
 
         ITextContentReader contentReader = new LocalTextContentReader( repositoryPath );
-        ISymbolImporter<CallbackSymbol> repositoryReader = new YamlCallbackSymbolImporter( contentReader );
+        ISymbolImporter<CallbackSymbol> repositoryImporter = new YamlCallbackSymbolImporter( contentReader );
 
         ITextContentWriter contentWriter = new LocalTextContentWriter( repositoryPath );
-        ISymbolExporter<CallbackSymbol> repositoryWriter = new YamlCallbackSymbolExporter( contentWriter );
+        ISymbolExporter<CallbackSymbol> repositoryExporter = new YamlCallbackSymbolExporter( contentWriter );
 
-        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryReader: repositoryReader, repositoryWriter: repositoryWriter );
+        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryImporter: repositoryImporter, repositoryExporter: repositoryExporter );
         var applicationService = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
 
         var result = await applicationService.DeleteAsync( _ => true );
 
         Assert.That( result.Success, Is.True );
-        Assert.That( ( await repository.FindAllAsync() ).Any(), Is.False );
+        Assert.That( (await repository.ToListAsync()).Count != 0, Is.False );
     }
 
     [Test]
@@ -298,9 +297,9 @@ public class SymbolLocalDatabaseApplicationServiceTest
         var repositoryPath = new FilePath( Path.Combine( FindTestDataDirectory, "repository_callback.yaml" ) );
 
         ITextContentReader contentReader = new LocalTextContentReader( repositoryPath );
-        ISymbolImporter<CallbackSymbol> repositoryReader = new YamlCallbackSymbolImporter( contentReader );
+        ISymbolImporter<CallbackSymbol> repositoryImporter = new YamlCallbackSymbolImporter( contentReader );
 
-        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryReader: repositoryReader );
+        using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryImporter: repositoryImporter );
         var applicationService = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
 
         var result = await applicationService.FindAsync( _ => true );
@@ -332,9 +331,9 @@ public class SymbolLocalDatabaseApplicationServiceTest
         var repositoryPath = new FilePath( Path.Combine( ImportTestDataDirectory, "repository_ui_type.yaml" ) );
 
         ITextContentWriter contentWriter = new LocalTextContentWriter( repositoryPath );
-        ISymbolExporter<UITypeSymbol> repositoryWriter = new YamlUITypeSymbolExporter( contentWriter );
+        ISymbolExporter<UITypeSymbol> repositoryExporter = new YamlUITypeSymbolExporter( contentWriter );
 
-        using ISymbolRepository<UITypeSymbol> repository = new UITypeSymbolRepository( repositoryWriter: repositoryWriter );
+        using ISymbolRepository<UITypeSymbol> repository = new UITypeSymbolRepository( repositoryExporter: repositoryExporter );
 
         var applicationService = new SymbolDatabaseApplicationService<UITypeSymbol>( repository );
 
@@ -353,9 +352,9 @@ public class SymbolLocalDatabaseApplicationServiceTest
         var repositoryPath = new FilePath( Path.Combine( ExportTestDataDirectory, "repository_ui_type.yaml" ) );
 
         ITextContentReader contentReader = new LocalTextContentReader( repositoryPath );
-        ISymbolImporter<UITypeSymbol> repositoryReader = new YamlUITypeSymbolImporter( contentReader );
+        ISymbolImporter<UITypeSymbol> repositoryImporter = new YamlUITypeSymbolImporter( contentReader );
 
-        using ISymbolRepository<UITypeSymbol> repository = new UITypeSymbolRepository( repositoryReader: repositoryReader );
+        using ISymbolRepository<UITypeSymbol> repository = new UITypeSymbolRepository( repositoryImporter: repositoryImporter );
         var applicationService = new SymbolDatabaseApplicationService<UITypeSymbol>( repository );
 
         ITextContentWriter writer = new LocalTextContentWriter( exportPath );
@@ -372,18 +371,18 @@ public class SymbolLocalDatabaseApplicationServiceTest
         var repositoryPath = new FilePath( Path.Combine( DeleteTestDataDirectory, "repository_ui_type.yaml" ) );
 
         ITextContentReader contentReader = new LocalTextContentReader( repositoryPath );
-        ISymbolImporter<UITypeSymbol> repositoryReader = new YamlUITypeSymbolImporter( contentReader );
+        ISymbolImporter<UITypeSymbol> repositoryImporter = new YamlUITypeSymbolImporter( contentReader );
 
         ITextContentWriter contentWriter = new LocalTextContentWriter( repositoryPath );
-        ISymbolExporter<UITypeSymbol> repositoryWriter = new YamlUITypeSymbolExporter( contentWriter );
+        ISymbolExporter<UITypeSymbol> repositoryExporter = new YamlUITypeSymbolExporter( contentWriter );
 
-        using ISymbolRepository<UITypeSymbol> repository = new UITypeSymbolRepository( repositoryReader: repositoryReader, repositoryWriter: repositoryWriter );
+        using ISymbolRepository<UITypeSymbol> repository = new UITypeSymbolRepository( repositoryImporter: repositoryImporter, repositoryExporter: repositoryExporter );
         var applicationService = new SymbolDatabaseApplicationService<UITypeSymbol>( repository );
 
         var result = await applicationService.DeleteAsync( _ => true );
 
         Assert.That( result.Success, Is.True );
-        Assert.That( ( await repository.FindAllAsync() ).Any(), Is.False );
+        Assert.That( (await repository.ToListAsync()).Count != 0, Is.False );
     }
 
     [Test]
@@ -392,9 +391,9 @@ public class SymbolLocalDatabaseApplicationServiceTest
         var repositoryPath = new FilePath( Path.Combine( FindTestDataDirectory, "repository_ui_type.yaml" ) );
 
         ITextContentReader contentReader = new LocalTextContentReader( repositoryPath );
-        ISymbolImporter<UITypeSymbol> repositoryReader = new YamlUITypeSymbolImporter( contentReader );
+        ISymbolImporter<UITypeSymbol> repositoryImporter = new YamlUITypeSymbolImporter( contentReader );
 
-        using ISymbolRepository<UITypeSymbol> repository = new UITypeSymbolRepository( repositoryReader: repositoryReader );
+        using ISymbolRepository<UITypeSymbol> repository = new UITypeSymbolRepository( repositoryImporter: repositoryImporter );
         var applicationService = new SymbolDatabaseApplicationService<UITypeSymbol>( repository );
 
         var result = await applicationService.FindAsync( _ => true );

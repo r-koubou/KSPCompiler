@@ -6,6 +6,7 @@ public sealed class UITypeModelClassMap : ClassMap<UITypeModel>
 {
     public UITypeModelClassMap()
     {
+        Map( x => x.Id ).Name( nameof( UITypeModel.Id ) );
         Map( x => x.Name ).Name( nameof( UITypeModel.Name ) );
         Map( x => x.BuiltIn ).Name( nameof( UITypeModel.BuiltIn ) );
         Map( x => x.DataType ).Name( nameof( UITypeModel.DataType ) );

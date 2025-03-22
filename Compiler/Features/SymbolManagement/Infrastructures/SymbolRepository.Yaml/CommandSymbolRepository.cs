@@ -4,11 +4,11 @@ using KSPCompiler.Shared.IO.Abstractions.Symbol;
 namespace KSPCompiler.SymbolManagement.Repository.Yaml;
 
 public class CommandSymbolRepository(
-    ISymbolImporter<CommandSymbol>? repositoryReader = null,
-    ISymbolExporter<CommandSymbol>? repositoryWriter = null,
+    ISymbolImporter<CommandSymbol>? repositoryImporter = null,
+    ISymbolExporter<CommandSymbol>? repositoryExporter = null,
     bool autoFlush = true )
     : SymbolRepository<CommandSymbol>(
-        repositoryReader,
-        repositoryWriter,
+        repositoryImporter,
+        repositoryExporter,
         autoFlush
     );

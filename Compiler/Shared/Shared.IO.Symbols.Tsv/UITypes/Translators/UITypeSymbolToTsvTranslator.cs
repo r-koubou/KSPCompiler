@@ -24,6 +24,7 @@ public sealed class UITypeSymbolToTsvTranslator : IDataTranslator<IEnumerable<UI
         {
             var model = new UITypeModel
             {
+                Id               = v.Id.ToString("D"),
                 Name             = v.Name,
                 BuiltIn          = v.BuiltIn,
                 DataType         = DataTypeUtility.ToString( v.DataType ),

@@ -7,6 +7,7 @@ public sealed class VariableHeaderRecordWriter : ITsvHeaderRecordWriter
     public void WriteHeaderRecord( CsvWriter csvWriter, int maxArgumentCount = 16 )
     {
         // Header
+        csvWriter.WriteField( nameof( VariableModel.Id ) );
         csvWriter.WriteField( nameof( VariableModel.Name ) );
         csvWriter.WriteField( nameof( VariableModel.BuiltIn ) );
         csvWriter.WriteField( nameof( VariableModel.Description ) );

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -27,6 +28,7 @@ public sealed class TsvToCallbackSymbolTranslator : IDataTranslator<string, IRea
         {
             var symbol = new CallbackSymbol( record.AllowMultipleDeclaration )
             {
+                Id               = Guid.Parse( record.Id ),
                 Name             = record.Name,
                 BuiltIn          = record.BuiltIn,
                 Description      = record.Description,
