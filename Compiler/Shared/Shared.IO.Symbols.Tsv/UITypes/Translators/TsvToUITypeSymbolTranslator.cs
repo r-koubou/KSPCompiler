@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -27,6 +28,7 @@ public sealed class TsvToUITypeSymbolTranslator : IDataTranslator<string, IReadO
         {
             var symbol = new UITypeSymbol( record.InitializerRequired )
             {
+                Id               = Guid.Parse( record.Id ),
                 Name             = record.Name,
                 BuiltIn          = record.BuiltIn,
                 Description      = record.Description,

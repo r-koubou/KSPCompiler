@@ -4,6 +4,7 @@ namespace KSPCompiler.Shared.IO.Symbols.Tsv.UITypes.Models;
 
 public sealed class UITypeModel
 {
+    public string Id { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
     public bool BuiltIn { get; set; } = true;
     public string DataType { get; set; } = string.Empty;
