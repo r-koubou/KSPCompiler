@@ -14,7 +14,7 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
 {
     private readonly SemaphoreSlim semaphore = new( 1, 1 );
 
-    protected List<TSymbol> Models { get; }
+    protected Dictionary<Guid, TSymbol> Models { get; }
     protected ISymbolExporter<TSymbol>? RepositoryWriter { get; }
 
     private bool Disposed { get; set; }
@@ -30,8 +30,30 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
         bool autoFlush = true )
     {
         RepositoryWriter  = repositoryWriter;
-        Models    = repositoryReader == null ? [] : repositoryReader.Import().ToList();
+        Models    = repositoryReader == null ? [] : ImportImpl( repositoryReader );
         AutoFlush = autoFlush;
+    }
+
+    private Dictionary<Guid, TSymbol> ImportImpl( ISymbolImporter<TSymbol> importer )
+    {
+        var result = new Dictionary<Guid, TSymbol>();
+        var symbols = importer.Import();
+
+        foreach( var x in symbols )
+        {
+            result.Add( x.Id, x );
+        }
+
+        return result;
+    }
+
+    public List<TSymbol> ToList()
+        => ToListAsync().GetAwaiter().GetResult();
+
+    public async Task<List<TSymbol>> ToListAsync( CancellationToken cancellationToken = default )
+    {
+        await Task.CompletedTask;
+        return Models.Values.OrderBy( x => x.Name.Value ).ToList();
     }
 
     public async Task FlushAsync()
@@ -48,7 +70,7 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
 
         if( RepositoryWriter != null )
         {
-            await RepositoryWriter.ExportAsync( Models, CancellationToken.None );
+            await RepositoryWriter.ExportAsync( ToList(), CancellationToken.None );
         }
 
         Dirty = false;
@@ -82,14 +104,12 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
 
     private async Task<StoreResult> StoreAsyncImpl( TSymbol symbol, CancellationToken _ = default )
     {
-        var existing = Models.FirstOrDefault( x => x.Name == symbol.Name );
-
-        if( existing == null )
+        if( !Models.TryGetValue( symbol.Id, out var existingSymbol ) )
         {
             symbol.CreatedAt = DateTime.UtcNow;
             symbol.UpdatedAt = DateTime.UtcNow;
 
-            Models.Add( symbol );
+            Models.Add( symbol.Id, symbol );
             Dirty = true;
 
             return new StoreResult(
@@ -100,14 +120,12 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
             );
         }
 
-        var index = Models.IndexOf( existing );
-
-        symbol.Id        = existing.Id;
-        symbol.CreatedAt = existing.CreatedAt;
+        symbol.Id        = existingSymbol.Id;
+        symbol.CreatedAt = existingSymbol.CreatedAt;
         symbol.UpdatedAt = DateTime.UtcNow;
 
-        Models[ index ] = symbol;
-        Dirty           = true;
+        Models[ symbol.Id ] = symbol;
+        Dirty               = true;
 
         await Task.CompletedTask;
 
@@ -187,14 +205,12 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
 
     private async Task<DeleteResult> DeleteAsyncImpl( TSymbol symbol, CancellationToken _ = default )
     {
-        var existing = Models.FirstOrDefault( x => x.Name == symbol.Name );
-
-        if( existing == null )
+        if( !Models.TryGetValue( symbol.Id, out var existingSymbol ) )
         {
             return new DeleteResult();
         }
 
-        Models.Remove( existing );
+        Models.Remove( existingSymbol.Id );
         Dirty = true;
 
         await Task.CompletedTask;
@@ -270,20 +286,20 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
 
     public virtual async Task<IReadOnlyCollection<TSymbol>> FindAsync( Predicate<TSymbol> predicate, CancellationToken cancellationToken = default )
     {
-        return await Lock(
-            () => new List<TSymbol>(
-                Models
-                   .Where( x => predicate( x ) )
-            )
+        var result = new List<TSymbol>();
+
+        await Lock( async () =>
+            {
+                result.AddRange( Models.Values.Where( x => predicate( x ) ) );
+                await Task.CompletedTask;
+            }
         );
+
+        return result;
     }
 
     public virtual async Task<IReadOnlyCollection<TSymbol>> FindAllAsync( CancellationToken cancellationToken = default )
-    {
-        return await Lock(
-            () => new List<TSymbol>( Models )
-        );
-    }
+        => await ToListAsync( cancellationToken );
 
     private async Task<T> Lock<T>( Func<T> func )
     {
