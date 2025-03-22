@@ -1,3 +1,3 @@
-Name	BuiltIn	BuiltIntoVersion	Description	ReturnType	Argument Name1	DataType1	Description1
-message	true	N/A	print message to console	V	message	*	a message data
-message	true	N/A	print message to console	V	message	ui_*	a message data
+Id	Name	BuiltIn	BuiltIntoVersion	Description	ReturnType	Argument Name1	DataType1	Description1
+DD9FB2A6-DC61-42CF-A988-3035BBB90766	message	true	N/A	print message to console	V	message	*	a message data
+0F74A512-097A-49CB-AE9A-7095BF631E02	message	true	N/A	print message to console	V	message	ui_*	a message data
