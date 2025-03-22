@@ -15,7 +15,7 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
     private readonly SemaphoreSlim semaphore = new( 1, 1 );
 
     protected Dictionary<Guid, TSymbol> Models { get; }
-    protected ISymbolExporter<TSymbol>? RepositoryWriter { get; }
+    protected ISymbolExporter<TSymbol>? RepositoryExporter { get; }
 
     private bool Disposed { get; set; }
     private bool Dirty { get; set; }
@@ -25,12 +25,12 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
         => Models.Count;
 
     protected SymbolRepository(
-        ISymbolImporter<TSymbol>? repositoryReader = null,
-        ISymbolExporter<TSymbol>? repositoryWriter = null,
+        ISymbolImporter<TSymbol>? repositoryImporter = null,
+        ISymbolExporter<TSymbol>? repositoryExporter = null,
         bool autoFlush = true )
     {
-        RepositoryWriter  = repositoryWriter;
-        Models    = repositoryReader == null ? [] : ImportImpl( repositoryReader );
+        RepositoryExporter  = repositoryExporter;
+        Models    = repositoryImporter == null ? [] : ImportImpl( repositoryImporter );
         AutoFlush = autoFlush;
     }
 
@@ -96,9 +96,9 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
             return;
         }
 
-        if( RepositoryWriter != null )
+        if( RepositoryExporter != null )
         {
-            await RepositoryWriter.ExportAsync( ToList(), CancellationToken.None );
+            await RepositoryExporter.ExportAsync( ToList(), CancellationToken.None );
         }
 
         Dirty = false;

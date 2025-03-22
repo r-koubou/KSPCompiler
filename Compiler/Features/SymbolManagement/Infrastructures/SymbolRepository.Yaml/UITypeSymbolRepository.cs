@@ -4,11 +4,11 @@ using KSPCompiler.Shared.IO.Abstractions.Symbol;
 namespace KSPCompiler.SymbolManagement.Repository.Yaml;
 
 public class UITypeSymbolRepository(
-    ISymbolImporter<UITypeSymbol>? repositoryReader = null,
-    ISymbolExporter<UITypeSymbol>? repositoryWriter = null,
+    ISymbolImporter<UITypeSymbol>? repositoryImporter = null,
+    ISymbolExporter<UITypeSymbol>? repositoryExporter = null,
     bool autoFlush = true )
     : SymbolRepository<UITypeSymbol>(
-        repositoryReader,
-        repositoryWriter,
+        repositoryImporter,
+        repositoryExporter,
         autoFlush
     );

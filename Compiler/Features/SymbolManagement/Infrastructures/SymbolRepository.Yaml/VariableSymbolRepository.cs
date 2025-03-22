@@ -4,11 +4,11 @@ using KSPCompiler.Shared.IO.Abstractions.Symbol;
 namespace KSPCompiler.SymbolManagement.Repository.Yaml;
 
 public class VariableSymbolRepository(
-    ISymbolImporter<VariableSymbol>? repositoryReader = null,
-    ISymbolExporter<VariableSymbol>? repositoryWriter = null,
+    ISymbolImporter<VariableSymbol>? repositoryImporter = null,
+    ISymbolExporter<VariableSymbol>? repositoryExporter = null,
     bool autoFlush = true )
     : SymbolRepository<VariableSymbol>(
-        repositoryReader,
-        repositoryWriter,
+        repositoryImporter,
+        repositoryExporter,
         autoFlush
     );
