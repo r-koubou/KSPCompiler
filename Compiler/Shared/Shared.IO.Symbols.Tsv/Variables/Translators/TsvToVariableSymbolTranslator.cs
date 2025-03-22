@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -27,6 +28,7 @@ public sealed class TsvToVariableSymbolTranslator : IDataTranslator<string, IRea
         {
             var symbol = new VariableSymbol
             {
+                Id               = Guid.Parse( record.Id ),
                 Name             = record.Name,
                 ArraySize        = 0,
                 BuiltIn          = record.BuiltIn,

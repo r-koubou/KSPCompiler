@@ -22,6 +22,7 @@ public sealed class VariableSymbolToTsvTranslator : IDataTranslator<IEnumerable<
         {
             var model = new VariableModel
             {
+                Id               = v.Id.ToString("D"),
                 Name             = v.Name,
                 BuiltIn          = v.BuiltIn,
                 Description      = v.Description,
