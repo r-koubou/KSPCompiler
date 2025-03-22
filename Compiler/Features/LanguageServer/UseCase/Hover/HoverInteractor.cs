@@ -69,7 +69,7 @@ public sealed class HoverInteractor : IHoverUseCase
             }
 
             // コマンド
-            if( symbols.Commands.TryBuildHoverText( word, out hoverText, new CommandHoverTextBuilder() ) )
+            if( symbols.CommandsNew.TryBuildHoverText( word, out hoverText, new CommandHoverTextBuilderNew() ) )
             {
                 return new HoverOutputPort( hoverText.AsHover(), true );
             }
