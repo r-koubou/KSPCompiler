@@ -4,6 +4,7 @@ namespace KSPCompiler.Shared.IO.Symbols.Tsv.Callbacks.Models;
 
 public sealed class CallbackModel
 {
+    public string Id { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
     public bool BuiltIn { get; set; } = true;
     public bool AllowMultipleDeclaration { get; set; }
