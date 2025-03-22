@@ -7,6 +7,7 @@ public sealed class CommandSymbolHeaderRecordWriter : ITsvHeaderRecordWriter
     public void WriteHeaderRecord( CsvWriter csvWriter, int maxArgumentCount = 16 )
     {
         // Header
+        csvWriter.WriteField( nameof( CommandModel.Id ) );
         csvWriter.WriteField( nameof( CommandModel.Name ) );
         csvWriter.WriteField( nameof( CommandModel.BuiltIn ) );
         csvWriter.WriteField( nameof( CommandModel.BuiltIntoVersion ) );
