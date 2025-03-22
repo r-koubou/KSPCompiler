@@ -154,7 +154,7 @@ public class SemanticAnalyzerTest
         var compilerMessageManger = ICompilerMessageManger.Default;
         context.EventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
 
-        context.SymbolTable.Commands.Add( command );
+        context.SymbolTable.CommandsNew.AddAsOverload( command, command.Arguments );
 
         // message( 1 + 2 + 3 )
         var expr = MockUtility.CreateCommandExpressionNode(
