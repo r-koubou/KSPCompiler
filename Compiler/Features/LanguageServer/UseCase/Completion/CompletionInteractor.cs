@@ -55,7 +55,7 @@ public sealed class CompletionInteractor : ICompletionUseCase
 
             // コマンド
             var commands = MatchCompletionItem(
-                symbolTable.Commands,
+                symbolTable.CommandsNew,
                 word
             );
 
