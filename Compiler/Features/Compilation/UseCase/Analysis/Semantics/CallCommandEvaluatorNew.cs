@@ -103,11 +103,6 @@ public class CallCommandEvaluatorNew : ICallCommandEvaluator
             #endregion ~No arguments command calling
 
             #region With arguments command calling
-            if( arguments == null )
-            {
-                throw new AstAnalyzeException( expr, "Failed to evaluate command arguments" );
-            }
-
             // 引数オーバーロード毎の引数の数が一致しない時点で評価はここまで
             if( symbolArgs.Count != callArgs.Count )
             {
