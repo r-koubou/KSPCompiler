@@ -7,8 +7,6 @@ public sealed class AggregateSymbolTable
     public IVariableSymbolTable BuiltInVariables { get; }
     public IVariableSymbolTable UserVariables { get; }
     public IUITypeSymbolTable UITypes { get; }
-    [Obsolete]
-    public ICommandSymbolTable Commands { get; }
     public ICommandSymbolTableNew CommandsNew { get; }
     public ICallbackSymbolTable UserCallbacks { get; }
     public ICallbackSymbolTable BuiltInCallbacks { get; }
@@ -19,7 +17,6 @@ public sealed class AggregateSymbolTable
         IVariableSymbolTable? builtInVariables = null,
         IVariableSymbolTable? userVariables = null,
         IUITypeSymbolTable? uiTypes = null,
-        ICommandSymbolTable? commands = null,
         ICommandSymbolTableNew? commandsNew = null,
         ICallbackSymbolTable? builtInCallbacks = null,
         ICallbackSymbolTable? userCallbacks = null,
@@ -29,7 +26,6 @@ public sealed class AggregateSymbolTable
         BuiltInVariables    = builtInVariables ?? new VariableSymbolTable();
         UserVariables       = userVariables ?? new VariableSymbolTable();
         UITypes             = uiTypes ?? new UITypeSymbolTable();
-        Commands            = commands ?? new CommandSymbolTable();
         CommandsNew         = commandsNew ?? new CommandSymbolTableNew();
         UserCallbacks       = userCallbacks ?? new CallbackSymbolTable();
         BuiltInCallbacks    = builtInCallbacks ?? new CallbackSymbolTable();
@@ -42,7 +38,6 @@ public sealed class AggregateSymbolTable
         BuiltInVariables.Clear();
         UserVariables.Clear();
         UITypes.Clear();
-        Commands.Clear();
         CommandsNew.Clear();
         UserCallbacks.Clear();
         BuiltInCallbacks.Clear();
@@ -54,13 +49,11 @@ public sealed class AggregateSymbolTable
     {
         // Variables
         // UI Type
-        // Command
         // User Function
         // PreProcessor Symbol
         target.BuiltInVariables.AddRange( source.BuiltInVariables );
         target.UserVariables.AddRange( source.UserVariables );
         target.UITypes.AddRange( source.UITypes );
-        target.Commands.AddRange( source.Commands );
         target.UserFunctions.AddRange( source.UserFunctions );
 
         // Command

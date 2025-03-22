@@ -234,7 +234,7 @@ public class AstCallCommandEvaluationTestNew
             new AstIntLiteralNode( 0 )
         );
 
-        var evaluator = new CallCommandEvaluator( eventEmitter, symbols );
+        var evaluator = new CallCommandEvaluatorNew( eventEmitter, symbols );
         var visitor = new MockCallCommandExpressionVisitor();
 
         visitor.Inject( evaluator );
