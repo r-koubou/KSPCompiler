@@ -65,7 +65,7 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
     public async Task<List<TSymbol>> ToListAsync( CancellationToken cancellationToken = default )
     {
         await Task.CompletedTask;
-        return Models.Values.OrderBy( x => x.Name.Value ).ToList();
+        return Models.Values.ToList();
     }
 
     #region Import / Export
