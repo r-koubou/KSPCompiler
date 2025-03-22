@@ -24,7 +24,7 @@ public sealed class AggregateSymbolTable
         BuiltInVariables    = builtInVariables ?? new VariableSymbolTable();
         UserVariables       = userVariables ?? new VariableSymbolTable();
         UITypes             = uiTypes ?? new UITypeSymbolTable();
-        Commands         = commandsNew ?? new CommandSymbolTable();
+        Commands            = commandsNew ?? new CommandSymbolTable();
         UserCallbacks       = userCallbacks ?? new CallbackSymbolTable();
         BuiltInCallbacks    = builtInCallbacks ?? new CallbackSymbolTable();
         UserFunctions       = userFunctions ?? new UserFunctionSymbolTable();
