@@ -47,7 +47,7 @@ public class CallbackRepositoryTest
         var importer = new YamlCallbackSymbolImporter( new LocalTextContentReader( dbPath ) );
         using ISymbolRepository<CallbackSymbol> repository = new CallbackSymbolRepository( repositoryReader: importer );
 
-        var symbol = repository.FindAll();
+        var symbol = repository.ToList();
 
         Assert.That( symbol.Count, Is.GreaterThan( 0 ) );
         Assert.That( symbol.Count, Is.EqualTo( repository.Count ) );

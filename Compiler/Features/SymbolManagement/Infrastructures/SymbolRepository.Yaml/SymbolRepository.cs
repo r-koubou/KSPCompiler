@@ -298,9 +298,6 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
         return result;
     }
 
-    public virtual async Task<IReadOnlyCollection<TSymbol>> FindAllAsync( CancellationToken cancellationToken = default )
-        => await ToListAsync( cancellationToken );
-
     private async Task<T> Lock<T>( Func<T> func )
     {
         await semaphore.WaitAsync();

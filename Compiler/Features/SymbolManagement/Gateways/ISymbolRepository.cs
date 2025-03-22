@@ -45,11 +45,6 @@ public interface ISymbolRepository<TSymbol> : IDisposable where TSymbol : Symbol
 
     Task<IReadOnlyCollection<TSymbol>> FindAsync( Predicate<TSymbol> predicate, CancellationToken cancellationToken = default );
 
-    IReadOnlyCollection<TSymbol> FindAll()
-        => FindAllAsync().GetAwaiter().GetResult();
-
-    Task<IReadOnlyCollection<TSymbol>> FindAllAsync( CancellationToken cancellationToken = default );
-
     void Flush()
         => FlushAsync().GetAwaiter().GetResult();
 

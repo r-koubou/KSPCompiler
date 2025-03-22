@@ -1,5 +1,4 @@
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 using KSPCompiler.Features.SymbolManagement.Gateways;
@@ -100,7 +99,7 @@ public class SymbolLocalDatabaseApplicationServiceTest
         var result = await applicationService.DeleteAsync( _ => true );
 
         Assert.That( result.Success, Is.True );
-        Assert.That( ( await repository.FindAllAsync() ).Any(), Is.False );
+        Assert.That( (await repository.ToListAsync()).Count != 0, Is.False );
     }
 
     [Test]
@@ -195,7 +194,7 @@ public class SymbolLocalDatabaseApplicationServiceTest
         var result = await applicationService.DeleteAsync( _ => true );
 
         Assert.That( result.Success, Is.True );
-        Assert.That( ( await repository.FindAllAsync() ).Any(), Is.False );
+        Assert.That( (await repository.ToListAsync()).Count != 0, Is.False );
     }
 
     [Test]
@@ -289,7 +288,7 @@ public class SymbolLocalDatabaseApplicationServiceTest
         var result = await applicationService.DeleteAsync( _ => true );
 
         Assert.That( result.Success, Is.True );
-        Assert.That( ( await repository.FindAllAsync() ).Any(), Is.False );
+        Assert.That( (await repository.ToListAsync()).Count != 0, Is.False );
     }
 
     [Test]
@@ -383,7 +382,7 @@ public class SymbolLocalDatabaseApplicationServiceTest
         var result = await applicationService.DeleteAsync( _ => true );
 
         Assert.That( result.Success, Is.True );
-        Assert.That( ( await repository.FindAllAsync() ).Any(), Is.False );
+        Assert.That( (await repository.ToListAsync()).Count != 0, Is.False );
     }
 
     [Test]
