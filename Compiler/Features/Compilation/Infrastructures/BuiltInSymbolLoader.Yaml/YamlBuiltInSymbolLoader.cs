@@ -35,7 +35,7 @@ public sealed class YamlBuiltInSymbolLoader(
         return new AggregateSymbolTable(
             builtInVariables: variables,
             uiTypes: uiTypes,
-            commandsNew: commands,
+            commands: commands,
             builtInCallbacks: callbacks
         );
     }

@@ -15,7 +15,7 @@ public sealed class AggregateSymbolTable
         IVariableSymbolTable? builtInVariables = null,
         IVariableSymbolTable? userVariables = null,
         IUITypeSymbolTable? uiTypes = null,
-        ICommandSymbolTable? commandsNew = null,
+        ICommandSymbolTable? commands = null,
         ICallbackSymbolTable? builtInCallbacks = null,
         ICallbackSymbolTable? userCallbacks = null,
         IUserFunctionSymbolSymbolTable? userFunctions = null,
@@ -24,7 +24,7 @@ public sealed class AggregateSymbolTable
         BuiltInVariables    = builtInVariables ?? new VariableSymbolTable();
         UserVariables       = userVariables ?? new VariableSymbolTable();
         UITypes             = uiTypes ?? new UITypeSymbolTable();
-        Commands            = commandsNew ?? new CommandSymbolTable();
+        Commands            = commands ?? new CommandSymbolTable();
         UserCallbacks       = userCallbacks ?? new CallbackSymbolTable();
         BuiltInCallbacks    = builtInCallbacks ?? new CallbackSymbolTable();
         UserFunctions       = userFunctions ?? new UserFunctionSymbolTable();

@@ -128,9 +128,6 @@
     <data name="semantic.error.command.arg.count" xml:space="preserve">
         <value>{0}: コマンド引数の数が一致していません</value>
     </data>
-    <data name="semantic.error.command.arg.incompatible" xml:space="preserve">
-        <value>{0}: コマンド引数 {1} 番目のデータ型が異なっています (期待される型: {2}, 実際の型: {3})</value>
-    </data>
     <data name="semantic.error.unaryoprator.logicalnot.incompatible" xml:space="preserve">
         <value>単項演算子 not は boolean 式にのみ使用できます</value>
     </data>
@@ -179,7 +176,7 @@
     <data name="semantic.error.declare.variable.uiinitializer.not.need.assign.opetator" xml:space="preserve">
         <value>`:=` 演算子は不要です</value>
     </data>
-    <data name="semantic.error.command.arg.incompatible_new" xml:space="preserve">
+    <data name="semantic.error.command.arg.incompatible" xml:space="preserve">
         <value>{0}: コマンド引数のデータ型が一致していません - 期待: {1}, 実際: {2}</value>
     </data>
 </root>

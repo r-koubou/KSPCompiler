@@ -58,7 +58,7 @@ public class CallCommandEvaluator : ICallCommandEvaluator
             throw new AstAnalyzeException( expr, "Failed to evaluate command symbol" );
         }
 
-        if( !SymbolTable.TrySearchCommandByNameNew( evaluatedSymbolExpr.Name, out var commandSymbol ) )
+        if( !SymbolTable.TrySearchCommandByName( evaluatedSymbolExpr.Name, out var commandSymbol ) )
         {
             EventEmitter.Emit(
                 expr.AsWarningEvent(
@@ -120,7 +120,7 @@ public class CallCommandEvaluator : ICallCommandEvaluator
         var commandName = commandSymbols.First().Name;
         EventEmitter.Emit(
             expr.AsErrorEvent(
-                CompilerMessageResources.semantic_error_command_arg_incompatible_new,
+                CompilerMessageResources.semantic_error_command_arg_incompatible,
                 commandName,
                 commandSymbols.ToIncompatibleMessage(),
                 callArgs.ToIncompatibleMessage( commandName )
