@@ -48,7 +48,7 @@ public class SymbolEvaluator(
 
     private bool CheckCommandSymbol( AstSymbolExpressionNode expr )
     {
-        if( !SymbolTable.CommandsNew.TrySearchByName( expr.Name, out _ ) )
+        if( !SymbolTable.Commands.TrySearchByName( expr.Name, out _ ) )
         {
             return false;
         }

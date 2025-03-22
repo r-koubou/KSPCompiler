@@ -62,12 +62,12 @@ public sealed class YamlBuiltInSymbolLoader(
         return symbolTable;
     }
 
-    private async Task<CommandSymbolTableNew> LoadCommandSymbolsAsync( CancellationToken cancellationToken = default )
+    private async Task<CommandSymbolTable> LoadCommandSymbolsAsync( CancellationToken cancellationToken = default )
     {
         var contentReader = new LocalTextContentReader( CommandsFilePath );
         var symbolReader = new YamlCommandSymbolImporter( contentReader );
         var symbols = await symbolReader.ImportAsync( cancellationToken );
-        var symbolTable = new CommandSymbolTableNew();
+        var symbolTable = new CommandSymbolTable();
 
         foreach( var x in symbols )
         {

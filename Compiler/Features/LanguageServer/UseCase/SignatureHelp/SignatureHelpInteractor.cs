@@ -45,7 +45,7 @@ public sealed class SignatureHelpInteractor : ISignatureHelpUseCase
                 return new SignatureHelpOutputPort( null, true );
             }
 
-            if( !symbols.CommandsNew.TryBuildSignatureHelp( word, activeParameter, out var signatureHelp ) )
+            if( !symbols.Commands.TryBuildSignatureHelp( word, activeParameter, out var signatureHelp ) )
             {
                 return new SignatureHelpOutputPort( null, true );
             }

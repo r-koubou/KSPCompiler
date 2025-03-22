@@ -15,13 +15,13 @@ using KSPCompiler.Shared.EventEmitting;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
 
-public class CallCommandEvaluatorNew : ICallCommandEvaluator
+public class CallCommandEvaluator : ICallCommandEvaluator
 {
     private IEventEmitter EventEmitter { get; }
 
     private AggregateSymbolTable SymbolTable { get; }
 
-    public CallCommandEvaluatorNew( IEventEmitter eventEmitter, AggregateSymbolTable symbolTable )
+    public CallCommandEvaluator( IEventEmitter eventEmitter, AggregateSymbolTable symbolTable )
     {
         EventEmitter = eventEmitter;
         SymbolTable  = symbolTable;

@@ -7,7 +7,7 @@ namespace KSPCompiler.Features.LanguageServer.UseCase.Hover.Extensions;
 
 public static class OverloadedSymbolTableExtensionForHoverTextExtension
 {
-    public static bool TryBuildHoverText( this ICommandSymbolTableNew self, string symbolName, out string result, IOverloadedHoverTextBuilder<CommandSymbol>? builder = null )
+    public static bool TryBuildHoverText( this ICommandSymbolTable self, string symbolName, out string result, IOverloadedHoverTextBuilder<CommandSymbol>? builder = null )
     {
         result = string.Empty;
 

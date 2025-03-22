@@ -29,7 +29,7 @@ public class CommandSymbolEvaluatorTest
             }
         );
 
-        symbolTable.CommandsNew.AddAsOverload( commandSymbol, commandSymbol.Arguments );
+        symbolTable.Commands.AddAsOverload( commandSymbol, commandSymbol.Arguments );
 
         var obfuscatedTable = MockUtility.CreateAggregateObfuscatedSymbolTable( symbolTable, variablePrefix: "v" );
 

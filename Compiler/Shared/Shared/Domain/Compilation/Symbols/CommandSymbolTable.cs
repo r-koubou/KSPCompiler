@@ -1,16 +1,16 @@
 namespace KSPCompiler.Shared.Domain.Compilation.Symbols;
 
-public class CommandSymbolTableNew
+public class CommandSymbolTable
     : OverloadedSymbolTable<CommandSymbol, CommandArgumentSymbolList>,
-      ICommandSymbolTableNew
+      ICommandSymbolTable
 {
-    public CommandSymbolTableNew() : this( null ) {}
+    public CommandSymbolTable() : this( null ) {}
 
-    public CommandSymbolTableNew(
+    public CommandSymbolTable(
         IOverloadedSymbolTable<CommandSymbol, CommandArgumentSymbolList>? parent = null
     ) : base( parent ) {}
 
-    public CommandSymbolTableNew(
+    public CommandSymbolTable(
         UniqueSymbolIndex startUniqueIndex,
         IOverloadedSymbolTable<CommandSymbol, CommandArgumentSymbolList>? parent = null
     ) : base( startUniqueIndex, parent ) {}

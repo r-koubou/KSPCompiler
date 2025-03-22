@@ -43,7 +43,7 @@ public static class AggregateSymbolTableExtension
 
     public static bool TrySearchCommandByNameNew( this AggregateSymbolTable symbolTable, SymbolName name, out IReadOnlyCollection<CommandSymbol> result, bool enableSearchParent = true )
     {
-        return symbolTable.CommandsNew.TrySearchByName( name, out result, enableSearchParent );
+        return symbolTable.Commands.TrySearchByName( name, out result, enableSearchParent );
     }
 
     public static bool TrySearchUITypeByName( this AggregateSymbolTable symbolTable, SymbolName name, out UITypeSymbol result, bool enableSearchParent = true )

@@ -5,7 +5,7 @@ using KSPCompiler.Shared.Domain.Compilation.Symbols;
 
 namespace KSPCompiler.Features.LanguageServer.UseCase.Hover;
 
-public sealed class CommandHoverTextBuilderNew : IOverloadedHoverTextBuilder<CommandSymbol>
+public sealed class CommandHoverTextBuilder : IOverloadedHoverTextBuilder<CommandSymbol>
 {
     public string BuildHoverText( IReadOnlyCollection<CommandSymbol> symbols )
     {

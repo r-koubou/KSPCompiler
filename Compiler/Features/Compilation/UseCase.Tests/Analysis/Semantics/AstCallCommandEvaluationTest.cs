@@ -14,7 +14,7 @@ using NUnit.Framework;
 namespace KSPCompiler.Features.SymbolManagement.UseCase.Tests.Analysis.Semantics;
 
 [TestFixture]
-public class AstCallCommandEvaluationTestNew
+public class AstCallCommandEvaluationTest
 {
     [Test]
     public void CallCommandTest()
@@ -31,7 +31,7 @@ public class AstCallCommandEvaluationTestNew
         var command = MockUtility.CreatePlayNoteCommand();
 
         // register the command
-        symbols.CommandsNew.AddAsOverload( command, command.Arguments );
+        symbols.Commands.AddAsOverload( command, command.Arguments );
 
         // Create a call command expression node
         // play_note( 40, 100, 0, 0 )
@@ -43,7 +43,7 @@ public class AstCallCommandEvaluationTestNew
             new AstIntLiteralNode( 0 )
         );
 
-        var evaluator = new CallCommandEvaluatorNew( eventEmitter, symbols );
+        var evaluator = new CallCommandEvaluator( eventEmitter, symbols );
         var visitor = new MockCallCommandExpressionVisitor();
 
         visitor.Inject( evaluator );
@@ -69,7 +69,7 @@ public class AstCallCommandEvaluationTestNew
         var command = MockUtility.CreatePlayNoteCommand();
 
         // register the command
-        symbols.CommandsNew.AddAsOverload( command, command.Arguments );
+        symbols.Commands.AddAsOverload( command, command.Arguments );
 
         // Create a call command expression node
         // play_note( 40, 100, 0 ) // missing 1 argument (Expected 4 arguments)
@@ -80,7 +80,7 @@ public class AstCallCommandEvaluationTestNew
             new AstIntLiteralNode( 0 )
         );
 
-        var evaluator = new CallCommandEvaluatorNew( eventEmitter, symbols );
+        var evaluator = new CallCommandEvaluator( eventEmitter, symbols );
         var visitor = new MockCallCommandExpressionVisitor();
 
         visitor.Inject( evaluator );
@@ -109,7 +109,7 @@ public class AstCallCommandEvaluationTestNew
         // register the command
         foreach( var x in commands )
         {
-            symbols.CommandsNew.AddAsOverload( x, x.Arguments );
+            symbols.Commands.AddAsOverload( x, x.Arguments );
         }
 
         // Create a call command expression node
@@ -121,7 +121,7 @@ public class AstCallCommandEvaluationTestNew
             "note_off"
         );
 
-        var evaluator = new CallCommandEvaluatorNew( eventEmitter, symbols );
+        var evaluator = new CallCommandEvaluator( eventEmitter, symbols );
         var visitor = new MockCallCommandExpressionVisitor();
 
         visitor.Inject( evaluator );
@@ -147,7 +147,7 @@ public class AstCallCommandEvaluationTestNew
         var command = MockUtility.CreatePlayNoteCommand();
 
         // register the command
-        symbols.CommandsNew.AddAsOverload( command, command.Arguments );
+        symbols.Commands.AddAsOverload( command, command.Arguments );
 
         // Create a call command expression node
         // play_note( "40", 100, 0, 0 ) // incompatible type (Expected int, but got string)
@@ -159,7 +159,7 @@ public class AstCallCommandEvaluationTestNew
             new AstIntLiteralNode( 0 )
         );
 
-        var evaluator = new CallCommandEvaluatorNew( eventEmitter, symbols );
+        var evaluator = new CallCommandEvaluator( eventEmitter, symbols );
         var visitor = new MockCallCommandExpressionVisitor();
 
         visitor.Inject( evaluator );
@@ -188,7 +188,7 @@ public class AstCallCommandEvaluationTestNew
         // register the command
         foreach( var x in commands )
         {
-            symbols.CommandsNew.AddAsOverload( x, x.Arguments );
+            symbols.Commands.AddAsOverload( x, x.Arguments );
         }
 
         // Create a call command expression node
@@ -201,7 +201,7 @@ public class AstCallCommandEvaluationTestNew
             new AstStringLiteralNode( "10" )
         );
 
-        var evaluator = new CallCommandEvaluatorNew( eventEmitter, symbols );
+        var evaluator = new CallCommandEvaluator( eventEmitter, symbols );
         var visitor = new MockCallCommandExpressionVisitor();
 
         visitor.Inject( evaluator );
@@ -234,7 +234,7 @@ public class AstCallCommandEvaluationTestNew
             new AstIntLiteralNode( 0 )
         );
 
-        var evaluator = new CallCommandEvaluatorNew( eventEmitter, symbols );
+        var evaluator = new CallCommandEvaluator( eventEmitter, symbols );
         var visitor = new MockCallCommandExpressionVisitor();
 
         visitor.Inject( evaluator );

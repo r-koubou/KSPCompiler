@@ -10,7 +10,7 @@ public static class SymbolTableExtension
         = new CommandSignatureHelpBuilder();
 
     public static bool TryBuildSignatureHelp(
-        this ICommandSymbolTableNew self,
+        this ICommandSymbolTable self,
         string symbolName,
         int activeParameter,
         out SignatureHelpItem result,

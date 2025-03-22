@@ -1,5 +1,3 @@
-using System;
-
 namespace KSPCompiler.Shared.Domain.Compilation.Symbols;
 
 public sealed class AggregateSymbolTable
@@ -7,7 +5,7 @@ public sealed class AggregateSymbolTable
     public IVariableSymbolTable BuiltInVariables { get; }
     public IVariableSymbolTable UserVariables { get; }
     public IUITypeSymbolTable UITypes { get; }
-    public ICommandSymbolTableNew CommandsNew { get; }
+    public ICommandSymbolTable Commands { get; }
     public ICallbackSymbolTable UserCallbacks { get; }
     public ICallbackSymbolTable BuiltInCallbacks { get; }
     public IUserFunctionSymbolSymbolTable UserFunctions { get; }
@@ -17,7 +15,7 @@ public sealed class AggregateSymbolTable
         IVariableSymbolTable? builtInVariables = null,
         IVariableSymbolTable? userVariables = null,
         IUITypeSymbolTable? uiTypes = null,
-        ICommandSymbolTableNew? commandsNew = null,
+        ICommandSymbolTable? commandsNew = null,
         ICallbackSymbolTable? builtInCallbacks = null,
         ICallbackSymbolTable? userCallbacks = null,
         IUserFunctionSymbolSymbolTable? userFunctions = null,
@@ -26,7 +24,7 @@ public sealed class AggregateSymbolTable
         BuiltInVariables    = builtInVariables ?? new VariableSymbolTable();
         UserVariables       = userVariables ?? new VariableSymbolTable();
         UITypes             = uiTypes ?? new UITypeSymbolTable();
-        CommandsNew         = commandsNew ?? new CommandSymbolTableNew();
+        Commands         = commandsNew ?? new CommandSymbolTable();
         UserCallbacks       = userCallbacks ?? new CallbackSymbolTable();
         BuiltInCallbacks    = builtInCallbacks ?? new CallbackSymbolTable();
         UserFunctions       = userFunctions ?? new UserFunctionSymbolTable();
@@ -38,7 +36,7 @@ public sealed class AggregateSymbolTable
         BuiltInVariables.Clear();
         UserVariables.Clear();
         UITypes.Clear();
-        CommandsNew.Clear();
+        Commands.Clear();
         UserCallbacks.Clear();
         BuiltInCallbacks.Clear();
         UserFunctions.Clear();
@@ -57,11 +55,11 @@ public sealed class AggregateSymbolTable
         target.UserFunctions.AddRange( source.UserFunctions );
 
         // Command
-        foreach( var x in source.CommandsNew )
+        foreach( var x in source.Commands )
         {
             foreach( var symbol in x.Values )
             {
-                target.CommandsNew.AddAsOverload( symbol, symbol.Arguments );
+                target.Commands.AddAsOverload( symbol, symbol.Arguments );
             }
         }
 
