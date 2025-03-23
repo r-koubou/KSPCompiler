@@ -76,8 +76,10 @@ public sealed class CommandHoverTextBuilder : IOverloadedHoverTextBuilder<Comman
 
         /*
          * Arguments:
-         *   - arg1 : description1 (if not empty)
-         *   - arg2 : description2 (if not empty)
+         *   - arg1 :
+         *     - description1 (if not empty)
+         *   - arg2 :
+         *     - description2 (if not empty)
          * :
          * :
          */
@@ -89,7 +91,12 @@ public sealed class CommandHoverTextBuilder : IOverloadedHoverTextBuilder<Comman
 
             if( !string.IsNullOrEmpty( arg.Description ) )
             {
-                builder.AppendLine( $" : {arg.Description}" );
+                builder.AppendLine();
+
+                foreach( var x in arg.Description.Value.Split( '\n' ) )
+                {
+                    builder.AppendLine( $"  {x}" );
+                }
             }
             else
             {
