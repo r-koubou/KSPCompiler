@@ -18,8 +18,9 @@ public sealed class CommandHoverTextBuilder : IOverloadedHoverTextBuilder<Comman
             BuildHoverText( x, builder );
             if( i < count - 1 )
             {
-                builder.AppendLine( "or" );
-                builder.AppendLine();
+                builder.AppendLine()
+                       .AppendLine( "---" )
+                       .AppendLine();
             }
             i++;
         }
@@ -30,11 +31,11 @@ public sealed class CommandHoverTextBuilder : IOverloadedHoverTextBuilder<Comman
     private void BuildHoverText( CommandSymbol symbol, StringBuilder builder )
     {
         /*
-         * command_name(arg1, arg2, ...)
+         * ## command_name(arg1, arg2, ...)
          * Description
          */
 
-        builder.Append( $"**{symbol.Name}" );
+        builder.Append( $"## {symbol.Name}" );
 
         if( symbol.ArgumentCount > 0 )
         {
@@ -55,12 +56,10 @@ public sealed class CommandHoverTextBuilder : IOverloadedHoverTextBuilder<Comman
                 index++;
             }
 
-            builder.Append( ")" );
-            builder.AppendLine( "**" );
+            builder.AppendLine( ")" );
         }
         else
         {
-            builder.AppendLine( "**" );
             builder.AppendLine();
         }
 
@@ -75,19 +74,19 @@ public sealed class CommandHoverTextBuilder : IOverloadedHoverTextBuilder<Comman
         builder.AppendLine();
 
         /*
-         * Arguments:
-         *   - arg1 :
-         *     - description1 (if not empty)
-         *   - arg2 :
-         *     - description2 (if not empty)
+         * ### Arguments:
+         *   #### arg1
+         *   description1 (if not empty)
+         *   #### arg2
+         *   description2 (if not empty)
          * :
          * :
          */
-        builder.AppendLine( "**Argument(s):**" );
+        builder.AppendLine( "### Argument(s)" );
 
         foreach( var arg in symbol.Arguments )
         {
-            builder.Append( $"- {arg.Name}" );
+            builder.Append( $"#### {arg.Name}" );
 
             if( !string.IsNullOrEmpty( arg.Description ) )
             {
@@ -102,6 +101,8 @@ public sealed class CommandHoverTextBuilder : IOverloadedHoverTextBuilder<Comman
             {
                 builder.AppendLine();
             }
+
+            builder.AppendLine();
         }
 
         builder.AppendLine();
