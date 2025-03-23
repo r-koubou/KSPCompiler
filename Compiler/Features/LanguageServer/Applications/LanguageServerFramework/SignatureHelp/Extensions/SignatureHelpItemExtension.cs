@@ -6,6 +6,7 @@ using FrameworkSignatureHelp = EmmyLua.LanguageServer.Framework.Protocol.Message
 using FrameworkSignatureInformation = EmmyLua.LanguageServer.Framework.Protocol.Message.SignatureHelp.SignatureInformation;
 using FrameworkParameterInformation = EmmyLua.LanguageServer.Framework.Protocol.Message.SignatureHelp.ParameterInformation;
 using FrameworkStringOrMarkupContent = EmmyLua.LanguageServer.Framework.Protocol.Model.Union.StringOrMarkupContent;
+using FrameworkMarkupContent = EmmyLua.LanguageServer.Framework.Protocol.Model.Markup.MarkupContent;
 
 namespace KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.SignatureHelp.Extensions;
 
@@ -42,7 +43,10 @@ public static class SignatureHelpItemExtension
 
         if( self.Documentation != null )
         {
-            documentation = new FrameworkStringOrMarkupContent( self.Documentation.Value );
+            documentation = new FrameworkMarkupContent
+            {
+                Value = self.Documentation.Value
+            };
         }
 
         if( self.ActiveParameter != null )
@@ -79,7 +83,10 @@ public static class SignatureHelpItemExtension
 
         if( self.Documentation != null )
         {
-            documentation = new FrameworkStringOrMarkupContent( self.Documentation.Value );
+            documentation = new FrameworkMarkupContent
+            {
+                Value = self.Documentation.Value
+            };
         }
 
         return new FrameworkParameterInformation
