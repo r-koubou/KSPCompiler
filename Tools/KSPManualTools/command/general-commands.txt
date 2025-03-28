@@ -1,0 +1,8 @@
+disable_logging(event-type)
+note_off(event-id)note_off(event-id,time-offset)
+play_note(note-number,velocity,sample-offset,duration)
+set_controller(controller,value)
+set_note_controller(controller,note-number,value)
+set_poly_at(note-number,value)
+set_rpn(address,value)set_nrpn(address,value)
+set_snapshot_type(type)

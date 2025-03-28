@@ -1,0 +1,11 @@
+get_loop_par(zone-id,loop-index,parameter)
+get_num_zones()
+get_sample(zone-id,return-parameter)
+get_sel_zones_idx(array-name)
+get_zone_id(zone-index)
+get_zone_par(zone-id,parameter)
+get_zone_status(zone-ID)
+set_loop_par(zone-id,loop-index,parameter,value
+set_num_user_zones(value)
+set_sample(zone-id,path)
+set_zone_par(zone-id,parameter,value)

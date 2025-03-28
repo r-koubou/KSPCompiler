@@ -1,0 +1,3 @@
+change_listener_par(signal-type,parameter)
+set_listener(signal-type,parameter)
+stop_wait(callback-id,parameter)

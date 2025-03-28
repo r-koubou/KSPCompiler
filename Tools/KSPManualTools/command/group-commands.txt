@@ -1,0 +1,2 @@
+get_purge_state(group-index)
+purge_group(group-index,mode)

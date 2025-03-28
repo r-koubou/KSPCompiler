@@ -1,0 +1,7 @@
+get_folder(path-variable)
+load_array(array-variable,mode)Â
+load_array_str(array-variable,path)Â
+load_ir_sample(path-or-filename,slot,generic)
+save_array(array-variable,mode)
+save_array_str(array-variable,path)
+save_midi_file(path)
