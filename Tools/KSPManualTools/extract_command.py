@@ -10,15 +10,6 @@ from bs4 import BeautifulSoup
 
 OUTPUT_DIR = 'command'
 
-if not os.path.exists(OUTPUT_DIR):
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
-
-
-# html_text = ''
-
-# with open('e.html', 'r') as file:
-#     html_text = file.read()
-
 url_list: List[List[str]] = [
     ['general-commands',                'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/general-commands'],
     ['array-commands',                  'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/array-commands'],
@@ -51,6 +42,9 @@ def read_html(url: str) -> str:
 
 
 def main(argv: List[str]) -> None:
+    if not os.path.exists(OUTPUT_DIR):
+        os.makedirs(OUTPUT_DIR, exist_ok=True)
+
     regex_command = re.compile(r'([a-zA-Z0-9_]+\([^\)]*\))')
     total_count = 0
 
