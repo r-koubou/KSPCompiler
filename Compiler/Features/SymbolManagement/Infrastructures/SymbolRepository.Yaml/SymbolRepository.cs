@@ -126,6 +126,8 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
             );
         }
 
+        Console.WriteLine( $"{symbol.Name.Value} already exists, updating..." );
+
         symbol.Id        = existingSymbol.Id;
         symbol.CreatedAt = existingSymbol.CreatedAt;
         symbol.UpdatedAt = DateTime.UtcNow;
