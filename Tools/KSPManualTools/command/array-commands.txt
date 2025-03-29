@@ -1,2 +1,6 @@
-search(array-variable,value)search(array-variable,value,from,to)
-sort(array-variable,direction)sort(array-variable,direction,from,to)
+array_equal(array-variable,array-variable)
+num_elements(array-variable)
+search(array-variable,value)
+search(array-variable,value,from,to)
+sort(array-variable,direction)
+sort(array-variable,direction,from,to)

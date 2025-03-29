@@ -1,5 +1,6 @@
 import os.path
 import time
+import re
 from typing import List
 
 
@@ -35,43 +36,68 @@ url_list: List[List[str]] = [
     ['zone-commands',                   'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/zone-commands'],
 ]
 
-for data in url_list:
-    prefix      = data[0]
-    url         = data[1]
-
-    print(f"Extracting {prefix} from {url}...")
-
-    response    = requests.get(url)
-    html_text   = response.text
-
-    soup = BeautifulSoup(html_text, 'html.parser')
-
-    command_elements = soup.find_all('section', {'class': 'section'})
-    commands: List[str] = []
-
-    for x in command_elements:
-
-        elements = x.find_all('th', {'colspan': '2'})
-
-        if not elements:
-            continue
-
-        command_name: str = elements[0].get_text(strip=True)
-        command_name = command_name.replace('<', '')
-        command_name = command_name.replace('>', '')
-        command_name = command_name.replace(' ', '')
-
-        commands.append(command_name)
-
-    commands = list(dict.fromkeys(commands))
-    output_path = os.path.join(OUTPUT_DIR, f'{prefix}.txt')
-
-    with open(output_path, 'w') as file:
-        for i in commands:
-            file.write(f"{i}\n")
+def read_html(url: str) -> str:
+    """
+    Read the HTML content from a URL or file.
+    """
+    if url.startswith('http'):
+        response = requests.get(url)
+        if response.status_code != requests.codes.ok:
+            raise Exception(f"Failed to retrieve URL: {url} with status code: {response.status_code}")
+        return response
+    else:
+        with open(url, 'r') as file:
+            return file.read()
 
 
-    time.sleep(2)
+def main(argv: List[str]) -> None:
+    regex_command = re.compile(r'([a-zA-Z0-9_]+\([^\)]*\))')
+    total_count = 0
 
+    for data in url_list:
+        prefix      = data[0]
+        url         = data[1]
 
+        print(f"Extracting {prefix} from {url}...")
 
+        response    = read_html(url)
+        html_text   = response.text
+
+        soup = BeautifulSoup(html_text, 'html.parser')
+
+        command_elements = soup.find_all('section', {'class': 'section'})
+        commands: List[str] = []
+
+        for x in command_elements:
+
+            elements = x.find_all('th', {'data-priority': '1'})
+
+            if not elements:
+                continue
+
+            command_name: str = elements[0].get_text(strip=True)
+            command_name = command_name.replace('<', '')
+            command_name = command_name.replace('>', '')
+            command_name = command_name.replace(' ', '')
+
+            command_names = regex_command.findall(command_name)
+
+            if command_names:
+                for match in command_names:
+                    commands.append(match)
+
+        commands = list(dict.fromkeys(commands))
+        output_path = os.path.join(OUTPUT_DIR, f'{prefix}.txt')
+
+        with open(output_path, 'w') as file:
+            for i in commands:
+                file.write(f"{i}\n")
+
+        total_count += len(commands)
+        time.sleep(2)
+
+    print(f"Total commands extracted: {total_count}")
+
+if __name__ == "__main__":
+    import sys
+    main(sys.argv[1:])

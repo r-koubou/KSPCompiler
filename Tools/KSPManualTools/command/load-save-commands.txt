@@ -1,6 +1,6 @@
 get_folder(path-variable)
-load_array(array-variable,mode)Â
-load_array_str(array-variable,path)Â
+load_array(array-variable,mode)
+load_array_str(array-variable,path)
 load_ir_sample(path-or-filename,slot,generic)
 save_array(array-variable,mode)
 save_array_str(array-variable,path)
