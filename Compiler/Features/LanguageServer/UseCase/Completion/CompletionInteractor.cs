@@ -162,7 +162,7 @@ public sealed class CompletionInteractor : ICompletionUseCase
                 continue;
             }
 
-            var document = symbol.Description.Value;
+            var document = DocumentUtility.GetCommentOrDescriptionText( symbol );
             document = string.IsNullOrEmpty( document ) ? null : document;
 
             target.Add(
@@ -180,7 +180,7 @@ public sealed class CompletionInteractor : ICompletionUseCase
 
     private static bool TryBuildCallbackSnippetItem( CallbackSymbol callbackSymbol, string partialName, StringBuilder stringBuilder, out CompletionItem result )
     {
-        var document = callbackSymbol.Description.Value;
+        var document = DocumentUtility.GetCommentOrDescriptionText( callbackSymbol );
         document = string.IsNullOrEmpty( document ) ? null : document;
 
         result = null!;
@@ -237,7 +237,7 @@ public sealed class CompletionInteractor : ICompletionUseCase
         var insertText = variableSymbol.Name.Value;
         var kind = CompletionItemKind.Variable;
 
-        var document = variableSymbol.Description.Value;
+        var document = DocumentUtility.GetCommentOrDescriptionText( variableSymbol );
         document = string.IsNullOrEmpty( document ) ? null : document;
 
         if( !variableSymbol.BuiltIn && variableSymbol.Modifier.IsConstant() )
@@ -257,7 +257,7 @@ public sealed class CompletionInteractor : ICompletionUseCase
 
     private static CompletionItem BuildCommandItem( CommandSymbol commandSymbol )
     {
-        var document = commandSymbol.Description.Value;
+        var document = DocumentUtility.GetCommentOrDescriptionText( commandSymbol );
         document = string.IsNullOrEmpty( document ) ? null : document;
 
         return new CompletionItem(
@@ -272,7 +272,7 @@ public sealed class CompletionInteractor : ICompletionUseCase
 
     private static CompletionItem BuildCommandSnippet( CommandSymbol commandSymbol, StringBuilder stringBuilder )
     {
-        var document = commandSymbol.Description.Value;
+        var document = DocumentUtility.GetCommentOrDescriptionText( commandSymbol );
         document = string.IsNullOrEmpty( document ) ? null : document;
 
         if( commandSymbol.Arguments.Count == 0 )
