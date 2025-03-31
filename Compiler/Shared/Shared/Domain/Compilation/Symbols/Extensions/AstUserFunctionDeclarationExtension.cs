@@ -10,7 +10,6 @@ public static class AstUserFunctionDeclarationExtension
         {
             Name         = self.Name,
             BuiltIn      = false,
-            Description  = $"Created from {nameof( AstUserFunctionDeclarationExtension )}.{nameof( As )}",
             CommentLines = self.CommentLines
         };
 

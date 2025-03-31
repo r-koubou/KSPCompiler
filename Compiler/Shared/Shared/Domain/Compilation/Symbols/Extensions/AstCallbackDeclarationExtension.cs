@@ -11,7 +11,6 @@ public static class AstCallbackDeclarationExtension
         {
             Name         = self.Name,
             BuiltIn      = false,
-            Description  = $"Created from {nameof( AstCallbackDeclarationExtension )}.{nameof( As )}",
             CommentLines = self.CommentLines
         };
 

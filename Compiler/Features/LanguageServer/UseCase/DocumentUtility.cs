@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
+using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
 using KSPCompiler.Shared.Text;
 
@@ -170,5 +173,32 @@ internal static class DocumentUtility
         }
 
         return false;
+    }
+
+    public static string GetCommentOrDescriptionText( SymbolBase symbol )
+    {
+        var commentLines = symbol.CommentLines;
+
+        if( commentLines.Count > 0 )
+        {
+            var builder = new StringBuilder( 128 );
+            var minIndent = commentLines
+                           .Where( line => line.Trim().Length > 0 )
+                           .Select( line => line.Length - line.TrimStart().Length )
+                           .DefaultIfEmpty( 0 )
+                           .Min();
+
+            var normalizedLines = commentLines
+               .Select( line => line.Length >= minIndent ? line.Substring( minIndent ) : line );
+
+            foreach( var line in normalizedLines )
+            {
+                builder.AppendLine( line );
+            }
+
+            return builder.ToString();
+        }
+
+        return symbol.Description.Value;
     }
 }
