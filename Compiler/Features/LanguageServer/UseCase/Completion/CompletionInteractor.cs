@@ -62,8 +62,7 @@ public sealed class CompletionInteractor : ICompletionUseCase
             // ユーザー定義関数
             var userFunctions = MatchCompletionItem(
                 symbolTable.UserFunctions,
-                word,
-                _ => line.Trim().StartsWith( "call" )
+                word
             );
 
             // ビルトインコールバック
