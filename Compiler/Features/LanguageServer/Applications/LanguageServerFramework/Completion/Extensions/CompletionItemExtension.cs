@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 
+using EmmyLua.LanguageServer.Framework.Protocol.Model.Markup;
 using EmmyLua.LanguageServer.Framework.Protocol.Model.Union;
 
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Completion;
@@ -18,7 +19,10 @@ public static class CompletionItemExtension
 
         if( self.Documentation != null )
         {
-            documentation = new StringOrMarkupContent( self.Documentation );
+            documentation = new MarkupContent
+            {
+                Value = self.Documentation
+            };
         }
 
         return new FrameworkCompletionItem
