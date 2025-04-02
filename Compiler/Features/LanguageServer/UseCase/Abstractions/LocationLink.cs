@@ -4,6 +4,6 @@ namespace KSPCompiler.Features.LanguageServer.UseCase.Abstractions;
 
 public sealed record LocationLink
 {
-    public ScriptLocation Location { get; init; } = ScriptLocation.Empty;
+    public ScriptLocation Location { get; init; } = null!;
     public Position Range { get; init; }
 }
