@@ -24,7 +24,6 @@ public sealed class CompletionInteractor : ICompletionUseCase
 
             var cache = compilerCacheService.GetCache( scriptLocation );
             var symbolTable = cache.SymbolTable;
-            var line = cache.AllLinesText[ position.BeginLine.Value ];
             var word = DocumentUtility.ExtractWord( cache.AllLinesText, position );
             var completions = new List<CompletionItem>();
 
