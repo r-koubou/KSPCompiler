@@ -24,23 +24,6 @@ public class ObfuscationCommandExecutor(
     private readonly ICompilationCacheManager compilationCacheManager = compilationCacheManager;
     private readonly CompilationServerService compilationSeverService = compilationServerService;
 
-    private static ScriptLocation ToScriptLocation( string documentUri )
-    {
-        var uri = new Uri( documentUri );
-        var filePath = uri.LocalPath + Uri.UnescapeDataString( uri.Fragment );
-
-        // Fix for Windows file system
-        // Remove '/' from the start of the path if it is a drive letter
-        if( filePath.StartsWith( '/' ) && filePath.Length > 2 && filePath[ 2 ] == ':' )
-        {
-            filePath = filePath[ 1.. ];
-        }
-
-        var fileInfo = new FileInfo( filePath );
-
-        return new ScriptLocation( fileInfo.FullName );
-    }
-
     protected override async Task<ExecuteCommandResponse> Handle( ExecuteCommandParams request, CancellationToken token )
     {
         if( request.Command != CommandName )
@@ -51,8 +34,12 @@ public class ObfuscationCommandExecutor(
         var documentUri = request.Arguments?[ 0 ].Value?.ToString();
         _ = documentUri ?? throw new ArgumentException( $"{nameof( documentUri )} is null" );
 
-        var scriptLocation = ToScriptLocation( documentUri! );
-        var script = await File.ReadAllTextAsync( scriptLocation.Value, token );
+        if( !ScriptLocation.TryParse( documentUri, out var scriptLocation ) )
+        {
+            return new ExecuteCommandResponse( null );
+        }
+
+        var script = await File.ReadAllTextAsync( scriptLocation.FileSystemPath, token );
 
         var result = await compilationSeverService.CompileAsync(
             compilationCacheManager: compilationCacheManager,

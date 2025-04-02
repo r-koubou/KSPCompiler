@@ -8,6 +8,6 @@ public static class DocumentUriExtension
 {
     public static ScriptLocation AsScriptLocation( this DocumentUri documentUri )
     {
-        return new ScriptLocation( documentUri.FileSystemPath );
+        return new ScriptLocation( documentUri.Uri );
     }
 }
