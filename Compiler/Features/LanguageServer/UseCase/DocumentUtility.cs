@@ -85,6 +85,11 @@ internal static class DocumentUtility
     // ReSharper disable once MemberCanBePrivate.Global
     public static string ExtractWord( IReadOnlyList<string> lines, Position position )
     {
+        if( lines.Count == 0 )
+        {
+            return string.Empty;
+        }
+
         var line = lines[ position.BeginLine.Value - 1 ]; // 0-based
         var (start, end) = GetWordRange( line, position.BeginColumn.Value );
 
@@ -94,6 +99,11 @@ internal static class DocumentUtility
     // ReSharper disable once MemberCanBePrivate.Global
     public static Position ExtractWordRange( IReadOnlyList<string> lines, Position position )
     {
+        if( lines.Count == 0 )
+        {
+            return Position.Zero;
+        }
+
         var line = lines[ position.BeginLine.Value ];
         var (start, end) = GetWordRange( line, position.BeginColumn.Value );
 
@@ -109,6 +119,11 @@ internal static class DocumentUtility
     // ReSharper disable once MemberCanBePrivate.Global
     public static bool IsInCommentToLeft( IReadOnlyList<string> lines, Position position )
     {
+        if( lines.Count == 0 )
+        {
+            return false;
+        }
+
         var begin = position.BeginLine.Value - 1; // 0-based
         var beginColumn = position.BeginColumn.Value;
 
@@ -145,6 +160,11 @@ internal static class DocumentUtility
 
     public static bool IsInCommentToRight( IReadOnlyList<string> lines, Position position )
     {
+        if( lines.Count == 0 )
+        {
+            return false;
+        }
+
         var begin = position.BeginLine.Value - 1; // 0-based
         var beginColumn = position.BeginColumn.Value;
         var lineCount = lines.Count;
