@@ -380,5 +380,11 @@ namespace KSPCompiler.Resources {
                 return ResourceManager.GetString("semantic.error.declare.variable.uiinitializer.not.need.assign.opetator", resourceCulture);
             }
         }
+        
+        public static string semantic_warning_unused {
+            get {
+                return ResourceManager.GetString("semantic.warning.unused", resourceCulture);
+            }
+        }
     }
 }

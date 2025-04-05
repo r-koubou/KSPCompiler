@@ -179,4 +179,7 @@
     <data name="semantic.error.command.arg.incompatible" xml:space="preserve">
         <value>{0}: コマンド引数のデータ型が一致していません - 期待: {1}, 実際: {2}</value>
     </data>
+    <data name="semantic.warning.unused" xml:space="preserve">
+        <value>{0}: 宣言されていますが、スクリプト内では使用されていません</value>
+    </data>
 </root>
