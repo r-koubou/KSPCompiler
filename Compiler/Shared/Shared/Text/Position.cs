@@ -3,7 +3,7 @@ using System;
 namespace KSPCompiler.Shared.Text
 {
     // ReSharper disable InconsistentNaming
-    public struct Position : IEquatable<Position>
+    public struct Position() : IEquatable<Position>
     {
         public static Position Zero { get; } = new()
         {
@@ -16,22 +16,22 @@ namespace KSPCompiler.Shared.Text
         /// <summary>
         /// Starting line number. (1-based)
         /// </summary>
-        public LineNumber BeginLine;
+        public LineNumber BeginLine = 0;
 
         /// <summary>
         /// End Line Number. It's -1 if it's unknown. (1-based)
         /// </summary>
-        public LineNumber EndLine;
+        public LineNumber EndLine = 0;
 
         /// <summary>
         /// Start column number. (0-based)
         /// </summary>
-        public Column BeginColumn;
+        public Column BeginColumn = 0;
 
         /// <summary>
         /// End Column Number. It's -1 if it's unknown. (0-based)
         /// </summary>
-        public Column EndColumn;
+        public Column EndColumn = 0;
 
         public bool Equals( Position other )
             => this == other;
