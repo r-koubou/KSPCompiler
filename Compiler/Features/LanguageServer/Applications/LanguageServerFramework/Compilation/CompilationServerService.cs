@@ -57,6 +57,12 @@ public sealed class CompilationServerService(
                 diagnostics.Add( e.AsDiagnostic() );
             }
         ).AddTo( compilerEventSubscribers );
+
+        eventEmitter.Subscribe<CompilationInfoEvent>( e =>
+            {
+                diagnostics.Add( e.AsDiagnostic() );
+            }
+        ).AddTo( compilerEventSubscribers );
         #endregion ~Event Subscription
 
         #region Compilation

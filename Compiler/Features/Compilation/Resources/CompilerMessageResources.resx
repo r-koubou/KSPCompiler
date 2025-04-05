@@ -186,4 +186,7 @@
     <data name="semantic.error.declare.variable.uiinitializer.not.need.assign.opetator" xml:space="preserve">
         <value>The `:=` operator is not needed</value>
     </data>
+    <data name="semantic.warning.unused" xml:space="preserve">
+        <value>{0}: Declared but not used in the script</value>
+    </data>
 </root>

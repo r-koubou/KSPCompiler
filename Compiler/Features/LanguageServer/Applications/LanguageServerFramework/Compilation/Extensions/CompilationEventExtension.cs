@@ -26,4 +26,7 @@ public static class CompilationEventExtension
 
     public static Diagnostic AsDiagnostic( this CompilationWarningEvent self )
         => CreateDiagnostic( self.Position, self.Message, DiagnosticSeverity.Warning );
+
+    public static Diagnostic AsDiagnostic( this CompilationInfoEvent self )
+        => CreateDiagnostic( self.Position, self.Message, DiagnosticSeverity.Information );
 }

@@ -13,6 +13,7 @@ public sealed class MockEventEmitter : IEventEmitter
     private List<IObserver<CompilationFatalEvent>> fatals = [];
     private List<IObserver<CompilationErrorEvent>> errors = [];
     private List<IObserver<CompilationWarningEvent>> warnings = [];
+    private List<IObserver<CompilationInfoEvent>> infos = [];
 
     public IDisposable Subscribe<TEvent>( IObserver<TEvent> observer ) where TEvent : IEvent
     {
@@ -27,6 +28,10 @@ public sealed class MockEventEmitter : IEventEmitter
         else if( observer is IObserver<CompilationWarningEvent> warning )
         {
             warnings.Add( warning );
+        }
+        else if( observer is IObserver<CompilationInfoEvent> info )
+        {
+            infos.Add( info );
         }
         else
         {
@@ -61,6 +66,13 @@ public sealed class MockEventEmitter : IEventEmitter
                 }
                 break;
 
+            case CompilationInfoEvent info:
+                foreach( var observer in infos )
+                {
+                    observer.OnNext( info );
+                }
+                break;
+
             default:
                 throw new NotSupportedException( evt.GetType().Name );
         }
@@ -88,6 +100,9 @@ public sealed class MockEventEmitter : IEventEmitter
 
                 case IObserver<CompilationWarningEvent> warning:
                     owner.warnings.Remove( warning );
+                    break;
+                case IObserver<CompilationInfoEvent> info:
+                    owner.infos.Remove( info );
                     break;
             }
         }
