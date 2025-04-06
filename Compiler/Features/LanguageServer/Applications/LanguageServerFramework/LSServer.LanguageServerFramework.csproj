@@ -14,34 +14,51 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="EmmyLua.LanguageServer.Framework" Version="0.8.0" />
+        <PackageReference Include="EmmyLua.LanguageServer.Framework" Version="0.8.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Compilation\Gateways\Gateways.csproj" />
-      <ProjectReference Include="..\..\..\Compilation\Infrastructures\BuiltInSymbolLoader.Yaml\BuiltInSymbolLoader.Yaml.csproj" />
-      <ProjectReference Include="..\..\..\Compilation\Infrastructures\Parser.Antlr\Parser.Antlr.csproj" />
-      <ProjectReference Include="..\..\..\Compilation\UseCase\UseCase.csproj" />
-      <ProjectReference Include="..\..\UseCase\UseCase.csproj" />
+        <ProjectReference Include="..\..\..\Compilation\Gateways\Gateways.csproj"/>
+        <ProjectReference Include="..\..\..\Compilation\Infrastructures\BuiltInSymbolLoader.Yaml\BuiltInSymbolLoader.Yaml.csproj"/>
+        <ProjectReference Include="..\..\..\Compilation\Infrastructures\Parser.Antlr\Parser.Antlr.csproj"/>
+        <ProjectReference Include="..\..\..\Compilation\UseCase\UseCase.csproj"/>
+        <ProjectReference Include="..\..\UseCase\UseCase.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="..\..\..\..\..\Data\Symbols\callbacks.yaml">
+        <None Include="..\..\..\..\..\Data\Symbols\callbacks.yaml">
             <Link>Data\Symbols\callbacks.yaml</Link>
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
-        <Content Include="..\..\..\..\..\Data\Symbols\commands.yaml">
+        </None>
+        <None Include="..\..\..\..\..\Data\Symbols\commands.yaml">
             <Link>Data\Symbols\commands.yaml</Link>
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
-        <Content Include="..\..\..\..\..\Data\Symbols\uitypes.yaml">
+        </None>
+        <None Include="..\..\..\..\..\Data\Symbols\uitypes.yaml">
             <Link>Data\Symbols\uitypes.yaml</Link>
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
-        <Content Include="..\..\..\..\..\Data\Symbols\variables.yaml">
+        </None>
+        <None Include="..\..\..\..\..\Data\Symbols\variables.yaml">
             <Link>Data\Symbols\variables.yaml</Link>
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
+        </None>
+        <None Include="..\..\..\..\..\LICENSE">
+            <Link>LICENSE</Link>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Include="..\..\..\..\..\NOTICE.md">
+            <Link>NOTICE.md</Link>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="ksp_lsp.bat">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="ksp_lsp.sh">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="README.md">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
 </Project>

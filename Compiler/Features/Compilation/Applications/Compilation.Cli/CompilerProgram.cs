@@ -16,7 +16,7 @@ using KSPCompiler.Shared;
 using KSPCompiler.Shared.EventEmitting;
 using KSPCompiler.Shared.EventEmitting.Extensions;
 
-namespace KSPCompiler.KSPCompiler.Features.Compilation.Applications.Compilation.Cli;
+namespace KSPCompiler.Features.Compilation.Applications.Compilation.Cli;
 
 /// <summary>
 /// Body of the compiler program.
