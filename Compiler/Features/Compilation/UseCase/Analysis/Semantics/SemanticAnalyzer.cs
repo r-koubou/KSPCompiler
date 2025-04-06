@@ -1,6 +1,7 @@
 using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Context;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics.Extensions;
 using KSPCompiler.Resources;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Blocks;
@@ -68,22 +69,8 @@ public class SemanticAnalyzer : DefaultAstVisitor, IAstTraversal
 
     private void PostProcess()
     {
-        // 未使用のユーザー変数の警告
-        foreach( var v in Context.SymbolTable.UserVariables )
-        {
-            if( v.State == SymbolState.Loaded )
-            {
-                continue;
-            }
-
-            Context.EventEmitter.Emit(
-                new CompilationInfoEvent(
-                    string.Format( CompilerMessageResources.semantic_warning_unused, v.Name ),
-                    v.DefinedPosition.BeginLine.Value,
-                    v.DefinedPosition.BeginColumn.Value
-                )
-            );
-        }
+        // 未使用のユーザーシンボルの通知
+        Context.SymbolTable.UserVariables.EmitUnusedSymbol( Context.EventEmitter );
     }
 
     #region Declarations
