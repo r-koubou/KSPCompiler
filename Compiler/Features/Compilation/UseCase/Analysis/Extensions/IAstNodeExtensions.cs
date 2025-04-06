@@ -19,4 +19,9 @@ public static class IAstNodeExtensions
     {
         return new CompilationWarningEvent( string.Format( message, argv ), self.Position );
     }
+
+    public static CompilationInfoEvent AsInfoEvent( this IAstNode self, string message, params object[] argv )
+    {
+        return new CompilationInfoEvent( string.Format( message, argv ), self.Position );
+    }
 }

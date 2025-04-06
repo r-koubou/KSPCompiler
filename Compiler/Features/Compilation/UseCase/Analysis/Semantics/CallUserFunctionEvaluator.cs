@@ -18,6 +18,8 @@ public class CallUserFunctionEvaluator( IEventEmitter eventEmitter, AggregateSym
 
     public IAstNode Evaluate( IAstVisitor visitor, AstCallUserFunctionStatementNode statement )
     {
+        UserFunctionSymbol? userFunction = null;
+
         if( statement.TryGetParent<AstCallbackDeclarationNode>( out var callback ) && callback.Name == "init" )
         {
             EventEmitter.Emit(
@@ -28,7 +30,7 @@ public class CallUserFunctionEvaluator( IEventEmitter eventEmitter, AggregateSym
                 )
             );
         }
-        else if( !UserFunctions.TrySearchByName( statement.Symbol.Name, out _ ) )
+        else if( !UserFunctions.TrySearchByName( statement.Symbol.Name, out userFunction ) )
         {
             EventEmitter.Emit(
                 statement.AsErrorEvent(
@@ -36,6 +38,12 @@ public class CallUserFunctionEvaluator( IEventEmitter eventEmitter, AggregateSym
                     statement.Symbol.Name
                 )
             );
+        }
+
+        // ユーザー定義関数の参照フラグを立てる
+        if( userFunction != null )
+        {
+            userFunction.State = SymbolState.Loaded;
         }
 
         return statement.Clone<AstCallUserFunctionStatementNode>();
