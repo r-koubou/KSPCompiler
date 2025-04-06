@@ -2,8 +2,8 @@
 
 setlocal
 
-set THIS_KSPC_DIR=%~dp0
+set THIS_DIR=%~dp0
 
-dotnet "%THIS_KSPC_DIR%\KSPCompiler.Features.Compilation.Applications.Compilation.Cli.dll" %*
+dotnet "%THIS_DIR%\KSPCompiler.Features.Compilation.Applications.Compilation.Cli.dll" %*
 
 endlocal
