@@ -71,6 +71,7 @@ public class SemanticAnalyzer : DefaultAstVisitor, IAstTraversal
     {
         // 未使用のユーザーシンボルの通知
         Context.SymbolTable.UserVariables.EmitUnusedSymbol( Context.EventEmitter );
+        Context.SymbolTable.UserFunctions.EmitUnusedSymbol( Context.EventEmitter );
     }
 
     #region Declarations
