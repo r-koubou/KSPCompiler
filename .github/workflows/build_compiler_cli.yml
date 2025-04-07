@@ -12,6 +12,9 @@ on:
       build-configuration:
         required: true
         type: string
+      version:
+        required: false
+        type: string
 
   workflow_dispatch:
     inputs:
@@ -32,6 +35,10 @@ on:
         options:
           - Debug
           - Release
+      version:
+        required: false
+        type: string
+        default: ""
 
 jobs:
   #--------------------------------------------------------------
@@ -43,7 +50,7 @@ jobs:
       DOTNET_CLI_TELEMETRY_OPTOUT: 1
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
       BASE_DIR: Compiler/Features/Compilation/Applications/Compilation.Cli
-      PUBLISH_DIR: publish
+      PUBLISH_DIRNAME: publish
 
     steps:
     - name: Show workflow inputs
@@ -51,33 +58,75 @@ jobs:
         echo ${{ inputs.build-target }}
         echo ${{ inputs.build-configuration }}
 
-    - name: Sanitize Branch Name
+    #----------------------------------------------------------
+    # Setup Environment Variables
+    #----------------------------------------------------------
+    - name: Setup Branch Name Variable
       run: echo "BRANCH_NAME=$(echo ${{ github.ref_name }} | sed 's|/|-|g')" >> $GITHUB_ENV
 
+    - name: Setup Version Variable
+      run: |
+        if [ "${{ inputs.version }}" == "" ]; then
+          echo "BUILD_VERSION=0.0.1-$BRANCH_NAME" >> $GITHUB_ENV
+        else
+          echo "BUILD_VERSION=${{ inputs.version }}" >> $GITHUB_ENV
+        fi
+
+    - name: Setup Publish Directory Variable
+      run: |
+        echo "PUBLISH_DIR=${{ env.BASE_DIR }}/${{ env.PUBLISH_DIRNAME }}/${{ env.PREFIX }}" >> $GITHUB_ENV
+        echo "PUBLISH_RELATIVE_DIR_FROM_BASE=${{ env.PUBLISH_DIRNAME }}/${{ env.PREFIX }}" >> $GITHUB_ENV
+
+    - name: Setup Version Information Path Variable
+      run: |
+        echo "VERSION_INFO_PATH=${{ env.PUBLISH_DIR }}/VERSION.txt" >> $GITHUB_ENV
+
+    #----------------------------------------------------------
+    # Setup Publish Directory
+    #----------------------------------------------------------
+    - name: Create publish directory & version information file
+      run: |
+        mkdir -p ${{ env.PUBLISH_DIR }}
+        echo "Version: ${{ env.BUILD_VERSION }}" > ${{ env.VERSION_INFO_PATH }}
+        echo "Build date: $(date)" >> ${{ env.VERSION_INFO_PATH }}
+        echo "Branch: ${{ github.ref_name }}" >> ${{ env.VERSION_INFO_PATH }}
+        echo "Commit: ${{ github.sha }}" >> ${{ env.VERSION_INFO_PATH }}
+        echo "Build configuration: ${{ inputs.build-configuration }}" >> ${{ env.VERSION_INFO_PATH }}
+        echo "Build target: ${{ inputs.build-target }}" >> ${{ env.VERSION_INFO_PATH }}
+
+    #----------------------------------------------------------
+    # Checkout
+    #----------------------------------------------------------
     - name: Checkout
       uses: actions/checkout@v4
 
+    #----------------------------------------------------------
+    # Setup .NET SDK
+    #----------------------------------------------------------
     - name: Install SDK
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: ${{ env.DOTNET_SDK_VERSION }}
 
+    #----------------------------------------------------------
+    # Build
+    #----------------------------------------------------------
     - name: Build AOT
       if: ${{ inputs.build-target != 'dotnet' }}
       run: |
         pushd ${{ env.BASE_DIR }}
-        dotnet publish -r ${{ inputs.build-target }} --self-contained -c ${{ inputs.build-configuration }} -o ${{ env.PUBLISH_DIR }}/${{ env.PREFIX }}
+        dotnet publish -p:Version=${{ env.BUILD_VERSION }} -p:AssemblyVersion=${{ env.BUILD_VERSION }} -r ${{ inputs.build-target }} --self-contained -c ${{ inputs.build-configuration }} -o ${{ env.PUBLISH_RELATIVE_DIR_FROM_BASE }}
         popd
 
     - name: Build for dotnet
       if: ${{ inputs.build-target == 'dotnet' }}
       run: |
         pushd ${{ env.BASE_DIR }}
-        dotnet publish -c ${{ inputs.build-configuration }} -o ${{ env.PUBLISH_DIR }}/${{ env.PREFIX }}
+        dotnet publish -p:Version=${{ env.BUILD_VERSION }} -p:AssemblyVersion=${{ env.BUILD_VERSION }} -c ${{ inputs.build-configuration }} -o ${{ env.PUBLISH_RELATIVE_DIR_FROM_BASE }}
         popd
 
     - name: Archive
       uses: actions/upload-artifact@v4
       with:
         name: ${{ env.PREFIX }}-${{ inputs.build-target }}-${{ inputs.build-configuration }}
-        path: ${{ env.BASE_DIR }}/${{ env.PUBLISH_DIR }}
+        path: ${{ env.BASE_DIR }}/${{ env.PUBLISH_DIRNAME }}

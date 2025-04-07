@@ -2,12 +2,15 @@ name: Build Language Server
 
 env:
   DOTNET_SDK_VERSION: '9.0.*'
-  PREFIX: KSP-LSP-Server-LanguageServer.Framework
+  PREFIX: KSP-LanguageServer
 on:
   workflow_call:
     inputs:
       build-configuration:
         required: true
+        type: string
+      version:
+        required: false
         type: string
 
   workflow_dispatch:
@@ -19,6 +22,10 @@ on:
         options:
           - Debug
           - Release
+      version:
+        required: false
+        type: string
+        default: ""
 
 jobs:
   #--------------------------------------------------------------
@@ -30,16 +37,51 @@ jobs:
       DOTNET_CLI_TELEMETRY_OPTOUT: 1
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
       BASE_DIR: ${{ github.workspace }}/Compiler/Features/LanguageServer/Applications/LanguageServerFramework
-      PUBLISH_DIR: publish/LanguageServer.Framework
+      PUBLISH_DIRNAME: publish
 
     steps:
     - name: Show workflow inputs
       run: |
         echo ${{ inputs.build-configuration }}
 
+    #----------------------------------------------------------
+    # Setup Environment Variables
+    #----------------------------------------------------------
     - name: Sanitize Branch Name
       run: echo "BRANCH_NAME=$(echo ${{ github.ref_name }} | sed 's|/|-|g')" >> $GITHUB_ENV
 
+    - name: Setup Version Variable
+      run: |
+        if [ "${{ inputs.version }}" == "" ]; then
+          echo "BUILD_VERSION=0.0.1-$BRANCH_NAME" >> $GITHUB_ENV
+        else
+          echo "BUILD_VERSION=${{ inputs.version }}" >> $GITHUB_ENV
+        fi
+
+    - name: Setup Publish Directory Variable
+      run: |
+        echo "PUBLISH_DIR=${{ env.BASE_DIR }}/${{ env.PUBLISH_DIRNAME }}/${{ env.PREFIX }}" >> $GITHUB_ENV
+        echo "PUBLISH_RELATIVE_DIR_FROM_BASE=${{ env.PUBLISH_DIRNAME }}/${{ env.PREFIX }}" >> $GITHUB_ENV
+
+    - name: Setup Version Information Path Variable
+      run: |
+        echo "VERSION_INFO_PATH=${{ env.PUBLISH_DIR }}/VERSION.txt" >> $GITHUB_ENV
+
+    #----------------------------------------------------------
+    # Setup Publish Directory
+    #----------------------------------------------------------
+    - name: Create publish directory & version information file
+      run: |
+        mkdir -p ${{ env.PUBLISH_DIR }}
+        echo "Version: ${{ env.BUILD_VERSION }}" > ${{ env.VERSION_INFO_PATH }}
+        echo "Build date: $(date)" >> ${{ env.VERSION_INFO_PATH }}
+        echo "Branch: ${{ github.ref_name }}" >> ${{ env.VERSION_INFO_PATH }}
+        echo "Commit: ${{ github.sha }}" >> ${{ env.VERSION_INFO_PATH }}
+        echo "Build Configuration: ${{ inputs.build-configuration }}" >> ${{ env.VERSION_INFO_PATH }}
+
+    #----------------------------------------------------------
+    # Checkout
+    #----------------------------------------------------------
     - name: Checkout
       uses: actions/checkout@v4
 
@@ -57,11 +99,11 @@ jobs:
     - name: Build LSP Server
       run: |
         pushd ${{ env.BASE_DIR }}
-        dotnet publish -c ${{ inputs.build-configuration }} -o ${{ env.PUBLISH_DIR }}
+        dotnet publish -p:Version=${{ env.BUILD_VERSION }} -p:AssemblyVersion=${{ env.BUILD_VERSION }} -c ${{ inputs.build-configuration }} -o ${{ env.PUBLISH_RELATIVE_DIR_FROM_BASE }}
         popd
 
     - name: Archive
       uses: actions/upload-artifact@v4
       with:
         name: ${{ env.PREFIX }}-${{ inputs.build-configuration }}-${{ env.BRANCH_NAME}}
-        path: ${{ env.BASE_DIR }}/${{ env.PUBLISH_DIR }}
+        path: ${{ env.BASE_DIR }}/${{ env.PUBLISH_DIRNAME }}
