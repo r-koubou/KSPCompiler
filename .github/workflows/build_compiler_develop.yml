@@ -14,33 +14,5 @@ jobs:
     uses: ./.github/workflows/build_compiler_cli.yml
     secrets: inherit
     with:
-      build-target: dotnet
       build-configuration: Debug
-
-  build-compiler-win-x64:
-    uses: ./.github/workflows/build_compiler_cli.yml
-    secrets: inherit
-    with:
-      build-target: win-x64
-      build-configuration: Debug
-
-  build-compiler-osx-x64:
-    uses: ./.github/workflows/build_compiler_cli.yml
-    secrets: inherit
-    with:
-      build-target: osx-x64
-      build-configuration: Debug
-
-  build-compiler-osx-arm64:
-    uses: ./.github/workflows/build_compiler_cli.yml
-    secrets: inherit
-    with:
-      build-target: osx-arm64
-      build-configuration: Debug
-
-  build-compiler-linux-x64:
-    uses: ./.github/workflows/build_compiler_cli.yml
-    secrets: inherit
-    with:
-      build-target: linux-x64
-      build-configuration: Debug
+      version: 1.2.3

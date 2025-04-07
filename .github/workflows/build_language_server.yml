@@ -50,18 +50,14 @@ jobs:
     - name: Sanitize Branch Name
       run: echo "BRANCH_NAME=$(echo ${{ github.ref_name }} | sed 's|/|-|g')" >> $GITHUB_ENV
 
-    - name: Setup Version Variable
-      run: |
-        if [ "${{ inputs.version }}" == "" ]; then
-          echo "BUILD_VERSION=0.0.1-$BRANCH_NAME" >> $GITHUB_ENV
-        else
-          echo "BUILD_VERSION=${{ inputs.version }}" >> $GITHUB_ENV
-        fi
-
     - name: Setup Publish Directory Variable
       run: |
         echo "PUBLISH_DIR=${{ env.BASE_DIR }}/${{ env.PUBLISH_DIRNAME }}/${{ env.PREFIX }}" >> $GITHUB_ENV
         echo "PUBLISH_RELATIVE_DIR_FROM_BASE=${{ env.PUBLISH_DIRNAME }}/${{ env.PREFIX }}" >> $GITHUB_ENV
+
+    - name: Setup Version Variable
+      run: |
+        echo "BUILD_VERSION=${{ (inputs.version != '' && inputs.version) || '0.0.0' }}" >> $GITHUB_ENV
 
     - name: Setup Version Information Path Variable
       run: |
@@ -96,14 +92,17 @@ jobs:
     #----------------------------------------------------------
     # Build
     #----------------------------------------------------------
-    - name: Build LSP Server
+    - name: Build LSP Server (with version info)
       run: |
         pushd ${{ env.BASE_DIR }}
         dotnet publish -p:Version=${{ env.BUILD_VERSION }} -p:AssemblyVersion=${{ env.BUILD_VERSION }} -c ${{ inputs.build-configuration }} -o ${{ env.PUBLISH_RELATIVE_DIR_FROM_BASE }}
         popd
 
-    - name: Archive
+    #----------------------------------------------------------
+    # Create Artifact
+    #----------------------------------------------------------
+    - name: Create Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ env.PREFIX }}-${{ inputs.build-configuration }}-${{ env.BRANCH_NAME}}
+        name: ${{ env.PREFIX }}-${{ inputs.build-configuration }}-${{ env.BUILD_VERSION}}
         path: ${{ env.BASE_DIR }}/${{ env.PUBLISH_DIRNAME }}
