@@ -1,0 +1,30 @@
+FormatVersion: 1.0.0
+Data:
+- Id: fb903925-68f0-4eff-a056-0c15c0372b5c
+  Name: abs
+  BuiltIn: true
+  Description: |-
+    Absolute value
+  BuiltIntoVersion: N/A
+  ReturnType: I||S||R
+  Arguments:
+  - Name: x
+    DataType: I||R
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1017040Z
+  UpdatedAt: 2025-01-26T06:28:18.1017040Z
+- Id: 3ba3e4f9-e852-479e-a0d4-d117652f10a2
+  Name: acos
+  BuiltIn: true
+  Description: |-
+    arccosine function
+  BuiltIntoVersion: N/A
+  ReturnType: S||R
+  Arguments:
+  - Name: x
+    DataType: R
+    Description: |-
+      arg 1 description
+  CreatedAt: 2025-01-26T06:28:18.1025820Z
+  UpdatedAt: 2025-01-26T06:28:18.1025820Z

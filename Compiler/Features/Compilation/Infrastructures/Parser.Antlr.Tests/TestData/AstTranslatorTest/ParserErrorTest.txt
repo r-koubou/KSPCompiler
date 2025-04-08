@@ -1,0 +1,2 @@
+on hoge( $arg1, $arg2,
+end on

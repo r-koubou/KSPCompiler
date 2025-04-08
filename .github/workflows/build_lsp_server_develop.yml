@@ -1,0 +1,17 @@
+name: Build LSP Server (develop)
+
+on:
+  push:
+    branches:
+      - develop
+    paths-ignore:
+      - "**.md"
+
+  workflow_dispatch:
+
+jobs:
+  build-language-server:
+    uses: ./.github/workflows/build_language_server.yml
+    secrets: inherit
+    with:
+      build-configuration: Debug

@@ -1,0 +1,10 @@
+# デフォルトの無視ファイル
+/shelf/
+/workspace.xml
+# Rider ignored files
+/contentModel.xml
+/.idea.KSPCompiler.iml
+/modules.xml
+/projectSettingsUpdater.xml
+# エディターベースの HTTP クライアントリクエスト
+/httpRequests/

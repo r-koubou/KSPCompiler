@@ -1,0 +1,18 @@
+FormatVersion: 1.0.0
+Data:
+- Name: ui_button
+  BuiltIn: false
+  VariableType: I
+  Description: |-
+    Creates a button in the performance view.
+  BuiltIntoVersion: N/A
+  RequireInitializer: false
+  InitializerArguments: []
+- Name: ui_file_selector
+  BuiltIn: false
+  VariableType: I
+  Description: |-
+    Creates a file selector in the performance view.
+  BuiltIntoVersion: N/A
+  RequireInitializer: false
+  InitializerArguments: []

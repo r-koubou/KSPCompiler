@@ -1,0 +1,7 @@
+on init
+    declare ui_table %tbl[10](1,2,3)
+    declare @i
+    declare $j
+    declare $k
+    $k := 1
+end on

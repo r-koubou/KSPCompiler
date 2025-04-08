@@ -1,0 +1,12 @@
+FormatVersion: 1.0.0
+Data:
+  - Id: 7395eded-e86d-45a8-8082-11a2b0cd54fe
+    Name: async_complete
+    BuiltIn: false
+    AllowMultipleDeclaration: false
+    Description: |-
+      Async complete callback, triggered after the execution of any command that is executed asynchronously, for example various loading or saving related commands.
+    BuiltIntoVersion: N/A
+    Arguments: []
+    CreatedAt: 2025-01-26T06:28:17.9807940Z
+    UpdatedAt: 2025-01-26T06:28:17.9807940Z

@@ -1,0 +1,17 @@
+name: Build KSP Compiler (develop)
+
+on:
+  push:
+    branches:
+      - develop
+    paths-ignore:
+      - "**.md"
+
+  workflow_dispatch:
+
+jobs:
+  build-compiler-dotnet:
+    uses: ./.github/workflows/build_compiler_cli.yml
+    secrets: inherit
+    with:
+      build-configuration: Debug

@@ -1,0 +1,108 @@
+name: Build KSP Compiler CLI
+
+env:
+  DOTNET_SDK_VERSION: '9.0.*'
+  PREFIX: KSPCompiler
+on:
+  workflow_call:
+    inputs:
+      build-configuration:
+        required: true
+        type: string
+      version:
+        required: false
+        type: string
+
+  workflow_dispatch:
+    inputs:
+      build-configuration:
+        description: "Build configuration for msbuild"
+        required: true
+        type: choice
+        options:
+          - Debug
+          - Release
+      version:
+        required: false
+        type: string
+        default: ""
+
+jobs:
+  #--------------------------------------------------------------
+  # Build Compiler CLI
+  #--------------------------------------------------------------
+  build-compiler-cli:
+    runs-on: ubuntu-latest
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: 1
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+      BASE_DIR: Compiler/Features/Compilation/Applications/Compilation.Cli
+      PUBLISH_DIRNAME: publish
+
+    steps:
+    - name: Show workflow inputs
+      run: |
+        echo ${{ inputs.build-configuration }}
+
+    #----------------------------------------------------------
+    # Setup Environment Variables
+    #----------------------------------------------------------
+    - name: Setup Branch Name Variable
+      run: echo "BRANCH_NAME=$(echo ${{ github.ref_name }} | sed 's|/|-|g')" >> $GITHUB_ENV
+
+    - name: Setup Publish Directory Variable
+      run: |
+        echo "PUBLISH_DIR=${{ env.BASE_DIR }}/${{ env.PUBLISH_DIRNAME }}/${{ env.PREFIX }}" >> $GITHUB_ENV
+        echo "PUBLISH_RELATIVE_DIR_FROM_BASE=${{ env.PUBLISH_DIRNAME }}/${{ env.PREFIX }}" >> $GITHUB_ENV
+
+    - name: Setup Version Variable
+      run: |
+        echo "BUILD_VERSION=${{ (inputs.version != '' && inputs.version) || '0.0.0' }}" >> $GITHUB_ENV
+
+    - name: Setup Version Information Path Variable
+      run: |
+        echo "VERSION_INFO_PATH=${{ env.PUBLISH_DIR }}/VERSION.txt" >> $GITHUB_ENV
+
+    #----------------------------------------------------------
+    # Setup Publish Directory
+    #----------------------------------------------------------
+    - name: Create publish directory & version information file
+      run: |
+        mkdir -p ${{ env.PUBLISH_DIR }}
+        echo "Version: ${{ env.BUILD_VERSION }}" > ${{ env.VERSION_INFO_PATH }}
+        echo "Build date: $(date)" >> ${{ env.VERSION_INFO_PATH }}
+        echo "Branch: ${{ github.ref_name }}" >> ${{ env.VERSION_INFO_PATH }}
+        echo "Commit: ${{ github.sha }}" >> ${{ env.VERSION_INFO_PATH }}
+        echo "Build configuration: ${{ inputs.build-configuration }}" >> ${{ env.VERSION_INFO_PATH }}
+
+    #----------------------------------------------------------
+    # Checkout
+    #----------------------------------------------------------
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    #----------------------------------------------------------
+    # Setup .NET SDK
+    #----------------------------------------------------------
+    - name: Install SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ env.DOTNET_SDK_VERSION }}
+
+    #----------------------------------------------------------
+    # Build
+    #----------------------------------------------------------
+    - name: Build for dotnet (with version info)
+      run: |
+        pushd ${{ env.BASE_DIR }}
+        dotnet publish -p:Version=${{ env.BUILD_VERSION }} -p:AssemblyVersion=${{ env.BUILD_VERSION }} -c ${{ inputs.build-configuration }} -o ${{ env.PUBLISH_RELATIVE_DIR_FROM_BASE }}
+        popd
+
+    #----------------------------------------------------------
+    # Create Artifact
+    #----------------------------------------------------------
+    - name: Create Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ env.PREFIX }}-${{ inputs.build-configuration }}-${{ env.BUILD_VERSION }}
+        path: ${{ env.BASE_DIR }}/${{ env.PUBLISH_DIRNAME }}

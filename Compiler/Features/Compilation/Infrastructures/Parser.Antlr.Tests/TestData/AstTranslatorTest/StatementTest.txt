@@ -1,0 +1,18 @@
+on init
+    if( a = 0 )
+        command()
+    end if
+    select( x )
+        case 0
+            command()
+        case 1 to 9
+            command1to9()
+    end select
+    while( x < 10 )
+        x := x + 1
+        if( x = 5 )
+            continue
+        end if
+    end while
+    call userFunc
+end on

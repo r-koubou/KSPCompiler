@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="syntax.error" xml:space="preserve">
+        <value>Syntax error</value>
+    </data>
+    <data name="synax.error.detail" xml:space="preserve">
+        <value>Syntax error: {0}</value>
+    </data>
+    <data name="symbol.error.declare.variable.outside" xml:space="preserve">
+        <value>Variable {0} declaration outside of callback scope</value>
+    </data>
+    <data name="symbol.error.declare.variable.builtin" xml:space="preserve">
+        <value>Variable name {0} is reserved</value>
+    </data>
+    <data name="symbol.error.declare.variable.ni_builtin" xml:space="preserve">
+        <value>Variable name {0} contains NI reserved prefix</value>
+    </data>
+    <data name="symbol.error.declare.variable.already" xml:space="preserve">
+        <value>Variable name {0} has already declared</value>
+    </data>
+    <data name="symbol.error.declare.variable.unkown" xml:space="preserve">
+        <value>Unknown type: {0}</value>
+    </data>
+    <data name="symbol.waring.declare.oninit" xml:space="preserve">
+        <value>Variable {0} declaration outside of `on init` callback scope</value>
+    </data>
+    <data name="symbol.warning.declare.callback.unkown" xml:space="preserve">
+        <value>Unknown callback: {0}</value>
+    </data>
+    <data name="symbol.error.declare.callback.already" xml:space="preserve">
+        <value>Callback {0} has already declared</value>
+    </data>
+    <data name="symbol.error.declare.userfunction.already" xml:space="preserve">
+        <value>User function {0} has already declared</value>
+    </data>
+    <data name="semantic.error.binaryoprator.compatible" xml:space="preserve">
+        <value>Not compatible : left and right side expression ( {0}, {1} )</value>
+    </data>
+    <data name="semantic.error.variable.not.declared" xml:space="preserve">
+        <value>Variable not declared: {0}</value>
+    </data>
+    <data name="semantic.error.unaryoprator.bitnot.compatible" xml:space="preserve">
+        <value>Unary operator .not. available integer types only</value>
+    </data>
+    <data name="semantic.error.variable.invalid.string.initializer" xml:space="preserve">
+        <value>String type is not support initializer</value>
+    </data>
+    <data name="semantic.error.string.operator.conditional" xml:space="preserve">
+        <value>Conditional expressions cannot be concatenated with string operators</value>
+    </data>
+    <data name="semantic.error.assign.to.constant" xml:space="preserve">
+        <value>{0}: Cannot assign values to constant variable</value>
+    </data>
+    <data name="semantic.error.assign.type.compatible" xml:space="preserve">
+        <value>":=" : not compatible type (assign to: {0}, assign from {1})</value>
+    </data>
+    <data name="semantic.error.binaryoprator.not.supported" xml:space="preserve">
+        <value>Contains types not supported by the binary operator {0}, {1}</value>
+    </data>
+    <data name="semantic.error.unaryoprator.not.supported" xml:space="preserve">
+        <value>Contains types not supported by unary operators {0}</value>
+    </data>
+    <data name="semantic.error.variable.array.outofbounds" xml:space="preserve">
+        <value>Array Index Out of Bounds (Array size: {0}, Index: {1})</value>
+    </data>
+    <data name="semantic.error.variable.uninitialized" xml:space="preserve">
+        <value>{0}: trying to access an uninitialized variable</value>
+    </data>
+    <data name="semantic.error.array.subscript.compatible" xml:space="preserve">
+        <value>Subscript type is not an integer type ({0})</value>
+    </data>
+    <data name="semantic.error.declare.variable.required.initializer" xml:space="preserve">
+        <value>{0} is required initializer</value>
+    </data>
+    <data name="semantic.error.declare.variable.noconstant.initializer" xml:space="preserve">
+        <value>{0}: Constant value(s) expected for variable initializer(s)</value>
+    </data>
+    <data name="semantic.error.declare.variable.string.initializer" xml:space="preserve">
+        <value>{0}: String type is not support initializer</value>
+    </data>
+    <data name="semantic.error.declare.variable.arraysize" xml:space="preserve">
+        <value>{0}: Invalid array size</value>
+    </data>
+    <data name="semantic.error.declare.variable.maxarraysize" xml:space="preserve">
+        <value>{0}: Array size cannot have more than {1}</value>
+    </data>
+    <data name="semantic.error.declare.variable.arrayinitilizer.incompatible" xml:space="preserve">
+        <value>{0}: Array initializer - element[{1}] is not compatible type ({2})</value>
+    </data>
+    <data name="semantic.error.declare.variable.arrayinitilizer.noconstant" xml:space="preserve">
+        <value>{0}: Array initializer - element[{1}] is not a constant value</value>
+    </data>
+    <data name="semantic.error.declare.variable.arrayinitilizer.sizeover" xml:space="preserve">
+        <value>{0}: The number of lists in the array initialization exceeds the array size</value>
+    </data>
+    <data name="semantic.error.declare.variable.cannot.const" xml:space="preserve">
+        <value>{0}: const cannot be specified</value>
+    </data>
+    <data name="semantic.error.declare.variable.invalid.initializer" xml:space="preserve">
+        <value>{0}: Incorrect initialization expression</value>
+    </data>
+    <data name="semantic.error.declare.variable.uiinitializer.count.incompatible" xml:space="preserve">
+        <value>{0}: The number of initialization arguments for UI variables does not match (required: {1}, actual: {2})</value>
+    </data>
+    <data name="semantic.error.declare.variable.uiinitializer.incompatible" xml:space="preserve">
+        <value>{0}: UI initializer - parameter [{1}] is not compatible type ({2})</value>
+    </data>
+    <data name="semantic.error.declare.variable.uiinitializer.nonconstant" xml:space="preserve">
+        <value>{0}: UI initializer - parameter [{1}] can only be a constant value</value>
+    </data>
+    <data name="semantic.error.declare.variable.unkown.ui" xml:space="preserve">
+        <value>Unknown UI name: {0}</value>
+    </data>
+    <data name="semantic.warning.command.unknown" xml:space="preserve">
+        <value>{0}: Unknown KSP command (may not be documented)</value>
+    </data>
+    <data name="semantic.error.command.arg.count" xml:space="preserve">
+        <value>{0}: Unmatched number of command arguments</value>
+    </data>
+    <data name="semantic.error.command.arg.incompatible" xml:space="preserve">
+        <value>{0}: Command argument(s) are not compatible type(s) - expected: {1}, actual: {2}</value>
+    </data>
+    <data name="semantic.error.unaryoprator.logicalnot.incompatible" xml:space="preserve">
+        <value>Unary operator not available boolean expression only</value>
+    </data>
+    <data name="semantic.error.logicaloprator.incompatible" xml:space="preserve">
+        <value>Contains types not supported by logical operators {0}, {1}</value>
+    </data>
+    <data name="semantic.error.if.condition.incompatible" xml:space="preserve">
+        <value>if: Conditional expression not included</value>
+    </data>
+    <data name="semantic.error.continue.invalid" xml:space="preserve">
+        <value>continue: Only available within the loop</value>
+    </data>
+    <data name="semantic.error.select.condition.incompatible" xml:space="preserve">
+        <value>select: Condition must be an integer</value>
+    </data>
+    <data name="semantic.error.select.condition.notvariable" xml:space="preserve">
+        <value>select: Variables to be evaluated are not specified</value>
+    </data>
+    <data name="semantic.error.select.case.incompatible" xml:space="preserve">
+        <value>case: must be an integer and a constant</value>
+    </data>
+    <data name="semantic.warning.select.case.from.to.noeffect" xml:space="preserve">
+        <value>case: “from” value is the same as ‘to’ value (={0})</value>
+    </data>
+    <data name="semantic.error.select.case.from.grater" xml:space="preserve">
+        <value>case: “from” value is greater than ‘to’ value(={0})</value>
+    </data>
+    <data name="semantic.error.userfunction.unknown" xml:space="preserve">
+        <value>{0}: Function not declared</value>
+    </data>
+    <data name="semantic.error.pgs.name.maximam.length" xml:space="preserve">
+        <value>PGS ID cannot exceed 64 characters (={0})</value>
+    </data>
+    <data name="semantic.error.assign.to.builtin.variable" xml:space="preserve">
+        <value>{0}: Cannot assign to built-in variable</value>
+    </data>
+    <data name="preprocess.error.symbol.incompatible" xml:space="preserve">
+        <value>Symbol is not a preprocessor symbol (={0})</value>
+    </data>
+    <data name="semantic.error.userfunction.call.initcallback" xml:space="preserve">
+        <value>User-defined functions cannot be called within an init callback.</value>
+    </data>
+    <data name="semantic.error.declare.variable.arrayinitializer.need.assign.operator" xml:space="preserve">
+        <value>Requires `:=` operator for initialization</value>
+    </data>
+    <data name="semantic.error.declare.variable.uiinitializer.not.need.assign.opetator" xml:space="preserve">
+        <value>The `:=` operator is not needed</value>
+    </data>
+    <data name="semantic.warning.unused" xml:space="preserve">
+        <value>{0}: Declared but not used in the script</value>
+    </data>
+</root>

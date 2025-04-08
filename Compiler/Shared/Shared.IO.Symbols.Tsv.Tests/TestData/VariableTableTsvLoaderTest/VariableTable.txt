@@ -1,0 +1,2 @@
+Id	Name	BuiltIn	Description	BuiltIntoVersion
+756E1A9A-6967-4B6E-A261-BAFDBE8E93E0	$hoge	true	hoge	N/A

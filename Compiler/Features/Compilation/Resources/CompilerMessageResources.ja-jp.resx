@@ -1,0 +1,185 @@
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="synax.error.detail" xml:space="preserve">
+        <value>文法エラー: {0}</value>
+    </data>
+    <data name="syntax.error" xml:space="preserve">
+        <value>文法エラー</value>
+    </data>
+    <data name="symbol.error.declare.variable.outside" xml:space="preserve">
+        <value>変数 {0} はコールバック外で宣言できません</value>
+    </data>
+    <data name="symbol.error.declare.variable.builtin" xml:space="preserve">
+        <value>変数名 {0} は予約されています</value>
+    </data>
+    <data name="symbol.error.declare.variable.ni_builtin" xml:space="preserve">
+        <value>変数名 {0} は NI で予約されている接頭文字を含んでいます</value>
+    </data>
+    <data name="symbol.error.declare.variable.already" xml:space="preserve">
+        <value>変数名 {0} は既に宣言されています</value>
+    </data>
+    <data name="symbol.waring.declare.oninit" xml:space="preserve">
+        <value>変数 {0} は `on init` コールバック以外の場所で宣言されています</value>
+    </data>
+    <data name="symbol.error.declare.variable.unkown" xml:space="preserve">
+        <value>不明なデータ型: {0}</value>
+    </data>
+    <data name="symbol.warning.declare.callback.unkown" xml:space="preserve">
+        <value>不明な コールバック: {0} </value>
+    </data>
+    <data name="symbol.error.declare.callback.already" xml:space="preserve">
+        <value>コールバック {0} は既に宣言されています</value>
+    </data>
+    <data name="symbol.error.declare.userfunction.already" xml:space="preserve">
+        <value>ユーザー関数 {0} は既に宣言されています</value>
+    </data>
+    <data name="semantic.error.binaryoprator.compatible" xml:space="preserve">
+        <value>左辺と右辺のデータ型が異なっています ( {0}, {1} )</value>
+    </data>
+    <data name="semantic.error.variable.not.declared" xml:space="preserve">
+        <value>宣言されていない変数です: {0}</value>
+    </data>
+    <data name="semantic.error.unaryoprator.bitnot.compatible" xml:space="preserve">
+        <value>単項演算子  .not. は整数にのみ使用できます</value>
+    </data>
+    <data name="semantic.error.variable.invalid.string.initializer" xml:space="preserve">
+        <value>String型には初期値代入を行うことはできません</value>
+    </data>
+    <data name="semantic.error.string.operator.conditional" xml:space="preserve">
+        <value>条件式は文字列演算子と連結できません</value>
+    </data>
+    <data name="semantic.error.assign.to.constant" xml:space="preserve">
+        <value>{0}: 定数の変数に値の代入はできません</value>
+    </data>
+    <data name="semantic.error.assign.type.compatible" xml:space="preserve">
+        <value>":=" : データ型が一致しません (代入先: {0}, 代入元: {1})</value>
+    </data>
+    <data name="semantic.error.binaryoprator.not.supported" xml:space="preserve">
+        <value>2項演算子がサポートしていない型が含まれています {0}, {1}</value>
+    </data>
+    <data name="semantic.error.unaryoprator.not.supported" xml:space="preserve">
+        <value>単項演算子がサポートしていない型が含まれています {0}</value>
+    </data>
+    <data name="semantic.error.variable.array.outofbounds" xml:space="preserve">
+        <value>配列要素数の範囲外アクセスです (配列要素数: {0}, インデックス: {1})</value>
+    </data>
+    <data name="semantic.error.variable.uninitialized" xml:space="preserve">
+        <value>{0}: 初期化されていない変数にアクセスしようとしています</value>
+    </data>
+    <data name="semantic.error.array.subscript.compatible" xml:space="preserve">
+        <value>添字の型が整数型ではありません  ({0})</value>
+    </data>
+    <data name="semantic.error.declare.variable.required.initializer" xml:space="preserve">
+        <value>{0}: 初期化が必要です</value>
+    </data>
+    <data name="semantic.error.declare.variable.noconstant.initializer" xml:space="preserve">
+        <value>{0}: 初期化式には定数値以外は指定できません</value>
+    </data>
+    <data name="semantic.error.declare.variable.string.initializer" xml:space="preserve">
+        <value>{0}: 文字列型には初期値代入を行うことはできません</value>
+    </data>
+    <data name="semantic.error.declare.variable.arraysize" xml:space="preserve">
+        <value>{0}: 配列要素サイズが不正です</value>
+    </data>
+    <data name="semantic.error.declare.variable.maxarraysize" xml:space="preserve">
+        <value>{0}: 配列要素サイズが上限の {1} を超えています</value>
+    </data>
+    <data name="semantic.error.declare.variable.arrayinitilizer.incompatible" xml:space="preserve">
+        <value>{0}: 配列初期化 - 要素[{1}] のデータ型が異なっています ({2})</value>
+    </data>
+    <data name="semantic.error.declare.variable.arrayinitilizer.noconstant" xml:space="preserve">
+        <value>{0}: 配列初期化 - 要素[{1}] は定数値ではありません</value>
+    </data>
+    <data name="semantic.error.declare.variable.arrayinitilizer.sizeover" xml:space="preserve">
+        <value>{0}: 配列初期化のリスト数が配列サイズを超えています</value>
+    </data>
+    <data name="semantic.error.declare.variable.cannot.const" xml:space="preserve">
+        <value>{0}: const を指定することはできません</value>
+    </data>
+    <data name="semantic.error.declare.variable.invalid.initializer" xml:space="preserve">
+        <value>{0}: 初期化式が正しくありません</value>
+    </data>
+    <data name="semantic.error.declare.variable.uiinitializer.count.incompatible" xml:space="preserve">
+        <value>{0}: UI変数の初期化引数の数が一致しません (要求される引数の数: {1}, 引数の数: {2})</value>
+    </data>
+    <data name="semantic.error.declare.variable.uiinitializer.incompatible" xml:space="preserve">
+        <value>{0}: UI初期化 - {1} 番目のデータ型が異なっています ({2})</value>
+    </data>
+    <data name="semantic.error.declare.variable.uiinitializer.nonconstant" xml:space="preserve">
+        <value>{0}: UI初期化 - {1} 番目のデータ型は定数値以外は指定できません</value>
+    </data>
+    <data name="semantic.error.declare.variable.unkown.ui" xml:space="preserve">
+        <value>不明な UI 名です: {0}</value>
+    </data>
+    <data name="semantic.warning.command.unknown" xml:space="preserve">
+        <value>{0}: 未知の KSP コマンドです(ドキュメント化されていない場合もあります)</value>
+    </data>
+    <data name="semantic.error.command.arg.count" xml:space="preserve">
+        <value>{0}: コマンド引数の数が一致していません</value>
+    </data>
+    <data name="semantic.error.unaryoprator.logicalnot.incompatible" xml:space="preserve">
+        <value>単項演算子 not は boolean 式にのみ使用できます</value>
+    </data>
+    <data name="semantic.error.logicaloprator.incompatible" xml:space="preserve">
+        <value>論理演算子がサポートしていない型が含まれています {0}, {1}</value>
+    </data>
+    <data name="semantic.error.if.condition.incompatible" xml:space="preserve">
+        <value>if: 条件式が含まれていません</value>
+    </data>
+    <data name="semantic.error.continue.invalid" xml:space="preserve">
+        <value>continue: ループ内でのみ使用可能です</value>
+    </data>
+    <data name="semantic.error.select.condition.incompatible" xml:space="preserve">
+        <value>select: 条件は整数でなければなりません</value>
+    </data>
+    <data name="semantic.error.select.condition.notvariable" xml:space="preserve">
+        <value>select: 評価対象となる変数が指定されていません</value>
+    </data>
+    <data name="semantic.error.select.case.incompatible" xml:space="preserve">
+        <value>case: 整数かつ定数でなければなりません</value>
+    </data>
+    <data name="semantic.warning.select.case.from.to.noeffect" xml:space="preserve">
+        <value>case: "from" の値が "to" の値が同じです (={0})</value>
+    </data>
+    <data name="semantic.error.select.case.from.grater" xml:space="preserve">
+        <value>case: "from" の値が "to" の値より大きいです (={0})</value>
+    </data>
+    <data name="semantic.error.userfunction.unknown" xml:space="preserve">
+        <value>{0}: 宣言されていない関数です</value>
+    </data>
+    <data name="semantic.error.pgs.name.maximam.length" xml:space="preserve">
+        <value>PGS ID は 64文字を超えることはできません (={0})</value>
+    </data>
+    <data name="semantic.error.assign.to.builtin.variable" xml:space="preserve">
+        <value>{0}: ビルトイン変数に代入できません</value>
+    </data>
+    <data name="preprocess.error.symbol.incompatible" xml:space="preserve">
+        <value>シンボルがプリプロセッサシンボルではありません (={0})</value>
+    </data>
+    <data name="semantic.error.userfunction.call.initcallback" xml:space="preserve">
+        <value>init コールバック内でユーザー定義関数を呼び出すことはできません</value>
+    </data>
+    <data name="semantic.error.declare.variable.arrayinitializer.need.assign.operator" xml:space="preserve">
+        <value>初期化に `:=` 演算子が必要です</value>
+    </data>
+    <data name="semantic.error.declare.variable.uiinitializer.not.need.assign.opetator" xml:space="preserve">
+        <value>`:=` 演算子は不要です</value>
+    </data>
+    <data name="semantic.error.command.arg.incompatible" xml:space="preserve">
+        <value>{0}: コマンド引数のデータ型が一致していません - 期待: {1}, 実際: {2}</value>
+    </data>
+    <data name="semantic.warning.unused" xml:space="preserve">
+        <value>{0}: 宣言されていますが、スクリプト内では使用されていません</value>
+    </data>
+</root>

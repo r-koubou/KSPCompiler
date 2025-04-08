@@ -1,0 +1,275 @@
+_delay_event_for_loading_slots	_delay_event_for_loading_slots( ${1:arg1} )	_delay_event_for_loading_slots( arg1 )	Undocumented
+_get_engine_par	_get_engine_par( ${1:parameter}, ${2:group}, ${3:slot}, ${4:generic} )	_get_engine_par( parameter, group, slot, generic )	returns the value of a specific engine parameter
+_get_engine_par_disp	_get_engine_par_disp( ${1:parameter}, ${2:group}, ${3:slot}, ${4:generic}<br>  )	_get_engine_par_disp( parameter, group, slot, generic )	returns the displayed string of a specific engine parameter
+_get_folder	_get_folder( ${1:path-variable} )	_get_folder( path-variable )	returns the path specified with the built-in path variable
+_load_ir_sample	_load_ir_sample( ${1:file-path}, ${2:slot}, ${3:generic} )	_load_ir_sample( file-path, slot, generic )	loads an impulse response sample into KONTAKT's convolution effect
+_num_slices	_num_slices( ${1:arg1} )	_num_slices( arg1 )	Undocumented
+_pgs_create_key	_pgs_create_key( ${1:key-id}, ${2:size} )	_pgs_create_key( key-id, size )	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.
+_pgs_get_key_val	_pgs_get_key_val( ${1:key-id}, ${2:index} )	_pgs_get_key_val( key-id, index )	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.
+_pgs_key_exists	_pgs_key_exists( ${1:key-id} )	_pgs_key_exists( key-id )	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.
+_pgs_set_key_val	_pgs_set_key_val( ${1:key-id}, ${2:index}, ${3:value} )	_pgs_set_key_val( key-id, index, value )	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.
+_read_persistent_var	_read_persistent_var( ${1:variable} )	_read_persistent_var( variable )	instantly reloads the value of a variable that was saved via the<br>  make_persistent()command
+_reset_rls_trig_counter	_reset_rls_trig_counter( ${1:note} )	_reset_rls_trig_counter( note )	dresets the release trigger counter (used by the release trigger system<br>  script)
+_set_engine_par	_set_engine_par( ${1:parameter}, ${2:value}, ${3:group}, ${4:slot},<br>  ${5:generic} )	_set_engine_par( parameter, value, group, slot, generic )	control automatable KONTAKT parameters and bypass buttons
+_set_skin_offset	_set_skin_offset( ${1:offset-in-pixel} )	_set_skin_offset( offset-in-pixel )	offsets the chosen background picture file by the specified number of<br>  pixels
+_slice_idx_loop_end	_slice_idx_loop_end( ${1:zone-ID}, ${2:loop-index} )	_slice_idx_loop_end( zone-ID, loop-index )	returns the index number of the slice at the loop end
+_slice_idx_loop_start	_slice_idx_loop_start( ${1:zone-ID}, ${2:loop-index} )	_slice_idx_loop_start( zone-ID, loop-index )	returns the index number of the slice at the loop start
+_slice_length	_slice_length( ${1:zone-ID}, ${2:slice-index} )	_slice_length( zone-ID, slice-index )	returns the length in microseconds of the specified slice with respect to<br>  the current tempo
+_slice_loop_count	_slice_loop_count( ${1:zone-ID}, ${2:loop-index} )	_slice_loop_count( zone-ID, loop-index )	returns the loop count of the specified loop
+_slice_start	_slice_start( ${1:zone-ID}, ${2:slice-index} )	_slice_start( zone-ID, slice-index )	returns the absolute start point of the specified slice in microseconds,<br>  independent of the current tempo
+_will_never_terminate	_will_never_terminate( ${1:event-id} )	_will_never_terminate( event-id )
+abs	abs( ${1:x} )	abs( x )	Absolute value
+acos	acos( ${1:x} )	acos( x )	arccosine function
+add_menu_item	add_menu_item( ${1:variable}, ${2:text}, ${3:value} )	add_menu_item( variable, text, value )	create a menu entry
+add_text_line	add_text_line( ${1:variable}, ${2:text} )	add_text_line( variable, text )	add a new text line in the specified label without erasing existing text
+allow_group	allow_group( ${1:group-index} )	allow_group( group-index )	allows the specified group, i.e. makes it available for playback
+array_equal	array_equal( ${1:array-variable}, ${2:array-variable} )	array_equal( array-variable, array-variable )	checks the values of two arrays, true if all values are equal, false if<br>  not
+asin	asin( ${1:x} )	asin( x )	arcsine (inverse sine function)
+atan	atan( ${1:x} )	atan( x )	arctangent (inverse tangent function)
+attach_level_meter	attach_level_meter( ${1:ui-ID}, ${2:group}, ${3:slot}, ${4:channel},<br>  ${5:bus} )	attach_level_meter( ui-ID, group, slot, channel, bus )	attach a level meter to a certain position within the instrument to read<br>  volume data
+attach_zone	attach_zone( ${1:variable}, ${2:zone-id}, ${3:flags} )	attach_zone( variable, zone-id, flags )	connects the corresponding zone to the waveform so that it shows up<br>  within the display
+by_marks	by_marks( ${1:bit-mask} )	by_marks( bit-mask )	a user defined group of events (or event IDs)
+by_track	by_track( ${1:track} )	by_track( track )	can be used to group events by their track number
+cbrt	cbrt( ${1:x} )	cbrt( x )	Cube root function	7.0.0
+cc_delivery_request	cc_delivery_request( ${1:arg1} )	cc_delivery_request( arg1 )	Undocumented
+ceil	ceil( ${1:x} )	ceil( x )	ceiling (round up) ceil(2.3) = 3.0
+change_listener_par	change_listener_par( ${1:signal-type}, ${2:parameter} )	change_listener_par( signal-type, parameter )	changes the parameters of the on listener callback. Can be used in every<br>  callback.
+change_note	change_note( ${1:ID-number}, ${2:note-number} )	change_note( ID-number, note-number )	change the note number of a specific note event
+change_pan	change_pan( ${1:ID-number}, ${2:panorama}, ${3:relative-bit} )	change_pan( ID-number, panorama, relative-bit )	change the pan position of a specific note event
+change_time_with_pitch	change_time_with_pitch( ${1:arg1} )	change_time_with_pitch( arg1 )	Undocumented
+change_tune	change_tune( ${1:ID-number}, ${2:tune-amount}, ${3:relative-bit} )	change_tune( ID-number, tune-amount, relative-bit )	change the tuning of a specific note event in millicent
+change_velo	change_velo( ${1:ID-number}, ${2:velocity} )	change_velo( ID-number, velocity )	change the velocity of a specific note event
+change_vol	change_vol( ${1:ID-number}, ${2:volume}, ${3:relative-bit} )	change_vol( ID-number, volume, relative-bit )	change the volume of a specific note event in millidecibel
+cos	cos( ${1:x} )	cos( x )	cosine function
+dec	dec( ${1:x} )	dec( x )	decrement an expression by 1 (x - 1)
+delete_event_mark	delete_event_mark( ${1:ID-number}, ${2:bit-mark} )	delete_event_mark( ID-number, bit-mark )	delete an event mark, i.e. ungroup the specified event from an event<br>  group
+detect_drum_type	detect_drum_type( ${1:zone-id}, ${2:drum-type-result} )	detect_drum_type( zone-id, drum-type-result )	Assigns <drum-type-result> a $NI_DETECT_DRUM_TYPE tag describing<br>  the drum type of an audio sample.	6.2.0
+detect_instrument_type	detect_instrument_type( ${1:zone-id}, ${2:instrument-type-result} )	detect_instrument_type( zone-id, instrument-type-result )	Assigns <drum-type-result> a $NI_DETECT_INSTRUMENT_TYPE tag<br>  describing the in- strument type of an audio sample.	6.3.0
+detect_key	detect_key( ${1:zone-id}, ${2:key-result} )	detect_key( zone-id, key-result )	Assigns <key-result> a $NI_DETECT_KEY tag describing the musical<br>  key of the audio sample. If detection fails, the function will return<br>  $NI_DETECT_KEY_INVALID.	8.0.0
+detect_loudness	detect_loudness( ${1:zone-id}, ${2:loudness-result} )	detect_loudness( zone-id, loudness-result )	Returns a real value representing the loudness of an audio sample in dB.	6.2.0
+detect_peak	detect_peak( ${1:zone-id}, ${2:peak-result} )	detect_peak( zone-id, peak-result )	Returns a real value representing peak level of an audio sample in dB.	6.2.0
+detect_pitch	detect_pitch( ${1:zone-id}, ${2:pitch-result} )	detect_pitch( zone-id, pitch-result )	Returns a real value representing the fundamental frequency of an audio<br>  sample, in semi- tones and cents	6.2.0
+detect_rms	detect_rms( ${1:zone-id}, ${2:rms-result} )	detect_rms( zone-id, rms-result )	Returns a real value representing the RMS level of an audio sample in<br>  dB. 	6.2.0
+detect_sample_type	detect_sample_type( ${1:zone-id}, ${2:sample-type-result} )	detect_sample_type( zone-id, sample-type-result )	Assigns <sample-type-result> a $NI_DETECT_SAMPLE_TYPE tag<br>  describing the whether an audio sample is a drum or an instrument.	6.2.0
+detect_tempo	detect_tempo( ${1:zone-id}, ${2:tempo-result} )	detect_tempo( zone-id, tempo-result )	Returns a real value representing the detected tempo of the audio sample,<br>  in BPM. If detection fails, the function will return<br>  ~NI_DETECT_TEMPO_INVALID.	8.0.0
+disable_logging	disable_logging( ${1:type} )	disable_logging( type )	Quickly disabling emission of messages, warnings or watched<br>  variable<br>    events to both the Kontakt Status Bar<br>    $NI_LOG_MESSAGE, $NI_LOG_WARNING, $NI_LOG_WATCHING
+disallow_group	disallow_group( ${1:group-index} )	disallow_group( group-index )	disallows the specified group, i.e. makes it unavailable for playback
+dont_use_machine_mode	dont_use_machine_mode( ${1:ID-number} )	dont_use_machine_mode( ID-number )	play the specified event in sampler mode
+event_status	event_status( ${1:ID-number} )	event_status( ID-number )	retrieve the status of a particular note event (or MIDI event in the<br>  multi script)
+exit	exit	exit	immediately stops a callback or exits a function
+exp	exp( ${1:x} )	exp( x )	exponential function (returns the value of e^x)
+fade_in	fade_in( ${1:ID-number}, ${2:fade-time} )	fade_in( ID-number, fade-time )	perform a fade-in for a specific note event
+fade_out	fade_out( ${1:ID-number}, ${2:fade-time} )	fade_out( ID-number, fade-time )	perform a fade-out for a specific note event
+find_group	find_group( ${1:group-name} )	find_group( group-name )	returns the group index for the specified group name
+find_mod	find_mod( ${1:group-index}, ${2:mod-name} )	find_mod( group-index, mod-name )	returns the slot index of an internal modulator or external modulation<br>  slot
+find_target	find_target( ${1:group-index}, ${2:mod-index}, ${3:target-name} )	find_target( group-index, mod-index, target-name )	returns the slot index of a modulation slot of an internal modulator
+find_zone	find_zone( ${1:zone-name} )	find_zone( zone-name )	returns the zone ID for the specified zone name. Only availabe in the<br>  init callback.
+floor	floor( ${1:x} )	floor( x )	floor (round down) floor(2.8) = 2.0
+fs_get_filename	fs_get_filename( ${1:ui-ID}, ${2:return-parameter} )	fs_get_filename( ui-ID, return-parameter )	return the filename of the last selected file in the UI file browser.
+fs_navigate	fs_navigate( ${1:ui-ID}, ${2:direction} )	fs_navigate( ui-ID, direction )	jump to the next/previous file in an ui file selector and trigger its<br>  callback.
+get_control_par	get_control_par( ${1:ui-ID}, ${2:control-parameter} )	get_control_par( ui-ID, control-parameter )	retrieve various parameters of the specified gui control
+get_control_par_arr	get_control_par_arr( ${1:arg1}, ${2:arg2}, ${3:arg3} )	get_control_par_arr( arg1, arg2}, arg3 )	Undocumented
+get_control_par_real_arr	get_control_par_real_arr( ${1:arg1}, ${2:arg2}, ${3:arg3} )	get_control_par_real_arr( arg1, arg2}, arg3 )	Undocumented
+get_control_par_str	get_control_par_str( ${1:arg1}, ${2:arg2} )	get_control_par_str( arg1}, arg2 )	Undocumented
+get_control_par_str_arr	get_control_par_str_arr( ${1:arg1}, ${2:arg2}, ${3:arg3} )	get_control_par_str( arg1}, arg2, arg3 )	Undocumented	6.3.0
+get_engine_par	get_engine_par( ${1:parameter}, ${2:group}, ${3:slot}, ${4:generic} )	get_engine_par( parameter, group, slot, generic )	returns the value of a specific engine parameter
+get_engine_par_disp	get_engine_par_disp( ${1:parameter}, ${2:group}, ${3:slot}, ${4:generic}<br>  )	get_engine_par_disp( parameter, group, slot, generic )	returns the displayed string of a specific engine parameter
+get_engine_par_disp_m	get_engine_par_disp_m( ${1:arg1}, ${2:arg2}, ${3:arg3}, ${4:arg4} )	get_engine_par_disp_m( arg1, arg2}, arg3, arg4 )	Undocumented
+get_engine_par_m	get_engine_par_m( ${1:arg1}, ${2:arg2}, ${3:arg3}, ${4:arg4} )	get_engine_par_m( arg1, arg2, arg3, arg4 )	Undocumented
+get_event_ids	get_event_ids( ${1:array-name} )	get_event_ids( array-name )	fills the specified array with all active event IDs.
+get_event_mark	get_event_mark( ${1:ID-number}, ${2:bit-mark} )	get_event_mark( ID-number, bit-mark )	Check if the specified event belongs to a specific event group (returns 1<br>  if the bitmark is set, 0 otherwise)
+get_event_par	get_event_par( ${1:ID-number}, ${2:parameter} )	get_event_par( ID-number, parameter )	return the value of a specific event parameter of the specified event
+get_event_par_arr	get_event_par_arr( ${1:ID-number}, ${2:parameter}, ${3:group-index} )	get_event_par_arr( ID-number, parameter, group-index )	special form of get_event_par(), used to retrieve the group allow state<br>  of the specified event
+get_folder	get_folder( ${1:path-variable} )	get_folder( path-variable )	returns the path specified with the built-in path variable
+get_font_id	get_font_id( ${1:id} )	get_font_id( id )	Enables use of custom dynamic fonts
+get_group_idx	get_group_idx( ${1:group-name} )	get_group_idx( group-name )	returns the group index for the specified group name
+get_key_color	get_key_color( ${1:note-nr} )	get_key_color( note-nr )	returns the color constant of the specified note number
+get_key_name	get_key_name( ${1:note-nr} )	get_key_name( note-nr )	returns the name of the specified key
+get_key_triggerstate	get_key_triggerstate( ${1:note-nr} )	get_key_triggerstate( note-nr )	returns the pressed state of the specified note number (i.e. key) on the<br>  KONTAKT keyboard, can be either 1 (key pressed) or 0 (key released)
+get_key_type	get_key_type( ${1:note-nr} )	get_key_type( note-nr )	returns the key type constant of the specified key.
+get_keyrange_max_note	get_keyrange_max_note( ${1:note-nr} )	get_keyrange_max_note( note-nr )	returns the highest note of the specified key range
+get_keyrange_min_note	get_keyrange_min_note( ${1:note-nr} )	get_keyrange_min_note( note-nr )	returns the lowest note of the specified key range
+get_keyrange_name	get_keyrange_name( ${1:note-nr} )	get_keyrange_name( note-nr )	returns the name of the specified key range
+get_loop_par	get_loop_par( ${1:zone-id}, ${2:loop-index}, ${3:parameter} )	get_loop_par( zone-id, loop_index, parameter )	Returns the loop parameters of a zone	6.2.0
+get_loop_sample	get_loop_par( ${1:zone-id}, ${2:return-parameter} )	get_sample( zone-id, return-parameter )	Returns paths, file names and extensions of samples	6.2.0
+get_menu_item_str	get_menu_item_str( ${1:menu-ID}, ${2:index} )	get_menu_item_str( menu-ID, index )	returns the string value of the menu's entry.
+get_menu_item_value	get_menu_item_value( ${1:menu-ID}, ${2:index} )	get_menu_item_value( menu-ID, index )	returns the value of the menu's entry.
+get_menu_item_visibility	get_menu_item_visibility( ${1:menu-ID}, ${2:index} )	get_menu_item_visibility( menu-ID, index )	returns 1 if the menu entry is visible, otherwise 0.
+get_mod_idx	get_mod_idx( ${1:group-index}, ${2:mod-name} )	get_mod_idx( group-index, mod-name )	Returns the slot index of an internal modulator or external modulation<br>  slot
+get_num_zones	get_num_zones()	get_num_zones()	Returns the total number of all zones that are present in the instrument<br>  (regular and user zones)
+get_purge_state	get_purge_state( ${1:group-index} )	get_purge_state( group-index )	returns the purge state of the specified group. 0=purged, 1=not purged
+get_sample_length	get_sample_length( ${1:zone-ID} )	get_sample_length( zone-ID )	returns the length of the specified zone's sample in microseconds
+get_sel_zones_idx	get_sel_zones_idx( ${1:array-name} )	get_sel_zones_idx( array-name )	Fills the specified array with indices of all selected zones in KONTAKT's<br>  Mapping Editor.	7.5.0
+get_target_idx	get_target_idx( ${1:group-index}, ${2:mod-index}, ${3:target-name} )	get_target_idx( group-index, mod-index, target-name )	Returns the modulation target slot index of an internal modulator
+get_ui_id	get_ui_id( ${1:variable} )	get_ui_id( variable )	retrieve the ID number of an ui control
+get_ui_wf_property	get_ui_wf_property( ${1:variable}, ${2:property}, ${3:index} )	get_ui_wf_property( variable, property, index )	returns the value of the waveform's different properties.
+get_voice_limit	get_voice_limit( ${1:voice-type} )	get_voice_limit( voice-type )	retunrs the voice limit for the Time Machine Pro mode of the source<br>  module
+get_zone_id	get_zone_id( ${1:zone-index} )	get_zone_id( zone-index )	Returns the ID of the zone with the specified zone index
+get_zone_par	get_zone_par( ${1:zone-id}, ${2:parameter} )	get_zone_par( zone-id, parameter )	Returns the zone parameters	6.2.0
+get_zone_status	get_zone_status( ${1:zone-id} )	get_zone_status( zone-id )	Queries the status of the zone ID in<br>  question. Zone status has four possible states:<br>    - $NI_ZONE_STATUS_EMPTY - zone is a user zone and has no sample<br>  loaded<br>    - $NI_ZONE_STATUS_LOADED - zone is a user zone and has a sample<br>  loaded<br>    - $NI_ZONE_STATUS_PURGED - zone is purged from memory (valid for both<br>  regular and user<br>    zones)<br>    - $NI_ZONE_STATUS_IGNORED - zone is ignored by the user response in the<br>  Content Missing<br>    dialog (valid for both regular and user zones)
+group_name	group_name( ${1:group-index} )	group_name( group-index )	returns the group name for the specified group
+hide_part	hide_part( ${1:variable}, ${2:hide-mask} )	hide_part( variable, hide-mask )	hide specific parts of user interface controls
+ignore_controller	ignore_controller	ignore_controller	ignore a controller event in a controller callback
+ignore_event	ignore_event( ${1:ID-number} )	ignore_event( ID-number )	ignore a note event in a note on or note off callback
+ignore_midi	ignore_midi	ignore_midi	Like ignore_event(), ignore_midi is a very "strong" command.<br>  Keep in mind that ignore_midi will ignore all incoming MIDI events. If you<br>  simply want to change the MIDI channel and/or any of the MIDI bytes, you can<br>  also use set_event_par().
+in_range	in_range( ${1:x}, ${2:y}, ${3:z} )	in_range( x, y, z )	Boolean Operator: true if x is between y and z
+inc	inc( ${1:x} )	inc( x )	increment an expression by 1 (x + 1)
+int	int( ${1:real value} )	int( real )	converts an integer value into a real number
+int_to_real	int_to_real( ${1:integer value} )	int_to_real( integer )	converts an integer value into a real number
+is_zone_empty	is_zone_emptyr( ${1:zone-id} )	is_zone_empty( zone-id )	Returns 1 if a zone is empty (has no sample), otherwise returns 0	6.2.0
+load_array	load_array( ${1:array-variable}, ${2:mode} )	load_array( array-variable, mode )	loads an array from an external file (.nka file)
+load_array_str	load_array_str( ${1:array-variable}, ${2:path} )	load_array_str( array-variable, path )	loads an array from an external file (.nka file) using the file's<br>  absolute path
+load_ir_sample	load_ir_sample( ${1:file-path}, ${2:slot}, ${3:generic} )	load_ir_sample( file-path, slot, generic )	loads an impulse response sample into KONTAKT's convolution effect
+load_ir_sample_m	load_ir_sample_m( ${1:arg1} )	load_ir_sample_m( arg1 )	Undocumented
+load_midi_file	load_midi_file( ${1:path} )	load_midi_file( path )	Load MIDI file from path (*Non documented)
+load_patch	load_patch( ${1:arg1}, ${2:arg2} )	load_patch( arg1, arg2 )	Undocumented
+load_performance_view	load_performance_view( ${1:filename} )	load_performance_view( filename )	Loads a performance view file (NCKP) that was created in the Creator<br>  Tools GUI Designer <filename>. The filename of the NCKP file, without<br>  extension, as a string (in quotation marks)	6.1.0
+log	log( ${1:x} )	log( x )	logarithmic function
+lsb	lsb( ${1:value} )	lsb( value )	return the LSB portion (least significant byte) of a 14 bit value
+make_instr_persistent	make_instr_persistent( ${1:variable} )	make_instr_persistent( variable )	retain the value of a variable only with the instrument
+make_perfview	make_perfview	make_perfview	activates the performance view for the respective script
+make_persistent	make_persistent( ${1:variable} )	make_persistent( variable )	retain the value of a variable whith the instrument and snapshot
+message	message( ${1:variable/text} )	message( variable/text )	display text in the status line of KONTAKT
+mf_copy_export_area	mf_copy_export_area( ${1:index} )	mf_insert_file( index )	Copies the content of MIDI export area 0 to the specified index.	6.4.0
+mf_get_buffer_size	mf_get_buffer_size()	mf_get_buffer_size()	returns the size of the MIDI event buffer
+mf_get_byte_one	mf_get_byte_one()	mf_get_byte_one()	Undocumented	SInce 6.0
+mf_get_byte_two	mf_get_byte_two()	mf_get_byte_two()	Undocumented	SInce 6.0
+mf_get_channel	mf_get_channel()	mf_get_channel()	Undocumented	SInce 6.0
+mf_get_command	mf_get_command()	mf_get_command()	Undocumented	SInce 6.0
+mf_get_event_par	mf_get_event_par( ${1:event-id}, ${2:parameter} )	mf_get_event_par( event-id, parameter )	returns the value of an event parameter
+mf_get_first	mf_get_first( ${1:track-index} )	mf_get_first( track-index )	moves the position marker to the first event in the MIDI track
+mf_get_id	mf_get_id()	mf_get_id()	returns the ID of the currently selected event (when using the navigation<br>  commands like mf_get_first(), and mf_get_next(), etc)
+mf_get_last	mf_get_last( ${1:track-index} )	mf_get_last( track-index )	moves the position marker to the last event in the MIDI track
+mf_get_last_filename	mf_get_last_filename()	mf_get_last_filename()	Returns the filename (not the full path!) of the last MIDI file that was<br>  inserted into KONTAKT, either via mf_insert_file(), or via drag and drop<br>  operation on ui_mouse_area.
+mf_get_mark	mf_get_mark( ${1:event-id}, ${2:mark} )	mf_get_mark( event-id, mark )	checks if an event is marked or not. Returns 1 if it is marked, or 0 if<br>  it is not.
+mf_get_next	mf_get_next( ${1:track-index} )	mf_get_next( track-index )	moves the position marker to the next event in the MIDI track
+mf_get_next_at	mf_get_next_at( ${1:track-index}, ${2:pos} )	mf_get_next_at( track-index, pos )	moves the position marker to the next event in the MIDI track right after<br>  the defined position.
+mf_get_note_length	mf_get_note_length()	mf_get_note_length()	Undocumented
+mf_get_num_tracks	mf_get_num_tracks()	mf_get_num_tracks()	returns the number of tracks in a MIDI object.
+mf_get_pos	mf_get_pos()	mf_get_pos()	Undocumented
+mf_get_prev	mf_get_prev( ${1:track-index} )	mf_get_prev( track-index )	moves the position marker to the previous event in the MIDI track
+mf_get_prev_at	mf_get_prev_at( ${1:track-index}, ${2:pos} )	mf_get_prev_at( track-index, pos )	moves the position marker to the first event before the defined position
+mf_get_track_idx	mf_get_track_idx()	mf_get_track_idx()	Undocumented
+mf_insert_event	mf_insert_event( ${1:track}, ${2:pos}, ${3:command}, ${4:byte1},<br>  ${5:byte2} )	mf_insert_event( track, pos, command, byte1, byte2 )	activates an inactive MIDI event in the MIDI object. However, because the<br>  command and position are defined in this command, it can be considered as an<br>  insertion.
+mf_insert_file	mf_insert_file( ${1:path}, ${2:track-offset}, ${3:position-offset},<br>  ${4:mode} )	mf_insert_file( path, track-offset, position-offset, mode )	inserts a MIDI file into the MIDI object.
+mf_remove_event	mf_remove_event( ${1:event-id} )	mf_remove_event( event-id )	deactivates an event in the MIDI object, effectively removing it
+mf_reset	mf_reset()	mf_reset()	resets the MIDI object, sets the event buffer to zero, and removes all<br>  events
+mf_set_buffer_size	mf_set_buffer_size( ${1:size} )	mf_set_buffer_size( size )	defines a number of inactive MIDI events, that can be activated and<br>  edited
+mf_set_byte_one	mf_set_byte_one( ${1:value} )	mf_set_byte_one( value )	Non documented
+mf_set_byte_two	mf_set_byte_two( ${1:value} )	mf_set_byte_two( value )	Non documented
+mf_set_channel	mf_set_channel()	mf_set_channel()	Undocumented	6
+mf_set_command	mf_set_command( ${1:value} )	mf_set_command( value )	Non documented
+mf_set_event_par	mf_set_event_par( ${1:event-id}, ${2:parameter}, ${3:value} )	mf_set_event_par( event-id, parameter, value )	sets an event parameter
+mf_set_export_area	mf_set_export_area( ${1:name}, ${2:start-pos}, ${3:end-pos},<br>  ${4:start-track}, ${5:end-track} )	mf_set_export_area( name, start-pos, end-pos, start-track, end-track )	defines the part of the MIDI object that will be exported when using a<br>  drag and drop area, or the save_midi_file() command.
+mf_set_mark	mf_set_mark( ${1:event-id}, ${2:mark}, ${3:status} )	mf_set_mark( event-id, mark, status )	marks an event, so that you may groups events together and process that<br>  group quickly
+mf_set_num_export_areas	mf_set_num_export_areas( ${1:num} )	mf_set_num_export_areas( num )	Sets the number of export areas, with a maximum of 512.	6.4.0
+mf_set_pos	mf_set_pos( ${1:value} )	mf_set_pos( value )	Non documented
+move_control	move_control( ${1:variable}, ${2:x-position}, ${3:y-position} )	move_control( variable, x-position, y-position )	position ui elements in the standard KONTAKT grid
+move_control_px	move_control_px( ${1:variable}, ${2:x-position}, ${3:y-position} )	move_control_px( variable, x-position, y-position )	position ui elements in pixels
+ms_to_ticks	ms_to_ticks( ${1:microseconds} )	ms_to_ticks( microseconds )	converts a microseconds value into a tempo dependent ticks value
+msb	msb( ${1:value} )	msb( value )	return the MSB portion (most significant byte) of a 14 bit value
+note_off	note_off( ${1:ID-number} )	note_off( ID-number )	send a note off message to a specific note
+num_elements	num_elements( ${1:array-variable} )	num_elements( array-variable )	returns the number of elements in an array
+num_slices	num_slices( ${1:arg1} )	num_slices( arg1 )	Undocumented
+num_slices_zone	num_slices_zone( ${1:zone-ID} )	num_slices_zone( zone-ID )	returns the number of slices of the specified zone
+output_channel_name	output_channel_name( ${1:output-number} )	output_channel_name( output-number )	returns the channel name for the specified output
+pgs_create_key	pgs_create_key( ${1:key-id}, ${2:size} )	pgs_create_key( key-id, size )	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.
+pgs_create_str_key	pgs_create_str_key( ${1:key-id} )	pgs_create_str_key( key-id )
+pgs_get_key_val	pgs_get_key_val( ${1:key-id}, ${2:index} )	pgs_get_key_val( key-id, index )	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.
+pgs_get_str_key_val	pgs_get_str_key_val()	pgs_get_str_key_val()	Undocumented	6
+pgs_key_exists	pgs_key_exists( ${1:key-id} )	pgs_key_exists( key-id )	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.
+pgs_set_key_val	pgs_set_key_val( ${1:key-id}, ${2:index}, ${3:value} )	pgs_set_key_val( key-id, index, value )	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.
+pgs_set_str_key_val	pgs_set_str_key_val( ${1:key-id}, ${2:stringvalue} )	pgs_set_str_key_val( key-id,<br>  stringvalue )
+pgs_str_key_exists	pgs_str_key_exists( ${1:key-id} )	pgs_str_key_exists( key-id )	It is possible to send and receive values from one script to another,<br>  discarding the usual left-to-right order by using the Program Global Storage<br>  (PGS) commands. PGS is a dynamic memory that can be read/written by any<br>  script.
+play_note	play_note( ${1:note-number}, ${2:velocity}, ${3:sample-offset},<br>  ${4:duration} )	play_note( note-number, velocity, sample-offset, duration )	generate a MIDI note, i.e. generate a note on message followed by a note<br>  off message
+pow	pow( ${1:x}, ${2:y} )	pow( x, y )	power (returns the value of x^y)
+purge_group	purge_group( ${1:group-index}, ${2:mode} )	purge_group( group-index, mode )	purges (i.e. unloads from RAM) the samples of the specified group
+random	random( ${1:min}, ${2:max} )	random( min, max )	generate a random integer in the range <min> to <max>
+read_persistent_var	read_persistent_var( ${1:variable} )	read_persistent_var( variable )	instantly reloads the value of a variable that was saved via the<br>  make_persistent()command
+real	real( ${1:integer value} )	real( integer )	converts a real number into an integer
+real_to_int	real_to_int( ${1:real value} )	real_to_int( real )	converts a real number into an integer
+redirect_midi	redirect_midi( ${1:arg1} )	redirect_midi( arg1 )	Undocumented
+redirect_output	redirect_output( ${1:ID-number}, ${2:output-type}, ${3:index} )	redirect_output( ID-number, output-type, index )	Routes the audio signal of the specified event to a specific output or<br>  bus
+remove_keyrange	remove_keyrange( ${1:note-nr} )	remove_keyrange( note-nr )	assigns a text string to the specified range of keys
+reset_engine	reset_engine()	reset_engine()	Undocumented
+reset_ksp_timer	reset_ksp_timer	reset_ksp_timer	resets the KSP timer ($KSP_TIMER) to zero
+reset_rls_trig_counter	reset_rls_trig_counter( ${1:note} )	reset_rls_trig_counter( note )	dresets the release trigger counter (used by the release trigger system<br>  script)
+round	round( ${1:x} )	round( x )	round (round to nearest) round(2.3) = 2.0 round(2.8) = 3.0
+save_array	save_array( ${1:array-variable}, ${2:mode} )	save_array( array-variable, mode )	saves an array to an external file (i.e. an .nka file)
+save_array_str	save_array_str( ${1:array-variable}, ${2:path} )	save_array_str( array-variable, path )	saves an array to an external file (i.e. an .nka file), using the<br>  specified absolute path
+save_midi_file	save_midi_file( ${1:path} )	save_midi_file( path )	saves a MIDI file with a range specified by the mf_set_export_area()<br>  command.
+search	search( ${1:array-variable}, ${2:value} )	search( array-variable, value )	searches the specified array for the specified value and returns the<br>  index of its first position.
+set_control_help	set_control_help( ${1:variable}, ${2:text} )	set_control_help( variable, text )	assigns a text string to be displayed when hovering the ui control. The<br>  text will appear in KONTAKT's info pane.
+set_control_par	set_control_par( ${1:ui-ID}, ${2:control-parameter}, ${3:value} )	set_control_par( ui-ID, control-parameter, value )	change various parameters of the specified gui control
+set_control_par_arr	set_control_par_arr( ${1:ui-ID}, ${2:control-parameter}, ${3:value},<br>  ${4:index} )	set_control_par_arr( ui-ID, control-parameter, value, index )	change various parameters of an element within an array based gui control<br>  (for example: cursors in the XY pad)
+set_control_par_real_arr	set_control_par_real_arr( ${1:ui-ID}, ${2:control-parameter}, ${3:value},<br>  ${4:index} )	set_control_par_real_arr( ui-ID, control-parameter, value, index )	change various parameters of an element within an array-based UI widget,<br>  e.g. ui_xy cursors.
+set_control_par_str	set_control_par_str_arr( ${1:ui-ID}, ${2:CONTROL_PAR_xxx}, ${3:value} )	set_control_par_str_arr( ui-ID, CONTROL_PAR_xxx, value )	A variation of the command for usage with text strings. ( see:<br>  set_control_par() Remarks)
+set_control_par_str_arr	set_control_par_str_arr( ${1:ui-ID}, ${2:control-parameter}, ${3:value},<br>  ${4:index} )	set_control_par_str_arr( ui-ID, control-parameter, value, index )	A variation of the command for usage with text strings. ( see:<br>  set_control_par_arr() Remarks)
+set_controller	set_controller( ${1:MIDI CC number/$VCC_PITCH_BEND/$VCC_MONO}, ${2:value}<br>  )	set_controller( MIDI CC number/$VCC_PITCH_BEND/$VCC_MONO, value )	send a MIDI CC, pitchbend or channel pressure value
+set_engine_par	set_engine_par( ${1:parameter}, ${2:value}, ${3:group}, ${4:slot},<br>  ${5:generic} )	set_engine_par( parameter, value, group, slot, generic )	control automatable KONTAKT parameters and bypass buttons
+set_engine_par_m	set_engine_par_m( ${1:arg1}, ${2:arg2}, ${3:arg3}, ${4:arg4}, ${5:arg5} )	set_engine_par_m( arg1, arg2, arg3, arg4, arg5 )	Undocumented
+set_event_mark	set_event_mark( ${1:ID-number}, ${2:bit-mark} )	set_event_mark( ID-number, bit-mark )	Assign the specified event to a specific event group
+set_event_par	set_event_par( ${1:ID-number}, ${2:parameter}, ${3:value} )	set_event_par( ID-number, parameter, value )	assign a parameter to a specific event
+set_event_par_arr	set_event_par_arr( ${1:ID-number}, ${2:parameter}, ${3:value},<br>  ${4:group-index} )	set_event_par_arr( ID-number, parameter, value, group-index )	special form of set_event_par(), used to set the group allow state of the<br>  specified event
+set_key_color	set_key_color( ${1:note-nr}, ${2:key-color-constant} )	set_key_color( note-nr, key-color-constant )	sets the color of the specified key (i.e. MIDI note) on the KONTAKT<br>  keyboard. use $KEY_COLOR_****
+set_key_name	set_key_name( ${1:note-nr}, ${2:name} )	set_key_name( note-nr, name )	assigns a text string to the specified key
+set_key_pressed	set_key_pressed( ${1:note-nr}, ${2:value} )	set_key_pressed( note-nr, value )	sets the trigger state of the specified key on KONTAKT's keyboard either<br>  to pressed/on (1) or released/off (0)
+set_key_pressed_support	set_key_pressed_support( ${1:mode} )	set_key_pressed_support( mode )	sets the pressed state support mode for KONTAKT'S keyboard. The available<br>  modes are:<br>    0: KONTAKT handles all pressed states, set_key_pressed() commands are<br>  ignored (default mode)<br>    1: KONTAKT's keyboard is only affected by set_key_pressed() commands
+set_key_type	set_key_type( ${1:note-nr}, ${2:key-type-constant} )	set_key_type( note-nr, key-type-constant )	assigns a key type to the specified key.<br>    The following key types are available:<br>    $NI_KEY_TYPE_DEFAULT (i.e. normal mapped notes that produce sound)<br>    $NI_KEY_TYPE_CONTROL (i.e. key switches or other notes that do not produce<br>  sound)<br>    $NI_KEY_TYPE_NONE (resets the key to its normal KONTAKT behaviour)
+set_keyrange	set_keyrange( ${1:min-note}, ${2:max-note}, ${3:name} )	set_keyrange( min-note, max-note, name )	assigns a text string to the specified range of keys.
+set_knob_defval	set_knob_defval( ${1:variable}, ${2:value} )	set_knob_defval( variable, value )	assign a default value to a knob to which the knob is reset when<br>  Cmd-clicking (mac) or Ctrl-clicking (PC) the knob.
+set_knob_label	set_knob_label( ${1:variable}, ${2:text} )	set_knob_label( variable, text )	assign a text string to a knob
+set_knob_unit	set_knob_unit( ${1:variable}, ${2:knob-unit-constant} )	set_knob_unit( variable, knob-unit-constant )	assign a unit mark to a knob.
+set_listener	set_listener( ${1:signal-type}, ${2:parameter} )	set_listener( signal-type, parameter )	Sets the signals on which the listener callback should react to. Can only<br>  be used in the init callback.
+set_loop_par	set_loop_par( ${1:zone-id}, ${2:loop-index}, ${3:parameter}, ${4:value} )	set_loop_par( zone-id, loop_index, parameter, value )	Sets the loop parameters of a user zone	6.2.0
+set_map_editor_event_color	set_map_editor_event_color( ${1:hex-value} )	set_map_editor_event_color( hex-value )	Assigns the specified color to events generated in the current script<br>  slot, visible in KONTAKT's Mapping Editor.
+set_menu_item_str	set_menu_item_str( ${1:menu-id}, ${2:index}, ${3:string} )	set_menu_item_str( menu-id, index, string )	sets the value of a menu entry.
+set_menu_item_value	set_menu_item_value( ${1:menu-id}, ${2:index}, ${3:value} )	set_menu_item_value( menu-id, index, value )	sets the value of a menu entry.
+set_menu_item_visibility	set_menu_item_visibility( ${1:menu-id}, ${2:index}, ${3:visibility} )	set_menu_item_visibility( menu-id, index, visibility )	sets the visibility of a menu entry.
+set_midi	set_midi( ${1:channel}, ${2:command}, ${3:byte-1}, ${4:byte-2} )	set_midi( channel, command, byte1, byte2 )	create any type of MIDI event. If you simply want to change the MIDI<br>  channel and/or any of the MIDI bytes, you can also use set_event_par().
+set_note_controller	set_note_controller( ${1:controller}, ${2:note-number}, ${3:value} )	set_note_controller( controller, note-number, value )	Sends a MIDI 2.0 Registered Per-Note Controller, MIDI 2.0 Assignable<br>  Per-Note Controller or MIDI 2.0 Per-Note Pitch Bend message.	8.0.0
+set_nrpn	set_nrpn( ${1:address}, ${2:value} )	set_nrpn( address, value )	send a nrpn message
+set_num_user_zones	set_num_user_zones(${1:number_of_user_zones} )	set_num_user_zones( number_of_user_zones )	Creates empty user zones	6.2.0
+set_poly_at	set_poly_at( ${1:note-number}, ${2:value} )	set_poly_at( note-number, value )	Sends a MIDI Polyphonic Aftertouch message.	8.0.0
+set_rpn	set_rpn( ${1:address}, ${2:value} )	set_rpn( address, value )	send a rpn message
+set_sample	set_sample( ${1:zone-id}, ${2:sample-path} )	set_sample( zone-id, sample-path )	Sets the user sample in a zone	6.2.0
+set_script_title	set_script_title( ${1:text} )	set_script_title( text )	set the script title
+set_skin_offset	set_skin_offset( ${1:offset-in-pixel} )	set_skin_offset( offset-in-pixel )	offsets the chosen background picture file by the specified number of<br>  pixels
+set_snapshot_type	set_snapshot_type( ${1:type} )	set_snapshot_type( type )	configures the KSP processor behavior of all five slots when a snapshot<br>  is recalled
+set_table_steps_shown	set_table_steps_shown( ${1:variable}, ${2:num-of-steps} )	set_table_steps_shown( variable, num-of-steps )	changes the number of displayed columns in an ui table
+set_text	set_text( ${1:variable}, ${2:text} )	set_text( variable, text )	when applied to a label: delete the text currently visible in the<br>  specified label and add new text.<br>    when applied to knobs, buttons, switches and value edits: set the display<br>  name of the ui element.
+set_ui_color	set_ui_color( ${1:hex-values}, ${2:text} )	set_ui_color( hex-values, text )	set the main background color of the performance view
+set_ui_height	set_ui_height( ${1:height} )	set_ui_height( height )	set the height of a script performance view in grid units
+set_ui_height_px	set_ui_height_px( ${1:height} )	set_ui_height_px( height )	set the height of a script performance view in pixels
+set_ui_wf_property	set_ui_wf_property( ${1:variable}, ${2:property}, ${3:index}, ${4:value}<br>  )	set_ui_wf_property( variable, property, index, value )	sets different properties for the waveform control
+set_ui_width_px	set_ui_width_px( ${1:width} )	set_ui_width_px( width )	set the width of a script performance view in pixels
+set_voice_limit	set_voice_limit( ${1:voice-type}, ${2:value} )	set_voice_limit( voice-type, value )	sets the voice limit for the Time Machine Pro mode of the source module
+set_zone_par	set_zone_par( ${1:zone-id}, ${2:parameter}, ${3:value} )	set_zone_par( zone-id, parameter, value )	Sets the user zone parameters	6.2.0
+sgn	sgn( ${1:x} )	sgn( x )	Signum function (returns -1 if the number is negative, 0 if it's zero, 1<br>  if it's positive)
+sh_left	sh_left( ${1:expression}, ${2:shift-bits} )	sh_left( expression, shift-bits )	shifts the bits in <expression> by the amount of <shift-bits><br>  to the left
+sh_right	sh_right( ${1:expression}, ${2:shift-bits} )	sh_right( expression, shift-bits )	shifts the bits in <expression> by the amount of <shift-bits><br>  to the right
+show_library_tab	show_library_tab	show_library_tab	Undocumented
+signbit	signbit( ${1:x} )	signbit( x )	Sign bit (returns 1 if the number is negative, 0 otherwise)
+sin	sin( ${1:x} )	sin( x )	sine function
+slice_idx_loop_end	slice_idx_loop_end( ${1:arg1}, ${2:arg2} )	slice_idx_loop_end( arg1, arg2 )	Undocumented
+slice_idx_loop_start	slice_idx_loop_start( ${1:arg1}, ${2:arg2} )	slice_idx_loop_start( arg1, arg2 )	Undocumented
+slice_length	slice_length( ${1:arg1}, ${2:arg2} )	slice_length( arg1, arg2 )	Undocumented
+slice_loop_count	slice_loop_count( ${1:arg1}, ${2:arg2} )	slice_loop_count( arg1, arg2 )	Undocumented
+slice_start	slice_start( ${1:arg1}, ${2:arg2} )	slice_start( arg1, arg2 )	Undocumented
+sort	sort( ${1:array-variable}, ${2:direction} )	sort( array-variable, direction )	searches the specified array for the specified value and returns the<br>  index of its first position.
+sqrt	sqrt( ${1:x} )	sqrt( x )	square root
+stop_wait	stop_wait( ${1:callback-ID}, ${2:parameter} )	stop_wait( callback-ID, parameter )	stops wait commands in the specified callback
+tan	tan( ${1:x} )	tan( x )	tangent function
+ticks_to_ms	ticks_to_ms( ${1:ticks} )	ticks_to_ms( ticks )	converts a tempo dependent ticks value into a microseconds value
+unload_slot	unload_slot( ${1:arg1} )	unload_slot( arg1 )	Undocumented
+wait	wait( ${1:wait-time} )	wait( wait-time )	pauses the callback for the specified time in microseconds
+wait_async	wait_async( ${1:asyncID} )	wait_async( asyncID )	waits until the async command identified by the <asyncID> is<br>  finished	6.2.0
+wait_ticks	wait_ticks( ${1:wait-time} )	wait_ticks( wait-time )	pauses the callback for the specified time in ticks
+watch_array_idx	watch_array_idx( ${1:arr}, ${2:idx} )	watch_array_idx( arr, idx )	Variable watching through Creator Tools	6
+watch_var	watch_var( ${1:var} )	watch_var( var )	Variable watching through Creator Tools	6
+will_never_terminate	will_never_terminate( ${1:event-id} )	will_never_terminate( event-id )
+zone_slice_idx_loop_end	zone_slice_idx_loop_end( ${1:zone-ID}, ${2:loop-index} )	zone_slice_idx_loop_end( zone-ID, loop-index )	returns the index number of the slice at the loop end
+zone_slice_idx_loop_start	zone_slice_idx_loop_start( ${1:zone-ID}, ${2:loop-index} )	zone_slice_idx_loop_start( zone-ID, loop-index )	returns the index number of the slice at the loop start
+zone_slice_length	zone_slice_length( ${1:zone-ID}, ${2:slice-index} )	zone_slice_length( zone-ID, slice-index )	returns the length in microseconds of the specified slice with respect to<br>  the current tempo
+zone_slice_loop_count	zone_slice_loop_count( ${1:zone-ID}, ${2:loop-index} )	zone_slice_loop_count( zone-ID, loop-index )	returns the loop count of the specified loop
+zone_slice_start	zone_slice_start( ${1:zone-ID}, ${2:slice-index} )	zone_slice_start( zone-ID, slice-index )	returns the absolute start point of the specified slice in microseconds,<br>  independent of the current tempo

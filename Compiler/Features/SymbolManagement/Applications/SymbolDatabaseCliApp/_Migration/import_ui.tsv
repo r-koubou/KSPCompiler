@@ -1,0 +1,17 @@
+# Name	Reserved	Type	Description	built-into-version	Require Initializer	Arg1	Arg1 Description	Arg2	Arg2 Description	Arg3	Arg3 Description
+ui_button	true	I	Creates a button in the performance view.	N/A	false
+ui_file_selector	true	I	Creates a file selector in the performance view.	N/A	false
+ui_label	true	I	Creates a text or image label in the performance view.	N/A	true	$grid_width	The width of the label in grid units (1 to 6)	$grid_height	The height of the label in grid units (1 to 16)
+ui_knob	true	I	Creates a knob in the performance view.	N/A	true	$min	The minimum value of the knob.	$max	The maximum value of the knob.	$display_ratio	The knob value is divided by <display-ratio> for display purposes.
+ui_level_meter	true	I	Creates a level meter in the performance view.	N/A	false
+ui_menu	true	I	Creates a drop-down menu in the performance view.	N/A	false
+ui_mouse_area	true	I	Creates a mouse area in the performance view.	N/A	false
+ui_panel	true	I	Creates a panel for grouping widgets in the performance view.	N/A	false
+ui_slider	true	I	Creates a slider in the performance view.	N/A	true	$min	The minimum value of the slider.	$max	The maximum value of the slider.
+ui_switch	true	I	Creates a switch in the performance view.	N/A	false
+ui_table	true	I[]	Creates a table in the performance view.	N/A	true	$width	The width of the table in grid units (1 ... 6).	$height	The height of the table in grid units (1 ... 16).	$range	The range of the table. If negative values are used, a bipolar table is created.
+ui_text_edit	true	S	Creates a text edit field in the performance view.	N/A	false
+ui_value_edit	true	I	Creates a value edit field (number box) in the performance view.	N/A	true	$min	The minimum value of the value edit.	$max	The maximum value of the value edit.	$display_ratio	The value is divided by <display-ratio> for display purposes.
+ui_waveform	true	I	Creates a waveform display for displaying samples and optionally their slices. This widget can also be used to control specific parameters per slice and for MIDI drag and drop functionality.	N/A	true	$width	The width of the waveform in grid units (1 ... 6).	$height	The height of the waveform in grid units (1 ... 16).
+ui_wavetable	true	I	Creates a wavetable display in the performance view, visualizing the state of a zone which is used as a wavetable.	N/A	false
+ui_xy	true	R[]	Creates an XY pad in the performance view.	N/A	false

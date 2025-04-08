@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <LangVersion>$$LANGVER$$</LangVersion>
+        <TargetFramework>$$FRAMEWORK$$</TargetFramework>
+        <Nullable>enable</Nullable>
+        <Copyright>$$AUTHOR$$</Copyright>
+        <Company>$$AUTHOR$$</Company>
+        <Product>$$PROJECT_NAME$$</Product>
+        <AssemblyName>$$PROJECT_NAME$$</AssemblyName>
+        <RootNamespace>$$PROJECT_NAME$$</RootNamespace>
+    </PropertyGroup>
+
+</Project>

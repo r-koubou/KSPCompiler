@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <LangVersion>default</LangVersion>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <Nullable>enable</Nullable>
+        <Copyright>R-Koubou</Copyright>
+        <Company>R-Koubou</Company>
+        <Product>KSPCompiler.Features.SymbolManagement.UseCase</Product>
+        <AssemblyName>KSPCompiler.Features.SymbolManagement.UseCase</AssemblyName>
+        <RootNamespace>KSPCompiler.Features.SymbolManagement.UseCase</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Shared\Shared.IO.Abstractions\Shared.IO.Abstractions.csproj" />
+      <ProjectReference Include="..\..\..\Shared\Shared\Shared.csproj" />
+      <ProjectReference Include="..\Gateways\Gateways.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="ApplicationServices\" />
+    </ItemGroup>
+
+</Project>

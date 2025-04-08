@@ -1,0 +1,64 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <LangVersion>default</LangVersion>
+        <TargetFramework>net9.0</TargetFramework>
+        <TieredCompilationQuickJit>false</TieredCompilationQuickJit>
+        <Nullable>enable</Nullable>
+        <Copyright>R-Koubou</Copyright>
+        <Company>R-Koubou</Company>
+        <Product>KSPCompiler.Features..Applications.LanguageServer.LanguageServerFramework</Product>
+        <AssemblyName>KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework</AssemblyName>
+        <RootNamespace>KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="EmmyLua.LanguageServer.Framework" Version="0.8.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\Compilation\Gateways\Gateways.csproj"/>
+        <ProjectReference Include="..\..\..\Compilation\Infrastructures\BuiltInSymbolLoader.Yaml\BuiltInSymbolLoader.Yaml.csproj"/>
+        <ProjectReference Include="..\..\..\Compilation\Infrastructures\Parser.Antlr\Parser.Antlr.csproj"/>
+        <ProjectReference Include="..\..\..\Compilation\UseCase\UseCase.csproj"/>
+        <ProjectReference Include="..\..\UseCase\UseCase.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\..\..\..\..\Data\Symbols\callbacks.yaml">
+            <Link>Data\Symbols\callbacks.yaml</Link>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Include="..\..\..\..\..\Data\Symbols\commands.yaml">
+            <Link>Data\Symbols\commands.yaml</Link>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Include="..\..\..\..\..\Data\Symbols\uitypes.yaml">
+            <Link>Data\Symbols\uitypes.yaml</Link>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Include="..\..\..\..\..\Data\Symbols\variables.yaml">
+            <Link>Data\Symbols\variables.yaml</Link>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Include="..\..\..\..\..\LICENSE">
+            <Link>LICENSE</Link>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Include="..\..\..\..\..\NOTICE.md">
+            <Link>NOTICE.md</Link>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="ksp_lsp.bat">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="ksp_lsp">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="README.md">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+</Project>

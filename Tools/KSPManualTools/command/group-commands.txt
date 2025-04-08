@@ -1,0 +1,6 @@
+allow_group(group-index)
+disallow_group(group-index)
+get_group_idx(group-name)
+get_purge_state(group-index)
+group_name(group-index)
+purge_group(group-index,mode)
