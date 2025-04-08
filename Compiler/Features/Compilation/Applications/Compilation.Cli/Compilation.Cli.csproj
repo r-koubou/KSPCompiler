@@ -58,7 +58,7 @@
         <None Update="kspc.bat">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
-        <None Update="kspc.sh">
+        <None Update="kspc">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
         <None Update="README.md">

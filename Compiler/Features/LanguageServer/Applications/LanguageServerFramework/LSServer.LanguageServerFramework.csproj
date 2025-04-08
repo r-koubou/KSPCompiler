@@ -53,7 +53,7 @@
         <None Update="ksp_lsp.bat">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
-        <None Update="ksp_lsp.sh">
+        <None Update="ksp_lsp">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
         <None Update="README.md">
