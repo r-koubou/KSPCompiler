@@ -52,8 +52,8 @@ jobs:
 
     - name: Setup Publish Directory Variable
       run: |
-        echo "PUBLISH_DIR=${{ env.BASE_DIR }}/${{ env.PUBLISH_DIRNAME }}/${{ env.PREFIX }}" >> $GITHUB_ENV
-        echo "PUBLISH_RELATIVE_DIR_FROM_BASE=${{ env.PUBLISH_DIRNAME }}/${{ env.PREFIX }}" >> $GITHUB_ENV
+        echo "PUBLISH_DIR=${{ env.BASE_DIR }}/${{ env.PUBLISH_DIRNAME }}" >> $GITHUB_ENV
+        echo "PUBLISH_RELATIVE_DIR_FROM_BASE=${{ env.PUBLISH_DIRNAME }}" >> $GITHUB_ENV
 
     - name: Setup Version Variable
       run: |
