@@ -64,18 +64,6 @@ jobs:
         echo "VERSION_INFO_PATH=${{ env.PUBLISH_DIR }}/VERSION.txt" >> $GITHUB_ENV
 
     #----------------------------------------------------------
-    # Setup Publish Directory
-    #----------------------------------------------------------
-    - name: Create publish directory & version information file
-      run: |
-        mkdir -p ${{ env.PUBLISH_DIR }}
-        echo "Version: ${{ env.BUILD_VERSION }}" > ${{ env.VERSION_INFO_PATH }}
-        echo "Build date: $(date)" >> ${{ env.VERSION_INFO_PATH }}
-        echo "Branch: ${{ github.ref_name }}" >> ${{ env.VERSION_INFO_PATH }}
-        echo "Commit: ${{ github.sha }}" >> ${{ env.VERSION_INFO_PATH }}
-        echo "Build Configuration: ${{ inputs.build-configuration }}" >> ${{ env.VERSION_INFO_PATH }}
-
-    #----------------------------------------------------------
     # Checkout
     #----------------------------------------------------------
     - name: Checkout
@@ -97,6 +85,18 @@ jobs:
         pushd ${{ env.BASE_DIR }}
         dotnet publish -p:Version=${{ env.BUILD_VERSION }} -p:AssemblyVersion=${{ env.BUILD_VERSION }} -c ${{ inputs.build-configuration }} -o ${{ env.PUBLISH_RELATIVE_DIR_FROM_BASE }}
         popd
+
+    #----------------------------------------------------------
+    # Create Version Information File
+    #----------------------------------------------------------
+    - name: Create Version information file
+      run: |
+        mkdir -p ${{ env.PUBLISH_DIR }}
+        echo "Version: ${{ env.BUILD_VERSION }}" > ${{ env.VERSION_INFO_PATH }}
+        echo "Build date: $(date)" >> ${{ env.VERSION_INFO_PATH }}
+        echo "Branch: ${{ github.ref_name }}" >> ${{ env.VERSION_INFO_PATH }}
+        echo "Commit: ${{ github.sha }}" >> ${{ env.VERSION_INFO_PATH }}
+        echo "Build Configuration: ${{ inputs.build-configuration }}" >> ${{ env.VERSION_INFO_PATH }}
 
     #----------------------------------------------------------
     # Create Artifact
