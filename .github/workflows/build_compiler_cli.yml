@@ -52,8 +52,8 @@ jobs:
 
     - name: Setup Publish Directory Variable
       run: |
-        echo "PUBLISH_DIR=${{ env.BASE_DIR }}/${{ env.PUBLISH_DIRNAME }}/${{ env.PREFIX }}" >> $GITHUB_ENV
-        echo "PUBLISH_RELATIVE_DIR_FROM_BASE=${{ env.PUBLISH_DIRNAME }}/${{ env.PREFIX }}" >> $GITHUB_ENV
+        echo "PUBLISH_DIR=${{ env.BASE_DIR }}/${{ env.PUBLISH_DIRNAME }}" >> $GITHUB_ENV
+        echo "PUBLISH_RELATIVE_DIR_FROM_BASE=${{ env.PUBLISH_DIRNAME }}" >> $GITHUB_ENV
 
     - name: Setup Version Variable
       run: |
@@ -104,5 +104,5 @@ jobs:
     - name: Create Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ env.PREFIX }}-${{ inputs.build-configuration }}-${{ env.BUILD_VERSION }}
+        name: ${{ env.PREFIX }}-${{ inputs.build-configuration }}-v${{ env.BUILD_VERSION }}
         path: ${{ env.BASE_DIR }}/${{ env.PUBLISH_DIRNAME }}
