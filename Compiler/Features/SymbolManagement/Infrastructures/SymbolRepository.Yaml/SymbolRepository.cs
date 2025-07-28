@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using KSPCompiler.Features.SymbolManagement.Gateways;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
+using KSPCompiler.Shared.EventEmitting;
 using KSPCompiler.Shared.IO.Abstractions.Symbol;
 
 namespace KSPCompiler.SymbolManagement.Repository.Yaml;
@@ -29,9 +30,9 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
         ISymbolExporter<TSymbol>? repositoryExporter = null,
         bool autoFlush = true )
     {
-        RepositoryExporter  = repositoryExporter;
-        Models    = repositoryImporter == null ? [] : ImportImpl( repositoryImporter );
-        AutoFlush = autoFlush;
+        RepositoryExporter = repositoryExporter;
+        Models             = repositoryImporter == null ? [] : ImportImpl( repositoryImporter );
+        AutoFlush          = autoFlush;
     }
 
     private void CheckDisposed()
@@ -118,6 +119,8 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
             Models.Add( symbol.Id, symbol );
             Dirty = true;
 
+            Console.WriteLine( $"Created: {symbol.Name.Value}");
+
             return new StoreResult(
                 success: true,
                 createdCount: 1,
@@ -126,7 +129,7 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
             );
         }
 
-        Console.WriteLine( $"{symbol.Name.Value} already exists, updating..." );
+        Console.WriteLine( $"Updated: {symbol.Name.Value}" );
 
         symbol.Id        = existingSymbol.Id;
         symbol.CreatedAt = existingSymbol.CreatedAt;
@@ -228,6 +231,8 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
 
         Models.Remove( existingSymbol.Id );
         Dirty = true;
+
+        Console.WriteLine( $"Deleted: {symbol.Name.Value}" );
 
         await Task.CompletedTask;
 
