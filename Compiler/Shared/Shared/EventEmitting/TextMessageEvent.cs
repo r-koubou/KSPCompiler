@@ -1,6 +1,6 @@
 namespace KSPCompiler.Shared.EventEmitting;
 
-public sealed class TextMessageEvent( string message ) : IEvent<string>
+public class TextMessageEvent( string message ) : IEvent<string>
 {
     public string Message { get; } = message;
 
