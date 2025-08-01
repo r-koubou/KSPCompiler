@@ -18,6 +18,8 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
     protected Dictionary<Guid, TSymbol> Models { get; }
     protected ISymbolExporter<TSymbol>? RepositoryExporter { get; }
 
+    protected IEventEmitter? EventEmitter { get; }
+
     private bool Disposed { get; set; }
     private bool Dirty { get; set; }
     public bool AutoFlush { get; set; }
@@ -28,9 +30,11 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
     protected SymbolRepository(
         ISymbolImporter<TSymbol>? repositoryImporter = null,
         ISymbolExporter<TSymbol>? repositoryExporter = null,
+        IEventEmitter? eventEmitter = null,
         bool autoFlush = true )
     {
         RepositoryExporter = repositoryExporter;
+        EventEmitter       = eventEmitter;
         Models             = repositoryImporter == null ? [] : ImportImpl( repositoryImporter );
         AutoFlush          = autoFlush;
     }
@@ -119,7 +123,7 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
             Models.Add( symbol.Id, symbol );
             Dirty = true;
 
-            Console.WriteLine( $"Created: {symbol.Name.Value}");
+            EventEmitter?.Emit( new TextMessageEvent( $"Created: {symbol.Name.Value}" ) );
 
             return new StoreResult(
                 success: true,
@@ -129,7 +133,7 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
             );
         }
 
-        Console.WriteLine( $"Updated: {symbol.Name.Value}" );
+        EventEmitter?.Emit( new TextMessageEvent( $"Updated: {symbol.Name.Value}" ) );
 
         symbol.Id        = existingSymbol.Id;
         symbol.CreatedAt = existingSymbol.CreatedAt;
@@ -232,7 +236,7 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
         Models.Remove( existingSymbol.Id );
         Dirty = true;
 
-        Console.WriteLine( $"Deleted: {symbol.Name.Value}" );
+        EventEmitter?.Emit( new TextMessageEvent( $"Deleted: {symbol.Name.Value}" ) );
 
         await Task.CompletedTask;
 
