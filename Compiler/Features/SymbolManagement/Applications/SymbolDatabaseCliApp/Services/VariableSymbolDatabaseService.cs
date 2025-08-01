@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using KSPCompiler.Features.SymbolManagement.Gateways;
 using KSPCompiler.Features.SymbolManagement.UseCase.ApplicationServices;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
+using KSPCompiler.Shared.EventEmitting;
 using KSPCompiler.Shared.IO.Local;
 using KSPCompiler.Shared.IO.Symbols.Tsv.Variables;
 using KSPCompiler.Shared.IO.Symbols.Yaml.Variables;
@@ -13,7 +14,9 @@ using KSPCompiler.SymbolManagement.Repository.Yaml;
 namespace KSPCompiler.Features.SymbolManagement.Applications.SymbolDbManager.Services;
 
 // ReSharper disable LocalizableElement
-public class VariableSymbolDatabaseService : IVariableSymbolDatabaseService
+public class VariableSymbolDatabaseService(
+    IEventEmitter? eventEmitter = null
+) : IVariableSymbolDatabaseService
 {
     public async Task<ImportResult> ImportSymbolsAsync( string databaseFilePath, string importFilePath, CancellationToken cancellationToken = default )
     {
@@ -25,7 +28,8 @@ public class VariableSymbolDatabaseService : IVariableSymbolDatabaseService
 
             using var repository = new VariableSymbolRepository(
                 repositoryImporter: repositoryReader,
-                repositoryExporter: repositoryWriter
+                repositoryExporter: repositoryWriter,
+                eventEmitter: eventEmitter
             );
 
             var service = new SymbolDatabaseApplicationService<VariableSymbol>( repository );
@@ -50,7 +54,8 @@ public class VariableSymbolDatabaseService : IVariableSymbolDatabaseService
 
             using var repository = new VariableSymbolRepository(
                 repositoryImporter: repositoryReader,
-                repositoryExporter: repositoryWriter
+                repositoryExporter: repositoryWriter,
+                eventEmitter: eventEmitter
             );
 
             var service = new SymbolDatabaseApplicationService<VariableSymbol>( repository );
@@ -78,7 +83,8 @@ public class VariableSymbolDatabaseService : IVariableSymbolDatabaseService
 
             using var repository = new VariableSymbolRepository(
                 repositoryImporter: repositoryReader,
-                repositoryExporter: repositoryWriter
+                repositoryExporter: repositoryWriter,
+                eventEmitter: eventEmitter
             );
 
             var service = new SymbolDatabaseApplicationService<VariableSymbol>( repository );

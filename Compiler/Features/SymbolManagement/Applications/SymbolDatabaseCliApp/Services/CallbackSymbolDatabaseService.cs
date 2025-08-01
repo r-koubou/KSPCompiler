@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using KSPCompiler.Features.SymbolManagement.Gateways;
 using KSPCompiler.Features.SymbolManagement.UseCase.ApplicationServices;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
+using KSPCompiler.Shared.EventEmitting;
 using KSPCompiler.Shared.IO.Local;
 using KSPCompiler.Shared.IO.Symbols.Tsv.Callbacks;
 using KSPCompiler.Shared.IO.Symbols.Yaml.Callbacks;
@@ -13,8 +14,9 @@ using KSPCompiler.SymbolManagement.Repository.Yaml;
 namespace KSPCompiler.Features.SymbolManagement.Applications.SymbolDbManager.Services;
 
 // ReSharper disable LocalizableElement
-
-public class CallbackSymbolDatabaseService : ICallbackSymbolDatabaseService
+public class CallbackSymbolDatabaseService(
+    IEventEmitter? eventEmitter = null
+) : ICallbackSymbolDatabaseService
 {
     public async Task<ImportResult> ImportSymbolsAsync( string databaseFilePath, string importFilePath, CancellationToken cancellationToken = default )
     {
@@ -26,7 +28,8 @@ public class CallbackSymbolDatabaseService : ICallbackSymbolDatabaseService
 
             using var repository = new CallbackSymbolRepository(
                 repositoryImporter: repositoryReader,
-                repositoryExporter: repositoryWriter
+                repositoryExporter: repositoryWriter,
+                eventEmitter: eventEmitter
             );
 
             var service = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
@@ -51,7 +54,8 @@ public class CallbackSymbolDatabaseService : ICallbackSymbolDatabaseService
 
             using var repository = new CallbackSymbolRepository(
                 repositoryImporter: repositoryReader,
-                repositoryExporter: repositoryWriter
+                repositoryExporter: repositoryWriter,
+                eventEmitter: eventEmitter
             );
 
             var service = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );
@@ -79,7 +83,8 @@ public class CallbackSymbolDatabaseService : ICallbackSymbolDatabaseService
 
             using var repository = new CallbackSymbolRepository(
                 repositoryImporter: repositoryReader,
-                repositoryExporter: repositoryWriter
+                repositoryExporter: repositoryWriter,
+                eventEmitter: eventEmitter
             );
 
             var service = new SymbolDatabaseApplicationService<CallbackSymbol>( repository );

@@ -11,6 +11,8 @@ from bs4 import BeautifulSoup
 OUTPUT_DIR = 'output'
 OUTPUT_PREFIX = 'variables'
 
+OUTPUT_PATH = os.path.join(OUTPUT_DIR, f'{OUTPUT_PREFIX}.txt')
+
 url_list: List[str] = [
     'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/control-parameters',
     'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/engine-parameters',
@@ -31,6 +33,16 @@ def read_html(url: str) -> str:
         with open(url, 'r') as file:
             return file.read()
 
+def read_previous() -> List[str]:
+    """
+    Read previously extracted variables from a file.
+    """
+    result = []
+    previous_path = OUTPUT_PATH
+    if os.path.exists(previous_path):
+        with open(previous_path, 'r') as file:
+            result = [line.strip() for line in file.readlines()]
+    return result
 
 def main(argv: List[str]) -> None:
     if not os.path.exists(OUTPUT_DIR):
@@ -38,6 +50,7 @@ def main(argv: List[str]) -> None:
 
     regex_command = re.compile(r'\s*([\$|\%|\~|\?|\@|\!][A-Z0-9_]+)')
     variables: List[str] = []
+    previous_variables: List[str] = read_previous()
 
     for url in url_list:
 
@@ -63,12 +76,22 @@ def main(argv: List[str]) -> None:
     # Remove duplicates
     # and sort the variables
     variables = list(dict.fromkeys(variables))
-    output_path = os.path.join(OUTPUT_DIR, f'{OUTPUT_PREFIX}.txt')
+    output_path = OUTPUT_PATH
 
     # Export the variables to a file
     with open(output_path, 'w') as file:
         for i in variables:
             file.write(f"{i}\n")
+
+    # Check for new variables
+    if len(previous_variables) > 0:
+        new_variables = set(variables) - set(previous_variables)
+        if len(new_variables) > 0:
+            print(f'New variables ({len(new_variables)}) found:')
+            print('-' * 20)
+            for variable in new_variables:
+                print(variable)
+            print('-' * 20)
 
     print(f"Total variables extracted: {len(variables)}")
 
