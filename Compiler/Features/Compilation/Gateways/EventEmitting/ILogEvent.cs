@@ -1,6 +1,7 @@
+using KSPCompiler.Shared.EventEmitting;
 using KSPCompiler.Shared.Text;
 
-namespace KSPCompiler.Shared.EventEmitting;
+namespace KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 
 public interface ILogEvent : IEvent
 {
