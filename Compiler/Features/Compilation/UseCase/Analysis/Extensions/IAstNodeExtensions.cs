@@ -24,4 +24,9 @@ public static class IAstNodeExtensions
     {
         return new CompilationInfoEvent( string.Format( message, argv ), self.Position );
     }
+
+    public static CompilationDebugEvent AsDebugEvent( this IAstNode self, string message, params object[] argv )
+    {
+        return new CompilationDebugEvent( string.Format( message, argv ), self.Position );
+    }
 }

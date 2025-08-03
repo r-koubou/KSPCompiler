@@ -1,6 +1,5 @@
 ﻿using Antlr4.Runtime;
 
-using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 using KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translators.Extensions;
 using KSPCompiler.Infrastructures.Parser.Antlr;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes;
@@ -52,7 +51,7 @@ namespace KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translat
             }
             else
             {
-                eventEmitter.Emit( new LogDebugEvent( $"{nameof( VisitIfStatement )} fallback" ) );
+                eventEmitter.Emit( context.AsDebugEvent( $"{nameof( VisitIfStatement )} fallback" ) );
             }
 
             return node;
