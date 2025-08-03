@@ -18,7 +18,7 @@ public static class ICompilerMessageFactoryExtension
         => self.Create( level, lineNo, column, message, exception );
 
     /// <summary>
-    /// Alias for <see cref="ICompilerMessageFactory.Create(CompilerMessageLevel,Position,string,System.Exception?)"/> with <see cref="CompilerMessageLevel.Info"/>.
+    /// Alias for <see cref="ICompilerMessageFactory.Create(CompilerMessageLevel,Position,string,System.Exception?)"/> with <see cref="CompilerMessageLevel.Debug"/>.
     /// </summary>
     public static CompilerMessage Debug( this ICompilerMessageFactory self, int lineNo, int column, string message, Exception? exception = null )
         => Create( self, CompilerMessageLevel.Debug, lineNo, column, message, exception );

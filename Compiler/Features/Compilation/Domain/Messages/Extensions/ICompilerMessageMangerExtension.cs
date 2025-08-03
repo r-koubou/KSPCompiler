@@ -53,7 +53,7 @@ public static class ICompilerMessageMangerExtension
         => self.Append( self.MessageFactory.Create( level, position, message, exception ) );
 
     /// <summary>
-    /// Alias for <see cref="ICompilerMessageManger.Append(CompilerMessage)"/> with <see cref="CompilerMessageLevel.Info"/>.
+    /// Alias for <see cref="ICompilerMessageManger.Append(CompilerMessage)"/> with <see cref="CompilerMessageLevel.Debug"/>.
     /// </summary>
     public static void Debug( this ICompilerMessageManger self, Position position, string message, Exception? exception = null )
         => Append( self, CompilerMessageLevel.Debug, position, message, exception );
