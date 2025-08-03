@@ -55,6 +55,12 @@ public static class ICompilerMessageMangerExtension
     /// <summary>
     /// Alias for <see cref="ICompilerMessageManger.Append(CompilerMessage)"/> with <see cref="CompilerMessageLevel.Info"/>.
     /// </summary>
+    public static void Debug( this ICompilerMessageManger self, Position position, string message, Exception? exception = null )
+        => Append( self, CompilerMessageLevel.Debug, position, message, exception );
+
+    /// <summary>
+    /// Alias for <see cref="ICompilerMessageManger.Append(CompilerMessage)"/> with <see cref="CompilerMessageLevel.Info"/>.
+    /// </summary>
     public static void Info( this ICompilerMessageManger self, Position position, string message, Exception? exception = null )
         => Append( self, CompilerMessageLevel.Info, position, message, exception );
 

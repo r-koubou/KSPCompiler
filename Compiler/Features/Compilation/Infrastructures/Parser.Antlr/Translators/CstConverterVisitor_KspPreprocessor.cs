@@ -25,7 +25,7 @@ namespace KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translat
             }
             else
             {
-                eventEmitter.Emit( new LogDebugEvent( $"{nameof( VisitPreprocessorDefine )} fallback" ) );
+                eventEmitter.Emit( new CompilationDebugEvent( $"{nameof( VisitPreprocessorDefine )} fallback" ) );
             }
 
             return node;
@@ -42,7 +42,7 @@ namespace KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translat
             }
             else
             {
-                eventEmitter.Emit( new LogDebugEvent( $"{nameof( VisitPreprocessorUndefine )} fallback" ) );
+                eventEmitter.Emit( new CompilationDebugEvent( $"{nameof( VisitPreprocessorUndefine )} fallback" ) );
             }
 
             return node;
@@ -64,7 +64,7 @@ namespace KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translat
             }
             else
             {
-                eventEmitter.Emit( new LogDebugEvent( $"{nameof( VisitPreprocessorIfdefine )} fallback" ) );
+                eventEmitter.Emit( context.AsDebugEvent( $"{nameof( VisitPreprocessorIfdefine )} fallback" ) );
             }
 
             var block = context.block();
@@ -103,7 +103,7 @@ namespace KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translat
             }
             else
             {
-                eventEmitter.Emit( new LogDebugEvent( $"{nameof( VisitPreprocessorIfnotDefine )} fallback" ) );
+                eventEmitter.Emit( context.AsDebugEvent( $"{nameof( VisitPreprocessorIfnotDefine )} fallback" ) );
             }
 
             var block = context.block();

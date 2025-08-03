@@ -1,9 +1,8 @@
-using KSPCompiler.Shared.EventEmitting;
 using KSPCompiler.Shared.Text;
 
 namespace KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 
-public readonly struct CompilationWarningEvent : IEvent
+public readonly struct CompilationWarningEvent : ICompilationEvent
 {
     public string Message { get; }
 

@@ -110,7 +110,7 @@ namespace KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translat
             }
             else
             {
-                eventEmitter.Emit( new LogDebugEvent( $"{nameof( VisitArgumentDefinitionList )} fallback" ) );
+                eventEmitter.Emit( new CompilationDebugEvent( $"{nameof( VisitArgumentDefinitionList )} fallback" ) );
             }
 
             //
