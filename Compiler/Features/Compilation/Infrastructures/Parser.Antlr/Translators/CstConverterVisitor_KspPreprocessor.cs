@@ -1,5 +1,4 @@
-﻿using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
-using KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translators.Extensions;
+﻿using KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translators.Extensions;
 using KSPCompiler.Infrastructures.Parser.Antlr;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Blocks;
@@ -25,7 +24,7 @@ namespace KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translat
             }
             else
             {
-                eventEmitter.Emit( new LogDebugEvent( $"{nameof( VisitPreprocessorDefine )} fallback" ) );
+                eventEmitter.Emit( context.AsDebugEvent( $"{nameof( VisitPreprocessorDefine )} fallback" ) );
             }
 
             return node;
@@ -42,7 +41,7 @@ namespace KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translat
             }
             else
             {
-                eventEmitter.Emit( new LogDebugEvent( $"{nameof( VisitPreprocessorUndefine )} fallback" ) );
+                eventEmitter.Emit( context.AsDebugEvent( $"{nameof( VisitPreprocessorUndefine )} fallback" ) );
             }
 
             return node;
@@ -64,7 +63,7 @@ namespace KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translat
             }
             else
             {
-                eventEmitter.Emit( new LogDebugEvent( $"{nameof( VisitPreprocessorIfdefine )} fallback" ) );
+                eventEmitter.Emit( context.AsDebugEvent( $"{nameof( VisitPreprocessorIfdefine )} fallback" ) );
             }
 
             var block = context.block();
@@ -103,7 +102,7 @@ namespace KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translat
             }
             else
             {
-                eventEmitter.Emit( new LogDebugEvent( $"{nameof( VisitPreprocessorIfnotDefine )} fallback" ) );
+                eventEmitter.Emit( context.AsDebugEvent( $"{nameof( VisitPreprocessorIfnotDefine )} fallback" ) );
             }
 
             var block = context.block();

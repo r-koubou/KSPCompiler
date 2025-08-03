@@ -5,6 +5,7 @@ namespace KSPCompiler.Features.Compilation.Domain.Messages;
 /// </summary>
 public enum CompilerMessageLevel
 {
+    Debug,
     Info,
     Warning,
     Error,

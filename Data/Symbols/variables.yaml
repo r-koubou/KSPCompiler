@@ -3112,6 +3112,30 @@ Data:
   BuiltIntoVersion: N/A
   CreatedAt: 2025-03-29T07:11:35.7054130Z
   UpdatedAt: 2025-03-29T07:11:35.7054130Z
+- Id: 90a5d11c-fab3-4abb-945a-98fc148a8bff
+  Name: $ENGINE_PAR_FILTER_FEEDBACK
+  BuiltIn: true
+  Description: |-
+    Built-in Variable: $ENGINE_PAR_FILTER_FEEDBACK
+  BuiltIntoVersion: N/A
+  CreatedAt: 2025-07-28T15:32:14.6153920Z
+  UpdatedAt: 2025-07-28T15:32:14.6153920Z
+- Id: b28cecb2-2f93-4be9-b363-027fc16f7681
+  Name: $ENGINE_PAR_FILTER_FEEDBACK_TYPE
+  BuiltIn: true
+  Description: |-
+    Built-in Variable: $ENGINE_PAR_FILTER_FEEDBACK_TYPE
+  BuiltIntoVersion: N/A
+  CreatedAt: 2025-07-28T15:32:14.6122350Z
+  UpdatedAt: 2025-07-28T15:32:14.6122350Z
+- Id: 572ae1a6-1cf2-4ca1-bc82-981fee6408d3
+  Name: $ENGINE_PAR_FILTER_FM
+  BuiltIn: true
+  Description: |-
+    Built-in Variable: $ENGINE_PAR_FILTER_FM
+  BuiltIntoVersion: N/A
+  CreatedAt: 2025-07-28T15:32:14.6153950Z
+  UpdatedAt: 2025-07-28T15:32:14.6153950Z
 - Id: f56eda7c-6a1d-412f-b787-caf7ae0e4f1f
   Name: $ENGINE_PAR_FILTER_GAIN
   BuiltIn: true
@@ -3824,6 +3848,14 @@ Data:
   BuiltIntoVersion: N/A
   CreatedAt: 2025-03-29T07:11:35.7054490Z
   UpdatedAt: 2025-03-29T07:11:35.7054490Z
+- Id: d22aa631-953d-4d23-ab98-eb73d6d7b99e
+  Name: $ENGINE_PAR_HP_RESONANCE
+  BuiltIn: true
+  Description: |-
+    Built-in Variable: $ENGINE_PAR_HP_RESONANCE
+  BuiltIntoVersion: N/A
+  CreatedAt: 2025-07-28T15:32:14.6153930Z
+  UpdatedAt: 2025-07-28T15:32:14.6153930Z
 - Id: a044a153-2317-4c7f-8fb8-bf4e3073edb8
   Name: $ENGINE_PAR_HQI_MODE
   BuiltIn: true
@@ -4328,6 +4360,14 @@ Data:
   BuiltIntoVersion: N/A
   CreatedAt: 2025-03-29T07:11:35.7054620Z
   UpdatedAt: 2025-03-29T07:11:35.7054620Z
+- Id: 18f42fb8-f57a-4686-b170-d260df0fbada
+  Name: $ENGINE_PAR_LP_RESONANCE
+  BuiltIn: true
+  Description: |-
+    Built-in Variable: $ENGINE_PAR_LP_RESONANCE
+  BuiltIntoVersion: N/A
+  CreatedAt: 2025-07-28T15:32:14.6153940Z
+  UpdatedAt: 2025-07-28T15:32:14.6153940Z
 - Id: 88f39487-c5c5-4733-b002-206b53e84372
   Name: $ENGINE_PAR_LR_SWAP
   BuiltIn: true
@@ -7528,6 +7568,14 @@ Data:
   BuiltIntoVersion: N/A
   CreatedAt: 2025-03-29T07:11:35.7055630Z
   UpdatedAt: 2025-03-29T07:11:35.7055630Z
+- Id: 4737dd0d-bc24-4ed2-bbc8-9360d2250f39
+  Name: $FILTER_TYPE_DUAL_SKF
+  BuiltIn: true
+  Description: |-
+    Built-in Variable: $FILTER_TYPE_DUAL_SKF
+  BuiltIntoVersion: N/A
+  CreatedAt: 2025-07-28T15:32:14.6154010Z
+  UpdatedAt: 2025-07-28T15:32:14.6154010Z
 - Id: f6eafe0d-32ff-4cb6-9d4e-9ac9ce916bfd
   Name: $FILTER_TYPE_EQ1BAND
   BuiltIn: true
@@ -7728,6 +7776,38 @@ Data:
   BuiltIntoVersion: N/A
   CreatedAt: 2025-03-29T07:11:35.7055670Z
   UpdatedAt: 2025-03-29T07:11:35.7055670Z
+- Id: e41ffaad-1df2-492d-9439-a38c471b7efb
+  Name: $FILTER_TYPE_MONARK_BP
+  BuiltIn: true
+  Description: |-
+    Built-in Variable: $FILTER_TYPE_MONARK_BP
+  BuiltIntoVersion: N/A
+  CreatedAt: 2025-07-28T15:32:14.6154000Z
+  UpdatedAt: 2025-07-28T15:32:14.6154000Z
+- Id: ddcc72a4-08f3-4ab5-b294-bd5c8a779a31
+  Name: $FILTER_TYPE_MONARK_LP1
+  BuiltIn: true
+  Description: |-
+    Built-in Variable: $FILTER_TYPE_MONARK_LP1
+  BuiltIntoVersion: N/A
+  CreatedAt: 2025-07-28T15:32:14.6153960Z
+  UpdatedAt: 2025-07-28T15:32:14.6153960Z
+- Id: 71fc994a-6145-4291-844d-e0f5ef0cf95c
+  Name: $FILTER_TYPE_MONARK_LP2
+  BuiltIn: true
+  Description: |-
+    Built-in Variable: $FILTER_TYPE_MONARK_LP2
+  BuiltIntoVersion: N/A
+  CreatedAt: 2025-07-28T15:32:14.6153970Z
+  UpdatedAt: 2025-07-28T15:32:14.6153980Z
+- Id: f0b4052a-4379-49e3-a99d-d43e689aa894
+  Name: $FILTER_TYPE_MONARK_LP4
+  BuiltIn: true
+  Description: |-
+    Built-in Variable: $FILTER_TYPE_MONARK_LP4
+  BuiltIntoVersion: N/A
+  CreatedAt: 2025-07-28T15:32:14.6153990Z
+  UpdatedAt: 2025-07-28T15:32:14.6153990Z
 - Id: 2905993b-b4fd-456a-bc7b-f4c8ffcf23cb
   Name: $FILTER_TYPE_PHASER
   BuiltIn: true
@@ -9840,6 +9920,30 @@ Data:
   BuiltIntoVersion: N/A
   CreatedAt: 2025-03-29T07:11:35.7056190Z
   UpdatedAt: 2025-03-29T07:11:35.7056190Z
+- Id: 3684ed36-fa49-4d97-92c8-ace61b5e233b
+  Name: $NI_FILTER_FEEDBACK_TYPE_A
+  BuiltIn: true
+  Description: |-
+    Built-in Variable: $NI_FILTER_FEEDBACK_TYPE_A
+  BuiltIntoVersion: N/A
+  CreatedAt: 2025-07-28T15:32:14.6153880Z
+  UpdatedAt: 2025-07-28T15:32:14.6153880Z
+- Id: 45afd44a-8fd5-4322-a736-f40fad02ddcc
+  Name: $NI_FILTER_FEEDBACK_TYPE_B
+  BuiltIn: true
+  Description: |-
+    Built-in Variable: $NI_FILTER_FEEDBACK_TYPE_B
+  BuiltIntoVersion: N/A
+  CreatedAt: 2025-07-28T15:32:14.6153900Z
+  UpdatedAt: 2025-07-28T15:32:14.6153900Z
+- Id: 3836f7a7-f00b-4f83-91e2-87906b5d8c4f
+  Name: $NI_FILTER_FEEDBACK_TYPE_OFF
+  BuiltIn: true
+  Description: |-
+    Built-in Variable: $NI_FILTER_FEEDBACK_TYPE_OFF
+  BuiltIntoVersion: N/A
+  CreatedAt: 2025-07-28T15:32:14.6153780Z
+  UpdatedAt: 2025-07-28T15:32:14.6153780Z
 - Id: 95181330-137e-469b-951b-6cadf25b0c8c
   Name: $NI_FLAIR_MODE_SCAN
   BuiltIn: true

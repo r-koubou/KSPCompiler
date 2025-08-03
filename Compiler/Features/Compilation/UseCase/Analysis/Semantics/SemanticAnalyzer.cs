@@ -1,14 +1,10 @@
-using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Context;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics.Extensions;
-using KSPCompiler.Resources;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Blocks;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Expressions;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Statements;
-using KSPCompiler.Shared.Domain.Compilation.Symbols;
-using KSPCompiler.Shared.Text;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
 

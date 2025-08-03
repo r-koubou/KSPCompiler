@@ -2,13 +2,13 @@ using KSPCompiler.Shared.Text;
 
 namespace KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 
-public readonly struct CompilationErrorEvent : ICompilationEvent
+public readonly struct CompilationDebugEvent : ICompilationEvent
 {
     public string Message { get; }
 
     public Position Position { get; }
 
-    public CompilationErrorEvent( string message, int line = 0, int column = 0 )
+    public CompilationDebugEvent( string message, int line = 0, int column = 0 )
     {
         Message = message;
         Position = new Position
@@ -20,7 +20,7 @@ public readonly struct CompilationErrorEvent : ICompilationEvent
         };
     }
 
-    public CompilationErrorEvent( string message, Position position )
+    public CompilationDebugEvent( string message, Position position )
     {
         Message  = message;
         Position = position;

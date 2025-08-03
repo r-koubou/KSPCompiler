@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using KSPCompiler.Features.SymbolManagement.Gateways;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
+using KSPCompiler.Shared.EventEmitting;
 using KSPCompiler.Shared.IO.Abstractions.Symbol;
 
 namespace KSPCompiler.SymbolManagement.Repository.Yaml;
@@ -17,6 +18,8 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
     protected Dictionary<Guid, TSymbol> Models { get; }
     protected ISymbolExporter<TSymbol>? RepositoryExporter { get; }
 
+    protected IEventEmitter? EventEmitter { get; }
+
     private bool Disposed { get; set; }
     private bool Dirty { get; set; }
     public bool AutoFlush { get; set; }
@@ -27,11 +30,13 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
     protected SymbolRepository(
         ISymbolImporter<TSymbol>? repositoryImporter = null,
         ISymbolExporter<TSymbol>? repositoryExporter = null,
+        IEventEmitter? eventEmitter = null,
         bool autoFlush = true )
     {
-        RepositoryExporter  = repositoryExporter;
-        Models    = repositoryImporter == null ? [] : ImportImpl( repositoryImporter );
-        AutoFlush = autoFlush;
+        RepositoryExporter = repositoryExporter;
+        EventEmitter       = eventEmitter;
+        Models             = repositoryImporter == null ? [] : ImportImpl( repositoryImporter );
+        AutoFlush          = autoFlush;
     }
 
     private void CheckDisposed()
@@ -118,6 +123,8 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
             Models.Add( symbol.Id, symbol );
             Dirty = true;
 
+            EventEmitter?.Emit( new TextMessageEvent( $"Created: {symbol.Name.Value}" ) );
+
             return new StoreResult(
                 success: true,
                 createdCount: 1,
@@ -126,7 +133,7 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
             );
         }
 
-        Console.WriteLine( $"{symbol.Name.Value} already exists, updating..." );
+        EventEmitter?.Emit( new TextMessageEvent( $"Updated: {symbol.Name.Value}" ) );
 
         symbol.Id        = existingSymbol.Id;
         symbol.CreatedAt = existingSymbol.CreatedAt;
@@ -228,6 +235,8 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
 
         Models.Remove( existingSymbol.Id );
         Dirty = true;
+
+        EventEmitter?.Emit( new TextMessageEvent( $"Deleted: {symbol.Name.Value}" ) );
 
         await Task.CompletedTask;
 
