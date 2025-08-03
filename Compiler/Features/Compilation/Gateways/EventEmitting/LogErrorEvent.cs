@@ -1,6 +1,5 @@
 using System.Runtime.CompilerServices;
 
-using KSPCompiler.Shared.EventEmitting;
 using KSPCompiler.Shared.Text;
 
 namespace KSPCompiler.Features.Compilation.Gateways.EventEmitting;
