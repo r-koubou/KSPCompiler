@@ -1,3 +1,3 @@
 #!/bin/bash
 
-python ./gen_project.py module $1
+uv run python ./gen_project.py module $1
