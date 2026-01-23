@@ -1,3 +1,3 @@
 #!/bin/bash
 
-python ./gen_project.py cliapp $1
+uv run python ./gen_project.py cliapp $1

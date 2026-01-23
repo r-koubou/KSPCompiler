@@ -20,7 +20,7 @@ A compiler programs for KONTAKT Script Processor scripts.
 
 ## Requirements
 
-- .net 9.0 Runtime
+- .net 10.x
 
 ## About KONTAKT
 
