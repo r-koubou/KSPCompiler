@@ -69,7 +69,7 @@ public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol
 
         while( p != null )
         {
-            if( p.TrySearchByName( name, out result ) )
+            if( p.TrySearchByName( name, out result, enableSearchParent: false ) )
             {
                 return true;
             }
@@ -107,7 +107,7 @@ public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol
 
         while( p != null )
         {
-            if( p.TrySearchByIndex( index, out result ) )
+            if( p.TrySearchByIndex( index, out result, enableSearchParent: false ) )
             {
                 return true;
             }
@@ -136,7 +136,7 @@ public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol
 
         while( p != null )
         {
-            if( p.TrySearchIndexByName( name, out result ) )
+            if( p.TrySearchIndexByName( name, out result, enableSearchParent: false ) )
             {
                 return true;
             }
@@ -211,7 +211,26 @@ public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol
     #region Contains
 
     public bool Contains( SymbolName name )
-        => table.ContainsKey( name );
+    {
+        if( table.ContainsKey( name ) )
+        {
+            return true;
+        }
+
+        var p = Parent;
+
+        while( p != null )
+        {
+            if( p.Contains( name ) )
+            {
+                return true;
+            }
+
+            p = p.Parent;
+        }
+
+        return false;
+    }
 
     #endregion ~Contains
 
