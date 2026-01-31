@@ -3,25 +3,16 @@ name: Build KSP Compiler CLI
 env:
   DOTNET_SDK_VERSION: '10.0.*'
   PREFIX: KSPCompiler
+
 on:
   workflow_call:
     inputs:
-      build-configuration:
-        required: true
-        type: string
       version:
         required: false
         type: string
 
   workflow_dispatch:
     inputs:
-      build-configuration:
-        description: "Build configuration for msbuild"
-        required: true
-        type: choice
-        options:
-          - Debug
-          - Release
       version:
         required: false
         type: string
@@ -33,16 +24,22 @@ jobs:
   #--------------------------------------------------------------
   build-compiler-cli:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        build-configuration: [Debug, Release]
     env:
       DOTNET_CLI_TELEMETRY_OPTOUT: 1
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
       BASE_DIR: Compiler/Features/Compilation/Applications/Compilation.Cli
       PUBLISH_DIRNAME: publish
+      BUILD_CONFIGURATION: ${{ matrix.build-configuration }}
 
     steps:
     - name: Show workflow inputs
       run: |
-        echo ${{ inputs.build-configuration }}
+        echo "configuration=${{ env.BUILD_CONFIGURATION }}"
+        echo "version(input)=${{ inputs.version }}"
 
     #----------------------------------------------------------
     # Setup Environment Variables
@@ -83,7 +80,7 @@ jobs:
     - name: Build for dotnet (with version info)
       run: |
         pushd ${{ env.BASE_DIR }}
-        dotnet publish -p:Version=${{ env.BUILD_VERSION }} -p:AssemblyVersion=${{ env.BUILD_VERSION }} -c ${{ inputs.build-configuration }} -o ${{ env.PUBLISH_RELATIVE_DIR_FROM_BASE }}
+        dotnet publish -p:Version=${{ env.BUILD_VERSION }} -p:AssemblyVersion=${{ env.BUILD_VERSION }} -c ${{ env.BUILD_CONFIGURATION }} -o ${{ env.PUBLISH_RELATIVE_DIR_FROM_BASE }}
         popd
 
     #----------------------------------------------------------
@@ -96,7 +93,7 @@ jobs:
         echo "Build date: $(date)" >> ${{ env.VERSION_INFO_PATH }}
         echo "Branch: ${{ github.ref_name }}" >> ${{ env.VERSION_INFO_PATH }}
         echo "Commit: ${{ github.sha }}" >> ${{ env.VERSION_INFO_PATH }}
-        echo "Build configuration: ${{ inputs.build-configuration }}" >> ${{ env.VERSION_INFO_PATH }}
+        echo "Build configuration: ${{ env.BUILD_CONFIGURATION }}" >> ${{ env.VERSION_INFO_PATH }}
 
     #----------------------------------------------------------
     # Create Artifact
@@ -104,5 +101,5 @@ jobs:
     - name: Create Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ env.PREFIX }}-${{ inputs.build-configuration }}-v${{ env.BUILD_VERSION }}
+        name: ${{ env.PREFIX }}-${{ env.BUILD_CONFIGURATION }}-v${{ env.BUILD_VERSION }}
         path: ${{ env.BASE_DIR }}/${{ env.PUBLISH_DIRNAME }}

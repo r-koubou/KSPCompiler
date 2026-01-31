@@ -13,5 +13,3 @@ jobs:
   build-compiler-dotnet:
     uses: ./.github/workflows/build_compiler_cli.yml
     secrets: inherit
-    with:
-      build-configuration: Debug
