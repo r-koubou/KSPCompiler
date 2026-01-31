@@ -22,18 +22,19 @@ jobs:
   #--------------------------------------------------------------
   # Build Compiler CLI
   #--------------------------------------------------------------
-  build-compiler-cli:
+  build:
+    name: build (${{ matrix.build_configuration }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        build-configuration: [Debug, Release]
+        build_configuration: [Debug, Release]
     env:
       DOTNET_CLI_TELEMETRY_OPTOUT: 1
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
       BASE_DIR: Compiler/Features/Compilation/Applications/Compilation.Cli
       PUBLISH_DIRNAME: publish
-      BUILD_CONFIGURATION: ${{ matrix.build-configuration }}
+      BUILD_CONFIGURATION: ${{ matrix.build_configuration }}
 
     steps:
     - name: Show workflow inputs
