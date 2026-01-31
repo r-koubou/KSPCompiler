@@ -58,8 +58,14 @@ public abstract class OverloadedSymbolTable<TSymbol, TOverload>(
     {
         result = null!;
 
+        // If the symbol is not found, attempt to search the parent table.
         if( !table.TryGetValue( name, out var overloads ) )
         {
+            if( enableSearchParent && Parent != null )
+            {
+                return Parent.TryGet( name, overload, out result, enableSearchParent );
+            }
+
             return false;
         }
 
@@ -80,8 +86,14 @@ public abstract class OverloadedSymbolTable<TSymbol, TOverload>(
     {
         result = null!;
 
+        // If the symbol is not found, attempt to search the parent table.
         if( !table.TryGetValue( name, out var overloads ) )
         {
+            if( enableSearchParent && Parent != null )
+            {
+                return Parent.TrySearchByName( name, out result, enableSearchParent );
+            }
+
             return false;
         }
 
@@ -92,10 +104,15 @@ public abstract class OverloadedSymbolTable<TSymbol, TOverload>(
             return true;
         }
 
-        if( Parent.TrySearchByName( name, out var parentResult, enableSearchParent ) )
+        if( !Parent.TrySearchByName( name, out var parentResult, enableSearchParent ) )
         {
-            result = result.Concat( parentResult ).ToList();
+            return true;
         }
+
+        result = result
+                .Concat( parentResult )
+                .Distinct( ReferenceEqualityComparer<TSymbol>.Instance )
+                .ToList();
 
         return true;
     }
@@ -129,8 +146,14 @@ public abstract class OverloadedSymbolTable<TSymbol, TOverload>(
     {
         result = null!;
 
+        // If the symbol is not found, attempt to search the parent table.
         if( !table.TryGetValue( name, out var overloads ) )
         {
+            if( enableSearchParent && Parent != null )
+            {
+                return Parent.TrySearchIndexByName( name, out result, enableSearchParent );
+            }
+
             return false;
         }
 
@@ -156,13 +179,25 @@ public abstract class OverloadedSymbolTable<TSymbol, TOverload>(
     {
         result = null!;
 
+        // If the symbol is not found, attempt to search the parent table.
         if( !table.TryGetValue( name, out var overloads ) )
         {
+            if( enableSearchParent && Parent != null )
+            {
+                return Parent.TryGetOverloadIndexByName( name, overload, out result, enableSearchParent );
+            }
+
             return false;
         }
 
+        // If the overload is not found, attempt to search the parent table.
         if( !overloads.TryGetValue( overload, out var symbol ) )
         {
+            if( enableSearchParent && Parent != null )
+            {
+                return Parent.TryGetOverloadIndexByName( name, overload, out result, enableSearchParent );
+            }
+
             return false;
         }
 

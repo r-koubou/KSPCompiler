@@ -13,5 +13,3 @@ jobs:
   build-language-server:
     uses: ./.github/workflows/build_language_server.yml
     secrets: inherit
-    with:
-      build-configuration: Debug
