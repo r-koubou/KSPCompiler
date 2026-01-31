@@ -61,6 +61,11 @@ Run as a standalone application
 - .net 10.x
     - https://dotnet.microsoft.com/
 
+## Limitations
+
+- Extended syntax is not supported
+
+
 ## About KONTAKT
 
 **KONTAKT** is registered trademarks of Native Instruments GmbH.
