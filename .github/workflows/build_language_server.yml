@@ -11,6 +11,14 @@ on:
         required: false
         type: string
         default: ""
+        description: |
+          This Language Server version to set (e.g.: 1.2.3).
+      channel:
+        required: true
+        type: string
+        default: "develop"
+        description: |
+          Build channel (develop, rc, release)
 
   workflow_dispatch:
     inputs:
@@ -20,9 +28,18 @@ on:
         default: ""
         description: |
           This Language Server version to set (e.g.: 1.2.3).
+      channel:
+        required: true
+        type: choice
+        options:
+          - develop
+          - rc
+          - release
+        description: |
+          Build channel (develop, rc, release)
 
 #--------------------------------------------------------------
-# Build Language Server (using LanguageServer.Framework)
+# Build Language Server
 #--------------------------------------------------------------
 jobs:
   build:
@@ -42,8 +59,25 @@ jobs:
     steps:
     - name: Show workflow inputs
       run: |
-        echo "configuration=${{ env.BUILD_CONFIGURATION }}"
-        echo "version(input)=${{ inputs.version }}"
+        {
+          echo "## Workflow Inputs"
+          echo ""
+          echo "|name|value|"
+          echo "|ref| ${{ github.ref }}|"
+          echo "|Commit SHA| ${{ github.sha }}|"
+          echo "|version|${{ inputs.version }}|"
+          echo "|channel|${{ inputs.channel }}|"
+          echo ""
+        } >> $GITHUB_STEP_SUMMARY
+
+    #----------------------------------------------------------
+    # Guard - tag build must be release channel
+    #----------------------------------------------------------
+    - name: Guard - tag build must be release channel
+      if: ${{ inputs.channel == 'release' && !startsWith(github.ref, 'refs/tags/v') }}
+      run: |
+        echo "::error::Must use channel=release when building from tag/v*"
+        exit 1
 
     #----------------------------------------------------------
     # Setup Environment Variables
@@ -64,8 +98,23 @@ jobs:
       run: |
         echo "VERSION_INFO_PATH=${{ env.PUBLISH_DIR }}/VERSION.txt" >> $GITHUB_ENV
 
+    - name: Show Environment Variables
+      run: |
+        {
+          echo "## Environment Variables"
+          echo ""
+          echo "|name|value|"
+          echo "|----|-----|"
+          echo "|BASE_DIR|${{ env.BASE_DIR }}|"
+          echo "|PUBLISH_DIR|${{ env.PUBLISH_DIR }}|"
+          echo "|BUILD_CONFIGURATION|${{ env.BUILD_CONFIGURATION }}|"
+          echo "|BUILD_VERSION|${{ env.BUILD_VERSION }}|"
+          echo "|VERSION_INFO_PATH|${{ env.VERSION_INFO_PATH }}|"
+          echo ""
+        } >> $GITHUB_STEP_SUMMARY
+
     #----------------------------------------------------------
-    # Checkout
+    # Checkout repository
     #----------------------------------------------------------
     - name: Checkout
       uses: actions/checkout@v4
@@ -73,7 +122,7 @@ jobs:
     #----------------------------------------------------------
     # Setup .NET SDK
     #----------------------------------------------------------
-    - name: Install SDK
+    - name: Install .NET SDK
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: ${{ env.DOTNET_SDK_VERSION }}
@@ -81,7 +130,7 @@ jobs:
     #----------------------------------------------------------
     # Build
     #----------------------------------------------------------
-    - name: Build Language Server (with version info)
+    - name: Build Language Server
       run: |
         pushd ${{ env.BASE_DIR }}
         dotnet publish -p:Version=${{ env.BUILD_VERSION }} -p:AssemblyVersion=${{ env.BUILD_VERSION }} -c ${{ env.BUILD_CONFIGURATION }} -o ${{ env.PUBLISH_RELATIVE_DIR_FROM_BASE }}
@@ -93,11 +142,25 @@ jobs:
     - name: Create Version information file
       run: |
         mkdir -p ${{ env.PUBLISH_DIR }}
-        echo "Version: ${{ env.BUILD_VERSION }}" > ${{ env.VERSION_INFO_PATH }}
+        echo "Build channel: ${{ inputs.channel }}" > ${{ env.VERSION_INFO_PATH }}
         echo "Build date: $(date)" >> ${{ env.VERSION_INFO_PATH }}
+        echo "Version: ${{ env.BUILD_VERSION }}" >> ${{ env.VERSION_INFO_PATH }}
         echo "Branch: ${{ github.ref_name }}" >> ${{ env.VERSION_INFO_PATH }}
         echo "Commit: ${{ github.sha }}" >> ${{ env.VERSION_INFO_PATH }}
         echo "Build Configuration: ${{ env.BUILD_CONFIGURATION }}" >> ${{ env.VERSION_INFO_PATH }}
+
+    - name: Show Version information file
+      run: |
+        {
+          if [ -f ${{ env.VERSION_INFO_PATH }} ]; then
+            echo "## Version Information File"
+            echo ""
+            echo "\`\`\`"
+            cat ${{ env.VERSION_INFO_PATH }}
+            echo ""
+            echo "\`\`\`"
+          fi
+        } >> $GITHUB_STEP_SUMMARY
 
     #----------------------------------------------------------
     # Create Artifact
@@ -105,5 +168,5 @@ jobs:
     - name: Create Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ env.PREFIX }}-${{ env.BUILD_CONFIGURATION }}-v${{ env.BUILD_VERSION }}
+        name: ${{ env.PREFIX }}-${{ env.BUILD_CONFIGURATION }}-v${{ env.BUILD_VERSION }}-${{ inputs.channel }}
         path: ${{ env.BASE_DIR }}/${{ env.PUBLISH_DIRNAME }}
