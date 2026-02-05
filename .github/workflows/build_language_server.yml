@@ -127,7 +127,7 @@ jobs:
     #----------------------------------------------------------
     - name: Setup the artifact name
       run: |
-        echo "ARTIFACT_NAME=${{ env.PREFIX }}-${{ env.BUILD_CONFIGURATION }}-v${{ env.BUILD_VERSION }}-${{ inputs.channel }}" >> $GITHUB_ENV
+        ARTIFACT_NAME="${{ env.PREFIX }}-${{ env.BUILD_CONFIGURATION }}-v${{ env.BUILD_VERSION }}-${{ inputs.channel }}" >> $GITHUB_ENV
         {
           echo "## Artifact Name"
           echo ""
