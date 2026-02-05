@@ -143,6 +143,9 @@ jobs:
         {
           echo "## Environment Variables"
           echo ""
+          echo "<details>"
+          echo "<summary>Click to expand</summary>"
+          echo ""
           echo "|name|value|"
           echo "|----|-----|"
           echo "|PREFIX|${{ env.PREFIX }}|"
@@ -154,6 +157,7 @@ jobs:
           echo "|VERSION_INFO_PATH|${{ env.VERSION_INFO_PATH }}|"
           echo "|ARTIFACT_NAME|${{ env.ARTIFACT_NAME }}|"
           echo ""
+          echo "</details>"
         } >> $GITHUB_STEP_SUMMARY
 
 
