@@ -1,17 +1,15 @@
-name: Build Language Server (develop)
+name: Build Language Server (rc)
 
 on:
   push:
     branches:
-      - develop
-      - feature/*
-      - fix/*
+      - release/*
 
   workflow_dispatch:
 
 jobs:
-  build-language-server-develop:
+  build-language-server-rc:
     uses: ./.github/workflows/build_language_server.yml
     secrets: inherit
     with:
-      channel: develop
+      channel: rc
