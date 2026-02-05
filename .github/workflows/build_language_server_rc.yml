@@ -1,15 +1,15 @@
-name: Build LSP Server (develop)
+name: Build Language Server (rc)
 
 on:
   push:
     branches:
-      - develop
-    paths-ignore:
-      - "**.md"
+      - release/*
 
   workflow_dispatch:
 
 jobs:
-  build-language-server:
+  build-language-server-rc:
     uses: ./.github/workflows/build_language_server.yml
     secrets: inherit
+    with:
+      channel: rc

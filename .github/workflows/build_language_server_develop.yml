@@ -1,0 +1,17 @@
+name: Build Language Server (develop)
+
+on:
+  push:
+    branches:
+      - develop
+      - feature/**
+      - fix/**
+
+  workflow_dispatch:
+
+jobs:
+  build-language-server-develop:
+    uses: ./.github/workflows/build_language_server.yml
+    secrets: inherit
+    with:
+      channel: develop

@@ -1,0 +1,15 @@
+name: Build Language Server (release)
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+  workflow_dispatch:
+
+jobs:
+  build-language-server-release:
+    uses: ./.github/workflows/build_language_server.yml
+    secrets: inherit
+    with:
+      channel: release
