@@ -1,4 +1,4 @@
-name: Build LSP Server (develop)
+name: Build Language Server (develop)
 
 on:
   push:
@@ -10,6 +10,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-language-server:
+  build-language-server-develop:
     uses: ./.github/workflows/build_language_server.yml
     secrets: inherit

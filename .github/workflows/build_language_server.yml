@@ -1,23 +1,28 @@
 name: Build Language Server
 
 env:
-  DOTNET_SDK_VERSION: '10.0.*'
+  DOTNET_SDK_VERSION: '10.*'
   PREFIX: KSP-LanguageServer
+
 on:
   workflow_call:
     inputs:
       version:
         required: false
         type: string
+        default: ""
 
   workflow_dispatch:
     inputs:
       version:
         required: false
         type: string
+        default: ""
+        description: |
+          This Language Server version to set (e.g.: 1.2.3).
 
 #--------------------------------------------------------------
-# Build LSP Server (using LanguageServer.Framework)
+# Build Language Server (using LanguageServer.Framework)
 #--------------------------------------------------------------
 jobs:
   build:
@@ -76,7 +81,7 @@ jobs:
     #----------------------------------------------------------
     # Build
     #----------------------------------------------------------
-    - name: Build LSP Server (with version info)
+    - name: Build Language Server (with version info)
       run: |
         pushd ${{ env.BASE_DIR }}
         dotnet publish -p:Version=${{ env.BUILD_VERSION }} -p:AssemblyVersion=${{ env.BUILD_VERSION }} -c ${{ env.BUILD_CONFIGURATION }} -o ${{ env.PUBLISH_RELATIVE_DIR_FROM_BASE }}
