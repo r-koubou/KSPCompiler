@@ -62,6 +62,7 @@ jobs:
           echo "## Workflow Inputs"
           echo ""
           echo "|name|value|"
+          echo "|----|-----|"
           echo "|ref| ${{ github.ref }}|"
           echo "|Commit SHA| ${{ github.sha }}|"
           echo "|version|${{ inputs.version }}|"
