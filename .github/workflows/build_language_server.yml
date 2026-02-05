@@ -1,5 +1,6 @@
 name: Build Language Server
 
+
 on:
   workflow_call:
     inputs:
