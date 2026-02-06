@@ -23,8 +23,7 @@ public sealed class DocumentSymbolInteractor : IDocumentSymbolUseCase
             var symbolTable = cache.SymbolTable;
             var result = new List<DocumentSymbol>();
 
-            await CollectVariablesAsync( symbolTable.UserVariables, result );
-            await CollectCallbackAsync( symbolTable.UserCallbacks, result );
+            await CollectCallbackAsync( symbolTable.UserCallbacks, symbolTable.UserVariables, result );
             await CollectUserFunctionAsync( symbolTable.UserFunctions, result );
 
             return new DocumentSymbolOutputPort( result, true );
@@ -87,13 +86,20 @@ public sealed class DocumentSymbolInteractor : IDocumentSymbolUseCase
         await Task.CompletedTask;
     }
 
-    private static async Task CollectCallbackAsync( ICallbackSymbolTable symbolTable, List<DocumentSymbol> result )
+    private static async Task CollectCallbackAsync( ICallbackSymbolTable symbolTable, IVariableSymbolTable variableSymbolTable, List<DocumentSymbol> result )
     {
         var detailBuilder = new StringBuilder();
 
         foreach( var callback in symbolTable.ToList() )
         {
             var detail = GetArgumentDetailText( callback.Arguments, detailBuilder );
+            List<DocumentSymbol>? children = null;
+
+            if( callback.Name == "init" && variableSymbolTable.Count > 0 )
+            {
+                children = new();
+                await CollectVariablesAsync( variableSymbolTable, children );
+            }
 
             result.Add( new DocumentSymbol
                 {
@@ -101,7 +107,8 @@ public sealed class DocumentSymbolInteractor : IDocumentSymbolUseCase
                     Detail         = detail,
                     Kind           = SymbolKind.Event,
                     Range          = callback.DefinedPosition,
-                    SelectionRange = callback.DefinedPosition
+                    SelectionRange = callback.DefinedPosition,
+                    Children       = children ?? []
                 }
             );
         }
