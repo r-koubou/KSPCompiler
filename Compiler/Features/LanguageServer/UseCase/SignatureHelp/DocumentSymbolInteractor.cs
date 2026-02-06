@@ -97,7 +97,7 @@ public sealed class DocumentSymbolInteractor : IDocumentSymbolUseCase
 
             if( callback.Name == "init" && variableSymbolTable.Count > 0 )
             {
-                children = new();
+                children = [];
                 await CollectVariablesAsync( variableSymbolTable, children );
             }
 
