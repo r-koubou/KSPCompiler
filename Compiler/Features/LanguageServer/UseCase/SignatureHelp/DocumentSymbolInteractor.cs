@@ -107,8 +107,7 @@ public sealed class DocumentSymbolInteractor : IDocumentSymbolUseCase
                     Detail         = detail,
                     Kind           = SymbolKind.Event,
                     Range          = callback.DefinedPosition,
-                    SelectionRange = callback.DefinedPosition,
-                    Children       = children ?? []
+                    SelectionRange = callback.DefinedPosition
                 }
             );
         }

@@ -19,7 +19,7 @@ public static class DocumentSymbolExtension
             Kind           = self.Kind.As(),
             Range          = self.Range.AsRange(),
             SelectionRange = self.SelectionRange.AsRange(),
-            Children       = self.Children.As()
+            Children       = self.Children?.As()
         };
     }
 
