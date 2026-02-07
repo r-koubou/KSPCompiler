@@ -50,6 +50,7 @@ jobs:
       DOTNET_CLI_TELEMETRY_OPTOUT: 1
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
       PREFIX: KSPCompiler
+      CSPROJ_FILENAME: Compilation.Cli.csproj
       BASE_DIR: Compiler/Features/Compilation/Applications/Compilation.Cli
       PUBLISH_DIRNAME: publish
       BUILD_CONFIGURATION: ${{ matrix.build_configuration }}
@@ -81,8 +82,12 @@ jobs:
     #----------------------------------------------------------
     # Setup Environment Variables
     #----------------------------------------------------------
-    - name: Setup Branch Name Variable
+    - name: Sanitize Branch Name Variable
       run: echo "BRANCH_NAME=$(echo ${{ github.ref_name }} | sed 's|/|-|g')" >> $GITHUB_ENV
+
+    - name:  Setup csproj file path variable
+      run: |
+        echo "CSPROJ_PATH=${{ env.BASE_DIR }}/${{ env.CSPROJ_FILENAME }}" >> $GITHUB_ENV
 
     - name: Setup Publish Directory Variable
       run: |
