@@ -6,12 +6,16 @@ on:
       - develop
       - feature/**
       - fix/**
+      - refactor/**
 
   workflow_dispatch:
 
 jobs:
   build-compiler-develop:
-    uses: ./.github/workflows/build_compiler.yml
+    uses: ./.github/workflows/build_csproj.yml
     secrets: inherit
     with:
       channel: develop
+      prefix: KSP-Compiler
+      base_dir: "Compiler/Features/Compilation/Applications/Compilation.Cli"
+      csproject_filename: "Compilation.Cli.csproj"
