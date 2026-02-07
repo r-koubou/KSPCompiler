@@ -1,0 +1,20 @@
+name: Build KSP Compiler (release)
+
+on:
+  push:
+    branches:
+      - release/*
+
+  workflow_dispatch:
+    inputs:
+      version:
+        required: false
+        default: ''
+
+jobs:
+  build-compiler-release:
+    uses: ./.github/workflows/build_compiler.yml
+    secrets: inherit
+    with:
+      channel: release
+      version: ${{ inputs.version }}

@@ -1,0 +1,15 @@
+name: Build KSP Compiler (rc)
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+  workflow_dispatch:
+
+jobs:
+  build-compiler-rc:
+    uses: ./.github/workflows/build_compiler.yml
+    secrets: inherit
+    with:
+      channel: release

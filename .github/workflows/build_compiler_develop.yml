@@ -4,12 +4,14 @@ on:
   push:
     branches:
       - develop
-    paths-ignore:
-      - "**.md"
+      - feature/**
+      - fix/**
 
   workflow_dispatch:
 
 jobs:
-  build-compiler-dotnet:
-    uses: ./.github/workflows/build_compiler_cli.yml
+  build-compiler-develop:
+    uses: ./.github/workflows/build_compiler.yml
     secrets: inherit
+    with:
+      channel: develop
