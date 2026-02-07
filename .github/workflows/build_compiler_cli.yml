@@ -57,8 +57,17 @@ jobs:
     steps:
     - name: Show workflow inputs
       run: |
-        echo "configuration=${{ env.BUILD_CONFIGURATION }}"
-        echo "version(input)=${{ inputs.version }}"
+        {
+          echo "## Workflow Inputs"
+          echo ""
+          echo "|name|value|"
+          echo "|----|-----|"
+          echo "|ref| ${{ github.ref }}|"
+          echo "|Commit SHA| ${{ github.sha }}|"
+          echo "|version|${{ inputs.version }}|"
+          echo "|channel|${{ inputs.channel }}|"
+          echo ""
+        } >> $GITHUB_STEP_SUMMARY
 
     #----------------------------------------------------------
     # Setup Environment Variables
