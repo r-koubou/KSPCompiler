@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 using KSPCompiler.Shared.Text;
 
 namespace KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Symbol;
@@ -10,5 +12,6 @@ public record DocumentSymbol
     public SymbolKind Kind { get; init; }
     public Position Range { get; init; }
     public Position SelectionRange { get; init; }
+    public List<DocumentSymbol>? Children { get; init; }
     // ReSharper restore UnusedAutoPropertyAccessor.Global
 }
