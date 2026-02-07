@@ -94,10 +94,6 @@ jobs:
         echo "PUBLISH_DIR=${{ env.BASE_DIR }}/${{ env.PUBLISH_DIRNAME }}" >> $GITHUB_ENV
         echo "PUBLISH_RELATIVE_DIR_FROM_BASE=${{ env.PUBLISH_DIRNAME }}" >> $GITHUB_ENV
 
-    - name: Setup Version Variable
-      run: |
-        echo "BUILD_VERSION=${{ (inputs.version != '' && inputs.version) || '0.0.0' }}" >> $GITHUB_ENV
-
     - name: Setup Version Information Path Variable
       run: |
         echo "VERSION_INFO_PATH=${{ env.PUBLISH_DIR }}/VERSION.txt" >> $GITHUB_ENV
@@ -181,7 +177,7 @@ jobs:
     - name: Build compiler for dotnet (with version info)
       run: |
         pushd ${{ env.BASE_DIR }}
-        dotnet publish -p:Version=${{ env.BUILD_VERSION }} -p:AssemblyVersion=${{ env.BUILD_VERSION }} -c ${{ env.BUILD_CONFIGURATION }} -o ${{ env.PUBLISH_RELATIVE_DIR_FROM_BASE }}
+        dotnet publish -p:FileVersion=${{ env.BUILD_VERSION }} -p:Version=${{ env.BUILD_VERSION }} -p:AssemblyVersion=${{ env.BUILD_VERSION }} -c ${{ env.BUILD_CONFIGURATION }} -o ${{ env.PUBLISH_RELATIVE_DIR_FROM_BASE }}
         popd
 
     #----------------------------------------------------------
