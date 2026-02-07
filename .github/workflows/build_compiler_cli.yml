@@ -10,6 +10,15 @@ on:
       version:
         required: false
         type: string
+        default: ""
+        description: |
+          This Language Server version to set (e.g.: 1.2.3).
+      channel:
+        required: true
+        type: string
+        default: "develop"
+        description: |
+          Build channel (develop, rc, release)
 
   workflow_dispatch:
     inputs:
@@ -17,6 +26,17 @@ on:
         required: false
         type: string
         default: ""
+        description: |
+          This Language Server version to set (e.g.: 1.2.3).
+      channel:
+        required: true
+        type: choice
+        options:
+          - develop
+          - rc
+          - release
+        description: |
+          Build channel (develop, rc, release)
 
 jobs:
   #--------------------------------------------------------------
