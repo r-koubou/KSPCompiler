@@ -201,5 +201,5 @@ jobs:
     - name: Create Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ env.PREFIX }}-${{ env.BUILD_CONFIGURATION }}-v${{ env.BUILD_VERSION }}
+        name: ${{ env.ARTIFACT_NAME }}
         path: ${{ env.BASE_DIR }}/${{ env.PUBLISH_DIRNAME }}
