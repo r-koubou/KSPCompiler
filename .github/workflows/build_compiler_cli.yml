@@ -70,6 +70,15 @@ jobs:
         } >> $GITHUB_STEP_SUMMARY
 
     #----------------------------------------------------------
+    # Guard - tag build must be release channel
+    #----------------------------------------------------------
+    - name: Guard - tag build must be release channel
+      if: ${{ inputs.channel == 'release' && !startsWith(github.ref, 'refs/tags/v') }}
+      run: |
+        echo "::error::Must use channel=release when building from tag/v*"
+        exit 1
+
+    #----------------------------------------------------------
     # Setup Environment Variables
     #----------------------------------------------------------
     - name: Setup Branch Name Variable
