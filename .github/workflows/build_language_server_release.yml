@@ -1,0 +1,18 @@
+name: Build Language Server (release)
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+  workflow_dispatch:
+
+jobs:
+  build-language-server-release:
+    uses: ./.github/workflows/build_csproj.yml
+    secrets: inherit
+    with:
+      channel: release
+      prefix: KSP-LanguageServer
+      base_dir: "Compiler/Features/LanguageServer/Applications/LanguageServerFramework"
+      csproject_filename: "LSServer.LanguageServerFramework.csproj"

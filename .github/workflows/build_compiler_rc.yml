@@ -1,21 +1,18 @@
-name: Build KSP Compiler (develop)
+name: Build KSP Compiler (rc)
 
 on:
   push:
     branches:
-      - develop
-      - feature/**
-      - fix/**
-      - refactor/**
+      - release/*
 
   workflow_dispatch:
 
 jobs:
-  build-compiler-develop:
+  build-compiler-rc:
     uses: ./.github/workflows/build_csproj.yml
     secrets: inherit
     with:
-      channel: develop
+      channel: rc
       prefix: KSP-Compiler
       base_dir: "Compiler/Features/Compilation/Applications/Compilation.Cli"
       csproject_filename: "Compilation.Cli.csproj"

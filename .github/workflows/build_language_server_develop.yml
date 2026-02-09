@@ -1,0 +1,21 @@
+name: Build Language Server (develop)
+
+on:
+  push:
+    branches:
+      - develop
+      - feature/**
+      - fix/**
+      - refactor/**
+
+  workflow_dispatch:
+
+jobs:
+  build-language-server-develop:
+    uses: ./.github/workflows/build_csproj.yml
+    secrets: inherit
+    with:
+      channel: develop
+      prefix: KSP-LanguageServer
+      base_dir: "Compiler/Features/LanguageServer/Applications/LanguageServerFramework"
+      csproject_filename: "LSServer.LanguageServerFramework.csproj"
