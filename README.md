@@ -52,10 +52,7 @@ Run as a standalone application
 ### Language server
 
 1. Build `LanguageServer/Applications/KSPLanguageServerCliApp`
-2. Run the language server
-    ```bash
-    dotnet KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.dll
-    ```
+2. Run the `ksp_lsp` command to start the language server
 3. Connect the LSP client via stdio
 
 ### Built-in Symbol Management
