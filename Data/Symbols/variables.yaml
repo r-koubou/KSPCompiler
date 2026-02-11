@@ -2904,6 +2904,38 @@ Data:
   BuiltIntoVersion: N/A
   CreatedAt: 2025-03-29T07:11:35.7054070Z
   UpdatedAt: 2025-03-29T07:11:35.7054070Z
+- Id: f047cb47-b787-4702-9f49-47fa02985424
+  Name: $ENGINE_PAR_EPP_ELECTRIC_C_BRILLIANT
+  BuiltIn: true
+  Description: |-
+    Built-in Variable: $ENGINE_PAR_EPP_ELECTRIC_C_BRILLIANT
+  BuiltIntoVersion: N/A
+  CreatedAt: 2026-02-11T13:12:55.0601320Z
+  UpdatedAt: 2026-02-11T13:12:55.0601320Z
+- Id: ab1d7072-30ab-40f6-8706-b61710e6e5d9
+  Name: $ENGINE_PAR_EPP_ELECTRIC_C_MEDIUM
+  BuiltIn: true
+  Description: |-
+    Built-in Variable: $ENGINE_PAR_EPP_ELECTRIC_C_MEDIUM
+  BuiltIntoVersion: N/A
+  CreatedAt: 2026-02-11T13:12:55.0601370Z
+  UpdatedAt: 2026-02-11T13:12:55.0601370Z
+- Id: 9bc9566d-915c-4610-bc8a-e7e0a6d8fdb9
+  Name: $ENGINE_PAR_EPP_ELECTRIC_C_SOFT
+  BuiltIn: true
+  Description: |-
+    Built-in Variable: $ENGINE_PAR_EPP_ELECTRIC_C_SOFT
+  BuiltIntoVersion: N/A
+  CreatedAt: 2026-02-11T13:12:55.0601340Z
+  UpdatedAt: 2026-02-11T13:12:55.0601340Z
+- Id: 1f96be92-7787-4d20-a2a9-c5b8877dcd66
+  Name: $ENGINE_PAR_EPP_ELECTRIC_C_TREBLE
+  BuiltIn: true
+  Description: |-
+    Built-in Variable: $ENGINE_PAR_EPP_ELECTRIC_C_TREBLE
+  BuiltIntoVersion: N/A
+  CreatedAt: 2026-02-11T13:12:55.0601360Z
+  UpdatedAt: 2026-02-11T13:12:55.0601360Z
 - Id: d05455cd-0b52-4d0f-a35e-27eea2d10ff3
   Name: $ENGINE_PAR_EPP_EQ_BASS
   BuiltIn: true
@@ -9768,6 +9800,14 @@ Data:
   BuiltIntoVersion: N/A
   CreatedAt: 2025-03-29T07:11:35.7056160Z
   UpdatedAt: 2025-03-29T07:11:35.7056160Z
+- Id: 60b345ed-1982-4001-aeb3-0a8fd38312d7
+  Name: $NI_EPP_EQ_MODE_ELECTRIC_C
+  BuiltIn: true
+  Description: |-
+    Built-in Variable: $NI_EPP_EQ_MODE_ELECTRIC_C
+  BuiltIntoVersion: N/A
+  CreatedAt: 2026-02-11T13:12:55.0516810Z
+  UpdatedAt: 2026-02-11T13:12:55.0516810Z
 - Id: d2c6b2c4-0ff0-4246-91cf-c62658646027
   Name: $NI_EPP_EQ_MODE_PASSIVE
   BuiltIn: true
@@ -9808,6 +9848,14 @@ Data:
   BuiltIntoVersion: N/A
   CreatedAt: 2025-03-29T07:11:35.7056170Z
   UpdatedAt: 2025-03-29T07:11:35.7056170Z
+- Id: 3f40741d-63a6-4563-86ce-c53fdb47d6b8
+  Name: $NI_EPP_TREMOLO_MODE_ELECTRIC_P
+  BuiltIn: true
+  Description: |-
+    Built-in Variable: $NI_EPP_TREMOLO_MODE_ELECTRIC_P
+  BuiltIntoVersion: N/A
+  CreatedAt: 2026-02-11T13:12:55.0601200Z
+  UpdatedAt: 2026-02-11T13:12:55.0601200Z
 - Id: 0179dbeb-752e-4059-b1ca-6bb3ee5b25d1
   Name: $NI_EPP_TREMOLO_MODE_GUITAR
   BuiltIn: true
