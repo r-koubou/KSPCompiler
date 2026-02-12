@@ -1863,7 +1863,7 @@ Data:
   Description: |-
     Converts a real number into an integer.
   BuiltIntoVersion: N/A
-  ReturnType: I||S
+  ReturnType: I
   Arguments:
   - Name: real
     DataType: R
@@ -1875,14 +1875,14 @@ Data:
   Name: int_to_real
   BuiltIn: true
   Description: |-
-    Converts a real number into an integer.
+    Converts an integer value into a real number.
   BuiltIntoVersion: N/A
-  ReturnType: I||S
+  ReturnType: R
   Arguments:
-  - Name: real
-    DataType: R
+  - Name: integer
+    DataType: I
     Description: |-
-      A real value to convert.
+      An integer value to convert.
   CreatedAt: 2025-03-29T06:15:22.6928030Z
   UpdatedAt: 2025-03-29T06:15:22.6928030Z
 - Id: af4e892f-1b46-4eb7-b9b7-63f9a7ae8de4
@@ -3056,11 +3056,11 @@ Data:
   Name: real
   BuiltIn: true
   Description: |-
-    Converts an integer value into a real numberConverts a real number into an integer.
+    Converts an integer value into a real number.
   BuiltIntoVersion: N/A
-  ReturnType: I||S
+  ReturnType: R
   Arguments:
-  - Name: real
+  - Name: integer
     DataType: I
     Description: |-
       An integer value to convert.
@@ -3070,14 +3070,14 @@ Data:
   Name: real_to_int
   BuiltIn: true
   Description: |-
-    Converts an integer value into a real numberConverts a real number into an integer.
+    Converts a real number into an integer.
   BuiltIntoVersion: N/A
-  ReturnType: I||S
+  ReturnType: I
   Arguments:
   - Name: real
-    DataType: I
+    DataType: R
     Description: |-
-      An integer value to convert.
+      A real value to convert.
   CreatedAt: 2025-03-29T06:15:22.6928250Z
   UpdatedAt: 2025-03-29T06:15:22.6928250Z
 - Id: 29c1c288-68ca-40fc-bc0c-3f0a99f17163

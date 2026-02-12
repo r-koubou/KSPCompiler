@@ -88,6 +88,19 @@ public class CallCommandEvaluator : ICallCommandEvaluator
             callArgs.AddRange( arguments.Expressions );
         }
 
+        // 引数の式を事前に評価し、型情報を取得する
+        var evaluatedCallArgs = new List<AstExpressionNode>();
+
+        foreach( var callArg in callArgs )
+        {
+            if( callArg.Accept( visitor ) is not AstExpressionNode evaluatedArg )
+            {
+                throw new AstAnalyzeException( callArg, "Failed to evaluate command argument" );
+            }
+
+            evaluatedCallArgs.Add( evaluatedArg );
+        }
+
         foreach( var x in commandSymbols )
         {
             var symbolArgs = x.Arguments.ToList();
@@ -104,12 +117,12 @@ public class CallCommandEvaluator : ICallCommandEvaluator
 
             #region With arguments command calling
             // 引数オーバーロード毎の引数の数が一致しない時点で評価はここまで
-            if( symbolArgs.Count != callArgs.Count )
+            if( symbolArgs.Count != evaluatedCallArgs.Count )
             {
                 continue;
             }
 
-            if( ValidateCommandArgumentType( visitor, expr, x, callArgs, symbolArgs ) )
+            if( ValidateCommandArgumentType( expr, x, evaluatedCallArgs, symbolArgs ) )
             {
                 return true;
             }
@@ -123,28 +136,19 @@ public class CallCommandEvaluator : ICallCommandEvaluator
                 CompilerMessageResources.semantic_error_command_arg_incompatible,
                 commandName,
                 commandSymbols.ToIncompatibleMessage(),
-                callArgs.ToIncompatibleMessage( commandName )
+                evaluatedCallArgs.ToIncompatibleMessage( commandName )
             )
         );
 
         return false;
     }
 
-    private bool ValidateCommandArgumentType( IAstVisitor visitor, AstCallCommandExpressionNode expr, CommandSymbol commandSymbol, IReadOnlyList<AstExpressionNode> callArgs, IReadOnlyList<CommandArgumentSymbol> symbolArgs )
+    private bool ValidateCommandArgumentType( AstCallCommandExpressionNode expr, CommandSymbol commandSymbol, IReadOnlyList<AstExpressionNode> evaluatedCallArgs, IReadOnlyList<CommandArgumentSymbol> symbolArgs )
     {
-        var evaluatedArgs = new List<AstExpressionNode>();
-
-        for( var i = 0; i < callArgs.Count; i++ )
+        for( var i = 0; i < evaluatedCallArgs.Count; i++ )
         {
             var symbolArg = symbolArgs[ i ];
-            var callArg = callArgs[ i ];
-
-            if( callArg.Accept( visitor ) is not AstExpressionNode evaluatedArg )
-            {
-                throw new AstAnalyzeException( callArg, "Failed to evaluate command argument" );
-            }
-
-            evaluatedArgs.Add( evaluatedArg );
+            var evaluatedArg = evaluatedCallArgs[ i ];
 
             // プリミティブ型の型評価
             if( TypeCompatibility.IsTypeCompatible( evaluatedArg.TypeFlag, symbolArg.DataType ) )
@@ -196,7 +200,7 @@ public class CallCommandEvaluator : ICallCommandEvaluator
         }
 
         // 引数が畳み込みでリテラルになっていれば引数の式を置き換える
-        ReplaceConvolutedCommandArguments( expr, evaluatedArgs );
+        ReplaceConvolutedCommandArguments( expr, evaluatedCallArgs );
 
         return true;
     }
