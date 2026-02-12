@@ -1863,7 +1863,7 @@ Data:
   Description: |-
     Converts a real number into an integer.
   BuiltIntoVersion: N/A
-  ReturnType: I
+  ReturnType: I||S
   Arguments:
   - Name: real
     DataType: R
@@ -1877,7 +1877,7 @@ Data:
   Description: |-
     Converts an integer value into a real number.
   BuiltIntoVersion: N/A
-  ReturnType: R
+  ReturnType: R||S
   Arguments:
   - Name: integer
     DataType: I
@@ -3072,7 +3072,7 @@ Data:
   Description: |-
     Converts a real number into an integer.
   BuiltIntoVersion: N/A
-  ReturnType: I
+  ReturnType: I||S
   Arguments:
   - Name: real
     DataType: R
