@@ -7,6 +7,10 @@ CHANGELOG
 
 - [#326 Fix Type Propagation Through Binary Expressions](https://github.com/r-koubou/KSPCompiler/pull/326) : Thank you to [cdbeckwith](https://github.com/cdbeckwith)
 
+### Variables added
+
+- $EVENT_PAR_OUTPUT_TYPE
+- $EVENT_PAR_OUTPUT_INDEX
 
 ## v1.0.2
 

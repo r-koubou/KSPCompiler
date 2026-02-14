@@ -7368,6 +7368,22 @@ Data:
   BuiltIntoVersion: N/A
   CreatedAt: 2025-03-29T07:11:35.7055310Z
   UpdatedAt: 2025-03-29T07:11:35.7055310Z
+- Id: fd83d2c6-d672-4c4b-82e3-9c7440ab5270
+  Name: $EVENT_PAR_OUTPUT_INDEX
+  BuiltIn: true
+  Description: |-
+    Built-in Variable: $EVENT_PAR_OUTPUT_INDEX
+  BuiltIntoVersion: N/A
+  CreatedAt: 2026-02-14T07:43:25.0020260Z
+  UpdatedAt: 2026-02-14T07:43:25.0020260Z
+- Id: ffda7465-938e-4002-bd68-4f892ef1a929
+  Name: $EVENT_PAR_OUTPUT_TYPE
+  BuiltIn: true
+  Description: |-
+    Built-in Variable: $EVENT_PAR_OUTPUT_TYPE
+  BuiltIntoVersion: N/A
+  CreatedAt: 2026-02-14T07:43:24.9959720Z
+  UpdatedAt: 2026-02-14T07:43:24.9959720Z
 - Id: d7fa2467-d5d5-4c8d-8f7f-55e876ad72fe
   Name: $EVENT_PAR_PAN
   BuiltIn: true
