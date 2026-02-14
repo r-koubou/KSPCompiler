@@ -3,10 +3,14 @@ using System;
 using KSPCompiler.Features.Compilation.Domain.Messages;
 using KSPCompiler.Features.Compilation.Domain.Messages.Extensions;
 using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Convolutions.Integers;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Convolutions.Reals;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
 using KSPCompiler.Features.SymbolManagement.UseCase.Tests.Commons;
+using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Expressions;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
+using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
 using KSPCompiler.Shared.EventEmitting.Extensions;
 
 using NUnit.Framework;
@@ -243,5 +247,62 @@ public class AstCallCommandEvaluationTest
         compilerMessageManger.WriteTo( Console.Out );
 
         Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Warning ), Is.EqualTo( 1 ) );
+    }
+
+    [Test]
+    public void CallCommandWithBinaryExpressionArgTest()
+    {
+        var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
+
+        var symbols = new AggregateSymbolTable();
+
+        // register command `int_to_real`
+        // int_to_real(<integer>) -> real
+        var command = MockUtility.CreateCommand(
+            "int_to_real",
+            DataTypeFlag.TypeReal,
+            new CommandArgumentSymbol
+            {
+                Name     = "integer",
+                DataType = DataTypeFlag.TypeInt
+            }
+        );
+
+        symbols.Commands.AddAsOverload( command, command.Arguments );
+
+        // Create a call command expression node with a binary expression argument
+        // int_to_real( 10 - 5 )
+        var binaryExpr = new AstSubtractionExpressionNode
+        {
+            Left  = new AstIntLiteralNode( 10 ),
+            Right = new AstIntLiteralNode( 5 )
+        };
+
+        var callCommandAst = MockUtility.CreateCommandExpressionNode(
+            "int_to_real",
+            binaryExpr
+        );
+
+        var callCommandEvaluator = new CallCommandEvaluator( eventEmitter, symbols );
+        var binaryOperatorEvaluator = new NumericBinaryOperatorEvaluator(
+            eventEmitter,
+            symbols,
+            new MockIntegerConvolutionEvaluator( null ),
+            new RealConvolutionEvaluator()
+        );
+
+        var visitor = new MockCallCommandExpressionVisitor();
+        visitor.Inject( callCommandEvaluator );
+        visitor.Inject( binaryOperatorEvaluator );
+
+        var result = callCommandEvaluator.Evaluate( visitor, callCommandAst ) as AstExpressionNode;
+
+        compilerMessageManger.WriteTo( Console.Out );
+
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 0 ) );
+        Assert.That( result, Is.Not.Null );
+        Assert.That( result?.TypeFlag, Is.EqualTo( DataTypeFlag.TypeReal ) );
     }
 }
