@@ -18,22 +18,6 @@ public abstract class SymbolBase
     public Guid Id { get; set; } = Guid.NewGuid();
 
     /// <summary>
-    /// Creation date of the symbol.
-    /// </summary>
-    /// <remarks>
-    /// This datetime is used when storing in the repository.
-    /// </remarks>
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
-    /// <summary>
-    /// Last updated date of the symbol.
-    /// </summary>
-    /// <remarks>
-    /// This datetime is used when storing in the repository.
-    /// </remarks>
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
-
-    /// <summary>
     /// If comment text above declaration exists.
     /// </summary>
     /// <remarks>

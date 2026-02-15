@@ -117,9 +117,6 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
 
         if( !Models.TryGetValue( symbol.Id, out var existingSymbol ) )
         {
-            symbol.CreatedAt = DateTime.UtcNow;
-            symbol.UpdatedAt = DateTime.UtcNow;
-
             Models.Add( symbol.Id, symbol );
             Dirty = true;
 
@@ -136,8 +133,6 @@ public abstract class SymbolRepository<TSymbol> : ISymbolRepository<TSymbol> whe
         EventEmitter?.Emit( new TextMessageEvent( $"Updated: {symbol.Name.Value}" ) );
 
         symbol.Id        = existingSymbol.Id;
-        symbol.CreatedAt = existingSymbol.CreatedAt;
-        symbol.UpdatedAt = DateTime.UtcNow;
 
         Models[ symbol.Id ] = symbol;
         Dirty               = true;

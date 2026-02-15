@@ -22,8 +22,4 @@ public sealed class CommandSymbolModel : ISymbolModel
     public string ReturnType { get; set; } = string.Empty;
 
     public List<CommandArgumentModel> Arguments { get; set; } = new();
-
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 }

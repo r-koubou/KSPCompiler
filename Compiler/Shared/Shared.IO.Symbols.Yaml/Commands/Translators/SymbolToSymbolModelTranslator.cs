@@ -14,8 +14,6 @@ public class SymbolToSymbolModelTranslator
         var model = new CommandSymbolModel
         {
             Id               = source.Id,
-            CreatedAt        = source.CreatedAt,
-            UpdatedAt        = source.UpdatedAt,
             Name             = source.Name.Value,
             BuiltIn          = source.BuiltIn,
             ReturnType       = DataTypeUtility.ToString( source.DataType ),

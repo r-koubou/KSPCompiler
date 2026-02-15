@@ -12,8 +12,6 @@ public sealed class SymbolModelToSymbolTranslator
         var uiType = new UITypeSymbol( source.RequireInitializer )
         {
             Id               = source.Id,
-            CreatedAt        = source.CreatedAt,
-            UpdatedAt        = source.UpdatedAt,
             Name             = source.Name,
             BuiltIn          = source.BuiltIn,
             Description      = source.Description,

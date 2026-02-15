@@ -24,8 +24,4 @@ public sealed class UITypeSymbolModel : ISymbolModel
     public bool RequireInitializer { get; set; }
 
     public List<UITypeSymbolArgumentModel> InitializerArguments { get; set; } = [];
-
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 }
