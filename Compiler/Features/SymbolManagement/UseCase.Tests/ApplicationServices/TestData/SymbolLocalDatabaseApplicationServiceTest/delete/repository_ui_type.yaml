@@ -9,8 +9,6 @@ Data:
   BuiltIntoVersion: N/A
   RequireInitializer: false
   InitializerArguments: []
-  CreatedAt: 2025-01-26T06:28:18.1809660Z
-  UpdatedAt: 2025-01-26T06:28:18.1809660Z
 - Id: eacf73b9-61ca-4fd7-9dca-f6078e6fb546
   Name: ui_file_selector
   BuiltIn: false
@@ -20,5 +18,3 @@ Data:
   BuiltIntoVersion: N/A
   RequireInitializer: false
   InitializerArguments: []
-  CreatedAt: 2025-01-26T06:28:18.1810570Z
-  UpdatedAt: 2025-01-26T06:28:18.1810570Z
