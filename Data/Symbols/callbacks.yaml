@@ -8,8 +8,6 @@ Data:
     Async complete callback, triggered after the execution of any command that is executed asynchronously, for example various loading or saving related commands.
   BuiltIntoVersion: N/A
   Arguments: []
-  CreatedAt: 2025-01-26T06:28:17.9807940Z
-  UpdatedAt: 2025-01-26T06:28:17.9807940Z
 - Id: a9212dc3-6a74-4990-a5e4-b9c209985e54
   Name: controller
   BuiltIn: false
@@ -18,8 +16,6 @@ Data:
     MIDI controller callback, executed whenever a MIDI CC, Pitch Bend or Channel Pressure message is received.
   BuiltIntoVersion: N/A
   Arguments: []
-  CreatedAt: 2025-01-26T06:28:17.9841600Z
-  UpdatedAt: 2025-01-26T06:28:17.9841600Z
 - Id: 2e448cd6-9b97-49ea-9703-fd47a750bef3
   Name: init
   BuiltIn: false
@@ -28,8 +24,6 @@ Data:
     Initialization callback, executed when the script was successfully compiled without warnings or errors.
   BuiltIntoVersion: N/A
   Arguments: []
-  CreatedAt: 2025-01-26T06:28:17.9841710Z
-  UpdatedAt: 2025-01-26T06:28:17.9841710Z
 - Id: 0053a43b-93bb-4fe6-9e27-727229424f59
   Name: listener
   BuiltIn: false
@@ -38,8 +32,6 @@ Data:
     Listener callback, executed at definable time intervals or whenever a transport command is received.
   BuiltIntoVersion: N/A
   Arguments: []
-  CreatedAt: 2025-01-26T06:28:17.9841770Z
-  UpdatedAt: 2025-01-26T06:28:17.9841770Z
 - Id: 6920ca14-9ed4-4e95-b9a1-5776d87a076c
   Name: midi_in
   BuiltIn: false
@@ -48,8 +40,6 @@ Data:
     MIDI callback, triggered by every incoming MIDI event.
   BuiltIntoVersion: N/A
   Arguments: []
-  CreatedAt: 2025-01-26T06:28:17.9856220Z
-  UpdatedAt: 2025-01-26T06:28:17.9856220Z
 - Id: df392e8d-ae7a-4d2a-a003-756dee1bfe14
   Name: note
   BuiltIn: false
@@ -58,8 +48,6 @@ Data:
     Note callback, executed whenever a MIDI Note On message is received.
   BuiltIntoVersion: N/A
   Arguments: []
-  CreatedAt: 2025-01-26T06:28:17.9841850Z
-  UpdatedAt: 2025-01-26T06:28:17.9841850Z
 - Id: 4fd9cc23-6ed7-4109-a89c-ab89311c4739
   Name: note_controller
   BuiltIn: false
@@ -68,8 +56,6 @@ Data:
     MIDI 2.0 per-note controller callback, executed whenever a MIDI 2.0 Registered Per-Note Controller, MIDI 2.0 Assignable Per-Note Controller, or MIDI 2.0 Per-Note Pitch Bend message is received.
   BuiltIntoVersion: N/A
   Arguments: []
-  CreatedAt: 2025-01-26T06:28:17.9841910Z
-  UpdatedAt: 2025-01-26T06:28:17.9841910Z
 - Id: dff5de5e-5925-4f94-989c-05b84bce335a
   Name: nrpn
   BuiltIn: false
@@ -78,8 +64,6 @@ Data:
     NRPN callbacks, executed whenever a MIDI NRPN (registered/non-registered parameter number) message is received.
   BuiltIntoVersion: N/A
   Arguments: []
-  CreatedAt: 2025-01-26T06:28:17.9842260Z
-  UpdatedAt: 2025-01-26T06:28:17.9842260Z
 - Id: 3d5165fa-845f-4442-bce0-05944f6a96c1
   Name: persistence_changed
   BuiltIn: false
@@ -88,8 +72,6 @@ Data:
     Executed after the on init callback, or whenever a snapshot has been loaded.
   BuiltIntoVersion: N/A
   Arguments: []
-  CreatedAt: 2025-01-26T06:28:17.9841970Z
-  UpdatedAt: 2025-01-26T06:28:17.9841970Z
 - Id: 883e01ca-6a65-455a-b5b1-c211cb05c6ca
   Name: pgs_changed
   BuiltIn: false
@@ -98,8 +80,6 @@ Data:
     Executed whenever any pgs_set_key_val() command is executed in any script slot.
   BuiltIntoVersion: N/A
   Arguments: []
-  CreatedAt: 2025-01-26T06:28:17.9842020Z
-  UpdatedAt: 2025-01-26T06:28:17.9842020Z
 - Id: 435a3614-5ff0-4fa4-b9f2-3504dd22a72f
   Name: poly_at
   BuiltIn: false
@@ -108,8 +88,6 @@ Data:
     Polyphonic aftertouch callback, executed whenever a MIDI Polyphonic Aftertouch message is received.
   BuiltIntoVersion: N/A
   Arguments: []
-  CreatedAt: 2025-01-26T06:28:17.9842080Z
-  UpdatedAt: 2025-01-26T06:28:17.9842080Z
 - Id: e0818bb8-b915-47f4-8991-7bb1b81782e6
   Name: release
   BuiltIn: false
@@ -118,8 +96,6 @@ Data:
     Release callback, executed whenever a MIDI Note Off message is received.
   BuiltIntoVersion: N/A
   Arguments: []
-  CreatedAt: 2025-01-26T06:28:17.9842130Z
-  UpdatedAt: 2025-01-26T06:28:17.9842130Z
 - Id: c7a98df6-5832-4e31-979d-e597a5a35863
   Name: rpn
   BuiltIn: false
@@ -128,8 +104,6 @@ Data:
     RPN callbacks, executed whenever a MIDI RPN (registered/non-registered parameter number) message is received.
   BuiltIntoVersion: N/A
   Arguments: []
-  CreatedAt: 2025-01-26T06:28:17.9842200Z
-  UpdatedAt: 2025-01-26T06:28:17.9842200Z
 - Id: 84231e60-ee67-4771-a2db-14d86e87df56
   Name: ui_control
   BuiltIn: false
@@ -142,8 +116,6 @@ Data:
     RequiredDeclare: true
     Description: |-
       UI widget variable
-  CreatedAt: 2025-01-26T06:28:17.9855530Z
-  UpdatedAt: 2025-01-26T06:28:17.9855530Z
 - Id: 9848336b-08fe-46b0-b05c-8c7c045cbf4b
   Name: ui_controls
   BuiltIn: false
@@ -152,8 +124,6 @@ Data:
     Global UI callback, executed whenever the user interacts with any particular UI widget.
   BuiltIntoVersion: N/A
   Arguments: []
-  CreatedAt: 2025-01-26T06:28:17.9856160Z
-  UpdatedAt: 2025-01-26T06:28:17.9856160Z
 - Id: 866108be-281b-4680-a573-8d6bc5d285ec
   Name: ui_update
   BuiltIn: false
@@ -162,5 +132,3 @@ Data:
     UI update callback, executed with every GUI change in Kontakt.
   BuiltIntoVersion: N/A
   Arguments: []
-  CreatedAt: 2025-01-26T06:28:17.9856100Z
-  UpdatedAt: 2025-01-26T06:28:17.9856100Z

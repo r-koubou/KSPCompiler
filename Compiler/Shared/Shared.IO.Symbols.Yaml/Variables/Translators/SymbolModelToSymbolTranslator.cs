@@ -12,8 +12,6 @@ public sealed class SymbolModelToSymbolTranslator
         var symbol = new VariableSymbol
         {
             Id               = source.Id,
-            CreatedAt        = source.CreatedAt,
-            UpdatedAt        = source.UpdatedAt,
             Name             = source.Name,
             ArraySize        = 0,
             BuiltIn          = source.BuiltIn,

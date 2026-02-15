@@ -9,8 +9,6 @@ Data:
   BuiltIntoVersion: N/A
   RequireInitializer: false
   InitializerArguments: []
-  CreatedAt: 2025-01-26T06:28:18.1809660Z
-  UpdatedAt: 2025-01-26T06:28:18.1809660Z
 - Id: eacf73b9-61ca-4fd7-9dca-f6078e6fb546
   Name: ui_file_selector
   BuiltIn: false
@@ -20,8 +18,6 @@ Data:
   BuiltIntoVersion: N/A
   RequireInitializer: false
   InitializerArguments: []
-  CreatedAt: 2025-01-26T06:28:18.1810570Z
-  UpdatedAt: 2025-01-26T06:28:18.1810570Z
 - Id: b48bbb6c-46bd-4d20-9c16-9e46f64f3498
   Name: ui_knob
   BuiltIn: false
@@ -40,8 +36,6 @@ Data:
   - Name: $display_ratio
     Description: |-
       The knob value is divided by <display-ratio> for display purposes.
-  CreatedAt: 2025-01-26T06:28:18.1812990Z
-  UpdatedAt: 2025-01-26T06:28:18.1812990Z
 - Id: 5139ca04-5ceb-4054-8deb-5f87ae69d186
   Name: ui_label
   BuiltIn: false
@@ -57,8 +51,6 @@ Data:
   - Name: $grid_height
     Description: |-
       The height of the label in grid units (1 to 16)
-  CreatedAt: 2025-01-26T06:28:18.1812790Z
-  UpdatedAt: 2025-01-26T06:28:18.1812790Z
 - Id: 4e745a25-7f24-49e8-bdea-598e81eaf5e4
   Name: ui_level_meter
   BuiltIn: false
@@ -68,8 +60,6 @@ Data:
   BuiltIntoVersion: N/A
   RequireInitializer: false
   InitializerArguments: []
-  CreatedAt: 2025-01-26T06:28:18.1813050Z
-  UpdatedAt: 2025-01-26T06:28:18.1813050Z
 - Id: e4304b07-e03a-4435-bd14-74ac60342341
   Name: ui_menu
   BuiltIn: false
@@ -79,8 +69,6 @@ Data:
   BuiltIntoVersion: N/A
   RequireInitializer: false
   InitializerArguments: []
-  CreatedAt: 2025-01-26T06:28:18.1813140Z
-  UpdatedAt: 2025-01-26T06:28:18.1813140Z
 - Id: 7d28359b-0f5b-441f-8bc7-4f582f05045b
   Name: ui_mouse_area
   BuiltIn: false
@@ -90,8 +78,6 @@ Data:
   BuiltIntoVersion: N/A
   RequireInitializer: false
   InitializerArguments: []
-  CreatedAt: 2025-01-26T06:28:18.1813200Z
-  UpdatedAt: 2025-01-26T06:28:18.1813200Z
 - Id: 3617d8cb-0041-47e4-aef7-350109d0ee65
   Name: ui_panel
   BuiltIn: false
@@ -101,8 +87,6 @@ Data:
   BuiltIntoVersion: N/A
   RequireInitializer: false
   InitializerArguments: []
-  CreatedAt: 2025-01-26T06:28:18.1813260Z
-  UpdatedAt: 2025-01-26T06:28:18.1813260Z
 - Id: 7cf1332e-8995-4f46-8e80-54dd71a29481
   Name: ui_slider
   BuiltIn: false
@@ -118,8 +102,6 @@ Data:
   - Name: $max
     Description: |-
       The maximum value of the slider.
-  CreatedAt: 2025-01-26T06:28:18.1813320Z
-  UpdatedAt: 2025-01-26T06:28:18.1813320Z
 - Id: 3fc7724c-8d95-4ec9-b7ae-d3937db86f87
   Name: ui_switch
   BuiltIn: false
@@ -129,8 +111,6 @@ Data:
   BuiltIntoVersion: N/A
   RequireInitializer: false
   InitializerArguments: []
-  CreatedAt: 2025-01-26T06:28:18.1813390Z
-  UpdatedAt: 2025-01-26T06:28:18.1813390Z
 - Id: f4a3a9b2-8d54-484f-b9e7-eed3bae906cf
   Name: ui_table
   BuiltIn: false
@@ -149,8 +129,6 @@ Data:
   - Name: $range
     Description: |-
       The range of the table. If negative values are used, a bipolar table is created.
-  CreatedAt: 2025-01-26T06:28:18.1813460Z
-  UpdatedAt: 2025-01-26T06:28:18.1813460Z
 - Id: e1b01f76-6916-445d-8308-59e8075ab2ae
   Name: ui_text_edit
   BuiltIn: false
@@ -160,8 +138,6 @@ Data:
   BuiltIntoVersion: N/A
   RequireInitializer: false
   InitializerArguments: []
-  CreatedAt: 2025-01-26T06:28:18.1813530Z
-  UpdatedAt: 2025-01-26T06:28:18.1813530Z
 - Id: 8b25d956-3882-4345-9813-e41bbe7cc347
   Name: ui_value_edit
   BuiltIn: false
@@ -180,8 +156,6 @@ Data:
   - Name: $display_ratio
     Description: |-
       The value is divided by <display-ratio> for display purposes.
-  CreatedAt: 2025-01-26T06:28:18.1813600Z
-  UpdatedAt: 2025-01-26T06:28:18.1813600Z
 - Id: 63eae602-9bbf-4430-95f3-56495dc62a5c
   Name: ui_waveform
   BuiltIn: false
@@ -197,8 +171,6 @@ Data:
   - Name: $height
     Description: |-
       The height of the waveform in grid units (1 ... 16).
-  CreatedAt: 2025-01-26T06:28:18.1813670Z
-  UpdatedAt: 2025-01-26T06:28:18.1813670Z
 - Id: e78e9df1-0a34-46f2-b7fc-5a657266396c
   Name: ui_wavetable
   BuiltIn: false
@@ -208,8 +180,6 @@ Data:
   BuiltIntoVersion: N/A
   RequireInitializer: false
   InitializerArguments: []
-  CreatedAt: 2025-01-26T06:28:18.1813730Z
-  UpdatedAt: 2025-01-26T06:28:18.1813730Z
 - Id: 66d76f73-a487-40b7-8a28-6e578a944f28
   Name: ui_xy
   BuiltIn: false
@@ -219,5 +189,3 @@ Data:
   BuiltIntoVersion: N/A
   RequireInitializer: false
   InitializerArguments: []
-  CreatedAt: 2025-01-26T06:28:18.1813790Z
-  UpdatedAt: 2025-01-26T06:28:18.1813790Z

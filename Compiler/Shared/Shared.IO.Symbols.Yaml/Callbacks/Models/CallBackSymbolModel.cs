@@ -16,6 +16,4 @@ public sealed class CallBackSymbolModel : ISymbolModel
     public string Description { get; set; } = string.Empty;
     public string BuiltIntoVersion { get; set; } = string.Empty;
     public List<CallbackArgumentModel> Arguments { get; set; } = new();
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 }

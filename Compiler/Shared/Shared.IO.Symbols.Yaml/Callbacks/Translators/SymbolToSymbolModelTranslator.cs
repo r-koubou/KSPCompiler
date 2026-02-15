@@ -11,8 +11,6 @@ public sealed class SymbolToSymbolModelTranslator
         var symbol = new CallBackSymbolModel
         {
             Id                       = source.Id,
-            CreatedAt                = source.CreatedAt,
-            UpdatedAt                = source.UpdatedAt,
             Name                     = source.Name.Value,
             BuiltIn                  = source.BuiltIn,
             AllowMultipleDeclaration = source.AllowMultipleDeclaration,

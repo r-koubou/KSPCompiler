@@ -12,8 +12,6 @@ Data:
     DataType: I||R
     Description: |-
       A numeric value to calculate
-  CreatedAt: 2025-03-29T06:15:22.6923390Z
-  UpdatedAt: 2025-03-29T06:15:22.6923910Z
 - Id: 48ce7bcc-130b-4f72-9c93-a31366cb001f
   Name: acos
   BuiltIn: true
@@ -26,8 +24,6 @@ Data:
     DataType: R
     Description: |-
       A numeric value to calculate
-  CreatedAt: 2025-03-29T06:15:22.6927590Z
-  UpdatedAt: 2025-03-29T06:15:22.6927590Z
 - Id: c719fb10-ba79-459a-a4be-c59556f3550d
   Name: add_menu_item
   BuiltIn: true
@@ -48,8 +44,6 @@ Data:
     DataType: I
     Description: |-
       The value of the menu entry.
-  CreatedAt: 2025-03-29T06:15:22.6927610Z
-  UpdatedAt: 2025-03-29T06:15:22.6927610Z
 - Id: 53107889-9215-4d10-83b5-dcd446178422
   Name: add_text_line
   BuiltIn: true
@@ -66,8 +60,6 @@ Data:
     DataType: S
     Description: |-
       The text to be displayed.
-  CreatedAt: 2025-03-29T06:15:22.6927610Z
-  UpdatedAt: 2025-03-29T06:15:22.6927610Z
 - Id: 7b2b0235-a3fe-46d3-aace-e0b0e81e0377
   Name: allow_group
   BuiltIn: true
@@ -79,8 +71,6 @@ Data:
   - Name: group-index
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6927730Z
-  UpdatedAt: 2025-03-29T06:15:22.6927730Z
 - Id: 5be16c07-b2dd-4323-9195-b33a5df55cd6
   Name: array_equal
   BuiltIn: true
@@ -95,8 +85,6 @@ Data:
   - Name: array-variable
     DataType: I[]
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6927740Z
-  UpdatedAt: 2025-03-29T06:15:22.6927740Z
 - Id: c5f3c51e-b8b8-4ccc-8ab2-9ade10e814d1
   Name: asin
   BuiltIn: true
@@ -108,8 +96,6 @@ Data:
     DataType: R
     Description: |-
       A numeric value to calculate
-  CreatedAt: 2025-03-29T06:15:22.6927740Z
-  UpdatedAt: 2025-03-29T06:15:22.6927740Z
 - Id: b206397b-0be5-431f-9bc0-48e91ee8d0ad
   Name: atan
   BuiltIn: true
@@ -122,8 +108,6 @@ Data:
     DataType: R
     Description: |-
       A numeric value to calculate.
-  CreatedAt: 2025-03-29T06:15:22.6927740Z
-  UpdatedAt: 2025-03-29T06:15:22.6927740Z
 - Id: 2aab7ef1-fc83-4ae4-ba9c-45034518b3fc
   Name: attach_level_meter
   BuiltIn: true
@@ -156,8 +140,6 @@ Data:
       - NI_LEVEL_METER_GROUP: used to access the Group FX chain
       - NI_LEVEL_METER_INSERT: used to access the Insert FX chain
       - 0 ... 15: used to access individual instrument buses
-  CreatedAt: 2025-03-29T06:15:22.6927750Z
-  UpdatedAt: 2025-03-29T06:15:22.6927750Z
 - Id: 715f37ec-cbc1-43b1-b8eb-a81a2cc88c6b
   Name: attach_zone
   BuiltIn: true
@@ -181,8 +163,6 @@ Data:
       - $UI_WAVEFORM_USE_TABLE
       - $UI_WAVEFORM_TABLE_IS_BIPOLAR
       - $UI_WAVEFORM_USE_MIDI_DRAG
-  CreatedAt: 2025-03-29T06:15:22.6927750Z
-  UpdatedAt: 2025-03-29T06:15:22.6927750Z
 - Id: 92e579f4-ac19-4aef-9448-7def4d7ad243
   Name: by_marks
   BuiltIn: true
@@ -196,8 +176,6 @@ Data:
     Description: |-
       One of 28 marks, `$MARK_1 ... $MARK_28`, which was assigned to the event.
       You can also select more than one event group by using the bitwise `.or.` operator, or by simply summing the event marks.
-  CreatedAt: 2025-03-29T06:15:22.6927760Z
-  UpdatedAt: 2025-03-29T06:15:22.6927760Z
 - Id: eecc9e0d-f5a3-40cd-ad74-082801d6e7f5
   Name: by_track
   BuiltIn: true
@@ -210,8 +188,6 @@ Data:
     DataType: I
     Description: |-
       The track number of the events you wish to access.
-  CreatedAt: 2025-03-29T06:15:22.6927760Z
-  UpdatedAt: 2025-03-29T06:15:22.6927760Z
 - Id: 33c10532-b141-457e-8423-3bca9107ebda
   Name: cbrt
   BuiltIn: true
@@ -224,8 +200,6 @@ Data:
     DataType: R
     Description: |-
       A numeric value to calculate.
-  CreatedAt: 2025-03-29T06:15:22.6927760Z
-  UpdatedAt: 2025-03-29T06:15:22.6927760Z
 - Id: 8f19c660-e908-44da-af59-a5892fd9f24b
   Name: cc_delivery_request
   BuiltIn: true
@@ -237,8 +211,6 @@ Data:
   - Name: arg1
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6927770Z
-  UpdatedAt: 2025-03-29T06:15:22.6927770Z
 - Id: 34603157-b838-43af-83e5-7289a43b9c64
   Name: ceil
   BuiltIn: true
@@ -251,8 +223,6 @@ Data:
     DataType: R
     Description: |-
       A numeric value to calculate.
-  CreatedAt: 2025-03-29T06:15:22.6927770Z
-  UpdatedAt: 2025-03-29T06:15:22.6927770Z
 - Id: 9a8c1a37-32f8-46b0-a51c-f3fdba95a90c
   Name: change_listener_par
   BuiltIn: true
@@ -273,8 +243,6 @@ Data:
       Dependent on the specified signal type:
       - $NI_SIGNAL_TIMER_MS: Time interval in microseconds (minimum value is 1000 microseconds, which equals one millisecond)
       - $NI_SIGNAL_TIMER_BEAT: Time interval in fractions of a beat/quarter note (1 ... 24)
-  CreatedAt: 2025-03-29T06:15:22.6927770Z
-  UpdatedAt: 2025-03-29T06:15:22.6927770Z
 - Id: 51da28e3-222e-48ab-adb7-fe3c26d42424
   Name: change_note
   BuiltIn: true
@@ -289,8 +257,6 @@ Data:
   - Name: note-number
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6927770Z
-  UpdatedAt: 2025-03-29T06:15:22.6927770Z
 - Id: 38e7549f-22d5-45ce-8700-290f9c5a45a5
   Name: change_pan
   BuiltIn: true
@@ -314,8 +280,6 @@ Data:
       - If set to 1, the amount is relative to the actual value of the event.
       - If set to 2, it behaves like mode 0 (absolute adjustment), except any zone volume adjustments are preserved.
       - The different implications between absolute and relative adjustments are more apparent with more than one change_pan() statement applied to the same event.
-  CreatedAt: 2025-03-29T06:15:22.6927780Z
-  UpdatedAt: 2025-03-29T06:15:22.6927780Z
 - Id: 2a74c3f4-e644-4727-bdc0-974299940dbb
   Name: change_time_with_pitch
   BuiltIn: true
@@ -327,8 +291,6 @@ Data:
   - Name: arg1
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6927780Z
-  UpdatedAt: 2025-03-29T06:15:22.6927780Z
 - Id: 5ce433ff-ec7d-41af-b492-ce31e2832535
   Name: change_tune
   BuiltIn: true
@@ -351,8 +313,6 @@ Data:
       - If set to 0, the amount is absolute, i.e. the amount overwrites any previous set values of that event.
       - If set to 1, the amount is relative to the actual value of the event.
       - The different implications between absolute and relative adjustments are more apparent with more than one change_tune() statement applied to the same event.
-  CreatedAt: 2025-03-29T06:15:22.6927780Z
-  UpdatedAt: 2025-03-29T06:15:22.6927780Z
 - Id: 963d20c0-bbf9-4a19-8e77-0e0853fb5baa
   Name: change_velo
   BuiltIn: true
@@ -367,8 +327,6 @@ Data:
   - Name: velocity
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6927790Z
-  UpdatedAt: 2025-03-29T06:15:22.6927790Z
 - Id: fedce435-8e1b-44fd-b75a-fd802feb1ef3
   Name: change_vol
   BuiltIn: true
@@ -392,8 +350,6 @@ Data:
       - If set to 1, the amount is relative to the actual value of the event.
       - If set to 2, it behaves like mode 0 (absolute adjustment), except any zone volume adjustments are preserved.
       - The different implications between absolute and relative adjustments are more apparent with more than one change_vol() statement applied to the same event.
-  CreatedAt: 2025-03-29T06:15:22.6927790Z
-  UpdatedAt: 2025-03-29T06:15:22.6927790Z
 - Id: 513d6c83-197b-437b-850c-d7b007137b18
   Name: cos
   BuiltIn: true
@@ -406,8 +362,6 @@ Data:
     DataType: R
     Description: |-
       A numeric value to calculate.
-  CreatedAt: 2025-03-29T06:15:22.6927790Z
-  UpdatedAt: 2025-03-29T06:15:22.6927790Z
 - Id: 7c35f42f-f055-41c7-8980-f1d80afe3ae0
   Name: dec
   BuiltIn: true
@@ -420,8 +374,6 @@ Data:
     DataType: I
     Description: |-
       A numeric value to calculate.
-  CreatedAt: 2025-03-29T06:15:22.6927800Z
-  UpdatedAt: 2025-03-29T06:15:22.6927800Z
 - Id: 76c9f446-a91d-467c-98a9-6ba97ef6bf75
   Name: delete_event_mark
   BuiltIn: true
@@ -438,8 +390,6 @@ Data:
     DataType: I
     Description: |-
       One of 28 marks, `$MARK_1 ... $MARK_28`, which was assigned to the event.
-  CreatedAt: 2025-03-29T06:15:22.6927800Z
-  UpdatedAt: 2025-03-29T06:15:22.6927800Z
 - Id: d19fff74-6a0a-42c7-968c-564a722b560f
   Name: detect_drum_type
   BuiltIn: true
@@ -467,8 +417,6 @@ Data:
       - $NI_DETECT_DRUM_TYPE_SHAKER
       - $NI_DETECT_DRUM_TYPE_PERC_DRUM
       - $NI_DETECT_DRUM_TYPE_PERC_OTHER
-  CreatedAt: 2025-03-29T06:15:22.6927800Z
-  UpdatedAt: 2025-03-29T06:15:22.6927800Z
 - Id: 2b417cc0-a6d8-4afc-b591-52af5c3c82f4
   Name: detect_instrument_type
   BuiltIn: true
@@ -498,8 +446,6 @@ Data:
       - $NI_DETECT_INSTRUMENT_TYPE_REED
       - $NI_DETECT_INSTRUMENT_TYPE_SYNTH
       - $NI_DETECT_INSTRUMENT_TYPE_VOCAL
-  CreatedAt: 2025-03-29T06:15:22.6927800Z
-  UpdatedAt: 2025-03-29T06:15:22.6927800Z
 - Id: e01c6bda-c1d8-4261-97d7-f9ecdb277432
   Name: detect_key
   BuiltIn: true
@@ -540,8 +486,6 @@ Data:
       - $NI_DETECT_KEY_A_MINOR
       - $NI_DETECT_KEY_ASHARP_MINOR
       - $NI_DETECT_KEY_B_MINOR
-  CreatedAt: 2025-03-29T06:15:22.6927810Z
-  UpdatedAt: 2025-03-29T06:15:22.6927810Z
 - Id: 5a908b32-db15-4fbd-a3fc-c7dcd53b1ffb
   Name: detect_loudness
   BuiltIn: true
@@ -558,8 +502,6 @@ Data:
     DataType: R
     Description: |-
       The real value of the detected loudness in decibels.
-  CreatedAt: 2025-03-29T06:15:22.6927810Z
-  UpdatedAt: 2025-03-29T06:15:22.6927810Z
 - Id: 4c246c87-cfd6-4a02-88ae-5bbe0425f48a
   Name: detect_peak
   BuiltIn: true
@@ -576,8 +518,6 @@ Data:
     DataType: R
     Description: |-
       The real value of the detected peak level in decibels.
-  CreatedAt: 2025-03-29T06:15:22.6927810Z
-  UpdatedAt: 2025-03-29T06:15:22.6927810Z
 - Id: 4a7ef433-c55f-46f8-a452-bb3722711c6b
   Name: detect_pitch
   BuiltIn: true
@@ -594,8 +534,6 @@ Data:
     DataType: R
     Description: |-
       The MIDI note value of the detected pitch.
-  CreatedAt: 2025-03-29T06:15:22.6927810Z
-  UpdatedAt: 2025-03-29T06:15:22.6927810Z
 - Id: 9a6f9aa9-a089-4474-b0b1-fa768f00e567
   Name: detect_rms
   BuiltIn: true
@@ -612,8 +550,6 @@ Data:
     DataType: R
     Description: |-
       The real value of the RMS level of the audio sample in decibels.
-  CreatedAt: 2025-03-29T06:15:22.6927820Z
-  UpdatedAt: 2025-03-29T06:15:22.6927820Z
 - Id: 6effd4d6-f142-4bb4-8352-5598d6fd4bf9
   Name: detect_sample_type
   BuiltIn: true
@@ -632,8 +568,6 @@ Data:
       - $NI_DETECT_SAMPLE_TYPE_INVALID
       - $NI_DETECT_SAMPLE_TYPE_INSTRUMENT
       - $NI_DETECT_SAMPLE_TYPE_DRUM
-  CreatedAt: 2025-03-29T06:15:22.6927820Z
-  UpdatedAt: 2025-03-29T06:15:22.6927820Z
 - Id: baac0923-914f-48ca-a258-b2f1bdae1d36
   Name: detect_tempo
   BuiltIn: true
@@ -650,8 +584,6 @@ Data:
     DataType: R
     Description: |-
       The BPM value of the detected tempo.
-  CreatedAt: 2025-03-29T06:15:22.6927830Z
-  UpdatedAt: 2025-03-29T06:15:22.6927830Z
 - Id: 74a6718f-dc72-4d6d-8651-5b3043be5a81
   Name: disable_logging
   BuiltIn: true
@@ -666,8 +598,6 @@ Data:
       - $NI_LOG_MESSAGE
       - $NI_LOG_WARNING
       - $NI_LOG_WATCHING
-  CreatedAt: 2025-03-29T06:15:22.6927830Z
-  UpdatedAt: 2025-03-29T06:15:22.6927830Z
 - Id: fd01a083-c3a0-47dd-b7c8-e3a6a135f063
   Name: disallow_group
   BuiltIn: true
@@ -679,8 +609,6 @@ Data:
   - Name: group-index
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6927830Z
-  UpdatedAt: 2025-03-29T06:15:22.6927830Z
 - Id: 9434bbac-a35a-4cc4-b8ac-a2ccf87e31c4
   Name: dont_use_machine_mode
   BuiltIn: true
@@ -692,8 +620,6 @@ Data:
   - Name: ID-number
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6927830Z
-  UpdatedAt: 2025-03-29T06:15:22.6927830Z
 - Id: 130073dd-b4cf-49e4-a60b-2c46294c9e20
   Name: event_status
   BuiltIn: true
@@ -708,8 +634,6 @@ Data:
       - `$EVENT_STATUS_NOTE_QUEUE` (note is active - instrument script only)
       - `$EVENT_STATUS_MIDI_QUEUE` (MIDI event is active - multi script only)
       - `$EVENT_STATUS_INACTIVE` (note or MIDI event is inactive)
-  CreatedAt: 2025-03-29T06:15:22.6927840Z
-  UpdatedAt: 2025-03-29T06:15:22.6927840Z
 - Id: 2e262dc3-1179-4530-a5fb-626473caba8f
   Name: exit
   BuiltIn: true
@@ -718,8 +642,6 @@ Data:
   BuiltIntoVersion: N/A
   ReturnType: V
   Arguments: []
-  CreatedAt: 2025-03-29T06:15:22.6927840Z
-  UpdatedAt: 2025-03-29T06:15:22.6927850Z
 - Id: 59c01a79-3278-4b7b-b617-49a6f7cf8475
   Name: exp
   BuiltIn: true
@@ -732,8 +654,6 @@ Data:
     DataType: R
     Description: |-
       A numeric value to calculate.
-  CreatedAt: 2025-03-29T06:15:22.6927850Z
-  UpdatedAt: 2025-03-29T06:15:22.6927850Z
 - Id: 0ae3f337-9b5b-485e-bca7-1dccdcb1212b
   Name: exp2
   BuiltIn: true
@@ -746,8 +666,6 @@ Data:
     DataType: R
     Description: |-
       A numeric value to calculate.
-  CreatedAt: 2025-03-29T06:15:22.6927850Z
-  UpdatedAt: 2025-03-29T06:15:22.6927850Z
 - Id: 59fa9044-e6c4-48e8-850d-95ea667227f7
   Name: expose_controls
   BuiltIn: true
@@ -756,8 +674,6 @@ Data:
   BuiltIntoVersion: N/A
   ReturnType: V
   Arguments: []
-  CreatedAt: 2025-03-29T06:15:22.6927850Z
-  UpdatedAt: 2025-03-29T06:15:22.6927850Z
 - Id: 55943902-2b0d-47f3-9589-e537a277a998
   Name: fade_in
   BuiltIn: true
@@ -774,8 +690,6 @@ Data:
     DataType: I
     Description: |-
       The fade in time in microseconds.
-  CreatedAt: 2025-03-29T06:15:22.6927860Z
-  UpdatedAt: 2025-03-29T06:15:22.6927860Z
 - Id: fbe09f89-56ec-446c-b520-a28e8df77a48
   Name: fade_out
   BuiltIn: true
@@ -797,8 +711,6 @@ Data:
     Description: |-
       - If set to 1, the voice is stopped after the fade out.
       - If set to 0, the voice will still be running after the fade out.
-  CreatedAt: 2025-03-29T06:15:22.6927860Z
-  UpdatedAt: 2025-03-29T06:15:22.6927860Z
 - Id: 5bf903e2-a2ee-4758-a733-8bc724f931a6
   Name: find_group
   BuiltIn: true
@@ -810,8 +722,6 @@ Data:
   - Name: group-name
     DataType: S
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6927860Z
-  UpdatedAt: 2025-03-29T06:15:22.6927860Z
 - Id: 2cc81b28-0021-4bdb-b87b-76943db52169
   Name: find_mod
   BuiltIn: true
@@ -826,8 +736,6 @@ Data:
   - Name: mod-name
     DataType: S
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6927860Z
-  UpdatedAt: 2025-03-29T06:15:22.6927860Z
 - Id: 128ea77a-69bc-4c90-bb45-8ad98ae1bc5d
   Name: find_target
   BuiltIn: true
@@ -845,8 +753,6 @@ Data:
   - Name: target-name
     DataType: S
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6927870Z
-  UpdatedAt: 2025-03-29T06:15:22.6927870Z
 - Id: 619e9985-e54f-4285-af5f-abfb1613bd8d
   Name: find_zone
   BuiltIn: true
@@ -858,8 +764,6 @@ Data:
   - Name: zone-name
     DataType: S
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6927870Z
-  UpdatedAt: 2025-03-29T06:15:22.6927870Z
 - Id: c4d8630b-8b34-469b-a95a-14d3ead8ba9f
   Name: floor
   BuiltIn: true
@@ -872,8 +776,6 @@ Data:
     DataType: R
     Description: |-
       A numeric value to calculate.
-  CreatedAt: 2025-03-29T06:15:22.6927870Z
-  UpdatedAt: 2025-03-29T06:15:22.6927870Z
 - Id: fbb80e34-7cee-415e-9939-bff585d4364a
   Name: fs_get_filename
   BuiltIn: true
@@ -892,8 +794,6 @@ Data:
       - 0: Returns the filename without extension.
       - 1: Returns the filename with extension.
       - 2: Returns the whole path.
-  CreatedAt: 2025-03-29T06:15:22.6927880Z
-  UpdatedAt: 2025-03-29T06:15:22.6927880Z
 - Id: a4f16670-50b2-4dad-ae51-2bb1974886d6
   Name: fs_navigate
   BuiltIn: true
@@ -911,8 +811,6 @@ Data:
     Description: |-
       - 0: The previous file (in relation to the currently selected one) is selected
       - 1: The next file (in relation to the currently selected one) is selected
-  CreatedAt: 2025-03-29T06:15:22.6927880Z
-  UpdatedAt: 2025-03-29T06:15:22.6927880Z
 - Id: bc00fefe-8ff8-4f36-b6ba-e173729391c3
   Name: get_control_par
   BuiltIn: true
@@ -929,8 +827,6 @@ Data:
     DataType: I
     Description: |-
       Parameter of the UI widget we want to retrieve, i.e. $CONTROL_PAR_WIDTH.
-  CreatedAt: 2025-03-29T06:15:22.6927880Z
-  UpdatedAt: 2025-03-29T06:15:22.6927880Z
 - Id: f6f437e6-2eed-4f4c-80b3-577c7f98987a
   Name: get_control_par_arr
   BuiltIn: true
@@ -951,8 +847,6 @@ Data:
     DataType: I
     Description: |-
       Array index of the UI widget we want to retrieve.
-  CreatedAt: 2025-03-29T06:15:22.6927880Z
-  UpdatedAt: 2025-03-29T06:15:22.6927880Z
 - Id: 1ea9e457-bcb1-4ace-9889-cd594a476c5f
   Name: get_control_par_real_arr
   BuiltIn: true
@@ -970,8 +864,6 @@ Data:
   - Name: arg3
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6927890Z
-  UpdatedAt: 2025-03-29T06:15:22.6927890Z
 - Id: 1bc60dce-5879-4a73-bf5a-82b8e2fee6cc
   Name: get_control_par_str
   BuiltIn: true
@@ -986,8 +878,6 @@ Data:
   - Name: arg2
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6927890Z
-  UpdatedAt: 2025-03-29T06:15:22.6927890Z
 - Id: f2198e0b-1ac4-4a37-b72d-76e612b827c4
   Name: get_control_par_str_arr
   BuiltIn: true
@@ -1005,8 +895,6 @@ Data:
   - Name: arg3
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6927890Z
-  UpdatedAt: 2025-03-29T06:15:22.6927890Z
 - Id: ae3b7d20-ea7b-43b9-909f-f99af63abaf6
   Name: get_engine_par
   BuiltIn: true
@@ -1046,8 +934,6 @@ Data:
       - For Flex Envelope, this parameter specifies which envelope stage to target when using $ENGINE_PAR_FLEXENV_STAGE_TIME, $ENGINE_PAR_FLEXENV_STAGE_LEVEL and $ENGINE_PAR_FLEXENV_STAGE_SLOPE.
       - For Step Modulator, this parameter specifies which step value to target when using $ENGINE_PAR_STEPSEQ_STEP_VALUE.
       - For all other applications, set this parameter to -1.
-  CreatedAt: 2025-03-29T06:15:22.6927890Z
-  UpdatedAt: 2025-03-29T06:15:22.6927890Z
 - Id: 4a24da61-eb5e-4536-bd1a-6296d1c33182
   Name: get_engine_par_disp
   BuiltIn: true
@@ -1087,8 +973,6 @@ Data:
       - For Flex Envelope, this parameter specifies which envelope stage to target when using `$ENGINE_PAR_FLEXENV_STAGE_TIME`, ` $ENGINE_PAR_FLEXENV_STAGE_LEVEL` and `$ENGINE_PAR_FLEXENV_STAGE_SLOPE`.
       - For Step Modulator, this parameter specifies which step value to target when using `$ENGINE_PAR_STEPSEQ_STEP_VALUE`.
       - For all other applications, set this parameter to -1.
-  CreatedAt: 2025-03-29T06:15:22.6927890Z
-  UpdatedAt: 2025-03-29T06:15:22.6927900Z
 - Id: 530d176a-b0da-45cc-9ced-89165b8882e7
   Name: get_engine_par_disp_ext
   BuiltIn: true
@@ -1133,8 +1017,6 @@ Data:
       - For Flex Envelope, this parameter specifies which envelope stage to target when using `$ENGINE_PAR_FLEXENV_STAGE_TIME`, `$ENGINE_PAR_FLEXENV_STAGE_LEVEL` and `$ENGINE_PAR_FLEXENV_STAGE_SLOPE`.
       - For Step Modulator, this parameter specifies which step value to target when using `$ENGINE_PAR_STEPSEQ_STEP_VALUE`.
       - For all other applications, set this parameter to -1.
-  CreatedAt: 2025-03-29T06:15:22.6927900Z
-  UpdatedAt: 2025-03-29T06:15:22.6927900Z
 - Id: 11a7595a-1ab0-47fd-a2a8-0ad60501130b
   Name: get_engine_par_disp_m
   BuiltIn: true
@@ -1155,8 +1037,6 @@ Data:
   - Name: arg4
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6927900Z
-  UpdatedAt: 2025-03-29T06:15:22.6927900Z
 - Id: c39802ca-6ead-432b-a8c7-a40309e3c151
   Name: get_engine_par_m
   BuiltIn: true
@@ -1177,8 +1057,6 @@ Data:
   - Name: arg4
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6927900Z
-  UpdatedAt: 2025-03-29T06:15:22.6927900Z
 - Id: 32a323b9-04b5-4c11-8f4d-e10ca7f49ac4
   Name: get_event_ids
   BuiltIn: true
@@ -1191,8 +1069,6 @@ Data:
     DataType: I[]
     Description: |-
       Array to be filled with active event IDs.
-  CreatedAt: 2025-03-29T06:15:22.6927910Z
-  UpdatedAt: 2025-03-29T06:15:22.6927910Z
 - Id: 1193c21b-49ab-48ea-9066-27a90e92a8d7
   Name: get_event_mark
   BuiltIn: true
@@ -1211,8 +1087,6 @@ Data:
       The bit mark, `$MARK_1 ... $MARK_28` .
       You can also select more than one event group by using the bitwise `.or.` operator, or by simply summing the event marks.
       Additionally, ensure to validate the event marks before processing them to avoid any potential errors.
-  CreatedAt: 2025-03-29T06:15:22.6927910Z
-  UpdatedAt: 2025-03-29T06:15:22.6927910Z
 - Id: 519efd8f-f17b-43ed-9e6d-8af08a480d4b
   Name: get_event_par
   BuiltIn: true
@@ -1247,8 +1121,6 @@ Data:
       - $EVENT_PAR_SOURCE
       - $EVENT_PAR_PLAY_POS
       - $EVENT_PAR_ZONE_ID
-  CreatedAt: 2025-03-29T06:15:22.6927930Z
-  UpdatedAt: 2025-03-29T06:15:22.6927930Z
 - Id: 3d348ead-26d6-4bcf-aab9-fa9977c2c2a8
   Name: get_event_par_arr
   BuiltIn: true
@@ -1278,8 +1150,6 @@ Data:
       - $EVENT_PAR_ALLOW_GROUP: the group index (0 ... 4095, however this depends on the amount of groups present in a particular Kontakt instrument)
       - $EVENT_PAR_CUSTOM: the event parameter index (0 ... 15)
       - $EVENT_PAR_MOD_VALUE_ID/$EVENT_PAR_MOD_VALUE_EX_ID: the "from script" modulator index, as set in the modulation assignment in Kontakt (0 ... 1000)
-  CreatedAt: 2025-03-29T06:15:22.6927930Z
-  UpdatedAt: 2025-03-29T06:15:22.6927930Z
 - Id: 84480fd5-b0a6-4412-aecd-fbead734f799
   Name: get_folder
   BuiltIn: true
@@ -1313,8 +1183,6 @@ Data:
       - The folder in which the Resource Container is saved. This path is generally recommended to be used when referencing other files in the library structure (for example, NKA or MIDI files), since the path to Resource Container is the same for Kontakt Player encoded library and unencoded patches.
 
       If no Resource Container is set for the insturment, an empty string is returned.
-  CreatedAt: 2025-03-29T06:15:22.6927930Z
-  UpdatedAt: 2025-03-29T06:15:22.6927930Z
 - Id: 1e6faff3-7db2-4a8e-8d74-96eeef0e262f
   Name: get_font_id
   BuiltIn: true
@@ -1327,8 +1195,6 @@ Data:
     DataType: S
     Description: |-
       Name of the image, without extension. The image has to be in PNG format and reside in the "pictures" subfolder of the resource container.
-  CreatedAt: 2025-03-29T06:15:22.6927930Z
-  UpdatedAt: 2025-03-29T06:15:22.6927930Z
 - Id: d3bd1bb8-9b86-4c5d-8ec0-1a079ea51d00
   Name: get_group_idx
   BuiltIn: true
@@ -1340,8 +1206,6 @@ Data:
   - Name: group-name
     DataType: S
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6927930Z
-  UpdatedAt: 2025-03-29T06:15:22.6927940Z
 - Id: 4fb5cde0-f9b5-4321-bc1e-b42938978249
   Name: get_key_color
   BuiltIn: true
@@ -1353,8 +1217,6 @@ Data:
   - Name: note-number
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6927940Z
-  UpdatedAt: 2025-03-29T06:15:22.6927940Z
 - Id: 30f70037-5383-41c6-b53d-1b6658a3490b
   Name: get_key_name
   BuiltIn: true
@@ -1366,8 +1228,6 @@ Data:
   - Name: note-number
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6927940Z
-  UpdatedAt: 2025-03-29T06:15:22.6927940Z
 - Id: fbc736e9-1b1f-4a81-870c-e3edfea312d3
   Name: get_key_triggerstate
   BuiltIn: true
@@ -1379,8 +1239,6 @@ Data:
   - Name: note-number
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6927940Z
-  UpdatedAt: 2025-03-29T06:15:22.6927940Z
 - Id: af9cbed3-c7fe-4ce1-97b1-efe58d4368c8
   Name: get_key_type
   BuiltIn: true
@@ -1392,8 +1250,6 @@ Data:
   - Name: note-number
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6927950Z
-  UpdatedAt: 2025-03-29T06:15:22.6927950Z
 - Id: 80779765-9a7a-44a8-a8fe-fd69e9bf9e65
   Name: get_keyrange_max_note
   BuiltIn: true
@@ -1405,8 +1261,6 @@ Data:
   - Name: note-number
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6927950Z
-  UpdatedAt: 2025-03-29T06:15:22.6927950Z
 - Id: 0f847ec9-0386-433b-a06d-cd49ac2d25a7
   Name: get_keyrange_min_note
   BuiltIn: true
@@ -1418,8 +1272,6 @@ Data:
   - Name: note-number
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6927950Z
-  UpdatedAt: 2025-03-29T06:15:22.6927950Z
 - Id: cb28f651-dacf-41fb-b072-bd37811e026c
   Name: get_keyrange_name
   BuiltIn: true
@@ -1431,8 +1283,6 @@ Data:
   - Name: note-number
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6927950Z
-  UpdatedAt: 2025-03-29T06:15:22.6927960Z
 - Id: 1a45bb0e-c45b-411f-83cb-c439dd99592b
   Name: get_loop_par
   BuiltIn: true
@@ -1459,8 +1309,6 @@ Data:
       - $LOOP_PAR_XFADE
       - $LOOP_PAR_COUNT
       - $LOOP_PAR_TUNING
-  CreatedAt: 2025-03-29T06:15:22.6927960Z
-  UpdatedAt: 2025-03-29T06:15:22.6927960Z
 - Id: c216c8ee-5028-441e-8b61-4945481cf0f6
   Name: get_menu_item_str
   BuiltIn: true
@@ -1477,8 +1325,6 @@ Data:
     DataType: I
     Description: |-
       The index (not the value!) of the menu item.
-  CreatedAt: 2025-03-29T06:15:22.6927960Z
-  UpdatedAt: 2025-03-29T06:15:22.6927960Z
 - Id: 6512183d-3df9-4fcd-8452-502f05593f47
   Name: get_menu_item_value
   BuiltIn: true
@@ -1495,8 +1341,6 @@ Data:
     DataType: I
     Description: |-
       The index (not the value!) of the menu item.
-  CreatedAt: 2025-03-29T06:15:22.6927960Z
-  UpdatedAt: 2025-03-29T06:15:22.6927970Z
 - Id: 5822454d-ba0d-4759-aafd-5cd2edbd5f2f
   Name: get_menu_item_visibility
   BuiltIn: true
@@ -1513,8 +1357,6 @@ Data:
     DataType: I
     Description: |-
       The index (not the value!) of the menu entry.
-  CreatedAt: 2025-03-29T06:15:22.6927970Z
-  UpdatedAt: 2025-03-29T06:15:22.6927970Z
 - Id: 2c23e30a-7c21-42fe-972c-62a966dad63b
   Name: get_mod_idx
   BuiltIn: true
@@ -1531,8 +1373,6 @@ Data:
     DataType: S
     Description: |-
       The name of the internal (LFO, envelope, step modulator...) or external (velocity, key position, mono aftertouch...) modulator.
-  CreatedAt: 2025-03-29T06:15:22.6927970Z
-  UpdatedAt: 2025-03-29T06:15:22.6927970Z
 - Id: 0859878c-8380-44db-9402-53e9a180994b
   Name: get_num_zones
   BuiltIn: true
@@ -1541,8 +1381,6 @@ Data:
   BuiltIntoVersion: N/A
   ReturnType: I||S
   Arguments: []
-  CreatedAt: 2025-03-29T06:15:22.6927970Z
-  UpdatedAt: 2025-03-29T06:15:22.6927970Z
 - Id: c9871d57-c425-431d-a344-a8bc025f8a23
   Name: get_purge_state
   BuiltIn: true
@@ -1557,8 +1395,6 @@ Data:
     DataType: I
     Description: |-
       The index number of the group that should be checked.
-  CreatedAt: 2025-03-29T06:15:22.6927970Z
-  UpdatedAt: 2025-03-29T06:15:22.6927970Z
 - Id: dbae6f1b-6510-42d7-a5bc-de821c8e7b9d
   Name: get_sample
   BuiltIn: true
@@ -1579,8 +1415,6 @@ Data:
       - $NI_FILE_FULL_PATH
       - $NI_FILE_FULL_PATH_OS
       - $NI_FILE_EXTENSION
-  CreatedAt: 2025-03-29T06:15:22.6927960Z
-  UpdatedAt: 2025-03-29T06:15:22.6927960Z
 - Id: 32a4eb38-6de4-4245-88f5-cee4c850be22
   Name: get_sample_length
   BuiltIn: true
@@ -1592,8 +1426,6 @@ Data:
   - Name: zone-id
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6927980Z
-  UpdatedAt: 2025-03-29T06:15:22.6927980Z
 - Id: 0d2bff96-1d7a-4d68-9b22-a3966ae886cd
   Name: get_sel_zones_idx
   BuiltIn: true
@@ -1606,8 +1438,6 @@ Data:
     DataType: I[]
     Description: |-
       Array to be filled with indices of selected zones.
-  CreatedAt: 2025-03-29T06:15:22.6927980Z
-  UpdatedAt: 2025-03-29T06:15:22.6927980Z
 - Id: 413614b0-2dc6-4dac-b9b6-92a25258dadf
   Name: get_target_idx
   BuiltIn: true
@@ -1628,8 +1458,6 @@ Data:
     DataType: S
     Description: |-
       The name of the modulation target slot.
-  CreatedAt: 2025-03-29T06:15:22.6927980Z
-  UpdatedAt: 2025-03-29T06:15:22.6927980Z
 - Id: 6a3c28b7-2eb7-46e0-b94e-f9998a40f67c
   Name: get_ui_id
   BuiltIn: true
@@ -1641,8 +1469,6 @@ Data:
   - Name: variable
     DataType: ui_*
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6927990Z
-  UpdatedAt: 2025-03-29T06:15:22.6927990Z
 - Id: eeb0070e-68f9-4d4b-91f9-bafd3726d58c
   Name: get_ui_wf_property
   BuiltIn: true
@@ -1668,8 +1494,6 @@ Data:
     DataType: I
     Description: |-
       The index of the slice.
-  CreatedAt: 2025-03-29T06:15:22.6927990Z
-  UpdatedAt: 2025-03-29T06:15:22.6927990Z
 - Id: 312136a1-49a7-4a48-b9da-049a3c731271
   Name: get_voice_limit
   BuiltIn: true
@@ -1684,8 +1508,6 @@ Data:
       The voice type, can be one of the following:
       - `$NI_VL_TMPRO_STANDARD`: Standard quality mode
       - `$NI_VL_TMPRO_HQ`: High quality mode
-  CreatedAt: 2025-03-29T06:15:22.6927990Z
-  UpdatedAt: 2025-03-29T06:15:22.6927990Z
 - Id: 5834d368-ca66-4405-8a77-c676b5275f5c
   Name: get_zone_id
   BuiltIn: true
@@ -1698,8 +1520,6 @@ Data:
     DataType: I
     Description: |-
       Index of the zone (see Index column in Monitor �� Zones pane in Kontakt) .
-  CreatedAt: 2025-03-29T06:15:22.6928000Z
-  UpdatedAt: 2025-03-29T06:15:22.6928000Z
 - Id: 40968f9a-c954-425a-84d4-9f335ba00be6
   Name: get_zone_par
   BuiltIn: true
@@ -1735,8 +1555,6 @@ Data:
       - $ZONE_PAR_SAMPLE_RATE
       - $ZONE_PAR_SELECTED
       - $ZONE_PAR_BPM
-  CreatedAt: 2025-03-29T06:15:22.6928000Z
-  UpdatedAt: 2025-03-29T06:15:22.6928000Z
 - Id: bdc50f9c-d6b1-4f3d-a8b2-7f4baf1d500d
   Name: get_zone_status
   BuiltIn: true
@@ -1753,8 +1571,6 @@ Data:
     DataType: I
     Description: |-
       The ID of the zone.
-  CreatedAt: 2025-03-29T06:15:22.6928010Z
-  UpdatedAt: 2025-03-29T06:15:22.6928010Z
 - Id: c9a9ed95-6410-44aa-a218-d5bb92454687
   Name: group_name
   BuiltIn: true
@@ -1766,8 +1582,6 @@ Data:
   - Name: group-index
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928010Z
-  UpdatedAt: 2025-03-29T06:15:22.6928010Z
 - Id: 0bd95844-8d39-4f5e-80d5-7eed600325e2
   Name: hide_part
   BuiltIn: true
@@ -1789,8 +1603,6 @@ Data:
       - $HIDE_PART_TITLE (title of ui_knob,)
       - $HIDE_PART_MOD_LIGHT (mod ring light of ui_knob,)
       - $HIDE_PART_CURSOR (hide a particular ui_xy cursor)
-  CreatedAt: 2025-03-29T06:15:22.6928010Z
-  UpdatedAt: 2025-03-29T06:15:22.6928010Z
 - Id: 50087e74-561c-4f62-ad27-7f4681ecf3fe
   Name: ignore_controller
   BuiltIn: true
@@ -1799,8 +1611,6 @@ Data:
   BuiltIntoVersion: N/A
   ReturnType: V
   Arguments: []
-  CreatedAt: 2025-03-29T06:15:22.6928010Z
-  UpdatedAt: 2025-03-29T06:15:22.6928010Z
 - Id: 196ab1ff-8704-4d8b-ab57-83c949d0893a
   Name: ignore_event
   BuiltIn: true
@@ -1812,8 +1622,6 @@ Data:
   - Name: event-id
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928020Z
-  UpdatedAt: 2025-03-29T06:15:22.6928020Z
 - Id: 781bb8b3-2ecb-4b04-81a2-d33c3a4854c3
   Name: ignore_midi
   BuiltIn: true
@@ -1822,8 +1630,6 @@ Data:
   BuiltIntoVersion: N/A
   ReturnType: V
   Arguments: []
-  CreatedAt: 2025-03-29T06:15:22.6928020Z
-  UpdatedAt: 2025-03-29T06:15:22.6928020Z
 - Id: 9b1ff6c4-c24a-49cc-a923-dc1821f4c919
   Name: in_range
   BuiltIn: true
@@ -1841,8 +1647,6 @@ Data:
   - Name: z
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928020Z
-  UpdatedAt: 2025-03-29T06:15:22.6928020Z
 - Id: 5dc70623-25db-49e4-bf59-fef8f1bb1c4b
   Name: inc
   BuiltIn: true
@@ -1855,8 +1659,6 @@ Data:
     DataType: I
     Description: |-
       A numeric value to calculate.
-  CreatedAt: 2025-03-29T06:15:22.6928020Z
-  UpdatedAt: 2025-03-29T06:15:22.6928020Z
 - Id: b87dfd77-0b31-42e4-b6b7-6af7f889bc49
   Name: int
   BuiltIn: true
@@ -1869,8 +1671,6 @@ Data:
     DataType: R
     Description: |-
       A real value to convert.
-  CreatedAt: 2025-03-29T06:15:22.6928030Z
-  UpdatedAt: 2025-03-29T06:15:22.6928030Z
 - Id: 6c02417a-7a11-4718-87b8-d6aca34b84f9
   Name: int_to_real
   BuiltIn: true
@@ -1883,8 +1683,6 @@ Data:
     DataType: I
     Description: |-
       An integer value to convert.
-  CreatedAt: 2025-03-29T06:15:22.6928030Z
-  UpdatedAt: 2025-03-29T06:15:22.6928030Z
 - Id: af4e892f-1b46-4eb7-b9b7-63f9a7ae8de4
   Name: is_zone_empty
   BuiltIn: true
@@ -1896,8 +1694,6 @@ Data:
   - Name: zone-id
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928030Z
-  UpdatedAt: 2025-03-29T06:15:22.6928030Z
 - Id: 535ce596-caaf-4865-84f7-81007fd3e78f
   Name: load_array
   BuiltIn: true
@@ -1932,8 +1728,6 @@ Data:
 
       The array is directly loaded from the data folder inside the resource container.
       This mode can be used synchronously in `on init`, and asynchronously in `on persistence_changed`, `on ui_control` and `on pgs_changed` callbacks.
-  CreatedAt: 2025-03-29T06:15:22.6928030Z
-  UpdatedAt: 2025-03-29T06:15:22.6928030Z
 - Id: 0a82ecc6-d6c2-480c-b8e2-6cc257cb24c9
   Name: load_array_str
   BuiltIn: true
@@ -1950,8 +1744,6 @@ Data:
     DataType: I||S
     Description: |-
       The absolute path of the .nka file.
-  CreatedAt: 2025-03-29T06:15:22.6928040Z
-  UpdatedAt: 2025-03-29T06:15:22.6928040Z
 - Id: aad99f43-0686-46da-940f-f04a452e9b6d
   Name: load_ir_sample
   BuiltIn: true
@@ -1983,8 +1775,6 @@ Data:
 
       For buses, this parameter specifies the actual bus:
       - $NI_BUS_OFFSET + [0 ... 15]: One of the 16 buses
-  CreatedAt: 2025-03-29T06:15:22.6928040Z
-  UpdatedAt: 2025-03-29T06:15:22.6928040Z
 - Id: 06ce39bd-c438-4b33-863b-7e387500d0ba
   Name: load_ir_sample_m
   BuiltIn: true
@@ -1996,8 +1786,6 @@ Data:
   - Name: arg1
     DataType: '*'
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928040Z
-  UpdatedAt: 2025-03-29T06:15:22.6928040Z
 - Id: 5c1704b2-249f-48bb-91ea-244a8112914a
   Name: load_midi_file
   BuiltIn: true
@@ -2009,8 +1797,6 @@ Data:
   - Name: path
     DataType: S
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928040Z
-  UpdatedAt: 2025-03-29T06:15:22.6928040Z
 - Id: e428f4dd-f558-48b2-92c1-90dade013c18
   Name: load_patch
   BuiltIn: true
@@ -2025,8 +1811,6 @@ Data:
   - Name: arg2
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928050Z
-  UpdatedAt: 2025-03-29T06:15:22.6928050Z
 - Id: e7c23a13-e98d-4481-96d6-5ffbb9d9040a
   Name: load_performance_view
   BuiltIn: true
@@ -2039,8 +1823,6 @@ Data:
     DataType: S
     Description: |-
       The filename of the .nckp file without extension, entered as a string.
-  CreatedAt: 2025-03-29T06:15:22.6928050Z
-  UpdatedAt: 2025-03-29T06:15:22.6928050Z
 - Id: adaba38a-7c2b-47a7-accd-fda07b5c210a
   Name: log
   BuiltIn: true
@@ -2053,8 +1835,6 @@ Data:
     DataType: R
     Description: |-
       A numeric value to calculate.
-  CreatedAt: 2025-03-29T06:15:22.6928050Z
-  UpdatedAt: 2025-03-29T06:15:22.6928050Z
 - Id: 566e87f7-5036-4884-988d-01c578a55dd3
   Name: log10
   BuiltIn: true
@@ -2067,8 +1847,6 @@ Data:
     DataType: R
     Description: |-
       A numeric value to calculate.
-  CreatedAt: 2025-03-29T06:15:22.6928060Z
-  UpdatedAt: 2025-03-29T06:15:22.6928060Z
 - Id: 7ede4000-1cad-44b2-ac1e-05852ac5f56f
   Name: log2
   BuiltIn: true
@@ -2081,8 +1859,6 @@ Data:
     DataType: R
     Description: |-
       A numeric value to calculate.
-  CreatedAt: 2025-03-29T06:15:22.6928060Z
-  UpdatedAt: 2025-03-29T06:15:22.6928060Z
 - Id: 35359106-9af8-444d-85c4-09d85b759362
   Name: lsb
   BuiltIn: true
@@ -2095,8 +1871,6 @@ Data:
     DataType: I
     Description: |-
       A numeric value to calculate.
-  CreatedAt: 2025-03-29T06:15:22.6928060Z
-  UpdatedAt: 2025-03-29T06:15:22.6928060Z
 - Id: 4dfab524-63c0-4cc7-960e-505376190c8f
   Name: make_instr_persistent
   BuiltIn: true
@@ -2109,8 +1883,6 @@ Data:
     DataType: '*'
     Description: |-
       Variable for retains.
-  CreatedAt: 2025-03-29T06:15:22.6928060Z
-  UpdatedAt: 2025-03-29T06:15:22.6928060Z
 - Id: 7028f7ee-3b30-4f6d-a1b1-f71cb4307c8d
   Name: make_perfview
   BuiltIn: true
@@ -2119,8 +1891,6 @@ Data:
   BuiltIntoVersion: N/A
   ReturnType: V
   Arguments: []
-  CreatedAt: 2025-03-29T06:15:22.6928080Z
-  UpdatedAt: 2025-03-29T06:15:22.6928080Z
 - Id: 6dfdf330-6125-4f16-bfd2-37869a9e0a44
   Name: make_persistent
   BuiltIn: true
@@ -2133,8 +1903,6 @@ Data:
     DataType: '*'
     Description: |-
       Variable for retains.
-  CreatedAt: 2025-03-29T06:15:22.6928080Z
-  UpdatedAt: 2025-03-29T06:15:22.6928080Z
 - Id: 6c65d5cc-40aa-46c1-8a34-5403b6e52b66
   Name: message
   BuiltIn: true
@@ -2147,8 +1915,6 @@ Data:
     DataType: I||S||R
     Description: |-
       message
-  CreatedAt: 2025-03-29T06:15:22.6928080Z
-  UpdatedAt: 2025-03-29T06:15:22.6928080Z
 - Id: fe9f658e-c2e3-4fb6-9314-a4156b565b58
   Name: mf_copy_export_area
   BuiltIn: true
@@ -2160,8 +1926,6 @@ Data:
   - Name: index
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928090Z
-  UpdatedAt: 2025-03-29T06:15:22.6928090Z
 - Id: 7c64c6fa-e46a-4daf-9ae3-bc4e72738620
   Name: mf_get_buffer_size
   BuiltIn: true
@@ -2170,8 +1934,6 @@ Data:
   BuiltIntoVersion: N/A
   ReturnType: I||S
   Arguments: []
-  CreatedAt: 2025-03-29T06:15:22.6928090Z
-  UpdatedAt: 2025-03-29T06:15:22.6928090Z
 - Id: 89c51908-b30d-4c9b-aebe-5a2d9ea50e00
   Name: mf_get_byte_one
   BuiltIn: true
@@ -2180,8 +1942,6 @@ Data:
   BuiltIntoVersion: N/A
   ReturnType: I||S
   Arguments: []
-  CreatedAt: 2025-03-29T06:15:22.6928090Z
-  UpdatedAt: 2025-03-29T06:15:22.6928090Z
 - Id: b5a56ca2-e7ee-46b3-8c34-3a0da4d83127
   Name: mf_get_byte_two
   BuiltIn: true
@@ -2190,8 +1950,6 @@ Data:
   BuiltIntoVersion: N/A
   ReturnType: I||S
   Arguments: []
-  CreatedAt: 2025-03-29T06:15:22.6928090Z
-  UpdatedAt: 2025-03-29T06:15:22.6928090Z
 - Id: ce8e5664-24d0-41ae-8776-7034ccb6f8f7
   Name: mf_get_channel
   BuiltIn: true
@@ -2200,8 +1958,6 @@ Data:
   BuiltIntoVersion: N/A
   ReturnType: I||S
   Arguments: []
-  CreatedAt: 2025-03-29T06:15:22.6928100Z
-  UpdatedAt: 2025-03-29T06:15:22.6928100Z
 - Id: f6459b74-d66e-4a44-b544-f1ff6c9b5330
   Name: mf_get_command
   BuiltIn: true
@@ -2210,8 +1966,6 @@ Data:
   BuiltIntoVersion: N/A
   ReturnType: I||S
   Arguments: []
-  CreatedAt: 2025-03-29T06:15:22.6928100Z
-  UpdatedAt: 2025-03-29T06:15:22.6928100Z
 - Id: 9a64ef14-01c6-4a1c-8d2e-c8bacce8be01
   Name: mf_get_event_par
   BuiltIn: true
@@ -2242,8 +1996,6 @@ Data:
       - $EVENT_PAR_NOTE_LENGTH
       - $EVENT_PAR_ID
       - $EVENT_PAR_TRACK_NR
-  CreatedAt: 2025-03-29T06:15:22.6928100Z
-  UpdatedAt: 2025-03-29T06:15:22.6928100Z
 - Id: 70577455-4572-4c5c-ae08-ebce2fbe2ce4
   Name: mf_get_first
   BuiltIn: true
@@ -2256,8 +2008,6 @@ Data:
     DataType: I
     Description: |-
       The number of the track you want to edit. -1 refers to the whole file.
-  CreatedAt: 2025-03-29T06:15:22.6928100Z
-  UpdatedAt: 2025-03-29T06:15:22.6928100Z
 - Id: 6aed78c9-529b-4406-8170-a891feed6b22
   Name: mf_get_id
   BuiltIn: true
@@ -2266,8 +2016,6 @@ Data:
   BuiltIntoVersion: N/A
   ReturnType: I||S
   Arguments: []
-  CreatedAt: 2025-03-29T06:15:22.6928100Z
-  UpdatedAt: 2025-03-29T06:15:22.6928110Z
 - Id: d9c08ab5-5bf6-4d3f-ae0c-5555a4da5218
   Name: mf_get_last
   BuiltIn: true
@@ -2280,8 +2028,6 @@ Data:
     DataType: I
     Description: |-
       The number of the track you want to edit. -1 refers to the whole file.
-  CreatedAt: 2025-03-29T06:15:22.6928110Z
-  UpdatedAt: 2025-03-29T06:15:22.6928110Z
 - Id: 3497bbd4-85ca-499b-bbec-bc6e9c73e8b3
   Name: mf_get_last_filename
   BuiltIn: true
@@ -2290,8 +2036,6 @@ Data:
   BuiltIntoVersion: N/A
   ReturnType: S
   Arguments: []
-  CreatedAt: 2025-03-29T06:15:22.6928110Z
-  UpdatedAt: 2025-03-29T06:15:22.6928110Z
 - Id: c23f2a32-736d-4b32-9639-23a395af8657
   Name: mf_get_mark
   BuiltIn: true
@@ -2308,8 +2052,6 @@ Data:
     DataType: I
     Description: |-
       The event mark number, `$MARK_1 ... $MARK_10` . You can also assign more than one mark to a single event, either by typing the command again, or by using the bitwise `.or.` operator, or by simply summing the event marks.
-  CreatedAt: 2025-03-29T06:15:22.6928110Z
-  UpdatedAt: 2025-03-29T06:15:22.6928110Z
 - Id: 708abe04-f405-4dc1-b2a0-da29562c6223
   Name: mf_get_next
   BuiltIn: true
@@ -2322,8 +2064,6 @@ Data:
     DataType: I
     Description: |-
       The number of the track you want to edit. -1 refers to the whole file.
-  CreatedAt: 2025-03-29T06:15:22.6928110Z
-  UpdatedAt: 2025-03-29T06:15:22.6928110Z
 - Id: c511e6f1-9dd5-48c0-b2c1-dbf8af153df6
   Name: mf_get_next_at
   BuiltIn: true
@@ -2340,8 +2080,6 @@ Data:
     DataType: I
     Description: |-
       Position in MIDI ticks.
-  CreatedAt: 2025-03-29T06:15:22.6928120Z
-  UpdatedAt: 2025-03-29T06:15:22.6928120Z
 - Id: a12b4866-0f3f-4779-b8a6-28dfe4649266
   Name: mf_get_note_length
   BuiltIn: true
@@ -2350,8 +2088,6 @@ Data:
   BuiltIntoVersion: N/A
   ReturnType: I||S
   Arguments: []
-  CreatedAt: 2025-03-29T06:15:22.6928120Z
-  UpdatedAt: 2025-03-29T06:15:22.6928120Z
 - Id: b3b32676-63c8-4b0d-89cd-d0b06900f5f5
   Name: mf_get_num_tracks
   BuiltIn: true
@@ -2360,8 +2096,6 @@ Data:
   BuiltIntoVersion: N/A
   ReturnType: I||S
   Arguments: []
-  CreatedAt: 2025-03-29T06:15:22.6928120Z
-  UpdatedAt: 2025-03-29T06:15:22.6928120Z
 - Id: 774ab021-e37f-4a58-8238-ba7d4f10bbe7
   Name: mf_get_pos
   BuiltIn: true
@@ -2370,8 +2104,6 @@ Data:
   BuiltIntoVersion: N/A
   ReturnType: I||S
   Arguments: []
-  CreatedAt: 2025-03-29T06:15:22.6928130Z
-  UpdatedAt: 2025-03-29T06:15:22.6928130Z
 - Id: fd95f1f3-7f93-4655-b25c-b45ed3a0f522
   Name: mf_get_prev
   BuiltIn: true
@@ -2384,8 +2116,6 @@ Data:
     DataType: I
     Description: |-
       The number of the track you want to edit. -1 refers to the whole file.
-  CreatedAt: 2025-03-29T06:15:22.6928130Z
-  UpdatedAt: 2025-03-29T06:15:22.6928130Z
 - Id: c3c28da5-da25-4cc1-a3aa-aeb781a3c15f
   Name: mf_get_prev_at
   BuiltIn: true
@@ -2402,8 +2132,6 @@ Data:
     DataType: I
     Description: |-
       Position in MIDI ticks.
-  CreatedAt: 2025-03-29T06:15:22.6928130Z
-  UpdatedAt: 2025-03-29T06:15:22.6928130Z
 - Id: 95cdadca-9ed7-4640-9606-ca41c513ab10
   Name: mf_get_track_idx
   BuiltIn: true
@@ -2412,8 +2140,6 @@ Data:
   BuiltIntoVersion: N/A
   ReturnType: I||S
   Arguments: []
-  CreatedAt: 2025-03-29T06:15:22.6928130Z
-  UpdatedAt: 2025-03-29T06:15:22.6928130Z
 - Id: 5f699122-3ec1-4429-a832-2d997541a380
   Name: mf_insert_event
   BuiltIn: true
@@ -2448,8 +2174,6 @@ Data:
     DataType: I
     Description: |-
       The second byte of the command.
-  CreatedAt: 2025-03-29T06:15:22.6928140Z
-  UpdatedAt: 2025-03-29T06:15:22.6928140Z
 - Id: f9e02dd9-cce2-4888-bd28-e2dcc46526e9
   Name: mf_insert_file
   BuiltIn: true
@@ -2477,8 +2201,6 @@ Data:
       - 0: Replaces all existing events
       - 1: Replaces only overlapping events
       - 2: Merges all events
-  CreatedAt: 2025-03-29T06:15:22.6928140Z
-  UpdatedAt: 2025-03-29T06:15:22.6928140Z
 - Id: b10ddcca-536e-4af6-ac5c-5c7e01f46a27
   Name: mf_remove_event
   BuiltIn: true
@@ -2491,8 +2213,6 @@ Data:
     DataType: I
     Description: |-
       The ID of the event to be deactivated.
-  CreatedAt: 2025-03-29T06:15:22.6928140Z
-  UpdatedAt: 2025-03-29T06:15:22.6928140Z
 - Id: 6851c6e7-7db9-42d8-b7b1-67328c353589
   Name: mf_reset
   BuiltIn: true
@@ -2501,8 +2221,6 @@ Data:
   BuiltIntoVersion: N/A
   ReturnType: V
   Arguments: []
-  CreatedAt: 2025-03-29T06:15:22.6928140Z
-  UpdatedAt: 2025-03-29T06:15:22.6928140Z
 - Id: 8f24a115-173d-4d2f-a80f-8d0c25527ff8
   Name: mf_set_buffer_size
   BuiltIn: true
@@ -2515,8 +2233,6 @@ Data:
     DataType: I
     Description: |-
       The size of the MIDI object edit buffer.
-  CreatedAt: 2025-03-29T06:15:22.6928150Z
-  UpdatedAt: 2025-03-29T06:15:22.6928150Z
 - Id: 348fa79f-92de-4ad6-a5ea-1658e2dbb1d7
   Name: mf_set_byte_one
   BuiltIn: true
@@ -2528,8 +2244,6 @@ Data:
   - Name: value
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928150Z
-  UpdatedAt: 2025-03-29T06:15:22.6928150Z
 - Id: 2dcc8eff-66d7-4b85-9368-7aa33397fdf5
   Name: mf_set_byte_two
   BuiltIn: true
@@ -2541,8 +2255,6 @@ Data:
   - Name: value
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928150Z
-  UpdatedAt: 2025-03-29T06:15:22.6928150Z
 - Id: e3c6828f-ee2f-4a8f-90c3-a9975f8019a7
   Name: mf_set_channel
   BuiltIn: true
@@ -2554,8 +2266,6 @@ Data:
   - Name: value
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928150Z
-  UpdatedAt: 2025-03-29T06:15:22.6928150Z
 - Id: c07f9240-422a-4fad-8c88-6494a3284f34
   Name: mf_set_command
   BuiltIn: true
@@ -2567,8 +2277,6 @@ Data:
   - Name: value
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928160Z
-  UpdatedAt: 2025-03-29T06:15:22.6928160Z
 - Id: ef072eb3-3c38-4344-a21c-1ea32b1b0bba
   Name: mf_set_event_par
   BuiltIn: true
@@ -2603,8 +2311,6 @@ Data:
     DataType: I
     Description: |-
       The value of the event parameter.
-  CreatedAt: 2025-03-29T06:15:22.6928160Z
-  UpdatedAt: 2025-03-29T06:15:22.6928160Z
 - Id: 7ecc15c8-b213-4edf-9a24-44b8ab3448ae
   Name: mf_set_export_area
   BuiltIn: true
@@ -2637,8 +2343,6 @@ Data:
     Description: |-
       Defines the last track to be included in the export area.
       - Use -1 to set this to the last track of the object.
-  CreatedAt: 2025-03-29T06:15:22.6928160Z
-  UpdatedAt: 2025-03-29T06:15:22.6928160Z
 - Id: 367d9a05-985a-4818-b7f4-4a47bca9e1f6
   Name: mf_set_mark
   BuiltIn: true
@@ -2659,8 +2363,6 @@ Data:
     DataType: I
     Description: |-
       Set this to 1 to mark an event or to 0 to unmark an event.
-  CreatedAt: 2025-03-29T06:15:22.6928170Z
-  UpdatedAt: 2025-03-29T06:15:22.6928170Z
 - Id: dfd686ac-c6dc-481a-a70d-a8cf66d0b0d4
   Name: mf_set_num_export_areas
   BuiltIn: true
@@ -2672,8 +2374,6 @@ Data:
   - Name: num
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928170Z
-  UpdatedAt: 2025-03-29T06:15:22.6928170Z
 - Id: fb2e3cca-6ce3-40a2-a13b-192edacbd4e3
   Name: mf_set_pos
   BuiltIn: true
@@ -2685,8 +2385,6 @@ Data:
   - Name: value
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928170Z
-  UpdatedAt: 2025-03-29T06:15:22.6928170Z
 - Id: 2ad837f3-633e-429b-a5af-f8e7905bb90e
   Name: move_control
   BuiltIn: true
@@ -2707,8 +2405,6 @@ Data:
     DataType: I
     Description: |-
       The vertical position of the widget in grid units (0 ... 16).
-  CreatedAt: 2025-03-29T06:15:22.6928170Z
-  UpdatedAt: 2025-03-29T06:15:22.6928170Z
 - Id: 9f8c26f9-f3d4-4795-8d2a-54a7a92b7534
   Name: move_control_px
   BuiltIn: true
@@ -2729,8 +2425,6 @@ Data:
     DataType: I
     Description: |-
       The vertical position of the widget in pixels (0 ... 750).
-  CreatedAt: 2025-03-29T06:15:22.6928180Z
-  UpdatedAt: 2025-03-29T06:15:22.6928180Z
 - Id: b2f0c55d-7328-4452-a5d2-95af34669987
   Name: ms_to_ticks
   BuiltIn: true
@@ -2742,8 +2436,6 @@ Data:
   - Name: microseconds
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928180Z
-  UpdatedAt: 2025-03-29T06:15:22.6928180Z
 - Id: c92b74e4-9b98-40d0-a2cb-d8e0c8d62a32
   Name: msb
   BuiltIn: true
@@ -2756,8 +2448,6 @@ Data:
     DataType: I
     Description: |-
       A numeric value to calculate.
-  CreatedAt: 2025-03-29T06:15:22.6928180Z
-  UpdatedAt: 2025-03-29T06:15:22.6928180Z
 - Id: b7784b3f-6c62-4e0e-926e-4e55e1d31b9a
   Name: note_off
   BuiltIn: true
@@ -2770,8 +2460,6 @@ Data:
     DataType: I
     Description: |-
       Unique identification number of the note event to be changed.
-  CreatedAt: 2025-03-29T06:15:22.6928190Z
-  UpdatedAt: 2025-03-29T06:15:22.6928190Z
 - Id: d9141eee-76fb-416e-a2da-8d0a05c3f923
   Name: note_off
   BuiltIn: true
@@ -2788,8 +2476,6 @@ Data:
     DataType: I
     Description: |-
       Optional argument defining the time offset in microseconds after which the note off will actually happen.
-  CreatedAt: 2025-03-29T06:15:22.6928190Z
-  UpdatedAt: 2025-03-29T06:15:22.6928190Z
 - Id: ed6b2b32-fb15-450f-aff9-e6c11e2363bf
   Name: num_elements
   BuiltIn: true
@@ -2801,8 +2487,6 @@ Data:
   - Name: array-variable
     DataType: I[]||S[]||R[]
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928190Z
-  UpdatedAt: 2025-03-29T06:15:22.6928190Z
 - Id: ce7aff00-60e6-4a0b-9d31-3f2a1819c6df
   Name: num_slices
   BuiltIn: true
@@ -2814,8 +2498,6 @@ Data:
   - Name: arg1
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928200Z
-  UpdatedAt: 2025-03-29T06:15:22.6928200Z
 - Id: a2bbdf04-7dce-48a8-b936-6ce0be4f1619
   Name: num_slices_zone
   BuiltIn: true
@@ -2827,8 +2509,6 @@ Data:
   - Name: zone-ID
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928200Z
-  UpdatedAt: 2025-03-29T06:15:22.6928200Z
 - Id: e6cd52ad-75e2-47e9-a4c3-43622f40ad2e
   Name: output_channel_name
   BuiltIn: true
@@ -2841,8 +2521,6 @@ Data:
     DataType: I
     Description: |-
       The number of the output channel (zero-based, i.e. the first output is 0).
-  CreatedAt: 2025-03-29T06:15:22.6928200Z
-  UpdatedAt: 2025-03-29T06:15:22.6928200Z
 - Id: 7164b35d-14f2-493b-9f45-e06ed037ff18
   Name: pgs_create_key
   BuiltIn: true
@@ -2856,8 +2534,6 @@ Data:
   - Name: size
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928200Z
-  UpdatedAt: 2025-03-29T06:15:22.6928200Z
 - Id: f7f5571b-858b-4f34-9b57-1118738a9876
   Name: pgs_create_str_key
   BuiltIn: true
@@ -2868,8 +2544,6 @@ Data:
   - Name: key-id
     DataType: P
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928210Z
-  UpdatedAt: 2025-03-29T06:15:22.6928210Z
 - Id: f45dc6ab-0f38-42d6-b006-9fba777d026c
   Name: pgs_get_key_val
   BuiltIn: true
@@ -2883,8 +2557,6 @@ Data:
   - Name: index
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928210Z
-  UpdatedAt: 2025-03-29T06:15:22.6928210Z
 - Id: c8539bee-aad9-4425-8f8e-2a5f63fa9ea2
   Name: pgs_get_str_key_val
   BuiltIn: true
@@ -2895,8 +2567,6 @@ Data:
   - Name: key-id
     DataType: P
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928210Z
-  UpdatedAt: 2025-03-29T06:15:22.6928210Z
 - Id: ce4e59b3-f6da-4f96-9ade-7864f66d5080
   Name: pgs_key_exists
   BuiltIn: true
@@ -2907,8 +2577,6 @@ Data:
   - Name: key-id
     DataType: P
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928210Z
-  UpdatedAt: 2025-03-29T06:15:22.6928210Z
 - Id: 52fcaee6-4777-4028-9ef8-7882dd6b7c74
   Name: pgs_set_key_val
   BuiltIn: true
@@ -2925,8 +2593,6 @@ Data:
   - Name: value
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928220Z
-  UpdatedAt: 2025-03-29T06:15:22.6928220Z
 - Id: fed5d467-f605-4b0e-9d0c-8fe90727794b
   Name: pgs_set_str_key_val
   BuiltIn: true
@@ -2940,8 +2606,6 @@ Data:
   - Name: stringvalue
     DataType: I||S||R
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928220Z
-  UpdatedAt: 2025-03-29T06:15:22.6928220Z
 - Id: 20ae3532-3a49-421f-b6c3-12cc3a209ab5
   Name: pgs_str_key_exists
   BuiltIn: true
@@ -2952,8 +2616,6 @@ Data:
   - Name: key-id
     DataType: P
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928220Z
-  UpdatedAt: 2025-03-29T06:15:22.6928220Z
 - Id: aa2ba3dd-3c86-4ecd-831f-010847194863
   Name: play_note
   BuiltIn: true
@@ -2981,8 +2643,6 @@ Data:
       This parameter also accepts two special values:
       - \1: releasing the note which started the callback stops the sample.
       - 0: the entire sample is played (be careful with looped samples, as they would be played indefinitely in this case!).
-  CreatedAt: 2025-03-29T06:15:22.6928230Z
-  UpdatedAt: 2025-03-29T06:15:22.6928230Z
 - Id: adbd77d6-5c6a-4036-9730-7e3a71b61e1a
   Name: pow
   BuiltIn: true
@@ -2999,8 +2659,6 @@ Data:
     DataType: R
     Description: |-
       A numeric value to calculate.
-  CreatedAt: 2025-03-29T06:15:22.6928230Z
-  UpdatedAt: 2025-03-29T06:15:22.6928230Z
 - Id: 792ecf56-15b2-473f-a7e1-58af3912707e
   Name: purge_group
   BuiltIn: true
@@ -3018,8 +2676,6 @@ Data:
     Description: |-
       - If set to 0, the samples of the specified group are unloaded.
       - If set to 1, the samples are reloaded.
-  CreatedAt: 2025-03-29T06:15:22.6928230Z
-  UpdatedAt: 2025-03-29T06:15:22.6928240Z
 - Id: e35efb92-980a-4bca-bf98-995277f56c99
   Name: random
   BuiltIn: true
@@ -3036,8 +2692,6 @@ Data:
     DataType: I
     Description: |-
       Max value.
-  CreatedAt: 2025-03-29T06:15:22.6928240Z
-  UpdatedAt: 2025-03-29T06:15:22.6928250Z
 - Id: ec6d076a-97e8-4923-8629-2db81ea63b99
   Name: read_persistent_var
   BuiltIn: true
@@ -3050,8 +2704,6 @@ Data:
     DataType: '*'
     Description: |-
       Variable to be reloaded.
-  CreatedAt: 2025-03-29T06:15:22.6928250Z
-  UpdatedAt: 2025-03-29T06:15:22.6928250Z
 - Id: eba11cd8-3b3e-4b8a-945b-f8a0bbd558e4
   Name: real
   BuiltIn: true
@@ -3064,8 +2716,6 @@ Data:
     DataType: I
     Description: |-
       An integer value to convert.
-  CreatedAt: 2025-03-29T06:15:22.6928250Z
-  UpdatedAt: 2025-03-29T06:15:22.6928250Z
 - Id: 752dbf40-8679-4994-bf9b-b31af8488308
   Name: real_to_int
   BuiltIn: true
@@ -3078,8 +2728,6 @@ Data:
     DataType: R
     Description: |-
       A real value to convert.
-  CreatedAt: 2025-03-29T06:15:22.6928250Z
-  UpdatedAt: 2025-03-29T06:15:22.6928250Z
 - Id: 29c1c288-68ca-40fc-bc0c-3f0a99f17163
   Name: redirect_midi
   BuiltIn: true
@@ -3091,8 +2739,6 @@ Data:
   - Name: arg1
     DataType: '*'
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928260Z
-  UpdatedAt: 2025-03-29T06:15:22.6928260Z
 - Id: 8be2395a-2524-46fb-98d7-c89d894c4dc8
   Name: redirect_output
   BuiltIn: true
@@ -3119,8 +2765,6 @@ Data:
     Description: |-
       Specifies the output channel, aux channel or instrument bus, depending on `output-type`.
       - Has no effect when `output-type` is set to $OUTPUT_TYPE_DEFAULT.
-  CreatedAt: 2025-03-29T06:15:22.6928260Z
-  UpdatedAt: 2025-03-29T06:15:22.6928260Z
 - Id: 063b78e8-8a3a-4798-9926-95e8a66125f9
   Name: remove_keyrange
   BuiltIn: true
@@ -3132,8 +2776,6 @@ Data:
   - Name: note-number
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928260Z
-  UpdatedAt: 2025-03-29T06:15:22.6928260Z
 - Id: dc2f4a30-a3da-46ad-9d60-8642ff21cda4
   Name: reset_engine
   BuiltIn: true
@@ -3142,8 +2784,6 @@ Data:
   BuiltIntoVersion: N/A
   ReturnType: V
   Arguments: []
-  CreatedAt: 2025-03-29T06:15:22.6928260Z
-  UpdatedAt: 2025-03-29T06:15:22.6928260Z
 - Id: 9cd10fac-c5a4-42c6-bb60-40c86b6218b6
   Name: reset_ksp_timer
   BuiltIn: true
@@ -3152,8 +2792,6 @@ Data:
   BuiltIntoVersion: N/A
   ReturnType: V
   Arguments: []
-  CreatedAt: 2025-03-29T06:15:22.6928260Z
-  UpdatedAt: 2025-03-29T06:15:22.6928260Z
 - Id: 04b2d03e-c824-4706-9a79-3bab5200c073
   Name: reset_rls_trig_counter
   BuiltIn: true
@@ -3165,8 +2803,6 @@ Data:
   - Name: note
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928270Z
-  UpdatedAt: 2025-03-29T06:15:22.6928270Z
 - Id: f19d9309-5fac-462a-885e-a9c27c01929b
   Name: round
   BuiltIn: true
@@ -3180,8 +2816,6 @@ Data:
   - Name: x
     DataType: R
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928270Z
-  UpdatedAt: 2025-03-29T06:15:22.6928270Z
 - Id: 90ad7a48-a8e6-42c3-8ecb-5a5f310f211a
   Name: save_array
   BuiltIn: true
@@ -3210,8 +2844,6 @@ Data:
           - Windows: C:\Users\<UserName>\AppData\Local\<LibraryName>\
 
       This mode can be used synchronously in `on init`, and asynchronously in `on persistence_changed`, `on ui_control` and `on pgs_changed` callbacks.
-  CreatedAt: 2025-03-29T06:15:22.6928270Z
-  UpdatedAt: 2025-03-29T06:15:22.6928270Z
 - Id: 0e9798d6-c7af-4364-9867-9c5b4198b3b9
   Name: save_array_str
   BuiltIn: true
@@ -3228,8 +2860,6 @@ Data:
     DataType: I||S
     Description: |-
       The absolute path of the .nka file to be saved.
-  CreatedAt: 2025-03-29T06:15:22.6928280Z
-  UpdatedAt: 2025-03-29T06:15:22.6928280Z
 - Id: eeba828e-6cfc-4ddf-bee8-2aec22d1f0a9
   Name: save_midi_file
   BuiltIn: true
@@ -3242,8 +2872,6 @@ Data:
     DataType: S
     Description: |-
       The absolute path of the MIDI file to be saved.
-  CreatedAt: 2025-03-29T06:15:22.6928280Z
-  UpdatedAt: 2025-03-29T06:15:22.6928280Z
 - Id: 6d8c582e-610a-4e62-8b33-a6c6b2803c48
   Name: search
   BuiltIn: true
@@ -3260,8 +2888,6 @@ Data:
     DataType: I
     Description: |-
       Value to be found in the specified array.
-  CreatedAt: 2025-03-29T06:15:22.6928280Z
-  UpdatedAt: 2025-03-29T06:15:22.6928280Z
 - Id: 5b3e3721-4726-4ea8-b96a-2c608a0d7f7e
   Name: search
   BuiltIn: true
@@ -3286,8 +2912,6 @@ Data:
     DataType: I
     Description: |-
       OptionalOptional argument which specifies the array index at which searching operation will end.
-  CreatedAt: 2025-03-29T06:15:22.6928280Z
-  UpdatedAt: 2025-03-29T06:15:22.6928280Z
 - Id: f8baedb3-4c21-400f-ae26-42ba6f51c3b7
   Name: set_control_help
   BuiltIn: true
@@ -3304,8 +2928,6 @@ Data:
     DataType: S
     Description: |-
       The info text to be displayed.
-  CreatedAt: 2025-03-29T06:15:22.6928290Z
-  UpdatedAt: 2025-03-29T06:15:22.6928290Z
 - Id: 1dab1197-8c74-4fb8-af61-380c764490ae
   Name: set_control_par
   BuiltIn: true
@@ -3326,8 +2948,6 @@ Data:
     DataType: I
     Description: |-
       The value of the control parameter we wish to set.
-  CreatedAt: 2025-03-29T06:15:22.6928290Z
-  UpdatedAt: 2025-03-29T06:15:22.6928290Z
 - Id: 42c63097-ea56-4b63-95cf-02bfa28b0eb0
   Name: set_control_par_arr
   BuiltIn: true
@@ -3352,8 +2972,6 @@ Data:
     DataType: I
     Description: |-
       The array index of the UI control we wish to set.
-  CreatedAt: 2025-03-29T06:15:22.6928290Z
-  UpdatedAt: 2025-03-29T06:15:22.6928290Z
 - Id: 1ce479a9-a188-4b1a-866f-f858c316d5a9
   Name: set_control_par_real_arr
   BuiltIn: true
@@ -3378,8 +2996,6 @@ Data:
     DataType: I
     Description: |-
       The array index of the UI control we wish to set.
-  CreatedAt: 2025-03-29T06:15:22.6928290Z
-  UpdatedAt: 2025-03-29T06:15:22.6928290Z
 - Id: b9d1db79-ab6d-42c2-be8d-6dbc968ebf25
   Name: set_control_par_str
   BuiltIn: true
@@ -3400,8 +3016,6 @@ Data:
     DataType: I||S
     Description: |-
       The value of the control parameter we wish to set.
-  CreatedAt: 2025-03-29T06:15:22.6928290Z
-  UpdatedAt: 2025-03-29T06:15:22.6928300Z
 - Id: 08141ee3-0c73-42af-a01b-a4cbaec215d7
   Name: set_control_par_str_arr
   BuiltIn: true
@@ -3426,8 +3040,6 @@ Data:
     DataType: I
     Description: |-
       The array index of the UI control we wish to set.
-  CreatedAt: 2025-03-29T06:15:22.6928300Z
-  UpdatedAt: 2025-03-29T06:15:22.6928300Z
 - Id: 166fb48a-9b1a-40b5-bfb6-32ebe414fc77
   Name: set_controller
   BuiltIn: true
@@ -3448,8 +3060,6 @@ Data:
       The value of the specified controller
         - MIDI CC and Channel Pressure value range: 0 ... 127
         - MIDI Pitch Bend value range: -8192 ... 8191
-  CreatedAt: 2025-03-29T06:15:22.6928300Z
-  UpdatedAt: 2025-03-29T06:15:22.6928300Z
 - Id: cab840c7-0f34-476b-935f-29577d96d5d1
   Name: set_engine_par
   BuiltIn: true
@@ -3494,8 +3104,6 @@ Data:
       - For Flex Envelope, this parameter specifies which envelope stage to target when using `$ENGINE_PAR_FLEXENV_STAGE_TIME`, `$ENGINE_PAR_FLEXENV_STAGE_LEVEL` and `$ENGINE_PAR_FLEXENV_STAGE_SLOPE`.
       - For Step Modulator, this parameter specifies which step value to target when using `$ENGINE_PAR_STEPSEQ_STEP_VALUE`.
       - For all other applications, set this parameter to -1.
-  CreatedAt: 2025-03-29T06:15:22.6928300Z
-  UpdatedAt: 2025-03-29T06:15:22.6928300Z
 - Id: 26d06bed-d24f-4bbc-883b-a9e59907f57e
   Name: set_engine_par_m
   BuiltIn: true
@@ -3519,8 +3127,6 @@ Data:
   - Name: arg5
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928310Z
-  UpdatedAt: 2025-03-29T06:15:22.6928310Z
 - Id: 405b3e50-e778-453d-9c6c-3252e02a90ba
   Name: set_event_mark
   BuiltIn: true
@@ -3538,8 +3144,6 @@ Data:
     Description: |-
       One of 28 marks, from $`MARK_1 to $MARK_28` which will be assigned to the event.
       You can also assign more than one mark to a single event, either by typing the command again, or by using the bitwise `.or.` operator, or by simply summing the event marks.
-  CreatedAt: 2025-03-29T06:15:22.6928310Z
-  UpdatedAt: 2025-03-29T06:15:22.6928310Z
 - Id: c4c654ce-94d8-4f8b-bcc0-ecb9070ff170
   Name: set_event_par
   BuiltIn: true
@@ -3574,8 +3178,6 @@ Data:
     DataType: I
     Description: |-
       The value of the event parameter.
-  CreatedAt: 2025-03-29T06:15:22.6928330Z
-  UpdatedAt: 2025-03-29T06:15:22.6928340Z
 - Id: bc7c3bb6-23ff-4b54-8800-845c03c41213
   Name: set_event_par_arr
   BuiltIn: true
@@ -3614,8 +3216,6 @@ Data:
       - $EVENT_PAR_ALLOW_GROUP: the group index (0 ... 4095, however this depends on the amount of groups present in a particular Kontakt instrument)
       - $EVENT_PAR_CUSTOM: the event parameter index (0 ... 15)
       - $EVENT_PAR_MOD_VALUE_ID/$EVENT_PAR_MOD_VALUE_EX_ID: the "from script" modulator index, as set in the modulation assignment in Kontakt (0 ... 1000)
-  CreatedAt: 2025-03-29T06:15:22.6928340Z
-  UpdatedAt: 2025-03-29T06:15:22.6928340Z
 - Id: bf40775d-e215-409a-9c6b-322e7682c267
   Name: set_key_color
   BuiltIn: true
@@ -3651,8 +3251,6 @@ Data:
       - $KEY_COLOR_DEFAULT Sets the key to Kontakt's standard color for mapped notes
       - $KEY_COLOR_INACTIVE Resets the key to standard black and white
       - $KEY_COLOR_NONE Resets the key to its normal Kontakt color, e.g. red for internal keyswitches
-  CreatedAt: 2025-03-29T06:15:22.6928340Z
-  UpdatedAt: 2025-03-29T06:15:22.6928340Z
 - Id: e3e2715b-70d0-4d42-93c4-e7ad69a07dca
   Name: set_key_name
   BuiltIn: true
@@ -3669,8 +3267,6 @@ Data:
     DataType: S
     Description: |-
       Text string to assign.
-  CreatedAt: 2025-03-29T06:15:22.6928340Z
-  UpdatedAt: 2025-03-29T06:15:22.6928340Z
 - Id: 70ad1a01-7442-459c-9b17-acd74d9bd0e9
   Name: set_key_pressed
   BuiltIn: true
@@ -3688,8 +3284,6 @@ Data:
     Description: |-
       - 0: Key is released
       - 1: Key is pressed
-  CreatedAt: 2025-03-29T06:15:22.6928340Z
-  UpdatedAt: 2025-03-29T06:15:22.6928350Z
 - Id: 55aa7bf0-fcc4-4634-bb33-47b936f0b715
   Name: set_key_pressed_support
   BuiltIn: true
@@ -3703,8 +3297,6 @@ Data:
     Description: |-
       - 0: Kontakt handles all pressed states. set_key_pressed() commands are ignored (this is the default).
       - 1: Kontakt's keyboard is only affected by set_key_pressed() commands.
-  CreatedAt: 2025-03-29T06:15:22.6928350Z
-  UpdatedAt: 2025-03-29T06:15:22.6928350Z
 - Id: b813a814-3a64-4779-9f74-6d9a203eed28
   Name: set_key_type
   BuiltIn: true
@@ -3724,8 +3316,6 @@ Data:
       - $NI_KEY_TYPE_DEFAULT Normally mapped keys that produce sound.
       - $NI_KEY_TYPE_CONTROL Keyswitches or other keysthat do not produce sound.
       - $NI_KEY_TYPE_NONE Resets the key to its standard Kontakt behaviour.
-  CreatedAt: 2025-03-29T06:15:22.6928350Z
-  UpdatedAt: 2025-03-29T06:15:22.6928350Z
 - Id: d8531cb2-7b8f-4596-833b-dc25ab17c257
   Name: set_keyrange
   BuiltIn: true
@@ -3746,8 +3336,6 @@ Data:
     DataType: S
     Description: |-
       Text string specifying the name of the key range.
-  CreatedAt: 2025-03-29T06:15:22.6928350Z
-  UpdatedAt: 2025-03-29T06:15:22.6928350Z
 - Id: 56d563b9-5936-4ce5-b55e-3047b5988eeb
   Name: set_knob_defval
   BuiltIn: true
@@ -3762,8 +3350,6 @@ Data:
   - Name: value
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928350Z
-  UpdatedAt: 2025-03-29T06:15:22.6928360Z
 - Id: 0c5f210c-1d93-4985-ad12-60abc71d223e
   Name: set_knob_label
   BuiltIn: true
@@ -3778,8 +3364,6 @@ Data:
   - Name: text
     DataType: S
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928360Z
-  UpdatedAt: 2025-03-29T06:15:22.6928360Z
 - Id: 6a0d9917-c184-468a-9a85-7034175d048d
   Name: set_knob_unit
   BuiltIn: true
@@ -3803,8 +3387,6 @@ Data:
       - $KNOB_UNIT_MS
       - $KNOB_UNIT_OCT
       - $KNOB_UNIT_ST
-  CreatedAt: 2025-03-29T06:15:22.6928360Z
-  UpdatedAt: 2025-03-29T06:15:22.6928360Z
 - Id: d477e67f-fbad-4304-8d88-bf58725c10b3
   Name: set_listener
   BuiltIn: true
@@ -3829,8 +3411,6 @@ Data:
       - $NI_SIGNAL_TIMER_BEAT: Time interval in fractions of a beat/quarter note (1 ... 24)
       - $NI_SIGNAL_TRANSP_START: Set to 1 if the listener callback should react to the host's transport start command
       - $NI_SIGNAL_TRANSP_STOP: Set to 1 if the listener callback should react to the host's transport stop command
-  CreatedAt: 2025-03-29T06:15:22.6928360Z
-  UpdatedAt: 2025-03-29T06:15:22.6928360Z
 - Id: 189ced2d-f07f-47c3-98d8-afd7cf0d6683
   Name: set_loop_par
   BuiltIn: true
@@ -3861,8 +3441,6 @@ Data:
     DataType: I
     Description: |-
       The value of the loop parameter.
-  CreatedAt: 2025-03-29T06:15:22.6928360Z
-  UpdatedAt: 2025-03-29T06:15:22.6928360Z
 - Id: bf790bb5-973a-4ebe-9940-c877daa36e92
   Name: set_map_editor_event_color
   BuiltIn: true
@@ -3879,8 +3457,6 @@ Data:
       - `0ff0000h {red}`
           - The `0` at the start lets Kontakt know the value is a number.
           - The `h` at the end indicates that it is a hexadecimal value. You can also use uppercase `H`.
-  CreatedAt: 2025-03-29T06:15:22.6928370Z
-  UpdatedAt: 2025-03-29T06:15:22.6928370Z
 - Id: c4085d0f-b4cf-4045-8ffd-b9fe9d39d80d
   Name: set_menu_item_str
   BuiltIn: true
@@ -3901,8 +3477,6 @@ Data:
     DataType: I||S
     Description: |-
       The text you wish to set for the selected menu item.
-  CreatedAt: 2025-03-29T06:15:22.6928370Z
-  UpdatedAt: 2025-03-29T06:15:22.6928370Z
 - Id: d4f8958b-9187-4d5d-ab75-f88f5e6abe15
   Name: set_menu_item_value
   BuiltIn: true
@@ -3923,8 +3497,6 @@ Data:
     DataType: I
     Description: |-
       The value you want to give the menu item.
-  CreatedAt: 2025-03-29T06:15:22.6928370Z
-  UpdatedAt: 2025-03-29T06:15:22.6928370Z
 - Id: c3d2a8d6-b293-4e46-a964-9b82e4c50e48
   Name: set_menu_item_visibility
   BuiltIn: true
@@ -3945,8 +3517,6 @@ Data:
     DataType: I
     Description: |-
       Set to either 0 (invisible) or 1 (visible).
-  CreatedAt: 2025-03-29T06:15:22.6928370Z
-  UpdatedAt: 2025-03-29T06:15:22.6928370Z
 - Id: b673400c-fce0-4124-aa96-42775ac74dae
   Name: set_midi
   BuiltIn: true
@@ -3967,8 +3537,6 @@ Data:
   - Name: byte2
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928380Z
-  UpdatedAt: 2025-03-29T06:15:22.6928380Z
 - Id: 1584be83-556f-40d6-9191-b0ab7a25314e
   Name: set_note_controller
   BuiltIn: true
@@ -3994,8 +3562,6 @@ Data:
       The value of the specified per-note controller.
       - MIDI 2.0 Per-Note Controller value range: 0 ... 127
       - MIDI 2.0 Per-Note Pitch Bend value range: -8192 ... 8191
-  CreatedAt: 2025-03-29T06:15:22.6928380Z
-  UpdatedAt: 2025-03-29T06:15:22.6928380Z
 - Id: 4237cd9d-a2f4-4322-835c-bd58f0609f58
   Name: set_nrpn
   BuiltIn: true
@@ -4012,8 +3578,6 @@ Data:
     DataType: I
     Description: |-
       The value of the NRPN message (0 ... 16383).
-  CreatedAt: 2025-03-29T06:15:22.6928380Z
-  UpdatedAt: 2025-03-29T06:15:22.6928380Z
 - Id: fdbc4d49-a47d-4914-a7fa-29d09a76cc72
   Name: set_num_user_zones
   BuiltIn: true
@@ -4026,8 +3590,6 @@ Data:
     DataType: I
     Description: |-
       Defines the number of user zones to be created. %NI_USER_ZONE_IDS is the array of size `value` with all the user zone IDs.
-  CreatedAt: 2025-03-29T06:15:22.6928380Z
-  UpdatedAt: 2025-03-29T06:15:22.6928380Z
 - Id: 57fd0bec-cd6f-4398-b360-8b3e70ca631c
   Name: set_poly_at
   BuiltIn: true
@@ -4044,8 +3606,6 @@ Data:
     DataType: I
     Description: |-
       The value of the Polyphonic Aftertouch message (0 ... 127).
-  CreatedAt: 2025-03-29T06:15:22.6928390Z
-  UpdatedAt: 2025-03-29T06:15:22.6928390Z
 - Id: bacbdc83-b733-4d3b-9595-13dca722a557
   Name: set_rpn
   BuiltIn: true
@@ -4062,8 +3622,6 @@ Data:
     DataType: I
     Description: |-
       The value of the RPN message (0 ... 16383).
-  CreatedAt: 2025-03-29T06:15:22.6928390Z
-  UpdatedAt: 2025-03-29T06:15:22.6928390Z
 - Id: 798ef062-b737-40f8-aac5-e6ada0ba49f9
   Name: set_sample
   BuiltIn: true
@@ -4080,8 +3638,6 @@ Data:
     DataType: S
     Description: |-
       The file path to the sample to be loaded.
-  CreatedAt: 2025-03-29T06:15:22.6928390Z
-  UpdatedAt: 2025-03-29T06:15:22.6928390Z
 - Id: d1fc7bfc-448a-4617-b525-b2b7a08667fe
   Name: set_script_title
   BuiltIn: true
@@ -4093,8 +3649,6 @@ Data:
   - Name: text
     DataType: S
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928390Z
-  UpdatedAt: 2025-03-29T06:15:22.6928390Z
 - Id: 1723272f-383e-472a-9041-2c7164b996b7
   Name: set_skin_offset
   BuiltIn: true
@@ -4106,8 +3660,6 @@ Data:
   - Name: offset-in-pixel
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928400Z
-  UpdatedAt: 2025-03-29T06:15:22.6928400Z
 - Id: 845e37be-5391-4a6e-a13c-c10bffacc8b3
   Name: set_snapshot_type
   BuiltIn: true
@@ -4124,8 +3676,6 @@ Data:
       - 1: the init callback will not be executed upon loading a snapshot, only the on persistence_callback will be executed.
       - 2: same as type 0, but only KSP variables are saved with the snapshot.
       - 3: same as type 1, but only KSP variables are saved with the snapshot.
-  CreatedAt: 2025-03-29T06:15:22.6928400Z
-  UpdatedAt: 2025-03-29T06:15:22.6928400Z
 - Id: 0d4c9551-68be-429a-b049-004b07844425
   Name: set_table_steps_shown
   BuiltIn: true
@@ -4142,8 +3692,6 @@ Data:
     DataType: I
     Description: |-
       The number of displayed steps.
-  CreatedAt: 2025-03-29T06:15:22.6928400Z
-  UpdatedAt: 2025-03-29T06:15:22.6928400Z
 - Id: 44173184-9c7d-4adf-8895-825a0630a2b2
   Name: set_text
   BuiltIn: true
@@ -4159,8 +3707,6 @@ Data:
   - Name: text
     DataType: I||S||R
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928410Z
-  UpdatedAt: 2025-03-29T06:15:22.6928410Z
 - Id: c7b3b506-7c27-4960-a7e7-7a05a040f58b
   Name: set_ui_color
   BuiltIn: true
@@ -4175,8 +3721,6 @@ Data:
       The hexadecimal color value in the following format: `0ff0000h {red}`
       - The 0 at the start lets Kontakt know the value is a number.
       - The h at the end indicates that it is a hexadecimal value. You can also use uppercase `H`.
-  CreatedAt: 2025-03-29T06:15:22.6928410Z
-  UpdatedAt: 2025-03-29T06:15:22.6928410Z
 - Id: 22ca545a-b16c-4edd-ae04-3214244940d0
   Name: set_ui_height
   BuiltIn: true
@@ -4189,8 +3733,6 @@ Data:
     DataType: I
     Description: |-
       The height of script in grid units (1 ... 8).
-  CreatedAt: 2025-03-29T06:15:22.6928410Z
-  UpdatedAt: 2025-03-29T06:15:22.6928410Z
 - Id: 3a06e051-2ddb-4b09-b0f7-b75ca3e1fca2
   Name: set_ui_height_px
   BuiltIn: true
@@ -4203,8 +3745,6 @@ Data:
     DataType: I
     Description: |-
       The height of script in pixels (50 ... 750).
-  CreatedAt: 2025-03-29T06:15:22.6928410Z
-  UpdatedAt: 2025-03-29T06:15:22.6928410Z
 - Id: cb34ebbd-3833-4d97-ad9a-d6abd579504c
   Name: set_ui_wf_property
   BuiltIn: true
@@ -4235,8 +3775,6 @@ Data:
     DataType: I
     Description: |-
       The value of the selected property.
-  CreatedAt: 2025-03-29T06:15:22.6928420Z
-  UpdatedAt: 2025-03-29T06:15:22.6928420Z
 - Id: 186f6a22-6704-49f6-974b-bfb1f54ca6c5
   Name: set_ui_width_px
   BuiltIn: true
@@ -4249,8 +3787,6 @@ Data:
     DataType: I
     Description: |-
       The width of the script in pixels (633 ... 1000).
-  CreatedAt: 2025-03-29T06:15:22.6928420Z
-  UpdatedAt: 2025-03-29T06:15:22.6928420Z
 - Id: a81862c5-6984-4dc6-91a8-f9e24e6190d0
   Name: set_voice_limit
   BuiltIn: true
@@ -4269,8 +3805,6 @@ Data:
     DataType: I
     Description: |-
       The voice limit of the Time Machine Pro mode.
-  CreatedAt: 2025-03-29T06:15:22.6928420Z
-  UpdatedAt: 2025-03-29T06:15:22.6928420Z
 - Id: e94c721a-31c1-4ec5-acbd-e4db5459da67
   Name: set_zone_par
   BuiltIn: true
@@ -4308,8 +3842,6 @@ Data:
     DataType: I
     Description: |-
       The value of the zone parameter
-  CreatedAt: 2025-03-29T06:15:22.6928420Z
-  UpdatedAt: 2025-03-29T06:15:22.6928420Z
 - Id: 6fd22b9d-ef05-44f8-816a-c1fbee2a1c30
   Name: sgn
   BuiltIn: true
@@ -4322,8 +3854,6 @@ Data:
     DataType: I
     Description: |-
       A numeric value to calculate.
-  CreatedAt: 2025-03-29T06:15:22.6928430Z
-  UpdatedAt: 2025-03-29T06:15:22.6928430Z
 - Id: dc2434f6-74fb-4202-a2e3-6eb53a3357d7
   Name: sh_left
   BuiltIn: true
@@ -4340,8 +3870,6 @@ Data:
     DataType: I
     Description: |-
       Bits to shift.
-  CreatedAt: 2025-03-29T06:15:22.6928430Z
-  UpdatedAt: 2025-03-29T06:15:22.6928430Z
 - Id: 6bdf0de9-144a-4453-8115-228878be453b
   Name: sh_right
   BuiltIn: true
@@ -4358,8 +3886,6 @@ Data:
     DataType: I
     Description: |-
       Bits to shift
-  CreatedAt: 2025-03-29T06:15:22.6928430Z
-  UpdatedAt: 2025-03-29T06:15:22.6928430Z
 - Id: 91b39268-8449-4679-87f2-e2b6e70ec37c
   Name: show_library_tab
   BuiltIn: true
@@ -4368,8 +3894,6 @@ Data:
   BuiltIntoVersion: N/A
   ReturnType: V
   Arguments: []
-  CreatedAt: 2025-03-29T06:15:22.6928430Z
-  UpdatedAt: 2025-03-29T06:15:22.6928430Z
 - Id: 681cbff5-b7e9-4546-86af-6e70c13acb64
   Name: signbit
   BuiltIn: true
@@ -4382,8 +3906,6 @@ Data:
     DataType: I
     Description: |-
       A numeric value to calculate.
-  CreatedAt: 2025-03-29T06:15:22.6928450Z
-  UpdatedAt: 2025-03-29T06:15:22.6928450Z
 - Id: c9c068bd-f182-4935-ae34-52a87d9ea27f
   Name: sin
   BuiltIn: true
@@ -4396,8 +3918,6 @@ Data:
     DataType: R
     Description: |-
       A numeric value to calculate.
-  CreatedAt: 2025-03-29T06:15:22.6928460Z
-  UpdatedAt: 2025-03-29T06:15:22.6928460Z
 - Id: f9940045-87ae-4cd3-bc4c-278fd039d0e2
   Name: slice_idx_loop_end
   BuiltIn: true
@@ -4412,8 +3932,6 @@ Data:
   - Name: arg2
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928460Z
-  UpdatedAt: 2025-03-29T06:15:22.6928460Z
 - Id: cb4c9c0e-2472-4b76-803e-783d31e90d6e
   Name: slice_idx_loop_start
   BuiltIn: true
@@ -4428,8 +3946,6 @@ Data:
   - Name: arg2
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928460Z
-  UpdatedAt: 2025-03-29T06:15:22.6928460Z
 - Id: 19f4045d-3d6f-4094-a5ff-7764e99cde3f
   Name: slice_length
   BuiltIn: true
@@ -4444,8 +3960,6 @@ Data:
   - Name: arg2
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928460Z
-  UpdatedAt: 2025-03-29T06:15:22.6928460Z
 - Id: f5f79e7c-4956-48a7-924e-6e88179e9cd1
   Name: slice_loop_count
   BuiltIn: true
@@ -4460,8 +3974,6 @@ Data:
   - Name: arg2
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928460Z
-  UpdatedAt: 2025-03-29T06:15:22.6928470Z
 - Id: 786782ca-38ae-46d4-8523-bdbd2de1d738
   Name: slice_start
   BuiltIn: true
@@ -4476,8 +3988,6 @@ Data:
   - Name: arg2
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928470Z
-  UpdatedAt: 2025-03-29T06:15:22.6928470Z
 - Id: ef80d2f5-0ecb-485a-8fb4-404d0185d283
   Name: sort
   BuiltIn: true
@@ -4495,8 +4005,6 @@ Data:
     Description: |-
       When equal to 0, the array is sorted in ascending order.
       When not equal to 0, the array is sorted in descending order.
-  CreatedAt: 2025-03-29T06:15:22.6928470Z
-  UpdatedAt: 2025-03-29T06:15:22.6928470Z
 - Id: cbbc09bc-2b3f-44c8-b1e3-ef40c1922868
   Name: sort
   BuiltIn: true
@@ -4522,8 +4030,6 @@ Data:
     DataType: I
     Description: |-
       Optional argument which specifies the array index at which sorting operation will end.
-  CreatedAt: 2025-03-29T06:15:22.6928470Z
-  UpdatedAt: 2025-03-29T06:15:22.6928470Z
 - Id: 2f88f1a7-9cca-4d9a-af3c-0c0b71317e9a
   Name: sqrt
   BuiltIn: true
@@ -4536,8 +4042,6 @@ Data:
     DataType: R
     Description: |-
       A numeric value to calculate.
-  CreatedAt: 2025-03-29T06:15:22.6928470Z
-  UpdatedAt: 2025-03-29T06:15:22.6928470Z
 - Id: 1e90ea42-cf47-4f0b-901d-e86585bf08d0
   Name: stop_wait
   BuiltIn: true
@@ -4555,8 +4059,6 @@ Data:
     Description: |-
       - 0: stops only the current wait.
       - 1: stops the current wait and ignores all following wait commands in this callback.
-  CreatedAt: 2025-03-29T06:15:22.6928480Z
-  UpdatedAt: 2025-03-29T06:15:22.6928480Z
 - Id: 2abc0280-3d80-4410-ae4f-3d16c786ec1a
   Name: tan
   BuiltIn: true
@@ -4569,8 +4071,6 @@ Data:
     DataType: R
     Description: |-
       A numeric value to calculate.
-  CreatedAt: 2025-03-29T06:15:22.6928480Z
-  UpdatedAt: 2025-03-29T06:15:22.6928480Z
 - Id: 06b4233e-15ca-4a4b-9193-456319f9115c
   Name: ticks_to_ms
   BuiltIn: true
@@ -4582,8 +4082,6 @@ Data:
   - Name: ticks
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928480Z
-  UpdatedAt: 2025-03-29T06:15:22.6928480Z
 - Id: 20cd9977-6e5f-4058-abb3-82d96814e468
   Name: unload_slot
   BuiltIn: true
@@ -4595,8 +4093,6 @@ Data:
   - Name: arg1
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928480Z
-  UpdatedAt: 2025-03-29T06:15:22.6928480Z
 - Id: 9866675d-3c62-4240-84e4-28034ef077d3
   Name: wait
   BuiltIn: true
@@ -4608,8 +4104,6 @@ Data:
   - Name: wait-time
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928490Z
-  UpdatedAt: 2025-03-29T06:15:22.6928490Z
 - Id: 96bd2fc2-5a2f-40a3-8191-31cee3acfe2c
   Name: wait_async
   BuiltIn: true
@@ -4621,8 +4115,6 @@ Data:
   - Name: asyncID
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928490Z
-  UpdatedAt: 2025-03-29T06:15:22.6928490Z
 - Id: 094ef2c8-99b6-44e6-a2fa-cd8e2b3fab63
   Name: wait_ticks
   BuiltIn: true
@@ -4634,8 +4126,6 @@ Data:
   - Name: wait-time
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928490Z
-  UpdatedAt: 2025-03-29T06:15:22.6928490Z
 - Id: cbd81db5-a146-46f9-a774-5ce0aa6bc1fb
   Name: watch_array_idx
   BuiltIn: true
@@ -4652,8 +4142,6 @@ Data:
     DataType: I
     Description: |-
       Array index
-  CreatedAt: 2025-03-29T06:15:22.6928490Z
-  UpdatedAt: 2025-03-29T06:15:22.6928490Z
 - Id: 47257528-0b06-48c7-8618-ab065abd0908
   Name: watch_var
   BuiltIn: true
@@ -4666,8 +4154,6 @@ Data:
     DataType: I||S||R
     Description: |-
       Variables to be monitored.
-  CreatedAt: 2025-03-29T06:15:22.6928500Z
-  UpdatedAt: 2025-03-29T06:15:22.6928500Z
 - Id: 06b090ac-906d-4c81-aab4-c64abd458385
   Name: will_never_terminate
   BuiltIn: true
@@ -4679,8 +4165,6 @@ Data:
   - Name: event-id
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928500Z
-  UpdatedAt: 2025-03-29T06:15:22.6928500Z
 - Id: 7b20858f-3904-4b25-b033-969a41137467
   Name: zone_slice_idx_loop_end
   BuiltIn: true
@@ -4695,8 +4179,6 @@ Data:
   - Name: loop-index
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928500Z
-  UpdatedAt: 2025-03-29T06:15:22.6928500Z
 - Id: d50a776f-4f64-4aa2-93d0-e1f6fd3d730e
   Name: zone_slice_idx_loop_start
   BuiltIn: true
@@ -4711,8 +4193,6 @@ Data:
   - Name: loop-index
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928510Z
-  UpdatedAt: 2025-03-29T06:15:22.6928510Z
 - Id: 11ee0c9b-fcab-49d5-967e-8606d5b0dba1
   Name: zone_slice_length
   BuiltIn: true
@@ -4727,8 +4207,6 @@ Data:
   - Name: slice-index
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928510Z
-  UpdatedAt: 2025-03-29T06:15:22.6928510Z
 - Id: 6ec00a35-1384-40e7-bb21-97e5ec5084a3
   Name: zone_slice_loop_count
   BuiltIn: true
@@ -4743,8 +4221,6 @@ Data:
   - Name: loop-index
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928510Z
-  UpdatedAt: 2025-03-29T06:15:22.6928510Z
 - Id: 2d3d2009-39de-437f-ba52-738a5883e08f
   Name: zone_slice_start
   BuiltIn: true
@@ -4759,5 +4235,3 @@ Data:
   - Name: slice-index
     DataType: I
     Description: ""
-  CreatedAt: 2025-03-29T06:15:22.6928510Z
-  UpdatedAt: 2025-03-29T06:15:22.6928510Z
