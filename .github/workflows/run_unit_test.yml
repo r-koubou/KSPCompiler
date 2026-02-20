@@ -5,18 +5,18 @@ on:
     branches:
       - main
       - develop
-      - 'release/*'
-      - 'hotfix/*'
-      - 'feature/*'
-      - 'refactor/*'
-      - 'fix/*'
+      - release/*
+      - hotfix/**
+      - feature/**
+      - refactor/**
+      - fix/**
   pull_request:
     branches:
-      - 'release/*'
-      - 'hotfix/*'
-      - 'feature/*'
-      - 'refactor/*'
-      - 'fix/*'
+      - release/*
+      - hotfix/**
+      - feature/**
+      - refactor/**
+      - fix/**
 
 #--------------------------------------------------------------
 # Run Unit Tests in solution
