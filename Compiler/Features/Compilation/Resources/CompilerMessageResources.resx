@@ -189,4 +189,13 @@
     <data name="semantic.warning.unused" xml:space="preserve">
         <value>{0}: Declared but not used in the script</value>
     </data>
+    <data name="semantic.error.declare.callback.arg.count" xml:space="preserve">
+        <value>{0}: Unmatched number of callback arguments</value>
+    </data>
+    <data name="semantic.error.declare.callback.arg.incompatible" xml:space="preserve">
+        <value>{0}: Callback argument(s) are not compatible type(s) - expected: {1}, actual: {2}</value>
+    </data>
+    <data name="semantic.error.declare.callback.arg.declaration.required" xml:space="preserve">
+        <value>{0}: Argument {1} is not declared in callback "on init"</value>
+    </data>
 </root>
