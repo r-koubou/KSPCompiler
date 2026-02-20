@@ -15,7 +15,11 @@ namespace KSPCompiler.Shared.IO.Symbols.Yaml.Tests;
 [TestFixture]
 public class UITypeTest
 {
-    private static readonly string TestDataDirectory = System.IO.Path.Combine( "TestData", "UiTypeTest" );
+    private static readonly string TestDataDirectory = System.IO.Path.Combine(
+        TestContext.CurrentContext.TestDirectory,
+        "TestData",
+        "UiTypeTest"
+    );
 
     private static ISymbolImporter<UITypeSymbol> CreateLocalImporter( string path )
     {

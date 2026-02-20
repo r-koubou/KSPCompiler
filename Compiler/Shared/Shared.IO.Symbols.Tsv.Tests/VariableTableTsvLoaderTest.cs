@@ -15,7 +15,11 @@ namespace KSPCompiler.Shared.IO.Symbols.Tsv.Tests;
 [TestFixture]
 public class VariableTableTsvLoaderTest
 {
-    private static readonly string TestDataDirectory = System.IO.Path.Combine( "TestData", "VariableTableTsvLoaderTest" );
+    private static readonly string TestDataDirectory = System.IO.Path.Combine(
+        TestContext.CurrentContext.TestDirectory,
+        "TestData",
+        "VariableTableTsvLoaderTest"
+    );
 
     private static ISymbolImporter<VariableSymbol> CreateLocalImporter( string path )
     {

@@ -26,6 +26,7 @@ namespace KSPCompiler.Interactors.Tests.ApplicationServices;
 public class SymbolLocalDatabaseApplicationServiceTest
 {
     private static readonly string TestDataDirectory = Path.Combine(
+        TestContext.CurrentContext.TestDirectory,
         "ApplicationServices",
         "TestData",
         "SymbolLocalDatabaseApplicationServiceTest"

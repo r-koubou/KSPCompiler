@@ -16,7 +16,11 @@ namespace KSPCompiler.Shared.IO.Symbols.Yaml.Tests;
 [TestFixture]
 public class CommandTest
 {
-    private static readonly string TestDataDirectory = System.IO.Path.Combine( "TestData", "CommandTest" );
+    private static readonly string TestDataDirectory = System.IO.Path.Combine(
+        TestContext.CurrentContext.TestDirectory,
+        "TestData",
+        "CommandTest"
+    );
 
     private static ISymbolImporter<CommandSymbol> CreateLocalImporter( string path )
     {

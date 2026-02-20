@@ -15,7 +15,11 @@ namespace KSPCompiler.Shared.IO.Symbols.Yaml.Tests;
 [TestFixture]
 public class CallbackTest
 {
-    private static readonly string TestDataDirectory = System.IO.Path.Combine( "TestData", "CallbackTest" );
+    private static readonly string TestDataDirectory = System.IO.Path.Combine(
+        TestContext.CurrentContext.TestDirectory,
+        "TestData",
+        "CallbackTest"
+    );
 
     private static ISymbolImporter<CallbackSymbol> CreateLocalImporter( string path )
     {
