@@ -1,0 +1,71 @@
+name: Run Unit Tests
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - 'release/*'
+      - 'hotfix/*'
+      - 'feature/*'
+      - 'refactor/*'
+      - 'fix/*'
+  pull_request:
+    branches:
+      - 'release/*'
+      - 'hotfix/*'
+      - 'feature/*'
+      - 'refactor/*'
+      - 'fix/*'
+
+#--------------------------------------------------------------
+# Run Unit Tests in solution
+#--------------------------------------------------------------
+jobs:
+  run-unit-tests:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    env:
+      DOTNET_SDK_VERSION: '10.*'
+      DOTNET_CLI_TELEMETRY_OPTOUT: 1
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+
+    steps:
+    #----------------------------------------------------------
+    # Checkout repository
+    #----------------------------------------------------------
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    #----------------------------------------------------------
+    # Show setup Environment Variables
+    #----------------------------------------------------------
+    - name: Show Environment Variables
+      run: |
+        {
+          echo "## Environment Variables"
+          echo ""
+          echo ""
+          echo "|name|value|"
+          echo "|----|-----|"
+          echo "|ref|${{ github.ref }}|"
+          echo "|commit|${{ github.sha }}|"
+          echo "|DOTNET_SDK_VERSION|${{ env.DOTNET_SDK_VERSION }}|"
+          echo ""
+        } >> $GITHUB_STEP_SUMMARY
+
+
+    #----------------------------------------------------------
+    # Setup .NET SDK
+    #----------------------------------------------------------
+    - name: Install .NET SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ env.DOTNET_SDK_VERSION }}
+
+    #----------------------------------------------------------
+    # Run Unit Tests
+    #----------------------------------------------------------
+    - name: Run Unit Tests
+      working-directory: Compiler
+      run: dotnet test KSPCompiler.sln
