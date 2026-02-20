@@ -1,0 +1,61 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: "CallbackCatalog"
+type: object
+required:
+  - FormatVersion
+  - Data
+additionalProperties: false
+properties:
+  FormatVersion:
+    type: string
+    default: "1.0.0"
+  Data:
+    type: array
+    items:
+      $ref: "#/$defs/callbackDefinition"
+$defs:
+  callbackDefinition:
+    type: object
+    required:
+      - Id
+      - Name
+      - BuiltIn
+      - AllowMultipleDeclaration
+      - Arguments
+    additionalProperties: false
+    properties:
+      Id:
+        type: string
+        description: "UUID"
+      Name:
+        type: string
+      BuiltIn:
+        type: boolean
+        default: false
+      AllowMultipleDeclaration:
+        type: boolean
+        default: false
+      Description:
+        type: string
+      BuiltIntoVersion:
+        type: string
+        default: "N/A"
+      Arguments:
+        type: array
+        items:
+          $ref: "#/$defs/callbackArgument"
+  callbackArgument:
+    type: object
+    required:
+      - Name
+      - RequiredDeclare
+    additionalProperties: false
+    properties:
+      Name:
+        type: string
+      RequiredDeclare:
+        type: boolean
+        default: true
+      Description:
+        type: string
+        default: ""
