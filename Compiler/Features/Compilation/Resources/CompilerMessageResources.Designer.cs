@@ -386,5 +386,23 @@ namespace KSPCompiler.Resources {
                 return ResourceManager.GetString("semantic.warning.unused", resourceCulture);
             }
         }
+        
+        public static string semantic_error_declare_callback_arg_count {
+            get {
+                return ResourceManager.GetString("semantic.error.declare.callback.arg.count", resourceCulture);
+            }
+        }
+        
+        public static string semantic_error_declare_callback_arg_incompatible {
+            get {
+                return ResourceManager.GetString("semantic.error.declare.callback.arg.incompatible", resourceCulture);
+            }
+        }
+        
+        public static string semantic_error_declare_callback_arg_declaration_required {
+            get {
+                return ResourceManager.GetString("semantic.error.declare.callback.arg.declaration.required", resourceCulture);
+            }
+        }
     }
 }

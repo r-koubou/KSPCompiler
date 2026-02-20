@@ -16,7 +16,11 @@ namespace KSPCompiler.Shared.IO.Symbols.Tsv.Tests;
 [TestFixture]
 public class CommandTableTsvLoaderTest
 {
-    private static readonly string TestDataDirectory = System.IO.Path.Combine( "TestData", "CommandTableTsvLoaderTest" );
+    private static readonly string TestDataDirectory = System.IO.Path.Combine(
+        TestContext.CurrentContext.TestDirectory,
+        "TestData",
+        "CommandTableTsvLoaderTest"
+    );
 
     private static ISymbolImporter<CommandSymbol> CreateLocalImporter( string path )
     {

@@ -15,7 +15,11 @@ namespace KSPCompiler.Shared.IO.Symbols.Tsv.Tests;
 [TestFixture]
 public class CallbackTableTsvLoaderTest
 {
-    private static readonly string TestDataDirectory = System.IO.Path.Combine( "TestData", "CallbackTableTsvLoaderTest" );
+    private static readonly string TestDataDirectory = System.IO.Path.Combine(
+        TestContext.CurrentContext.TestDirectory,
+        "TestData",
+        "CallbackTableTsvLoaderTest"
+    );
 
     private static ISymbolImporter<CallbackSymbol> CreateLocalImporter( string path )
     {
