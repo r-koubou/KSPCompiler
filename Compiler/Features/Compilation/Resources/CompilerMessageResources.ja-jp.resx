@@ -194,4 +194,7 @@
     <data name="semantic.error.declare.callback.arg.ui.incompatible" xml:space="preserve">
         <value>{0}: コールバック引数の UI  が一致していません - 期待: {1}</value>
     </data>
+    <data name="semantic.error.declare.variable.incompatible.ui" xml:space="preserve">
+        <value>{0}: UI  {1} で定義されているデータ型と一致しません - 期待: {2}, 実際: {3}</value>
+    </data>
 </root>

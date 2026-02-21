@@ -267,6 +267,12 @@ namespace KSPCompiler.Resources {
             }
         }
         
+        public static string semantic_error_declare_variable_incompatible_ui {
+            get {
+                return ResourceManager.GetString("semantic.error.declare.variable.incompatible.ui", resourceCulture);
+            }
+        }
+        
         public static string semantic_warning_command_unknown {
             get {
                 return ResourceManager.GetString("semantic.warning.command.unknown", resourceCulture);

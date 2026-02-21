@@ -198,6 +198,20 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
                 variable.Modifier |= ModifierFlag.Const;
             }
 
+            // UI情報で定義している型と宣言している変数の型が互換性があるかどうかチェック
+            if( !TypeCompatibility.IsTypeCompatible( variable.DataType, uiType.DataType ) )
+            {
+                EventEmitter.Emit(
+                    node.AsErrorEvent(
+                        CompilerMessageResources.semantic_error_declare_variable_incompatible_ui,
+                        node.Name,
+                        uiType.Name.Value,
+                        variable.DataType.ToMessageString(),
+                        uiType.DataType.ToMessageString()
+                    )
+                );
+            }
+
             // UI型情報を参照
             // 意味解析時に使用するため、用意されている変数に保持
             variable.UIType = uiType;
