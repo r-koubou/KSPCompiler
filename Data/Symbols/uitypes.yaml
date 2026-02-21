@@ -1,4 +1,4 @@
-FormatVersion: 1.0.0
+FormatVersion: 1.1.0
 Data:
   - Id: 7eb866d4-468d-4f1f-8594-aee0af2de0ce
     Name: ui_button
@@ -27,13 +27,16 @@ Data:
     BuiltIntoVersion: N/A
     RequireInitializer: false
     InitializerArguments:
-      - Name: $min
+      - Name: min
+        DataType: I
         Description: |-
           The minimum value of the knob.
-      - Name: $max
+      - Name: max
+        DataType: I
         Description: |-
           The maximum value of the knob.
-      - Name: $display_ratio
+      - Name: display_ratio
+        DataType: I
         Description: |-
           The knob value is divided by <display-ratio> for display purposes.
   - Id: 5139ca04-5ceb-4054-8deb-5f87ae69d186
@@ -45,10 +48,12 @@ Data:
     BuiltIntoVersion: N/A
     RequireInitializer: false
     InitializerArguments:
-      - Name: $grid_width
+      - Name: grid_width
+        DataType: I
         Description: |-
           The width of the label in grid units (1 to 6)
-      - Name: $grid_height
+      - Name: grid_height
+        DataType: I
         Description: |-
           The height of the label in grid units (1 to 16)
   - Id: 4e745a25-7f24-49e8-bdea-598e81eaf5e4
@@ -96,10 +101,12 @@ Data:
     BuiltIntoVersion: N/A
     RequireInitializer: false
     InitializerArguments:
-      - Name: $min
+      - Name: min
+        DataType: I
         Description: |-
           The minimum value of the slider.
-      - Name: $max
+      - Name: max
+        DataType: I
         Description: |-
           The maximum value of the slider.
   - Id: 3fc7724c-8d95-4ec9-b7ae-d3937db86f87
@@ -120,13 +127,16 @@ Data:
     BuiltIntoVersion: N/A
     RequireInitializer: false
     InitializerArguments:
-      - Name: $width
+      - Name: width
+        DataType: I
         Description: |-
           The width of the table in grid units (1 ... 6).
-      - Name: $height
+      - Name: height
+        DataType: I
         Description: |-
           The height of the table in grid units (1 ... 16).
-      - Name: $range
+      - Name: range
+        DataType: I
         Description: |-
           The range of the table. If negative values are used, a bipolar table is created.
   - Id: e1b01f76-6916-445d-8308-59e8075ab2ae
@@ -147,13 +157,16 @@ Data:
     BuiltIntoVersion: N/A
     RequireInitializer: false
     InitializerArguments:
-      - Name: $min
+      - Name: min
+        DataType: I
         Description: |-
           The minimum value of the value edit.
-      - Name: $max
+      - Name: max
+        DataType: I
         Description: |-
           The maximum value of the value edit.
-      - Name: $display_ratio
+      - Name: display_ratio
+        DataType: I
         Description: |-
           The value is divided by <display-ratio> for display purposes.
   - Id: 63eae602-9bbf-4430-95f3-56495dc62a5c
@@ -165,10 +178,12 @@ Data:
     BuiltIntoVersion: N/A
     RequireInitializer: false
     InitializerArguments:
-      - Name: $width
+      - Name: width
+        DataType: I
         Description: |-
           The width of the waveform in grid units (1 ... 6).
-      - Name: $height
+      - Name: height
+        DataType: I
         Description: |-
           The height of the waveform in grid units (1 ... 16).
   - Id: e78e9df1-0a34-46f2-b7fc-5a657266396c
