@@ -68,8 +68,6 @@ public class CallbackDeclarationEvaluator(
 
         // 引数の数の検査（不一致でもそのままフォールバック）
         ValidateArgumentCount( node, specificArguments, declaredArguments );
-        // 引数の型の検査（不一致でもそのままフォールバック）
-        //ValidateArgumentType( node, specificArguments, declaredArguments );
         // 引数の宣言の検査（不一致でもそのままフォールバック）
         ValidateArgumentDeclaration( node, specificArguments, declaredArguments );
 
@@ -166,6 +164,8 @@ public class CallbackDeclarationEvaluator(
                         declaredArg.Name.Value
                     )
                 );
+
+                continue;
             }
 
             // プリミティブ型の型評価
