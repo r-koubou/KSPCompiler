@@ -206,8 +206,8 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
                         CompilerMessageResources.semantic_error_declare_variable_incompatible_ui,
                         node.Name,
                         uiType.Name.Value,
-                        variable.DataType.ToMessageString(),
-                        uiType.DataType.ToMessageString()
+                        uiType.DataType.ToMessageString(),
+                        variable.DataType.ToMessageString()
                     )
                 );
             }
