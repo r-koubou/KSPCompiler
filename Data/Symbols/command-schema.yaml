@@ -1,0 +1,60 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: "FunctionCatalog"
+type: object
+required:
+  - FormatVersion
+  - Data
+additionalProperties: false
+properties:
+  FormatVersion:
+    type: string
+    default: "1.0.0"
+  Data:
+    type: array
+    items:
+      $ref: "#/$defs/functionDefinition"
+$defs:
+  functionDefinition:
+    type: object
+    required:
+      - Id
+      - Name
+      - BuiltIn
+      - BuiltIntoVersion
+      - ReturnType
+      - Arguments
+    additionalProperties: false
+    properties:
+      Id:
+        type: string
+        description: "UUID"
+      Name:
+        type: string
+      BuiltIn:
+        type: boolean
+        default: true
+      Description:
+        type: string
+        default: ""
+      BuiltIntoVersion:
+        type: string
+        default: "N/A"
+      ReturnType:
+        type: string
+      Arguments:
+        type: array
+        items:
+          $ref: "#/$defs/argumentDefinition"
+  argumentDefinition:
+    type: object
+    required:
+      - Name
+      - DataType
+    additionalProperties: false
+    properties:
+      Name:
+        type: string
+      DataType:
+        type: string
+      Description:
+        type: string
