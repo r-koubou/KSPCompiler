@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
 using KSPCompiler.Shared.IO.Symbols.Yaml.Callbacks.Models;
@@ -18,16 +20,22 @@ public sealed class SymbolModelToSymbolTranslator
             BuiltIntoVersion = source.BuiltIntoVersion
         };
 
+        // ReSharper disable once ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
         foreach( var arg in source.Arguments )
         {
-            var argument = new CallbackArgumentSymbol( arg.RequiredDeclare )
+            var uiType = new List<string>();
+            var otherType = new List<string>();
+
+            DataTypeUtility.GuessFromTypeString( arg.DataType, out var dataType, ref uiType, ref otherType );
+
+            var argument = new CallbackArgumentSymbol( arg.RequiredDeclare, uiType, otherType )
             {
                 Name        = arg.Name,
+                DataType    = dataType,
                 Description = arg.Description,
                 BuiltIn     = false
             };
 
-            argument.DataType = DataTypeUtility.GuessFromSymbolName( arg.Name );
             model.Arguments.Add( argument );
         }
 

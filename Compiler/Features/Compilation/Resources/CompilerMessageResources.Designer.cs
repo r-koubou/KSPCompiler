@@ -399,6 +399,12 @@ namespace KSPCompiler.Resources {
             }
         }
         
+        public static string semantic_error_declare_callback_arg_ui_incompatible {
+            get {
+                return ResourceManager.GetString("semantic.error.declare.callback.arg.ui.incompatible", resourceCulture);
+            }
+        }
+        
         public static string semantic_error_declare_callback_arg_declaration_required {
             get {
                 return ResourceManager.GetString("semantic.error.declare.callback.arg.declaration.required", resourceCulture);

@@ -62,7 +62,7 @@ public static class MockSymbolTableUtility
 
         example.AddInitializerArgument( new UIInitializerArgumentSymbol
             {
-                Name        = "$width",
+                Name        = "width",
                 DataType    = DataTypeFlag.TypeInt,
                 Description = "button width",
                 BuiltIn     = false,
@@ -86,7 +86,7 @@ public static class MockSymbolTableUtility
 
         example.Arguments.Add( new CallbackArgumentSymbol( false )
             {
-                Name        = "$button",
+                Name        = "button",
                 DataType    = DataTypeFlag.TypeInt,
                 Description = "button ui variable",
                 BuiltIn     = false,

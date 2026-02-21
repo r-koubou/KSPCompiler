@@ -2,13 +2,13 @@ using System.Linq;
 
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Evaluations.Declarations;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Extensions;
-using KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics.Extensions;
 using KSPCompiler.Resources;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Blocks;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.Domain.Compilation.Symbols.Extensions;
 using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
+using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData.Extensions;
 using KSPCompiler.Shared.EventEmitting;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
@@ -69,7 +69,7 @@ public class CallbackDeclarationEvaluator(
         // 引数の数の検査（不一致でもそのままフォールバック）
         ValidateArgumentCount( node, specificArguments, declaredArguments );
         // 引数の型の検査（不一致でもそのままフォールバック）
-        ValidateArgumentType( node, specificArguments, declaredArguments );
+        //ValidateArgumentType( node, specificArguments, declaredArguments );
         // 引数の宣言の検査（不一致でもそのままフォールバック）
         ValidateArgumentDeclaration( node, specificArguments, declaredArguments );
 
@@ -130,38 +130,6 @@ public class CallbackDeclarationEvaluator(
         }
     }
 
-    private void ValidateArgumentType(
-        AstCallbackDeclarationNode node,
-        CallbackArgumentSymbolList specificArguments,
-        CallbackArgumentSymbolList declaredArguments )
-    {
-        if( !EqualArgumentCount( specificArguments, declaredArguments ) )
-        {
-            // 引数の数が異なる場合はスキップ
-            return;
-        }
-
-        for( var i = 0; i < node.ArgumentList.ArgumentCount; i++ )
-        {
-            var astArg = node.ArgumentList.Arguments[ i ];
-            var callbackArg = specificArguments[ i ];
-            var astType = DataTypeUtility.GuessFromSymbolName( astArg.Name );
-            var callbackType = callbackArg.DataType;
-
-            if( !TypeCompatibility.IsTypeCompatible( astType, callbackType ) )
-            {
-                EventEmitter.Emit(
-                    astArg.AsErrorEvent(
-                        CompilerMessageResources.semantic_error_declare_callback_arg_incompatible,
-                        node.Name,
-                        specificArguments.ToIncompatibleMessage( node.Name ),
-                        declaredArguments.ToIncompatibleMessage( node.Name )
-                    )
-                );
-            }
-        }
-    }
-
     private void ValidateArgumentDeclaration(
         AstCallbackDeclarationNode node,
         CallbackArgumentSymbolList specificArguments,
@@ -178,6 +146,7 @@ public class CallbackDeclarationEvaluator(
 
         for( var i = 0; i < count; i++ )
         {
+            var astArg = node.ArgumentList.Arguments[ i ];
             var specificArg = specificArguments[ i ];
             var declaredArg = declaredArguments[ i ];
 
@@ -187,7 +156,7 @@ public class CallbackDeclarationEvaluator(
                 continue;
             }
 
-            if( !variableSymbols.TrySearchByName( declaredArg.Name, out _ ) )
+            if( !variableSymbols.TrySearchByName( declaredArg.Name, out var variableSymbol ) )
             {
                 // on init コールバックで宣言が必要な引数が宣言されていない
                 EventEmitter.Emit(
@@ -198,6 +167,93 @@ public class CallbackDeclarationEvaluator(
                     )
                 );
             }
+
+            // プリミティブ型の型評価
+            if( TypeCompatibility.IsTypeCompatible( variableSymbol.DataType, specificArg.DataType ) )
+            {
+                continue;
+            }
+
+            // シンボル定義と実際の変数のUI情報の有無の不一致
+            if( specificArg.UITypeNames.Count == 0 && variableSymbol.UIType != UITypeSymbol.Null )
+            {
+                EventEmitter.Emit(
+                    astArg.AsErrorEvent(
+                        CompilerMessageResources.semantic_error_declare_callback_arg_incompatible,
+                        astArg.Name,
+                        specificArg.DataType.ToMessageString(),
+                        declaredArg.DataType.ToMessageString()
+                    )
+                );
+                return;
+            }
+
+            // UI型情報で評価
+            var matchedUiType = ValidateArgumentUiType( specificArg, variableSymbol );
+
+            if( !matchedUiType )
+            {
+                // UI情報一致
+                EventEmitter.Emit(
+                    astArg.AsErrorEvent(
+                        CompilerMessageResources.semantic_error_declare_callback_arg_ui_incompatible,
+                        astArg.Name,
+                        string.Join( ", ", specificArg.UITypeNames )
+                    )
+                );
+            }
         }
+    }
+
+    private bool ValidateArgumentUiType( CallbackArgumentSymbol specificArg, VariableSymbol declaredVariable )
+    {
+        var matchedUiType = false;
+
+        var declaredVariableUiType = declaredVariable.UIType;
+
+        foreach( var uiName in specificArg.UITypeNames )
+        {
+            // コールバック定義側がワイルドカード指定
+            if( uiName == UITypeSymbol.AnyUI.Name )
+            {
+                // 宣言している変数を起点でシンボルテーブルからUI情報取得
+                if( !symbolTable.TrySearchUITypeByName( declaredVariable.UIType.Name.Value, out var declaredVarUiTypeSymbol ) )
+                {
+                    continue;
+                }
+
+                // 見つかったUI定義のプリミティブ型と宣言されている変数のプリミティブ型が互換性があるかどうかチェック
+                if( TypeCompatibility.IsTypeCompatible( declaredVariable.DataType, declaredVarUiTypeSymbol.DataType ) )
+                {
+                    matchedUiType = true;
+                    break;
+                }
+
+                // プリミティブ型が互換性がない場合はワイルドカード指定でも不一致
+                matchedUiType = false;
+                break;
+            }
+
+            // UIの名前が一致するかどうかチェック
+            if( uiName != declaredVariableUiType.Name.Value )
+            {
+                continue;
+            }
+
+            // シンボルテーブルからUI情報取得
+            if( !symbolTable.TrySearchUITypeByName( uiName, out var uiTypeSymbol ) )
+            {
+                continue;
+            }
+
+            // UIで要求される変数データ型と一致するかどうかチェック
+            if( TypeCompatibility.IsTypeCompatible( declaredVariable.DataType, uiTypeSymbol.DataType ) )
+            {
+                matchedUiType = true;
+                break;
+            }
+        }
+
+        return matchedUiType;
     }
 }

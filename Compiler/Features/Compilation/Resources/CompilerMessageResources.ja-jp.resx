@@ -191,4 +191,7 @@
     <data name="semantic.error.declare.callback.arg.declaration.required" xml:space="preserve">
         <value>{0}: 引数 {1} がコールバック "on init" で宣言されていません</value>
     </data>
+    <data name="semantic.error.declare.callback.arg.ui.incompatible" xml:space="preserve">
+        <value>{0}: コールバック引数の UI  が一致していません - 期待: {1}</value>
+    </data>
 </root>

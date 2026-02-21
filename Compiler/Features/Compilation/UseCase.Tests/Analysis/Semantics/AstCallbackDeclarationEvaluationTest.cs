@@ -100,7 +100,7 @@ public class AstCallbackDeclarationEvaluationTest
         callback.BuiltIn = true;
         callback.Arguments.Add( new CallbackArgumentSymbol( true )
             {
-                Name     = new SymbolName( "$arg1" ),
+                Name     = new SymbolName( "arg1" ),
                 DataType = DataTypeFlag.TypeInt
             }
         );
