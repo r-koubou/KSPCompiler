@@ -112,7 +112,8 @@ Data:
       UI callback, executed whenever the user interacts with a particular UI widget.
     BuiltIntoVersion: N/A
     Arguments:
-      - Name: '*ui_widget_name'
+      - Name: 'ui_widget_name'
+        DataType: 'ui_*'
         RequiredDeclare: true
         Description: |-
           UI widget variable

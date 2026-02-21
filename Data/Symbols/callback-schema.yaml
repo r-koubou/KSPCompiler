@@ -8,7 +8,7 @@ additionalProperties: false
 properties:
   FormatVersion:
     type: string
-    default: "1.0.0"
+    default: "1.1.0"
   Data:
     type: array
     items:
@@ -48,10 +48,13 @@ $defs:
     type: object
     required:
       - Name
+      - DataType
       - RequiredDeclare
     additionalProperties: false
     properties:
       Name:
+        type: string
+      DataType:
         type: string
       RequiredDeclare:
         type: boolean
