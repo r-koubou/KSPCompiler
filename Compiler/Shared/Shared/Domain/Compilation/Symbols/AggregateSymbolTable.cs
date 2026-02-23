@@ -10,6 +10,7 @@ public sealed class AggregateSymbolTable
     public ICallbackSymbolTable BuiltInCallbacks { get; }
     public IUserFunctionSymbolSymbolTable UserFunctions { get; }
     public IPreProcessorSymbolTable PreProcessorSymbols { get; }
+    public IPgsKeyIdSymbolTable PgsKeyIdSymbolTable { get; }
 
     public AggregateSymbolTable(
         IVariableSymbolTable? builtInVariables = null,
@@ -19,7 +20,8 @@ public sealed class AggregateSymbolTable
         ICallbackSymbolTable? builtInCallbacks = null,
         ICallbackSymbolTable? userCallbacks = null,
         IUserFunctionSymbolSymbolTable? userFunctions = null,
-        IPreProcessorSymbolTable? preProcessorSymbols = null )
+        IPreProcessorSymbolTable? preProcessorSymbols = null,
+        IPgsKeyIdSymbolTable? pgsKeyIdSymbolTable = null )
     {
         BuiltInVariables    = builtInVariables ?? new VariableSymbolTable();
         UserVariables       = userVariables ?? new VariableSymbolTable();
@@ -29,6 +31,7 @@ public sealed class AggregateSymbolTable
         BuiltInCallbacks    = builtInCallbacks ?? new CallbackSymbolTable();
         UserFunctions       = userFunctions ?? new UserFunctionSymbolTable();
         PreProcessorSymbols = preProcessorSymbols ?? new PreProcessorSymbolTable();
+        PgsKeyIdSymbolTable = pgsKeyIdSymbolTable ?? new PgsKeyIdSymbolTable();
     }
 
     public void Clear()
@@ -41,6 +44,7 @@ public sealed class AggregateSymbolTable
         BuiltInCallbacks.Clear();
         UserFunctions.Clear();
         PreProcessorSymbols.Clear();
+        PgsKeyIdSymbolTable.Clear();
     }
 
     public static void Merge( AggregateSymbolTable source, AggregateSymbolTable target )
@@ -49,10 +53,13 @@ public sealed class AggregateSymbolTable
         // UI Type
         // User Function
         // PreProcessor Symbol
+        // PgsKeyId Symbol
         target.BuiltInVariables.AddRange( source.BuiltInVariables );
         target.UserVariables.AddRange( source.UserVariables );
         target.UITypes.AddRange( source.UITypes );
         target.UserFunctions.AddRange( source.UserFunctions );
+        target.PreProcessorSymbols.AddRange( source.PreProcessorSymbols );
+        target.PgsKeyIdSymbolTable.AddRange( source.PgsKeyIdSymbolTable );
 
         // Command
         foreach( var x in source.Commands )
