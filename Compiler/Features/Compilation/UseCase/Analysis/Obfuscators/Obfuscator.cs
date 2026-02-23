@@ -25,6 +25,22 @@ public class Obfuscator : DefaultAstVisitor, IAstTraversal
         node.AcceptChildren( this );
     }
 
+    #region Preprocessor
+
+    public override IAstNode Visit( AstPreprocessorDefineNode node )
+        => Context.StatementContext.Preprocess.Evaluate( this, node );
+
+    public override IAstNode Visit( AstPreprocessorUndefineNode node )
+        => Context.StatementContext.Preprocess.Evaluate( this, node );
+
+    public override IAstNode Visit( AstPreprocessorIfdefineNode node )
+        => Context.StatementContext.Preprocess.Evaluate( this, node );
+
+    public override IAstNode Visit( AstPreprocessorIfnotDefineNode node )
+        => Context.StatementContext.Preprocess.Evaluate( this, node );
+
+    #endregion ~Preprocessor Symbol Statements
+
     #region Declarations
 
     public override IAstNode Visit( AstCallbackDeclarationNode node )
@@ -174,16 +190,6 @@ public class Obfuscator : DefaultAstVisitor, IAstTraversal
     #endregion ~Expressions
 
     #region Statements
-
-    #region Preprocessor Symbol Statements
-
-    public override IAstNode Visit( AstPreprocessorIfdefineNode node )
-        => Context.StatementContext.Preprocess.Evaluate( this, node );
-
-    public override IAstNode Visit( AstPreprocessorIfnotDefineNode node )
-        => Context.StatementContext.Preprocess.Evaluate( this, node );
-
-    #endregion ~Preprocessor Symbol Statements
 
     #region Call User Function Statements
 
