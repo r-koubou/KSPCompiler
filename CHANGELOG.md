@@ -34,6 +34,7 @@ CHANGELOG
 - Fixed reversed `expected` / `actual` values in error messages
 - Fixed incorrect test data folder path
 - Fixed case mismatch in csproj (UI → Ui)
+- Fixed missing SET_CONDITION and RESET_CONDITION output during obfuscation
 - Removed `CreatedAt` and `UpdatedAt` from YAML
 
 
