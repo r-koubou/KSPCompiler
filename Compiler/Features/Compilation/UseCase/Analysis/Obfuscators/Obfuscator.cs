@@ -39,7 +39,7 @@ public class Obfuscator : DefaultAstVisitor, IAstTraversal
     public override IAstNode Visit( AstPreprocessorIfnotDefineNode node )
         => Context.StatementContext.Preprocess.Evaluate( this, node );
 
-    #endregion ~Preprocessor Symbol Statements
+    #endregion ~Preprocessor
 
     #region Declarations
 
