@@ -2525,12 +2525,12 @@ Data:
     Name: pgs_create_key
     BuiltIn: true
     Description: |-
-      It is possible to send and receive values from one script to another, circumventing the usual left-to-right processing order, by using the Program Global Storage (PGS) commands. PGS is shared memory that can be read from or written to by any script. 
+      It is possible to send and receive values from one script to another, circumventing the usual left-to-right processing order, by using the Program Global Storage (PGS) commands. PGS is shared memory that can be read from or written to by any script.
     BuiltIntoVersion: N/A
     ReturnType: V
     Arguments:
       - Name: key-id
-        DataType: P
+        DataType: K
         Description: ""
       - Name: size
         DataType: I
@@ -2539,23 +2539,23 @@ Data:
     Name: pgs_create_str_key
     BuiltIn: true
     Description: |-
-      It is possible to send and receive values from one script to another, circumventing the usual left-to-right processing order, by using the Program Global Storage (PGS) commands. PGS is shared memory that can be read from or written to by any script. 
+      It is possible to send and receive values from one script to another, circumventing the usual left-to-right processing order, by using the Program Global Storage (PGS) commands. PGS is shared memory that can be read from or written to by any script.
     BuiltIntoVersion: N/A
     ReturnType: V
     Arguments:
       - Name: key-id
-        DataType: P
+        DataType: K
         Description: ""
   - Id: f45dc6ab-0f38-42d6-b006-9fba777d026c
     Name: pgs_get_key_val
     BuiltIn: true
     Description: |-
-      It is possible to send and receive values from one script to another, circumventing the usual left-to-right processing order, by using the Program Global Storage (PGS) commands. PGS is shared memory that can be read from or written to by any script. 
+      It is possible to send and receive values from one script to another, circumventing the usual left-to-right processing order, by using the Program Global Storage (PGS) commands. PGS is shared memory that can be read from or written to by any script.
     BuiltIntoVersion: N/A
     ReturnType: I||S
     Arguments:
       - Name: key-id
-        DataType: P
+        DataType: K
         Description: ""
       - Name: index
         DataType: I
@@ -2564,34 +2564,34 @@ Data:
     Name: pgs_get_str_key_val
     BuiltIn: true
     Description: |-
-      It is possible to send and receive values from one script to another, circumventing the usual left-to-right processing order, by using the Program Global Storage (PGS) commands. PGS is shared memory that can be read from or written to by any script. 
+      It is possible to send and receive values from one script to another, circumventing the usual left-to-right processing order, by using the Program Global Storage (PGS) commands. PGS is shared memory that can be read from or written to by any script.
     BuiltIntoVersion: N/A
     ReturnType: S
     Arguments:
       - Name: key-id
-        DataType: P
+        DataType: K
         Description: ""
   - Id: ce4e59b3-f6da-4f96-9ade-7864f66d5080
     Name: pgs_key_exists
     BuiltIn: true
     Description: |-
-      It is possible to send and receive values from one script to another, circumventing the usual left-to-right processing order, by using the Program Global Storage (PGS) commands. PGS is shared memory that can be read from or written to by any script. 
+      It is possible to send and receive values from one script to another, circumventing the usual left-to-right processing order, by using the Program Global Storage (PGS) commands. PGS is shared memory that can be read from or written to by any script.
     BuiltIntoVersion: N/A
     ReturnType: B
     Arguments:
       - Name: key-id
-        DataType: P
+        DataType: K
         Description: ""
   - Id: 52fcaee6-4777-4028-9ef8-7882dd6b7c74
     Name: pgs_set_key_val
     BuiltIn: true
     Description: |-
-      It is possible to send and receive values from one script to another, circumventing the usual left-to-right processing order, by using the Program Global Storage (PGS) commands. PGS is shared memory that can be read from or written to by any script. 
+      It is possible to send and receive values from one script to another, circumventing the usual left-to-right processing order, by using the Program Global Storage (PGS) commands. PGS is shared memory that can be read from or written to by any script.
     BuiltIntoVersion: N/A
     ReturnType: V
     Arguments:
       - Name: key-id
-        DataType: P
+        DataType: K
         Description: ""
       - Name: index
         DataType: I
@@ -2603,12 +2603,12 @@ Data:
     Name: pgs_set_str_key_val
     BuiltIn: true
     Description: |-
-      It is possible to send and receive values from one script to another, circumventing the usual left-to-right processing order, by using the Program Global Storage (PGS) commands. PGS is shared memory that can be read from or written to by any script. 
+      It is possible to send and receive values from one script to another, circumventing the usual left-to-right processing order, by using the Program Global Storage (PGS) commands. PGS is shared memory that can be read from or written to by any script.
     BuiltIntoVersion: N/A
     ReturnType: V
     Arguments:
       - Name: key-id
-        DataType: P
+        DataType: K
         Description: ""
       - Name: stringvalue
         DataType: I||S||R
@@ -2617,12 +2617,12 @@ Data:
     Name: pgs_str_key_exists
     BuiltIn: true
     Description: |-
-      It is possible to send and receive values from one script to another, circumventing the usual left-to-right processing order, by using the Program Global Storage (PGS) commands. PGS is shared memory that can be read from or written to by any script. 
+      It is possible to send and receive values from one script to another, circumventing the usual left-to-right processing order, by using the Program Global Storage (PGS) commands. PGS is shared memory that can be read from or written to by any script.
     BuiltIntoVersion: N/A
     ReturnType: B
     Arguments:
       - Name: key-id
-        DataType: P
+        DataType: K
         Description: ""
   - Id: aa2ba3dd-3c86-4ecd-831f-010847194863
     Name: play_note
