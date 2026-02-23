@@ -7,7 +7,8 @@ Data:
       test description
     BuiltIntoVersion: N/A
     Arguments:
-      - Name: '*ui_widget_name'
+      - Name: ui_widget_name
+        DataType: '*'
         RequiredDeclare: true
         Description: |-
           UI widget variable
@@ -18,7 +19,8 @@ Data:
       baba description
     BuiltIntoVersion: N/A
     Arguments:
-      - Name: '$number'
+      - Name: number
+        DataType: I
         RequiredDeclare: true
         Description: |-
-          number variable  
+          number variable

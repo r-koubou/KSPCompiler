@@ -21,16 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="TestData\UITypeTest\uitype.yaml">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="TestData\VariableTest\variable.yaml">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="TestData\CallbackTest\callback.yaml">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="TestData\CommandTest\command.yaml">
+      <None Update="TestData\**\*">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>

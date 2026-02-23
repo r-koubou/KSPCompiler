@@ -129,6 +129,9 @@
     <data name="semantic.error.declare.variable.unkown.ui" xml:space="preserve">
         <value>Unknown UI name: {0}</value>
     </data>
+    <data name="semantic.error.declare.variable.incompatible.ui" xml:space="preserve">
+        <value>{0}: Incompatible "{1}" data type - expected: {2}, actual: {3}</value>
+    </data>
     <data name="semantic.warning.command.unknown" xml:space="preserve">
         <value>{0}: Unknown KSP command (may not be documented)</value>
     </data>
@@ -188,5 +191,17 @@
     </data>
     <data name="semantic.warning.unused" xml:space="preserve">
         <value>{0}: Declared but not used in the script</value>
+    </data>
+    <data name="semantic.error.declare.callback.arg.count" xml:space="preserve">
+        <value>{0}: Unmatched number of callback arguments</value>
+    </data>
+    <data name="semantic.error.declare.callback.arg.incompatible" xml:space="preserve">
+        <value>{0}: Callback argument(s) are not compatible type(s) - expected: {1}, actual: {2}</value>
+    </data>
+    <data name="semantic.error.declare.callback.arg.ui.incompatible" xml:space="preserve">
+        <value>{0}: Callback argument(s) are not compatible UI - expected: {1}</value>
+    </data>
+    <data name="semantic.error.declare.callback.arg.declaration.required" xml:space="preserve">
+        <value>{0}: Argument {1} is not declared in callback "on init"</value>
     </data>
 </root>

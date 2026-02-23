@@ -19,28 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="TestData\AstTranslatorTest\LexerErrorTest.txt">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="TestData\AstTranslatorTest\ParserErrorTest.txt">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="TestData\AstTranslatorTest\AssignTest.txt">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="TestData\AstTranslatorTest\CallCommandTest.txt">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="TestData\AstTranslatorTest\ExpressionTest.txt">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="TestData\AstTranslatorTest\StatementTest.txt">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="TestData\SemanticAnalyzeVariableTest\assign_int.txt">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="TestData\SemanticAnalyzeVariableTest\assign_int_incompatible.txt">
+      <None Update="TestData\**\*">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>

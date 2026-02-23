@@ -1,3 +1,5 @@
+using System.Text;
+
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
 using KSPCompiler.Shared.IO.Symbols.Yaml.UITypes.Models;
@@ -12,8 +14,6 @@ public sealed class SymbolToSymbolModelTranslator
         var symbol = new UITypeSymbolModel
         {
             Id                 = source.Id,
-            CreatedAt          = source.CreatedAt,
-            UpdatedAt          = source.UpdatedAt,
             Name               = source.Name.Value,
             BuiltIn            = source.BuiltIn,
             VariableType       = DataTypeUtility.ToString( source.DataType ),
@@ -22,11 +22,17 @@ public sealed class SymbolToSymbolModelTranslator
             BuiltIntoVersion   = source.BuiltIntoVersion
         };
 
+        var stringBuilder = new StringBuilder();
+
         foreach( var arg in source.InitializerArguments )
         {
+            stringBuilder.Clear();
+            DataTypeUtility.ToDataTypeString( stringBuilder, arg );
+
             var argument = new UITypeSymbolArgumentModel
             {
                 Name        = arg.Name,
+                DataType    = stringBuilder.ToString(),
                 Description = arg.Description
             };
 

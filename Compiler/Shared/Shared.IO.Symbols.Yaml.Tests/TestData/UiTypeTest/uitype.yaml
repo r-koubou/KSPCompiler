@@ -1,0 +1,27 @@
+FormatVersion: 1.1.0
+Data:
+- Name: ui_button
+  BuiltIn: false
+  VariableType: I
+  Description: |-
+    Creates a button in the performance view.
+  BuiltIntoVersion: N/A
+  RequireInitializer: false
+  InitializerArguments: []
+- Id: 7cf1332e-8995-4f46-8e80-54dd71a29481
+  Name: ui_slider
+  BuiltIn: false
+  VariableType: I
+  Description: |-
+    Creates a slider in the performance view.
+  BuiltIntoVersion: N/A
+  RequireInitializer: false
+  InitializerArguments:
+    - Name: min
+      DataType: I
+      Description: |-
+        The minimum value of the slider.
+    - Name: max
+      DataType: I
+      Description: |-
+        The maximum value of the slider.

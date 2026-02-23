@@ -9,7 +9,7 @@
         <Product>KSPCompiler.Features.Compilation.Applications.Compilation.Cli</Product>
         <AssemblyName>KSPCompiler.Features.Compilation.Applications.Compilation.Cli</AssemblyName>
         <RootNamespace>KSPCompiler.Features.Compilation.Applications.Compilation.Cli</RootNamespace>
-        <AssemblyVersion>1.0.3</AssemblyVersion>
+        <AssemblyVersion>1.0.4</AssemblyVersion>
         <OutputType>Exe</OutputType>
     </PropertyGroup>
 

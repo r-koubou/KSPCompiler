@@ -2,6 +2,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
+using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
 using KSPCompiler.Shared.IO.Abstractions.Symbol;
 using KSPCompiler.Shared.IO.Local;
 using KSPCompiler.Shared.IO.Symbols.Mock;
@@ -15,7 +16,11 @@ namespace KSPCompiler.Shared.IO.Symbols.Yaml.Tests;
 [TestFixture]
 public class UITypeTest
 {
-    private static readonly string TestDataDirectory = System.IO.Path.Combine( "TestData", "UiTypeTest" );
+    private static readonly string TestDataDirectory = System.IO.Path.Combine(
+        TestContext.CurrentContext.TestDirectory,
+        "TestData",
+        "UiTypeTest"
+    );
 
     private static ISymbolImporter<UITypeSymbol> CreateLocalImporter( string path )
     {
@@ -38,6 +43,24 @@ public class UITypeTest
 
         Assert.That( symbols.Count, Is.EqualTo( 2 ) );
         Assert.That( symbols.First().BuiltIntoVersion, Is.EqualTo( SymbolBuiltIntoVersion.NotAvailable ) );
+    }
+
+    [Test]
+    public void TranslateSymbolTableWithInitializer()
+    {
+        var path = System.IO.Path.Combine( TestDataDirectory, "uitype.yaml" );
+        var importer = CreateLocalImporter( path );
+        var symbols = importer.Import();
+
+        Assert.That( symbols.Count, Is.EqualTo( 2 ) );
+        Assert.That( symbols.First().BuiltIntoVersion, Is.EqualTo( SymbolBuiltIntoVersion.NotAvailable ) );
+
+        var slider = symbols.Last();
+        Assert.That( slider.InitializerArguments.Count, Is.EqualTo( 2 ) );
+        Assert.That( slider.InitializerArguments[ 0 ].Name.Value, Is.EqualTo( "min" ) );
+        Assert.That( slider.InitializerArguments[ 1 ].Name.Value, Is.EqualTo( "max" ) );
+        Assert.That( slider.InitializerArguments[ 0 ].DataType, Is.EqualTo( DataTypeFlag.TypeInt ) );
+        Assert.That( slider.InitializerArguments[ 1 ].DataType, Is.EqualTo( DataTypeFlag.TypeInt ) );
     }
 
     [Test]

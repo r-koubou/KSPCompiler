@@ -1,0 +1,65 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: "UITypeCatalog"
+type: object
+required:
+  - FormatVersion
+  - Data
+additionalProperties: false
+properties:
+  FormatVersion:
+    type: string
+    default: "1.1.0"
+  Data:
+    type: array
+    items:
+      $ref: "#/$defs/uiTypeDefinition"
+$defs:
+  uiTypeDefinition:
+    type: object
+    required:
+      - Id
+      - Name
+      - BuiltIn
+      - VariableType
+      - RequireInitializer
+      - InitializerArguments
+    additionalProperties: false
+    properties:
+      Id:
+        type: string
+        description: "UUID"
+      Name:
+        type: string
+      BuiltIn:
+        type: boolean
+        default: true
+      VariableType:
+        type: string
+        default: "I"
+      Description:
+        type: string
+        default: ""
+      BuiltIntoVersion:
+        type: string
+        default: "N/A"
+      RequireInitializer:
+        type: boolean
+        default: false
+      InitializerArguments:
+        type: array
+        items:
+          $ref: "#/$defs/initializerArgument"
+  initializerArgument:
+    type: object
+    required:
+      - Name
+      - DataType
+    additionalProperties: false
+    properties:
+      Name:
+        type: string
+      DataType:
+        type: string
+      Description:
+        type: string
+        default: ""

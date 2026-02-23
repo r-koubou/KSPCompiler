@@ -1,3 +1,5 @@
+using System;
+
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Evaluations.Symbols;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Extensions;
 using KSPCompiler.Resources;
@@ -119,10 +121,12 @@ public class SymbolEvaluator : ISymbolEvaluator
 
     private bool TryGetPgsSymbol( AstSymbolExpressionNode expr, out AstExpressionNode result )
     {
+        var symbolTable = SymbolTable.PgsKeyIdSymbolTable;
         result = NullAstExpressionNode.Instance;
 
-        // PGS key は create, set, get の呼び出し順に関係なく参照可能なので
-        // シンボルテーブルを用いない
+        // 名前から PGS key かどうかを判定する
+        // ＊プリプロセッサシンボルと記法が同じなので、プリプロセッサシンボルの場合も判定を通過する
+        // ＊その場合は割り切って PGS key として扱うことにする
         if( !DataTypeUtility.GuessFromSymbolName( expr.Name ).IsPgsId() )
         {
             return false;
@@ -144,9 +148,18 @@ public class SymbolEvaluator : ISymbolEvaluator
 
         var symbol = new PgsSymbol
         {
-            Name = expr.Name,
-            DataType = DataTypeFlag.TypePgsId
+            Name     = expr.Name,
+            DataType = DataTypeFlag.TypePgsId,
+            Id       = Guid.NewGuid(),
+            State    = SymbolState.Loaded
         };
+
+        // PGS key は create, set, get の呼び出し順に関係なく参照可能なので
+        // 宣言の評価なしにテーブルへ追加する
+        if( !symbolTable.Contains( symbol.Name ) )
+        {
+            symbolTable.Add( symbol );
+        }
 
         result = CreateEvaluateNode( expr, symbol, symbol );
 

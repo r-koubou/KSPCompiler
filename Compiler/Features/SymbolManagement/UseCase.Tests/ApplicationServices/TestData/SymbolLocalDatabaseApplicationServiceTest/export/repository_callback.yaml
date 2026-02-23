@@ -8,8 +8,6 @@ Data:
     Async complete callback, triggered after the execution of any command that is executed asynchronously, for example various loading or saving related commands.
   BuiltIntoVersion: N/A
   Arguments: []
-  CreatedAt: 2025-01-26T06:28:17.9807940Z
-  UpdatedAt: 2025-01-26T06:28:17.9807940Z
 - Id: a9212dc3-6a74-4990-a5e4-b9c209985e54
   Name: controller
   BuiltIn: false
@@ -18,5 +16,3 @@ Data:
     MIDI controller callback, executed whenever a MIDI CC, Pitch Bend or Channel Pressure message is received.
   BuiltIntoVersion: N/A
   Arguments: []
-  CreatedAt: 2025-01-26T06:28:17.9841600Z
-  UpdatedAt: 2025-01-26T06:28:17.9841600Z

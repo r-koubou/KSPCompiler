@@ -5,7 +5,9 @@ using KSPCompiler.Features.Compilation.Domain.Messages.Extensions;
 using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
 using KSPCompiler.Features.SymbolManagement.UseCase.Tests.Commons;
+using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Blocks;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
+using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
 using KSPCompiler.Shared.EventEmitting.Extensions;
 
 using NUnit.Framework;
@@ -86,4 +88,42 @@ public class AstCallbackDeclarationEvaluationTest
 
         Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
     }
+
+    [Test]
+    public void ArgumentMustBeDeclaredOnInitTest()
+    {
+        var compilerMessageManger = ICompilerMessageManger.Default;
+        var eventEmitter = new MockEventEmitter();
+        eventEmitter.Subscribe<CompilationErrorEvent>( e => compilerMessageManger.Error( e.Position, e.Message ) );
+
+        var callback = MockUtility.CreateCallback( "ui_control", true );
+        callback.BuiltIn = true;
+        callback.Arguments.Add( new CallbackArgumentSymbol( true )
+            {
+                Name     = new SymbolName( "arg1" ),
+                DataType = DataTypeFlag.TypeInt
+            }
+        );
+
+        var symbols = new AggregateSymbolTable();
+        symbols.BuiltInCallbacks.AddAsNoOverload(  callback );
+
+        var ast = MockUtility.CreateCallbackDeclarationNode( "ui_control" );
+        ast.ArgumentList.Arguments.Add( new AstArgumentNode()
+            {
+                Name = new SymbolName( "$arg2" ),
+            }
+        );
+
+        var visitor = new MockDeclarationVisitor();
+        var evaluator = new CallbackDeclarationEvaluator( eventEmitter, symbols );
+
+        visitor.Inject( evaluator );
+        evaluator.Evaluate( visitor, ast );
+
+        compilerMessageManger.WriteTo( Console.Out );
+
+        Assert.That( compilerMessageManger.Count( CompilerMessageLevel.Error ), Is.EqualTo( 1 ) );
+    }
+
 }

@@ -7,11 +7,11 @@ namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
 public class PreprocessEvaluator : IPreprocessEvaluator
 {
     public IAstNode Evaluate( IAstVisitor visitor, AstPreprocessorDefineNode node )
-        // 意味化石フェーズでは評価項目なし
+        // 意味解析フェーズでは評価項目なし
         => node;
 
     public IAstNode Evaluate( IAstVisitor visitor, AstPreprocessorUndefineNode node )
-        // 意味化石フェーズでは評価項目なし
+        // 意味解析フェーズでは評価項目なし
         => node;
 
     public IAstNode Evaluate( IAstVisitor visitor, AstPreprocessorIfdefineNode node )

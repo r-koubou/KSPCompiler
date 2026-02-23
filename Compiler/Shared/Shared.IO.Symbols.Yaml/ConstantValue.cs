@@ -4,6 +4,11 @@ namespace KSPCompiler.Shared.IO.Symbols.Yaml;
 
 public static class ConstantValue
 {
-    public static readonly ISerializer YamlSerializer = new SerializerBuilder().Build();
+    public static readonly ISerializer YamlSerializer
+        = new SerializerBuilder()
+         .WithNewLine( "\n" )
+         .WithIndentedSequences()
+         .Build();
+
     public static readonly IDeserializer YamlDeserializer = new DeserializerBuilder().Build();
 }

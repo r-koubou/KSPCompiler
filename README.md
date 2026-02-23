@@ -3,8 +3,8 @@ KSPCompiler
 
 ![GitHub Release](https://img.shields.io/github/v/release/r-koubou/KSPCompiler) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-[![Build KSP Compiler (develop)](https://github.com/r-koubou/KSPCompiler/actions/workflows/build_compiler_develop.yml/badge.svg?branch=develop)](https://github.com/r-koubou/KSPCompiler/actions/workflows/build_compiler_develop.yml) [![Build LSP Server (develop)](https://github.com/r-koubou/KSPCompiler/actions/workflows/build_language_server_develop.yml/badge.svg?branch=develop)](https://github.com/r-koubou/KSPCompiler/actions/workflows/build_language_server_develop.yml)
-
+[![Run Unit Tests](https://github.com/r-koubou/KSPCompiler/actions/workflows/run_unit_test.yml/badge.svg)](https://github.com/r-koubou/KSPCompiler/actions/workflows/run_unit_test.yml) [![Build KSP Compiler (develop)](https://github.com/r-koubou/KSPCompiler/actions/workflows/build_compiler_develop.yml/badge.svg?branch=develop)](https://github.com/r-koubou/KSPCompiler/actions/workflows/build_compiler_develop.yml)
+[![Build LSP Server (develop)](https://github.com/r-koubou/KSPCompiler/actions/workflows/build_language_server_develop.yml/badge.svg?branch=develop)](https://github.com/r-koubou/KSPCompiler/actions/workflows/build_language_server_develop.yml)
 
 
 A compiler programs for **KONTAKT Script Processor** scripts.

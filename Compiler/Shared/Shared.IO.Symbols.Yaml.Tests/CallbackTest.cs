@@ -2,6 +2,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
+using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
 using KSPCompiler.Shared.IO.Abstractions.Symbol;
 using KSPCompiler.Shared.IO.Local;
 using KSPCompiler.Shared.IO.Symbols.Mock;
@@ -15,7 +16,11 @@ namespace KSPCompiler.Shared.IO.Symbols.Yaml.Tests;
 [TestFixture]
 public class CallbackTest
 {
-    private static readonly string TestDataDirectory = System.IO.Path.Combine( "TestData", "CallbackTest" );
+    private static readonly string TestDataDirectory = System.IO.Path.Combine(
+        TestContext.CurrentContext.TestDirectory,
+        "TestData",
+        "CallbackTest"
+    );
 
     private static ISymbolImporter<CallbackSymbol> CreateLocalImporter( string path )
     {
@@ -42,6 +47,20 @@ public class CallbackTest
 
         Assert.That( list[ 0 ].BuiltIntoVersion, Is.EqualTo( SymbolBuiltIntoVersion.NotAvailable ) );
         Assert.That( list[ 1 ].BuiltIntoVersion, Is.EqualTo( SymbolBuiltIntoVersion.NotAvailable ) );
+
+        var args = list[ 0 ].Arguments;
+        Assert.That( args.Count, Is.EqualTo( 1 ) );
+        Assert.That( args[ 0 ].Name.Value, Is.EqualTo( "ui_widget_name" ) );
+        Assert.That( args[ 0 ].DataType, Is.EqualTo( DataTypeFlag.All ) );
+        Assert.That( args[ 0 ].RequiredDeclareOnInit, Is.True );
+        Assert.That( args[ 0 ].Description.Value, Is.EqualTo( "UI widget variable" ) );
+
+        args = list[ 1 ].Arguments;
+        Assert.That( args.Count, Is.EqualTo( 1 ) );
+        Assert.That( args[ 0 ].Name.Value, Is.EqualTo( "number" ) );
+        Assert.That( args[ 0 ].DataType, Is.EqualTo( DataTypeFlag.TypeInt ) );
+        Assert.That( args[ 0 ].RequiredDeclareOnInit, Is.True );
+        Assert.That( args[ 0 ].Description.Value, Is.EqualTo( "number variable" ) );
     }
 
     [Test]
@@ -53,6 +72,25 @@ public class CallbackTest
         await Task.Run( async () => {
             var symbolTable = await importer.ImportAsync();
             Assert.That( symbolTable.Count, Is.EqualTo( 2 ) );
+
+            var list = symbolTable.ToList();
+
+            Assert.That( list[ 0 ].BuiltIntoVersion, Is.EqualTo( SymbolBuiltIntoVersion.NotAvailable ) );
+            Assert.That( list[ 1 ].BuiltIntoVersion, Is.EqualTo( SymbolBuiltIntoVersion.NotAvailable ) );
+
+            var args = list[ 0 ].Arguments;
+            Assert.That( args.Count, Is.EqualTo( 1 ) );
+            Assert.That( args[ 0 ].Name.Value, Is.EqualTo( "ui_widget_name" ) );
+            Assert.That( args[ 0 ].DataType, Is.EqualTo( DataTypeFlag.All ) );
+            Assert.That( args[ 0 ].RequiredDeclareOnInit, Is.True );
+            Assert.That( args[ 0 ].Description.Value, Is.EqualTo( "UI widget variable" ) );
+
+            args = list[ 1 ].Arguments;
+            Assert.That( args.Count, Is.EqualTo( 1 ) );
+            Assert.That( args[ 0 ].Name.Value, Is.EqualTo( "number" ) );
+            Assert.That( args[ 0 ].DataType, Is.EqualTo( DataTypeFlag.TypeInt ) );
+            Assert.That( args[ 0 ].RequiredDeclareOnInit, Is.True );
+            Assert.That( args[ 0 ].Description.Value, Is.EqualTo( "number variable" ) );
         });
     }
 
@@ -63,7 +101,7 @@ public class CallbackTest
         var exporter = CreateLocalExporter( path );
         var symbols = MockSymbolTableUtility.CreateDummyCallbackSymbols();
 
-        exporter.ExportAsync( symbols );
+        exporter.Export( symbols );
     }
 
     [Test]

@@ -15,7 +15,11 @@ namespace KSPCompiler.Shared.IO.Symbols.Tsv.Tests;
 [TestFixture]
 public class UITypeTableTsvLoaderTest
 {
-    private static readonly string TestDataDirectory = System.IO.Path.Combine( "TestData", "UiTypeTableTsvLoaderTest" );
+    private static readonly string TestDataDirectory = System.IO.Path.Combine(
+        TestContext.CurrentContext.TestDirectory,
+        "TestData",
+        "UiTypeTableTsvLoaderTest"
+    );
 
     private static ISymbolImporter<UITypeSymbol> CreateLocalImporter( string path )
     {

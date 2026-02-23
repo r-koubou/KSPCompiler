@@ -34,6 +34,12 @@ public sealed class CompletionInteractor : ICompletionUseCase
                 word
             );
 
+            // PGS KeyId
+            var pgsKeyIds = MatchCompletionItem(
+                symbolTable.PgsKeyIdSymbolTable,
+                word
+            );
+
             // ユーザー定義変数
             var userVariables = MatchCompletionItem(
                 symbolTable.UserVariables,
@@ -72,6 +78,7 @@ public sealed class CompletionInteractor : ICompletionUseCase
 
             #region Build completion list
             BuildCompletionItem( preprocessors, word, CompletionItemKind.Variable, "Preprocessor", completions );
+            BuildCompletionItem( pgsKeyIds, word, CompletionItemKind.Variable, "PGS Key-Id", completions );
             BuildCompletionItem( userVariables, word, CompletionItemKind.Variable, "User Variable", completions );
             BuildCompletionItem( builtInVariables, word, CompletionItemKind.Function, "Built-in Variable", completions );
             BuildCompletionItem( uiTypes, word, CompletionItemKind.Class, "UI Type", completions );
