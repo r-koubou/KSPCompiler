@@ -3,78 +3,47 @@ import time
 import re
 from typing import List
 
-
-import requests
-from bs4 import BeautifulSoup
+from scrapling.spiders import Spider, Response
 
 URL_LIST: List[str] = [
     'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/general-commands',
-    'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/array-commands',
-    'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/engine-parameter-commands',
-    'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/event-commands',
-    'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/group-commands',
-    'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/keyboard-commands',
-    'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/load-save-commands',
-    'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/midi-object-commands',
-    'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/music-information-retrieval',
-    'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/time-related-commands',
-    'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/user-interface-commands',
-    'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/zone-commands',
+    # 'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/array-commands',
+    # 'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/engine-parameter-commands',
+    # 'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/event-commands',
+    # 'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/group-commands',
+    # 'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/keyboard-commands',
+    # 'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/load-save-commands',
+    # 'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/midi-object-commands',
+    # 'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/music-information-retrieval',
+    # 'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/time-related-commands',
+    # 'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/user-interface-commands',
+    # 'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/zone-commands',
 ]
 
 OUTPUT_DIR = os.path.join('output', 'command')
 
-REGEX_COMMAND = re.compile(r'([a-zA-Z0-9_]+\([^\)]*\))')
+class CommandSpider(Spider):
+    name = "command"
 
-def read_html(url: str) -> str:
-    """
-    Read the HTML content from a URL or file.
-    """
-    if url.startswith('http'):
-        response = requests.get(url)
-        if response.status_code != requests.codes.ok:
-            raise Exception(f"Failed to retrieve URL: {url} with status code: {response.status_code}")
-        return response
-    else:
-        with open(url, 'r') as file:
-            return file.read()
+    def __init__(self, url: str):
+        super().__init__()
+        self.corrected_items = []
+        self.start_urls = [url]
 
-def process(url: str, output_path: str) -> List[str]:
-    print(f"Extracting from {url}...")
+    async def parse(self, response: Response):
+        for item in response.css(".section"):
+            handler = item.css("code::text").get()
+            if handler is None:
+                continue
 
-    response  = read_html(url)
-    html_text = response.text
+            title = str(handler)
+            if "(" in title:
+                title = title.replace("<", "")
+                title = title.replace(">", "")
+                title = title.replace(" ", "")
+                self.corrected_items.append(title)
 
-    soup = BeautifulSoup(html_text, 'html.parser')
-
-    command_elements = soup.find_all('section', {'class': 'section'})
-    commands: List[str] = []
-
-    for x in command_elements:
-
-        elements = x.find_all('th', {'data-priority': '1'})
-
-        if not elements:
-            continue
-
-        command_name: str = elements[0].get_text(strip=True)
-        command_name = command_name.replace('<', '')
-        command_name = command_name.replace('>', '')
-        command_name = command_name.replace(' ', '')
-
-        command_names = REGEX_COMMAND.findall(command_name)
-
-        if command_names:
-            for match in command_names:
-                commands.append(match)
-
-    commands = list(dict.fromkeys(commands))
-
-    with open(output_path, 'w') as file:
-        for i in commands:
-            file.write(f"{i}\n")
-
-    return commands
+            yield
 
 def read_previous(file_path: str) -> List[str]:
     """
@@ -97,11 +66,24 @@ def main(argv: List[str]) -> None:
     total_count = 0
 
     for url in URL_LIST:
+        spider = CommandSpider(url)
+        spider.start()
+
         prefix      = os.path.basename(url)
         output_path = os.path.join(OUTPUT_DIR, f'{prefix}.txt')
         previous    = read_previous(output_path)
-        commands    = process(url, output_path)
+        commands    = spider.corrected_items
+        commands.sort()
+        for i in commands:
+            print(i)
+        commands    = list(set(commands))
+        commands.sort()
+
         total_count += len(commands)
+
+        with open(output_path, 'w') as file:
+            for i in commands:
+                file.write(f"{i}\n")
 
         previous_all_commands.extend(previous)
         all_commands.extend(commands)
