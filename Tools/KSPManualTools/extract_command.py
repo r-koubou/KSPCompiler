@@ -7,17 +7,17 @@ from scrapling.spiders import Spider, Response
 
 URL_LIST: List[str] = [
     'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/general-commands',
-    # 'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/array-commands',
-    # 'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/engine-parameter-commands',
-    # 'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/event-commands',
-    # 'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/group-commands',
-    # 'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/keyboard-commands',
-    # 'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/load-save-commands',
-    # 'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/midi-object-commands',
-    # 'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/music-information-retrieval',
-    # 'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/time-related-commands',
-    # 'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/user-interface-commands',
-    # 'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/zone-commands',
+    'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/array-commands',
+    'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/engine-parameter-commands',
+    'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/event-commands',
+    'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/group-commands',
+    'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/keyboard-commands',
+    'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/load-save-commands',
+    'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/midi-object-commands',
+    'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/music-information-retrieval',
+    'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/time-related-commands',
+    'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/user-interface-commands',
+    'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/zone-commands',
 ]
 
 OUTPUT_DIR = os.path.join('output', 'command')
@@ -31,17 +31,30 @@ class CommandSpider(Spider):
         self.start_urls = [url]
 
     async def parse(self, response: Response):
+        # .section: per command content
         for item in response.css(".section"):
-            handler = item.css("code::text").get()
-            if handler is None:
+            # th: command signature
+            th = item.find("th")
+            if th is None:
                 continue
 
-            title = str(handler)
-            if "(" in title:
-                title = title.replace("<", "")
-                title = title.replace(">", "")
-                title = title.replace(" ", "")
-                self.corrected_items.append(title)
+            # all command signatures in the current th element
+            command_signatures = th.css("code::text").getall()
+
+            if command_signatures is None or len(command_signatures) == 0:
+                continue
+
+            for handler in command_signatures:
+                signature_text = str(handler).strip()
+                if "(" in signature_text:
+                    # some command typo in document: missing ')'
+                    if not signature_text.endswith(")"):
+                        signature_text += ")"
+
+                    signature_text = signature_text.replace("<", "")
+                    signature_text = signature_text.replace(">", "")
+                    signature_text = signature_text.replace(" ", "")
+                self.corrected_items.append(signature_text)
 
             yield
 
@@ -67,15 +80,17 @@ def main(argv: List[str]) -> None:
 
     for url in URL_LIST:
         spider = CommandSpider(url)
-        spider.start()
+        spider_result = spider.start()
+
+        if spider_result.stats.failed_requests_count > 0:
+            print(f"Failed to extract commands from {url}")
+            sys.exit(1)
 
         prefix      = os.path.basename(url)
         output_path = os.path.join(OUTPUT_DIR, f'{prefix}.txt')
         previous    = read_previous(output_path)
         commands    = spider.corrected_items
-        commands.sort()
-        for i in commands:
-            print(i)
+
         commands    = list(set(commands))
         commands.sort()
 
