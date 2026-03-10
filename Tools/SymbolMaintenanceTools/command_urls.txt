@@ -1,0 +1,12 @@
+https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/general-commands
+https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/array-commands
+https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/engine-parameter-commands
+https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/event-commands
+https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/group-commands
+https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/keyboard-commands
+https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/load-save-commands
+https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/midi-object-commands
+https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/music-information-retrieval
+https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/time-related-commands
+https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/user-interface-commands
+https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/zone-commands

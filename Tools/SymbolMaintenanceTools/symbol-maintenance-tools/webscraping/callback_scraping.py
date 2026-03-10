@@ -40,10 +40,13 @@ class CallbackSpider(Spider):
 
         self.start_urls = [url]
 
-    async def parse(self, response: Response):
-        # Clear previous results before parsing a new page
+    def clear_collected_items(self) -> None:
+        """
+        Clear the collected items before starting a new scraping session.
+        """
         self.corrected_items = []
 
+    async def parse(self, response: Response):
         # .section: per callback content
         for item in response.css(".section"):
             # th: callback signature
