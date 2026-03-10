@@ -129,4 +129,12 @@ dmypy.json
 .pyre/
 
 # Me
-[O|o]ut/
+[Oo]ut/
+.[Oo]ut/
+.[Tt]emp/
+.[Ww]ork/
+
+*.bak
+*.org
+
+/log.txt
