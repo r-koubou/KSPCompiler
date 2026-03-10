@@ -3,9 +3,7 @@ import time
 import re
 from typing import List
 
-
-import requests
-from bs4 import BeautifulSoup
+from scrapling.spiders import Spider, Response
 
 URL_LIST: List[str] = [
     'https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/general-commands',
@@ -24,57 +22,41 @@ URL_LIST: List[str] = [
 
 OUTPUT_DIR = os.path.join('output', 'command')
 
-REGEX_COMMAND = re.compile(r'([a-zA-Z0-9_]+\([^\)]*\))')
+class CommandSpider(Spider):
+    name = "command"
 
-def read_html(url: str) -> str:
-    """
-    Read the HTML content from a URL or file.
-    """
-    if url.startswith('http'):
-        response = requests.get(url)
-        if response.status_code != requests.codes.ok:
-            raise Exception(f"Failed to retrieve URL: {url} with status code: {response.status_code}")
-        return response
-    else:
-        with open(url, 'r') as file:
-            return file.read()
+    def __init__(self, url: str):
+        super().__init__()
+        self.corrected_items = []
+        self.start_urls = [url]
 
-def process(url: str, output_path: str) -> List[str]:
-    print(f"Extracting from {url}...")
+    async def parse(self, response: Response):
+        # .section: per command content
+        for item in response.css(".section"):
+            # th: command signature
+            th = item.find("th")
+            if th is None:
+                continue
 
-    response  = read_html(url)
-    html_text = response.text
+            # all command signatures in the current th element
+            command_signatures = th.css("code::text").getall()
 
-    soup = BeautifulSoup(html_text, 'html.parser')
+            if command_signatures is None or len(command_signatures) == 0:
+                continue
 
-    command_elements = soup.find_all('section', {'class': 'section'})
-    commands: List[str] = []
+            for handler in command_signatures:
+                signature_text = str(handler).strip()
+                if "(" in signature_text:
+                    # some command typo in document: missing ')'
+                    if not signature_text.endswith(")"):
+                        signature_text += ")"
 
-    for x in command_elements:
+                    signature_text = signature_text.replace("<", "")
+                    signature_text = signature_text.replace(">", "")
+                    signature_text = signature_text.replace(" ", "")
+                self.corrected_items.append(signature_text)
 
-        elements = x.find_all('th', {'data-priority': '1'})
-
-        if not elements:
-            continue
-
-        command_name: str = elements[0].get_text(strip=True)
-        command_name = command_name.replace('<', '')
-        command_name = command_name.replace('>', '')
-        command_name = command_name.replace(' ', '')
-
-        command_names = REGEX_COMMAND.findall(command_name)
-
-        if command_names:
-            for match in command_names:
-                commands.append(match)
-
-    commands = list(dict.fromkeys(commands))
-
-    with open(output_path, 'w') as file:
-        for i in commands:
-            file.write(f"{i}\n")
-
-    return commands
+            yield
 
 def read_previous(file_path: str) -> List[str]:
     """
@@ -97,11 +79,26 @@ def main(argv: List[str]) -> None:
     total_count = 0
 
     for url in URL_LIST:
+        spider = CommandSpider(url)
+        spider_result = spider.start()
+
+        if spider_result.stats.failed_requests_count > 0:
+            print(f"Failed to extract commands from {url}")
+            sys.exit(1)
+
         prefix      = os.path.basename(url)
         output_path = os.path.join(OUTPUT_DIR, f'{prefix}.txt')
         previous    = read_previous(output_path)
-        commands    = process(url, output_path)
+        commands    = spider.corrected_items
+
+        commands    = list(set(commands))
+        commands.sort()
+
         total_count += len(commands)
+
+        with open(output_path, 'w') as file:
+            for i in commands:
+                file.write(f"{i}\n")
 
         previous_all_commands.extend(previous)
         all_commands.extend(commands)
