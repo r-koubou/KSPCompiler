@@ -1,10 +1,10 @@
-import sys
 import re
+import sys
 
-from typing import List
-from scrapling.spiders import Spider, Response
+from scrapling.spiders import Response
+from .base_spider import BaseSpider
 
-class VariableSpider(Spider):
+class VariableSpider(BaseSpider):
     """
     Scraping variable signatures from Native Instruments KSP manual.
 
@@ -19,14 +19,14 @@ class VariableSpider(Spider):
 
     name = "variable"
 
-    def __init__(self, urls: List[str]):
+    def __init__(self, url: str):
         """
         ctor.
 
         Args:
             urls: The list of URLs to scrape
         """
-        super().__init__()
+        super().__init__(url)
         self.corrected_items = []
         """
         A list to store corrected variable signatures extracted from the webpage.
@@ -39,7 +39,7 @@ class VariableSpider(Spider):
             :
         """
 
-        self.start_urls = urls
+        self.start_urls = [url]
 
     def clear_collected_items(self) -> None:
         """
@@ -71,16 +71,3 @@ class VariableSpider(Spider):
         # Remove duplicates and sort the list
         self.corrected_items = list(dict.fromkeys(self.corrected_items))
         self.corrected_items.sort()
-
-if __name__ == "__main__":
-    url = sys.argv[1]
-    output_file = sys.argv[2]
-    spider = VariableSpider([url])
-    spider_result = spider.start()
-    if spider_result.stats.failed_requests_count > 0:
-        print(f"Failed to scrape the webpage: {url}")
-        sys.exit(1)
-
-    with open(output_file, "w", encoding="utf-8") as f:
-        for item in spider.corrected_items:
-            f.write(f"{item}\n")

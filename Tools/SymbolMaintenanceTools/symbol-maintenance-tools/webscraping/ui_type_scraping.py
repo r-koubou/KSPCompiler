@@ -1,8 +1,9 @@
 import sys
 
-from scrapling.spiders import Spider, Response
+from scrapling.spiders import Response
+from .base_spider import BaseSpider
 
-class UiTypeSpider(Spider):
+class UiTypeSpider(BaseSpider):
     """
     Scraping UI type signatures from Native Instruments KSP manual.
 
@@ -24,7 +25,7 @@ class UiTypeSpider(Spider):
         Args:
             url: The URL to scrape
         """
-        super().__init__()
+        super().__init__(url)
         self.corrected_items = []
         """
         A list to store corrected UI type signatures extracted from the webpage.
@@ -84,16 +85,3 @@ class UiTypeSpider(Spider):
         # Remove duplicates and sort the list
         self.corrected_items = list(dict.fromkeys(self.corrected_items))
         self.corrected_items.sort()
-
-if __name__ == "__main__":
-    url = sys.argv[1]
-    output_file = sys.argv[2]
-    spider = UiTypeSpider(url)
-    spider_result = spider.start()
-    if spider_result.stats.failed_requests_count > 0:
-        print(f"Failed to scrape the webpage: {url}")
-        sys.exit(1)
-
-    with open(output_file, "w", encoding="utf-8") as f:
-        for item in spider.corrected_items:
-            f.write(f"{item}\n")
