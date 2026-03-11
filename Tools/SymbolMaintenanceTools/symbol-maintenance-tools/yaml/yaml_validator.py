@@ -1,17 +1,18 @@
 import sys
-import yaml
 import jsonschema
+
+from  ruamel.yaml import YAML
 
 from typing import List
 
 def validate_yaml(schema_file: str, source_file: str):
     # Load schema
     with open(schema_file, "r", encoding="utf-8") as f:
-        schema = yaml.safe_load(f)
+        schema = YAML().load(f)
 
     # Load source
     with open(source_file, "r", encoding="utf-8") as f:
-        source = yaml.safe_load(f)
+        source = YAML().load(f)
 
     # validate
     try:

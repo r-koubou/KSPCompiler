@@ -3,14 +3,14 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, Optional
 
-import yaml
-
+from ruamel.yaml import YAML
+from ruamel.yaml.scalarstring import LiteralScalarString
 
 @dataclass(frozen=True)
 class InitializerArgumentModel:
 	name: str
 	data_type: str
-	description: str = ""
+	description: LiteralScalarString = LiteralScalarString("")
 
 	@staticmethod
 	def from_dict(data: dict[str, Any]) -> "InitializerArgumentModel":
@@ -21,14 +21,14 @@ class InitializerArgumentModel:
 		return InitializerArgumentModel(
 			name=str(data["Name"]),
 			data_type=str(data["DataType"]),
-			description=str(description),
+			description=LiteralScalarString(description),
 		)
 
 	def to_dict(self) -> dict[str, Any]:
 		return {
 			"Name": self.name,
 			"DataType": self.data_type,
-			"Description": self.description,
+			"Description": str(self.description),
 		}
 
 
@@ -41,7 +41,7 @@ class UITypeModel:
 	require_initializer: bool
 	initializer_arguments: list[InitializerArgumentModel]
 	built_into_version: str = "N/A"
-	description: str = ""
+	description: LiteralScalarString = LiteralScalarString("")
 
 	@staticmethod
 	def from_dict(data: dict[str, Any]) -> "UITypeModel":
@@ -67,7 +67,7 @@ class UITypeModel:
 				InitializerArgumentModel.from_dict(item) for item in initializer_arguments_data
 			],
 			built_into_version=str(built_into_version),
-			description=str(description),
+			description=LiteralScalarString(description),
 		)
 
 	def to_dict(self) -> dict[str, Any]:
@@ -76,7 +76,7 @@ class UITypeModel:
 			"Name": self.name,
 			"BuiltIn": self.built_in,
 			"VariableType": self.variable_type,
-			"Description": self.description,
+			"Description": str(self.description),
 			"BuiltIntoVersion": self.built_into_version,
 			"RequireInitializer": self.require_initializer,
 			"InitializerArguments": [arg.to_dict() for arg in self.initializer_arguments],
@@ -99,7 +99,7 @@ class UITypeModelRoot:
 	@staticmethod
 	def from_yaml(path: str) -> "UITypeModelRoot":
 		with open(path, "r", encoding="utf-8") as f:
-			loaded: Optional[dict[str, Any]] = yaml.safe_load(f)
+			loaded: Optional[dict[str, Any]] = YAML().load(f)
 
 		if not isinstance(loaded, dict):
 			raise ValueError("YAML root must be a mapping")

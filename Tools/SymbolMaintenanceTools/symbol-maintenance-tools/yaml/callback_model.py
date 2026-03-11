@@ -3,15 +3,15 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, Optional
 
-import yaml
-
+from ruamel.yaml import YAML
+from ruamel.yaml.scalarstring import LiteralScalarString
 
 @dataclass(frozen=True)
 class CallbackArgumentModel:
 	name: str
 	data_type: str
 	required_declare: bool
-	description: str = ""
+	description: LiteralScalarString = LiteralScalarString("")
 
 	@staticmethod
 	def from_dict(data: dict[str, Any]) -> "CallbackArgumentModel":
@@ -23,7 +23,7 @@ class CallbackArgumentModel:
 			name=str(data["Name"]),
 			data_type=str(data["DataType"]),
 			required_declare=bool(data["RequiredDeclare"]),
-			description=str(description),
+			description=LiteralScalarString(description),
 		)
 
 	def to_dict(self) -> dict[str, Any]:
@@ -31,7 +31,7 @@ class CallbackArgumentModel:
 			"Name": self.name,
 			"DataType": self.data_type,
 			"RequiredDeclare": self.required_declare,
-			"Description": self.description,
+			"Description": str(self.description),
 		}
 
 
@@ -43,7 +43,7 @@ class CallbackModel:
 	allow_multiple_declaration: bool
 	arguments: list[CallbackArgumentModel]
 	built_into_version: str = "N/A"
-	description: str = ""
+	description: LiteralScalarString = LiteralScalarString("")
 
 	@staticmethod
 	def from_dict(data: dict[str, Any]) -> "CallbackModel":
@@ -66,7 +66,7 @@ class CallbackModel:
 			allow_multiple_declaration=bool(data["AllowMultipleDeclaration"]),
 			arguments=[CallbackArgumentModel.from_dict(item) for item in arguments_data],
 			built_into_version=str(built_into_version),
-			description=str(description),
+			description=LiteralScalarString(description),
 		)
 
 	def to_dict(self) -> dict[str, Any]:
@@ -75,7 +75,7 @@ class CallbackModel:
 			"Name": self.name,
 			"BuiltIn": self.built_in,
 			"AllowMultipleDeclaration": self.allow_multiple_declaration,
-			"Description": self.description,
+			"Description": str(self.description),
 			"BuiltIntoVersion": self.built_into_version,
 			"Arguments": [arg.to_dict() for arg in self.arguments],
 		}
@@ -97,7 +97,7 @@ class CallbackModelRoot:
 	@staticmethod
 	def from_yaml(path: str) -> "CallbackModelRoot":
 		with open(path, "r", encoding="utf-8") as f:
-			loaded: Optional[dict[str, Any]] = yaml.safe_load(f)
+			loaded: Optional[dict[str, Any]] = YAML().load(f)
 
 		if not isinstance(loaded, dict):
 			raise ValueError("YAML root must be a mapping")

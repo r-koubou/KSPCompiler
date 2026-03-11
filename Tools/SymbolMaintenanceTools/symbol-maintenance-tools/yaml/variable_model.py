@@ -3,8 +3,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, Optional
 
-import yaml
-
+from ruamel.yaml import YAML
+from ruamel.yaml.scalarstring import LiteralScalarString
 
 @dataclass(frozen=True)
 class VariableModel:
@@ -12,7 +12,7 @@ class VariableModel:
 	name: str
 	built_in: bool
 	built_into_version: str
-	description: str = ""
+	description: LiteralScalarString = LiteralScalarString("")
 
 	@staticmethod
 	def from_dict(data: dict[str, Any]) -> "VariableModel":
@@ -25,7 +25,7 @@ class VariableModel:
 			name=str(data["Name"]),
 			built_in=bool(data["BuiltIn"]),
 			built_into_version=str(data["BuiltIntoVersion"]),
-			description=str(description),
+			description=LiteralScalarString(description),
 		)
 
 	def to_dict(self) -> dict[str, Any]:
@@ -33,7 +33,7 @@ class VariableModel:
 			"Id": self.id,
 			"Name": self.name,
 			"BuiltIn": self.built_in,
-			"Description": self.description,
+			"Description": str(self.description),
 			"BuiltIntoVersion": self.built_into_version,
 		}
 
@@ -54,7 +54,7 @@ class VariableRootModel:
 	@staticmethod
 	def from_yaml(path: str) -> "VariableRootModel":
 		with open(path, "r", encoding="utf-8") as f:
-			loaded: Optional[dict[str, Any]] = yaml.safe_load(f)
+			loaded: Optional[dict[str, Any]] = YAML().load(f)
 
 		if not isinstance(loaded, dict):
 			raise ValueError("YAML root must be a mapping")

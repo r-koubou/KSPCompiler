@@ -1,12 +1,13 @@
 import sys
-import yaml
 
 from typing import List
+from ruamel.yaml import YAML
+
 
 def validate_duplicate_uuid(source_file: str):
     # Load source
     with open(source_file, "r", encoding="utf-8") as f:
-        source = yaml.safe_load(f)
+        source = YAML().load(f)
 
     # Check for duplicate UUIDs
     uuids = set()

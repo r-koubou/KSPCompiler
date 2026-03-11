@@ -3,14 +3,14 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, Optional
 
-import yaml
-
+from ruamel.yaml import YAML
+from ruamel.yaml.scalarstring import LiteralScalarString
 
 @dataclass(frozen=True)
 class ArgumentModel:
 	name: str
 	data_type: str
-	description: str = ""
+	description: LiteralScalarString = LiteralScalarString("")
 
 	@staticmethod
 	def from_dict(data: dict[str, Any]) -> "ArgumentModel":
@@ -21,14 +21,14 @@ class ArgumentModel:
 		return ArgumentModel(
 			name=str(data["Name"]),
 			data_type=str(data["DataType"]),
-			description=str(description),
+			description=LiteralScalarString(description),
 		)
 
 	def to_dict(self) -> dict[str, Any]:
 		return {
 			"Name": self.name,
 			"DataType": self.data_type,
-			"Description": self.description,
+			"Description": str(self.description),
 		}
 
 
@@ -40,7 +40,7 @@ class CommandModel:
 	built_into_version: str
 	return_type: str
 	arguments: list[ArgumentModel]
-	description: str = ""
+	description: LiteralScalarString = LiteralScalarString("")
 
 	@staticmethod
 	def from_dict(data: dict[str, Any]) -> "CommandModel":
@@ -59,7 +59,7 @@ class CommandModel:
 			built_into_version=str(data["BuiltIntoVersion"]),
 			return_type=str(data["ReturnType"]),
 			arguments=[ArgumentModel.from_dict(item) for item in arguments_data],
-			description=str(description),
+			description=LiteralScalarString(description),
 		)
 
 	def to_dict(self) -> dict[str, Any]:
@@ -67,7 +67,7 @@ class CommandModel:
 			"Id": self.id,
 			"Name": self.name,
 			"BuiltIn": self.built_in,
-			"Description": self.description,
+			"Description": str(self.description),
 			"BuiltIntoVersion": self.built_into_version,
 			"ReturnType": self.return_type,
 			"Arguments": [arg.to_dict() for arg in self.arguments],
@@ -90,7 +90,7 @@ class CommandRootModel:
 	@staticmethod
 	def from_yaml(path: str) -> "CommandRootModel":
 		with open(path, "r", encoding="utf-8") as f:
-			loaded: Optional[dict[str, Any]] = yaml.safe_load(f)
+			loaded: Optional[dict[str, Any]] = YAML().load(f)
 
 		if not isinstance(loaded, dict):
 			raise ValueError("YAML root must be a mapping")
