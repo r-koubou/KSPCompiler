@@ -1,0 +1,4 @@
+https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/control-parameters
+https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/engine-parameters
+https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/zone-parameters
+https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/multi-script
