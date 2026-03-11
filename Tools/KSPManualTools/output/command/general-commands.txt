@@ -1,4 +1,6 @@
 disable_logging(event-type)
+exit
+ignore_controller
 message(variable-or-string)
 note_off(event-id)
 note_off(event-id,time-offset)
