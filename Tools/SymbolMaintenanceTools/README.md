@@ -38,11 +38,11 @@ make validate_yaml_uuid
 
 ## Scraping and Generating Output Files
 
+Scrapes the [KONTAKT Online Manual](https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/index-en) and generates output files in `output/`.
+
 ```bash
 make gen
 ```
-
-The generated files will be placed in `output/`.
 
 ### If git detects changes under `output/**`
 

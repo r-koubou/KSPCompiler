@@ -39,11 +39,19 @@ make validate_yaml_uuid
 
 ## スクレイピング、結果ファイルの生成
 
+[KONTAKTのオンラインマニュアル(https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/index-en)](https://www.native-instruments.com/ni-tech-manuals/ksp-manual/en/index-en) からスクレイピングして、`output/` に結果ファイルを生成します。
+
 ```bash
 make gen
 ```
 
-`output/` に生成されます。
+スクレイピング対象のURLは以下のファイルで管理しています。
+
+- variable_urls.txt
+- command_urls.txt
+- callback_urls.txt
+- ui_type_urls.txt
+
 
 ### git が `output/**` に差分があると認識した場合
 
