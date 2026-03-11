@@ -62,9 +62,7 @@ def execute(
         all_symbols.extend(symbols)
 
     # Check for new symbols
-    new_symbols = utility.collection.collect_new_items(
-        all_previous_symbols, all_symbols
-    )
+    new_symbols = set(all_previous_symbols) - set(all_symbols)
 
     if len(new_symbols) > 0:
         print(f"New symbols ({len(new_symbols)}) found:")
