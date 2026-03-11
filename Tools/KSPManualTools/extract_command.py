@@ -1,6 +1,4 @@
 import os.path
-import time
-import re
 from typing import List
 
 from scrapling.spiders import Spider, Response
@@ -102,7 +100,6 @@ def main(argv: List[str]) -> None:
 
         previous_all_commands.extend(previous)
         all_commands.extend(commands)
-        time.sleep(2)
 
     # Check for new commands
     if len(previous_all_commands) > 0:
