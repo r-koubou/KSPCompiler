@@ -1,0 +1,16 @@
+ui_button $variable-name
+ui_file_selector $variable-name
+ui_knob$variable-name(min,max,display-ratio)
+ui_label$variable-name(grid-width,grid-height)
+ui_level_meter $variable-name
+ui_menu $variable-name
+ui_mouse_area $variable-name
+ui_panel $variable-name
+ui_slider$variable-name(min,max)
+ui_switch $variable-name
+ui_table%array-name[num-elements](grid-width,grid-height,range)
+ui_text_edit @variable-name
+ui_value_edit$variable-name(min,max,$display-ratio)
+ui_waveform$variable-name(grid-width,grid-height)
+ui_wavetable $variable-name
+ui_xy ?array-name[num-elements]

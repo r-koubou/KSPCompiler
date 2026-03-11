@@ -9,11 +9,10 @@ from webscraping.command_scraping import CommandSpider
 from webscraping.callback_scraping import CallbackSpider
 from webscraping.ui_type_scraping import UiTypeSpider
 
-from scrapling.spiders import Spider
-
-
 from typing import Callable, List
 
+SEPARATOR_LINE1 = "=" * 40
+SEPARATOR_LINE2 = "-" * 40
 
 def execute(
     spider_factory: Callable[[str], BaseSpider],
@@ -62,17 +61,33 @@ def execute(
         all_symbols.extend(symbols)
 
     # Check for new symbols
-    new_symbols = set(all_previous_symbols) - set(all_symbols)
+    new_symbols = utility.collection.collect_new_items(
+        all_previous_symbols, all_symbols
+    )
 
-    if len(new_symbols) > 0:
-        print(f"New symbols ({len(new_symbols)}) found:")
-        print("-" * 20)
-        for symbol in new_symbols:
-            print(symbol)
-        print("-" * 20)
+    sorted_new_symbols = sorted(new_symbols)
+    new_symbols_count = len(new_symbols)
+
+    if new_symbols_count > 0:
+        print(SEPARATOR_LINE2)
+
+        # If there are fewer than 10 new symbols, print them all.
+        # Otherwise, 10 new symbols + "..."
+        if new_symbols_count < 10:
+            for symbol in sorted_new_symbols:
+                print(symbol)
+        else:
+            for symbol in sorted_new_symbols[:10]:
+                print(symbol)
+            print("...")
+
+        print(SEPARATOR_LINE2)
+        print(f"{new_symbols_count} New symbols found:")
     else:
         print("No new symbols found.")
 
+    # Newline for better readability
+    print('')
 
 if __name__ == "__main__":
 
@@ -107,9 +122,9 @@ if __name__ == "__main__":
     ]
 
     for params in execute_params:
-        print("=" * 40)
+        print(SEPARATOR_LINE1)
         print(f"Extracting {params['name']} symbols...")
-        print("=" * 40)
+        print(SEPARATOR_LINE1)
 
         execute(
             spider_factory=params["spider_factory"],

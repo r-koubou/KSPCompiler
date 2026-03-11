@@ -21,3 +21,6 @@ validate_yaml_uuid: validate_yaml
 	uv run python "$(PYTHON_SCRIPT_ROOT)/yaml/uuid_validator.py" "$(YAML_DIR)/callbacks.yaml"
 	uv run python "$(PYTHON_SCRIPT_ROOT)/yaml/uuid_validator.py" "$(YAML_DIR)/uitypes.yaml"
 	echo "YAML UUID validation completed successfully."
+
+gen:
+	uv run python "$(PYTHON_SCRIPT_ROOT)/extract_symbols.py" output/
