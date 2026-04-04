@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Completion;
+using KSPCompiler.Features.LanguageServer.UseCase.Completion.CompletionItems;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData.Extensions;
 
@@ -137,6 +138,8 @@ public sealed class CompletionInteractor : ICompletionUseCase
     {
         var stringBuilder = new StringBuilder( 256 );
 
+        var variableItemFactory = new VariableCompletionItemFactory();
+
         foreach( var symbol in symbols )
         {
             stringBuilder.Clear();
@@ -162,7 +165,7 @@ public sealed class CompletionInteractor : ICompletionUseCase
 
             if( symbol is VariableSymbol variableSymbol )
             {
-                var item = BuildVariableItem( variableSymbol, partialName );
+                var item = variableItemFactory.Create( variableSymbol, partialName, preferSnippetInsertion );
 
                 target.Add( item );
 
@@ -178,7 +181,7 @@ public sealed class CompletionInteractor : ICompletionUseCase
                     Kind: kind,
                     Detail: detail,
                     Documentation: document,
-                    InsertTextFormat: InsertTextFormat.PlainText,
+                    InsertTextFormat: preferSnippetInsertion ? InsertTextFormat.Snippet : InsertTextFormat.PlainText,
                     InsertText: symbol.Name.Value
                 )
             );
@@ -239,6 +242,7 @@ public sealed class CompletionInteractor : ICompletionUseCase
         return true;
     }
 
+    [Obsolete( "Use VariableCompletionItemFactory instead." )]
     private static CompletionItem BuildVariableItem( VariableSymbol variableSymbol, string partialName )
     {
         var insertText = variableSymbol.Name.Value;
