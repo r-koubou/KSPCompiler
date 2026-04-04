@@ -16,6 +16,7 @@ public sealed class CompletionHandlingInputPortDetail(
     public ICompilationCacheManager Cache { get; } = compilerCacheService;
     public ScriptLocation Location { get; } = scriptLocation;
     public Position Position { get; } = position;
+    public bool PreferSnippetInsertion { get; } = false;
 }
 
 public sealed class CompletionHandlingInputPort(
