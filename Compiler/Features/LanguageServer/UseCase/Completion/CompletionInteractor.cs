@@ -21,6 +21,7 @@ public sealed class CompletionInteractor : ICompletionUseCase
             var compilerCacheService = parameter.Input.Cache;
             var scriptLocation = parameter.Input.Location;
             var position = parameter.Input.Position;
+            var preferSnippetInsertion = parameter.Input.PreferSnippetInsertion;
 
             var cache = compilerCacheService.GetCache( scriptLocation );
             var symbolTable = cache.SymbolTable;
@@ -77,14 +78,14 @@ public sealed class CompletionInteractor : ICompletionUseCase
             #endregion ~Collection of target symbols
 
             #region Build completion list
-            BuildCompletionItem( preprocessors, word, CompletionItemKind.Variable, "Preprocessor", completions );
-            BuildCompletionItem( pgsKeyIds, word, CompletionItemKind.Variable, "PGS Key-Id", completions );
-            BuildCompletionItem( userVariables, word, CompletionItemKind.Variable, "User Variable", completions );
-            BuildCompletionItem( builtInVariables, word, CompletionItemKind.Function, "Built-in Variable", completions );
-            BuildCompletionItem( uiTypes, word, CompletionItemKind.Class, "UI Type", completions );
-            BuildCompletionItem( commands, word, CompletionItemKind.Method, "Command", completions );
-            BuildCompletionItem( userFunctions, word, CompletionItemKind.Function, "User Function", completions );
-            BuildCompletionItem( builtInCallBacks, word, CompletionItemKind.Event, "Callback", completions );
+            BuildCompletionItem( preprocessors, word, CompletionItemKind.Variable, preferSnippetInsertion, "Preprocessor", completions );
+            BuildCompletionItem( pgsKeyIds, word, CompletionItemKind.Variable, preferSnippetInsertion, "PGS Key-Id", completions );
+            BuildCompletionItem( userVariables, word, CompletionItemKind.Variable, preferSnippetInsertion, "User Variable", completions );
+            BuildCompletionItem( builtInVariables, word, CompletionItemKind.Function, preferSnippetInsertion, "Built-in Variable", completions );
+            BuildCompletionItem( uiTypes, word, CompletionItemKind.Class, preferSnippetInsertion, "UI Type", completions );
+            BuildCompletionItem( commands, word, CompletionItemKind.Method, preferSnippetInsertion, "Command", completions );
+            BuildCompletionItem( userFunctions, word, CompletionItemKind.Function, preferSnippetInsertion, "User Function", completions );
+            BuildCompletionItem( builtInCallBacks, word, CompletionItemKind.Event, preferSnippetInsertion, "Callback", completions );
             #endregion ~Build completion list
 
             await Task.CompletedTask;
@@ -130,6 +131,7 @@ public sealed class CompletionInteractor : ICompletionUseCase
         IReadOnlyCollection<TSymbol> symbols,
         string partialName,
         CompletionItemKind kind,
+        bool preferSnippetInsertion,
         string detail,
         List<CompletionItem> target ) where TSymbol : SymbolBase
     {
