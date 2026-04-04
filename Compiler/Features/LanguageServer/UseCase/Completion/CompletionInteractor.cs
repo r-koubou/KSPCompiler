@@ -139,6 +139,7 @@ public sealed class CompletionInteractor : ICompletionUseCase
         var stringBuilder = new StringBuilder( 256 );
 
         var variableItemFactory = new VariableCompletionItemFactory();
+        var callbackItemFactory = new CallbackCompletionItemFactory( stringBuilder );
 
         foreach( var symbol in symbols )
         {
@@ -146,12 +147,10 @@ public sealed class CompletionInteractor : ICompletionUseCase
 
             if( symbol is CallbackSymbol callbackSymbol )
             {
-                if( TryBuildCallbackSnippetItem( callbackSymbol, partialName, stringBuilder, out var completionItem ) )
-                {
-                    target.Add( completionItem );
+                var completionItem = callbackItemFactory.Create( callbackSymbol, partialName, true );
+                target.Add( completionItem );
 
-                    continue;
-                }
+                continue;
             }
 
             if( symbol is CommandSymbol commandSymbol )
@@ -188,6 +187,7 @@ public sealed class CompletionInteractor : ICompletionUseCase
         }
     }
 
+    [Obsolete( "Use CallbackCompletionItemFactory instead." )]
     private static bool TryBuildCallbackSnippetItem( CallbackSymbol callbackSymbol, string partialName, StringBuilder stringBuilder, out CompletionItem result )
     {
         var document = DocumentUtility.GetCommentOrDescriptionText( callbackSymbol );
