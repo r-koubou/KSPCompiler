@@ -65,22 +65,22 @@ public sealed class CommandCompletionItemFactory(
         stringBuilder.Append( commandSymbol.Name.Value );
         stringBuilder.Append( "(" );
 
-        var index = 1;
+        var placeholderIndex = 1;
         var argCount = commandSymbol.Arguments.Count;
 
         foreach( var arg in commandSymbol.Arguments )
         {
             stringBuilder.Append( "${" )
-                         .Append( index ).Append( ":" )
+                         .Append( placeholderIndex ).Append( ":" )
                          .Append( arg.Name.Value )
                          .Append( "}" );
 
-            if( index < argCount )
+            if( placeholderIndex < argCount )
             {
                 stringBuilder.Append( ", " );
             }
 
-            index++;
+            placeholderIndex++;
         }
 
         stringBuilder.Append( ")" );
