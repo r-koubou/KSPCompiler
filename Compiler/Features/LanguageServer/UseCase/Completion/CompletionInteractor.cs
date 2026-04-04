@@ -22,7 +22,9 @@ public sealed class CompletionInteractor : ICompletionUseCase
             var compilerCacheService = parameter.Input.Cache;
             var scriptLocation = parameter.Input.Location;
             var position = parameter.Input.Position;
-            var preferSnippetInsertion = true;//parameter.Input.PreferSnippetInsertion;
+#warning リリース前にテストコードを消す
+            var preferSnippetInsertion = true;
+            //var preferSnippetInsertion = parameter.Input.PreferSnippetInsertion;
 
             var cache = compilerCacheService.GetCache( scriptLocation );
             var symbolTable = cache.SymbolTable;
@@ -79,14 +81,31 @@ public sealed class CompletionInteractor : ICompletionUseCase
             #endregion ~Collection of target symbols
 
             #region Build completion list
-            BuildCompletionItem( preprocessors, word, CompletionItemKind.Variable, preferSnippetInsertion, "Preprocessor", completions );
-            BuildCompletionItem( pgsKeyIds, word, CompletionItemKind.Variable, preferSnippetInsertion, "PGS Key-Id", completions );
-            BuildCompletionItem( userVariables, word, CompletionItemKind.Variable, preferSnippetInsertion, "User Variable", completions );
-            BuildCompletionItem( builtInVariables, word, CompletionItemKind.Function, preferSnippetInsertion, "Built-in Variable", completions );
-            BuildCompletionItem( uiTypes, word, CompletionItemKind.Class, preferSnippetInsertion, "UI Type", completions );
-            BuildCompletionItem( commands, word, CompletionItemKind.Method, preferSnippetInsertion, "Command", completions );
-            BuildCompletionItem( userFunctions, word, CompletionItemKind.Function, preferSnippetInsertion, "User Function", completions );
-            BuildCompletionItem( builtInCallBacks, word, CompletionItemKind.Event, preferSnippetInsertion, "Callback", completions );
+            var snippetTextBuilder = new StringBuilder();
+            var preprocessorItemFactory = new PreprocessorCompletionItemFactory();
+            var pgsItemFactory = new PgsKeyCompletionItemFactory();
+            var variableItemFactory = new VariableCompletionItemFactory();
+            var commandItemFactory = new CommandCompletionItemFactory( snippetTextBuilder );
+            var callbackItemFactory = new CallbackCompletionItemFactory( snippetTextBuilder );
+            var userFunctionItemFactory = new UserFunctionCompletionItemFactory( snippetTextBuilder );
+
+            BuildCompletionItemNew( preprocessors, preprocessorItemFactory, word, preferSnippetInsertion, completions );
+            BuildCompletionItemNew( pgsKeyIds, pgsItemFactory, word, preferSnippetInsertion, completions );
+            BuildCompletionItemNew( userVariables, variableItemFactory, word, preferSnippetInsertion, completions );
+            BuildCompletionItemNew( builtInVariables, variableItemFactory, word, preferSnippetInsertion, completions );
+            //BuildCompletionItemNew( uiTypes, word, CompletionItemKind.Class, preferSnippetInsertion, "UI Type", completions );
+            BuildCompletionItemNew( commands, commandItemFactory, word, preferSnippetInsertion, completions );
+            BuildCompletionItemNew( userFunctions, userFunctionItemFactory, word, preferSnippetInsertion, completions );
+            BuildCompletionItemNew( builtInCallBacks, callbackItemFactory, word, preferSnippetInsertion, completions );
+
+            // BuildCompletionItem( preprocessors, word, CompletionItemKind.Variable, preferSnippetInsertion, "Preprocessor", completions );
+            // BuildCompletionItem( pgsKeyIds, word, CompletionItemKind.Variable, preferSnippetInsertion, "PGS Key-Id", completions );
+            // BuildCompletionItem( userVariables, word, CompletionItemKind.Variable, preferSnippetInsertion, "User Variable", completions );
+            // BuildCompletionItem( builtInVariables, word, CompletionItemKind.Function, preferSnippetInsertion, "Built-in Variable", completions );
+            // BuildCompletionItem( uiTypes, word, CompletionItemKind.Class, preferSnippetInsertion, "UI Type", completions );
+            // BuildCompletionItem( commands, word, CompletionItemKind.Method, preferSnippetInsertion, "Command", completions );
+            // BuildCompletionItem( userFunctions, word, CompletionItemKind.Function, preferSnippetInsertion, "User Function", completions );
+            // BuildCompletionItem( builtInCallBacks, word, CompletionItemKind.Event, preferSnippetInsertion, "Callback", completions );
             #endregion ~Build completion list
 
             await Task.CompletedTask;
@@ -128,6 +147,29 @@ public sealed class CompletionInteractor : ICompletionUseCase
         return list.Select( x => x.First().Value ).ToList();
     }
 
+    private static void BuildCompletionItemNew<TSymbol>(
+        IReadOnlyCollection<TSymbol> symbols,
+        ICompletionItemFactory<TSymbol> itemFactory,
+        string partialName,
+        bool preferSnippetInsertion,
+        List<CompletionItem> target ) where TSymbol : SymbolBase
+    {
+        if( itemFactory.TryCreateFixedSnippet( partialName, out var fixedSnippetItem ) )
+        {
+            target.Add( fixedSnippetItem );
+        }
+
+        // ReSharper disable once LoopCanBeConvertedToQuery
+        foreach( var symbol in symbols )
+        {
+            var completionItem = itemFactory.Create( symbol, partialName, preferSnippetInsertion );
+            target.Add( completionItem );
+        }
+    }
+
+#warning リリース前に旧コードを消す
+    #region Will be removed code
+    [Obsolete( "Use BuildCompletionItemNew with ICompletionItemFactory instead." )]
     private static void BuildCompletionItem<TSymbol>(
         IReadOnlyCollection<TSymbol> symbols,
         string partialName,
@@ -138,9 +180,12 @@ public sealed class CompletionInteractor : ICompletionUseCase
     {
         var stringBuilder = new StringBuilder( 256 );
 
+        var preprocessorItemFactory = new PreprocessorCompletionItemFactory();
+        var pgsItemFactory = new PgsKeyCompletionItemFactory();
         var variableItemFactory = new VariableCompletionItemFactory();
         var commandItemFactory = new CommandCompletionItemFactory( stringBuilder );
         var callbackItemFactory = new CallbackCompletionItemFactory( stringBuilder );
+        var userFunctionItemFactory = new UserFunctionCompletionItemFactory( stringBuilder );
 
         foreach( var symbol in symbols )
         {
@@ -169,6 +214,33 @@ public sealed class CompletionInteractor : ICompletionUseCase
                 case VariableSymbol variableSymbol:
                 {
                     var item = variableItemFactory.Create( variableSymbol, partialName, preferSnippetInsertion );
+
+                    target.Add( item );
+
+                    break;
+                }
+
+                case UserFunctionSymbol userFunctionSymbol:
+                {
+                    var item = userFunctionItemFactory.Create( userFunctionSymbol, partialName, preferSnippetInsertion );
+
+                    target.Add( item );
+
+                    break;
+                }
+
+                case PreProcessorSymbol preProcessorSymbol:
+                {
+                    var item = preprocessorItemFactory.Create( preProcessorSymbol, partialName, preferSnippetInsertion );
+
+                    target.Add( item );
+
+                    break;
+                }
+
+                case PgsSymbol pgsSymbol:
+                {
+                    var item = pgsItemFactory.Create( pgsSymbol, partialName, preferSnippetInsertion );
 
                     target.Add( item );
 
@@ -341,4 +413,5 @@ public sealed class CompletionInteractor : ICompletionUseCase
             InsertText: stringBuilder.ToString()
         );
     }
+    #endregion
 }
