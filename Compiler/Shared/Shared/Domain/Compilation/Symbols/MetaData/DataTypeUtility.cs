@@ -27,18 +27,6 @@ public static class DataTypeUtility
     public static IReadOnlyCollection<string> KspTypeCharactersAsString { get; }
         = KspTypeCharactersTable.Select( x => x.ToString() ).ToList();
 
-    /// <summary>
-    /// Get KSP data type character mapped to data type flag.
-    /// </summary>
-    public static IReadOnlyDictionary<char, DataTypeFlag> KspTypeCharacterTable { get; } = new Dictionary<char, DataTypeFlag>
-    {
-        { '$', DataTypeFlag.TypeInt },
-        { '%', DataTypeFlag.TypeIntArray },
-        { '~', DataTypeFlag.TypeReal },
-        { '?', DataTypeFlag.TypeRealArray },
-        { '@', DataTypeFlag.TypeString },
-        { '!', DataTypeFlag.TypeStringArray }
-    };
     #endregion
 
     /// <summary>
