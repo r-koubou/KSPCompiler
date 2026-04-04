@@ -31,6 +31,8 @@ public sealed class CompletionInteractor : ICompletionUseCase
             var word = DocumentUtility.ExtractWord( cache.AllLinesText, position );
             var completions = new List<CompletionItem>();
 
+            var snippetTextBuilder = new StringBuilder();
+
             #region Collection of target symbols
             // プリプロセッサ
             var preprocessors = MatchCompletionItem(
@@ -81,10 +83,10 @@ public sealed class CompletionInteractor : ICompletionUseCase
             #endregion ~Collection of target symbols
 
             #region Build completion list
-            var snippetTextBuilder = new StringBuilder();
             var preprocessorItemFactory = new PreprocessorCompletionItemFactory();
             var pgsItemFactory = new PgsKeyCompletionItemFactory();
             var variableItemFactory = new VariableCompletionItemFactory();
+            var uiItemFactory = new UICompletionItemFactory( snippetTextBuilder );
             var commandItemFactory = new CommandCompletionItemFactory( snippetTextBuilder );
             var callbackItemFactory = new CallbackCompletionItemFactory( snippetTextBuilder );
             var userFunctionItemFactory = new UserFunctionCompletionItemFactory( snippetTextBuilder );
@@ -93,7 +95,7 @@ public sealed class CompletionInteractor : ICompletionUseCase
             BuildCompletionItemNew( pgsKeyIds, pgsItemFactory, word, preferSnippetInsertion, completions );
             BuildCompletionItemNew( userVariables, variableItemFactory, word, preferSnippetInsertion, completions );
             BuildCompletionItemNew( builtInVariables, variableItemFactory, word, preferSnippetInsertion, completions );
-            //BuildCompletionItemNew( uiTypes, word, CompletionItemKind.Class, preferSnippetInsertion, "UI Type", completions );
+            BuildCompletionItemNew( uiTypes, uiItemFactory, word, preferSnippetInsertion, completions );
             BuildCompletionItemNew( commands, commandItemFactory, word, preferSnippetInsertion, completions );
             BuildCompletionItemNew( userFunctions, userFunctionItemFactory, word, preferSnippetInsertion, completions );
             BuildCompletionItemNew( builtInCallBacks, callbackItemFactory, word, preferSnippetInsertion, completions );

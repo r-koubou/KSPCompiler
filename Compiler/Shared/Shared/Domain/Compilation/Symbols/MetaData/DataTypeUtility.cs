@@ -30,7 +30,7 @@ public static class DataTypeUtility
     /// <summary>
     /// Get KSP data type character mapped to data type flag.
     /// </summary>
-    public static IReadOnlyDictionary<char, DataTypeFlag> KspTypeCharacterType { get; } = new Dictionary<char, DataTypeFlag>
+    public static IReadOnlyDictionary<char, DataTypeFlag> KspTypeCharacterTable { get; } = new Dictionary<char, DataTypeFlag>
     {
         { '$', DataTypeFlag.TypeInt },
         { '%', DataTypeFlag.TypeIntArray },
@@ -57,6 +57,42 @@ public static class DataTypeUtility
     public static bool StartsWithDataTypeCharacter( string text )
     {
         return text.Length > 0 && IsDataTypeCharacter( text[ 0 ] );
+    }
+
+    /// <summary>
+    /// Convert to KSP data type character from data type flag.
+    /// </summary>
+    /// <exception cref="ArgumentException">Unknown type or flag has multiple types</exception>
+    public static string GuessKspTypeCharacter( DataTypeFlag dataType )
+    {
+        return !TryGuessKspTypeCharacter( dataType, out var result )
+            ? throw new ArgumentException( $"unknown ksp type (or {nameof( dataType )} has multiple type : {dataType}" )
+            : result;
+    }
+
+    /// <summary>
+    /// Convert to KSP data type character from data type flag.
+    /// </summary>
+    /// <remarks>
+    /// If dataType has multiple type flags, return false.
+    /// </remarks>
+    public static bool TryGuessKspTypeCharacter( DataTypeFlag dataType, out string result )
+    {
+        var unknown = string.Empty;
+
+        // ReSharper disable once SwitchExpressionHandlesSomeKnownEnumValuesWithExceptionInDefault
+        result = dataType switch
+        {
+            DataTypeFlag.TypeInt         => "$",
+            DataTypeFlag.TypeIntArray    => "%",
+            DataTypeFlag.TypeReal        => "~",
+            DataTypeFlag.TypeRealArray   => "?",
+            DataTypeFlag.TypeString      => "@",
+            DataTypeFlag.TypeStringArray => "!",
+            _                            => unknown
+        };
+
+        return result != unknown;
     }
 
     /// <summary>
