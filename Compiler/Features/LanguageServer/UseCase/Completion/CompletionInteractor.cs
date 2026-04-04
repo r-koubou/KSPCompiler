@@ -22,7 +22,7 @@ public sealed class CompletionInteractor : ICompletionUseCase
             var compilerCacheService = parameter.Input.Cache;
             var scriptLocation = parameter.Input.Location;
             var position = parameter.Input.Position;
-            var preferSnippetInsertion = parameter.Input.PreferSnippetInsertion;
+            var preferSnippetInsertion = true;//parameter.Input.PreferSnippetInsertion;
 
             var cache = compilerCacheService.GetCache( scriptLocation );
             var symbolTable = cache.SymbolTable;
@@ -139,6 +139,7 @@ public sealed class CompletionInteractor : ICompletionUseCase
         var stringBuilder = new StringBuilder( 256 );
 
         var variableItemFactory = new VariableCompletionItemFactory();
+        var commandItemFactory = new CommandCompletionItemFactory( stringBuilder );
         var callbackItemFactory = new CallbackCompletionItemFactory( stringBuilder );
 
         foreach( var symbol in symbols )
@@ -147,6 +148,8 @@ public sealed class CompletionInteractor : ICompletionUseCase
 
             if( symbol is CallbackSymbol callbackSymbol )
             {
+                // preferSnippetInsertion: fixed to true
+                // Always expand the snippet if the phrase starts with “on”
                 var completionItem = callbackItemFactory.Create( callbackSymbol, partialName, true );
                 target.Add( completionItem );
 
@@ -155,8 +158,7 @@ public sealed class CompletionInteractor : ICompletionUseCase
 
             if( symbol is CommandSymbol commandSymbol )
             {
-                var completionItem = BuildCommandItem( commandSymbol );
-
+                var completionItem = commandItemFactory.Create( commandSymbol, partialName, preferSnippetInsertion );
                 target.Add( completionItem );
 
                 continue;
@@ -281,6 +283,7 @@ public sealed class CompletionInteractor : ICompletionUseCase
         );
     }
 
+    [Obsolete( "Use CommandCompletionItemFactory instead." )]
     private static CompletionItem BuildCommandSnippet( CommandSymbol commandSymbol, StringBuilder stringBuilder )
     {
         var document = DocumentUtility.GetCommentOrDescriptionText( commandSymbol );
