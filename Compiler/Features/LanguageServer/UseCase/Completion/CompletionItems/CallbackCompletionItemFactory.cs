@@ -87,4 +87,31 @@ public sealed class CallbackCompletionItemFactory(
 
         return true;
     }
+
+    public bool TryCreateFixedSnippet( string partialName, bool preferSnippetInsertion, out CompletionItem result )
+    {
+        result = null!;
+
+        if( !partialName.StartsWith( "on " ) )
+        {
+            return false;
+        }
+
+        snippetTextBuilder.Clear();
+
+        snippetTextBuilder.AppendLine( "on ${1:name}" )
+                          .AppendLine( "    ${2:code}" )
+                          .AppendLine( "end on" );
+
+        result = new CompletionItem(
+            Label: "on <name>",
+            Kind: Kind,
+            Detail: Detail,
+            Documentation: string.Empty,
+            InsertTextFormat: InsertTextFormat.Snippet,
+            InsertText: snippetTextBuilder.ToString()
+        );
+
+        return true;
+    }
 }

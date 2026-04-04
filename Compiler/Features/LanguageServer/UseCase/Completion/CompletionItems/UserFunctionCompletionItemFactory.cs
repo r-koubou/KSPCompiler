@@ -18,11 +18,6 @@ public sealed class UserFunctionCompletionItemFactory(
     {
         snippetTextBuilder.Clear();
 
-        if( TryCreateSnippetItem( symbol, partialName, snippetTextBuilder, out var completionItem ) )
-        {
-            return completionItem;
-        }
-
         return new CompletionItem(
             Label: symbol.Name.Value,
             Kind: CompletionItemKind.Function,
@@ -33,11 +28,8 @@ public sealed class UserFunctionCompletionItemFactory(
         );
     }
 
-    private static bool TryCreateSnippetItem( UserFunctionSymbol callbackSymbol, string partialName, StringBuilder stringBuilder, out CompletionItem result )
+    public bool TryCreateFixedSnippet( string partialName, bool preferSnippetInsertion, out CompletionItem result )
     {
-        var document = DocumentUtility.GetCommentOrDescriptionText( callbackSymbol );
-        document = string.IsNullOrEmpty( document ) ? null : document;
-
         result = null!;
 
         if( !partialName.StartsWith( "function " ) )
@@ -45,17 +37,17 @@ public sealed class UserFunctionCompletionItemFactory(
             return false;
         }
 
-        stringBuilder.Append( "function " ).AppendLine( "${1:name}" )
-                     .AppendLine( "    ${2:code}" )
-                     .AppendLine( "end function" );
+        snippetTextBuilder.Append( "function " ).AppendLine( "${1:name}" )
+                          .AppendLine( "    ${2:code}" )
+                          .AppendLine( "end function" );
 
         result = new CompletionItem(
-            Label: "function",
+            Label: "function <name>",
             Kind: CompletionItemKind.Snippet,
             Detail: Detail,
-            Documentation: document,
+            Documentation: string.Empty,
             InsertTextFormat: InsertTextFormat.Snippet,
-            InsertText: stringBuilder.ToString()
+            InsertText: snippetTextBuilder.ToString()
         );
 
         return true;
