@@ -100,7 +100,7 @@ public sealed class CallbackCompletionItemFactory(
         snippetTextBuilder.Clear();
 
         snippetTextBuilder.AppendLine( "on ${1:name}" )
-                          .AppendLine( "    ${2:code}" )
+                          .AppendLine( @"    ${2:{TODO: your script here\}}" )
                           .AppendLine( "end on" );
 
         result = new CompletionItem(

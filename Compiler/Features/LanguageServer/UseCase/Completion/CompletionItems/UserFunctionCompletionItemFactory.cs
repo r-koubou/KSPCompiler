@@ -37,8 +37,10 @@ public sealed class UserFunctionCompletionItemFactory(
             return false;
         }
 
+        snippetTextBuilder.Clear();
+
         snippetTextBuilder.Append( "function " ).AppendLine( "${1:name}" )
-                          .AppendLine( "    ${2:code}" )
+                          .AppendLine( @"    ${2:{TODO: your script here\}}" )
                           .AppendLine( "end function" );
 
         result = new CompletionItem(
