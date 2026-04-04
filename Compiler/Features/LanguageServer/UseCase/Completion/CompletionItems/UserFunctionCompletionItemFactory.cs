@@ -28,11 +28,11 @@ public sealed class UserFunctionCompletionItemFactory(
         );
     }
 
-    public bool TryCreateFixedSnippet( string partialName, bool preferSnippetInsertion, out CompletionItem result )
+    public bool TryCreateFixedSnippet( string partialName, out CompletionItem result )
     {
         result = null!;
 
-        if( !partialName.StartsWith( "function " ) )
+        if( !partialName.StartsWith( "f" ) )
         {
             return false;
         }

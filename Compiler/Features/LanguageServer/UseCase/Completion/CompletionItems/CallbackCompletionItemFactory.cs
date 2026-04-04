@@ -15,11 +15,11 @@ public sealed class CallbackCompletionItemFactory(
 
     private readonly StringBuilder snippetTextBuilder = snippetTextBuilder ?? new StringBuilder();
 
-    public CompletionItem Create( CallbackSymbol symbol, string partialName, bool preferSnippetInsertion )
+    public CompletionItem Create( CallbackSymbol symbol, string partialName, bool _ )
     {
         snippetTextBuilder.Clear();
 
-        if( TryBuildCallbackSnippetItem( symbol, partialName, snippetTextBuilder, out var completionItem ) )
+        if( TryCreateSnippetItem( symbol, partialName, snippetTextBuilder, out var completionItem ) )
         {
             return completionItem;
         }
@@ -34,14 +34,14 @@ public sealed class CallbackCompletionItemFactory(
         );
     }
 
-    private static bool TryBuildCallbackSnippetItem( CallbackSymbol callbackSymbol, string partialName, StringBuilder stringBuilder, out CompletionItem result )
+    private static bool TryCreateSnippetItem( CallbackSymbol callbackSymbol, string partialName, StringBuilder stringBuilder, out CompletionItem result )
     {
         var document = DocumentUtility.GetCommentOrDescriptionText( callbackSymbol );
         document = string.IsNullOrEmpty( document ) ? null : document;
 
         result = null!;
 
-        if( !partialName.StartsWith( "on" ) )
+        if( !partialName.StartsWith( "o" ) )
         {
             return false;
         }
@@ -88,11 +88,11 @@ public sealed class CallbackCompletionItemFactory(
         return true;
     }
 
-    public bool TryCreateFixedSnippet( string partialName, bool preferSnippetInsertion, out CompletionItem result )
+    public bool TryCreateFixedSnippet( string partialName, out CompletionItem result )
     {
         result = null!;
 
-        if( !partialName.StartsWith( "on " ) )
+        if( !partialName.StartsWith( "o" ) )
         {
             return false;
         }
@@ -105,7 +105,7 @@ public sealed class CallbackCompletionItemFactory(
 
         result = new CompletionItem(
             Label: "on <name>",
-            Kind: Kind,
+            Kind: CompletionItemKind.Snippet,
             Detail: Detail,
             Documentation: string.Empty,
             InsertTextFormat: InsertTextFormat.Snippet,
