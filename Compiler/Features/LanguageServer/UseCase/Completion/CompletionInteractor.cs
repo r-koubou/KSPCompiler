@@ -146,46 +146,54 @@ public sealed class CompletionInteractor : ICompletionUseCase
         {
             stringBuilder.Clear();
 
-            if( symbol is CallbackSymbol callbackSymbol )
+            switch( symbol )
             {
-                // preferSnippetInsertion: fixed to true
-                // Always expand the snippet if the phrase starts with “on”
-                var completionItem = callbackItemFactory.Create( callbackSymbol, partialName, true );
-                target.Add( completionItem );
+                case CallbackSymbol callbackSymbol:
+                {
+                    // preferSnippetInsertion: fixed to true
+                    // Always expand the snippet if the phrase starts with “on”
+                    var completionItem = callbackItemFactory.Create( callbackSymbol, partialName, true );
+                    target.Add( completionItem );
 
-                continue;
+                    break;
+                }
+
+                case CommandSymbol commandSymbol:
+                {
+                    var completionItem = commandItemFactory.Create( commandSymbol, partialName, preferSnippetInsertion );
+                    target.Add( completionItem );
+
+                    continue;
+                }
+
+                case VariableSymbol variableSymbol:
+                {
+                    var item = variableItemFactory.Create( variableSymbol, partialName, preferSnippetInsertion );
+
+                    target.Add( item );
+
+                    break;
+                }
+
+                default:
+                {
+                    var document = DocumentUtility.GetCommentOrDescriptionText( symbol );
+                    document = string.IsNullOrEmpty( document ) ? null : document;
+
+                    target.Add(
+                        new CompletionItem(
+                            Label: symbol.Name.Value,
+                            Kind: kind,
+                            Detail: detail,
+                            Documentation: document,
+                            InsertTextFormat: preferSnippetInsertion ? InsertTextFormat.Snippet : InsertTextFormat.PlainText,
+                            InsertText: symbol.Name.Value
+                        )
+                    );
+                    break;
+                }
             }
 
-            if( symbol is CommandSymbol commandSymbol )
-            {
-                var completionItem = commandItemFactory.Create( commandSymbol, partialName, preferSnippetInsertion );
-                target.Add( completionItem );
-
-                continue;
-            }
-
-            if( symbol is VariableSymbol variableSymbol )
-            {
-                var item = variableItemFactory.Create( variableSymbol, partialName, preferSnippetInsertion );
-
-                target.Add( item );
-
-                continue;
-            }
-
-            var document = DocumentUtility.GetCommentOrDescriptionText( symbol );
-            document = string.IsNullOrEmpty( document ) ? null : document;
-
-            target.Add(
-                new CompletionItem(
-                    Label: symbol.Name.Value,
-                    Kind: kind,
-                    Detail: detail,
-                    Documentation: document,
-                    InsertTextFormat: preferSnippetInsertion ? InsertTextFormat.Snippet : InsertTextFormat.PlainText,
-                    InsertText: symbol.Name.Value
-                )
-            );
         }
     }
 
