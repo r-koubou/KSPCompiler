@@ -22,9 +22,7 @@ public sealed class CompletionInteractor : ICompletionUseCase
             var compilerCacheService = parameter.Input.Cache;
             var scriptLocation = parameter.Input.Location;
             var position = parameter.Input.Position;
-#warning リリース前にテストコードを消す
-            var preferSnippetInsertion = true;
-            //var preferSnippetInsertion = parameter.Input.PreferSnippetInsertion;
+            var preferSnippetInsertion = parameter.Input.PreferSnippetInsertion;
 
             var cache = compilerCacheService.GetCache( scriptLocation );
             var symbolTable = cache.SymbolTable;

@@ -10,13 +10,14 @@ namespace KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Completion;
 public sealed class CompletionHandlingInputPortDetail(
     ICompilationCacheManager compilerCacheService,
     ScriptLocation scriptLocation,
-    Position position
+    Position position,
+    bool preferSnippetInsertion
 )
 {
     public ICompilationCacheManager Cache { get; } = compilerCacheService;
     public ScriptLocation Location { get; } = scriptLocation;
     public Position Position { get; } = position;
-    public bool PreferSnippetInsertion { get; } = false;
+    public bool PreferSnippetInsertion { get; } = preferSnippetInsertion;
 }
 
 public sealed class CompletionHandlingInputPort(
