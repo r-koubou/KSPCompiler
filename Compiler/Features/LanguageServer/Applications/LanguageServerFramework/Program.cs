@@ -35,7 +35,7 @@ public sealed class Program
                 await Console.Error.WriteLineAsync( "Server#OnInitialize" );
             }
         );
-        server.OnInitialize( async ( c, s ) =>
+        server.OnInitialized( async initializedParams =>
             {
                 await Console.Error.WriteLineAsync( "Server#OnInitialized" );
             }
