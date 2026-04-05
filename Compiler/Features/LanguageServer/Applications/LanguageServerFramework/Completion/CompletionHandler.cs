@@ -20,11 +20,13 @@ using FrameworkCompletionItem = EmmyLua.LanguageServer.Framework.Protocol.Messag
 namespace KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Completion;
 
 public class CompletionHandler(
-    ICompilationCacheManager compilationCacheManager
+    ICompilationCacheManager compilationCacheManager,
+    CompletionHandlerConfig config
 ) : CompletionHandlerBase
 {
     private readonly ICompilationCacheManager compilationCacheManager = compilationCacheManager;
     private readonly CompletionInteractor interactor = new();
+    private readonly CompletionHandlerConfig config = config;
 
     protected override async Task<CompletionResponse?> Handle( CompletionParams request, CancellationToken token )
     {
@@ -40,7 +42,8 @@ public class CompletionHandler(
             new CompletionHandlingInputPortDetail(
                 compilationCacheManager,
                 scriptLocation,
-                position
+                position,
+                config.PreferSnippetInsertion
             )
         );
 

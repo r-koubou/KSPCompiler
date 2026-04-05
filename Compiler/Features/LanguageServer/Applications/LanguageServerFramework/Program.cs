@@ -30,16 +30,42 @@ public sealed class Program
         var server = EmmyLua.LanguageServer.Framework.Server.LanguageServer.From( input, output );
         server.OnInitialize( async ( initializeParams, serverInfo ) =>
             {
-                serverInfo.Name    = "ksp";
-                serverInfo.Version = "1.0.0";
+                var version = typeof( Program ).Assembly.GetName().Version;
+                serverInfo.Name = "ksp";
+                serverInfo.Version = version is null
+                    ? "unknown"
+                    : $"{version.Major}.{version.Minor}.{version.Build}";
+
                 await Console.Error.WriteLineAsync( "Server#OnInitialize" );
+                await Console.Error.WriteLineAsync( $"Server Version: {serverInfo.Version}" );
             }
         );
-        server.OnInitialize( async ( c, s ) =>
+        server.OnInitialized( async initializedParams =>
             {
                 await Console.Error.WriteLineAsync( "Server#OnInitialized" );
             }
         );
+
+        #region Parse command line arguments
+        var preferSnippetInsertion = false;
+
+#if DEBUG
+        await Console.Error.WriteLineAsync( "Command line arguments:" );
+
+        foreach( var arg in args )
+        {
+            await Console.Error.WriteLineAsync( arg );
+        }
+#endif
+
+        foreach( var arg in args )
+        {
+            if( arg == "--prefer-snippet-insertion" )
+            {
+                preferSnippetInsertion = true;
+            }
+        }
+        #endregion
 
         #region Register Handlers
         var compilationCacheManager = new CompilationCacheManager();
@@ -61,7 +87,14 @@ public sealed class Program
                 compilationSeverService
             )
         );
-        server.AddHandler( new CompletionHandler( compilationCacheManager ) );
+        server.AddHandler(
+            new CompletionHandler(
+                compilationCacheManager, new CompletionHandlerConfig
+                {
+                    PreferSnippetInsertion = preferSnippetInsertion
+                }
+            )
+        );
         server.AddHandler( new DefinitionHandler( compilationCacheManager ) );
         server.AddHandler( new FoldingRabgeHandler( compilationCacheManager ) );
         server.AddHandler( new HoverHandler( compilationCacheManager ) );
