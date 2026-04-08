@@ -220,6 +220,139 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
     #endregion ~Primary validations
 
+    #region Array Size Validation
+
+    private static bool TryGetArraySize( IAstVisitor visitor, AstVariableDeclarationNode node, AstArrayInitializerNode initializer, out AstIntLiteralNode result )
+    {
+        result = null!;
+
+        if( initializer.Size.Accept( visitor ) is not AstExpressionNode arraySizeExpr )
+        {
+            throw new AstAnalyzeException( initializer.Size, "Array size expression evaluation failed" );
+        }
+
+        if( arraySizeExpr.Constant )
+        {
+            if( arraySizeExpr is not AstIntLiteralNode arraySize )
+            {
+                throw new AstAnalyzeException( arraySizeExpr, "Array size expression is not integer" );
+            }
+
+            result = arraySize;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool ValidateArrayMinMaxSize( AstVariableDeclarationNode node, int arraySize )
+    {
+        if( arraySize >= KspLanguageLimitations.MaxArraySize )
+        {
+            EventEmitter.Emit(
+                node.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_declare_variable_maxarraysize,
+                    node.Name,
+                    arraySize
+                )
+            );
+
+            return false;
+        }
+
+        if( arraySize <= 0 )
+        {
+            EventEmitter.Emit(
+                node.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_declare_variable_arraysize,
+                    node.Name
+                )
+            );
+
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool ValidateArrayInitializerCount( AstVariableDeclarationNode node, AstArrayInitializerNode initializer, int arraySize )
+    {
+        // 初期化式が配列サイズより大きい
+        if( initializer.Initializer.Expressions.Count > arraySize )
+        {
+            EventEmitter.Emit(
+                node.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_declare_variable_arrayinitilizer_sizeover,
+                    node.Name
+                )
+            );
+
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool ValidateHasArrayInitializer( AstVariableDeclarationNode node, AstArrayInitializerNode initializer )
+    {
+        // 初期化代入式なし
+        if( initializer.IsNull() )
+        {
+            EventEmitter.Emit(
+                node.AsErrorEvent(
+                    CompilerMessageResources.semantic_error_declare_variable_required_initializer,
+                    node.Name
+                )
+            );
+
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool ValidateArraySize(
+        IAstVisitor visitor,
+        AstVariableDeclarationNode node,
+        VariableSymbol variable,
+        AstArrayInitializerNode initializer,
+        bool validateArrayMinMaxSize = true,
+        bool validateHasInitializer = true,
+        bool validateArrayInitializerCount = true
+    )
+    {
+        if( !TryGetArraySize( visitor, node, initializer, out var arraySize ) )
+        {
+            return false;
+        }
+
+        if( validateArrayMinMaxSize && !ValidateArrayMinMaxSize( node, arraySize.Value ) )
+        {
+            return false;
+        }
+
+        if( validateHasInitializer && !ValidateHasArrayInitializer( node, initializer ) )
+        {
+            return false;
+        }
+
+        if( validateArrayInitializerCount && !ValidateArrayInitializerCount( node, initializer, arraySize.Value ) )
+        {
+            return false;
+        }
+
+        // シンボル情報に配列サイズを反映
+        variable.ArraySize = arraySize.Value;
+
+        // 配列サイズの式が畳み込みされた値に置き換える
+        initializer.Size = arraySize;
+
+        return true;
+    }
+
+    #endregion ~Array Size Validation
+
     #region Initializer root
 
     private void ValidateInitialValue( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
@@ -386,21 +519,8 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             return;
         }
 
-        if( !ValidateArraySize( visitor, node, initializer, variable ) )
+        if( !ValidateArraySize( visitor, node, variable, initializer ) )
         {
-            return;
-        }
-
-        // 初期化代入式なし
-        if( initializer.IsNull() )
-        {
-            EventEmitter.Emit(
-                node.AsErrorEvent(
-                    CompilerMessageResources.semantic_error_declare_variable_required_initializer,
-                    node.Name
-                )
-            );
-
             return;
         }
 
@@ -571,7 +691,22 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
     private void ValidateArrayBasedUIInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, AstArrayInitializerNode initializer, VariableSymbol variable )
     {
-        if( !ValidateArraySize( visitor, node, initializer, variable ) )
+        // ## validateArrayInitializerCount: false
+        //
+        // 配列サイズ != UIの初期化パラメータ数
+        // UIの初期化パラメータは配列初期化の式ではなく、UIごとに定められている引数
+        //
+        // e.g. : ui_table
+        // declare ui_table %myTable[100] ( <grid-width>, <grid-height>, <range> )
+        //                           ~~~    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        //
+        if( !ValidateArraySize(
+               visitor,
+               node,
+               variable,
+               initializer,
+               validateArrayInitializerCount: false
+           ) )
         {
             return;
         }
@@ -590,7 +725,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             return;
         }
 
-        // 配列要素の型チェック
+        // UI初期化引数の型チェック
         ValidateUIArguments( visitor, node, initializer.Initializer, variable.UIType );
     }
 
