@@ -219,7 +219,7 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
     #endregion ~Primary validations
 
     #region Array Size Validation
-    private static bool TryGetArraySize( IAstVisitor visitor, AstVariableDeclarationNode node, AstArrayInitializerNode initializer, out AstIntLiteralNode result )
+    private bool TryGetArraySize( IAstVisitor visitor, AstVariableDeclarationNode node, AstArrayInitializerNode initializer, out AstIntLiteralNode result )
     {
         result = null!;
 
@@ -239,6 +239,14 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
             return true;
         }
+
+        // リテラル or 定数でないと初期化できない
+        EventEmitter.Emit(
+            node.AsErrorEvent(
+                CompilerMessageResources.semantic_error_declare_variable_arraysize,
+                node.Name
+            )
+        );
 
         return false;
     }
