@@ -69,7 +69,6 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
     }
 
     #region Primary validations
-
     private bool ValidateCallbackNode( AstVariableDeclarationNode node )
     {
         if( !node.TryGetParent<AstCallbackDeclarationNode>( out var callback ) )
@@ -217,11 +216,9 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             variable.UIType = uiType;
         }
     }
-
     #endregion ~Primary validations
 
     #region Array Size Validation
-
     private static bool TryGetArraySize( IAstVisitor visitor, AstVariableDeclarationNode node, AstArrayInitializerNode initializer, out AstIntLiteralNode result )
     {
         result = null!;
@@ -350,11 +347,9 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
         return true;
     }
-
     #endregion ~Array Size Validation
 
     #region Initializer root
-
     private void ValidateInitialValue( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
     {
         // constあり＋初期化代入式が無い場合
@@ -405,11 +400,9 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
 
         ValidatePrimitiveInitializer( visitor, node, variable );
     }
-
     #endregion ~Initializer root
 
     #region Primitive Initializer
-
     private void ValidatePrimitiveInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
     {
         var initializer = node.Initializer.PrimitiveInitializer;
@@ -492,16 +485,14 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
         }
 
         // 定数型変数に対して初期化式がリテラル値であれば、その値を保持
-        if( variable.Modifier.IsConstant() && evaluated.TryGetLiteralNodeValue( out var value ))
+        if( variable.Modifier.IsConstant() && evaluated.TryGetLiteralNodeValue( out var value ) )
         {
             variable.ConstantValue = value;
         }
     }
-
     #endregion ~Primitive Initializer
 
     #region Array Initializer
-
     private void ValidateArrayInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
     {
         var initializer = node.Initializer.ArrayInitializer;
@@ -597,11 +588,9 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             }
         }
     }
-
     #endregion ~Array Initializer
 
     #region UI Initializer
-
     private void ValidateUIInitializer( IAstVisitor visitor, AstVariableDeclarationNode node, VariableSymbol variable )
     {
         if( variable.DataType.IsArray() )
@@ -737,7 +726,5 @@ public class VariableDeclarationEvaluator : IVariableDeclarationEvaluator
             }
         }
     }
-
     #endregion ~UI Initializer
-
 }
