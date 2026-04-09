@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,8 +24,96 @@ public sealed class DocumentSymbolInteractor : IDocumentSymbolUseCase
             var symbolTable = cache.SymbolTable;
             var result = new List<DocumentSymbol>();
 
-            await CollectCallbackAsync( symbolTable.UserCallbacks, symbolTable.UserVariables, result );
-            await CollectUserFunctionAsync( symbolTable.UserFunctions, result );
+            #region Variable
+            {
+                var variableSymbols = new List<DocumentSymbol>();
+                await CollectVariablesNewAsync( symbolTable.UserVariables, variableSymbols, cancellationToken );
+
+                if( variableSymbols.Any() )
+                {
+                    var firstElement = variableSymbols.First();
+                    var variableSymbolsRoot = new DocumentSymbol
+                    {
+                        Name           = "Variable",
+                        Kind           = SymbolKind.Variable,
+                        Range          = firstElement.Range,
+                        SelectionRange = firstElement.SelectionRange,
+                        Children       = variableSymbols
+                    };
+
+                    result.Add( variableSymbolsRoot );
+                }
+            }
+            #endregion ~Variable
+
+            #region UI Variable
+            {
+                var variableSymbols = new List<DocumentSymbol>();
+                await CollectUiVariablesNewAsync( symbolTable.UserVariables, variableSymbols,  cancellationToken );
+
+                if( variableSymbols.Any() )
+                {
+                    var firstElement = variableSymbols.First();
+                    var variableSymbolsRoot = new DocumentSymbol
+                    {
+                        Name           = "UI",
+                        Kind           = SymbolKind.Variable,
+                        Range          = firstElement.Range,
+                        SelectionRange = firstElement.SelectionRange,
+                        Children       = variableSymbols
+                    };
+
+                    result.Add( variableSymbolsRoot );
+                }
+            }
+            #endregion ~UI Variable
+
+            #region Callback
+            {
+                var callbackSymbols = new List<DocumentSymbol>();
+                await CollectCallbackNewAsync( symbolTable.UserCallbacks, callbackSymbols, cancellationToken );
+
+                if( callbackSymbols.Any() )
+                {
+                    var firstElement = callbackSymbols.First();
+                    var callbackSymbolsRoot = new DocumentSymbol
+                    {
+                        Name           = "Callback",
+                        Kind           = SymbolKind.Event,
+                        Range          = firstElement.Range,
+                        SelectionRange = firstElement.SelectionRange,
+                        Children       = callbackSymbols
+                    };
+
+                    result.Add( callbackSymbolsRoot );
+                }
+            }
+            #endregion ~Callback
+
+            #region User Function
+            {
+                var userFunctions = new List<DocumentSymbol>();
+                await CollectUserFunctionNewAsync( symbolTable.UserFunctions, userFunctions, cancellationToken );
+
+                if( userFunctions.Any() )
+                {
+                    var firstElement = userFunctions.First();
+                    var userFunctionSymbolsRoot = new DocumentSymbol
+                    {
+                        Name           = "User Function",
+                        Kind           = SymbolKind.Function,
+                        Range          = firstElement.Range,
+                        SelectionRange = firstElement.SelectionRange,
+                        Children       = userFunctions
+                    };
+
+                    result.Add( userFunctionSymbolsRoot );
+                }
+            }
+            #endregion ~User Function
+
+            //await CollectCallbackAsync( symbolTable.UserCallbacks, symbolTable.UserVariables, result );
+            //await CollectUserFunctionAsync( symbolTable.UserFunctions, result );
 
             return new DocumentSymbolOutputPort( result, true );
         }
@@ -55,6 +144,7 @@ public sealed class DocumentSymbolInteractor : IDocumentSymbolUseCase
         return builder.ToString();
     }
 
+    [Obsolete]
     private static async Task CollectVariablesAsync( IVariableSymbolTable symbolTable, List<DocumentSymbol> result )
     {
         foreach( var variable in symbolTable )
@@ -86,6 +176,85 @@ public sealed class DocumentSymbolInteractor : IDocumentSymbolUseCase
         await Task.CompletedTask;
     }
 
+    private static async Task CollectVariablesNewAsync(
+        IVariableSymbolTable symbolTable,
+        List<DocumentSymbol> result,
+        CancellationToken _ = default )
+    {
+        foreach( var variable in symbolTable )
+        {
+            var detail = variable.DataType.ToMessageString();
+            var kind = SymbolKind.Variable;
+
+            if( variable.Modifier.IsUI() )
+            {
+                continue;
+            }
+
+            if( variable.Modifier.IsConstant() )
+            {
+                kind = SymbolKind.Constant;
+            }
+
+            if( variable.UIType != UITypeSymbol.Null )
+            {
+                detail = variable.UIType.Name;
+            }
+
+            result.Add( new DocumentSymbol
+                {
+                    Name           = variable.Name,
+                    Detail         = detail,
+                    Kind           = kind,
+                    Range          = variable.DefinedPosition,
+                    SelectionRange = variable.DefinedPosition
+                }
+            );
+        }
+
+        await Task.CompletedTask;
+    }
+
+    private static async Task CollectUiVariablesNewAsync(
+        IVariableSymbolTable symbolTable,
+        List<DocumentSymbol> result,
+        CancellationToken _ = default )
+    {
+        foreach( var variable in symbolTable )
+        {
+            var detail = variable.DataType.ToMessageString();
+            var kind = SymbolKind.Variable;
+
+            if( !variable.Modifier.IsUI() )
+            {
+                continue;
+            }
+
+            if( variable.Modifier.IsConstant() )
+            {
+                kind = SymbolKind.Constant;
+            }
+
+            if( variable.UIType != UITypeSymbol.Null )
+            {
+                detail = variable.UIType.Name;
+            }
+
+            result.Add( new DocumentSymbol
+                {
+                    Name           = variable.Name,
+                    Detail         = detail,
+                    Kind           = kind,
+                    Range          = variable.DefinedPosition,
+                    SelectionRange = variable.DefinedPosition
+                }
+            );
+        }
+
+        await Task.CompletedTask;
+    }
+
+    [Obsolete]
     private static async Task CollectCallbackAsync( ICallbackSymbolTable symbolTable, IVariableSymbolTable variableSymbolTable, List<DocumentSymbol> result )
     {
         var detailBuilder = new StringBuilder();
@@ -116,6 +285,32 @@ public sealed class DocumentSymbolInteractor : IDocumentSymbolUseCase
         await Task.CompletedTask;
     }
 
+    private static async Task CollectCallbackNewAsync(
+        ICallbackSymbolTable symbolTable,
+        List<DocumentSymbol> result,
+        CancellationToken cancellationToken = default )
+    {
+        var detailBuilder = new StringBuilder();
+
+        foreach( var callback in symbolTable.ToList() )
+        {
+            var detail = GetArgumentDetailText( callback.Arguments, detailBuilder );
+
+            result.Add( new DocumentSymbol
+                {
+                    Name           = callback.Name,
+                    Detail         = detail,
+                    Kind           = SymbolKind.Event,
+                    Range          = callback.DefinedPosition,
+                    SelectionRange = callback.DefinedPosition
+                }
+            );
+        }
+
+        await Task.CompletedTask;
+    }
+
+    [Obsolete]
     private static async Task CollectUserFunctionAsync( IUserFunctionSymbolSymbolTable symbolTable, List<DocumentSymbol> result )
     {
         foreach( var function in symbolTable )
@@ -132,4 +327,25 @@ public sealed class DocumentSymbolInteractor : IDocumentSymbolUseCase
 
         await Task.CompletedTask;
     }
+
+    private static async Task CollectUserFunctionNewAsync(
+        IUserFunctionSymbolSymbolTable symbolTable,
+        List<DocumentSymbol> result,
+        CancellationToken cancellationToken = default )
+    {
+        foreach( var function in symbolTable )
+        {
+            result.Add( new DocumentSymbol
+                {
+                    Name           = function.Name,
+                    Kind           = SymbolKind.Function,
+                    Range          = function.DefinedPosition,
+                    SelectionRange = function.DefinedPosition
+                }
+            );
+        }
+
+        await Task.CompletedTask;
+    }
+
 }
