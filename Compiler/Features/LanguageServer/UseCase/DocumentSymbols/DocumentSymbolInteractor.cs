@@ -8,7 +8,7 @@ using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Symbol;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData.Extensions;
 
-namespace KSPCompiler.Features.LanguageServer.UseCase.SignatureHelp;
+namespace KSPCompiler.Features.LanguageServer.UseCase.DocumentSymbols;
 
 public sealed class DocumentSymbolInteractor : IDocumentSymbolUseCase
 {
