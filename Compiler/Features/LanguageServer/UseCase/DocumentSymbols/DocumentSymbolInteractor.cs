@@ -27,7 +27,7 @@ public sealed class DocumentSymbolInteractor : IDocumentSymbolUseCase
             #region Variable
             {
                 var variableSymbols = new List<DocumentSymbol>();
-                await CollectVariablesNewAsync( symbolTable.UserVariables, variableSymbols, cancellationToken );
+                await CollectVariablesAsync( symbolTable.UserVariables, variableSymbols, cancellationToken );
 
                 if( variableSymbols.Any() )
                 {
@@ -49,7 +49,7 @@ public sealed class DocumentSymbolInteractor : IDocumentSymbolUseCase
             #region UI Variable
             {
                 var variableSymbols = new List<DocumentSymbol>();
-                await CollectUiVariablesNewAsync( symbolTable.UserVariables, variableSymbols,  cancellationToken );
+                await CollectUiVariablesAsync( symbolTable.UserVariables, variableSymbols,  cancellationToken );
 
                 if( variableSymbols.Any() )
                 {
@@ -71,7 +71,7 @@ public sealed class DocumentSymbolInteractor : IDocumentSymbolUseCase
             #region Callback
             {
                 var callbackSymbols = new List<DocumentSymbol>();
-                await CollectCallbackNewAsync( symbolTable.UserCallbacks, callbackSymbols, cancellationToken );
+                await CollectCallbackAsync( symbolTable.UserCallbacks, callbackSymbols, cancellationToken );
 
                 if( callbackSymbols.Any() )
                 {
@@ -93,7 +93,7 @@ public sealed class DocumentSymbolInteractor : IDocumentSymbolUseCase
             #region User Function
             {
                 var userFunctions = new List<DocumentSymbol>();
-                await CollectUserFunctionNewAsync( symbolTable.UserFunctions, userFunctions, cancellationToken );
+                await CollectUserFunctionAsync( symbolTable.UserFunctions, userFunctions, cancellationToken );
 
                 if( userFunctions.Any() )
                 {
@@ -111,9 +111,6 @@ public sealed class DocumentSymbolInteractor : IDocumentSymbolUseCase
                 }
             }
             #endregion ~User Function
-
-            //await CollectCallbackAsync( symbolTable.UserCallbacks, symbolTable.UserVariables, result );
-            //await CollectUserFunctionAsync( symbolTable.UserFunctions, result );
 
             return new DocumentSymbolOutputPort( result, true );
         }
@@ -144,39 +141,7 @@ public sealed class DocumentSymbolInteractor : IDocumentSymbolUseCase
         return builder.ToString();
     }
 
-    [Obsolete]
-    private static async Task CollectVariablesAsync( IVariableSymbolTable symbolTable, List<DocumentSymbol> result )
-    {
-        foreach( var variable in symbolTable )
-        {
-            var detail = variable.DataType.ToMessageString();
-            var kind = SymbolKind.Variable;
-
-            if( variable.Modifier.IsConstant() )
-            {
-                kind = SymbolKind.Constant;
-            }
-
-            if( variable.UIType != UITypeSymbol.Null )
-            {
-                detail = variable.UIType.Name;
-            }
-
-            result.Add( new DocumentSymbol
-                {
-                    Name           = variable.Name,
-                    Detail         = detail,
-                    Kind           = kind,
-                    Range          = variable.DefinedPosition,
-                    SelectionRange = variable.DefinedPosition
-                }
-            );
-        }
-
-        await Task.CompletedTask;
-    }
-
-    private static async Task CollectVariablesNewAsync(
+    private static async Task CollectVariablesAsync(
         IVariableSymbolTable symbolTable,
         List<DocumentSymbol> result,
         CancellationToken _ = default )
@@ -215,7 +180,7 @@ public sealed class DocumentSymbolInteractor : IDocumentSymbolUseCase
         await Task.CompletedTask;
     }
 
-    private static async Task CollectUiVariablesNewAsync(
+    private static async Task CollectUiVariablesAsync(
         IVariableSymbolTable symbolTable,
         List<DocumentSymbol> result,
         CancellationToken _ = default )
@@ -254,41 +219,10 @@ public sealed class DocumentSymbolInteractor : IDocumentSymbolUseCase
         await Task.CompletedTask;
     }
 
-    [Obsolete]
-    private static async Task CollectCallbackAsync( ICallbackSymbolTable symbolTable, IVariableSymbolTable variableSymbolTable, List<DocumentSymbol> result )
-    {
-        var detailBuilder = new StringBuilder();
-
-        foreach( var callback in symbolTable.ToList() )
-        {
-            var detail = GetArgumentDetailText( callback.Arguments, detailBuilder );
-            List<DocumentSymbol>? children = null;
-
-            if( callback.Name == "init" && variableSymbolTable.Count > 0 )
-            {
-                children = [];
-                await CollectVariablesAsync( variableSymbolTable, children );
-            }
-
-            result.Add( new DocumentSymbol
-                {
-                    Name           = callback.Name,
-                    Detail         = detail,
-                    Kind           = SymbolKind.Event,
-                    Range          = callback.DefinedPosition,
-                    SelectionRange = callback.DefinedPosition,
-                    Children       = children
-                }
-            );
-        }
-
-        await Task.CompletedTask;
-    }
-
-    private static async Task CollectCallbackNewAsync(
+    private static async Task CollectCallbackAsync(
         ICallbackSymbolTable symbolTable,
         List<DocumentSymbol> result,
-        CancellationToken cancellationToken = default )
+        CancellationToken _ = default )
     {
         var detailBuilder = new StringBuilder();
 
@@ -310,28 +244,10 @@ public sealed class DocumentSymbolInteractor : IDocumentSymbolUseCase
         await Task.CompletedTask;
     }
 
-    [Obsolete]
-    private static async Task CollectUserFunctionAsync( IUserFunctionSymbolSymbolTable symbolTable, List<DocumentSymbol> result )
-    {
-        foreach( var function in symbolTable )
-        {
-            result.Add( new DocumentSymbol
-                {
-                    Name           = function.Name,
-                    Kind           = SymbolKind.Function,
-                    Range          = function.DefinedPosition,
-                    SelectionRange = function.DefinedPosition
-                }
-            );
-        }
-
-        await Task.CompletedTask;
-    }
-
-    private static async Task CollectUserFunctionNewAsync(
+    private static async Task CollectUserFunctionAsync(
         IUserFunctionSymbolSymbolTable symbolTable,
         List<DocumentSymbol> result,
-        CancellationToken cancellationToken = default )
+        CancellationToken _ = default )
     {
         foreach( var function in symbolTable )
         {
