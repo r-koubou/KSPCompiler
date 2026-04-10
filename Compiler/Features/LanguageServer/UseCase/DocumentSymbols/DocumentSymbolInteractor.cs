@@ -107,10 +107,12 @@ public sealed class DocumentSymbolInteractor : IDocumentSymbolUseCase
     private static async Task CollectVariablesAsync(
         IVariableSymbolTable symbolTable,
         List<DocumentSymbol> result,
-        CancellationToken _ = default )
+        CancellationToken cancellationToken = default )
     {
         foreach( var variable in symbolTable )
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             var detail = variable.DataType.ToMessageString();
             var kind = SymbolKind.Variable;
 
@@ -146,10 +148,12 @@ public sealed class DocumentSymbolInteractor : IDocumentSymbolUseCase
     private static async Task CollectUiVariablesAsync(
         IVariableSymbolTable symbolTable,
         List<DocumentSymbol> result,
-        CancellationToken _ = default )
+        CancellationToken cancellationToken = default )
     {
         foreach( var variable in symbolTable )
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             var detail = variable.DataType.ToMessageString();
             var kind = SymbolKind.Variable;
 
@@ -187,12 +191,14 @@ public sealed class DocumentSymbolInteractor : IDocumentSymbolUseCase
         List<DocumentSymbol> variableSymbols,
         List<DocumentSymbol> uiVariableSymbols,
         List<DocumentSymbol> result,
-        CancellationToken _ = default )
+        CancellationToken cancellationToken = default )
     {
         var detailBuilder = new StringBuilder();
 
         foreach( var callback in symbolTable.ToList() )
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             List<DocumentSymbol>? children = null;
             var detail = GetArgumentDetailText( callback.Arguments, detailBuilder );
 
@@ -221,10 +227,12 @@ public sealed class DocumentSymbolInteractor : IDocumentSymbolUseCase
     private static async Task CollectUserFunctionAsync(
         IUserFunctionSymbolSymbolTable symbolTable,
         List<DocumentSymbol> result,
-        CancellationToken _ = default )
+        CancellationToken cancellationToken = default )
     {
         foreach( var function in symbolTable )
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             result.Add( new DocumentSymbol
                 {
                     Name           = function.Name,
