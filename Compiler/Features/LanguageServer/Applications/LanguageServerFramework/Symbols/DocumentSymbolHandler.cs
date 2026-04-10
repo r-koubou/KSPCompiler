@@ -10,7 +10,7 @@ using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.E
 using KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Symbols.Extensions;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Compilation;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Symbol;
-using KSPCompiler.Features.LanguageServer.UseCase.SignatureHelp;
+using KSPCompiler.Features.LanguageServer.UseCase.DocumentSymbols;
 
 namespace KSPCompiler.Features.Applications.LanguageServer.LanguageServerFramework.Symbols;
 
