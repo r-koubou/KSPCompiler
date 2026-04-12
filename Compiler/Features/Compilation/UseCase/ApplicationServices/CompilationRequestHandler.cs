@@ -37,12 +37,13 @@ public sealed class CompilationRequestHandler : ICompilationRequestHandler
             // Syntax Analysis
             //-------------------------------------------------
             var syntaxAnalysisOutput = await ExecuteSyntaxAnalysisAsync( request.SyntaxParser, cancellationToken );
-            var ast = syntaxAnalysisOutput.OutputData;
 
             if( !syntaxAnalysisOutput.Result )
             {
-                return new CompilationResponse( false, syntaxAnalysisOutput.Error, ast, userSymbolTable, string.Empty );
+                return new CompilationResponse( false, syntaxAnalysisOutput.Error, null, userSymbolTable, string.Empty );
             }
+
+            var ast = syntaxAnalysisOutput.OutputData;
 
             //-------------------------------------------------
             // Preprocess
