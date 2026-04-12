@@ -18,15 +18,9 @@ public class AstTranslatorTest
     // ReSharper disable once UnusedMethodReturnValue.Local
 
     [Test]
-    public void LexerFallbackTest()
+    public void ParserExceptionTest()
     {
-        Assert.That( () => ParseTestUtility.Parse( TestDataDirectory, "LexerErrorTest.txt" ), Throws.Nothing );
-    }
-
-    [Test]
-    public void ParserFallbackTest()
-    {
-        Assert.That( () => ParseTestUtility.Parse( TestDataDirectory, "ParserErrorTest.txt" ), Throws.Nothing );
+        Assert.That( () => ParseTestUtility.Parse( TestDataDirectory, "ParserErrorTest.txt" ), Throws.Exception );
     }
 
     [Test]

@@ -2,6 +2,7 @@ using System.IO;
 
 using Antlr4.Runtime;
 
+using KSPCompiler.Features.Compilation.Domain;
 using KSPCompiler.Features.Compilation.Gateways.Parser;
 using KSPCompiler.Features.Compilation.Infrastructures.Parser.Antlr.Translators;
 using KSPCompiler.Infrastructures.Parser.Antlr;
@@ -55,6 +56,12 @@ public abstract class AntlrKspSyntaxParser : ISyntaxParser
         parser.AddErrorListener( parserErrorListener );
 
         var cst = parser.compilationUnit();
+
+        if( lexerErrorListener.HasError || parserErrorListener.HasError || parser.NumberOfSyntaxErrors > 0 )
+        {
+            throw new KspScriptParseException( "Parsing failed due to syntax errors." );
+        }
+
         var ast = cst.Accept( new CstConverterVisitor( tokenStream, EventEmitter ) ) as AstCompilationUnitNode;
         _ = ast ?? throw new MustBeNotNullException( nameof( ast ) );
 
