@@ -1,0 +1,8 @@
+namespace: KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Blocks
+template: templates/base.cs
+output_dir: ./
+suffix: ".cs"
+
+classes:
+  - name: Modifier
+    description: a modifier information node

@@ -1,3 +1,0 @@
-templates:
-  - name: usecases
-    path: "usecases/usecases.cs"

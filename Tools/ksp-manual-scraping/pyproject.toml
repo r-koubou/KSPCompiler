@@ -1,0 +1,9 @@
+[project]
+name = "ksp-manual-scraping"
+version = "0.1.0"
+description = "Scraping manual pages for Kontakt Script Processor (KSP) to extract built-in symbols."
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "scrapling[fetchers]>=0.4.*"
+]
