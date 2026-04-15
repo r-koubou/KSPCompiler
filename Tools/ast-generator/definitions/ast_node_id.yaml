@@ -1,0 +1,6 @@
+namespace: KSPCompiler.Shared.Domain.Compilation.Ast.Nodes
+template: templates/node_id_enum.cs
+output_dir: ./
+suffix: ".cs"
+
+classes: []

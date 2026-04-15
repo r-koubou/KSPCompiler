@@ -1,0 +1,6 @@
+namespace: KSPCompiler.Shared.Domain.Compilation.Ast.Nodes
+template: templates/visitor.cs
+output_dir: ./
+suffix: ".cs"
+
+classes: []
