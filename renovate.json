@@ -1,0 +1,45 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:best-practices"
+  ],
+  "rangeStrategy": "auto",
+  "timezone": "Asia/Tokyo",
+    "schedule": [
+    "* 9-21 * * 6,0"
+  ],
+  "dependencyDashboard": true,
+  "labels": [
+    "dependencies",
+    "renovate"
+  ],
+  "enabledManagers": [
+    "nuget",
+    "gradle",
+    "gradle-wrapper",
+    "github-actions",
+    "pep621",
+    "uv"
+  ],
+  "packageRules": [
+    {
+      "description": "Automerge patch and minor updates",
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "automerge": true,
+      "automergeType": "pr"
+    },
+    {
+      "description": "Use replace strategy for PEP 621 dependency ranges",
+      "matchManagers": [
+        "pep621"
+      ],
+      "matchFileNames": [
+        "**/pyproject.toml"
+      ],
+      "rangeStrategy": "update-lockfile"
+    }
+  ]
+}
