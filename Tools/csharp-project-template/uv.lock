@@ -1,6 +1,6 @@
 version = 1
 revision = 3
-requires-python = ">=3.14"
+requires-python = ">=3.14, <4"
 
 [[package]]
 name = "csharp-project-template"
@@ -13,8 +13,8 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "jinja2", specifier = ">=3" },
-    { name = "ruamel-yaml", specifier = ">=0.19" },
+    { name = "jinja2", specifier = "~=3.1" },
+    { name = "ruamel-yaml", specifier = "~=0.19" },
 ]
 
 [[package]]
