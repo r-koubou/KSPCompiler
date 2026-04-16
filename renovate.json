@@ -18,8 +18,7 @@
     "gradle",
     "gradle-wrapper",
     "github-actions",
-    "pep621",
-    "uv"
+    "pep621"
   ],
   "packageRules": [
     {
