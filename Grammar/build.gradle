@@ -18,7 +18,7 @@ dependencies {
 }
 
 wrapper {
-    gradleVersion = '7.6.2'
+    gradleVersion = '7.6.6'
 }
 
 // ANTLR
