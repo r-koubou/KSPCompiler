@@ -8,7 +8,6 @@ plugins {
 repositories {
     // Use jcenter for resolving dependencies.
     // You can declare any Maven/Ivy/file repository here.
-    jcenter()
     mavenCentral()
 }
 
@@ -18,7 +17,7 @@ dependencies {
 }
 
 wrapper {
-    gradleVersion = '7.6.6'
+    gradleVersion = '9.4.1'
 }
 
 // ANTLR
