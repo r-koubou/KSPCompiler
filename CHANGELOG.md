@@ -13,9 +13,9 @@ This allows snippets to be prioritized during code completion. Snippets streamli
 - Compilation error if a UI variable array has fewer elements than the initialization parameters
 - Syntax and Semantic analysis
 
-### Organize internal tools
+### Organized internal tools
 
-- Organized python tools in `/Tools` directory
+- Organized python tools in the `/Tools` directory
 
 ## v1.0.4
 
