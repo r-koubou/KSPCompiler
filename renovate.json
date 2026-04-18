@@ -20,25 +20,27 @@
     "github-actions",
     "pep621"
   ],
+  "ignorePaths": [
+    "^Data/**",
+    "**/example/**",
+    "**/out/**",
+    "**/output/**"
+  ],
   "packageRules": [
+    {
+      "description": "Major updates are manually reviewed",
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "automerge": false
+    },
     {
       "description": "Automerge patch and minor updates",
       "matchUpdateTypes": [
         "minor",
         "patch"
       ],
-      "automerge": true,
-      "automergeType": "pr"
-    },
-    {
-      "description": "Use replace strategy for PEP 621 dependency ranges",
-      "matchManagers": [
-        "pep621"
-      ],
-      "matchFileNames": [
-        "**/pyproject.toml"
-      ],
-      "rangeStrategy": "update-lockfile"
+      "automerge": true
     }
   ]
 }
