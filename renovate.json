@@ -1,0 +1,46 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:best-practices"
+  ],
+  "rangeStrategy": "auto",
+  "timezone": "Asia/Tokyo",
+    "schedule": [
+    "* 9-21 * * 6,0"
+  ],
+  "dependencyDashboard": true,
+  "labels": [
+    "dependencies",
+    "renovate"
+  ],
+  "enabledManagers": [
+    "nuget",
+    "gradle",
+    "gradle-wrapper",
+    "github-actions",
+    "pep621"
+  ],
+  "ignorePaths": [
+    "^Data/**",
+    "**/example/**",
+    "**/out/**",
+    "**/output/**"
+  ],
+  "packageRules": [
+    {
+      "description": "Major updates are manually reviewed",
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "automerge": false
+    },
+    {
+      "description": "Automerge patch and minor updates",
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "automerge": true
+    }
+  ]
+}

@@ -1,6 +1,25 @@
 CHANGELOG
 =========
 
+## v1.1.0
+
+### New Features
+
+#### Language Server: Improvements to Completion
+
+Added `--prefer-snippet-insertion` to the language server startup options.
+
+This allows snippets to be prioritized during code completion. Snippets streamline coding by providing placeholders for command arguments.
+
+### Bug Fixes and Improvements
+
+- Compilation error if a UI variable array has fewer elements than the initialization parameters
+- Syntax and Semantic analysis
+
+### Organized internal tools
+
+- Organized python tools in the `/Tools` directory
+
 ## v1.0.4
 
 ### The Symbol Editor is now available on the web

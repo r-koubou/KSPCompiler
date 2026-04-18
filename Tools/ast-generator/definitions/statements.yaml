@@ -1,0 +1,59 @@
+namespace: KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Statements
+template: templates/statement.cs
+output_dir: Statements
+suffix: ".cs"
+
+classes:
+  #--------------------------------------------
+  # KSPプリプロセッサ
+  #--------------------------------------------
+  - name: PreprocessorDefine
+    description: "a KSP Preprocessor: SET_CONDITION"
+
+  - name: PreprocessorUndefine
+    description: "a KSP Preprocessor: RESET_CONDITION"
+
+  - name: PreprocessorIfdefine
+    description: "a KSP Preprocessor: USE_CODE_IF"
+
+  - name: PreprocessorIfnotDefine
+    description: "a KSP Preprocessor: USE_CODE_IF_NOT"
+
+  #--------------------------------------------
+  # if, while, select ステートメント
+  #--------------------------------------------
+  - name: IfStatement
+    description: "an if statement"
+
+  - name: WhileStatement
+    description: "an while statement"
+
+  - name: SelectStatement
+    description: "an select statement"
+
+  #--------------------------------------------
+  # 制御文
+  #--------------------------------------------
+  - name: ContinueStatement
+    description: "an continue statement"
+
+  #--------------------------------------------
+  # KSPユーザー定義関数
+  #--------------------------------------------
+  - name: CallUserFunctionStatement
+    description: "a call statement"
+
+  #--------------------------------------------
+  # 変数宣言
+  #--------------------------------------------
+  - name: VariableDeclaration
+    description: "a variable declaration"
+
+  - name: VariableInitializer
+    description: "a variable initialization"
+
+  - name: PrimitiveInitializer
+    description: "a primitive variable initialization"
+
+  - name: ArrayInitializer
+    description: "an array variable initialization"

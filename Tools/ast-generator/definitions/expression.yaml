@@ -1,0 +1,144 @@
+namespace: KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Expressions
+template: templates/expression.cs
+output_dir: Expressions
+suffix: ".cs"
+
+classes:
+  #--------------------------------------------
+  # 論理 OR, AND, XOR
+  #--------------------------------------------
+  - name: LogicalOr
+    description: "a conditional operator: AND (or)"
+
+  - name: LogicalAnd
+    description: "a conditional operator: AND (and)"
+
+  - name: LogicalXor
+    description: "a conditional operator: XOR (xor)"
+
+  #--------------------------------------------
+  # KSP文字列連結
+  #--------------------------------------------
+  - name: StringConcatenate
+    description: "a string concatenation operator (&)"
+
+  #--------------------------------------------
+  # ビット演算子 OR AND XOR
+  #--------------------------------------------
+  - name: BitwiseOr
+    description: "a bitwise OR operator (.or.)"
+
+  - name: BitwiseAnd
+    description: "a bitwise AND operator (.and.)"
+
+  - name: BitwiseXor
+    description: "a bitwise XOR operator (.xor.)"
+
+  #--------------------------------------------
+  # 比較演算子
+  #--------------------------------------------
+  - name: Equal
+    description: "a comparison operator: equal"
+
+  - name: NotEqual
+    description: "a comparison operator: not equal"
+
+  - name: LessThan
+    description: "a comparison operator: less than (&lt;)"
+
+  - name: GreaterThan
+    description: "a comparison operator: greater than (&gt;)"
+
+  - name: LessEqual
+    description: "a comparison operator: less equal (&lt;=)"
+
+  - name: GreaterEqual
+    description: "a comparison operator: greater equal (&gt;=)"
+
+  #--------------------------------------------
+  # 2項演算子
+  #--------------------------------------------
+  - name: Addition
+    description: "an addition operator (+)"
+
+  - name: Subtraction
+    description: "a subtraction operator (-)"
+
+  - name: Multiplying
+    description: "a multiplying operator (*)"
+
+  - name: Division
+    description: "a division operator (/)"
+
+  - name: Modulo
+    description: "a modulo operator (%)"
+
+  #--------------------------------------------
+  # 単項演算子
+  #--------------------------------------------
+  - name: UnaryMinus
+    description: "an unary operator: negative"
+
+  - name: UnaryNot
+    description: "an unary operator: NOT"
+
+  - name: UnaryLogicalNot
+    description: "an unary operator: Logical NOT"
+
+  #--------------------------------------------
+  # リテラル
+  #--------------------------------------------
+  - name: IntLiteral
+    description: "an integer literal"
+
+  - name: RealLiteral
+    description: "a floating-point literal"
+
+  - name: StringLiteral
+    description: "a string literal"
+
+  - name: BooleanLiteral
+    description: "boolean literal"
+
+  #--------------------------------------------
+  # 式リスト
+  #--------------------------------------------
+  - name: ExpressionList
+    description: "a comma-separated list of expressions"
+
+
+  #--------------------------------------------
+  # 代入演算子
+  #--------------------------------------------
+  - name: Assignment
+    description: "an assignment (:=)"
+
+  - name: AssignmentExpressionList
+    description: "a comma-separated list of expressions (including assignment expressions)."
+
+  #--------------------------------------------
+  # 代入演算子 (KSP非標準)
+  #--------------------------------------------
+  - name: AdditionAssignment
+    description: "an assignment (+=)"
+
+  - name: SubtractionAssignment
+    description: "an assignment (-=)"
+
+  - name: MultiplyingAssignment
+    description: "an assignment (*=)"
+
+  - name: DivisionAssignment
+    description: "an assignment (/=)"
+
+  #--------------------------------------------
+  # シンボル参照
+  #--------------------------------------------
+  - name: Symbol
+    description: "a symbolic reference"
+
+  - name: ArrayElement
+    description: "an array element reference expression ( Left: AstSymbolExpression, Right: AstExpressionSyntaxNode )"
+
+  - name: CallCommand
+    description: "an invoking the KSP command"

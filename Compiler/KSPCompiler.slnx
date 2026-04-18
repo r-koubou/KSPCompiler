@@ -1,0 +1,52 @@
+<Solution>
+  <Folder Name="/Features/" />
+  <Folder Name="/Features/Compilation/">
+    <Project Path="Features/Compilation/Domain/Domain.csproj" />
+    <Project Path="Features/Compilation/Gateways/Gateways.csproj" />
+    <Project Path="Features/Compilation/Resources/Resources.csproj" />
+    <Project Path="Features/Compilation/UseCase.Tests/UseCase.Tests.csproj" />
+    <Project Path="Features/Compilation/UseCase/UseCase.csproj" />
+  </Folder>
+  <Folder Name="/Features/Compilation/Applications/">
+    <Project Path="Features/Compilation/Applications/Compilation.Cli/Compilation.Cli.csproj" />
+  </Folder>
+  <Folder Name="/Features/Compilation/Infrastructures/">
+    <Project Path="Features/Compilation/Infrastructures/BuiltInSymbolLoader.Yaml/BuiltInSymbolLoader.Yaml.csproj" />
+    <Project Path="Features/Compilation/Infrastructures/Parser.Antlr.Tests/Parser.Antlr.Tests.csproj" />
+    <Project Path="Features/Compilation/Infrastructures/Parser.Antlr/Parser.Antlr.csproj" />
+  </Folder>
+  <Folder Name="/Features/Language Server/">
+    <Project Path="Features/LanguageServer/UseCase/UseCase.csproj" />
+  </Folder>
+  <Folder Name="/Features/Language Server/Applications/">
+    <Project Path="Features/LanguageServer/Applications/LanguageServerFramework/LSServer.LanguageServerFramework.csproj" />
+  </Folder>
+  <Folder Name="/Features/Symbol Management/">
+    <Project Path="Features/SymbolManagement/Gateways/Gateways.csproj" />
+    <Project Path="Features/SymbolManagement/UseCase.Tests/UseCase.Tests.csproj" />
+    <Project Path="Features/SymbolManagement/UseCase/UseCase.csproj" />
+  </Folder>
+  <Folder Name="/Features/Symbol Management/Applications/">
+    <Project Path="Features/SymbolManagement/Applications/SymbolDatabaseCliApp/SymbolDatabaseCliApp.csproj" />
+  </Folder>
+  <Folder Name="/Features/Symbol Management/Infrastructures/" />
+  <Folder Name="/Features/Symbol Management/Infrastructures/Symbol Reposotories/">
+    <Project Path="Features/SymbolManagement/Infrastructures/SymbolRepository.Yaml.Tests/SymbolRepository.Yaml.Tests.csproj" />
+    <Project Path="Features/SymbolManagement/Infrastructures/SymbolRepository.Yaml/SymbolRepository.Yaml.csproj" />
+  </Folder>
+  <Folder Name="/Shared/">
+    <Project Path="Shared/Shared.Tests/Shared.Tests.csproj" />
+    <Project Path="Shared/Shared/Shared.csproj" />
+  </Folder>
+  <Folder Name="/Shared/IO/">
+    <Project Path="Shared/Shared.IO.Abstractions/Shared.IO.Abstractions.csproj" />
+    <Project Path="Shared/Shared.IO.Local/Shared.IO.Local.csproj" />
+  </Folder>
+  <Folder Name="/Shared/IO/Symbols/">
+    <Project Path="Shared/Shared.IO.Symbols.Mock/Shared.IO.Symbols.Mock.csproj" />
+    <Project Path="Shared/Shared.IO.Symbols.Tsv.Tests/Shared.IO.Symbols.Tsv.Tests.csproj" />
+    <Project Path="Shared/Shared.IO.Symbols.Tsv/Shared.IO.Symbols.Tsv.csproj" />
+    <Project Path="Shared/Shared.IO.Symbols.Yaml.Tests/Shared.IO.Symbols.Yaml.Tests.csproj" />
+    <Project Path="Shared/Shared.IO.Symbols.Yaml/Shared.IO.Symbols.Yaml.csproj" />
+  </Folder>
+</Solution>

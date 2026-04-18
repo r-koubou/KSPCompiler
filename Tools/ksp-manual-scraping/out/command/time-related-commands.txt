@@ -1,0 +1,9 @@
+change_listener_par(signal-type,parameter)
+ms_to_ticks(microseconds)
+reset_ksp_timer
+set_listener(signal-type,parameter)
+stop_wait(callback-id,parameter)
+ticks_to_ms(ticks)
+wait(wait-time)
+wait_async(async-id)
+wait_ticks(ticks)

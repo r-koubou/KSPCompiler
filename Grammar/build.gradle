@@ -8,17 +8,16 @@ plugins {
 repositories {
     // Use jcenter for resolving dependencies.
     // You can declare any Maven/Ivy/file repository here.
-    jcenter()
     mavenCentral()
 }
 
 dependencies {
     // https://mvnrepository.com/artifact/org.antlr/antlr4
-    antlr group: 'org.antlr', name: 'antlr4', version: '4.13.1'
+    antlr group: 'org.antlr', name: 'antlr4', version: '4.13.2'
 }
 
 wrapper {
-    gradleVersion = '7.6.2'
+    gradleVersion = '9.4.1'
 }
 
 // ANTLR

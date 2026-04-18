@@ -1,0 +1,26 @@
+namespace: KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Blocks
+template: templates/block.cs
+output_dir: Blocks
+suffix: ".cs"
+
+classes:
+  - name: CompilationUnit
+    description: a root node
+
+  - name: CallbackDeclaration
+    description: a callback definition
+
+  - name: UserFunctionDeclaration
+    description: an user Defined Functions (KSP)
+
+  - name: Argument
+    description: an argument
+
+  - name: ArgumentList
+    description: an argument list
+
+  - name: Block
+    description: a callback, block in function
+
+  - name: CaseBlock
+    description: a case block in the select statement

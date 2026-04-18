@@ -1,0 +1,5 @@
+language_version: "default"
+target_framework: "netstandard2.1"
+target_app_framework: "net10"
+namespace_prefix: "KSPCompiler"
+author: "R-Koubou"

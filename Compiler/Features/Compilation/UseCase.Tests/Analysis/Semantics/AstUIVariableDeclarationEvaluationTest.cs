@@ -68,10 +68,11 @@ public class AstUIVariableDeclarationEvaluationTest
         Assert.That( symbols.UserVariables.Count, Is.EqualTo( 1 ) );
     }
 
-    [Test]
-    public void DeclareArrayBaseTest()
+    [TestCase( 2, 1, 2, 10 )]
+    [TestCase( 10, 2, 2, 10 )]
+    public void DeclareArrayBaseByUITableTest(int arraySize, int gridWidth, int gridHeight, int range )
     {
-        // declare ui_table %table[10] (2, 2, 10)
+        // declare ui_table %table[arraySize] (gridWidth, gridHeight, range)
 
         const string name = "%table";
 
@@ -88,29 +89,30 @@ public class AstUIVariableDeclarationEvaluationTest
         var uiLabelType = MockUtility.CreateUITable();
         symbols.UITypes.Add( uiLabelType );
 
-        // declare %variable[10]
+        // declare %variable[arraySize]
         var declaration = MockUtility.CreateVariableDeclarationNode( name );
         declaration.Parent   = callbackAst;
         declaration.Modifier = new AstModiferNode( declaration, uiLabelType.Name );
 
-        // [10] (2, 2, 10)
+        // [arraySize] (gridWidth, gridHeight, range)
         declaration.Initializer = new AstVariableInitializerNode( declaration )
         {
             ArrayInitializer = new AstArrayInitializerNode
             {
                 Parent = declaration,
-                Size   = new AstIntLiteralNode( 10 )
+                Size   = new AstIntLiteralNode( arraySize )
             },
             PrimitiveInitializer = new AstPrimitiveInitializerNode
             {
                 Parent = declaration
             }
         };
+
         declaration.Initializer.ArrayInitializer.Initializer.Expressions.AddRange( new AstExpressionNode[]
         {
-            new AstIntLiteralNode( 2 ),
-            new AstIntLiteralNode( 2 ),
-            new AstIntLiteralNode( 10 )
+            new AstIntLiteralNode( gridWidth ),
+            new AstIntLiteralNode( gridHeight ),
+            new AstIntLiteralNode( range )
         });
 
         var evaluator = new VariableDeclarationEvaluator( eventEmitter, symbols );
