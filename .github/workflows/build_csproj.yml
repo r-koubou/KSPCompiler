@@ -128,6 +128,8 @@ jobs:
         echo "PUBLISH_RELATIVE_DIR_FROM_BASE=${{ env.PUBLISH_DIRNAME }}" >> $GITHUB_ENV
 
     - name: Setup Version Information Path Variable
+      env:
+        PUBLISH_DIR: ${{ env.PUBLISH_DIR }}
       run: |
         echo "VERSION_INFO_PATH=${{ env.PUBLISH_DIR }}/VERSION.txt" >> $GITHUB_ENV
 
@@ -142,6 +144,8 @@ jobs:
     #----------------------------------------------------------
     - name: "Setup the application version ('AssemblyVersion' tag in csproj)"
       if: ${{ inputs.version == '' }}
+      env:
+        CSPROJ_PATH: ${{ env.CSPROJ_PATH }}
       run: |
           VERSION=$(grep '<AssemblyVersion>' ${{ env.CSPROJ_PATH }} | sed -E 's/.*<AssemblyVersion>([^<]+)<\/AssemblyVersion>.*/\1/')
           if [ "$VERSION" == "" ]; then
@@ -160,10 +164,14 @@ jobs:
     # Setup the artifact name
     #----------------------------------------------------------
     - name: Setup the artifact name
+      env:
+        BUILD_VERSION: ${{ env.BUILD_VERSION }}
       run: |
         echo "ARTIFACT_NAME=${{ env.PREFIX }}-${{ env.BUILD_CONFIGURATION }}-v${{ env.BUILD_VERSION }}-${{ inputs.channel }}" >> $GITHUB_ENV
 
     - name: Show the artifact name
+      env:
+        ARTIFACT_NAME: ${{ env.ARTIFACT_NAME }}
       run: |
         {
           echo "## Artifact Name"
@@ -175,6 +183,16 @@ jobs:
     # Show setup Environment Variables
     #----------------------------------------------------------
     - name: Show Environment Variables
+      env:
+        PREFIX: ${{ env.PREFIX }}
+        DOTNET_SDK_VERSION: ${{ env.DOTNET_SDK_VERSION }}
+        BASE_DIR: ${{ env.BASE_DIR }}
+        CSPROJ_PATH: ${{ env.CSPROJ_PATH }}
+        PUBLISH_DIR: ${{ env.PUBLISH_DIR }}
+        BUILD_CONFIGURATION: ${{ env.BUILD_CONFIGURATION }}
+        BUILD_VERSION: ${{ env.BUILD_VERSION }}
+        VERSION_INFO_PATH: ${{ env.VERSION_INFO_PATH }}
+        ARTIFACT_NAME: ${{ env.ARTIFACT_NAME }}
       run: |
         {
           echo "## Environment Variables"
@@ -210,6 +228,8 @@ jobs:
     # Show .csproj file
     #----------------------------------------------------------
     - name: Show .csproj file
+      env:
+        CSPROJ_PATH: ${{ env.CSPROJ_PATH }}
       run: |
         {
           echo "## .csproj file content"
@@ -229,6 +249,11 @@ jobs:
     # Build
     #----------------------------------------------------------
     - name: Build Project
+      env:
+        BASE_DIR: ${{ env.BASE_DIR }}
+        BUILD_VERSION: ${{ env.BUILD_VERSION }}
+        BUILD_CONFIGURATION: ${{ env.BUILD_CONFIGURATION }}
+        PUBLISH_RELATIVE_DIR_FROM_BASE: ${{ env.PUBLISH_RELATIVE_DIR_FROM_BASE }}
       run: |
         pushd ${{ env.BASE_DIR }}
         dotnet publish -p:FileVersion=${{ env.BUILD_VERSION }} -p:Version=${{ env.BUILD_VERSION }} -p:AssemblyVersion=${{ env.BUILD_VERSION }} -c ${{ env.BUILD_CONFIGURATION }} -o ${{ env.PUBLISH_RELATIVE_DIR_FROM_BASE }}
@@ -238,16 +263,25 @@ jobs:
     # Create Version Information File
     #----------------------------------------------------------
     - name: Create Version information file
+      env:
+        PUBLISH_DIR: ${{ env.PUBLISH_DIR }}
+        VERSION_INFO_PATH: ${{ env.VERSION_INFO_PATH }}
+        BUILD_VERSION: ${{ env.BUILD_VERSION }}
+        BUILD_CONFIGURATION: ${{ env.BUILD_CONFIGURATION }}
       run: |
         mkdir -p ${{ env.PUBLISH_DIR }}
-        echo "Build channel: ${{ inputs.channel }}" > ${{ env.VERSION_INFO_PATH }}
-        echo "Build date: $(date)" >> ${{ env.VERSION_INFO_PATH }}
-        echo "Version: ${{ env.BUILD_VERSION }}" >> ${{ env.VERSION_INFO_PATH }}
-        echo "Branch: ${{ github.ref_name }}" >> ${{ env.VERSION_INFO_PATH }}
-        echo "Commit: ${{ github.sha }}" >> ${{ env.VERSION_INFO_PATH }}
-        echo "Build Configuration: ${{ env.BUILD_CONFIGURATION }}" >> ${{ env.VERSION_INFO_PATH }}
+        {
+          echo "Build channel: ${{ inputs.channel }}"
+          echo "Build date: $(date)"
+          echo "Version: ${{ env.BUILD_VERSION }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Commit: ${{ github.sha }}"
+          echo "Build Configuration: ${{ env.BUILD_CONFIGURATION }}"
+        } >> ${{ env.VERSION_INFO_PATH }}
 
     - name: Show Version information file
+      env:
+        VERSION_INFO_PATH: ${{ env.VERSION_INFO_PATH }}
       run: |
         {
           if [ -f ${{ env.VERSION_INFO_PATH }} ]; then
@@ -264,6 +298,10 @@ jobs:
     # Create Artifact
     #----------------------------------------------------------
     - name: Create Artifact
+      env:
+        ARTIFACT_NAME: ${{ env.ARTIFACT_NAME }}
+        BASE_DIR: ${{ env.BASE_DIR }}
+        PUBLISH_DIRNAME: ${{ env.PUBLISH_DIRNAME }}
       uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
       with:
         name: ${{ env.ARTIFACT_NAME }}
