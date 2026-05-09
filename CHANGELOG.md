@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+## v1.1.1
+
+### maintenance Release
+
+Update dependency Frameworks / Libraries
+
 ## v1.1.0
 
 ### New Features
