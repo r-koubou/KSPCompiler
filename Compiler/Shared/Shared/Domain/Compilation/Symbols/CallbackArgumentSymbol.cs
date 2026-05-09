@@ -30,8 +30,8 @@ public sealed class CallbackArgumentSymbol
     }
 
     #region For overload callback arguments comparison
-    public bool Equals( CallbackArgumentSymbol other )
-        => RequiredDeclareOnInit == other.RequiredDeclareOnInit
+    public bool Equals( CallbackArgumentSymbol? other )
+        => other != null && RequiredDeclareOnInit == other.RequiredDeclareOnInit
            && Name == other.Name
            && DataType == other.DataType
            && UITypeNames.SequenceEqual( other.UITypeNames );

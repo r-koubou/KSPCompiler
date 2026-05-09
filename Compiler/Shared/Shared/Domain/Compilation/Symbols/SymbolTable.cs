@@ -55,7 +55,7 @@ public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol
     /// <returns>Valid instance, null if not found</returns>
     public virtual bool TrySearchByName( SymbolName name, out TSymbol result, bool enableSearchParent = true )
     {
-        if( table.TryGetValue( name, out result ) )
+        if( table.TryGetValue( name, out result! ) )
         {
             return true;
         }
@@ -90,7 +90,7 @@ public abstract class SymbolTable<TSymbol> : ISymbolTable<TSymbol> where TSymbol
         foreach( var x in table.Values )
         {
             // ReSharper disable once InvertIf
-            if( x?.TableIndex == index )
+            if( x.TableIndex == index )
             {
                 result = x;
                 return true;
