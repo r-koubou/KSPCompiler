@@ -11,7 +11,6 @@ using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Blocks;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.EventEmitting;
 using KSPCompiler.Shared.EventEmitting.Extensions;
-using KSPCompiler.Shared.UseCase;
 
 namespace KSPCompiler.Features.Compilation.UseCase.ApplicationServices;
 
@@ -48,11 +47,11 @@ public sealed class CompilationRequestHandler : ICompilationRequestHandler
             //-------------------------------------------------
             // Preprocess
             //-------------------------------------------------
-            var preprocessOutput = await ExecutePreprocessAsync( eventEmitter, ast, userSymbolTable, cancellationToken );
+            var preprocessResult = await ExecutePreprocessAsync( eventEmitter, ast, userSymbolTable, cancellationToken );
 
-            if( !preprocessOutput.Result )
+            if( preprocessResult.IsFailure )
             {
-                return new CompilationResponse( false, preprocessOutput.Error, ast, userSymbolTable, string.Empty );
+                return new CompilationResponse( false, preprocessResult.UnwrapError().Error, ast, userSymbolTable, string.Empty );
             }
 
             //-------------------------------------------------
@@ -98,16 +97,14 @@ public sealed class CompilationRequestHandler : ICompilationRequestHandler
         return await analyzer.ExecuteAsync( input, cancellationToken );
     }
 
-    private async Task<UnitOutputPort> ExecutePreprocessAsync(
+    private async Task<Result<Unit, CompilationFailureReason>> ExecutePreprocessAsync(
         IEventEmitter compilerMessageManger,
         AstCompilationUnitNode ast,
         AggregateSymbolTable symbolTable,
         CancellationToken cancellationToken )
     {
         IPreprocessUseCase preprocessor = new PreprocessInteractor();
-        var preprocessInput = new PreprocessInputData(
-            new PreprocessInputDataDetail( compilerMessageManger, ast, symbolTable )
-        );
+        var preprocessInput = new PreprocessInput( compilerMessageManger, ast, symbolTable );
 
         return await preprocessor.ExecuteAsync( preprocessInput, cancellationToken );
     }
