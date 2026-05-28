@@ -1,7 +1,7 @@
-using System;
 using System.Text;
 
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Evaluations.Operators;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators.Extensions;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes;
 
@@ -21,7 +21,7 @@ public class ConditionalUnaryOperatorEvaluator : IConditionalUnaryOperatorEvalua
         _ = expr.Id switch
         {
             AstNodeId.UnaryLogicalNot => OutputBuilder.AppendUnaryOperator( visitor, "not", expr.Left ),
-            _                         => throw new ArgumentException( $"Invalid unary operator: {expr.Id}" )
+            _                         => throw new AstAnalyzeException( expr, $"Invalid unary operator: {expr.Id}" )
         };
 
         return expr;
