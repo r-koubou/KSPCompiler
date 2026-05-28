@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Text;
 
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Evaluations.Declarations;
@@ -30,7 +29,7 @@ public class VariableDeclarationEvaluator(
 
         if( !SymbolTable.TrySearchUserVariableByName( node.Name, out var variable ) )
         {
-            throw new KeyNotFoundException( $"Variable not found: {node.Name} from variable symbol table" );
+            throw SymbolNotFoundException.Variable( node.Name );
         }
 
         // 定数変数はシュリンク

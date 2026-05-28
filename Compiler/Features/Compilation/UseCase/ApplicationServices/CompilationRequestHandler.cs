@@ -80,13 +80,9 @@ public sealed class CompilationRequestHandler : ICompilationRequestHandler
                 cancellationToken
             );
 
-            return new CompilationResponse(
-                obfuscationOutput.Result,
-                obfuscationOutput.Error,
-                ast,
-                userSymbolTable,
-                obfuscationOutput.OutputData
-            );
+            return obfuscationOutput.IsSuccess
+                ? new CompilationResponse( true, null, ast, userSymbolTable, obfuscationOutput.Unwrap().ObfuscatedScript )
+                : new CompilationResponse( false, obfuscationOutput.UnwrapError().Error, ast, userSymbolTable, string.Empty );
         }
         catch( Exception e )
         {
@@ -142,25 +138,16 @@ public sealed class CompilationRequestHandler : ICompilationRequestHandler
         }
     }
 
-    private async Task<ObfuscationOutputData> ExecuteObfuscationAsync(
+    private static async Task<Result<ObfuscationOutput, CompilationFailureReason>> ExecuteObfuscationAsync(
         IEventEmitter eventEmitter,
         AstCompilationUnitNode ast,
         AggregateSymbolTable symbolTable,
         CancellationToken cancellationToken )
     {
         var obfuscator = new ObfuscationInteractor();
-        var input = new ObfuscationInputData(
-            new ObfuscationInputDataDetail( eventEmitter, ast, symbolTable )
-        );
+        var input = new ObfuscationInput( eventEmitter, ast, symbolTable );
 
-        try
-        {
-            return await obfuscator.ExecuteAsync( input, cancellationToken );
-        }
-        catch( Exception e )
-        {
-            return new ObfuscationOutputData( string.Empty, false, e );
-        }
+        return await obfuscator.ExecuteAsync( input, cancellationToken );
     }
 
     #region Setup Symbols

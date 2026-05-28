@@ -1,7 +1,7 @@
-using System;
 using System.Text;
 
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Evaluations.Operators;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators.Extensions;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes;
 
@@ -22,7 +22,7 @@ public class NumericUnaryOperatorEvaluator : IUnaryOperatorEvaluator
         {
             AstNodeId.UnaryMinus => OutputBuilder.AppendUnaryOperator( visitor, "-",     expr.Left ),
             AstNodeId.UnaryNot   => OutputBuilder.AppendUnaryOperator( visitor, ".not.", expr.Left ),
-            _                    => throw new ArgumentException( $"Invalid binary operator: {expr.Id}" )
+            _                    => throw new AstAnalyzeException( expr, $"Invalid binary operator: {expr.Id}" )
         };
 
         return expr;

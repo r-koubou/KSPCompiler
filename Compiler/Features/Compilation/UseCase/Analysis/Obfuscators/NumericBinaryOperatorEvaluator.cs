@@ -1,7 +1,7 @@
-using System;
 using System.Text;
 
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Evaluations.Operators;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators.Extensions;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes;
 
@@ -28,7 +28,7 @@ public class NumericBinaryOperatorEvaluator : IBinaryOperatorEvaluator
             AstNodeId.BitwiseOr   => OutputBuilder.AppendBinaryOperator( visitor, ".or.",  expr.Left, expr.Right ),
             AstNodeId.BitwiseAnd  => OutputBuilder.AppendBinaryOperator( visitor, ".and.", expr.Left, expr.Right ),
             AstNodeId.BitwiseXor  => OutputBuilder.AppendBinaryOperator( visitor, ".xor.", expr.Left, expr.Right ),
-            _                     => throw new ArgumentException( $"Invalid binary operator: {expr.Id}" )
+            _                     => throw new AstAnalyzeException( expr, $"Invalid binary operator: {expr.Id}" )
         };
 
         return expr;

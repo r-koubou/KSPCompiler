@@ -1,7 +1,7 @@
-using System;
 using System.Text;
 
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Evaluations.Operators;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators.Extensions;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes;
 
@@ -23,7 +23,7 @@ public class ConditionalLogicalOperatorEvaluator : IConditionalLogicalOperatorEv
             AstNodeId.LogicalOr  => OutputBuilder.AppendBinaryOperator( visitor, "or",  expr.Left, expr.Right ),
             AstNodeId.LogicalAnd => OutputBuilder.AppendBinaryOperator( visitor, "and", expr.Left, expr.Right ),
             AstNodeId.LogicalXor => OutputBuilder.AppendBinaryOperator( visitor, "xor", expr.Left, expr.Right ),
-            _                    => throw new ArgumentException( $"Invalid logical operator: {expr.Id}" )
+            _                    => throw new AstAnalyzeException( expr, $"Invalid logical operator: {expr.Id}" )
         };
 
         return expr;
