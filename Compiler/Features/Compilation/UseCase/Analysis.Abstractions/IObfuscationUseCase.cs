@@ -1,13 +1,14 @@
-using System;
+using System.Threading;
+using System.Threading.Tasks;
 
+using KSPCompiler.Shared;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Blocks;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.EventEmitting;
-using KSPCompiler.Shared.UseCase;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions;
 
-public sealed class ObfuscationInputDataDetail
+public sealed record ObfuscationInput
 {
     public IEventEmitter EventEmitter { get; }
     public AstCompilationUnitNode CompilationUnitNode { get; }
@@ -15,28 +16,25 @@ public sealed class ObfuscationInputDataDetail
 
     public int DefaultOutputBufferCapacity { get; }
 
-    public ObfuscationInputDataDetail(
+    // ReSharper disable once ConvertToPrimaryConstructor
+    public ObfuscationInput(
         IEventEmitter eventEmitter,
         AstCompilationUnitNode compilationUnitNode,
         AggregateSymbolTable symbolTable,
         int defaultOutputBufferCapacity = 16384 )
     {
-        EventEmitter              = eventEmitter;
+        EventEmitter                = eventEmitter;
         CompilationUnitNode         = compilationUnitNode;
         SymbolTable                 = symbolTable;
         DefaultOutputBufferCapacity = defaultOutputBufferCapacity;
     }
 }
 
-public sealed class ObfuscationInputData(
-    ObfuscationInputDataDetail inputInput
-) : InputPort<ObfuscationInputDataDetail>( inputInput );
-
-public sealed class ObfuscationOutputData(
-    string outputData,
-    bool result,
-    Exception? error = null
-) : OutputPort<string>( outputData, result, error );
+public sealed record ObfuscationOutput(
+    string ObfuscatedScript
+);
 
 public interface IObfuscationUseCase
-    : IUseCase<ObfuscationInputData, ObfuscationOutputData> {}
+{
+    Task<Result<ObfuscationOutput, CompilationFailureReason>> ExecuteAsync( ObfuscationInput input, CancellationToken cancellationToken = default );
+}

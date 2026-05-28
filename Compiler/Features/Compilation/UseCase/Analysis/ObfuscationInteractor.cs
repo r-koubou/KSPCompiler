@@ -1,41 +1,49 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators;
+using KSPCompiler.Shared;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis;
 
 public class ObfuscationInteractor : IObfuscationUseCase
 {
-    public Task<ObfuscationOutputData> ExecuteAsync( ObfuscationInputData parameter, CancellationToken cancellationToken = default )
+    public async Task<Result<ObfuscationOutput, CompilationFailureReason>> ExecuteAsync( ObfuscationInput input, CancellationToken cancellationToken = default )
+
     {
-        var output = new StringBuilder( parameter.Input.DefaultOutputBufferCapacity );
+        var obfuscatedStringBuilder = new StringBuilder( input.DefaultOutputBufferCapacity );
 
-        var messageManger = parameter.Input.EventEmitter;
-        var compilationUnit = parameter.Input.CompilationUnitNode;
-        var symbolTable = parameter.Input.SymbolTable;
+        var messageManger = input.EventEmitter;
+        var compilationUnit = input.CompilationUnitNode;
+        var symbolTable = input.SymbolTable;
 
-        var context = new ObfuscatorContext( output, messageManger, symbolTable );
-        var obfuscator = new Obfuscator( context, output );
+        var context = new ObfuscatorContext( obfuscatedStringBuilder, messageManger, symbolTable );
+        var obfuscator = new Obfuscator( context, obfuscatedStringBuilder );
 
         try
         {
             obfuscator.Traverse( compilationUnit );
+
+            var outputData = new ObfuscationOutput( obfuscatedStringBuilder.ToString() );
+
+            await Task.CompletedTask;
+            return Result<ObfuscationOutput, CompilationFailureReason>.Success( outputData );
+        }
+        catch( ArgumentException e )
+        {
+            return Result<ObfuscationOutput, CompilationFailureReason>.Failure( CompilationFailureReason.SemanticsError, e );
+        }
+        catch( KeyNotFoundException e )
+        {
+            return Result<ObfuscationOutput, CompilationFailureReason>.Failure( CompilationFailureReason.SymbolNotFound, e );
         }
         catch( Exception e )
         {
-            return Task.FromResult( CreateOutputData( false, e ) );
+            return Result<ObfuscationOutput, CompilationFailureReason>.Failure( CompilationFailureReason.Other, e );
         }
-
-        return Task.FromResult( CreateOutputData( true, null ) );
-
-        ObfuscationOutputData CreateOutputData( bool result, Exception? error )
-            => new( output.ToString(), result, error );
     }
-
-    public ObfuscationOutputData Execute( ObfuscationInputData input )
-        => ExecuteAsync( input ).GetAwaiter().GetResult();
 }
