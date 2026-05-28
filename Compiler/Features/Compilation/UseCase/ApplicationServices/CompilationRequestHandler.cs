@@ -72,16 +72,16 @@ public sealed class CompilationRequestHandler : ICompilationRequestHandler
                 return new CompilationResponse( noAnalysisError, null, ast, userSymbolTable, string.Empty );
             }
 
-            var obfuscationOutput = await ExecuteObfuscationAsync(
+            var obfuscateResult = await ExecuteObfuscationAsync(
                 eventEmitter,
                 semanticAnalysisOutput.OutputData.CompilationUnitNode,
                 semanticAnalysisOutput.OutputData.SymbolTable,
                 cancellationToken
             );
 
-            return obfuscationOutput.IsSuccess
-                ? new CompilationResponse( true, null, ast, userSymbolTable, obfuscationOutput.Unwrap().ObfuscatedScript )
-                : new CompilationResponse( false, obfuscationOutput.UnwrapError().Error, ast, userSymbolTable, string.Empty );
+            return obfuscateResult.IsSuccess
+                ? new CompilationResponse( true, null, ast, userSymbolTable, obfuscateResult.Unwrap().ObfuscatedScript )
+                : new CompilationResponse( false, obfuscateResult.UnwrapError().Error, ast, userSymbolTable, string.Empty );
         }
         catch( Exception e )
         {
