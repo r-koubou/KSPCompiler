@@ -72,13 +72,18 @@ public sealed class SymbolDatabaseApplicationService<TSymbol>( ISymbolRepository
     public async Task<FindResult<TSymbol>> FindAsync( Predicate<TSymbol> predicate, CancellationToken cancellationToken = default )
     {
         var useCase = new FindSymbolFromRepositoryInteractor<TSymbol>( Repository );
-        var inputPort = new FindSymbolInputData<TSymbol>( predicate );
-        var outputPort = await useCase.ExecuteAsync( inputPort, cancellationToken );
+        var input = new FindSymbolInput<TSymbol>( predicate );
+        var result = await useCase.ExecuteAsync( input, cancellationToken );
 
-        return new FindResult<TSymbol>(
-            outputPort.Result,
-            outputPort.OutputData,
-            outputPort.Error
-        );
+        if( result.IsFailure )
+        {
+            return new FindResult<TSymbol>(
+                false,
+                [],
+                result.UnwrapError().Error
+            );
+        }
+
+        return new FindResult<TSymbol>( true, result.Unwrap().Symbols );
     }
 }

@@ -1,21 +1,22 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
+using KSPCompiler.Shared;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
-using KSPCompiler.Shared.UseCase;
 
 namespace KSPCompiler.Features.SymbolManagement.UseCase.Abstractions;
 
-public sealed class FindSymbolInputData<TSymbol>(
-    Predicate<TSymbol> inputInput
-) : InputPort<Predicate<TSymbol>>( inputInput ) where TSymbol : SymbolBase;
+public sealed record FindSymbolInput<TSymbol>(
+    Predicate<TSymbol> Input
+) where TSymbol : SymbolBase;
 
-public sealed class FindSymbolOutputData<TSymbol>(
-    IReadOnlyCollection<TSymbol> outputData,
-    bool result,
-    Exception? error = null
-) : OutputPort<IReadOnlyCollection<TSymbol>>( outputData, result, error ) where TSymbol : SymbolBase;
+public sealed record FindSymbolOutput<TSymbol>(
+    IReadOnlyCollection<TSymbol> Symbols
+) where TSymbol : SymbolBase;
 
-public interface IFindSymbolUseCase<TSymbol>
-    : IUseCase<FindSymbolInputData<TSymbol>, FindSymbolOutputData<TSymbol>>
-    where TSymbol : SymbolBase;
+public interface IFindSymbolUseCase<TSymbol> where TSymbol : SymbolBase
+{
+    Task<Result<FindSymbolOutput<TSymbol>, SymbolManagementFailureReason>> ExecuteAsync( FindSymbolInput<TSymbol> input, CancellationToken cancellationToken = default );
+}
