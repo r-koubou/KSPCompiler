@@ -18,7 +18,7 @@ public class ExportSymbolFromRepositoryInteractor<TSymbol> : IExportSymbolUseCas
         Repository = repository;
     }
 
-    public async Task<Result<Unit, SymbolManagementFailureReason>> ExecuteAsync( ExportSymbolInputData<TSymbol> input, CancellationToken cancellationToken = default )
+    public async Task<Result<Unit, SymbolManagementFailureReason>> ExecuteAsync( ExportSymbolInput<TSymbol> input, CancellationToken cancellationToken = default )
     {
         try
         {

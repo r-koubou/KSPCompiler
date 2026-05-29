@@ -37,7 +37,7 @@ public sealed class SymbolDatabaseApplicationService<TSymbol>( ISymbolRepository
     public async Task<ExportResult> ExportAsync( ISymbolExporter<TSymbol> exporter, Predicate<TSymbol> predicate, CancellationToken cancellationToken = default )
     {
         var useCase = new ExportSymbolFromRepositoryInteractor<TSymbol>( Repository );
-        var input = new ExportSymbolInputData<TSymbol>(
+        var input = new ExportSymbolInput<TSymbol>(
             exporter,
             predicate
         );

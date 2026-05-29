@@ -11,7 +11,7 @@ namespace KSPCompiler.Features.SymbolManagement.UseCase;
 public class ExportSymbolTemplateInteractor<TSymbol>
     : IExportSymbolTemplateUseCase<TSymbol> where TSymbol : SymbolBase
 {
-    public async Task<Result<Unit, SymbolManagementFailureReason>> ExecuteAsync( ExportSymbolTemplateInputPort<TSymbol> input, CancellationToken cancellationToken = default )
+    public async Task<Result<Unit, SymbolManagementFailureReason>> ExecuteAsync( ExportSymbolTemplateInput<TSymbol> input, CancellationToken cancellationToken = default )
     {
         try
         {

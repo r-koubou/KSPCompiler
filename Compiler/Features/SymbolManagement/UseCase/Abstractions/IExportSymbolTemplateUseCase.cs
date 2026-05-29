@@ -7,11 +7,11 @@ using KSPCompiler.Shared.IO.Abstractions.Symbol;
 
 namespace KSPCompiler.Features.SymbolManagement.UseCase.Abstractions;
 
-public sealed record  ExportSymbolTemplateInputPort<TSymbol>(
+public sealed record  ExportSymbolTemplateInput<TSymbol>(
     ISymbolExporter<TSymbol> Input
 ) where TSymbol : SymbolBase;
 
 public interface IExportSymbolTemplateUseCase<TSymbol> where TSymbol : SymbolBase
 {
-    Task<Result<Unit, SymbolManagementFailureReason>> ExecuteAsync( ExportSymbolTemplateInputPort<TSymbol> input, CancellationToken cancellationToken = default );
+    Task<Result<Unit, SymbolManagementFailureReason>> ExecuteAsync( ExportSymbolTemplateInput<TSymbol> input, CancellationToken cancellationToken = default );
 }
