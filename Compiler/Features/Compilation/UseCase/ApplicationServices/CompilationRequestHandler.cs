@@ -57,12 +57,14 @@ public sealed class CompilationRequestHandler : ICompilationRequestHandler
             //-------------------------------------------------
             // Semantic Analysis
             //-------------------------------------------------
-            var semanticAnalysisOutput = await ExecuteSemanticAnalysisAsync( eventEmitter, ast, userSymbolTable, cancellationToken );
+            var semanticAnalysisResult = await ExecuteSemanticAnalysisAsync( eventEmitter, ast, userSymbolTable, cancellationToken );
 
-            if( !semanticAnalysisOutput.Result )
+            if( semanticAnalysisResult.IsFailure )
             {
-                return new CompilationResponse( false, semanticAnalysisOutput.Error, ast, userSymbolTable, string.Empty );
+                return new CompilationResponse( false, semanticAnalysisResult.UnwrapError().Error, ast, userSymbolTable, string.Empty );
             }
+
+            var semanticAnalysisOutput = semanticAnalysisResult.Unwrap();
 
             //-------------------------------------------------
             // Obfuscation
@@ -74,8 +76,8 @@ public sealed class CompilationRequestHandler : ICompilationRequestHandler
 
             var obfuscateResult = await ExecuteObfuscationAsync(
                 eventEmitter,
-                semanticAnalysisOutput.OutputData.CompilationUnitNode,
-                semanticAnalysisOutput.OutputData.SymbolTable,
+                semanticAnalysisOutput.CompilationUnitNode,
+                semanticAnalysisOutput.SymbolTable,
                 cancellationToken
             );
 
@@ -109,30 +111,16 @@ public sealed class CompilationRequestHandler : ICompilationRequestHandler
         return await preprocessor.ExecuteAsync( preprocessInput, cancellationToken );
     }
 
-    private async Task<SemanticAnalysisOutputData> ExecuteSemanticAnalysisAsync(
+    private static async Task<Result<SemanticAnalysisOutput, CompilationFailureReason>> ExecuteSemanticAnalysisAsync(
         IEventEmitter eventEmitter,
         AstCompilationUnitNode ast,
         AggregateSymbolTable symbolTable,
         CancellationToken cancellationToken )
     {
         var semanticAnalyzer = new SemanticAnalysisInteractor();
-        var preprocessInput = new SemanticAnalysisInputData(
-            new SemanticAnalysisInputDataDetail( eventEmitter, ast, symbolTable )
-        );
+        var preprocessInput = new SemanticAnalysisInput( eventEmitter, ast, symbolTable );
 
-        try
-        {
-            return await semanticAnalyzer.ExecuteAsync( preprocessInput, cancellationToken );
-        }
-        catch( Exception e )
-        {
-            return new SemanticAnalysisOutputData(
-                new SemanticAnalysisOutputDataDetail(
-                    ast,
-                    symbolTable
-                ), false, e
-            );
-        }
+        return await semanticAnalyzer.ExecuteAsync( preprocessInput, cancellationToken );
     }
 
     private static async Task<Result<ObfuscationOutput, CompilationFailureReason>> ExecuteObfuscationAsync(

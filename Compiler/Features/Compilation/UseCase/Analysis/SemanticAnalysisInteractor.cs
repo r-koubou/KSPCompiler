@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
 using KSPCompiler.Shared;
 using KSPCompiler.Shared.EventEmitting.Extensions;
@@ -12,13 +13,13 @@ namespace KSPCompiler.Features.Compilation.UseCase.Analysis;
 
 public class SemanticAnalysisInteractor : ISemanticAnalysisUseCase
 {
-    public Task<SemanticAnalysisOutputData> ExecuteAsync( SemanticAnalysisInputData parameter, CancellationToken cancellationToken = default )
+    public async Task<Result<SemanticAnalysisOutput, CompilationFailureReason>> ExecuteAsync( SemanticAnalysisInput input, CancellationToken cancellationToken = default )
     {
-        var node = parameter.Input.CompilationUnitNode;
-        var symbolTable = parameter.Input.SymbolTable;
+        var node = input.CompilationUnitNode;
+        var symbolTable = input.SymbolTable;
 
         var noError = true;
-        var eventEmitter = parameter.Input.EventEmitter;
+        var eventEmitter = input.EventEmitter;
 
         try
         {
@@ -29,19 +30,21 @@ public class SemanticAnalysisInteractor : ISemanticAnalysisUseCase
             var context = new SemanticAnalyzerContext( eventEmitter, symbolTable );
             var analyzer = new SemanticAnalyzer( context );
 
-            analyzer.Traverse( parameter.Input.CompilationUnitNode );
+            analyzer.Traverse( input.CompilationUnitNode );
+
+            await Task.CompletedTask;
+
+            return noError
+                ? Result<SemanticAnalysisOutput, CompilationFailureReason>.Success( new SemanticAnalysisOutput( node, symbolTable ) )
+                : Result<SemanticAnalysisOutput, CompilationFailureReason>.Failure( CompilationFailureReason.SemanticsError );
+        }
+        catch( AstAnalyzeException e )
+        {
+            return Result<SemanticAnalysisOutput, CompilationFailureReason>.Failure( CompilationFailureReason.SemanticsError, e );
         }
         catch( Exception e )
         {
-            return Task.FromResult( CreateOutputData( false, e ) );
+            return Result<SemanticAnalysisOutput, CompilationFailureReason>.Failure( CompilationFailureReason.Other, e );
         }
-
-        return Task.FromResult( CreateOutputData( noError, null ) );
-
-        SemanticAnalysisOutputData CreateOutputData( bool result, Exception? error )
-            => new( new SemanticAnalysisOutputDataDetail( node, symbolTable ), result, error );
     }
-
-    public SemanticAnalysisOutputData Execute( SemanticAnalysisInputData input )
-        => ExecuteAsync( input ).GetAwaiter().GetResult();
 }

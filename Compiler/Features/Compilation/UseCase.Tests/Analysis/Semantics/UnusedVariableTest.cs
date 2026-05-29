@@ -76,16 +76,15 @@ public class UnusedVariableTest
 
         // Run semantic analysis
         var interactor = new SemanticAnalysisInteractor();
-        var input = new SemanticAnalysisInputData(
-            new SemanticAnalysisInputDataDetail(
-                eventEmitter,
-                rootAst,
-                symbols
-            )
+        var input = new SemanticAnalysisInput(
+            eventEmitter,
+            rootAst,
+            symbols
         );
 
         var result = await interactor.ExecuteAsync( input, CancellationToken.None );
-        Assert.That( result.Result, Is.True, $"Semantic analysis failed : {result.Error}" );
+        var error = result.IsFailure ? result.UnwrapError().Error : null;
+        Assert.That( result.IsSuccess, Is.True, $"Semantic analysis failed : {error?.Message}" );
 
         compilerMessageManger.WriteTo( Console.Out );
 
