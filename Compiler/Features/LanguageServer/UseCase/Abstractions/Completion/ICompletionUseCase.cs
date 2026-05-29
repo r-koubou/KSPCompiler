@@ -1,34 +1,25 @@
-using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Compilation;
+using KSPCompiler.Shared;
 using KSPCompiler.Shared.Text;
-using KSPCompiler.Shared.UseCase;
 
 namespace KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Completion;
 
-public sealed class CompletionHandlingInputPortDetail(
-    ICompilationCacheManager compilerCacheService,
-    ScriptLocation scriptLocation,
-    Position position,
-    bool preferSnippetInsertion
-)
-{
-    public ICompilationCacheManager Cache { get; } = compilerCacheService;
-    public ScriptLocation Location { get; } = scriptLocation;
-    public Position Position { get; } = position;
-    public bool PreferSnippetInsertion { get; } = preferSnippetInsertion;
-}
+public sealed record CompletionHandlingInput(
+    ICompilationCacheManager Cache,
+    ScriptLocation Location,
+    Position Position,
+    bool PreferSnippetInsertion
+);
 
-public sealed class CompletionHandlingInputPort(
-    CompletionHandlingInputPortDetail inputInput
-) : InputPort<CompletionHandlingInputPortDetail>( inputInput );
-
-public sealed class CompletionHandlingOutput(
-    List<CompletionItem> outputData,
-    bool result,
-    Exception? error = null
-) : OutputPort<List<CompletionItem>>( outputData, result, error );
+public sealed record CompletionHandlingOutput(
+    List<CompletionItem> OutputData
+);
 
 public interface ICompletionUseCase
-    : IUseCase<CompletionHandlingInputPort, CompletionHandlingOutput>;
+{
+    Task<Result<CompletionHandlingOutput, LanguageServerFailureReason>> ExecuteAsync( CompletionHandlingInput input, CancellationToken cancellationToken = default );
+}

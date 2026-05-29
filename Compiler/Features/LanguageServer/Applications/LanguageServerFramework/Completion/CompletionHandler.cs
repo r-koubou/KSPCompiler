@@ -38,23 +38,25 @@ public class CompletionHandler(
             return null;
         }
 
-        var input = new CompletionHandlingInputPort(
-            new CompletionHandlingInputPortDetail(
-                compilationCacheManager,
-                scriptLocation,
-                position,
-                config.PreferSnippetInsertion
-            )
+        var input = new CompletionHandlingInput(
+            compilationCacheManager,
+            scriptLocation,
+            position,
+            config.PreferSnippetInsertion
         );
 
-        var output = await interactor.ExecuteAsync( input, token );
+        var result = await interactor.ExecuteAsync( input, token );
 
-        if( !output.Result || output.OutputData.Count == 0 )
+        if( result.IsFailure )
         {
             return null;
         }
 
-        return new CompletionResponse( output.OutputData.As() );
+        var output = result.Unwrap();
+
+        return output.OutputData.Count == 0
+            ? null
+            : new CompletionResponse( output.OutputData.As() );
     }
 
     protected override async Task<FrameworkCompletionItem> Resolve( FrameworkCompletionItem item, CancellationToken token )
