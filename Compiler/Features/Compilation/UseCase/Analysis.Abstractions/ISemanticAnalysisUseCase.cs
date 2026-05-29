@@ -1,42 +1,25 @@
-using System;
+using System.Threading;
+using System.Threading.Tasks;
 
+using KSPCompiler.Shared;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Blocks;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.EventEmitting;
-using KSPCompiler.Shared.UseCase;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions;
 
-public sealed class SemanticAnalysisInputDataDetail(
-    IEventEmitter eventEmitter,
-    AstCompilationUnitNode compilationUnitNode,
-    AggregateSymbolTable symbolTable )
-{
-    public IEventEmitter EventEmitter { get; } = eventEmitter;
+public sealed record SemanticAnalysisInput(
+    IEventEmitter EventEmitter,
+    AstCompilationUnitNode CompilationUnitNode,
+    AggregateSymbolTable SymbolTable
+);
 
-    public AstCompilationUnitNode CompilationUnitNode { get; } = compilationUnitNode;
-
-    public AggregateSymbolTable SymbolTable { get; } = symbolTable;
-}
-
-public sealed class SemanticAnalysisInputData(
-    SemanticAnalysisInputDataDetail inputInput
-) : InputPort<SemanticAnalysisInputDataDetail>( inputInput );
-
-public sealed class SemanticAnalysisOutputDataDetail(
-    AstCompilationUnitNode compilationUnitNode,
-    AggregateSymbolTable symbolTable )
-{
-    public AstCompilationUnitNode CompilationUnitNode { get; } = compilationUnitNode;
-
-    public AggregateSymbolTable SymbolTable { get; } = symbolTable;
-}
-
-public sealed class SemanticAnalysisOutputData(
-    SemanticAnalysisOutputDataDetail outputData,
-    bool result,
-    Exception? error
-) : OutputPort<SemanticAnalysisOutputDataDetail>( outputData, result, error );
+public sealed record SemanticAnalysisOutput(
+    AstCompilationUnitNode CompilationUnitNode,
+    AggregateSymbolTable SymbolTable
+);
 
 public interface ISemanticAnalysisUseCase
-    : IUseCase<SemanticAnalysisInputData, SemanticAnalysisOutputData> {}
+{
+    Task<Result<SemanticAnalysisOutput, CompilationFailureReason>> ExecuteAsync( SemanticAnalysisInput input, CancellationToken cancellationToken = default );
+}
