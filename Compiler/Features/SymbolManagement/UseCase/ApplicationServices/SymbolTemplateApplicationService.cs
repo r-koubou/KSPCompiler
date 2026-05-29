@@ -13,17 +13,13 @@ public sealed class SymbolTemplateApplicationService<TSymbol> where TSymbol : Sy
     public async Task<ExportResult> ExportAsync( ISymbolExporter<TSymbol> exporter, CancellationToken cancellationToken = default )
     {
         var useCase = new ExportSymbolTemplateInteractor<TSymbol>();
-        var inputPort = new ExportSymbolTemplateInputPort<TSymbol>( exporter );
-        var outputPort = await useCase.ExecuteAsync( inputPort, cancellationToken );
+        var input = new ExportSymbolTemplateInputPort<TSymbol>( exporter );
+        var result = await useCase.ExecuteAsync( input, cancellationToken );
 
-        if( !outputPort.Result )
-        {
-            return new ExportResult( false, outputPort.Error );
-        }
+        await Task.CompletedTask;
 
-        return new ExportResult(
-            outputPort.Result,
-            outputPort.Error
-        );
+        return result.IsFailure
+            ? new ExportResult( false, result.UnwrapError().Error )
+            : new ExportResult( true );
     }
 }

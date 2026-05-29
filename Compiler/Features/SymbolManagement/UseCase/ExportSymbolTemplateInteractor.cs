@@ -3,25 +3,25 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using KSPCompiler.Features.SymbolManagement.UseCase.Abstractions;
+using KSPCompiler.Shared;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
-using KSPCompiler.Shared.UseCase;
 
 namespace KSPCompiler.Features.SymbolManagement.UseCase;
 
 public class ExportSymbolTemplateInteractor<TSymbol>
     : IExportSymbolTemplateUseCase<TSymbol> where TSymbol : SymbolBase
 {
-    public async Task<UnitOutputPort> ExecuteAsync( ExportSymbolTemplateInputPort<TSymbol> parameter, CancellationToken cancellationToken = default )
+    public async Task<Result<Unit, SymbolManagementFailureReason>> ExecuteAsync( ExportSymbolTemplateInputPort<TSymbol> input, CancellationToken cancellationToken = default )
     {
         try
         {
-            await parameter.Input.ExportTemplateAsync( cancellationToken );
+            await input.Input.ExportTemplateAsync( cancellationToken );
 
-            return new UnitOutputPort( true );
+            return Result<Unit, SymbolManagementFailureReason>.Success( Unit.Default );
         }
         catch( Exception e )
         {
-            return new UnitOutputPort( false, e );
+            return Result<Unit, SymbolManagementFailureReason>.Failure( SymbolManagementFailureReason.Other, e );
         }
     }
 }
