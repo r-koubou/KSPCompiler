@@ -26,25 +26,30 @@ public sealed class RenameHandler( ICompilationCacheManager compilationCacheMana
         var position = request.Position.As();
         var newName = request.NewName;
 
-        var input = new RenamingInputPort(
-            new RenamingInputPortDetail(
-                compilationCacheManager,
-                scriptLocation,
-                position,
-                newName
-            )
+        var input = new RenamingInput(
+            compilationCacheManager,
+            scriptLocation,
+            position,
+            newName
         );
 
-        var output = await interactor.ExecuteAsync( input, token );
+        var result = await interactor.ExecuteAsync( input, token );
 
-        if( !output.Result || output.OutputData.Count == 0 )
+        if( result.IsFailure )
+        {
+            return null;
+        }
+
+        var output = result.Unwrap();
+
+        if( output.Changes.Count == 0 )
         {
             return null;
         }
 
         return new WorkspaceEdit
         {
-            Changes = output.OutputData.As()
+            Changes = output.Changes.As()
         };
     }
 
