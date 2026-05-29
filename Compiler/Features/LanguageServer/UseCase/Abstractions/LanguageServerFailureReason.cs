@@ -4,5 +4,6 @@ public enum LanguageServerFailureReason
 {
     Other,
     IoError,
-    Canceled
+    Canceled,
+    SymbolNotFound
 }
