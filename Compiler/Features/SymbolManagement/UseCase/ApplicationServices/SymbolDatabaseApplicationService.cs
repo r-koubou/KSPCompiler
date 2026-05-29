@@ -60,14 +60,20 @@ public sealed class SymbolDatabaseApplicationService<TSymbol>( ISymbolRepository
     public async Task<DeleteResult> DeleteAsync( Predicate<TSymbol> predicate, CancellationToken cancellationToken = default )
     {
         var useCase = new DeleteSymbolFromRepositoryInteractor<TSymbol>( Repository );
-        var inputPort = new DeleteSymbolInputData<TSymbol>( predicate );
-        var outputPort = await useCase.ExecuteAsync( inputPort, cancellationToken );
+        var input = new DeleteSymbolInput<TSymbol>( predicate );
+        var result = await useCase.ExecuteAsync( input, cancellationToken );
+
+       if( result.IsFailure )
+       {
+           return new DeleteResult( false, 0, 0, result.UnwrapError().Error );
+       }
+
+       var output = result.Unwrap();
 
         return new DeleteResult(
-            success: outputPort.Result,
-            deletedCount: outputPort.OutputData.DeletedCount,
-            failedCount: outputPort.OutputData.FailedCount,
-            exception: outputPort.Error
+            success: true,
+            deletedCount: output.DeletedCount,
+            failedCount: output.FailedCount
         );
     }
 

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 
 using KSPCompiler.Features.SymbolManagement.Gateways;
 using KSPCompiler.Features.SymbolManagement.UseCase.Abstractions;
+using KSPCompiler.Shared;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 
 namespace KSPCompiler.Features.SymbolManagement.UseCase;
@@ -16,15 +17,16 @@ public class DeleteSymbolFromRepositoryInteractor<TSymbol> : IDeleteSymbolUseCas
         Repository = repository;
     }
 
-    public async Task<DeleteOutputData> ExecuteAsync( DeleteSymbolInputData<TSymbol> parameter, CancellationToken cancellationToken = default )
+    public async Task<Result<DeleteOutput, SymbolManagementFailureReason>> ExecuteAsync( DeleteSymbolInput<TSymbol> input, CancellationToken cancellationToken = default )
     {
-        var symbols = await Repository.FindAsync( parameter.Input, cancellationToken );
+        var symbols = await Repository.FindAsync( input.Input, cancellationToken );
         var deleteResult = await Repository.DeleteAsync( symbols, cancellationToken );
 
-        return new DeleteOutputData(
-            outputData: new DeleteOutputDetail( deleteResult.DeletedCount, deleteResult.FailedCount ),
-            result: deleteResult.Success,
-            error: deleteResult.Exception
+        return Result<DeleteOutput, SymbolManagementFailureReason>.Success(
+            new DeleteOutput(
+                deleteResult.DeletedCount,
+                deleteResult.FailedCount
+            )
         );
     }
 }
