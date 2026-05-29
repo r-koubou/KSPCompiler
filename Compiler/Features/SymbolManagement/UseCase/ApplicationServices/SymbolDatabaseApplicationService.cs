@@ -37,24 +37,16 @@ public sealed class SymbolDatabaseApplicationService<TSymbol>( ISymbolRepository
     public async Task<ExportResult> ExportAsync( ISymbolExporter<TSymbol> exporter, Predicate<TSymbol> predicate, CancellationToken cancellationToken = default )
     {
         var useCase = new ExportSymbolFromRepositoryInteractor<TSymbol>( Repository );
-        var inputPort = new ExportSymbolInputData<TSymbol>(
-            new ExportSymbolInputDataDetail<TSymbol>(
-                exporter,
-                predicate
-            )
+        var input = new ExportSymbolInputData<TSymbol>(
+            exporter,
+            predicate
         );
 
-        var outputPort = await useCase.ExecuteAsync( inputPort, cancellationToken );
+        var result = await useCase.ExecuteAsync( input, cancellationToken );
 
-        if( !outputPort.Result )
-        {
-            return new ExportResult( false, outputPort.Error );
-        }
-
-        return new ExportResult(
-            outputPort.Result,
-            outputPort.Error
-        );
+        return result.IsFailure
+            ? new ExportResult( false, result.UnwrapError().Error )
+            : new ExportResult( true );
     }
 
     public async Task<DeleteResult> DeleteAsync( Predicate<TSymbol> predicate, CancellationToken cancellationToken = default )

@@ -1,24 +1,19 @@
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
+using KSPCompiler.Shared;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.IO.Abstractions.Symbol;
-using KSPCompiler.Shared.UseCase;
 
 namespace KSPCompiler.Features.SymbolManagement.UseCase.Abstractions;
 
-public sealed class ExportSymbolInputData<TSymbol>(
-    ExportSymbolInputDataDetail<TSymbol> inputInput
-) : InputPort<ExportSymbolInputDataDetail<TSymbol>>( inputInput ) where TSymbol : SymbolBase;
+public sealed record ExportSymbolInputData<TSymbol>(
+    ISymbolExporter<TSymbol> Exporter,
+    Predicate<TSymbol> Predicate
+) where TSymbol : SymbolBase;
 
-public sealed class ExportSymbolInputDataDetail<TSymbol>(
-    ISymbolExporter<TSymbol> exporter,
-    Predicate<TSymbol> predicate
-) where TSymbol : SymbolBase
+public interface IExportSymbolUseCase<TSymbol> where TSymbol : SymbolBase
 {
-    public ISymbolExporter<TSymbol> Exporter { get; } = exporter;
-    public Predicate<TSymbol> Predicate { get; } = predicate;
+    Task<Result<Unit, SymbolManagementFailureReason>> ExecuteAsync( ExportSymbolInputData<TSymbol> input, CancellationToken cancellationToken = default );
 }
-
-public interface IExportSymbolUseCase<TSymbol>
-    : IUseCase<ExportSymbolInputData<TSymbol>, UnitOutputPort>
-    where TSymbol : SymbolBase {}
