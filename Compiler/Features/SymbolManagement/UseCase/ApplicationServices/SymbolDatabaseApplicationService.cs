@@ -17,20 +17,21 @@ public sealed class SymbolDatabaseApplicationService<TSymbol>( ISymbolRepository
     public async Task<ImportResult> ImportAsync( ISymbolImporter<TSymbol> importer, CancellationToken cancellationToken = default )
     {
         var useCase = new ImportSymbolToRepositoryInteractor<TSymbol>( Repository );
-        var inputPort = new ImportSymbolInputPort<TSymbol>( importer );
-        var outputPort = await useCase.ExecuteAsync( inputPort, cancellationToken );
+        var input = new ImportSymbolInput<TSymbol>( importer );
+        var result = await useCase.ExecuteAsync( input, cancellationToken );
 
-        if( !outputPort.Result )
+        if( result.IsFailure )
         {
-            return new ImportResult( false, 0, 0, 0, outputPort.Error );
+            return new ImportResult( false, 0, 0, 0, result.UnwrapError().Error );
         }
 
+        var output = result.Unwrap();
+
         return new ImportResult(
-            outputPort.Result,
-            outputPort.OutputData.CreatedCount,
-            outputPort.OutputData.UpdatedCount,
-            outputPort.OutputData.FailedCount,
-            outputPort.Error
+            true,
+            output.CreatedCount,
+            output.UpdatedCount,
+            output.FailedCount
         );
     }
 
@@ -55,12 +56,12 @@ public sealed class SymbolDatabaseApplicationService<TSymbol>( ISymbolRepository
         var input = new DeleteSymbolInput<TSymbol>( predicate );
         var result = await useCase.ExecuteAsync( input, cancellationToken );
 
-       if( result.IsFailure )
-       {
-           return new DeleteResult( false, 0, 0, result.UnwrapError().Error );
-       }
+        if( result.IsFailure )
+        {
+            return new DeleteResult( false, 0, 0, result.UnwrapError().Error );
+        }
 
-       var output = result.Unwrap();
+        var output = result.Unwrap();
 
         return new DeleteResult(
             success: true,
@@ -79,7 +80,7 @@ public sealed class SymbolDatabaseApplicationService<TSymbol>( ISymbolRepository
         {
             return new FindResult<TSymbol>(
                 false,
-                [],
+                [ ],
                 result.UnwrapError().Error
             );
         }
