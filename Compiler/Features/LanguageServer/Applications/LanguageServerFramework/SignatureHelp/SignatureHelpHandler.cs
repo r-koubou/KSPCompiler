@@ -27,17 +27,15 @@ public class SignatureHelpHandler( ICompilationCacheManager compilationCacheMana
         var scriptLocation = request.TextDocument.Uri.AsScriptLocation();
         var position = request.Position.As();
 
-        var input = new SignatureHelpInputPort(
-            new SignatureHelpInputPortDetail(
-                compilationCacheManager,
-                scriptLocation,
-                position
-            )
+        var input = new SignatureHelpInput(
+            compilationCacheManager,
+            scriptLocation,
+            position
         );
 
-        var output = await interactor.ExecuteAsync( input, token );
+        var result = await interactor.ExecuteAsync( input, token );
 
-        if( !output.Result || output.OutputData == null )
+        if( result.IsFailure )
         {
             return new FrameworkSignatureHelp
             {
@@ -45,7 +43,17 @@ public class SignatureHelpHandler( ICompilationCacheManager compilationCacheMana
             };
         }
 
-        return output.OutputData.As();
+        var output = result.Unwrap();
+
+        if( output.SignatureHelp == null )
+        {
+            return new FrameworkSignatureHelp
+            {
+                Signatures = [ ]
+            };
+        }
+
+        return output.SignatureHelp.As();
     }
 
     public override void RegisterCapability( ServerCapabilities serverCapabilities, ClientCapabilities clientCapabilities )
