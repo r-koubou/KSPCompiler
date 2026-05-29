@@ -42,15 +42,12 @@ public sealed class RenameHandler( ICompilationCacheManager compilationCacheMana
 
         var output = result.Unwrap();
 
-        if( output.Changes.Count == 0 )
-        {
-            return null;
-        }
-
-        return new WorkspaceEdit
-        {
-            Changes = output.Changes.As()
-        };
+        return output.Changes.Count == 0
+            ? null
+            : new WorkspaceEdit
+            {
+                Changes = output.Changes.As()
+            };
     }
 
     protected override async Task<PrepareRenameResponse> Handle( PrepareRenameParams request, CancellationToken token )
