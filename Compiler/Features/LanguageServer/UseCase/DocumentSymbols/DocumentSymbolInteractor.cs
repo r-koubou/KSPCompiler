@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Symbol;
+using KSPCompiler.Shared;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData.Extensions;
 
@@ -13,12 +15,12 @@ namespace KSPCompiler.Features.LanguageServer.UseCase.DocumentSymbols;
 
 public sealed class DocumentSymbolInteractor : IDocumentSymbolUseCase
 {
-    public async Task<DocumentSymbolOutputPort> ExecuteAsync( DocumentSymbolInputPort parameter, CancellationToken cancellationToken = default )
+    public async Task<Result<DocumentSymbolOutput, LanguageServerFailureReason>> ExecuteAsync( DocumentSymbolInput input, CancellationToken cancellationToken = default )
     {
         try
         {
-            var compilationCacheManager = parameter.Input.Cache;
-            var scriptLocation = parameter.Input.Location;
+            var compilationCacheManager = input.Cache;
+            var scriptLocation = input.Location;
 
             var cache = compilationCacheManager.GetCache( scriptLocation );
             var symbolTable = cache.SymbolTable;
@@ -75,11 +77,11 @@ public sealed class DocumentSymbolInteractor : IDocumentSymbolUseCase
 
             DocumentSymbolSorter.SortByOccurrence( result );
 
-            return new DocumentSymbolOutputPort( result, true );
+            return Result<DocumentSymbolOutput, LanguageServerFailureReason>.Success( new DocumentSymbolOutput( result ) );
         }
         catch( Exception e )
         {
-            return new DocumentSymbolOutputPort( [ ], false, e );
+            return Result<DocumentSymbolOutput, LanguageServerFailureReason>.Failure( LanguageServerFailureReason.Other, e );
         }
     }
 

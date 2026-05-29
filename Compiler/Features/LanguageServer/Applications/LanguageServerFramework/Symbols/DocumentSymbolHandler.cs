@@ -25,21 +25,23 @@ public sealed class DocumentSymbolHandler(
     {
         var scriptLocation = request.TextDocument.Uri.AsScriptLocation();
 
-        var input = new DocumentSymbolInputPort(
-            new DocumentSymbolInputPortDetail(
-                compilationCacheManager,
-                scriptLocation
-            )
+        var input = new DocumentSymbolInput(
+            compilationCacheManager,
+            scriptLocation
         );
 
-        var output = await interactor.ExecuteAsync( input, token );
+        var result = await interactor.ExecuteAsync( input, token );
 
-        if( output.OutputData.Count == 0 )
+        if( result.IsFailure )
         {
             return new DocumentSymbolResponse( [] );
         }
 
-        return new DocumentSymbolResponse( output.OutputData.As() );
+        var output = result.Unwrap();
+
+        return output.Symbols.Count == 0
+            ? new DocumentSymbolResponse( [ ] )
+            : new DocumentSymbolResponse( output.Symbols.As() );
     }
 
     public override void RegisterCapability( ServerCapabilities serverCapabilities, ClientCapabilities clientCapabilities )
