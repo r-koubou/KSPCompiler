@@ -1,20 +1,21 @@
-using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 using KSPCompiler.Features.Compilation.Gateways.Parser;
+using KSPCompiler.Shared;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Blocks;
-using KSPCompiler.Shared.UseCase;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions;
 
-public class SyntaxAnalysisInputData(
-    ISyntaxParser inputInput
-) : InputPort<ISyntaxParser>( inputInput );
+public sealed record SyntaxAnalysisInput(
+    ISyntaxParser Parser
+);
 
-public sealed class SyntaxAnalysisOutputData(
-    AstCompilationUnitNode outputData,
-    bool result,
-    Exception? error = null
-) : OutputPort<AstCompilationUnitNode>( outputData, result, error );
+public sealed record SyntaxAnalysisOutput(
+    AstCompilationUnitNode Node
+);
 
 public interface ISyntaxAnalysisUseCase
-    : IUseCase<SyntaxAnalysisInputData, SyntaxAnalysisOutputData> {}
+{
+    Task<Result<SyntaxAnalysisOutput, CompilationFailureReason>> ExecuteAsync( SyntaxAnalysisInput input, CancellationToken cancellationToken = default );
+}
