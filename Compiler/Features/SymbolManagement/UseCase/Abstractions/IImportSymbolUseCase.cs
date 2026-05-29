@@ -1,35 +1,23 @@
-using System;
+using System.Threading;
+using System.Threading.Tasks;
 
+using KSPCompiler.Shared;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.IO.Abstractions.Symbol;
-using KSPCompiler.Shared.UseCase;
 
 namespace KSPCompiler.Features.SymbolManagement.UseCase.Abstractions;
 
-public sealed class ImportSymbolInputPort<TSymbol>(
-    ISymbolImporter<TSymbol> inputInput
-) : InputPort<ISymbolImporter<TSymbol>>( inputInput ) where TSymbol : SymbolBase;
+public sealed record ImportSymbolInput<TSymbol>(
+    ISymbolImporter<TSymbol> Importer
+) where TSymbol : SymbolBase;
 
-public sealed class ImportSymbolOutputPort(
-    ImportSymbolOutputPortDetail outputData,
-    bool result,
-    Exception? error = null
-) : OutputPort<ImportSymbolOutputPortDetail>( outputData, result, error );
+public sealed record ImportSymbolOutput(
+    int CreatedCount,
+    int UpdatedCount,
+    int FailedCount
+);
 
-public sealed class ImportSymbolOutputPortDetail
+public interface IImportSymbolUseCase<TSymbol> where TSymbol : SymbolBase
 {
-    public int CreatedCount { get; }
-    public int UpdatedCount { get; }
-    public int FailedCount  { get; }
-
-    public ImportSymbolOutputPortDetail( int createdCount, int updatedCount, int failedCount )
-    {
-        CreatedCount = createdCount;
-        UpdatedCount = updatedCount;
-        FailedCount  = failedCount;
-    }
+    Task<Result<ImportSymbolOutput, SymbolManagementFailureReason>> ExecuteAsync( ImportSymbolInput<TSymbol> input, CancellationToken cancellationToken = default );
 }
-
-public interface IImportSymbolUseCase<TSymbol>
-    : IUseCase<ImportSymbolInputPort<TSymbol>, ImportSymbolOutputPort>
-    where TSymbol : SymbolBase;
