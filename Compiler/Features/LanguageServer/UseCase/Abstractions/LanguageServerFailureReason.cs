@@ -5,5 +5,6 @@ public enum LanguageServerFailureReason
     Other,
     IoError,
     Canceled,
-    SymbolNotFound
+    SymbolNotFound,
+    SignatureNotFound
 }
