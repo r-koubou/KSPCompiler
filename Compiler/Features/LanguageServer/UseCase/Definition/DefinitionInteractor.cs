@@ -6,24 +6,25 @@ using System.Threading.Tasks;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Definition;
 using KSPCompiler.Features.LanguageServer.UseCase.Extensions;
+using KSPCompiler.Shared;
 
 namespace KSPCompiler.Features.LanguageServer.UseCase.Definition;
 
 public sealed class DefinitionInteractor : IDefinitionHandlingUseCase
 {
-    public async Task<DefinitionOutputPort> ExecuteAsync(
-        DefinitionInputPort parameter,
+    public async Task<Result<DefinitionOutput, LanguageServerFailureReason>> ExecuteAsync(
+        DefinitionInput input,
         CancellationToken cancellationToken = default )
     {
         try
         {
-            var compilationCacheManager = parameter.Input.Cache;
-            var scriptLocation = parameter.Input.Location;
-            var position = parameter.Input.Position;
+            var compilationCacheManager = input.Cache;
+            var scriptLocation = input.Location;
+            var position = input.Position;
 
             if( !compilationCacheManager.ContainsCache( scriptLocation ) )
             {
-                return new DefinitionOutputPort( [ ], false );
+                return Result<DefinitionOutput, LanguageServerFailureReason>.Failure( LanguageServerFailureReason.DefinitionNotFound );
             }
 
             var cache = compilationCacheManager.GetCache( scriptLocation );
@@ -44,11 +45,11 @@ public sealed class DefinitionInteractor : IDefinitionHandlingUseCase
 
             await Task.CompletedTask;
 
-            return new DefinitionOutputPort( links, true );
+            return Result<DefinitionOutput, LanguageServerFailureReason>.Success( new DefinitionOutput( links ) );
         }
         catch( Exception e )
         {
-            return new DefinitionOutputPort( [ ], false, e );
+            return Result<DefinitionOutput, LanguageServerFailureReason>.Failure( LanguageServerFailureReason.Other, e );
         }
     }
 }

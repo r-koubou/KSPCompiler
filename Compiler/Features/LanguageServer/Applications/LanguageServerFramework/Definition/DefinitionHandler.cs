@@ -30,22 +30,24 @@ public class DefinitionHandler(
             return null;
         }
 
-        var input = new DefinitionInputPort(
-            new DefinitionInputPortDetail(
-                compilationCacheManager,
-                scriptLocation,
-                position
-            )
+        var input = new DefinitionInput(
+            compilationCacheManager,
+            scriptLocation,
+            position
         );
 
-        var output = await interactor.ExecuteAsync( input, cancellationToken );
+        var result = await interactor.ExecuteAsync( input, cancellationToken );
 
-        if( !output.Result || output.OutputData.Count == 0 )
+        if( result.IsFailure )
         {
             return null;
         }
 
-        return new DefinitionResponse( output.OutputData.As() );
+        var output = result.Unwrap();
+
+        return output.Links.Count == 0
+            ? null
+            : new DefinitionResponse( output.Links.As() );
     }
 
     public override void RegisterCapability( ServerCapabilities serverCapabilities, ClientCapabilities clientCapabilities )
