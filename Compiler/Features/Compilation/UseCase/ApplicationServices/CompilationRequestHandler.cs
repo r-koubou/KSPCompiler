@@ -37,12 +37,12 @@ public sealed class CompilationRequestHandler : ICompilationRequestHandler
             //-------------------------------------------------
             var syntaxAnalysisOutput = await ExecuteSyntaxAnalysisAsync( request.SyntaxParser, cancellationToken );
 
-            if( !syntaxAnalysisOutput.Result )
+            if( syntaxAnalysisOutput.IsFailure )
             {
-                return new CompilationResponse( false, syntaxAnalysisOutput.Error, null, userSymbolTable, string.Empty );
+                return new CompilationResponse( false, syntaxAnalysisOutput.UnwrapError().Error, null, userSymbolTable, string.Empty );
             }
 
-            var ast = syntaxAnalysisOutput.OutputData;
+            var ast = syntaxAnalysisOutput.Unwrap().Node;
 
             //-------------------------------------------------
             // Preprocess
@@ -91,10 +91,10 @@ public sealed class CompilationRequestHandler : ICompilationRequestHandler
         }
     }
 
-    private async Task<SyntaxAnalysisOutputData> ExecuteSyntaxAnalysisAsync( ISyntaxParser parser, CancellationToken cancellationToken )
+    private async Task<Result<SyntaxAnalysisOutput, CompilationFailureReason>> ExecuteSyntaxAnalysisAsync( ISyntaxParser parser, CancellationToken cancellationToken )
     {
         var analyzer = new SyntaxAnalysisInteractor();
-        var input = new SyntaxAnalysisInputData( parser );
+        var input = new SyntaxAnalysisInput( parser );
 
         return await analyzer.ExecuteAsync( input, cancellationToken );
     }
