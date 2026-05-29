@@ -1,29 +1,22 @@
-using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Compilation;
-using KSPCompiler.Shared.UseCase;
+using KSPCompiler.Shared;
 
 namespace KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Folding;
 
-public sealed class FoldingRangeInputPortDetail(
-    ICompilationCacheManager cache,
-    ScriptLocation location
-)
-{
-    public ICompilationCacheManager Cache { get; } = cache;
-    public ScriptLocation Location { get; } = location;
-}
+public sealed record FoldingRangeInput(
+    ICompilationCacheManager Cache,
+    ScriptLocation Location
+);
 
-public sealed class FoldingRangeInputPort(
-    FoldingRangeInputPortDetail input
-) : InputPort<FoldingRangeInputPortDetail>( input );
-
-public sealed class FoldingRangeOutputPort(
-    List<FoldingItem> ranges,
-    bool result,
-    Exception? error = null
-) : OutputPort<List<FoldingItem>>( ranges, result, error );
+public sealed record FoldingRangeOutput(
+    List<FoldingItem> Ranges
+);
 
 public interface IFoldingRangeUseCase
-    : IUseCase<FoldingRangeInputPort, FoldingRangeOutputPort>;
+{
+    Task<Result<FoldingRangeOutput, LanguageServerFailureReason>> ExecuteAsync( FoldingRangeInput input, CancellationToken cancellationToken = default );
+}
