@@ -8,6 +8,7 @@ using KSPCompiler.Features.LanguageServer.UseCase.Abstractions;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Compilation;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Renaming;
 using KSPCompiler.Features.LanguageServer.UseCase.Ast;
+using KSPCompiler.Shared;
 using KSPCompiler.Shared.Text;
 
 using RenamingResult
@@ -17,14 +18,14 @@ namespace KSPCompiler.Features.LanguageServer.UseCase.Renaming;
 
 public sealed class RenamingInteractor : IRenamingUseCase
 {
-    public async Task<RenamingOutputPort> ExecuteAsync( RenamingInputPort parameter, CancellationToken cancellationToken = default )
+    public async Task<Result<RenamingOutput, LanguageServerFailureReason>> ExecuteAsync( RenamingInput input, CancellationToken cancellationToken = default )
     {
         try
         {
-            var compilationCacheManager = parameter.Input.Cache;
-            var scriptLocation = parameter.Input.Location;
-            var position = parameter.Input.Position;
-            var newName = parameter.Input.NewName;
+            var compilationCacheManager = input.Cache;
+            var scriptLocation = input.Location;
+            var position = input.Position;
+            var newName = input.NewName;
 
             var cache = compilationCacheManager.GetCache( scriptLocation );
             var orgName = DocumentUtility.ExtractWord( cache.AllLinesText, position );
@@ -41,11 +42,11 @@ public sealed class RenamingInteractor : IRenamingUseCase
 
             await Task.CompletedTask;
 
-            return new RenamingOutputPort( changes, true );
+            return Result<RenamingOutput, LanguageServerFailureReason>.Success( new RenamingOutput( changes ) );
         }
         catch( Exception e )
         {
-            return new RenamingOutputPort( [ ], false, e );
+            return Result<RenamingOutput, LanguageServerFailureReason>.Failure( LanguageServerFailureReason.Other, e );
         }
     }
 
