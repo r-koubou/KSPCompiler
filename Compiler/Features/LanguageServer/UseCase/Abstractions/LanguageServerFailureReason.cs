@@ -6,5 +6,6 @@ public enum LanguageServerFailureReason
     IoError,
     Canceled,
     SymbolNotFound,
-    SignatureNotFound
+    SignatureNotFound,
+    HoverItemNotFound,
 }

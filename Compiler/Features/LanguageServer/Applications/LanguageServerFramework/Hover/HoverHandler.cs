@@ -24,22 +24,24 @@ public sealed class HoverHandler( ICompilationCacheManager compilationCacheManag
         var scriptLocation = request.TextDocument.Uri.AsScriptLocation();
         var position = request.Position.As();
 
-        var input = new HoverInputPort(
-            new HoverInputPortDetail(
-                compilationCacheManager,
-                scriptLocation,
-                position
-            )
+        var input = new HoverInput(
+            compilationCacheManager,
+            scriptLocation,
+            position
         );
 
-        var output = await interactor.ExecuteAsync( input, token );
+        var result = await interactor.ExecuteAsync( input, token );
 
-        if( !output.Result || output.OutputData == null )
+        if( result.IsFailure )
         {
             return null;
         }
 
-        return output.OutputData.As();
+        var output = result.Unwrap();
+
+        return output.HoverItem == null!
+            ? null
+            : output.HoverItem.As();
     }
 
     public override void RegisterCapability( ServerCapabilities serverCapabilities, ClientCapabilities clientCapabilities )
