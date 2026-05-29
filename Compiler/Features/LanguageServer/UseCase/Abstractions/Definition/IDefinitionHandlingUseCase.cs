@@ -1,32 +1,29 @@
-using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Compilation;
+using KSPCompiler.Shared;
 using KSPCompiler.Shared.Text;
-using KSPCompiler.Shared.UseCase;
 
 namespace KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Definition;
 
-public sealed class DefinitionInputPortDetail(
-    ICompilationCacheManager cache,
-    ScriptLocation location,
-    Position position
+public sealed record DefinitionInput(
+    ICompilationCacheManager Cache,
+    ScriptLocation Location,
+    Position Position
 )
 {
-    public ICompilationCacheManager Cache { get; } = cache;
-    public ScriptLocation Location { get; } = location;
-    public Position Position { get; } = position;
+    public ICompilationCacheManager Cache { get; } = Cache;
+    public ScriptLocation Location { get; } = Location;
+    public Position Position { get; } = Position;
 }
 
-public sealed class DefinitionInputPort(
-    DefinitionInputPortDetail input
-) : InputPort<DefinitionInputPortDetail>( input );
-
-public sealed class DefinitionOutputPort(
-    List<LocationLink> links,
-    bool result,
-    Exception? error = null
-) : OutputPort<List<LocationLink>>( links, result, error );
+public sealed record DefinitionOutput(
+    List<LocationLink> Links
+);
 
 public interface IDefinitionHandlingUseCase
-    : IUseCase<DefinitionInputPort, DefinitionOutputPort>;
+{
+    Task<Result<DefinitionOutput, LanguageServerFailureReason>> ExecuteAsync( DefinitionInput input, CancellationToken cancellationToken = default );
+}
