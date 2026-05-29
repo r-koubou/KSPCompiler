@@ -3,22 +3,24 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Folding;
 using KSPCompiler.Features.LanguageServer.UseCase.Ast;
 using KSPCompiler.Features.LanguageServer.UseCase.Folding.Extensions;
+using KSPCompiler.Shared;
 
 namespace KSPCompiler.Features.LanguageServer.UseCase.Folding;
 
 public sealed class FoldingRangeInteractor : IFoldingRangeUseCase
 {
-    public async Task<FoldingRangeOutputPort> ExecuteAsync(
-        FoldingRangeInputPort parameter,
+    public async Task<Result<FoldingRangeOutput, LanguageServerFailureReason>> ExecuteAsync(
+        FoldingRangeInput input,
         CancellationToken cancellationToken = default )
     {
         try
         {
-            var compilationCacheManager = parameter.Input.Cache;
-            var scriptLocation = parameter.Input.Location;
+            var compilationCacheManager = input.Cache;
+            var scriptLocation = input.Location;
 
             var cache = compilationCacheManager.GetCache( scriptLocation );
             var symbols = cache.SymbolTable;
@@ -45,11 +47,11 @@ public sealed class FoldingRangeInteractor : IFoldingRangeUseCase
 
             await Task.CompletedTask;
 
-            return new FoldingRangeOutputPort( items, true );
+            return Result<FoldingRangeOutput, LanguageServerFailureReason>.Success( new FoldingRangeOutput( items ) );
         }
         catch( Exception e )
         {
-            return new FoldingRangeOutputPort( [], false, e );
+            return Result<FoldingRangeOutput, LanguageServerFailureReason>.Failure( LanguageServerFailureReason.Other, e );
         }
     }
 }

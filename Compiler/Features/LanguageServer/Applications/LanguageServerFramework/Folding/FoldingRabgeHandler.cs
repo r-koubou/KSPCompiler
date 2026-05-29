@@ -30,21 +30,23 @@ public sealed class FoldingRabgeHandler(
             return new FoldingRangeResponse( [] );
         }
 
-        var input = new FoldingRangeInputPort(
-            new FoldingRangeInputPortDetail(
-                compilationCacheManager,
-                scriptLocation
-            )
+        var input = new FoldingRangeInput(
+            compilationCacheManager,
+            scriptLocation
         );
 
-        var output = await interactor.ExecuteAsync( input, token );
+        var result = await interactor.ExecuteAsync( input, token );
 
-        if( !output.Result || output.OutputData.Count == 0 )
+        if( result.IsFailure )
         {
             return new FoldingRangeResponse( [] );
         }
 
-        return new FoldingRangeResponse( output.OutputData.As() );
+        var output = result.Unwrap();
+
+        return output.Ranges.Count == 0
+            ? new FoldingRangeResponse( [] )
+            : new FoldingRangeResponse( output.Ranges.As() );
     }
 
     public override void RegisterCapability( ServerCapabilities serverCapabilities, ClientCapabilities clientCapabilities )
