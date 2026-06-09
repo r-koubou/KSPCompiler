@@ -42,7 +42,7 @@ public sealed class FindReferenceInteractor : IFindReferenceUseCase
         }
         catch( Exception e )
         {
-            return Result<FindReferenceOutput, LanguageServerFailureReason>.Failure( LanguageServerFailureReason.Other );
+            return Result<FindReferenceOutput, LanguageServerFailureReason>.Failure( LanguageServerFailureReason.Other, e );
         }
     }
 
