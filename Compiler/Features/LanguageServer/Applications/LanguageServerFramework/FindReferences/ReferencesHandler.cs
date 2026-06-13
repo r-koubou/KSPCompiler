@@ -31,23 +31,24 @@ public sealed class ReferencesHandler(
             return null;
         }
 
-        var input = new FindReferenceInputPort(
-            new FindReferenceInputPortDetail(
-                compilationCacheManager,
-                scriptLocation,
-                position
-            )
+        var input = new FindReferenceInput(
+            compilationCacheManager,
+            scriptLocation,
+            position
         );
 
-        var output = await interactor.ExecuteAsync( input, cancellationToken );
+        var result = await interactor.ExecuteAsync( input, cancellationToken );
 
-        if( !output.Result || output.OutputData.Count == 0 )
+        if( result.IsFailure )
         {
             return null;
         }
 
-        return new ReferenceResponse( output.OutputData.As() );
+        var output = result.Unwrap();
 
+        return output.References.Count == 0
+            ? null
+            : new ReferenceResponse( output.References.As() );
     }
 
     public override void RegisterCapability( ServerCapabilities serverCapabilities, ClientCapabilities clientCapabilities )

@@ -1,32 +1,24 @@
-using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Compilation;
+using KSPCompiler.Shared;
 using KSPCompiler.Shared.Text;
-using KSPCompiler.Shared.UseCase;
 
 namespace KSPCompiler.Features.LanguageServer.UseCase.Abstractions.FindReferences;
 
-public sealed class FindReferenceInputPortDetail(
-    ICompilationCacheManager cache,
-    ScriptLocation location,
-    Position position
-)
-{
-    public ICompilationCacheManager Cache { get; } = cache;
-    public ScriptLocation Location { get; } = location;
-    public Position Position { get; } = position;
-}
+public sealed record FindReferenceInput(
+    ICompilationCacheManager Cache,
+    ScriptLocation Location,
+    Position Position
+);
 
-public sealed class FindReferenceInputPort(
-    FindReferenceInputPortDetail inputInput
-) : InputPort<FindReferenceInputPortDetail>( inputInput );
-
-public sealed class FindReferenceOutputPort(
-    List<ReferenceItem> references,
-    bool result,
-    Exception? error = null
-) : OutputPort<List<ReferenceItem>>( references, result, error );
+public sealed record FindReferenceOutput(
+    List<ReferenceItem> References
+);
 
 public interface IFindReferenceUseCase
-    : IUseCase<FindReferenceInputPort, FindReferenceOutputPort>;
+{
+    Task<Result<FindReferenceOutput, LanguageServerFailureReason>> ExecuteAsync( FindReferenceInput input, CancellationToken cancellationToken = default );
+}

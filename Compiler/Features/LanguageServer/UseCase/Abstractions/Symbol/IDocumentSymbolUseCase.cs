@@ -1,28 +1,22 @@
-using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Compilation;
-using KSPCompiler.Shared.UseCase;
+using KSPCompiler.Shared;
 
 namespace KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Symbol;
 
-public sealed class DocumentSymbolInputPortDetail(
-    ICompilationCacheManager cache,
-    ScriptLocation location )
-{
-    public ICompilationCacheManager Cache { get; } = cache;
-    public ScriptLocation Location { get; } = location;
-}
+public sealed record DocumentSymbolInput(
+    ICompilationCacheManager Cache,
+    ScriptLocation Location
+);
 
-public sealed class DocumentSymbolInputPort(
-    DocumentSymbolInputPortDetail input
-) : InputPort<DocumentSymbolInputPortDetail>( input );
-
-public sealed class DocumentSymbolOutputPort(
-    List<DocumentSymbol> symbols,
-    bool result,
-    Exception? error = null
-) : OutputPort<List<DocumentSymbol>>( symbols, result, error );
+public sealed record  DocumentSymbolOutput(
+    List<DocumentSymbol> Symbols
+);
 
 public interface IDocumentSymbolUseCase
-    : IUseCase<DocumentSymbolInputPort, DocumentSymbolOutputPort>;
+{
+    Task<Result<DocumentSymbolOutput, LanguageServerFailureReason>> ExecuteAsync( DocumentSymbolInput input, CancellationToken cancellationToken = default );
+}

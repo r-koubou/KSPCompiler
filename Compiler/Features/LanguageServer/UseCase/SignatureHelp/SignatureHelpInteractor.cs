@@ -2,27 +2,31 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.SignatureHelp;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.SignatureHelp.Extensions;
+using KSPCompiler.Shared;
 
 namespace KSPCompiler.Features.LanguageServer.UseCase.SignatureHelp;
 
 public sealed class SignatureHelpInteractor : ISignatureHelpUseCase
 {
-    public async Task<SignatureHelpOutputPort> ExecuteAsync( SignatureHelpInputPort parameter, CancellationToken cancellationToken = default )
+    public async Task<Result<SignatureHelpOutput, LanguageServerFailureReason>> ExecuteAsync( SignatureHelpInput input, CancellationToken cancellationToken = default )
     {
         try
         {
-            var compilationCacheManager = parameter.Input.Cache;
-            var scriptLocation = parameter.Input.Location;
-            var position = parameter.Input.Position;
+            var compilationCacheManager = input.Cache;
+            var scriptLocation = input.Location;
+            var position = input.Position;
 
             var cache = compilationCacheManager.GetCache( scriptLocation );
             var symbols = cache.SymbolTable;
 
+            var signatureNotFoundResult = Result<SignatureHelpOutput, LanguageServerFailureReason>.Failure( LanguageServerFailureReason.SignatureNotFound );
+
             if( DocumentUtility.IsInCommentToLeft( cache.AllLinesText, position ) )
             {
-                return new SignatureHelpOutputPort( null, true );
+                return signatureNotFoundResult;
             }
 
             var iterator = new BackwardIterator(
@@ -35,28 +39,28 @@ public sealed class SignatureHelpInteractor : ISignatureHelpUseCase
 
             if( activeParameter < 0 )
             {
-                return new SignatureHelpOutputPort( null, true );
+                return signatureNotFoundResult;
             }
 
             var word = GetIdentifier( iterator );
 
             if( string.IsNullOrEmpty( word ) )
             {
-                return new SignatureHelpOutputPort( null, true );
+                return signatureNotFoundResult;
             }
 
             if( !symbols.Commands.TryBuildSignatureHelp( word, activeParameter, out var signatureHelp ) )
             {
-                return new SignatureHelpOutputPort( null, true );
+                return signatureNotFoundResult;
             }
 
             await Task.CompletedTask;
 
-            return new SignatureHelpOutputPort( signatureHelp, true );
+            return Result<SignatureHelpOutput, LanguageServerFailureReason>.Success( new SignatureHelpOutput( signatureHelp ) );
         }
         catch( Exception e )
         {
-            return new SignatureHelpOutputPort( null, false, e );
+            return Result<SignatureHelpOutput, LanguageServerFailureReason>.Failure( LanguageServerFailureReason.Other, e );
         }
     }
 

@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 
 using KSPCompiler.Features.SymbolManagement.Gateways;
 using KSPCompiler.Features.SymbolManagement.UseCase.Abstractions;
+using KSPCompiler.Shared;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
-using KSPCompiler.Shared.UseCase;
 
 namespace KSPCompiler.Features.SymbolManagement.UseCase;
 
@@ -18,20 +18,21 @@ public class ExportSymbolFromRepositoryInteractor<TSymbol> : IExportSymbolUseCas
         Repository = repository;
     }
 
-    public async Task<UnitOutputPort> ExecuteAsync( ExportSymbolInputData<TSymbol> parameter, CancellationToken cancellationToken = default )
+    public async Task<Result<Unit, SymbolManagementFailureReason>> ExecuteAsync( ExportSymbolInput<TSymbol> input, CancellationToken cancellationToken = default )
     {
         try
         {
-            var exporter = parameter.Input.Exporter;
-            var predicate = parameter.Input.Predicate;
+            var exporter = input.Exporter;
+            var predicate = input.Predicate;
             var symbols = await Repository.FindAsync( predicate, cancellationToken );
 
             await exporter.ExportAsync( symbols, cancellationToken );
-            return new UnitOutputPort( true );
+
+            return Result<Unit, SymbolManagementFailureReason>.Success( Unit.Default );
         }
         catch( Exception e )
         {
-            return new UnitOutputPort( false, e );
+            return Result<Unit, SymbolManagementFailureReason>.Failure( SymbolManagementFailureReason.Other, e );
         }
     }
 }

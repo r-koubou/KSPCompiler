@@ -1,7 +1,7 @@
-using System;
 using System.Text;
 
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions.Evaluations.Operators;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Obfuscators.Extensions;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes;
 
@@ -26,7 +26,7 @@ public class ConditionalBinaryOperatorEvaluator : IConditionalBinaryOperatorEval
             AstNodeId.GreaterThan  => OutputBuilder.AppendBinaryOperator( visitor, ">",  expr.Left, expr.Right ),
             AstNodeId.LessEqual    => OutputBuilder.AppendBinaryOperator( visitor, "<=", expr.Left, expr.Right ),
             AstNodeId.GreaterEqual => OutputBuilder.AppendBinaryOperator( visitor, ">=", expr.Left, expr.Right ),
-            _                      => throw new ArgumentException( $"Invalid binary operator: {expr.Id}" )
+            _                      => throw new AstAnalyzeException( expr, $"Invalid binary operator: {expr.Id}" )
         };
 
         return expr;

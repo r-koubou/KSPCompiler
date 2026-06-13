@@ -17,70 +17,74 @@ public sealed class SymbolDatabaseApplicationService<TSymbol>( ISymbolRepository
     public async Task<ImportResult> ImportAsync( ISymbolImporter<TSymbol> importer, CancellationToken cancellationToken = default )
     {
         var useCase = new ImportSymbolToRepositoryInteractor<TSymbol>( Repository );
-        var inputPort = new ImportSymbolInputPort<TSymbol>( importer );
-        var outputPort = await useCase.ExecuteAsync( inputPort, cancellationToken );
+        var input = new ImportSymbolInput<TSymbol>( importer );
+        var result = await useCase.ExecuteAsync( input, cancellationToken );
 
-        if( !outputPort.Result )
+        if( result.IsFailure )
         {
-            return new ImportResult( false, 0, 0, 0, outputPort.Error );
+            return new ImportResult( false, 0, 0, 0, result.UnwrapError().Error );
         }
 
+        var output = result.Unwrap();
+
         return new ImportResult(
-            outputPort.Result,
-            outputPort.OutputData.CreatedCount,
-            outputPort.OutputData.UpdatedCount,
-            outputPort.OutputData.FailedCount,
-            outputPort.Error
+            true,
+            output.CreatedCount,
+            output.UpdatedCount,
+            output.FailedCount
         );
     }
 
     public async Task<ExportResult> ExportAsync( ISymbolExporter<TSymbol> exporter, Predicate<TSymbol> predicate, CancellationToken cancellationToken = default )
     {
         var useCase = new ExportSymbolFromRepositoryInteractor<TSymbol>( Repository );
-        var inputPort = new ExportSymbolInputData<TSymbol>(
-            new ExportSymbolInputDataDetail<TSymbol>(
-                exporter,
-                predicate
-            )
+        var input = new ExportSymbolInput<TSymbol>(
+            exporter,
+            predicate
         );
 
-        var outputPort = await useCase.ExecuteAsync( inputPort, cancellationToken );
+        var result = await useCase.ExecuteAsync( input, cancellationToken );
 
-        if( !outputPort.Result )
-        {
-            return new ExportResult( false, outputPort.Error );
-        }
-
-        return new ExportResult(
-            outputPort.Result,
-            outputPort.Error
-        );
+        return result.IsFailure
+            ? new ExportResult( false, result.UnwrapError().Error )
+            : new ExportResult( true );
     }
 
     public async Task<DeleteResult> DeleteAsync( Predicate<TSymbol> predicate, CancellationToken cancellationToken = default )
     {
         var useCase = new DeleteSymbolFromRepositoryInteractor<TSymbol>( Repository );
-        var inputPort = new DeleteSymbolInputData<TSymbol>( predicate );
-        var outputPort = await useCase.ExecuteAsync( inputPort, cancellationToken );
+        var input = new DeleteSymbolInput<TSymbol>( predicate );
+        var result = await useCase.ExecuteAsync( input, cancellationToken );
+
+        if( result.IsFailure )
+        {
+            return new DeleteResult( false, 0, 0, result.UnwrapError().Error );
+        }
+
+        var output = result.Unwrap();
 
         return new DeleteResult(
-            success: outputPort.Result,
-            deletedCount: outputPort.OutputData.DeletedCount,
-            failedCount: outputPort.OutputData.FailedCount,
-            exception: outputPort.Error
+            success: true,
+            deletedCount: output.DeletedCount,
+            failedCount: output.FailedCount
         );
     }
 
     public async Task<FindResult<TSymbol>> FindAsync( Predicate<TSymbol> predicate, CancellationToken cancellationToken = default )
     {
         var useCase = new FindSymbolFromRepositoryInteractor<TSymbol>( Repository );
-        var inputPort = new FindSymbolInputData<TSymbol>( predicate );
-        var outputPort = await useCase.ExecuteAsync( inputPort, cancellationToken );
+        var input = new FindSymbolInput<TSymbol>( predicate );
+        var result = await useCase.ExecuteAsync( input, cancellationToken );
 
-        return new FindResult<TSymbol>(
-            outputPort.Result,
-            outputPort.OutputData,
-            outputPort.Error
-        );
+        if( result.IsFailure )
+        {
+            return new FindResult<TSymbol>(
+                false,
+                [ ],
+                result.UnwrapError().Error
+            );
+        }
+
+        return new FindResult<TSymbol>( true, result.Unwrap().Symbols );
     }
 }

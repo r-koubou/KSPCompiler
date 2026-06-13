@@ -1,30 +1,23 @@
-using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Compilation;
+using KSPCompiler.Shared;
 using KSPCompiler.Shared.Text;
-using KSPCompiler.Shared.UseCase;
 
 namespace KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Hover;
 
-public sealed class HoverInputPortDetail(
-    ICompilationCacheManager cache,
-    ScriptLocation location,
-    Position position )
-{
-    public ICompilationCacheManager Cache { get; } = cache;
-    public ScriptLocation Location { get; } = location;
-    public Position Position { get; } = position;
-}
+public sealed record HoverInput(
+    ICompilationCacheManager Cache,
+    ScriptLocation Location,
+    Position Position
+);
 
-public sealed class HoverInputPort(
-    HoverInputPortDetail input
-) : InputPort<HoverInputPortDetail>( input );
-
-public sealed class HoverOutputPort(
-    HoverItem? hoverItem,
-    bool result,
-    Exception? error = null
-) : OutputPort<HoverItem?>( hoverItem, result, error );
+public sealed record HoverOutput(
+    HoverItem? HoverItem
+);
 
 public interface IHoverUseCase
-    : IUseCase<HoverInputPort, HoverOutputPort>;
+{
+    Task<Result<HoverOutput, LanguageServerFailureReason>> ExecuteAsync( HoverInput input, CancellationToken cancellationToken = default );
+}

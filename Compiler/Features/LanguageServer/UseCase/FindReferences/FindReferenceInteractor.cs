@@ -6,21 +6,22 @@ using System.Threading.Tasks;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.FindReferences;
 using KSPCompiler.Features.LanguageServer.UseCase.Ast;
+using KSPCompiler.Shared;
 using KSPCompiler.Shared.Text;
 
 namespace KSPCompiler.Features.LanguageServer.UseCase.FindReferences;
 
 public sealed class FindReferenceInteractor : IFindReferenceUseCase
 {
-    public async Task<FindReferenceOutputPort> ExecuteAsync(
-        FindReferenceInputPort parameter,
+    public async Task<Result<FindReferenceOutput, LanguageServerFailureReason>> ExecuteAsync(
+        FindReferenceInput input,
         CancellationToken cancellationToken = default )
     {
         try
         {
-            var compilationCacheManager = parameter.Input.Cache;
-            var scriptLocation = parameter.Input.Location;
-            var position = parameter.Input.Position;
+            var compilationCacheManager = input.Cache;
+            var scriptLocation = input.Location;
+            var position = input.Position;
 
             var cache = compilationCacheManager.GetCache( scriptLocation );
             var word = DocumentUtility.ExtractWord( cache.AllLinesText, position );
@@ -37,11 +38,11 @@ public sealed class FindReferenceInteractor : IFindReferenceUseCase
 
             await Task.CompletedTask;
 
-            return new FindReferenceOutputPort( references, true );
+            return Result<FindReferenceOutput, LanguageServerFailureReason>.Success( new FindReferenceOutput( references ) );
         }
         catch( Exception e )
         {
-            return new FindReferenceOutputPort( [ ], false, e );
+            return Result<FindReferenceOutput, LanguageServerFailureReason>.Failure( LanguageServerFailureReason.Other, e );
         }
     }
 

@@ -3,18 +3,19 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Abstractions;
+using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Preprocessing;
-using KSPCompiler.Shared.UseCase;
+using KSPCompiler.Shared;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis;
 
 public class PreprocessInteractor : IPreprocessUseCase
 {
-    public async Task<UnitOutputPort> ExecuteAsync( PreprocessInputData parameter, CancellationToken cancellationToken = default )
+    public async Task<Result<Unit, CompilationFailureReason>> ExecuteAsync( PreprocessInput input, CancellationToken cancellationToken = default )
     {
-        var eventEmitter = parameter.Input.EventEmitter;
-        var ast = parameter.Input.CompilationUnitNode;
-        var symbolTable = parameter.Input.SymbolTable;
+        var eventEmitter = input.EventEmitter;
+        var ast = input.CompilationUnitNode;
+        var symbolTable = input.SymbolTable;
 
         var preprocessor = new PreprocessAnalyzer( symbolTable.PreProcessorSymbols, eventEmitter );
 
@@ -22,12 +23,15 @@ public class PreprocessInteractor : IPreprocessUseCase
         {
             preprocessor.Traverse( ast );
             await Task.CompletedTask;
+            return Result<Unit, CompilationFailureReason>.Success( Unit.Default );
+        }
+        catch( AstAnalyzeException e )
+        {
+            return Result<Unit, CompilationFailureReason>.Failure( CompilationFailureReason.SemanticsError, e );
         }
         catch( Exception e )
         {
-            return new UnitOutputPort( false, e );
+            return Result<Unit, CompilationFailureReason>.Failure( CompilationFailureReason.Other, e );
         }
-
-        return new UnitOutputPort( true );
     }
 }

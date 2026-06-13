@@ -5,22 +5,24 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
+using KSPCompiler.Features.LanguageServer.UseCase.Abstractions;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Completion;
 using KSPCompiler.Features.LanguageServer.UseCase.Completion.CompletionItems;
+using KSPCompiler.Shared;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 
 namespace KSPCompiler.Features.LanguageServer.UseCase.Completion;
 
 public sealed class CompletionInteractor : ICompletionUseCase
 {
-    public async Task<CompletionHandlingOutput> ExecuteAsync( CompletionHandlingInputPort parameter, CancellationToken cancellationToken = default )
+    public async Task<Result<CompletionHandlingOutput, LanguageServerFailureReason>> ExecuteAsync( CompletionHandlingInput input, CancellationToken cancellationToken = default )
     {
         try
         {
-            var compilerCacheService = parameter.Input.Cache;
-            var scriptLocation = parameter.Input.Location;
-            var position = parameter.Input.Position;
-            var preferSnippetInsertion = parameter.Input.PreferSnippetInsertion;
+            var compilerCacheService = input.Cache;
+            var scriptLocation = input.Location;
+            var position = input.Position;
+            var preferSnippetInsertion = input.PreferSnippetInsertion;
 
             var cache = compilerCacheService.GetCache( scriptLocation );
             var symbolTable = cache.SymbolTable;
@@ -99,11 +101,11 @@ public sealed class CompletionInteractor : ICompletionUseCase
 
             await Task.CompletedTask;
 
-            return new CompletionHandlingOutput( completions, true );
+            return Result<CompletionHandlingOutput, LanguageServerFailureReason>.Success( new CompletionHandlingOutput( completions ) );
         }
         catch( Exception e )
         {
-            return new CompletionHandlingOutput( [], false, e );
+            return Result<CompletionHandlingOutput, LanguageServerFailureReason>.Failure( LanguageServerFailureReason.Other, e );
         }
     }
 
