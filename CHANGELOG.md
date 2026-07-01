@@ -1,13 +1,17 @@
 CHANGELOG
 =========
 
+## v1.1.3
+
+### Maintenance Release
+
+Update dependency Frameworks / Libraries
+
 ## v1.1.2
 
 ### Maintenance Release
 
-- Refactored UseCase codes
-- Update dependency Frameworks / Libraries
-
+Update dependency Frameworks / Libraries
 
 ## v1.1.1
 
