@@ -129,13 +129,14 @@ public sealed class CompletionInteractor : ICompletionUseCase
         where TSymbol : SymbolBase
         where TOverload : IEquatable<TOverload>
     {
-        var list = symbols.Where(
-            x => x.First().Value.Name != partialName
-                 && x.First().Value.Name.Value.Contains( partialName )
-                 && ( extracCondition == null || extracCondition.Invoke( x.First().Value ) )
-        ).ToList();
-
-        return list.Select( x => x.First().Value ).ToList();
+        return symbols
+            .SelectMany( x => x.Values )
+            .Where(
+                x => x.Name.Value != partialName
+                     && x.Name.Value.Contains( partialName )
+                     && ( extracCondition == null || extracCondition.Invoke( x ) )
+            )
+            .ToList();
     }
 
     private static void BuildCompletionItemNew<TSymbol>(
