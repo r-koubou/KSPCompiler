@@ -20,6 +20,7 @@ public sealed class UserFunctionCompletionItemFactory(
 
         return new CompletionItem(
             Label: symbol.Name.Value,
+            LabelDetails: null,
             Kind: CompletionItemKind.Function,
             Detail: Detail,
             Documentation: DocumentUtility.GetCommentOrDescriptionText( symbol ),
@@ -45,6 +46,7 @@ public sealed class UserFunctionCompletionItemFactory(
 
         result = new CompletionItem(
             Label: "function <name>",
+            LabelDetails: null,
             Kind: CompletionItemKind.Snippet,
             Detail: Detail,
             Documentation: string.Empty,

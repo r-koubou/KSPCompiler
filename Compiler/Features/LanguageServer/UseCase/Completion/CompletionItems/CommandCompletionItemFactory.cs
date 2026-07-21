@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Text;
 
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions;
@@ -25,15 +26,46 @@ public sealed class CommandCompletionItemFactory(
         }
 
         var document = DocumentUtility.GetCommentOrDescriptionText( symbol );
+        var labelDetail = CreateLabelDetail( symbol );
 
         return new CompletionItem(
             Label: symbol.Name.Value,
+            LabelDetails: labelDetail,
             Kind: Kind,
             Detail: Detail,
             InsertTextFormat: InsertTextFormat.PlainText,
             Documentation: document,
             InsertText: symbol.Name.Value
         );
+    }
+
+    private static CompletionItemLabelDetails? CreateLabelDetail( CommandSymbol commandSymbol )
+    {
+        if( !TryCreateCommandArgumentsSignature( commandSymbol, out var signature ) )
+        {
+            return null;
+        }
+
+        return new CompletionItemLabelDetails(
+            Detail: signature,
+            Description: null
+        );
+    }
+
+    private static bool TryCreateCommandArgumentsSignature( CommandSymbol commandSymbol, out string result )
+    {
+        result = string.Empty;
+
+        if( commandSymbol.Arguments.Count == 0 )
+        {
+            return false;
+        }
+
+        var parameterStrings = commandSymbol.Arguments.Select( x => $"{x.Name.Value}" );
+
+        result = $"({string.Join( ", ", parameterStrings )})";
+
+        return true;
     }
 
     private static bool TryCreateCommandSnippet( CommandSymbol commandSymbol, StringBuilder stringBuilder, bool preferSnippetInsertion, out CompletionItem result )
@@ -52,6 +84,7 @@ public sealed class CommandCompletionItemFactory(
         {
             result = new CompletionItem(
                 Label: commandSymbol.Name.Value,
+                LabelDetails: null,
                 Kind: Kind,
                 Detail: Detail,
                 Documentation: document,
@@ -87,6 +120,7 @@ public sealed class CommandCompletionItemFactory(
 
         result = new CompletionItem(
             Label: commandSymbol.Name.Value,
+            LabelDetails: CreateLabelDetail( commandSymbol ),
             Kind: Kind,
             Detail: Detail,
             Documentation: document,

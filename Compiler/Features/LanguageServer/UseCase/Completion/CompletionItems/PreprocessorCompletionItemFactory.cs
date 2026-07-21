@@ -13,6 +13,7 @@ public sealed class PreprocessorCompletionItemFactory : ICompletionItemFactory<P
 
         return new CompletionItem(
             Label: symbol.Name.Value,
+            LabelDetails: null,
             Kind: CompletionItemKind.Variable,
             Detail: "Preprocessor",
             Documentation: document,

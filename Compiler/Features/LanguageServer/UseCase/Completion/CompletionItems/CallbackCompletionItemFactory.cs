@@ -26,6 +26,7 @@ public sealed class CallbackCompletionItemFactory(
 
         return new CompletionItem(
             Label: symbol.Name.Value,
+            LabelDetails: null,
             Kind: Kind,
             Detail: Detail,
             Documentation: DocumentUtility.GetCommentOrDescriptionText( symbol ),
@@ -78,6 +79,7 @@ public sealed class CallbackCompletionItemFactory(
 
         result = new CompletionItem(
             Label: $"on {callbackSymbol.Name.Value}",
+            LabelDetails: null,
             Kind: Kind,
             Detail: Detail,
             Documentation: document,
@@ -105,6 +107,7 @@ public sealed class CallbackCompletionItemFactory(
 
         result = new CompletionItem(
             Label: "on <name>",
+            LabelDetails: null,
             Kind: CompletionItemKind.Snippet,
             Detail: Detail,
             Documentation: string.Empty,

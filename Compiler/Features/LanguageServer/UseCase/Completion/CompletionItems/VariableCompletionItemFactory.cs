@@ -22,6 +22,7 @@ public sealed class VariableCompletionItemFactory : ICompletionItemFactory<Varia
 
         return new CompletionItem(
             Label: symbol.Name.Value,
+            LabelDetails: null,
             Kind: kind,
             Detail: symbol.BuiltIn ? "Built-in Variable" : "User Variable",
             Documentation: document,
