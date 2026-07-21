@@ -9066,3 +9066,33 @@ Data:
     Description: |-
       Built-in Variable: $ZONE_PAR_VOLUME
     BuiltIntoVersion: N/A
+  - Id: 55c1af74-4c18-4f76-a7b8-57a80792dbff
+    Name: $NI_FADE_EQUAL_POWER
+    BuiltIn: true
+    Description: |-
+      Built-in Variable: $NI_FADE_EQUAL_POWER
+    BuiltIntoVersion: '8.12'
+  - Id: 39bf0d7a-fbdf-48bf-9694-764a4c82e49f
+    Name: $NI_FADE_EXPONENTIAL
+    BuiltIn: true
+    Description: |-
+      Built-in Variable: $NI_FADE_EXPONENTIAL
+    BuiltIntoVersion: '8.12'
+  - Id: 08267fd0-5051-42c5-9af2-a1e8ddd518c5
+    Name: $NI_FADE_LINEAR
+    BuiltIn: true
+    Description: |-
+      Built-in Variable: $NI_FADE_LINEAR
+    BuiltIntoVersion: '8.12'
+  - Id: 17b7fbf5-0f49-47d6-b80b-72b1750577d7
+    Name: $NI_FADE_LOGARITHMIC
+    BuiltIn: true
+    Description: |-
+      Built-in Variable: $NI_FADE_LOGARITHMIC
+    BuiltIntoVersion: '8.12'
+  - Id: a4eabdc3-1143-4fed-bf2f-f309942c8067
+    Name: $NI_FADE_S_CURVE
+    BuiltIn: true
+    Description: |-
+      Built-in Variable: $NI_FADE_S_CURVE
+    BuiltIntoVersion: '8.12'
