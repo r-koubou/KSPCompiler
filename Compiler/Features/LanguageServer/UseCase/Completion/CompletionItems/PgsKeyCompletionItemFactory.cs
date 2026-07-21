@@ -13,6 +13,7 @@ public sealed class PgsKeyCompletionItemFactory : ICompletionItemFactory<PgsSymb
 
         return new CompletionItem(
             Label: symbol.Name.Value,
+            LabelDetails: null,
             Kind: CompletionItemKind.Variable,
             Detail: "PGS Key-Id",
             Documentation: document,

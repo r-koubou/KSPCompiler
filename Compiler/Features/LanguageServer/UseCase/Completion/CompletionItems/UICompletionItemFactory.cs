@@ -30,6 +30,7 @@ public sealed class UICompletionItemFactory(
 
         return new CompletionItem(
             Label: symbol.Name.Value,
+            LabelDetails: null,
             Kind: Kind,
             Detail: Detail,
             InsertTextFormat: InsertTextFormat.PlainText,
@@ -73,6 +74,7 @@ public sealed class UICompletionItemFactory(
         {
             result = new CompletionItem(
                 Label: symbol.Name.Value,
+                LabelDetails: null,
                 Kind: Kind,
                 Detail: Detail,
                 Documentation: document,
@@ -122,6 +124,7 @@ public sealed class UICompletionItemFactory(
 
         result = new CompletionItem(
             Label: symbol.Name.Value,
+            LabelDetails: null,
             Kind: Kind,
             Detail: Detail,
             Documentation: document,
