@@ -85,18 +85,18 @@ public sealed class CompletionInteractor : ICompletionUseCase
             var pgsItemFactory = new PgsKeyCompletionItemFactory();
             var variableItemFactory = new VariableCompletionItemFactory();
             var uiItemFactory = new UICompletionItemFactory( snippetTextBuilder );
-            var commandItemFactory = new CommandCompletionItemFactory( snippetTextBuilder );
+            var commandItemFactory = new CommandCompletionItemFactory();
             var callbackItemFactory = new CallbackCompletionItemFactory( snippetTextBuilder );
             var userFunctionItemFactory = new UserFunctionCompletionItemFactory( snippetTextBuilder );
 
-            BuildCompletionItemNew( preprocessors, preprocessorItemFactory, word, preferSnippetInsertion, completions );
-            BuildCompletionItemNew( pgsKeyIds, pgsItemFactory, word, preferSnippetInsertion, completions );
-            BuildCompletionItemNew( userVariables, variableItemFactory, word, preferSnippetInsertion, completions );
-            BuildCompletionItemNew( builtInVariables, variableItemFactory, word, preferSnippetInsertion, completions );
-            BuildCompletionItemNew( uiTypes, uiItemFactory, word, preferSnippetInsertion, completions );
-            BuildCompletionItemNew( commands, commandItemFactory, word, preferSnippetInsertion, completions );
-            BuildCompletionItemNew( userFunctions, userFunctionItemFactory, word, preferSnippetInsertion, completions );
-            BuildCompletionItemNew( builtInCallBacks, callbackItemFactory, word, preferSnippetInsertion, completions );
+            BuildCompletionItem( preprocessors, preprocessorItemFactory, word, preferSnippetInsertion, completions );
+            BuildCompletionItem( pgsKeyIds, pgsItemFactory, word, preferSnippetInsertion, completions );
+            BuildCompletionItem( userVariables, variableItemFactory, word, preferSnippetInsertion, completions );
+            BuildCompletionItem( builtInVariables, variableItemFactory, word, preferSnippetInsertion, completions );
+            BuildCompletionItem( uiTypes, uiItemFactory, word, preferSnippetInsertion, completions );
+            BuildCompletionItem( commands, commandItemFactory, word, preferSnippetInsertion, completions );
+            BuildCompletionItem( userFunctions, userFunctionItemFactory, word, preferSnippetInsertion, completions );
+            BuildCompletionItem( builtInCallBacks, callbackItemFactory, word, preferSnippetInsertion, completions );
             #endregion ~Build completion list
 
             await Task.CompletedTask;
@@ -129,16 +129,17 @@ public sealed class CompletionInteractor : ICompletionUseCase
         where TSymbol : SymbolBase
         where TOverload : IEquatable<TOverload>
     {
-        var list = symbols.Where(
-            x => x.First().Value.Name != partialName
-                 && x.First().Value.Name.Value.Contains( partialName )
-                 && ( extracCondition == null || extracCondition.Invoke( x.First().Value ) )
-        ).ToList();
-
-        return list.Select( x => x.First().Value ).ToList();
+        return symbols
+            .SelectMany( x => x.Values )
+            .Where(
+                x => x.Name.Value != partialName
+                     && x.Name.Value.Contains( partialName )
+                     && ( extracCondition == null || extracCondition.Invoke( x ) )
+            )
+            .ToList();
     }
 
-    private static void BuildCompletionItemNew<TSymbol>(
+    private static void BuildCompletionItem<TSymbol>(
         IReadOnlyCollection<TSymbol> symbols,
         ICompletionItemFactory<TSymbol> itemFactory,
         string partialName,

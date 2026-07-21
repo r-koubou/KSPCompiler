@@ -4243,3 +4243,49 @@ Data:
       - Name: slice-index
         DataType: I
         Description: ""
+  - Id: 1e6fe389-f50f-402d-9c80-0204bc0d177e
+    Name: fade_in
+    BuiltIn: true
+    Description: |-
+      Performs a fade in for a specific note event.
+    BuiltIntoVersion: '8.12'
+    ReturnType: V
+    Arguments:
+      - Name: event-id
+        DataType: I
+        Description: |-
+          Unique identification number of the note event to be faded in.
+      - Name: fade-time
+        DataType: I
+        Description: |-
+          The fade in time in microseconds.
+      - Name: curve
+        DataType: I
+        Description: |-
+          Optional argument which specifies the fade shape. One of $NI_FADE_LINEAR, $NI_FADE_EQUAL_POWER, $NI_FADE_S_CURVE, $NI_FADE_EXPONENTIAL, $NI_FADE_LOGARITHMIC.
+          Omitting this argument is equivalent to using $NI_FADE_LINEAR.
+  - Id: cbfc0484-8ca4-4299-81ba-ad973a5fc42a
+    Name: fade_out
+    BuiltIn: true
+    Description: |-
+      Performs a fade-out for a specific note event.
+    BuiltIntoVersion: '8.12'
+    ReturnType: V
+    Arguments:
+      - Name: event-id
+        DataType: I
+        Description: |-
+          Unique identification number of the note event to be faded out.
+      - Name: fade-time
+        DataType: I
+        Description: |-
+          The fade out time in microseconds.
+      - Name: stop-voice
+        DataType: I
+        Description: |-
+          - If set to 1, the voice is stopped after the fade out.
+          - If set to 0, the voice will still be running after the fade out.
+      - Name: curve
+        DataType: I
+        Description: |-
+          Optional fade shape. Same constants as for fade_in. Omitting is equivalent to using $NI_FADE_LINEAR.

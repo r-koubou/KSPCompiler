@@ -1,4 +1,5 @@
-using System.Text;
+using System.Linq;
+using System.Runtime.CompilerServices;
 
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Completion;
@@ -6,28 +7,24 @@ using KSPCompiler.Shared.Domain.Compilation.Symbols;
 
 namespace KSPCompiler.Features.LanguageServer.UseCase.Completion.CompletionItems;
 
-public sealed class CommandCompletionItemFactory(
-    StringBuilder? snippetTextBuilder
-) : ICompletionItemFactory<CommandSymbol>
+public sealed class CommandCompletionItemFactory : ICompletionItemFactory<CommandSymbol>
 {
     private const string Detail = "Command";
     private const CompletionItemKind Kind = CompletionItemKind.Method;
 
-    private readonly StringBuilder snippetTextBuilder = snippetTextBuilder ?? new StringBuilder();
-
     public CompletionItem Create( CommandSymbol symbol, string partialName, bool preferSnippetInsertion )
     {
-        snippetTextBuilder.Clear();
-
-        if( TryCreateCommandSnippet( symbol, snippetTextBuilder, preferSnippetInsertion, out var snippetResult ) )
+        if( TryCreateCommandSnippet( symbol, preferSnippetInsertion, out var snippetResult ) )
         {
             return snippetResult;
         }
 
         var document = DocumentUtility.GetCommentOrDescriptionText( symbol );
+        var labelDetail = CreateLabelDetail( symbol );
 
         return new CompletionItem(
             Label: symbol.Name.Value,
+            LabelDetails: labelDetail,
             Kind: Kind,
             Detail: Detail,
             InsertTextFormat: InsertTextFormat.PlainText,
@@ -36,7 +33,36 @@ public sealed class CommandCompletionItemFactory(
         );
     }
 
-    private static bool TryCreateCommandSnippet( CommandSymbol commandSymbol, StringBuilder stringBuilder, bool preferSnippetInsertion, out CompletionItem result )
+    private static CompletionItemLabelDetails? CreateLabelDetail( CommandSymbol commandSymbol )
+    {
+        if( !TryCreateCommandArgumentsSignature( commandSymbol, out var signature ) )
+        {
+            return null;
+        }
+
+        return new CompletionItemLabelDetails(
+            Detail: signature,
+            Description: null
+        );
+    }
+
+    private static bool TryCreateCommandArgumentsSignature( CommandSymbol commandSymbol, out string result )
+    {
+        result = string.Empty;
+
+        if( commandSymbol.Arguments.Count == 0 )
+        {
+            return false;
+        }
+
+        var parameterStrings = commandSymbol.Arguments.Select( x => $"{x.Name.Value}" );
+
+        result = $"({string.Join( ", ", parameterStrings )})";
+
+        return true;
+    }
+
+    private static bool TryCreateCommandSnippet( CommandSymbol commandSymbol, bool preferSnippetInsertion, out CompletionItem result )
     {
         result = null!;
 
@@ -52,6 +78,7 @@ public sealed class CommandCompletionItemFactory(
         {
             result = new CompletionItem(
                 Label: commandSymbol.Name.Value,
+                LabelDetails: null,
                 Kind: Kind,
                 Detail: Detail,
                 Documentation: document,
@@ -62,36 +89,53 @@ public sealed class CommandCompletionItemFactory(
             return true;
         }
 
-        stringBuilder.Append( commandSymbol.Name.Value );
-        stringBuilder.Append( "(" );
+        var literalCont =
+            "(".Length
+            + "${".Length
+            + ":".Length
+            + "}".Length
+            + " ,".Length
+            + ")".Length;
+
+        var stringHandler = new DefaultInterpolatedStringHandler(
+            literalLength: literalCont * commandSymbol.Arguments.Count + 1,
+            formattedCount: commandSymbol.Arguments.Count * 2 + 1
+            // * 2: index, arg.Name
+            // + 1: commandSymbol.Name
+        );
+
+        stringHandler.AppendFormatted( commandSymbol.Name.Value );
+        stringHandler.AppendLiteral( "(" );
 
         var placeholderIndex = 1;
         var argCount = commandSymbol.Arguments.Count;
 
         foreach( var arg in commandSymbol.Arguments )
         {
-            stringBuilder.Append( "${" )
-                         .Append( placeholderIndex ).Append( ":" )
-                         .Append( arg.Name.Value )
-                         .Append( "}" );
+            stringHandler.AppendLiteral( "${" );
+            stringHandler.AppendFormatted( placeholderIndex );
+            stringHandler.AppendLiteral( ":" );
+            stringHandler.AppendFormatted( arg.Name.Value );
+            stringHandler.AppendLiteral( "}" );
 
             if( placeholderIndex < argCount )
             {
-                stringBuilder.Append( ", " );
+                stringHandler.AppendLiteral( ", " );
             }
 
             placeholderIndex++;
         }
 
-        stringBuilder.Append( ")" );
+        stringHandler.AppendLiteral( ")" );
 
         result = new CompletionItem(
             Label: commandSymbol.Name.Value,
+            LabelDetails: CreateLabelDetail( commandSymbol ),
             Kind: Kind,
             Detail: Detail,
             Documentation: document,
             InsertTextFormat: InsertTextFormat.Snippet,
-            InsertText: stringBuilder.ToString()
+            InsertText: stringHandler.ToStringAndClear()
         );
 
         return true;

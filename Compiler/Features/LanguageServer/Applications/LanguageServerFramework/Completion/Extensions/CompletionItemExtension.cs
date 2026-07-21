@@ -6,6 +6,7 @@ using EmmyLua.LanguageServer.Framework.Protocol.Model.Union;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Completion;
 
 using FrameworkCompletionItem = EmmyLua.LanguageServer.Framework.Protocol.Message.Completion.CompletionItem;
+using FrameworkCompletionItemLabelDetails = EmmyLua.LanguageServer.Framework.Protocol.Message.Completion.CompletionItemLabelDetails;
 using FrameworkCompletionItemKind = EmmyLua.LanguageServer.Framework.Protocol.Message.Completion.CompletionItemKind;
 using FrameworkInsertTextFormat = EmmyLua.LanguageServer.Framework.Protocol.Model.Kind.InsertTextFormat;
 
@@ -25,9 +26,21 @@ public static class CompletionItemExtension
             };
         }
 
+        FrameworkCompletionItemLabelDetails? labelDetails = null;
+
+        if( self.LabelDetails != null )
+        {
+            labelDetails = new FrameworkCompletionItemLabelDetails
+            {
+                Detail = self.LabelDetails.Detail,
+                Description = self.LabelDetails.Description
+            };
+        }
+
         return new FrameworkCompletionItem
         {
             Label            = self.Label,
+            LabelDetails     = labelDetails,
             Kind             = (FrameworkCompletionItemKind)(int)self.Kind,
             Detail           = self.Detail,
             Documentation    = documentation,
