@@ -85,7 +85,7 @@ public sealed class CompletionInteractor : ICompletionUseCase
             var pgsItemFactory = new PgsKeyCompletionItemFactory();
             var variableItemFactory = new VariableCompletionItemFactory();
             var uiItemFactory = new UICompletionItemFactory( snippetTextBuilder );
-            var commandItemFactory = new CommandCompletionItemFactory( snippetTextBuilder );
+            var commandItemFactory = new CommandCompletionItemFactory();
             var callbackItemFactory = new CallbackCompletionItemFactory( snippetTextBuilder );
             var userFunctionItemFactory = new UserFunctionCompletionItemFactory( snippetTextBuilder );
 
