@@ -1,6 +1,32 @@
 CHANGELOG
 =========
 
+## v1.1.4
+
+### KONTAKT 8.12 ready
+
+#### Variables added
+
+- $NI_FADE_EQUAL_POWER
+- $NI_FADE_EXPONENTIAL
+- $NI_FADE_LOGARITHMIC
+- $NI_FADE_S_CURVE
+
+#### Commands added
+
+- fade_in(event-id,fade-time,curve)
+- fade_out(event-id,fade-time,stop-voice,curve)
+
+### Improvements
+
+- Added a feature to display command arguments in the completion list.
+- The completion list is now displayed for overloaded commands as well.
+- Performance tuning (experimental)
+
+### Maintenance Release
+
+- Update dependency Frameworks / Libraries
+
 ## v1.1.3
 
 ### Maintenance Release
