@@ -1,4 +1,4 @@
-using System.Text;
+using System.Runtime.CompilerServices;
 
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Completion;
@@ -6,18 +6,12 @@ using KSPCompiler.Shared.Domain.Compilation.Symbols;
 
 namespace KSPCompiler.Features.LanguageServer.UseCase.Completion.CompletionItems;
 
-public sealed class UserFunctionCompletionItemFactory(
-    StringBuilder? snippetTextBuilder
-) : ICompletionItemFactory<UserFunctionSymbol>
+public sealed class UserFunctionCompletionItemFactory : ICompletionItemFactory<UserFunctionSymbol>
 {
     private const string Detail = "User Function";
 
-    private readonly StringBuilder snippetTextBuilder = snippetTextBuilder ?? new StringBuilder();
-
     public CompletionItem Create( UserFunctionSymbol symbol, string partialName, bool preferSnippetInsertion )
     {
-        snippetTextBuilder.Clear();
-
         return new CompletionItem(
             Label: symbol.Name.Value,
             LabelDetails: null,
@@ -33,16 +27,20 @@ public sealed class UserFunctionCompletionItemFactory(
     {
         result = null!;
 
-        if( !partialName.StartsWith( "f" ) )
+        if( !partialName.StartsWith( 'f' ) )
         {
             return false;
         }
 
-        snippetTextBuilder.Clear();
+        var stringHandler = new DefaultInterpolatedStringHandler( 0, 0 );
 
-        snippetTextBuilder.Append( "function " ).AppendLine( "${1:name}" )
-                          .AppendLine( @"    ${2:{TODO: your script here\}}" )
-                          .AppendLine( "end function" );
+        stringHandler.AppendLiteral( "function " );
+        stringHandler.AppendLiteral( "${1:name}" );
+        stringHandler.AppendLiteral( "\n" );
+        stringHandler.AppendLiteral( @"    ${2:{TODO: your script here\}}" );
+        stringHandler.AppendLiteral( "\n" );
+        stringHandler.AppendLiteral( "end function" );
+        stringHandler.AppendLiteral( "\n" );
 
         result = new CompletionItem(
             Label: "function <name>",
@@ -51,7 +49,7 @@ public sealed class UserFunctionCompletionItemFactory(
             Detail: Detail,
             Documentation: string.Empty,
             InsertTextFormat: InsertTextFormat.Snippet,
-            InsertText: snippetTextBuilder.ToString()
+            InsertText: stringHandler.ToStringAndClear()
         );
 
         return true;

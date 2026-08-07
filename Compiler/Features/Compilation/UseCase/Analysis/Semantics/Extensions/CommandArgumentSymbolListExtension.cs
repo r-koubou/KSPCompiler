@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Runtime.CompilerServices;
 
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
@@ -12,76 +12,76 @@ public static class CommandArgumentSymbolListExtension
 {
     public static string ToIncompatibleMessage( this IReadOnlyCollection<CommandSymbol> self )
     {
-        var stringBuilder = new StringBuilder();
-
         var i = 0;
         var length = self.Count;
         var commandName = self.First().Name.Value;
+        var stringHandler = new DefaultInterpolatedStringHandler( 0, 0 );
 
         foreach( var command in self )
         {
-            stringBuilder.Append( command.Arguments.ToIncompatibleMessage( commandName ) );
+            stringHandler.AppendFormatted( command.Arguments.ToIncompatibleMessage( commandName ) );
 
             if( i < length - 1 )
             {
-                stringBuilder.Append( " or " );
+                stringHandler.AppendLiteral( " or " );
             }
             i++;
         }
 
-        return stringBuilder.ToString();
+        return stringHandler.ToStringAndClear();
 
     }
 
     public static string ToIncompatibleMessage( this CommandArgumentSymbolList self, string commandName )
     {
-        var stringBuilder = new StringBuilder();
-
         var i = 0;
         var length = self.Count;
+        var stringHandler = new DefaultInterpolatedStringHandler( 0, 0 );
 
-        stringBuilder.Append( commandName );
-        stringBuilder.Append( '(' );
+        stringHandler.AppendFormatted( commandName );
+        stringHandler.AppendLiteral( "(" );
 
         foreach( var arg in self )
         {
-            stringBuilder.Append( arg.DataType.ToMessageString() );
+            stringHandler.AppendFormatted( arg.DataType.ToMessageString() );
 
             if( i < length - 1 )
             {
-                stringBuilder.Append( ", " );
+                stringHandler.AppendLiteral( ", " );
             }
             i++;
         }
 
-        stringBuilder.Append( ')' );
+        stringHandler.AppendLiteral( ")" );
 
-        return stringBuilder.ToString();
+        return stringHandler.ToStringAndClear();
     }
 
     public static string ToIncompatibleMessage( this IReadOnlyCollection<AstExpressionNode> self, string commandName )
     {
-        var stringBuilder = new StringBuilder();
-
         var i = 0;
-        var length = self.Count();
+        var length = self.Count;
+        var stringHandler = new DefaultInterpolatedStringHandler(
+            literalLength: "()".Length + ", ".Length * ( length - 1 ),
+            formattedCount: length + 1
+        );
 
-        stringBuilder.Append( commandName );
-        stringBuilder.Append( '(' );
+        stringHandler.AppendFormatted( commandName );
+        stringHandler.AppendLiteral( "(" );
 
         foreach( var arg in self )
         {
-            stringBuilder.Append( arg.TypeFlag.ToMessageString() );
+            stringHandler.AppendFormatted( arg.TypeFlag.ToMessageString() );
 
             if( i < length - 1 )
             {
-                stringBuilder.Append( ", " );
+                stringHandler.AppendLiteral( ", " );
             }
             i++;
         }
 
-        stringBuilder.Append( ')' );
+        stringHandler.AppendLiteral( ")" );
 
-        return stringBuilder.ToString();
+        return stringHandler.ToStringAndClear();
     }
 }

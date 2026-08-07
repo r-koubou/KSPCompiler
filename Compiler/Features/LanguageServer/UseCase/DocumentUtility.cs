@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Runtime.CompilerServices;
 
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
@@ -201,7 +201,6 @@ internal static class DocumentUtility
 
         if( commentLines.Count > 0 )
         {
-            var builder = new StringBuilder( 128 );
             var minIndent = commentLines
                            .Where( line => line.Trim().Length > 0 )
                            .Select( line => line.Length - line.TrimStart().Length )
@@ -209,14 +208,25 @@ internal static class DocumentUtility
                            .Min();
 
             var normalizedLines = commentLines
-               .Select( line => line.Length >= minIndent ? line.Substring( minIndent ) : line );
+               .Select( line => line.Length >= minIndent ? line.Substring( minIndent ) : line ).ToList();
+
+            if( normalizedLines.Count == 0 )
+            {
+                return string.Empty;
+            }
+
+            var stringHandler = new DefaultInterpolatedStringHandler(
+                literalLength: "\n".Length * normalizedLines.Count,
+                formattedCount: normalizedLines.Count
+            );
 
             foreach( var line in normalizedLines )
             {
-                builder.AppendLine( line );
+                stringHandler.AppendFormatted( line );
+                stringHandler.AppendLiteral( "\n" );
             }
 
-            return builder.ToString();
+            return stringHandler.ToStringAndClear();
         }
 
         return symbol.Description.Value;
