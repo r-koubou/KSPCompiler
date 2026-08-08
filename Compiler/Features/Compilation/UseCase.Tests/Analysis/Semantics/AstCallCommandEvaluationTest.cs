@@ -3,7 +3,6 @@ using System;
 using KSPCompiler.Features.Compilation.Domain.Messages;
 using KSPCompiler.Features.Compilation.Domain.Messages.Extensions;
 using KSPCompiler.Features.Compilation.Gateways.EventEmitting;
-using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Convolutions.Integers;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Commons.Evaluations.Convolutions.Reals;
 using KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
 using KSPCompiler.Features.SymbolManagement.UseCase.Tests.Commons;

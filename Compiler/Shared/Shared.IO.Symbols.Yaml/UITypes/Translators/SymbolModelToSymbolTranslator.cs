@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
 using KSPCompiler.Shared.IO.Symbols.Yaml.UITypes.Models;
