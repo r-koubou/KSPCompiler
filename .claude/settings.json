@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dotnet build *)",
+      "Bash(dotnet test *)",
+      "Bash(uv --version)",
+      "Bash(uv run *)",
+      "Bash(uv sync *)",
+      "Bash(read d *)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(sudo *)",
+      "Bash(* --force)",
+      "Bash(del /q *)",
+      "Bash(rmdir /s *)"
+    ]
+  }
+}
