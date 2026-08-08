@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -28,8 +27,6 @@ public sealed class CompletionInteractor : ICompletionUseCase
             var symbolTable = cache.SymbolTable;
             var word = DocumentUtility.ExtractWord( cache.AllLinesText, position );
             var completions = new List<CompletionItem>();
-
-            var snippetTextBuilder = new StringBuilder();
 
             #region Collection of target symbols
             // プリプロセッサ
@@ -84,10 +81,10 @@ public sealed class CompletionInteractor : ICompletionUseCase
             var preprocessorItemFactory = new PreprocessorCompletionItemFactory();
             var pgsItemFactory = new PgsKeyCompletionItemFactory();
             var variableItemFactory = new VariableCompletionItemFactory();
-            var uiItemFactory = new UICompletionItemFactory( snippetTextBuilder );
+            var uiItemFactory = new UICompletionItemFactory();
             var commandItemFactory = new CommandCompletionItemFactory();
-            var callbackItemFactory = new CallbackCompletionItemFactory( snippetTextBuilder );
-            var userFunctionItemFactory = new UserFunctionCompletionItemFactory( snippetTextBuilder );
+            var callbackItemFactory = new CallbackCompletionItemFactory();
+            var userFunctionItemFactory = new UserFunctionCompletionItemFactory();
 
             BuildCompletionItem( preprocessors, preprocessorItemFactory, word, preferSnippetInsertion, completions );
             BuildCompletionItem( pgsKeyIds, pgsItemFactory, word, preferSnippetInsertion, completions );
