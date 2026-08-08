@@ -67,13 +67,13 @@ public sealed class CallbackCompletionItemFactory : ICompletionItemFactory<Callb
             var codeIndex = callbackSymbol.ArgumentCount + 1;
 
             stringHandler.AppendLiteral( ")" );
-            stringHandler.AppendLiteral( Environment.NewLine );
+            stringHandler.AppendLiteral( LspConstants.NewLine );
             stringHandler.AppendLiteral( "    ${" );
             stringHandler.AppendFormatted( codeIndex );
             stringHandler.AppendLiteral( ":code}" );
-            stringHandler.AppendLiteral( Environment.NewLine );
+            stringHandler.AppendLiteral( LspConstants.NewLine );
             stringHandler.AppendLiteral( "end on" );
-            stringHandler.AppendLiteral( Environment.NewLine );
+            stringHandler.AppendLiteral( LspConstants.NewLine );
 
             result = new CompletionItem(
                 Label: $"on {callbackSymbol.Name.Value}",
@@ -93,11 +93,11 @@ public sealed class CallbackCompletionItemFactory : ICompletionItemFactory<Callb
 
             stringHandler.AppendLiteral( "on " );
             stringHandler.AppendFormatted( callbackSymbol.Name.Value );
-            stringHandler.AppendLiteral( "\n" );
+            stringHandler.AppendLiteral( LspConstants.NewLine );
             stringHandler.AppendLiteral( "    ${1:code}" );
-            stringHandler.AppendLiteral( "\n" );
+            stringHandler.AppendLiteral( LspConstants.NewLine );
             stringHandler.AppendLiteral( "end on" );
-            stringHandler.AppendLiteral( "\n" );
+            stringHandler.AppendLiteral( LspConstants.NewLine );
 
             result = new CompletionItem(
                 Label: $"on {callbackSymbol.Name.Value}",
@@ -125,11 +125,11 @@ public sealed class CallbackCompletionItemFactory : ICompletionItemFactory<Callb
         var stringHandler = new DefaultInterpolatedStringHandler( 0, 0 );
 
         stringHandler.AppendLiteral( "on ${1:name}" );
-        stringHandler.AppendLiteral( Environment.NewLine );
+        stringHandler.AppendLiteral( LspConstants.NewLine );
         stringHandler.AppendLiteral( @"    ${2:{TODO: your script here\}}" );
-        stringHandler.AppendLiteral( Environment.NewLine );
+        stringHandler.AppendLiteral( LspConstants.NewLine );
         stringHandler.AppendLiteral( "end on" );
-        stringHandler.AppendLiteral( Environment.NewLine );
+        stringHandler.AppendLiteral( LspConstants.NewLine );
 
         result = new CompletionItem(
             Label: "on <name>",

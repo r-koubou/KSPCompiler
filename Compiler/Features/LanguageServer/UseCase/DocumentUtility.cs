@@ -216,14 +216,14 @@ internal static class DocumentUtility
             }
 
             var stringHandler = new DefaultInterpolatedStringHandler(
-                literalLength: "\n".Length * normalizedLines.Count,
+                literalLength: LspConstants.NewLine.Length * normalizedLines.Count,
                 formattedCount: normalizedLines.Count
             );
 
             foreach( var line in normalizedLines )
             {
                 stringHandler.AppendFormatted( line );
-                stringHandler.AppendLiteral( "\n" );
+                stringHandler.AppendLiteral( LspConstants.NewLine );
             }
 
             return stringHandler.ToStringAndClear();

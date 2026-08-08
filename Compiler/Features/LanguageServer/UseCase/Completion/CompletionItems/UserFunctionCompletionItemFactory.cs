@@ -36,11 +36,11 @@ public sealed class UserFunctionCompletionItemFactory : ICompletionItemFactory<U
 
         stringHandler.AppendLiteral( "function " );
         stringHandler.AppendLiteral( "${1:name}" );
-        stringHandler.AppendLiteral( "\n" );
+        stringHandler.AppendLiteral( LspConstants.NewLine );
         stringHandler.AppendLiteral( @"    ${2:{TODO: your script here\}}" );
-        stringHandler.AppendLiteral( "\n" );
+        stringHandler.AppendLiteral( LspConstants.NewLine );
         stringHandler.AppendLiteral( "end function" );
-        stringHandler.AppendLiteral( "\n" );
+        stringHandler.AppendLiteral( LspConstants.NewLine );
 
         result = new CompletionItem(
             Label: "function <name>",

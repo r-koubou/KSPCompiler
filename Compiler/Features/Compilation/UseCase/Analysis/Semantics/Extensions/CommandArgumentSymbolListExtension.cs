@@ -61,10 +61,7 @@ public static class CommandArgumentSymbolListExtension
     {
         var i = 0;
         var length = self.Count;
-        var stringHandler = new DefaultInterpolatedStringHandler(
-            literalLength: "()".Length + ", ".Length * ( length - 1 ),
-            formattedCount: length + 1
-        );
+        var stringHandler = new DefaultInterpolatedStringHandler( 0, 0 );
 
         stringHandler.AppendFormatted( commandName );
         stringHandler.AppendLiteral( "(" );
