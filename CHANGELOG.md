@@ -1,6 +1,14 @@
 CHANGELOG
 =========
 
+## v1.1.5
+
+### Maintenance Release
+
+- Update dependency Frameworks / Libraries
+- Removed deprecated CLI Application (KSP Built-in Symbol Management)
+- Improved Memory Performance (StringBuilder to DefaultInterpolatedStringHandler)
+
 ## v1.1.4
 
 ### KONTAKT 8.12 ready

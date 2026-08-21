@@ -1,4 +1,4 @@
-using System.Text;
+using System.Runtime.CompilerServices;
 
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Completion;
@@ -8,20 +8,14 @@ using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData.Extensions;
 
 namespace KSPCompiler.Features.LanguageServer.UseCase.Completion.CompletionItems;
 
-public sealed class UICompletionItemFactory(
-    StringBuilder? snippetTextBuilder
-) : ICompletionItemFactory<UITypeSymbol>
+public sealed class UICompletionItemFactory : ICompletionItemFactory<UITypeSymbol>
 {
     private const string Detail = "UI";
     private const CompletionItemKind Kind = CompletionItemKind.Class;
 
-    private readonly StringBuilder snippetTextBuilder = snippetTextBuilder ?? new StringBuilder();
-
     public CompletionItem Create( UITypeSymbol symbol, string partialName, bool preferSnippetInsertion )
     {
-        snippetTextBuilder.Clear();
-
-        if( TryCreateCommandSnippet( symbol, snippetTextBuilder, preferSnippetInsertion, out var snippetResult ) )
+        if( TryCreateCommandSnippet( symbol, preferSnippetInsertion, out var snippetResult ) )
         {
             return snippetResult;
         }
@@ -39,7 +33,7 @@ public sealed class UICompletionItemFactory(
         );
     }
 
-    private static bool TryCreateCommandSnippet( UITypeSymbol symbol, StringBuilder stringBuilder, bool preferSnippetInsertion, out CompletionItem result )
+    private static bool TryCreateCommandSnippet( UITypeSymbol symbol, bool preferSnippetInsertion, out CompletionItem result )
     {
         result = null!;
 
@@ -57,7 +51,6 @@ public sealed class UICompletionItemFactory(
         document = string.IsNullOrEmpty( document ) ? null : document;
 
         var placeholderIndex = 1;
-        stringBuilder.Clear();
 
         // declare ui_**** <name>
 
@@ -66,11 +59,20 @@ public sealed class UICompletionItemFactory(
             kspTypeCharacter = "";
         }
 
-        stringBuilder.Append( "declare " ).Append( symbol.Name.Value ).Append( " " );
-        stringBuilder.Append( $"{kspTypeCharacter}" ).Append( "${" ).Append( placeholderIndex ).Append( ":name}" );
+        var isArray = symbol.DataType.IsArray();
+        var argCount = symbol.InitializerArguments.Count;
+        var stringHandler = new DefaultInterpolatedStringHandler( 0, 0 );
+
+        stringHandler.AppendLiteral( "declare " );
+        stringHandler.AppendFormatted( symbol.Name.Value );
+        stringHandler.AppendLiteral( " " );
+        stringHandler.AppendFormatted( kspTypeCharacter );
+        stringHandler.AppendLiteral( "${" );
+        stringHandler.AppendFormatted( placeholderIndex );
+        stringHandler.AppendLiteral( ":name}" );
         placeholderIndex++;
 
-        if( symbol.InitializerArguments.Count == 0 )
+        if( argCount == 0 )
         {
             result = new CompletionItem(
                 Label: symbol.Name.Value,
@@ -79,7 +81,7 @@ public sealed class UICompletionItemFactory(
                 Detail: Detail,
                 Documentation: document,
                 InsertTextFormat: InsertTextFormat.Snippet,
-                InsertText: stringBuilder.ToString()
+                InsertText: stringHandler.ToStringAndClear()
             );
 
             return true;
@@ -87,40 +89,38 @@ public sealed class UICompletionItemFactory(
 
         // [array-size]
 
-        if( symbol.DataType.IsArray() )
+        if( isArray )
         {
-            stringBuilder.Append( "[${" ).Append( placeholderIndex ).Append( ":array-size}]" );
+            stringHandler.AppendLiteral( "[${" );
+            stringHandler.AppendFormatted( placeholderIndex );
+            stringHandler.AppendLiteral( ":array-size}]" );
             placeholderIndex++;
         }
 
         // Initializer
 
-        var argCount = symbol.InitializerArguments.Count;
-
-        if( argCount > 0 )
-        {
-            stringBuilder.Append( " (" );
-        }
+        stringHandler.AppendLiteral( " (" );
 
         var argIndex = 0;
 
         foreach( var arg in symbol.InitializerArguments )
         {
-            stringBuilder.Append( "${" )
-                         .Append( placeholderIndex ).Append( ":" )
-                         .Append( arg.Name.Value )
-                         .Append( "}" );
+            stringHandler.AppendLiteral( "${" );
+            stringHandler.AppendFormatted( placeholderIndex );
+            stringHandler.AppendLiteral( ":" );
+            stringHandler.AppendFormatted( arg.Name.Value );
+            stringHandler.AppendLiteral( "}" );
 
             if( argIndex + 1 < argCount )
             {
-                stringBuilder.Append( ", " );
+                stringHandler.AppendLiteral( ", " );
             }
 
             argIndex++;
             placeholderIndex++;
         }
 
-        stringBuilder.Append( ")" );
+        stringHandler.AppendLiteral( ")" );
 
         result = new CompletionItem(
             Label: symbol.Name.Value,
@@ -129,7 +129,7 @@ public sealed class UICompletionItemFactory(
             Detail: Detail,
             Documentation: document,
             InsertTextFormat: InsertTextFormat.Snippet,
-            InsertText: stringBuilder.ToString()
+            InsertText: stringHandler.ToStringAndClear()
         );
 
         return true;

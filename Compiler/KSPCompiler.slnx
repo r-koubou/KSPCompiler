@@ -21,19 +21,6 @@
   <Folder Name="/Features/Language Server/Applications/">
     <Project Path="Features/LanguageServer/Applications/LanguageServerFramework/LSServer.LanguageServerFramework.csproj" />
   </Folder>
-  <Folder Name="/Features/Symbol Management/">
-    <Project Path="Features/SymbolManagement/Gateways/Gateways.csproj" />
-    <Project Path="Features/SymbolManagement/UseCase.Tests/UseCase.Tests.csproj" />
-    <Project Path="Features/SymbolManagement/UseCase/UseCase.csproj" />
-  </Folder>
-  <Folder Name="/Features/Symbol Management/Applications/">
-    <Project Path="Features/SymbolManagement/Applications/SymbolDatabaseCliApp/SymbolDatabaseCliApp.csproj" />
-  </Folder>
-  <Folder Name="/Features/Symbol Management/Infrastructures/" />
-  <Folder Name="/Features/Symbol Management/Infrastructures/Symbol Reposotories/">
-    <Project Path="Features/SymbolManagement/Infrastructures/SymbolRepository.Yaml.Tests/SymbolRepository.Yaml.Tests.csproj" />
-    <Project Path="Features/SymbolManagement/Infrastructures/SymbolRepository.Yaml/SymbolRepository.Yaml.csproj" />
-  </Folder>
   <Folder Name="/Shared/">
     <Project Path="Shared/Shared.Tests/Shared.Tests.csproj" />
     <Project Path="Shared/Shared/Shared.csproj" />

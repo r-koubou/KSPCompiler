@@ -1,4 +1,5 @@
-using System.Text;
+using System;
+using System.Runtime.CompilerServices;
 
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions;
 using KSPCompiler.Features.LanguageServer.UseCase.Abstractions.Completion;
@@ -6,20 +7,14 @@ using KSPCompiler.Shared.Domain.Compilation.Symbols;
 
 namespace KSPCompiler.Features.LanguageServer.UseCase.Completion.CompletionItems;
 
-public sealed class CallbackCompletionItemFactory(
-    StringBuilder? snippetTextBuilder
-) : ICompletionItemFactory<CallbackSymbol>
+public sealed class CallbackCompletionItemFactory : ICompletionItemFactory<CallbackSymbol>
 {
     private const string Detail = "Callback";
     private const CompletionItemKind Kind = CompletionItemKind.Event;
 
-    private readonly StringBuilder snippetTextBuilder = snippetTextBuilder ?? new StringBuilder();
-
     public CompletionItem Create( CallbackSymbol symbol, string partialName, bool _ )
     {
-        snippetTextBuilder.Clear();
-
-        if( TryCreateSnippetItem( symbol, partialName, snippetTextBuilder, out var completionItem ) )
+        if( TryCreateSnippetItem( symbol, partialName, out var completionItem ) )
         {
             return completionItem;
         }
@@ -35,7 +30,7 @@ public sealed class CallbackCompletionItemFactory(
         );
     }
 
-    private static bool TryCreateSnippetItem( CallbackSymbol callbackSymbol, string partialName, StringBuilder stringBuilder, out CompletionItem result )
+    private static bool TryCreateSnippetItem( CallbackSymbol callbackSymbol, string partialName, out CompletionItem result )
     {
         var document = DocumentUtility.GetCommentOrDescriptionText( callbackSymbol );
         document = string.IsNullOrEmpty( document ) ? null : document;
@@ -49,61 +44,92 @@ public sealed class CallbackCompletionItemFactory(
 
         if( callbackSymbol.ArgumentCount > 0 )
         {
-            stringBuilder.Append( "on " ).Append( callbackSymbol.Name.Value ).Append( '(' );
+            var stringHandler = new DefaultInterpolatedStringHandler( 0, 0 );
+
+            stringHandler.AppendLiteral( "on " );
+            stringHandler.AppendFormatted( callbackSymbol.Name.Value );
+            stringHandler.AppendLiteral( "(" );
 
             for( var snippetIndex = 0; snippetIndex < callbackSymbol.ArgumentCount; snippetIndex++ )
             {
-                stringBuilder.Append( "${" )
-                             .Append( snippetIndex + 1 ).Append( ':' )
-                             .Append( callbackSymbol.Arguments[ snippetIndex ].Name.Value )
-                             .Append( '}' );
+                stringHandler.AppendLiteral( "${" );
+                stringHandler.AppendFormatted( snippetIndex + 1 );
+                stringHandler.AppendLiteral( ":" );
+                stringHandler.AppendFormatted( callbackSymbol.Arguments[ snippetIndex ].Name.Value );
+                stringHandler.AppendLiteral( "}" );
 
                 if( snippetIndex < callbackSymbol.ArgumentCount - 1 )
                 {
-                    stringBuilder.Append( ", " );
+                    stringHandler.AppendLiteral( ", " );
                 }
             }
 
             var codeIndex = callbackSymbol.ArgumentCount + 1;
 
-            stringBuilder.AppendLine( ")" )
-                         .AppendLine( $"    ${{{codeIndex}:code}}" )
-                         .AppendLine( "end on" );
+            stringHandler.AppendLiteral( ")" );
+            stringHandler.AppendLiteral( LspConstants.NewLine );
+            stringHandler.AppendLiteral( "    ${" );
+            stringHandler.AppendFormatted( codeIndex );
+            stringHandler.AppendLiteral( ":code}" );
+            stringHandler.AppendLiteral( LspConstants.NewLine );
+            stringHandler.AppendLiteral( "end on" );
+            stringHandler.AppendLiteral( LspConstants.NewLine );
+
+            result = new CompletionItem(
+                Label: $"on {callbackSymbol.Name.Value}",
+                LabelDetails: null,
+                Kind: Kind,
+                Detail: Detail,
+                Documentation: document,
+                InsertTextFormat: InsertTextFormat.Snippet,
+                InsertText: stringHandler.ToStringAndClear()
+            );
+
+            return true;
         }
         else
         {
-            stringBuilder.Append( "on " ).AppendLine( callbackSymbol.Name.Value )
-                         .AppendLine( "    ${1:code}" )
-                         .AppendLine( "end on" );
+            var stringHandler = new DefaultInterpolatedStringHandler( 0, 0 );
+
+            stringHandler.AppendLiteral( "on " );
+            stringHandler.AppendFormatted( callbackSymbol.Name.Value );
+            stringHandler.AppendLiteral( LspConstants.NewLine );
+            stringHandler.AppendLiteral( "    ${1:code}" );
+            stringHandler.AppendLiteral( LspConstants.NewLine );
+            stringHandler.AppendLiteral( "end on" );
+            stringHandler.AppendLiteral( LspConstants.NewLine );
+
+            result = new CompletionItem(
+                Label: $"on {callbackSymbol.Name.Value}",
+                LabelDetails: null,
+                Kind: Kind,
+                Detail: Detail,
+                Documentation: document,
+                InsertTextFormat: InsertTextFormat.Snippet,
+                InsertText: stringHandler.ToStringAndClear()
+            );
+
+            return true;
         }
-
-        result = new CompletionItem(
-            Label: $"on {callbackSymbol.Name.Value}",
-            LabelDetails: null,
-            Kind: Kind,
-            Detail: Detail,
-            Documentation: document,
-            InsertTextFormat: InsertTextFormat.Snippet,
-            InsertText: stringBuilder.ToString()
-        );
-
-        return true;
     }
 
     public bool TryCreateFixedSnippet( string partialName, out CompletionItem result )
     {
         result = null!;
 
-        if( !partialName.StartsWith( "o" ) )
+        if( !partialName.StartsWith( 'o' ) )
         {
             return false;
         }
 
-        snippetTextBuilder.Clear();
+        var stringHandler = new DefaultInterpolatedStringHandler( 0, 0 );
 
-        snippetTextBuilder.AppendLine( "on ${1:name}" )
-                          .AppendLine( @"    ${2:{TODO: your script here\}}" )
-                          .AppendLine( "end on" );
+        stringHandler.AppendLiteral( "on ${1:name}" );
+        stringHandler.AppendLiteral( LspConstants.NewLine );
+        stringHandler.AppendLiteral( @"    ${2:{TODO: your script here\}}" );
+        stringHandler.AppendLiteral( LspConstants.NewLine );
+        stringHandler.AppendLiteral( "end on" );
+        stringHandler.AppendLiteral( LspConstants.NewLine );
 
         result = new CompletionItem(
             Label: "on <name>",
@@ -112,7 +138,7 @@ public sealed class CallbackCompletionItemFactory(
             Detail: Detail,
             Documentation: string.Empty,
             InsertTextFormat: InsertTextFormat.Snippet,
-            InsertText: snippetTextBuilder.ToString()
+            InsertText: stringHandler.ToStringAndClear()
         );
 
         return true;
