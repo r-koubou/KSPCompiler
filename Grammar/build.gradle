@@ -17,7 +17,7 @@ dependencies {
 }
 
 wrapper {
-    gradleVersion = '9.8.0'
+    gradleVersion = '9.8.1'
 }
 
 // ANTLR
