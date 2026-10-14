@@ -30,6 +30,12 @@ on:
         default: "develop"
         description: |
           Build channel (develop, rc, release)
+      build_configuration:
+        required: true
+        type: string
+        default: "Debug"
+        description: |
+          Build configuration for csproj (Debug, Release).
 
   workflow_dispatch:
     inputs:
@@ -63,18 +69,28 @@ on:
           - release
         description: |
           Build channel (develop, rc, release)
+      build_configuration:
+        required: true
+        type: choice
+        options:
+          - Debug
+          - Release
+        default: "Debug"
+        description: |
+          Build configuration (Debug, Release).
 
 #--------------------------------------------------------------
 # Build C# project
+#
+# [outputs]
+#   artifact-name: The name of the artifact produced by the build.
 #--------------------------------------------------------------
 jobs:
   build-csproj:
-    name: build (${{ matrix.build_configuration }})
+    name: build (${{ inputs.build_configuration }})
+    outputs:
+      artifact-name: ${{ steps.set-artifact-name.outputs.artifact-name }}
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        build_configuration: [Debug, Release]
     env:
       DOTNET_SDK_VERSION: '10.*'
       DOTNET_CLI_TELEMETRY_OPTOUT: 1
@@ -83,7 +99,7 @@ jobs:
       CSPROJ_FILENAME: ${{ inputs.csproject_filename }}
       BASE_DIR: ${{ github.workspace }}/${{ inputs.base_dir }}
       PUBLISH_DIRNAME: publish
-      BUILD_CONFIGURATION: ${{ matrix.build_configuration }}
+      BUILD_CONFIGURATION: ${{ inputs.build_configuration }}
 
     steps:
     - name: Show workflow inputs
@@ -164,10 +180,13 @@ jobs:
     # Setup the artifact name
     #----------------------------------------------------------
     - name: Setup the artifact name
+      id: set-artifact-name
       env:
         BUILD_VERSION: ${{ env.BUILD_VERSION }}
+      # Set the artifact name and output it as a GitHub Actions output variable
       run: |
         echo "ARTIFACT_NAME=${{ env.PREFIX }}-${{ env.BUILD_CONFIGURATION }}-v${{ env.BUILD_VERSION }}-${{ inputs.channel }}" >> $GITHUB_ENV
+        echo "artifact-name=${ARTIFACT_NAME}" >> $GITHUB_OUTPUT
 
     - name: Show the artifact name
       env:

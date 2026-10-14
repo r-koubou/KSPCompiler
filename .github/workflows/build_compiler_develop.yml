@@ -20,5 +20,6 @@ jobs:
     with:
       channel: develop
       prefix: KSP-Compiler
+      build_configuration: Debug
       base_dir: "Compiler/Features/Compilation/Applications/Compilation.Cli"
       csproject_filename: "Compilation.Cli.csproj"
