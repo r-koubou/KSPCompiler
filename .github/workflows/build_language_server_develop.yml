@@ -20,5 +20,6 @@ jobs:
     with:
       channel: develop
       prefix: KSP-LanguageServer
+      build_configuration: Debug
       base_dir: "Compiler/Features/LanguageServer/Applications/LanguageServerFramework"
       csproject_filename: "LSServer.LanguageServerFramework.csproj"
