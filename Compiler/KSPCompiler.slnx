@@ -31,8 +31,6 @@
   </Folder>
   <Folder Name="/Shared/IO/Symbols/">
     <Project Path="Shared/Shared.IO.Symbols.Mock/Shared.IO.Symbols.Mock.csproj" />
-    <Project Path="Shared/Shared.IO.Symbols.Tsv.Tests/Shared.IO.Symbols.Tsv.Tests.csproj" />
-    <Project Path="Shared/Shared.IO.Symbols.Tsv/Shared.IO.Symbols.Tsv.csproj" />
     <Project Path="Shared/Shared.IO.Symbols.Yaml.Tests/Shared.IO.Symbols.Yaml.Tests.csproj" />
     <Project Path="Shared/Shared.IO.Symbols.Yaml/Shared.IO.Symbols.Yaml.csproj" />
   </Folder>
