@@ -7,7 +7,6 @@ Native Instruments KONTAKT が提供するスクリプト言語 KSP (Kontakt Scr
 
 [VS Code 拡張機能側](https://github.com/r-koubou/vscode-ksp)でビルドした言語サーバーを利用している。
 
-
 ## KSPとは
 
 https://docs.native-instruments.com/online-guides/ksp-manual/en/welcome-to-ksp
