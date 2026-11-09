@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <LangVersion>{{ lang_version }}</LangVersion>
+        <TargetFramework>{{ target_app_framework }}</TargetFramework>
+        <Nullable>enable</Nullable>
+        <Copyright>{{ author }}</Copyright>
+        <Company>{{ author }}</Company>
+        <Product>{{ project_name }}</Product>
+        <AssemblyName>{{ project_name }}</AssemblyName>
+        <RootNamespace>{{namespace_prefix}}.{{project_name}}</RootNamespace>
+    </PropertyGroup>
+
+</Project>
