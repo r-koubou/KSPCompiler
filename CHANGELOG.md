@@ -1,6 +1,16 @@
 CHANGELOG
 =========
 
+## v1.1.6
+
+### Maintenance Release
+
+- Updated dependencies version
+- Removed unused functions
+    - Tsv import / export
+- Removed unused dependencies
+    - CsvHelper
+
 ## v1.1.5
 
 ### Maintenance Release
