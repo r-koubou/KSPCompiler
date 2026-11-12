@@ -18,5 +18,6 @@ jobs:
     with:
       channel: release
       prefix: KSP-Compiler
+      build_configuration: Release
       base_dir: "Compiler/Features/Compilation/Applications/Compilation.Cli"
       csproject_filename: "Compilation.Cli.csproj"
