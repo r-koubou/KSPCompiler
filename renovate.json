@@ -8,7 +8,9 @@
     "schedule": [
     "* 9-21 * * 6,0"
   ],
-  "dependencyDashboard": true,
+  "dependencyDashboard": {
+    "enabled": true
+  },
   "labels": [
     "dependencies",
     "renovate"
