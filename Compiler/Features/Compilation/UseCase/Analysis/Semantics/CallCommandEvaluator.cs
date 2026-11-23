@@ -29,7 +29,7 @@ public class CallCommandEvaluator : ICallCommandEvaluator
 
     public IAstNode Evaluate( IAstVisitor visitor, AstCallCommandExpressionNode expr )
     {
-        if( !TryGetCommandSymbol( visitor, expr, out var symbols ) )
+        if( !TryGetCommandSymbols( visitor, expr, out var symbols ) )
         {
             // フォールバックに応じるため代替の式を返す
             var alternative = expr.Clone<AstCallCommandExpressionNode>();
@@ -38,18 +38,19 @@ public class CallCommandEvaluator : ICallCommandEvaluator
             return alternative;
         }
 
-        // フォールバックに応じるため return せずに続行
-        ValidateCommandArguments( visitor, expr, symbols );
-
         var result = expr.Clone<AstCallCommandExpressionNode>();
 
-        // 引数オーバーロードが複数あっても、戻り値の型は同じ想定
-        result.TypeFlag = symbols.First().DataType;
+        // フォールバックに応じるため return せずに続行
+        if( TryGetCommand( visitor, expr, symbols, out var command ) )
+        {
+            // 該当オーバーロードコマンドの戻り値の型設定
+            result.TypeFlag = command.DataType;
+        }
 
         return result;
     }
 
-    private bool TryGetCommandSymbol( IAstVisitor visitor, AstCallCommandExpressionNode expr, out IReadOnlyCollection<CommandSymbol> result )
+    private bool TryGetCommandSymbols( IAstVisitor visitor, AstCallCommandExpressionNode expr, out IReadOnlyCollection<CommandSymbol> result )
     {
         result = default!;
 
@@ -75,13 +76,16 @@ public class CallCommandEvaluator : ICallCommandEvaluator
         return true;
     }
 
-    private bool ValidateCommandArguments(
+    private bool TryGetCommand(
         IAstVisitor visitor,
         AstCallCommandExpressionNode expr,
-        IReadOnlyCollection<CommandSymbol> commandSymbols )
+        IReadOnlyCollection<CommandSymbol> commandSymbols,
+        out CommandSymbol result )
     {
         var arguments = expr.Right as AstExpressionListNode;
         var callArgs = new List<AstExpressionNode>();
+
+        result = null!;
 
         if( arguments != null )
         {
@@ -110,6 +114,7 @@ public class CallCommandEvaluator : ICallCommandEvaluator
             {
                 if( symbolArgs.Count == 0 )
                 {
+                    result = x;
                     return true;
                 }
             }
@@ -124,6 +129,7 @@ public class CallCommandEvaluator : ICallCommandEvaluator
 
             if( ValidateCommandArgumentType( expr, x, evaluatedCallArgs, symbolArgs ) )
             {
+                result = x;
                 return true;
             }
             #endregion ~With arguments command calling
