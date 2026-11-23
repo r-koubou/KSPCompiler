@@ -865,7 +865,7 @@ Data:
     Description: |-
       Undocumented
     BuiltIntoVersion: N/A
-    ReturnType: I||R
+    ReturnType: R
     Arguments:
       - Name: arg1
         DataType: I
