@@ -4,12 +4,24 @@ Data:
     Name: abs
     BuiltIn: true
     Description: |-
-      Absolute value
+      Absolute value (integer)
     BuiltIntoVersion: N/A
-    ReturnType: I||R
+    ReturnType: I
     Arguments:
       - Name: x
-        DataType: I||R
+        DataType: I
+        Description: |-
+          A numeric value to calculate
+  - Id: 5fcfdae6-1124-4286-8faf-c28759bb686f
+    Name: abs
+    BuiltIn: true
+    Description: |-
+      Absolute value (real)
+    BuiltIntoVersion: N/A
+    ReturnType: R
+    Arguments:
+      - Name: x
+        DataType: R
         Description: |-
           A numeric value to calculate
   - Id: 48ce7bcc-130b-4f72-9c93-a31366cb001f
