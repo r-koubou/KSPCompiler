@@ -29,25 +29,26 @@ public class CallCommandEvaluator : ICallCommandEvaluator
 
     public IAstNode Evaluate( IAstVisitor visitor, AstCallCommandExpressionNode expr )
     {
+        // フォールバックに応じるための代替式
+        var fallbackAst = expr.Clone<AstCallCommandExpressionNode>();
+        fallbackAst.TypeFlag = DataTypeFlag.FallBack;
+
         if( !TryGetCommandSymbols( visitor, expr, out var symbols ) )
         {
-            // フォールバックに応じるため代替の式を返す
-            var alternative = expr.Clone<AstCallCommandExpressionNode>();
-            alternative.TypeFlag = DataTypeFlag.FallBack;
-
-            return alternative;
+            return fallbackAst;
         }
 
-        var result = expr.Clone<AstCallCommandExpressionNode>();
-
-        // フォールバックに応じるため return せずに続行
-        if( TryGetCommand( visitor, expr, symbols, out var command ) )
+        if( !TryGetCommand( visitor, expr, symbols, out var command ) )
         {
-            // 該当オーバーロードコマンドの戻り値の型設定
-            result.TypeFlag = command.DataType;
+            return fallbackAst;
         }
+
+        // 該当オーバーロードコマンドの戻り値の型設定
+        var result = expr.Clone<AstCallCommandExpressionNode>();
+        result.TypeFlag = command.DataType;
 
         return result;
+
     }
 
     private bool TryGetCommandSymbols( IAstVisitor visitor, AstCallCommandExpressionNode expr, out IReadOnlyCollection<CommandSymbol> result )
