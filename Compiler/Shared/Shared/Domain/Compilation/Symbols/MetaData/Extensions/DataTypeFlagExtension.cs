@@ -7,7 +7,7 @@ namespace KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData.Extensions;
 public static class DataTypeFlagExtension
 {
     public static bool IsFallBack( this DataTypeFlag flag )
-        => flag == DataTypeFlag.FallBack;
+        => ( flag & DataTypeFlag.AttributeFallBack ) != 0;
 
     public static bool AreFallBack( this DataTypeFlag a, DataTypeFlag b )
         => a.IsFallBack() && b.IsFallBack();
