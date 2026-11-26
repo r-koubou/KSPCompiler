@@ -11,6 +11,7 @@ using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Expressions;
 using KSPCompiler.Shared.Domain.Compilation.Ast.Nodes.Extensions;
 using KSPCompiler.Shared.Domain.Compilation.Symbols;
 using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
+using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData.Extensions;
 using KSPCompiler.Shared.EventEmitting;
 
 namespace KSPCompiler.Features.Compilation.UseCase.Analysis.Semantics;
@@ -130,7 +131,27 @@ public class CallCommandEvaluator : ICallCommandEvaluator
 
             if( ValidateCommandArgumentType( expr, x, evaluatedCallArgs, symbolArgs ) )
             {
-                result = x;
+                // 引数の式のいずれかがフォールバックであっても x のシンボルが設定されてしまうので
+                var hasFalBackArg = evaluatedCallArgs.Any( arg => arg.TypeFlag.IsFallBack() );
+
+                // フォールバックだった場合は同名のコマンドオーバーロードの戻り値が異なっても
+                // 後続の式評価で型互換をを維持するため代替のコマンドを作成
+                //
+                // [具体的なコマンドの例]
+                // abs(x) は int と real を返すバリエーションのコマンド。x が int 版 real 版 どちらのコマンドのシンボルを
+                // 参照しているかは状況によるので代替コマンドシンボルを作成
+                if( hasFalBackArg )
+                {
+                    result = new CommandSymbol( x )
+                    {
+                        DataType = DataTypeFlag.FallBack,
+                    };
+                }
+                else
+                {
+                    result = x;
+                }
+
                 return true;
             }
             #endregion ~With arguments command calling
