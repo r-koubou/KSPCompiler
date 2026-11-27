@@ -107,6 +107,14 @@ public class CallCommandEvaluator : ICallCommandEvaluator
             evaluatedCallArgs.Add( evaluatedArg );
         }
 
+        // 引数の評価
+
+        // 引数の式のいずれかがフォールバックが含んでいるか
+        var hasFallBackArg = evaluatedCallArgs.Any( arg => arg.TypeFlag.IsFallBack() );
+
+        // 引数の式でフォールバックが含まれている場合、同名のコマンドオーバーロードのうち、引数の型が一致する候補を収集
+        var fallBackCommandCandidates = new List<CommandSymbol>();
+
         foreach( var x in commandSymbols )
         {
             var symbolArgs = x.Arguments.ToList();
@@ -129,32 +137,42 @@ public class CallCommandEvaluator : ICallCommandEvaluator
                 continue;
             }
 
-            if( ValidateCommandArgumentType( expr, x, evaluatedCallArgs, symbolArgs ) )
+            if( !ValidateCommandArgumentType( expr, x, evaluatedCallArgs, symbolArgs ) )
             {
-                // 引数の式のいずれかがフォールバックであっても x のシンボルが設定されてしまうので
-                var hasFalBackArg = evaluatedCallArgs.Any( arg => arg.TypeFlag.IsFallBack() );
+                continue;
+            }
 
-                // フォールバックだった場合は同名のコマンドオーバーロードの戻り値が異なっても
-                // 後続の式評価で型互換をを維持するため代替のコマンドを作成
-                //
-                // [具体的なコマンドの例]
-                // abs(x) は int と real を返すバリエーションのコマンド。x が int 版 real 版 どちらのコマンドのシンボルを
-                // 参照しているかは状況によるので代替コマンドシンボルを作成
-                if( hasFalBackArg )
-                {
-                    result = new CommandSymbol( x )
-                    {
-                        DataType = DataTypeFlag.FallBack,
-                    };
-                }
-                else
-                {
-                    result = x;
-                }
-
+            // 引数の型が一致する場合、かつフォールバック引数が含まれていない場合は、評価は完了＆該当するコマンドオーバーロードを返す
+            if( !hasFallBackArg )
+            {
+                ReplaceConvolutedCommandArguments( expr, evaluatedCallArgs );
+                result = x;
                 return true;
             }
+
+            // 引数の型が一致する場合、かつフォールバック引数が含まれている場合は、該当するコマンドオーバーロードを候補として収集
+            fallBackCommandCandidates.Add( x );
+
             #endregion ~With arguments command calling
+        }
+
+        // フォールバック引数を含み、引数に適合するオーバーロードが1つ以上ある場合、
+        // 戻り値型が異なる候補が残っているか確認する
+        if( fallBackCommandCandidates.Count > 0 )
+        {
+            var first = fallBackCommandCandidates[ 0 ];
+            var hasDifferentReturnTypes = fallBackCommandCandidates.Any( candidate => candidate.DataType != first.DataType );
+
+            ReplaceConvolutedCommandArguments( expr, evaluatedCallArgs );
+
+            result = hasDifferentReturnTypes
+                ? new CommandSymbol( first )
+                {
+                    DataType = DataTypeFlag.FallBack
+                }
+                : first;
+
+            return true;
         }
 
         // 全てのコマンド引数オーバーロードの評価がパスできなかった場合はエラー
@@ -226,9 +244,6 @@ public class CallCommandEvaluator : ICallCommandEvaluator
             // 引数の型が不一致
             return false;
         }
-
-        // 引数が畳み込みでリテラルになっていれば引数の式を置き換える
-        ReplaceConvolutedCommandArguments( expr, evaluatedCallArgs );
 
         return true;
     }
