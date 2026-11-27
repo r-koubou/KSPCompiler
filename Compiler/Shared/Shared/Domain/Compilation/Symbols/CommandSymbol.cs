@@ -22,6 +22,13 @@ public sealed class CommandSymbol : SymbolBase, ISymbolDataTypeProvider
 
     public CommandSymbol() {}
 
+    public CommandSymbol( CommandSymbol source )
+    {
+        DataType = source.DataType;
+        Name     = source.Name;
+        Arguments.AddRange( source.Arguments );
+    }
+
     public CommandSymbol( IEnumerable<CommandArgumentSymbol> args )
     {
         Arguments.AddRange( args );

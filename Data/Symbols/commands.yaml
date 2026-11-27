@@ -4,12 +4,24 @@ Data:
     Name: abs
     BuiltIn: true
     Description: |-
-      Absolute value
+      Absolute value (integer)
     BuiltIntoVersion: N/A
-    ReturnType: I||S||R
+    ReturnType: I
     Arguments:
       - Name: x
-        DataType: I||R
+        DataType: I
+        Description: |-
+          A numeric value to calculate
+  - Id: 5fcfdae6-1124-4286-8faf-c28759bb686f
+    Name: abs
+    BuiltIn: true
+    Description: |-
+      Absolute value (real)
+    BuiltIntoVersion: N/A
+    ReturnType: R
+    Arguments:
+      - Name: x
+        DataType: R
         Description: |-
           A numeric value to calculate
   - Id: 48ce7bcc-130b-4f72-9c93-a31366cb001f
@@ -18,7 +30,7 @@ Data:
     Description: |-
       Arccosine (inverse cosine) function
     BuiltIntoVersion: N/A
-    ReturnType: S||R
+    ReturnType: R
     Arguments:
       - Name: x
         DataType: R
@@ -90,7 +102,7 @@ Data:
     BuiltIn: true
     Description: ""
     BuiltIntoVersion: N/A
-    ReturnType: S||R
+    ReturnType: R
     Arguments:
       - Name: x
         DataType: R
@@ -102,7 +114,7 @@ Data:
     Description: |-
       Arctangent (inverse tangent function).
     BuiltIntoVersion: N/A
-    ReturnType: S||R
+    ReturnType: R
     Arguments:
       - Name: x
         DataType: R
@@ -169,7 +181,7 @@ Data:
     Description: |-
       A user-defined group of events.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: mark
         DataType: I
@@ -182,7 +194,7 @@ Data:
     Description: |-
       Used to access events grouped by their track number.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: track
         DataType: I
@@ -194,7 +206,7 @@ Data:
     Description: |-
       Cube root function.
     BuiltIntoVersion: N/A
-    ReturnType: S||R
+    ReturnType: R
     Arguments:
       - Name: x
         DataType: R
@@ -217,7 +229,7 @@ Data:
     Description: |-
       Ceiling (round up) ceil(2.3) = 3.0.
     BuiltIntoVersion: N/A
-    ReturnType: S||R
+    ReturnType: R
     Arguments:
       - Name: x
         DataType: R
@@ -286,9 +298,12 @@ Data:
     Description: |-
       Undocumented
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
-      - Name: arg1
+      - Name: event-id
+        DataType: I
+        Description: ""
+      - Name: time
         DataType: I
         Description: ""
   - Id: 5ce433ff-ec7d-41af-b492-ce31e2832535
@@ -356,7 +371,7 @@ Data:
     Description: |-
       Cosine function.
     BuiltIntoVersion: N/A
-    ReturnType: S||R
+    ReturnType: R
     Arguments:
       - Name: x
         DataType: R
@@ -396,7 +411,7 @@ Data:
     Description: |-
       Assigns `drum-type-result` a $NI_DETECT_DRUM_TYPE tag describing the drum type of an audio sample. You can use this function if detect_sample_type() determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_DRUM. If detection fails, the function will return ~NI_DETECT_DRUM_TYPE_INVALID.
     BuiltIntoVersion: N/A
-    ReturnType: S||R
+    ReturnType: I
     Arguments:
       - Name: zone-id
         DataType: I
@@ -423,7 +438,7 @@ Data:
     Description: |-
       Assigns `instr-type-result` a $NI_DETECT_INSTRUMENT_TYPE tag describing the instrument type of an audio sample. Hint: use this function if detect_sample_type() determines that a given audio sample is of type $NI_DETECT_SAMPLE_TYPE_INSTRUMENT. If detection fails, the function will return $NI_DETECT_INSTRUMENT_TYPE_INVALID.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: zone-id
         DataType: I
@@ -452,7 +467,7 @@ Data:
     Description: |-
       Assigns `key-result` a $NI_DETECT_KEY tag describing the musical key of the audio sample. If detection fails, the function will return $NI_DETECT_KEY_INVALID.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: zone-id
         DataType: I
@@ -492,7 +507,7 @@ Data:
     Description: |-
       Returns a real value representing the loudness of an audio sample in decibels. Loudness is measured according to the standard established by the International Telecommunication Union: Algorithms to measure audio program loudness and true-peak audio level - ITU-R BS.1770-4 (2015). If detection fails, the function will return ~NI_DETECT_LOUDNESS_INVALID.
     BuiltIntoVersion: N/A
-    ReturnType: S||R
+    ReturnType: I
     Arguments:
       - Name: zone-id
         DataType: I
@@ -508,7 +523,7 @@ Data:
     Description: |-
       Returns a real value representing peak level of an audio sample in decibels. Peak is measured according to the standard established by the International Telecommunication Union: Algorithms to measure audio program loudness and true-peak audio level - ITU-R BS.1770-4 (2015). If detection fails, the function will set `peak-result` to ~NI_DETECT_PEAK_INVALID.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: zone-id
         DataType: I
@@ -524,7 +539,7 @@ Data:
     Description: |-
       Returns a real value representing the fundamental frequency of an audio sample, in semitones and cents. If detection fails, the function will return ~NI_DETECT_PITCH_INVALID.
     BuiltIntoVersion: N/A
-    ReturnType: S||R
+    ReturnType: I
     Arguments:
       - Name: zone-id
         DataType: I
@@ -540,7 +555,7 @@ Data:
     Description: |-
       Returns a real value representing the RMS level of an audio sample in decibels. If detection fails, the function will return ~NI_DETECT_RMS_INVALID.
     BuiltIntoVersion: N/A
-    ReturnType: S||R
+    ReturnType: I
     Arguments:
       - Name: zone-id
         DataType: I
@@ -556,7 +571,7 @@ Data:
     Description: |-
       Assigns `sample-type-result` a $NI_DETECT_SAMPLE_TYPE tag describing the whether an audio sample is a drum or an instrument. If detection fails, the function will return $NI_DETECT_SAMPLE_TYPE_INVALID.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: zone-id
         DataType: I
@@ -574,7 +589,7 @@ Data:
     Description: |-
       Returns a real value representing the detected tempo of the audio sample, in BPM. If detection fails, the function will return ~NI_DETECT_TEMPO_INVALID.
     BuiltIntoVersion: N/A
-    ReturnType: S||R
+    ReturnType: I
     Arguments:
       - Name: zone-id
         DataType: I
@@ -626,7 +641,7 @@ Data:
     Description: |-
       Retrieves the status of a particular note event (or MIDI event in the multi script).
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: event-id
         DataType: I
@@ -648,7 +663,7 @@ Data:
     Description: |-
       Exponential function (returns the value of e^x).
     BuiltIntoVersion: N/A
-    ReturnType: S||R
+    ReturnType: R
     Arguments:
       - Name: x
         DataType: R
@@ -660,7 +675,7 @@ Data:
     Description: |-
       Binary exponential function (returns the value of 2^x).
     BuiltIntoVersion: N/A
-    ReturnType: S||R
+    ReturnType: R
     Arguments:
       - Name: x
         DataType: R
@@ -717,7 +732,7 @@ Data:
     Description: |-
       [Deprecated]: Returns the group index for the specified group name
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: group-name
         DataType: S
@@ -728,7 +743,7 @@ Data:
     Description: |-
       [Deprecated]: Returns the slot index of an internal modulator or external modulation<br>  slot
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: group-index
         DataType: I
@@ -742,7 +757,7 @@ Data:
     Description: |-
       [Deprecated]: Returns the slot index of a modulation slot of an internal modulator
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: group-index
         DataType: I
@@ -759,7 +774,7 @@ Data:
     Description: |-
       Returns the zone ID for the specified zone name. Only available in the on init callback.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: zone-name
         DataType: S
@@ -770,7 +785,7 @@ Data:
     Description: |-
       Floor (round down) floor(2.8) = 2.0.
     BuiltIntoVersion: N/A
-    ReturnType: S||R
+    ReturnType: R
     Arguments:
       - Name: x
         DataType: R
@@ -817,7 +832,7 @@ Data:
     Description: |-
       Retrieve various parameters of the specified UI widget.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: ui-ID
         DataType: I
@@ -833,7 +848,7 @@ Data:
     Description: |-
       Retrieve various parameters of the specified UI widget
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: ui-ID
         DataType: I
@@ -853,7 +868,7 @@ Data:
     Description: |-
       Undocumented
     BuiltIntoVersion: N/A
-    ReturnType: I||S||R
+    ReturnType: R
     Arguments:
       - Name: arg1
         DataType: I
@@ -884,7 +899,7 @@ Data:
     Description: |-
       Undocumented
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: S
     Arguments:
       - Name: arg1
         DataType: I
@@ -901,7 +916,7 @@ Data:
     Description: |-
       Returns the value of a specific engine parameter.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: parameter
         DataType: I
@@ -1043,7 +1058,7 @@ Data:
     Description: |-
       Undocumented
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: arg1
         DataType: I
@@ -1075,7 +1090,7 @@ Data:
     Description: |-
       Checks if the specified event ID belongs to a specific event group (returns 1 if the bit mark is set, 0 otherwise).
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: event-id
         DataType: I
@@ -1093,7 +1108,7 @@ Data:
     Description: |-
       Returns the value of a specific event parameter of the specified event.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: event-id
         DataType: I
@@ -1127,7 +1142,7 @@ Data:
     Description: |-
       Retrieves the value of a specified event parameter of a specific event.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: event-id
         DataType: I
@@ -1201,7 +1216,7 @@ Data:
     Description: |-
       Returns the group index for the specified group name
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: group-name
         DataType: S
@@ -1212,7 +1227,7 @@ Data:
     Description: |-
       Returns the color constant of the specified note number.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: note-number
         DataType: I
@@ -1234,7 +1249,7 @@ Data:
     Description: |-
       Returns the pressed state of the specified note number, i.e. key, on the Kontakt keyboard. It can be either 1 (key pressed) or 0 (key released).
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: note-number
         DataType: I
@@ -1245,7 +1260,7 @@ Data:
     Description: |-
       Returns the key type constant of the specified note number.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: note-number
         DataType: I
@@ -1256,7 +1271,7 @@ Data:
     Description: |-
       Returns the highest note of the specified key range.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: note-number
         DataType: I
@@ -1267,7 +1282,7 @@ Data:
     Description: |-
       Returns the lowest note of the specified key range.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: note-number
         DataType: I
@@ -1289,7 +1304,7 @@ Data:
     Description: |-
       Returns the value of a particular loop parameter of a zone.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: zone-id
         DataType: I
@@ -1331,7 +1346,7 @@ Data:
     Description: |-
       Returns the value of a particular ui_menu entry.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: ui-id
         DataType: I
@@ -1347,7 +1362,7 @@ Data:
     Description: |-
       Returns 1 if a particular ui_menu entry is visible, otherwise 0.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: ui-id
         DataType: I
@@ -1363,7 +1378,7 @@ Data:
     Description: |-
       Returns the slot index of an internal modulator or external modulation slot.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: group-index
         DataType: I
@@ -1379,7 +1394,7 @@ Data:
     Description: |-
       Returns the total number of all zones that are present in the instrument (normal and user zones).
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments: []
   - Id: c9871d57-c425-431d-a344-a8bc025f8a23
     Name: get_purge_state
@@ -1389,7 +1404,7 @@ Data:
       - 0: The group is purged.
       - 1: The group is not purged, i.e. the samples are loaded.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: group-index
         DataType: I
@@ -1401,7 +1416,7 @@ Data:
     Description: |-
       Returns paths, file names and extensions of samples.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: S
     Arguments:
       - Name: zone-id
         DataType: I
@@ -1421,7 +1436,7 @@ Data:
     Description: |-
       Returns the length of the specified zone's sample in microseconds.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: zone-id
         DataType: I
@@ -1444,7 +1459,7 @@ Data:
     Description: |-
       Returns the modulation target slot index of an internal modulator
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: group-index
         DataType: I
@@ -1464,7 +1479,7 @@ Data:
     Description: |-
       Retrieves the UI ID number of a UI widget.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: variable
         DataType: ui_*
@@ -1475,7 +1490,7 @@ Data:
     Description: |-
       Returns 1 if a particular ui_menu entry is visible, otherwise 0.
     BuiltIntoVersion: Returns the values of different properties pertaining to the ui_waveform widget.
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: variable
         DataType: ui_waveform
@@ -1500,7 +1515,7 @@ Data:
     Description: |-
       Returns the voice limit for the Time Machine Pro sampler mode of the Source module.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: voice-type
         DataType: I
@@ -1514,7 +1529,7 @@ Data:
     Description: |-
       Returns the ID of the zone with the specified zone index.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: zone-index
         DataType: I
@@ -1526,7 +1541,7 @@ Data:
     Description: |-
       Returns the value of a particular zone parameter.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: zone-id
         DataType: I
@@ -1565,7 +1580,7 @@ Data:
       - $NI_ZONE_STATUS_PURGED Zone is purged from memory (valid for both regular and user zones)
       - $NI_ZONE_STATUS_IGNORED Zone is ignored by the user response in the Content Missing dialog (valid for both regular and user zones)
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: zone-id
         DataType: I
@@ -1665,7 +1680,7 @@ Data:
     Description: |-
       Converts a real number into an integer.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: real
         DataType: R
@@ -1677,7 +1692,7 @@ Data:
     Description: |-
       Converts an integer value into a real number.
     BuiltIntoVersion: N/A
-    ReturnType: R||S
+    ReturnType: R
     Arguments:
       - Name: integer
         DataType: I
@@ -1689,7 +1704,7 @@ Data:
     Description: |-
       [Deprecated]: Returns 1 if a zone is empty (has no sample), otherwise returns 0
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: zone-id
         DataType: I
@@ -1700,7 +1715,7 @@ Data:
     Description: |-
       Loads an array from an external .nka file.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: array-variable
         DataType: I[]||S[]
@@ -1734,7 +1749,7 @@ Data:
     Description: |-
       Loads an array from an external .nka file, using an absolute path to the file.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: array-variable
         DataType: I[]||S[]
@@ -1750,7 +1765,7 @@ Data:
     Description: |-
       Loads an impulse response sample into Kontakt's convolution effect.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: path-or-filename
         DataType: S
@@ -1792,7 +1807,7 @@ Data:
     Description: |-
       Load MIDI file from path (*Non documented)
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: path
         DataType: S
@@ -1829,7 +1844,7 @@ Data:
     Description: |-
       Natural logarithmic function (base e).
     BuiltIntoVersion: N/A
-    ReturnType: S||R
+    ReturnType: R
     Arguments:
       - Name: x
         DataType: R
@@ -1841,7 +1856,7 @@ Data:
     Description: |-
       Common logarithmic function (base 10).
     BuiltIntoVersion: N/A
-    ReturnType: S||R
+    ReturnType: R
     Arguments:
       - Name: x
         DataType: R
@@ -1853,7 +1868,7 @@ Data:
     Description: |-
       Binary logarithmic function (base 2).
     BuiltIntoVersion: N/A
-    ReturnType: S||R
+    ReturnType: R
     Arguments:
       - Name: x
         DataType: R
@@ -1865,7 +1880,7 @@ Data:
     Description: |-
       Return the LSB portion (least significant byte) of a 14 bit value.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: value
         DataType: I
@@ -1932,7 +1947,7 @@ Data:
     Description: |-
       Returns the size of the MIDI object's event buffer.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments: []
   - Id: 89c51908-b30d-4c9b-aebe-5a2d9ea50e00
     Name: mf_get_byte_one
@@ -1940,7 +1955,7 @@ Data:
     Description: |-
       Undocumented
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments: []
   - Id: b5a56ca2-e7ee-46b3-8c34-3a0da4d83127
     Name: mf_get_byte_two
@@ -1948,7 +1963,7 @@ Data:
     Description: |-
       Undocumented
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments: []
   - Id: ce8e5664-24d0-41ae-8776-7034ccb6f8f7
     Name: mf_get_channel
@@ -1956,7 +1971,7 @@ Data:
     Description: |-
       Undocumented
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments: []
   - Id: f6459b74-d66e-4a44-b544-f1ff6c9b5330
     Name: mf_get_command
@@ -1964,7 +1979,7 @@ Data:
     Description: |-
       Undocumented
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments: []
   - Id: 9a64ef14-01c6-4a1c-8d2e-c8bacce8be01
     Name: mf_get_event_par
@@ -1972,7 +1987,7 @@ Data:
     Description: |-
       Returns the value of an event parameter.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: event-id
         DataType: I
@@ -2014,7 +2029,7 @@ Data:
     Description: |-
       Returns the ID of the currently selected event, when using the navigation commands like mf_get_first(), mf_get_next(), etc.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments: []
   - Id: d9c08ab5-5bf6-4d3f-ae0c-5555a4da5218
     Name: mf_get_last
@@ -2042,7 +2057,7 @@ Data:
     Description: |-
       Checks if an event is marked or not. Returns 1 if it is marked or 0 if it is not.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: event-id
         DataType: I
@@ -2086,7 +2101,7 @@ Data:
     Description: |-
       Undocumented
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments: []
   - Id: b3b32676-63c8-4b0d-89cd-d0b06900f5f5
     Name: mf_get_num_tracks
@@ -2094,7 +2109,7 @@ Data:
     Description: |-
       Returns the number of tracks in the MIDI object.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments: []
   - Id: 774ab021-e37f-4a58-8238-ba7d4f10bbe7
     Name: mf_get_pos
@@ -2102,7 +2117,7 @@ Data:
     Description: |-
       Undocumented
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments: []
   - Id: fd95f1f3-7f93-4655-b25c-b45ed3a0f522
     Name: mf_get_prev
@@ -2138,7 +2153,7 @@ Data:
     Description: |-
       Undocumented
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments: []
   - Id: 5f699122-3ec1-4429-a832-2d997541a380
     Name: mf_insert_event
@@ -2146,7 +2161,7 @@ Data:
     Description: |-
       Activates an inactive MIDI event in the MIDI object. However, because the command and position are defined in this command, it can be considered as an insertion.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: track
         DataType: I
@@ -2180,7 +2195,7 @@ Data:
     Description: |-
       Inserts a MIDI file into the object.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: path
         DataType: S
@@ -2227,7 +2242,7 @@ Data:
     Description: |-
       Defines a number of inactive MIDI events, that can be activated and edited.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: size
         DataType: I
@@ -2317,7 +2332,7 @@ Data:
     Description: |-
       Defines the part of the object that will be exported when using a drag and drop area, or when using save_midi_file() command.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: name
         DataType: S
@@ -2431,7 +2446,7 @@ Data:
     Description: |-
       Converts a microseconds value into a value in tempo-dependent MIDI ticks.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: microseconds
         DataType: I
@@ -2442,7 +2457,7 @@ Data:
     Description: |-
       Return the MSB portion (most significant byte) of a 14 bit value.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: value
         DataType: I
@@ -2482,7 +2497,7 @@ Data:
     Description: |-
       Returns the number of elements in an array.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: array-variable
         DataType: I[]||S[]||R[]
@@ -2493,7 +2508,7 @@ Data:
     Description: |-
       Undocumented
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: arg1
         DataType: I
@@ -2504,7 +2519,7 @@ Data:
     Description: |-
       Returns the length of the specified zone's sample in microseconds.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: zone-ID
         DataType: I
@@ -2552,7 +2567,7 @@ Data:
     Description: |-
       It is possible to send and receive values from one script to another, circumventing the usual left-to-right processing order, by using the Program Global Storage (PGS) commands. PGS is shared memory that can be read from or written to by any script.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: key-id
         DataType: K
@@ -2630,7 +2645,7 @@ Data:
     Description: |-
       Generate a MIDI note, i.e. generate a note on message followed by a note<br>  off message.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: note-number
         DataType: I
@@ -2657,7 +2672,7 @@ Data:
     Description: |-
       Power (returns the value of x^y).
     BuiltIntoVersion: N/A
-    ReturnType: S||R
+    ReturnType: R
     Arguments:
       - Name: x
         DataType: R
@@ -2690,7 +2705,7 @@ Data:
     Description: |-
       Generate a random integer in the range `min` to `max`.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: min
         DataType: I
@@ -2730,7 +2745,7 @@ Data:
     Description: |-
       Converts a real number into an integer.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: real
         DataType: R
@@ -2819,7 +2834,7 @@ Data:
       - round(2.3) = 2.0
       - round(2.8) = 3.0
     BuiltIntoVersion: N/A
-    ReturnType: S||R
+    ReturnType: R
     Arguments:
       - Name: x
         DataType: R
@@ -2830,7 +2845,7 @@ Data:
     Description: |-
       Saves an array to an external .nka file
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: array-variable
         DataType: I[]||S[]
@@ -2858,7 +2873,7 @@ Data:
     Description: |-
       Saves an array to an external .nka file with the specified absolute path.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: array-variable
         DataType: I[]||S[]
@@ -2874,7 +2889,7 @@ Data:
     Description: |-
       Saves a MIDI file with the range specified by the mf_set_export_area() command.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: path
         DataType: S
@@ -2886,7 +2901,7 @@ Data:
     Description: |-
       Searches the specified array for the specified value (optionally within the range specified by `from` and `to`) and returns the index of its first position. If the value is not found, the function returns -1.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: array-variable
         DataType: I[]
@@ -2902,7 +2917,7 @@ Data:
     Description: |-
       Searches the specified array for the specified value (optionally within the range specified by `from` and `to`) and returns the index of its first position. If the value is not found, the function returns -1.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: array-variable
         DataType: I[]
@@ -3074,7 +3089,7 @@ Data:
     Description: |-
       Controls various Kontakt engine parameters.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: parameter
         DataType: I
@@ -3425,7 +3440,7 @@ Data:
     Description: |-
       Sets the loop parameters of a user zone.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: zone-id
         DataType: I
@@ -3592,7 +3607,7 @@ Data:
     Description: |-
       Creates empty user zones.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: V
     Arguments:
       - Name: number_of_user_zones
         DataType: I
@@ -3636,7 +3651,7 @@ Data:
     Description: |-
       Sets the user sample in a zone.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: zone-id
         DataType: I
@@ -3801,7 +3816,7 @@ Data:
     Description: |-
       Sets the voice limit for the Time Machine Pro mode of the Source module.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: voice-type
         DataType: I
@@ -3819,7 +3834,7 @@ Data:
     Description: |-
       Sets the user zone parameters.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: zone-id
         DataType: I
@@ -3856,7 +3871,7 @@ Data:
     Description: |-
       Signum function (returns -1 if the number is negative, 0 if it's zero, 1 if it's positive).
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: x
         DataType: I
@@ -3868,7 +3883,7 @@ Data:
     Description: |-
       Shifts the bits in `expression` by the amount of `shift-bits` to the left.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: expression
         DataType: I
@@ -3884,7 +3899,7 @@ Data:
     Description: |-
       Shifts the bits in `expression` by the amount of `shift-bits` to the right.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: expression
         DataType: I
@@ -3908,7 +3923,7 @@ Data:
     Description: |-
       Sign bit (returns 1 if the number is negative, 0 otherwise).
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: x
         DataType: I
@@ -3920,7 +3935,7 @@ Data:
     Description: |-
       Sine function.
     BuiltIntoVersion: N/A
-    ReturnType: S||R
+    ReturnType: R
     Arguments:
       - Name: x
         DataType: R
@@ -3932,7 +3947,7 @@ Data:
     Description: |-
       Undocumented
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: arg1
         DataType: I
@@ -3946,7 +3961,7 @@ Data:
     Description: |-
       Undocumented
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: arg1
         DataType: I
@@ -3960,7 +3975,7 @@ Data:
     Description: |-
       Undocumented
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: arg1
         DataType: I
@@ -3974,7 +3989,7 @@ Data:
     Description: |-
       Undocumented
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: arg1
         DataType: I
@@ -3988,7 +4003,7 @@ Data:
     Description: |-
       Undocumented
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: arg1
         DataType: I
@@ -4044,7 +4059,7 @@ Data:
     Description: |-
       Square root.
     BuiltIntoVersion: N/A
-    ReturnType: S||R
+    ReturnType: R
     Arguments:
       - Name: x
         DataType: R
@@ -4073,7 +4088,7 @@ Data:
     Description: |-
       Tangent function.
     BuiltIntoVersion: N/A
-    ReturnType: S||R
+    ReturnType: R
     Arguments:
       - Name: x
         DataType: R
@@ -4085,7 +4100,7 @@ Data:
     Description: |-
       Converts a tempo-dependent MIDI ticks value into a value in microseconds.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: ticks
         DataType: I
@@ -4179,7 +4194,7 @@ Data:
     Description: |-
       Returns the index number of the slice at the loop end
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: zone-id
         DataType: I
@@ -4193,7 +4208,7 @@ Data:
     Description: |-
       Returns the index number of the slice at the loop end.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: zone-id
         DataType: I
@@ -4207,7 +4222,7 @@ Data:
     Description: |-
       Returns the length of the specified slice in microseconds, with respect to the current tempo.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: zone-id
         DataType: I
@@ -4221,7 +4236,7 @@ Data:
     Description: |-
       Returns the loop count of the specified loop.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: zone-id
         DataType: I
@@ -4235,7 +4250,7 @@ Data:
     Description: |-
       Returns the absolute start point of the specified slice in microseconds, independent of the current tempo.
     BuiltIntoVersion: N/A
-    ReturnType: I||S
+    ReturnType: I
     Arguments:
       - Name: zone-id
         DataType: I

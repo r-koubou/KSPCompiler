@@ -9,8 +9,6 @@ namespace KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
 public enum DataTypeFlag : uint
 {
     None                        = 0,
-    All                         = 0xffffffff,
-    FallBack                    = All,
 
     #region Type
     TypeInt                     = 1 << 0,
@@ -27,6 +25,7 @@ public enum DataTypeFlag : uint
 
     #region Attribute
     AttributeArray              = 0x01000000,
+    AttributeFallBack           = 0x80000000,
     AttributeMask               = 0xff000000,
     #endregion
 
@@ -35,5 +34,9 @@ public enum DataTypeFlag : uint
     TypeStringArray             = TypeString | AttributeArray,
     TypeRealArray               = TypeReal   | AttributeArray,
     TypeBoolArray               = TypeBool   | AttributeArray,
+    All                         = TypeInt | TypeString | TypeReal
+                                  | TypeBool | TypeVoid | TypePreprocessorSymbol | TypePgsId
+                                  | AttributeArray,
+    FallBack                    = All | AttributeFallBack,
     #endregion
 }

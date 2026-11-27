@@ -1,6 +1,8 @@
 using System;
 using System.Linq;
 
+using KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData.Extensions;
+
 namespace KSPCompiler.Shared.Domain.Compilation.Symbols.MetaData;
 
 public static class DataTypeFlagUtility
@@ -15,11 +17,11 @@ public static class DataTypeFlagUtility
 
     public static bool AllFallback( params DataTypeFlag[] flags )
     {
-        return All( f => f == DataTypeFlag.FallBack, flags );
+        return All( f => f.IsFallBack(), flags );
     }
 
     public static bool AnyFallback( params DataTypeFlag[] flags )
     {
-        return Any( f => f == DataTypeFlag.FallBack, flags );
+        return Any( f => f.IsFallBack(), flags );
     }
 }
